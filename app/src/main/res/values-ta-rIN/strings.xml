@@ -104,7 +104,7 @@
     <string name="patcher_task_decoding_dex">DEX கோப்புகளைப் படிக்கிறது</string>
     <string name="patcher_task_extracting_resources">வளங்களை வெளியே எடுக்கிறது</string>
     <string name="patcher_task_decoding_resources">வளங்களை டிகோடிங் செய்கிறது</string>
-    <string name="patcher_task_indexing_classes">வகுப்புகளை வரிசைப்படுத்துகிறது</string>
+    <string name="patcher_task_indexing_classes">வகுப்புகளைக் குறியிடுகிறது</string>
     <string name="patcher_task_compiling_dex">DEX கோப்புகளை தொகுக்கிறது</string>
     <string name="patcher_task_compiling_resources">வளங்களை தொகுக்கிறது</string>
     <string name="patcher_task_writing_apk">APK கோப்பை எழுதுகிறது</string>

@@ -19,7 +19,7 @@
     <string name="home_app_no_hidden">ไม่มีแอปที่ซ่อนอยู่</string>
     <string name="home_app_hidden_apps_title">แอปที่ซ่อนอยู่</string>
     <string name="home_app_hidden_apps_hint">แตะเพื่อแสดง</string>
-    <string name="home_apps_unhide_message">แอปที่เปิดเผยแล้วจะกลับสู่หน้าแรก</string>
+    <string name="home_apps_unhide_message">แอปที่ยกเลิกการซ่อนแล้วจะกลับไปยังหน้าจอหลัก</string>
     <string name="home_app_patch_sources_description">แหล่งที่มาที่ไม่ได้เลือกไว้จะไม่ถูกเสนอเมื่อแอปเหล่านี้ถูกแพตช์ และแพตช์ของแหล่งที่มาเหล่านั้นจะไม่เข้าร่วมการเลือกด้วยตัวเอง แต่ละแหล่งที่มาจะยังคงเปิดใช้สำหรับแอปอื่นทุกแอป</string>
     <string name="home_app_patch_sources_mixed">เสนอให้ %1$s จากทั้งหมด %2$s</string>
     <string name="home_app_patch_sources_covers">มีแพตช์สำหรับ %1$s จากทั้งหมด %2$s</string>
@@ -30,7 +30,7 @@
     <string name="deep_link_add_source_message">คุณต้องการเพิ่มแหล่งที่มาแพตช์นี้ไปยัง Morphe หรือไม่?</string>
     <string name="deep_link_add_source_warning">เพิ่มแหล่งที่มาที่คุณเชื่อถือเท่านั้น</string>
     <!-- Shown under the app a link was opened for -->
-    <string name="deep_link_add_source_only_app">เพิ่มเฉพาะแอปนี้แล้ว คุณสามารถเพิ่มแอปอื่นจากบัญชีรายชื่อแอปของแหล่งข้อมูลได้</string>
+    <string name="deep_link_add_source_only_app">เพิ่มเฉพาะแอปนี้แล้ว คุณสามารถเพิ่มแอปอื่นจากรายการแอปของแหล่งข้อมูลได้</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <string name="deep_link_add_source_only_universal">เพิ่มเฉพาะแพตช์แบบสากลเท่านั้น คุณสามารถเพิ่มแอปจากรายชื่อแอปของแหล่งที่มา</string>
     <!-- Asked when the link names an app of a source that is already added -->
@@ -68,7 +68,7 @@
     <string name="home_app_sort_manual_hint">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
     <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
     <string name="home_app_sort_updates_first">อัปเดตแพตช์ก่อน</string>
-    <string name="home_app_sort_recently_patched">เพิ่งแพตช์ล่าสุด</string>
+    <string name="home_app_sort_recently_patched">แพตช์ล่าสุด</string>
     <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
     <string name="home_no_apps_search_subtitle">ไม่พบแอปที่ตรงกับ \"%s\"</string>
@@ -158,7 +158,7 @@
     <string name="sources_filter_issues">ต้องการความสนใจ</string>
     <string name="sources_sort_manual">จัดเรียงด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
-    <string name="sources_sort_last_updated">ปรับปรุงล่าสุด</string>
+    <string name="sources_sort_last_updated">อัปเดตล่าสุด</string>
     <string name="sources_sort_enabled_first">เปิดใช้งานก่อน</string>
     <string name="sources_patches_source_disabled_hint">แหล่งที่มานี้ถูกปิดใช้งาน แพตช์ของมันถูกแสดงเพื่อการอ้างอิงและจะไม่ถูกนำไปใช้</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
@@ -179,12 +179,12 @@
     <string name="sources_management_prerelease_toggle_description">รับสิทธิ์เข้าถึงแพตช์ใหม่เวอร์ชันทดลองแต่เนิ่นๆ</string>
     <string name="sources_prerelease_warning_title">เปิดใช้แพตช์ก่อนเผยแพร่หรือไม่?</string>
     <string name="sources_prerelease_warning_message">บิลด์ก่อนเผยแพร่ยังอยู่ระหว่างการพัฒนา แพตช์อาจล้มเหลวหรือทำให้แอปเสียหาย และฟีเจอร์อาจเปลี่ยนแปลงได้โดยไม่มีการแจ้งเตือน</string>
-    <string name="expert_mode_unstable_notice">แพตช์รุ่น Pre-release หรือรุ่นทดลองอาจไม่เสถียร</string>
+    <string name="expert_mode_unstable_notice">แพตช์ก่อนเผยแพร่หรือแอปเวอร์ชันทดลองอาจไม่เสถียร</string>
     <string name="sources_management_experimental_versions_toggle">ใช้แอปเวอร์ชันทดลอง</string>
     <string name="sources_management_experimental_versions_toggle_description">แสดงและแพตช์เป้าหมายแอปทดลอง</string>
     <!-- Actions of the panel for several selected sources at once -->
-    <string name="sources_management_prerelease_enable">เปิดใช้งานแพตช์รุ่นก่อนปล่อยจริง</string>
-    <string name="sources_management_prerelease_disable">ปิดใช้งานแพตช์รุ่นก่อนปล่อยจริง</string>
+    <string name="sources_management_prerelease_enable">เปิดใช้งานแพตช์ก่อนเผยแพร่</string>
+    <string name="sources_management_prerelease_disable">ปิดใช้งานแพตช์ก่อนเผยแพร่</string>
     <string name="sources_management_experimental_versions_enable">เปิดใช้งานแอปเวอร์ชันทดลอง</string>
     <string name="sources_management_experimental_versions_disable">ปิดใช้งานแอปเวอร์ชันทดลอง</string>
     <string name="sources_management_already_exists">แหล่งที่มานี้ได้ถูกเพิ่มไปแล้ว</string>
@@ -286,7 +286,7 @@
     <string name="home_download_instructions_finding">กำลังค้นหาหน้าดาวน์โหลด…</string>
     <string name="home_download_instructions_step1">กดปุ่ม \'%s\' ด้านล่าง</string>
     <string name="home_download_instructions_step2_part1">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่ม</string>
-    <string name="home_download_instructions_step2_apkcube">เลื่อนหน้าเว็บลงมา เลือกเวอร์ชัน &lt;b&gt;%s&lt;/b&gt; แล้วกด</string>
+    <string name="home_download_instructions_step2_apkcube">เลื่อนหน้าเว็บลงมา เลือกเวอร์ชัน &lt;b&gt;%s&lt;/b&gt; แล้วกดปุ่มดาวน์โหลด</string>
     <string name="home_download_instructions_step2_generic">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่มดาวน์โหลด</string>
     <string name="home_download_instructions_step2_variant">เลื่อนลงมาที่หน้าเว็บแล้วกดปุ่มดาวน์โหลดของ &lt;b&gt;รูปแบบ APK&lt;/b&gt; ที่อยู่ด้านบน</string>
     <string name="home_download_instructions_step2_search">เปิดผลการค้นหาจากเว็บไซต์ที่คุณเชื่อถือ</string>
@@ -365,7 +365,7 @@
     <string name="home_split_apk_warning_message">"ไฟล์นี้เป็น APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-สำหรับผลลัพธ์ที่ดีที่สุด แอปนี้ขอแนะนำให้อัปเดต &lt;b&gt;APK เต็ม&lt;/b&gt;"</string>
+สำหรับผลลัพธ์ที่ดีที่สุด แอปนี้ขอแนะนำให้แพตช์ &lt;b&gt;APK เต็ม&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">เลือก APK อื่น</string>
     <string name="home_dialog_unsupported_version_experimental_label">ทดลอง</string>
     <string name="home_dialog_unsupported_version_experimental_description">รุ่นนี้มีการรองรับแบบทดลองและอาจไม่เสถียรหรือไม่สมบูรณ์</string>
@@ -381,14 +381,14 @@
     <string name="home_dialog_unsupported_version_unsupported_label">ไม่รองรับ</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">บิลด์ %s</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน การอัปเดตต้องการบิลด์ที่เฉพาะเจาะจง</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน แพตช์ต้องการบิลด์ที่เฉพาะเจาะจง</string>
     <string name="home_dialog_wrong_package_title">แพ็กเกจที่เลือกไม่ถูกต้อง</string>
     <string name="home_dialog_wrong_package_description">ไฟล์ APK ที่เลือกไว้ ไม่ใช่แอปพลิเคชันที่คุณต้องการแพตช์</string>
     <string name="home_dialog_expected_package">แพ็กเกจที่คาดหวัง:</string>
     <string name="home_dialog_selected_package">แพ็คเกจที่เลือก:</string>
-    <string name="home_outdated_patches_dialog_title">อาจมีปรับปรุงที่เลิกใช้แล้ว</string>
-    <string name="home_outdated_patches_dialog_message">ข้อมูลเคลื่อนที่มีการใช้งานและปรับปรุงถูกหยุด</string>
-    <string name="home_outdated_patches_dialog_warning">อาจมีปัญหาในแอปพลิเคชันถ้าใช้ปรับปรุงที่เลิกใช้แล้ว</string>
+    <string name="home_outdated_patches_dialog_title">แพตช์อาจล้าสมัย</string>
+    <string name="home_outdated_patches_dialog_message">ใช้ข้อมูลมือถืออยู่ และการอัปเดตแพตช์ถูกปิดใช้งาน</string>
+    <string name="home_outdated_patches_dialog_warning">การแพตช์ด้วยแพตช์ที่ล้าสมัยอาจทำให้แอปใช้งานไม่ได้</string>
     <string name="home_outdated_patches_dialog_update_and_patch">อัปเดต &amp; แพตช์</string>
     <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
@@ -470,7 +470,7 @@
     <string name="batch_patch_multiple_sources">แอปบางตัวรวมแพตช์จากหลายแหล่ง ซึ่งอาจทำให้เกิดข้อขัดแย้ง</string>
     <string name="batch_patch_needs_apk">ไม่มี APK พร้อมใช้งาน, แนบไฟล์</string>
     <string name="batch_patch_wrong_package">ไฟล์ที่แนบมาเป็นของ %s</string>
-    <string name="batch_patch_version_mismatch">เวอร์ชัน %s ไม่รองรับโดยแพตช์</string>
+    <string name="batch_patch_version_mismatch">แพตช์ไม่รองรับเวอร์ชัน %s</string>
     <string name="batch_patch_source_saved">บันทึกต้นฉบับ</string>
     <string name="batch_patch_source_installed">ติดตั้งแอปแล้ว</string>
     <string name="batch_patch_source_file">ไฟล์ที่แนบมา</string>
@@ -528,7 +528,7 @@
     <string name="home_app_info_applied_patches">แพตช์ที่ถูกใช้งาน</string>
     <string name="home_app_info_patch_source_used">แหล่งที่มาแพตช์ที่ใช้</string>
     <string name="home_app_info_install_type_custom_installer">ตัวกรองติดตั้งกำหนดเอง</string>
-    <string name="home_app_info_install_type_system_installer">ตัวกรองติดตั้งระบบ</string>
+    <string name="home_app_info_install_type_system_installer">ตัวติดตั้งของระบบ</string>
     <string name="home_app_info_install_type_play_store">ติดตั้งจาก Play Store</string>
     <string name="home_app_info_install_type_root">ติดตั้งแบบ Root</string>
     <string name="home_app_info_install_type_root_play_store">ติดตั้งจาก Play Store แบบรูท</string>
@@ -564,9 +564,9 @@
     <string name="home_app_info_apk_size">ขนาด APK</string>
     <string name="home_app_info_cpu_arch">สถาปัตยกรรม CPU</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">โหมดรากรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนปรับแก้</string>
+    <string name="root_install_apk_required">โหมดรูตต้องมี APK รุ่นต้นฉบับติดตั้งบนอุปกรณ์ของคุณก่อนแพตช์</string>
     <string name="root_pre_patch_installer_title">เลือกโหมดแพตช์</string>
-    <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีการเข้าถึงสิทธิ์รูท โปรดเลือกแอปนี้ควรแพตช์สำหรับการติดตั้งแบบรูทหรือแบบมาตรฐาน</string>
+    <string name="root_pre_patch_installer_description">อุปกรณ์ของคุณมีการเข้าถึงสิทธิ์รูท โปรดเลือกว่าแอปนี้ควรแพตช์สำหรับการติดตั้งแบบรูทหรือแบบมาตรฐาน</string>
     <string name="root_pre_patch_installer_mount_title">โหมดการติดตั้งแบบรูท</string>
     <string name="root_pre_patch_installer_mount_description">แพตช์สำหรับการติดตั้งแบบรูท จากนั้นจึงติดตั้ง APK ทับแอปเดิมที่ตรงกัน ไม่จำเป็นต้องใช้ GmsCore</string>
     <string name="root_mount_module_unmount_warning">หาก KernelSU มีการเปิดใช้ \"Unmount modules by default\" เปิด KernelSU &gt; Superuser &gt; แอปที่คุณติดตั้ง &gt; โปรไฟล์ &gt; กำหนดเอง และปิด \"Unmount modules\" มิเช่นนั้น APK ที่แพตช์แล้วที่ติดตั้งอาจไม่มีผล แม้ Morphe จะแสดงว่าติดตั้งแล้วก็ตาม</string>
@@ -619,7 +619,7 @@
     <string name="patcher_installing_subtitle">ใกล้พร้อมแล้ว! 🎸</string>
     <string name="patcher_success_title">เสร็จเรียบร้อยแล้ว! 🎉</string>
     <string name="patcher_success_subtitle">แอปของคุณได้รับการแพตช์และถูกติดตั้งแล้ว!</string>
-    <string name="patcher_mounted_subtitle">แอปของคุณได้รับการแพตช์และเมาท์แล้ว!</string>
+    <string name="patcher_mounted_subtitle">แอปของคุณได้รับการแพตช์และเมานต์แล้ว!</string>
     <string name="patcher_complete_title">การแพตช์เสร็จสมบูรณ์แล้ว! ✨</string>
     <string name="patcher_failed_title">อุ๊ย! เกิดข้อผิดพลาดบางอย่างขึ้น</string>
     <string name="patcher_failed_dialog_title">การแพตช์ล้มเหลว</string>
@@ -638,19 +638,19 @@
 
 การถอนการติดตั้งจะลบข้อมูลแอปทั้งหมดอย่างถาวร"</string>
     <string name="patcher_install_error_title">ข้อผิดพลาดในการติดตั้ง</string>
-    <string name="patcher_mount_error_title">ข้อผิดพลาดการเมาท์</string>
+    <string name="patcher_mount_error_title">ข้อผิดพลาดการเมานต์</string>
     <string name="patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_patches_excluded_for_installer">ไม่สามารถใช้ได้กับวิธีการติดตั้งนี้ และไม่รวม: %s</string>
     <string name="patcher_back_to_game_hint">แตะ %1$s เพื่อกลับไปยังเกมของคุณ</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
     <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
-    <string name="patcher_incompatible_patcher_description">แหล่งที่มา &lt;b&gt;%1$s&lt;/b&gt; ต้องใช้แพตเชอร์ &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า อัปเดต Morphe เพื่อใช้งาน</string>
+    <string name="patcher_incompatible_patcher_description">แหล่งที่มา &lt;b&gt;%1$s&lt;/b&gt; ต้องใช้ตัวแพตช์ &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า อัปเดต Morphe เพื่อใช้งาน</string>
     <string name="patcher_storage_permission_description_api30">ตัวเลือกแพตช์อย่างน้อยหนึ่งรายการชี้ไปยังพาธที่ Morphe ไม่สามารถอ่านได้ ให้สิทธิ์การเข้าถึงพื้นที่เก็บข้อมูลและแตะปุ่ม จากนั้นการแพตช์จะเริ่มทำงานโดยอัตโนมัติ</string>
     <string name="patcher_storage_permission_description_legacy">ตัวเลือกแพตช์บางตัวอ้างอิงไปยังเส้นทางที่ไม่สามารถเข้าถึงได้ อัปเดตเส้นทางในตัวเลือกแพตช์และลองใหม่อีกครั้ง</string>
     <string name="patcher_storage_permission_grant">ยืนยันสิทธิ์การเข้าถึงเก็บข้อมูล</string>
-    <string name="patcher_storage_permission_denied_warning">การอนุญาตในการใช้พื้นที่เก็บถาวรถูกปฏิเสธ。อนุญาตให้ใช้เส้นทางนี้หรือย้ายไฟล์ไปยังโฟลเดอร์ส่วนตัวของแอปพลิเคชัน</string>
-    <string name="patcher_storage_permission_open_settings">เปิดการตั้งค่าเก็บถาวร</string>
+    <string name="patcher_storage_permission_denied_warning">การอนุญาตพื้นที่เก็บข้อมูลถูกปฏิเสธ ให้สิทธิ์การเข้าถึงเพื่อใช้เส้นทางนี้ หรือย้ายไฟล์ไปยังโฟลเดอร์ส่วนตัวของแอป</string>
+    <string name="patcher_storage_permission_open_settings">เปิดการตั้งค่าพื้นที่เก็บข้อมูล</string>
     <string name="patcher_storage_badge_denied">การอนุญาตถูกปฏิเสธ</string>
     <string name="patcher_storage_badge_missing">ไม่พบ</string>
     <string name="patcher_storage_badge_rejected">ใช้งานไม่ได้</string>
@@ -719,14 +719,14 @@
     <string name="patcher_message_20">กำลังไล่เบา กรุณารอสักครู่… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">กำลังแพตช์แอป</string>
-    <string name="memory_usage">การใช้พื้นที่ความจำ</string>
+    <string name="memory_usage">การใช้หน่วยความจำ</string>
     <string name="cpu_usage">การใช้งาน CPU</string>
     <string name="storage_io_usage">I/O ของพื้นที่เก็บข้อมูล</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">กำลังใช้แพตช์</string>
     <string name="failed_to_execute_patch">ไม่สามารถใช้ %s ได้</string>
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์แล้วได้</string>
-    <string name="plugin_activity_dialog_body">ต้องมีการติดต่อผู้ใช้เพื่อดำเนินการต่อไปนี้</string>
+    <string name="plugin_activity_dialog_body">ปลั๊กอินนี้ต้องการการโต้ตอบจากผู้ใช้เพื่อดำเนินการต่อ</string>
     <string name="patcher_process_killed_message">ระบบหยุดการทำงานของตัวแพตช์ก่อนที่จะเสร็จสิ้น โดยปกติแล้วเพื่อเพิ่มพื้นที่ว่างในหน่วยความจำ โปรดปิดแอปอื่นๆ แล้วลองใหม่อีกครั้ง</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ตัวแพตช์หยุดทำงานก่อนที่จะเสร็จสิ้น หากเกิดขึ้นอีก ให้ปิด %1$s และรายงานปัญหาพร้อมบันทึก</string>
@@ -745,8 +745,8 @@
     <string name="saved_app_removed_toast">ลบแอปที่แพตช์ที่บันทึกไว้สำเร็จ</string>
     <string name="saved_app_launch_unavailable">ติดตั้งแอปพลิเคชันก่อนเปิดใช้งาน</string>
     <string name="package_name">ชื่อแพ็กเกจ</string>
-    <string name="failed_to_mount">ไม่สามารถติดตั้งใช้งานได้: %s</string>
-    <string name="failed_to_unmount">ไม่สามารถยกเลิกการติดตั้งใช้งานได้: %s</string>
+    <string name="failed_to_mount">ไม่สามารถเมานต์ได้: %s</string>
+    <string name="failed_to_unmount">ไม่สามารถยกเลิกการเมานต์ได้: %s</string>
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_score">คะแนน %s</string>
     <string name="mini_game_best">ดีที่สุด %s</string>
@@ -778,9 +778,9 @@
     <string name="settings_appearance_background_description">แอนิเมชันที่เล่นอยู่เบื้องหลังหน้าจอต่างๆ ของแอป</string>
     <string name="settings_appearance_background_circles">วงกลม</string>
     <string name="settings_appearance_background_rings">วงแหวน</string>
-    <string name="settings_appearance_background_mesh">เส้นผ่านศูนย์กลาง</string>
+    <string name="settings_appearance_background_mesh">ตาข่าย</string>
     <string name="settings_appearance_background_space">อวกาศ</string>
-    <string name="settings_appearance_background_shapes">รูปแบบ</string>
+    <string name="settings_appearance_background_shapes">รูปทรง</string>
     <string name="settings_appearance_background_snow">หิมะ</string>
     <string name="settings_appearance_background_grid">ตาราง</string>
     <string name="settings_appearance_background_particles">อนุภาค</string>
@@ -793,7 +793,7 @@
     <string name="settings_appearance_background_random_interval_daily">รายวัน</string>
     <string name="settings_appearance_background_random_interval_3days">ทุกๆ 3 วัน</string>
     <string name="settings_appearance_parallax_effect">เอฟเฟ็กต์พารัลแล็กซ์</string>
-    <string name="settings_appearance_parallax_effect_description">การเปลี่ยนแปลงพื้นหลังที่เรียบร้อยเมื่อลดทอนอุปกรณ์</string>
+    <string name="settings_appearance_parallax_effect_description">พื้นหลังเลื่อนอย่างนุ่มนวลเมื่อเอียงอุปกรณ์</string>
     <string name="settings_appearance_seasonal_themes">ธีมตามเทศกาล</string>
     <string name="settings_appearance_seasonal_themes_description">พื้นหลังและคำอวยพรตามเทศกาลในช่วงวันหยุด</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
@@ -801,7 +801,7 @@
     <!-- Settings - Appearance Tab - Theme -->
     <string name="settings_appearance_display">แสดงผล</string>
     <string name="settings_appearance_effects">เอฟเฟกต์</string>
-    <string name="settings_appearance_theme">ระบบ</string>
+    <string name="settings_appearance_theme">ธีม</string>
     <string name="settings_appearance_theme_mode">โหมดสี</string>
     <string name="settings_appearance_system">ระบบ</string>
     <string name="settings_appearance_light">สว่าง</string>
@@ -810,7 +810,7 @@
     <string name="settings_appearance_monochrome">ขาวดำ</string>
     <string name="settings_appearance_color_style">รูปแบบสี</string>
     <string name="settings_appearance_accent_color">สีเน้น</string>
-    <string name="settings_appearance_pure_black">ดำสีบริสุทธิ์</string>
+    <string name="settings_appearance_pure_black">ดำสนิท</string>
     <string name="settings_appearance_pure_black_description">ใช้พื้นหลังสีดำสนิท</string>
     <string name="settings_appearance_color_accents">สีของแอปและแหล่งที่มา</string>
     <string name="settings_appearance_color_accents_description">ใช้สีของแต่ละแอปและแหล่งที่มาแทนสีเน้น</string>
@@ -906,7 +906,7 @@
     <string name="external_batch_patch_trust_caller">อนุญาตแอปนี้เสมอ</string>
     <string name="external_batch_patch_unknown_caller">แอปที่ไม่รู้จัก</string>
     <!-- Notification content -->
-    <string name="notification_bundle_update_title">มีแพ็คเกจใหม่ให้ใช้งาน</string>
+    <string name="notification_bundle_update_title">แพตช์ใหม่พร้อมใช้งาน</string>
     <string name="notification_update_text">พร้อมดาวน์โหลดเวอร์ชัน %s แล้ว</string>
     <string name="notification_bundle_update_text_unversioned">แตะเพื่อเปิด Morphe และอัปเดต</string>
     <string name="notification_permission_dialog_title">อนุญาตให้มีการแจ้งเตือน</string>
@@ -927,12 +927,12 @@
     <string name="settings_advanced_expert_mode">โหมดเชี่ยวชาญ</string>
     <string name="settings_advanced_expert_mode_description">เปิดใช้งานการตั้งค่าการแพตช์ขั้นสูงและตัวเลือกการแพตช์</string>
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมการนำเข้าแปลงมากขึ้น แต่การตั้งค่าค่าไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปพลิเคชันไม่สามารถใช้งานได้</string>
+    <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมวิธีการใช้แพตช์ได้มากขึ้น แต่การตั้งค่าที่ไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปใช้งานไม่ได้</string>
     <string name="settings_advanced_strip_unused_libs">ปรับประสิทธิภาพสำหรับสถาปัตยกรรมของอุปกรณ์</string>
     <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีเนทีฟที่ไม่ได้ใช้และการแยก APK</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">ปลดล็อกแหล่งที่มาของ pull request และ repository ส่วนตัว</string>
-    <string name="settings_advanced_github_pat_description">สำหรับแหล่งที่มาของ pull request, repository ส่วนตัว และขีดจำกัดอัตราส่วน GitHub ที่สูงขึ้น</string>
+    <string name="settings_advanced_github_pat_description">สำหรับแหล่งที่มาของ pull request, repository ส่วนตัว และขีดจำกัดอัตราการเรียกใช้ GitHub ที่สูงขึ้น</string>
     <string name="settings_advanced_github_pat_configured">โทเค็นถูกกำหนดค่าแล้ว</string>
     <string name="settings_advanced_github_pat_create">สร้างโทเค็นบน GitHub</string>
     <!-- "%s" is the GitHub scope name, keep it as is -->
@@ -949,11 +949,11 @@
     <string name="settings_advanced_github_pat_export_warning">อย่าแชร์โทเคนส่วนตัวของคุณ ถ้าคุณรวมมันเข้าไปในการส่งออกการตั้งค่า ให้เก็บไฟล์นั้นเป็นส่วนตัว เพราะมันมีโทเค็นไว้ในไฟล์</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">ตัวเลือกแพตช์</string>
-    <string name="settings_advanced_patch_options_restart_message">เปลี่ยนตัวเลือกแพตช์ต้องรีสตาร์ทอีกครั้ง</string>
+    <string name="settings_advanced_patch_options_restart_message">การเปลี่ยนตัวเลือกแพตช์ต้องแพตช์แอปใหม่จึงจะมีผล</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">ในการตั้งค่าแบบเชี่ยวชาญจะมีตัวเลือกแพตช์ในระหว่างกระบวนการแพตช์</string>
     <string name="settings_advanced_patch_options_loading">กำลังโหลด...</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">รอให้แหล่งข้อมูลถูกอัปเด็ดท์</string>
-    <string name="settings_advanced_patch_options_load_error">ล้มการโหลดตัวเลือกแพตช์</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">รอให้แหล่งแพตช์อัปเดตเสร็จก่อน</string>
+    <string name="settings_advanced_patch_options_load_error">ไม่สามารถโหลดตัวเลือกแพตช์ได้</string>
     <string name="settings_advanced_patch_options_no_available">ไม่มีตัวเลือกแพตช์ให้เลือก</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">แบรนด์แบบกำหนดเอง</string>
@@ -1000,19 +1000,19 @@ morphe_adaptive_monochrome_custom.xml
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">โลโก้ส่วนหัวแบบกำหนดเอง</string>
     <string name="settings_advanced_patch_options_custom_header_description">เปลี่ยนโลโก้ส่วนหัว</string>
-    <string name="settings_advanced_patch_options_custom_header_instruction">"โฟเดอร์ที่มีไฟล์ที่ใช้เป็นโลโก้หัวหน้าแบบกำหนดเอง
+    <string name="settings_advanced_patch_options_custom_header_instruction">"โฟลเดอร์ที่มีรูปภาพสำหรับใช้เป็นโลโก้ส่วนหัวแบบกำหนดเอง
 
-โฟเดอร์ต้องมีอยู่เหลือต่อไปนี้:
+โฟลเดอร์ต้องมีโฟลเดอร์อย่างน้อยหนึ่งโฟลเดอร์ต่อไปนี้ ขึ้นอยู่กับ DPI ของอุปกรณ์:
 - drawable-hdpi
 - drawable-xhdpi
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-แต่ละแต่ละของโฟเดอร์ต้องมีทั้งหมดของไฟล์ต่อไปนี้:
+แต่ละโฟลเดอร์ต้องมีไฟล์ต่อไปนี้ทั้งหมด:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
-ขนาดของไฟล์ต้องเป็นดังค์เหลือดังต่อไปนี้:
+ขนาดรูปภาพต้องเป็นดังนี้:
 - drawable-hdpi: 194x72 px
 - drawable-xhdpi: 258x96 px
 - drawable-xxhdpi: 387x144 px
@@ -1039,10 +1039,10 @@ morphe_header_custom_dark.png
     <string name="installer_status_not_supported">ไม่รองรับสำหรับการดำเนินการนี้</string>
     <string name="installer_status_shizuku_not_installed">ติดตั้ง Shizuku หรือ Sui เพื่อใช้ตัวเลือกนี้</string>
     <string name="installer_status_shizuku_not_running">เริ่มต้น Shizuku หรือ Sui และลองอีกครั้ง</string>
-    <string name="installer_status_shizuku_permission">อนุญาตให้ Morphe จากแอป Shizuku</string>
-    <string name="installer_mount_warning_install">โหมดแพตช์ถูกตั้งค่าเป็นการเมาท์แบบ root แอปที่บันทึกไว้นี้ไม่ได้ถูกติดตั้งโดยใช้การเมาท์</string>
-    <string name="mount_version_mismatch_message">รุ่นแอปสต็อก (%2$s) ไม่ตรงกับรุ่นแอปปรับแก้ (%1$s). มอนต์รุ่นสต็อกที่ตรงกัน, แล้วลองอีกครั้ง</string>
-    <string name="mount_stock_restore_failed_message">Android ปฏิเสธ APK ดั้งเดิมที่บันทึกไว้ ติดตั้งเวอร์ชันสต็อกที่ตรงกัน จากนั้นลองมิวนต์อีกครั้ง</string>
+    <string name="installer_status_shizuku_permission">อนุญาตสิทธิ์ให้ Morphe ในแอป Shizuku</string>
+    <string name="installer_mount_warning_install">โหมดแพตช์ถูกตั้งค่าเป็นการเมานต์แบบ root แอปที่บันทึกไว้นี้ไม่ได้ถูกติดตั้งด้วยการเมานต์</string>
+    <string name="mount_version_mismatch_message">เวอร์ชันแอปสต็อก (%2$s) ไม่ตรงกับเวอร์ชันแอปที่แพตช์แล้ว (%1$s) เมานต์เวอร์ชันสต็อกที่ตรงกันแล้วลองอีกครั้ง</string>
+    <string name="mount_stock_restore_failed_message">Android ปฏิเสธ APK ดั้งเดิมที่บันทึกไว้ ติดตั้งเวอร์ชันสต็อกที่ตรงกัน จากนั้นลองเมานต์อีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
@@ -1064,7 +1064,7 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_mode_description">กำหนด Google Play Store เป็นแหล่งติดตั้ง</string>
     <string name="settings_section_patch_mode">โหมดแพตช์</string>
     <string name="settings_patch_mode_ask">ถามทุกครั้ง</string>
-    <string name="settings_patch_mode_ask_description">ถามก่อนแพตช์แต่ละแอปว่าต้องการแพตช์เพื่อการเมาท์แบบ root หรือการติดตั้งแบบมาตรฐาน</string>
+    <string name="settings_patch_mode_ask_description">ถามก่อนแพตช์แต่ละแอปว่าต้องการแพตช์เพื่อการเมานต์แบบ root หรือการติดตั้งแบบมาตรฐาน</string>
     <string name="settings_section_after_patching">หลังการแพตช์</string>
     <string name="settings_after_patching_install">ติดตั้งอัตโนมัติ</string>
     <string name="settings_after_patching_ask">ถามว่าจะใช้ตัวติดตั้งใด</string>
@@ -1138,8 +1138,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_sources_description">แหล่งที่มาแบบกำหนดเองและโทเค็น GitHub</string>
     <string name="settings_system_backup_patch_selections_description">แพตช์ที่เลือกไว้สำหรับทุกแอป</string>
     <string name="settings_system_backup_signing_key_note">คีย์เซ็นชื่อถูกสำรองไว้แยกต่างหาก</string>
-    <string name="settings_system_import_keystore_dialog_title">คุณต้องต้องแน่ใจว่าต้องป้อนชื่อและรหัสของไฟล์ตัวเลือก</string>
-    <string name="settings_system_import_keystore_dialog_description">คุณต้องป้อนข้อมูลรับรองของคลังคีย์เพื่อนำเข้า</string>
+    <string name="settings_system_import_keystore_dialog_title">ป้อนข้อมูลรับรองของคีย์สโตร์</string>
+    <string name="settings_system_import_keystore_dialog_description">คุณต้องป้อนข้อมูลรับรองของคีย์สโตร์เพื่อนำเข้า</string>
     <string name="settings_system_import_keystore_dialog_alias_field">ชื่อผู้ใช้ (นามแฝง)</string>
     <string name="settings_system_import_keystore_dialog_password_field">รหัสผ่าน</string>
     <string name="settings_system_import_keystore_wrong_credentials">ข้อมูลรับรองคีย์สโตร์ไม่ถูกต้อง</string>
@@ -1164,7 +1164,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_manager_settings_fail">ไม่สามารถส่งออกการตั้งค่า Morphe ได้: %s</string>
     <string name="settings_system_export_manager_settings_success">ส่งออกการตั้งค่า Morphe สำเร็จ</string>
     <string name="settings_system_export_debug_logs">ส่งออกบันทึกการแก้ไขข้อบกพร่อง</string>
-    <string name="settings_system_export_debug_logs_description">บันทึกบันทึกระบบเพื่อแก้ไขปัญหา</string>
+    <string name="settings_system_export_debug_logs_description">บันทึกข้อมูลระบบเพื่อใช้แก้ไขปัญหา</string>
     <string name="settings_system_export_debug_logs_export_read_failed">ล้มเหลวในการอ่านบันทึก (รหัสออก %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ไม่สามารถส่งออกบันทึกได้</string>
     <string name="settings_system_export_debug_logs_export_success">ส่งออกบันทึกสำเร็จ</string>
@@ -1200,7 +1200,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_clear_all_confirm">การดำเนินการนี้จะล้างการตอบกลับเครือข่ายที่แคชไว้ สำเนาตัวติดตั้งที่จัดเตรียมไว้ และไฟล์ชั่วคราว ไฟล์ APK ดั้งเดิมและที่แพตช์แล้วจะถูกเก็บไว้</string>
     <string name="settings_system_storage_cleared">พื้นที่ว่าง %s</string>
     <string name="settings_system_storage_patch_running_warning">กำลังแพตช์อยู่และใช้ไฟล์เหล่านี้ การลบตอนนี้จะทำให้ล้มเหลว</string>
-    <string name="settings_system_storage_clear_anyway">ดำเนินการลบตามเลย</string>
+    <string name="settings_system_storage_clear_anyway">ลบต่อไป</string>
     <string name="settings_system_storage_nothing_to_clear">ไม่มีอะไรให้ล้าง</string>
     <string name="settings_system_storage_open_app_info_title">เปิดที่เก็บข้อมูลแอป Android</string>
     <string name="settings_system_storage_open_app_info_description">จัดการหรือล้างข้อมูล Morphe ทั้งหมดผ่านการตั้งค่าระบบ</string>
@@ -1227,7 +1227,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_reset_all_confirm_title">รีเซ็ตการเลือกทั้งหมด?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">รีเซ็ตแพ็กเกจที่เลือก?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">รีเซ็ตการเลือกแหล่งที่มา?</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s ถึง %2$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s ใน %2$s</string>
     <string name="settings_system_patch_selection_source_format">แหล่งที่มา #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">การดำเนินการนี้จะลบการบันทึกการเลือกแพตช์ทั้งหมดอย่างถาวรสำหรับทุกแพ็กเกจและแหล่งที่มา</string>
     <string name="settings_system_patch_selection_reset_source_warning">การดำเนินการนี้จะลบการเลือกแพตช์ที่บันทึกไว้อย่างถาวรสำหรับ &lt;b&gt;%1$s&lt;/b&gt; ใน &lt;b&gt;%2$s&lt;/b&gt;</string>
@@ -1303,7 +1303,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_blue">ยาเม็ดสีฟ้า</string>
     <string name="easter_egg_pill_red_toast">ปลดล็อกพื้นหลังเมทริกซ์แล้ว</string>
     <string name="easter_egg_pill_blue_toast">โฆษณาจะรอคุณอยู่</string>
-    <string name="easter_egg_pill_message_again">คุณอยู่ในเมทริกซ์แล้ว. ยาเม็ดแดงทำให้คุณกลับไปในสายฝน, ยาเม็ดสีฟ้าปลุกคุณให้ตื่น</string>
+    <string name="easter_egg_pill_message_again">คุณอยู่ในเมทริกซ์แล้ว ยาเม็ดสีแดงจะส่งคุณกลับไปในสายฝน ส่วนยาเม็ดสีฟ้าจะปลุกคุณให้ตื่น</string>
     <string name="easter_egg_pill_red_toast_again">กลับไปในสายฝน</string>
     <string name="easter_egg_pill_blue_toast_again">ถอดปลั๊กแล้ว ทางกลับก็อยู่ที่เดิมเสมอมา</string>
     <!-- Shared strings -->
@@ -1320,7 +1320,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_updates">อัปเดต</string>
     <string name="settings_section_patching">การแพตช์</string>
     <string name="settings_section_appearance_summary">ลักษณะของ Morphe</string>
-    <string name="settings_section_patch_options_summary">สิ่งที่โหมดง่ายๆ แปะแอปด้วย</string>
+    <string name="settings_section_patch_options_summary">สิ่งที่โหมดง่ายแพตช์แอปด้วย</string>
     <string name="settings_section_general">ทั่วไป</string>
     <string name="settings_section_patcher_summary">วิธีการแพตช์แอปบนอุปกรณ์นี้</string>
     <string name="settings_section_help_info">ความช่วยเหลือ &amp; ข้อมูล</string>
@@ -1359,7 +1359,7 @@ morphe_header_custom_dark.png
     <string name="excluded">ยกเว้นแล้ว</string>
     <string name="include">รวม</string>
     <string name="disable">ปิดการใช้งาน</string>
-    <string name="enable">อนุญาต</string>
+    <string name="enable">เปิดใช้งาน</string>
     <string name="trust">เชื่อถือ</string>
     <string name="loading">กำลังโหลด…</string>
     <string name="creating">กำลังสร้าง…</string>
@@ -1372,7 +1372,7 @@ morphe_header_custom_dark.png
     <string name="sort">เรียงลำดับ</string>
     <string name="any_version">เวอร์ชันใดก็ได้</string>
     <string name="enabled">เปิดใช้งานแล้ว</string>
-    <string name="disabled">ปิดการใช้งานอยู่</string>
+    <string name="disabled">ปิดใช้งาน</string>
     <string name="state_selected">เลือกแล้ว</string>
     <string name="state_not_selected">ไม่ได้เลือก</string>
     <string name="select_all">เลือกทั้งหมด</string>
@@ -1382,7 +1382,7 @@ morphe_header_custom_dark.png
     <string name="reorder_done">บันทึกการจัดเรียงแล้ว</string>
     <string name="reset_order">รีเซ็ตการจัดเรียง</string>
     <string name="reset_order_done">รีเซ็ตการจัดเรียงแล้ว</string>
-    <string name="reset_order_confirm_title">รีเซ็ตลำดับใช่หรือไม่?</string>
+    <string name="reset_order_confirm_title">รีเซ็ตลำดับหรือไม่?</string>
     <string name="reset_order_confirm_message">รายการจะกลับไปเป็นลำดับเริ่มต้น และลำดับที่ลากจัดวางด้วยตนเองจะหายไป</string>
     <string name="accessibility_select_app">เลือกแอป</string>
     <string name="accessibility_select_source">เลือกแหล่งที่มา</string>
@@ -1459,7 +1459,7 @@ morphe_header_custom_dark.png
     <string name="changelog_older_failed">ไม่สามารถโหลดรุ่นที่เก่ากว่าได้</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="changelog_release_page">หน้ารุ่น</string>
-    <string name="content_translate">แปลภาษา</string>
+    <string name="content_translate">แปล</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">ต้นฉบับ</string>
     <string name="content_translation_failed">การแปลล้มเหลว: %s</string>
@@ -1500,9 +1500,9 @@ morphe_header_custom_dark.png
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s จาก %2$s</string>
     <string name="onboarding_sources_desc">จัดการแหล่งแพตช์ของคุณ แต่ละแหล่งให้แพตช์ที่สามารถนำไปใช้กับแอปของคุณได้</string>
-    <string name="onboarding_other_apps_desc">ลงแพตช์แอปที่ไม่ได้อยู่ในรายการ โดยใช้อไฟล์ APK หรือแอปที่ติดตั้งอยู่บนอุปกรณ์ของคุณ</string>
+    <string name="onboarding_other_apps_desc">แพตช์แอปที่ไม่อยู่ในรายการ โดยใช้ไฟล์ APK หรือแอปที่ติดตั้งอยู่บนอุปกรณ์ของคุณ</string>
     <string name="onboarding_add_source_desc">เพิ่มแหล่งที่มาของแพตช์จากลิงก์หรือไฟล์แพตช์บันเดิล</string>
-    <string name="onboarding_signing_key_desc">สำรองกุญแจที่ใช้เซ็นชื่อแอปที่ถูกแพตช์ของคุณ หากไม่มีมัน แอปเหล่านั้นสามารถอัปเดตได้เฉพาะหลังจากการถอนการติดตั้งเท่านั้น</string>
+    <string name="onboarding_signing_key_desc">สำรองคีย์ที่ใช้เซ็นชื่อแอปที่ถูกแพตช์ของคุณ หากไม่มีคีย์นี้ แอปเหล่านั้นจะอัปเดตได้เฉพาะหลังจากถอนการติดตั้งเท่านั้น</string>
     <string name="onboarding_swipe_title">ท่าทางสัมผัส</string>
     <string name="onboarding_swipe_desc">ปัดไปทางขวาบนการ์ดแอปเพื่อดูแพตช์ที่มีอยู่ ปัดไปทางซ้ายเพื่อซ่อนการ์ดออกจากหน้าจอหลัก</string>
     <string name="onboarding_settings_desc">ปรับแต่ง Morphe: รูปลักษณ์ ตัวเลือกขั้นสูง และเครื่องมือระบบ</string>
@@ -1514,7 +1514,7 @@ morphe_header_custom_dark.png
     <string name="onboarding_expert_mode_desc">เปิดใช้งานโหมดผู้เชี่ยวชาญเพื่อปลดล็อกการเลือกแพตช์ ตัวเลือกที่กำหนดเอง และคุณสมบัติขั้นสูงอื่นๆ</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_installer_desc">เลือกวิธีการติดตั้งแอปที่ได้รับการแพตช์: มาตรฐาน, root mount หรือ Shizuku</string>
-    <string name="onboarding_system_file_picker_desc">เปิดใช้งานเพื่อใช้ตัวเลือกไฟล์ในตัวแทนตัวเลือกของระบบเมื่อเลือก APK หรือคีย์สโตร์</string>
+    <string name="onboarding_system_file_picker_desc">เปิดใช้งานเพื่อใช้ตัวเรียกดูไฟล์ในแอปแทนตัวเลือกไฟล์ของระบบเมื่อเลือก APK หรือคีย์สโตร์</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">ทัวร์คุณสมบัติอย่างรวดเร็ว</string>
     <string name="tour_prompt_desc">ต้องการทัวร์อย่างรวดเร็วเกี่ยวกับคุณสมบัติหลักของ Morphe หรือไม่</string>

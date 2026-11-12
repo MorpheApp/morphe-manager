@@ -161,7 +161,7 @@
     <string name="sources_sort_last_updated">Axırıncı dəfə yeniləndi</string>
     <string name="sources_sort_enabled_first">Əvvəlcə aktivləşdirilmiş</string>
     <string name="sources_patches_source_disabled_hint">Bu mənbə qapadılıb. Onun yamaqları məlumat üçün siyahıya alınıb və tətbiq olunmur</string>
-    <string name="sources_management_open_in_browser">Brauzerdə açın</string>
+    <string name="sources_management_open_in_browser">Brauzerdə aç</string>
     <string name="sources_management_report_issue">Problemi bildir</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_apps">Tətbiqlər</string>
@@ -376,7 +376,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam et</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Uyuşan versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Dəstəklənməyən</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
@@ -576,7 +576,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="root_pre_patch_installer_hint">%1$s %2$s olaraq təyin edildikdə soruşuldu. Yamaq rejimi yamaqlamadan sonra dəyişdirilə bilməz</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
-    <string name="patcher_error_log">Xəta jurnalı</string>
+    <string name="patcher_error_log">Xəta qeydi</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
     <string name="patcher_error_dialog_diagnostics">Diaqnostika</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
@@ -1357,7 +1357,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="exclude">İstisna et</string>
     <string name="excluded">İstisna edildi</string>
     <string name="include">Daxil et</string>
-    <string name="disable">Qapadın</string>
+    <string name="disable">Bağla</string>
     <string name="enable">Aktivləşdir</string>
     <string name="trust">Etibar et</string>
     <string name="loading">Yüklənilir…</string>
@@ -1428,7 +1428,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="save">Saxla</string>
     <string name="saved">Saxlanıldı</string>
     <string name="update">Yenilə</string>
-    <string name="allow">İcazə verin</string>
+    <string name="allow">İcazə ver</string>
     <string name="hide">Gizlət</string>
     <string name="hidden">Gizlədildi</string>
     <string name="unhide">Göstər</string>

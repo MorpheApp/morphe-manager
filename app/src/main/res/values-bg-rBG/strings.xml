@@ -5,7 +5,7 @@
     <string name="home_other_apps_action">Избор на други приложения</string>
     <string name="home_not_patched_yet">Все още не е патчнато</string>
     <string name="home_unpatched_version_installed">Инсталирана е версия без пачове</string>
-    <string name="home_unpatched_badge">Не е патчнато</string>
+    <string name="home_unpatched_badge">Не е пачнато</string>
     <string name="home_no_patches_available">Няма достъпни патчове</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
     <string name="home_more_apps_title">Още приложения</string>
@@ -18,7 +18,7 @@
     <string name="home_app_shown_named">Показани %s</string>
     <string name="home_app_no_hidden">Няма скрити приложения</string>
     <string name="home_app_hidden_apps_title">Скрити приложения</string>
-    <string name="home_app_hidden_apps_hint">̅̅Натиснете, за да покажете</string>
+    <string name="home_app_hidden_apps_hint">Натиснете, за да покажете</string>
     <string name="home_apps_unhide_message">Нескритите приложения се връщат на началния екран</string>
     <string name="home_app_patch_sources_description">Източниците, останали без отметка, не се предлагат, когато тези приложения се кърпят, и кръпките им никога не се включват сами в селекция. Всеки източник остава включен за всяко друго приложение.</string>
     <string name="home_app_patch_sources_mixed">Предлага се на %1$s от %2$s</string>
@@ -27,28 +27,28 @@
     <string name="android_11_bug_dialog_title">Грешка на Android 11</string>
     <string name="android_11_bug_dialog_description">Предварително трябва да се предостави право за инсталиране на приложението, за да се избегне грешка в системата Android 11, която ще повлияе негативно на потребителския опит</string>
     <string name="deep_link_add_source_title">Добавяне на източник</string>
-    <string name="deep_link_add_source_message">Искате ли да добавите този източник на корекции към Morphe?</string>
+    <string name="deep_link_add_source_message">Искате ли да добавите този източник на пачове към Morphe?</string>
     <string name="deep_link_add_source_warning">Добавяйте само източници, на които имате доверие</string>
     <!-- Shown under the app a link was opened for -->
-    <string name="deep_link_add_source_only_app">Добавена е само това приложение. Можете да добавите други приложения от списъка с приложения на източника</string>
+    <string name="deep_link_add_source_only_app">Добавено е само това приложение. Можете да добавите други приложения от списъка с приложения на източника</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <string name="deep_link_add_source_only_universal">Добавени са само универсалните патчове. Можете да добавяте приложения от списъка с приложения на източника</string>
     <!-- Asked when the link names an app of a source that is already added -->
-    <string name="deep_link_add_source_app_back">Този източник вече е добавен. Да се добави това приложение от съществуващия източник?</string>
+    <string name="deep_link_add_source_app_back">Този източник вече е добавен. Да се добави ли това приложение от съществуващия източник?</string>
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Това е нова версия на %s. Искате ли да я актуализирате?</string>
     <string name="mpp_import_unreadable">Този файл не може да бъде прочетен</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Налично е ново обновление за Morphe</string>
-    <string name="home_update_available_subtitle">Готово за инсталиране</string>
-    <string name="home_blocked_source_title">Открит е блокиран източник на корекции</string>
+    <string name="home_update_available_subtitle">Нова версия, готова за инсталиране</string>
+    <string name="home_blocked_source_title">Открит е блокиран източник на пачове</string>
     <string name="home_blocked_source_subtitle">Докоснете, за да прегледате и премахнете</string>
-    <string name="home_metadata_errors_title">Някои източници на корекции не са достъпни</string>
+    <string name="home_metadata_errors_title">Някои източници на пачове не са достъпни</string>
     <string name="home_metadata_errors_subtitle">Докоснете, за да прегледате източниците</string>
     <string name="home_outdated_manager_title">Morphe е остарял</string>
     <string name="home_outdated_manager_subtitle">Някои източници на пачове изискват по-нова версия</string>
     <string name="home_held_back_title">Един източник на пачове предизвика срив на Morphe</string>
-    <string name="home_held_back_subtitle">Срив</string>
+    <string name="home_held_back_subtitle">Пропуснато е, за да може приложението да стартира. Докоснете за преглед</string>
     <string name="home_metered_skipped_title">Актуализациите са спрени при използване на мобилни данни</string>
     <string name="home_metered_skipped_subtitle">Докоснете, за да разрешите актуализации през мобилни данни</string>
     <string name="home_repatch_available_subtitle">Докоснете, за да ги добавите всички в опашката</string>
@@ -57,7 +57,7 @@
     <string name="home_update_skipped_metered">Пропуснати актуализации</string>
     <string name="home_update_skipped_metered_subtitle">Мобилни данни активни</string>
     <string name="home_updating_sources">Обновяне на източници…</string>
-    <string name="home_update_success">Обновяне на източниците завършено</string>
+    <string name="home_update_success">Източниците са актуализирани</string>
     <string name="home_update_success_subtitle">Вашите източници са актуални</string>
     <string name="home_sources_are_loading">Зареждане на източниците, моля изчакайте…</string>
     <string name="home_search_apps">Търсене на приложения</string>
@@ -67,8 +67,8 @@
     <string name="home_app_grouping_none">Без</string>
     <string name="home_app_sort_manual_hint">Натиснете и задръжте върху дадено приложение, след което докоснете бутона за пренареждане.</string>
     <string name="home_app_sort_recommended">Препоръчителен ред</string>
-    <string name="home_app_sort_updates_first">Първо актуализации за поправки</string>
-    <string name="home_app_sort_recently_patched">Наскоро пачвани</string>
+    <string name="home_app_sort_updates_first">Първо актуализации за пачове</string>
+    <string name="home_app_sort_recently_patched">Наскоро пачнати</string>
     <string name="home_no_apps_title">Няма налични приложения</string>
     <string name="home_no_apps_subtitle">Добавете източник на пачове или активирайте съществуващ в %s</string>
     <string name="home_no_apps_search_subtitle">Няма приложения, които отговарят на \"%s\"</string>
@@ -103,7 +103,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Нека накараме приложенията ви да се държат добре</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Днес предвиждането: 100% шанс за поправяне</string>
+    <string name="home_greeting_7" formatted="false">Днешната прогноза: 100% шанс за пачване</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Готови ли сте да превърнете разочароващото в страхотно?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -116,20 +116,20 @@
     <string name="home_greeting_morning_2">Добро утро! Приложенията няма сами да се закърпят</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">Следобеден застой? Закърпи нещо</string>
-    <string name="home_greeting_afternoon_2">След обядските ъпдейти са различни</string>
-    <string name="home_greeting_afternoon_3">Следобедна смяна: издание за ъпдейти</string>
+    <string name="home_greeting_afternoon_2">Пачването след обед е друга работа</string>
+    <string name="home_greeting_afternoon_3">Следобедната смяна: издание за пачове</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Добър вечер! Вечерните ъпдейти са различни</string>
-    <string name="home_greeting_evening_2">Отпускате ли? Първо направете ъпдейт на приложение</string>
-    <string name="home_greeting_evening_3">Напускате ли? Първо направете ъпдейт на нещо</string>
+    <string name="home_greeting_evening_1">Добър вечер! Вечерното пачване е различно</string>
+    <string name="home_greeting_evening_2">Отпускате ли? Първо пачнете някое приложение</string>
+    <string name="home_greeting_evening_3">Напускате ли? Първо пачнете нещо</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Все още буден/будна? Също и приложенията, които трябва да се ъпдейтнат</string>
-    <string name="home_greeting_late_night_2">Вечерна сесия за ъпдейти? Респект</string>
+    <string name="home_greeting_late_night_1">Все още буден/будна? Също и приложенията, които трябва да се пачнат</string>
+    <string name="home_greeting_late_night_2">Вечерна сесия за пачване? Респект</string>
     <string name="home_greeting_late_night_3">Нощен режим: активиран</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Върхово време за ъпдейти… уж</string>
-    <string name="home_greeting_super_late_2">Не можете да спите? Направете ъпдейт на нещо</string>
-    <string name="home_greeting_super_late_3">В този момент, просто останете будни и направете ъпдейти</string>
+    <string name="home_greeting_super_late_1">Върхово време за пачване… уж</string>
+    <string name="home_greeting_super_late_2">Не можете да спите? Пачнете нещо</string>
+    <string name="home_greeting_super_late_3">В този момент просто останете будни и пачнете</string>
     <string name="home_greeting_super_late_4">Вие и сървърите, и двамата сте будни</string>
     <string name="home_greeting_super_late_5">Нощни птици и продуктивни</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
@@ -153,7 +153,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <string name="home_greeting_new_year_4">Долу старите версии, да живеят новите</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Източници за поправки</string>
+    <string name="sources_management_title">Източници на пачове</string>
     <string name="sources_search">Търсене на източници и кръпки</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Изискват внимание</string>
@@ -166,11 +166,11 @@
     <string name="sources_management_report_issue">Докладвай за проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
     <string name="sources_apps">Приложения</string>
-    <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете прилагането на промени. Приложението се премахва от началния екран, когато няма източник, който да го предоставя, освен ако не сте го модифицирали</string>
+    <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете. Приложението се премахва от началния екран, когато никой източник вече не го предоставя, освен ако не сте го пачнали.</string>
     <string name="sources_apps_brought">Включени от този източник</string>
     <string name="sources_apps_left_out">Изключени от този източник</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">Запазено като модифицирано</string>
+    <string name="sources_apps_stays_patched">Запазено като пачнато</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Ново</string>
     <string name="sources_apps_new_apps">Добавете нови приложения</string>
@@ -180,9 +180,9 @@
     <string name="sources_management_prerelease_toggle_description">Получава ранен достъп до нови експериментални версии на пачове</string>
     <string name="sources_prerelease_warning_title">Активиране на предварителни пачове ли?</string>
     <string name="sources_prerelease_warning_message">Предварителните версии все още са в разработка. Пачовете може да се провалят или да счупят приложението, а функциите може да се променят без предупреждение.</string>
-    <string name="expert_mode_unstable_notice">Предварителните версии или експерименталните корекции могат да бъдат нестабилни</string>
+    <string name="expert_mode_unstable_notice">Предварителните версии или експерименталните пачове могат да бъдат нестабилни</string>
     <string name="sources_management_experimental_versions_toggle">Експериментални версии на приложението</string>
-    <string name="sources_management_experimental_versions_toggle_description">Показва и поправя експериментални цели на приложението</string>
+    <string name="sources_management_experimental_versions_toggle_description">Показва и пачва експериментални цели на приложението</string>
     <!-- Actions of the panel for several selected sources at once -->
     <string name="sources_management_prerelease_enable">Включи предварителните пачове</string>
     <string name="sources_management_prerelease_disable">Изключи предварителните пачове</string>
@@ -190,14 +190,14 @@
     <string name="sources_management_experimental_versions_disable">Изключване на експериментални версии на приложението</string>
     <string name="sources_management_already_exists">Този източник вече е добавен</string>
     <string name="sources_management_invalid_url">Невалиден URL адрес на източника. Моля, проверете адреса и опитайте отново</string>
-    <string name="sources_management_blocked">Този източник на корекции е блокиран и не може да бъде добавен</string>
+    <string name="sources_management_blocked">Този източник на пачове е блокиран и не може да бъде добавен</string>
     <string name="sources_management_source_blocked_badge">Блокиран</string>
     <string name="sources_management_metadata_unavailable">Метаданни не са налични</string>
-    <string name="sources_management_metadata_unavailable_hint">Дистанционният метаданнен файл не е достъпен. Патчването с инсталирания пакет все още работи, но автоматичното обновяване е деактивирано за този източник</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">Пакетът за корекции не може да бъде свален. URL адресът на източника може да е неверен или файлът не съществува</string>
-    <string name="sources_management_metadata_unavailable_hint_missing_editable">Пакетът с корекции не можа да бъде изтеглен. Източникът на URL адреса може да е неправилен или файлът не съществува. Докоснете, за да го промените</string>
+    <string name="sources_management_metadata_unavailable_hint">Отдалеченият файл с метаданни не е достъпен. Пачването с инсталирания пакет все още работи, но автоматичната актуализация е деактивирана за този източник</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Пакетът с пачове не може да бъде изтеглен. URL адресът на източника може да е неверен или файлът не съществува</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Пакетът с пачове не можа да бъде изтеглен. URL адресът на източника може да е неправилен или файлът не съществува. Докоснете, за да го промените</string>
     <string name="sources_management_outdated_manager_badge">Актуализиране на Morphe</string>
-    <string name="sources_management_outdated_manager_hint">Този източник е създаден за пачър %1$s, но Morphe %2$s включва пачър %3$s. Актуализирайте Morphe, за да го използвате.</string>
+    <string name="sources_management_outdated_manager_hint">Този източник е създаден за пачер %1$s, но Morphe %2$s включва пачер %3$s. Актуализирайте Morphe, за да го използвате.</string>
     <string name="sources_management_held_back_badge">Срив</string>
     <string name="sources_management_held_back_hint">Този източник предизвика срив на Morphe по време на зареждане, затова той се пропуска. Обновете го или го импортирайте отново, за да опитате отново.</string>
     <string name="sources_management_signed_by">Подписано от</string>
@@ -207,14 +207,14 @@
     <string name="sources_management_source_disabled">Източникът е деактивиран</string>
     <string name="sources_management_source_updating">Актуализиране на източник</string>
     <!-- Home Screen - Sources Dialogs -->
-    <string name="sources_dialog_display_name">Име на диалога</string>
+    <string name="sources_dialog_display_name">Показвано име</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
-    <string name="sources_dialog_change_url">Променете мястото, от където се изтегля източникът на корекциите</string>
+    <string name="sources_dialog_change_url">Променете откъде се изтегля източникът на пачове</string>
     <string name="sources_dialog_duplicate_name_error">Източник с това име вече съществува</string>
-    <string name="sources_dialog_missing_error">Не може да се обнови този източник на патча</string>
+    <string name="sources_dialog_missing_error">Този източник на кръпки не може да бъде актуализиран</string>
     <string name="sources_dialog_add_source">Добавяне на източник</string>
     <string name="sources_dialog_delete_confirm_body">Това не може да бъде отменено</string>
-    <string name="sources_dialog_remote">Удален</string>
+    <string name="sources_dialog_remote">Отдалечен</string>
     <string name="sources_dialog_remote_url">URL на източника</string>
     <string name="sources_dialog_remote_url_hint">Хранилище или връзка към .json пакет с корекции. Поставете няколко наведнъж, за да ги добавите всички</string>
     <string name="sources_dialog_paste_no_links">Не са намерени връзки в клипборда</string>
@@ -232,9 +232,9 @@
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Източници на пачове от трети страни</string>
     <string name="sources_dialog_community_notice_message">"Източниците на общностните пачове се създават и поддържат от техните собствени автори. Morphe не преглежда и не проверява пачове от трети страни и не носи отговорност за тяхното съдържание или за това какво правят на вашето устройство"</string>
-    <string name="sources_update_success">Успешно обновяване</string>
-    <string name="sources_update_unavailable">Няма достъпно обновление</string>
-    <string name="sources_download_fail">Неуспешно сваляне на източника: %s</string>
+    <string name="sources_update_success">Актуализацията е успешна</string>
+    <string name="sources_update_unavailable">Няма налична актуализация</string>
+    <string name="sources_download_fail">Неуспешно изтегляне на източниците: %s</string>
     <string name="sources_download_fail_named">\'%s\' не може да бъде актуализиран. Проверете връзката си с интернет и опитайте отново</string>
     <string name="sources_download_endpoint_not_found">\'%s\': метаданни за пакета не са намерени</string>
     <string name="sources_signing_key_changed_named">\'%s\' не беше актуализиран, защото последната му версия не е подписана с ключа, който е използван преди</string>
@@ -249,15 +249,15 @@
     <string name="sources_patch_expert_badge_tooltip">Включете %1$s, за да добавите този пач ръчно</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Нуждаете ли се от помощ за намиране на APK файла?</string>
-    <string name="home_apk_availability_dialog_simple">За да оновяваш &lt;b&gt;%s&lt;/b&gt;, ти трябва непрошатата версия на APK:</string>
-    <string name="home_apk_availability_dialog_expert">За да прилагате &lt;b&gt;%s&lt;/b&gt;, нужна е непренагласена APK от версиите:</string>
+    <string name="home_apk_availability_dialog_simple">За да пачнете &lt;b&gt;%s&lt;/b&gt;, ви е необходим непачнат APK на версията:</string>
+    <string name="home_apk_availability_dialog_expert">За да пачнете &lt;b&gt;%s&lt;/b&gt;, са необходими непачнати APK на следните версии:</string>
     <string name="home_apk_availability_recommended_label">Рекомендовано</string>
-    <string name="home_apk_availability_unpatched_label">Необновен</string>
+    <string name="home_apk_availability_unpatched_label">Непачнат</string>
     <string name="home_apk_availability_incompatible_label">Несъвместим</string>
     <string name="home_apk_availability_find">Да, помогнете ми да го намеря</string>
     <string name="home_apk_availability_have">Не, вече го имам</string>
     <string name="home_apk_helper_download">Използвайте помощно приложение</string>
-    <string name="home_apk_helper_untrusted">Инсталирана е помощна програма, но все още не е удостоверяема, така че не се предлага тук</string>
+    <string name="home_apk_helper_untrusted">Инсталирана е помощна програма, но все още не е доверена, затова не се предлага тук</string>
     <string name="home_apk_helper_untrusted_action">Преглед на помощните програми</string>
     <string name="home_apk_helper_title">Изтегляне с помощно приложение</string>
     <string name="home_apk_helper_description">Morphe ще помоли приложението-помощник по-долу да изтегли оригиналния APK файл и да върне файла обратно</string>
@@ -275,10 +275,10 @@
     <string name="home_apk_use_installed_app">Използване на инсталираното приложение</string>
     <string name="home_apk_use_saved_unsupported">Кръпките не поддържат това запазено копие. Прилагането на кръпката ще изисква потвърждение, или изберете друг APK</string>
     <string name="home_apk_use_installed_unverified">Не успяхме да потвърдим подписа на инсталираното приложение, затова е възможно вече да е променено</string>
-    <string name="home_unverified">Неверифицирано</string>
+    <string name="home_unverified">Непотвърдено</string>
     <string name="home_install_verification_pending">Проверка на инсталацията…</string>
-    <string name="home_app_info_install_unverified">Morphe не може да потвърди, че инсталираното приложение е версията, която е патчнала. Патчнете го отново или го инсталирайте от запазения APK, за да възстановите действията му</string>
-    <string name="home_app_info_no_saved_apk">Няма запазено APK. Пatching ще изисква отново да изберете APK файл.</string>
+    <string name="home_app_info_install_unverified">Morphe не може да потвърди, че инсталираното приложение е версията, която е пачнала. Пачнете го отново или го инсталирайте от запазения APK, за да възстановите действията му</string>
+    <string name="home_app_info_no_saved_apk">Няма запазен APK. Пачването ще изисква отново да изберете APK файл.</string>
     <string name="home_version_requires_android">Изисква Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Не се поддържа на това устройство</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; няма поддържани версии за Android %2$s (API %3$s). Всички декларирани версии изискват по-нова версия на Android</string>
@@ -288,8 +288,8 @@
     <string name="home_download_instructions_step1">Натиснете бутона \'%s\' отдолу</string>
     <string name="home_download_instructions_step2_part1">Скролни надолу страницата и натиснете</string>
     <string name="home_download_instructions_step2_apkcube">Превъртете надолу по уеб страницата, изберете версия &lt;b&gt;%s&lt;/b&gt; и натиснете.</string>
-    <string name="home_download_instructions_step2_generic">Скролнете надолу страницата и натиснете нейния бутон за изтегляне.</string>
-    <string name="home_download_instructions_step2_variant">Скролнете надолу страницата и натиснете бутона за изтегляне на най-горния &lt;b&gt;APK вариант&lt;/b&gt;.</string>
+    <string name="home_download_instructions_step2_generic">Превъртете надолу страницата и натиснете нейния бутон за изтегляне.</string>
+    <string name="home_download_instructions_step2_variant">Превъртете надолу страницата и натиснете бутона за изтегляне на най-горния &lt;b&gt;APK вариант&lt;/b&gt;.</string>
     <string name="home_download_instructions_step2_search">Отворете резултат от търсене от уебсайт, на който имате доверие.</string>
     <string name="home_download_instructions_step2_search_note">Morphe не може да гарантира за тези уебсайтове. Пропуснете тези, които предлагат собствен магазин за приложения вместо APK файл.</string>
     <string name="home_download_instructions_step3_search">На този уебсайт изтеглете APK на версия &lt;b&gt;%s&lt;/b&gt;, а не най-новата.</string>
@@ -305,9 +305,9 @@
     <string name="home_download_instructions_download_button_toast_4">Все още не е тук… все още не е тук… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Добре, уважавам отдадеността 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Вече сте официален тестер на бутона Morphe 🏅</string>
-    <string name="home_download_instructions_step3">Чакајте да се завърши изтеглянето и &lt;b&gt;не инсталирайте&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step3_mount">Чакајте да се завърши изтеглянето, след това &lt;b&gt;инсталирайте&lt;/b&gt; APK</string>
-    <string name="home_download_instructions_step4">След завършване на свалянето, върнете се в Morphe</string>
+    <string name="home_download_instructions_step3">Чакайте да се завърши изтеглянето и &lt;b&gt;не инсталирайте&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step3_mount">Чакайте да се завърши изтеглянето, след това &lt;b&gt;инсталирайте&lt;/b&gt; APK</string>
+    <string name="home_download_instructions_step4">След приключване на изтеглянето се върнете в Morphe</string>
     <string name="home_download_instructions_step4_mount">След инсталирането на оригиналния APK, върнете се в Morphe</string>
     <string name="home_download_instructions_continue_to">Продължете към %s</string>
     <string name="home_download_instructions_destination">страницата за изтегляне</string>
@@ -343,22 +343,22 @@
     <string name="expert_mode_enable_all_universal_pending">Докоснете отново за универсални кръпки</string>
     <string name="expert_mode_universal_all_warning_title">Активиране на всички универсални пачове ли?</string>
     <string name="expert_mode_universal_all_warning_message">Универсалните пачове не са тествани заедно. Активирането на всички наведнъж може да причини конфликти, неуспешно пачване или сривове.</string>
-    <string name="expert_mode_recommended">Препоръчани поправки</string>
-    <string name="expert_mode_reset_to_default_done">Приложени са препоръчителните корекции</string>
+    <string name="expert_mode_recommended">Препоръчани пачове</string>
+    <string name="expert_mode_reset_to_default_done">Приложени са препоръчаните пачове</string>
     <string name="expert_mode_selected_count">%1$s от %2$s избрани</string>
     <string name="expert_mode_saved_selection">Запазен избор</string>
-    <string name="expert_mode_restore_saved_done">Възстановената запазена селекция</string>
-    <string name="expert_mode_copy_from_bundle_no_patches">Няма съвпадащи поправки в този пакет</string>
+    <string name="expert_mode_restore_saved_done">Запазеният избор е възстановен</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">Няма съвпадащи пачове в този пакет</string>
     <string name="expert_mode_no_results">Няма намерени пачове</string>
-    <string name="expert_mode_selected_only">Само избраните заплатки</string>
+    <string name="expert_mode_selected_only">Само избраните пачове</string>
     <string name="expert_mode_selected_only_on">Показване само на избраните кръпки</string>
     <string name="expert_mode_selected_only_off">Показване на всички кръпки</string>
-    <string name="expert_mode_universal_patches">Универсални пачове</string>
+    <string name="expert_mode_universal_patches">Универсални кръпки</string>
     <string name="expert_mode_new_patches">Нов</string>
     <string name="expert_mode_options_customized">Персонализиран</string>
     <string name="expert_mode_patch_required_by_installer">Изисква се за избраната инсталационна цел</string>
     <string name="expert_mode_patch_unavailable_for_installer">Не е налично за избраната инсталационна цел</string>
-    <string name="expert_mode_multiple_sources_warning_title">Избрани са патове от различни източници</string>
+    <string name="expert_mode_multiple_sources_warning_title">Избрани са пачове от различни източници</string>
     <string name="expert_mode_multiple_sources_warning_conflict">Пачове от различни източници не са създадени да работят заедно и може да си противоречат или да повредят приложението</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">Непотвърден APK</string>
@@ -377,22 +377,22 @@
 
 🔧 Очаквайте странно поведение на приложението или неидентифицирани бъгове, докато пачовете се оптимизират за тази версия на приложението"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Неподдържана версия</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Това APK не е препоръчана версия на приложението. Продължаване може да доведе до неработещо приложение</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Този APK не е препоръчана версия на приложението. Продължаването може да доведе до неработещо приложение</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="home_dialog_unsupported_version_dialog_proceed">Продължаване въпреки това</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Съвместими версии:</string>
-    <string name="home_dialog_unsupported_version_unsupported_label">Несъвместим</string>
+    <string name="home_dialog_unsupported_version_unsupported_label">Неподдържан</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Изграждане %s</string>
-    <string name="home_dialog_unsupported_version_build_mismatch_description">Това е различна версия на същата версия. Пачовете изискват определена версия</string>
-    <string name="home_dialog_wrong_package_title">Грешно избрано пакети</string>
-    <string name="home_dialog_wrong_package_description">Избраното APK не е за приложението, което искате да поправите</string>
+    <string name="home_dialog_unsupported_version_build_mismatch_description">Това е различен build на същата версия. Пачовете изискват определен build</string>
+    <string name="home_dialog_wrong_package_title">Избран е грешен пакет</string>
+    <string name="home_dialog_wrong_package_description">Избраното APK не е за приложението, което искате да пачнете</string>
     <string name="home_dialog_expected_package">Очакван пакет:</string>
     <string name="home_dialog_selected_package">Избран пакет:</string>
-    <string name="home_outdated_patches_dialog_title">Патчовете могат да бъдат остарели</string>
-    <string name="home_outdated_patches_dialog_message">Мобилен интернет е активен и патчовете са изключени</string>
-    <string name="home_outdated_patches_dialog_warning">Патчване с остарели патчове може да доведе до счупване на приложението</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">Обновяване и патчване</string>
+    <string name="home_outdated_patches_dialog_title">Кръпките може да са остарели</string>
+    <string name="home_outdated_patches_dialog_message">Мобилните данни са активни и актуализациите на кръпките са изключени</string>
+    <string name="home_outdated_patches_dialog_warning">Пачването с остарели кръпки може да доведе до неработещо приложение</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Актуализиране и пачване</string>
     <string name="home_low_disk_space_dialog_title">Малко място на диска</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_message">Налично е само %1$s ГБ свободно място. Прилагането на кръпката изисква поне %2$s ГБ свободно място, за да работи правилно</string>
@@ -400,7 +400,7 @@
     <string name="home_simple_bundle_select_title">Изберете източник на пач</string>
     <string name="home_simple_bundle_select_remember">Винаги използвайте този източник за това приложение</string>
     <!-- Color picker -->
-    <string name="custom_color">Навикнат цвят</string>
+    <string name="custom_color">Персонализиран цвят</string>
     <string name="color_picker_shade">Наситеност и яркост</string>
     <string name="color_picker_hue">Нюанс</string>
     <!-- Patch Options -->
@@ -421,7 +421,7 @@
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
     <string name="patch_option_recommended_size">Препоръчително: %1$s×%2$s</string>
     <!-- Adaptive Icon Creator -->
-    <string name="adaptive_icon_create">Създай адаптивен икон</string>
+    <string name="adaptive_icon_create">Създай адаптивна икона</string>
     <string name="adaptive_icon_select_image">Избери снимка</string>
     <string name="adaptive_icon_change_image">Промени снимка</string>
     <string name="image_load_failed">Не можа да се зареди това изображение</string>
@@ -435,10 +435,10 @@
     <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_themed">Тематична</string>
     <string name="adaptive_icon_background_color">Цвят на фона</string>
-    <string name="adaptive_icon_reset_transform">Възстанови позиция и мащаб</string>
+    <string name="adaptive_icon_reset_transform">Нулиране на позицията и мащаба</string>
     <string name="adaptive_icon_no_transparency_warning">Това изображение няма прозрачни пиксели, затова тематичните икони и иконите за известия запазват логото на Morphe</string>
-    <string name="adaptive_icon_created_success">Адаптивен иконо създаден успешно</string>
-    <string name="adaptive_icon_creation_failed">Неуспешно създаване на адаптивен иконо</string>
+    <string name="adaptive_icon_created_success">Адаптивната икона е създадена успешно</string>
+    <string name="adaptive_icon_creation_failed">Неуспешно създаване на адаптивна икона</string>
     <string name="adaptive_icon_guide">Ръководство за създаване на икони</string>
     <string name="adaptive_icon_guide_png_title">Използвайте PNG изображение с прозрачен фон</string>
     <string name="adaptive_icon_guide_png_body">Най-добре работи лого върху прозрачен фон, като цветът на фона се избира по-долу. Изображение без прозрачност запълва цялата икона, а тематичните икони и иконите за известия запазват логото на Morphe.</string>
@@ -450,7 +450,7 @@
     <string name="adaptive_icon_guide_monochrome_body">Изрязва се от изображението със същата позиция и размер като иконата на стартера. На Android 13 и по-нови версии стартерите с активирани тематични икони я оцветяват от тапета.</string>
     <string name="notification_icon_preview">Известие</string>
     <!-- Header Creator -->
-    <string name="header_creator_create">Създай кастомен хедър</string>
+    <string name="header_creator_create">Създай персонализирано заглавие</string>
     <string name="header_creator_light_theme">Заглавие за светла тема</string>
     <string name="header_creator_dark_theme">Заглавие за тъмна тема</string>
     <string name="header_creator_success">Заглавието е създадено успешно</string>
@@ -463,13 +463,13 @@
     <string name="header_creator_guide_positioning_title">Позициониране и мащабиране</string>
     <string name="header_creator_guide_positioning_body">Плъзгайте и прищипвайте изображението в редактора или го оразмерявайте с плъзгача. Пунктираната кутия показва мястото на стандартното лого, а водачи се появяват, когато изображението се подравни с него.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Избран пач</string>
-    <string name="batch_patch_title">Пакетно прилагане на корекции</string>
+    <string name="batch_patch_action">Пачни избраните</string>
+    <string name="batch_patch_title">Пакетно пачване</string>
     <string name="batch_patch_planning">Подготвя се опашката…</string>
     <string name="batch_patch_preparing_next">Подготвя се следващото приложение…</string>
     <string name="batch_patch_progress_counter">Патчване на %1$s от %2$s</string>
-    <string name="batch_patch_summary">%1$s коригирани, %2$s неуспешни, %3$s пропуснати</string>
-    <string name="batch_patch_saved_hint">Пачните приложения са запазени. Инсталирайте ги сега или по-късно от списъка с пачните APK в настройките</string>
+    <string name="batch_patch_summary">%1$s пачнати, %2$s неуспешни, %3$s пропуснати</string>
+    <string name="batch_patch_saved_hint">Пачнатите приложения са запазени. Инсталирайте ги сега или по-късно от списъка с пачнатите APK файлове в настройките</string>
     <string name="batch_patch_multiple_sources">Някои приложения комбинират пачове от повече от един източник, което може да причини конфликти</string>
     <string name="batch_patch_needs_apk">Няма наличен APK файл, прикачете файл</string>
     <string name="batch_patch_wrong_package">Прикаченият файл принадлежи към %s</string>
@@ -478,10 +478,13 @@
     <string name="batch_patch_source_installed">Инсталирано приложение</string>
     <string name="batch_patch_source_file">Прикачен файл</string>
     <string name="batch_patch_source_unavailable">APK файлът не може да бъде подготвен</string>
-    <string name="batch_patch_force_version">Пачовай въпреки това</string>
+    <string name="batch_patch_force_version">Пачни въпреки това</string>
     <string name="batch_patch_force_version_done">Въпреки това е на опашка, приложението може да се счупи</string>
     <string name="batch_patch_accept_signature_done">Въпреки това е на опашка, APK не е проверен</string>
     <string name="batch_patch_apk_selected">APK е избран</string>
+    <string name="batch_patch_auto_download_stopped">Автоматичното изтегляне на APK файлове е спряно</string>
+    <string name="batch_patch_auto_download_stop">Спри изтеглянията</string>
+    <string name="batch_patch_auto_download_kept">Изтегленият APK файл не можа да бъде използван, затова предишният е запазен</string>
     <string name="batch_patch_edit_patches">Избор на пачове</string>
     <string name="batch_patch_state_no_apk">Няма APK</string>
     <string name="batch_patch_state_no_patches">Няма пачове</string>
@@ -509,8 +512,8 @@
     <string name="batch_queue_keep_title">Запазване на опашката?</string>
     <string name="batch_queue_keep_description">Приложенията в опашката ще изчакват на началния екран, за да бъдат стартирани по-късно.</string>
     <string name="batch_queue_keep">Запази</string>
-    <string name="shortcut_repatch_short">Презакачване</string>
-    <string name="shortcut_repatch_long">Презакачване на остарели приложения</string>
+    <string name="shortcut_repatch_short">Повторно пачване</string>
+    <string name="shortcut_repatch_long">Повторно пачване на остарели приложения</string>
     <string name="shortcut_check_updates_short">Проверка за актуализации</string>
     <string name="shortcut_check_updates_long">Проверка за актуализации на пачове</string>
     <!-- Home Screen - App Info Screen -->
@@ -518,36 +521,36 @@
     <string name="home_app_info_uninstall_removes_data">Приложението и данните му се премахват от това устройство</string>
     <string name="batch_uninstall_confirm_body">Избраните приложения ще бъдат трайно премахнати от вашето устройство</string>
     <string name="home_app_info_remove_app_warning">Това ще изтрие завинаги:</string>
-    <string name="home_app_info_delete_item_database">Вход в базата данни</string>
-    <string name="home_app_info_delete_item_patched_apk">Поправен APK файл</string>
+    <string name="home_app_info_delete_item_database">Запис в базата данни</string>
+    <string name="home_app_info_delete_item_patched_apk">Пачнат APK файл</string>
     <string name="home_app_info_delete_item_original_apk">Оригинален APK файл</string>
-    <string name="home_app_info_delete_preservation_note">Вашият избор за поправка и опции ще бъдат запазени за бъдещи поправки</string>
-    <string name="home_app_info_patches_name_default">Замества</string>
+    <string name="home_app_info_delete_preservation_note">Вашият избор на пачове и опции ще бъде запазен за бъдещо пачване.</string>
+    <string name="home_app_info_patches_name_default">Пачове</string>
     <string name="home_app_info_patches_name_fallback">Без име</string>
-    <string name="home_app_info_patches_source_removed">Изтрит източник на кръпка</string>
-    <string name="home_app_info_patches_replace_fail">Неуспешно заместим патчове: %s</string>
+    <string name="home_app_info_patches_source_removed">Изтрит източник на пачове</string>
+    <string name="home_app_info_patches_replace_fail">Неуспешно импортиране на пачове: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Оригиналният APK не е намерен. Не може да се препачва това приложение.</string>
-    <string name="home_app_info_original_package_name">Име на оригиналното пакети</string>
-    <string name="home_app_info_applied_patches">Приложени замести</string>
-    <string name="home_app_info_patch_source_used">Използван източник на патч</string>
-    <string name="home_app_info_install_type_custom_installer">Намиране на инсталатор</string>
+    <string name="home_app_info_original_package_name">Оригинално име на пакета</string>
+    <string name="home_app_info_applied_patches">Приложени пачове</string>
+    <string name="home_app_info_patch_source_used">Използван източник на пачове</string>
+    <string name="home_app_info_install_type_custom_installer">Персонализиран инсталатор</string>
     <string name="home_app_info_install_type_system_installer">Системен инсталатор</string>
     <string name="home_app_info_install_type_play_store">Инсталиране от Play Store</string>
-    <string name="home_app_info_install_type_root">Root инсталиране</string>
+    <string name="home_app_info_install_type_root">Root инсталация</string>
     <string name="home_app_info_install_type_root_play_store">Инсталиране от Play Store с root</string>
     <string name="home_app_info_install_type_shizuku_play_store">Инсталиране от Play Store чрез Shizuku</string>
-    <string name="home_app_info_patch_update_available">Достъпно е ново издание на замести</string>
-    <string name="home_app_info_patch_update_available_description">Достъпна е по-нова версия на поправките. Поправете отново приложението си, за да получите последното подобрение и поправки</string>
+    <string name="home_app_info_patch_update_available">Налично е ново издание на пачовете</string>
+    <string name="home_app_info_patch_update_available_description">Налична е по-нова версия на пачовете. Пачнете отново приложението си, за да получите последните подобрения и корекции.</string>
     <string name="home_app_info_app_update_available">Налична е актуализация на приложението</string>
     <string name="home_app_info_app_update_available_description">Източниците на кръпката поддържат по-нова версия на това приложение. Приложете отново кръпката, за да преминете към тази версия</string>
     <string name="home_app_info_newest_supported_version">Най-нова поддържана</string>
     <string name="home_app_info_version_move">Инсталирана %1$s, най-нова поддържана %2$s</string>
-    <string name="home_app_info_version_restore">Инсталирана версия: %1$s, патчна версия: %2$s</string>
+    <string name="home_app_info_version_restore">Инсталирана версия: %1$s, пачната версия: %2$s</string>
     <string name="home_app_info_app_deleted_warning">Приложението беше деинсталирано</string>
-    <string name="home_app_info_app_deleted_description">Това приложение беше деинсталирано извън Morphe. Поправете го отново, за да възстановите функционалността</string>
+    <string name="home_app_info_app_deleted_description">Това приложение беше деинсталирано извън Morphe. Пачнете го отново, за да възстановите функционалността</string>
     <string name="home_app_info_not_patched_description">Инсталирана е версия без пачове на това приложение. Morphe все още има своя предишен запис за пач</string>
-    <string name="home_app_info_mount_replaced_description">Друга версия замени монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща патчната версия обратно</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play актуализира монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща патчната версия. Изключете автоматичното актуализиране за него в Google Play, за да остане с кръпка</string>
+    <string name="home_app_info_mount_replaced_description">Друга версия замени монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща пачнатата версия обратно</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play актуализира монтираното приложение, така че кръпката вече не се прилага. Възстановяването връща пачнатата версия. Изключете автоматичното актуализиране за него в Google Play, за да остане с кръпка</string>
     <string name="app_links_title">Поддържани уеб връзки</string>
     <string name="app_links_description">На Android 12+ връзките към поддържани домейни по подразбиране се отварят в браузъра, освен ако не са одобрени</string>
     <string name="app_links_unverified_banner_title">Непроверени уеб връзки</string>
@@ -572,7 +575,7 @@
     <string name="root_pre_patch_installer_description">Вашето устройство има root достъп. Изберете дали това приложение трябва да бъде пачнато за root монтиране или стандартна инсталация.</string>
     <string name="root_pre_patch_installer_mount_title">Режим на root монтиране</string>
     <string name="root_pre_patch_installer_mount_description">Пачове за root монтиране, след което монтира APK върху съответното стоково приложение. Не е необходим GmsCore.</string>
-    <string name="root_mount_module_unmount_warning">Ако KernelSU има включена опцията „Unmount modules by default“, отворете KernelSU &gt; Superuser &gt; приложението, което сте закачили &gt; Profile &gt; Custom и изключете „Unmount modules“. В противен случая закаченото модифицирано APK може да не влезе в сила, дори ако Morphe го показва като закачено</string>
+    <string name="root_mount_module_unmount_warning">Ако KernelSU има включена опцията „Unmount modules by default“, отворете KernelSU &gt; Superuser &gt; приложението, което сте монтирали &gt; Profile &gt; Custom и изключете „Unmount modules“. В противен случай монтираният пачнат APK може да не влезе в сила, дори ако Morphe го показва като монтиран</string>
     <string name="root_pre_patch_installer_standard_title">Стандартен режим на инсталиране</string>
     <string name="root_pre_patch_installer_standard_description">Патчове като нормален APK с GmsCore поддръжка. Вашата настройка на инсталатора се използва след патчването</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
@@ -614,28 +617,28 @@
     <string name="patcher_field_value_stripped">премахнати</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">запазени</string>
-    <string name="patcher_tab_logs">Дневници на пакетора</string>
+    <string name="patcher_tab_logs">Дневници на пачера</string>
     <string name="patcher_tab_game">Игри</string>
     <string name="patcher_logs_waiting">Изчаквам изход от логовете…</string>
     <string name="patcher_logs_lost">Изходите от логовете не се запазват при рестартиране на приложението</string>
-    <string name="patcher_long_step_warning">Този стъпка може да отнеме време. Моля, изчакайте…</string>
-    <string name="patcher_installing_subtitle">Готворе се да рокне! 🎸</string>
+    <string name="patcher_long_step_warning">Тази стъпка може да отнеме време. Моля, изчакайте…</string>
+    <string name="patcher_installing_subtitle">Почти готови за рок! 🎸</string>
     <string name="patcher_success_title">Всичко е готово! 🎉</string>
-    <string name="patcher_success_subtitle">Вашата приложение е патчена и инсталирана!</string>
-    <string name="patcher_mounted_subtitle">Вашето приложение е кръпено и монтирано!</string>
+    <string name="patcher_success_subtitle">Вашето приложение е пачнато и инсталирано!</string>
+    <string name="patcher_mounted_subtitle">Вашето приложение е пачнато и монтирано!</string>
     <string name="patcher_complete_title">Пачването завърши! ✨</string>
     <string name="patcher_failed_title">Опа! Нещо се обърка</string>
     <string name="patcher_failed_dialog_title">Пачването не успя</string>
     <string name="patcher_error_details">Подробности за грешката</string>
     <string name="patcher_change_patches">Смяна на пачове</string>
-    <string name="patcher_unknown_error">Грешка: Неизвестна грешка</string>
+    <string name="patcher_unknown_error">Възникна неизвестна грешка</string>
     <string name="patcher_split_step_extracting">Извличане на разделени APK файлове</string>
     <string name="patcher_split_step_merging">Обединяване на %s</string>
     <string name="patcher_split_step_writing">Запис на обединен APK</string>
     <string name="patcher_split_step_finalizing">Завършване на обединен APK</string>
     <string name="patcher_conflict_title">Конфликт на пакети</string>
     <string name="patcher_conflict_subtitle">Трябва да деинсталирате текущата версия</string>
-    <string name="patcher_conflict_hint">Коригираното приложение използва различен сертификат от инсталираната версия. Деинсталирането ще изтрие всички данни на приложението.</string>
+    <string name="patcher_conflict_hint">Пачнатото приложение използва различен сертификат от инсталираната версия. Деинсталирането ще изтрие всички данни на приложението.</string>
     <string name="patcher_installed_conflict_title">Необходимо деинсталиране</string>
     <string name="patcher_installed_conflict_body">"Morphe подписва променените приложения със собствен сертификат, който се различава от оригиналния. Android изисква премахването на съществуващата версия, преди да може да бъде инсталирано промененото приложение.
 
@@ -646,20 +649,20 @@
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
     <string name="patcher_patches_excluded_for_installer">Не е налично за този метод на инсталиране и е изключено: %s</string>
     <string name="patcher_back_to_game_hint">Докоснете %1$s, за да се върнете към играта си</string>
-    <string name="patcher_storage_permission_dialog_title">Не е възможно да се достъпи до пата за съхранение</string>
+    <string name="patcher_storage_permission_dialog_title">Няма достъп до пътя за съхранение</string>
     <string name="patcher_incompatible_patcher_title">Необходима е актуализация</string>
-    <string name="patcher_incompatible_patcher_description">Източникът &lt;b&gt;%1$s&lt;/b&gt; изисква патчер &lt;b&gt;%2$s&lt;/b&gt; или по-нова версия. Обновете Morphe, за да го използвате</string>
-    <string name="patcher_storage_permission_description_api30">Една или повече опции за корекции сочат към пътища, които Morphe не може да прочете. Предоставете достъп до хранилището и натиснете бутона, след което корекциите ще започнат автоматично</string>
-    <string name="patcher_storage_permission_description_legacy">Едно или повече опции за патч сочат към пътища, които не могат да бъдат достъпени. Актуализирайте пътищата в опциите за патч и опитайте отново</string>
-    <string name="patcher_storage_permission_grant">Дайте разрешение за съхранение</string>
-    <string name="patcher_storage_permission_denied_warning">Разрешение за съхранение е отказано. Разрешете разрешението за да използвате този път, или преместете файловете в директорията за частни файлове на приложението.</string>
+    <string name="patcher_incompatible_patcher_description">Източникът &lt;b&gt;%1$s&lt;/b&gt; изисква пачер &lt;b&gt;%2$s&lt;/b&gt; или по-нова версия. Обновете Morphe, за да го използвате</string>
+    <string name="patcher_storage_permission_description_api30">Една или повече опции за пачове сочат към пътища, които Morphe не може да прочете. Предоставете достъп до хранилището и натиснете бутона, след което пачването ще започне автоматично</string>
+    <string name="patcher_storage_permission_description_legacy">Една или повече опции за пачове сочат към пътища, до които няма достъп. Актуализирайте пътищата в опциите за пачове и опитайте отново</string>
+    <string name="patcher_storage_permission_grant">Предоставяне на разрешение за съхранение</string>
+    <string name="patcher_storage_permission_denied_warning">Разрешението за съхранение е отказано. Предоставете разрешението, за да използвате този път, или преместете файловете в частната директория на приложението.</string>
     <string name="patcher_storage_permission_open_settings">Отвори настройки за съхранение</string>
     <string name="patcher_storage_badge_denied">Разрешение отказано</string>
     <string name="patcher_storage_badge_missing">Не е намерено</string>
     <string name="patcher_storage_badge_rejected">Неприложимо</string>
     <string name="batch_patch_option_paths_skipped">Файловете с опции за кръпки липсват и ще бъдат пропуснати: %1$s</string>
     <string name="patcher_missing_patches_title">Някои кръпки липсват</string>
-    <string name="patcher_missing_patches_description">Запазените selections за това приложение посочват патчове, които вече не се предлагат от нито един активен източник. Продължаването на модификацията ще бъде без тези патчове</string>
+    <string name="patcher_missing_patches_description">Запазените избори за това приложение посочват пачове, които вече не се предлагат от нито един активен източник. Продължаването на пачването ще стане без тези пачове</string>
     <string name="patcher_missing_patches_label">Вече не се предлага</string>
     <string name="patcher_option_paths_gone_title">Файловете с опции за кръпки липсват</string>
     <string name="patcher_option_paths_gone_description">Една или повече опции за кръпки сочат към файлове, които вече не съществуват. Премахнете пътищата, за да приложите кръпки без тях, или върнете файловете обратно и опитайте отново</string>
@@ -668,13 +671,13 @@
     <string name="patcher_option_paths_clear">Премахнете пътищата и продължете</string>
     <string name="patcher_storage_permission_hint">Съвет: Преместете файловете в /Android/data/app.morphe.manager/files/ - не са нужни допълнителни разрешения</string>
     <!-- Patcher Screen - Patcher Steps -->
-    <string name="patcher_step_group_preparing">Not selected</string>
-    <string name="patcher_step_load_patches">Not set</string>
+    <string name="patcher_step_group_preparing">Подготовка</string>
+    <string name="patcher_step_load_patches">Зареждане на пачове</string>
     <string name="patcher_step_prepare_split_apk">Сливане на разделени APK</string>
     <string name="patcher_step_unpack">Четене на APK файл</string>
-    <string name="patcher_step_group_saving">Patches</string>
-    <string name="patcher_step_write_patched">Patch Bundles</string>
-    <string name="patcher_step_sign_apk">Patch Bundle</string>
+    <string name="patcher_step_group_saving">Запазване</string>
+    <string name="patcher_step_write_patched">Записване на пачнатия APK файл</string>
+    <string name="patcher_step_sign_apk">Подписване на пачнатия APK файл</string>
     <!-- Patcher Screen - Patcher Tasks -->
     <string name="patcher_task_decoding_dex">Четене на DEX файлове</string>
     <string name="patcher_task_extracting_resources">Извличане на ресурси</string>
@@ -684,12 +687,12 @@
     <string name="patcher_task_compiling_resources">Компилиране на ресурси</string>
     <string name="patcher_task_writing_apk">Записване на APK файл</string>
     <!-- Battery optimization pre-flight dialog -->
-    <string name="battery_optimization_dialog_title">Защита от корекции във фонов режим</string>
-    <string name="battery_optimization_dialog_description">Някои устройства може да спрат коректора, когато приложението е минимизирано. Разрешете на Morphe да работи без ограничения на батерията, за да сте сигурни, че корекциите ще бъдат завършени надеждно.</string>
+    <string name="battery_optimization_dialog_title">Защита от пачване във фонов режим</string>
+    <string name="battery_optimization_dialog_description">Някои устройства може да спрат пачера, когато приложението е минимизирано. Разрешете на Morphe да работи без ограничения на батерията, за да сте сигурни, че пачването ще завърши успешно.</string>
     <string name="battery_optimization_not_now">Не сега</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Morphe</string>
-    <string name="patcher_notification_text">Toast</string>
+    <string name="patcher_notification_title">Пачване в ход…</string>
+    <string name="patcher_notification_text">Докоснете, за да се върнете към инструмента за закърпване</string>
     <string name="patcher_stop_title">Да се спре ли модифицирането?</string>
     <string name="patcher_stop_discards">Направеното дотук се изхвърля и нищо не се инсталира</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
@@ -700,17 +703,17 @@
     <string name="patcher_message_3">Правим дигитален сервиз на вашето приложение… 🔧</string>
     <string name="patcher_message_4">Сготвяме дигитална магия… ☕</string>
     <string name="patcher_message_5">Препоръчва се почивка за кафе… ☕</string>
-    <string name="patcher_message_6">Гледни навън, там е хубаво… ☀️</string>
+    <string name="patcher_message_6">Погледнете навън, там е хубаво… ☀️</string>
     <string name="patcher_message_7">Настройка на 1 и 0… 🤖</string>
     <string name="patcher_message_8">Разплитаме дигитална спагети… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">Поправяне на грешки в некоригираното приложение 🪲</string>
-    <string name="patcher_message_10">Добрите промени си струват чакането… ⏳</string>
+    <string name="patcher_message_9">Отстраняване на грешки в непачнатото приложение… 🪲</string>
+    <string name="patcher_message_10">Добрите пачове си струват чакането… ⏳</string>
     <string name="patcher_message_11">Лъскаме пикселите, докато засияят… 💎</string>
-    <string name="patcher_message_12">Моля, оставете седнали докато капитанът изключи знака за \"Поправяне в процес...\"… 💺✈️</string>
+    <string name="patcher_message_12">Моля, останете на местата си, докато капитанът изключи знака \"Пачване в ход\"… 💺✈️</string>
     <string name="patcher_message_13">Сготвяме вашето променено приложение, горещо и прясно… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
-    <string name="patcher_message_14">Преговарям учтиво с байт кода… 🤝</string>
+    <string name="patcher_message_14">Преговарям учтиво с байткода… 🤝</string>
     <!-- Space flight communications callout. -->
     <string name="patcher_message_15">Всички системи номинални… траекторията на пачване е стабилна… 🚀</string>
     <string name="patcher_message_16">Изстисквам допълнителна мощност, като сок от дигитален лимон… 🍋</string>
@@ -718,7 +721,7 @@
     <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
     <string name="patcher_message_18">Променям суперпозицията на приложението от непачнато към пачнато… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Вашият апарат има температура, а единствената рецепта е повече патчи… 🩺🔔</string>
+    <string name="patcher_message_19">Вашето приложение има температура, а единствената рецепта е още пачове… 🩺🔔</string>
     <string name="patcher_message_20">Премахвам глупостите. Моля, изчакайте… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Патчване на приложението</string>
@@ -726,30 +729,30 @@
     <string name="cpu_usage">Използване на процесора</string>
     <string name="storage_io_usage">Дисков I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
-    <string name="applying_patches">Error</string>
+    <string name="applying_patches">Прилагане на пачове</string>
     <string name="failed_to_execute_patch">Неуспешно прилагане на %s</string>
-    <string name="patched_app_save_failed_toast">Import</string>
-    <string name="plugin_activity_dialog_body">Потребителски интеракция е нужна, за да продължите с този плагин.</string>
-    <string name="patcher_process_killed_message">Системата спря програма за обновяване преди тя да приключи, обикновено с цел освобождаване на памет. Затворете други приложения и опитайте отново</string>
+    <string name="patched_app_save_failed_toast">Запазването на закърпеното приложение не бе успешно</string>
+    <string name="plugin_activity_dialog_body">Необходимо е взаимодействие с потребителя, за да продължите с този плъгин.</string>
+    <string name="patcher_process_killed_message">Системата спря патчера преди той да приключи, обикновено с цел освобождаване на памет. Затворете други приложения и опитайте отново</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
-    <string name="patcher_process_crashed_message">Патчърът crashed преди да приключи. Ако се случи отново, изключете %1$s и докладвайте проблема с лога</string>
+    <string name="patcher_process_crashed_message">Патчерът се срина преди да приключи. Ако се случи отново, изключете %1$s и докладвайте проблема с лога</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <string name="patcher_out_of_memory_message">Програмата за патчове свърши с паметта при куп от %1$s МБ. Това приложение е твърде голямо за избраните патчове. Опитайте да патчувате с по-малко източници на патчове или изберете по-малко патчове</string>
+    <string name="patcher_out_of_memory_message">Патчерът остана без памет при heap от %1$s МБ. Това приложение е твърде голямо за избраните пачове. Опитайте да пачнете с по-малко източници на пачове или изберете по-малко пачове</string>
     <string name="install_app_success">Инсталирано успешно</string>
     <string name="install_app_fail">Неуспешно инсталиране на приложението: %s</string>
     <string name="install_ignore_signature">Инсталирай все пак</string>
     <string name="install_ignore_signature_description">Запазва данните на приложението, но работи само ако root модул деактивира проверката на подпис в Android</string>
-    <string name="uninstall_app_fail">Неуспешно изтриване на приложението: %s</string>
-    <string name="uninstall_app_unverified">Оставено на място: Morphe не можа да потвърди, че инсталираното приложение е сборката, която е кръпкирал.</string>
-    <string name="launch_app_unverified">Morphe не можа да потвърди, че инсталираното приложение е сборката, която е кръпкирал.</string>
-    <string name="uninstall_timeout">Премахването на инсталацията изтече</string>
+    <string name="uninstall_app_fail">Неуспешно деинсталиране на приложението: %s</string>
+    <string name="uninstall_app_unverified">Оставено на място: Morphe не можа да потвърди, че инсталираното приложение е сборката, която е пачнала.</string>
+    <string name="launch_app_unverified">Morphe не можа да потвърди, че инсталираното приложение е сборката, която е пачнала.</string>
+    <string name="uninstall_timeout">Времето за деинсталиране изтече</string>
     <string name="save_apk_success">APK запазен</string>
     <string name="saved_app_export_failed">Неуспешно изнасяне на модифицирано приложение</string>
     <string name="saved_app_removed_toast">Премахнато запазено модифицирано приложение</string>
     <string name="saved_app_launch_unavailable">Инсталирайте приложението преди да го отворите.</string>
     <string name="package_name">Име на пакета</string>
     <string name="failed_to_mount">Неуспешно монтиране: %s</string>
-    <string name="failed_to_unmount">Неуспешно откачване: %s</string>
+    <string name="failed_to_unmount">Неуспешно демонтиране: %s</string>
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_score">Резултат %s</string>
     <string name="mini_game_best">Най-добър %s</string>
@@ -780,11 +783,11 @@
     <string name="settings_appearance_background">Фонова анимация</string>
     <string name="settings_appearance_background_description">Анимацията, която се възпроизвежда зад екраните на приложението</string>
     <string name="settings_appearance_background_circles">Кръгове</string>
-    <string name="settings_appearance_background_rings">Пренци</string>
-    <string name="settings_appearance_background_mesh">Mesh</string>
+    <string name="settings_appearance_background_rings">Пръстени</string>
+    <string name="settings_appearance_background_mesh">Мрежа</string>
     <string name="settings_appearance_background_space">Пространство</string>
     <string name="settings_appearance_background_shapes">Форми</string>
-    <string name="settings_appearance_background_snow">Снег</string>
+    <string name="settings_appearance_background_snow">Сняг</string>
     <string name="settings_appearance_background_grid">Решетка</string>
     <string name="settings_appearance_background_particles">Частици</string>
     <string name="settings_appearance_background_lava">Лава лампа</string>
@@ -796,7 +799,7 @@
     <string name="settings_appearance_background_random_interval_daily">Всеки ден</string>
     <string name="settings_appearance_background_random_interval_3days">На всеки 3 дни</string>
     <string name="settings_appearance_parallax_effect">Ефект на паралакса</string>
-    <string name="settings_appearance_parallax_effect_description">Сгладко преместване на фона при накланяне на устройството</string>
+    <string name="settings_appearance_parallax_effect_description">Плавно преместване на фона при накланяне на устройството</string>
     <string name="settings_appearance_seasonal_themes">Сезонни теми</string>
     <string name="settings_appearance_seasonal_themes_description">Празнични фонове и поздравления през празниците</string>
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
@@ -807,25 +810,25 @@
     <string name="settings_appearance_theme">Тема</string>
     <string name="settings_appearance_theme_mode">Режим на темата</string>
     <string name="settings_appearance_system">Система</string>
-    <string name="settings_appearance_light">Светлина</string>
+    <string name="settings_appearance_light">Светла</string>
     <string name="settings_appearance_dark">Тъмна</string>
-    <string name="settings_appearance_dynamic">Материал Ю</string>
+    <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">Монохромен</string>
     <string name="settings_appearance_color_style">Стил на цветовете</string>
-    <string name="settings_appearance_accent_color">Цвят на акцент</string>
-    <string name="settings_appearance_pure_black">Натурално черно</string>
+    <string name="settings_appearance_accent_color">Акцентен цвят</string>
+    <string name="settings_appearance_pure_black">Истинско черно</string>
     <string name="settings_appearance_pure_black_description">Използва истински черни фонове</string>
     <string name="settings_appearance_color_accents">Цветове на приложения и източници</string>
     <string name="settings_appearance_color_accents_description">Използва цветовете на всяко приложение и източник вместо акцентния</string>
     <string name="settings_appearance_outlines">Контури</string>
     <string name="settings_appearance_outlines_description">Изчертава тънък контур около карти, панели и бутони.</string>
     <string name="settings_appearance_blur">Размазване</string>
-    <string name="settings_appearance_blur_description">Размива елементите, които се скролват под заглавките, лентите и панелите</string>
+    <string name="settings_appearance_blur_description">Размива елементите, които се превъртат под заглавките, лентите и панелите</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Език на приложението</string>
     <string name="settings_appearance_app_language_current">Текущият език</string>
     <string name="settings_appearance_translate">Помогнете с превода на Morphe</string>
-    <string name="settings_appearance_translations_info_title">Недостъпни или неполни преводи за някои езици</string>
+    <string name="settings_appearance_translations_info_title">Преводите за някои езици може да липсват или да са непълни</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Мащаб на интерфейса</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
@@ -833,9 +836,9 @@
     <string name="settings_appearance_greeting_phrases">Поздравителни фрази</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Показва приветствено съобщение</string>
     <string name="settings_appearance_repatch_notice">Известие за повторно кръпване</string>
-    <string name="settings_appearance_repatch_notice_description">Показва банер, когато модифицираните приложения могат да бъдат повторно модифицирани</string>
+    <string name="settings_appearance_repatch_notice_description">Показва банер, когато пачнатите приложения могат да бъдат пачнати отново</string>
     <string name="settings_appearance_more_apps_card">Карта \"Още приложения\"</string>
-    <string name="settings_appearance_more_apps_card_description">Показва карта под приложенията, водеща към общностни корекции</string>
+    <string name="settings_appearance_more_apps_card_description">Показва карта под приложенията, водеща към общностни пачове</string>
     <string name="settings_appearance_app_card_colors">Цветове на картите</string>
     <string name="settings_appearance_app_card_colors_default">По подразбиране</string>
     <string name="settings_appearance_app_card_colors_default_description">Присвоете собствен цвят на всяко приложение и източник</string>
@@ -849,7 +852,7 @@
     <string name="settings_appearance_app_card_colors_middle">Среден цвят</string>
     <string name="settings_appearance_app_card_colors_end">Краен цвят</string>
     <string name="settings_appearance_app_card_colors_solid_color">Плътен цвят</string>
-    <string name="settings_appearance_app_card_colors_bundle">Цвет на пакета приложения</string>
+    <string name="settings_appearance_app_card_colors_bundle">Цвят на пакет с приложения</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Използвайте собствения цвят на всяко приложение или източник тук, автоматично засенчен за съответствие</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Икона на приложението</string>
@@ -862,7 +865,7 @@
     <string name="settings_appearance_app_icon_light_6">Мъгла</string>
     <string name="settings_appearance_app_icon_light_7">Пясък</string>
     <string name="settings_appearance_app_icon_dark_1">Тюркоаз</string>
-    <string name="settings_appearance_app_icon_dark_2">Праз</string>
+    <string name="settings_appearance_app_icon_dark_2">Празнота</string>
     <string name="settings_appearance_app_icon_dark_3">Сливово</string>
     <string name="settings_appearance_app_icon_dark_4">Полунощ</string>
     <string name="settings_appearance_app_icon_dark_5">Тъмносив</string>
@@ -890,9 +893,9 @@
 
 Пачовете не са засегнати: активирайте предварителни пачове за всеки източник в списъка на източниците на пачове"</string>
     <string name="settings_advanced_updates_allow_metered">Актуализации през мобилни данни</string>
-    <string name="settings_advanced_updates_allow_metered_description">Изтегля актуализации на Morphe и патчове през мобилни данни</string>
-    <string name="settings_advanced_updates_background_notifications">Обновления в фона</string>
-    <string name="settings_advanced_updates_background_notifications_description">Периодично проверете наличието на актуализации в фона и известите при наличност.</string>
+    <string name="settings_advanced_updates_allow_metered_description">Изтегля актуализации на Morphe и пачове през мобилни данни</string>
+    <string name="settings_advanced_updates_background_notifications">Известия за фонови актуализации</string>
+    <string name="settings_advanced_updates_background_notifications_description">Периодично проверява за актуализации във фонов режим и показва известие, когато има налични.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Push известия за нови версии, дори когато приложението е затворено</string>
     <string name="settings_system_notifications_categories">Категории на известията</string>
     <string name="settings_system_notifications_categories_description">Изберете в системните настройки кои актуализации да ви уведомяват</string>
@@ -903,23 +906,23 @@
     <string name="settings_advanced_update_interval_monthly">Месечно</string>
     <string name="settings_advanced_update_interval_battery_warning">Проверките във фонов режим може да не работят надеждно на устройства, които ограничават приложенията във фонов режим, като Xiaomi, Huawei, Samsung и OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Разрешаване на външни тригери</string>
-    <string name="settings_advanced_external_batch_patch_description">Позволява на автоматизационните приложения да стартират партидна модификация</string>
+    <string name="settings_advanced_external_batch_patch_description">Позволява на приложения за автоматизация да стартират пакетно пачване</string>
     <string name="external_batch_patch_title">Стартиране на пакетно закърпване?</string>
     <string name="external_batch_patch_description">%s иска Morphe да закърпи и инсталира приложения</string>
     <string name="external_batch_patch_trust_caller">Винаги разрешавай това приложение</string>
     <string name="external_batch_patch_unknown_caller">Неизвестно приложение</string>
     <!-- Notification content -->
-    <string name="notification_bundle_update_title">Достъпни нови патчове</string>
+    <string name="notification_bundle_update_title">Налични са нови кръпки</string>
     <string name="notification_update_text">Версия %s е готова за изтегляне</string>
     <string name="notification_bundle_update_text_unversioned">Докоснете, за да отворите Morphe и да актуализирате</string>
-    <string name="notification_permission_dialog_title">Разрешете известувания</string>
+    <string name="notification_permission_dialog_title">Разрешете известия</string>
     <string name="notification_permission_dialog_description">Morphe се нуждае от разрешение за известия, за да ви предупреди, когато има актуализации във фонов режим</string>
-    <string name="notification_post_patch_dialog_title">Желая ли би да бъдете известителен, когато има достъпни актуализации?</string>
+    <string name="notification_post_patch_dialog_title">Искате ли да получавате известия, когато има налични актуализации?</string>
     <string name="notification_channel_manager_updates">Актуализации на Morphe</string>
     <string name="notification_channel_manager_updates_description">Известия за нови версии на Morphe</string>
-    <string name="notification_channel_patch_updates">Актуализации с корекции</string>
-    <string name="notification_channel_patch_updates_description">Известия за нови корекции</string>
-    <string name="notification_channel_patcher_description">Показва се, когато Morphe актуализира приложение във фона</string>
+    <string name="notification_channel_patch_updates">Актуализации на пачове</string>
+    <string name="notification_channel_patch_updates_description">Известия за нови пачове</string>
+    <string name="notification_channel_patcher_description">Показва се, когато Morphe пачва приложение във фонов режим</string>
     <string name="notification_channel_patching_results">Резултати от пачването</string>
     <string name="notification_channel_patching_results_description">Когато пачването завърши или инсталацията очаква действие от вас, докато Morphe работи във фонов режим</string>
     <string name="notification_channel_mounted_apps">Монтирани приложения</string>
@@ -928,9 +931,9 @@
     <string name="notification_mount_replaced_text">v%1$s замени v%2$s с приложен пач. Отворете Morphe, за да го възстановите</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Режим за експерти</string>
-    <string name="settings_advanced_expert_mode_description">Отключва разширени настройки за модификация и опции за патч</string>
-    <string name="settings_advanced_expert_mode_dialog_title">Включете експерт режим?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">Експертният режим дава повече контрол над прилагането на патчове, но грешно конфигуриране на настройките в експертния режим може да доведе до неработеща приложение</string>
+    <string name="settings_advanced_expert_mode_description">Отключва разширени настройки за пачване и опции за пачове</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Включване на режима за експерти?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Експертният режим дава повече контрол над прилагането на пачове, но грешно конфигуриране на настройките в експертния режим може да доведе до неработещо приложение</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизиране за архитектурата на устройството</string>
     <string name="settings_advanced_strip_unused_libs_description">Премахва неизползвани нативни библиотеки и APK разделения</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -943,21 +946,21 @@
     <string name="settings_advanced_github_pat_checking">Проверка с GitHub…</string>
     <!-- "%s" is the GitHub account name -->
     <string name="settings_advanced_github_pat_account">Вписан сте в GitHub като %s</string>
-    <string name="settings_advanced_github_pat_rejected">GitHub отхвърли този токен. Той може би е изтекъл или да бъде отменен</string>
+    <string name="settings_advanced_github_pat_rejected">GitHub отхвърли този токен. Може да е изтекъл или да е бил отменен</string>
     <string name="settings_advanced_github_pat_unreachable">Не може да се свърже с GitHub за проверка на този токен</string>
-    <string name="settings_advanced_github_pat_export_include_label">Включи в извеждане на настройки</string>
+    <string name="settings_advanced_github_pat_export_include_label">Включване в експорта на настройки</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_include_supporting">Добавя този PAT към експортираните настройки на Morphe</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
-    <string name="settings_advanced_github_pat_export_warning">Не споделяйте вашия PAT. Ако го включите в извеждане на настройки, пазете този файл в приватен режим, защото съдържа токена</string>
+    <string name="settings_advanced_github_pat_export_warning">Не споделяйте вашия PAT. Ако го включите в експорт на настройки, пазете този файл поверителен, защото съдържа токена</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
-    <string name="settings_advanced_patch_options">Опции за замести</string>
-    <string name="settings_advanced_patch_options_restart_message">Промените на опциите за замести трябва да бъдат приложени отново, за да влязат в сила</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">В режима за експерти опциите за замести ще бъдат налични по време на заместителния процес</string>
-    <string name="settings_advanced_patch_options_loading">Зареждане на опции за замести…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Чакае се да се обнови източника за замести</string>
-    <string name="settings_advanced_patch_options_load_error">Неуспешно зареждане на опции за замести</string>
-    <string name="settings_advanced_patch_options_no_available">Няма налични опции за замести</string>
+    <string name="settings_advanced_patch_options">Опции за пачове</string>
+    <string name="settings_advanced_patch_options_restart_message">Промените на опциите за пачове трябва да бъдат приложени отново, за да влязат в сила</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">В режима за експерти опциите за пачове ще бъдат налични по време на процеса на пачване</string>
+    <string name="settings_advanced_patch_options_loading">Зареждане на опции за пачове…</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Изчакайте източникът на пачове да се обнови</string>
+    <string name="settings_advanced_patch_options_load_error">Неуспешно зареждане на опции за пачове</string>
+    <string name="settings_advanced_patch_options_no_available">Няма налични опции за пачове</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Настройки за брандиране</string>
     <string name="settings_advanced_patch_options_custom_branding_description">Променя името на приложението</string>
@@ -967,7 +970,7 @@
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Икона на приложението</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Иконата, с която се патчва приложението, използва се също и там, където не може да бъде променена по-късно, като например Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Персонализираната икона на приложението изисква папка с изображения на икони</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Настройки за брандиране</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Персонализирана икона</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Папка с изображения, които да използвате като персонализирана икона.
 
 Папката трябва да съдържа една или повече от следните папки, в зависимост от DPI на устройството:
@@ -977,7 +980,7 @@
 - mipmap-xxhdpi
 - mipmap-xxxhdpi
 
-Всяка от папките трябва да съдържа всички следващи файлове:
+Всяка от папките трябва да съдържа всички следните файлове:
 morphe_adaptive_background_custom.png
 morphe_adaptive_foreground_custom.png
 
@@ -1001,7 +1004,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">Настройки за брандиране</string>
+    <string name="settings_advanced_patch_options_custom_header">Персонализирано лого на заглавката</string>
     <string name="settings_advanced_patch_options_custom_header_description">Променя логото на заглавката</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Папка с изображения за използване като лого на заглавката.
 
@@ -1011,7 +1014,7 @@ morphe_adaptive_monochrome_custom.xml
 - drawable-xxhdpi
 - drawable-xxxhdpi
 
-Съдържаните папки трябва да съдържат всичките следните файлове:
+Всяка от папките трябва да съдържа всички следните файлове:
 morphe_header_custom_light.png
 morphe_header_custom_dark.png
 
@@ -1021,9 +1024,9 @@ morphe_header_custom_dark.png
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Скриване на иконата на къси видеоклипове</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Скриване на пряк път към Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Премахва Shorts от контекстното меню за дълго натискане на стартовия екран.</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget">Скриване на виждет на къси видеоклипове</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget">Скриване на уиджета за къси видеоклипове</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Премахва бутона Shorts от уиджета на стартовия екран.</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Инсталатор</string>
@@ -1041,27 +1044,27 @@ morphe_header_custom_dark.png
     <string name="installer_status_requires_root">Изисква root достъп</string>
     <string name="installer_status_not_supported">Неподдържано за това действие.</string>
     <string name="installer_status_shizuku_not_installed">Инсталирайте Shizuku или Sui, за да използвате тази опция.</string>
-    <string name="installer_status_shizuku_not_running">Запустете Shizuku или Sui и опитайте отново.</string>
+    <string name="installer_status_shizuku_not_running">Стартирайте Shizuku или Sui и опитайте отново.</string>
     <string name="installer_status_shizuku_permission">Разрешете на Morphe достъп от приложението Shizuku</string>
-    <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Товато запазено приложение не е било инсталирано чрез mount</string>
-    <string name="mount_version_mismatch_message">Версия на приложението за акции (%2$s) не съвпада с версията на патнатото приложение (%1$s). Монтирайте съответстващата версия на приложението за акции, след това опитайте отново</string>
+    <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Това запазено приложение не е било инсталирано чрез mount</string>
+    <string name="mount_version_mismatch_message">Версията на оригиналното приложение (%2$s) не съвпада с версията на пачнатото приложение (%1$s). Монтирайте съответстващата версия на оригиналното приложение, след което опитайте отново</string>
     <string name="mount_stock_restore_failed_message">Android отхвърли запазения оригинален APK. Инсталирайте съответстващата стокова версия, след това опитайте да монтирате отново.</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
-    <string name="installer_action_open_shizuku">Not selected</string>
-    <string name="installer_hint_generic">Инсталирането провалило. Опитайте отново или превключете на различен инсталатор.</string>
+    <string name="installer_action_open_shizuku">Отваряне на Shizuku</string>
+    <string name="installer_hint_generic">Инсталирането се провали. Опитайте отново или превключете на различен инсталатор.</string>
     <string name="installer_hint_conflict">Друго приложение с това име вече е инсталирано. Деинсталирайте го преди да продължите.</string>
     <string name="installer_confirm_notification_title">Потвърдете инсталацията</string>
-    <string name="installer_confirm_notification_text">Докоснете, за да завършите инсталирането на патчваното приложение.اگر فیلڈ غلط ہو تو صارف کو اطلاع دیں۔</string>
+    <string name="installer_confirm_notification_text">Докоснете, за да завършите инсталирането на пачнатото приложение.</string>
     <string name="installer_external_launched">Отваряне на %s…</string>
-    <string name="installer_external_timeout">%s не потвърди инсталацията. Проверете другата приложение и опитайте отново</string>
+    <string name="installer_external_timeout">%s не потвърди инсталацията. Проверете другото приложение и опитайте отново</string>
     <string name="installer_external_success">%s докладва за успешно инсталиране</string>
     <string name="installer_unavailable_title">%s (недостъпен)</string>
-    <string name="installer_unavailable_message">Предпочитаното ви инсталатор (%s) е временно недостъпно. Можете да поправите проблема и опитайте отново или използвайте стандартния инсталатор вместо него.</string>
-    <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартиран и разрешението е предоставето на това приложение.</string>
+    <string name="installer_unavailable_message">Предпочитаният от вас инсталатор (%s) е временно недостъпен. Можете да отстраните проблема и да опитате отново, или да използвате стандартния инсталатор вместо него.</string>
+    <string name="installer_unavailable_shizuku_hint">Уверете се, че Shizuku е стартиран и разрешението е предоставено на това приложение.</string>
     <string name="installer_choose_another">Избор на друг инсталатор</string>
     <string name="installer_play_store_warning_title">Инсталиране като Play Store?</string>
-    <string name="installer_play_store_warning_message">Пачнатo приложение ще бъде регистрирано като инсталирано от Google Play Store. Това може да помогне на услуги като Android Auto да го разпознае като приложение от Play Store, но това не е гарантирано за всяко приложение или устройство. Поведението може да варира в зависимост от версията на Android, ROM, марката на устройството и специфичните проверки на приложението.</string>
-    <string name="installer_play_store_warning_risk">Play Store може да предложи актуализации за поправеното приложение. Инсталирането на тази актуализация ще презапише поправения APK файл с оригиналната версия и ще премахне поправките. Ако бъдете подканени да актуализирате, докоснете менюто с три точки на страницата на приложението в Play Store и изберете \"Изключване на актуализациите\".</string>
+    <string name="installer_play_store_warning_message">Пачнатото приложение ще бъде регистрирано като инсталирано от Google Play Store. Това може да помогне на услуги като Android Auto да го разпознае като приложение от Play Store, но това не е гарантирано за всяко приложение или устройство. Поведението може да варира в зависимост от версията на Android, ROM, марката на устройството и специфичните проверки на приложението.</string>
+    <string name="installer_play_store_warning_risk">Play Store може да предложи актуализации за пачнатото приложение. Инсталирането на тази актуализация ще презапише пачнатия APK файл с оригиналната версия и ще премахне пачовете. Ако бъдете подканени да актуализирате, докоснете менюто с три точки на страницата на приложението в Play Store и изберете \"Изключване на актуализациите\".</string>
     <string name="installer_play_store_warning_continue">Разбирам, продължи</string>
     <string name="installer_play_store_mode">Инсталиране като Play Store</string>
     <string name="installer_play_store_mode_description">Маркира Google Play Store като инсталационен източник</string>
@@ -1076,7 +1079,7 @@ morphe_header_custom_dark.png
     <string name="settings_after_patching_manual_description">Инсталира с инсталатора по подразбиране, след като докоснете Инсталиране</string>
     <string name="settings_nomount_only">Само NoMount</string>
     <string name="settings_nomount_only_description">Монтира приложения само с NoMount и никога не превключва към bind mount, така че те остават немонтирани без него</string>
-    <string name="settings_auto_install_with_shizuku_description">Инсталира или монтира опачения APK веднага след като паченето приключи</string>
+    <string name="settings_auto_install_with_shizuku_description">Инсталира или монтира пачнатия APK веднага след като пачването приключи</string>
     <string name="settings_auto_uninstall_with_shizuku">Автоматично деинсталиране при конфликт</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Деинсталира съществуващото приложение при конфликт на сигнатури. Това може да премахне данни от приложението</string>
     <string name="settings_ignore_install_target_rules">Игнорирай изискванията за целта на инсталиране</string>
@@ -1102,22 +1105,22 @@ morphe_header_custom_dark.png
 Подробности: %2$s"</string>
     <string name="installer_shizuku_error_permission">Липсва разрешение на Shizuku. Предоставете разрешение на Morphe и опитайте отново.</string>
     <string name="installer_shizuku_error_timeout">Shizuku не върна резултат от инсталацията. Уверете се, че все още работи и опитайте отново.</string>
-    <string name="installer_shizuku_error_downgrade">Android блокира това, защото ще понижи нивото на инсталираното приложение.</string>
+    <string name="installer_shizuku_error_downgrade">Android блокира това, защото ще понижи версията на инсталираното приложение.</string>
     <string name="installer_shizuku_error_signature">Android блокира това, защото инсталираното приложение има различен подпис.</string>
     <string name="installer_shizuku_error_invalid_apk">Android не може да прочете този APK файл.</string>
     <string name="installer_shizuku_error_user_profile">Системата блокира това инсталиране. На Xiaomi и подобни устройства, включете \"Инсталиране чрез USB\" в опциите за програмисти. На работен профил, инсталациите могат да бъдат ограничени от правилата</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Оптимизация на батерията</string>
-    <string name="settings_system_battery_optimization_description">Поддържа работещ патчър, когато приложението е минимизирано</string>
-    <string name="settings_system_process_runtime">Ръчен модул</string>
+    <string name="settings_system_battery_optimization_description">Поддържа работещ пачер, когато приложението е минимизирано</string>
+    <string name="settings_system_process_runtime">Среда на патчера</string>
     <string name="settings_system_jvm_runtime_enable">Използвай вграден VM</string>
     <string name="settings_system_jvm_runtime_description">Пачове в собствената Java VM на Morphe, която може да използва повече памет. Изключете, за да използвате runtime на Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Изисква ARM или 64-битово x86 устройство</string>
     <string name="settings_system_patcher_completion_sound">Звук за завършване</string>
-    <string name="settings_system_patcher_completion_sound_description">Възпроизвежда отделен тон при успех или неуспех, когато завърши прилагането на корекциите</string>
+    <string name="settings_system_patcher_completion_sound_description">Възпроизвежда отделен тон при успех или неуспех, когато завърши пачването</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Известия</string>
-    <string name="settings_system_notifications_description">Как Морфе ви информира</string>
+    <string name="settings_system_notifications_description">Как Morphe ви информира</string>
     <string name="settings_system_notifications_success_sound">Звук при успех</string>
     <string name="settings_system_notifications_error_sound">Звук за грешка</string>
     <string name="settings_system_notifications_sound_default">По подразбиране</string>
@@ -1128,7 +1131,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_notifications_ringtone_picker_title">Изберете тон</string>
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_signing_key">Ключ за подписване</string>
-    <string name="settings_system_signing_key_description">Архивира или възстановява ключа, който подписва модифицираните приложения</string>
+    <string name="settings_system_signing_key_description">Архивира или възстановява ключа, който подписва пачнатите приложения</string>
     <string name="settings_system_signing_key_dialog_description">Всяко приложение, което Morphe патчва, е подписано с този ключ. Запазете копие: без него патчваните приложения могат да се актуализират само след деинсталирането им</string>
     <string name="settings_system_signing_key_missing">Morphe създава такъв с първия ви патч</string>
     <string name="settings_system_signing_key_created">Създаден %s</string>
@@ -1136,20 +1139,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_appearance_description">Тема, цветове и език</string>
     <string name="settings_system_backup_home_description">Групи, скрити приложения, сортиране и превключватели</string>
     <string name="settings_system_backup_patching">Патчване и инсталиране</string>
-    <string name="settings_system_backup_patching_description">Инсталатор, патчер и запазени APK файлове</string>
+    <string name="settings_system_backup_patching_description">Инсталатор, пачер и запазени APK файлове</string>
     <string name="settings_system_backup_updates_description">Предварителни версии и проверки за актуализации</string>
     <string name="settings_system_backup_sources_description">Персонализирани източници и GitHub токен</string>
     <string name="settings_system_backup_patch_selections_description">Избрани патчове за всяко приложение</string>
     <string name="settings_system_backup_signing_key_note">Ключът за подписване се архивира отделно</string>
-    <string name="settings_system_import_keystore_dialog_title">Въвеждане на данни за ключовата запазна книга</string>
+    <string name="settings_system_import_keystore_dialog_title">Въвеждане на данни за keystore</string>
     <string name="settings_system_import_keystore_dialog_description">Трябва да въведете данните за keystore, за да го импортирате</string>
-    <string name="settings_system_import_keystore_dialog_alias_field">Име на потребител (Алиас)</string>
+    <string name="settings_system_import_keystore_dialog_alias_field">Име на потребител (псевдоним)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Парола</string>
-    <string name="settings_system_import_keystore_wrong_credentials">Невалидни данни за ключовата запазна книга</string>
-    <string name="settings_system_import_keystore_success">Ключовата запазна книга е импортирана</string>
-    <string name="settings_system_import_keystore_failed">Неуспешно импортиране на ключовата запазна книга</string>
-    <string name="settings_system_export_keystore_success">Ключовата запазна книга е изнесена</string>
-    <string name="settings_system_export_keystore_failed">Неуспешен експорт на хранилище на ключове</string>
+    <string name="settings_system_import_keystore_wrong_credentials">Невалидни данни за keystore</string>
+    <string name="settings_system_import_keystore_success">Keystore е импортиран</string>
+    <string name="settings_system_import_keystore_failed">Неуспешно импортиране на keystore</string>
+    <string name="settings_system_export_keystore_success">Keystore е експортиран</string>
+    <string name="settings_system_export_keystore_failed">Неуспешно експортиране на keystore</string>
     <string name="settings_system_show_password_field">Показване на парола</string>
     <string name="settings_system_hide_password_field">Скриване на парола</string>
     <string name="settings_system_morphe_settings">Настройки на Morphe</string>
@@ -1159,7 +1162,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_mode_title">Импортиране на настройките на Morphe</string>
     <string name="settings_system_import_manager_settings_mode_description">Изберете как да бъдат приложени импортираните настройки и източници</string>
     <string name="settings_system_import_selections_mode_title">Импортиране на избрани пачове</string>
-    <string name="settings_system_import_selections_mode_description">Изберете как да се приложат импортираните селекции и опциите за корекции</string>
+    <string name="settings_system_import_selections_mode_description">Изберете как да се приложат импортираните селекции и опциите за пачове</string>
     <string name="import_mode_replace_title">Заместване на съществуващите</string>
     <string name="import_mode_replace_description">Точно съответствие с архива. Елементите, които липсват в архива, ще бъдат премахнати</string>
     <string name="import_mode_merge_title">Сливане със съществуващите</string>
@@ -1187,20 +1190,20 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_free">%1$s свободно</string>
     <string name="settings_system_storage_saved_apks">Запазени APK файлове</string>
     <string name="settings_system_storage_caches">Кешове</string>
-    <string name="settings_system_storage_keystore_title">Хранилище за подписи</string>
+    <string name="settings_system_storage_keystore_title">Keystore за подписване</string>
     <string name="settings_system_storage_app_data_title">Данни на приложението</string>
-    <string name="settings_system_storage_patch_bundles_title">Пакети с корекции</string>
+    <string name="settings_system_storage_patch_bundles_title">Пакети с пачове</string>
     <string name="settings_system_storage_http_cache_title">Кеш на мрежата</string>
     <string name="settings_system_storage_http_cache_description">HTTP отговорите са кеширани за ускоряване на актуализациите</string>
     <string name="settings_system_storage_installer_cache_title">Кеш на външен инсталатор</string>
     <string name="settings_system_storage_installer_cache_description">Копия на APK, прехвърлени на инсталатори на трети страни</string>
-    <string name="settings_system_storage_patcher_workspace_title">Работно пространство на Patcher</string>
-    <string name="settings_system_storage_patcher_workspace_description">Runtime файлове на Patcher и изоставени временни данни</string>
+    <string name="settings_system_storage_patcher_workspace_title">Работно пространство на пачера</string>
+    <string name="settings_system_storage_patcher_workspace_description">Файлове за изпълнение на пачера и изоставени временни данни</string>
     <string name="settings_system_storage_temporary_title">Временни файлове</string>
-    <string name="settings_system_storage_temporary_description">Работни файлове, създадени по време на прилагането на корекции</string>
+    <string name="settings_system_storage_temporary_description">Работни файлове, създадени по време на прилагането на пачове</string>
     <string name="settings_system_storage_clear_all">Изчистване на всички кешове</string>
     <string name="settings_system_storage_clear_all_description">Освобождава цялото кеширано пространство наведнъж</string>
-    <string name="settings_system_storage_clear_all_confirm">Това изчиства кешираните мрежови отговори, подготвените копия на инсталатора и временните файлове. Оригиналните и приложените APK файлове се запазват</string>
+    <string name="settings_system_storage_clear_all_confirm">Това изчиства кешираните мрежови отговори, подготвените копия на инсталатора и временните файлове. Оригиналните и пачнатите APK файлове се запазват</string>
     <string name="settings_system_storage_cleared">Освободени %s</string>
     <string name="settings_system_storage_patch_running_warning">Пачът е в процес на изпълнение и използва тези файлове. Изтриването им сега ще доведе до неуспех</string>
     <string name="settings_system_storage_clear_anyway">Изтрий въпреки това</string>
@@ -1225,14 +1228,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_notice">Няма да можете да патчнете отново, без да предоставите нов APK</string>
     <string name="settings_system_original_apks_delete_all_title">Изтриване на всички оригинални APK файлове?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
-    <string name="settings_system_patch_selections_title">Избрани поправки</string>
+    <string name="settings_system_patch_selections_title">Избрани пачове</string>
     <string name="settings_system_patch_selections_description">Запазени селекции на пачове, запазени след деинсталиране</string>
-    <string name="settings_system_patch_selection_reset_all_confirm_title">Изтриване на всички избрани? </string>
-    <string name="settings_system_patch_selection_reset_selected_confirm_title">Възстановяване на избраните пакети?</string>
-    <string name="settings_system_patch_selection_reset_source_confirm_title">Изтриване на избрания източник? </string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Нулиране на всички избрани?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Нулиране на избраните пакети?</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Нулиране на избора за източника?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s по %2$s</string>
     <string name="settings_system_patch_selection_source_format">Източник #%s</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие всички запазени избрани пакети за всички пакети и източници завинаги</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Това ще изтрие завинаги всички запазени избори на пачове за всички пакети и източници.</string>
     <string name="settings_system_patch_selection_reset_source_warning">Това ще изтрие безвъзвратно запазените селекции на пачове за &lt;b&gt;%1$s&lt;/b&gt; в &lt;b&gt;%2$s&lt;/b&gt;.</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Това ще изтрие безвъзвратно всички запазени селекции на пачове за избраните пакети.</string>
     <string name="settings_system_export_source_data_fail">Неуспешно експортиране на данни за източника</string>
@@ -1240,7 +1243,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_source_data_fail">Неуспешно импортиране на данни за източника</string>
     <string name="settings_system_import_source_data_success">Данните за източника са импортирани успешно</string>
     <string name="settings_system_selected_patches_section">Избрани пачове</string>
-    <string name="settings_system_no_patches_or_options">Няма запазени пакети или опции</string>
+    <string name="settings_system_no_patches_or_options">Няма запазени пачове или опции</string>
     <!-- Selection panel: saved selection, sets and copies -->
     <string name="selection_panel_title">Селекции</string>
     <string name="selection_panel_copy_into">Копиране в %s</string>
@@ -1270,6 +1273,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">Неизвестен инсталатор</string>
     <string name="settings_system_apk_download_helper_open_directly">Отвори помощника веднага</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Пропуска инструкциите за изтегляне и отваря доверения помощник</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Автоматично изтегляне на APK файлове на пакети</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Няма файлове тук</string>
     <string name="file_picker_read_error">Невъзможно е да се прочете тази директория</string>
@@ -1289,7 +1293,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_show_hidden_files">Покажи скрити файлове</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
-    <string name="settings_system_manager_description">Отворен проект с изходен код за модерен, оптимизиран процес на поправяне на популярни Android приложения, поддържан от обратна връзка и приноси от общността</string>
+    <string name="settings_system_manager_description">Отворен проект с изходен код за модерен, оптимизиран процес на пачване на популярни Android приложения, поддържан от обратна връзка и приноси от общността</string>
     <string name="credits">Кредити</string>
     <string name="credits_description">Хората зад Morphe</string>
     <string name="settings_about_section_project">Проект</string>
@@ -1321,9 +1325,9 @@ morphe_header_custom_dark.png
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="settings_section_patcher">Пачер</string>
     <string name="settings_section_updates">Актуализации</string>
-    <string name="settings_section_patching">Пачове</string>
+    <string name="settings_section_patching">Пачване</string>
     <string name="settings_section_appearance_summary">Как изглежда Morphe</string>
-    <string name="settings_section_patch_options_summary">Какво прости начини за приложни програми с</string>
+    <string name="settings_section_patch_options_summary">С какво простият режим пачва приложенията</string>
     <string name="settings_section_general">Основни</string>
     <string name="settings_section_patcher_summary">Как се прилагат патчове за приложения на това устройство</string>
     <string name="settings_section_help_info">Помощ &amp; информация</string>
@@ -1337,7 +1341,7 @@ morphe_header_custom_dark.png
     <string name="filter">Филтър</string>
     <string name="group">Групиране</string>
     <string name="reset">Нулирай</string>
-    <string name="reset_all">Възстановяване на всичко</string>
+    <string name="reset_all">Нулиране на всичко</string>
     <string name="apply">Приложи</string>
     <string name="confirm">Потвърдете</string>
     <string name="warning">Предупреждение</string>
@@ -1369,11 +1373,11 @@ morphe_header_custom_dark.png
     <string name="processing_apk">Обработване на APK…</string>
     <string name="exporting_apks">Експортиране на APK файлове…</string>
     <string name="not_installed">Не е инсталирано</string>
-    <string name="view">Просмотр</string>
+    <string name="view">Преглед</string>
     <string name="search">Търсене</string>
     <string name="search_no_results">Няма намерени резултати</string>
     <string name="sort">Сортиране</string>
-    <string name="any_version">Изтриване на запазеното приложение</string>
+    <string name="any_version">Всякаква</string>
     <string name="enabled">Включен</string>
     <string name="disabled">Изключен</string>
     <string name="state_selected">Избран</string>
@@ -1384,7 +1388,7 @@ morphe_header_custom_dark.png
     <string name="reorder_list_hint">Влачете, за да пренаредите</string>
     <string name="reorder_done">Редът е запазен</string>
     <string name="reset_order">Възстановяване на реда</string>
-    <string name="reset_order_done">Заявката е възстановена</string>
+    <string name="reset_order_done">Редът е възстановен</string>
     <string name="reset_order_confirm_title">Нулиране на реда?</string>
     <string name="reset_order_confirm_message">Списъкът се връща към стандартния си ред, а ръчно зададеният ред се губи</string>
     <string name="accessibility_select_app">Избор на приложение</string>
@@ -1399,14 +1403,14 @@ morphe_header_custom_dark.png
     <string name="export">Експорт</string>
     <string name="copy">Копиране</string>
     <string name="copied_to_clipboard">Копирано в клипборда</string>
-    <string name="download">Свали</string>
-    <string name="less">Morphe</string>
+    <string name="download">Изтегли</string>
+    <string name="less">По-малко</string>
     <string name="expand">Разгъване</string>
     <string name="expanded">Разширен</string>
     <string name="collapse">Свиване</string>
     <string name="collapsed">Сгънат</string>
-    <string name="continue_">Toast</string>
-    <string name="version">New downloader plugins available. Click here to configure them.</string>
+    <string name="continue_">Продължи</string>
+    <string name="version">Версия</string>
     <!-- Who made a patch source, as a field label -->
     <string name="author">Автор</string>
     <!-- A file a patch source is added from, as a field label -->
@@ -1415,20 +1419,20 @@ morphe_header_custom_dark.png
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Пач</string>
     <string name="patching">Закърпване</string>
-    <string name="patched">Пачвани</string>
+    <string name="patched">Пачнати</string>
     <string name="open">Отваряне</string>
     <string name="mount">Монтирай</string>
     <string name="mounted">Монтирано</string>
-    <string name="unmount">B342 M542</string>
+    <string name="unmount">Демонтиране</string>
     <string name="unmounted">Размонтирано</string>
     <string name="remount">Повторно монтиране</string>
     <string name="restore">Възстанови</string>
     <string name="share">Споделяне</string>
     <string name="install">Инсталиране</string>
     <string name="installed">Инсталирано</string>
-    <string name="reinstall">Изтриване на запазеното приложение</string>
+    <string name="reinstall">Преинсталиране</string>
     <string name="uninstall">Деинсталирай</string>
-    <string name="uninstalled">Изтрит</string>
+    <string name="uninstalled">Деинсталиран</string>
     <string name="save">Запази</string>
     <string name="saved">Запазен</string>
     <string name="update">Актуализиране</string>
@@ -1446,18 +1450,18 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">Монтиране…</string>
     <string name="mount_stage_restoring_stock">Възстановяване на оригинала…</string>
     <string name="mount_stage_copying">Копиране…</string>
-    <string name="unmounting_ellipsis">Извличане…</string>
+    <string name="unmounting_ellipsis">Демонтиране…</string>
     <string name="importing_ellipsis">Импортиране…</string>
     <string name="imported_successfully">Успешно импортирано</string>
-    <string name="changelog">Вижте дневниците на промените</string>
+    <string name="changelog">Вижте списъка с промени</string>
     <string name="changelog_for_app">Промени за %s</string>
     <string name="changelog_general_changes">Общи промени</string>
     <string name="whats_new">Какво ново</string>
     <string name="changelog_description">Какво ново има в тази версия</string>
-    <string name="changelog_download_fail">Неуспешно сваляне на дневника на промените: %s</string>
-    <string name="changelog_empty">Няма налични промени</string>
+    <string name="changelog_download_fail">Неуспешно изтегляне на списъка с промени: %s</string>
+    <string name="changelog_empty">Няма наличен списък с промени</string>
     <string name="changelog_earlier_releases">По-ранни версии</string>
-    <string name="changelog_patched_with">Пачвано с %s</string>
+    <string name="changelog_patched_with">Пачнато с %s</string>
     <string name="changelog_older_empty">Няма по-стари издания за показване</string>
     <string name="changelog_older_failed">Неуспешно зареждане на по-стари версии</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
@@ -1480,46 +1484,46 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Покажи всички (%s)</string>
     <string name="changelog_show_less">Покажи по-малко</string>
     <string name="no_network_toast">Няма достъп до интернет</string>
-    <string name="update_available">Налично е актуализиране</string>
-    <string name="ready_to_install_update">Готово за инсталиране на актуализиране</string>
-    <string name="update_completed">Актуализиране инсталирано</string>
-    <string name="install_update_manager_failed">Неуспешно инсталиране на актуализиране</string>
-    <string name="installing_manager_update">Инсталиране на актуализиране…</string>
+    <string name="update_available">Налична е актуализация</string>
+    <string name="ready_to_install_update">Готово за инсталиране на актуализацията</string>
+    <string name="update_completed">Актуализацията е инсталирана</string>
+    <string name="install_update_manager_failed">Неуспешно инсталиране на актуализацията</string>
+    <string name="installing_manager_update">Инсталиране на актуализацията…</string>
     <string name="installing_manager_update_hint">Morphe ще се затвори, за да завърши актуализацията</string>
-    <string name="downloading_manager_update">Сваляне на актуализиране…</string>
+    <string name="downloading_manager_update">Изтегляне на актуализацията…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">Изтеглено: %1$s MB</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
     <string name="manager_update_not_ready">Този релиз все още се публикува. Опитайте отново след няколко минути</string>
     <string name="update_download_missing">Изтеглената актуализация вече не е налична. Изтеглете я отново.</string>
-    <string name="failed_to_check_updates">Неуспешна проверка за обновления: %s</string>
-    <string name="failed_to_download_update">Неуспешно сваляне на обновление: %s</string>
-    <string name="download_confirmation_metered">"В момента сте свързани с ограничена връзка и такси за данни от доставчика ви може да се начислят.
+    <string name="failed_to_check_updates">Неуспешна проверка за актуализации: %s</string>
+    <string name="failed_to_download_update">Неуспешно изтегляне на актуализацията: %s</string>
+    <string name="download_confirmation_metered">"В момента сте свързани чрез връзка с ограничен трафик и може да ви бъдат начислени такси за данни от доставчика.
 
-Искате ли да продължите още?"</string>
-    <string name="download_update_confirmation">Да сваля обновление?</string>
+Искате ли все пак да продължите?"</string>
+    <string name="download_update_confirmation">Изтегляне на актуализация?</string>
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s от %2$s</string>
-    <string name="onboarding_sources_desc">Управлявайте източниците на пакети. Всеки източник предоставя пакети, които могат да бъдат приложени към вашите приложения. </string>
-    <string name="onboarding_other_apps_desc">Осигурете приложение, което не е в списъка, от APK файл или приложение, инсталирано на вашето устройство</string>
+    <string name="onboarding_sources_desc">Управлявайте източниците на пачове. Всеки източник предоставя пачове, които могат да бъдат приложени към вашите приложения.</string>
+    <string name="onboarding_other_apps_desc">Пачнете приложение, което не е в списъка, от APK файл или от приложение, инсталирано на вашето устройство</string>
     <string name="onboarding_add_source_desc">Добавете източник на патч от връзка или файл за пакет с патчове</string>
     <string name="onboarding_signing_key_desc">Архивирайте ключа, който подписва вашите патчнати приложения. Без него те могат да се актуализират само след деинсталирането им</string>
     <string name="onboarding_swipe_title">Жестове с плъзгане</string>
-    <string name="onboarding_swipe_desc">Плъзнете надясно върху карта на приложение, за да видите наличните пакети. Плъзнете наляво, за да скриете картата от началния екран. </string>
+    <string name="onboarding_swipe_desc">Плъзнете надясно върху карта на приложение, за да видите наличните пачове. Плъзнете наляво, за да скриете картата от началния екран.</string>
     <string name="onboarding_settings_desc">Персонализирайте Morphe: външен вид, разширени опции и системни инструменти</string>
-    <string name="onboarding_sources_patches_desc">Докоснете, за да видите всички пакети, налични от този източник</string>
+    <string name="onboarding_sources_patches_desc">Докоснете, за да видите всички пачове, налични от този източник</string>
     <string name="onboarding_sources_version_desc">Докоснете версията, за да видите пълния списък с промени за този източник</string>
-    <string name="onboarding_sources_apps_desc">Допрете, за да видите приложението, които този източник патчва и изберете кои от тях предлага патчове</string>
-    <string name="onboarding_sources_prerelease_desc">Активирайте това, за да получавате версии на пакети преди тяхното официално пускане от този източник</string>
+    <string name="onboarding_sources_apps_desc">Докоснете, за да видите приложенията, които този източник пачва, и изберете за кои от тях предлага пачове</string>
+    <string name="onboarding_sources_prerelease_desc">Активирайте това, за да получавате версии на пачове преди тяхното официално пускане от този източник</string>
     <string name="onboarding_appearance_tab_desc">Персонализирайте външния вид на приложението: тема, цвят на акцента и фон</string>
-    <string name="onboarding_expert_mode_desc">Активирайте Expert Mode, за да отключите избор на пакети, персонализирани опции и други разширени функции</string>
+    <string name="onboarding_expert_mode_desc">Активирайте Expert Mode, за да отключите избор на пачове, персонализирани опции и други разширени функции</string>
     <!-- Translate "System" the same way as the System settings tab -->
-    <string name="onboarding_system_installer_desc">Изберете как ще се инсталират пакетираните приложения: стандартно, root mount или Shizuku</string>
+    <string name="onboarding_system_installer_desc">Изберете как да се инсталират пачнатите приложения: стандартно, root mount или Shizuku</string>
     <string name="onboarding_system_file_picker_desc">Активирайте, за да използвате вградения файлов браузър вместо системния селектор при избор на APK или keystores</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
-    <string name="tour_prompt_title">Бърз обиколен тур</string>
+    <string name="tour_prompt_title">Бърза обиколка на функциите</string>
     <string name="tour_prompt_desc">Искате ли бързо да видите основните функции на Morphe?</string>
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="tour_prompt_confirm">Покажи ми наоколо</string>

@@ -3,10 +3,10 @@
     <!-- Home Screen -->
     <string name="home_other_apps">Бусад аппликейшнүүд</string>
     <string name="home_other_apps_action">Бусад аппликейшн сонгох</string>
-    <string name="home_not_patched_yet">Хараахан патлаагүй</string>
+    <string name="home_not_patched_yet">Хараахан патчлаагүй</string>
     <string name="home_unpatched_version_installed">Патчлагдаагүй хувилбар суурилуулагдсан байна</string>
     <string name="home_unpatched_badge">Патч хийгдээгүй</string>
-    <string name="home_no_patches_available">Боломжтой пат байхгүй байна</string>
+    <string name="home_no_patches_available">Боломжтой патч байхгүй байна</string>
     <string name="home_app_hide_title">Энэ апп-ыг нуух уу?</string>
     <string name="home_more_apps_title">Илүү олон апп</string>
     <string name="home_more_apps_hide_title">Энэхүү картыг нуух уу?</string>
@@ -47,8 +47,8 @@
     <string name="home_metadata_errors_subtitle">Эх сурвалжуудыг шалгахын тулд товшино уу</string>
     <string name="home_outdated_manager_title">Morphe хуучирсан байна</string>
     <string name="home_outdated_manager_subtitle">Зарим патчийн эх сурвалжүүдэд шинэ хувилбар шаардлагатай байна</string>
-    <string name="home_held_back_title">Нэвлэлтийн эх сурвалж Morphe-ийг гацаасан</string>
-    <string name="home_held_back_subtitle">Аппликейшныг эхлүүлэхын тулд үүнийг алгасав. Шалгахын тулд товшоорой</string>
+    <string name="home_held_back_title">Патчийн эх сурвалж Morphe-ийг гацаасан</string>
+    <string name="home_held_back_subtitle">Аппликейшныг эхлүүлэхийн тулд үүнийг алгасав. Шалгахын тулд товшино уу</string>
     <string name="home_metered_skipped_title">Мобайл дата дээр шинэчлэл түр зогссон</string>
     <string name="home_metered_skipped_subtitle">Мобайл дата дээр шинэчлэлийг зөвшөөрөхийн тулд товшино уу</string>
     <string name="home_repatch_available_subtitle">Бүгдийг дарааллын жагсаалтад нэмэхийн тулд товшино уу</string>
@@ -109,7 +109,7 @@
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Өнөөдрөөс эхлэн аппликейшнүүдийг өөрсдийнх нь алдаанаас аврах болно</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Кофе болон чанартай патч-аар хንдийлэгдсэн</string>
+    <string name="home_greeting_10">Кофе болон сайн патчаар тэжээгдсэн</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Босоод патч хийцгээе</string>
     <string name="home_greeting_morning_2">Өглөөний мэнд! Апп-ууд өөрсдөө патч хийхгүй шүү</string>
@@ -118,17 +118,17 @@
     <string name="home_greeting_afternoon_2">Өдрийн хоолны дараах патч өөр л мэдрэмжтэй</string>
     <string name="home_greeting_afternoon_3">Өдрийн ээлж: патч хувилбар</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Сайнгийн орой! Оройн патч өөр мэдрэмж төрүүлдэг</string>
+    <string name="home_greeting_evening_1">Сайн орой! Оройн патч өөр мэдрэмж төрүүлдэг</string>
     <string name="home_greeting_evening_2">Амрах гэж үү? Эхлээд апп патчлаарай</string>
     <string name="home_greeting_evening_3">Ажлаа дуусгаж байна уу? Эхлээд ямар нэг зүйл патчлаарай</string>
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">Унтаагүй байна уу? Патчлах шаардлагатай апп-ууд ч бас унтаагүй байна</string>
     <string name="home_greeting_late_night_2">Шөнийн патчлагаа хийж байна уу? Хүндэтгэж байна</string>
-    <string name="home_greeting_late_night_3">Шөнийн шуугуй горим: идэвхжлээ</string>
+    <string name="home_greeting_late_night_3">Шөнийн шувуу горим: идэвхжлээ</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Патчлах хамгийн оргил цаг... гэж яридаг</string>
     <string name="home_greeting_super_late_2">Унтаж чадкахгүй байна уу? Ямар нэг зүйл патчлаарай</string>
-    <string name="home_greeting_super_late_3">Одоо бол зүгээр л унтахгүйгээсээ патчлаарай</string>
+    <string name="home_greeting_super_late_3">Одоо бол унтахгүй байгаад патчлаарай</string>
     <string name="home_greeting_super_late_4">Та болон серверууд хоёулаа сэрүүн байна</string>
     <string name="home_greeting_super_late_5">Шөнийн амьтан бөгөөд бүтээмжтэй</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
@@ -141,7 +141,7 @@
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
     <string name="home_greeting_winter_1">Баярын мэнд, шинэ патчууд</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Цас орж, патч сууг</string>
+    <string name="home_greeting_winter_2">Цас орж, патч ч ирлээ</string>
     <string name="home_greeting_winter_3">Шинэ жил, шинэ патчууд</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
     <string name="home_greeting_winter_4">Цас дундуур патчлах</string>
@@ -175,11 +175,11 @@
     <string name="sources_apps_new_apps">Шинэ апп-уудыг авчрах</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_apps_new_apps_description">Дараа нь нэмэгдсэн аппликейшнүүд нүүр дэлгэц дээр харагдана</string>
-    <string name="sources_management_prerelease_toggle">Хувилбарын өмнөх патчууд</string>
+    <string name="sources_management_prerelease_toggle">Урьдчилсан хувилбарын патчууд</string>
     <string name="sources_management_prerelease_toggle_description">Шинэ туршилтын патчийн хувилбаруудыг эртээр авах</string>
     <string name="sources_prerelease_warning_title">Урьдчилсан хувилбарын патчуудыг идэвхжүүлэх үү?</string>
     <string name="sources_prerelease_warning_message">Урьдчилсан хувилбарын билдүүд хөгжүүлэлтийн шатандаа байна. Патлах үед алдаа гарч апп ажиллахгүй болох эсвэл функцууд урьдчилсан анхааруулгагүйгээр өөрчлөгдөж болно</string>
-    <string name="expert_mode_unstable_notice">Урьдчилсан хувилбар эсвэл туршилтын нөхцөльеүүд нь тогтворгүй байж болзошгүй</string>
+    <string name="expert_mode_unstable_notice">Урьдчилсан хувилбар эсвэл туршилтын патчууд нь тогтворгүй байж болзошгүй</string>
     <string name="sources_management_experimental_versions_toggle">Аппликейшний туршилтын хувилбарууд</string>
     <string name="sources_management_experimental_versions_toggle_description">Туршилтын апп зорилтуудыг харуулах болон патчлах</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -194,7 +194,7 @@
     <string name="sources_management_metadata_unavailable">Мета өгөгдөл олдохгүй байна</string>
     <string name="sources_management_metadata_unavailable_hint">Алсын мета өгөгдлийн файл олдохгүй байна. Суурилуулсан багцаар патчлах боломжтой хэвээр байгаа ч энэ эх сурвалжийн автоматаар шинэчлэх функцийг идэвхгүй болголоо</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патчийн багцыг татаж авж чадсангүй. Эх сурвалжийн URL буруу эсвэл файл байхгүй байж болзошгүй</string>
-    <string name="sources_management_metadata_unavailable_hint_missing_editable">Нөхцөльеийн багцыг татаж авж чадсангүй. Эх сурвалж URL буруу байх эсвэл файл байхгүй байж болзошгүй. Өөрчлөхийн тулд товшино уу</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Патчийн багцыг татаж авч чадсангүй. Эх сурвалжийн URL буруу байх эсвэл файл байхгүй байж болзошгүй. Өөрчлөхийн тулд товшино уу</string>
     <string name="sources_management_outdated_manager_badge">Morphe-ийг шинэчлэх</string>
     <string name="sources_management_outdated_manager_hint">Энэ эх сурвалж нь %1$s патчерт зориулагдсан боловч Morphe %2$s хувилбар нь %3$s патчерыг агуулж байна. Үүнийг ашиглахын тулд Morphe-ийг шинэчлээрэй</string>
     <string name="sources_management_held_back_badge">Гацсан</string>
@@ -208,14 +208,14 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Харуулах нэр</string>
     <string name="sources_dialog_rename">Патчийн эх сурвалжийг дахин нэрлэх</string>
-    <string name="sources_dialog_change_url">Нөхцөльеийн эх сурвалж татаж авах хаягийг өөрчлөх</string>
+    <string name="sources_dialog_change_url">Патчийн эх сурвалж татаж авах хаягийг өөрчлөх</string>
     <string name="sources_dialog_duplicate_name_error">Энэхүү нэртэй патчийн эх сурвалж аль хэдийн байна</string>
     <string name="sources_dialog_missing_error">Энэхүү патчийн эх сурвалжийг шинэчилж чадсангүй</string>
     <string name="sources_dialog_add_source">Патчийн эх сурвалж нэмэх</string>
     <string name="sources_dialog_delete_confirm_body">Үүнийг буцаах боломжгүй</string>
     <string name="sources_dialog_remote">Алсын</string>
     <string name="sources_dialog_remote_url">Эх сурвалжийн URL</string>
-    <string name="sources_dialog_remote_url_hint">Репозиторийн эсвэл пач багцын .json холбоос. Бүгдийг нэмэхийн тулд хэд хэдэн холбоосыг нэгэн зэрэг хуулж тавина уу</string>
+    <string name="sources_dialog_remote_url_hint">Репозиторийн эсвэл патч багцын .json холбоос. Бүгдийг нэмэхийн тулд хэд хэдэн холбоосыг нэгэн зэрэг хуулж тавина уу</string>
     <string name="sources_dialog_paste_no_links">Санах ойд холбоос олдсонгүй</string>
     <string name="sources_dialog_local">Локал</string>
     <string name="sources_dialog_local_files">Патчийн эх сурвалж файлуудыг сонгох</string>
@@ -230,7 +230,7 @@
     <string name="sources_dialog_choose_apps_description">Эх сурвалж ачаалсны дараа аль аппликейшнүүдийг нь үлдээхийг сонгоно уу</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Гуравдагч патчийн эх сурвалжууд</string>
-    <string name="sources_dialog_community_notice_message">"Олон нийтийн нөхцөлийн эх сурвалжуудыг тухайн зохиогчид нь үүсгэж, хэвээр хадгалдаг. Morphe нь гуравдагч талын нөхцөлүүдийг хянадаг эсвэл баталгаажуулдаггүй бөгөөд тэдгээрийн агуулга болон таны төхөөрөмж дээрх үйл ажиллагаанд хариуцлага хүлээхгүй"</string>
+    <string name="sources_dialog_community_notice_message">"Олон нийтийн патчийн эх сурвалжуудыг тэдгээрийн зохиогчид өөрсдөө бүтээж, хадгалдаг. Morphe нь гуравдагч талын патчуудыг хянадаг эсвэл баталгаажуулдаггүй бөгөөд тэдгээрийн агуулга болон таны төхөөрөмж дээр хийдэг үйлдлүүдэд хариуцлага хүлээхгүй"</string>
     <string name="sources_update_success">Шинэчлэл амжилттай боллоо</string>
     <string name="sources_update_unavailable">Боломжтой шинэчлэл байхгүй байна</string>
     <string name="sources_download_fail">Эх сурвалжийг татаж авахад алдаа гарлаа: %s</string>
@@ -245,7 +245,7 @@
     <string name="sources_signing_key_new">Шинэ түлхүүр</string>
     <string name="sources_patch_expert_badge">Мэргэжилтэн</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
-    <string name="sources_patch_expert_badge_tooltip">Энэхүү пачийг гараар оруулахын тулд %1$s-ийг асаана уу</string>
+    <string name="sources_patch_expert_badge_tooltip">Энэхүү патчийг гараар оруулахын тулд %1$s-ийг асаана уу</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">APK-г олоход тусламж хэрэгтэй байна уу?</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;-ыг патч хийхийн тулд патч хийгдээгүй APK хувилбар шаардлагатай:</string>
@@ -298,7 +298,7 @@
     <string name="home_download_instructions_step2_github_note">Хэрэв хэд хэдэн APK файл байгаа бол %s нэртэй эсвэл универсал файлыг сонгоно уу</string>
     <string name="home_download_instructions_download_button_toast">Энд бус, вэбсайт дээрх татаж авах товчийг дарна уу 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Сайхан байна! Одоо \"үргэлжлүүлэх\" дээр дарж вебсайт руу орно уу 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Дадлага бол төгсբайдлын түлхүүр, та амжилтадээ дөхөж байна 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">Дадлага хийвэл амжилтад хүрнэ, та зөв замдаа явж байна 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Одоо ч байхгүй байна... одоо ч байхгүй байна... 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">За, чиний зүтгэлд хүндлэл үзүүлье 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Та одоо Morphe-ийн албан ёсны товчлуур шалгагч боллоо 🏅</string>
@@ -339,8 +339,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="expert_mode_enable_all">Бүгдийг идэвхжүүлэх</string>
     <string name="expert_mode_enable_all_universal_pending">Универсал патчуудыг идэвхжүүлэхийн тулд дахин дарна уу</string>
     <string name="expert_mode_universal_all_warning_title">Бүх универсал патчуудыг идэвхжүүлэх үү?</string>
-    <string name="expert_mode_universal_all_warning_message">Төвлөрсөн патчуудыг хамтдаа туршиж үзээгүй. Бүгдийг нь нэгэн зэрэг идэвхжүүлбэл зөрчил үүсэх, патчлах үйлдэл амжилтгүй болох эсвэл програм гацаж магадгүй</string>
-    <string name="expert_mode_recommended">Зөвлөмжтэй нөхцөльеүүд</string>
+    <string name="expert_mode_universal_all_warning_message">Түгээмэл патчуудыг хамтдаа туршиж үзээгүй. Бүгдийг нь нэгэн зэрэг идэвхжүүлбэл зөрчил үүсэх, патчлах үйлдэл амжилтгүй болох эсвэл апп гацаж магадгүй</string>
+    <string name="expert_mode_recommended">Зөвлөмжтэй патчууд</string>
     <string name="expert_mode_reset_to_default_done">Зөвлөмжтэй патчуудыг хэрэглээд дууслаа</string>
     <string name="expert_mode_selected_count">%2$s-аас %1$s сонгогдсон</string>
     <string name="expert_mode_saved_selection">Хадгалагдсан сонголт</string>
@@ -358,7 +358,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="expert_mode_multiple_sources_warning_title">Олон патчийн эх сурвалж сонгогдсон байна</string>
     <string name="expert_mode_multiple_sources_warning_conflict">Өөр өөр эх сурвалжаас авсан патчууд нь хооронд нь зохицохгүй байх эсвэл аппликейшнийг эвдэх магадлалтай</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Баталгаа化гүй APK</string>
+    <string name="home_invalid_signature_title">Баталгаажаагүй APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt;-д зориулж сонгосон APK нь хүлээгдэж буй гарын үсгийн сертификаттай тохирохгүй байна. Энэ нь өөрчлөгдсөн эсвэл найдваргүй эх сурвалжаас ирсэн байж болзошгүй</string>
     <string name="home_invalid_signature_badge">Энэхүү APK нь эх хувилбар биш байж магадгүй</string>
     <string name="home_split_apk_warning_title">Хуваагдсан APK илрэв</string>
@@ -442,7 +442,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="adaptive_icon_guide_safe_zones_title">Аюулгүй бүсүүд</string>
     <string name="adaptive_icon_guide_safe_zones_body">Гадна хүрээ нь таны лаунчерийн дүрсний хэлбэрийг харуулна бөгөөд түүний гаднах бүх зүйл таслагдана. Бусад лаунчерууд өөр хэлбэр ашигладаг тул чухал нарийн ширийн зүйлсийг бүх хэлбэрт харагддаг таслагдуулах тойрог дотор байлгаарай.</string>
     <string name="adaptive_icon_guide_notification_title">Мэдэгдлийн дүрс</string>
-    <string name="adaptive_icon_guide_notification_body">Файлын зайнаас үлхарьсан, зургийн харагдах хэсгээс таслагдан бусад төлөв байдлын мөрний дүрсүүдтэй ижил хэмжээтэй байна. Үүнийг урьдчилан харагдлын доорх гүйдлүүрээр тохируулна. Android үүнийг нэг өнгөөр харуулдаг.</string>
+    <string name="adaptive_icon_guide_notification_body">Зургийн харагдах хэсгээс таслагдаж, файлын ямар ч хүрээтэй байсан бусад статусын мөрний дүрсүүдтэй ижил хэмжээтэй болно. Урьдчилан харахын доорх гулсагчаар тохируулна уу. Android үүнийг нэг өнгөөр харуулна.</string>
     <string name="adaptive_icon_guide_monochrome_title">Сэдэвт дүрс</string>
     <string name="adaptive_icon_guide_monochrome_body">Лаунчерийн дүрстэй ижил байрлал, хэмжээтэйгээр зургаас таслагдсан байна. Android 13 болон түүнээс хойш хувилбаруудад сэдэвт дүрс идэвхжүүлсэн лаунчерууд нь үүний өнгийг дэлгэцийн зургаас авч тохируулна.</string>
     <string name="notification_icon_preview">Мэдэгдэл</string>
@@ -458,7 +458,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="header_creator_guide_themes_title">Гэрэлгээн ба бараан theme-үүд</string>
     <string name="header_creator_guide_themes_body">Ихэнх аппликейшнүүдэд гэрэлгээн болон бараан theme-д зориулсан тусдаа зураг шаардлагатай байдаг. Зарим аппликейшнүүд (жишээ нь YouTube Music) зөвхөн бараан theme ашигладаг тул зөвхөн тухайн хэсэг харагдана.</string>
     <string name="header_creator_guide_positioning_title">Байршил ба хэмжээг тохируулах</string>
-    <string name="header_creator_guide_positioning_body">Засварлагчид зургийг чирж, томроож жижигээр эсвэл гулсагчаар хэмжээг нь тохируулаарай. Цэгцгэр хайрцаг нь үндсэн логогийн байрлалыг заана бөгөөд зураг түүнтэй таарөх үед чиглүүлэгч шугамууд гарна.</string>
+    <string name="header_creator_guide_positioning_body">Засварлагчид зургийг чирж, хуруугаараа шахан томруулах эсвэл гулсагчаар хэмжээг нь тохируулна уу. Цэгцгэр хайрцаг нь үндсэн логогийн байрлалыг заана бөгөөд зураг түүнтэй таарах үед чиглүүлэгч шугамууд гарна.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Сонгосныг патчлах</string>
     <string name="batch_patch_title">Багцаар патчлах</string>
@@ -479,6 +479,9 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="batch_patch_force_version_done">Дарааллын жагсаалтад нэмэгдлээ, апп ажиллахгүй болж магадгүй</string>
     <string name="batch_patch_accept_signature_done">Дарааллын жагсаалтад нэмэгдлээ, APK баталгаажсангүй</string>
     <string name="batch_patch_apk_selected">APK сонгогдсон</string>
+    <string name="batch_patch_auto_download_stopped">APK автоматаар татаж авах зогслоо</string>
+    <string name="batch_patch_auto_download_stop">Татаж авалтыг зогсоох</string>
+    <string name="batch_patch_auto_download_kept">Татаж авсан APK-г ашиглах боломжгүй болсон тул өмнөх хувилбарыг хадгаллаа</string>
     <string name="batch_patch_edit_patches">Патчуудыг сонгох</string>
     <string name="batch_patch_state_no_apk">APK байхгүй</string>
     <string name="batch_patch_state_no_patches">Патч байхгүй</string>
@@ -499,8 +502,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="batch_patch_install_failed">Суулгалт амжилтгүй боллоо</string>
     <string name="batch_patch_in_progress">Багц засах процесс аль хэдийн ажиллаж байна</string>
     <string name="batch_patch_nothing_outdated">Зассан апп бүр шинэчлэгдсэн байна</string>
-    <string name="batch_queue_add_action">Дарааллын дарааллд нэмэх</string>
-    <string name="batch_queue_pending_subtitle">Шалгаж, эхлүүлэхийн тулд товшоорой</string>
+    <string name="batch_queue_add_action">Дарааллд нэмэх</string>
+    <string name="batch_queue_pending_subtitle">Шалгаж, эхлүүлэхийн тулд товшино уу</string>
     <string name="batch_queue_clear_title">Дарааллыг цэвэрлэх үү?</string>
     <string name="batch_queue_clear_description">Бүх апп-уудыг дарааллаас хасах болно</string>
     <string name="batch_queue_keep_title">Дарааллыг хадгалах уу?</string>
@@ -522,9 +525,9 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_app_info_patches_name_default">Патчиуд</string>
     <string name="home_app_info_patches_name_fallback">Нэрээгүй</string>
     <string name="home_app_info_patches_source_removed">Устгасан патчийн эх сурвалж</string>
-    <string name="home_app_info_patches_replace_fail">Нөхцөлүүдийг импортлох үйлдэл амжилтгүй боллоо: %s</string>
+    <string name="home_app_info_patches_replace_fail">Патчуудыг импортлох үйлдэл амжилтгүй боллоо: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Эх APK олдсонгүй. Энэхүү апп-ыг дахин патчлах боломжгүй</string>
-    <string name="home_app_info_original_package_name">Багцын alkuгой нэр</string>
+    <string name="home_app_info_original_package_name">Анхны багцын нэр</string>
     <string name="home_app_info_applied_patches">Хэрэглэсэн нөхцөлүүд</string>
     <string name="home_app_info_patch_source_used">Патчийн эх сурвалж ашиглагдсан</string>
     <string name="home_app_info_install_type_custom_installer">Тусгай суулгагч</string>
@@ -533,7 +536,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_app_info_install_type_root">Root суулгалт</string>
     <string name="home_app_info_install_type_root_play_store">Root Play Store-оор суулгах</string>
     <string name="home_app_info_install_type_shizuku_play_store">Shizuku Play Store-оор суулгах</string>
-    <string name="home_app_info_patch_update_available">Нөхцөлийн шинэчлэлт боломжтой</string>
+    <string name="home_app_info_patch_update_available">Патчийн шинэчлэлт боломжтой</string>
     <string name="home_app_info_patch_update_available_description">Нэвтрүүлгийн шинэ хувилбар бэлэн боллоо. Хамгийн сүүлийн үеийн сайжруулалт, засваруудыг авахын тулд аппликейшнээ дахин нэвтрүүлнэ үү</string>
     <string name="home_app_info_app_update_available">Аппликейшны шинэчлэлт боломжтой</string>
     <string name="home_app_info_app_update_available_description">Засварын эх сурвалж нь энэхүү аппликейшны илүү шинэ хувилбарыг дэмждэг байна. Тухайн хувилбар руу шилжихийн тулд дахин засварлаарай</string>
@@ -566,16 +569,16 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root горимд патч хийхээс өмнө төхөөрөмж дээрээ эх APK-г суулгасан байх шаардлагатай</string>
     <string name="root_pre_patch_installer_title">Патчийн горимыг сонгоно уу</string>
-    <string name="root_pre_patch_installer_description">Таны төхөөрөмж root эрхтэй байна. Энэхүү аппликейшнийг root mount-д зориулж патлах уу эсвэл стандарт суулгалт хийх үү гэдгээ сонгоно уу</string>
+    <string name="root_pre_patch_installer_description">Таны төхөөрөмж root эрхтэй байна. Энэ аппликейшнийг root mount-д зориулж патчлах уу, эсвэл стандарт суулгалтаар патчлах уу гэдгээ сонгоно уу</string>
     <string name="root_pre_patch_installer_mount_title">Root mount горим</string>
-    <string name="root_pre_patch_installer_mount_description">Root mount-д зориулж патлаад, дараа нь APK-г уялдах үйлдвэрийн апп-ын дээгүүр mount хийнэ. GmsCore шаардлагагүй</string>
-    <string name="root_mount_module_unmount_warning">Хэрэв KernelSU-ийн \"Unmount modules by default\" тохиргоо асаалттай бол KernelSU &gt; Superuser &gt; таны mount хийсэн апп &gt; Profile &gt; Custom руу орж \"Unmount modules\"-ийг унтраагаарай. Эсвэл Morphe-д mount хийгдсэн гэж харагдаж байсан ч mount хийсэн патчлагдсан APK-ийн үйлчилгээ идэвхжихгүй байх可能性があります</string>
+    <string name="root_pre_patch_installer_mount_description">Root mount-д зориулж патчилаад, дараа нь APK-г тохирох стандарт апп-ын дээгүүр mount хийнэ. GmsCore шаардлагагүй</string>
+    <string name="root_mount_module_unmount_warning">Хэрэв KernelSU-ийн \"Unmount modules by default\" тохиргоо асаалттай бол KernelSU &gt; Superuser &gt; таны mount хийсэн апп &gt; Profile &gt; Custom руу орж \"Unmount modules\"-ийг унтраагаарай. Эс бөгөөс Morphe-д mount хийгдсэн гэж харагдсан ч mount хийсэн патчлагдсан APK үйлчлэхгүй байж болзошгүй</string>
     <string name="root_pre_patch_installer_standard_title">Стандарт суулгалт горим</string>
-    <string name="root_pre_patch_installer_standard_description">GmsCore дэмжлэгтэй энгийн APK байдлаар патлана. Патлалтын дараа таны суулጋгчийн тохиргоог ашиглана</string>
+    <string name="root_pre_patch_installer_standard_description">GmsCore дэмжлэгтэй энгийн APK байдлаар патчилна. Патчилсны дараа таны суулгагчийн тохиргоог ашиглана</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">%1$s тохиргоо %2$s дээр байх үед асуулаа. Пач хийсний дараа пачийн горимыг өөрчилж болохгүй</string>
+    <string name="root_pre_patch_installer_hint">%1$s тохиргоо %2$s дээр байх үед асуулаа. Патч хийсний дараа патчийн горимыг өөрчилж болохгүй</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">Алдааг санах баруунд хууллаа</string>
+    <string name="patcher_error_copied">Алдаа хуулах самбарт хуулагдлаа</string>
     <string name="patcher_error_log">Алдааны лог</string>
     <string name="patcher_error_technical">Техникийн дэлгэрэнгүй</string>
     <string name="patcher_error_dialog_diagnostics">Диагностик</string>
@@ -610,7 +613,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">хассан</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_field_value_kept">үлдэअसн</string>
+    <string name="patcher_field_value_kept">үлдсэн</string>
     <string name="patcher_tab_logs">Патчерийн лог</string>
     <string name="patcher_tab_game">Тоглоомууд</string>
     <string name="patcher_logs_waiting">Лог гаралтыг хүлээж байна…</string>
@@ -654,8 +657,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patcher_storage_badge_denied">Зөвшөөрөл татгалзсан</string>
     <string name="patcher_storage_badge_missing">Олдсонгүй</string>
     <string name="patcher_storage_badge_rejected">Ашиглах боломжгүй</string>
-    <string name="batch_patch_option_paths_skipped">Нэвлэлтийн сонголтын файлууд дутуу байгаа тул алгасах болно: %1$s</string>
-    <string name="patcher_missing_patches_title">Зарим нэвлэлтүүд алга болсон</string>
+    <string name="batch_patch_option_paths_skipped">Патчийн сонголтын файлууд дутуу байгаа тул алгасах болно: %1$s</string>
+    <string name="patcher_missing_patches_title">Зарим патчууд алга болсон</string>
     <string name="patcher_missing_patches_description">Энэ аппликейшнд хадгалагдсан сонголт нь идэвхжүүлсэн эх сурвалжт байхгүй байгаа патчуудыг зааж байна. Үргэлжлүүлбэл эдгээр патчуудгүйгээр аппликейшныг патчих болно</string>
     <string name="patcher_missing_patches_label">Дахин санал болгохгүй</string>
     <string name="patcher_option_paths_gone_title">Патчийн сонголтын файлууд алга байна</string>
@@ -723,8 +726,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="cpu_usage">CPU-ийн ашиглалт</string>
     <string name="storage_io_usage">Storage I/O ашиглалт</string>
     <!-- Patcher Screen - Other hidden strings -->
-    <string name="applying_patches">Нөхөөс суулгаж байна</string>
-    <string name="failed_to_execute_patch">%s-ийг суулгаж чадсангүй</string>
+    <string name="applying_patches">Патчуудыг хэрэглэж байна</string>
+    <string name="failed_to_execute_patch">%s-ийг хэрэглэж чадсангүй</string>
     <string name="patched_app_save_failed_toast">Зассан аппликейшнийг хадгалах үед алдаа гарлаа</string>
     <string name="plugin_activity_dialog_body">Энэхүү нэмэлт програмыг ашиглахын тулд хэрэглэгчийн үйлдэл шаардлагатай</string>
     <string name="patcher_process_killed_message">Систем патчерыг дуусахаас нь өмнө зогсоолоо, энэ нь ихэвчлэн санах ойг чөлөөлөх зорилготой байдаг. Бусад апп-уудыг хааж дахин оролдоно уу</string>
@@ -762,7 +765,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="mini_game_flappy_tap_to_start">Нисэхийн тулд товшо</string>
     <string name="mini_game_snake_picker_subtitle">Хоол идэж, өөртөө мөргөхгүй байх</string>
     <string name="mini_game_snake_swipe_to_start">Эхлүүлэхийн тулд гүйлгэ</string>
-    <string name="mini_game_dino_picker_subtitle">Цагаан цэцгүүдийг алгасахын тулд товшо</string>
+    <string name="mini_game_dino_picker_subtitle">Кактусыг алгасахын тулд товшо</string>
     <string name="mini_game_dino_tap_to_start">Гүйхийн тулд товшо</string>
     <string name="mini_game_blocks_picker_subtitle">Дүрсийг тааруулж, шугамуудыг арилгаарай</string>
     <string name="mini_game_blocks_tap_to_start">Эргүүлэхийн тулд товшиж, хөдөлгөхөд чирж, буулгахын тулд доош чирнэ үү</string>
@@ -988,7 +991,7 @@ morphe_adaptive_foreground_custom.png
 Нэмэлтээр, замд нэг өнгөт дүрс бүхий 'drawable' хавтас байж болно:
 morphe_adaptive_monochrome_custom.xml
 
-Нэмэлтээр, замд дараах formato-уудын нэгээр мэдэгдлийн дүрс байж болно:
+Нэмэлтээр, замд дараах форматуудын нэгээр мэдэгдлийн дүрс байж болно:
 - 'drawable' доторх XML вектор drawable:
   morphe_notification_icon_custom.xml
 - 'drawable-dpi' хавтаснууд дахь PNG растер зураг:
@@ -1040,7 +1043,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_installed">Энэхүү сонголтыг ашиглахын тулд Shizuku эсвэл Sui-г суулгана уу</string>
     <string name="installer_status_shizuku_not_running">Shizuku эсвэл Sui-г ажиллуулж дахин оролдоно уу</string>
     <string name="installer_status_shizuku_permission">Shizuku аппликейшнээс Morphe-д зөвшөөрөл олгоно уу</string>
-    <string name="installer_mount_warning_install">Нөхцөлжөөх горим root mount болгож тохируулагдсан байна. Хадгалагдсан энэ аппликейшн mount ашиглан суулгагдаагүй байна</string>
+    <string name="installer_mount_warning_install">Патчлах горим root mount болгож тохируулагдсан байна. Хадгалагдсан энэ аппликейшн mount ашиглан суулгагдаагүй байна</string>
     <string name="mount_version_mismatch_message">Үндсэн апп-ны хувилбар (%2$s) нь патч хийсэн апп-ны хувилбартай (%1$s) тохирохгүй байна. Тохирох үндсэн хувилбарыг mount хийгээд дахин оролдоно уу</string>
     <string name="mount_stock_restore_failed_message">Android хадгалсан эх APK-г татгалзлаа. Тохирох стандарт хувилбарыг суулгаад, Mount-ийг дахин оролдоно уу</string>
     <string name="installer_status_shizuku_unsupported">Суулгасан Shizuku хувилбар дэмжигдэхгүй байна</string>
@@ -1062,10 +1065,10 @@ morphe_header_custom_dark.png
     <string name="installer_play_store_warning_continue">Ойлголоо, үргэлжлүүлэх</string>
     <string name="installer_play_store_mode">Play Store-оор суулгах</string>
     <string name="installer_play_store_mode_description">Суулгасан эх сурвалжийг Google Play Store гэж тэмдэглэнэ</string>
-    <string name="settings_section_patch_mode">Нөхцөлжөөх горим</string>
-    <string name="settings_patch_mode_ask">Удирдлага бүрдээс асуух</string>
-    <string name="settings_patch_mode_ask_description">Апп бүрийг нөхцөлжөөхөөс өмнө root mount эсвэл стандарт суулгалтаар нөхцөлжөөхийг асууна</string>
-    <string name="settings_section_after_patching">Нөхцөлжөөсний дараа</string>
+    <string name="settings_section_patch_mode">Патчлах горим</string>
+    <string name="settings_patch_mode_ask">Патчлах бүрд асуух</string>
+    <string name="settings_patch_mode_ask_description">Апп бүрийг патчлахаас өмнө root mount эсвэл стандарт суулгалтаар патчлах эсэхийг асууна</string>
+    <string name="settings_section_after_patching">Патчлалтын дараа</string>
     <string name="settings_after_patching_install">Автоматаар суулгах</string>
     <string name="settings_after_patching_ask">Суулгагч сонгохыг асуух</string>
     <string name="settings_after_patching_ask_description">Аппликейшн суулгах бүрд аль суулгагчийг ашиглахыг асууна</string>
@@ -1079,8 +1082,8 @@ morphe_header_custom_dark.png
     <string name="settings_ignore_install_target_rules">Суулгах зорилтот шаардлагуудыг үл тоомсорлох</string>
     <string name="settings_ignore_install_target_rules_description">Суурилуулах зорилтот объектод шаардлагатай патчуудыг унтраах, эсвэл үл хамаарах патчуудыг асаах боломжийг олгоно. Ингэхэд патчлагдсан аппликейшн ажиллахгүй байж болзошгүй</string>
     <string name="settings_auto_uninstall_warning_title">Автоматаар устгахыг идэвхжүүлэх үү?</string>
-    <string name="settings_auto_uninstall_warning_message">Shizuku-ийн автоматаар суулгах явцад Android гарын үлдэгдлийн зөрчилдөөнийг илтгэвэл, Morphe-ийг нэмэлт APK суулгахаас өмнө одоо байгаа аппликейшнийг устгана</string>
-    <string name="settings_auto_uninstall_warning_risk">Энэ нь аппликейшний өгөгдлийг устгаж болзошгүй. Хэрэв устгасны дараа нэмэлт APK суулгаж чадвал өмнөх аппликейшн аль хэдийн устсан байж болзошгүй</string>
+    <string name="settings_auto_uninstall_warning_message">Shizuku-ийн автоматаар суулгах явцад Android гарын үсгийн зөрчил илрүүлвэл, Morphe патч хийсэн APK-г суулгахаас өмнө одоо байгаа аппликейшнийг устгана</string>
+    <string name="settings_auto_uninstall_warning_risk">Энэ нь аппликейшний өгөгдлийг устгаж болзошгүй. Устгасны дараа патч хийсэн APK суулгаж чадахгүй бол өмнөх аппликейшн аль хэдийн устсан байж болзошгүй</string>
     <string name="installer_shizuku_status_action">Shizuku-ийн төлөв байдлыг шалгах</string>
     <string name="installer_shizuku_status_title">Shizuku-ийн төлөв</string>
     <string name="installer_shizuku_status_ready">Бэлэн</string>
@@ -1098,9 +1101,9 @@ morphe_header_custom_dark.png
 
 Дэлгэрэнгүй: %2$s"</string>
     <string name="installer_shizuku_error_permission">Shizuku-ийн зөвшөөрөл дутуу байна. Morphe-д зөвшөөрөл олгоод дахин оролдоно уу</string>
-    <string name="installer_shizuku_error_timeout">Shizuku суулгасны үр дүнг буцаагаагүй байна. Программ ажиллаж байгаа эсэхийг шалгаад дахин оролдоно уу</string>
-    <string name="installer_shizuku_error_downgrade">Суулгасан аппликейшныг хуучин хувилбар руу буцаах гэж байгаа тул Android үүнийг blocking хийлээ</string>
-    <string name="installer_shizuku_error_signature">Суулгасан аппликейшны гарын үсэг зөрүүтэй байгаа тул Android үүнийг blocking хийлээ</string>
+    <string name="installer_shizuku_error_timeout">Shizuku суулгасны үр дүнг буцаагаагүй байна. Апп ажиллаж байгаа эсэхийг шалгаад дахин оролдоно уу</string>
+    <string name="installer_shizuku_error_downgrade">Суулгасан аппликейшныг хуучин хувилбар руу буцаах тул Android үүнийг хориглолоо</string>
+    <string name="installer_shizuku_error_signature">Суулгасан аппликейшны гарын үсэг өөр тул Android үүнийг хориглолоо</string>
     <string name="installer_shizuku_error_invalid_apk">Android энэхүү APK-г уншиж чадсангүй</string>
     <string name="installer_shizuku_error_user_profile">Систем энэхүү суулгалтыг хаасан байна. Xiaomi болон төстэй төхөөрөмжүүд дээр хөгжүүлэгчийн тохиргооноос \"USB-ээр суулгах\"-ыг идэвхжүүлнэ үү. Ажлын профиль дээр суулгалт нь бодлогоор хязгаарлагдсан байж болно</string>
     <!-- Settings - System Tab - Performance Section -->
@@ -1108,7 +1111,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization_description">Аппликейшн багассан үед patcher-ийг ажиллуулсаар байлгана</string>
     <string name="settings_system_process_runtime">Патчерын ажиллах орчин</string>
     <string name="settings_system_jvm_runtime_enable">Суулгацсан VM-ийг ашиглах</string>
-    <string name="settings_system_jvm_runtime_description">Morphe-ийн өөрийн Java VM-ийн нөхцөлүүд нь илүү их санах ой ашиглах боломжтой. Android-ийн runtime-ийг ашиглахын тулд үүнийг унтраана уу</string>
+    <string name="settings_system_jvm_runtime_description">Morphe-ийн өөрийн Java VM дээр патчлана. Энэ нь илүү их санах ой ашиглаж болзошгүй. Android-ийн runtime-ийг ашиглахын тулд үүнийг унтраана уу</string>
     <string name="settings_system_jvm_runtime_unavailable">ARM эсвэл 64-бит x86 төхөөрөмж шаардлагатай</string>
     <string name="settings_system_patcher_completion_sound">Дуусах үеийн дуу</string>
     <string name="settings_system_patcher_completion_sound_description">Патч хийж дууссан үед амжилттай эсвэл амжилтгүй болсныг илтгэх тусгай өнгө ая тоглуулна</string>
@@ -1133,7 +1136,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_appearance_description">Сэдэв, өнгө болон хэл</string>
     <string name="settings_system_backup_home_description">Бүлгүүд, нуугдсан апп-ууд, эрэмбэлэлт болон шилжүүлэгчид</string>
     <string name="settings_system_backup_patching">Патчлах болон суулгах</string>
-    <string name="settings_system_backup_patching_description">Суулጋгч, патчер болон хадгалагдсан APK-нууд</string>
+    <string name="settings_system_backup_patching_description">Суулгагч, патчер болон хадгалагдсан APK-нууд</string>
     <string name="settings_system_backup_updates_description">Урьдчилсан хувилбарууд болон шинэчлэлтийн шалгалт</string>
     <string name="settings_system_backup_sources_description">Custom эх сурвалж болон GitHub токен</string>
     <string name="settings_system_backup_patch_selections_description">Аппликейшн бүрийн сонгосон патчууд</string>
@@ -1145,7 +1148,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_wrong_credentials">Keystore-ийн нэвтрэх мэдээлэл буруу байна</string>
     <string name="settings_system_import_keystore_success">Keystore-ийг импортлолоо</string>
     <string name="settings_system_import_keystore_failed">Keystore импортлоход алдаа гарлаа</string>
-    <string name="settings_system_export_keystore_success">Keystore экспортлоглоо</string>
+    <string name="settings_system_export_keystore_success">Keystore экспортлогдлоо</string>
     <string name="settings_system_export_keystore_failed">Keystore экспорт хийхэд алдаа гарлаа</string>
     <string name="settings_system_show_password_field">Нууц үгийг харуулах</string>
     <string name="settings_system_hide_password_field">Нууц үгийг нуух</string>
@@ -1184,7 +1187,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_free">%1$s сул</string>
     <string name="settings_system_storage_saved_apks">Хадгалагдсан APK-нууд</string>
     <string name="settings_system_storage_caches">Кэшүүд</string>
-    <string name="settings_system_storage_keystore_title">Гарын үлгэрийн keystore</string>
+    <string name="settings_system_storage_keystore_title">Гарын үсгийн keystore</string>
     <string name="settings_system_storage_app_data_title">Апп-ын өгөгдөл</string>
     <string name="settings_system_storage_patch_bundles_title">Засварын багцууд</string>
     <string name="settings_system_storage_http_cache_title">Сүлжээний кэш</string>
@@ -1209,10 +1212,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_save_patched_apks_title">Патч хийсэн APK-нуудыг хадгалах</string>
     <string name="settings_system_save_patched_apks_description">Дараа нь экспортлох эсвэл менежерээс дахин суулгахын тулд патч хийсэн APK-гийн хуулбарыг хадгалах</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
-    <string name="settings_system_patched_apks_title">Засагдсан APK-нууд</string>
-    <string name="settings_system_patched_apks_empty">Хэвшүүлсэн APK хараахан хадгалагдаагүй байна</string>
-    <string name="settings_system_patched_apks_delete_title">Хэвшүүлсэн APK-г устгах уу?</string>
-    <string name="settings_system_patched_apks_deleted">Хэвшүүлсэн APK амжилттай устгагдлаа</string>
+    <string name="settings_system_patched_apks_title">Патчлагдсан APK-нууд</string>
+    <string name="settings_system_patched_apks_empty">Патчлагдсан APK хараахан хадгалагдаагүй байна</string>
+    <string name="settings_system_patched_apks_delete_title">Патчлагдсан APK-г устгах уу?</string>
+    <string name="settings_system_patched_apks_deleted">Патчлагдсан APK амжилттай устгагдлаа</string>
     <string name="settings_system_patched_apks_delete_all_title">Засварласан бүх APK-уудыг устгах уу?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">Эх APK-нууд</string>
@@ -1255,7 +1258,7 @@ morphe_header_custom_dark.png
     <string name="copy_selection_empty">Хуулж авах өөр хадгалсан сонголт байхгүй байна</string>
     <string name="copy_selection_available_format">%2$s-аас %1$s боломжтой</string>
     <!-- Settings - System Tab - Custom file picker -->
-    <string name="settings_system_custom_file_picker">Файлын төгсгөлийн сонгогч</string>
+    <string name="settings_system_custom_file_picker">Өөрийн файлын сонгогч</string>
     <string name="settings_system_custom_file_picker_description">Системийн файлын сонгогчийн оронд Morphe-ийн суурилуулсан файлын сонгогчийг ашиглах</string>
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK татах туслах</string>
@@ -1267,6 +1270,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">Суулгагч тодорхойгүй</string>
     <string name="settings_system_apk_download_helper_open_directly">Туслахыг шууд нээх</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Татаж авах зааврыг алгасаад итгэмжлэгдсэн туслахыг нээнэ</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APK файлуудыг багцаар автоматаар татаж авах</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Энд файл байхгүй байна</string>
     <string name="file_picker_read_error">Энэхүү хавтсыг унших боломжгүй</string>
@@ -1395,7 +1399,7 @@ morphe_header_custom_dark.png
     <string name="import_">Импорт хийх</string>
     <string name="export">Экспортлох</string>
     <string name="copy">Хуулах</string>
-    <string name="copied_to_clipboard">Хавхлагаа руу хууллаа</string>
+    <string name="copied_to_clipboard">Санах ойд хуулагдлаа</string>
     <string name="download">Татах</string>
     <string name="less">Бага</string>
     <string name="expand">Өргөтгөх</string>
@@ -1499,19 +1503,19 @@ morphe_header_custom_dark.png
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%2$s-аас %1$s-р алхам</string>
-    <string name="onboarding_sources_desc">Патчийн эх сурвалжуудаа удирдаарай. Эх сурвалж бүр нь таны аппликейшнүүдэд хэрэглэх боломжтой патчуудыг предоставляет</string>
-    <string name="onboarding_other_apps_desc">Жагсаалтад байхгүй апп-ыг APK файл эсвэл төхөөрөмж дээрээ суулгасан апп-аас патлах</string>
+    <string name="onboarding_sources_desc">Патчийн эх сурвалжуудаа удирдаарай. Эх сурвалж бүр таны аппликейшнүүдэд хэрэглэх боломжтой патчуудыг өгдөг</string>
+    <string name="onboarding_other_apps_desc">Жагсаалтад байхгүй аппликейшнийг APK файлаас эсвэл төхөөрөмж дээрээ суулгасан апп-аас патчлах</string>
     <string name="onboarding_add_source_desc">Линк эсвэл патчийн багц файлаас патчийн эх сурвалж нэмэх</string>
-    <string name="onboarding_signing_key_desc">Патлагдсан апп-уудаа гарын үсэг зурдаг түлхүүрээ нөөцлөөрэй. Түлхүүргүйгээр тэдгээрийг зөвхөн устгасны дараа шинэчлэх боломжтой</string>
+    <string name="onboarding_signing_key_desc">Патчлагдсан апп-уудаа гарын үсэг зурдаг түлхүүрээ нөөцлөөрэй. Түлхүүргүйгээр тэдгээрийг зөвхөн устгасны дараа шинэчлэх боломжтой</string>
     <string name="onboarding_swipe_title">Гүйлгэх дохио</string>
     <string name="onboarding_swipe_desc">Апп-ын картаг баруун тийш гүйлгэж боломжит патчуудыг харна уу. Нүүр хуудаснаас нуухын тулд зүүн тийш гүйлгэнэ үү</string>
     <string name="onboarding_settings_desc">Morphe-ийг тохируулах: гадаад төрх, ахисан түвшний тохиргоо болон системийн хэрэгслүүд</string>
     <string name="onboarding_sources_patches_desc">Энэхүү эх сурвалжаас боломжтой бүх патчуудыг харахын тулд товшино уу</string>
     <string name="onboarding_sources_version_desc">Энэхүү эх сурвалжийн өөрчлөлтийн бүрэн түүхийг харахын тулд хувилбар дээр товшино уу</string>
-    <string name="onboarding_sources_apps_desc">Энэ эх сурвалж ямар апп-уудыг патлахыг харахын тулд товшож, тэдгээрээс алийг нь сонгохыг шийднэ үү</string>
+    <string name="onboarding_sources_apps_desc">Энэ эх сурвалж ямар апп-уудыг патчлахыг харахын тулд товшиж, тэдгээрээс аль нь дээр патч санал болгохыг сонгоно уу</string>
     <string name="onboarding_sources_prerelease_desc">Энэхүү эх сурвалжаас хувилбарын өмнөх патчуудыг хүлээн авахын тулд үүнийг идэвхжүүлнэ үү</string>
     <string name="onboarding_appearance_tab_desc">Аппликейшны харагдах байдлыг тохируулах: сэдэв, гол өнгө болон арын дэвсгэр</string>
-    <string name="onboarding_expert_mode_desc">Пат сонголт, тусгай тохиргоо болон бусад ахисан түвшний функцуудыг нээхийн тулд Мэргэжилтний горимыг идэвхжүүлнэ үү</string>
+    <string name="onboarding_expert_mode_desc">Патч сонголт, тусгай тохиргоо болон бусад ахисан түвшний функцуудыг нээхийн тулд Мэргэжилтний горимыг идэвхжүүлнэ үү</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_installer_desc">Патч хийсэн апп-уудыг хэрхэн суулгахыг сонгоно уу: стандарт, root mount эсвэл Shizuku</string>
     <string name="onboarding_system_file_picker_desc">APK эсвэл keystore сонгохдоо системийн сонгогчийн оронд суурилуулсан файлын хөтөчийг ашиглахын тулд идэвхжүүлнэ үү</string>

@@ -25,12 +25,12 @@
     </plurals>
     <!-- Button that adds every source waiting in the add source dialog -->
     <plurals name="sources_dialog_add_count">
-        <item quantity="one">%s मूळ जोडा</item>
-        <item quantity="other">%s मूळ जोडा</item>
+        <item quantity="one">स्त्रोत %s जोडा</item>
+        <item quantity="other">स्त्रोत %s जोडा</item>
     </plurals>
     <plurals name="home_app_patch_sources_title">
-        <item quantity="one">%s ॲपसाठी पॅच सोर्सेस</item>
-        <item quantity="other">%s ॲप्ससाठी पॅच सोर्सेस</item>
+        <item quantity="one">%s ॲपसाठी पॅच स्त्रोत</item>
+        <item quantity="other">%s ॲप्ससाठी पॅच स्त्रोत</item>
     </plurals>
     <plurals name="home_apk_availability_hidden_sources">
         <item quantity="one">या ॲपसाठी %s स्रोत लपवलेला आहे. तो पुन्हा मिळवण्यासाठी Apps टॅबवर ॲप निवडा आणि Patch sources उघडा</item>
@@ -149,8 +149,8 @@
         <item quantity="other">%s वैशिष्ट्ये</item>
     </plurals>
     <plurals name="changelog_fix_count">
-        <item quantity="one">%s फिक्स</item>
-        <item quantity="other">%s दुरुस्त्या</item>
+        <item quantity="one">%s दुरूस्ती</item>
+        <item quantity="other">%s fixes</item>
     </plurals>
     <plurals name="changelog_performance_count">
         <item quantity="one">%s ऑप्टिमायझेशन</item>
@@ -175,6 +175,6 @@
     </plurals>
     <plurals name="app_links_count_unverified">
         <item quantity="one">%d पडताळणी न झालेली लिंक</item>
-        <item quantity="other">%d पडताळणी न झालेल्या लिंक्स</item>
+        <item quantity="other">%d पडताळणी न झालेल्या लिंक</item>
     </plurals>
 </resources>

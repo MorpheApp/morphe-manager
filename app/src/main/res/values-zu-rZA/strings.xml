@@ -14,8 +14,8 @@
     <string name="home_more_apps_hide_message">Ungayibuyisela noma nini ku-%1$s</string>
     <string name="home_app_hide_message">Lolu hlelo luzofihlelwa esikrinini sasekhaya. Ungalubuyisa kamuva ezinhlelweni ezifihliwe usebenzisa inkinobho esekhasini laphansi lolu hlu</string>
     <string name="home_app_will_be_hidden">Lolu hlelo luzofihleka</string>
-    <string name="home_app_hidden_named">{%s} ifihliwe</string>
-    <string name="home_app_shown_named">{%s} ibonakile</string>
+    <string name="home_app_hidden_named">%s ifihliwe</string>
+    <string name="home_app_shown_named">%s ibonakile</string>
     <string name="home_app_no_hidden">Azikho izinhlelo ezifihliwe</string>
     <string name="home_app_hidden_apps_title">Izinhlelo ezifihliwe</string>
     <string name="home_app_hidden_apps_hint">Thinta ukuze uveze</string>
@@ -47,7 +47,7 @@
     <string name="home_metadata_errors_subtitle">Thinta ukuze ubuyekeze izimithombo</string>
     <string name="home_outdated_manager_title">IMorphe isidala</string>
     <string name="home_outdated_manager_subtitle">Ezinye izimina zezipamelo zidinga inguqulo entsha</string>
-    <string name="home_held_back_title">Umdwebo we-patch ubangele ukuthi i-Morphe icrashe</string>
+    <string name="home_held_back_title">Umthombo we-patch ubangele ukuthi i-Morphe icrashe</string>
     <string name="home_held_back_subtitle">Kushiywe ukuze i-app ikwazi ukuqala. Thinta ukuze ubuyekeze</string>
     <string name="home_metered_skipped_title">Ukubuyekeza kumile kudatha yeselula</string>
     <string name="home_metered_skipped_subtitle">Chofoza ukuze uvumele izibuyekezo kudatha yeselula</string>
@@ -65,7 +65,7 @@
     <string name="list_options_state_description">Hlelwe ngokuka %1$s, hlulwe ngokuka %2$s</string>
     <string name="home_app_filter_clones">Ama-Clones</string>
     <string name="home_app_grouping_none">Akukho</string>
-    <string name="home_app_sort_manual_hint">Cindezela isekelwe i-app, bese uchofoza inkinobho yokuhlela kabusha</string>
+    <string name="home_app_sort_manual_hint">Cindezela isikhathi eside i-app, bese uchofoza inkinobho yokuhlela kabusha</string>
     <string name="home_app_sort_recommended">Uhlelo oluncomekile</string>
     <string name="home_app_sort_updates_first">Izibuyekezo ze-Patch kuqala</string>
     <string name="home_app_sort_recently_patched">Kwakhelwe muva</string>
@@ -114,7 +114,7 @@
     <string name="home_greeting_morning_1">Vuka uphatshisise</string>
     <string name="home_greeting_morning_2">Sawubona ekuseni! Izinhlelo zokusebenza ngeke ziphatshise zodwa</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Ukukhathala kwasekuseni? Phatshisa okuthile</string>
+    <string name="home_greeting_afternoon_1">Ukukhathala ntambama? Phatshisa okuthile</string>
     <string name="home_greeting_afternoon_2">Ukuphatshisa emva kokudla kuhluke</string>
     <string name="home_greeting_afternoon_3">Ishifthi yasemini: uhlobo lokuphatshisa</string>
     <!-- Evening greetings (17:00–21:59) -->
@@ -201,7 +201,7 @@
     <string name="sources_management_held_back_hint">Lolu hlelo lubangele ukuthi i-Morphe icrashe ngenkathi ilodwa, ngakho lushiywa. Livuselele noma uliphinde ulifake ukuze uzame futhi</string>
     <string name="sources_management_signed_by">Sayinwe ngu</string>
     <string name="sources_management_signing_key_changed_badge">Ikey ishintshile</string>
-    <string name="sources_management_signing_key_changed_hint">Ukukhishwa kwamanje akusayinwa ngekey leli thambo elalisebenzisa ngaphambilini, ngakho akuzange kufakwe. Thinta ukuze ukubuyekize</string>
+    <string name="sources_management_signing_key_changed_hint">Ukukhishwa kwamanje akusayinwa ngokhiye walo mthombo owawusetshenziswa ngaphambilini, ngakho akuzange kufakwe. Thinta ukuze ukubuyekeze</string>
     <string name="sources_management_source_enabled">Umthombo uvuliwe</string>
     <string name="sources_management_source_disabled">Umthombo uvaliwe</string>
     <string name="sources_management_source_updating">Uvuselelwa umthombo</string>
@@ -231,13 +231,13 @@
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Izithombo zama-patch zangaphandle</string>
     <string name="sources_dialog_community_notice_message">"Imithombo yama-patch omphakathi yenziwa futhi igcinwe ababhali bayo. IMorphe ayikubuyekezi noma ayikuqinisekisi ama-patch wesithathu, futhi ayibophezeleki okuqukethwe kuwo noma kulokho akwenzayo kudivayisi yakho"</string>
-    <string name="sources_update_success">Ukulungisa kuphumelele</string>
-    <string name="sources_update_unavailable">Alikho ukulungisa etholakala</string>
+    <string name="sources_update_success">Ukuvuselelwa kuphumelele</string>
+    <string name="sources_update_unavailable">Alikho ukuvuselelwa okutholakalayo</string>
     <string name="sources_download_fail">Kwehlulekile ukulanda imithombo: %s</string>
     <string name="sources_download_fail_named">\'%s\' ngeke yakwazi ukubuyiselwa. Hlola uxhumano lwakho lwe-internet bese uzama futhi</string>
     <string name="sources_download_endpoint_not_found">\'%s\': imininingwane ye-patch ayitholakali</string>
     <string name="sources_signing_key_changed_named">\'%s\' ayizange ibuyekezwe ngoba ukukhishwa kwayo kwamanje akusayinwa ngekey eyayisebenzisa ngaphambilini</string>
-    <string name="sources_signing_key_changed_local">Ifayela alusayinwa ngekey leli thambo elalisebenzisa ngaphambilini. Ukuze ulithembe, susa ithambo bese wengeza ifayela futhi</string>
+    <string name="sources_signing_key_changed_local">Ifayela alusayinwa ngokhiye walo mthombo owawusetshenziswa ngaphambilini. Ukuze ulithembe, susa umthombo bese wengeza ifayela futhi</string>
     <string name="sources_signing_key_trust_title">Uthemba ikey entsha?</string>
     <string name="sources_signing_key_trust_message">I-release yakamuva isayiniwe nge-key ehlukile. Kungaba wukuthi umsayili ushintshe i-key yakhe, noma omunye umuntu uxhumise le release. Yithembe kuphela uma umsayili ememezela i-key entsha</string>
     <string name="sources_signing_key_trust_message_unsigned">I-release yakamuva ayisayiniwe. Kungaba wukuthi umsayili uyekile ukusayina ama-release, noma omunye umuntu uxhumise le release. Yithembe kuphela uma umsayili ekumemezile</string>
@@ -340,7 +340,7 @@ Khetha ukuthi uthathe i-APK yayo kuphi"</string>
     <string name="expert_mode_enable_all_universal_pending">Thinta futhi ukuze uthole ama-patches onke</string>
     <string name="expert_mode_universal_all_warning_title">Vula wonke ama-patches universal?</string>
     <string name="expert_mode_universal_all_warning_message">Ama-patches universal awakuhloliswana. Ukuvula wonke ngasikhathi sinye kungabangela ukungahambisani, ukuhluleka kokufaka i-patch, noma ukuqhuma kwe-app</string>
-    <string name="expert_mode_recommended">Ama-patches anelele</string>
+    <string name="expert_mode_recommended">Ama-patch anconyelwayo</string>
     <string name="expert_mode_reset_to_default_done">Izipathi ezinekilwayo sezifakwe</string>
     <string name="expert_mode_selected_count">%1$s kwe-%2$s ukhethiwe</string>
     <string name="expert_mode_saved_selection">Ukukhetha okugcinwe</string>
@@ -440,7 +440,7 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="adaptive_icon_guide_png_title">Sebenzisa i-PNG enengemuva elicacile</string>
     <string name="adaptive_icon_guide_png_body">I-logo ohlangothini olucacile isebenza kangcono, lapho umbala we-background ukhethwa ngezansi. Isithombe esingenalo ukucaca zigcwalisa i-icon yonke, bese ama-icon ahambisana nesihloko nawesaziso agcina i-logo ye-Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Izona eziphephile</string>
-    <string name="adaptive_icon_guide_safe_zones_body">Umugodlo ukhombisa isimo se-icon ye-launcher yakho, futhi konke okungaphandle kwalo kusisulwa. Amanye ama-launcher asebenzisa izimo ezihlukile, ngakho gcina imininingwane ebalulekile phakathi kwesing circle esine-dashed, esikhonjiswa yiso sonke isimo.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Umugodlo ukhombisa isimo se-icon ye-launcher yakho, futhi konke okungaphandle kwalo kusisulwa. Amanye ama-launcher asebenzisa izimo ezihlukile, ngakho gcina imininingwane ebalulekile phakathi kwesiyingi esinemigqa, esikhonjiswa yiso sonke isimo.</string>
     <string name="adaptive_icon_guide_notification_title">I-icon yesaziso</string>
     <string name="adaptive_icon_guide_notification_body">Sikisizwa engxenyeni ebonakalayo yesithombe futhi sinikelwe isayizi efana nama-icon ama-status bar, noma yikuphi i-margin efakwe kufayela. Ilungise ngesilayida ngaphansi kokubuka. I-Android iyikhombisa ngombala owodwa.</string>
     <string name="adaptive_icon_guide_monochrome_title">I-icon ene-theme</string>
@@ -458,14 +458,14 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="header_creator_guide_themes_title">Izindikimba ezikhanyayo nezimnyama</string>
     <string name="header_creator_guide_themes_body">Izinhlelo eziningi zidinga imifanekiso ehlukanisiwe yezindikimba ezikhanyayo nezimnyama. Ezinye izinhlelo (njenge-YouTube Music) zisebenzisa indindikimba emnyama kuphela, ngakho lowo gcaba kuphela okhonjiswa.</string>
     <string name="header_creator_guide_positioning_title">Ukubeka nokushintsha isayizi</string>
-    <string name="header_creator_guide_positioning_body">Hambisa futhi ucindezele isithombe kume-editor, noma usnikele isayizi ngesilayida. Ibhokisi eline-dashed limakisa lapho i-stock logo ihleli khona, futhi imihlahlandlela ivela lapho isithombe sihlala ngokuhambisana nayo.</string>
+    <string name="header_creator_guide_positioning_body">Hambisa futhi ucindezele isithombe kume-editor, noma usinikeze isayizi ngesilayida. Ibhokisi elinemigqa limakisa lapho i-stock logo ihleli khona, futhi imihlahlandlela ivela lapho isithombe sihlala ngokuhambisana nayo.</string>
     <!-- Batch patching -->
     <string name="batch_patch_action">Patch okhethiwe</string>
     <string name="batch_patch_title">Ukupatch ngokubamba</string>
     <string name="batch_patch_planning">Kulungiswa uhlelo...</string>
     <string name="batch_patch_preparing_next">Kulungiswa i-app elandelayo...</string>
     <string name="batch_patch_progress_counter">Kuphethwa u-%1$s we-%2$s</string>
-    <string name="batch_patch_summary">%1$s kungeziwe, %2$s kuhleleke, %3$s kushiyelele</string>
+    <string name="batch_patch_summary">%1$s kulungisiwe, %2$s kuhlulekile, %3$s kushiyiwe</string>
     <string name="batch_patch_saved_hint">I-apps ezipatchwe zisondelwe. Zifake manje, noma kamuva kusuhlu lwe-APK ezipatchwe kuzilungiselelo</string>
     <string name="batch_patch_multiple_sources">Izinhlelo ezithile zihlanganisa ama-patch avelela emithonjeni engaphezu kweyodwa, okungabangela ukungqubuzana</string>
     <string name="batch_patch_needs_apk">Alikho i-APK etholakalayo, namathisela ifayela</string>
@@ -487,9 +487,9 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="batch_patch_policy_install">Faka lapho kuqedile</string>
     <string name="batch_patch_policy_install_description">Ifaka yonke i-app ephephelwe ngemuva kokuba i-queue iqedile. Ukucisha kugcina ama-APK ukuze asetshenziswe kamuva</string>
     <string name="batch_patch_policy_mount">Mount-a lapho seqedile</string>
-    <string name="batch_patch_policy_mount_description">I-mount-a yonke i-app eyi-patched lapho umsព័ន្ធ uqedile. Ukuyicima kugcina ama-APK ukuze asetshenziswe kamuva</string>
+    <string name="batch_patch_policy_mount_description">I-mount-a yonke i-app e-patched lapho uhlu seluqedile. Ukuyicima kugcina ama-APK ukuze asetshenziswe kamuva</string>
     <string name="batch_patch_policy_install_mount">Faka noma u-mount-e lapho seqedile</string>
-    <string name="batch_patch_policy_install_mount_description">Ifaka noma i-mount yonke i-app e-patched kanye lapho umsindo uphela. Ukucisha kugcina ama-APK ukuze asetshenziswe kamuva</string>
+    <string name="batch_patch_policy_install_mount_description">Ifaka noma i-mount-a yonke i-app e-patched lapho uhlu seluqedile. Ukucisha kugcina ama-APK ukuze asetshenziswe kamuva</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Qala</string>
     <string name="batch_patch_stop_title">Yemisa ukuphephela ngama-batch?</string>
@@ -503,8 +503,8 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="batch_queue_pending_subtitle">Thinta ukuze ubuyekeze futhi uqale</string>
     <string name="batch_queue_clear_title">Sula umsizi?</string>
     <string name="batch_queue_clear_description">Zonke izinhlelo zizosuswa ohlwini</string>
-    <string name="batch_queue_keep_title">Ugcine umsiphelo?</string>
-    <string name="batch_queue_keep_description">Izinhlelo ezilindile zizolinda kuscreen sasekhaya ukuze zaqale kamuva</string>
+    <string name="batch_queue_keep_title">Gcina uhlu?</string>
+    <string name="batch_queue_keep_description">Izinhlelo ezilindile zizolinda esikrinini sasekhaya ukuze zaqale kamuva</string>
     <string name="batch_queue_keep">Gcina</string>
     <string name="shortcut_repatch_short">Phephela futhi</string>
     <string name="shortcut_repatch_long">Phinda u-patch izinhlelo ezindala</string>
@@ -527,7 +527,7 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="home_app_info_original_package_name">Igama lophakheji lokuqala</string>
     <string name="home_app_info_applied_patches">Ama-patches afakwe</string>
     <string name="home_app_info_patch_source_used">Umthombo we-patch osebenziswe</string>
-    <string name="home_app_info_install_type_custom_installer">Umfakisi wekাস্টam</string>
+    <string name="home_app_info_install_type_custom_installer">Umfaki ongokwezifiso</string>
     <string name="home_app_info_install_type_system_installer">Umfakisi ohlelo lwesistimu</string>
     <string name="home_app_info_install_type_play_store">Ukufaka kwe-Play Store</string>
     <string name="home_app_info_install_type_root">Ukufaka kwe-Root</string>
@@ -646,7 +646,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patcher_storage_permission_dialog_title">Awukwazi ukufinyelela endleleni yokugcina (storage path)</string>
     <string name="patcher_incompatible_patcher_title">Kudingeka ukubuyekeza</string>
     <string name="patcher_incompatible_patcher_description">Umthombo &lt;b&gt;%1$s&lt;/b&gt; udinga i-patcher &lt;b&gt;%2$s&lt;/b&gt; noma entsha kakhulu. Thuthukisa i-Morphe ukuze uyisebenzise</string>
-    <string name="patcher_storage_permission_description_api30">Okukodwa noma okuningi kwezinketho ze-patch kukhomba izindlela i-Morphe enginakwazi ukuzifunda. Nikeza imvume yokusebenzisa is토rage bese uchofoza inkinobho ukuze uku-patcha kuqale ngokuzenzakalelayo</string>
+    <string name="patcher_storage_permission_description_api30">Okukodwa noma okuningi kwezinketho ze-patch kukhomba izindlela i-Morphe enginakwazi ukuzifunda. Nikeza imvume yokusebenzisa isitorage bese uchofoza inkinobho ukuze uku-patcha kuqale ngokuzenzakalelayo</string>
     <string name="patcher_storage_permission_description_legacy">Kukhona inketho eyodwa noma ezingaphezulu ze-patch ezikhomba ezindleleni ezingafinyeleleki. Vuselela izindlela ezinkethweni ze-patch bese uzama futhi</string>
     <string name="patcher_storage_permission_grant">Nikeza imvume yokugcina</string>
     <string name="patcher_storage_permission_denied_warning">Imvume yokugcina yanqanyulwa. Nikeza imvume yokusebenzisa le ndlela, noma uthise amafaila ku-directory eyimfihlo ye-app</string>
@@ -656,12 +656,12 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patcher_storage_badge_rejected">Ayisebenziseki</string>
     <string name="batch_patch_option_paths_skipped">Amafayela ezinketho zokuphethisha ayashoda futhi azonqandwa: %1$s</string>
     <string name="patcher_missing_patches_title">Amaphetshi amanye anyamalale</string>
-    <string name="patcher_missing_patches_description">Ukukhetha okugcinwe kwale app kubala ama-patches angafanelanga anikezwa yithunzi elivuliwe. Ukuqhubeka kuzolungisa i-app ngaphandle kwawo</string>
+    <string name="patcher_missing_patches_description">Ukukhetha okugcinwe kwale app kubala ama-patches angasatholakali kumathuluzi avuliwe. Ukuqhubeka kuzolungisa i-app ngaphandle kwawo</string>
     <string name="patcher_missing_patches_label">Asezingeniswanga</string>
     <string name="patcher_option_paths_gone_title">Izifayela zezinketho ze-Patch azikho</string>
     <string name="patcher_option_paths_gone_description">Okukodwa noma okuningi kwezinketho ze-patch kukhomba amafayela angesekho. Susa imizila ukuze u-patch ngaphandle kwawo, noma ubuyise amafayela bese uzama futhi</string>
     <string name="patcher_option_paths_rejected_title">Amafaila okukhetha i-patch aweke asetshenziswe</string>
-    <string name="patcher_option_paths_rejected_description">Okukhethwayo kwe-patch okukodwa noma okuningi kukhomba amafaila ashayekile noma angenalo okucelwe i-patch. Susa imigqa yokuxhumana ukuze wenze i-patch ngaphandle kwawo, noma ulungise amafaila njengoba kuchazwe emigqondweni yokukhetha bese uzama futhi</string>
+    <string name="patcher_option_paths_rejected_description">Okukhethwayo kwe-patch okukodwa noma okuningi kukhomba amafayela angekho noma angenalo okucelwa yi-patch. Susa ama-path ukuze wenze i-patch ngaphandle kwawo, noma ulungise amafayela njengoba kuchazwe imiyalelo yokukhetha bese uzama futhi</string>
     <string name="patcher_option_paths_clear">Susa imizila bese uyaqhubeka</string>
     <string name="patcher_storage_permission_hint">Iseluleko: Yisa amafaila ku /Android/data/app.morphe.manager/files/ - akudingeki imvume eyengeziwe</string>
     <!-- Patcher Screen - Patcher Steps -->
@@ -676,7 +676,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patcher_task_decoding_dex">Ukufundwa kwamafayela e-DEX</string>
     <string name="patcher_task_extracting_resources">Kukhiphelwa izinsiza</string>
     <string name="patcher_task_decoding_resources">Kudekodiwa izinsiza</string>
-    <string name="patcher_task_indexing_classes">Kwenziwa uhlu lwezikhala</string>
+    <string name="patcher_task_indexing_classes">Kwenziwa uhlu lwamakilasi</string>
     <string name="patcher_task_compiling_dex">Kuhlanganywa amafayela e-DEX</string>
     <string name="patcher_task_compiling_resources">Kuhlanganiswa izinsiza</string>
     <string name="patcher_task_writing_apk">Kubhalwa ifayela le-APK</string>
@@ -727,7 +727,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="failed_to_execute_patch">Kuhleleke ukufakwa kuka %s</string>
     <string name="patched_app_save_failed_toast">Kuhleleke ukulonda i-app e-patched</string>
     <string name="plugin_activity_dialog_body">Kudingeka ukuhlanganyela komsebenzisi ukuze kuqhubekwe nalolu plugin</string>
-    <string name="patcher_process_killed_message">Uhlelo lwemishini lumise i-patcher ngaphambi kokuba iqedele, imvamisa ukuze kukhululwe inkumbulo. Vala ezinye izinhlelo uzame futhi</string>
+    <string name="patcher_process_killed_message">Uhlelo lusimise i-patcher ngaphambi kokuba iqedele, imvamisa ukuze kukhululwe inkumbulo. Vala ezinye izinhlelo uzame futhi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">I-patcher iye yahluleka ngaphambi kokuba iqedele. Uma kwenzeka futhi, vala u-%1$s bese ubika inkinga ngokusebenzisa i-log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -777,7 +777,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_appearance_background">I-animation yengemuva</string>
     <string name="settings_appearance_background_description">I-animation edlala ngemuva kwezikhrini ze-app</string>
     <string name="settings_appearance_background_circles">Izindilinga</string>
-    <string name="settings_appearance_background_rings">Izindilinga zezolo</string>
+    <string name="settings_appearance_background_rings">Amasongo</string>
     <string name="settings_appearance_background_mesh">Mesh</string>
     <string name="settings_appearance_background_space">Isikhala</string>
     <string name="settings_appearance_background_shapes">Izimo</string>
@@ -788,7 +788,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_appearance_background_halloween">i-Halloween</string>
     <string name="settings_appearance_background_fireworks">Imicobobo</string>
     <string name="settings_appearance_background_none">Alukho</string>
-    <string name="settings_appearance_background_random">Okuhleliwe ngendlela engahleliwe</string>
+    <string name="settings_appearance_background_random">Okungahleliwe</string>
     <string name="settings_appearance_background_random_interval_launch">Lapho kuqala</string>
     <string name="settings_appearance_background_random_interval_daily">Nsuku zonke</string>
     <string name="settings_appearance_background_random_interval_3days">Njalo emva kwezinsuku ezi-3</string>
@@ -811,7 +811,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_appearance_color_style">Isitayela sombala</string>
     <string name="settings_appearance_accent_color">Umbala ogqamile</string>
     <string name="settings_appearance_pure_black">Omnyama Pure</string>
-    <string name="settings_appearance_pure_black_description">Use imbalashwe emnyama kakhulu</string>
+    <string name="settings_appearance_pure_black_description">Isebenzisa izingemuva ezimnyama ngempela</string>
     <string name="settings_appearance_color_accents">Imibala yohlelo nomthombo</string>
     <string name="settings_appearance_color_accents_description">Kusebenzisa imibala yohlelo lwe-app kanye nomthombo esikhundleni se-accent</string>
     <string name="settings_appearance_outlines">Imingcele</string>
@@ -821,7 +821,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Ulimi lwohlelo</string>
     <string name="settings_appearance_app_language_current">Ulimi lwamanje</string>
-    <string name="settings_appearance_translate">Siza ekuhumuleni i-Morphe</string>
+    <string name="settings_appearance_translate">Siza ukuhumusha i-Morphe</string>
     <string name="settings_appearance_translations_info_title">Izihumushi zezinye izilimi zingase zibe khona noma zingaphelele</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Isayizi ye-interface</string>
@@ -831,7 +831,7 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Kukhombisa umlayezo wokubingelela</string>
     <string name="settings_appearance_repatch_notice">Isaziso sokuphinda ufake i-patch</string>
     <string name="settings_appearance_repatch_notice_description">Kukhombisa ibhena lapho izinhlelo ezipatshwe zingapatshwa kabusha</string>
-    <string name="settings_appearance_more_apps_card">Ikhadi lamazise lalama-app amaningi</string>
+    <string name="settings_appearance_more_apps_card">Ikhadi lezinhlelo eziningi</string>
     <string name="settings_appearance_more_apps_card_description">Ikhombisa ikhadi ngaphansi kwe-apps eliqondisa kuma-community patches</string>
     <string name="settings_appearance_app_card_colors">Imibala yamakadi</string>
     <string name="settings_appearance_app_card_colors_default">Okujwayelekile</string>
@@ -880,14 +880,14 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates_manager_prereleases">I-update zangaphambi kokukhishwa</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
-    <string name="settings_advanced_updates_manager_prereleases_description">Ukufunda okusisekelo kwezinguqulo ezintsha ze-Morphe</string>
+    <string name="settings_advanced_updates_manager_prereleases_description">Ukufinyelela kuqala kwezinguqulo ezintsha ze-Morphe</string>
     <string name="settings_advanced_updates_prerelease_warning_title">Vumela i-update zangaphambi kokukhishwa?</string>
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
     <string name="settings_advanced_updates_prerelease_warning_message">"Izinguqulo zangaphambi kokukhishwa ze-Morphe zisasebenzelwa futhi zingase zibe nezinkinga.
 
 Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke omthombo ohlelweni lwezithombo zama-patch"</string>
     <string name="settings_advanced_updates_allow_metered">Ukubuyekeza kwedatha yeselula</string>
-    <string name="settings_advanced_updates_allow_metered_description">Kudawuniloda uMorphe kanye neziv Aktualizasyon zokupatsha ngedatha yeselula</string>
+    <string name="settings_advanced_updates_allow_metered_description">Kudawuniloda uMorphe kanye nezibuyekezo zokupatsha ngedatha yeselula</string>
     <string name="settings_advanced_updates_background_notifications">Izaziso zokuvutha kwengemuva</string>
     <string name="settings_advanced_updates_background_notifications_description">Hlola imisebenzi yokuvuselelwa ngesikhathi ngemuva futhi wazise lapho itholakala</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Izaziso zokuthumela zezikhala ezintsha, ngisho noma i-app ivalele</string>
@@ -910,7 +910,7 @@ Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke
     <string name="notification_update_text">Inguqulo %s isilungile ukulandwa</string>
     <string name="notification_bundle_update_text_unversioned">Thinta ukuvula iMorphe bese uvuselela</string>
     <string name="notification_permission_dialog_title">Vumela izaziso</string>
-    <string name="notification_permission_dialog_description">IMorphe idinga imvume yezaziso ukuze ikwazise lapho kuvеle izivuselelo ngemuva</string>
+    <string name="notification_permission_dialog_description">IMorphe idinga imvume yezaziso ukuze ikwazise lapho kuvele izivuselelo ngemuva</string>
     <string name="notification_post_patch_dialog_title">Ungathanda ukwaziswa lapho kuvutholakala ukuvuselelwa?</string>
     <string name="notification_channel_manager_updates">Izibuyekezo ze-Morphe</string>
     <string name="notification_channel_manager_updates_description">Izaziso mayelana nokukhipha okusha kwe-Morphe</string>
@@ -940,7 +940,7 @@ Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke
     <string name="settings_advanced_github_pat_checking">Kuhlolwa ku-GitHub…</string>
     <!-- "%s" is the GitHub account name -->
     <string name="settings_advanced_github_pat_account">Ungene ku-GitHub njenge-%s</string>
-    <string name="settings_advanced_github_pat_rejected">I-GitHub yiyenqabe le token. Kungase kube yikuze iphelé isikhathi noma isuswe</string>
+    <string name="settings_advanced_github_pat_rejected">I-GitHub yiyenqabe le token. Kungenzeka ukuthi iphelelwe yisikhathi noma ihoxisiwe</string>
     <string name="settings_advanced_github_pat_unreachable">Akukwazanga ukufinyelela ku-GitHub ukuze kuhlolwe le token</string>
     <string name="settings_advanced_github_pat_export_include_label">Faka ekuthumeleni izilungiselelo</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
@@ -949,15 +949,15 @@ Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke
     <string name="settings_advanced_github_pat_export_warning">Ungayabelani i-PAT yakho. Uma uyifaka ekukhipheni izilungiselelo, gcina lolo fayela lube yimfihlo ngoba lunethokeni</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Izinketho ze-patch</string>
-    <string name="settings_advanced_patch_options_restart_message">Ukushintsha izinketho ze-patch kudinga uku-patch-a futhi i-app ukuze kube nenombolo</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">Emoden iyeNgcweti, izinketho ze-patch zizotholakala ngesikhathi senqubo ye-patching</string>
+    <string name="settings_advanced_patch_options_restart_message">ukuze kuthathe umthelela</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">Emodini yengcweti</string>
     <string name="settings_advanced_patch_options_loading">Kulayishwa izinketho ze-patch…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Linda kuze kube isumansela se-patch sibuyiselwe</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Linda kuze kuvuselelwe umthombo we-patch</string>
     <string name="settings_advanced_patch_options_load_error">Kuhlulekile ukulayisha izinketho ze-patch</string>
     <string name="settings_advanced_patch_options_no_available">Azikho izinketho ezitholakala kule-patch</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">Uku-brand okukhethekile</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">Ishintsha igama lokuvele que i-app</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">Ishintsha igama lokubonisa le-app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Igama le-app</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Faka igama elikhethekile</string>
     <string name="settings_advanced_patch_options_path_gone">Le folder ayisafundeki. Ikhethe futhi noma uyisuse, ngaleyo ndlela u-patching uzoma bese ubuza ngakho</string>
@@ -998,8 +998,8 @@ Ngokukhetha, indlela iqukethe i-icon yezaziso kunye nanye yalezi zinhlobo:
   drawable-xxhdpi/morphe_notification_icon_custom.png (72x72 px)
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
-    <string name="settings_advanced_patch_options_custom_header">I-logo yomcimbi ekhethekile</string>
-    <string name="settings_advanced_patch_options_custom_header_description">Ishintsha i-logo ephezu</string>
+    <string name="settings_advanced_patch_options_custom_header">I-logo yesihloko ekhethekile</string>
+    <string name="settings_advanced_patch_options_custom_header_description">Ishintsha ilogo yesihloko</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"Ifolda enemifanekiso ezisetshenziswa njenge-logo yomcimbi ekhethekile.
 
 Ifolda kumele ibe nezinye zezifolda ezilandelayo, kuye nge-DPI yedivayisi:
@@ -1072,7 +1072,7 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="settings_after_patching_manual">Faka ngesandla</string>
     <string name="settings_after_patching_manual_description">Kufakwa kusetshenziswa i-installer ejejikelele kanye lapho uchofoza uFaka</string>
     <string name="settings_nomount_only">iNoMount kuphela</string>
-    <string name="settings_nomount_only_description">I-mount i-apps kuphela nge-NoMount futhi ayibuyi emuva ku-bind mount, ngakho zahlala zingakhonjise ngaphandle kwayo</string>
+    <string name="settings_nomount_only_description">Ikhonjisa ama-app nge-NoMount kuphela futhi ayibuyi emuva ku-bind mount, ngakho zihlale zingakhonjiswe ngaphandle kwayo</string>
     <string name="settings_auto_install_with_shizuku_description">Ifaka noma uxhumise i-APK elungisiwe masinyane lapho ukulungisa kuqedile</string>
     <string name="settings_auto_uninstall_with_shizuku">Zisuse ngokuzenzakalelayo lapho kukhona ukungahambisani</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Yisuse i-app esekhona lapho kunengxabano yesigingisigi. Lokhu kungasusa idatha ye-app</string>
@@ -1086,7 +1086,7 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="installer_shizuku_status_ready">Kulungele</string>
     <string name="installer_shizuku_status_issue">Kudinga ukunakekelwa</string>
     <string name="installer_shizuku_status_supported">Iyasekelwa</string>
-    <string name="installer_shizuku_status_running">Iyashesha</string>
+    <string name="installer_shizuku_status_running">Iyasebenza</string>
     <string name="installer_shizuku_status_permission">Imvume</string>
     <string name="installer_shizuku_status_mode">Imodeli</string>
     <string name="installer_shizuku_status_provider">Umhlinzeki</string>
@@ -1106,7 +1106,7 @@ Imininingwane: %2$s"</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Ukuhlelwa kwebhethri</string>
     <string name="settings_system_battery_optimization_description">Gcina i-patcher isebenza lapho i-app incishiswa</string>
-    <string name="settings_system_process_runtime">Isikhathi sokuqala se-Patcher</string>
+    <string name="settings_system_process_runtime">Isikhathi sokusebenza se-Patcher</string>
     <string name="settings_system_jvm_runtime_enable">Sebenzisa i-VM efakwe</string>
     <string name="settings_system_jvm_runtime_description">Ama-patch ku-Java VM ka-Morphe, engase isebenzise inkumbulo eningi. Vali ukuze usebenzise i-runtime ye-Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Kudingeka idivayisi ye-ARM noma i-64-bit x86</string>
@@ -1199,7 +1199,7 @@ Imininingwane: %2$s"</string>
     <string name="settings_system_storage_clear_all_description">Kukhulula konke isikhala se-cache esingabuyiselwa kanye</string>
     <string name="settings_system_storage_clear_all_confirm">Lokhu kusula izimpendulo zenetwork ezigcinwe (cached), ikhopikho zika-installer ezilungiselelwe, kanye namafayela wesikhashana. Ama-APK ayingqayizivele kanye alaphiwe agcinwa</string>
     <string name="settings_system_storage_cleared">Kukhululwe %s</string>
-    <string name="settings_system_storage_patch_running_warning">Kukhona iphetshi elisebenza futhi lisebenzisa lezi zifayela. Ukuzisula manje kuzokwenza hluleke</string>
+    <string name="settings_system_storage_patch_running_warning">Kukhona i-patch esebenza futhi isebenzisa lezi zifayela. Ukuzisula manje kuzokwenza kuhluleke</string>
     <string name="settings_system_storage_clear_anyway">Sula noma kanjani</string>
     <string name="settings_system_storage_nothing_to_clear">Alukho okumele kusulwe</string>
     <string name="settings_system_storage_open_app_info_title">Vula isimo sokugcina i-app ye-Android</string>
@@ -1251,7 +1251,7 @@ Imininingwane: %2$s"</string>
     <string name="selection_set_renamed">Kuguqulwe igama laba u-%s</string>
     <string name="selection_set_rename_title">Guqula igama le-set</string>
     <string name="selection_set_delete_title">Susa i-set?</string>
-    <string name="selection_set_delete_message">Lokhu kususa phukula isethi %s ngokuphelele</string>
+    <string name="selection_set_delete_message">Lokhu kuzosusa isethi %s ngokuphelele</string>
     <string name="copy_selection_empty">Azikho ezinye izikhetho ezigcinwe zokukopisha kuzo</string>
     <string name="copy_selection_available_format">%1$s kwe-%2$s ezitholakalayo</string>
     <!-- Settings - System Tab - Custom file picker -->
@@ -1324,7 +1324,7 @@ Imininingwane: %2$s"</string>
     <string name="settings_section_general">Okubanzi</string>
     <string name="settings_section_patcher_summary">Indlela izinhlelo ezipatshwa ngayo kuleli device</string>
     <string name="settings_section_help_info">Usizo nolwazi</string>
-    <string name="settings_section_about_summary">Okumزيدi ngeMorphe nokuthola usizo</string>
+    <string name="settings_section_about_summary">Okwengeziwe ngeMorphe nokuthola usizo</string>
     <string name="settings_section_local_files">Amafaili</string>
     <string name="settings_section_backup">Uku-backup</string>
     <string name="settings_search">Sesha izilungiselelo</string>
@@ -1334,7 +1334,7 @@ Imininingwane: %2$s"</string>
     <string name="filter">Hlunga</string>
     <string name="group">Iqopho</string>
     <string name="reset">Sethula kabusha</string>
-    <string name="reset_all">Bhala phinda konke</string>
+    <string name="reset_all">Buyisela konke</string>
     <string name="apply">Faka</string>
     <string name="confirm">Qinisekisa</string>
     <string name="warning">Isixwayiso</string>
@@ -1379,11 +1379,11 @@ Imininingwane: %2$s"</string>
     <string name="deselect_all">Khipha konke ekukhethweni</string>
     <string name="reorder_list">Hlela kabusha uhlu</string>
     <string name="reorder_list_hint">Dhonsa ukuze uhlele kabusha</string>
-    <string name="reorder_done">Uhlelo loluhlu lolongezwe</string>
+    <string name="reorder_done">Uhlelo lugcinwe</string>
     <string name="reset_order">Buyisela uhlelo</string>
     <string name="reset_order_done">Uhlelo lubuyiselwe</string>
     <string name="reset_order_confirm_title">Buyisela uhlelo?</string>
-    <string name="reset_order_confirm_message">Uhlu buyela ohlelweni lwawo lwezincwadi futhi uhlelo oluhwebwe ngesandla lulahleka</string>
+    <string name="reset_order_confirm_message">Uhlu lubuyela ohlelweni lwalo lokuzenzakalelayo futhi uhlelo olwahlelwa ngesandla luyalahleka</string>
     <string name="accessibility_select_app">Khetha i-app</string>
     <string name="accessibility_select_source">Khetha umthombo</string>
     <string name="accessibility_move_up">Nyusa phezulu</string>
@@ -1477,11 +1477,11 @@ Imininingwane: %2$s"</string>
     <string name="changelog_show_all">Khombisa zonke (%s)</string>
     <string name="changelog_show_less">Khombisa okuncane</string>
     <string name="no_network_toast">Alikho uxhumano lwe-internet olutholakala</string>
-    <string name="update_available">Kukhona ukuthetha okutholakala</string>
-    <string name="ready_to_install_update">Kulungele ukufaka ukuthetha</string>
-    <string name="update_completed">Ukuthetha kufakile</string>
-    <string name="install_update_manager_failed">Kuhleleke ukufaka ukuthetha</string>
-    <string name="installing_manager_update">Kufakwa ukuthetha…</string>
+    <string name="update_available">Kukhona ukuvuselelwa okutholakalayo</string>
+    <string name="ready_to_install_update">Kulungele ukufaka ukuvuselelwa</string>
+    <string name="update_completed">Ukuvuselelwa kufakiwe</string>
+    <string name="install_update_manager_failed">Kuhlulekile ukufaka ukuvuselelwa</string>
+    <string name="installing_manager_update">Kufakwa ukuvuselelwa…</string>
     <string name="installing_manager_update_hint">I-Morphe izovaleka ukuze iqedele ukuvuselelwa</string>
     <string name="downloading_manager_update">Kudownloadwa ukuvuselelwa…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
@@ -1501,8 +1501,8 @@ Usafuna ukuqhubeka?"</string>
     <string name="onboarding_step_of">%1$s kwangu %2$s</string>
     <string name="onboarding_sources_desc">Lawula imithombo yakho yokulungisa. Wonke umthombo unikeza izilungiso ezingafakwa ezinhlelweni zakho</string>
     <string name="onboarding_other_apps_desc">Patch-a i-app engekho ohlwini, kusuka kufayela le-APK noma i-app efakwe kudivayisi yakho</string>
-    <string name="onboarding_add_source_desc">Yengeza isimo somthombo we-patch kusuka kwinxulumano (link) noma kufayela le-patch bundle</string>
-    <string name="onboarding_signing_key_desc">Bakha i-key esayina ama-app akho ayi-patched. Ngaphandle kwayo, angavuselelwa kuphela ngemva kokukhipha (uninstalling)</string>
+    <string name="onboarding_add_source_desc">Yengeza umthombo we-patch ngesixhumanisi noma ngefayela le-patch bundle</string>
+    <string name="onboarding_signing_key_desc">Yenza i-backup yokhiye osayina ama-app akho apatchiwe. Ngaphandle kwalo, angavuselelwa kuphela ngemva kokususa (uninstalling)</string>
     <string name="onboarding_swipe_title">Izandiso zokuswepha</string>
     <string name="onboarding_swipe_desc">Swepha kwesokudla ekhadini lenhlelo ukuze ubone izilungiso ezitholakala. Swepha kwesokunxele ukufihla ikhadi esikrinini sasekhaya</string>
     <string name="onboarding_settings_desc">Yenza u-Morphe ngendlela oyifunayo: ukubukeka, izinketho eziphezulu, namathuluzi ohlelo</string>

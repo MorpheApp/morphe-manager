@@ -47,7 +47,7 @@
     <string name="home_metadata_errors_subtitle">Toca para revisar as fontes</string>
     <string name="home_outdated_manager_title">Morphe está desactualizado</string>
     <string name="home_outdated_manager_subtitle">Algunhas fontes de parcheos necesitan unha versión máis nova</string>
-    <string name="home_held_back_title">Unha fonte de parcheo fixo Morphe</string>
+    <string name="home_held_back_title">Unha fonte de parches provocou un fallo en Morphe</string>
     <string name="home_held_back_subtitle">Ignorouse para que a aplicación puidese iniciar. Toca para revisar</string>
     <string name="home_metered_skipped_title">Actualizacións pausadas con datos móbiles</string>
     <string name="home_metered_skipped_subtitle">Toca para permitir actualizacións con datos móbiles</string>
@@ -112,23 +112,23 @@
     <string name="home_greeting_10">Propulsado por cafeína e bos parches</string>
     <!-- Morning greetings (5:00–11:59) -->
     <string name="home_greeting_morning_1">Levántate e parchea</string>
-    <string name="home_greeting_morning_2">Boos días! As aplicacións non se parchean soas</string>
+    <string name="home_greeting_morning_2">Bos días! As aplicacións non se parchean soas</string>
     <!-- Afternoon greetings (12:00–16:59) -->
     <string name="home_greeting_afternoon_1">¿Cansazo de tarde? Parchea algo</string>
-    <string name="home_greeting_afternoon_2">O parcheo post-xantar sente diferentemente</string>
+    <string name="home_greeting_afternoon_2">O parcheo despois do xantar é outra historia</string>
     <string name="home_greeting_afternoon_3">O turno da tarde: edición de parcheo</string>
     <!-- Evening greetings (17:00–21:59) -->
     <string name="home_greeting_evening_1">Boa noite! Os parches da noite son diferentes</string>
-    <string name="home_greeting_evening_2">A relaxar? Primeiro aplica un parche a unha app</string>
+    <string name="home_greeting_evening_2">A relaxar? Primeiro aplica un parche a unha aplicación</string>
     <string name="home_greeting_evening_3">A rematar a xornada? Primeiro aplica un parche a algo</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Aínda awake? Tamén as apps que necesitan parches</string>
+    <string name="home_greeting_late_night_1">Aínda espabilado? Tamén as aplicacións que necesitan parches</string>
     <string name="home_greeting_late_night_2">Sesió de parches tarde na noite? Respeto</string>
     <string name="home_greeting_late_night_3">Modo ave nocturna: activado</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Horas punta de parcheo… supostamente</string>
     <string name="home_greeting_super_late_2">Non podes durmir? Parchea algo</string>
-    <string name="home_greeting_super_late_3">A estas horas, simplemente queda awake e parchea</string>
+    <string name="home_greeting_super_late_3">A estas horas, simplemente fica espabilado e parchea</string>
     <string name="home_greeting_super_late_4">Ti e os servidores, ambos espertos</string>
     <string name="home_greeting_super_late_5">Nocturno e productivo</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
@@ -165,11 +165,11 @@
     <string name="sources_management_report_issue">Informar dun problema</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
     <string name="sources_apps">Aplicacións</string>
-    <string name="sources_apps_description">As aplicacións marcadas provén desta fonte. Toca unha aplicación para excluíla ou recuperala. Unha aplicación desaparece da pantalla de inicio cando ningunha fonte a aporta, a menos que a patchedas</string>
+    <string name="sources_apps_description">As aplicacións marcadas proveñen desta fonte. Toca unha aplicación para excluíla ou recuperala. Unha aplicación desaparece da pantalla de inicio cando ningunha fonte a aporta, a menos que a parcheses</string>
     <string name="sources_apps_brought">Trazidos por esta fonte</string>
     <string name="sources_apps_left_out">Deixados fóra desta fonte</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">Mantida como patcheda</string>
+    <string name="sources_apps_stays_patched">Mantida como parcheada</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Novo</string>
     <string name="sources_apps_new_apps">Traer novas aplicacións</string>
@@ -197,8 +197,8 @@
     <string name="sources_management_metadata_unavailable_hint_missing_editable">O paquete de parches non se puido descargar. A URL de orixe pode ser incorrecta ou o ficheiro non existe. Toca para cambiala</string>
     <string name="sources_management_outdated_manager_badge">Actualizar Morphe</string>
     <string name="sources_management_outdated_manager_hint">Esta fonte está construída para o patcher %1$s, pero Morphe %2$s inclúe o patcher %3$s. Actualiza Morphe para usala</string>
-    <string name="sources_management_held_back_badge">Fixo</string>
-    <string name="sources_management_held_back_hint">Esta fonte fixo Morphe durante a carga, polo que está sendo ignorada. Actualízaa ou impórtaa de novo para tentar outra vez</string>
+    <string name="sources_management_held_back_badge">Fallou</string>
+    <string name="sources_management_held_back_hint">Esta fonte provocou un fallo en Morphe durante a carga, polo que se omite. Actualízaa ou impórtaa de novo para tentar outra vez</string>
     <string name="sources_management_signed_by">Asinado por</string>
     <string name="sources_management_signing_key_changed_badge">Clave cambiada</string>
     <string name="sources_management_signing_key_changed_hint">A última versión non está asinadoa pola clave que esta fonte usaba anteriormente, polo que non foi instalada. Toca para revisala</string>
@@ -215,10 +215,10 @@
     <string name="sources_dialog_delete_confirm_body">Isto non se pode desfacer</string>
     <string name="sources_dialog_remote">Remoto</string>
     <string name="sources_dialog_remote_url">URL da fonte</string>
-    <string name="sources_dialog_remote_url_hint">Un repositorio ou un enlace a un bundle de parches .json. Pega varios a veciña para engadila todos</string>
+    <string name="sources_dialog_remote_url_hint">Un repositorio ou un enlace a un paquete de parches .json. Pega varios á vez para engadilos todos</string>
     <string name="sources_dialog_paste_no_links">Non se atoparon enlaces no portapapéis</string>
     <string name="sources_dialog_local">Local</string>
-    <string name="sources_dialog_local_files">Seleccionar os arquivos fonte do parche</string>
+    <string name="sources_dialog_local_files">Seleccionar os ficheiros de orixe do parche</string>
     <string name="sources_dialog_local_invalid_extension">O arquivo debe ter a extensión .mpp</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Actualizacións de %s</string>
@@ -239,8 +239,8 @@
     <string name="sources_signing_key_changed_named">\'%s\' non se actualizou porque a súa última versión non está asinada coa clave que utilizaba anteriormente</string>
     <string name="sources_signing_key_changed_local">O ficheiro non está asinado coa clave que esta fonte utilizaba anteriormente. Para confiar nel, elimine a fonte e engada o ficheiro de novo</string>
     <string name="sources_signing_key_trust_title">Confiar na nova clave?</string>
-    <string name="sources_signing_key_trust_message">A última versión está asinada cunha clave diferente. Ou ben o desenvolvedor substituíu a súa clave, ou ben alguén máis publicou esta versión. Confíe nela nurga o desenvolvedor anunciou unha nova clave</string>
-    <string name="sources_signing_key_trust_message_unsigned">A última versión non está asinada. Ou ben o desenvolvedor deixou de asinar as versións, ou ben alguén máis publicou esta versión. Confíe nela nurga o desenvolvedor o anunciou</string>
+    <string name="sources_signing_key_trust_message">A última versión está asinada cunha clave diferente. Ou ben o desenvolvedor substituíu a súa clave, ou ben alguén máis publicou esta versión. Confíe nela só se o desenvolvedor anunciou unha nova clave</string>
+    <string name="sources_signing_key_trust_message_unsigned">A última versión non está asinada. Ou ben o desenvolvedor deixou de asinar as versións, ou ben alguén máis publicou esta versión. Confíe nela só se o desenvolvedor o anunciou</string>
     <string name="sources_signing_key_trusted">Clave de confianza</string>
     <string name="sources_signing_key_new">Nova clave</string>
     <string name="sources_patch_expert_badge">Experto</string>
@@ -298,7 +298,7 @@
     <string name="home_download_instructions_step2_github_note">Se hai varios arquivos APK, escolle o que leva o nome de %s ou o universal</string>
     <string name="home_download_instructions_download_button_toast">Prema ao botón de descarga no sitio web, e non aquí 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Xenial! Agora preme continuar e vai ao sitio web 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">A práctica fai ao mestre e xa estás chegando 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">A práctica fai o mestre e xa o estás conseguindo 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Aínda non está aquí… aínda non está aquí… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Vale, respecto a dedicación 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Agora es un probador oficial de botóns de Morphe 🏅</string>
@@ -371,7 +371,7 @@ Elixe outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versión ten soporte experimental e pode ser inestable ou incompleta</string>
     <string name="morphe_experimental_app_version_dialog_title">Queres experimentar? 🧪</string>
-    <string name="morphe_experimental_app_version_dialog_message">"Esta versión de &lt;b&gt;%s&lt;/b&gt; ten soporte experimental awal.
+    <string name="morphe_experimental_app_version_dialog_message">"Esta versión de &lt;b&gt;%s&lt;/b&gt; ten soporte experimental inicial.
 
 🔧 Espera comportamentos estraños da aplicación ou erros non identificados mentres se refinan os parches para esta versión da aplicación"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Versión non compatible</string>
@@ -381,7 +381,7 @@ Elixe outro APK</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versións compatibles:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Non compatible</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">Construción %s</string>
+    <string name="home_dialog_unsupported_version_build">Compilación %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Esta é unha compilación diferente da mesma versión. Os parches requiren unha compilación específica</string>
     <string name="home_dialog_wrong_package_title">Paquete incorrecto seleccionado</string>
     <string name="home_dialog_wrong_package_description">O arquivo APK seleccionado non é para a aplicación que pretende parchear</string>
@@ -441,11 +441,11 @@ Elixe outro APK</string>
     <string name="adaptive_icon_guide_png_title">Use un PNG cun fondo transparente</string>
     <string name="adaptive_icon_guide_png_body">Un logo cun fondo transparente é o que mellor funciona, escollendo a cor do fondo abaixo. Unha imaxe sen transparencia enche todo o icono en seu lugar, e os iconos tematizados e de notificación manteñen entón o logo de Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Zonas seguras</string>
-    <string name="adaptive_icon_guide_safe_zones_body">O contorno mostra a forma do icono do seu lanzador, e todo o que está fóra cortaise. Outros lanzadores usan outras formas, polo que manteña os detalles importantes dentro do círculo punteado, que todas as formas amosan.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">O contorno mostra a forma da icona do seu lanzador, e todo o que está fóra córtase. Outros lanzadores usan outras formas, polo que manteña os detalles importantes dentro do círculo punteado, que todas as formas amosan.</string>
     <string name="adaptive_icon_guide_notification_title">Icona de notificación</string>
-    <string name="adaptive_icon_guide_notification_body">Corta da parte visible da imaxe e dalle o tamaño dos demais icons da barra de estado, independentemente do marxe que teña o ficheiro. Axústao co deslizador baixo a vista previa. Android amósao nunha única cor.</string>
-    <string name="adaptive_icon_guide_monochrome_title">Icon con tema</string>
-    <string name="adaptive_icon_guide_monochrome_body">Corta da imaxe coa mesma posición e tamaño que o icon do lanzador. En Android 13 e versións posteriores, os lanzadores con icons con tema activados dálle cor a partir do fondo de pantalla.</string>
+    <string name="adaptive_icon_guide_notification_body">Corta da parte visible da imaxe e dalle o tamaño das demais iconas da barra de estado, independentemente do marxe que teña o ficheiro. Axústao co deslizador baixo a vista previa. Android amósao nunha única cor.</string>
+    <string name="adaptive_icon_guide_monochrome_title">Icona con tema</string>
+    <string name="adaptive_icon_guide_monochrome_body">Corta da imaxe coa mesma posición e tamaño que a icona do lanzador. En Android 13 e versións posteriores, os lanzadores con iconas con tema activados dálle cor a partir do fondo de pantalla.</string>
     <string name="notification_icon_preview">Notificación</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Crear cabeceiro personalizado</string>
@@ -476,13 +476,16 @@ Elixe outro APK</string>
     <string name="batch_patch_source_installed">App instalada</string>
     <string name="batch_patch_source_file">Fichero anexo</string>
     <string name="batch_patch_source_unavailable">Non se puido preparar o APK</string>
-    <string name="batch_patch_force_version">Aplicar mellora de todas maneiras</string>
-    <string name="batch_patch_force_version_done">Enguillado a pesar de todo, a aplicación pode fallar</string>
-    <string name="batch_patch_accept_signature_done">Enguillado a pesar de todo, APK non verificada</string>
+    <string name="batch_patch_force_version">Parchear de todos modos</string>
+    <string name="batch_patch_force_version_done">Engadido á cola igualmente, a aplicación pode fallar</string>
+    <string name="batch_patch_accept_signature_done">Engadido á cola igualmente, APK non verificado</string>
     <string name="batch_patch_apk_selected">APK seleccionada</string>
-    <string name="batch_patch_edit_patches">Escoller melloras</string>
+    <string name="batch_patch_auto_download_stopped">Deténguense as descargas automáticas de APK</string>
+    <string name="batch_patch_auto_download_stop">Detener descargas</string>
+    <string name="batch_patch_auto_download_kept">O APK descargado non puido usarse, polo que se mantén o anterior</string>
+    <string name="batch_patch_edit_patches">Escoller parches</string>
     <string name="batch_patch_state_no_apk">Sen APK</string>
-    <string name="batch_patch_state_no_patches">Sen melloras</string>
+    <string name="batch_patch_state_no_patches">Sen parches</string>
     <string name="batch_patch_state_no_selection">Ningún seleccionado</string>
     <string name="batch_patch_no_selection">Non se seleccionou ningún dos parches disponibles</string>
     <string name="batch_patch_policy_install">Instalar ao rematar</string>
@@ -539,7 +542,7 @@ Elixe outro APK</string>
     <string name="home_app_info_app_update_available">Actualización da aplicación dispoñible</string>
     <string name="home_app_info_app_update_available_description">As fontes do parche soportan unha versión máis recente desta aplicación. Aplica o parche de novo para pasar a esa versión</string>
     <string name="home_app_info_newest_supported_version">A máis recente soportada</string>
-    <string name="home_app_info_version_move">Instalado %1$s, o máis novo compatibles %2$s</string>
+    <string name="home_app_info_version_move">Instalado %1$s, o máis novo compatible %2$s</string>
     <string name="home_app_info_version_restore">Instalado %1$s, parcheado %2$s</string>
     <string name="home_app_info_app_deleted_warning">A aplicación foi desinstalada</string>
     <string name="home_app_info_app_deleted_description">Esta aplicación foi desinstalada fóra de Morphe. Volva a parchear para restaurar a súa funcionalidade</string>
@@ -582,7 +585,7 @@ Elixe outro APK</string>
     <string name="patcher_error_dialog_diagnostics">Diagnóstico</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
     <string name="patcher_card_started">Iniciando a aplicación de parches</string>
-    <string name="patcher_card_succeeded">A aplicación do parche tivo éxito</string>
+    <string name="patcher_card_succeeded">O parcheo tivo éxito</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">App</string>
     <string name="patcher_field_package">Paquete</string>
@@ -621,9 +624,9 @@ Elixe outro APK</string>
     <string name="patcher_success_title">Todo listo! 🎉</string>
     <string name="patcher_success_subtitle">A súa aplicación foi parcheada e instalada!</string>
     <string name="patcher_mounted_subtitle">A súa aplicación foi parcheada e montada!</string>
-    <string name="patcher_complete_title">Parcheado completado! ✨</string>
+    <string name="patcher_complete_title">Parcheo completado! ✨</string>
     <string name="patcher_failed_title">Ups! Algo saíu mal</string>
-    <string name="patcher_failed_dialog_title">Aplicación de parches completada</string>
+    <string name="patcher_failed_dialog_title">O parcheo fallou</string>
     <string name="patcher_error_details">Detalles do erro</string>
     <string name="patcher_change_patches">Cambiar parches</string>
     <string name="patcher_unknown_error">Ocorreu un erro descoñecido</string>
@@ -647,7 +650,7 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patcher_storage_permission_dialog_title">Non se pode acceder á ruta de almacenamento</string>
     <string name="patcher_incompatible_patcher_title">Actualización necesaria</string>
     <string name="patcher_incompatible_patcher_description">A fonte &lt;b&gt;%1$s&lt;/b&gt; require o parcheador &lt;b&gt;%2$s&lt;/b&gt; ou un máis recente. Actualiza Morphe para usalo</string>
-    <string name="patcher_storage_permission_description_api30">Un ou máis opcións de parche apuntan a rutas que Morphe non pode ler. Concede o acceso ao almacenamento e preme o botón para que a aplicación de parches comece automaticamente</string>
+    <string name="patcher_storage_permission_description_api30">Unha ou máis opcións de parche apuntan a rutas que Morphe non pode ler. Concede o acceso ao almacenamento e preme o botón para que a aplicación de parches comece automaticamente</string>
     <string name="patcher_storage_permission_description_legacy">Unha ou máis opcións de parche apuntan a rutas ás que non se pode acceder. Actualice as rutas nas opcións de parche e tente de novo</string>
     <string name="patcher_storage_permission_grant">Conceder permiso de almacenamento</string>
     <string name="patcher_storage_permission_denied_warning">Denegouse o permiso de almacenamento. Concede o permiso para usar este camiño ou move os ficheiros ao directorio privado da aplicación</string>
@@ -683,7 +686,7 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patcher_task_writing_apk">Escribindo o ficheiro APK</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Protección do parcheo en segundo plano</string>
-    <string name="battery_optimization_dialog_description">Alguns dispositivos poden detener o parcheador cando a aplicación está minimizada. Permita que Morphe se execute sen restricións de batería para garantir que o parcheo se complete de forma fiable</string>
+    <string name="battery_optimization_dialog_description">Alguns dispositivos poden deter o parcheador cando a aplicación está minimizada. Permita que Morphe se execute sen restricións de batería para garantir que o parcheo se complete de forma fiable</string>
     <string name="battery_optimization_not_now">Agora non</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Parcheado en progreso...</string>
@@ -730,20 +733,20 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="plugin_activity_dialog_body">É necesaria a interacción do usuario para continuar con este complemento</string>
     <string name="patcher_process_killed_message">O sistema detivo o patcher antes de rematar, normalmente para liberar memoria. Pecha outras aplicacións e tenta de novo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
-    <string name="patcher_process_crashed_message">O parcheador crashou antes de rematar. Se volve suceder, desactiva %1$s e informa do problema co rexistro</string>
+    <string name="patcher_process_crashed_message">O parcheador fallou antes de rematar. Se volve suceder, desactiva %1$s e informa do problema co rexistro</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">O patcher quedou sen memoria cun heap de %1$s MB. Esta aplicación é demasiado grande para os patches seleccionados. Tenta facer o patch con menos orixes de patches, ou selecciona menos patches</string>
     <string name="install_app_success">Instalado con éxito</string>
     <string name="install_app_fail">Erro ao instalar a aplicación: %s</string>
     <string name="install_ignore_signature">Instalar de todos modos</string>
-    <string name="install_ignore_signature_description">Mantén os datos da aplicación, pero só funciona se un módulo root desactiva a verificación daasinatura de Android</string>
+    <string name="install_ignore_signature_description">Mantén os datos da aplicación, pero só funciona se un módulo root desactiva a verificación da asinatura de Android</string>
     <string name="uninstall_app_fail">Erro ao desinstalar a aplicación: %s</string>
     <string name="uninstall_app_unverified">Mantido no seu lugar: Morphe non puido verificar que a aplicación instalada é a versión que parcheou</string>
     <string name="launch_app_unverified">Morphe non puido verificar que a aplicación instalada é a versión que parcheou</string>
     <string name="uninstall_timeout">A desinstalación expirou</string>
     <string name="save_apk_success">APK gardado</string>
     <string name="saved_app_export_failed">Erro ao exportar a aplicación parcheada</string>
-    <string name="saved_app_removed_toast">Elimináusea aplicación parcheada gardada</string>
+    <string name="saved_app_removed_toast">Eliminouse a aplicación parcheada gardada</string>
     <string name="saved_app_launch_unavailable">Instala a aplicación antes de abrila</string>
     <string name="package_name">Nome do paquete</string>
     <string name="failed_to_mount">Fallo ao montar: %s</string>
@@ -758,13 +761,13 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="mini_game_resume">Continuar</string>
     <string name="mini_game_restart">Comezar de novo</string>
     <string name="mini_game_change">Elixe outro xogo</string>
-    <string name="mini_game_2048_picker_subtitle">Desliza as playedas para fusionalas</string>
+    <string name="mini_game_2048_picker_subtitle">Desliza as fichas para fusionalas</string>
     <string name="mini_game_flappy_picker_subtitle">Toca para voar entre tubos</string>
     <string name="mini_game_flappy_tap_to_start">Toca para voar</string>
     <string name="mini_game_snake_picker_subtitle">Come comida, non te choques</string>
     <string name="mini_game_snake_swipe_to_start">Desliza para comezar</string>
     <string name="mini_game_dino_picker_subtitle">Toca para saltar os cactos</string>
-    <string name="mini_game_dino_tap_to_start">Toca para executar</string>
+    <string name="mini_game_dino_tap_to_start">Toca para correr</string>
     <string name="mini_game_blocks_picker_subtitle">Axusta as formas, limpa as liñas</string>
     <string name="mini_game_blocks_tap_to_start">Toca para xirar, desliza para mover, desliza cara abaixo para soltar</string>
     <string name="mini_game_bricks_picker_subtitle">Fai botar a bola, limpa a parede</string>
@@ -816,7 +819,7 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="settings_appearance_color_accents">Colores da aplicación e da fonte</string>
     <string name="settings_appearance_color_accents_description">Usa a cor de cada aplicación e fonte en lugar da cor de acento</string>
     <string name="settings_appearance_outlines">Contornos</string>
-    <string name="settings_appearance_outlines_description">Debuxa un bordo fino arredor das tarhetas, paneles e botóns</string>
+    <string name="settings_appearance_outlines_description">Debuxa un bordo fino arredor das tarxetas, paneles e botóns</string>
     <string name="settings_appearance_blur">Desenfoque</string>
     <string name="settings_appearance_blur_description">Desenfoca o que se desliza baixo os encabezados, barras e paneles</string>
     <!-- Settings - Appearance Tab - Language Selector -->
@@ -831,7 +834,7 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="settings_appearance_greeting_phrases">Frases de saudación</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra unha mensaxe de saúdo</string>
     <string name="settings_appearance_repatch_notice">Aviso de volver parchear</string>
-    <string name="settings_appearance_repatch_notice_description">Mostra un banner cando as aplicacións patchedas poden volver a ser patchedas</string>
+    <string name="settings_appearance_repatch_notice_description">Mostra un aviso cando as aplicacións parcheadas poden volver parchearse</string>
     <string name="settings_appearance_more_apps_card">Tarxeta de máis aplicacións</string>
     <string name="settings_appearance_more_apps_card_description">Mostra unha tarxeta baixo as aplicacións que leva aos parches da comunidade</string>
     <string name="settings_appearance_app_card_colors">Colores das tarxetas</string>
@@ -860,7 +863,7 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="settings_appearance_app_icon_light_6">Neblina</string>
     <string name="settings_appearance_app_icon_light_7">Area</string>
     <string name="settings_appearance_app_icon_dark_1">Azul verdoso</string>
-    <string name="settings_appearance_app_icon_dark_2">Vazio</string>
+    <string name="settings_appearance_app_icon_dark_2">Baleiro</string>
     <string name="settings_appearance_app_icon_dark_3">Ciruela</string>
     <string name="settings_appearance_app_icon_dark_4">Medianoche</string>
     <string name="settings_appearance_app_icon_dark_5">Lousa</string>
@@ -966,7 +969,7 @@ Os parches non se ven afectados: activa os parches pre-lanzamento para cada font
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">O icona coa que se parchea a aplicación, que tamén se usa onde non se pode cambiar posteriormente, como en Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">A icona personalizada da aplicación necesita unha carpeta con imaxes de iconas</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Icona personalizada</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Cartera con imaxes para usar como icona personalizada.
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Cartafol con imaxes para usar como icona personalizada.
 
 A carpeta debe conter unha ou máis das seguintes carpetas, dependendo do DPI do dispositivo:
 - mipmap-mdpi
@@ -1019,7 +1022,7 @@ As dimensións da imaxe deben ser as seguintes:
 - drawable-xxhdpi: 387x144 px
 - drawable-xxxhdpi: 512x192 px"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Hide Shorts -->
-    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ocultar o acceso directo da aplicación Shorts</string>
+    <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Ocultar o atallo da aplicación Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Elimina Shorts do menú de presión longa do lanzador</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Ocultar o widget de Shorts</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Elimina o botón de Shorts do widget do lanzador</string>
@@ -1044,18 +1047,18 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_mount_warning_install">O modo de parcheo está configurado en montaxe root. Esta aplicación gardada non se instalou mediante montaxe</string>
     <string name="mount_version_mismatch_message">A versión da aplicación orixinal (%2$s) non coincide coa versión da aplicación parcheada (%1$s). Monta a versión orixinal correspondente e tenta de novo</string>
     <string name="mount_stock_restore_failed_message">Android rexeitou o APK orixinal gardado. Instala a versión de fábrica correspondente e intenta montar de novo</string>
-    <string name="installer_status_shizuku_unsupported">A versión de Shizuku instalada non é compatibles</string>
+    <string name="installer_status_shizuku_unsupported">A versión de Shizuku instalada non é compatible</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">A instalación fallou. Tenta de novo ou cambia a un instalador diferente</string>
     <string name="installer_hint_conflict">Xa hai instalada outra aplicación co mesmo nome de paquete. Desinstalaa antes de continuar</string>
     <string name="installer_confirm_notification_title">Confirma a instalación</string>
     <string name="installer_confirm_notification_text">Toca para rematar a instalación da aplicación parcheada</string>
     <string name="installer_external_launched">Abrindo %s…</string>
-    <string name="installer_external_timeout">%s non confirmou a instalación. Comprobe a outra aplicación e tente novamente</string>
-    <string name="installer_external_success">%s informou dunha instalación exitosa</string>
+    <string name="installer_external_timeout">%s non confirmou a instalación. Comprobe a outra aplicación e tente de novo</string>
+    <string name="installer_external_success">%s informou dunha instalación con éxito</string>
     <string name="installer_unavailable_title">%s non está dispoñible</string>
     <string name="installer_unavailable_message">O teu instalador preferido (%s) non está dispoñible actualmente. Podes solucionar o problema e reintentalo, ou usar o instalador estándar no seu lugar</string>
-    <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku este en execución e que se lle concedeu permiso a esta aplicación</string>
+    <string name="installer_unavailable_shizuku_hint">Asegúrate de que Shizuku estea en execución e que se lle concedeu permiso a esta aplicación</string>
     <string name="installer_choose_another">Escoller outro instalador</string>
     <string name="installer_play_store_warning_title">Instalar como Play Store?</string>
     <string name="installer_play_store_warning_message">A aplicación parcheada rexístrase como instalada desde Google Play Store. Isto pode axudar a que servizos como Android Auto a recoñecan como unha aplicación da Play Store, pero non está garantido para todas as aplicacións ou dispositivos. O comportamento pode variar segundo a versión de Android, a ROM, a marca do dispositivo e as comprobacións específicas de cada aplicación</string>
@@ -1073,7 +1076,7 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="settings_after_patching_manual">Instalar manualmente</string>
     <string name="settings_after_patching_manual_description">Instálase co instalador predefinido unha vez que toques en Instalar</string>
     <string name="settings_nomount_only">Só NoMount</string>
-    <string name="settings_nomount_only_description">Monta aplicacións nur con NoMount e nunca recurre a un bind mount, polo que permanecen desmontadas sen el</string>
+    <string name="settings_nomount_only_description">Monta aplicacións só con NoMount e nunca recorre a un bind mount, polo que permanecen desmontadas sen el</string>
     <string name="settings_auto_install_with_shizuku_description">Instala ou monta o APK parcheado así que remate o parcheo</string>
     <string name="settings_auto_uninstall_with_shizuku">Desinstalar automaticamente en caso de conflito</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Desinstala a aplicación existente nun conflito de sinatura. Isto pode eliminar os datos da aplicación</string>
@@ -1086,7 +1089,7 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_shizuku_status_title">Estado de Shizuku</string>
     <string name="installer_shizuku_status_ready">Listo</string>
     <string name="installer_shizuku_status_issue">Require atención</string>
-    <string name="installer_shizuku_status_supported">Compatibel</string>
+    <string name="installer_shizuku_status_supported">Compatible</string>
     <string name="installer_shizuku_status_running">En execución</string>
     <string name="installer_shizuku_status_permission">Permiso</string>
     <string name="installer_shizuku_status_mode">Modo</string>
@@ -1125,10 +1128,10 @@ Detalles: %2$s"</string>
     <string name="settings_system_notifications_sound_reset">Restaurar por defecto</string>
     <string name="settings_system_notifications_ringtone_picker_title">Escolle un ton</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_signing_key">Chave deasinatura</string>
+    <string name="settings_system_signing_key">Clave de asinatura</string>
     <string name="settings_system_signing_key_description">Fai unha copia de seguridade ou restaura a clave que asina as aplicacións parcheadas</string>
     <string name="settings_system_signing_key_dialog_description">Cada aplicación que Morphe parchea está asinada con esta clave. Garda unha copia: sen ela, as aplicacións parcheadas só poden actualizarse tras desinstalálas</string>
-    <string name="settings_system_signing_key_missing">Morphe crea unha coa túa primeira parchea</string>
+    <string name="settings_system_signing_key_missing">Morphe crea unha co teu primeiro parche</string>
     <string name="settings_system_signing_key_created">Creado o %s</string>
     <string name="settings_system_signing_key_fingerprint">Impressión dixital SHA-256</string>
     <string name="settings_system_backup_appearance_description">Tema, cores e idioma</string>
@@ -1138,7 +1141,7 @@ Detalles: %2$s"</string>
     <string name="settings_system_backup_updates_description">Pre-lanzamentos e comprobacións de actualizacións</string>
     <string name="settings_system_backup_sources_description">Fontes personalizadas e token de GitHub</string>
     <string name="settings_system_backup_patch_selections_description">Parches elixidos para cada aplicación</string>
-    <string name="settings_system_backup_signing_key_note">A chave deasinatura está copiada por separado</string>
+    <string name="settings_system_backup_signing_key_note">A clave de asinatura copíase por separado</string>
     <string name="settings_system_import_keystore_dialog_title">Introduza as credenciais do almacén de claves</string>
     <string name="settings_system_import_keystore_dialog_description">Precisará introducir as credenciais do almacén de claves para importalo</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Nome de usuario (Alias)</string>
@@ -1161,7 +1164,7 @@ Detalles: %2$s"</string>
     <string name="import_mode_replace_title">Substituir as existentes</string>
     <string name="import_mode_replace_description">Coincidir exactamente coa copia de seguridade. Os elementos que falten na copia de seguridade serán eliminados</string>
     <string name="import_mode_merge_title">Fusionar co existente</string>
-    <string name="import_mode_merge_description">Engadir os elementos que falan da copia de seguridade. Os elementos existentes mantéñense sen cambios</string>
+    <string name="import_mode_merge_description">Engadir os elementos que faltan na copia de seguridade. Os elementos existentes mantéñense sen cambios</string>
     <string name="settings_system_export_manager_settings_fail">Fallo ao exportar a configuración de Morphe: %s</string>
     <string name="settings_system_export_manager_settings_success">Configuración de Morphe exportada</string>
     <string name="settings_system_export_debug_logs">Exportar rexistros de depuración</string>
@@ -1185,20 +1188,20 @@ Detalles: %2$s"</string>
     <string name="settings_system_storage_free">%1$s libre</string>
     <string name="settings_system_storage_saved_apks">APKs gardados</string>
     <string name="settings_system_storage_caches">Caches</string>
-    <string name="settings_system_storage_keystore_title">Almacén de claves deasinatura</string>
+    <string name="settings_system_storage_keystore_title">Almacén de claves de asinatura</string>
     <string name="settings_system_storage_app_data_title">Datos da aplicación</string>
     <string name="settings_system_storage_patch_bundles_title">Paquetes de parches</string>
-    <string name="settings_system_storage_http_cache_title">Cache de rede</string>
-    <string name="settings_system_storage_http_cache_description">Respostas HTTP almacenadas en cache para acelerar as actualizacións</string>
-    <string name="settings_system_storage_installer_cache_title">Cache do instalador externo</string>
+    <string name="settings_system_storage_http_cache_title">Caché de rede</string>
+    <string name="settings_system_storage_http_cache_description">Respostas HTTP almacenadas en caché para acelerar as actualizacións</string>
+    <string name="settings_system_storage_installer_cache_title">Caché do instalador externo</string>
     <string name="settings_system_storage_installer_cache_description">Copias de APK pasadas a instaladores de terceiros</string>
     <string name="settings_system_storage_patcher_workspace_title">Espazo de traballo do Patcher</string>
     <string name="settings_system_storage_patcher_workspace_description">Ficheros de execución do Patcher e datos temporais orfáns</string>
     <string name="settings_system_storage_temporary_title">Ficheiros temporais</string>
-    <string name="settings_system_storage_temporary_description">Arquivos de traballo creados durante o parcheo</string>
-    <string name="settings_system_storage_clear_all">Limpar todas as caches</string>
-    <string name="settings_system_storage_clear_all_description">Libera todo o espazo de cache recuperable de unha vez</string>
-    <string name="settings_system_storage_clear_all_confirm">Isto limpa as respostas de rede almacenadas en cache, as copias do instalador en espera e os arquivos temporais. Mantéñense os APKs orixinais e parcheados</string>
+    <string name="settings_system_storage_temporary_description">Ficheiros de traballo creados durante o parcheo</string>
+    <string name="settings_system_storage_clear_all">Limpar todas as cachés</string>
+    <string name="settings_system_storage_clear_all_description">Libera todo o espazo de caché recuperable de unha vez</string>
+    <string name="settings_system_storage_clear_all_confirm">Isto limpa as respostas de rede almacenadas en caché, as copias do instalador en espera e os ficheiros temporais. Mantéñense os APKs orixinais e parcheados</string>
     <string name="settings_system_storage_cleared">Liberado %s</string>
     <string name="settings_system_storage_patch_running_warning">Hai un parche en execución que utiliza estes ficheiros. Borralos agora fará que falle</string>
     <string name="settings_system_storage_clear_anyway">Borrar de todas formas</string>
@@ -1263,16 +1266,17 @@ Detalles: %2$s"</string>
     <string name="settings_system_apk_download_helper_trusted_count">Fiables: %1$d de %2$d</string>
     <string name="settings_system_apk_download_helper_dialog_description">As aplicacións axudantes poden descargar os APK orixinais por ti. Só as que confías aquí se ofrecen nas instrucións de descarga</string>
     <string name="settings_system_apk_download_helper_trust_title">Confiar neste axudante?</string>
-    <string name="settings_system_apk_download_helper_warning">O APK vén da aplicación axudante, así que confía nuras aplicacións que coñecas. Morphe segue comprobando o paquete, a versión e a sinatura de cada ficheiro antes do parcheo</string>
+    <string name="settings_system_apk_download_helper_warning">O APK vén da aplicación axudante, así que confía só nas aplicacións que coñeces. Morphe segue comprobando o paquete, a versión e a sinatura de cada ficheiro antes do parcheo</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalado por %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalador descoñecido</string>
     <string name="settings_system_apk_download_helper_open_directly">Abrir o axudante inmediatamente</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Salta as instrucións de descarga e abre o axudante de confianza</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Descargar APKs automaticamente en lote</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Non hai ficheiros aquí</string>
     <string name="file_picker_read_error">Non se pode ler este directorio</string>
     <string name="file_picker_internal_storage">Almacenamento interno</string>
-    <string name="file_picker_sd_card">Tarta SD</string>
+    <string name="file_picker_sd_card">Tarxeta SD</string>
     <string name="file_picker_root">Raíz (/)</string>
     <string name="file_picker_storage_access_unavailable">Este dispositivo non ten pantalla para permitir o acceso a todos os ficheiros. Permitao a través de ADB con: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_storages">Almacenamentos</string>
@@ -1478,7 +1482,7 @@ Detalles: %2$s"</string>
     <string name="changelog_show_all">Amosar todo (%s)</string>
     <string name="changelog_show_less">Amosar menos</string>
     <string name="no_network_toast">Non hai ningunha conexión a Internet dispoñible</string>
-    <string name="update_available">Hai unha actualización dispoñíble</string>
+    <string name="update_available">Hai unha actualización dispoñible</string>
     <string name="ready_to_install_update">Listo para instalar a actualización</string>
     <string name="update_completed">Actualización instalada</string>
     <string name="install_update_manager_failed">Erro ao instalar a actualización</string>
@@ -1520,7 +1524,7 @@ Queres continuar?"</string>
     <string name="tour_prompt_title">Tour rápido polas funcións</string>
     <string name="tour_prompt_desc">Queres un tour rápido polas funcións principais de Morphe?</string>
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="tour_prompt_confirm">Amóstramo</string>
+    <string name="tour_prompt_confirm">Amósame</string>
     <string name="onboarding_restart_title">Tour polas funcións</string>
     <string name="onboarding_restart_desc">Unha visita guiada polas funcións principais</string>
 </resources>

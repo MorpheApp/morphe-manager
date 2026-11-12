@@ -478,6 +478,9 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="batch_patch_force_version_done">Mis en file d\'attente quand même, l\'application peut ne plus fonctionner</string>
     <string name="batch_patch_accept_signature_done">Mis en file d\'attente quand même, APK non vérifié</string>
     <string name="batch_patch_apk_selected">APK sélectionnés</string>
+    <string name="batch_patch_auto_download_stopped">Les téléchargements automatiques d\'APK ont été arrêtés</string>
+    <string name="batch_patch_auto_download_stop">Arrêter les téléchargements</string>
+    <string name="batch_patch_auto_download_kept">L\'APK téléchargée n\'a pas pu être utilisée, la précédente est donc conservée</string>
     <string name="batch_patch_edit_patches">Choisissez les patchs</string>
     <string name="batch_patch_state_no_apk">Aucun APK</string>
     <string name="batch_patch_state_no_patches">Aucun patch</string>
@@ -559,7 +562,7 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="app_links_fix">Corriger les liens</string>
     <string name="configure">Configurer</string>
     <string name="patcher_rename_title">Cela installera un clone</string>
-    <string name="patcher_rename_description">Les patchs ont compilé cette application sous leur propre nom de paquet, donc l\'installer ajoute un clone à côté de <b>%s</b> au lieu de le mettre à jour</string>
+    <string name="patcher_rename_description">Les patchs ont compilé cette application sous leur propre nom de paquet, son installation ajoute donc un clone à côté de &lt;b&gt;%s&lt;/b&gt; au lieu de le mettre à jour</string>
     <string name="patcher_rename_result_package">Sera installé en tant que</string>
     <string name="patcher_rename_replaces">Une application est déjà installée sous ce nom et sera remplacée</string>
     <string name="home_app_info_apk_size">Taille de l\'APK</string>
@@ -1271,6 +1274,7 @@ Détails : %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installateur inconnu</string>
     <string name="settings_system_apk_download_helper_open_directly">Ouvrir l\'assistant immédiatement</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Passe les instructions de téléchargement et ouvre l\'assistant de confiance</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Télécharger automatiquement les APK par lot</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Aucun fichier ici</string>
     <string name="file_picker_read_error">Impossible de lire ce répertoire</string>
@@ -1372,7 +1376,7 @@ Détails : %2$s"</string>
     <string name="not_installed">Non installé</string>
     <string name="view">Voir</string>
     <string name="search">Rechercher</string>
-    <string name="search_no_results">Pas de résultat trouvé</string>
+    <string name="search_no_results">Aucun résultat trouvé</string>
     <string name="sort">Trier</string>
     <string name="any_version">N\'importe laquelle</string>
     <string name="enabled">Activée</string>

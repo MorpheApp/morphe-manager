@@ -45,7 +45,7 @@
     <string name="home_blocked_source_subtitle">點擊以檢視並移除</string>
     <string name="home_metadata_errors_title">部份修補程式來源無法使用</string>
     <string name="home_metadata_errors_subtitle">點擊以檢視來源</string>
-    <string name="home_outdated_manager_title">Morphe 要更新</string>
+    <string name="home_outdated_manager_title">Morphe 已過時</string>
     <string name="home_outdated_manager_subtitle">有些修補來源需要較新的版本</string>
     <string name="home_held_back_title">修補檔來源導致 Morphe 當機</string>
     <string name="home_held_back_subtitle">該項目已略過，以便應用程式能啟動。點按以檢視</string>
@@ -230,7 +230,7 @@
     <string name="sources_dialog_choose_apps_description">在來源載入後，選擇要保留其中的哪些應用程式。</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">第三方修補程式來源</string>
-    <string name="sources_dialog_community_notice_message">"社群補丁來源由其作者自行製作與維護。Morphe 不審核或驗證第三方補丁，且對其內容或在您的裝置上的操作不承擔任何責任"</string>
+    <string name="sources_dialog_community_notice_message">"社群修補檔來源由其作者自行製作與維護。Morphe 不審核或驗證第三方修補檔，且對其內容或在您的裝置上的操作不承擔任何責任"</string>
     <string name="sources_update_success">更新成功</string>
     <string name="sources_update_unavailable">沒有可用的更新</string>
     <string name="sources_download_fail">無法下載來源: %s</string>
@@ -318,7 +318,7 @@
     <string name="home_recommended_version">推薦版本</string>
     <string name="home_selected_version">所選版本</string>
     <string name="home_select_apk_title">選取 APK</string>
-    <string name="home_select_apk_description">"通用補丁適用於任何應用程式
+    <string name="home_select_apk_description">"通用修補檔適用於任何應用程式
 
 選擇 APK 的來源"</string>
     <string name="home_use_installed_app">使用已安裝的應用程式</string>
@@ -340,14 +340,14 @@
     <string name="expert_mode_enable_all_universal_pending">再點按一次以套用通用修補程式</string>
     <string name="expert_mode_universal_all_warning_title">啟用所有通用修補程式？</string>
     <string name="expert_mode_universal_all_warning_message">通用修補程式未經過共同測試。同時啟用所有修補程式可能導致衝突、修補失敗或當機</string>
-    <string name="expert_mode_recommended">已套用推薦的修補程式</string>
+    <string name="expert_mode_recommended">推薦的修補程式</string>
     <string name="expert_mode_reset_to_default_done">已套用推薦的修補程式</string>
     <string name="expert_mode_selected_count">已選擇 %1$s / %2$s</string>
-    <string name="expert_mode_saved_selection">項儲存的選配</string>
+    <string name="expert_mode_saved_selection">已儲存的選取項目</string>
     <string name="expert_mode_restore_saved_done">已儲存的選取已還原</string>
     <string name="expert_mode_copy_from_bundle_no_patches">此套件中沒有相符的修補程式</string>
     <string name="expert_mode_no_results">找不到修補程式</string>
-    <string name="expert_mode_selected_only">僅限已選取的修補補丁</string>
+    <string name="expert_mode_selected_only">僅限已選取的修補檔</string>
     <string name="expert_mode_selected_only_on">僅顯示已選取的修補程式</string>
     <string name="expert_mode_selected_only_off">顯示所有修補程式</string>
     <string name="expert_mode_universal_patches">通用型修補程式</string>
@@ -356,7 +356,7 @@
     <string name="expert_mode_patch_required_by_installer">選定安裝目標需要</string>
     <string name="expert_mode_patch_unavailable_for_installer">未針對選定的安裝目標提供</string>
     <string name="expert_mode_multiple_sources_warning_title">選取了多個修補來源</string>
-    <string name="expert_mode_multiple_sources_warning_conflict">來自不同來源的補丁並非設計為共同運作，可能會產生衝突或導致應用程式損壞</string>
+    <string name="expert_mode_multiple_sources_warning_conflict">來自不同來源的修補檔並非設計為共同運作，可能會產生衝突或導致應用程式損壞</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">未驗證的 APK</string>
     <string name="home_invalid_signature_message">您為 &lt;b&gt;%s&lt;/b&gt; 選取的 APK 與預期的簽署憑證不符。APK 可能已遭修改，或來自不受信任的來源</string>
@@ -460,7 +460,7 @@
     <string name="header_creator_guide_positioning_title">定位與縮放</string>
     <string name="header_creator_guide_positioning_body">在編輯器中拖曳和雙指縮放影像，或使用滑桿調整大小。虛線框標示原始標誌所在位置，當影像與其對齊時會顯示輔助線。</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">已選取  個修補程式</string>
+    <string name="batch_patch_action">修補已選取項目</string>
     <string name="batch_patch_title">批次修補</string>
     <string name="batch_patch_planning">正在準備佇列…</string>
     <string name="batch_patch_preparing_next">正在準備下一個應用程式…</string>
@@ -479,6 +479,9 @@
     <string name="batch_patch_force_version_done">已照樣排入佇列，應用程式可能無法正常運作</string>
     <string name="batch_patch_accept_signature_done">已照樣排入佇列，APK 未經驗證</string>
     <string name="batch_patch_apk_selected">已選取 APK</string>
+    <string name="batch_patch_auto_download_stopped">自動下載 APK 已停止</string>
+    <string name="batch_patch_auto_download_stop">停止下載</string>
+    <string name="batch_patch_auto_download_kept">下載的 APK 無法使用，因此保留前一個版本</string>
     <string name="batch_patch_edit_patches">選擇修補程式</string>
     <string name="batch_patch_state_no_apk">沒有 APK</string>
     <string name="batch_patch_state_no_patches">沒有修補程式</string>
@@ -495,7 +498,7 @@
     <string name="batch_patch_stop_title">停止批次修補？</string>
     <string name="batch_patch_stop_description">目前正在修補的應用程式以及所有排隊中的作業都將被取消</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="batch_patch_install_all">全選</string>
+    <string name="batch_patch_install_all">全部安裝</string>
     <string name="batch_patch_install_failed">安裝失敗</string>
     <string name="batch_patch_in_progress">批次修補正在執行</string>
     <string name="batch_patch_nothing_outdated">每個已修補的應用程式都是最新的</string>
@@ -562,7 +565,7 @@
     <string name="patcher_rename_result_package">將安裝為</string>
     <string name="patcher_rename_replaces">已安裝同名應用程式，將被取代</string>
     <string name="home_app_info_apk_size">APK 大小</string>
-    <string name="home_app_info_cpu_arch">CPU 架构</string>
+    <string name="home_app_info_cpu_arch">CPU 架構</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root 模式需要在修補之前將原始 APK 安裝在您的裝置上</string>
     <string name="root_pre_patch_installer_title">選擇修補模式</string>
@@ -687,7 +690,7 @@
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">修補進行中…</string>
     <string name="patcher_notification_text">輕觸以返回修補程式畫面</string>
-    <string name="patcher_stop_title">停止補丁？</string>
+    <string name="patcher_stop_title">停止修補？</string>
     <string name="patcher_stop_discards">目前的進度將被捨棄且不會安裝任何內容</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
     <string name="patcher_keep_patching">繼續修補</string>
@@ -731,7 +734,7 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請關閉 %1$s 並附上日誌回報問題</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <string name="patcher_out_of_memory_message">偵錯工具記憶體不足，堆疊大小為 %1$s MB。此應用程式相對於選取的修補程式而言過於龐大。請嘗試使用較少的修補來源進行修補，或減少選取的修補程式數量</string>
+    <string name="patcher_out_of_memory_message">修補程式記憶體不足，堆積大小為 %1$s MB。此應用程式相對於選取的修補程式而言過於龐大。請嘗試使用較少的修補來源進行修補，或減少選取的修補程式數量</string>
     <string name="install_app_success">安裝成功</string>
     <string name="install_app_fail">無法安裝應用程式：%s</string>
     <string name="install_ignore_signature">仍要安裝</string>
@@ -931,8 +934,8 @@
     <string name="settings_advanced_strip_unused_libs">針對裝置架構最佳化</string>
     <string name="settings_advanced_strip_unused_libs_description">移除未使用的原生程式庫及 APK 分割區</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat_summary">在 GitHub 上建立權杖</string>
-    <string name="settings_advanced_github_pat_description">適用於拉取請求來源、私有資源庫以及較高的 GitHub 速率限制</string>
+    <string name="settings_advanced_github_pat_summary">解鎖拉取請求來源與私有存放庫</string>
+    <string name="settings_advanced_github_pat_description">適用於拉取請求來源、私有存放庫以及較高的 GitHub 速率限制</string>
     <string name="settings_advanced_github_pat_configured">已設定 Token</string>
     <string name="settings_advanced_github_pat_create">在 GitHub 上建立權杖</string>
     <!-- "%s" is the GitHub scope name, keep it as is -->
@@ -1173,7 +1176,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apks_delete_selected_confirm">這將永久刪除選取的 APK 檔案</string>
     <string name="settings_system_apks_deleted_all">APK 刪除成功</string>
     <string name="settings_system_apks_delete_failed">部份APK檔案無法刪除</string>
-    <string name="settings_system_apks_export_zip_success">已匯出的 APK</string>
+    <string name="settings_system_apks_export_zip_success">已匯出選取的 APK</string>
     <string name="settings_system_apks_export_zip_failed">匯出選取的 APK 失敗</string>
     <!-- Settings - System Tab - Storage Management screen -->
     <string name="settings_system_storage_management_title">儲存空間管理</string>
@@ -1197,7 +1200,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_clear_all_description">一次釋放所有可回收的快取空間</string>
     <string name="settings_system_storage_clear_all_confirm">這會清除已快取的網路回應、已排程的安裝程式副本和臨時檔案。原始 APK 和修補後的 APK 會保留</string>
     <string name="settings_system_storage_cleared">釋放 %s</string>
-    <string name="settings_system_storage_patch_running_warning">正在執行修復程式並使用這些檔案。現在清除它們會導致失敗</string>
+    <string name="settings_system_storage_patch_running_warning">正在執行修補程式並使用這些檔案。現在清除會導致其失敗</string>
     <string name="settings_system_storage_clear_anyway">仍要清除</string>
     <string name="settings_system_storage_nothing_to_clear">無須清除</string>
     <string name="settings_system_storage_open_app_info_title">開啟 Android 應用程式儲存空間</string>
@@ -1247,9 +1250,9 @@ morphe_header_custom_dark.png
     <string name="selection_set_applied">已切換至 %s</string>
     <string name="selection_set_deleted">%s 已刪除</string>
     <string name="selection_set_renamed">已重新命名為 %s</string>
-    <string name="selection_set_rename_title">重新命名組合</string>
-    <string name="selection_set_delete_title">刪除組合？</string>
-    <string name="selection_set_delete_message">這將永久刪除組合 %s</string>
+    <string name="selection_set_rename_title">重新命名集組</string>
+    <string name="selection_set_delete_title">刪除集組？</string>
+    <string name="selection_set_delete_message">這將永久刪除集組 %s</string>
     <string name="copy_selection_empty">沒有其他已儲存的選取項目可供複製</string>
     <string name="copy_selection_available_format">%1$s of %2$s 可用</string>
     <!-- Settings - System Tab - Custom file picker -->
@@ -1265,6 +1268,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">安裝者未知</string>
     <string name="settings_system_apk_download_helper_open_directly">立即開啟助手</string>
     <string name="settings_system_apk_download_helper_open_directly_description">跳過下載說明並開啟信任的助手</string>
+    <string name="settings_system_apk_download_helper_auto_batch">自動批次下載 APK</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">這裡沒有檔案</string>
     <string name="file_picker_read_error">無法讀取此目錄</string>
@@ -1316,7 +1320,7 @@ morphe_header_custom_dark.png
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="settings_section_patcher">修補器</string>
     <string name="settings_section_updates">更新</string>
-    <string name="settings_section_patching">正在修補</string>
+    <string name="settings_section_patching">修補</string>
     <string name="settings_section_appearance_summary">Morphe 的外觀</string>
     <string name="settings_section_patch_options_summary">簡易模式方式修補的應用程式</string>
     <string name="settings_section_general">一般</string>
@@ -1410,7 +1414,7 @@ morphe_header_custom_dark.png
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">修補</string>
     <string name="patching">修補中</string>
-    <string name="patched">修補時間</string>
+    <string name="patched">已修補</string>
     <string name="open">開啟</string>
     <string name="mount">掛載</string>
     <string name="mounted">已掛載</string>
@@ -1498,7 +1502,7 @@ morphe_header_custom_dark.png
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%2$s 中的 %1$s</string>
     <string name="onboarding_sources_desc">管理您的修補檔案來源。每個來源都提供可用於您應用程式的修補檔案</string>
-    <string name="onboarding_other_apps_desc">為列表以外的應用程式安裝修補程式，可從 APK 檔案或已安裝於裝置上的應用程式進行</string>
+    <string name="onboarding_other_apps_desc">修補列表中沒有的應用程式，可從 APK 檔案或裝置上已安裝的應用程式進行</string>
     <string name="onboarding_add_source_desc">從連結或修補程式封裝檔新增修補來源</string>
     <string name="onboarding_signing_key_desc">備份簽署您修補後應用程式的金鑰。若無此金鑰，則必須先解除安裝才能更新這些應用程式</string>
     <string name="onboarding_swipe_title">手勢</string>

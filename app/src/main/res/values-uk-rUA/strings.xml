@@ -297,7 +297,7 @@
     <string name="home_download_instructions_step2_github_latest">У розділі &lt;b&gt;Assets&lt;/b&gt; найновішого релізу натисніть на файл, що закінчується на &lt;b&gt;.apk&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_github_note">Якщо є кілька файлів APK, виберіть файл із назвою %s або універсальний</string>
     <string name="home_download_instructions_download_button_toast">Натисніть завантажити на сайті, а не тут 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Чудово! Тепер натисніть продовжити нижче та перейдіть на сайт 👆</string>
+    <string name="home_download_instructions_download_button_toast_2">Чудово! Тепер натисніть \"Продовжити\" та перейдіть на сайт 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Практика веде до досконалості, ви на правильному шляху 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Все ще не тут… все ще не тут… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Добре, поважаю наполегливість 🫡</string>
@@ -758,7 +758,7 @@
     <string name="mini_game_2048_picker_subtitle">Зсувайте плитки, щоб об’єднати їх</string>
     <string name="mini_game_flappy_picker_subtitle">Натискайте, щоб пролетіти крізь труби</string>
     <string name="mini_game_flappy_tap_to_start">Натисніть, щоб полетіти</string>
-    <string name="mini_game_snake_picker_subtitle">Їжте їжу, не бийтеся об себе</string>
+    <string name="mini_game_snake_picker_subtitle">Їжте їжу і не врізайтеся в себе</string>
     <string name="mini_game_snake_swipe_to_start">Проведіть, щоб почати</string>
     <string name="mini_game_dino_picker_subtitle">Натискайте, щоб перестрибнути кактуси</string>
     <string name="mini_game_dino_tap_to_start">Натисніть, щоб бігти</string>
@@ -1052,7 +1052,7 @@ morphe_header_custom_dark.png
     <string name="installer_external_success">%s повідомив про успішне встановлення</string>
     <string name="installer_unavailable_title">%s недоступний</string>
     <string name="installer_unavailable_message">Ваш бажаний інсталятор (%s) зараз недоступний. Ви можете усунути проблему та повторити спробу або натомість скористатися стандартним інсталятором</string>
-    <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Морфе надано дозвіл</string>
+    <string name="installer_unavailable_shizuku_hint">Переконайтеся, що Shizuku запущено, і менеджеру Morphe надано дозвіл</string>
     <string name="installer_choose_another">Виберіть інший інсталятор</string>
     <string name="installer_play_store_warning_title">Встановити як Play Store?</string>
     <string name="installer_play_store_warning_message">Пропатчений застосунок буде записано як встановлений із Google Play Store. Це може допомогти сервісам на кшталт Android Auto розпізнати його як застосунок із Play Store, але це не гарантовано для кожного застосунку чи пристрою. Поведінка може залежати від версії Android, прошивки, бренду пристрою та перевірок самого застосунку</string>

@@ -64,7 +64,7 @@
     <string name="list_options_title">Ordenar y filtrar</string>
     <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
     <string name="home_app_filter_clones">Clones</string>
-    <string name="home_app_grouping_none">Nada</string>
+    <string name="home_app_grouping_none">Ninguno</string>
     <string name="home_app_sort_manual_hint">Mantén pulsada una aplicación, luego pulsa el botón de reordenar</string>
     <string name="home_app_sort_recommended">Orden recomendado</string>
     <string name="home_app_sort_updates_first">Actualizaciones de parches primero</string>
@@ -175,7 +175,7 @@
     <string name="sources_apps_new_apps">Traer nuevas aplicaciones</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_apps_new_apps_description">Las aplicaciones que añade más tarde aparecen en la pantalla de inicio</string>
-    <string name="sources_management_prerelease_toggle">Parches pre-lanzamiento</string>
+    <string name="sources_management_prerelease_toggle">Parches de prelanzamiento</string>
     <string name="sources_management_prerelease_toggle_description">Recibe acceso anticipado a nuevas versiones experimentales de parches</string>
     <string name="sources_prerelease_warning_title">¿Activar parches pre-lanzamiento?</string>
     <string name="sources_prerelease_warning_message">Las compilaciones pre-lanzamiento aún están en desarrollo. Los parches pueden fallar o romper la aplicación, y las funciones pueden cambiar sin previo aviso</string>
@@ -183,8 +183,8 @@
     <string name="sources_management_experimental_versions_toggle">Versiones experimentales de la aplicación</string>
     <string name="sources_management_experimental_versions_toggle_description">Muestra y parchea versiones experimentales de la aplicación</string>
     <!-- Actions of the panel for several selected sources at once -->
-    <string name="sources_management_prerelease_enable">Activar parches pre-lanzamiento</string>
-    <string name="sources_management_prerelease_disable">Desactivar parches pre-lanzamiento</string>
+    <string name="sources_management_prerelease_enable">Activar parches de prelanzamiento</string>
+    <string name="sources_management_prerelease_disable">Desactivar parches de prelanzamiento</string>
     <string name="sources_management_experimental_versions_enable">Activar versiones experimentales de la aplicación</string>
     <string name="sources_management_experimental_versions_disable">Desactivar versiones experimentales de la aplicación</string>
     <string name="sources_management_already_exists">Esta fuente ya ha sido añadida</string>
@@ -286,7 +286,7 @@
     <string name="home_download_instructions_finding">Buscando la página de descarga…</string>
     <string name="home_download_instructions_step1">Pulsa el botón \'%s\' de abajo</string>
     <string name="home_download_instructions_step2_part1">Desplázate hacia abajo en la página web y pulsa</string>
-    <string name="home_download_instructions_step2_apkcube">Desplázate hacia abajo en la página web, elige la versión &lt;b&gt;%s&lt;/b&gt; y presiona</string>
+    <string name="home_download_instructions_step2_apkcube">Desplázate hacia abajo en la página web, elige la versión &lt;b&gt;%s&lt;/b&gt; y pulsa</string>
     <string name="home_download_instructions_step2_generic">Desplázate hacia abajo en la página web y pulsa el botón de descarga</string>
     <string name="home_download_instructions_step2_variant">Desplázate hacia abajo en la página web y pulsa el botón de descarga de la &lt;b&gt;variante APK&lt;/b&gt; principal</string>
     <string name="home_download_instructions_step2_search">Abre un resultado de búsqueda de un sitio web de confianza</string>
@@ -478,7 +478,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="batch_patch_force_version">Continuar de todos modos</string>
     <string name="batch_patch_force_version_done">En cola de todos modos, la aplicación podría fallar</string>
     <string name="batch_patch_accept_signature_done">En cola de todos modos, APK no verificado</string>
-    <string name="batch_patch_apk_selected">APK seleccionada</string>
+    <string name="batch_patch_apk_selected">APK seleccionado</string>
     <string name="batch_patch_edit_patches">Elegir parches</string>
     <string name="batch_patch_state_no_apk">Sin APK</string>
     <string name="batch_patch_state_no_patches">Sin parches</string>
@@ -716,7 +716,7 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="patcher_message_18">Cambiando la superposición de la aplicación de sin parchear a parcheada… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <string name="patcher_message_19">Tu app tiene fiebre, y el único remedio son más parches… 🩺🔔</string>
-    <string name="patcher_message_20">Eliminando tonterías. Por favor, espere… 🗑️</string>
+    <string name="patcher_message_20">Eliminando tonterías. Por favor, espera… 🗑️</string>
     <!-- Expert patcher Screen -->
     <string name="patching_app">Parcheando la aplicación</string>
     <string name="memory_usage">Uso de memoria</string>
@@ -878,7 +878,7 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="settings_appearance_app_icon_change_dialog_confirm">Cambiar icono</string>
     <!-- Settings - Advanced Tab - Updates Section -->
-    <string name="settings_advanced_updates_manager_prereleases">Actualizaciones pre-lanzamiento</string>
+    <string name="settings_advanced_updates_manager_prereleases">Actualizaciones de prelanzamiento</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <string name="settings_advanced_updates_manager_prereleases_description">Acceso anticipado a nuevas versiones de Morphe</string>
     <string name="settings_advanced_updates_prerelease_warning_title">¿Activar actualizaciones pre-lanzamiento?</string>
@@ -952,7 +952,7 @@ Los parches no se ven afectados: habilita los parches pre-lanzamiento para cada 
     <string name="settings_advanced_patch_options_restart_message">Cambiar las opciones de parches requiere volver a parchear la aplicación para que surtan efecto</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">En el modo Experto, las opciones de parches estarán disponibles durante el proceso de parcheo</string>
     <string name="settings_advanced_patch_options_loading">Cargando opciones de parches…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">Esperar hasta que la fuente de parches se actualice</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">Espera hasta que la fuente de parches se actualice</string>
     <string name="settings_advanced_patch_options_load_error">Error al cargar las opciones de parches</string>
     <string name="settings_advanced_patch_options_no_available">No hay opciones disponibles para este parche</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -1273,7 +1273,7 @@ Detalles: %2$s"</string>
     <string name="file_picker_internal_storage">Almacenamiento interno</string>
     <string name="file_picker_sd_card">Tarjeta SD</string>
     <string name="file_picker_root">Raíz (/)</string>
-    <string name="file_picker_storage_access_unavailable">Este dispositivo no tiene pantalla para permitir el acceso a todos los archivos. Permítalo a través de ADB con: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
+    <string name="file_picker_storage_access_unavailable">Este dispositivo no tiene pantalla para permitir el acceso a todos los archivos. Pérmitelo a través de ADB con: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_storages">Almacenamientos</string>
     <string name="file_saver_downloads_failed">No se pudo crear el archivo en Descargas</string>
     <string name="file_saver_saving_to_downloads">Este dispositivo no tiene pantalla de guardado, por lo que el archivo se guarda en Descargas como %1$s</string>
@@ -1318,9 +1318,9 @@ Detalles: %2$s"</string>
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="settings_section_patcher">Parcheador</string>
     <string name="settings_section_updates">Actualizaciones</string>
-    <string name="settings_section_patching">Parcheando</string>
+    <string name="settings_section_patching">Parcheo</string>
     <string name="settings_section_appearance_summary">Cómo se ve Morphe</string>
-    <string name="settings_section_patch_options_summary">Qué parchea las aplicaciones en el modo simple</string>
+    <string name="settings_section_patch_options_summary">Con qué se parchean las aplicaciones en el modo simple</string>
     <string name="settings_section_general">General</string>
     <string name="settings_section_patcher_summary">Cómo se parchean las aplicaciones en este dispositivo</string>
     <string name="settings_section_help_info">Ayuda e información</string>

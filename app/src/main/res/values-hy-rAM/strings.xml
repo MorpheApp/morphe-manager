@@ -18,7 +18,7 @@
     <string name="home_app_shown_named">Ցուցադրված է %s</string>
     <string name="home_app_no_hidden">Թաքցված հավելվածներ չկան</string>
     <string name="home_app_hidden_apps_title">Թաքցված հավելվածներ</string>
-    <string name="home_app_hidden_apps_hint">Հպրեք՝ ցույց տալու համար</string>
+    <string name="home_app_hidden_apps_hint">Հպեք՝ ցույց տալու համար</string>
     <string name="home_apps_unhide_message">Անթաքցված հավելվածները վերադառնում են գլխավոր էկրան</string>
     <string name="home_app_patch_sources_description">Չնշված աղբյուրները չեն առաջարկվի այս հավելվածները թարմացնելիս, և դրանց թարմացումները ինքնուրույն չեն միացնի ընտրանքին: Յուրաքանչյուր աղբյուր մնում է միացված մնացած բոլոր հավելվածների համար</string>
     <string name="home_app_patch_sources_mixed">Առաջարկվում է %2$s-ից %1$s-ին</string>
@@ -27,7 +27,7 @@
     <string name="android_11_bug_dialog_title">Android 11-ի սխալ</string>
     <string name="android_11_bug_dialog_description">Հավելվածի տեղադրման թույլտվությունը պետք է տրվի նախապես՝ Android 11 համակարգի սխալից խուսափելու համար, որը բացասաբար կազդի օգտատիրոջ փորձի վրա</string>
     <string name="deep_link_add_source_title">Ավելացնել աղբյուրը</string>
-    <string name="deep_link_add_source_message">Ցանկանո՞ւմ եք այս փաչի աղբյուրը ավելացնել Morphe-ին:</string>
+    <string name="deep_link_add_source_message">Ցանկանո՞ւմ եք այս փաթեթի աղբյուրը ավելացնել Morphe-ին:</string>
     <string name="deep_link_add_source_warning">Ավելացրեք միայն այն աղբյուրները, որոնց վստահում եք</string>
     <!-- Shown under the app a link was opened for -->
     <string name="deep_link_add_source_only_app">Ավելացվել է միայն այս հավելվածը: Դուք կարող եք ավելացնել այլ հավելվածներ աղբյուրի հավելվածների ցուցակից</string>
@@ -43,16 +43,16 @@
     <string name="home_update_available_subtitle">Նոր տարբերակը պատրաստ է տեղադրման համար</string>
     <string name="home_blocked_source_title">Հայտնաբերվել է արգելափակված փոփոխման աղբյուր</string>
     <string name="home_blocked_source_subtitle">Հպեք՝ վերանայելու և հեռացնելու համար</string>
-    <string name="home_metadata_errors_title">Փոփոխման որոշ աղբյուրներ and անհասանելի են</string>
+    <string name="home_metadata_errors_title">Փոփոխման որոշ աղբյուրներ անհասանելի են</string>
     <string name="home_metadata_errors_subtitle">Հպեք՝ աղբյուրները վերանայելու համար</string>
     <string name="home_outdated_manager_title">Morphe-ն հնացած է</string>
     <string name="home_outdated_manager_subtitle">Որոշ փաթեթների աղբյուրներ պահանջում են ավելի նոր տարբերակ</string>
-    <string name="home_held_back_title">Փաթիչի աղբյուրըបង្լավել է Morphe-ը</string>
+    <string name="home_held_back_title">Փոփոխման աղբյուրը խափանեց Morphe-ը</string>
     <string name="home_held_back_subtitle">Այն բաց է թողնվել, որպեսզի հավելվածը կարողանա միանալ: Հպեք՝ վերանայելու համար</string>
     <string name="home_metered_skipped_title">Թարմացումները դադարեցված են բջջային տվյալների դեպքում</string>
     <string name="home_metered_skipped_subtitle">Հպեք՝ բջջային տվյալներով թարմացումները թույլատրելու համար</string>
     <string name="home_repatch_available_subtitle">Հպեք՝ բոլորը հերթի դնելու համար</string>
-    <string name="home_update_error">Թարմացումը ձախացավ</string>
+    <string name="home_update_error">Թարմացումը ձախողվեց</string>
     <string name="home_update_error_subtitle">Աղբյուրների թարմացման ժամանակ սխալ տեղի ունեցավ</string>
     <string name="home_update_skipped_metered">Թարմացումները բաց են թողնված</string>
     <string name="home_update_skipped_metered_subtitle">Բջջային տվյալները ակտիվ են</string>
@@ -66,9 +66,9 @@
     <string name="home_app_filter_clones">Կլոններ</string>
     <string name="home_app_grouping_none">Ոչինչ</string>
     <string name="home_app_sort_manual_hint">Երկար սեղմեք հավելվածի վրա, ապա սեղմեք վերադասավորման կոճակը</string>
-    <string name="home_app_sort_recommended">Հ سفارشված հերթականություն</string>
+    <string name="home_app_sort_recommended">Խորհուրդ տրվող հերթականություն</string>
     <string name="home_app_sort_updates_first">Թարմացումները՝ առաջին հերթին</string>
-    <string name="home_app_sort_recently_patched">Վերջերս պատչված</string>
+    <string name="home_app_sort_recently_patched">Պատչերը չեն աջակցում այս պահպանված պատճենին: Փոփոխելիս ձեզնից կպահանջվի հաստատել կամ ընտրել մեկ այլ APK</string>
     <string name="home_no_apps_title">Հավելվածներ չկան</string>
     <string name="home_no_apps_subtitle">Ավելացրեք փեթչի աղբյուր կամ ակտիվացրեք գոյություն ունեցողը %s-ում</string>
     <string name="home_no_apps_search_subtitle">«%s»-ին համապատասխանող հավելվածներ չկան</string>
@@ -103,33 +103,33 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Եկեք ստիպենք ձեր հավելվածներին իրենց պահել</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Այսօրվա կանխատեսումը՝ 100% հավանականություն փոփոխումների (patching) համար</string>
+    <string name="home_greeting_7" formatted="false">Այսօրվա կանխատեսումը՝ 100% հավանականություն փոփոխումների համար</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Պատրա՞ստ եք սովորականը դարձնել հիանալի։</string>
     <!-- Playful exaggeration, making patching feel heroic -->
     <string name="home_greeting_9">Փրկում ենք հավելվածները իրենցից սկսած այսօրվանից</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Գործում է կոֆեի և լավ փաչերի շնորհիվ</string>
+    <string name="home_greeting_10">Գործում է սուրճի և լավ պատչերի շնորհիվ</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Արթնացիր և փաչ արա</string>
-    <string name="home_greeting_morning_2">Բարի լույս: Հավելվածները ինքնուրույն չեն փաչի</string>
+    <string name="home_greeting_morning_1">Արթնացիր և պատչիր</string>
+    <string name="home_greeting_morning_2">Բարի լույս: Հավելվածները ինքնուրույն չեն պատչվում</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Կեսօրյա հոգնություն: Փաչ արի ինչ-որ բան</string>
-    <string name="home_greeting_afternoon_2">Ճաշից հետո փաչ անելն այլ զգացողություն է</string>
-    <string name="home_greeting_afternoon_3">Կեսօրյա հերթափոխը՝ փաչի տարբերակով</string>
+    <string name="home_greeting_afternoon_1">Կեսօրյա հոգնություն: Պատչ արա ինչ-որ բան</string>
+    <string name="home_greeting_afternoon_2">Ճաշից հետո պատչ անելն այլ զգացողություն է</string>
+    <string name="home_greeting_afternoon_3">Կեսօրյա հերթափոխը՝ պատչի տարբերակով</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Բարի երեկո! Երեկոյան փեչերը ուրիշ են</string>
+    <string name="home_greeting_evening_1">Բարի երեկո! Երեկոյան պատչերը ուրիշ են</string>
     <string name="home_greeting_evening_2">Հանգստանում եք՞: Նախ փոփոխեք մի հավելված</string>
-    <string name="home_greeting_evening_3">Աշխատանքն ավարտե՞լ եք: Նախ թարմացրեք ինչ-որ բան</string>
+    <string name="home_greeting_evening_3">Աշխատանքն ավարտե՞լ եք: Նախ փոփոխեք ինչ-որ բան</string>
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">Դեռ արթուն եք: Այդպես էլ հավելվածները, որոնք պետք է թարմացվեն</string>
     <string name="home_greeting_late_night_2">Գիշերային թարմացման սեսիա: Հարգանք</string>
     <string name="home_greeting_late_night_3">Գիշերային արթունության ռեժիմը՝ ակտիվացված</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Թարմացումների պիկ ժամերն են... իբր</string>
-    <string name="home_greeting_super_late_2">Չե՞ք կարողանում քնել: Թարմացրեք ինչ-որ բան</string>
+    <string name="home_greeting_super_late_2">Չե՞ք կարողանում քնել: Փոփոխեք ինչ-որ բան</string>
     <string name="home_greeting_super_late_3">Այս պահին արդեն պարզապես արթուն մնացեք և թարմացրեք</string>
-    <string name="home_greeting_super_late_4">Դուք և սերվերները, երկուսunuz էլ արթուն եք</string>
+    <string name="home_greeting_super_late_4">Դուք և սերվերները, երկուսդ էլ արթուն եք</string>
     <string name="home_greeting_super_late_5">Գիշերային և արտադրողական</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
@@ -153,7 +153,7 @@
     <string name="home_greeting_new_year_4">Հին տարբերակները դուրս, նորերը՝ ներս</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Պատչերի աղբյուրներ</string>
-    <string name="sources_search">Որոնել աղբյուրները և թարմացումները</string>
+    <string name="sources_search">Որոնել աղբյուրներում և պատչերում</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Ուշադրություն է պահանջվում</string>
     <string name="sources_sort_manual">Ձեռքով դասավորում</string>
@@ -165,7 +165,7 @@
     <string name="sources_management_report_issue">Հայտնել խնդրի մասին</string>
     <string name="sources_management_failed_to_open_url">Չհաջողվեց բացել URL-ը</string>
     <string name="sources_apps">Հավելվածներ</string>
-    <string name="sources_apps_description">Նշված հավելվածները գալիս են այս աղբյուրից: Հպեք հավելվածին՝ այն հեռացնելու կամ վերադարձնելու համար: Հավելվածը հեռանում է գլխավոր էկրանից, երբ ոչ մի աղբյուր չի բերում այն, եթե դուք այն չեք փեչել</string>
+    <string name="sources_apps_description">Նշված հավելվածները գալիս են այս աղբյուրից: Հպեք հավելվածին՝ այն հեռացնելու կամ վերադարձնելու համար: Հավելվածը հեռանում է գլխավոր էկրանից, երբ ոչ մի աղբյուր չի բերում այն, եթե դուք այն չեք փեթչել</string>
     <string name="sources_apps_brought">Բերված է այս աղբյուրից</string>
     <string name="sources_apps_left_out">Բաց թողնված է այս աղբյուրից</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -175,8 +175,8 @@
     <string name="sources_apps_new_apps">Բերել նոր հավելվածներ</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_apps_new_apps_description">Այն ավելացվող հավելվածները հետագայում կհայտնվեն գլխավոր էկրանին</string>
-    <string name="sources_management_prerelease_toggle">Նախնական թողարկման փեթչեր</string>
-    <string name="sources_management_prerelease_toggle_description">Ստանում է վաղ հասանելիություն նոր փորձարարական փեթչերի տար version-ներին</string>
+    <string name="sources_management_prerelease_toggle">Նախնական թողարկման պատչեր</string>
+    <string name="sources_management_prerelease_toggle_description">Ստանում է նոր փորձարարական պատչերի վաղ հասանելիություն</string>
     <string name="sources_prerelease_warning_title">Ակտիվացնել նախնական թողարկման պատչերը՞</string>
     <string name="sources_prerelease_warning_message">Նախնական թողարկման տարբերակները դեռ մշակման փուլում են: Պատչերը կարող են ձախողվել կամ խաթարել հավելվածը, իսկ գործառույթները կարող են փոխվել առանց նախնական ծանուցման</string>
     <string name="expert_mode_unstable_notice">Նախնական թողարկման կամ փորձարարական թարմացումները կարող են լինել անկայուն</string>
@@ -198,10 +198,10 @@
     <string name="sources_management_outdated_manager_badge">Թարմացնել Morphe-ը</string>
     <string name="sources_management_outdated_manager_hint">Այս աղբյուրը ստեղծված է %1$s փաթեթավորիչի համար, սակայն Morphe %2$s-ը ներառում է %3$s փաթեթավորիչը: Թարմացրեք Morphe-ը դրա համար</string>
     <string name="sources_management_held_back_badge">Բռնվել է</string>
-    <string name="sources_management_held_back_hint">Այս աղբյուրը բեռնման ժամանակបង្լավել է Morphe-ը, ուստի այն բաց է թողնվում: Թարմացրեք կամ կրկին ներմուծեք այն՝ նորից փորձելու համար</string>
+    <string name="sources_management_held_back_hint">Այս աղբյուրը բեռնման ժամանակ խափանեց Morphe-ը, ուստի այն բաց է թողնվում: Թարմացրեք կամ կրկին ներմուծեք այն՝ նորից փորձելու համար</string>
     <string name="sources_management_signed_by">Ստորագրված է</string>
     <string name="sources_management_signing_key_changed_badge">Բանալին փոխվել է</string>
-    <string name="sources_management_signing_key_changed_hint">Վերջին թողարկումը ստորագրված չէ այն բանալիով, որն այս աղբյուրն օգտագործում էր նախկինում, ուստի այն չի տեղադրվել: Հպրեք՝ վերանայելու համար</string>
+    <string name="sources_management_signing_key_changed_hint">Հպեք՝ վերանայելու համար</string>
     <string name="sources_management_source_enabled">Աղբյուրը միացված է</string>
     <string name="sources_management_source_disabled">Աղբյուրը անջատված է</string>
     <string name="sources_management_source_updating">Աղբյուրի թարմացում</string>
@@ -216,7 +216,7 @@
     <string name="sources_dialog_remote">Հեռակա</string>
     <string name="sources_dialog_remote_url">Աղբյուրի URL-ը</string>
     <string name="sources_dialog_remote_url_hint">Ռեպոզիտորիում կամ հղում դեպի patch bundle .json: Տեղադրեք մի քանիսը միասին՝ բոլորը ավելացնելու համար</string>
-    <string name="sources_dialog_paste_no_links">Հղումներ չեն գտնվել échanges-ի մեջ</string>
+    <string name="sources_dialog_paste_no_links">Սեղմատախտակին հղումներ չեն գտնվել</string>
     <string name="sources_dialog_local">Տեղական</string>
     <string name="sources_dialog_local_files">Ընտրեք փաթեթի աղբյուր ֆայլերը</string>
     <string name="sources_dialog_local_invalid_extension">Ֆայլը պետք է ունենա .mpp ընդլայնում</string>
@@ -249,14 +249,14 @@
     <!-- Home Screen - Dialog 1: APK Availability -->
     <string name="home_apk_availability_title">Օգնություն է պետք APK-ն գտնելու համար:</string>
     <string name="home_apk_availability_dialog_simple">&lt;b&gt;%s&lt;/b&gt;-ը պատչելու համար ձեզ անհրաժեշտ է APK-ի չպատչված տարբերակը։</string>
-    <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;-ը փոփոխելու համար ձեզ անհրաժեշտ է հետևյալ տարբերակների չփոփոխված APK-ն՝:</string>
+    <string name="home_apk_availability_dialog_expert">&lt;b&gt;%s&lt;/b&gt;-ը փոփոխելու համար ձեզ անհրաժեշտ է հետևյալ տարբերակների չփոփոխված APK-ն՝</string>
     <string name="home_apk_availability_recommended_label">Խորհուրդ տրվող</string>
     <string name="home_apk_availability_unpatched_label">Չփոփոխված</string>
     <string name="home_apk_availability_incompatible_label">Անհամատեղելի</string>
     <string name="home_apk_availability_find">Այո, օգնեք ինձ գտնել այն</string>
     <string name="home_apk_availability_have">Ոչ, ես արդեն ունեմ այն</string>
     <string name="home_apk_helper_download">Օգտագործել օգնող հավելված</string>
-    <string name="home_apk_helper_untrusted">Օգնական հավելվածն տեղադրված է, բայց դեռ վստահված չէ, ուստի այն այստեղ առաջարկված չէ</string>
+    <string name="home_apk_helper_untrusted">Օգնական հավելվածը տեղադրված է, բայց դեռ վստահված չէ, ուստի այն այստեղ առաջարկված չէ</string>
     <string name="home_apk_helper_untrusted_action">Վերանայել օգնականներին</string>
     <string name="home_apk_helper_title">Ներբեռնել օգնող հավելվածի միջոցով</string>
     <string name="home_apk_helper_description">Morphe-ը կխնդրի ստորև նշված օգնող հավելվածին ներբեռնել բնօրինակ APK-ն և վերադարձնել ֆայլը</string>
@@ -285,8 +285,8 @@
     <string name="home_download_instructions_title">Ներբեռնեք բնօրինակ APK-ն</string>
     <string name="home_download_instructions_finding">Փնտրել ներբեռնման էջը…</string>
     <string name="home_download_instructions_step1">Սեղմեք ստորև գտնվող \'%s\' կոճակը</string>
-    <string name="home_download_instructions_step2_part1">Գլխվեք էջի ներքևի մասին և սեղմեք</string>
-    <string name="home_download_instructions_step2_apkcube">Թերթեք վեբ-էջը ներքև, ընտրեք <b>%s</b> տարբերակը և սեղմեք</string>
+    <string name="home_download_instructions_step2_part1">Ոլորեք վեբ-էջը ներքև և սեղմեք</string>
+    <string name="home_download_instructions_step2_apkcube">Թերթեք վեբ-էջը ներքև, ընտրեք &lt;b&gt;%s&lt;/b&gt; տարբերակը և սեղմեք</string>
     <string name="home_download_instructions_step2_generic">Թերթեք վեբ-էջը ներքև և սեղմեք ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_variant">Թերթեք վեբ-էջը ներքև և սեղմեք ամենավերևի &lt;b&gt;APK տարբերակի&lt;/b&gt; ներբեռնման կոճակը</string>
     <string name="home_download_instructions_step2_search">Բացեք որոնման արդյունքը վստահելի վեբ-կայքից</string>
@@ -295,7 +295,7 @@
     <string name="home_download_instructions_step3_search_any">Այդ վեբ-կայքում ներբեռնեք հավելվածի APK-ն: &lt;b&gt;Ցանկացած տարբերակ&lt;/b&gt; կարող է փոփոխվել</string>
     <string name="home_download_instructions_step2_github">Թողարկման &lt;b&gt;%s&lt;/b&gt; &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
     <string name="home_download_instructions_step2_github_latest">Ամենանոր թողարկման &lt;b&gt;Assets&lt;/b&gt; բաժնում սեղմեք &lt;b&gt;.apk&lt;/b&gt; հավելվածով ավարտվող ֆայլի վրա</string>
-    <string name="home_download_instructions_step2_github_note">Եթե կան մի քանի APK ֆայլեր, ընտրեք այն մեկը, որը կոչված է %s անունով, կամ համամուտականը</string>
+    <string name="home_download_instructions_step2_github_note">Եթե կան մի քանի APK ֆայլեր, ընտրեք այն մեկը, որը կոչված է %s անունով, կամ համընդհանուրը</string>
     <string name="home_download_instructions_download_button_toast">Սեղմեք ներբեռնման կոճակը կայքում, ոչ թե այստեղ 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Հիանալի է: Հիմա սեղմեք \"շարունակել\" և անցեք կայք 👆</string>
     <string name="home_download_instructions_download_button_toast_3">Պրակտիկան կատարելին է դարձնում, և դուք արդեն հասնում եք դրան 💪</string>
@@ -304,8 +304,8 @@
     <string name="home_download_instructions_download_button_toast_6">Դուք այլևս Morphe կոճակների պաշտոնական թեստավորող եք 🏅</string>
     <string name="home_download_instructions_step3">Սպասեք ներբեռնման ավարտին և &lt;b&gt;մի տեղադրեք&lt;/b&gt; APK-ն</string>
     <string name="home_download_instructions_step3_mount">Սպասեք ներբեռնման ավարտին, ապա &lt;b&gt;տեղադրեք APK-ն&lt;/b&gt;</string>
-    <string name="home_download_instructions_step4">Ներբեռնումն ավարտելուց հետ andարձեք Morphe</string>
-    <string name="home_download_instructions_step4_mount">Օրիգինալ APK-ն տեղադրելուց հետ andարձեք Morphe</string>
+    <string name="home_download_instructions_step4">Ներբեռնումն ավարտելուց հետո վերադարձեք Morphe-ին</string>
+    <string name="home_download_instructions_step4_mount">Օրիգինալ APK-ն տեղադրելուց հետո վերադարձեք Morphe-ին</string>
     <string name="home_download_instructions_continue_to">Շարունակել դեպի %s</string>
     <string name="home_download_instructions_destination">ներբեռնման էջը</string>
     <string name="home_download_instructions_copy_link">Պատճենել հղումը</string>
@@ -318,7 +318,7 @@
     <string name="home_recommended_version">Հանձնարարվող տարբերակ</string>
     <string name="home_selected_version">Ընտրված տարբերակ</string>
     <string name="home_select_apk_title">Ընտրել APK</string>
-    <string name="home_select_apk_description">"Ունիվերսալ թարմացումները աշխատում են ցանկացած հավելվածի հետ
+    <string name="home_select_apk_description">"Ունիվերսալ պատչերը աշխատում են ցանկացած հավելվածի հետ
 
 Ընտրեք, թե որտեղից վերցնել դրա APK-ն"</string>
     <string name="home_use_installed_app">Օգտագործել տեղադրված հավելվածը</string>
@@ -339,7 +339,7 @@
     <string name="expert_mode_enable_all">Միացնել բոլորը</string>
     <string name="expert_mode_enable_all_universal_pending">Հպեք նորից՝ համապարփակ փոփոխությունների համար</string>
     <string name="expert_mode_universal_all_warning_title">Ակտիվացնել բոլոր համընդհանուր պատչերը՞</string>
-    <string name="expert_mode_universal_all_warning_message">Համընդհանուր պատչերը միասին չեն թեստավորվել: Բոլորը միաժամանակ ակտիվացնելը կարող է առաջացնել կոնֆլիկտներ, պատչիଂի ձախողում կամ հավելվածի անկումներ</string>
+    <string name="expert_mode_universal_all_warning_message">Համընդհանուր պատչերը միասին չեն թեստավորվել: Բոլորը միաժամանակ ակտիվացնելը կարող է առաջացնել կոնֆլիկտներ, պատչավորման ձախողում կամ հավելվածի անկումներ</string>
     <string name="expert_mode_recommended">Խորհուրդ տրվող փաթեթներ</string>
     <string name="expert_mode_reset_to_default_done">Հանձնարարված փեթչերը կիրառված են</string>
     <string name="expert_mode_selected_count">ընտրված է %1$s-ը %2$s-ից</string>
@@ -348,8 +348,8 @@
     <string name="expert_mode_copy_from_bundle_no_patches">Այս փաթեթում չկան համապատասխան փոփոխություններ</string>
     <string name="expert_mode_no_results">Փաթեթներ չեն գտնվել</string>
     <string name="expert_mode_selected_only">Միայն ընտրված փաթեթները</string>
-    <string name="expert_mode_selected_only_on">Ցուցադրվում են միայն ընտրված փեթչերը</string>
-    <string name="expert_mode_selected_only_off">Ցուցադրվում են բոլոր փեթչերը</string>
+    <string name="expert_mode_selected_only_on">Ցուցադրվում են միայն ընտրված պատչերը</string>
+    <string name="expert_mode_selected_only_off">Ցուցադրվում են բոլոր պատչերը</string>
     <string name="expert_mode_universal_patches">Ունիվերսալ փաթեթներ</string>
     <string name="expert_mode_new_patches">Նոր</string>
     <string name="expert_mode_options_customized">Անհատականացված</string>
@@ -365,7 +365,7 @@
     <string name="home_split_apk_warning_message">"Այս ֆայլը APK փաթեթ է
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Լավագույն արդյունքների համար այս հավելվածը խորհուրդ է տալիս փատչել &lt;b&gt;լիարժեք APK&lt;/b&gt;"</string>
+Լավագույն արդյունքների համար այս հավելվածը խորհուրդ է տալիս փոփոխել &lt;b&gt;լիարժեք APK&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Ընտրեք մեկ այլ APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Փորձարարական</string>
     <string name="home_dialog_unsupported_version_experimental_description">Այս տարբերակն ունի փորձարարական աջակցություն և կարող է լինել անկայուն կամ թերի</string>
@@ -374,9 +374,9 @@
 
 🔧 Սպասեք հավելվածի տարօրինակ վարքի կամ անհայտ սխալների, քանի դեռ թարմացումները կատարելագործվում են հավելվածի այս տարբերակի համար"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Չաջակցվող տարբերակ</string>
-    <string name="home_dialog_unsupported_version_dialog_description">Այս APK-ն հավելվածի නිර්දේශվող տարբերակը չէ: Շարունակելը կարող է հանգեցնել հավելվածի անգործունակության</string>
+    <string name="home_dialog_unsupported_version_dialog_description">Այս APK-ն հավելվածի խորհուրդ տրվող տարբերակը չէ: Շարունակելը կարող է հանգեցնել հավելվածի անգործունակության</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_dialog_unsupported_version_dialog_proceed">Շարունակել հակառակը</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Շարունակել ամեն դեպքում</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Համատեղելի տարբերակներ՝</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Չաջակցվող</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
@@ -397,7 +397,7 @@
     <string name="home_simple_bundle_select_title">Ընտրեք փաթեթի աղբյուրը</string>
     <string name="home_simple_bundle_select_remember">Միշտ օգտագործել այս աղբյուրը այս հավելվածի համար</string>
     <!-- Color picker -->
-    <string name="custom_color">Պատվորյալ գույն</string>
+    <string name="custom_color">Անհատական գույն</string>
     <string name="color_picker_shade">Հագեցվածություն և պայծառություն</string>
     <string name="color_picker_hue">Երանգ</string>
     <!-- Patch Options -->
@@ -423,7 +423,7 @@
     <string name="adaptive_icon_change_image">Փոխել պատկերը</string>
     <string name="image_load_failed">Չհաջողվեց բեռնել այս պատկերը</string>
     <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
-    <string name="adaptive_icon_launcher">Launcher-ի սիմվոլ</string>
+    <string name="adaptive_icon_launcher">Գործարկիչի սիմվոլ</string>
     <string name="adaptive_icon_gesture_hint">Քաշեք տեղափոխելու, սեղմեք չափսը փոխելու համար</string>
     <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
     <string name="adaptive_icon_preview">Նախադիտում</string>
@@ -440,7 +440,7 @@
     <string name="adaptive_icon_guide_png_title">Օգտագործեք թափանցիկ ֆոնով PNG</string>
     <string name="adaptive_icon_guide_png_body">Թափանցիկ ֆոնի վրայի լոգոն աշխատում է լավագույնս, երբ ֆոնի գույնը ընտրված է ստորև: Առանց թափանցիկության պատկերը լրացնում է ամբողջ սիկոնը, և այդ դեպքում թեմայացված ու ծանուցումների սիկոնները պահպանում են Morphe լոգոն:</string>
     <string name="adaptive_icon_guide_safe_zones_title">Անվտանգ գոտիներ</string>
-    <string name="adaptive_icon_guide_safe_zones_body">Կոնտուրը ցույց է տալիս ձեր լաունչերի սիկոնի ձևը, և դրանից դուրս գտնվող ամեն ինչ կտրվում է: Այլ լաունչերներ օգտագործում են այլ ձևեր, ուստի կարևոր մանրամասները պահեք կիսիկ շրջանագծի ներսում, որը երևում է բոլոր ձևերի դեպքում:</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Կոնտուրը ցույց է տալիս ձեր լաունչերի սիկոնի ձևը, և դրանից դուրս գտնվող ամեն ինչ կտրվում է: Այլ լաունչերներ օգտագործում են այլ ձևեր, ուստի կարևոր մանրամասները պահեք կիսաշրջանագծի ներսում, որը երևում է բոլոր ձևերի դեպքում:</string>
     <string name="adaptive_icon_guide_notification_title">Ծանուցման սիկոն</string>
     <string name="adaptive_icon_guide_notification_body">Կտրեք պատկերի տեսանելի մասից և չափսավորեք այն կարգավիճակի տողի մյուս սիկոնների նման, անկախ նրանից, թե ինչ լուսանցուկներ ունի ֆայլը: Կարգավորեք այն նախադիտման տակ գտնվող սլայդերով: Android-ը ցուցադրում է այն միակ գույնով:</string>
     <string name="adaptive_icon_guide_monochrome_title">Թեմատիկ սիկոն</string>
@@ -479,6 +479,9 @@
     <string name="batch_patch_force_version_done">Ավելացվեց հերթի, հավելվածը կարող է խափանվել</string>
     <string name="batch_patch_accept_signature_done">Ավելացվեց հերթի, APK-ն չի ստուգվել</string>
     <string name="batch_patch_apk_selected">APK-ն ընտրված է</string>
+    <string name="batch_patch_auto_download_stopped">APK-ների ավտոմատ ներբեռնումները դադարեցվել են</string>
+    <string name="batch_patch_auto_download_stop">Դադարեցնել ներբեռնումները</string>
+    <string name="batch_patch_auto_download_kept">Ներբեռնված APK-ն հնարավոր չէր օգտագործել, ուստի պահվել է նախորդը</string>
     <string name="batch_patch_edit_patches">Ընտրել փաթեթները</string>
     <string name="batch_patch_state_no_apk">Առանց APK-ի</string>
     <string name="batch_patch_state_no_patches">Պատչեր չկան</string>
@@ -523,7 +526,7 @@
     <string name="home_app_info_patches_name_fallback">Անանուն</string>
     <string name="home_app_info_patches_source_removed">Ջնջված է փոփոխման աղբյուրը</string>
     <string name="home_app_info_patches_replace_fail">Չհաջողվեց ներմուծել փաթեթները. %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Բնօրինակ APK-ն չի գտնվել: Հնարավոր չէ վերակարգել այս հավելվածը</string>
+    <string name="home_app_info_repatch_no_original_apk">Բնօրինակ APK-ն չի գտնվել: Հնարավոր չէ վերապատչել այս հավելվածը</string>
     <string name="home_app_info_original_package_name">Փաթեթի բնօրինակ անվանումը</string>
     <string name="home_app_info_applied_patches">Կիրառված փաթեթներ</string>
     <string name="home_app_info_patch_source_used">Օգտագործված փաթեթի աղբյուրը</string>
@@ -536,15 +539,15 @@
     <string name="home_app_info_patch_update_available">Հասանելի է փաթեթի թարմացում</string>
     <string name="home_app_info_patch_update_available_description">Հասանելի է փաթեթների ավելի նոր տարբերակ: Փաթեթավորեք ձեր հավելվածը նորագույն բարելավումները և ուղղումները ստանալու համար</string>
     <string name="home_app_info_app_update_available">Հասանելի է հավելվածի թարմացում</string>
-    <string name="home_app_info_app_update_available_description">Փաչի աղբյուրները աջակցում են այս հավելվածի ավելի նոր տարբերակին: Կրկին փաչավորեք այն՝ այդ տարբերակին անցնելու համար</string>
+    <string name="home_app_info_app_update_available_description">Պատչի աղբյուրները աջակցում են այս հավելվածի ավելի նոր տարբերակին: Կրկին պատչավորեք այն՝ այդ տարբերակին անցնելու համար</string>
     <string name="home_app_info_newest_supported_version">Ամենանոր աջակցվողը</string>
     <string name="home_app_info_version_move">Տեղադրված է %1$s, ամենանոր աջակցվողը՝ %2$s</string>
     <string name="home_app_info_version_restore">Տեղադրված է %1$s, փոփոխված է %2$s</string>
     <string name="home_app_info_app_deleted_warning">Հավելվածը հեռացվել է</string>
-    <string name="home_app_info_app_deleted_description">Այս հավելվածը հեռացվել է Morphe-ից դուրս: Վերապատչ edin այն՝ գործառնությունները վերականգնելու համար</string>
+    <string name="home_app_info_app_deleted_description">Այս հավելվածը հեռացվել է Morphe-ից դուրս: Վերապատչեք այն՝ գործառույթները վերականգնելու համար</string>
     <string name="home_app_info_not_patched_description">Այս հավելվածի չփոփոխված տարբերակն տեղադրված է: Morphe-ն դեռ ունի իր նախկին փոփոխման տվյալները</string>
-    <string name="home_app_info_mount_replaced_description">Մի այլ տարբերակը փոխարինել է տեղադրված հավելվածը, ուստի փոփոխությունը այլևս չի գործում: Վերականգնումը ပြန် է բերում փոփոխված տարբերակը</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play-ը թարմացրել է տեղադրված հավելվածը, ուստի փոփոխությունը այլևս չի գործում: Վերականգնումը ပြန် է բերում փոփոխված տարբերակը: Անջատեք ավտոմատ թարմացումը Google Play-ում՝ այն փոփոխված պահելու համար</string>
+    <string name="home_app_info_mount_replaced_description">Մի այլ տարբերակը փոխարինել է տեղադրված հավելվածը, ուստի փոփոխությունը այլևս չի գործում: Վերականգնումը վերադարձնում է փոփոխված տարբերակը</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play-ը թարմացրել է տեղադրված հավելվածը, ուստի փոփոխությունը այլևս չի գործում: Վերականգնումը վերադարձնում է փոփոխված տարբերակը: Անջատեք ավտոմատ թարմացումը Google Play-ում՝ այն փոփոխված պահելու համար</string>
     <string name="app_links_title">Աջակցվող վեբ հղումներ</string>
     <string name="app_links_description">Android 12-ից սկսած՝ աջակցվող տիրույթների հղումները լռելյայն բացվում են ձեր բրաուզերում, եթե դրանք չեն հաստատվել</string>
     <string name="app_links_unverified_banner_title">Վեբ հղումները չեն հաստատվել</string>
@@ -558,14 +561,14 @@
     <string name="app_links_fix">Ուղղել հղումները</string>
     <string name="configure">Կարգավորել</string>
     <string name="patcher_rename_title">Սա կտեղադրի կլոն</string>
-    <string name="patcher_rename_description">Փաթեթները կառուցել են այս հավելվածը իրենց սեփական փաթեթի անվան տակ, ուստի դրա տեղադրումը ավելացնում է կլոնមួយ &lt;b&gt;%s&lt;/b&gt;-ի կողքին, փոխարենը թարմացնելու</string>
+    <string name="patcher_rename_description">Փաթեթները կառուցել են այս հավելվածը իրենց սեփական փաթեթի անվան տակ, ուստի դրա տեղադրումը ավելացնում է կլոն &lt;b&gt;%s&lt;/b&gt;-ի կողքին՝ այն թարմացնելու փոխարեն</string>
     <string name="patcher_rename_result_package">Կտեղադրվի որպես</string>
     <string name="patcher_rename_replaces">Այդ անվամբ հավելվածն արդեն տեղադրված է և կփոխարինվի</string>
     <string name="home_app_info_apk_size">APK-ի չափսը</string>
     <string name="home_app_info_cpu_arch">ՊՐԿ-ի ճարտարապետություն</string>
     <!-- Home Screen - Root Mode -->
-    <string name="root_install_apk_required">Root ռեժիմը պահանջում է, որ բնօրինակ APK-ն տեղադրված լինի ձեր սարքի վրա նախքան կարգավորումը</string>
-    <string name="root_pre_patch_installer_title">Ընտրեք patch ռեժիմը</string>
+    <string name="root_install_apk_required">Root ռեժիմը պահանջում է, որ բնօրինակ APK-ն տեղադրված լինի ձեր սարքի վրա նախքան փաթեթավորումը</string>
+    <string name="root_pre_patch_installer_title">Ընտրեք փոփոխման ռեժիմը</string>
     <string name="root_pre_patch_installer_description">Ձեր սարքն ունի root հասանելիություն: Ընտրեք՝ արդյոք այս հավելվածը պետք է փաթեթավորվի root mount-ի թե ստանդարտ տեղադրման համար</string>
     <string name="root_pre_patch_installer_mount_title">Root mount ռեժիմ</string>
     <string name="root_pre_patch_installer_mount_description">Փաթեթավորում է root mount-ի համար, այնուհետև տեղադրում է APK-ն համապատասխան ստանդարտ հավելվածի վրա: GmsCore-ի կարիք չկա</string>
@@ -575,7 +578,7 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">Հարցումն արվել է, երբ %1$s-ը սահմանված է որպես %2$s: Փաթեթավորման ռեժիմը հնարավոր չէ փոխել փաթեթավորումից հետո</string>
     <!-- Patcher Screen -->
-    <string name="patcher_error_copied">Սխալը պատճենվեց հիշողության մեջ</string>
+    <string name="patcher_error_copied">Սխալը պատճենվեց սեղմատախտակին</string>
     <string name="patcher_error_log">Սխալների մատյան</string>
     <string name="patcher_error_technical">Տեխնիկական մանրամասներ</string>
     <string name="patcher_error_dialog_diagnostics">Ախտորոշում</string>
@@ -626,7 +629,7 @@
     <string name="patcher_error_details">Սխալի մանրամասները</string>
     <string name="patcher_change_patches">Փոխել պատչերը</string>
     <string name="patcher_unknown_error">Տեղի է ունեցել անհայտ սխալ</string>
-    <string name="patcher_split_step_extracting">Բացահայտում ենք split APK-ները</string>
+    <string name="patcher_split_step_extracting">Հանում ենք split APK-ները</string>
     <string name="patcher_split_step_merging">Միավորում ենք %s-ը</string>
     <string name="patcher_split_step_writing">Գրում ենք միավորված APK-ն</string>
     <string name="patcher_split_step_finalizing">Ավարտում ենք միավորված APK-ն</string>
@@ -646,7 +649,7 @@
     <string name="patcher_storage_permission_dialog_title">Հնարավոր չէ մուտք գործել պահեստի ուղուն</string>
     <string name="patcher_incompatible_patcher_title">Թարմացումը պարտադիր է</string>
     <string name="patcher_incompatible_patcher_description">Աղբյուրը &lt;b&gt;%1$s&lt;/b&gt;-ը պահանջում է patcher &lt;b&gt;%2$s&lt;/b&gt; կամ ավելի նոր տարբերակ: Թարմացրեք Morphe-ը՝ այն օգտագործելու համար</string>
-    <string name="patcher_storage_permission_description_api30">Փաչի մեկ կամ մի քանի տարբերակներ հղվում են այն ուղիներին, որոնք Morphe-ը չի կարող կարդալ: Տրամադրեք հասանելիություն պահոցին և սեղմեք կոճակը, ապա փաչինգը կսկսվի ավտոմատ կերպով</string>
+    <string name="patcher_storage_permission_description_api30">Պատչերի մեկ կամ մի քանի տարբերակներ հղվում են այն ուղիներին, որոնք Morphe-ը չի կարող կարդալ: Տրամադրեք հասանելիություն պահոցին և սեղմեք կոճակը, ապա փոփոխումը կսկսվի ավտոմատ կերպով</string>
     <string name="patcher_storage_permission_description_legacy">Մեկ կամ մի քանի փեթչի տարբերակներ հղվում են ուղիներին, որոնց հասանելիությունը սահմանափակված է: Թարմացրեք ուղիները փեթչի տարբերակներում և փորձեք նորից</string>
     <string name="patcher_storage_permission_grant">Տրամադրել պահպանման թույլտվություն</string>
     <string name="patcher_storage_permission_denied_warning">Պահպանման թույլտվությունը մերժվել է: Տրամադրեք թույլտվությունը այս ուղին օգտագործելու համար կամ տեղափոխեք ֆայլերը հավելվածի անհատական թղթապանակ</string>
@@ -654,11 +657,11 @@
     <string name="patcher_storage_badge_denied">Թույլտվությունը մերժված է</string>
     <string name="patcher_storage_badge_missing">Չի գտնվել</string>
     <string name="patcher_storage_badge_rejected">Չի կարելի օգտագործել</string>
-    <string name="batch_patch_option_paths_skipped">Թարմացման տարբերակների ֆայլերը բացակայում են և կբաց թողնվեն. %1$s</string>
+    <string name="batch_patch_option_paths_skipped">Պատչի տարբերակների ֆայլերը բացակայում են և կբաց թողնվեն. %1$s</string>
     <string name="patcher_missing_patches_title">Որոշ թարմացումներ բացակայում են</string>
     <string name="patcher_missing_patches_description">Այս հավելվածի համար պահպանված ընտրությունը ներառում է այնպիսի փոփոխություններ, որոնք այլևս չկան ոչ մի ակտիվ աղբյուրում: Շարունակելը կփոփոխի հավելվածն առանց դրանց</string>
     <string name="patcher_missing_patches_label">Այլևս չի առաջարկվում</string>
-    <string name="patcher_option_paths_gone_title">Փաչի օպցիայի ֆայլերը բացակայում են</string>
+    <string name="patcher_option_paths_gone_title">Պատչի տարբերակների ֆայլերը բացակայում են</string>
     <string name="patcher_option_paths_gone_description">Մեկ կամ ավելի փաթեթավորման տարբերակներ հղվում են ֆայլերի, որոնք այլևս գոյություն չունեն: Հեռացրեք այդ ուղիները կամ վերադարձրեք ֆայլերը և փորձեք նորից</string>
     <string name="patcher_option_paths_rejected_title">Փաթեթի տարբերակի ֆայլերը չեն կարող օգտագործվել</string>
     <string name="patcher_option_paths_rejected_description">Մեկ կամ մի քանի փաթեթի տարբերակներ հղվում են ֆայլերի, որոնք բացակայում են կամ չունեն այն, ինչ պահանջում է փաթեթը: Հեռացրեք այդ ուղիները, որպեսզի փաթեթավորումը կատարվի առանց դրանց, կամ ուղղեք ֆայլերը՝ ըստ տարբերակի հրահանգների, և փորձեք նորից</string>
@@ -685,7 +688,7 @@
     <string name="battery_optimization_dialog_description">Որոշ սարքեր կարող են կանգնեցնել փոփոխիչը, երբ հավելվածը փոքրացվում է: Թույլ տվեք Morphe-ին աշխատել առանց մարտկոցի սահմանափակումների՝ ապահովելու համար, որ փոփոխումն ավարտվի հուսալիորեն</string>
     <string name="battery_optimization_not_now">Հիմա ոչ</string>
     <!-- Patcher Screen - Patcher Worker -->
-    <string name="patcher_notification_title">Փոփոխությունների գործընթացը ընթացքի է…</string>
+    <string name="patcher_notification_title">Փոփոխումը ընթացքի մեջ է…</string>
     <string name="patcher_notification_text">Հպեք՝ վերադառնալու համար փոփոխիչին</string>
     <string name="patcher_stop_title">Դադարեցնել փաթեթավորումը՞</string>
     <string name="patcher_stop_discards">Առայժմ կատարված առաջընթացը ջնջվում է, և ոչինչ չի տեղադրվի</string>
@@ -699,7 +702,7 @@
     <string name="patcher_message_5">Խորհուրդ է տրվում սուրճի ընդմիջում անել… ☕</string>
     <string name="patcher_message_6">Նայեք դուրս, դրսում հրաշալի եղանակ է… 🌤️</string>
     <string name="patcher_message_7">Կարգավորվում են 1-երը և 0-երը… 🤖</string>
-    <string name="patcher_message_8">Թ unravel-ում ենք թվային «սպագետիները»… 🍝</string>
+    <string name="patcher_message_8">Արձակում ենք թվային սպագետիի կծիկը… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Ուղղվում են չպատչված հավելվածի սխալները… 🪲</string>
     <string name="patcher_message_10">Լավ թարմացումները արժեն սպասելը… ⏳</string>
@@ -726,10 +729,10 @@
     <string name="applying_patches">Կիրառվում են փաթեթները</string>
     <string name="failed_to_execute_patch">Չհաջողվեց կիրառել %s</string>
     <string name="patched_app_save_failed_toast">Չհաջողվեց պահպանել փոփոխված հավելվածը</string>
-    <string name="plugin_activity_dialog_body">Այս պլագինի հետ շարունակելու համար անհրաժեշտ է օգտատիրոջ ഇടപെլությունը</string>
+    <string name="plugin_activity_dialog_body">Այս պլագինի հետ շարունակելու համար անհրաժեշտ է օգտատիրոջ միջամտությունը</string>
     <string name="patcher_process_killed_message">Համակարգը կանգնեցրեց փաթեթավորողը նախքան դրա ավարտը, սովորաբար հիշողությունը ազատելու համար: Փակեք մյուս հավելվածները և փորձեք նորից</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
-    <string name="patcher_process_crashed_message">Փաթեթավորողը կասեցավ նախքան ավարտելը: Եթե դա կրկնվի, անջատեք %1$s-ը և հայտեք խնդրի մասին՝ կցելով լոգը</string>
+    <string name="patcher_process_crashed_message">Փաթեթավորողը խափանվեց նախքան ավարտելը: Եթե դա կրկնվի, անջատեք %1$s-ը և հայտեք խնդրի մասին՝ կցելով լոգը</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <string name="patcher_out_of_memory_message">Փաթեթավորողի հիշողությունը սպառվեց %1$s ՄԲ heap-ի դեպքում: Այս հավելվածը չափազանց մեծ է ընտրված փաթեթների համար: Փորձեք փաթեթավորել ավելի քիչ աղբյուրներով կամ ընտրեք ավելի քիչ փաթեթներ</string>
     <string name="install_app_success">Հաջողությամբ տեղադրվեց</string>
@@ -745,8 +748,8 @@
     <string name="saved_app_removed_toast">Պահպանված փոփոխված հավելվածը հեռացվեց</string>
     <string name="saved_app_launch_unavailable">Տեղադրեք հավելվածը նախքան այն բացելը</string>
     <string name="package_name">Փաթեթի անվանում</string>
-    <string name="failed_to_mount">Չհաջողվեց մոնտավորել. %s</string>
-    <string name="failed_to_unmount">Չհաջողվեց ապամոնտավորել. %s</string>
+    <string name="failed_to_mount">Չհաջողվեց մոնտաժել. %s</string>
+    <string name="failed_to_unmount">Չհաջողվեց ապամոնտաժել. %s</string>
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_score">Միավոր %s</string>
     <string name="mini_game_best">Լավագույն %s</string>
@@ -757,7 +760,7 @@
     <string name="mini_game_resume">Շարունակել</string>
     <string name="mini_game_restart">Սկսել նորից</string>
     <string name="mini_game_change">Ընտրել մեկ այլ խաղ</string>
-    <string name="mini_game_2048_picker_subtitle">Սահեցրեք շարկերը միացնելու համար</string>
+    <string name="mini_game_2048_picker_subtitle">Սահեցրեք սալիկները՝ միացնելու համար</string>
     <string name="mini_game_flappy_picker_subtitle">Հպեք՝ խողովակների միջով թռչելու համար</string>
     <string name="mini_game_flappy_tap_to_start">Հպեք՝ թռչելու համար</string>
     <string name="mini_game_snake_picker_subtitle">Ուտիր սնունդը, մի՛ հարվածիր ինքդ քեզ</string>
@@ -765,10 +768,10 @@
     <string name="mini_game_dino_picker_subtitle">Հպեք կակտուսներից ցատկելու համար</string>
     <string name="mini_game_dino_tap_to_start">Հպեք վազելու համար</string>
     <string name="mini_game_blocks_picker_subtitle">Տեղադրեք պատկերները, մաքրեք գծերը</string>
-    <string name="mini_game_blocks_tap_to_start">Հպրեք պտտելու համար, սահեցրեք տեղաշարժելու, սահեցրեք ներքև գցելու համար</string>
+    <string name="mini_game_blocks_tap_to_start">Հպեք պտտելու համար, սահեցրեք տեղաշարժելու, սահեցրեք ներքև գցելու համար</string>
     <string name="mini_game_bricks_picker_subtitle">Գնդակը թռցրեք, պատը քանդեք</string>
     <string name="mini_game_bricks_tap_to_start">Քաշեք՝ նպատակային կետը սահմանելու համար, հպեք՝ գործարկելու համար</string>
-    <string name="mini_game_miner_picker_subtitle">Հպրեք բացելու համար, սեղմեք նշելու համար</string>
+    <string name="mini_game_miner_picker_subtitle">Հպեք բացելու համար, սեղմեք նշելու համար</string>
     <string name="mini_game_pairs_picker_subtitle">Շրջեք քարտերը, գտեք զույգը</string>
     <!-- Settings -->
     <string name="appearance">Արտաքին տեսք</string>
@@ -780,7 +783,7 @@
     <string name="settings_appearance_background_rings">Օղակներ</string>
     <string name="settings_appearance_background_mesh">Ցանց</string>
     <string name="settings_appearance_background_space">Տիեզերք</string>
-    <string name="settings_appearance_background_shapes">Պատկերներ</string>
+    <string name="settings_appearance_background_shapes">Ձևեր</string>
     <string name="settings_appearance_background_snow">Ձյուն</string>
     <string name="settings_appearance_background_grid">Ցանց</string>
     <string name="settings_appearance_background_particles">Մասնիկներ</string>
@@ -816,8 +819,8 @@
     <string name="settings_appearance_color_accents_description">Օգտագործում է յուրաքանչյուր հավելվածի և աղբյուրի գույնը՝ շեշտադրի գույնի փոխարեն</string>
     <string name="settings_appearance_outlines">Կոնտուրներ</string>
     <string name="settings_appearance_outlines_description">Գծում է բարակ եզրագիծ քարտերի, վահանակների և կոճակների շուրջ</string>
-    <string name="settings_appearance_blur">Շփոթում</string>
-    <string name="settings_appearance_blur_description">Շփոթում է այն ամենը, ինչը սահում է գլխագրերի, զուգแถբերի և վահանակների տակ</string>
+    <string name="settings_appearance_blur">Մշուշում</string>
+    <string name="settings_appearance_blur_description">Մշուշում է այն ամենը, ինչը սահում է վերնագրերի, գործիքագոտիների և վահանակների տակ</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Հավելվածի լեզուն</string>
     <string name="settings_appearance_app_language_current">Ընթացիկ լեզուն</string>
@@ -829,7 +832,7 @@
     <string name="settings_appearance_home_screen">Գլխավոր էկրան</string>
     <string name="settings_appearance_greeting_phrases">Ողջույնի արտահայտություններ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Ցուցադրում է ողջունման հաղորդագրություն</string>
-    <string name="settings_appearance_repatch_notice">Վերափեթչավորման ծանուցում</string>
+    <string name="settings_appearance_repatch_notice">Վերապատչավորման ծանուցում</string>
     <string name="settings_appearance_repatch_notice_description">Ցուցադրում է բաններ, երբ փոփոխված հավելվածները կարող են նորից փոփոխվել</string>
     <string name="settings_appearance_more_apps_card">Ավելի շատ հավելվածների քարտ</string>
     <string name="settings_appearance_more_apps_card_description">Ցույց է տալիս քարտ հավելվածների տակ, որը տանում է դեպի համայնքային ուղղումները</string>
@@ -839,9 +842,9 @@
     <string name="settings_appearance_app_card_colors_accent">Շեշտադրված</string>
     <string name="settings_appearance_app_card_colors_accent_description">Օգտագործել հավելվածի շեշտադրվող գույնը հավելվածների և աղբյուրների քարտերի համար</string>
     <string name="settings_appearance_app_card_colors_gradient">Գրադիենտ</string>
-    <string name="settings_appearance_app_card_colors_gradient_description">Օգտագործել մեկ benutzerական գրադիենտ հավելվածների քարտերի համար, որը միաձուլվում է մեկ գույնի մեջ աղբյուրների քարտերի համար</string>
+    <string name="settings_appearance_app_card_colors_gradient_description">Օգտագործել մեկ հատուկ գրադիենտ հավելվածների քարտերի համար, որը միաձուլվում է մեկ գույնի մեջ աղբյուրների քարտերի համար</string>
     <string name="settings_appearance_app_card_colors_solid">Համասեռ</string>
-    <string name="settings_appearance_app_card_colors_solid_description">Օգտագործել մեկ benutzerական գույն հավելվածների և աղբյուրների քարտերի համար</string>
+    <string name="settings_appearance_app_card_colors_solid_description">Օգտագործել մեկ հատուկ գույն հավելվածների և աղբյուրների քարտերի համար</string>
     <string name="settings_appearance_app_card_colors_start">Սկզբնական գույն</string>
     <string name="settings_appearance_app_card_colors_middle">Միջին գույն</string>
     <string name="settings_appearance_app_card_colors_end">Ավարտի գույն</string>
@@ -850,23 +853,23 @@
     <string name="settings_appearance_app_card_colors_bundle_description">Այստեղ օգտագործեք յուրաքանչյուր հավելվածի կամ աղբյուրի սեփական գույնը, որն ավտոմատ կերպով կհարմարեցվի</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Հավելվածի սիմվոլ</string>
-    <string name="settings_appearance_app_icon_selector_description">Ինչպես է Morphe-ը görünում ձեր գլխավոր էկրանին և հավելվածների ցանկում</string>
+    <string name="settings_appearance_app_icon_selector_description">Ինչպես է Morphe-ը երևում ձեր գլխավոր էկրանին և հավելվածների ցանկում</string>
     <string name="settings_appearance_app_icon_default">Լռելյայն</string>
     <string name="settings_appearance_app_icon_light_2">Երկինք</string>
     <string name="settings_appearance_app_icon_light_3">Մայրամուտ</string>
     <string name="settings_appearance_app_icon_light_4">Լավանդա</string>
-    <string name="settings_appearance_app_icon_light_5">Սառցնյուտ</string>
+    <string name="settings_appearance_app_icon_light_5">Սառցադաշտ</string>
     <string name="settings_appearance_app_icon_light_6">Մառախուղ</string>
     <string name="settings_appearance_app_icon_light_7">Ավազ</string>
     <string name="settings_appearance_app_icon_dark_1">Մուգ կապտա-կանաչ</string>
-    <string name="settings_appearance_app_icon_dark_2">Ծո ৩৫</string>
+    <string name="settings_appearance_app_icon_dark_2">Դատարկություն</string>
     <string name="settings_appearance_app_icon_dark_3">Սալոր</string>
     <string name="settings_appearance_app_icon_dark_4">Կեսգիշեր</string>
-    <string name="settings_appearance_app_icon_dark_5">Գրիգ</string>
+    <string name="settings_appearance_app_icon_dark_5">Թերթաքար</string>
     <string name="settings_appearance_app_icon_accent_1">Ավրորա</string>
     <string name="settings_appearance_app_icon_accent_2">Թանաքիլ</string>
-    <string name="settings_appearance_app_icon_accent_3">Թղթապսակ</string>
-    <string name="settings_appearance_app_icon_accent_4">Մթնոլորտ</string>
+    <string name="settings_appearance_app_icon_accent_3">Թուղթ</string>
+    <string name="settings_appearance_app_icon_accent_4">Մթնշաղ</string>
     <string name="settings_appearance_app_icon_background">Ֆոն</string>
     <string name="settings_appearance_app_icon_mark">Լոգո</string>
     <string name="settings_appearance_app_icon_mark_color">Գույն</string>
@@ -894,10 +897,10 @@
     <string name="settings_system_notifications_categories">Ծանուցումների կատեգորիաներ</string>
     <string name="settings_system_notifications_categories_description">Համակարգի կարգավորումներում ընտրեք, թե որ թարմացումները ծանուցեն ձեզ</string>
     <string name="settings_advanced_update_interval">Ստուգման հաճախականությունը</string>
-    <string name="settings_advanced_update_interval_hourly">Ժամապես</string>
+    <string name="settings_advanced_update_interval_hourly">Ժամեկան</string>
     <string name="settings_advanced_update_interval_daily">Օրական</string>
     <string name="settings_advanced_update_interval_weekly">Շաբաթական</string>
-    <string name="settings_advanced_update_interval_monthly">Ամենամիս</string>
+    <string name="settings_advanced_update_interval_monthly">Ամսական</string>
     <string name="settings_advanced_update_interval_battery_warning">Ֆոնային ստուգումները կարող են անկայուն աշխատել այն սարքերում, որոնք սահմանափակում են ֆոնային հավելվածները, օրինակ՝ Xiaomi, Huawei, Samsung և OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Թույլատրել արտաքին գրգռիչները</string>
     <string name="settings_advanced_external_batch_patch_description">Թույլ է տալիս ավտոմատացման հավելվածներին սկսել խմբակային փոփոխումները</string>
@@ -906,7 +909,7 @@
     <string name="external_batch_patch_trust_caller">Միշտ թույլատրել այս հավելվածին</string>
     <string name="external_batch_patch_unknown_caller">Անհայտ հավելված</string>
     <!-- Notification content -->
-    <string name="notification_bundle_update_title">Հասան նոր փաթեթներ</string>
+    <string name="notification_bundle_update_title">Հասանելի են նոր փաթեթներ</string>
     <string name="notification_update_text">Տարբերակ %s-ը պատրաստ է ներբեռնման համար</string>
     <string name="notification_bundle_update_text_unversioned">Սեղմեք Morphe-ը բացելու և թարմացնելու համար</string>
     <string name="notification_permission_dialog_title">Թույլ տվեք ծանուցումները</string>
@@ -914,8 +917,8 @@
     <string name="notification_post_patch_dialog_title">Ցանկանո՞ւմ եք ծանուցում ստանալ, երբ թարմացումները հասանելի լինեն:</string>
     <string name="notification_channel_manager_updates">Morphe-ի թարմացումներ</string>
     <string name="notification_channel_manager_updates_description">Ծանուցումներ Morphe-ի նոր թողարկումների մասին</string>
-    <string name="notification_channel_patch_updates">Փեթչի թարմացումներ</string>
-    <string name="notification_channel_patch_updates_description">Ծանուցումներ փեթչի նոր թողարկումների մասին</string>
+    <string name="notification_channel_patch_updates">Պատչերի թարմացումներ</string>
+    <string name="notification_channel_patch_updates_description">Ծանուցումներ պատչերի նոր թողարկումների մասին</string>
     <string name="notification_channel_patcher_description">Ցուցադրվում է, երբ Morphe-ը ֆոնային ռեժիմում փոփոխում է հավելվածը</string>
     <string name="notification_channel_patching_results">Պատչավորման արդյունքները</string>
     <string name="notification_channel_patching_results_description">Երբ պատչավորումն ավարտվում է կամ տեղադրումը սպասում է ձեզ, մինչ Morphe-ը գտնվում է հետին պլանում</string>
@@ -927,7 +930,7 @@
     <string name="settings_advanced_expert_mode">Էքսպերտի ռեժիմ</string>
     <string name="settings_advanced_expert_mode_description">Բացում է փոփոխման առաջադեմ կարգավորումները և տարբերակները</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ակտիվացնել փորձագետի ռեժիմը՞</string>
-    <string name="settings_advanced_expert_mode_dialog_message">Փորձագետի ռեժիմն ապահովում է ավելի մեծ վերահսկողություն նկատմամբ այն, թե ինչպես են կիրառվում պատչերը, սակայն փորձագետի ռեժիմում կարգավորումների սխալ մշտկումը կարող է հանգեցնել հավելվածի անգործունակության</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Փորձագետի ռեժիմն ավելի մեծ վերահսկողություն է տալիս պատչերի կիրառման նկատմամբ, սակայն փորձագետի ռեժիմում կարգավորումների սխալ կարգավորումը կարող է հանգեցնել հավելվածի անգործունակության</string>
     <string name="settings_advanced_strip_unused_libs">Օպտիմալացնել սարքի ճարտարապետության համար</string>
     <string name="settings_advanced_strip_unused_libs_description">Հեռացնում է չօգտագործվող native գրադարանները և APK split-երը</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
@@ -948,10 +951,10 @@
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_warning">Մի՛ կիսվեք ձեր PAT-ով: Եթե այն ներառեք կարգավորումների արտահանման մեջ, պահեք այդ ֆայլը գաղտնի, քանի որ այն պարունակում է թոքենը</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
-    <string name="settings_advanced_patch_options">Փաչի տարբերակներ</string>
-    <string name="settings_advanced_patch_options_restart_message">Փաչի տարբերակների փոփոխությունը ուժի մեջ մտնելու համար պահանջում է հավելվածի վերափաչում</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">Էքսպերտի ռեժիմում փաչի տարբերակները հասանելի կլինեն փաչինգի գործընթացի ժամանակ</string>
-    <string name="settings_advanced_patch_options_loading">Բեռնվում են փաթեթի տարբերակները…</string>
+    <string name="settings_advanced_patch_options">Պատչի տարբերակներ</string>
+    <string name="settings_advanced_patch_options_restart_message">Պատչի տարբերակների փոփոխությունը ուժի մեջ մտնելու համար պահանջվում է հավելվածը վերապատչել</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">Էքսպերտ ռեժիմում պատչի տարբերակները հասանելի կլինեն փոփոխման գործընթացի ժամանակ</string>
+    <string name="settings_advanced_patch_options_loading">Բեռնվում են պատչի տարբերակները…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Սպասեք, մինչև փաթեթի աղբյուրը թարմացվի</string>
     <string name="settings_advanced_patch_options_load_error">Փաթեթի տարբերակների բեռնումը ձախողվեց</string>
     <string name="settings_advanced_patch_options_no_available">Այս փաթեթի համար հասանելի տարբերակներ չկան</string>
@@ -1024,14 +1027,14 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">Հեռացնում է Shorts կոճակը լաունչերի վիջեթից</string>
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer">Տեղադրող</string>
-    <string name="installer_settings_title">Լռացված տեղադրող</string>
+    <string name="installer_settings_title">Լռելյայն տեղադրող</string>
     <string name="settings_installation">Տեղադրում</string>
     <string name="installer_title">Ընտրեք տեղադրողը</string>
     <string name="installer_internal_description">Օգտագործում է Android-ի փաթեթների տեղադրիչը</string>
     <string name="installer_play_store_description">Օգտագործում է համակարգային տեղադրիչը և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
     <string name="installer_root_description">Լռելյայն տեղադրում root-ի միջոցով</string>
     <string name="installer_root_play_store_description">Լռելյայն տեղադրում է root-ի միջոցով և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
-    <string name="installer_shizuku_description">Տեղադրում է լռելյայն Shizuku-ի կամ Sui-ի միջոցով</string>
+    <string name="installer_shizuku_description">Տեղադրում է անաղմուկ՝ Shizuku-ի կամ Sui-ի միջոցով</string>
     <string name="installer_shizuku_play_store_description">Լռելյայն տեղադրում է Shizuku-ի կամ Sui-ի միջոցով և որպես տեղադրման աղբյուր սահմանում է Google Play Store-ը</string>
     <string name="installer_option_none">Առանց պահուստային տարբերակի</string>
     <string name="installer_none_description">Պահուստային տեղադրիչ կոնֆիգուրացված չէ</string>
@@ -1041,14 +1044,14 @@ morphe_header_custom_dark.png
     <string name="installer_status_shizuku_not_running">Միացրեք Shizuku-ն կամ Sui-ն և փորձեք նորից</string>
     <string name="installer_status_shizuku_permission">Տրամադրել թույլտվություն Morphe-ին Shizuku հավելվածից</string>
     <string name="installer_mount_warning_install">Պատչի ռեժիմը սահմանված է root mount-ի վրա: Այս պահպանված հավելվածը չի տեղադրվել mount-ի միջոցով</string>
-    <string name="mount_version_mismatch_message">Ծնագծային հավելվածի տարբերակը (%2$s) չի համընկնում փոփոխված հավելվածի տարբերակի հետ (%1$s): Միացրեք համապատասխան ծնագծային տարբերակը, ապա փորձեք նորից</string>
-    <string name="mount_stock_restore_failed_message">Android-ը մերժեց պահպանված բնօրինակ APK-ն: Տեղադրեք համապատասխան ստանդարտ տարբերակը, ապա կրկին փորձեք Մոնտավորումը</string>
+    <string name="mount_version_mismatch_message">Stock հավելվածի տարբերակը (%2$s) չի համընկնում փոփոխված հավելվածի տարբերակի հետ (%1$s): Mount արեք համապատասխան stock տարբերակը, ապա փորձեք նորից</string>
+    <string name="mount_stock_restore_failed_message">Android-ը մերժեց պահպանված բնօրինակ APK-ն: Տեղադրեք համապատասխան ստանդարտ տարբերակը, ապա կրկին փորձեք Mount-ը</string>
     <string name="installer_status_shizuku_unsupported">Տեղադրված Shizuku-ի տարբերակը չի աջակցվի</string>
     <string name="installer_action_open_shizuku">Բացել Shizuku-ն</string>
     <string name="installer_hint_generic">Տեղադրումը ձախողվեց: Փորձեք նորից կամ անցեք այլ տեղադրողի</string>
     <string name="installer_hint_conflict">Այս փաթեթի անվան այլ հավելված արդեն տեղադրված է: Հեռացրեք այն նախքան շարունակելը</string>
     <string name="installer_confirm_notification_title">Հաստատեք տեղադրումը</string>
-    <string name="installer_confirm_notification_text">Հպեք՝ փաթիչ հավելվածի տեղադրումն ավարտելու համար</string>
+    <string name="installer_confirm_notification_text">Հպեք՝ փոփոխված հավելվածի տեղադրումն ավարտելու համար</string>
     <string name="installer_external_launched">Բացվում է %s…</string>
     <string name="installer_external_timeout">%s-ը չի հաստատել տեղադրումը: Ստուգեք մյուս հավելվածը և փորձեք նորից</string>
     <string name="installer_external_success">%s-ը հայտնեց տեղադրման հաջողության մասին</string>
@@ -1072,7 +1075,7 @@ morphe_header_custom_dark.png
     <string name="settings_after_patching_manual">Տեղադրել ձեռքով</string>
     <string name="settings_after_patching_manual_description">Տեղադրվում է լռելյայն տեղադրիչի միջոցով, երբ սեղմում եք «Տեղադրել»</string>
     <string name="settings_nomount_only">Միայն NoMount</string>
-    <string name="settings_nomount_only_description">Միացնում է հավելվածները միայն NoMount-ի միջոցով և երբեք չի անցնում bind mount-ին, അതിനാൽ առանց դրա դրանք մնում են անմիացված</string>
+    <string name="settings_nomount_only_description">Միացնում է հավելվածները միայն NoMount-ի միջոցով և երբեք չի անցնում bind mount-ին, ուստի առանց դրա դրանք մնում են անմիացված</string>
     <string name="settings_auto_install_with_shizuku_description">Տեղադրում կամ մոնտավորում է պատչավորված APK-ն հենց պատչավորումն ավարտվի</string>
     <string name="settings_auto_uninstall_with_shizuku">Ավտոմատ հեռացում կոնֆլիկտի դեպքում</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Հեռացնում է գոյություն ունեցող հավելվածը ստորագրության կոնֆլիկտի դեպքում: Սա կարող է հեռացնել հավելվածի տվյալները</string>
@@ -1105,7 +1108,7 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_error_user_profile">Համակարգը արգելել է այս տեղադրումը: Xiaomi-ի և նմանատիպ սարքերի վրա միացրեք \"Տեղադրում USB-ի միջոցով\" տարբերակը մշակողի կարգավորումներում: Աշխատանքային պրոֆիլի դեպքում տեղադրումները կարող են սահմանափակվել քաղաքականությամբ</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Մարտկոցի օպտիմալացում</string>
-    <string name="settings_system_battery_optimization_description">Պահպանում է փաթեթավորիչի աշխատանքը, երբ հավելվածը and փոքրացված է</string>
+    <string name="settings_system_battery_optimization_description">Պահպանում է փաթեթավորիչի աշխատանքը, երբ հավելվածը փոքրացված է</string>
     <string name="settings_system_process_runtime">Փաթեթավորողի աշխատանքային միջավայր</string>
     <string name="settings_system_jvm_runtime_enable">Օգտագործել ներկառուցված VM-ը</string>
     <string name="settings_system_jvm_runtime_description">Փոփոխություններ Morphe-ի սեփական Java VM-ում, որը կարող է ավելի շատ հիշողություն օգտագործել: Անջատեք՝ Android-ի runtime-ն օգտագործելու համար</string>
@@ -1126,7 +1129,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_signing_key">Ստորագրման բանալի</string>
     <string name="settings_system_signing_key_description">Պահպանում է կամ վերականգնում բանալին, որով ստորագրվում են փոփոխված հավելվածները</string>
-    <string name="settings_system_signing_key_dialog_description">Յուրաքանչյուր հավելված, որը Morphe-ը փեթչում է, ստորագրվում է այս բանալիով: Պահպանեք պատճենը. առանց դրա փեթչված հավելվածները կարելի է թարմացնել միայն հեռացնելուց հետո</string>
+    <string name="settings_system_signing_key_dialog_description">Յուրաքանչյուր հավելված, որը Morphe-ը պատչում է, ստորագրվում է այս բանալիով: Պահեք պատճենը. առանց դրա պատչված հավելվածները կարելի է թարմացնել միայն հեռացնելուց հետո</string>
     <string name="settings_system_signing_key_missing">Morphe-ը կստեղծի մեկը ձեր առաջին փեթչի ժամանակ</string>
     <string name="settings_system_signing_key_created">Ստեղծվել է %s</string>
     <string name="settings_system_signing_key_fingerprint">SHA-256 մատնահետք</string>
@@ -1135,11 +1138,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_patching">Պատչավորում և տեղադրում</string>
     <string name="settings_system_backup_patching_description">Տեղադրող, պատչավորող և պահպանված APK-ներ</string>
     <string name="settings_system_backup_updates_description">Նախնական թողարկումներ և թարմացումների ստուգումներ</string>
-    <string name="settings_system_backup_sources_description">Պատվորյալ աղբյուրներ և GitHub տոկեն</string>
+    <string name="settings_system_backup_sources_description">Անհատական աղբյուրներ և GitHub տոկեն</string>
     <string name="settings_system_backup_patch_selections_description">Ընտրված պատչեր յուրաքանչյուր հավելվածի համար</string>
     <string name="settings_system_backup_signing_key_note">Ստորագրման բանալին պահպանվում է առանձին</string>
     <string name="settings_system_import_keystore_dialog_title">Մուտքագրեք keystore-ի հավաստագրերը</string>
-    <string name="settings_system_import_keystore_dialog_description">Այն ներկայացնելու համար անհրաժեշտ է մուտքագրել keystore-ի հավաստագրերը</string>
+    <string name="settings_system_import_keystore_dialog_description">Այն ներմուծելու համար անհրաժեշտ է մուտքագրել keystore-ի հավաստագրերը</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Օգտանուն (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Գաղտնաբառ</string>
     <string name="settings_system_import_keystore_wrong_credentials">Բանալիների պահոցի սխալ հավաստագրեր</string>
@@ -1163,16 +1166,16 @@ morphe_header_custom_dark.png
     <string name="import_mode_merge_description">Ավելացնել պահուստային պատճենի բացակայող տարրերը: Գոյություն ունեցող տարրերը կմնան անփոփոխ</string>
     <string name="settings_system_export_manager_settings_fail">Morphe կարգավորումների արտահանումը ձախողվեց. %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe կարգավորումները արտահանվեցին</string>
-    <string name="settings_system_export_debug_logs">Արտահանել 디բագ լոգերը</string>
+    <string name="settings_system_export_debug_logs">Արտահանել դեբագ լոգերը</string>
     <string name="settings_system_export_debug_logs_description">Պահպանում է համակարգի մատյանները խնդիրների լուծման համար</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Չհաջողվեց կարդալ մատյանները (ելքի կոդը %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Մատյանների արտահանումը ձախողվեց</string>
     <string name="settings_system_export_debug_logs_export_success">Մատյանները արտահանվեցին</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">Ընդհանուր չափը՝ %s</string>
-    <string name="settings_system_apks_delete_all_confirm">Սա կմնայուն կջնջի այստեղ ցուցադրված պահպանված APK ֆայլերը</string>
+    <string name="settings_system_apks_delete_all_confirm">Սա մշտապես կջնջի այստեղ ցուցադրված պահպանված APK ֆայլերը</string>
     <string name="settings_system_apks_delete_selected_title">Ջնջե՞լ ընտրված APK-ները։</string>
-    <string name="settings_system_apks_delete_selected_confirm">Սա կմնայուն կջնջի ընտրված APK ֆայլերը</string>
+    <string name="settings_system_apks_delete_selected_confirm">Սա մշտապես կջնջի ընտրված APK ֆայլերը</string>
     <string name="settings_system_apks_deleted_all">APK-ները հաջողությամբ ջնջվեցին</string>
     <string name="settings_system_apks_delete_failed">Որոշ APK ֆայլեր չհաջողվեց ջնջել</string>
     <string name="settings_system_apks_export_zip_success">Ընտրված APK-ները արտահանվեցին</string>
@@ -1186,15 +1189,15 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_caches">Քեշեր</string>
     <string name="settings_system_storage_keystore_title">Ստորագրման բանալիների պահոց</string>
     <string name="settings_system_storage_app_data_title">Հավելվածի տվյալներ</string>
-    <string name="settings_system_storage_patch_bundles_title">Փատչի փաթեթներ</string>
+    <string name="settings_system_storage_patch_bundles_title">Պատչերի փաթեթներ</string>
     <string name="settings_system_storage_http_cache_title">Ցանցի քեշ</string>
     <string name="settings_system_storage_http_cache_description">HTTP պատասխանները քեշավորվում են թարմացումն արագացնելու համար</string>
     <string name="settings_system_storage_installer_cache_title">Արտաքին տեղադրողի քեշ</string>
     <string name="settings_system_storage_installer_cache_description">APK պատճեններ, որոնք փոխանցվել են երրորդ կողմի տեղադրողներին</string>
     <string name="settings_system_storage_patcher_workspace_title">Փոփոխիչի աշխատանքային տարածք</string>
-    <string name="settings_system_storage_patcher_workspace_description">Փոփոխիչի աշխատանքային ֆայլեր և օրբոք ժամանակավոր տվյալներ</string>
+    <string name="settings_system_storage_patcher_workspace_description">Փոփոխիչի աշխատանքային ֆայլեր և որբացած ժամանակավոր տվյալներ</string>
     <string name="settings_system_storage_temporary_title">Ժամանակավոր ֆայլեր</string>
-    <string name="settings_system_storage_temporary_description">Պատշերիկման ժամանակ ստեղծված աշխատանքային ֆայլեր</string>
+    <string name="settings_system_storage_temporary_description">Փոփոխման ժամանակ ստեղծված աշխատանքային ֆայլեր</string>
     <string name="settings_system_storage_clear_all">Մաքրել բոլոր քեշերը</string>
     <string name="settings_system_storage_clear_all_description">Միանգամից ազատում է քեշի ողջ վերականգնելի տարածությունը</string>
     <string name="settings_system_storage_clear_all_confirm">Սա մաքրում է ցանցային պատասխանների քեշը, տեղադրողի պատրաստի պատճենները և ժամանակավոր ֆայլերը: Բնօրինակ և փոփոխված APK-ները պահպանվում են</string>
@@ -1202,7 +1205,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_patch_running_warning">Փոփոխության գործընթացը ակտիվ է և օգտագործում է այս ֆայլերը: Դրանց հեռացումն այս պահին կհանգեցնի սխալի</string>
     <string name="settings_system_storage_clear_anyway">Այնուամենայնիվ, մաքրել</string>
     <string name="settings_system_storage_nothing_to_clear">Մաքրելու ոչինչ չկա</string>
-    <string name="settings_system_storage_open_app_info_title">Բացել Android հավելվածի տիրույթը</string>
+    <string name="settings_system_storage_open_app_info_title">Բացել Android հավելվածի տվյալները</string>
     <string name="settings_system_storage_open_app_info_description">Կառավարեք կամ մաքրեք Morphe-ի բոլոր տվյալները համակարգի կարգավորումների միջոցով</string>
     <string name="settings_system_save_original_apks_title">Պահպանել բնօրինակ APK-ները</string>
     <string name="settings_system_save_original_apks_description">Պահպանել նախնական փաթեթավորված APK-ն, որպեսզի այն կարողանա օգտագործվել կրկնակի փաթեթավորման համար առանց ֆայլը նորից ընտրելու</string>
@@ -1210,7 +1213,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_save_patched_apks_description">Պահպանել փաթեթավորված APK-ի պատճենը հետագայում արտահանելու կամ կառավարիչից վերակայացնելու համար</string>
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Փոփոխված APK-ներ</string>
-    <string name="settings_system_patched_apks_empty">Փոփոխված APK-ներ դեռ պահպված չեն</string>
+    <string name="settings_system_patched_apks_empty">Փոփոխված APK-ներ դեռ պահպանված չեն</string>
     <string name="settings_system_patched_apks_delete_title">Ջնջե՞լ փոփոխված APK-ն։</string>
     <string name="settings_system_patched_apks_deleted">Փոփոխված APK-ն հաջողությամբ ջնջվեց</string>
     <string name="settings_system_patched_apks_delete_all_title">Ջնջե՞լ բոլոր փոփոխված APK-ները։</string>
@@ -1223,18 +1226,18 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_all_title">Ջնջե՞լ բոլոր օրիգինալ APK-ները։</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Փաթեթների ընտրություն</string>
-    <string name="settings_system_patch_selections_description">Պահպանված փեթչի ընտրությունները, որոնք մնում են հեռացնելուց հետո</string>
-    <string name="settings_system_patch_selection_reset_all_confirm_title">Վերակազմել բոլոր ընտրությունները:</string>
-    <string name="settings_system_patch_selection_reset_selected_confirm_title">Վերակայմանե՞լ ընտրված փաթեթները։</string>
-    <string name="settings_system_patch_selection_reset_source_confirm_title">Վերակազմել աղբյուրի ընտրությունը:</string>
+    <string name="settings_system_patch_selections_description">Պահպանված պատչերի ընտրությունները, որոնք մնում են հեռացնելուց հետո</string>
+    <string name="settings_system_patch_selection_reset_all_confirm_title">Վերակայե՞լ բոլոր ընտրությունները:</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Վերակայե՞լ ընտրված փաթեթները։</string>
+    <string name="settings_system_patch_selection_reset_source_confirm_title">Վերակայե՞լ աղբյուրի ընտրությունը:</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s %2$s-ի ընդլայնությամբ</string>
     <string name="settings_system_patch_selection_source_format">Աղբյուր #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Սա կջնջի բոլոր պահպանված փեթչի ընտրությունները բոլոր փաթեթների և աղբյուրների համար</string>
     <string name="settings_system_patch_selection_reset_source_warning">Սա կջնջի &lt;b&gt;%1$s&lt;/b&gt;-ի համար պահպանված փոփոխությունների ընտրանքները &lt;b&gt;%2$s&lt;/b&gt;-ում</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Սա կջնջի բոլոր պահպանված փոփոխությունների ընտրանքները ընտրված փաթեթների համար</string>
-    <string name="settings_system_export_source_data_fail">Աղբյուրի տվյալների արտահանմանը հաջողություն չարտագրվեց</string>
+    <string name="settings_system_export_source_data_fail">Չհաջողվեց արտահանել աղբյուրի տվյալները</string>
     <string name="settings_system_export_source_data_success">Աղբյուրի տվյալները հաջողությամբ արտահանվեցին</string>
-    <string name="settings_system_import_source_data_fail">Աղբյուրի տվյալների ներմուծմանը հաջողություն չարտագրվեց</string>
+    <string name="settings_system_import_source_data_fail">Չհաջողվեց ներմուծել աղբյուրի տվյալները</string>
     <string name="settings_system_import_source_data_success">Աղբյուրի տվյալները հաջողությամբ ներմուծվեցին</string>
     <string name="settings_system_selected_patches_section">Ընտրված փաթեթներ</string>
     <string name="settings_system_no_patches_or_options">Պահպանված փեթչեր կամ տարբերակներ չկան</string>
@@ -1267,6 +1270,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">Տեղադրողը անհայտ է</string>
     <string name="settings_system_apk_download_helper_open_directly">Անմիջապես բացել օգնականը</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Բաց է թողնում ներբեռնման հրահանգները և բացում վստահելի օգնականը</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Ավտոմատ ներբեռնել APK-ները խմբով</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Այստեղ ֆայլեր չկան</string>
     <string name="file_picker_read_error">Չի հաջողվում կարդալ այս թղթապանակը</string>
@@ -1286,7 +1290,7 @@ morphe_header_custom_dark.png
     <string name="file_picker_show_hidden_files">Ցուցադրել թաքցված ֆայլերը</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Մասին</string>
-    <string name="settings_system_manager_description">Բաց կոդով նախագիծ հայտնի Android հավելվածների ժամանակակից, օպտիմալացված փեթչինգի համար, որը զարգացվում է համայնքի արձագանքների և ներդրումների հիման վրա</string>
+    <string name="settings_system_manager_description">Բաց կոդով նախագիծ հայտնի Android հավելվածների ժամանակակից, օպտիմալացված փոփոխման համար, որը զարգացվում է համայնքի արձագանքների և ներդրումների հիման վրա</string>
     <string name="credits">Հեղինակներ</string>
     <string name="credits_description">Մարդիկ, ովքեր կանգնած են Morphe-ի հետևում</string>
     <string name="settings_about_section_project">Նախագիծ</string>
@@ -1334,7 +1338,7 @@ morphe_header_custom_dark.png
     <string name="filter">Զտել</string>
     <string name="group">Խումբ</string>
     <string name="reset">Վերակայացնել</string>
-    <string name="reset_all">Վերակազմել բոլորը</string>
+    <string name="reset_all">Վերակայել բոլորը</string>
     <string name="apply">Կիրառել</string>
     <string name="confirm">Հաստատել</string>
     <string name="warning">Զգուշացում</string>
@@ -1369,7 +1373,7 @@ morphe_header_custom_dark.png
     <string name="view">Տեսնել</string>
     <string name="search">Որոնում</string>
     <string name="search_no_results">Արդյունքներ չեն գտնվել</string>
-    <string name="sort">Սորտավորել</string>
+    <string name="sort">Դասավորել</string>
     <string name="any_version">Ցանկացած</string>
     <string name="enabled">Միացված</string>
     <string name="disabled">Անջատված</string>
@@ -1395,7 +1399,7 @@ morphe_header_custom_dark.png
     <string name="import_">Ներմուծել</string>
     <string name="export">Արտահանել</string>
     <string name="copy">Պատճենել</string>
-    <string name="copied_to_clipboard">Պատճենված է հիշողության մեջ</string>
+    <string name="copied_to_clipboard">Պատճենված է սեղմատախտակին</string>
     <string name="download">Ներբեռնել</string>
     <string name="less">Ավելի քիչ</string>
     <string name="expand">Ընդլայնել</string>
@@ -1414,7 +1418,7 @@ morphe_header_custom_dark.png
     <string name="patching">Փոփոխում</string>
     <string name="patched">Փոփոխված</string>
     <string name="open">Բացել</string>
-    <string name="mount">Մոնտավորել</string>
+    <string name="mount">Մոնտաժել</string>
     <string name="mounted">Տեղադրված է</string>
     <string name="unmount">Անջատել մոնտաժումը</string>
     <string name="unmounted">Հեռացված է</string>
@@ -1440,7 +1444,7 @@ morphe_header_custom_dark.png
     <string name="logs">Մատյաններ</string>
     <string name="sources">Աղբյուրներ</string>
     <string name="installing_ellipsis">Տեղադրվում է…</string>
-    <string name="mounting_ellipsis">Մոնտավորվում է…</string>
+    <string name="mounting_ellipsis">Մոնտաժվում է…</string>
     <string name="mount_stage_restoring_stock">Վերականգնվում է բնօրինակը…</string>
     <string name="mount_stage_copying">Պատճենվում է…</string>
     <string name="unmounting_ellipsis">Անջատվում է…</string>
@@ -1452,7 +1456,7 @@ morphe_header_custom_dark.png
     <string name="whats_new">Ի՞նչն է նոր</string>
     <string name="changelog_description">Ինչն է նոր այս տարբերակում</string>
     <string name="changelog_download_fail">Չհաջողվեց ներբեռնել փոփոխությունների ցուցակը՝ %s</string>
-    <string name="changelog_empty">Փոփոխությունների միտքը հասանելի չէ</string>
+    <string name="changelog_empty">Փոփոխությունների մատյան հասանելի չէ</string>
     <string name="changelog_earlier_releases">Նախկին թողարկումներ</string>
     <string name="changelog_patched_with">Պատչավորված է %s-ով</string>
     <string name="changelog_older_empty">Ցուցադրելու համար հին թողարկումներ չկան</string>
@@ -1462,7 +1466,7 @@ morphe_header_custom_dark.png
     <string name="content_translate">Թարգմանել</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">Բնօրինակ</string>
-    <string name="content_translation_failed">Թարգմանությունը ձախցած է՝ %s</string>
+    <string name="content_translation_failed">Թարգմանությունը ձախողվեց՝ %s</string>
     <string name="changelog_section_new">Նոր</string>
     <string name="changelog_section_fixes">Ուղղումներ</string>
     <string name="changelog_section_performance">Արդյունավետություն</string>
@@ -1505,13 +1509,13 @@ morphe_header_custom_dark.png
     <string name="onboarding_signing_key_desc">Պահպանեք այն բանալին, որով ստորագրվում են ձեր փոփոխված հավելվածները: Առանց դրա դրանք կարող են թարմացվել միայն վերատեղադրումից հետո</string>
     <string name="onboarding_swipe_title">Սահելու ժեստեր</string>
     <string name="onboarding_swipe_desc">Սահեցրեք հավելվածի քարտը դեպի աջ՝ հասանելի փաթեթները տեսնելու համար: Սահեցրեք դեպի ձախ՝ քարտը գլխավոր էկրանից թաքցնելու համար</string>
-    <string name="onboarding_settings_desc">Անհատականացրեք Morphe-ը՝ արտաքին տեսքը, 고급 կարգավորումները և համակարգային գործիքները</string>
+    <string name="onboarding_settings_desc">Անհատականացրեք Morphe-ը՝ արտաքին տեսքը, ընդլայնված կարգավորումները և համակարգային գործիքները</string>
     <string name="onboarding_sources_patches_desc">Հպեք՝ այս աղբյուրից հասանելի բոլոր թարմացումները տեսնելու համար</string>
     <string name="onboarding_sources_version_desc">Հպեք տարբերակին՝ այս աղբյուրի փոփոխությունների ամբողջական ցանկը տեսնելու համար</string>
     <string name="onboarding_sources_apps_desc">Հպեք՝ տեսնելու համար այն հավելվածները, որոնք փոփոխում է այս աղբյուրը, և ընտրեք, թե որոնց համար են առաջարկվում փոփոխություններ</string>
     <string name="onboarding_sources_prerelease_desc">Միացրեք սա՝ այս աղբյուրից նախնական թողարկման փաթեթների տարբերակներ ստանալու համար</string>
     <string name="onboarding_appearance_tab_desc">Անհատականացրեք հավելվածի արտաքին տեսքը՝ թեման, շեշտադրվող գույնը և ֆոնը</string>
-    <string name="onboarding_expert_mode_desc">Միացրեք Փորձագետի ռեժիմը՝ փաթեթների ընտրությունը, հատուկ կարգավորումները և այլ 고급 ֆունկցիաներ բացելու համար</string>
+    <string name="onboarding_expert_mode_desc">Միացրեք Փորձագետի ռեժիմը՝ փաթեթների ընտրությունը, հատուկ կարգավորումները և այլ ընդլայնված գործառույթներ բացելու համար</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_installer_desc">Ընտրեք, թե ինչպես տեղադրվեն փոփոխված հավելվածները՝ ստանդարտ, root mount կամ Shizuku</string>
     <string name="onboarding_system_file_picker_desc">Միացրեք՝ APK-ներ կամ keystore-ներ ընտրելիս համակարգային ընտրիչի փոխարեն ներկառուցված ֆայլերի բրաուզերը օգտագործելու համար</string>

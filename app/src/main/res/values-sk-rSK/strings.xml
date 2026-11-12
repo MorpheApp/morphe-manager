@@ -4,7 +4,7 @@
     <string name="home_other_apps">Ďalšie aplikácie</string>
     <string name="home_other_apps_action">Vybrať iné aplikácie</string>
     <string name="home_not_patched_yet">Zatiaľ nezaplátané</string>
-    <string name="home_unpatched_version_installed">Nainštalovaná nezapatchovaná verzia</string>
+    <string name="home_unpatched_version_installed">Nainštalovaná nezáplatovaná verzia</string>
     <string name="home_unpatched_badge">Nezaplátané</string>
     <string name="home_no_patches_available">Neboli nájdené žiadne záplaty</string>
     <string name="home_app_hide_title">Skryť túto aplikáciu?</string>
@@ -18,8 +18,8 @@
     <string name="home_app_shown_named">%s zobrazených</string>
     <string name="home_app_no_hidden">Žiadne skryté aplikácie</string>
     <string name="home_app_hidden_apps_title">Skryté aplikácie</string>
-    <string name="home_app_hidden_apps_hint">Ťuknite na skrytie</string>
-    <string name="home_apps_unhide_message">Zobraziteľné aplikácie sa vrátia na domovskú obrazovku</string>
+    <string name="home_app_hidden_apps_hint">Ťuknite na zobrazenie</string>
+    <string name="home_apps_unhide_message">Zobrazené aplikácie sa vrátia na domovskú obrazovku</string>
     <string name="home_app_patch_sources_description">Zdroje, ktoré zostali nezačiarknuté, sa neponúkajú, keď sa tieto aplikácie záplatujú, a ich záplaty sa nikdy samy od seba nepridajú do výberu. Každý zdroj zostáva zapnutý pre každú inú aplikáciu</string>
     <string name="home_app_patch_sources_mixed">Ponúkané pre %1$s z %2$s</string>
     <string name="home_app_patch_sources_covers">Má záplaty pre %1$s z %2$s.</string>
@@ -66,7 +66,7 @@
     <string name="home_app_filter_clones">Klonované</string>
     <string name="home_app_grouping_none">Žiadna</string>
     <string name="home_app_sort_manual_hint">Dlho podržte aplikáciu a potom klepnite na tlačidlo pre zmenu poradia</string>
-    <string name="home_app_sort_recommended">Odporúčaná verzia</string>
+    <string name="home_app_sort_recommended">Odporúčané poradie</string>
     <string name="home_app_sort_updates_first">Najprv opravy</string>
     <string name="home_app_sort_recently_patched">Nedávno opravené</string>
     <string name="home_no_apps_title">Nedostupné žiadne aplikácie</string>
@@ -230,7 +230,7 @@
     <string name="sources_dialog_choose_apps_description">Vyberte, ktoré z aplikácií tohto zdroja si ponechať po jeho načítaní.</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Zdroje záplat tretích strán</string>
-    <string name="sources_dialog_community_notice_message">"Zdroje komunitných záplat vytvárajú a udržiavam ich autori. Morphe nepreskúma ani neoveruje záplaty tretích strán a nie je zodpovedný za ich obsah ani za to, čo vykonávajú vo vašom zariadení"</string>
+    <string name="sources_dialog_community_notice_message">"Zdroje komunitných záplat vytvárajú a udržiavajú ich autori. Morphe nepreskúma ani neoveruje záplaty tretích strán a nie je zodpovedný za ich obsah ani za to, čo vykonávajú vo vašom zariadení"</string>
     <string name="sources_update_success">Aktualizácia bola úspešná</string>
     <string name="sources_update_unavailable">Neboli nájdené žiadne aktualizácie</string>
     <string name="sources_download_fail">Nepodarilo sa stiahnuť zdroje: %s</string>
@@ -256,14 +256,14 @@
     <string name="home_apk_availability_find">Áno, pomôžte mi to nájsť</string>
     <string name="home_apk_availability_have">Nie, už ho mám</string>
     <string name="home_apk_helper_download">Použiť pomocnú aplikáciu</string>
-    <string name="home_apk_helper_untrusted">Pomocná aplikácia je nainštalovaná, ale ešte nie je dôveryhodná, preto sa tu nenájdeta</string>
+    <string name="home_apk_helper_untrusted">Pomocná aplikácia je nainštalovaná, ale ešte nie je dôveryhodná, preto sa tu nezobrazuje.</string>
     <string name="home_apk_helper_untrusted_action">Skontrolovať pomocné aplikácie</string>
     <string name="home_apk_helper_title">Stiahnuť s pomocnou aplikáciou</string>
     <string name="home_apk_helper_description">Morphe požiada nižšie uvedenú pomocnú aplikáciu, aby stiahla pôvodný APK a vrátila súbor späť</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="home_apk_helper_continue">Otvoriť pomocníka</string>
     <string name="home_apk_helper_warning">Pokračujte iba v prípade, ak dôverujete tejto pomocnej aplikácii. Morphe pred patchovaním kontroluje balík, verziu a podpis čokoľvek, čo prijme</string>
-    <string name="home_apk_helper_warning_unverified">Pokračujte iba v prípade, ak dôverujete tejto pomocnej aplikácii. Morphe nemôže overiť podpis tohto APK, takže upravený súbor by nebol zachvátený</string>
+    <string name="home_apk_helper_warning_unverified">Pokračujte iba v prípade, ak dôverujete tejto pomocnej aplikácii. Morphe nemôže overiť podpis tohto APK, takže upravený súbor by nebol zistený</string>
     <string name="home_apk_helper_no_result">Pomocná aplikácia nevrátila žiadne APK</string>
     <string name="home_apk_helper_no_access">Pomocná aplikácia neudelila prístup k vrátenému APK</string>
     <string name="home_apk_helper_no_package">Pomocná aplikácia nepovedala, ktorú nainštalovanú aplikáciu použiť.</string>
@@ -276,7 +276,7 @@
     <string name="home_apk_use_installed_unverified">Nepodarilo sa overiť podpis nainštalovanej aplikácie, takže môže byť už zaplátaná</string>
     <string name="home_unverified">Neoverené</string>
     <string name="home_install_verification_pending">Overenie inštalácie…</string>
-    <string name="home_app_info_install_unverified">Morphe nemôže potvrdiť, že nainštalovaná aplikácia je verzia, ktorú zaplátal. Opätovne ju zaplátajte alebo nainštalujte zo saved APK, aby ste obnovili jej funkcie</string>
+    <string name="home_app_info_install_unverified">Morphe nemôže potvrdiť, že nainštalovaná aplikácia je verzia, ktorú zaplátal. Opätovne ju zaplátajte alebo nainštalujte z uloženého APK, aby ste obnovili jej funkcie</string>
     <string name="home_app_info_no_saved_apk">Nie je uložený žiadny súbor APK. Na zaplátanie bude potrebné znova vybrať APK súbor</string>
     <string name="home_version_requires_android">Vyžaduje Android %s+</string>
     <string name="home_apk_no_compatible_versions_title">Nepodporované na tomto zariadení</string>
@@ -313,7 +313,7 @@
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
     <string name="home_file_picker_prompt_app_title">Vyberte APK %s</string>
-    <string name="home_file_picker_prompt_where">Prehliadače to zvyčajne uložia do priečinka Stiahnute súbory</string>
+    <string name="home_file_picker_prompt_where">Prehliadače to zvyčajne uložia do priečinka Stiahnuté súbory</string>
     <string name="home_file_picker_prompt_open_apk">Otvoriť APK súbor</string>
     <string name="home_recommended_version">Odporúčaná verzia</string>
     <string name="home_selected_version">Vybraná verzia:</string>
@@ -394,7 +394,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_message">K dispozícii je iba %1$s GB voľného úložiska. Oprava vyžaduje aspoň %2$s GB voľného miesta, aby správne fungovala.</string>
     <string name="home_low_disk_space_dialog_warning">Pokračovanie môže viesť k chybe \"súbor sa nenašiel\" alebo poškodenému výstupnému APK</string>
-    <string name="home_simple_bundle_select_title">Vyber zdrojový súbor záplaty</string>
+    <string name="home_simple_bundle_select_title">Vyberte zdroj záplat</string>
     <string name="home_simple_bundle_select_remember">Vždy používať tento zdroj pre túto aplikáciu.</string>
     <!-- Color picker -->
     <string name="custom_color">Vlastná farba</string>
@@ -460,13 +460,13 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="header_creator_guide_positioning_title">Polohovanie a škálovanie</string>
     <string name="header_creator_guide_positioning_body">Potiahnite a štipnite obrázok v editore alebo zmeňte jeho veľkosť posuvníkom. Prerušovaný rámček označuje miesto, kde sa nachádza predvolené logo, a vodidlá sa zobrazia, keď sa obrázok s ním zarovná.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Zvolená záplata</string>
+    <string name="batch_patch_action">Záplatovať vybrané</string>
     <string name="batch_patch_title">Hromadné záplatovanie</string>
     <string name="batch_patch_planning">Pripravuje sa front…</string>
     <string name="batch_patch_preparing_next">Pripravuje sa ďalšia aplikácia…</string>
     <string name="batch_patch_progress_counter">Patchovanie %1$s z %2$s</string>
     <string name="batch_patch_summary">%1$s opravených, %2$s zlyhaných, %3$s preskočených</string>
-    <string name="batch_patch_saved_hint">Aplikované záplaty boli uložené. Nainštalujte ich teraz alebo neskôr zo zoznamu záplat APK v nastaveniach</string>
+    <string name="batch_patch_saved_hint">Záplatované aplikácie boli uložené. Nainštalujte ich teraz alebo neskôr zo zoznamu záplatovaných APK v nastaveniach</string>
     <string name="batch_patch_multiple_sources">Niektoré aplikácie kombinujú záplaty z viac ako jedného zdroja, čo môže spôsobiť konflikty</string>
     <string name="batch_patch_needs_apk">Žiadny dostupný APK, priložte súbor</string>
     <string name="batch_patch_wrong_package">Priložený súbor patrí k %s</string>
@@ -475,10 +475,13 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="batch_patch_source_installed">Nainštalovaná aplikácia</string>
     <string name="batch_patch_source_file">Priložený súbor</string>
     <string name="batch_patch_source_unavailable">APK súbor sa nepodarilo pripraviť</string>
-    <string name="batch_patch_force_version">Aplikovať aj tak</string>
+    <string name="batch_patch_force_version">Záplatovať aj tak</string>
     <string name="batch_patch_force_version_done">Napriek tomu zaradené do frontu, aplikácia sa môže pokaziť.</string>
     <string name="batch_patch_accept_signature_done">Napriek tomu zaradené do frontu, APK nebolo overené.</string>
     <string name="batch_patch_apk_selected">APK vybrané</string>
+    <string name="batch_patch_auto_download_stopped">Automatické sťahovanie súborov APK bolo zastavené</string>
+    <string name="batch_patch_auto_download_stop">Zastaviť sťahovanie</string>
+    <string name="batch_patch_auto_download_kept">Sťahovaný súbor APK sa nedal použiť, preto sa zachová predchádzajúci</string>
     <string name="batch_patch_edit_patches">Vyberte záplaty</string>
     <string name="batch_patch_state_no_apk">Žiadny APK</string>
     <string name="batch_patch_state_no_patches">Žiadne záplaty</string>
@@ -503,7 +506,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="batch_queue_pending_subtitle">Kliknutím skontrolujte a začnite</string>
     <string name="batch_queue_clear_title">Vymazať frontu?</string>
     <string name="batch_queue_clear_description">Všetky aplikácie budú odstránené z fronty</string>
-    <string name="batch_queue_keep_title">ponechať vo fronte?</string>
+    <string name="batch_queue_keep_title">Ponechať vo fronte?</string>
     <string name="batch_queue_keep_description">Aplikácie vo fronte budú na hlavnej obrazovke čakať na neskoršie spustenie</string>
     <string name="batch_queue_keep">Ponechať</string>
     <string name="shortcut_repatch_short">Zopakovať záplatu</string>
@@ -521,7 +524,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="home_app_info_delete_preservation_note">Výber a nastavenia záplat budú uložené pre budúce plátanie</string>
     <string name="home_app_info_patches_name_default">Záplaty</string>
     <string name="home_app_info_patches_name_fallback">Nepomenované</string>
-    <string name="home_app_info_patches_source_removed">Zmazaný zdroj záplaty</string>
+    <string name="home_app_info_patches_source_removed">Odstránený zdroj záplat</string>
     <string name="home_app_info_patches_replace_fail">Nepodarilo sa importovať záplaty: %s</string>
     <string name="home_app_info_repatch_no_original_apk">Nebol nájdený pôvodný APK súbor. Nie je možné znovu zaplátať túto aplikáciu</string>
     <string name="home_app_info_original_package_name">Pôvodný názov balíka</string>
@@ -573,7 +576,7 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="root_pre_patch_installer_standard_title">Štandardná inštalácia</string>
     <string name="root_pre_patch_installer_standard_description">Patche ako bežný APK s podporou GmsCore. Po opatchovaní sa použije vaše nastavenie inštalátora.</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">Opýtane, kým je %1$s nastavené na %2$s. Režim záplaty nemožno po záplatovaní zmeniť</string>
+    <string name="root_pre_patch_installer_hint">Pýta sa, kým je %1$s nastavené na %2$s. Režim záplaty nemožno po záplatovaní zmeniť</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Chyba bola skopírovaná do schránky</string>
     <string name="patcher_error_log">Záznam o chybách</string>
@@ -731,7 +734,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Záplatovateľ prepadol skôr, než skončil. Ak sa to zopakuje, vypnite %1$s a nahláste problém spolu s protokolom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <string name="patcher_out_of_memory_message">Patcher vyčerpal pamäť so zásobníkom %1$s MB. Táto aplikácia je príliš veľká na vybrané záplaty. Skúste patchovať s menej zdrojmi záplat alebo vyberte menej záplat</string>
+    <string name="patcher_out_of_memory_message">Patcher vyčerpal pamäť pri %1$s MB halde. Táto aplikácia je príliš veľká na vybrané záplaty. Skúste patchovať s menej zdrojmi záplat alebo vyberte menej záplat</string>
     <string name="install_app_success">Úspešne nainštalované</string>
     <string name="install_app_fail">Nepodarilo sa nainštalovať aplikáciu: %s</string>
     <string name="install_ignore_signature">Nainštalovať napriek tomu</string>
@@ -739,7 +742,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="uninstall_app_fail">Nepodarilo sa odinštalovať aplikáciu: %s</string>
     <string name="uninstall_app_unverified">Ponechané na mieste: Morphe nemohol overiť, že nainštalovaná aplikácia je zostava, ktorú opatchoval.</string>
     <string name="launch_app_unverified">Morphe nemohol overiť, že nainštalovaná aplikácia je zostava, ktorú opatchoval.</string>
-    <string name="uninstall_timeout">Inštalácia sa časovo obmedzená.</string>
+    <string name="uninstall_timeout">Vypršal časový limit odinštalovania</string>
     <string name="save_apk_success">APK súbor uložený</string>
     <string name="saved_app_export_failed">Nepodarilo sa exportovať zaplátanú aplikáciu</string>
     <string name="saved_app_removed_toast">Uložená zaplátaná aplikácia bola odstránená</string>
@@ -758,7 +761,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="mini_game_restart">Začať odznova</string>
     <string name="mini_game_change">Vybrať inú hru</string>
     <string name="mini_game_2048_picker_subtitle">Posúvajte dlaždice, aby ste ich spojili</string>
-    <string name="mini_game_flappy_picker_subtitle">Ťuknite a prelette cez rúry</string>
+    <string name="mini_game_flappy_picker_subtitle">Ťuknite a preleťte cez rúry</string>
     <string name="mini_game_flappy_tap_to_start">Ťuknite a lietajte</string>
     <string name="mini_game_snake_picker_subtitle">Jedzte potravu, nedotýkajte sa seba</string>
     <string name="mini_game_snake_swipe_to_start">Potiahnite prstom, aby ste začali</string>
@@ -790,7 +793,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_background_none">Žiadna</string>
     <string name="settings_appearance_background_random">Náhodné</string>
     <string name="settings_appearance_background_random_interval_launch">Pri spustení</string>
-    <string name="settings_appearance_background_random_interval_daily">Dennev</string>
+    <string name="settings_appearance_background_random_interval_daily">Denne</string>
     <string name="settings_appearance_background_random_interval_3days">Každé 3 dni</string>
     <string name="settings_appearance_parallax_effect">Paralaxový efekt</string>
     <string name="settings_appearance_parallax_effect_description">Plynulé posúvanie pozadia pri nakláňaní zariadenia</string>
@@ -832,11 +835,11 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_repatch_notice">Upozornenie na opätovné záplatovanie</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazuje banner, keď je možné znovu opraviť opravené aplikácie</string>
     <string name="settings_appearance_more_apps_card">Karta Ďalšie aplikácie</string>
-    <string name="settings_appearance_more_apps_card_description">Zobrazí kartu pod aplikáciami, ktorá vedie k patchom komunity</string>
+    <string name="settings_appearance_more_apps_card_description">Zobrazí kartu pod aplikáciami, ktorá vedie k záplatám komunity</string>
     <string name="settings_appearance_app_card_colors">Farby kariet</string>
     <string name="settings_appearance_app_card_colors_default">Predvolená</string>
     <string name="settings_appearance_app_card_colors_default_description">Pridelte každej aplikácii a zdroju vlastnú farbu</string>
-    <string name="settings_appearance_app_card_colors_accent">Odtiene</string>
+    <string name="settings_appearance_app_card_colors_accent">Akcent</string>
     <string name="settings_appearance_app_card_colors_accent_description">Pre karty aplikácií a zdrojov použite akcentovú farbu aplikácie</string>
     <string name="settings_appearance_app_card_colors_gradient">Prechod</string>
     <string name="settings_appearance_app_card_colors_gradient_description">Pre karty aplikácií použite jeden vlastný gradient, ktorý sa pre karty zdrojov zjednotí do jednej farby</string>
@@ -869,7 +872,7 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_app_icon_accent_4">Súmrak</string>
     <string name="settings_appearance_app_icon_background">Pozadie</string>
     <string name="settings_appearance_app_icon_mark">Logo</string>
-    <string name="settings_appearance_app_icon_mark_color">Farebná</string>
+    <string name="settings_appearance_app_icon_mark_color">Farba</string>
     <string name="settings_appearance_app_icon_mark_white">Biela</string>
     <string name="settings_appearance_app_icon_mark_black">Čierna</string>
     <string name="settings_appearance_app_icon_change_dialog_title">Zmeniť ikonu aplikácie?</string>
@@ -931,8 +934,8 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="settings_advanced_strip_unused_libs">Optimalizovať pre architektúru zariadenia</string>
     <string name="settings_advanced_strip_unused_libs_description">Odstráni nepoužívané natívne knižnice a APK splity</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat_summary">Odomie zdrojové kódy žiadostí o spriahnutie a súkromné úložiská</string>
-    <string name="settings_advanced_github_pat_description">Pre žiadosti o spriahnutie, súkromné úložiská a vyšší limit rýchlosti GitHubu</string>
+    <string name="settings_advanced_github_pat_summary">Odomkne zdroje pull requestov a súkromné repozitáre</string>
+    <string name="settings_advanced_github_pat_description">Pre zdroje pull requestov, súkromné repozitáre a vyšší limit rýchlosti GitHubu</string>
     <string name="settings_advanced_github_pat_configured">Token nastavený</string>
     <string name="settings_advanced_github_pat_create">Vytvoriť token na GitHube</string>
     <!-- "%s" is the GitHub scope name, keep it as is -->
@@ -962,7 +965,7 @@ Záplaty tým nie sú ovplyvnené: povoľte predbežné záplaty pre každý zdr
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Zadajte vlastný názov</string>
     <string name="settings_advanced_patch_options_path_gone">Tento priečinok sa už nedá prečítať. Vyberte ho znova alebo ho vymažte, inak sa záplatovanie zastaví a opýta sa naň.</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Ikona aplikácie</string>
-    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, ktorou je aplikácia patched, používa sa aj tam, kde sa neskôr nedá zmeniť, napríklad v Android Auto</string>
+    <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikona, ktorou je aplikácia záplatovaná, sa používa aj tam, kde sa neskôr nedá zmeniť, napríklad v Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Vlastná ikona aplikácie potrebuje priečinok s obrázkami ikon.</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon">Vlastná ikona</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Priečinok s obrázkami, ktoré sa majú použiť ako vlastná ikona.
@@ -1029,7 +1032,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="installer_title">Vybrať inštalátor</string>
     <string name="installer_internal_description">Použite nástroj na inštaláciu balíkov Android</string>
     <string name="installer_play_store_description">Používa systémový inštalátor a nastavuje Google Play Store ako zdroj inštalácie.</string>
-    <string name="installer_root_description">Inštaluje ticho pomocou rootu</string>
+    <string name="installer_root_description">Inštaluje potichu pomocou rootu</string>
     <string name="installer_root_play_store_description">Inštaluje sa potichu s root právami a nastavuje Google Play Store ako zdroj inštalácie</string>
     <string name="installer_shizuku_description">Nainštalovať na pozadí pomocou Shizuku alebo Sui</string>
     <string name="installer_shizuku_play_store_description">Inštaluje sa potichu cez Shizuku alebo Sui a nastavuje Google Play Store ako zdroj inštalácie</string>
@@ -1042,7 +1045,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="installer_status_shizuku_permission">Udeľte Morphe povolenie priamo z aplikácie Shizuku</string>
     <string name="installer_mount_warning_install">Režim záplaty je nastavený na root mount. Táto uložená aplikácia nebola nainštalovaná pomocou mount</string>
     <string name="mount_version_mismatch_message">Verzia stock aplikácie (%2$s) sa nezhoduje s verziou patched aplikácie (%1$s). Použite mount pre zodpovedajúcu verziu stock aplikácie a skúste to znova</string>
-    <string name="mount_stock_restore_failed_message">Android odmietol uložený pôvodný APK. Nainštalujte zodpovedajúcu pôvodnú verziu a skúste opätovne montáž.</string>
+    <string name="mount_stock_restore_failed_message">Android odmietol uložený pôvodný APK. Nainštalujte zodpovedajúcu pôvodnú verziu a skúste znova namontovať</string>
     <string name="installer_status_shizuku_unsupported">Nainštalovaná verzia Shizuku nie je podporovaná</string>
     <string name="installer_action_open_shizuku">Otvoriť Shizuku</string>
     <string name="installer_hint_generic">Inštalácia zlyhala. Skúste to znova alebo s iným inštalátorom</string>
@@ -1055,7 +1058,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="installer_unavailable_title">%s je nedostupný</string>
     <string name="installer_unavailable_message">Vaš preferovaný inštalátor (%s) nie je dostupný. Môžete problém opraviť a skúsiť znova, alebo použiť štandardný inštalátor.</string>
     <string name="installer_unavailable_shizuku_hint">Uistite sa, že Shizuku beží a že ste mu udelili povolenie</string>
-    <string name="installer_choose_another">Vybrať inú inštaláciu</string>
+    <string name="installer_choose_another">Vybrať iný inštalátor</string>
     <string name="installer_play_store_warning_title">Inštalovať ako Play Store?</string>
     <string name="installer_play_store_warning_message">Opravená aplikácia bude zaznamenaná ako nainštalovaná z Obchodu Play. To môže pomôcť službám, ako je Android Auto, rozpoznať ju ako aplikáciu z Obchodu Play, ale nie je to zaručené pre každú aplikáciu alebo zariadenie. Správanie sa môže líšiť v závislosti od verzie Androidu, ROM, značky zariadenia a kontrol špecifických pre aplikáciu</string>
     <string name="installer_play_store_warning_risk">Play Store môže ponúkať aktualizácie pre opravenú aplikáciu. Inštalácia takejto aktualizácie prepíše opravený APK originálnou verziou a odstráni opravy. Ak sa zobrazí výzva na aktualizáciu, klepnite na ponuku troch bodov na stránke aplikácie v Play Store a vyberte možnosť \"Zakázať aktualizácie\"</string>
@@ -1077,7 +1080,7 @@ Rozmery obrázka musia byť nasledovné:
     <string name="settings_auto_uninstall_with_shizuku">Automaticky odinštalovať v prípade konfliktu</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Odinštaluje existujúcu aplikáciu pri konflikte podpisov. Môže to odstrániť údaje aplikácie</string>
     <string name="settings_ignore_install_target_rules">Ignorovať požiadavky cieľa inštalácie</string>
-    <string name="settings_ignore_install_target_rules_description">Umožňuje vypnúť patche, ktoré vyžaduje cieľ inštalácie, a zapnúť tie, ktoré vylučuje. Patched aplikácia nemusí fungovať</string>
+    <string name="settings_ignore_install_target_rules_description">Umožňuje vypnúť záplaty, ktoré vyžaduje cieľ inštalácie, a zapnúť tie, ktoré vylučuje. Záplatovaná aplikácia nemusí fungovať</string>
     <string name="settings_auto_uninstall_warning_title">Povoliť automatické odinštalovanie?</string>
     <string name="settings_auto_uninstall_warning_message">Ak Android nahlási konflikt podpisu počas automatickej inštalácie pomocou Shizuku, Morphe najprv odinštaluje existujúcu aplikáciu a potom nainštaluje opravený APK</string>
     <string name="settings_auto_uninstall_warning_risk">Týmto sa môžu odstrániť údaje aplikácie. Ak sa opravenému APK nepodarí nainštalovať po odinštalovaní, predchádzajúca aplikácia už nemusí existovať</string>
@@ -1105,10 +1108,10 @@ Podrobnosti: %2$s"</string>
     <string name="installer_shizuku_error_user_profile">Systém zablokoval túto inštaláciu. Na Xiaomi a podobných zariadeniach zapnite \"Inštalovať cez USB\" v možnostiach pre vývojárov. Na pracovnom profile môžu byť inštalácie obmedzené zásadami</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Optimalizácia batérie</string>
-    <string name="settings_system_battery_optimization_description">Udrží pátrač v prevádzke, keď je aplikácia minimalizovaná</string>
+    <string name="settings_system_battery_optimization_description">Udrží záplatovač v prevádzke, keď je aplikácia minimalizovaná</string>
     <string name="settings_system_process_runtime">Runtime patchera</string>
-    <string name="settings_system_jvm_runtime_enable">Použiť embednutý VM</string>
-    <string name="settings_system_jvm_runtime_description">Patche vo vlastnom Java VM od Morphe, ktoré môžu využívať viac pamäte. Vypnite pre použitie runtime Androidu</string>
+    <string name="settings_system_jvm_runtime_enable">Použiť vstavanú Java VM</string>
+    <string name="settings_system_jvm_runtime_description">Záplaty bežia vo vlastnej Java VM od Morphe, ktorá môže využívať viac pamäte. Vypnite pre použitie runtime Androidu</string>
     <string name="settings_system_jvm_runtime_unavailable">Vyžaduje zariadenie s ARM alebo 64-bitovým x86</string>
     <string name="settings_system_patcher_completion_sound">Zvuk úspešného dokončenia</string>
     <string name="settings_system_patcher_completion_sound_description">Prehráva odlišný tón pre úspech alebo zlyhanie po dokončení záplatovania</string>
@@ -1199,7 +1202,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_storage_clear_all_description">Vymaže všetok reclaimovateľný priestor cache naraz</string>
     <string name="settings_system_storage_clear_all_confirm">Toto vymaže uložené sieťové odpovede, priebežne inštalované kópie a dočasné súbory. Pôvodné a opatchované APK zostanú zachované</string>
     <string name="settings_system_storage_cleared">Uvoľnené miesto: %s</string>
-    <string name="settings_system_storage_patch_running_warning">Prebieha aktualizácia, ktorá používa tieto súbory. Ich okamžité vymazanie spôsobí zlyhanie</string>
+    <string name="settings_system_storage_patch_running_warning">Prebieha záplatovanie, ktoré používa tieto súbory. Ich okamžité vymazanie spôsobí zlyhanie</string>
     <string name="settings_system_storage_clear_anyway">Vymazať aj tak</string>
     <string name="settings_system_storage_nothing_to_clear">Nie je čo vymazať</string>
     <string name="settings_system_storage_open_app_info_title">Otvoriť úložisko aplikácie Android</string>
@@ -1248,10 +1251,10 @@ Podrobnosti: %2$s"</string>
     <string name="selection_set_saved">Uložené ako %s</string>
     <string name="selection_set_applied">Prepnuté na %s</string>
     <string name="selection_set_deleted">%s bolo odstránené</string>
-    <string name="selection_set_renamed">Переmenované na %s</string>
-    <string name="selection_set_rename_title">Premenovať súpravu</string>
-    <string name="selection_set_delete_title">Odstrániť súpravu?</string>
-    <string name="selection_set_delete_message">Týmto sa súprava %s trvalo odstráni</string>
+    <string name="selection_set_renamed">Premenované na %s</string>
+    <string name="selection_set_rename_title">Premenovať sadu</string>
+    <string name="selection_set_delete_title">Odstrániť sadu?</string>
+    <string name="selection_set_delete_message">Týmto sa sada %s natrvalo odstráni</string>
     <string name="copy_selection_empty">Nie sú k dispozícii žiadne iné uložené výbery na kopírovanie</string>
     <string name="copy_selection_available_format">%1$s z %2$s dostupných</string>
     <!-- Settings - System Tab - Custom file picker -->
@@ -1267,13 +1270,14 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Neznámy inštalátor</string>
     <string name="settings_system_apk_download_helper_open_directly">Otvoriť pomocníka okamžite</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Preskočí pokyny na sťahovanie a otvorí dôveryhodného pomocníka</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Automaticky sťahovať súbory APK hromadne</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Tu nie sú žiadne súbory</string>
     <string name="file_picker_read_error">Nie je možné prečítať tento adresár</string>
     <string name="file_picker_internal_storage">Interná pamäť</string>
     <string name="file_picker_sd_card">SD karta</string>
     <string name="file_picker_root">Koreň (/)</string>
-    <string name="file_picker_storage_access_unavailable">Toto zariadenie nemá obrazovku, ktorá by umožnila prístup ku všetkým súborom. Povoleňte ho cez ADB pomocou: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
+    <string name="file_picker_storage_access_unavailable">Toto zariadenie nemá obrazovku, ktorá by umožnila prístup ku všetkým súborom. Povoľte ho cez ADB pomocou: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_storages">Úložiská</string>
     <string name="file_saver_downloads_failed">Nepodarilo sa vytvoriť súbor v priečinku Stiahnuté súbory</string>
     <string name="file_saver_saving_to_downloads">Toto zariadenie nemá obrazovku pre ukladanie, takže súbor sa uloží do priečinka Stiahnuté súbory ako %1$s</string>
@@ -1302,7 +1306,7 @@ Podrobnosti: %2$s"</string>
     <string name="easter_egg_pill_red">Červená tabletka</string>
     <string name="easter_egg_pill_blue">Modrá tabletka</string>
     <string name="easter_egg_pill_red_toast">Pozadie Matrixu odomknuté</string>
-    <string name="easter_egg_pill_blue_toast">Reklamy na teba budú čakať.</string>
+    <string name="easter_egg_pill_blue_toast">Reklamy na vás budú čakať.</string>
     <string name="easter_egg_pill_message_again">Už si v Matrixe. Červená pilulka ťa vráti späť do dažďa, modrá ťa prebudí.</string>
     <string name="easter_egg_pill_red_toast_again">Späť v daždi.</string>
     <string name="easter_egg_pill_blue_toast_again">Odpojený. Cesta späť je tam, kde vždy bola.</string>
@@ -1318,7 +1322,7 @@ Podrobnosti: %2$s"</string>
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="settings_section_patcher">Opravovač</string>
     <string name="settings_section_updates">Aktualizácie</string>
-    <string name="settings_section_patching">Aplikujem záplaty</string>
+    <string name="settings_section_patching">Záplatovanie</string>
     <string name="settings_section_appearance_summary">Ako vyzerá Morphe</string>
     <string name="settings_section_patch_options_summary">Čo jednoducho upravuje aplikácie s</string>
     <string name="settings_section_general">Všeobecné</string>
@@ -1420,7 +1424,7 @@ Podrobnosti: %2$s"</string>
     <string name="unmounted">Odpojené</string>
     <string name="remount">Znovu pripojiť</string>
     <string name="restore">Obnoviť</string>
-    <string name="share">Zdieľaž</string>
+    <string name="share">Zdieľať</string>
     <string name="install">Inštalovať</string>
     <string name="installed">Nainštalované</string>
     <string name="reinstall">Preinštalovať</string>
@@ -1500,8 +1504,8 @@ Chcete aj tak pokračovať?"</string>
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s z %2$s</string>
     <string name="onboarding_sources_desc">Spravujte svoje zdroje záplat. Každý zdroj poskytuje záplaty, ktoré je možné použiť na vaše aplikácie</string>
-    <string name="onboarding_other_apps_desc">Opravte aplikáciu, ktorá nie je na zozname, zo súboru APK alebo aplikácie nainštrovanej v zariadení</string>
-    <string name="onboarding_add_source_desc">Pridajte zdroj opravy z odkazu alebo súboru balíka opráv</string>
+    <string name="onboarding_other_apps_desc">Opravte aplikáciu, ktorá nie je na zozname, zo súboru APK alebo aplikácie nainštalovanej v zariadení</string>
+    <string name="onboarding_add_source_desc">Pridajte zdroj záplat z odkazu alebo súboru balíka záplat</string>
     <string name="onboarding_signing_key_desc">Zálohujte kľúč, ktorý podpisuje vaše opravené aplikácie. Bez neho ich možno aktualizovať iba po odstránení</string>
     <string name="onboarding_swipe_title">Gestá pre posúvanie prstom</string>
     <string name="onboarding_swipe_desc">Posúňte prstom doprava na kartičke aplikácie, aby ste zobrazili dostupné záplaty. Posúňte prstom doľava, aby ste skryli kartičku z domovskej obrazovky</string>
@@ -1519,7 +1523,7 @@ Chcete aj tak pokračovať?"</string>
     <string name="tour_prompt_title">Rýchly prehľad funkcií</string>
     <string name="tour_prompt_desc">Chcete si rýchlo pozrieť kľúčové funkcie Morphe?</string>
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="tour_prompt_confirm">Prevezmite ma</string>
+    <string name="tour_prompt_confirm">Ukážte mi to</string>
     <string name="onboarding_restart_title">Prehliadka funkcií</string>
     <string name="onboarding_restart_desc">Prehliadka kľúčových funkcií</string>
 </resources>

@@ -33,8 +33,8 @@
         <item quantity="other">Patch-források %s alkalmazáshoz</item>
     </plurals>
     <plurals name="home_apk_availability_hidden_sources">
-        <item quantity="one">A(z) %s forrása rejtve van ehhez az alkalmazáshoz. Válassza ki az alkalmazást az Alkalmazások lapon, és nyissa meg a Források javítása menüpontot a visszaállításhoz</item>
-        <item quantity="other">A(z) %s forrásai rejtve vannak ehhez az alkalmazáshoz. Válassza ki az alkalmazást az Alkalmazások lapon, és nyissa meg a Források javítása menüpontot a visszaállításhoz</item>
+        <item quantity="one">A(z) %s forrása rejtve van ehhez az alkalmazáshoz. Válassza ki az alkalmazást az Alkalmazások lapon és nyissa meg a Források javítása menüpontot a visszaállításhoz</item>
+        <item quantity="other">A(z) %s forrásai rejtve vannak ehhez az alkalmazáshoz. Válassza ki az alkalmazást az Alkalmazások lapon és nyissa meg a Források javítása menüpontot a visszaállításhoz</item>
     </plurals>
     <plurals name="expert_mode_hidden_sources_notice">
         <item quantity="one">%s forrás elrejtve. Koppintson a megjelenítéshez</item>

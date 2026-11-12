@@ -479,6 +479,9 @@
     <string name="batch_patch_force_version_done">به‌هرحال در صف قرار گرفت؛ ممکن است برنامه از کار بیفتد</string>
     <string name="batch_patch_accept_signature_done">به‌هرحال در صف قرار گرفت؛ APK تأیید نشده است</string>
     <string name="batch_patch_apk_selected">APK انتخاب شده است</string>
+    <string name="batch_patch_auto_download_stopped">دانلود خودکار APKها متوقف شد</string>
+    <string name="batch_patch_auto_download_stop">توقف دانلودها</string>
+    <string name="batch_patch_auto_download_kept">APK دانلود شده قابل استفاده نبود، بنابراین نسخه قبلی حفظ شد</string>
     <string name="batch_patch_edit_patches">انتخاب پچ‌ها</string>
     <string name="batch_patch_state_no_apk">بدون APK</string>
     <string name="batch_patch_state_no_patches">بدون پچ</string>
@@ -727,7 +730,7 @@
     <string name="failed_to_execute_patch">اعمال %s ناموفق بود</string>
     <string name="patched_app_save_failed_toast">ذخیرهٔ برنامهٔ پچ‌شده ناموفق بود</string>
     <string name="plugin_activity_dialog_body">برای ادامهٔ کار این افزونه، تعامل کاربر لازم است</string>
-    <string name="patcher_process_killed_message">سیستم قبل از اتمام فرآیند لکه‌گیر، آن را متوقف کرد، معمولاً برای آزادسازی حافظه. برنامه‌های دیگر را ببندید و دوباره تلاش کنید</string>
+    <string name="patcher_process_killed_message">سیستم قبل از اتمام فرایند پچر آن را متوقف کرد، معمولاً برای آزادسازی حافظه. برنامه‌های دیگر را ببندید و دوباره تلاش کنید</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">پچر پیش از اتمام کرش کرد. اگر دوباره اتفاق افتاد، %1$s را خاموش کرده و مشکل را همراه با لاگ گزارش دهید</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -929,9 +932,9 @@
     <string name="settings_advanced_expert_mode_dialog_title">حالت حرفه‌ای فعال شود؟</string>
     <string name="settings_advanced_expert_mode_dialog_message">حالت حرفه‌ای کنترل بیشتری بر نحوهٔ اعمال پچ‌ها می‌دهد، اما پیکربندی نادرست تنظیمات در این حالت ممکن است برنامه را از کار بیندازد</string>
     <string name="settings_advanced_strip_unused_libs">بهینه‌سازی برای معماری دستگاه</string>
-    <string name="settings_advanced_strip_unused_libs_description">حذف کتابخانه‌های نیتی استفاده نشده و تقسیم‌بندی‌های APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">حذف کتابخانه‌های بومی استفاده‌نشده و تقسیم‌بندی‌های APK</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
-    <string name="settings_advanced_github_pat_summary">منابع درخواست‌های کشیدن و مخازن خصوصی را غیرفعال می‌کند</string>
+    <string name="settings_advanced_github_pat_summary">فعال‌سازی منابع درخواست‌های کشیدن و مخازن خصوصی</string>
     <string name="settings_advanced_github_pat_description">برای منابع درخواست‌های کشیدن، مخازن خصوصی و محدودیت نرخ بالاتر GitHub</string>
     <string name="settings_advanced_github_pat_configured">توکن پیکربندی شد</string>
     <string name="settings_advanced_github_pat_create">یک توکن در GitHub ایجاد کنید</string>
@@ -1106,7 +1109,7 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">بهینه‌سازی باتری</string>
     <string name="settings_system_battery_optimization_description">پچر را هنگام کوچک‌شدن برنامه در حال اجرا نگه می‌دارد</string>
-    <string name="settings_system_process_runtime">زمان اجرای اصلاح‌کننده</string>
+    <string name="settings_system_process_runtime">زمان اجرای پچر</string>
     <string name="settings_system_jvm_runtime_enable">استفاده از VM تعبیه‌شده</string>
     <string name="settings_system_jvm_runtime_description">پچ‌ها در Java VM اختصاصی Morphe اجرا می‌شوند که می‌تواند حافظه بیشتری مصرف کند. برای استفاده از runtime اندروید، این گزینه را خاموش کنید</string>
     <string name="settings_system_jvm_runtime_unavailable">به دستگاه ARM یا x86 ۶۴ بیتی نیاز دارد</string>
@@ -1267,6 +1270,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">نصب‌کننده ناشناس</string>
     <string name="settings_system_apk_download_helper_open_directly">باز کردن فوری کمک‌کننده</string>
     <string name="settings_system_apk_download_helper_open_directly_description">دستورالعمل‌های دانلود را نادیده می‌گیرد و کمک‌کننده مورد اعتماد را باز می‌کند</string>
+    <string name="settings_system_apk_download_helper_auto_batch">دانلود خودکار APKها به صورت دسته‌ای</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">اینجا فایلی نیست</string>
     <string name="file_picker_read_error">خواندن این پوشه ممکن نیست</string>
@@ -1290,7 +1294,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="settings_system_about">درباره</string>
     <string name="settings_system_manager_description">پروژه‌ای متن‌باز برای پچ‌کردن مدرن و سادهٔ برنامه‌های محبوب Android که با بازخورد و مشارکت جامعه پیش می‌رود</string>
     <string name="credits">دست‌اندرکاران</string>
-    <string name="credits_description">مورفه</string>
+    <string name="credits_description">افرادی که پشت Morphe هستند</string>
     <string name="settings_about_section_project">پروژه</string>
     <string name="settings_about_section_help">راهنما</string>
     <string name="credits_current_development">توسعهٔ کنونی</string>
@@ -1325,7 +1329,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="settings_section_patch_options_summary">چیزی که حالت ساده برنامه‌ها را با آن اصلاح می‌کند</string>
     <string name="settings_section_general">عمومی</string>
     <string name="settings_section_patcher_summary">نحوه پچ کردن اپلیکیشن‌ها در این دستگاه</string>
-    <string name="settings_section_help_info">راهنما و <b>اطلاعات</b></string>
+    <string name="settings_section_help_info">راهنما و اطلاعات</string>
     <string name="settings_section_about_summary">اطلاعات بیشتر درباره Morphe و دریافت راهنمایی</string>
     <string name="settings_section_local_files">فایل‌ها</string>
     <string name="settings_section_backup">پشتیبان‌گیری</string>

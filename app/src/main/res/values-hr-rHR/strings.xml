@@ -179,7 +179,7 @@
     <string name="sources_management_prerelease_toggle_description">Primite rani pristup novoj verziji eksperimentalnih patcheva</string>
     <string name="sources_prerelease_warning_title">Omogućiti predizdanja patcheva?</string>
     <string name="sources_prerelease_warning_message">Predizdanja su još uvijek u razvoju. Patchevi mogu propasti ili prekinuti rad aplikacije, a značajke se mogu promijeniti bez upozorenja.</string>
-    <string name="expert_mode_unstable_notice">Pred-izdanja ili eksperimentalni zakrpe mogu biti nestabilni</string>
+    <string name="expert_mode_unstable_notice">Predizdanja ili eksperimentalne zakrpe mogu biti nestabilne</string>
     <string name="sources_management_experimental_versions_toggle">Eksperimentalne verzije aplikacije</string>
     <string name="sources_management_experimental_versions_toggle_description">Prikazuje i patcha eksperimentalne ciljne aplikacije</string>
     <!-- Actions of the panel for several selected sources at once -->
@@ -197,7 +197,7 @@
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket patcheva nije bilo moguće preuzeti. Izvorna poveznica je možda netočna ili datoteka ne postoji. Dodirnite za promjenu.</string>
     <string name="sources_management_outdated_manager_badge">Ažururajte Morphe</string>
     <string name="sources_management_outdated_manager_hint">Ovaj izvorni kod je napravljen za patcher %1$s, ali Morphe %2$s uključuje patcher %3$s. Ažurirajte Morphe da biste ga koristili.</string>
-    <string name="sources_management_held_back_badge">Preskočeno je kako bi se aplikacija mogla pokrenuti. Dodirnite za pregled.</string>
+    <string name="sources_management_held_back_badge">Srušeno</string>
     <string name="sources_management_held_back_hint">Ovaj je izvor srušio Morphe tijekom učitavanja, pa se preskače. Ažurirajte ga ili ga ponovno uvezite da biste pokušali ponovno</string>
     <string name="sources_management_signed_by">Potpisao</string>
     <string name="sources_management_signing_key_changed_badge">Promijenjen ključ</string>
@@ -256,8 +256,8 @@
     <string name="home_apk_availability_find">Da, pomozi mi pronaći aplikaciju</string>
     <string name="home_apk_availability_have">Ne, već imam aplikaciju</string>
     <string name="home_apk_helper_download">Koristite pomoćnu aplikaciju</string>
-    <string name="home_apk_helper_untrusted">Aplikacija asistent je instalirana, ali joj još nije odobreno povjerenje pa se ovdje ne nudi</string>
-    <string name="home_apk_helper_untrusted_action">Pregledaj asistente</string>
+    <string name="home_apk_helper_untrusted">Aplikacija pomoćnik je instalirana, ali joj još nije odobreno povjerenje pa se ovdje ne nudi</string>
+    <string name="home_apk_helper_untrusted_action">Pregledaj pomoćnike</string>
     <string name="home_apk_helper_title">Preuzmite pomoću pomoćne aplikacije</string>
     <string name="home_apk_helper_description">Morphe će od pomoćne aplikacije u nastavku zatražiti preuzimanje originalne APK datoteke i vraćanje datoteke</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -342,7 +342,7 @@ Odaberite odakle ćete preuzeti APK datoteku"</string>
     <string name="expert_mode_enable_all_universal_pending">Dodirnite ponovno za univerzalne patcheve</string>
     <string name="expert_mode_universal_all_warning_title">Omogućiti sve univerzalne patcheve?</string>
     <string name="expert_mode_universal_all_warning_message">Univerzalni patchevi se ne testiraju zajedno. Omogućavanje svih odjednom može uzrokovati sukobe, neuspješno instaliranje patchanje ili rušenje</string>
-    <string name="expert_mode_recommended">Preporučeni zakrpe</string>
+    <string name="expert_mode_recommended">Preporučene zakrpe</string>
     <string name="expert_mode_reset_to_default_done">Preporučeni patchevi su primjenjeni</string>
     <string name="expert_mode_selected_count">odabrano %1$s od %2$s</string>
     <string name="expert_mode_saved_selection">Spremljen odabir</string>
@@ -481,6 +481,9 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="batch_patch_force_version_done">Svejedno dodano u red čekanja, aplikacija se može pokvariti</string>
     <string name="batch_patch_accept_signature_done">Svejedno dodano u red čekanja, APK nije verificiran</string>
     <string name="batch_patch_apk_selected">Odabran APK</string>
+    <string name="batch_patch_auto_download_stopped">Automatsko preuzimanje APK-ova je zaustavljeno</string>
+    <string name="batch_patch_auto_download_stop">Zaustavi preuzimanje</string>
+    <string name="batch_patch_auto_download_kept">Preuzeti APK nije moguće koristiti, stoga je zadržana prethodna verzija</string>
     <string name="batch_patch_edit_patches">Odaberite patcheve</string>
     <string name="batch_patch_state_no_apk">Nema APK-a</string>
     <string name="batch_patch_state_no_patches">Nema patcheva </string>
@@ -572,7 +575,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="root_pre_patch_installer_description">Vaš uređaj ima root pristup. Odaberite treba li ova aplikacija biti patchana za root montiranje ili standardnu ​​instalaciju</string>
     <string name="root_pre_patch_installer_mount_title">Root mount način</string>
     <string name="root_pre_patch_installer_mount_description">Patchevi za root montiranje, a zatim montira APK preko odgovarajuće standardne aplikacije. Nije potreban GmsCore</string>
-    <string name="root_mount_module_unmount_warning">If KernelSU has \"Unmount modules by default\" turned on, open KernelSU &gt; Superuser &gt; the app you mounted &gt; Profile &gt; Custom and turn off \"Unmount modules\". Otherwise, the mounted patched APK may not take effect, even if Morphe shows it as mounted</string>
+    <string name="root_mount_module_unmount_warning">Ako KernelSU ima uključeno \"Unmount modules by default\", otvorite KernelSU &gt; Superuser &gt; aplikaciju koju ste montirali &gt; Profile &gt; Custom i isključite \"Unmount modules\". Inače montirani zakrpani APK možda neće djelovati, čak i ako ga Morphe prikazuje kao montiranog</string>
     <string name="root_pre_patch_installer_standard_title">Standardni način instalacije</string>
     <string name="root_pre_patch_installer_standard_description">Patchevi kao obični APK s podrškom za GmsCore. Vaša postavka programa za instalaciju koristi se nakon patchanja</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
@@ -734,7 +737,7 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher je srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem s logom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <string name="patcher_out_of_memory_message">Programu za patchanje je ponestalo memorije s hrpom od %1$s MB. Ova je aplikacija prevelika za odabrane patcheve. Pokušajte patchanje  s manje izvora patcheva ili odaberite manje patcheva</string>
+    <string name="patcher_out_of_memory_message">Programu za patchanje je ponestalo memorije s hrpom od %1$s MB. Ova je aplikacija prevelika za odabrane patcheve. Pokušajte patchanje s manje izvora patcheva ili odaberite manje patcheva</string>
     <string name="install_app_success">Uspješno instalirano</string>
     <string name="install_app_fail">Nije moguće instalirati aplikaciju: %s</string>
     <string name="install_ignore_signature">Svejedno instaliraj</string>
@@ -897,7 +900,7 @@ Patchevi nisu pogođeni: omogućite predizdanja patcheva za svaki izvor na popis
     <string name="settings_system_notifications_categories">Kategorije obavijesti</string>
     <string name="settings_system_notifications_categories_description">Odaberite u postavkama sustava o kojim ažuriranjima želite biti obaviješteni</string>
     <string name="settings_advanced_update_interval">Povremeno provjeravanje</string>
-    <string name="settings_advanced_update_interval_hourly">Svatkasatno</string>
+    <string name="settings_advanced_update_interval_hourly">Svaki sat</string>
     <string name="settings_advanced_update_interval_daily">Dnevno</string>
     <string name="settings_advanced_update_interval_weekly">Sedmično</string>
     <string name="settings_advanced_update_interval_monthly">Mjesečno</string>
@@ -1202,7 +1205,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_storage_clear_all_description">Oslobađa sav prostor predmemorije koji se može osloboditi odjednom</string>
     <string name="settings_system_storage_clear_all_confirm">Ovim se brišu predmemorirani mrežni odgovori, kopije instalacijskog programa i privremene datoteke. Originalne i patchane APK datoteke se čuvaju.</string>
     <string name="settings_system_storage_cleared">Oslobođeno %s</string>
-    <string name="settings_system_storage_patch_running_warning">Zaput se izvršava i koristi ove datoteke. Odmah im ih brisanje dovodit će do neuspjeha</string>
+    <string name="settings_system_storage_patch_running_warning">Patchanje je u tijeku i koristi ove datoteke. Brisanje ih sada uzrokuje neuspjeh</string>
     <string name="settings_system_storage_clear_anyway">Ipak očisti</string>
     <string name="settings_system_storage_nothing_to_clear">Nema ništa za čišćenje</string>
     <string name="settings_system_storage_open_app_info_title">Otvorite pohranu aplikacija Androida</string>
@@ -1232,7 +1235,7 @@ Detalji: %2$s"</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Izbriši odabir izvora?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s preko %2$s</string>
     <string name="settings_system_patch_selection_source_format">Izvor #%s</string>
-    <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvor</string>
+    <string name="settings_system_patch_selection_reset_all_warning">Ovo će trajno izbrisati sve spremljene odabire patcha za sve pakete i izvore</string>
     <string name="settings_system_patch_selection_reset_source_warning">Ovim će se trajno izbrisati svi spremljeni odabiri patcha za &lt;b&gt;%1$s&lt;/b&gt; u &lt;b&gt;%2$s&lt;/b&gt;</string>
     <string name="settings_system_patch_selection_reset_selected_warning">Ovim će se trajno izbrisati svi spremljeni odabiri patcha za  u odabranim paketima</string>
     <string name="settings_system_export_source_data_fail">Neuspjeh pri izvozu podataka izvora</string>
@@ -1268,8 +1271,9 @@ Detalji: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK dolazi iz pomoćne aplikacije, zato vjerujte samo aplikacijama koje poznajete. Morphe i dalje provjerava paket, verziju i potpis svake datoteke prije patchanja</string>
     <string name="settings_system_apk_download_helper_installed_by">Instalirao/la %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalater nepoznat</string>
-    <string name="settings_system_apk_download_helper_open_directly">Odmah otvori pomoćnik</string>
+    <string name="settings_system_apk_download_helper_open_directly">Odmah otvori pomoćnika</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Preskače upute za preuzimanje i otvara pouzdanog pomoćnika</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Automatski preuzmi APK-ove u skupu</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nema datoteka ovdje</string>
     <string name="file_picker_read_error">Nije moguće pročitati ovu mapu</string>
@@ -1506,7 +1510,7 @@ Detalji: %2$s"</string>
     <string name="onboarding_sources_desc">Upravljajte izvorima patcheva. Svaki izvor pruža patcheve koje se mogu primijeniti na vaše aplikacije</string>
     <string name="onboarding_other_apps_desc">Primijenite patch na aplikaciju koja nije na popisu, koristeći APK datoteku ili aplikaciju instaliranu na vašem uređaju</string>
     <string name="onboarding_add_source_desc">Dodaj izvor patcha s poveznice ili datoteke paketa patcheva</string>
-    <string name="onboarding_signing_key_desc">Izbaci sigurnosnu kopiju ključa kojim potpisuješ svoje zakrificirane aplikacije. Bez njega ih se može ažurirati samo nakon što ih deinstaliraš</string>
+    <string name="onboarding_signing_key_desc">Napravi sigurnosnu kopiju ključa kojim potpisuješ svoje zakrpljene aplikacije. Bez njega ih se može ažurirati samo nakon deinstalacije</string>
     <string name="onboarding_swipe_title">Geste povlačenja</string>
     <string name="onboarding_swipe_desc">Povucite desno preko kartice aplikacije kako biste vidjeli dostupne patcheve. Povucite lijevo kako biste sakrili karticu s početnog zaslona</string>
     <string name="onboarding_settings_desc">Prilagodite Morphe: izgled, napredne opcije i alate sustava</string>

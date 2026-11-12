@@ -4,265 +4,265 @@
     <string name="home_other_apps">Muud rakendused</string>
     <string name="home_other_apps_action">Vali teised rakendused</string>
     <string name="home_not_patched_yet">Veel mitte paigatud</string>
-    <string name="home_unpatched_version_installed">Paigaldatud on patchimata versioon</string>
-    <string name="home_unpatched_badge">Ei ole patchitud</string>
-    <string name="home_no_patches_available">Paige ei ole saadaval</string>
-    <string name="home_app_hide_title">Kas peitamise see rakendus?</string>
-    <string name="home_more_apps_title">Rohkem rakendusi</string>
-    <string name="home_more_apps_hide_title">Peida see kaart?</string>
+    <string name="home_unpatched_version_installed">Paigaldatud on paikamata versioon</string>
+    <string name="home_unpatched_badge">Paikamata</string>
+    <string name="home_no_patches_available">Paiku ei ole saadaval</string>
+    <string name="home_app_hide_title">Kas peita see rakendus?</string>
+    <string name="home_more_apps_title">Veel rakendusi</string>
+    <string name="home_more_apps_hide_title">Kas peita see kaart?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
-    <string name="home_more_apps_hide_message">Saate selle igal ajal tagasi tuua jaotises %1$s</string>
-    <string name="home_app_hide_message">See rakendus peidetakse avakuvalt. Saate selle hiljem taastada peidetud rakenduste alt, kasutades nimekirja alloleva nuppu</string>
-    <string name="home_app_will_be_hidden">See rakendus varjatakse</string>
+    <string name="home_more_apps_hide_message">Selle saab igal ajal tagasi tuua jaotises %1$s</string>
+    <string name="home_app_hide_message">See rakendus peidetakse avakuvalt. Saad selle hiljem taastada peidetud rakenduste alt, kasutades nimekirja all olevat nuppu</string>
+    <string name="home_app_will_be_hidden">See rakendus peidetakse</string>
     <string name="home_app_hidden_named">%s peidetud</string>
-    <string name="home_app_shown_named">%s näidatud</string>
-    <string name="home_app_no_hidden">Varjatud rakendusi pole</string>
+    <string name="home_app_shown_named">%s nähtaval</string>
+    <string name="home_app_no_hidden">Peidetud rakendusi pole</string>
     <string name="home_app_hidden_apps_title">Peidetud rakendused</string>
-    <string name="home_app_hidden_apps_hint">Puuduta, et nähtavakste끔</string>
-    <string name="home_apps_unhide_message">Nähtavaks tehtud rakendused naasevad avaleekranile</string>
-    <string name="home_app_patch_sources_description">Märkimata jäetud allikaid ei pakuta nende rakenduste parandamiseks ning nende parandustegutused ei liitu kunagi iseseisvalt valikuga. Iga allikas jääb aktiveeritud kõigi teiste rakenduste jaoks</string>
+    <string name="home_app_hidden_apps_hint">Puuduta, et uuesti nähtavaks teha</string>
+    <string name="home_apps_unhide_message">Nähtavaks tehtud rakendused naasevad avakuvale</string>
+    <string name="home_app_patch_sources_description">Märkimata allikaid ei pakuta nende rakenduste paikamisel ning nende paiku ei lisata valikusse iseenesest. Iga allikas jääb sisselülitatuks kõigi teiste rakenduste jaoks</string>
     <string name="home_app_patch_sources_mixed">Pakutakse %2$s-st %1$s-le</string>
-    <string name="home_app_patch_sources_covers">Omab parandustegutusi %2$s-st %1$s-le</string>
-    <string name="home_app_patch_sources_last">Igal rakendusel peab olema üks allikas parandamiseks alles</string>
+    <string name="home_app_patch_sources_covers">Paiku on %1$s-le %2$s-st</string>
+    <string name="home_app_patch_sources_last">Igal rakendusel peab olema vähemalt üks allikas, millest seda paigata</string>
     <string name="android_11_bug_dialog_title">Android 11 viga</string>
-    <string name="android_11_bug_dialog_description">Äppide installimise luba tuleb anda ettehoolmatult, et vältida Androidi 11 süsteemi viga, mis mõjutab negatiivselt kasutajakogemust</string>
+    <string name="android_11_bug_dialog_description">Rakenduste installimise luba tuleb anda eelnevalt, et vältida Androidi 11 süsteemi viga, mis mõjutab negatiivselt kasutuskogemust</string>
     <string name="deep_link_add_source_title">Lisa allikas</string>
-    <string name="deep_link_add_source_message">Kas soovite lisada selle plaastri allika Morphe\'sse?</string>
+    <string name="deep_link_add_source_message">Kas soovid lisada selle paigaallika Morphe\'sse?</string>
     <string name="deep_link_add_source_warning">Lisa ainult allikad, mida usaldad</string>
     <!-- Shown under the app a link was opened for -->
-    <string name="deep_link_add_source_only_app">Lisatud on ainult see rakendus. Saate lisada teisi rakendusi allika rakendusloendist</string>
+    <string name="deep_link_add_source_only_app">Lisati ainult see rakendus. Teisi rakendusi saad lisada allika rakenduste loendist</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
-    <string name="deep_link_add_source_only_universal">Lisatud on ainult universaalsed paigad. Rakendusi saad lisada allika rakenduste loendist</string>
+    <string name="deep_link_add_source_only_universal">Lisati ainult universaalsed paigad. Rakendusi saad lisada allika rakenduste loendist</string>
     <!-- Asked when the link names an app of a source that is already added -->
-    <string name="deep_link_add_source_app_back">See allikas on juba lisatud. Kas lisate selle rakenduse olemasolevast allikast?</string>
+    <string name="deep_link_add_source_app_back">See allikas on juba lisatud. Kas lisads see rakendus olemasolevast allikast?</string>
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
-    <string name="mpp_import_update_message">See on %s uus versioon. Kas soovite seda uuendada?</string>
+    <string name="mpp_import_update_message">See on %s uus versioon. Kas soovid seda uuendada?</string>
     <string name="mpp_import_unreadable">Seda faili ei saa lugeda</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">Sada Morphe uuendus</string>
-    <string name="home_update_available_subtitle">Uus versioon on installimiseks valmis</string>
-    <string name="home_blocked_source_title">Avastatud blokeeritud paigutuse allikas</string>
-    <string name="home_blocked_source_subtitle">Puuduta, et ülevaadata ja eemaldada</string>
-    <string name="home_metadata_errors_title">Mõned paigutuse allikad on unavailable</string>
-    <string name="home_metadata_errors_subtitle">Puuduta, et ülevaadata allikad</string>
+    <string name="home_update_available">Morphe\'i uuendus on saadaval</string>
+    <string name="home_update_available_subtitle">Uus versioon on paigaldamiseks valmis</string>
+    <string name="home_blocked_source_title">Tuvastati blokeeritud paigaallikas</string>
+    <string name="home_blocked_source_subtitle">Puuduta ülevaatamiseks ja eemaldamiseks</string>
+    <string name="home_metadata_errors_title">Mõned paigaallikad on kättesaamatud</string>
+    <string name="home_metadata_errors_subtitle">Puuduta allikate ülevaatamiseks</string>
     <string name="home_outdated_manager_title">Morphe on aegunud</string>
-    <string name="home_outdated_manager_subtitle">Mõnedad plaastiallikad vajavad uuemat versiooni</string>
-    <string name="home_held_back_title">Üks plaasteri allikas põhjustas Morphe crashimise</string>
-    <string name="home_held_back_subtitle">Seda oli möödatud, et rakendus saaks käivituda. Täpsustage ülevaatamiseks</string>
-    <string name="home_metered_skipped_title">Uuendused on mobiilsette andmete puhul paused</string>
-    <string name="home_metered_skipped_subtitle">Puudutage, et lubada uuendused mobiilsette andmeid kasutades</string>
-    <string name="home_repatch_available_subtitle">Puudutage, et lisada kõik järjekorda</string>
+    <string name="home_outdated_manager_subtitle">Mõned paigaallikad vajavad uuemat versiooni</string>
+    <string name="home_held_back_title">Üks paigaallikas põhjustas Morphe\'i kokkujooksmise</string>
+    <string name="home_held_back_subtitle">Jäeti vahele, et rakendus saaks käivituda. Puuduta ülevaatamiseks</string>
+    <string name="home_metered_skipped_title">Uuendused on mobiilse andmeside korral peatatud</string>
+    <string name="home_metered_skipped_subtitle">Puuduta, et lubada uuendused mobiilse andmeside kaudu</string>
+    <string name="home_repatch_available_subtitle">Puuduta, et lisada need kõik järjekorda</string>
     <string name="home_update_error">Uuendamine ebaõnnestus</string>
     <string name="home_update_error_subtitle">Allikate uuendamise käigus tekis viga</string>
-    <string name="home_update_skipped_metered">Uuendused olid jäetud mööda</string>
-    <string name="home_update_skipped_metered_subtitle">Mobiilandmed on aktiivsed</string>
+    <string name="home_update_skipped_metered">Uuendused jäeti vahele</string>
+    <string name="home_update_skipped_metered_subtitle">Kasutusel on mobiilne andmeside</string>
     <string name="home_updating_sources">Allikate uuendamine…</string>
     <string name="home_update_success">Allikate uuendamine lõpetatud</string>
-    <string name="home_update_success_subtitle">Teie allikad on uuendatud</string>
-    <string name="home_sources_are_loading">Allikad laadivad, palun oodake…</string>
+    <string name="home_update_success_subtitle">Allikad on uuendatud</string>
+    <string name="home_sources_are_loading">Allikad laadivad, palun oota…</string>
     <string name="home_search_apps">Otsi rakendusi</string>
-    <string name="list_options_title">Sorteeri ja filtreeri</string>
-    <string name="list_options_state_description">Sorteeritud %1$s järgi, filtreeritud %2$s järgi</string>
+    <string name="list_options_title">Järjesta ja filtreeri</string>
+    <string name="list_options_state_description">Järjestatud %1$s järgi, filtreeritud %2$s järgi</string>
     <string name="home_app_filter_clones">Kloonid</string>
-    <string name="home_app_grouping_none">None</string>
+    <string name="home_app_grouping_none">Puudub</string>
     <string name="home_app_sort_manual_hint">Vajuta rakendust pikalt ja siis nupule järjekorra muutmiseks</string>
     <string name="home_app_sort_recommended">Soovitatav järjestus</string>
-    <string name="home_app_sort_updates_first">Esmalt paranduseuuendused</string>
-    <string name="home_app_sort_recently_patched">Viimasena paigandatud</string>
+    <string name="home_app_sort_updates_first">Esmalt paigauuendused</string>
+    <string name="home_app_sort_recently_patched">Viimati paigatud</string>
     <string name="home_no_apps_title">Rakendusi pole saadaval</string>
-    <string name="home_no_apps_subtitle">Lisage plastri allikas või aktiveerige olemasolev %s jaotises</string>
+    <string name="home_no_apps_subtitle">Lisa paigaallikas või aktiveeri olemasolev jaotises %s</string>
     <string name="home_no_apps_search_subtitle">Rakendusi, mis vastavad otsingule \"%s\", ei leitud</string>
     <string name="home_all_apps_hidden_title">Kõik rakendused on peidetud</string>
-    <string name="home_all_apps_hidden_subtitle">Olete peitnud kõik rakendused avalehelt</string>
+    <string name="home_all_apps_hidden_subtitle">Oled peitnud kõik rakendused avalehelt</string>
     <string name="home_no_apps_filter_title">Selle filtriga ei ühti ükski rakendus</string>
-    <string name="home_no_apps_filter_subtitle">Sellega ei ühi midagi: %s</string>
+    <string name="home_no_apps_filter_subtitle">Filtri järgi ei leitud midagi: %s</string>
     <string name="home_category_add">Lisa kategooria</string>
     <string name="home_category_all_apps">Kõik rakendused</string>
     <string name="home_app_grouping_categories">Kategooriad</string>
     <string name="home_category_uncategorized">Kategooria määramata</string>
     <string name="home_category_new_title">Uus kategooria</string>
-    <string name="home_category_rename_title">Nimele kategooria</string>
+    <string name="home_category_rename_title">Nimeta kategooria ümber</string>
     <string name="home_category_name">Kategooria nimi</string>
     <string name="home_category_move_to">Liigu kategooriasse</string>
     <string name="home_category_move_selected_title">Liiguta valitud rakendusi</string>
     <!-- %s is the name of the category -->
     <string name="home_category_delete_title">Kustutada %s?</string>
     <!-- %s is the name of the category the apps fall back to -->
-    <string name="home_category_delete_moves_apps">Selle rakendused liiguvad tagasi jaotusse &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="home_category_delete_moves_apps">Selle rakendused liiguvad tagasi jaotisse &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="home_category_actions_unavailable">Tegevused ei ole selle kategooria puhul saadaval</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Kumba rakendust soovite paigutada?</string>
+    <string name="home_greeting_1">Millist rakendust soovid paigata?</string>
     <!-- Humorous hype message with light nostalgia -->
-    <string name="home_greeting_2">Kas oled valmis muuta rakendused taas legendaarseks?</string>
+    <string name="home_greeting_2">Kas oled valmis muutma rakendused taas legendaarseks?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Pane vöö kinnitama, on aeg paigutada</string>
+    <string name="home_greeting_3">Kinnita turvavöö, hakkama paikama</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Uus päev, uus reklaamivaba meistriteos</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">Tahad reklaame vaadata? Mina ei tahaks</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">Paneme su rakendused taltsuma</string>
+    <string name="home_greeting_6">Õpetame rakendustele kombeid</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Täänase prognoos: 100% tõenäosus pätšimiseks</string>
+    <string name="home_greeting_7" formatted="false">Tänane prognoos: 100% tõenäosus paikamiseks</string>
     <!-- From mediocrity to amazing -->
-    <string name="home_greeting_8">Kas oled valmis muuta keskpärase suurepäraseks?</string>
+    <string name="home_greeting_8">Kas oled valmis muutma keskpärase suurepäraseks?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
-    <string name="home_greeting_9">Päästame rakendusi neilt endalt alates tänasest</string>
+    <string name="home_greeting_9">Päästame rakendusi nende enda käest alates tänasest</string>
     <!-- Light sarcasm, casual and tech-savvy humor -->
-    <string name="home_greeting_10">Toidetud kofeiini ja head plaasteriga</string>
+    <string name="home_greeting_10">Edasi viivad kofeiin ja head parandused</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Tõuse ja paiga</string>
-    <string name="home_greeting_morning_2">Tere hommikust! Rakendused endapäraseks paigast ei lähe</string>
+    <string name="home_greeting_morning_1">Tõuse ja paika</string>
+    <string name="home_greeting_morning_2">Tere hommikust! Rakendused ei paika ennast ise</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Pärastlõunase väsimus? Paiga midagi</string>
-    <string name="home_greeting_afternoon_2">Pärast lõunat paigastamine on kuidagi teist</string>
-    <string name="home_greeting_afternoon_3">Pärastlõuna vahetus: paranduste editsioon</string>
+    <string name="home_greeting_afternoon_1">Pärastlõunane väsimus? Paika midagi</string>
+    <string name="home_greeting_afternoon_2">Pärastlõunane paikamine mõjub teistmoodi</string>
+    <string name="home_greeting_afternoon_3">Pärastlõunane vahetus: paikade versioon</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Tere õhtust! Õhtused patchid on kuidagi teistsugused</string>
-    <string name="home_greeting_evening_2">Lõpetad päeva? Patchi siis esmalt üks rakendus</string>
-    <string name="home_greeting_evening_3">Lõpetad töö? Patchi siis esmalt midagi</string>
+    <string name="home_greeting_evening_1">Tere õhtust! Õhtused paigad on kuidagi teistsugused</string>
+    <string name="home_greeting_evening_2">Lõpetad päeva? Paika siis esmalt üks rakendus</string>
+    <string name="home_greeting_evening_3">Lõpetad töö? Paika siis esmalt midagi</string>
     <!-- Late night greetings (22:00–23:59) -->
-    <string name="home_greeting_late_night_1">Veel ärvel? Samuti on rakendused, mis vajavad patchimist</string>
-    <string name="home_greeting_late_night_2">Hõialu patchimise seans? Respect</string>
-    <string name="home_greeting_late_night_3">Öökukku režiim: aktiveeritud</string>
+    <string name="home_greeting_late_night_1">Veel ärkvel? Nii ka rakendused, mis vajavad paikamist</string>
+    <string name="home_greeting_late_night_2">Hiline paigaldusseanss? Respekt</string>
+    <string name="home_greeting_late_night_3">Öökulli režiim: aktiveeritud</string>
     <!-- Super late night greetings (0:00–4:59) -->
-    <string name="home_greeting_super_late_1">Patchimise tipptunnid… väidetavalt</string>
-    <string name="home_greeting_super_late_2">Ei saa magada? Patchi midagi</string>
-    <string name="home_greeting_super_late_3">Sellel ajal juba lihtsalt ärka ja patchi</string>
-    <string name="home_greeting_super_late_4">Sina ja serverid, mõlemad ärvel</string>
+    <string name="home_greeting_super_late_1">Tipptunnid paikamiseks… väidetavalt</string>
+    <string name="home_greeting_super_late_2">Ei saa und? Paika midagi</string>
+    <string name="home_greeting_super_late_3">Nüüd jää lihtsalt üles ja paika</string>
+    <string name="home_greeting_super_late_4">Sina ja serverid, mõlemad ärkvel</string>
     <string name="home_greeting_super_late_5">Öine ja produktiivne</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Klassik või patch?</string>
+    <string name="home_greeting_halloween_1">Komm või paik?</string>
     <string name="home_greeting_halloween_2">Neis APK-des ei ole kummitusi, me kontrollisime</string>
-    <string name="home_greeting_halloween_3">Õudne hooaeg, värsked patchid</string>
+    <string name="home_greeting_halloween_3">Õudne hooaeg, värsked paigad</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Midagi kurja on patchitud</string>
+    <string name="home_greeting_halloween_4">Midagi kurja on siin paigas</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">H duplicates pühaid, värsked patchid</string>
+    <string name="home_greeting_winter_1">Häid pühi, värsked paigad</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Lumu lumega, lumu uuendustega</string>
-    <string name="home_greeting_winter_3">Uus aasta, uued patchid</string>
+    <string name="home_greeting_winter_2">Las sajab lund, las ta paikab</string>
+    <string name="home_greeting_winter_3">Uus aasta, uued paigad</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">Patchides läbi lume</string>
+    <string name="home_greeting_winter_4">Läbi lume paigates</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
-    <string name="home_greeting_new_year_1">Häpi uut aastat!</string>
-    <string name="home_greeting_new_year_2">Ootame uusi uuendusi</string>
+    <string name="home_greeting_new_year_1">Head uut aastat!</string>
+    <string name="home_greeting_new_year_2">Ootame uusi paiku</string>
     <string name="home_greeting_new_year_3">Uus aasta, samad reklaamivabad rakendused</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <string name="home_greeting_new_year_4">Vana versioonid välja, uued sisse</string>
     <!-- Home Screen - Sources Management -->
-    <string name="sources_management_title">Patchide allikad</string>
-    <string name="sources_search">Otsi allikaid ja parandustegutusi</string>
+    <string name="sources_management_title">Paikade allikad</string>
+    <string name="sources_search">Otsi allikaid ja paiku</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Vajab tähelepanu</string>
-    <string name="sources_sort_manual">Käsijärjestus</string>
-    <string name="sources_sort_manual_hint">Kordustamiseks hoidke allikat kauem vajutatud</string>
-    <string name="sources_sort_last_updated">Viimasekordne uuendus</string>
+    <string name="sources_sort_manual">Käsitsi järjestus</string>
+    <string name="sources_sort_manual_hint">Ümberjärjestamiseks hoia allikat all</string>
+    <string name="sources_sort_last_updated">Viimati uuendatud</string>
     <string name="sources_sort_enabled_first">Esmalt aktiveeritud</string>
-    <string name="sources_patches_source_disabled_hint">See allikas on leviotatud. Selle parandustegutused on loetletud viiteks ja neid ei rakendata</string>
+    <string name="sources_patches_source_disabled_hint">See allikas on keelatud. Selle paigad on loetletud viiteks ega rakendu</string>
     <string name="sources_management_open_in_browser">Ava brauseris</string>
     <string name="sources_management_report_issue">Teata probleemist</string>
     <string name="sources_management_failed_to_open_url">URL-i avamine ebaõnnestus</string>
     <string name="sources_apps">Rakendused</string>
-    <string name="sources_apps_description">Märgisetud rakendused tulevad sellest allikast. Puudutage rakendust, et see eemaldada või tagasi tuua. Rakendus kaob avalehelt, kui ükski allikas seda ei too, välja arvatud juhul, kui olete seda patchinud</string>
-    <string name="sources_apps_brought">Selle allikast toodud</string>
+    <string name="sources_apps_description">Märgitud rakendused tulevad sellest allikast. Puuduta rakendust, et see eemaldada või tagasi tuua. Rakendus kaob avalehelt, kui ükski allikas seda ei paku, välja arvatud juhul, kui oled seda paiganud</string>
+    <string name="sources_apps_brought">Pärineb sellest allikast</string>
     <string name="sources_apps_left_out">Selle allikast välja jäetud</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">Jätkad paigutatuda</string>
+    <string name="sources_apps_stays_patched">Säilitatud kui paigatud</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Uus</string>
-    <string name="sources_apps_new_apps">Too uued rakendused</string>
+    <string name="sources_apps_new_apps">Too uusi rakendusi</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_apps_new_apps_description">Hiljem lisatud rakendused kuvatakse avakuval</string>
-    <string name="sources_management_prerelease_toggle">Eelselektiooni plaastrid</string>
-    <string name="sources_management_prerelease_toggle_description">Saab varajase juuripääsu uute eksperimentaalsete paigade versioonideni</string>
-    <string name="sources_prerelease_warning_title">Kas lubada eelväljalaskuse paigandused?</string>
-    <string name="sources_prerelease_warning_message">Eelväljalaskuse versioonid on veel arendamisel. Paigandused võivad ebaõnnestuda või rakendust rikkuda ning funktsioonid võivad muutuda ilma eelteatuse%</string>
-    <string name="expert_mode_unstable_notice">Eelväljalaskused või eksperimentaalsed paigutused võivad olla ebastabiilsed</string>
+    <string name="sources_management_prerelease_toggle">Eelväljalaske paigad</string>
+    <string name="sources_management_prerelease_toggle_description">Saab varakult juurdepääsu uutele eksperimentaalsetele paikade versioonidele</string>
+    <string name="sources_prerelease_warning_title">Kas lubada eelväljalaske paigad?</string>
+    <string name="sources_prerelease_warning_message">Eelväljalaske versioonid on veel arendamisel. Paigad võivad ebaõnnestuda või rakendust rikkuda ning funktsioonid võivad hoiatuseta muutuda</string>
+    <string name="expert_mode_unstable_notice">Eelväljalaske või eksperimentaalsed paigad võivad olla ebastabiilsed</string>
     <string name="sources_management_experimental_versions_toggle">Rakenduse eksperimentaalsed versioonid</string>
-    <string name="sources_management_experimental_versions_toggle_description">Kuvab ja paigutab eksperimentaalseid rakendussigandeid</string>
+    <string name="sources_management_experimental_versions_toggle_description">Kuvab ja paikab eksperimentaalseid rakenduse versioone</string>
     <!-- Actions of the panel for several selected sources at once -->
-    <string name="sources_management_prerelease_enable">Luba eelväljalasketud paigutused</string>
-    <string name="sources_management_prerelease_disable">Keela eelväljalasketud paigutused</string>
+    <string name="sources_management_prerelease_enable">Luba eelväljalaske paigad</string>
+    <string name="sources_management_prerelease_disable">Keela eelväljalaske paigad</string>
     <string name="sources_management_experimental_versions_enable">Luba rakenduse eksperimentaalsed versioonid</string>
     <string name="sources_management_experimental_versions_disable">Keela rakenduse eksperimentaalsed versioonid</string>
     <string name="sources_management_already_exists">See allikas on juba lisatud</string>
-    <string name="sources_management_invalid_url">Allika URL onk validaalne. Kontrolli aadressi ja proovi uuesti</string>
+    <string name="sources_management_invalid_url">Sobimatu allika URL. Kontrollige aadressi ja proovige uuesti</string>
     <string name="sources_management_blocked">See paigandi allikas on blokeeritud ja seda ei saa lisada</string>
     <string name="sources_management_source_blocked_badge">Blokeeritud</string>
-    <string name="sources_management_metadata_unavailable">Metandandmed puuduvad</string>
-    <string name="sources_management_metadata_unavailable_hint">Kaugmetandandmete fail puudub. Paastamine installitud paketiga toimib endiselt, kuid selle allika jaoks on automaatne värskendus keelatud</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">Paastipaketti ei õnnestunud alla laadida. Allika URL võib olla vale või fail ei eksisteeri</string>
-    <string name="sources_management_metadata_unavailable_hint_missing_editable">Paigutuskogumit ei õnnestunud alla laadida. Allika-URL võib olla vale või faili ei eksisteeri. Muutmiseks puudutage</string>
+    <string name="sources_management_metadata_unavailable">Metaandmed puuduvad</string>
+    <string name="sources_management_metadata_unavailable_hint">Kaugmetaandmete fail ei ole saadaval. Paigutamine installitud paketiga toimib endiselt, kuid selle allika automaatne värskendamine on keelatud</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">Paigutuspaketti ei õnnestunud alla laadida. Allika URL võib olla vale või fail puudub</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Muutmiseks puuduta</string>
     <string name="sources_management_outdated_manager_badge">Uuenda Morphet</string>
     <string name="sources_management_outdated_manager_hint">See allikas on loodud plaastija versioonile %1$s, kuid Morphe %2$s sisaldab plaastijat %3$s. Selle kasutamiseks uuenda Morphet</string>
-    <string name="sources_management_held_back_badge">Crashitud</string>
-    <string name="sources_management_held_back_hint">See allikas põhjustas Morphe crashimise laadimise ajal, seega on see möödatud. Proovige uuesti, kui uuendate või importite selle uuesti</string>
+    <string name="sources_management_held_back_badge">Kokkujooksnud</string>
+    <string name="sources_management_held_back_hint">See allikas põhjustas laadimise ajal Morphe\'i kokkujooksmise, seega jäeti see vahele. Proovi uuesti pärast uuendamist või uuesti importimist</string>
     <string name="sources_management_signed_by">Allkirjastaja</string>
     <string name="sources_management_signing_key_changed_badge">Võti on muutunud</string>
-    <string name="sources_management_signing_key_changed_hint">Uusim versioon ei ole allkirjastatud võtmega, mida see allikas varem kasutas, mistõttu ei installitud seda. Ülevaatus uchun puudutage</string>
+    <string name="sources_management_signing_key_changed_hint">Uusim versioon ei ole allkirjastatud võtmega, mida see allikas varem kasutas, mistõttu ei installitud seda. Puuduta ülevaatamiseks</string>
     <string name="sources_management_source_enabled">Allikas on lubatud</string>
     <string name="sources_management_source_disabled">Allikas on keelatud</string>
     <string name="sources_management_source_updating">Allika uuendamine</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Kuvanimi</string>
     <string name="sources_dialog_rename">Nimeks patchi allika ümbernimetamine</string>
-    <string name="sources_dialog_change_url">Muuda paigutusallika allalaadimiskoha</string>
+    <string name="sources_dialog_change_url">Muuda paigutusallika allalaadimiskohta</string>
     <string name="sources_dialog_duplicate_name_error">Selle nimega patchi allikas on juba olemas</string>
     <string name="sources_dialog_missing_error">Selle patchi allikat ei õnnestunud uuendada</string>
     <string name="sources_dialog_add_source">Lisa patchi allikas</string>
     <string name="sources_dialog_delete_confirm_body">Seda ei saa tagasi pöördata</string>
     <string name="sources_dialog_remote">Kaugjuhtimine</string>
     <string name="sources_dialog_remote_url">Allika URL</string>
-    <string name="sources_dialog_remote_url_hint">Hoidla või link patch bundle\'i .json failile. Lisage kõik korraga, kleepides mitu linki</string>
+    <string name="sources_dialog_remote_url_hint">Hoidla või link patch bundle\'i .json failile. Lisa kõik korraga, kleebi mitu linki</string>
     <string name="sources_dialog_paste_no_links">Lõikelaualt ei leitud linke</string>
     <string name="sources_dialog_local">Kohalik</string>
-    <string name="sources_dialog_local_files">Valige plaastri allikafailid</string>
+    <string name="sources_dialog_local_files">Vali plaastri allikafailid</string>
     <string name="sources_dialog_local_invalid_extension">Failil peab olema laiendus .mpp</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uuendused %s</string>
-    <string name="sources_dialog_url_valid">Validaalne repositorioumi või JSON-i URL</string>
+    <string name="sources_dialog_url_valid">Kehtiv repositooriumi või JSON-i URL</string>
     <string name="sources_dialog_url_invalid">URL peab viitama GitHubi/GitLabi hoidlale või .json failile</string>
     <string name="sources_dialog_preinstalled">Eelinstalleeritud</string>
     <string name="sources_dialog_community">Kogukonna patchid</string>
     <string name="sources_dialog_choose_apps">Vali rakendused</string>
-    <string name="sources_dialog_choose_apps_description">Valige, milliseid rakendusi hoida pärast allika laadimist</string>
+    <string name="sources_dialog_choose_apps_description">Vali, milliseid rakendusi hoida pärast allika laadimist</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">Kolmandate osapoolte patchide allikad</string>
-    <string name="sources_dialog_community_notice_message">"Kogukonna paigutusallikad on loodud ja holdatud nende enda autorite poolt. Morphe ei ülevaata ega kinnita kolmandate osapoolte paigutusi ning ei vastuta nende sisu ega selle eest, mida need teie seadmes teevad"</string>
+    <string name="sources_dialog_community_notice_message">"Kogukonna paigutusallikad on loodud ja hallatud nende enda autorite poolt. Morphe ei ülevaata ega kinnita kolmandate osapoolte paigutusi ning ei vastuta nende sisu ega selle eest, mida need sinu seadmes teevad"</string>
     <string name="sources_update_success">Uuendamine õnnestus</string>
     <string name="sources_update_unavailable">Uuendusi pole saadaval</string>
     <string name="sources_download_fail">Allikate allalaadimine ebaõnnestus: %s</string>
-    <string name="sources_download_fail_named">Rakendust \'%s\' ei õnnestunud värskendada. Kontrolli internetiseadust ja proovi uuesti</string>
+    <string name="sources_download_fail_named">\'%s\' ei õnnestunud värskendada. Kontrollige internetiühendust ja proovige uuesti</string>
     <string name="sources_download_endpoint_not_found">\'%s\': paigandusandmeid ei leitud</string>
-    <string name="sources_signing_key_changed_named">\'%s\' ei beenud uuendatud, kuna selle uusim versioon ei ole allkirjastatud võtmega, mida see varem kasutas</string>
-    <string name="sources_signing_key_changed_local">Fail ei ole allkirjastatud võtmega, mida see allikas varem kasutas. Sellele usaldust õhvestamiseks kustutage allikas ja lisage fail uuesti</string>
-    <string name="sources_signing_key_trust_title">Usaldada uut võtmet?</string>
-    <string name="sources_signing_key_trust_message">Viimane versioon on allkirjastatud teise võtme abil. Kas arendaja asendas oma võtme või on selle versiooni avaldanud keegi muu. Usaldage seda ainult juhul, kui arendaja on teatnud uuest võtmest</string>
-    <string name="sources_signing_key_trust_message_unsigned">Viimane versioon pole allkirjastatud. Kas arendaja lõpetas versioonide allkirjastamise või on selle versiooni avaldanud keegi muu. Usaldage seda ainult juhul, kui arendaja on seda teatnud</string>
-    <string name="sources_signing_key_trusted">Usaldatud võtme</string>
-    <string name="sources_signing_key_new">Uus võtme</string>
+    <string name="sources_signing_key_changed_named">\'%s\' ei uuendatud, sest selle uusim versioon ei ole allkirjastatud võtmega, mida see varem kasutas</string>
+    <string name="sources_signing_key_changed_local">Fail ei ole allkirjastatud võtmega, mida see allikas varem kasutas. Selle usaldamiseks kustuta allikas ja lisa fail uuesti</string>
+    <string name="sources_signing_key_trust_title">Kas usaldada uus võti?</string>
+    <string name="sources_signing_key_trust_message">Viimane versioon on allkirjastatud teise võtme abil. Kas arendaja asendas oma võtme või on selle versiooni avaldanud keegi muu. Usalda seda ainult juhul, kui arendaja on teatanud uuest võtmest</string>
+    <string name="sources_signing_key_trust_message_unsigned">Viimane versioon pole allkirjastatud. Kas arendaja lõpetas versioonide allkirjastamise või on selle versiooni avaldanud keegi muu. Usalda seda ainult juhul, kui arendaja on seda teatanud</string>
+    <string name="sources_signing_key_trusted">Usaldatud võti</string>
+    <string name="sources_signing_key_new">Uus võti</string>
     <string name="sources_patch_expert_badge">Ekspert</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <string name="sources_patch_expert_badge_tooltip">Lülitage sisse %1$s, et lisada see paigandus käsitsi</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_title">Kas vajate abi APK leidmisel?</string>
-    <string name="home_apk_availability_dialog_simple">Et pätšida &lt;b&gt;%s&lt;/b&gt;, vajate pätšimata APK versiooni:</string>
-    <string name="home_apk_availability_dialog_expert">Et paigata &lt;b&gt;%s&lt;/b&gt;, vajate versioonide paigatamata APK-d:</string>
+    <string name="home_apk_availability_title">Kas vajad abi APK leidmisel?</string>
+    <string name="home_apk_availability_dialog_simple">Et paigutada &lt;b&gt;%s&lt;/b&gt;, vajate paigutamata APK versiooni:</string>
+    <string name="home_apk_availability_dialog_expert">Et paigutada &lt;b&gt;%s&lt;/b&gt;, vajate järgmiste versioonide paigutamata APK-d:</string>
     <string name="home_apk_availability_recommended_label">Soovitatav</string>
     <string name="home_apk_availability_unpatched_label">Patchimata</string>
     <string name="home_apk_availability_incompatible_label">Ühildamatu</string>
-    <string name="home_apk_availability_find">Jah, converged abi selle leidmisel</string>
-    <string name="home_apk_availability_have">Ei, see on mul juba olemas</string>
-    <string name="home_apk_helper_download">Kasuta abiärakku</string>
-    <string name="home_apk_helper_untrusted">Abiut utiliit on installitud, kuid veel mitte usaldatud, seega ei pakita seda siin</string>
-    <string name="home_apk_helper_untrusted_action">Vaadata abiutökisid</string>
-    <string name="home_apk_helper_title">Laada alla abiäraku abil</string>
-    <string name="home_apk_helper_description">Morphe palub allpool olevat abiärakku alla laadida originaal-APK ja fail tagasi üle anda</string>
+    <string name="home_apk_availability_find">Jah, aita mul see leida</string>
+    <string name="home_apk_availability_have">Ei, mul on see juba olemas</string>
+    <string name="home_apk_helper_download">Kasuta abirakendust</string>
+    <string name="home_apk_helper_untrusted">Abirakendus on installitud, kuid pole veel usaldatud, seega seda siin ei pakuta</string>
+    <string name="home_apk_helper_untrusted_action">Vaata abirakendusi üle</string>
+    <string name="home_apk_helper_title">Laadi alla abirakenduse abil</string>
+    <string name="home_apk_helper_description">Morphe palub allpool olevat abirakendust laadida alla originaal-APK ja anda fail tagasi</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_apk_helper_continue">Ava abiutूल</string>
-    <string name="home_apk_helper_warning">Jätka ainult siis, kui usaldad seda abiärakku. Morphe kontrollib paketti, versiooni ja allkirja igalt receive\'itud faililt enne paigutamist</string>
+    <string name="home_apk_helper_continue">Ava abirakendus</string>
+    <string name="home_apk_helper_warning">Jätka ainult siis, kui usaldad seda abirakendust. Morphe kontrollib paketti, versiooni ja allkirja enne paigutamist saadud failil</string>
     <string name="home_apk_helper_warning_unverified">Jätka ainult siis, kui usaldad seda abirakendust. Morphe ei saa selle APK allkirja kontrollida, seega muudetud faili ei tuvastataks</string>
     <string name="home_apk_helper_no_result">Abirakendus ei tagastanud APK-faili</string>
     <string name="home_apk_helper_no_access">Abirakendus ei andnud juurdepääsu tagastatud APK-failile</string>
@@ -272,33 +272,33 @@
     <string name="home_apk_helper_installed_incompatible">Installitud versiooni ei saa paigutada</string>
     <string name="home_apk_use_saved_copy">Kasuta salvestatud koopiat</string>
     <string name="home_apk_use_installed_app">Kasuta installitud rakendust</string>
-    <string name="home_apk_use_saved_unsupported">Paigandused ei toeta seda salvestatud koopiad. Paigandamise korral palutakse teid kinnitust või valida teine APK</string>
+    <string name="home_apk_use_saved_unsupported">Paigandused ei toeta seda salvestatud koopiat. Paigandamise korral palutakse sul kinnitada või valida teine APK</string>
     <string name="home_apk_use_installed_unverified">Paigaldatud rakenduse allkirja ei õnnestunud kontrollida, seega võib see olla juba paigatud</string>
-    <string name="home_unverified">Verifyimata</string>
+    <string name="home_unverified">Kinnitamata</string>
     <string name="home_install_verification_pending">Kontrollitakse installatsiooni…</string>
     <string name="home_app_info_install_unverified">Morphe ei saa kinnitada, et installitud rakendus on seesama versioon, mille ta patchis. Teosta uuesti patchimine või installi see salvestatud APK failist, et taastada selle funktsionaalsus</string>
     <string name="home_app_info_no_saved_apk">Salvestatud APK-faili pole. Paigutamiseks tuleb APK-fail uuesti valida</string>
     <string name="home_version_requires_android">Nõuab Android %s+</string>
-    <string name="home_apk_no_compatible_versions_title">Selle seadme poolt ei toetata</string>
+    <string name="home_apk_no_compatible_versions_title">Seade ei toeta</string>
     <string name="home_apk_no_compatible_versions_message">&lt;b&gt;%1$s&lt;/b&gt; rakendusel puuduvad Androidi versioonile %2$s (API %3$s) toetatud versioonid. Kõik deklareritud versioonid nõuavad kõrgemat Androidi versiooni</string>
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">Laadige alla algne APK</string>
     <string name="home_download_instructions_finding">Otsitakse allalaadimislehte…</string>
     <string name="home_download_instructions_step1">Vajuta allpool nuppu \'%s\'</string>
     <string name="home_download_instructions_step2_part1">Kerige veebilehel all ja vajutage</string>
-    <string name="home_download_instructions_step2_apkcube">Kerki veebilehel alla, vali versioon &lt;b&gt;%s&lt;/b&gt; ja vajuta</string>
-    <string name="home_download_instructions_step2_generic">Kerige veebilehte all ja vajutage selle allalaadimisnuppu</string>
+    <string name="home_download_instructions_step2_apkcube">Keri veebilehel alla, vali versioon &lt;b&gt;%s&lt;/b&gt; ja vajuta</string>
+    <string name="home_download_instructions_step2_generic">Keri veebilehel allapoole ja vajuta selle allalaadimisnuppu</string>
     <string name="home_download_instructions_step2_variant">Kerige veebilehte all ja vajutage esimese &lt;b&gt;APK variandi&lt;/b&gt; allalaadimisnuppu</string>
-    <string name="home_download_instructions_step2_search">Avage usaldatavalt veebilehnalt leitud otsingutulemus</string>
-    <string name="home_download_instructions_step2_search_note">Morphe ei saa nende veebilehtede eest garanteerida. Jäätke need, mis pakuvad APK faili asemel oma rakenduspoodi</string>
+    <string name="home_download_instructions_step2_search">Ava usaldusväärselt veebilehelt leitud otsingutulemus</string>
+    <string name="home_download_instructions_step2_search_note">Morphe ei saa nende veebilehtede eest garanteerida. Jäta vahele need, mis pakuvad APK-faili asemel oma rakenduspoodi</string>
     <string name="home_download_instructions_step3_search">Laadi sellest veebilehelt alla versiooni &lt;b&gt;%s&lt;/b&gt; APK, mitte kõige uuem versioon</string>
     <string name="home_download_instructions_step3_search_any">Laadi sellest veebilehelt alla rakenduse APK. Võib patchida &lt;b&gt;suigupäeva versiooni&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_github">Väljaande &lt;b&gt;%s&lt;/b&gt; jaotises &lt;b&gt;Assets&lt;/b&gt; vali fail, mille lõpp on &lt;b&gt;.apk&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_github_latest">Uuimaima väljaande jaotises &lt;b&gt;Assets&lt;/b&gt; vali fail, mille lõpp on &lt;b&gt;.apk&lt;/b&gt;</string>
     <string name="home_download_instructions_step2_github_note">Kui APK-faile on mitu, vali see, mille nimi vastab %s, või universaalne fail</string>
     <string name="home_download_instructions_download_button_toast">Vajutage allalaadimiseks veebilehel, mitte siin 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">Super! Nüüd klõpsake \"jätka\" ja minge veebilehele 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Harjutamine annab tulemusi ja te ed Nestele 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">Super! Nüüd klõpsa \"Jätka\" ja mine veebilehele 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">Harjutamine teeb meistriks ja sa oled juba teel 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Kõik veel puudub… ikka veel puudub… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">OK, ma austan sellist pühendumust 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Nüüd oled sa ametlik Morphe nuppu testija 🏅</string>
@@ -312,7 +312,7 @@
     <string name="home_download_instructions_link_copied">Link kopeeritud</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
-    <string name="home_file_picker_prompt_app_title">Valige %s APK</string>
+    <string name="home_file_picker_prompt_app_title">Vali %s APK</string>
     <string name="home_file_picker_prompt_where">Brauserid salvestavad selle tavaliselt allalaadimiste kaustasse</string>
     <string name="home_file_picker_prompt_open_apk">Ava APK-fail</string>
     <string name="home_recommended_version">Soovitatav versioon</string>
@@ -320,26 +320,26 @@
     <string name="home_select_apk_title">Vali APK</string>
     <string name="home_select_apk_description">"Universaalsed paigad töötavad iga rakendusega
 
-Valige, kust selle APK võtta"</string>
+Vali, kust selle APK võtta"</string>
     <string name="home_use_installed_app">Kasuta installitud rakendust</string>
     <string name="home_use_installed_app_description">Vali rakendus, mis on juba selles seadmes</string>
-    <string name="home_open_apk_file_description">Vali mälust APK, APKM, APKS või XAPK fail</string>
+    <string name="home_open_apk_file_description">Vali salvestusruumist APK, APKM, APKS või XAPK fail</string>
     <string name="home_installed_app_picker_title">Paigaldatud rakendused</string>
     <string name="home_installed_app_picker_empty">Rakendusi ei leitud</string>
     <string name="home_installed_app_picker_filter_user">Ainult kasutaja rakendused</string>
     <string name="home_installed_app_picker_filter_system">Ainult süsteemirakendused</string>
-    <string name="home_invalid_apk_unreadable">Faili ei õnnestunud lugeda. Kontrollige, et \'Väline mäluplaat\' ei oleks akupääsuga piiratud</string>
+    <string name="home_invalid_apk_unreadable">Faili ei õnnestunud lugeda. Kontrollige, et \'Väline mäluplaat\' ei oleks aku piirangutega</string>
     <string name="home_invalid_apk_not_an_apk">Valitud fail ei ole korrektne APK</string>
     <string name="home_invalid_apk_already_patched">Valitud APK on juba patchitud. Vali selle asemel algne rakendus</string>
-    <string name="home_invalid_apk_io_error">Faili avamine eplule. Proovige uuesti</string>
-    <string name="home_external_apk_expert_mode_required">See funktsioon on saadaval ainult eksperdi režiimis</string>
+    <string name="home_invalid_apk_io_error">Faili avamine ebaõnnestus. Proovige uuesti</string>
+    <string name="home_external_apk_expert_mode_required">See funktsioon on saadaval ainult eksperdirežiimis</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Otsi plaastreid</string>
-    <string name="expert_mode_disable_all">Võta kõik maha</string>
+    <string name="expert_mode_disable_all">Lülita kõik välja</string>
     <string name="expert_mode_enable_all">Aktiveeri kõik</string>
-    <string name="expert_mode_enable_all_universal_pending">Universaalsete paigutuste jaoks puudutage uuesti</string>
+    <string name="expert_mode_enable_all_universal_pending">Universaalsete paigutuste jaoks puuduta uuesti</string>
     <string name="expert_mode_universal_all_warning_title">Kas aktiveerida kõik universaalsed lapid?</string>
-    <string name="expert_mode_universal_all_warning_message">Universaalseid lappe ei ole koos testitud. Kõigi nende korraga aktiveerimine võib põhjustada konflikte, lappimise ebaõnnestumist või rakenduse kokkujärgemist</string>
+    <string name="expert_mode_universal_all_warning_message">Universaalseid lappe ei ole koos testitud. Kõigi nende korraga aktiveerimine võib põhjustada konflikte, lappimise ebaõnnestumist või rakenduse kokkujooksmist</string>
     <string name="expert_mode_recommended">Soovitatud paigad</string>
     <string name="expert_mode_reset_to_default_done">Soovitatud paigad on rakendatud</string>
     <string name="expert_mode_selected_count">Valitud %1$s / %2$s</string>
@@ -353,13 +353,13 @@ Valige, kust selle APK võtta"</string>
     <string name="expert_mode_universal_patches">Universaalsed paigad</string>
     <string name="expert_mode_new_patches">Uus</string>
     <string name="expert_mode_options_customized">Kohandatud</string>
-    <string name="expert_mode_patch_required_by_installer">Kohalpaneku sihti on see nõutav</string>
+    <string name="expert_mode_patch_required_by_installer">Nõutav valitud installimissihtkoha jaoks</string>
     <string name="expert_mode_patch_unavailable_for_installer">Valitud installamise sihtkohaga ei ole saadaval</string>
     <string name="expert_mode_multiple_sources_warning_title">Valitud on mitu plaastriallikat</string>
-    <string name="expert_mode_multiple_sources_warning_conflict">Erinevate allikate tõlgendused ei ole loodud koos töötama ning võivad tekitada konflikte või rakenduse rikutada</string>
+    <string name="expert_mode_multiple_sources_warning_conflict">Erinevatest allikatest pärit paigutused ei ole loodud koos töötama ning võivad tekitada konflikte või rakendust rikkuda</string>
     <!-- Home Screen - Home Sub-Dialogs -->
-    <string name="home_invalid_signature_title">Verifyimata APK</string>
-    <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; jaoks valitud APK ei vasta oodatavale allkirjamise sertifikaadile. See võib olla muudetud või pärit mittepõhialusest allikast</string>
+    <string name="home_invalid_signature_title">Kontrollimata APK</string>
+    <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; jaoks valitud APK ei vasta oodatavale allkirjastamise sertifikaadile. See võib olla muudetud või pärit ebausaldusväärsest allikast</string>
     <string name="home_invalid_signature_badge">See APK ei pruugi olla originaal</string>
     <string name="home_split_apk_warning_title">Tuvastatud Split APK</string>
     <string name="home_split_apk_warning_message">"See fail on APK-bundel
@@ -372,7 +372,7 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="morphe_experimental_app_version_dialog_title">Kas soovid eksperimenteerida? 🧪</string>
     <string name="morphe_experimental_app_version_dialog_message">"Sellel &lt;b&gt;%s&lt;/b&gt; versioonil on varajane eksperimentaalne tugi.
 
-🔧 Oota rakenduse käitumiselt veisust või tuvastamata tõrkeid, kuna paigutusi lihvatakse selle rakenduse versiooni jaoks"</string>
+🔧 Ole valmis rakenduse ebatavaliseks käitumiseks või tuvastamata vigadeks, kuna paigutusi selle rakenduse versiooni jaoks alles lihvitakse"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Toetamata versioon</string>
     <string name="home_dialog_unsupported_version_dialog_description">See APK ei ole soovitatud rakenduse versioon. Jätkamisel võib rakendus jääda toimimata</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
@@ -387,24 +387,24 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="home_dialog_expected_package">Oodatud pakett:</string>
     <string name="home_dialog_selected_package">Valitud pakett:</string>
     <string name="home_outdated_patches_dialog_title">Paigad võivad olla aegunud</string>
-    <string name="home_outdated_patches_dialog_message">Mobiilandmed on aktiivsed ja paigade uuendused oni disableeritud</string>
-    <string name="home_outdated_patches_dialog_warning">Aegunud paigadega paigatamine võib põhjustada rakenduse rikkumist</string>
-    <string name="home_outdated_patches_dialog_update_and_patch">Uuenda &amp; paiga</string>
+    <string name="home_outdated_patches_dialog_message">Mobiilne andmeside on aktiivne ja paigauuendused on keelatud</string>
+    <string name="home_outdated_patches_dialog_warning">Aegunud patchidega paigutamine võib rakenduse katki teha</string>
+    <string name="home_outdated_patches_dialog_update_and_patch">Uuenda &amp; paiguta</string>
     <string name="home_low_disk_space_dialog_title">Kettaruumi vähene kogus</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_message">Vaba salvestusruumi on saadaval vaid %1$s GB. Paigutamiseks on vaja vähemalt %2$s GB vaba ruumi, et see toimiks korrektselt</string>
-    <string name="home_low_disk_space_dialog_warning">Jätkamisel võib tekkida viga \"faili ei lepitud\" või võib tulemuseks olla rikutud APK</string>
+    <string name="home_low_disk_space_dialog_warning">Jätkamisel võib tekkida viga \"faili ei leitud\" või võib tulemuseks olla rikutud APK</string>
     <string name="home_simple_bundle_select_title">Vali plaastri allikas</string>
     <string name="home_simple_bundle_select_remember">Kasuta selle rakenduse jaoks alati seda allikat</string>
     <!-- Color picker -->
-    <string name="custom_color">Krediitvärvi</string>
+    <string name="custom_color">Kohandatud värv</string>
     <string name="color_picker_shade">Küllastust ja helegust</string>
     <string name="color_picker_hue">Toon</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Juhendid</string>
     <string name="patch_option_enter_value">Sisesta väärtus</string>
     <string name="patch_option_enter_number">Sisesta number</string>
-    <string name="patch_option_enter_decimal">Sisesta külimürgak</string>
+    <string name="patch_option_enter_decimal">Sisesta kümnendarv</string>
     <string name="patch_option_slider_edit">Sisesta täpne väärtus</string>
     <string name="patch_option_slider_range_start">Kust</string>
     <string name="patch_option_slider_range_end">Kuni</string>
@@ -421,10 +421,10 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="adaptive_icon_create">Loo adaptiivne ikoon</string>
     <string name="adaptive_icon_select_image">Vali pilt</string>
     <string name="adaptive_icon_change_image">Muuda pilt</string>
-    <string name="image_load_failed">Seda pilti ei õnnistunud laadida</string>
+    <string name="image_load_failed">Seda pilti ei õnnestunud laadida</string>
     <!-- Card of the adaptive icon creator where the picture is placed on the icon -->
-    <string name="adaptive_icon_launcher">Käivitusiku</string>
-    <string name="adaptive_icon_gesture_hint">Liigutamiseks lohista, suuruse muutmiseks lepita</string>
+    <string name="adaptive_icon_launcher">Käivitusikoon</string>
+    <string name="adaptive_icon_gesture_hint">Liigutamiseks lohista, suuruse muutmiseks sõrmi kokku või lahku</string>
     <!-- Card of the adaptive icon creator showing the icons as the device draws them -->
     <string name="adaptive_icon_preview">Eelvaade</string>
     <!-- Caption under the launcher icon in its own colors -->
@@ -432,19 +432,19 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <!-- Caption under the launcher icon recolored by the system theme -->
     <string name="adaptive_icon_themed">Teemavärviga</string>
     <string name="adaptive_icon_background_color">Taustavärv</string>
-    <string name="adaptive_icon_reset_transform">Läbizeta asukoht ja skaala</string>
+    <string name="adaptive_icon_reset_transform">Lähtesta asukoht ja mõõtkava</string>
     <string name="adaptive_icon_no_transparency_warning">Selle pildil puuduvad läbipaistvad pikslid, seega säilivad teemaliste ja teavituste ikoonide puhul Morphe logo</string>
     <string name="adaptive_icon_created_success">Adaptiivne ikoon loodi edukalt</string>
     <string name="adaptive_icon_creation_failed">Adaptiivse ikooni loomine ebaõnnestus</string>
     <string name="adaptive_icon_guide">Ikoonide loomise juhend</string>
     <string name="adaptive_icon_guide_png_title">Kasutage läbipaistva taustaga PNG-faili</string>
-    <string name="adaptive_icon_guide_png_body">Kõige paremini töötab läbipaistva taustaga logo, kus taustavärgi on valitud allpoolt. Pilt ilma läbipaistvusega täidab selle asemel kogu ikooni ja teemaliste ning teavituste ikoonide puhul säilib Morphe logo.</string>
-    <string name="adaptive_icon_guide_safe_zones_title">Ohutused tsoonid</string>
-    <string name="adaptive_icon_guide_safe_zones_body">Ärisjoon näitab teie käivitusprogrammi ikooni kujut ja kõik selle väljaspool on lõigatud. Muud käivitusprogrammid kasutavad teisi kujusid, seega hoidke olulised ükskohad katkendliku ringi sees, mille kõik kujud kuvavad.</string>
+    <string name="adaptive_icon_guide_png_body">Kõige paremini töötab läbipaistva taustaga logo, kus taustavärv on valitud allpool. Pilt ilma läbipaistvusega täidab selle asemel kogu ikooni ja teemaliste ning teavituste ikoonide puhul säilib Morphe logo.</string>
+    <string name="adaptive_icon_guide_safe_zones_title">Ohutud tsoonid</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Piirjoon näitab sinu käivitusprogrammi ikooni kuju ja kõik sellest väljaspool jääv lõigatakse ära. Muud käivitusprogrammid kasutavad teisi kujusid, seega hoia olulised detailid katkendliku ringi sees, mille kõik kujud kuvavad.</string>
     <string name="adaptive_icon_guide_notification_title">Teavituse ikoon</string>
-    <string name="adaptive_icon_guide_notification_body">Lõika pildi nähtavast osast ja määra suurus nagu teiste olekuriba ikoonide puhul, olenemata faili marginaalist. Reguleeri seda eelvaate all olevale lihkujale. Android kuvab selle ühe värviga.</string>
+    <string name="adaptive_icon_guide_notification_body">Lõika pildi nähtavast osast ja määra suurus nagu teiste olekuriba ikoonide puhul, olenemata faili marginaalist. Reguleeri seda eelvaate all oleva liuguriga. Android kuvab selle ühe värviga.</string>
     <string name="adaptive_icon_guide_monochrome_title">Teemavärviline ikoon</string>
-    <string name="adaptive_icon_guide_monochrome_body">Lõika pildist sama asukohaga ja suurusega kui käivitusikoonil. Androidi versioonis 13 ja uuemas värvivad teemavärvilised ikoonid käivitajatesse pildit taustapildi järgi.</string>
+    <string name="adaptive_icon_guide_monochrome_body">Lõika pildist sama asukoha ja suurusega nagu käivitusikoon. Androidi versioonis 13 ja uuemas värvitakse teemavärvilised ikoonid taustapildi järgi, kui käivitajas on need sisse lülitatud.</string>
     <string name="notification_icon_preview">Teavitus</string>
     <!-- Header Creator -->
     <string name="header_creator_create">Loo kohandatud päis</string>
@@ -458,27 +458,30 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="header_creator_guide_themes_title">Hele ja tume teema</string>
     <string name="header_creator_guide_themes_body">Enamik rakendused nõuavad hele ja tume teema jaoks eraldi pilte. Mõned rakendused (näiteks YouTube Music) kasutavad ainult tumedat teemat, seega on näidatud ainult see osa.</string>
     <string name="header_creator_guide_positioning_title">Asukohad ja skaalimine</string>
-    <string name="header_creator_guide_positioning_body">Lohista ja suru pilti redaktoris või määra selle suurus lihkujaga. Katkesjoonidega kast märgib algse logo asukohta ja juhised ilmunevad siis, kui pilt sellega ühiseb.</string>
+    <string name="header_creator_guide_positioning_body">Lohista ja suru pilti redaktoris või määra selle suurus liuguriga. Katkendjoonega kast märgib algse logo asukohta ja juhised ilmuvad siis, kui pilt sellega joondub</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Paigutamine valitud</string>
+    <string name="batch_patch_action">Paiguta valitud</string>
     <string name="batch_patch_title">Masspaigutus</string>
     <string name="batch_patch_planning">Valmistatakse ette järjekorda…</string>
     <string name="batch_patch_preparing_next">Valmistatakse ette järgmist rakendust…</string>
     <string name="batch_patch_progress_counter">Paigutatakse %1$s / %2$s</string>
     <string name="batch_patch_summary">%1$s patchitud, %2$s ebaõnnestunud, %3$s jäetud mööda</string>
-    <string name="batch_patch_saved_hint">Paigutatud rakendused on salvestatud. Installige need kohe või hiljem seadete paigutatud APK-de loendist</string>
+    <string name="batch_patch_saved_hint">Paigutatud rakendused on salvestatud. Installi need kohe või hiljem seadete paigutatud APK-de loendist</string>
     <string name="batch_patch_multiple_sources">Mõned rakendused kombineerivad paigutusi mitmest allikast, mis võib põhjustada konflikte</string>
     <string name="batch_patch_needs_apk">APK ei ole saadaval, lisa fail</string>
     <string name="batch_patch_wrong_package">Lisatud fail kuulub elemendile %s</string>
     <string name="batch_patch_version_mismatch">Versiooni %s ei toeta plaastrid</string>
     <string name="batch_patch_source_saved">Salvestatud originaal</string>
     <string name="batch_patch_source_installed">Installitud rakendus</string>
-    <string name="batch_patch_source_file">Manuseletatud fail</string>
+    <string name="batch_patch_source_file">Lisatud fail</string>
     <string name="batch_patch_source_unavailable">APK-d ei õnnestunud ette valmistada</string>
     <string name="batch_patch_force_version">Patchi siiski</string>
     <string name="batch_patch_force_version_done">Lisatud järjekorda, rakendus võib lakata töötamast</string>
-    <string name="batch_patch_accept_signature_done">Lisatud järjekorda, APK-d ei ole verifyeritud</string>
+    <string name="batch_patch_accept_signature_done">Lisatud järjekorda, APK-d ei ole kinnitatud</string>
     <string name="batch_patch_apk_selected">APK valitud</string>
+    <string name="batch_patch_auto_download_stopped">Automaatsed APK allalaadimised on peatatud</string>
+    <string name="batch_patch_auto_download_stop">Peata allalaadimised</string>
+    <string name="batch_patch_auto_download_kept">Allalaaditud APK-d ei saanud kasutada, seega on alles jäatud eelmine</string>
     <string name="batch_patch_edit_patches">Vali patchid</string>
     <string name="batch_patch_state_no_apk">Puudub APK</string>
     <string name="batch_patch_state_no_patches">Ei ole paigutusi</string>
@@ -487,9 +490,9 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="batch_patch_policy_install">Installi lõppedes</string>
     <string name="batch_patch_policy_install_description">Installib iga paigutatud rakenduse kohe pärast järjekorra lõppemist. Väljalülitatud olekul jäävad APK-failid hilisemaks</string>
     <string name="batch_patch_policy_mount">Monteeri lõpetamisel</string>
-    <string name="batch_patch_policy_mount_description">Monteerib iga plaastitud rakenduse pärast järjekorra lõppemist. Väljal jäetud valik hoiab APK-id hilisemaks</string>
+    <string name="batch_patch_policy_mount_description">Monteerib iga paigutatud rakenduse pärast järjekorra lõppemist. Väljalülitatud olekus jäävad APK-d hilisemaks</string>
     <string name="batch_patch_policy_install_mount">Installi või monteeri lõpetamisel</string>
-    <string name="batch_patch_policy_install_mount_description">Installib või monteerib iga plaastitud rakenduse pärast järjekorra lõppemist. Väljal jäetud valik hoiab APK-id hilisemaks</string>
+    <string name="batch_patch_policy_install_mount_description">Installib või monteerib iga paigutatud rakenduse pärast järjekorra lõppemist. Väljalülitatud olekus jäävad APK-d hilisemaks</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Alusta</string>
     <string name="batch_patch_stop_title">Lõpetada masspaigutus?</string>
@@ -497,11 +500,11 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_install_all">Installi kõik</string>
     <string name="batch_patch_install_failed">Installimine ebaõnnestus</string>
-    <string name="batch_patch_in_progress">Masspaigutus on juba käigu</string>
+    <string name="batch_patch_in_progress">Masspaigutus on juba käigus</string>
     <string name="batch_patch_nothing_outdated">Kõik paigutatud rakendused on värskendatud</string>
-    <string name="batch_queue_add_action">Lisau järjekorda</string>
+    <string name="batch_queue_add_action">Lisa järjekorda</string>
     <string name="batch_queue_pending_subtitle">Puuduta ülevaatamiseks ja alustamiseks</string>
-    <string name="batch_queue_clear_title">Tõhjutada järjekord?</string>
+    <string name="batch_queue_clear_title">Tühjendada järjekord?</string>
     <string name="batch_queue_clear_description">Kõik rakendused eemaldatakse järjekorrast</string>
     <string name="batch_queue_keep_title">Kas jätta järjekord?</string>
     <string name="batch_queue_keep_description">Järjekorda ootavad rakendused jäävad avatud ekraanile hilisemaks käivitamiseks</string>
@@ -513,7 +516,7 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_uninstall_title">Eemaldada see rakendus?</string>
     <string name="home_app_info_uninstall_removes_data">Rakendus ja selle andmed eemaldatakse sellest seadmest</string>
-    <string name="batch_uninstall_confirm_body">Valitud rakendused eemaldatakse teie seadmest jäädavalt</string>
+    <string name="batch_uninstall_confirm_body">Valitud rakendused eemaldatakse sinu seadmest jäädavalt</string>
     <string name="home_app_info_remove_app_warning">See kustutab jäädavalt:</string>
     <string name="home_app_info_delete_item_database">Andmebaasi kirje</string>
     <string name="home_app_info_delete_item_patched_apk">Paigatud APK-fail</string>
@@ -523,10 +526,10 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="home_app_info_patches_name_fallback">Nimetamata</string>
     <string name="home_app_info_patches_source_removed">Patchi allikas on kustutatud</string>
     <string name="home_app_info_patches_replace_fail">Paigandite importimine ebaõnnestus: %s</string>
-    <string name="home_app_info_repatch_no_original_apk">Originaalse APK-d ei ownud. Rakendust ei saa uuesti paigutada</string>
+    <string name="home_app_info_repatch_no_original_apk">Originaalset APK-d ei leitud. Rakendust ei saa uuesti paigutada</string>
     <string name="home_app_info_original_package_name">Paketi algne nimi</string>
     <string name="home_app_info_applied_patches">Rakendatud paigandid</string>
-    <string name="home_app_info_patch_source_used">Kasutatud pätši allikas</string>
+    <string name="home_app_info_patch_source_used">Kasutatud patchi allikas</string>
     <string name="home_app_info_install_type_custom_installer">Kohandatud installator</string>
     <string name="home_app_info_install_type_system_installer">Süsteemi installator</string>
     <string name="home_app_info_install_type_play_store">Play Store\'i installatsioon</string>
@@ -537,46 +540,46 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="home_app_info_patch_update_available_description">Saadaval on uuem versioon paigutustest. Paiguta rakendus uuesti, et saada uusimad uuendused ja parandused</string>
     <string name="home_app_info_app_update_available">Rakenduse uuendus saadaval</string>
     <string name="home_app_info_app_update_available_description">Patchi allikad toetavad rakenduse uuemat versiooni. Liigutamiseks sellele versioonile tee patchimine uuesti</string>
-    <string name="home_app_info_newest_supported_version">Uuim tohitud</string>
-    <string name="home_app_info_version_move">Paigaldatud %1$s, uusim tohitud %2$s</string>
+    <string name="home_app_info_newest_supported_version">Uusim toetatud</string>
+    <string name="home_app_info_version_move">Paigaldatud %1$s, uusim toetatud %2$s</string>
     <string name="home_app_info_version_restore">Paigaldatud %1$s, paigatud %2$s</string>
     <string name="home_app_info_app_deleted_warning">Rakendus on eemaldatud</string>
     <string name="home_app_info_app_deleted_description">See rakendus eemaldati väljaspool Morphe rakendust. Taastage funktsionaalsus, tehes selle uuesti pätšimise</string>
-    <string name="home_app_info_not_patched_description">See rakendus on installitud patchimata versiooniga. Morphel on alles eelmine patchi kirje</string>
-    <string name="home_app_info_mount_replaced_description">Paigaldatud rakenduse asemikuks tuli teine versioon, mistõttu paiga ei kehti enam. Taastamine seab paigatud versiooni tagasi</string>
-    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uuendas paigaldatud rakendust, mistõttu paiga ei kehti enam. Taastamine seab paigatud versiooni tagasi. Selle paigutatud hoidmiseks lülitage Google Play\'s auto-uuendamine välja</string>
+    <string name="home_app_info_not_patched_description">See rakendus on installitud patchimata versiooniga. Morphe\'il on alles eelmine patchi kirje</string>
+    <string name="home_app_info_mount_replaced_description">Paigaldatud rakenduse asendas teine versioon, mistõttu paiga ei kehti enam. Taastamine seab paigatud versiooni tagasi</string>
+    <string name="home_app_info_mount_replaced_by_play_store_description">Google Play uuendas paigaldatud rakendust, mistõttu paiga ei kehti enam. Taastamine seab paigatud versiooni tagasi. Paigatuna hoidmiseks lülita Google Play\'s selle automaatuuendused välja</string>
     <string name="app_links_title">Toetatud veebilingid</string>
-    <string name="app_links_description">Android 12+ versioonides avanevad toetatud domeenide lingid vaikimisi teie brauseris, kui neid ei ole heaks kiidetud</string>
-    <string name="app_links_unverified_banner_title">Veebilingid pole verifyeritud</string>
-    <string name="app_links_unverified_banner_description">Toetatud veebilingid avanevad hetkel teie brauseris selle rakenduse asemel</string>
+    <string name="app_links_description">Android 12+ versioonides avanevad toetatud domeenide lingid vaikimisi sinu brauseris, kui neid ei ole heaks kiidetud</string>
+    <string name="app_links_unverified_banner_title">Veebilingid pole kinnitatud</string>
+    <string name="app_links_unverified_banner_description">Toetatud veebilingid avanevad hetkel sinu brauseris selle rakenduse asemel</string>
     <string name="app_links_enable_auto">Luba automaatselt</string>
-    <string name="app_links_enable_auto_in_progress">Luba linke…</string>
+    <string name="app_links_enable_auto_in_progress">Lubatakse linke…</string>
     <string name="app_links_open_settings">Ava lingi seaded</string>
     <string name="app_links_repair_success">Rakenduse lingid aktiveeriti edukalt</string>
     <string name="app_links_repair_failed">Rakenduse linkide automaatne aktiveerimine ebaõnnestus</string>
-    <string name="app_links_all_verified">Kõik toetatud lingid on konfigureeritud selle rakendusega avama</string>
+    <string name="app_links_all_verified">Kõik toetatud lingid on seadistatud avanema selles rakenduses</string>
     <string name="app_links_fix">Paranda lingid</string>
-    <string name="configure">Konfigureeri</string>
+    <string name="configure">Seadista</string>
     <string name="patcher_rename_title">See installib klooni</string>
     <string name="patcher_rename_description">Paigandused ehitasid selle rakenduse oma paketi nimega, seega selle installimine lisab klooni &lt;b&gt;%s&lt;/b&gt;-i kõrvale selle asemel, et seda uuendada</string>
     <string name="patcher_rename_result_package">Installitakse kui</string>
     <string name="patcher_rename_replaces">Selle nimega rakendus on juba installitud ja see asendatakse</string>
-    <string name="home_app_info_apk_size">APK suur</string>
+    <string name="home_app_info_apk_size">APK suurus</string>
     <string name="home_app_info_cpu_arch">CPU arhitektuur</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root-režiim nõuab, et enne paigutamist oleks teie seadmesse installitud originaalne APK</string>
-    <string name="root_pre_patch_installer_title">Valige paigutuse režiim</string>
-    <string name="root_pre_patch_installer_description">Sinu seadmel on root-juurdamine. Vali, kas see rakendus tuleks paigaldada root-mounti jaoks või tavaliselt</string>
-    <string name="root_pre_patch_installer_mount_title">Root-montiireimise režiim</string>
-    <string name="root_pre_patch_installer_mount_description">Paigutab root-montiireimiseks, seejärel montiirib APK-faili vastava tehaserakenduse kohale. GmsCore\'i ei ole vaja</string>
-    <string name="root_mount_module_unmount_warning">Kui KernelSU-l on funktsioon \"Unmount modules by default\" sisse lülitatud, avage KernelSU &gt; Superuser &gt; rakendus, mille mountisite &gt; Profile &gt; Custom ja lülitage \"Unmount modules\" välja. Vastasel juhul ei pruugis mountitud paigutatud APK jõustuda, isegi kui Morphe näitab seda mountitud,</string>
+    <string name="root_pre_patch_installer_title">Vali paigutuse režiim</string>
+    <string name="root_pre_patch_installer_description">Sinu seadmel on root-juurdepääs. Vali, kas see rakendus tuleks paigutada root-mounti või tavalise installina</string>
+    <string name="root_pre_patch_installer_mount_title">Root-mounti režiim</string>
+    <string name="root_pre_patch_installer_mount_description">Paigutab root-mounti jaoks, seejärel paigaldab APK-faili vastava tehaserakenduse kohale. GmsCore\'i ei ole vaja</string>
+    <string name="root_mount_module_unmount_warning">Kui KernelSU-l on funktsioon \"Unmount modules by default\" sisse lülitatud, ava KernelSU &gt; Superuser &gt; rakendus, mille mountisid &gt; Profile &gt; Custom ja lülita \"Unmount modules\" välja. Vastasel juhul ei pruugi mountitud paigutatud APK jõustuda, isegi kui Morphe näitab seda mountitud.</string>
     <string name="root_pre_patch_installer_standard_title">Standardne installimise režiim</string>
-    <string name="root_pre_patch_installer_standard_description">Paigutab tavalise APK-failina koos GmsCore\'i toega. Pärast paigutust kasutatakse teie installija seadet</string>
+    <string name="root_pre_patch_installer_standard_description">Paigutab tavalise APK-failina koos GmsCore\'i toega. Pärast paigutust kasutatakse sinu installeri seadet</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">Küsitakse siis, kui %1$s on määratud väärtusele %2$s. Paigandusrežiimi ei saa pärast paigandamist muuta</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Viga kopeeriti lõikelauale</string>
-    <string name="patcher_error_log">Vealogue</string>
+    <string name="patcher_error_log">Vealogi</string>
     <string name="patcher_error_technical">Tehnilised üksikasjad</string>
     <string name="patcher_error_dialog_diagnostics">Diagnostika</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
@@ -625,13 +628,13 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="patcher_failed_dialog_title">Paigutamine ebaõnnestus</string>
     <string name="patcher_error_details">Vea üksikasjad</string>
     <string name="patcher_change_patches">Muuda patche</string>
-    <string name="patcher_unknown_error">Tuli teavamat viga</string>
+    <string name="patcher_unknown_error">Tundmatu viga ilmnes</string>
     <string name="patcher_split_step_extracting">Split APK-de väljavõtmine</string>
     <string name="patcher_split_step_merging">Ühendamine %s</string>
     <string name="patcher_split_step_writing">Ühendatud APK kirjutamine</string>
     <string name="patcher_split_step_finalizing">Ühendatud APK lõpustamine</string>
     <string name="patcher_conflict_title">Paketi konflikt</string>
-    <string name="patcher_conflict_subtitle">Peate eemaldamaks olemasoleva versiooni</string>
+    <string name="patcher_conflict_subtitle">Peate olemasoleva versiooni eemaldama</string>
     <string name="patcher_conflict_hint">Paigutatud rakendus kasutab erinevat sertifikaati kui installitud versioon. Desinstallimine kustutab kogu rakenduse andmed</string>
     <string name="patcher_installed_conflict_title">Vajalik desinstallimine</string>
     <string name="patcher_installed_conflict_body">"Morphe allkirjastab paigutatud rakendused oma sertifikaadiga, mis erineb algsest. Android nõuab olemasoleva versiooni eemaldamist enne, kui paigutatud rakendust saab installida.
@@ -642,27 +645,27 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="patcher_install_error_subtitle">Proovige eemaldada ja uuesti installida</string>
     <string name="patcher_ready_to_mount_subtitle">Mountimiseks vajutage allpoolset nuppu</string>
     <string name="patcher_patches_excluded_for_installer">Selle installimise meetodiga ei ole saadaval ja on välditud: %s</string>
-    <string name="patcher_back_to_game_hint">Puudutage %1$s, et mängu naasta</string>
-    <string name="patcher_storage_permission_dialog_title">Ei saa pöörduda tõusuklubi tee juurde</string>
+    <string name="patcher_back_to_game_hint">Puuduta %1$s, et naasta mängu</string>
+    <string name="patcher_storage_permission_dialog_title">Salvestusteele ei pääse juurde</string>
     <string name="patcher_incompatible_patcher_title">Vajalik on värskendus</string>
     <string name="patcher_incompatible_patcher_description">Allikas &lt;b&gt;%1$s&lt;/b&gt; nõuab versiooni &lt;b&gt;%2$s&lt;/b&gt; või uuema patcherit. Selle kasutamiseks uuenda Morphe\'i</string>
-    <string name="patcher_storage_permission_description_api30">Üks või mitu plaastri valikut viitab teele, mida Morphe ei saa lugeda. Andke juurdepääs salvestusalaan ja puudutage nuppu, siis algab plaastramine automaatselt</string>
+    <string name="patcher_storage_permission_description_api30">Üks või mitu plaastri valikut viitab teele, mida Morphe ei saa lugeda. Andke salvestusõigus ja puudutage nuppu, seejärel algab paigutamine automaatselt</string>
     <string name="patcher_storage_permission_description_legacy">Üks või mitu plaastri valikut viitab teele, millele puudub juurdepääs. Uuendage teed plaastri valikutes ja proovige uuesti</string>
-    <string name="patcher_storage_permission_grant">Anna loujurruse luba</string>
-    <string name="patcher_storage_permission_denied_warning">Loujurruse luba tõidati ära. Anna luba selle tee kasutamiseks või liiguta failid rakenduse privaatse kataloogi</string>
-    <string name="patcher_storage_permission_open_settings">Ava louse seaded</string>
-    <string name="patcher_storage_badge_denied">Luba tõideti ära</string>
+    <string name="patcher_storage_permission_grant">Anna salvestusluba</string>
+    <string name="patcher_storage_permission_denied_warning">Salvestusluba keelati. Andke luba selle tee kasutamiseks või teisaldage failid rakenduse privaatsesse kataloogi</string>
+    <string name="patcher_storage_permission_open_settings">Ava salvestusseaded</string>
+    <string name="patcher_storage_badge_denied">Luba keelati</string>
     <string name="patcher_storage_badge_missing">Ei leitud</string>
     <string name="patcher_storage_badge_rejected">Kasutamatu</string>
-    <string name="batch_patch_option_paths_skipped">Parandusvalikute failid puuduvad ja needle jäädakse möödast: %1$s</string>
+    <string name="batch_patch_option_paths_skipped">Parandusvalikute failid puuduvad ja jäetakse vahele: %1$s</string>
     <string name="patcher_missing_patches_title">Mõned parandused on kadunud</string>
     <string name="patcher_missing_patches_description">Selle rakenduse jaoks salvestatud valik sisaldab paigeid, mida ükski aktiveeritud allikas enam ei paku. Jätkates paigutatakse rakendust ilma nendeta</string>
     <string name="patcher_missing_patches_label">Ei pakuta enam</string>
     <string name="patcher_option_paths_gone_title">Parandusvalikute failid puuduvad</string>
-    <string name="patcher_option_paths_gone_description">Üks või mitu parandusvalikut viitab failidele, mida enam ei ole. Eemaldage teed, et jätkata parandamine ilma nende failideta, või taastage failid ja proovige uuesti</string>
-    <string name="patcher_option_paths_rejected_title">Tõlgenduse valikfailide ei saa kasutada</string>
-    <string name="patcher_option_paths_rejected_description">Üks või mitu tõlgenduse valikut viitab failidele, mida puudub või mis ei sisalda tõlgenduse nõutavaid elementide. Eemaldage teed, et tõlgendada ilma nende ilma, või parandage failid vastavalt juhistustele ja proovige uuesti</string>
-    <string name="patcher_option_paths_clear">Eemaldage teed ja jätkake</string>
+    <string name="patcher_option_paths_gone_description">Üks või mitu parandusvalikut viitab failidele, mida enam ei ole. Eemalda teed, et jätkata ilma nendeta, või taasta failid ja proovi uuesti</string>
+    <string name="patcher_option_paths_rejected_title">Parandusvalikute faile ei saa kasutada</string>
+    <string name="patcher_option_paths_rejected_description">Üks või mitu parandusvalikut viitab failidele, mida ei ole või millel pole paranduse nõutavaid elemente. Eemalda teed, et paigutada ilma nendeta, või paranda failid vastavalt valiku juhistele ja proovi uuesti</string>
+    <string name="patcher_option_paths_clear">Eemalda teed ja jätka</string>
     <string name="patcher_storage_permission_hint">Nõuanne: Liiguta failid kataloogi /Android/data/app.morphe.manager/files/ - lisalubasid ei vaja</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Ettevalmistamine</string>
@@ -682,7 +685,7 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="patcher_task_writing_apk">APK-faili kirjutamine</string>
     <!-- Battery optimization pre-flight dialog -->
     <string name="battery_optimization_dialog_title">Taustapaigutamise kaitse</string>
-    <string name="battery_optimization_dialog_description">Mõned seadmed võivad peatada paigutaja, kui rakendus on minimeeritud. Luba Morphe\'l töötada ilma akupiiranguteta, et tagada paigutamise tõusev kestvus</string>
+    <string name="battery_optimization_dialog_description">Mõned seadmed võivad paigutaja peatada, kui rakendus on minimeeritud. Lubage Morphe\'il töötada ilma akupiiranguteta, et paigutamine lõpeks kindlalt</string>
     <string name="battery_optimization_not_now">Mitte praegu</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Paigutamine on käigus…</string>
@@ -692,36 +695,36 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
     <string name="patcher_keep_patching">Jätka paigutamist</string>
     <!-- Patcher Screen - Patcher Messages -->
-    <string name="patcher_message_1">Muudame teie rakendust millekski häras... 🏆</string>
+    <string name="patcher_message_1">Muudame teie rakenduse millekski vapustavaks… 🏆</string>
     <string name="patcher_message_2">Õpetame vanu rakendusi uusi trikke... 🎩</string>
     <string name="patcher_message_3">Tehakse rakendusele digitaalset hooldust… 🔧</string>
     <string name="patcher_message_4">Keedetakse digitaalset magiat… ☕</string>
     <string name="patcher_message_5">Soovitatav kohvipaus… ☕</string>
     <string name="patcher_message_6">Vaata välja, seal on ilus ilm… 🌤️</string>
     <string name="patcher_message_7">Kohandatakse 1-id ja 0-id… 🤖</string>
-    <string name="patcher_message_8">Lahti poolitakse digitaalset spagettikoodi… 🍝</string>
+    <string name="patcher_message_8">Lahti harutatakse digitaalset spagettikoodi… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
     <string name="patcher_message_9">Parandatakse vigu patchimata rakenduses… 🪲</string>
-    <string name="patcher_message_10">Head uuendused on ootamise väärt… ⏳</string>
+    <string name="patcher_message_10">Head plaastrid on ootamise väärt… ⏳</string>
     <string name="patcher_message_11">Poleeritakse piksleid, kuni need säravad… 💎</string>
-    <string name="patcher_message_12">Palun jääge istumaks, kuni kapitan lülitab märgise \"Paikanemine käigul\" välja… 💺✈️</string>
+    <string name="patcher_message_12">Palun jääge istumaks, kuni kapten lülitab märgise \"Paigutamine käigus\" välja… 💺✈️</string>
     <string name="patcher_message_13">Valmistatakse teie uuendatud rakendust, kuuma ja värskena… 🍳</string>
     <!-- "bytecode" can be translated from "the app code" -->
     <string name="patcher_message_14">Veennetakse viisakaselt rakenduse koodi… 🤝</string>
     <!-- Space flight communications callout. -->
-    <string name="patcher_message_15">Kõik süsteemid on korras… trajektooria korrigeerimine on stabiilne… 🚀</string>
+    <string name="patcher_message_15">Kõik süsteemid on korras… paigutamise trajektoor on stabiilne… 🚀</string>
     <string name="patcher_message_16">Pressin välja täiendavat võimsust, nagu mahla digitaalsest sidrunist… 🍋</string>
     <string name="patcher_message_17">Õhutan rakendust aktsepteerima oma uut ja paremat mina… 🌱</string>
     <!-- Quantum physics (box emoji is a reference to Schrödinger's cat). -->
-    <string name="patcher_message_18">Muudan rakenduse superpositsiooni olekust \"mitte-päevitatud\" olekku \"päevitatud\"… 📦⚛️</string>
+    <string name="patcher_message_18">Muudan rakenduse superpositsiooni olekust \"paigutamata\" olekusse \"paigutatud\"… 📦⚛️</string>
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
-    <string name="patcher_message_19">Sinu rakendusel on palavik ja ainus ravim on rohkem päevitusi… 🩺🔔</string>
-    <string name="patcher_message_20">Eemaldan jabramist. Palun oodake… 🗑️</string>
+    <string name="patcher_message_19">Sinu rakendusel on palavik ja ainus ravim on rohkem paigutusi… 🩺🔔</string>
+    <string name="patcher_message_20">Eemaldan jaburust. Palun oodake… 🗑️</string>
     <!-- Expert patcher Screen -->
-    <string name="patching_app">Rakenduse paigatamine</string>
+    <string name="patching_app">Rakenduse paigutamine</string>
     <string name="memory_usage">Mälu kasutus</string>
     <string name="cpu_usage">CPU kasutus</string>
-    <string name="storage_io_usage">Tallutuse I/O</string>
+    <string name="storage_io_usage">Salvestusruumi I/O</string>
     <!-- Patcher Screen - Other hidden strings -->
     <string name="applying_patches">Rakendatakse paigutusi</string>
     <string name="failed_to_execute_patch">%s rakendamine ebaõnnestus</string>
@@ -737,36 +740,36 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="install_ignore_signature">Installi siiski</string>
     <string name="install_ignore_signature_description">Säilitab rakenduse andmed, kuid töötab ainult juhul, kui root-moodul keelab Androidi allkirja kontrollimise</string>
     <string name="uninstall_app_fail">Rakenduse eemaldamine ebaõnnestus: %s</string>
-    <string name="uninstall_app_unverified">Jätatud paiksele: Morphe ei suutnud kinnitada, et installitud rakendus on justne versioon, mille ta paigutas</string>
-    <string name="launch_app_unverified">Morphe ei suutnud kinnitada, et installitud rakendus on justne versioon, mille ta paigutas</string>
-    <string name="uninstall_timeout">Eemaldamise aeg läbis</string>
+    <string name="uninstall_app_unverified">Jäeti alles: Morphe ei suutnud kinnitada, et installitud rakendus on see versioon, mille ta paigutas</string>
+    <string name="launch_app_unverified">Morphe ei suutnud kinnitada, et installitud rakendus on see versioon, mille ta paigutas</string>
+    <string name="uninstall_timeout">Eemaldamise aeg lõppes</string>
     <string name="save_apk_success">APK salvestatud</string>
     <string name="saved_app_export_failed">Paigutatud rakenduse eksportimine ebaõnnestus</string>
     <string name="saved_app_removed_toast">Eemaldatud salvestatud paigutatud rakendus</string>
     <string name="saved_app_launch_unavailable">Installige rakendus enne selle avamist</string>
     <string name="package_name">Paketi nimi</string>
-    <string name="failed_to_mount">Ühendamine ebaõnnestus: %s</string>
-    <string name="failed_to_unmount">Lahtiühendamine ebaõnnestus: %s</string>
+    <string name="failed_to_mount">Monteerimine ebaõnnestus: %s</string>
+    <string name="failed_to_unmount">Demonteerimine ebaõnnestus: %s</string>
     <!-- Patcher Screen - Mini-games -->
     <string name="mini_game_score">Tulemus %s</string>
     <string name="mini_game_best">Parim %s</string>
     <string name="mini_game_new_record">Uus rekord!</string>
     <string name="mini_game_game_over">Mäng on läbi</string>
     <string name="mini_game_try_again">Proovi uuesti</string>
-    <string name="mini_game_paused">Pausesitud</string>
+    <string name="mini_game_paused">Peatatud</string>
     <string name="mini_game_resume">Jätka</string>
     <string name="mini_game_restart">Alusta algusest</string>
     <string name="mini_game_change">Vali teine mäng</string>
     <string name="mini_game_2048_picker_subtitle">Liiguta plaate, et neid ühendada</string>
     <string name="mini_game_flappy_picker_subtitle">Puuduta, et lendada läbi torude</string>
     <string name="mini_game_flappy_tap_to_start">Puuduta, et lendada</string>
-    <string name="mini_game_snake_picker_subtitle">Söö toitu, ära taga enda saba</string>
+    <string name="mini_game_snake_picker_subtitle">Söö toitu, ära jookse iseendasse</string>
     <string name="mini_game_snake_swipe_to_start">Liiguta käivitamiseks</string>
     <string name="mini_game_dino_picker_subtitle">Puuduta, et hüpata kaktuste üle</string>
     <string name="mini_game_dino_tap_to_start">Puuduta, et jooksma hakata</string>
     <string name="mini_game_blocks_picker_subtitle">Sobita kujundid, puhasta read</string>
     <string name="mini_game_blocks_tap_to_start">Puuduta pööramiseks, libista liigutamiseks, libista alla laskmiseks</string>
-    <string name="mini_game_bricks_picker_subtitle"> Bounce\'i pall, puhasta sein</string>
+    <string name="mini_game_bricks_picker_subtitle">Põrgata pall, puhasta sein</string>
     <string name="mini_game_bricks_tap_to_start">Lohista sihtimiseks, puuduta käivitamiseks</string>
     <string name="mini_game_miner_picker_subtitle">Puuduta avamiseks, hoia märgistamiseks</string>
     <string name="mini_game_pairs_picker_subtitle">Pööra kaarteid, leia paar</string>
@@ -783,16 +786,16 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="settings_appearance_background_shapes">Kujundid</string>
     <string name="settings_appearance_background_snow">Lumi</string>
     <string name="settings_appearance_background_grid">Ruuduk</string>
-    <string name="settings_appearance_background_particles">Partiklid</string>
+    <string name="settings_appearance_background_particles">Osakesed</string>
     <string name="settings_appearance_background_lava">Lavalamp</string>
     <string name="settings_appearance_background_halloween">Halloween</string>
-    <string name="settings_appearance_background_fireworks">Külavuurid</string>
+    <string name="settings_appearance_background_fireworks">Ilutulestik</string>
     <string name="settings_appearance_background_none">Puudub</string>
     <string name="settings_appearance_background_random">Juhuslik</string>
     <string name="settings_appearance_background_random_interval_launch">Käivitamisel</string>
     <string name="settings_appearance_background_random_interval_daily">Igal päeval</string>
-    <string name="settings_appearance_background_random_interval_3days">Iga 3 päeva tagasi</string>
-    <string name="settings_appearance_parallax_effect">Parallaksi efekt</string>
+    <string name="settings_appearance_background_random_interval_3days">Iga 3 päeva järel</string>
+    <string name="settings_appearance_parallax_effect">Paralaksefekt</string>
     <string name="settings_appearance_parallax_effect_description">Sile taustaliigutus seadme kallutamisel</string>
     <string name="settings_appearance_seasonal_themes">Hooajalised teemad</string>
     <string name="settings_appearance_seasonal_themes_description">Peo taustad ja tervitused pühade ajal</string>
@@ -810,32 +813,32 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="settings_appearance_monochrome">Monokroomne</string>
     <string name="settings_appearance_color_style">Värvistiil</string>
     <string name="settings_appearance_accent_color">Aksentsvärv</string>
-    <string name="settings_appearance_pure_black">Süvat must</string>
+    <string name="settings_appearance_pure_black">Puhas must</string>
     <string name="settings_appearance_pure_black_description">Kasutab tõelist musta taustavärvi</string>
     <string name="settings_appearance_color_accents">Rakenduse ja allika värvid</string>
     <string name="settings_appearance_color_accents_description">Kasutab iga rakenduse ja allika värvi aktsentvärvi asemel</string>
-    <string name="settings_appearance_outlines">Ärirajad</string>
-    <string name="settings_appearance_outlines_description">Joonib kaardide, paneelide ja nuppude ümber õhueerandiga raame</string>
-    <string name="settings_appearance_blur">Summutus</string>
-    <string name="settings_appearance_blur_description">Summutab sisu, mis kerib päisade, riba ja paneelide alla</string>
+    <string name="settings_appearance_outlines">Piirjooned</string>
+    <string name="settings_appearance_outlines_description">Joonistab kaartide, paneelide ja nuppude ümber õhukese äärise</string>
+    <string name="settings_appearance_blur">Hägusus</string>
+    <string name="settings_appearance_blur_description">Hägustab sisu, mis kerib päiste, riba ja paneelide alla</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Rakenduse keel</string>
     <string name="settings_appearance_app_language_current">Käesolev keel</string>
-    <string name="settings_appearance_translate">Aita Morphe\'d tõlkida</string>
+    <string name="settings_appearance_translate">Aita Morphe\'i tõlkida</string>
     <string name="settings_appearance_translations_info_title">Mõne keele tõlked võivad puududa või olla mittäielikud</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Liidese mastaap</string>
     <!-- Settings - Appearance Tab - Home Screen Section -->
     <string name="settings_appearance_home_screen">Avaleht</string>
     <string name="settings_appearance_greeting_phrases">Tervituslaused</string>
-    <string name="settings_appearance_greeting_phrases_subtitle">Kuvab tervitusesteksti</string>
+    <string name="settings_appearance_greeting_phrases_subtitle">Kuvab tervitussõnumi</string>
     <string name="settings_appearance_repatch_notice">Teavitus uuest lappimisest</string>
     <string name="settings_appearance_repatch_notice_description">Kuvab bänneri, kui patchitud rakendusi saab uuesti patchida</string>
     <string name="settings_appearance_more_apps_card">Rohkem rakendusi kaart</string>
     <string name="settings_appearance_more_apps_card_description">Näitab rakenduste all kaarti, mis viib kogukonna patchide juurde</string>
     <string name="settings_appearance_app_card_colors">Kaardi värvid</string>
     <string name="settings_appearance_app_card_colors_default">Vaikimisi</string>
-    <string name="settings_appearance_app_card_colors_default_description">Kinnita igale rakendusele ja allikale oma värv</string>
+    <string name="settings_appearance_app_card_colors_default_description">Määra igale rakendusele ja allikale oma värv</string>
     <string name="settings_appearance_app_card_colors_accent">Aktsent</string>
     <string name="settings_appearance_app_card_colors_accent_description">Kasuta rakenduse aktsentvärvi rakenduse ja allika kaardide jaoks</string>
     <string name="settings_appearance_app_card_colors_gradient">Gradient</string>
@@ -843,22 +846,22 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="settings_appearance_app_card_colors_solid">Ühtlane</string>
     <string name="settings_appearance_app_card_colors_solid_description">Kasuta rakenduse ja allika kaardide jaoks ühte kohandatud värvi</string>
     <string name="settings_appearance_app_card_colors_start">Algusvärv</string>
-    <string name="settings_appearance_app_card_colors_middle">Keskusvärv</string>
+    <string name="settings_appearance_app_card_colors_middle">Keskmine värv</string>
     <string name="settings_appearance_app_card_colors_end">Lõppvärv</string>
     <string name="settings_appearance_app_card_colors_solid_color">Üksvärv</string>
     <string name="settings_appearance_app_card_colors_bundle">Rakenduse paketi värv</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Kasuta siin iga rakenduse või allika oma värvi, mida kohandatakse automaatselt sobivaks</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <string name="settings_appearance_app_icon_selector_title">Rakenduse ikoon</string>
-    <string name="settings_appearance_app_icon_selector_description">Kuidas Morphe näeb välja teie avalsalt ja rakenduste loendis</string>
+    <string name="settings_appearance_app_icon_selector_description">Kuidas Morphe näeb välja sinu avaekraanil ja rakenduste loendis</string>
     <string name="settings_appearance_app_icon_default">Vaikimisi</string>
     <string name="settings_appearance_app_icon_light_2">Taevas</string>
-    <string name="settings_appearance_app_icon_light_3">Loendus</string>
+    <string name="settings_appearance_app_icon_light_3">Päikeseloojang</string>
     <string name="settings_appearance_app_icon_light_4">Lavendel</string>
     <string name="settings_appearance_app_icon_light_5">Jäämägi</string>
     <string name="settings_appearance_app_icon_light_6">Udu</string>
     <string name="settings_appearance_app_icon_light_7">Liiv</string>
-    <string name="settings_appearance_app_icon_dark_1">Sinisinine</string>
+    <string name="settings_appearance_app_icon_dark_1">Rohesinine</string>
     <string name="settings_appearance_app_icon_dark_2">Tühjus</string>
     <string name="settings_appearance_app_icon_dark_3">Pluum</string>
     <string name="settings_appearance_app_icon_dark_4">Kesköö</string>
@@ -878,31 +881,31 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="settings_appearance_app_icon_change_dialog_confirm">Muuda ikooni</string>
     <!-- Settings - Advanced Tab - Updates Section -->
-    <string name="settings_advanced_updates_manager_prereleases">Eeluletamise uuendused</string>
+    <string name="settings_advanced_updates_manager_prereleases">Eelväljalaskuse uuendused</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <string name="settings_advanced_updates_manager_prereleases_description">Varajane juurdepääs Morphe uutele versioonidele</string>
-    <string name="settings_advanced_updates_prerelease_warning_title">Kas lubada eeluletamise uuendused?</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">Kas lubada eelväljalaskuse uuendused?</string>
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
-    <string name="settings_advanced_updates_prerelease_warning_message">"Morphe eeluletamise versioonid on veel arenduses ja võivad olla ebastabiilsed.
+    <string name="settings_advanced_updates_prerelease_warning_message">"Morphe eelväljalaskuse versioonid on veel arenduses ja võivad olla ebastabiilsed.
 
-Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks patchide allikate loendis"</string>
-    <string name="settings_advanced_updates_allow_metered">Mobiilse andmevoogu uuendused</string>
+Patchid ei ole sellest mõjutatud: luba eelväljalaskuse patchid iga allika jaoks patchide allikate loendis"</string>
+    <string name="settings_advanced_updates_allow_metered">Uuendused mobiilse andmesidega</string>
     <string name="settings_advanced_updates_allow_metered_description">Laadib Morphe\'i ja patchi uuendusi mobiilsetest andmetest</string>
     <string name="settings_advanced_updates_background_notifications">Taustauuenduste teavitused</string>
     <string name="settings_advanced_updates_background_notifications_description">Kontrolli perioodiliselt taustal uuendusi ja teavita, kui need on saadaval</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Push-teavitused uute versioonide kohta, isegi kui rakendus on suletud</string>
     <string name="settings_system_notifications_categories">Teavituskategooriad</string>
-    <string name="settings_system_notifications_categories_description">Valige süsteemi seadetest, millisest uuendustest soovite teavitusi saada</string>
+    <string name="settings_system_notifications_categories_description">Vali süsteemi seadetest, millistest uuendustest soovid teavitusi saada</string>
     <string name="settings_advanced_update_interval">Kontrollimise sagedus</string>
     <string name="settings_advanced_update_interval_hourly">Iga tund</string>
     <string name="settings_advanced_update_interval_daily">Iga päev</string>
     <string name="settings_advanced_update_interval_weekly">Kord nädalas</string>
-    <string name="settings_advanced_update_interval_monthly">Kuu별selt</string>
-    <string name="settings_advanced_update_interval_battery_warning">Taustakontrollid ei prugu töötada tõenäku seadmetel, mis piiravad taustarakendusi, näiteks Xiaomi, Huawei, Samsung ja OnePlus</string>
+    <string name="settings_advanced_update_interval_monthly">Kord kuus</string>
+    <string name="settings_advanced_update_interval_battery_warning">Taustakontrollid ei pruugi usaldusväärselt töötada seadmetel, mis piiravad taustarakendusi, näiteks Xiaomi, Huawei, Samsung ja OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Luba välised käivitajad</string>
     <string name="settings_advanced_external_batch_patch_description">Luba automatiseerimise rakendustel alustada mass-patchimist</string>
-    <string name="external_batch_patch_title">Alustada plaastrimasse?</string>
-    <string name="external_batch_patch_description">%s soovib, et Morphe plaastriks ja installiks rakendusi</string>
+    <string name="external_batch_patch_title">Kas alustada masspaigutust?</string>
+    <string name="external_batch_patch_description">%s soovib, et Morphe paigutaks ja installiks rakendusi</string>
     <string name="external_batch_patch_trust_caller">Luba sellel rakendusel alati</string>
     <string name="external_batch_patch_unknown_caller">Tundmatu rakendus</string>
     <!-- Notification content -->
@@ -917,19 +920,19 @@ Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks 
     <string name="notification_channel_patch_updates">Paiganduste uuendused</string>
     <string name="notification_channel_patch_updates_description">Teavitused uute paranduste väljalaskmise kohta</string>
     <string name="notification_channel_patcher_description">Näidatakse, kui Morphe paigutab rakendust taustal</string>
-    <string name="notification_channel_patching_results">Paigutamise tulemused</string>
-    <string name="notification_channel_patching_results_description">Kui paigutamine lõppeb või installimine ootab teid, kui Morphe on taustal</string>
+    <string name="notification_channel_patching_results">Paigandamise tulemused</string>
+    <string name="notification_channel_patching_results_description">Kui paigandamine lõpeb või installimine ootab teid, kui Morphe on taustal</string>
     <string name="notification_channel_mounted_apps">Paigaldatud rakendused</string>
     <string name="notification_channel_mounted_apps_description">Kui teine versioon asendab paigaldatud rakenduse ja selle paiga ei kehti enam</string>
     <string name="notification_mount_replaced_title">%1$s ei ole enam paigutatud</string>
-    <string name="notification_mount_replaced_text">v%1$s asendas paigutatud v%2$s. Taastamiseks avage Morphe</string>
+    <string name="notification_mount_replaced_text">v%1$s asendas paigutatud v%2$s. Taastamiseks ava Morphe</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
-    <string name="settings_advanced_expert_mode">Eksperdimode</string>
+    <string name="settings_advanced_expert_mode">Eksperdirežiim</string>
     <string name="settings_advanced_expert_mode_description">Avab täpsemad patchimise seaded ja patchi valikud</string>
-    <string name="settings_advanced_expert_mode_dialog_title">Lubada eksperdimood?</string>
-    <string name="settings_advanced_expert_mode_dialog_message">Eksperdimood annab suurema kontrolli üle selle üle, kuidas plaastreid rakendatakse, kuid sätete valekonfigureerimine eksperdimoodus võib привести rakenduse toimimatuseni</string>
+    <string name="settings_advanced_expert_mode_dialog_title">Kas lülitada sisse eksperdirežiim?</string>
+    <string name="settings_advanced_expert_mode_dialog_message">Eksperdirežiim annab suurema kontrolli selle üle, kuidas patche rakendatakse, kuid valesti seadistatud sätted eksperdirežiimis võivad rakenduse toimimatuks muuta</string>
     <string name="settings_advanced_strip_unused_libs">Optimeeri seadme arhitektuuri jaoks</string>
-    <string name="settings_advanced_strip_unused_libs_description">Eemaldab kasutamata kohaliku keele raamatukogud ja APK jaotused</string>
+    <string name="settings_advanced_strip_unused_libs_description">Eemaldab kasutamata natiivsed teegid ja APK-jaotused</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Avab pull requesti allikad ja privaatsed hoidlad</string>
     <string name="settings_advanced_github_pat_description">Pull requesti allikate, privaatsete hoidlate ja kõrgema GitHubi limiidi jaoks</string>
@@ -940,17 +943,17 @@ Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks 
     <string name="settings_advanced_github_pat_checking">Kontrollitakse GitHubist…</string>
     <!-- "%s" is the GitHub account name -->
     <string name="settings_advanced_github_pat_account">Sisselogitud GitHubi kontole %s</string>
-    <string name="settings_advanced_github_pat_rejected">GitHub keeldus sellest tokènist. See võib olla aegunud või katkestatud</string>
-    <string name="settings_advanced_github_pat_unreachable">GitHubiga ei õnnestunud ühendust saada, et tokènit kontrollida</string>
+    <string name="settings_advanced_github_pat_rejected">GitHub keeldus sellest tokenist. See võib olla aegunud või tühistatud</string>
+    <string name="settings_advanced_github_pat_unreachable">GitHubiga ei õnnestunud ühendust saada, et tokenit kontrollida</string>
     <string name="settings_advanced_github_pat_export_include_label">Lisa seadete ekspordile</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
     <string name="settings_advanced_github_pat_export_include_supporting">Lisab selle PAT-i eksporteeritud Morphe seadetesse</string>
     <!-- "PAT" is a GitHub Personal Access Token, keep it in English because GitHub has no localized UI -->
-    <string name="settings_advanced_github_pat_export_warning">Ära jaga oma PAT-i. Kui lisad selle seadete ekspordile, hoidu faili privaatse, kuna see sisaldab tokinit</string>
+    <string name="settings_advanced_github_pat_export_warning">Ära jaga oma PAT-i. Kui lisad selle seadete ekspordile, hoia fail privaatsena, kuna see sisaldab tokenit</string>
     <!-- Settings - Advanced Tab - Patch Options Section -->
     <string name="settings_advanced_patch_options">Paigapealsete valikud</string>
-    <string name="settings_advanced_patch_options_restart_message">Paigapealsete valikute muutmiseks on vajalik rakenduse uuesti paigutamine, et muudatused jõustuksid</string>
-    <string name="settings_advanced_patch_options_expert_mode_notice">Eksperdimoodis on paigapealsed valikud saadaval paigutamise protsessi ajal</string>
+    <string name="settings_advanced_patch_options_restart_message">Patchi valikute muutmiseks on vaja rakendus uuesti paigutada, et muudatused jõustuksid</string>
+    <string name="settings_advanced_patch_options_expert_mode_notice">Eksperdirežiimis on patchi valikud saadaval paigutamise ajal</string>
     <string name="settings_advanced_patch_options_loading">Laaditakse plaastri valikuid…</string>
     <string name="settings_advanced_patch_options_waiting_for_source">Oota, kuni plaastri allikas on uuendatud</string>
     <string name="settings_advanced_patch_options_load_error">Plaastri valikute laadimine ebaõnnestus</string>
@@ -960,7 +963,7 @@ Patchid ei ole sellest mõjutatud: lubage eeluletamise patchid iga allika jaoks 
     <string name="settings_advanced_patch_options_custom_branding_description">Muudab rakenduse kuvanime</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Rakenduse nimi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Sisestage kohandatud nimi</string>
-    <string name="settings_advanced_patch_options_path_gone">Seda kausta ei saa enam lugeda. Valige see uuesti või tühjendage see, vastasel juhul peatub parandamine ja küsitakse selle kohta</string>
+    <string name="settings_advanced_patch_options_path_gone">Seda kausta ei saa enam lugeda. Vali see uuesti või tühjenda see, muidu peatub paigutamine ja küsitakse selle kohta</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Rakenduse ikoon</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Ikoon, millega rakendust paigutatakse; kasutatakse ka seal, kus seda hiljem ei saa muuta, näiteks Android Auto puhul</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Kohandatud rakenduse ikooni jaoks on vaja kausta ikoonipiltidega</string>
@@ -1021,13 +1024,13 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut">Peida Shorts rakenduse otsetee</string>
     <string name="settings_advanced_patch_options_hide_shorts_app_shortcut_description">Eemaldab Shortsid käivitusmenüü pikavajutuse menüüst</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget">Peida Shorts vidin</string>
-    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Eemaldab Shortsnuu käivitusvidinast</string>
+    <string name="settings_advanced_patch_options_hide_shorts_widget_description">Eemaldab Shortsi nupu käivitusvidinast</string>
     <!-- Settings - System Tab - Installer Section -->
-    <string name="installer">Installeerija</string>
+    <string name="installer">Installija</string>
     <string name="installer_settings_title">Vaikimisi installija</string>
     <string name="settings_installation">Paigaldamine</string>
     <string name="installer_title">Valige installija</string>
-    <string name="installer_internal_description">Kasutab Androidi paketi installatorit</string>
+    <string name="installer_internal_description">Kasutab Androidi paketiinstallijat</string>
     <string name="installer_play_store_description">Kasutab süsteemi installajat ja määrab Google Play Store\'i installiallikaks</string>
     <string name="installer_root_description">Installitakse vaikselt root-õigustega</string>
     <string name="installer_root_play_store_description">Installib vaikselt root-õigustega ja määrab Google Play Store\'i installiallikaks</string>
@@ -1041,14 +1044,14 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="installer_status_shizuku_not_running">Käivitage Shizuku või Sui ja proovige uuesti</string>
     <string name="installer_status_shizuku_permission">Anna Morphe\'ile luba Shizuku rakenduse kaudu</string>
     <string name="installer_mount_warning_install">Paigandusrežiimiks on määratud root-mount. Seda salvestatud rakendust ei installitud mount-meetodiga</string>
-    <string name="mount_version_mismatch_message">Rakenduse algne versioon (%2$s) ei üksi kokku paigutatud versiooniga (%1$s). Paiguta vastav algne versioon ja proovi uuesti</string>
-    <string name="mount_stock_restore_failed_message">Android keeldus salvestatud originaalset APK-d. Installige vastav tehaseversioon ja proovige Mounti uuesti</string>
+    <string name="mount_version_mismatch_message">Algse rakenduse versioon (%2$s) ei ühti paigutatud versiooniga (%1$s). Kinnitage vastav algne versioon ja proovige uuesti</string>
+    <string name="mount_stock_restore_failed_message">Android keeldus salvestatud originaalset APK-d. Installi vastav tehaseversioon ja proovi Mounti uuesti</string>
     <string name="installer_status_shizuku_unsupported">Paigaldatud Shizuku versioon ei ole toetatud</string>
     <string name="installer_action_open_shizuku">Ava Shizuku</string>
-    <string name="installer_hint_generic">Paigaldamine eperformis. Proovi uuesti või vali muu paigaldaja</string>
+    <string name="installer_hint_generic">Installimine ebaõnnestus. Proovige uuesti või valige teine installija</string>
     <string name="installer_hint_conflict">Selle paketinimega rakendus on juba paigaldatud. Eemalda see enne jätkamist</string>
     <string name="installer_confirm_notification_title">Kinnita installimine</string>
-    <string name="installer_confirm_notification_text">Puudutage, et lõpetada plaasteritud rakenduse installimine</string>
+    <string name="installer_confirm_notification_text">Puuduta, et lõpetada paigutatud rakenduse installimine</string>
     <string name="installer_external_launched">Avatakse %s…</string>
     <string name="installer_external_timeout">%s ei kinnitanud installatsiooni. Kontrollige teist rakendust ja proovige uuesti</string>
     <string name="installer_external_success">%s teatas edukast installatsioonist</string>
@@ -1058,7 +1061,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="installer_choose_another">Vali teine installator</string>
     <string name="installer_play_store_warning_title">Installida Play Store\'i kaudu?</string>
     <string name="installer_play_store_warning_message">Paigatud rakendus märgistatakse kui Google Play poest installitud. See võib aidata sellistel teenustel nagu Android Auto seda Play poe rakendusena tuvastada, kuid see ei ole garanteeritud iga rakenduse või seadme puhul. Käitumine võib varieeruda sõltuvalt Androidi versioonist, ROM-ist, seadme märgist ja rakendusepõhistest kontrollidest</string>
-    <string name="installer_play_store_warning_risk">Play Store võib pakkuda uuendusi paigutatud rakendusele. Selle uuenduse installimine asendab paigutatud APK faili algse versiooniga ja eemaldab paigutused. Kui teile pakutakse uuendust, puudutage rakenduse Play Store\'i lehel kolme punktiga menüüd ja valige \"Lülita uuendused välja\"</string>
+    <string name="installer_play_store_warning_risk">Play Store võib paigutatud rakendusele uuendusi pakkuda. Selle uuenduse installimine asendab paigutatud APK-faili algse versiooniga ja eemaldab paigutused. Kui sulle pakutakse uuendust, puuduta rakenduse Play Store\'i lehel kolme punktiga menüüd ja vali \"Lülita uuendused välja\"</string>
     <string name="installer_play_store_warning_continue">Saan aru, jätka</string>
     <string name="installer_play_store_mode">Installi kui Play poe rakendus</string>
     <string name="installer_play_store_mode_description">Märgib Google Play Store\'i installamise allikaks</string>
@@ -1067,17 +1070,17 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_patch_mode_ask_description">Küsib enne iga rakenduse paigandamist, kas see tuleb paigandada root-mounti või tavavaliku installimiseks</string>
     <string name="settings_section_after_patching">Pärast paigandamist</string>
     <string name="settings_after_patching_install">Installi automaatselt</string>
-    <string name="settings_after_patching_ask">Küsige installikomande</string>
-    <string name="settings_after_patching_ask_description">Küsib iga rakenduse installimise korral, millist installikat kasutada</string>
+    <string name="settings_after_patching_ask">Küsige installijat</string>
+    <string name="settings_after_patching_ask_description">Küsib iga rakenduse installimise korral, millist installijat kasutada</string>
     <string name="settings_after_patching_manual">Installi käsitsi</string>
-    <string name="settings_after_patching_manual_description">Installib vaik vaikimispärase installikaga pärast nuppu Install puudutamist</string>
+    <string name="settings_after_patching_manual_description">Installib vaikimisi installijaga, kui puudutate nuppu Install</string>
     <string name="settings_nomount_only">Ainult NoMount</string>
-    <string name="settings_nomount_only_description">Montib rakendusi ainult NoMountiga ja ei kasuta kunagi varundusena bind-monti, et need jääksid ilma selle piisuta montimata</string>
+    <string name="settings_nomount_only_description">Montib rakendusi ainult NoMountiga ega kasuta kunagi varuvariandina bind-monti, nii et need jäävad ilma selleta montimata</string>
     <string name="settings_auto_install_with_shizuku_description">Paigaldab või mountib patchitud APK kohe pärast patchimise lõpule jõudmist</string>
     <string name="settings_auto_uninstall_with_shizuku">Automaatne desinstallimine konflikti korral</string>
     <string name="settings_auto_uninstall_with_shizuku_description">Eemaldab olemasoleva rakenduse allkirja konflikti korral. See võib kustutada rakenduse andmed</string>
-    <string name="settings_ignore_install_target_rules">Ignore installitargeti nõueid</string>
-    <string name="settings_ignore_install_target_rules_description">Võimaldab välja lülitada paigutusi, mida installimise sihtruut nõuab, ja sisse lülitada neid, mis on välistatud. Paigutatud rakendus ei prugu töötada</string>
+    <string name="settings_ignore_install_target_rules">Ignoreeri installimise sihtmärgi nõudeid</string>
+    <string name="settings_ignore_install_target_rules_description">Võimaldab välja lülitada paigutusi, mida installimise sihtmärk nõuab, ja sisse lülitada neid, mis on välistatud. Paigutatud rakendus ei pruugi töötada</string>
     <string name="settings_auto_uninstall_warning_title">Luba automaatne desinstallimine?</string>
     <string name="settings_auto_uninstall_warning_message">Kui Android teatab allkirja konflikti Shizuku automaatse installimise ajal, desinstallib Morphe olemasoleva rakenduse enne paigatud APK installimist</string>
     <string name="settings_auto_uninstall_warning_risk">See võib kustutada rakenduse andmed. Kui paigatud APK installimine ebaõnnestub pärast desinstallimist, võib eelmine rakendus olla juba kadunud</string>
@@ -1090,44 +1093,44 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="installer_shizuku_status_permission">Luba</string>
     <string name="installer_shizuku_status_mode">Režiim</string>
     <string name="installer_shizuku_status_provider">Pakkuja</string>
-    <string name="installer_shizuku_status_granted">Andud</string>
+    <string name="installer_shizuku_status_granted">Antud</string>
     <string name="installer_shizuku_status_missing">Puudub</string>
-    <string name="installer_shizuku_request_permission">Küsi lubatud</string>
+    <string name="installer_shizuku_request_permission">Küsi luba</string>
     <string name="installer_shizuku_install_fail">Shizuku installimine ebaõnnestus: %s</string>
     <string name="installer_shizuku_install_fail_with_details">"Shizuku installimine ebaõnnestus: %1$s
 
- üksikasjad: %2$s"</string>
-    <string name="installer_shizuku_error_permission">Shizuku luba puudub. Anna Morphe lubadus ja proovi uuesti</string>
+Üksikasjad: %2$s"</string>
+    <string name="installer_shizuku_error_permission">Shizuku luba puudub. Anna Morphe\'ile luba ja proovi uuesti</string>
     <string name="installer_shizuku_error_timeout">Shizuku ei tagastanud installimise tulemust. Veendu, et see on endiselt käimas, ja proovi uuesti</string>
-    <string name="installer_shizuku_error_downgrade">Android takistas seda, kuna see downgrade\'iks installitud rakenduse</string>
-    <string name="installer_shizuku_error_signature">Android takistas seda, kuna installitud rakendusel on erinev allkirjast</string>
+    <string name="installer_shizuku_error_downgrade">Android takistas seda, sest see oleks installitud rakenduse vanemaks versiooniks viinud</string>
+    <string name="installer_shizuku_error_signature">Android takistas seda, sest installitud rakenduse allkiri on teistsugune</string>
     <string name="installer_shizuku_error_invalid_apk">Android ei suutnud seda APK-faili lugeda</string>
     <string name="installer_shizuku_error_user_profile">Süsteem takistas selle installimise. Xiaomi ja sarnaste seadmete puhul lülita arendaja valikutest sisse \"Installi USB kaudu\". Tööprofiili puhul võivad installimised olla piiratud poliitikaga</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Aku optimeerimine</string>
-    <string name="settings_system_battery_optimization_description">Hoiab paikasutajat töötamas, kui rakendus on minimeeritud</string>
-    <string name="settings_system_process_runtime">Patcher runtime</string>
-    <string name="settings_system_jvm_runtime_enable">Kasuta sisseekitud VM-i</string>
-    <string name="settings_system_jvm_runtime_description">Paigutused Morphe oma Java VM-is, mis võib kasutada rohkem mälu. Androidi runtime\'i kasutamiseks lülitage see välja</string>
+    <string name="settings_system_battery_optimization_description">Hoiab paigutajat töötamas, kui rakendus on minimeeritud</string>
+    <string name="settings_system_process_runtime">Patcheri käitusaeg</string>
+    <string name="settings_system_jvm_runtime_enable">Kasuta sisseehitatud VM-i</string>
+    <string name="settings_system_jvm_runtime_description">Paigutused Morphe oma Java VM-is, mis võib kasutada rohkem mälu. Androidi runtime\'i kasutamiseks lülita see välja</string>
     <string name="settings_system_jvm_runtime_unavailable">Vajalik ARM või 64-bitine x86 seade</string>
-    <string name="settings_system_patcher_completion_sound">Lõpumise heli</string>
-    <string name="settings_system_patcher_completion_sound_description">Esitab eristuva helitooni eduvuse või ebaõnnestumise korral, kui paigutamine lõppeb</string>
+    <string name="settings_system_patcher_completion_sound">Lõpetamise heli</string>
+    <string name="settings_system_patcher_completion_sound_description">Esitab paigutamise lõppedes eristuva helitooni, mis näitab edu või ebaõnnestumist</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">Teavitused</string>
-    <string name="settings_system_notifications_description">Kuidas Morphe teid teavitab</string>
+    <string name="settings_system_notifications_description">Kuidas Morphe sind teavitab</string>
     <string name="settings_system_notifications_success_sound">Eduheli</string>
     <string name="settings_system_notifications_error_sound">Vea heli</string>
     <string name="settings_system_notifications_sound_default">Vaikimisi</string>
     <string name="settings_system_notifications_sound_picker_title">Vali heli allikas</string>
     <string name="settings_system_notifications_sound_pick_ringtone">Süsteemhelid</string>
     <string name="settings_system_notifications_sound_pick_file">Vali failidest</string>
-    <string name="settings_system_notifications_sound_reset">Häälesta vaigväärtustele</string>
+    <string name="settings_system_notifications_sound_reset">Lähtesta vaikeväärtusele</string>
     <string name="settings_system_notifications_ringtone_picker_title">Vali helitoon</string>
     <!-- Settings - System Tab - Import and Export Section -->
-    <string name="settings_system_signing_key">Allkirjakeuk</string>
-    <string name="settings_system_signing_key_description">Varandab või taastab võtme, millega on allkirjastatud paigutatud rakendused</string>
-    <string name="settings_system_signing_key_dialog_description">Iga Morphe poolt parandatud rakendus on allkirjastatud selle võtmega. Hoidke koopiast: ilma selleta saab parandatud rakendusi uuendada alles pärast nende eemaldamist</string>
-    <string name="settings_system_signing_key_missing">Morphe loob selle koos teie esimese parandusega</string>
+    <string name="settings_system_signing_key">Allkirjavõti</string>
+    <string name="settings_system_signing_key_description">Varundab või taastab võtme, millega on allkirjastatud paigutatud rakendused</string>
+    <string name="settings_system_signing_key_dialog_description">Iga Morphe poolt paigutatud rakendus on allkirjastatud selle võtmega. Hoia koopiat alles: ilma selleta saab paigutatud rakendusi uuendada alles pärast nende eemaldamist</string>
+    <string name="settings_system_signing_key_missing">Morphe loob selle koos sinu esimese paigutusega</string>
     <string name="settings_system_signing_key_created">Loodud %s</string>
     <string name="settings_system_signing_key_fingerprint">SHA-256 sõrmejälg</string>
     <string name="settings_system_backup_appearance_description">Teema, värvid ja keel</string>
@@ -1139,7 +1142,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_backup_patch_selections_description">Valitud paigandused iga rakenduse jaoks</string>
     <string name="settings_system_backup_signing_key_note">Allkirjavõti on varundatud eraldi</string>
     <string name="settings_system_import_keystore_dialog_title">Sisestage keystore\'i tõendused</string>
-    <string name="settings_system_import_keystore_dialog_description">Selle importimiseks peate sisestama keystore\'i tõenduse</string>
+    <string name="settings_system_import_keystore_dialog_description">Selle importimiseks peate sisestama keystore\'i tõendusandmed</string>
     <string name="settings_system_import_keystore_dialog_alias_field">Kasutajanimi (alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Parool</string>
     <string name="settings_system_import_keystore_wrong_credentials">Vale keystore\'i tõendusandmed</string>
@@ -1150,11 +1153,11 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_show_password_field">Näita salasõna</string>
     <string name="settings_system_hide_password_field">Peida salasõna</string>
     <string name="settings_system_morphe_settings">Morphe seaded</string>
-    <string name="settings_system_import_manager_settings_description">Varandab ja taastab teie Morphe seadeid</string>
+    <string name="settings_system_import_manager_settings_description">Varundab ja taastab teie Morphe seaded</string>
     <string name="settings_system_import_manager_settings_fail">Morphe seadete importimine ebaõnnestus: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe seaded on importitud</string>
-    <string name="settings_system_import_manager_settings_mode_title">Importee Morphe seaded</string>
-    <string name="settings_system_import_manager_settings_mode_description">Valige, kuidas importitud seaded ja allikad tuleks rakendada</string>
+    <string name="settings_system_import_manager_settings_mode_title">Impordi Morphe seaded</string>
+    <string name="settings_system_import_manager_settings_mode_description">Vali, kuidas imporditud seaded ja allikad tuleks rakendada</string>
     <string name="settings_system_import_selections_mode_title">Impordi plaastri valikud</string>
     <string name="settings_system_import_selections_mode_description">Vali, kuidas imporditud valikud ja paranduse valikud tuleks rakendada</string>
     <string name="import_mode_replace_title">Asenda olemasolevad</string>
@@ -1164,7 +1167,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_export_manager_settings_fail">Morphe seadete eksportimine ebaõnnestus: %s</string>
     <string name="settings_system_export_manager_settings_success">Morphe seaded eksporteeritud</string>
     <string name="settings_system_export_debug_logs">Eksporteeri debugi logid</string>
-    <string name="settings_system_export_debug_logs_description">Salvestab süsteemlogisid tõrgsõnaotsinguks</string>
+    <string name="settings_system_export_debug_logs_description">Salvestab süsteemilogid tõrkeotsinguks</string>
     <string name="settings_system_export_debug_logs_export_read_failed">Logide lugemine ebaõnnestus (väljumisekood %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">Logide eksportimine ebaõnnestus</string>
     <string name="settings_system_export_debug_logs_export_success">Logid eksporteeritud</string>
@@ -1178,8 +1181,8 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_apks_export_zip_success">Valitud APK-d eksporteeriti</string>
     <string name="settings_system_apks_export_zip_failed">Valitud APK-de eksport ebaõnnestus</string>
     <!-- Settings - System Tab - Storage Management screen -->
-    <string name="settings_system_storage_management_title">Tallutuse haldamine</string>
-    <string name="settings_system_storage_management_description">Kuvab ketta kasutust ja tõhjutab vahemälu faile</string>
+    <string name="settings_system_storage_management_title">Salvestusruumi haldamine</string>
+    <string name="settings_system_storage_management_description">Kuvab ketta kasutust ja tühjendab vahemälu faile</string>
     <!-- Shown under how much Morphe takes up. "%1$s" is the space still available on the device, already formatted with its unit. "Free" as in unused, not as in free of charge. -->
     <string name="settings_system_storage_free">%1$s vaba</string>
     <string name="settings_system_storage_saved_apks">Salvestatud APK-d</string>
@@ -1187,22 +1190,22 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_storage_keystore_title">Allkirjakeystore</string>
     <string name="settings_system_storage_app_data_title">Rakenduste andmed</string>
     <string name="settings_system_storage_patch_bundles_title">Paranduskogumid</string>
-    <string name="settings_system_storage_http_cache_title">Võrgumälu</string>
+    <string name="settings_system_storage_http_cache_title">Võrgu vahemälu</string>
     <string name="settings_system_storage_http_cache_description">HTTP-vastused on vahemälusse salvestatud, et kiirendada uuendusi</string>
     <string name="settings_system_storage_installer_cache_title">Välise installatori vahemälu</string>
-    <string name="settings_system_storage_installer_cache_description">Kolmandatele installatoritele edastatud APK-kopeeriad</string>
-    <string name="settings_system_storage_patcher_workspace_title">Patcheri töölaud</string>
-    <string name="settings_system_storage_patcher_workspace_description">Patcheri käivitusfailid ja üksildased ajutandid</string>
+    <string name="settings_system_storage_installer_cache_description">Kolmandatele installatoritele edastatud APK-koopiad</string>
+    <string name="settings_system_storage_patcher_workspace_title">Patcheri tööruum</string>
+    <string name="settings_system_storage_patcher_workspace_description">Patcheri käivitusfailid ja jäänud ajutised andmed</string>
     <string name="settings_system_storage_temporary_title">Ajutised failid</string>
-    <string name="settings_system_storage_temporary_description">Paigandamise käigus loodud töötamise failid</string>
+    <string name="settings_system_storage_temporary_description">Paigutamise käigus loodud töötlusfailid</string>
     <string name="settings_system_storage_clear_all">Tühjenda kõik vahemälud</string>
     <string name="settings_system_storage_clear_all_description">Vabastab korraga kogu taastatava vahemälu ruumi</string>
-    <string name="settings_system_storage_clear_all_confirm">See tõhjustab vahemälusse salvestatud võrgivastused, etappe läbinud installeri koopiad ja ajutised failid. Originaalsed ja paigutatud APK-d jäävad alles</string>
-    <string name="settings_system_storage_cleared">Vabandatud %s</string>
+    <string name="settings_system_storage_clear_all_confirm">See tühjendab vahemälus olevad võrguvastused, installijale ette valmistatud koopiad ja ajutised failid. Originaalsed ja paigutatud APK-d jäävad alles</string>
+    <string name="settings_system_storage_cleared">Vabastatud %s</string>
     <string name="settings_system_storage_patch_running_warning">Paigutus on käigus ja kasutab neid faile. Nende tühjendamine põhjustab tõrke</string>
-    <string name="settings_system_storage_clear_anyway">Tõrguta siiski</string>
+    <string name="settings_system_storage_clear_anyway">Tühjenda siiski</string>
     <string name="settings_system_storage_nothing_to_clear">Ei ole midagi tühjendada</string>
-    <string name="settings_system_storage_open_app_info_title">Ava Androidi rakenduse tõhjutus</string>
+    <string name="settings_system_storage_open_app_info_title">Ava Androidi rakenduse salvestusruum</string>
     <string name="settings_system_storage_open_app_info_description">Halda või tühjenda kogu Morphe andmeid süsteemi seadete kaudu</string>
     <string name="settings_system_save_original_apks_title">Säilita algsed APK-d</string>
     <string name="settings_system_save_original_apks_description">Salvesta eelpaigutatud APK, et seda saaks uuesti kasutada ilma faili uue valimiseta</string>
@@ -1219,13 +1222,13 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_original_apks_empty">Originaalseid APK-id ei ole salvestatud</string>
     <string name="settings_system_original_apks_deleted">Originaalne APK on edukalt kustutatud</string>
     <string name="settings_system_original_apks_delete_title">Kustutada originaalne APK?</string>
-    <string name="settings_system_original_apks_delete_notice">Sa ei saa uuesti patchida ilma uue APK pakkumata</string>
+    <string name="settings_system_original_apks_delete_notice">Sa ei saa uuesti patchida ilma uue APK-ta</string>
     <string name="settings_system_original_apks_delete_all_title">Kustutada kõik algsed APK-d?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">Paigutuse valikud</string>
     <string name="settings_system_patch_selections_description">Salvestatud plaastrivalikud, mis säilivad pärast desinstallimist</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Kas kõik valikud lähtestatakse?</string>
-    <string name="settings_system_patch_selection_reset_selected_confirm_title">Lä resetting valitud paketid?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">Lähtesta valitud paketid?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Kas allika valik lähtestatakse?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s %2$s peale</string>
     <string name="settings_system_patch_selection_source_format">Allikas #%s</string>
@@ -1242,14 +1245,14 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="selection_panel_title">Valikud</string>
     <string name="selection_panel_copy_into">Kopeeri %s-sse</string>
     <string name="selection_sets_title">Kompletid</string>
-    <string name="selection_set_name">Kompledi nimi</string>
-    <string name="selection_set_save">Salvesta kompledina</string>
+    <string name="selection_set_name">Komplekti nimi</string>
+    <string name="selection_set_save">Salvesta komplektina</string>
     <string name="selection_set_replace">Asenda komplekt</string>
-    <string name="selection_set_saved">Salvestatud kui %s</string>
+    <string name="selection_set_saved">Salvestatud nimega %s</string>
     <string name="selection_set_applied">Lülitatud %s-le</string>
     <string name="selection_set_deleted">%s kustutati</string>
-    <string name="selection_set_renamed">Nimeletatud uuesti %s-ks</string>
-    <string name="selection_set_rename_title">Nimeleta komplekti</string>
+    <string name="selection_set_renamed">Nimetatud ümber nimeks %s</string>
+    <string name="selection_set_rename_title">Nimeta komplekt ümber</string>
     <string name="selection_set_delete_title">Kustutada komplekt?</string>
     <string name="selection_set_delete_message">See kustutab komplekti %s jäädavalt</string>
     <string name="copy_selection_empty">Kopeerimiseks pole teisi salvestatud valikuid</string>
@@ -1260,22 +1263,23 @@ Piltide mõõtmed peavad olema järgmised:
     <!-- Settings - System Tab - APK download helper -->
     <string name="settings_system_apk_download_helper">APK allalaadimise abirakendus</string>
     <string name="settings_system_apk_download_helper_trusted_count">Usaldatud: %1$d / %2$d</string>
-    <string name="settings_system_apk_download_helper_dialog_description">Abirakendused saavad teie jaoks alla laadida originaal-APK-id. Allalaadimise juhistes pakutakse ainult neid, keda te siin usaldate</string>
-    <string name="settings_system_apk_download_helper_trust_title">Kas usaldad seda abiut utiliiti?</string>
-    <string name="settings_system_apk_download_helper_warning">APK tuleb abirakendusest, seega usaldage ainult tuttavaid rakendusi. Morphe kontrollib siiski iga faili paketti, versiooni ja allkirja enne paigutamist</string>
+    <string name="settings_system_apk_download_helper_dialog_description">Abirakendused saavad sinu eest alla laadida originaal-APK-d. Allalaadimisjuhistes pakutakse ainult neid, keda siin usaldad</string>
+    <string name="settings_system_apk_download_helper_trust_title">Kas usaldad seda abirakendust?</string>
+    <string name="settings_system_apk_download_helper_warning">APK tuleb abirakendusest, seega usalda ainult tuttavaid rakendusi. Morphe kontrollib siiski iga faili paketti, versiooni ja allkirja enne paigutamist</string>
     <string name="settings_system_apk_download_helper_installed_by">Installinud %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installija tundmatu</string>
-    <string name="settings_system_apk_download_helper_open_directly">Ava abiutool kohe</string>
-    <string name="settings_system_apk_download_helper_open_directly_description">Jätkab allalaadimise juhiseid üle ja avab usaldatud abirakenduse</string>
+    <string name="settings_system_apk_download_helper_open_directly">Ava abirakendus kohe</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Jätab allalaadimisjuhised vahele ja avab usaldatud abirakenduse</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Laadi APK-d automaatselt partiina alla</string>
     <!-- File Picker -->
-    <string name="file_picker_no_files">Siit ei leiaks faile</string>
+    <string name="file_picker_no_files">Siin pole faile</string>
     <string name="file_picker_read_error">Seda kataloogi ei õnnestunud lugeda</string>
     <string name="file_picker_internal_storage">Sisemälu</string>
     <string name="file_picker_sd_card">SD-kaart</string>
     <string name="file_picker_root">Juurtasand (/)</string>
     <string name="file_picker_storage_access_unavailable">Sellel seadmel puudub ekraan, et lubada juurdepääs kõigile failidele. Luba see ADB kaudu käiguga: adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
-    <string name="file_picker_storages">Salvestused</string>
-    <string name="file_saver_downloads_failed">Faili loomine kataloogisse Downloads eplutud</string>
+    <string name="file_picker_storages">Salvestusruumid</string>
+    <string name="file_saver_downloads_failed">Faili loomine kataloogis Downloads ebaõnnestus</string>
     <string name="file_saver_saving_to_downloads">Sellel seadmel puudub salvestamise ekraan, seega salvestatakse fail kataloogisse Downloads nimega %1$s</string>
     <string name="file_picker_sort_name_asc">Nimi (A–Z)</string>
     <string name="file_picker_sort_name_desc">Nimi (Z–A)</string>
@@ -1285,7 +1289,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="file_picker_sort_date_asc">Kuupäev (vanim esimesena)</string>
     <string name="file_picker_show_hidden_files">Näita peidetud faile</string>
     <!-- Settings - System Tab - About Section -->
-    <string name="settings_system_about">INFO</string>
+    <string name="settings_system_about">Teave</string>
     <string name="settings_system_manager_description">Avatud lähtekoodiga projekt populaarsete Androidi rakenduste kaasaegseks ja optimeeritud paigutamiseks, milleks on aluseks kogukonna tagasiside ja panused</string>
     <string name="credits">Autorid</string>
     <string name="credits_description">Inimesed Morphe taustal</string>
@@ -1303,15 +1307,15 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="easter_egg_pill_blue">Sinine pill</string>
     <string name="easter_egg_pill_red_toast">Matrixi taust on avatud</string>
     <string name="easter_egg_pill_blue_toast">Reklaamid jäävad sind ootama</string>
-    <string name="easter_egg_pill_message_again">Sa oled juba Matrixis. Punane pill viskab su tagasi vihma owni, sinine aga äratab su üles</string>
+    <string name="easter_egg_pill_message_again">Sa oled juba Matrixis. Punane pill viskab su tagasi vihma sisse, sinine aga äratab su üles</string>
     <string name="easter_egg_pill_red_toast_again">Tagasi vihmasse</string>
     <string name="easter_egg_pill_blue_toast_again">Ühendus katkestatud. Tee tagasi on seal, kus see alati oli</string>
     <!-- Shared strings -->
     <string name="select_file">Vali fail</string>
-    <string name="select_files">Valige failid</string>
+    <string name="select_files">Vali failid</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="select_folder">Vali kaust</string>
-    <string name="patches">Päevitused</string>
+    <string name="patches">Plaastrid</string>
     <string name="home">Avaleht</string>
     <string name="settings">Seaded</string>
     <string name="apps">Rakendused</string>
@@ -1324,16 +1328,16 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_section_general">Üldine</string>
     <string name="settings_section_patcher_summary">Kuidas rakendusi selles seadmes paigutatakse</string>
     <string name="settings_section_help_info">Abi &amp; info</string>
-    <string name="settings_section_about_summary">Lisateavet Morphe&amp; abi saamine</string>
+    <string name="settings_section_about_summary">Lisateave Morphe\'i ja abi saamise kohta</string>
     <string name="settings_section_local_files">Failid</string>
     <string name="settings_section_backup">Varundus</string>
     <string name="settings_search">Otsi seadetest</string>
     <string name="yes">Jah</string>
     <string name="no">Ei</string>
     <string name="all">Kõik</string>
-    <string name="filter">Filteri</string>
+    <string name="filter">Filter</string>
     <string name="group">Grupp</string>
-    <string name="reset">Hävitamine</string>
+    <string name="reset">Lähtesta</string>
     <string name="reset_all">Lähtesta kõik</string>
     <string name="apply">Rakenda</string>
     <string name="confirm">Kinnita</string>
@@ -1349,17 +1353,17 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="back">Tagasi</string>
     <string name="next">Järgmine</string>
     <string name="done">Valmis</string>
-    <string name="skip">Vaata üle</string>
+    <string name="skip">Jäta vahele</string>
     <string name="clear">Tühjenda</string>
     <string name="paste">Kleebi</string>
     <string name="delete">Kustuta</string>
     <string name="delete_all">Kustuta kõik</string>
-    <string name="remove">Eemaldamine</string>
-    <string name="exclude">Väljaata</string>
-    <string name="excluded">Väljaatatud</string>
-    <string name="include">Includeeri</string>
-    <string name="disable">Välja lülita</string>
-    <string name="enable">Sisse lülita</string>
+    <string name="remove">Eemalda</string>
+    <string name="exclude">Välista</string>
+    <string name="excluded">Välistatud</string>
+    <string name="include">Lisa</string>
+    <string name="disable">Lülita välja</string>
+    <string name="enable">Lülita sisse</string>
     <string name="trust">Usalda</string>
     <string name="loading">Laadimine…</string>
     <string name="creating">Loome…</string>
@@ -1376,31 +1380,31 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="state_selected">Valitud</string>
     <string name="state_not_selected">Ei ole valitud</string>
     <string name="select_all">Vali kõik</string>
-    <string name="deselect_all">Tühista kõik valgused</string>
-    <string name="reorder_list">Loendi uudestamine</string>
-    <string name="reorder_list_hint">Lohistage järjekorra muutmiseks</string>
+    <string name="deselect_all">Tühista kõik valikud</string>
+    <string name="reorder_list">Loendi ümberjärjestamine</string>
+    <string name="reorder_list_hint">Lohista järjekorra muutmiseks</string>
     <string name="reorder_done">Järjekord salvestatud</string>
     <string name="reset_order">Hääjusta järjekord</string>
     <string name="reset_order_done">Järjekord hääjustatud</string>
-    <string name="reset_order_confirm_title">Härvestada järjestus?</string>
-    <string name="reset_order_confirm_message">Nimekiri taastatakse vaikimisi järjekorrale ja käsitsi loietatud järjestus läheb kaduks</string>
+    <string name="reset_order_confirm_title">Lähtestada järjestus?</string>
+    <string name="reset_order_confirm_message">Loend taastatakse vaikejärjekorrale ja käsitsi lohistatud järjestus läheb kaduma</string>
     <string name="accessibility_select_app">Vali rakendus</string>
     <string name="accessibility_select_source">Vali allikas</string>
     <string name="accessibility_move_up">Liiguta üles</string>
     <string name="accessibility_move_down">Liiguta all</string>
     <string name="accessibility_app_moved_announcement">%1$s liigutati asendisse %2$s kokku %3$s</string>
-    <string name="accessibility_scroll_to_top">Keri nimekraju algusesse</string>
+    <string name="accessibility_scroll_to_top">Keri loendi algusesse</string>
     <string name="rename">Nime muutmine</string>
     <string name="more_options">Rohkem valikuid</string>
-    <string name="import_">Importeer</string>
+    <string name="import_">Impordi</string>
     <string name="export">Eksporteeri</string>
     <string name="copy">Kopeeri</string>
     <string name="copied_to_clipboard">Kopeeritud lõikelauale</string>
     <string name="download">Laadi alla</string>
     <string name="less">Vähem</string>
-    <string name="expand">Laia</string>
+    <string name="expand">Laienda</string>
     <string name="expanded">Laiaendatud</string>
-    <string name="collapse">Kujuta</string>
+    <string name="collapse">Ahenda</string>
     <string name="collapsed">Kokkupressitud</string>
     <string name="continue_">Jätka</string>
     <string name="version">Versioon</string>
@@ -1414,11 +1418,11 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="patching">Patchimine</string>
     <string name="patched">Paigutatud</string>
     <string name="open">Ava</string>
-    <string name="mount">Mounti</string>
-    <string name="mounted">Ühendatud</string>
+    <string name="mount">Monteeri</string>
+    <string name="mounted">Monteeritud</string>
     <string name="unmount">Lahtiühendamine</string>
-    <string name="unmounted">Lahtiühendatud</string>
-    <string name="remount">Uuendage kinnitus</string>
+    <string name="unmounted">Demonteeritud</string>
+    <string name="remount">Kinnita uuesti</string>
     <string name="restore">Taasta</string>
     <string name="share">Jaga</string>
     <string name="install">Installi</string>
@@ -1440,18 +1444,18 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="logs">Logid</string>
     <string name="sources">Allikad</string>
     <string name="installing_ellipsis">Installitakse…</string>
-    <string name="mounting_ellipsis">Ühendatakse…</string>
+    <string name="mounting_ellipsis">Monteeritakse…</string>
     <string name="mount_stage_restoring_stock">Taastatakse algset…</string>
     <string name="mount_stage_copying">Kopeeritakse…</string>
     <string name="unmounting_ellipsis">Väljakinnitamine…</string>
     <string name="importing_ellipsis">Importimine…</string>
     <string name="imported_successfully">Importimine õnnestus</string>
-    <string name="changelog">Vaata muutmistegeid</string>
+    <string name="changelog">Vaata muudatuste logisid</string>
     <string name="changelog_for_app">Muudatused rakendusele %s</string>
     <string name="changelog_general_changes">Üldised muudatused</string>
     <string name="whats_new">Mis on uut</string>
     <string name="changelog_description">Mis on selles versioonis uut</string>
-    <string name="changelog_download_fail">Muutmisloogi allalaadimine ebaõnnestus: %s</string>
+    <string name="changelog_download_fail">Muudatuste logi allalaadimine ebaõnnestus: %s</string>
     <string name="changelog_empty">Muutuste loend pole saadaval</string>
     <string name="changelog_earlier_releases">Varasemad väljalaskemised</string>
     <string name="changelog_patched_with">Patchitud %s abil</string>
@@ -1466,17 +1470,17 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="changelog_section_new">Uut</string>
     <string name="changelog_section_fixes">Parandused</string>
     <string name="changelog_section_performance">Jõudlus</string>
-    <string name="changelog_section_improvements">Parandused</string>
+    <string name="changelog_section_improvements">Täiustused</string>
     <string name="changelog_section_app_support">Rakenduste tugi</string>
     <string name="changelog_section_other">Muutused</string>
     <string name="changelog_badge_latest">Uusim</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
-    <string name="changelog_badge_downloaded">Allahlaaditud</string>
+    <string name="changelog_badge_downloaded">Allalaaditud</string>
     <string name="changelog_badge_prerelease">Eelväljalaskmine</string>
     <!-- "%s" is the number of changes in the section -->
     <string name="changelog_show_all">Näita kõiki (%s)</string>
     <string name="changelog_show_less">Näita vähem</string>
-    <string name="no_network_toast">Internetiseire puudub</string>
+    <string name="no_network_toast">Interneti-ühendus puudub</string>
     <string name="update_available">Uuendus on saadaval</string>
     <string name="ready_to_install_update">Uuenduse installimine on võimalik</string>
     <string name="update_completed">Uuendus on installitud</string>
@@ -1488,11 +1492,11 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="manager_update_progress_downloaded">Alla laaditud %1$s MB</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
-    <string name="manager_update_not_ready">Seda versiooni avaldatakse veel. Proovige mõne minuti pärast uuesti</string>
+    <string name="manager_update_not_ready">Seda versiooni avaldatakse veel. Proovi mõne minuti pärast uuesti</string>
     <string name="update_download_missing">Allalaaditud uuendus ei ole enam saadaval. Laadi see uuesti alla</string>
     <string name="failed_to_check_updates">Uuenduste kontrollimise ebaõnnestumine: %s</string>
     <string name="failed_to_download_update">Uuenduse allalaadimise ebaõnnestumine: %s</string>
-    <string name="download_confirmation_metered">"Kasutate praegu maksutav ühendust ja teie teenusepakkuja võib rakendada andmepakettide tasusid.
+    <string name="download_confirmation_metered">"Kasutate praegu mahupõhist ühendust ja teie teenusepakkuja võib rakendada andmeside tasusid.
 
 Kas soovite siiski jätkata?"</string>
     <string name="download_update_confirmation">Laadida uuendus alla?</string>
@@ -1502,7 +1506,7 @@ Kas soovite siiski jätkata?"</string>
     <string name="onboarding_sources_desc">Halda oma paikade allikaid. Iga allikas pakub paiku, mida saab rakendada sinu rakendustele</string>
     <string name="onboarding_other_apps_desc">Patchi rakendust, mida pole loendis, APK-failist või seadmesse installitud rakendust</string>
     <string name="onboarding_add_source_desc">Lisa plaastri allikas lingi või plaastipaketi faili kaudu</string>
-    <string name="onboarding_signing_key_desc">Tee võrrundusvõtme koopia, millega allkirjastatakse teie plaastitud rakendused. Ilma selleta saab neid uuendada alles pärast eemaldamist</string>
+    <string name="onboarding_signing_key_desc">Tee koopia allkirjavõtmest, millega allkirjastatakse sinu paigutatud rakendused. Ilma selleta saab neid uuendada alles pärast eemaldamist</string>
     <string name="onboarding_swipe_title">Libistusžestid</string>
     <string name="onboarding_swipe_desc">Libista rakenduse kaardi puhul paremale, et näha sellele saadaval olevaid paiku. Libista vasemale, et peita kaart avaleekraanilt</string>
     <string name="onboarding_settings_desc">Kohanda Morphe\'i: välimus, täpsemad seaded ja süsteemitööriistad</string>
@@ -1514,7 +1518,7 @@ Kas soovite siiski jätkata?"</string>
     <string name="onboarding_expert_mode_desc">Lülita sisse eksperdi režiim, et avada paranduste valiku, kohandatud valikud ja teised täpsemad funktsioonid</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_installer_desc">Vali, kuidas paigatud rakendused installitakse: standardne, root-mount või Shizuku</string>
-    <string name="onboarding_system_file_picker_desc">Lülita sisse, et kasutada APK-de või võtmetalude valimisel sisseehitatud failihalat süsteemi valija asemel</string>
+    <string name="onboarding_system_file_picker_desc">Lülita sisse, et kasutada APK-de või võtmehoidlate valimisel sisseehitatud failihaldurit süsteemi valija asemel</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">Kiirtutvustus funktsioonidega</string>
     <string name="tour_prompt_desc">Kas soovid Morphe\'i peamiste funktsioonide kiirtutvustust?</string>

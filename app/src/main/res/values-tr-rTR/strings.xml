@@ -130,7 +130,7 @@
     <string name="home_greeting_super_late_2">Uyuyamıyor musunuz? Bir şeyleri yamalayın</string>
     <string name="home_greeting_super_late_3">Bu noktada, sadece uyanık kalın ve yamalayın</string>
     <string name="home_greeting_super_late_4">Siz ve sunucular, ikiniz de uyanıksınız</string>
-    <string name="home_greeting_super_late_5">Gececi ve üretken</string>
+    <string name="home_greeting_super_late_5">Gece kuşu ve üretken</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
     <string name="home_greeting_halloween_1">Şaka mı, yama mı?</string>
@@ -178,7 +178,7 @@
     <string name="sources_management_prerelease_toggle">Ön sürüm yamalar</string>
     <string name="sources_management_prerelease_toggle_description">Yeni deneysel sürüm yamalarına erken erişim sağlar</string>
     <string name="sources_prerelease_warning_title">Ön sürüm yamalarını etkinleştir?</string>
-    <string name="sources_prerelease_warning_message">Ön sürüm yapıları hâlâ geliştirme aşamasındadır. Yamalar başarısız olabilir veya uygulamayı bozabilir ve özellikler uyarı vermeden değişebilir.</string>
+    <string name="sources_prerelease_warning_message">Ön sürüm derlemeleri hâlâ geliştirme aşamasındadır. Yamalar başarısız olabilir veya uygulamayı bozabilir, özellikler bir uyarı olmadan değişebilir</string>
     <string name="expert_mode_unstable_notice">Ön sürüm veya deneysel yamalar kararsız olabilir</string>
     <string name="sources_management_experimental_versions_toggle">Deneysel uygulama sürümleri</string>
     <string name="sources_management_experimental_versions_toggle_description">Deneysel uygulama hedeflerini gösterir ve yamalar</string>
@@ -298,7 +298,7 @@
     <string name="home_download_instructions_step2_github_note">Birden fazla APK dosyası varsa, %s adını taşıyanı veya evrensel (universal) olanı seçin</string>
     <string name="home_download_instructions_download_button_toast">Web sitesindeki indirme düğmesine basın, buradakine değil 😊</string>
     <string name="home_download_instructions_download_button_toast_2">Harika! Şimdi devam\'a tıklayın ve web sitesine gidin 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir ve yavaş yavaş ilerliyorsun 💪</string>
+    <string name="home_download_instructions_download_button_toast_3">Pratik mükemmelleştirir, siz de yavaş yavaş ilerliyorsunuz 💪</string>
     <string name="home_download_instructions_download_button_toast_4">Hala ulaşılmadı… hala ulaşılmadı… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">Tamam, özveriyi anlıyorum 🫡</string>
     <string name="home_download_instructions_download_button_toast_6">Artık resmi bir Morphe butonu test kullanıcısısınız 🏅</string>
@@ -673,9 +673,9 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_step_write_patched">Yamalanmış APK dosyası yazılıyor</string>
     <string name="patcher_step_sign_apk">Yamalanmış APK dosyası imzalanıyor</string>
     <!-- Patcher Screen - Patcher Tasks -->
-    <string name="patcher_task_decoding_dex">Dex dosyaları okunyor...</string>
-    <string name="patcher_task_extracting_resources">Kaynaklar çıkartılıyor...</string>
-    <string name="patcher_task_decoding_resources">Kaynakların kodu çözülüyor...</string>
+    <string name="patcher_task_decoding_dex">DEX dosyaları okunuyor</string>
+    <string name="patcher_task_extracting_resources">Kaynaklar çıkartılıyor</string>
+    <string name="patcher_task_decoding_resources">Kaynaklar çözümleniyor</string>
     <string name="patcher_task_indexing_classes">Sınıflar indeksleniyor</string>
     <string name="patcher_task_compiling_dex">DEX dosyaları derleniyor</string>
     <string name="patcher_task_compiling_resources">Kaynaklar derleniyor</string>
@@ -686,7 +686,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="battery_optimization_not_now">Şimdi değil</string>
     <!-- Patcher Screen - Patcher Worker -->
     <string name="patcher_notification_title">Yamalama devam ediyor…</string>
-    <string name="patcher_notification_text">Patcher\'a dönmek için dokunun</string>
+    <string name="patcher_notification_text">Yamalayıcıya dönmek için dokunun</string>
     <string name="patcher_stop_title">Yamalama durdurulsun mu?</string>
     <string name="patcher_stop_discards">Şu ana kadarki ilerleme iptal edilir ve hiçbir şey yüklenmez</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
@@ -767,7 +767,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="mini_game_blocks_picker_subtitle">Şekilleri yerleştir, çizgileri temizle</string>
     <string name="mini_game_blocks_tap_to_start">Döndürmek için dokunun, taşımak için kaydırın, düşürmek için aşağı kaydırın</string>
     <string name="mini_game_bricks_picker_subtitle">Topu sektir, duvarı yok et</string>
-    <string name="mini_game_bricks_tap_to_start">Nişan almak için sürükle, fırlatmak için dokun</string>
+    <string name="mini_game_bricks_tap_to_start">Nişan almak için sürükleyin, fırlatmak için dokunun</string>
     <string name="mini_game_miner_picker_subtitle">Açmak için dokunun, işaretlemek için basılı tutun</string>
     <string name="mini_game_pairs_picker_subtitle">Kartları çevirin, eşleşeni bulun</string>
     <!-- Settings -->
@@ -845,7 +845,7 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_app_card_colors_start">Başlangıç rengi</string>
     <string name="settings_appearance_app_card_colors_middle">Orta renk</string>
     <string name="settings_appearance_app_card_colors_end">Bitiş rengi</string>
-    <string name="settings_appearance_app_card_colors_solid_color">Geçersiz renk</string>
+    <string name="settings_appearance_app_card_colors_solid_color">Düz renk</string>
     <string name="settings_appearance_app_card_colors_bundle">Uygulama paketi rengi</string>
     <string name="settings_appearance_app_card_colors_bundle_description">Burada, her bir uygulamanın veya kaynağın kendi rengini kullan; uyum sağlaması için otomatik olarak tonlandırılır.</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
@@ -964,7 +964,7 @@ Yamalar etkilenmez: yamalama kaynakları listesindeki her kaynak için ön sür�
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Uygulama simgesi</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Uygulamanın yamalandığı simge; Android Auto gibi daha sonra değiştirilemeyeceği yerlerde de kullanılır</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Özel uygulama simgesi için simge görselleri içeren bir klasör gerekli</string>
-    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Özel filtre</string>
+    <string name="settings_advanced_patch_options_custom_branding_custom_icon">Özel simge</string>
     <string name="settings_advanced_patch_options_custom_branding_custom_icon_instruction">"Özel bir simge olarak kullanılacak görüntüleri içeren klasör.
 
 Bu klasör, cihazın DPI'sine bağlı olarak bir veya daha fazla aşağıdaki klasörleri içermelidir:
@@ -1057,7 +1057,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_unavailable_shizuku_hint">Shizuku\'nun çalıştığından ve ve bu uygulama için izin verildiğinden emin olun</string>
     <string name="installer_choose_another">Başka bir yükleyici seç</string>
     <string name="installer_play_store_warning_title">Play Store olarak mı yüklensin?</string>
-    <string name="installer_play_store_warning_message">Yenilenen uygulama, Google Play Store\'dan yüklenmiş olarak kaydedilecektir. Bu, Android Auto gibi hizmetlerin uygulamayı bir Play Store uygulaması olarak tanımasına yardımcı olabilir, ancak her uygulama veya cihaz için garanti edilmez. Davranış, Android sürümüne, ROM\'a, cihaz markasına ve uygulamaya özel kontrollere göre değişiklik gösterebilir.</string>
+    <string name="installer_play_store_warning_message">Yamalanan uygulama, Google Play Store\'dan yüklenmiş olarak kaydedilecektir. Bu, Android Auto gibi hizmetlerin uygulamayı bir Play Store uygulaması olarak tanımasına yardımcı olabilir, ancak her uygulama veya cihaz için garanti edilmez. Davranış, Android sürümüne, ROM\'a, cihaz markasına ve uygulamaya özel kontrollere göre değişiklik gösterebilir.</string>
     <string name="installer_play_store_warning_risk">Play Store, değiştirilmiş uygulama için güncelleme sunabilir. Bu güncellemeyi yüklemek, değiştirilmiş APK\'yı orijinal sürümüyle değiştirir ve değişiklikleri kaldırır. Güncelleme yapmanız istenirse, uygulamanın Play Store sayfasındaki üç nokta menüsüne dokunun ve \"Güncellemeleri kapat\" seçeneğini seçin</string>
     <string name="installer_play_store_warning_continue">Anladım, devam et</string>
     <string name="installer_play_store_mode">Play Store olarak mı yüklensin</string>
@@ -1067,7 +1067,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="settings_patch_mode_ask_description">Her uygulamayı yamalamadan önce, root bağlama için mi yoksa standart kurulum için mi yamalanacağını sorar</string>
     <string name="settings_section_after_patching">Yamalamadan sonra</string>
     <string name="settings_after_patching_install">Otomatik olarak kur</string>
-    <string name="settings_after_patching_ask">Hangi yükleyici olduğunu sor</string>
+    <string name="settings_after_patching_ask">Hangi yükleyicinin kullanılacağını sor</string>
     <string name="settings_after_patching_ask_description">Bir uygulama kurulduğunda her seferinde hangi yükleyicinin kullanılacağını sorar</string>
     <string name="settings_after_patching_manual">Manuel olarak kur</string>
     <string name="settings_after_patching_manual_description">Kur butonuna dokunduğunuzda varsayılan yükleyici ile kurar</string>
@@ -1102,7 +1102,7 @@ Ayrıntılar: %2$s"</string>
     <string name="installer_shizuku_error_downgrade">Android, bunu mevcut uygulamayı düşürdüğü için engelledi.</string>
     <string name="installer_shizuku_error_signature">Android, yüklenen uygulamanın farklı bir imzaya sahip olması nedeniyle bunu engelledi.</string>
     <string name="installer_shizuku_error_invalid_apk">Android bu APK\'yı okuyamadı.</string>
-    <string name="installer_shizuku_error_user_profile">Dışla</string>
+    <string name="installer_shizuku_error_user_profile">Sistem bu yüklemeyi engelledi. Xiaomi ve benzeri cihazlarda geliştirici seçeneklerinden \"USB ile yükle\" seçeneğini açın. İş profilinde yüklemeler politika ile kısıtlanabilir</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">Pil optimizasyonu</string>
     <string name="settings_system_battery_optimization_description">Uygulama küçültüldüğünde patcher\'ı çalışır durumda tutar</string>
@@ -1287,7 +1287,7 @@ Ayrıntılar: %2$s"</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_manager_description">Popüler Android uygulamalarının modern ve verimli şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen açık kaynaklı bir proje</string>
-    <string name="credits">Takdir</string>
+    <string name="credits">Katkıda bulunanlar</string>
     <string name="credits_description">Morphe\'nin arkasındaki insanlar</string>
     <string name="settings_about_section_project">Proje</string>
     <string name="settings_about_section_help">Yardım</string>
@@ -1339,10 +1339,10 @@ Ayrıntılar: %2$s"</string>
     <string name="confirm">Onayla</string>
     <string name="warning">Uyarı</string>
     <string name="error_">Hata</string>
-    <string name="failed">Dışlandı</string>
+    <string name="failed">Başarısız</string>
     <string name="canceled">İptal edildi</string>
     <string name="ready">Hazır</string>
-    <string name="retry">Tekrar deneyin</string>
+    <string name="retry">Tekrar dene</string>
     <string name="refresh">Yenile</string>
     <string name="add">Ekle</string>
     <string name="close">Kapat</string>
@@ -1355,7 +1355,7 @@ Ayrıntılar: %2$s"</string>
     <string name="delete">Sil</string>
     <string name="delete_all">Tümünü sil</string>
     <string name="remove">Kaldır</string>
-    <string name="exclude">Yamalıyor</string>
+    <string name="exclude">Hariç tut</string>
     <string name="excluded">Hariç tutuldu</string>
     <string name="include">Dahil Et</string>
     <string name="disable">Devre dışı bırak</string>
@@ -1378,7 +1378,7 @@ Ayrıntılar: %2$s"</string>
     <string name="select_all">Tümünü seç</string>
     <string name="deselect_all">Hepsini kaldır</string>
     <string name="reorder_list">Listeyi yeniden sırala</string>
-    <string name="reorder_list_hint">Yeniden sıralamak için sürükle</string>
+    <string name="reorder_list_hint">Yeniden sıralamak için sürükleyin</string>
     <string name="reorder_done">Sıra kaydedildi</string>
     <string name="reset_order">Sırayı sıfırla</string>
     <string name="reset_order_done">Sıra sıfırlandı</string>

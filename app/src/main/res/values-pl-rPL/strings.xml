@@ -461,7 +461,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="header_creator_guide_positioning_title">Pozycjonowanie i skalowanie</string>
     <string name="header_creator_guide_positioning_body">Przeciągnij i uszczypnij obraz w edytorze lub zmień jego rozmiar suwakiem. Przerywane pole wyznacza miejsce oryginalnego logo, a prowadnice pojawiają się, gdy obraz się z nim zrówna.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Wybrana modyfikacja</string>
+    <string name="batch_patch_action">Zmodyfikuj wybrane</string>
     <string name="batch_patch_title">Modyfikowanie grupowe</string>
     <string name="batch_patch_planning">Przygotowywanie kolejki…</string>
     <string name="batch_patch_preparing_next">Przygotowywanie następnej aplikacji…</string>
@@ -480,6 +480,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="batch_patch_force_version_done">Dodano do kolejki mimo to, aplikacja może nie działać</string>
     <string name="batch_patch_accept_signature_done">Dodano do kolejki mimo to, plik APK niezweryfikowany</string>
     <string name="batch_patch_apk_selected">Wybrano plik APK</string>
+    <string name="batch_patch_auto_download_stopped">Automatyczne pobieranie plików APK zostało zatrzymane</string>
+    <string name="batch_patch_auto_download_stop">Zatrzymaj pobieranie</string>
+    <string name="batch_patch_auto_download_kept">Pobranego pliku APK nie można było użyć, więc poprzedni został zachowany</string>
     <string name="batch_patch_edit_patches">Wybierz modyfikacje</string>
     <string name="batch_patch_state_no_apk">Brak pliku APK</string>
     <string name="batch_patch_state_no_patches">Brak modyfikacji</string>
@@ -606,7 +609,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patcher_field_memory_average">Średnie użycie pamięci</string>
     <string name="patcher_field_memory_max">Maksymalne użycie pamięci</string>
     <!-- Fastest read or write rate reached while patching, in data per second -->
-    <string name="patcher_field_io_peak">Szczytowe I/O przestrzeni</string>
+    <string name="patcher_field_io_peak">Szczytowe operacje I/O</string>
     <string name="patcher_field_value_unknown">nieznany</string>
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">usunięte</string>
@@ -1268,6 +1271,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apk_download_helper_installed_by_unknown">Nieznany instalator</string>
     <string name="settings_system_apk_download_helper_open_directly">Otwórz asystenta od razu</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Pomija instrukcje pobierania i otwiera zaufanego asystenta</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Automatycznie pobieraj pliki APK w trybie wsadowym</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Brak plików</string>
     <string name="file_picker_read_error">Nie można odczytać tego folderu</string>

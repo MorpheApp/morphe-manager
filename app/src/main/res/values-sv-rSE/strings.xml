@@ -340,7 +340,7 @@ Välj var dess APK ska hämtas ifrån"</string>
     <string name="expert_mode_enable_all_universal_pending">Tryck igen för universella tillägg</string>
     <string name="expert_mode_universal_all_warning_title">Aktivera alla universella tillägg?</string>
     <string name="expert_mode_universal_all_warning_message">Universella tillägg testas inte tillsammans. Om du aktiverar alla på en gång kan det orsaka konflikter, misslyckad modifiering eller krascher</string>
-    <string name="expert_mode_recommended">Rekommenderade korrigeringar</string>
+    <string name="expert_mode_recommended">Rekommenderade tillägg</string>
     <string name="expert_mode_reset_to_default_done">Rekommenderade tillägg har tillämpats</string>
     <string name="expert_mode_selected_count">%1$s av %2$s har valts</string>
     <string name="expert_mode_saved_selection">Sparat urval</string>
@@ -1265,8 +1265,8 @@ Information: %2$s"</string>
     <string name="settings_system_apk_download_helper_warning">APK-filen kommer från hjälpappen, så lita bara på appar som du känner till. Morphe kontrollerar fortfarande paketet, versionen och signaturen för varje fil före modifieringen</string>
     <string name="settings_system_apk_download_helper_installed_by">Installerad av %s</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Okänd installerare</string>
-    <string name="settings_system_apk_download_helper_open_directly">Öppna hjälpredskap direkt</string>
-    <string name="settings_system_apk_download_helper_open_directly_description">Hoppar över nedladdningsinstruktionerna och öppnar den betrodda hjälpredigeraren</string>
+    <string name="settings_system_apk_download_helper_open_directly">Öppna hjälpprogrammet direkt</string>
+    <string name="settings_system_apk_download_helper_open_directly_description">Hoppar över nedladdningsinstruktionerna och öppnar det betrodda hjälpprogrammet</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Inga filer här</string>
     <string name="file_picker_read_error">Det går inte att läsa den här katalogen</string>

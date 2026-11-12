@@ -21,9 +21,9 @@
     <string name="home_app_hidden_apps_hint">Tocca per mostrare</string>
     <string name="home_apps_unhide_message">Le app non nascoste tornano alla schermata Home</string>
     <string name="home_app_patch_sources_description">Le fonti non selezionate non vengono proposte quando queste applicazioni vengono modificate, e le relative modifiche non vengono mai aggiunte automaticamente a una selezione. Ogni fonte rimane attiva per tutte le altre applicazioni</string>
-    <string name="home_app_patch_sources_mixed">Offerto %1$s di %2$s</string>
-    <string name="home_app_patch_sources_covers">Ha modifiche per %1$s da %2$s</string>
-    <string name="home_app_patch_sources_last">Ogni applicazione necessita di almeno una fonte</string>
+    <string name="home_app_patch_sources_mixed">Offerto a %1$s di %2$s</string>
+    <string name="home_app_patch_sources_covers">Ha modifiche per %1$s di %2$s</string>
+    <string name="home_app_patch_sources_last">Ogni applicazione necessita di una fonte rimanente da cui applicare una patch</string>
     <string name="android_11_bug_dialog_title">Bug di Android 11</string>
     <string name="android_11_bug_dialog_description">È necessario concedere in anticipo il permesso per l\'installazione dell\'app per evitare un bug con il sistema operativo Android 11 che potrebbe influire negativamente sull\'esperienza dell\'utente.</string>
     <string name="deep_link_add_source_title">Aggiungi fonte</string>
@@ -32,7 +32,7 @@
     <!-- Shown under the app a link was opened for -->
     <string name="deep_link_add_source_only_app">Solo questa app è stata aggiunta. Puoi aggiungere altre app dall\'elenco delle app della sorgente</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
-    <string name="deep_link_add_source_only_universal">Sono aggiunti solo gli universal patch. Puoi aggiungere app dall\'elenco delle app della fonte</string>
+    <string name="deep_link_add_source_only_universal">Sono aggiunte solo le patch universali. Puoi aggiungere app dall\'elenco app della fonte</string>
     <!-- Asked when the link names an app of a source that is already added -->
     <string name="deep_link_add_source_app_back">Questa origine è già stata aggiunta. Vuoi aggiungere questa app dall\'origine esistente?</string>
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
@@ -48,9 +48,9 @@
     <string name="home_outdated_manager_title">Morphe non è aggiornato</string>
     <string name="home_outdated_manager_subtitle">Alcune sorgenti di modifiche richiedono una versione più recente</string>
     <string name="home_held_back_title">Una sorgente di modifiche ha causato l\'arresto anomalo di Morphe</string>
-    <string name="home_held_back_subtitle">È stata saltata per consentire l\'avvio dell\'app. Tocca per rivedere</string>
-    <string name="home_metered_skipped_title">Aggiornamenti in pausa sulla rete dati mobile</string>
-    <string name="home_metered_skipped_subtitle">Tocca per consentire gli aggiornamenti sulla rete mobile</string>
+    <string name="home_held_back_subtitle">È stata saltata per consentire l\'avvio dell\'app. Tocca per riesaminare</string>
+    <string name="home_metered_skipped_title">Aggiornamenti in pausa con la rete dati mobili</string>
+    <string name="home_metered_skipped_subtitle">Tocca per consentire gli aggiornamenti sulla rete dati mobili</string>
     <string name="home_repatch_available_subtitle">Tocca per accodarli tutti</string>
     <string name="home_update_error">Aggiornamento non riuscito</string>
     <string name="home_update_error_subtitle">Si è verificato un errore durante l\'aggiornamento delle fonti</string>
@@ -159,7 +159,7 @@
     <string name="sources_sort_manual">Ordine manuale</string>
     <string name="sources_sort_manual_hint">Tieni premuto un elemento per riordinarlo</string>
     <string name="sources_sort_last_updated">Ultimo aggiornamento</string>
-    <string name="sources_sort_enabled_first">Abilitate per prime</string>
+    <string name="sources_sort_enabled_first">Attive per prime</string>
     <string name="sources_patches_source_disabled_hint">Questa fonte è disabilitata. Le sue patch sono elencate come riferimento e non vengono applicate</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_report_issue">Segnala un problema</string>
@@ -194,7 +194,7 @@
     <string name="sources_management_metadata_unavailable">Metadati non disponibili</string>
     <string name="sources_management_metadata_unavailable_hint">Il file dei metadati remoti non è disponibile. L\'applicazione della patch con il bundle installato funziona ancora, ma l\'aggiornamento automatico è disabilitato per questa sorgente</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente </string>
-    <string name="sources_management_metadata_unavailable_hint_missing_editable">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente. Tocca per modificarlo</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file non esiste. Tocca per modificarlo</string>
     <string name="sources_management_outdated_manager_badge">Aggiorna Morphe</string>
     <string name="sources_management_outdated_manager_hint">Questa sorgente è stata creata per patcher %1$s, ma Morphe %2$s include patcher %3$s. Aggiorna Morphe per utilizzarlo</string>
     <string name="sources_management_held_back_badge">Arresto anomalo</string>
@@ -237,10 +237,10 @@
     <string name="sources_download_fail_named">\"%s\" non è stato possibile aggiornarlo. Controlla la tua connessione internet e riprova</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metadati modifiche non trovati</string>
     <string name="sources_signing_key_changed_named">\'%s\' non è stato aggiornato perché l\'ultima release non è firmata con la chiave utilizzata in precedenza</string>
-    <string name="sources_signing_key_changed_local">Il file non è firmato con la chiave utilizzata in precedenza da questa sorgente. Per attendere il file, elimina la sorgente e aggiungilo nuovamente</string>
-    <string name="sources_signing_key_trust_title">Attendere la nuova chiave?</string>
-    <string name="sources_signing_key_trust_message">L\'ultima release è firmata con una chiave diversa. Lo sviluppatore potrebbe aver sostituito la propria chiave, oppure qualcun altro ha pubblicato questa release. Attendila solo se lo sviluppatore ha annunciato una nuova chiave</string>
-    <string name="sources_signing_key_trust_message_unsigned">L\'ultima release non è firmata. Il sviluppatore potrebbe aver smesso di firmare le release, oppure qualcun altro ha pubblicato questa release. Attendila solo se lo sviluppatore l\'ha annunciato</string>
+    <string name="sources_signing_key_changed_local">Il file non è firmato con la chiave utilizzata in precedenza da questa sorgente. Per fidarti, elimina la sorgente e aggiungi di nuovo il file</string>
+    <string name="sources_signing_key_trust_title">Ti fidi della nuova chiave?</string>
+    <string name="sources_signing_key_trust_message">L\'ultima release è firmata con una chiave diversa. Lo sviluppatore potrebbe aver sostituito la propria chiave, oppure qualcun altro ha pubblicato questa release. Fidati solo se lo sviluppatore ha annunciato una nuova chiave</string>
+    <string name="sources_signing_key_trust_message_unsigned">L\'ultima release non è firmata. Lo sviluppatore potrebbe aver smesso di firmare le release, oppure qualcun altro ha pubblicato questa release. Fidati solo se lo sviluppatore l\'ha annunciato</string>
     <string name="sources_signing_key_trusted">Chiave attendibile</string>
     <string name="sources_signing_key_new">Nuova chiave</string>
     <string name="sources_patch_expert_badge">Esperto</string>
@@ -324,7 +324,7 @@ Scegli da dove scaricare l'APK."</string>
     <string name="home_use_installed_app">Usa app installata</string>
     <string name="home_use_installed_app_description">Scegli un\'app già presente su questo dispositivo</string>
     <string name="home_open_apk_file_description">Scegli un file APK, APKM, APKS o XAPK dalla memoria</string>
-    <string name="home_installed_app_picker_title">Installate app</string>
+    <string name="home_installed_app_picker_title">App installate</string>
     <string name="home_installed_app_picker_empty">Nessuna app trovata</string>
     <string name="home_installed_app_picker_filter_user">Solo app utente</string>
     <string name="home_installed_app_picker_filter_system">Solo app di sistema</string>
@@ -460,7 +460,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="header_creator_guide_positioning_title">Posizionamento e ridimensionamento</string>
     <string name="header_creator_guide_positioning_body">Trascina e pizzica l\'immagine nell\'editor oppure regolane le dimensioni con il cursore. Il riquadro tratteggiato indica la posizione del logo predefinito e le guide compaiono quando l\'immagine si allinea con il riquadro.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Patch selezionata</string>
+    <string name="batch_patch_action">Applica patch alle selezionate</string>
     <string name="batch_patch_title">Patching di gruppo</string>
     <string name="batch_patch_planning">Preparazione della coda…</string>
     <string name="batch_patch_preparing_next">Preparazione dell\'app successiva…</string>
@@ -479,11 +479,14 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="batch_patch_force_version_done">Accodato comunque, l\'app potrebbe non funzionare</string>
     <string name="batch_patch_accept_signature_done">Accodato comunque, APK non verificato</string>
     <string name="batch_patch_apk_selected">APK selezionata</string>
+    <string name="batch_patch_auto_download_stopped">Download automatici di APK interrotti</string>
+    <string name="batch_patch_auto_download_stop">Interrompi download</string>
+    <string name="batch_patch_auto_download_kept">L\'APK scaricato non potrebbe essere utilizzato, quindi è stato mantenuto quello precedente</string>
     <string name="batch_patch_edit_patches">Scegli patch</string>
     <string name="batch_patch_state_no_apk">Nessun APK</string>
     <string name="batch_patch_state_no_patches">Nessuna patch</string>
     <string name="batch_patch_state_no_selection">Nessuna selezionata</string>
-    <string name="batch_patch_no_selection">Nessuno dei patch disponibili è selezionato</string>
+    <string name="batch_patch_no_selection">Nessuna delle patch disponibili è selezionata</string>
     <string name="batch_patch_policy_install">Installa al termine</string>
     <string name="batch_patch_policy_install_description">Installa ogni app modificata subito dopo che la coda è terminata. Disattivato mantiene gli APK per dopo</string>
     <string name="batch_patch_policy_mount">Monta al termine</string>
@@ -886,7 +889,7 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Le versioni pre-release di Morphe sono ancora in sviluppo e possono essere instabili.
 
 Le patch non sono interessate: abilita le patch pre-release per ciascuna fonte nell'elenco delle fonti delle patch"</string>
-    <string name="settings_advanced_updates_allow_metered">I dati mobili sono attivi</string>
+    <string name="settings_advanced_updates_allow_metered">Aggiornamenti tramite dati mobili</string>
     <string name="settings_advanced_updates_allow_metered_description">Scarica Morphe e gli aggiornamenti dei patch tramite dati mobili</string>
     <string name="settings_advanced_updates_background_notifications">Notifiche degli aggiornamenti in background</string>
     <string name="settings_advanced_updates_background_notifications_description">Controlla periodicamente la presenza di aggiornamenti in background e notifica quando sono disponibili</string>
@@ -908,7 +911,7 @@ Le patch non sono interessate: abilita le patch pre-release per ciascuna fonte n
     <!-- Notification content -->
     <string name="notification_bundle_update_title">Nuove patch disponibili</string>
     <string name="notification_update_text">La versione %s è pronta per il download</string>
-    <string name="notification_bundle_update_text_unversioned">Fai clic per aprire Morphe e aggiornare</string>
+    <string name="notification_bundle_update_text_unversioned">Tocca per aprire Morphe e aggiornare</string>
     <string name="notification_permission_dialog_title">Consenti le notifiche</string>
     <string name="notification_permission_dialog_description">Morphe ha bisogno del permesso di notifica per avvisarti quando gli aggiornamenti sono disponibili in background</string>
     <string name="notification_post_patch_dialog_title">Vorresti essere notificato quando ci sono aggiornamenti disponibili?</string>
@@ -1150,7 +1153,7 @@ Dettagli: %2$s"</string>
     <string name="settings_system_show_password_field">Mostra la password</string>
     <string name="settings_system_hide_password_field">Nascondi la password</string>
     <string name="settings_system_morphe_settings">Impostazioni Morphe</string>
-    <string name="settings_system_import_manager_settings_description">Salva i logs del sistema per la risoluzione dei problemi</string>
+    <string name="settings_system_import_manager_settings_description">Salva e ripristina le impostazioni di Morphe</string>
     <string name="settings_system_import_manager_settings_fail">Impossibile importare le impostazioni di Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Impostazioni di Morphe importate</string>
     <string name="settings_system_import_manager_settings_mode_title">Importa impostazioni di Morphe</string>
@@ -1241,10 +1244,10 @@ Dettagli: %2$s"</string>
     <!-- Selection panel: saved selection, sets and copies -->
     <string name="selection_panel_title">Selezioni</string>
     <string name="selection_panel_copy_into">Copia in %s</string>
-    <string name="selection_sets_title">Impostazioni</string>
-    <string name="selection_set_name">Nome impostazione</string>
-    <string name="selection_set_save">Salva come impostazione</string>
-    <string name="selection_set_replace">Sostituisci impostazione</string>
+    <string name="selection_sets_title">Set</string>
+    <string name="selection_set_name">Nome del set</string>
+    <string name="selection_set_save">Salva come set</string>
+    <string name="selection_set_replace">Sostituisci set</string>
     <string name="selection_set_saved">Salvato come %s</string>
     <string name="selection_set_applied">Passato a %s</string>
     <string name="selection_set_deleted">%s eliminato</string>
@@ -1267,6 +1270,7 @@ Dettagli: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installer sconosciuto</string>
     <string name="settings_system_apk_download_helper_open_directly">Apri subito l\'assistente</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Salta le istruzioni per il download e apre l\'assistente attendibile</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Scarica automaticamente gli APK in batch</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nessun file qui</string>
     <string name="file_picker_read_error">Impossibile leggere questa directory</string>
@@ -1316,14 +1320,14 @@ Dettagli: %2$s"</string>
     <string name="settings">Impostazioni</string>
     <string name="apps">Applicazioni</string>
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
-    <string name="settings_section_patcher">Modificatore</string>
+    <string name="settings_section_patcher">Patcher</string>
     <string name="settings_section_updates">Aggiornamenti</string>
     <string name="settings_section_patching">Applicazione delle patch</string>
     <string name="settings_section_appearance_summary">Aspetto di Morphe</string>
     <string name="settings_section_patch_options_summary">Ciò che la modalità semplice patcha nelle app</string>
     <string name="settings_section_general">Generale</string>
     <string name="settings_section_patcher_summary">Come le applicazioni vengono modificate su questo dispositivo</string>
-    <string name="settings_section_help_info"><b>Help &amp; info</b></string>
+    <string name="settings_section_help_info">Help &amp; info</string>
     <string name="settings_section_about_summary">Maggiori informazioni su Morphe e come ottenere aiuto</string>
     <string name="settings_section_local_files">File</string>
     <string name="settings_section_backup">Backup</string>
@@ -1360,7 +1364,7 @@ Dettagli: %2$s"</string>
     <string name="include">Includi</string>
     <string name="disable">Disabilita</string>
     <string name="enable">Attiva</string>
-    <string name="trust">Attendi</string>
+    <string name="trust">Fidati</string>
     <string name="loading">Caricamento in corso…</string>
     <string name="creating">Creazione…</string>
     <string name="processing_apk">Elaborazione APK…</string>
@@ -1444,7 +1448,7 @@ Dettagli: %2$s"</string>
     <string name="mount_stage_restoring_stock">Ripristino dell\'originale…</string>
     <string name="mount_stage_copying">Copia in corso…</string>
     <string name="unmounting_ellipsis">Smontaggio in corso…</string>
-    <string name="importing_ellipsis">Riprova</string>
+    <string name="importing_ellipsis">Importazione in corso…</string>
     <string name="imported_successfully">Importati con successo</string>
     <string name="changelog">Visualizza registri delle modifiche</string>
     <string name="changelog_for_app">Modifiche per %s</string>

@@ -101,7 +101,7 @@
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <string name="home_greeting_5">광고를 보고 싶으세요? 저도 싫어요</string>
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
-    <string name="home_greeting_6">앱의 동작을 개선해 보죠</string>
+    <string name="home_greeting_6">앱의 동작을 개선해 볼까요?</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
     <string name="home_greeting_7" formatted="false">오늘의 예보: 패치 확률 100%</string>
     <!-- From mediocrity to amazing -->
@@ -219,7 +219,7 @@
     <string name="sources_dialog_paste_no_links">클립보드에서 링크를 찾을 수 없습니다</string>
     <string name="sources_dialog_local">로컬</string>
     <string name="sources_dialog_local_files">패치 소스 파일 선택</string>
-    <string name="sources_dialog_local_invalid_extension">파일은 .mpp 확장자를 가져야 합니다</string>
+    <string name="sources_dialog_local_invalid_extension">파일의 확장자는 .mpp여야 합니다</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s 업데이트</string>
     <string name="sources_dialog_url_valid">유효한 리포지토리 또는 JSON URL</string>
@@ -231,7 +231,7 @@
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <string name="sources_dialog_community_notice_title">서드파티 패치 소스</string>
     <string name="sources_dialog_community_notice_message">"커뮤니티 패치 소스는 각 제작자가 직접 만들고 관리합니다. Morphe는 서드파티 패치를 검토하거나 검증하지 않으며, 해당 패치의 콘텐츠나 기기에서 수행하는 작업에 대해 책임지지 않습니다"</string>
-    <string name="sources_update_success">업데이트를 성공하였습니다</string>
+    <string name="sources_update_success">업데이트에 성공했습니다</string>
     <string name="sources_update_unavailable">새 업데이트가 없습니다</string>
     <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
     <string name="sources_download_fail_named">\'%s\'를 업데이트할 수 없습니다. 인터넷 연결 상태를 확인하고 다시 시도하세요</string>
@@ -301,7 +301,7 @@
     <string name="home_download_instructions_download_button_toast_3">연습할수록 실력이 늘고, 당신도 잘하고 있어요 💪</string>
     <string name="home_download_instructions_download_button_toast_4">여기는 아니예요… 여기는 아니예요… 🙈</string>
     <string name="home_download_instructions_download_button_toast_5">좋아요, 그 끈기는 인정합니다 🫡</string>
-    <string name="home_download_instructions_download_button_toast_6">이제 당신은 공식 Morphe 버튼 테스터입니다 🏅</string>
+    <string name="home_download_instructions_download_button_toast_6">이제 공식 Morphe 버튼 테스터가 되셨습니다 🏅</string>
     <string name="home_download_instructions_step3">다운로드가 완료될 때까지 기다리세요&lt;br&gt;APK는 &lt;b&gt;설치하지 마세요&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">다운로드가 완료되면, &lt;b&gt;APK 파일을 설치하세요&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">다운로드가 완료되면 Morphe로 돌아오세요</string>
@@ -342,7 +342,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="expert_mode_universal_all_warning_message">유니버설 패치는 함께 테스트되지 않았습니다. 모든 패치를 한 번에 활성화하면 패치 충돌, 패치 실패 또는 앱 충돌이 발생할 수 있습니다</string>
     <string name="expert_mode_recommended">추천 패치</string>
     <string name="expert_mode_reset_to_default_done">권장 패치 적용됨</string>
-    <string name="expert_mode_selected_count">%2$s 개 중 %1$s 개 선택됨</string>
+    <string name="expert_mode_selected_count">%2$s개 중 %1$s개 선택됨</string>
     <string name="expert_mode_saved_selection">저장된 선택 목록</string>
     <string name="expert_mode_restore_saved_done">저장된 선택 목록 복원됨</string>
     <string name="expert_mode_copy_from_bundle_no_patches">이 번들에는 일치하는 패치가 없습니다</string>
@@ -470,7 +470,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="batch_patch_multiple_sources">일부 앱은 여러 소스의 패치가 선택되어 있으므로 충돌이 발생할 수 있습니다</string>
     <string name="batch_patch_needs_apk">APK를 사용할 수 없습니다. 파일을 첨부하세요</string>
     <string name="batch_patch_wrong_package">첨부된 파일은 \'%s\'에 속합니다</string>
-    <string name="batch_patch_version_mismatch">버전 %s는 패치에서 지원되지 않습니다</string>
+    <string name="batch_patch_version_mismatch">%s 버전은 패치에서 지원되지 않습니다</string>
     <string name="batch_patch_source_saved">저장된 원본</string>
     <string name="batch_patch_source_installed">설치된 앱</string>
     <string name="batch_patch_source_file">첨부된 파일</string>
@@ -479,6 +479,9 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="batch_patch_force_version_done">그래도 패치 목록에 추가됨, 앱이 손상될 수 있음</string>
     <string name="batch_patch_accept_signature_done">그래도 패치 목록에 추가됨, APK가 검증되지 않음</string>
     <string name="batch_patch_apk_selected">APK 선택됨</string>
+    <string name="batch_patch_auto_download_stopped">자동 APK 다운로드가 중지되었습니다</string>
+    <string name="batch_patch_auto_download_stop">다운로드 중지</string>
+    <string name="batch_patch_auto_download_kept">다운로드한 APK를 사용할 수 없어 이전 버전이 유지되었습니다</string>
     <string name="batch_patch_edit_patches">패치 선택</string>
     <string name="batch_patch_state_no_apk">APK 없음</string>
     <string name="batch_patch_state_no_patches">패치 없음</string>
@@ -804,8 +807,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_appearance_theme">테마</string>
     <string name="settings_appearance_theme_mode">테마 모드</string>
     <string name="settings_appearance_system">시스템</string>
-    <string name="settings_appearance_light">밝은</string>
-    <string name="settings_appearance_dark">어두운</string>
+    <string name="settings_appearance_light">라이트</string>
+    <string name="settings_appearance_dark">다크</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">흑백</string>
     <string name="settings_appearance_color_style">색상 스타일</string>
@@ -869,7 +872,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_appearance_app_icon_accent_4">황혼</string>
     <string name="settings_appearance_app_icon_background">배경</string>
     <string name="settings_appearance_app_icon_mark">로고</string>
-    <string name="settings_appearance_app_icon_mark_color">컬러</string>
+    <string name="settings_appearance_app_icon_mark_color">색상</string>
     <string name="settings_appearance_app_icon_mark_white">하얀</string>
     <string name="settings_appearance_app_icon_mark_black">검정</string>
     <string name="settings_appearance_app_icon_change_dialog_title">앱 아이콘을 변경할까요?</string>
@@ -896,8 +899,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_advanced_update_interval">확인 빈도</string>
     <string name="settings_advanced_update_interval_hourly">매시간</string>
     <string name="settings_advanced_update_interval_daily">매일</string>
-    <string name="settings_advanced_update_interval_weekly">주간</string>
-    <string name="settings_advanced_update_interval_monthly">월간</string>
+    <string name="settings_advanced_update_interval_weekly">매주</string>
+    <string name="settings_advanced_update_interval_monthly">매월</string>
     <string name="settings_advanced_update_interval_battery_warning">Xiaomi, Huawei, Samsung 및 OnePlus와 같이 백그라운드 앱 실행을 제한하는 기기에서는 백그라운드 확인 기능이 안정적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_external_batch_patch">외부 트리거 허용</string>
     <string name="settings_advanced_external_batch_patch_description">자동화 앱에서 일괄 패치를 시작할 수 있도록 합니다</string>
@@ -937,7 +940,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_advanced_github_pat_create">GitHub에서 토큰 생성</string>
     <!-- "%s" is the GitHub scope name, keep it as is -->
     <string name="settings_advanced_github_pat_create_description">%s 범위가 미리 선택된 상태로 GitHub를 엽니다</string>
-    <string name="settings_advanced_github_pat_checking">GitHub 확인 중...</string>
+    <string name="settings_advanced_github_pat_checking">GitHub 확인 중…</string>
     <!-- "%s" is the GitHub account name -->
     <string name="settings_advanced_github_pat_account">%s로 GitHub에 로그인됨</string>
     <string name="settings_advanced_github_pat_rejected">GitHub가 이 토큰을 거부하였습니다. 만료되었거나 무효화되었을 수 있습니다</string>
@@ -957,7 +960,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_advanced_patch_options_no_available">이 패치에 사용 가능한 옵션이 없습니다</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
     <string name="settings_advanced_patch_options_custom_branding">커스텀 브랜딩</string>
-    <string name="settings_advanced_patch_options_custom_branding_description">앱 표시 이름을 변경해 보세요</string>
+    <string name="settings_advanced_patch_options_custom_branding_description">앱 표시 이름을 변경합니다</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">앱 이름</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">커스텀 앱 이름 입력</string>
     <string name="settings_advanced_patch_options_path_gone">이 폴더를 더 이상 읽을 수 없습니다. 폴더를 다시 선택하거나 삭제하세요. 그렇지 않으면 패치가 중단되고 해당 폴더에 대해 물어봅니다</string>
@@ -999,7 +1002,7 @@ morphe_adaptive_monochrome_custom.xml
   drawable-xxxhdpi/morphe_notification_icon_custom.png (96x96 px)"</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Header -->
     <string name="settings_advanced_patch_options_custom_header">커스텀 헤더 로고</string>
-    <string name="settings_advanced_patch_options_custom_header_description">헤더 로고를 변경해 보세요</string>
+    <string name="settings_advanced_patch_options_custom_header_description">헤더 로고를 변경합니다</string>
     <string name="settings_advanced_patch_options_custom_header_instruction">"커스텀 헤더 로고로 사용될 이미지가 있는 폴더.
 
 폴더에는 이 기기의 DPI에 따라 다음 폴더 중 하나 이상이 포함되어야 합니다:
@@ -1038,7 +1041,7 @@ morphe_header_custom_dark.png
     <string name="installer_status_requires_root">루트 접근 권한이 필요합니다</string>
     <string name="installer_status_not_supported">이 작업에는 지원되지 않습니다</string>
     <string name="installer_status_shizuku_not_installed">이 옵션을 사용하려면 Shizuku 또는 Sui를 설치하세요</string>
-    <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui 을 시작하고 다시 시도하세요</string>
+    <string name="installer_status_shizuku_not_running">Shizuku 또는 Sui를 시작하고 다시 시도하세요</string>
     <string name="installer_status_shizuku_permission">Shizuku 앱에서 Morphe에 권한을 부여하세요</string>
     <string name="installer_mount_warning_install">패치 모드가 루트 마운트로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
@@ -1049,9 +1052,9 @@ morphe_header_custom_dark.png
     <string name="installer_hint_conflict">이 앱 패키지명을 가진 다른 앱이 이미 설치되어 있습니다. 계속하기 전에 제거하세요</string>
     <string name="installer_confirm_notification_title">설치 확인</string>
     <string name="installer_confirm_notification_text">탭하여 패치된 앱 설치를 완료하세요</string>
-    <string name="installer_external_launched">\'%s\'을 여는 중…</string>
-    <string name="installer_external_timeout">\'%s\'에서 설치를 확인하지 못하였습니다. 다른 앱을 확인하고 다시 시도하세요</string>
-    <string name="installer_external_success">\'%s\'이 설치 성공을 보고하였습니다</string>
+    <string name="installer_external_launched">%s 여는 중…</string>
+    <string name="installer_external_timeout">\'%s\'에서 설치를 확인하지 못했습니다. 다른 앱을 확인하고 다시 시도하세요</string>
+    <string name="installer_external_success">\'%s\'에서 설치가 성공했다고 알렸습니다</string>
     <string name="installer_unavailable_title">\'%s\'를 사용할 수 없음</string>
     <string name="installer_unavailable_message">선택된 설치 프로그램(%s)을 현재 사용할 수 없습니다. 문제를 해결하고 다시 시도하거나 일반 설치 프로그램을 사용해 보세요</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku가 실행 중이고, 이 앱에 권한이 부여되었는지 확인하세요</string>
@@ -1086,12 +1089,12 @@ morphe_header_custom_dark.png
     <string name="installer_shizuku_status_ready">준비 완료</string>
     <string name="installer_shizuku_status_issue">주의 필요</string>
     <string name="installer_shizuku_status_supported">지원됨</string>
-    <string name="installer_shizuku_status_running">실행하는 중</string>
+    <string name="installer_shizuku_status_running">실행 중</string>
     <string name="installer_shizuku_status_permission">권한</string>
     <string name="installer_shizuku_status_mode">모드</string>
     <string name="installer_shizuku_status_provider">제공자</string>
     <string name="installer_shizuku_status_granted">부여됨</string>
-    <string name="installer_shizuku_status_missing">누락되었음</string>
+    <string name="installer_shizuku_status_missing">누락됨</string>
     <string name="installer_shizuku_request_permission">권한 요청</string>
     <string name="installer_shizuku_install_fail">Shizuku 설치할 수 없음: %s</string>
     <string name="installer_shizuku_install_fail_with_details">"Shizuku 설치할 수 없음: %1$s
@@ -1138,7 +1141,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_backup_sources_description">사용자 정의 소스 및 GitHub 토큰</string>
     <string name="settings_system_backup_patch_selections_description">모든 앱에 대해 선택된 패치</string>
     <string name="settings_system_backup_signing_key_note">서명키는 별도로 백업됩니다</string>
-    <string name="settings_system_import_keystore_dialog_title">키스토어 자격 증명 입력</string>
+    <string name="settings_system_import_keystore_dialog_title">키 저장소 자격 증명 입력</string>
     <string name="settings_system_import_keystore_dialog_description">키스토어를 가져오려면 키스토어의 자격 증명을 입력해야 합니다</string>
     <string name="settings_system_import_keystore_dialog_alias_field">사용자 이름 (별칭)</string>
     <string name="settings_system_import_keystore_dialog_password_field">비밀번호</string>
@@ -1200,7 +1203,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_clear_all_confirm">캐시된 네트워크 응답, 설치 준비된 APK 복사본, 임시 파일을 삭제합니다. 원본 APK와 패치된 APK는 유지됩니다</string>
     <string name="settings_system_storage_cleared">%s 확보됨</string>
     <string name="settings_system_storage_patch_running_warning">패치가 실행 중이며 이 파일들을 사용하고 있습니다. 지금 삭제하면 실패합니다</string>
-    <string name="settings_system_storage_clear_anyway">어쨌든 지우기</string>
+    <string name="settings_system_storage_clear_anyway">그래도 지우기</string>
     <string name="settings_system_storage_nothing_to_clear">삭제할 항목이 없습니다</string>
     <string name="settings_system_storage_open_app_info_title">Android 앱 저장소 열기</string>
     <string name="settings_system_storage_open_app_info_description">시스템 설정을 통해 모든 Morphe 데이터를 관리하거나 지울 수 있습니다</string>
@@ -1247,7 +1250,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_replace">세트 교체</string>
     <string name="selection_set_saved">\'%s\'로 저장됨</string>
     <string name="selection_set_applied">\'%s\'로 전환됨</string>
-    <string name="selection_set_deleted">%s 개 삭제됨</string>
+    <string name="selection_set_deleted">%s 삭제됨</string>
     <string name="selection_set_renamed">\'%s\'로 이름 변경됨</string>
     <string name="selection_set_rename_title">세트 이름 변경</string>
     <string name="selection_set_delete_title">세트를 삭제하시겠습니까?</string>
@@ -1267,9 +1270,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">설치 프로그램 알 수 없음</string>
     <string name="settings_system_apk_download_helper_open_directly">Helper 바로 열기</string>
     <string name="settings_system_apk_download_helper_open_directly_description">다운로드 안내를 건너뛰고 신뢰할 수 있는 Helper 앱을 실행합니다</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APK 일괄 자동 다운로드</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">파일이 없습니다</string>
-    <string name="file_picker_read_error">이 디렉터리를 읽을 수 없습니다</string>
+    <string name="file_picker_read_error">이 디렉토리를 읽을 수 없습니다</string>
     <string name="file_picker_internal_storage">내부 저장소</string>
     <string name="file_picker_sd_card">SD 카드</string>
     <string name="file_picker_root">루트 (/)</string>
@@ -1385,17 +1389,17 @@ morphe_header_custom_dark.png
     <string name="reset_order_confirm_title">순서를 초기화하시겠습니까?</string>
     <string name="reset_order_confirm_message">목록이 기본 순서로 돌아가며, 직접 드래그하여 변경한 순서는 삭제됩니다</string>
     <string name="accessibility_select_app">앱 선택</string>
-    <string name="accessibility_select_source">소스 선택하기</string>
+    <string name="accessibility_select_source">소스 선택</string>
     <string name="accessibility_move_up">위로 이동</string>
     <string name="accessibility_move_down">아래로 이동</string>
     <string name="accessibility_app_moved_announcement">\'%1$s\'가 %3$s 개 중 %2$s 번째 위치로 이동하였습니다</string>
     <string name="accessibility_scroll_to_top">목록 맨 위로 스크롤</string>
     <string name="rename">이름 변경</string>
-    <string name="more_options">옵션 더보기</string>
+    <string name="more_options">추가 옵션</string>
     <string name="import_">가져오기</string>
     <string name="export">내보내기</string>
     <string name="copy">복사</string>
-    <string name="copied_to_clipboard">클립보드에 복사하였습니다</string>
+    <string name="copied_to_clipboard">클립보드에 복사되었습니다</string>
     <string name="download">다운로드</string>
     <string name="less">접기</string>
     <string name="expand">펼치기</string>
@@ -1435,7 +1439,7 @@ morphe_header_custom_dark.png
     <string name="unhide">숨기기 해제</string>
     <string name="show_all">모두 표시</string>
     <string name="ignore">무시</string>
-    <string name="stop_ignoring">무시 중지</string>
+    <string name="stop_ignoring">무시 해제</string>
     <string name="stop">중지</string>
     <string name="logs">로그</string>
     <string name="sources">소스</string>
@@ -1479,8 +1483,8 @@ morphe_header_custom_dark.png
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
     <string name="update_available">업데이트 사용 가능</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
-    <string name="update_completed">업데이트하였습니다</string>
-    <string name="install_update_manager_failed">업데이트를 할 수 없습니다</string>
+    <string name="update_completed">업데이트를 설치했습니다</string>
+    <string name="install_update_manager_failed">업데이트를 설치할 수 없습니다</string>
     <string name="installing_manager_update">업데이트를 설치하는 중…</string>
     <string name="installing_manager_update_hint">Morphe가 업데이트를 완료하기 위해 종료됩니다</string>
     <string name="downloading_manager_update">업데이트를 다운로드하는 중…</string>

@@ -65,7 +65,7 @@
     <string name="list_options_state_description">ຈັດລຽງໂດຍ %1$s, ກັ່ນຕອງໂດຍ %2$s</string>
     <string name="home_app_filter_clones">ຕົວໂຄລນ</string>
     <string name="home_app_grouping_none">ບໍ່ມີ</string>
-    <string name="home_app_sort_manual_hint">ກົດແຊ່ທີ່ແອັບ, ຈາກນັ້ນແຕະປຸ່ມຈັດລຽງໃໝ່</string>
+    <string name="home_app_sort_manual_hint">ກົດຄ້າງທີ່ແອັບ, ຈາກນັ້ນແຕະປຸ່ມຈັດລຽງໃໝ່</string>
     <string name="home_app_sort_recommended">ລຳດັບທີ່ແນະນຳ</string>
     <string name="home_app_sort_updates_first">ອັບເດດຊຸດແພດກ່ອນ</string>
     <string name="home_app_sort_recently_patched">ແພັດຊ໌ຫຼ້າສຸດ</string>
@@ -178,7 +178,7 @@
     <string name="sources_management_prerelease_toggle">ຊຸດແພດກ່ອນວາງຈຳໜ່າຍ</string>
     <string name="sources_management_prerelease_toggle_description">ໄດ້ຮັບສິດເຂົ້າເຖິງເວີຊັນຊຸດແພດທົດລອງໃໝ່ກ່ອນໄວ</string>
     <string name="sources_prerelease_warning_title">ເປີດໃຊ້ແພັດຊ໌ເວີຊັນກ່ອນປ່ອຍຕົວບໍ?</string>
-    <string name="sources_prerelease_warning_message">ບິວເວີຊັນກ່ອນປ່ອຍຕົວຍັງຢູ່ໃນຂັ້ນຕອນການພັດທະນາ. ການແພັດຊ໌ອາດຈະລົ້ມເຫຼວ ຫຼື ເຮັດໃຫ້ແອັບໃຊ້ງານບໍ່ໄດ້, ແລະ ຄຸນສົມບັດຕ່າງໆອາດມີການປ່ຽນແປງໂດຍບໍ່ມີການແຈ້ງລ່ວງໜ້າ</string>
+    <string name="sources_prerelease_warning_message">ເວີຊັນກ່ອນປ່ອຍຕົວຍັງຢູ່ໃນຂັ້ນຕອນການພັດທະນາ. ການແພັດຊ໌ອາດຈະລົ້ມເຫຼວ ຫຼື ເຮັດໃຫ້ແອັບໃຊ້ງານບໍ່ໄດ້, ແລະ ຄຸນສົມບັດຕ່າງໆອາດມີການປ່ຽນແປງໂດຍບໍ່ມີການແຈ້ງລ່ວງໜ້າ</string>
     <string name="expert_mode_unstable_notice">ແພັດເວີຊັນ Pre-release ຫຼື ທົດລອງອາດຈະບໍ່ຄົງທີ່</string>
     <string name="sources_management_experimental_versions_toggle">ເວີຊັນແອັບທົດລອງ</string>
     <string name="sources_management_experimental_versions_toggle_description">ສະແດງ ແລະ ແພັດຊ໌ເປົ້າໝາຍແອັບທົດລອງ</string>
@@ -239,8 +239,8 @@
     <string name="sources_signing_key_changed_named">\'%s\' ບໍ່ໄດ້ຖືກອັບເດດ ເນື່ອງຈາກເວີຊັນຫຼ້າສຸດຂອງມັນບໍ່ໄດ້ຖືກລົງນາມດ້ວຍຄີທີ່ມັນເຄີຍໃຊ້ມາກ່ອນ</string>
     <string name="sources_signing_key_changed_local">ໄຟລ໌ບໍ່ໄດ້ຖືກລົງນາມດ້ວຍຄີທີ່ແຫຼ່ງນີ້ເຄີຍໃຊ້ມາກ່ອນ. ເພື່ອໃຫ້ຄວາມໄວ້ວາງໃຈມັນ, ໃຫ້ລຶບແຫຼ່ງອອກ ແລະ ເພີ່ມໄຟລ໌ອີກຄັ້ງ</string>
     <string name="sources_signing_key_trust_title">ເຊື່ອໝັ້ນຄີໃໝ່ຫຼືບໍ່?</string>
-    <string name="sources_signing_key_trust_message">ເວີຊັນຫຼ້າສຸດຖືກລົງນາມດ້ວຍຄີທີ່ແຕກຕ່າງ. ບໍ່ວ່າຈະເປັນເພາະຜູ້ພັດທະນາໄດ້ປ່ຽນຄີຂອງພວກເຂົາ ຫຼື ມີບາງຄົນເຜີຍແຜ່ວેີຊັນນີ້. ໃຫ້ເຊື່ອໝັ້ນມັນສະເພາະໃນກໍລະນີທີ່ຜູ້ພັດທະນາໄດ້ແຈ້ງຄີໃໝ່ເທົ່ານັ້ນ</string>
-    <string name="sources_signing_key_trust_message_unsigned">ເວີຊັນຫຼ້າສຸດບໍ່ໄດ້ຖືກລົງນາມ. ບໍ່ວ່າຈະເປັນເພາະຜູ້ພັດທະນາຢຸດການລົງນາມໃນເວີຊັນຕ່າງໆ ຫຼື ມີບາງຄົນເຜີຍແຜ່ວેີຊັນນີ້. ໃຫ້ເຊື່ອໝັ້ນມັນສະເພາະໃນກໍລະນີທີ່ຜູ້ພັດທະນາໄດ້ແຈ້ງໃຫ້ຊາບເທົ່ານັ້ນ</string>
+    <string name="sources_signing_key_trust_message">ເວີຊັນຫຼ້າສຸດຖືກລົງນາມດ້ວຍຄີທີ່ແຕກຕ່າງ. ບໍ່ວ່າຈະເປັນເພາະຜູ້ພັດທະນາໄດ້ປ່ຽນຄີຂອງພວກເຂົາ ຫຼື ມີບາງຄົນເຜີຍແຜ່ເວີຊັນນີ້. ໃຫ້ເຊື່ອໝັ້ນມັນສະເພາະໃນກໍລະນີທີ່ຜູ້ພັດທະນາໄດ້ແຈ້ງຄີໃໝ່ເທົ່ານັ້ນ</string>
+    <string name="sources_signing_key_trust_message_unsigned">ເວີຊັນຫຼ້າສຸດບໍ່ໄດ້ຖືກລົງນາມ. ບໍ່ວ່າຈະເປັນເພາະຜູ້ພັດທະນາຢຸດການລົງນາມໃນເວີຊັນຕ່າງໆ ຫຼື ມີບາງຄົນເຜີຍແຜ່ເວີຊັນນີ້. ໃຫ້ເຊື່ອໝັ້ນມັນສະເພາະໃນກໍລະນີທີ່ຜູ້ພັດທະນາໄດ້ແຈ້ງໃຫ້ຊາບເທົ່ານັ້ນ</string>
     <string name="sources_signing_key_trusted">ຄີທີ່ເຊື່ອໝັ້ນໄດ້</string>
     <string name="sources_signing_key_new">ຄີໃໝ່</string>
     <string name="sources_patch_expert_badge">ຜູ້ຊ່ຽວຊານ</string>
@@ -253,7 +253,7 @@
     <string name="home_apk_availability_recommended_label">ແນະນຳ</string>
     <string name="home_apk_availability_unpatched_label">ຍັງບໍ່ໄດ້ແພດ</string>
     <string name="home_apk_availability_incompatible_label">ບໍ່ເຂົ້າກັນໄດ້</string>
-    <string name="home_apk_availability_find">ແມ່ນ, ຊ່ວຍຂ້ອຍຊອກຫາ}{|pluralForm\":\"other\"</string>
+    <string name="home_apk_availability_find">ແມ່ນ, ຊ່ວຍຂ້ອຍຊອກຫາມັນ</string>
     <string name="home_apk_availability_have">ບໍ່, ຂ້ອຍມີມັນຢູ່ແລ້ວ</string>
     <string name="home_apk_helper_download">ໃຊ້ແອັບຊ່ວຍ</string>
     <string name="home_apk_helper_untrusted">ແອັບຕົວຊ່ວຍຖືກຕິດຕັ້ງແລ້ວ ແຕ່ຍັງບໍ່ທັນໄດ້ຮັບຄວາມເຊື່ອໝັ້ນ, ດັ່ງນັ້ນຈຶ່ງບໍ່ມີໃຫ້ເລືອກຢູ່ທີ່ນີ້</string>
@@ -345,7 +345,7 @@
     <string name="expert_mode_selected_count">ເລືອກແລ້ວ %1$s ຈາກ %2$s</string>
     <string name="expert_mode_saved_selection">ການເລືອກທີ່ບັນທຶກໄວ້</string>
     <string name="expert_mode_restore_saved_done">ກູ້ຄືນການເລືອກທີ່ບັນທຶກໄວ້ແລ້ວ</string>
-    <string name="expert_mode_copy_from_bundle_no_patches">ບໍ່ມີ patch ທີ່ກົງກັນໃນບັນດິລນີ້</string>
+    <string name="expert_mode_copy_from_bundle_no_patches">ບໍ່ມີ patch ທີ່ກົງກັນໃນ bundle ນີ້</string>
     <string name="expert_mode_no_results">ບໍ່ພົບຊຸດແພດ</string>
     <string name="expert_mode_selected_only">ສະເພາະ patch ທີ່ເລືອກເທົ່ານັ້ນ</string>
     <string name="expert_mode_selected_only_on">ສະແດງສະເພາະແພັດຊ໌ທີ່ເລືອກເທົ່ານັ້ນ</string>
@@ -356,7 +356,7 @@
     <string name="expert_mode_patch_required_by_installer">ຈຳເປັນສຳລັບເປົ້າໝາຍການຕິດຕັ້ງທີ່ເລືອກ</string>
     <string name="expert_mode_patch_unavailable_for_installer">ບໍ່ມີໃຫ້ໃຊ້ສຳລັບເປົ້າໝາຍການຕິດຕັ້ງທີ່ເລືອກ</string>
     <string name="expert_mode_multiple_sources_warning_title">ເລືອກຫຼາຍແຫຼ່ງຊຸດແພດ</string>
-    <string name="expert_mode_multiple_sources_warning_conflict">Patch ຈາກແຫຼ່ງທີ່ມາທີ່ແຕກຕ່າງກັນ ບໍ່ໄດ້ຖືກສ້າງມາເພື່ອໃຫ້ເຮັດວຽກຮ່ວມກັນ ແລະ ອາດຈະເກີດການຂັດແຍ່ງ ຫຼື ເຮັດໃຫ້ແອັບເພ</string>
+    <string name="expert_mode_multiple_sources_warning_conflict">Patch ຈາກແຫຼ່ງທີ່ມາທີ່ແຕກຕ່າງກັນ ບໍ່ໄດ້ຖືກສ້າງມາເພື່ອໃຫ້ເຮັດວຽກຮ່ວມກັນ ແລະ ອາດຈະເກີດການຂັດແຍ່ງ ຫຼື ເຮັດໃຫ້ແອັບພັງ</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">APK ທີ່ບໍ່ໄດ້ຢືນຢັນ</string>
     <string name="home_invalid_signature_message">APK ທີ່ທ່ານເລືອກສຳລັບ &lt;b&gt;%s&lt;/b&gt; ບໍ່ກົງກັບໃບຮັບຮອງການເຊັນທີ່ຄາດຫວັງ. ມັນອາດຖືກດັດແປງ ຫຼືມາຈາກແຫຼ່ງທີ່ບໍ່ໜ້າເຊື່ອຖື</string>
@@ -399,7 +399,7 @@
     <!-- Color picker -->
     <string name="custom_color">ສີທີ່ກຳນົດເອງ</string>
     <string name="color_picker_shade">ຄວາມອີ່ມຕົວ ແລະ ຄວາມສະຫວ່າງ</string>
-    <string name="color_picker_hue">ສີ Hue</string>
+    <string name="color_picker_hue">ໂທນສີ (Hue)</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">ຄຳແນະນຳ</string>
     <string name="patch_option_enter_value">ປ້ອນຄ່າ</string>
@@ -440,7 +440,7 @@
     <string name="adaptive_icon_guide_png_title">ໃຊ້ PNG ທີ່ມີພື້ນຫຼັງໂປ່ງໃສ</string>
     <string name="adaptive_icon_guide_png_body">ໂລໂກ້ທີ່ມີພື້ນຫຼັງໂປ່ງໃສຈະເຮັດວຽກໄດ້ດີທີ່ສຸດ, ໂດຍເລືອກສີພື້ນຫຼັງຢູ່ລຸ່ມນີ້. ຮູບພາບທີ່ບໍ່ມີຄວາມໂປ່ງໃສຈະເຕັມໄອຄອນທັງໝົດ ແທນ, ແລະ ໄອຄອນຕາມຮູບແບບ ແລະ ໄອຄອນການແຈ້ງເຕືອນຈະຍັງຄົງໃຊ້ໂລໂກ້ Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">ເຂດປອດໄພ</string>
-    <string name="adaptive_icon_guide_safe_zones_body">ເສັ້ນຂອບສະແດງຮູບຮ່າງໄອຄອນຂອງ launcher ຂອງທ່ານ, ແລະ ທຸກຢ່າງທີ່ຢູ່ນອກເສັ້ນນັ້ນຈະຖືກຕັດອອກ. launcher ອື່ນໆໃຊ້ຮູບຮ່າງອື່ນ, ດັ່ງນັ້ນຈົ່ງຮັກສາລາຍລະອຽດທີ່ສຳຄັນໄວ້ພາຍໃນວົງມົນເສັ້ນປྲຸ, ເຊິ່ງທຸກຮູບຮ່າງຈະສະແດງໃຫ້ເຫັນ.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">ເສັ້ນຂອບສະແດງຮູບຮ່າງໄອຄອນຂອງ launcher ຂອງທ່ານ, ແລະ ທຸກຢ່າງທີ່ຢູ່ນອກເສັ້ນນັ້ນຈະຖືກຕັດອອກ. launcher ອື່ນໆໃຊ້ຮູບຮ່າງອື່ນ, ດັ່ງນັ້ນຈົ່ງຮັກສາລາຍລະອຽດທີ່ສຳຄັນໄວ້ພາຍໃນວົງມົນເສັ້ນປະ, ເຊິ່ງທຸກຮູບຮ່າງຈະສະແດງໃຫ້ເຫັນ.</string>
     <string name="adaptive_icon_guide_notification_title">ໄອຄອນແຈ້ງເຕືອນ</string>
     <string name="adaptive_icon_guide_notification_body">ຕັດຈາກສ່ວນທີ່ເຫັນຂອງຮູບພາບ ແລະ ປັບຂະໜາດໃຫ້ຄືກັບໄອຄອນແຖບສະຖານະອື່ນໆ, ບໍ່ວ່າໄຟລ໌ຈະມີຂອບເຂດເທົ່າໃດກໍຕາມ. ປັບມັນດ້ວຍແຖບເລື່ອນພາຍໃຕ້ການເບິ່ງຕົວຢ່າງ. Android ຈະສະແດງມັນເປັນສີດຽວ.</string>
     <string name="adaptive_icon_guide_monochrome_title">ໄອຄອນຕາມຮູບແບບ</string>
@@ -454,13 +454,13 @@
     <string name="header_creator_failed">ສ້າງສ່ວນຫົວລົ້ມເຫຼວ</string>
     <string name="header_creator_guide">ຄູ່ມືການສ້າງສ່ວນຫົວ</string>
     <string name="header_creator_guide_image_title">ຂໍ້ກຳນົດຮູບພາບ</string>
-    <string name="header_creator_guide_image_body">ໄຟລ໌ PNG ທີ່ມີພື້ນຫຼັງໂປ່ງໃສຈະກືບເຂົ້າກັບແຖບແອັບ. ຂອບເຂດອ້ອມຮອບໂລໂກ້ໃນໄຟລ໌ຈະຖືກລະເວັ້ນ, ດັ່ງນັ້ນມັນຈຶ່ງເລີ່ມຕົ້ນດ້ວຍຂະໜາດ ແລະ ຕຳແໜ່ງຂອງໂລໂກ້ມາດຕະຖານ.</string>
+    <string name="header_creator_guide_image_body">ໄຟລ໌ PNG ທີ່ມີພື້ນຫຼັງໂປ່ງໃສຈະກືນເຂົ້າກັບແຖບແອັບ. ຂອບເຂດອ້ອມຮອບໂລໂກ້ໃນໄຟລ໌ຈະຖືກລະເວັ້ນ, ດັ່ງນັ້ນມັນຈຶ່ງເລີ່ມຕົ້ນດ້ວຍຂະໜາດ ແລະ ຕຳແໜ່ງຂອງໂລໂກ້ມາດຕະຖານ.</string>
     <string name="header_creator_guide_themes_title">ຊຸດຮູບແບບສະຫວ່າງ ແລະມືດ</string>
     <string name="header_creator_guide_themes_body">ແອັບສ່ວນໃຫຍ່ຕ້ອງການຮູບພາບແຍກຕ່າງຫາກສຳລັບຊຸດຮູບແບບສະຫວ່າງ ແລະມືດ. ບາງແອັບ (ເຊັ່ນ YouTube Music) ໃຊ້ພຽງແຕ່ຊຸດຮູບແບບມືດ, ສະນັ້ນຈຶ່ງສະແດງພຽງສ່ວນນັ້ນ.</string>
     <string name="header_creator_guide_positioning_title">ການວາງຕຳແໜ່ງ ແລະປັບຂະໜາດ</string>
     <string name="header_creator_guide_positioning_body">ລາກ ແລະ ບີບຮູບພາບໃນຕົວແກ້ໄຂ, ຫຼື ປັບຂະໜາດດ້ວຍແຖບເລື່ອນ. ກ່ອງເສັ້ນປະຈະບອກຕຳແໜ່ງທີ່ໂລໂກ້ມາດຕະຖານຕັ້ງຢູ່, ແລະ ເສັ້ນໄກດ໌ຈະປາກົດຂຶ້ນເມື່ອຮູບພາບຈັດວາງກົງກັບມັນ.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">ເລືອກ Patch ແລ້ວ</string>
+    <string name="batch_patch_action">Patch ທີ່ເລືອກ</string>
     <string name="batch_patch_title">ການ patch ແບບເປັນກຸ່ມ</string>
     <string name="batch_patch_planning">ກຳລັງກຽມຄິວ…</string>
     <string name="batch_patch_preparing_next">ກຳລັງກຽມແອັບຖັດໄປ…</string>
@@ -476,9 +476,12 @@
     <string name="batch_patch_source_file">ໄຟລ໌ທີ່ຄັດຕິດ</string>
     <string name="batch_patch_source_unavailable">ບໍ່ສາມາດກຽມ APK ໄດ້</string>
     <string name="batch_patch_force_version">ຍັງຄົງ patch ຕໍ່</string>
-    <string name="batch_patch_force_version_done">ຈັດລໍບຽບແລ້ວ, ແອັບອາດຈະມີບັນຫາ</string>
-    <string name="batch_patch_accept_signature_done">ຈັດລໍບຽບແລ້ວ, APK ບໍ່ໄດ້ຮັບການຢືນຢັນ</string>
+    <string name="batch_patch_force_version_done">ເພີ່ມເຂົ້າຄິວແລ້ວ, ແອັບອາດຈະມີບັນຫາ</string>
+    <string name="batch_patch_accept_signature_done">ເພີ່ມເຂົ້າຄິວແລ້ວ, APK ບໍ່ໄດ້ຮັບການຢືນຢັນ</string>
     <string name="batch_patch_apk_selected">ເລືອກ APK ແລ້ວ</string>
+    <string name="batch_patch_auto_download_stopped">ຢຸດການດາວໂຫຼດ APK ອັດຕະໂນມັດແລ້ວ</string>
+    <string name="batch_patch_auto_download_stop">ຢຸດການດາວໂຫຼດ</string>
+    <string name="batch_patch_auto_download_kept">ບໍ່ສາມາດໃຊ້ APK ທີ່ດາວໂຫຼດມາໄດ້, ດັ່ງນັ້ນຈຶ່ງເກັບຮັກສາໄຟລ໌ກ່ອນໜ້ານີ້ໄວ້</string>
     <string name="batch_patch_edit_patches">ເລືອກ patch</string>
     <string name="batch_patch_state_no_apk">ບໍ່ມີ APK</string>
     <string name="batch_patch_state_no_patches">ບໍ່ມີ patch</string>
@@ -580,7 +583,7 @@
     <string name="patcher_error_technical">ລາຍລະອຽດດ້ານເຕັກນິກ</string>
     <string name="patcher_error_dialog_diagnostics">ການວິນິດໄສ</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
-    <string name="patcher_card_started">ເລີ່ມການປັບປຸງແປດ</string>
+    <string name="patcher_card_started">ເລີ່ມການ patch</string>
     <string name="patcher_card_succeeded">ການແພັດຊ໌ສຳເລັດແລ້ວ</string>
     <!-- Field labels, shown in a column beside their values. Keep them short, a long one is cut off rather than wrapped -->
     <string name="patcher_field_app">ແອັບ</string>
@@ -734,7 +737,7 @@
     <string name="patcher_out_of_memory_message">Patcher ໝົດໜ່ວຍຄວາມຈຳດ້ວຍ heap %1$s MB. ແອັບນີ້ມີຂະໜາດໃຫຍ່ເກີນໄປສຳລັບ patch ທີ່ເລືອກ. ລອງ patch ດ້ວຍແຫຼ່ງ patch ທີ່ໜ້ອຍລົງ, ຫຼື ເລືອກ patch ໃຫ້ໜ້ອຍລົງ</string>
     <string name="install_app_success">ຕິດຕັ້ງສຳເລັດ</string>
     <string name="install_app_fail">ຕິດຕັ້ງແອັບລົ້ມເຫຼວ: %s</string>
-    <string name="install_ignore_signature">ຕິດຕັ້ງທັງໝົດ</string>
+    <string name="install_ignore_signature">ຕິດຕັ້ງຕໍ່ໄປ</string>
     <string name="install_ignore_signature_description">ຮັກສາຂໍ້ມູນແອັບໄວ້, ແຕ່ຈະເຮັດວຽກໄດ້ກໍ່ຕໍ່ເມື່ອ root module ປິດການກວດສອບລາຍເຊັນຂອງ Android</string>
     <string name="uninstall_app_fail">ຖອນການຕິດຕັ້ງແອັບບໍ່ສຳເລັດ: %s</string>
     <string name="uninstall_app_unverified">ປ່ອຍໄວ້ບ່ອນເກົ່າ: Morphe ບໍ່ສາມາດຢືນຢັນໄດ້ວ່າແອັບທີ່ຕິດຕັ້ງແມ່ນເວີຊັນທີ່ມັນໄດ້ patch ໄວ້</string>
@@ -802,7 +805,7 @@
     <string name="settings_appearance_display">ການສະແດງຜົນ</string>
     <string name="settings_appearance_effects">ເອັບເຟັກ</string>
     <string name="settings_appearance_theme">ຮູບແບບ</string>
-    <string name="settings_appearance_theme_mode">ໂໝດທີມ</string>
+    <string name="settings_appearance_theme_mode">ໂໝດຮູບແບບ</string>
     <string name="settings_appearance_system">ລະບົບ</string>
     <string name="settings_appearance_light">ສະຫວ່າງ</string>
     <string name="settings_appearance_dark">ມືດ</string>
@@ -898,8 +901,8 @@ Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປ
     <string name="settings_advanced_update_interval_daily">ລາຍວັນ</string>
     <string name="settings_advanced_update_interval_weekly">ລາຍອາທິດ</string>
     <string name="settings_advanced_update_interval_monthly">ລາຍເດືອນ</string>
-    <string name="settings_advanced_update_interval_battery_warning">ການກວດສອບເບื้องຫຼັງອາດຈະເຮັດວຽກບໍ່ໄດ້ຢ່າງໝັ້ນຄົງໃນອຸປະກອນທີ່ຈຳກັດແອັບເບื้องຫຼັງ ເຊັ່ນ Xiaomi, Huawei, Samsung ແລະ OnePlus</string>
-    <string name="settings_advanced_external_batch_patch">ອະນຸຍາດໃຫ້ມີຕົວ觸ີນພາຍນອກ</string>
+    <string name="settings_advanced_update_interval_battery_warning">ການກວດສອບເບື້ອງຫຼັງອາດຈະເຮັດວຽກບໍ່ໄດ້ຢ່າງໝັ້ນຄົງໃນອຸປະກອນທີ່ຈຳກັດແອັບເບື້ອງຫຼັງ ເຊັ່ນ Xiaomi, Huawei, Samsung ແລະ OnePlus</string>
+    <string name="settings_advanced_external_batch_patch">ອະນຸຍາດໃຫ້ມີຕົວກະຕຸ້ນພາຍນອກ</string>
     <string name="settings_advanced_external_batch_patch_description">ອະນຸຍາດໃຫ້ແອັບອັດຕະໂນມັດເລີ່ມການປັບແກ້ແບບກຸ່ມ</string>
     <string name="external_batch_patch_title">ເລີ່ມຕົ້ນການແພັດແບບກຸ່ມບໍ?</string>
     <string name="external_batch_patch_description">%s ຕ້ອງການໃຫ້ Morphe ແພັດ ແລະ ຕິດຕັ້ງແອັບ</string>
@@ -929,7 +932,7 @@ Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປ
     <string name="settings_advanced_expert_mode_dialog_title">ເປີດໂໝດຜູ້ຊ່ຽວຊານບໍ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">ໂໝດຜູ້ຊ່ຽວຊານໃຫ້ການຄວບຄຸມຫຼາຍຂຶ້ນກວ່າວິທີໃຊ້ຊຸດແພດ, ແຕ່ການຕັ້ງຄ່າຜິດໃນໂໝດຜູ້ຊ່ຽວຊານອາດເຮັດໃຫ້ແອັບໃຊ້ບໍ່ໄດ້</string>
     <string name="settings_advanced_strip_unused_libs">ປັບປຸງສຳລັບສະຖາປັດຕະຍະກຳຂອງອຸປະກອນ</string>
-    <string name="settings_advanced_strip_unused_libs_description">ລຶບ library ພື້ນເຖິງທີ່ບໍ່ໄດ້ໃຊ້ງານ ແລະ APK splits ອອກ</string>
+    <string name="settings_advanced_strip_unused_libs_description">ລຶບ library ພື້ນເມືອງທີ່ບໍ່ໄດ້ໃຊ້ງານ ແລະ APK splits ອອກ</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">ປົດລັອກແຫຼ່ງທີ່ມາຂອງ pull request ແລະ repository ສ່ວນຕົວ</string>
     <string name="settings_advanced_github_pat_description">ສຳລັບແຫຼ່ງທີ່ມາຂອງ pull request, repository ສ່ວນຕົວ ແລະ ຂີດຈຳກັດ GitHub ທີ່ສູງຂຶ້ນ</string>
@@ -1073,7 +1076,7 @@ morphe_header_custom_dark.png
     <string name="settings_after_patching_manual_description">ຕິດຕັ້ງດ້ວຍຕົວຕິດຕັ້ງເລີ່ມຕົ້ນເມື່ອທ່ານແຕະ ຕິດຕັ້ງ</string>
     <string name="settings_nomount_only">ສະເພາະ NoMount ເທົ່ານັ້ນ</string>
     <string name="settings_nomount_only_description">ຕິດຕັ້ງແອັບດ້ວຍ NoMount ເທົ່ານັ້ນ ແລະ ຈະບໍ່ກັບໄປໃຊ້ bind mount, ດັ່ງນັ້ນພວກມັນຈະບໍ່ຖືກຕິດຕັ້ງໂດຍບໍ່ມີມັນ</string>
-    <string name="settings_auto_install_with_shizuku_description">ຕິດຕັ້ງ ຫຼື ມައウント APK ທີ່ຖືກປັບແກ້ທັນທີທີ່ການປັບແກ້ສຳເລັດ</string>
+    <string name="settings_auto_install_with_shizuku_description">ຕິດຕັ້ງ ຫຼື Mount APK ທີ່ຖືກປັບແກ້ທັນທີທີ່ການປັບແກ້ສຳເລັດ</string>
     <string name="settings_auto_uninstall_with_shizuku">ຖອນການຕິດຕັ້ງອັດຕະໂນມັດເມື່ອມີຄວາມຂັດແຍ່ງ</string>
     <string name="settings_auto_uninstall_with_shizuku_description">ຖອນການຕິດຕັ້ງແອັບທີ່ມີຢູ່ເມື່ອເກີດຄວາມຂັດແຍ້ງຂອງລາຍເຊັນ. ສິ່ງນີ້ອາດຈະລຶບຂໍ້ມູນຂອງແອັບ</string>
     <string name="settings_ignore_install_target_rules">ບໍ່ສົນໃຈຂໍ້ກຳນົດຂອງເປົ້າໝາຍການຕິດຕັ້ງ</string>
@@ -1111,7 +1114,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_jvm_runtime_description">ປັບປຸງໃນ Java VM ຂອງ Morphe ເອງ, ເຊິ່ງສາມາດໃຊ້ໜ່ວຍຄວາມຈຳໄດ້ຫຼາຍຂຶ້ນ. ປິດເພື່ອໃຊ້ runtime ຂອງ Android</string>
     <string name="settings_system_jvm_runtime_unavailable">ຕ້ອງການອຸປະກອນ ARM ຫຼື x86 64-ບິດ</string>
     <string name="settings_system_patcher_completion_sound">ສຽງສຳເລັດ</string>
-    <string name="settings_system_patcher_completion_sound_description">ຫຼິ້ນສຽງທີ່ແຕກຕ່າງກັນສຳລັບຄວາມສຳເລັດ ຫຼື ຄວາມລົ້ມເຫຼວ ເມື່ອການເຮັດແພັດຊ໌ສຳເລັດ</string>
+    <string name="settings_system_patcher_completion_sound_description">ຫຼິ້ນສຽງທີ່ແຕກຕ່າງກັນສຳລັບຄວາມສຳເລັດ ຫຼື ຄວາມລົ້ມເຫຼວ ເມື່ອ patch ສຳເລັດ</string>
     <!-- Settings - System Tab - Notifications Section -->
     <string name="settings_system_notifications">ການແຈ້ງເຕືອນ</string>
     <string name="settings_system_notifications_description">ວິທີທີ່ Morphe ແຈ້ງເຕືອນໃຫ້ທ່ານຊາບ</string>
@@ -1267,6 +1270,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">ບໍ່ຮູ້ຜູ້ຕິດຕັ້ງ</string>
     <string name="settings_system_apk_download_helper_open_directly">ເປີດຕົວຊ່ວຍທັນທີ</string>
     <string name="settings_system_apk_download_helper_open_directly_description">ຂ້າມຄຳແນະນຳການດາວໂຫຼດ ແລະ ເປີດຕົວຊ່ວຍທີ່ເຊື່ອຖືໄດ້</string>
+    <string name="settings_system_apk_download_helper_auto_batch">ດາວໂຫຼດ APK ແບບກຸ່ມອັດຕະໂນມັດ</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">ບໍ່ມີໄຟລ໌ຢູ່ນີ້</string>
     <string name="file_picker_read_error">ບໍ່ສາມາດອ່ານໄດເລັກທໍຣີນີ້ໄດ້</string>
@@ -1408,7 +1412,7 @@ morphe_header_custom_dark.png
     <string name="author">ຜູ້ຂຽນ</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ໄຟລ໌</string>
-    <string name="clone">ຈຳລອງ</string>
+    <string name="clone">ໂຄລນ</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">ແພດ</string>
     <string name="patching">ກຳລັງແພັດຊ໌</string>

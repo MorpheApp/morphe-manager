@@ -200,7 +200,7 @@
     <string name="sources_management_held_back_badge">クラッシュしました</string>
     <string name="sources_management_held_back_hint">このソースの読み込み中に Morphe がクラッシュしたため、スキップします。もう一度試すには、ソースを更新または再インポートしてください</string>
     <string name="sources_management_signed_by">署名者</string>
-    <string name="sources_management_signing_key_changed_badge">鍵が変更されました</string>
+    <string name="sources_management_signing_key_changed_badge">署名キーが変更されました</string>
     <string name="sources_management_signing_key_changed_hint">最新のリリースは、このソースで以前使用されていた署名キーで署名されていないため、インストールされませんでした。タップして確認してください</string>
     <string name="sources_management_source_enabled">有効にしました</string>
     <string name="sources_management_source_disabled">無効にしました</string>
@@ -284,7 +284,7 @@
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_title">オリジナルの APK をダウンロード</string>
     <string name="home_download_instructions_finding">ダウンロードページを探しています…</string>
-    <string name="home_download_instructions_step1">下の 「%s」 ボタンをタップする</string>
+    <string name="home_download_instructions_step1">下の「%s」ボタンをタップしてください</string>
     <string name="home_download_instructions_step2_part1">ウェブページを下にスクロールして、このボタンをタップする</string>
     <string name="home_download_instructions_step2_apkcube">ウェブページを下にスクロールし、バージョン &lt;b&gt;%s&lt;/b&gt; を選択して、次を押してください</string>
     <string name="home_download_instructions_step2_generic">ウェブページを下にスクロールして、そのダウンロードボタンをタップしてください</string>
@@ -416,7 +416,7 @@ APK ファイルの取得元を選択してください"</string>
     <!-- Badge on a patch option that has to be filled in before patching -->
     <string name="patch_option_required">必須</string>
     <!-- Hint under an image patch option. "%1$s" is the width and "%2$s" the height in pixels -->
-    <string name="patch_option_recommended_size">推奨：%1$s×%2$s</string>
+    <string name="patch_option_recommended_size">推奨: %1$s×%2$s</string>
     <!-- Adaptive Icon Creator -->
     <string name="adaptive_icon_create">アダプティブ アイコンを作成</string>
     <string name="adaptive_icon_select_image">画像を選択</string>
@@ -479,6 +479,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="batch_patch_force_version_done">キューに追加しましたが、アプリが正常に動作しない可能性があります</string>
     <string name="batch_patch_accept_signature_done">キューに追加しましたが、APK は検証されていません</string>
     <string name="batch_patch_apk_selected">選択済みの APK</string>
+    <string name="batch_patch_auto_download_stopped">APKの自動ダウンロードが停止しました</string>
+    <string name="batch_patch_auto_download_stop">ダウンロードを停止</string>
+    <string name="batch_patch_auto_download_kept">ダウンロードしたAPKを使用できなかったため、前のものが保持されました</string>
     <string name="batch_patch_edit_patches">パッチを選択する</string>
     <string name="batch_patch_state_no_apk">APK がありません</string>
     <string name="batch_patch_state_no_patches">パッチがありません</string>
@@ -520,9 +523,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="home_app_info_delete_item_original_apk">オリジナルの APK ファイル</string>
     <string name="home_app_info_delete_preservation_note">パッチ セレクションとオプションは、今後のパッチ適用のために保持されます</string>
     <string name="home_app_info_patches_name_default">パッチ数</string>
-    <string name="home_app_info_patches_name_fallback">無名</string>
+    <string name="home_app_info_patches_name_fallback">名称未設定</string>
     <string name="home_app_info_patches_source_removed">パッチソースを削除しました</string>
-    <string name="home_app_info_patches_replace_fail">パッチの適用に失敗しました: %s</string>
+    <string name="home_app_info_patches_replace_fail">パッチのインポートに失敗しました: %s</string>
     <string name="home_app_info_repatch_no_original_apk">オリジナルの APK が見つからないため、このアプリを再パッチすることができません</string>
     <string name="home_app_info_original_package_name">オリジナルのアプリのパッケージ名</string>
     <string name="home_app_info_applied_patches">適用したパッチ</string>
@@ -573,7 +576,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="root_pre_patch_installer_standard_title">標準インストールモード</string>
     <string name="root_pre_patch_installer_standard_description">GmsCore 対応の通常の APK としてパッチを適用します。パッチ適用後は、設定したインストーラーが使用されます</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
-    <string name="root_pre_patch_installer_hint">%1$s が %2$s に設定されている間に要求されました。パッチ適用後にパッチモードを変更することはできません</string>
+    <string name="root_pre_patch_installer_hint">%1$s が %2$s に設定されています。パッチ適用後にパッチモードを変更することはできません</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">エラーをクリップボードにコピーしました</string>
     <string name="patcher_error_log">エラーログ</string>
@@ -673,11 +676,11 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_step_write_patched">パッチ済み APK ファイルを出力中</string>
     <string name="patcher_step_sign_apk">パッチ済み APK ファイルに署名中</string>
     <!-- Patcher Screen - Patcher Tasks -->
-    <string name="patcher_task_decoding_dex">DEXファイルを読み込んでいます</string>
-    <string name="patcher_task_extracting_resources">リソースを抽出しています</string>
-    <string name="patcher_task_decoding_resources">リソースをデコードしています</string>
-    <string name="patcher_task_indexing_classes">クラスをインデックス作成しています</string>
-    <string name="patcher_task_compiling_dex">DEXファイルをコンパイルしています</string>
+    <string name="patcher_task_decoding_dex">DEX ファイルを読み込み中</string>
+    <string name="patcher_task_extracting_resources">リソースを抽出中</string>
+    <string name="patcher_task_decoding_resources">リソースをデコード中</string>
+    <string name="patcher_task_indexing_classes">クラスのインデックスを作成中</string>
+    <string name="patcher_task_compiling_dex">DEX ファイルをコンパイル中</string>
     <string name="patcher_task_compiling_resources">リソースをコンパイル中</string>
     <string name="patcher_task_writing_apk">APK ファイルを書き込み中</string>
     <!-- Battery optimization pre-flight dialog -->
@@ -809,7 +812,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="settings_appearance_dark">ダーク</string>
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">モノクロ</string>
-    <string name="settings_appearance_color_style">カラーモード</string>
+    <string name="settings_appearance_color_style">カラースタイル</string>
     <string name="settings_appearance_accent_color">アクセント カラー</string>
     <string name="settings_appearance_pure_black">ピュアブラック</string>
     <string name="settings_appearance_pure_black_description">真っ黒な背景を使用します</string>
@@ -919,7 +922,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="notification_channel_patch_updates_description">パッチの新しいリリースに関する通知</string>
     <string name="notification_channel_patcher_description">バックグラウンドで Morphe がアプリにパッチを適用しているときに表示されます</string>
     <string name="notification_channel_patching_results">パッチ適用結果</string>
-    <string name="notification_channel_patching_results_description">Morpheがバックグラウンドにある間に、パッチ適用が終了したとき、またはインストールで操作が必要なとき</string>
+    <string name="notification_channel_patching_results_description">Morphe がバックグラウンドにある間に、パッチ適用が終了したとき、またはインストールで操作が必要になったとき</string>
     <string name="notification_channel_mounted_apps">マウント済みアプリ</string>
     <string name="notification_channel_mounted_apps_description">マウント済みアプリが別のバージョンに置き換えられ、パッチが適用されなくなった場合</string>
     <string name="notification_mount_replaced_title">%1$s のパッチ適用が無効になりました</string>
@@ -1228,7 +1231,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patch_selection_reset_all_confirm_title">すべてのセレクションをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">選択されたパッケージをリセットしますか？</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">ソース セレクションをリセットしますか？</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s ～ %2$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s（%2$s のソース）</string>
     <string name="settings_system_patch_selection_source_format">ソース #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">すべてのパッケージとソースの保存済みパッチ セレクションを完全に削除します</string>
     <string name="settings_system_patch_selection_reset_source_warning">&lt;b&gt;%1$s&lt;/b&gt; のソース #&lt;b&gt;%2$s&lt;/b&gt; の保存済みパッチ セレクションを完全に削除します</string>
@@ -1268,6 +1271,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">不明なインストーラー</string>
     <string name="settings_system_apk_download_helper_open_directly">すぐにヘルパーを開く</string>
     <string name="settings_system_apk_download_helper_open_directly_description">ダウンロード手順をスキップして、信頼できるヘルパーを開きます</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APKをバッチで自動的にダウンロードする</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">ファイルが見つかりません</string>
     <string name="file_picker_read_error">このディレクトリを読み取ることができません</string>
@@ -1311,7 +1315,7 @@ morphe_header_custom_dark.png
     <string name="select_file">ファイルを選択</string>
     <string name="select_files">ファイルを選択</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="select_folder">フォルダーを選択</string>
+    <string name="select_folder">フォルダを選択</string>
     <string name="patches">パッチ</string>
     <string name="home">ホーム</string>
     <string name="settings">設定</string>
@@ -1391,7 +1395,7 @@ morphe_header_custom_dark.png
     <string name="accessibility_move_down">下に移動</string>
     <string name="accessibility_app_moved_announcement">%1$s を %3$s の %2$s 番目に移動しました</string>
     <string name="accessibility_scroll_to_top">リストの一番上にスクロール</string>
-    <string name="rename">名前を変更する</string>
+    <string name="rename">名前を変更</string>
     <string name="more_options">その他のオプション</string>
     <string name="import_">インポート</string>
     <string name="export">エクスポート</string>
@@ -1453,7 +1457,7 @@ morphe_header_custom_dark.png
     <string name="whats_new">新着情報</string>
     <string name="changelog_description">このバージョンの変更点</string>
     <string name="changelog_download_fail">変更履歴のダウンロードに失敗しました: %s</string>
-    <string name="changelog_empty">利用可能な更新はありません</string>
+    <string name="changelog_empty">変更履歴はありません</string>
     <string name="changelog_earlier_releases">過去のリリース</string>
     <string name="changelog_patched_with">パッチ適用: %s</string>
     <string name="changelog_older_empty">表示可能な過去のリリースはありません</string>
@@ -1463,7 +1467,7 @@ morphe_header_custom_dark.png
     <string name="content_translate">翻訳</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">原文</string>
-    <string name="content_translation_failed">翻訳に失敗しました：%s</string>
+    <string name="content_translation_failed">翻訳に失敗しました: %s</string>
     <string name="changelog_section_new">新機能</string>
     <string name="changelog_section_fixes">修正</string>
     <string name="changelog_section_performance">最適化</string>
@@ -1489,7 +1493,7 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_downloaded">%1$s MB ダウンロード済み</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
-    <string name="manager_update_not_ready">このリリースはまだ公開中です。しばらくしてから再度お試しください</string>
+    <string name="manager_update_not_ready">このリリースはまだ公開処理中です。数分後にもう一度お試しください</string>
     <string name="update_download_missing">ダウンロードした更新は利用できなくなりました。再度ダウンロードしてください</string>
     <string name="failed_to_check_updates">アップデートの確認に失敗しました: %s</string>
     <string name="failed_to_download_update">アップデートのダウンロードに失敗しました: %s</string>

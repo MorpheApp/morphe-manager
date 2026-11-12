@@ -20,7 +20,7 @@
     <string name="home_app_hidden_apps_title">የተደበቁ መተግበሪያዎች</string>
     <string name="home_app_hidden_apps_hint">ለመግለጥ ይንኩ</string>
     <string name="home_apps_unhide_message">የተደበቁ አፖች ወደ መነሻ ስክሪን ይመለሳሉ</string>
-    <string name="home_app_patch_sources_description">ያልተመረጡ ምንጮች እነዚህ መተግበሪያዎች በሚፓች شوند ጊዜ አይቀርቡም፣ እንዲሁም ፓቾቻቸው በራሳቸው ምርጫ ውስጥ አይካተቱም። እያንዳንዱ ምንጭ ለሌሎች መተግበሪያዎች ሁሉ ክፍት ሆኖ ይቆያል</string>
+    <string name="home_app_patch_sources_description">ያልተመረጡ ምንጮች እነዚህ መተግበሪያዎች በሚፓች ጊዜ አይቀርቡም፣ እንዲሁም ፓቾቻቸው በራሳቸው ምርጫ ውስጥ አይካተቱም። እያንዳንዱ ምንጭ ለሌሎች መተግበሪያዎች ሁሉ ክፍት ሆኖ ይቆያል</string>
     <string name="home_app_patch_sources_mixed">ለ %2$s ውስጥ ካሉ %1$s የቀረበ</string>
     <string name="home_app_patch_sources_covers">ለ %2$s ውስጥ ካሉ %1$s ፓቾች አሉት</string>
     <string name="home_app_patch_sources_last">እያንዳንዱ መተግበሪያ ለመፓች ቢያንስ አንድ ምንጭ ያስፈልገዋል</string>
@@ -39,7 +39,7 @@
     <string name="mpp_import_update_message">ይህ የ %s አዲስ ስሪት ነው። ማዘመን ይፈልጋሉ?</string>
     <string name="mpp_import_unreadable">ይህ ፋይል ሊነበብ አይችልም</string>
     <!-- Home Screen - Update Notifications -->
-    <string name="home_update_available">የ Morphe ማዘሚያ ቀርቧል</string>
+    <string name="home_update_available">የMorphe ማዘመኛ ይገኛል</string>
     <string name="home_update_available_subtitle">አዲስ ስሪት ለመጫን ዝግጁ ነው</string>
     <string name="home_blocked_source_title">የተከለከለ የፓች ምንጭ ተገኝቷል</string>
     <string name="home_blocked_source_subtitle">ለመገምገም እና ለማስወገድ ይጫኑ</string>
@@ -47,14 +47,14 @@
     <string name="home_metadata_errors_subtitle">ምንጮችን ለመገምገም ይጫኑ</string>
     <string name="home_outdated_manager_title">Morphe ጊዜ ያለፈበት ነው</string>
     <string name="home_outdated_manager_subtitle">አንዳንድ የፓች ምንጮች አዲስ ስሪት ያስፈልጋቸዋል</string>
-    <string name="home_held_back_title">የፓች ምንጭ Morpheን አጋልጦታል</string>
-    <string name="home_held_back_subtitle">መተግበሪያው እንዲጀምር ተለትቷል። ለመከለስ ይጫኑ</string>
+    <string name="home_held_back_title">የፓች ምንጭ Morphe እንዲበላሽ አድርጓል</string>
+    <string name="home_held_back_subtitle">መተግበሪያው እንዲጀምር ተዘልሏል። ለመገምገም ይጫኑ</string>
     <string name="home_metered_skipped_title">በሞባይል ዳታ ላይ ማሻሻያዎች ቆም ብለዋል</string>
     <string name="home_metered_skipped_subtitle">በሞባይል ዳታ ላይ ማሻሻያዎችን ለመፍቀድ ይጫኑ</string>
-    <string name="home_repatch_available_subtitle">ሁሉንም በቅደም ተከተል ለማስቀመጥ ይጫኑ</string>
+    <string name="home_repatch_available_subtitle">ሁሉንም ወረፋ ላይ ለማስቀመጥ ይጫኑ</string>
     <string name="home_update_error">ዝማኔ አልተሳካም</string>
     <string name="home_update_error_subtitle">ምንጮችን በሚዘምኑበት ወቅት ችግር ተፈጥሯል</string>
-    <string name="home_update_skipped_metered">ማሻሻያዎች ተለፉ</string>
+    <string name="home_update_skipped_metered">ማሻሻያዎች ተዘለሉ</string>
     <string name="home_update_skipped_metered_subtitle">የሞባይል ዳታ ንቁ ነው</string>
     <string name="home_updating_sources">ምንጮች እየተዘመኑ ነው…</string>
     <string name="home_update_success">የምንጮች ማዘመን ተጠናቋል</string>
@@ -67,7 +67,7 @@
     <string name="home_app_grouping_none">ምንም</string>
     <string name="home_app_sort_manual_hint">አንድን መተግበሪያ ለረጅም ጊዜ ተጭነው ይያዙ፣ ከዚያም የቅደም ተከተል ማስተካከያ ቁልፉን ይጫኑ</string>
     <string name="home_app_sort_recommended">የሚመከር ቅደም ተከተል</string>
-    <string name="home_app_sort_updates_first">የጥገና ማሻሻያዎች መጀመሪያ</string>
+    <string name="home_app_sort_updates_first">የፓች ማሻሻያዎች መጀመሪያ</string>
     <string name="home_app_sort_recently_patched">በቅርቡ ፓች የተደረጉ</string>
     <string name="home_no_apps_title">ምንም መተግበሪያዎች የሉም</string>
     <string name="home_no_apps_subtitle">በ%s ውስጥ የፓች ምንጭ ያክሉ ወይም ያለውን ያብሩ</string>
@@ -86,7 +86,7 @@
     <string name="home_category_move_to">ወደ ምድብ አዛውር</string>
     <string name="home_category_move_selected_title">የተመረጡትን መተግበሪያዎች አዛውር</string>
     <!-- %s is the name of the category -->
-    <string name="home_category_delete_title">%sን ያጥፉ?</string>
+    <string name="home_category_delete_title">%sን ይሰርዙ?</string>
     <!-- %s is the name of the category the apps fall back to -->
     <string name="home_category_delete_moves_apps">መተግበሪያዎቹ ወደ &lt;b&gt;%s&lt;/b&gt; ይመለሳሉ</string>
     <string name="home_category_actions_unavailable">ለዚህ ምድብ ተግባራት አይገኙም</string>
@@ -103,7 +103,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">መተግበሪያዎችዎ በትክክል እንዲሰሩ እናድርግ</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">የዛሬው ትንበያ፡ 100% የፓች ስጋት አለ</string>
+    <string name="home_greeting_7" formatted="false">የዛሬው ትንበያ፡ 100% የፓቺንግ ዕድል አለ</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">አሰልቺ ነገሮችን ወደ አስደናቂ ለመቀየር ዝግጁ ነዎት?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -124,12 +124,12 @@
     <!-- Late night greetings (22:00–23:59) -->
     <string name="home_greeting_late_night_1">ገና አልተኙም? ፓች የሚያስፈልጋቸው መተግበሪያዎችም እንዲሁ ነቅተዋል</string>
     <string name="home_greeting_late_night_2">የእኩለ ሌሊት የፓች ክፍለ ጊዜ? አድናቆቴ ይድረስዎ</string>
-    <string name="home_greeting_late_night_3">የሌሊት ንቁነት ሁኔታ፡ ተفعيل ሆኗል</string>
+    <string name="home_greeting_late_night_3">የሌሊት ንቁነት ሁኔታ፡ ነቅቷል</string>
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">ከፍተኛ የፓች ሰዓታት… ይባላል</string>
-    <string name="home_greeting_super_late_2">እንቅልፍ አጣህ? አንድ ነገር ፓች አድርግ</string>
+    <string name="home_greeting_super_late_2">እንቅልፍ አጡ? አንድ ነገር ፓች ያድርጉ</string>
     <string name="home_greeting_super_late_3">በዚህ ሰዓት፣ ዝም ብለው ነቅተው ፓች ያድርጉ</string>
-    <string name="home_greeting_super_late_4">እርስዎ እና ሰርቨሮቹ፣ ሁለታችሁም ነቅታችኋል</string>
+    <string name="home_greeting_super_late_4">እርስዎም ሰርቨሮቹም ነቅተዋል</string>
     <string name="home_greeting_super_late_5">የሌሊት እና ውጤታማ</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
@@ -156,20 +156,20 @@
     <string name="sources_search">ምንጮችን እና ፓቾችን ፈልግ</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">ትኩረት የሚሹ</string>
-    <string name="sources_sort_manual">በእጅ ማዘዝ</string>
+    <string name="sources_sort_manual">በእጅ ቅደም ተከተል</string>
     <string name="sources_sort_manual_hint">የምንጩን ቅደም ተከተል ለመቀየር ምንጩን ተጭነው ይያዙ</string>
     <string name="sources_sort_last_updated">ለመጨረሻ ጊዜ የተዘመነው</string>
     <string name="sources_sort_enabled_first">የነቁዎች መጀመሪያ</string>
-    <string name="sources_patches_source_disabled_hint">ይህ ምንጭ ተዘግቷል። ፓቾቹ ለማጣቀሻ ተዘርዝረዋል ነገር ግን አልተተገበሩም</string>
-    <string name="sources_management_open_in_browser">በብราวዘር ይክፈቱ</string>
-    <string name="sources_management_report_issue">ችግርን ሪፖርት አድርግ</string>
+    <string name="sources_patches_source_disabled_hint">ይህ ምንጭ ተሰናክሏል። ፓቾቹ ለማጣቀሻ ተዘርዝረዋል ነገር ግን አልተተገበሩም</string>
+    <string name="sources_management_open_in_browser">በብራውዘር ይክፈቱ</string>
+    <string name="sources_management_report_issue">ችግርን ሪፖርት ያድርጉ</string>
     <string name="sources_management_failed_to_open_url">URL-ን ለመክፈት አልተቻለም</string>
     <string name="sources_apps">መተግበሪያዎች</string>
-    <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ ካልሆነ ግን እናንተ patched ካደረጋችሁት ይቀራል</string>
+    <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ እርስዎ ካስተካከሉት ግን ይቀራል</string>
     <string name="sources_apps_brought">በዚህ ምንጭ የመጡ</string>
     <string name="sources_apps_left_out">ከዚህ ምንጭ የተተዉ</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">እንደ patched ተቀምጧል</string>
+    <string name="sources_apps_stays_patched">እንደተስተካከለ ተቀምጧል</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">አዲስ</string>
     <string name="sources_apps_new_apps">አዳዲስ መተግበሪያዎችን አምጣ</string>
@@ -177,33 +177,33 @@
     <string name="sources_apps_new_apps_description">በኋላ የሚጨምራቸው መተግበሪያዎች በዋናው ስክሪን ላይ ይታያሉ</string>
     <string name="sources_management_prerelease_toggle">ቅድመ-ይፋ ፓቾች</string>
     <string name="sources_management_prerelease_toggle_description">ለአዳዲስ የሙከራ ፓች ስሪቶች ቀድሞ የማግኘት መብት ያገኛል</string>
-    <string name="sources_prerelease_warning_title">ከይፋዊ విడుታ በፊት ያሉ ፓቾችን ማብራት?</string>
-    <string name="sources_prerelease_warning_message">ከይፋዊ విడుታ በፊት ያሉ ግንባታዎች አሁንም በልማት ላይ ናቸው። ፓቾች ሊበላሹ ወይም መተግበሪያውን ሊያበላሹ ይችላሉ፣ እና ባህሪያት ያለ ማስጠንቀቂያ ሊለወጡ ይችላሉ</string>
+    <string name="sources_prerelease_warning_title">ቅድመ-ልቀት ፓቾችን ማብራት?</string>
+    <string name="sources_prerelease_warning_message">ቅድመ-ልቀት ግንባታዎች አሁንም በልማት ላይ ናቸው። ፓቾች ሊበላሹ ወይም መተግበሪያውን ሊያበላሹ ይችላሉ፣ እና ባህሪያት ያለ ማስጠንቀቂያ ሊለወጡ ይችላሉ</string>
     <string name="expert_mode_unstable_notice">ከይፋዊ መልቀቂያ በፊት የሚወጡ ወይም የሙከራ ፓቾች ያልተረጋጉ ሊሆኑ ይችላሉ</string>
     <string name="sources_management_experimental_versions_toggle">የሙከራ መተግበሪያ ስሪቶች</string>
-    <string name="sources_management_experimental_versions_toggle_description">የሙከራ መተግበሪያ ኢላማዎችን ያሳያል እንዲሁም ይጠግናል</string>
+    <string name="sources_management_experimental_versions_toggle_description">የሙከራ መተግበሪያ ኢላማዎችን ያሳያል እንዲሁም ፓች ያደርጋል</string>
     <!-- Actions of the panel for several selected sources at once -->
-    <string name="sources_management_prerelease_enable">ቅድመ-ብቅያ ፓቾችን አግብ</string>
-    <string name="sources_management_prerelease_disable">ቅድመ-ብቅያ ፓቾችን አጥፋ</string>
+    <string name="sources_management_prerelease_enable">ቅድመ-ልቀት ፓቾችን አግብ</string>
+    <string name="sources_management_prerelease_disable">ቅድመ-ልቀት ፓቾችን አጥፋ</string>
     <string name="sources_management_experimental_versions_enable">የሙከራ መተግበሪያ ስሪቶችን አግብ</string>
     <string name="sources_management_experimental_versions_disable">የሙከራ መተግበሪያ ስሪቶችን አጥፋ</string>
     <string name="sources_management_already_exists">ይህ ምንጭ አስቀድሞ ተጨምሯል</string>
     <string name="sources_management_invalid_url">የተሳሳተ የምንጭ URL ነው። እባክዎ አድራሻውን ያረጋግጡ እና እንደገና ይሞክሩ</string>
-    <string name="sources_management_blocked">ይህ የማሻሻያ ምንጭ ታግዶታል እና ሊጨመር አይችልም</string>
-    <string name="sources_management_source_blocked_badge">ተዘግቷል</string>
+    <string name="sources_management_blocked">ይህ የፓች ምንጭ ታግዷል እና ሊጨመር አይችልም</string>
+    <string name="sources_management_source_blocked_badge">ታግዷል</string>
     <string name="sources_management_metadata_unavailable">ሜታዳታ አይገኝም</string>
     <string name="sources_management_metadata_unavailable_hint">የርቀት ሜታዳታ ፋይሉ አይገኝም። ከተጫነው ባንድል ጋር ፓች ማድረግ አሁንም ይሰራል፣ ነገር ግን ለዚህ ምንጭ አውቶ-አፕዴት ተዘግቷል</string>
     <string name="sources_management_metadata_unavailable_hint_missing">የፓች ባንድሉን ማውረድ አልተቻለም። የምንጭ URL ስህተት ሊሆን ይችላል ወይም ፋይሉ የለም</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">የፓች ባንድሉ ሊወርድ አልቻለም። የምንጩ URL ስህተት ሊሆን ይችላል ወይም ፋይሉ የለም። ለመቀየር ይጫኑ</string>
-    <string name="sources_management_outdated_manager_badge">Morpheን አዘምን</string>
+    <string name="sources_management_outdated_manager_badge">Morpheን ያዘምኑ</string>
     <string name="sources_management_outdated_manager_hint">ይህ ምንጭ ለፓቸር %1$s የተገነባ ነው፣ ነገር ግን Morphe %2$s ፓቸር %3$sን ያካትታል። ለመጠቀም Morpheን አዘምን</string>
-    <string name="sources_management_held_back_badge">አጋልጧል</string>
-    <string name="sources_management_held_back_hint">ይህ ምንጭ በሚጫንበት ጊዜ Morpheን አጋልጦታል፣ ስለዚህ እየተለታ ነው። እንደገና ለመሞከር ያዘምኑት ወይም እንደገና ያስመጡት</string>
+    <string name="sources_management_held_back_badge">ተበላሽቷል</string>
+    <string name="sources_management_held_back_hint">ይህ ምንጭ በሚጫንበት ጊዜ Morphe እንዲበላሽ አድርጓል፣ ስለዚህ ተዘልሏል። እንደገና ለመሞከር ያዘምኑት ወይም እንደገና ያስመጡት</string>
     <string name="sources_management_signed_by">የተፈረመው በ</string>
     <string name="sources_management_signing_key_changed_badge">ቁልፍ ተቀይሯል</string>
     <string name="sources_management_signing_key_changed_hint">የመጨረሻው ስሪት ይህ ምንጭ ቀደም ሲል የተጠቀመው ቁልፍ አልተፈረመበትም፣ ስለዚህ አልተጫነም። ለመገምገም ይጫኑት</string>
-    <string name="sources_management_source_enabled">ምንጭ ተበላሽቷል</string>
-    <string name="sources_management_source_disabled">ምንጭ ተዘግቷል</string>
+    <string name="sources_management_source_enabled">ምንጭ ነቅቷል</string>
+    <string name="sources_management_source_disabled">ምንጭ ተሰናክሏል</string>
     <string name="sources_management_source_updating">ምንጩን በማዘመን ላይ</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">የሚታይ ስም</string>
@@ -212,7 +212,7 @@
     <string name="sources_dialog_duplicate_name_error">በዚህ ስም የተሰየመ የፓች ምንጭ ቀድሞውኑ አለ</string>
     <string name="sources_dialog_missing_error">ይህንን የፓች ምንጭ ማዘመን አልተቻለም</string>
     <string name="sources_dialog_add_source">የፓች ምንጭ አክል</string>
-    <string name="sources_dialog_delete_confirm_body">ይህ действие ሊሰረዝ አይችልም</string>
+    <string name="sources_dialog_delete_confirm_body">ይህ ሊመለስ አይችልም</string>
     <string name="sources_dialog_remote">የርቀት</string>
     <string name="sources_dialog_remote_url">የምንጩ URL</string>
     <string name="sources_dialog_remote_url_hint">የፓች ባንድል .json ማከማቻ ወይም ሊንክ። ሁሉንም አንድ ላይ ለመጨመር ብዙዎቹን በአንድ ጊዜ ይለጥፉ</string>
@@ -285,23 +285,23 @@
     <string name="home_download_instructions_title">ዋናውን APK ያውርዱ</string>
     <string name="home_download_instructions_finding">የማውረጃ ገጹ እየተፈለገ ነው…</string>
     <string name="home_download_instructions_step1">ከታች ያለውን \'%s\' ቁልፍ ይጫኑ</string>
-    <string name="home_download_instructions_step2_part1">የድረ-ገጹን ገጽ ወደ ታች ያውርዱ እና ይጫኑ</string>
+    <string name="home_download_instructions_step2_part1">የድረ-ገጹን ገጽ ወደ ታች ይሸብልሉ እና ይጫኑ</string>
     <string name="home_download_instructions_step2_apkcube">የድረገጹን ገጽ ወደ ታች ያውርዱ፣ ስሪት &lt;b&gt;%s&lt;/b&gt;ን ይምረጡ እና ይጫኑ</string>
     <string name="home_download_instructions_step2_generic">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የዳውንሎድ ቁልፉን ይጫኑ</string>
     <string name="home_download_instructions_step2_variant">የድረ-ገጹን ገጽ ወደ ታች በማውረድ የላይኛውን &lt;b&gt;APK variant&lt;/b&gt; የዳውንሎድ ቁልፍ ይጫኑ</string>
     <string name="home_download_instructions_step2_search">ከሚያምኑት ድረ-ገጽ ላይ የፍለጋ ውጤትን ይክፈቱ</string>
     <string name="home_download_instructions_step2_search_note">Morphe ለእነዚህ ድረ-ገጾች ዋስትና ሊሰጥ አይችልም። ከAPK ፋይል ይልቅ የራሳቸውን መተግበሪያ መደብር የሚያቀርቡትን ይዘለሉ</string>
-    <string name="home_download_instructions_step3_search">በዚያ ድረ-ገጽ ላይ፣ አዲሱን ሳይሆን የትግበራውን ስሪት &lt;b&gt;%s&lt;/b&gt; APK ያውርዱ</string>
-    <string name="home_download_instructions_step3_search_any">በዚያ ድረ-ገጽ ላይ የትግበራውን APK ያውርዱ። &lt;b&gt;ማንኛውም ስሪት&lt;/b&gt; ሊስተካከል ይችላል</string>
-    <string name="home_download_instructions_step2_github">በ الإصدار &lt;b&gt;%s&lt;/b&gt; ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
-    <string name="home_download_instructions_step2_github_latest">በአዲሱ الإصدار ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
+    <string name="home_download_instructions_step3_search">በዚያ ድረ-ገጽ ላይ፣ አዲሱን ሳይሆን የመተግበሪያውን ስሪት &lt;b&gt;%s&lt;/b&gt; APK ያውርዱ</string>
+    <string name="home_download_instructions_step3_search_any">በዚያ ድረ-ገጽ ላይ የመተግበሪያውን APK ያውርዱ። &lt;b&gt;ማንኛውም ስሪት&lt;/b&gt; ሊስተካከል ይችላል</string>
+    <string name="home_download_instructions_step2_github">በ&lt;b&gt;%s&lt;/b&gt; ስሪት ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
+    <string name="home_download_instructions_step2_github_latest">በአዲሱ ስሪት ስር ባለው &lt;b&gt;Assets&lt;/b&gt; ውስጥ፣ በ&lt;b&gt;.apk&lt;/b&gt; የሚጨርሰውን ፋይል ይጫኑ</string>
     <string name="home_download_instructions_step2_github_note">በርካታ የAPK ፋይሎች ካሉ፣ በ %s ስም የተሰየመውን ወይም ሁለንተናዊውን ይምረጡ</string>
     <string name="home_download_instructions_download_button_toast">እባክዎ እዚህ ላይ ሳይሆን በድረ-ገጹ ላይ ማውረጃውን ይጫኑ 😊</string>
-    <string name="home_download_instructions_download_button_toast_2">በጣም ጥሩ! አሁን ቀጥል የሚለውን ተጫን እና ወደ ድረ-ገጹ ሂድ 👆</string>
-    <string name="home_download_instructions_download_button_toast_3">ልምምድ ለብቃት ያበቃል እና አንተም እየደረስክ ነው 💪</string>
+    <string name="home_download_instructions_download_button_toast_2">በጣም ጥሩ! አሁን ቀጥል የሚለውን ይጫኑ እና ወደ ድረ-ገጹ ይሂዱ 👆</string>
+    <string name="home_download_instructions_download_button_toast_3">ልምምድ ፍጹም ያደርጋል፣ እርስዎም እየደረሱበት ነው 💪</string>
     <string name="home_download_instructions_download_button_toast_4">አሁንም እዚህ የለም… አሁንም እዚህ የለም… 🙈</string>
-    <string name="home_download_instructions_download_button_toast_5">እሺ ለጽናቱ አከብረዋለሁ 🫡</string>
-    <string name="home_download_instructions_download_button_toast_6">አሁን ይፋዊ የ Morphe በተን አ পরীক্ষ መሆንዎ 🏅</string>
+    <string name="home_download_instructions_download_button_toast_5">እሺ ለጽናቱ አከብራለሁ 🫡</string>
+    <string name="home_download_instructions_download_button_toast_6">አሁን ይፋዊ የ Morphe ቁልፍ ሞካሪ ሆነዋል 🏅</string>
     <string name="home_download_instructions_step3">ማውረዱ እስኪያልቅ ይጠብቁ እና APKውን &lt;b&gt;አይጫኑ&lt;/b&gt;</string>
     <string name="home_download_instructions_step3_mount">ማውረዱ እስኪያልቅ ይጠብቁ፣ ከዚያ &lt;b&gt;APKውን ይጫኑ&lt;/b&gt;</string>
     <string name="home_download_instructions_step4">የማውረዱ ሂደት ሲጠናቀቅ ወደ Morphe ይመለሱ</string>
@@ -338,8 +338,8 @@
     <string name="expert_mode_disable_all">ሁሉንም አጥፋ</string>
     <string name="expert_mode_enable_all">ሁሉንም አብራ</string>
     <string name="expert_mode_enable_all_universal_pending">ለዩኒቨርሳል ፓቾች እንደገና ይጫኑ</string>
-    <string name="expert_mode_universal_all_warning_title">ሁሉንም አጠቃላይ ፓቾች ማብራት?</string>
-    <string name="expert_mode_universal_all_warning_message">አጠቃላይ ፓቾች አብረው አልተሞከሩም። ሁሉንም በአንድ ጊዜ ማብራት ግጭቶችን፣ የፓች ውድቀትን ወይም መተግበሪያው እንዲዘጋ ሊያደርግ ይችላል</string>
+    <string name="expert_mode_universal_all_warning_title">ሁሉንም ዩኒቨርሳል ፓቾች ማብራት?</string>
+    <string name="expert_mode_universal_all_warning_message">ዩኒቨርሳል ፓቾች አብረው አልተሞከሩም። ሁሉንም በአንድ ጊዜ ማብራት ግጭቶችን፣ የፓች ውድቀትን ወይም መተግበሪያው እንዲዘጋ ሊያደርግ ይችላል</string>
     <string name="expert_mode_recommended">የሚመከሩ ፓቾች</string>
     <string name="expert_mode_reset_to_default_done">የሚመከሩት ፓቾች ተተግብረዋል</string>
     <string name="expert_mode_selected_count">%2$s ውስጥ %1$s ተመርጧል</string>
@@ -353,8 +353,8 @@
     <string name="expert_mode_universal_patches">ዩኒቨርሳል ፓቾች</string>
     <string name="expert_mode_new_patches">አዲስ</string>
     <string name="expert_mode_options_customized">የተበጀ</string>
-    <string name="expert_mode_patch_required_by_installer">ለተመረጠው የጫን target አስፈላጊ ነው</string>
-    <string name="expert_mode_patch_unavailable_for_installer">ለተመረጠው የጫን target አይдоступም</string>
+    <string name="expert_mode_patch_required_by_installer">ለተመረጠው የጫኚ ኢላማ አስፈላጊ ነው</string>
+    <string name="expert_mode_patch_unavailable_for_installer">ለተመረጠው የጫኚ ኢላማ አይገኝም</string>
     <string name="expert_mode_multiple_sources_warning_title">በርካታ የፓች ምንጮች ተመርጠዋል</string>
     <string name="expert_mode_multiple_sources_warning_conflict">ከተለያዩ ምንጮች የተገኙ ፓቾች አብረው እንዲሰሩ ተደርገው አልተሰሩም እና ግጭት ሊፈጥሩ ወይም መተግበሪያውን ሊያበላሹ ይችላሉ</string>
     <!-- Home Screen - Home Sub-Dialogs -->
@@ -374,32 +374,32 @@
 
 🔧 ፓቾቹ ለዚህ የመተግበሪያ ስሪት እየተስተካከሉ ስለሆነ ያልተለመደ የመተግበሪያ ባህሪ ወይም ያልተለዩ ስህተቶችን ይጠብቁ"</string>
     <string name="home_dialog_unsupported_version_dialog_title">የማይደገፍ ስሪት</string>
-    <string name="home_dialog_unsupported_version_dialog_description">ይህ APK የሚመከር የሥራ приложение ስሪት አይደለም። መቀጠሉ መተግበሪያው እንዳይሠራ ሊያደርግ ይችላል</string>
+    <string name="home_dialog_unsupported_version_dialog_description">ይህ APK የሚመከር የመተግበሪያ ስሪት አይደለም። መቀጠሉ መተግበሪያው እንዳይሠራ ሊያደርግ ይችላል</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_dialog_unsupported_version_dialog_proceed">ያሁንም ቀጥል</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">አሁንም ቀጥል</string>
     <string name="home_dialog_unsupported_version_compatible_versions">ተስማሚ ስሪቶች፦</string>
     <string name="home_dialog_unsupported_version_unsupported_label">ያልተደገፈ</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
-    <string name="home_dialog_unsupported_version_build">ቢልድ %s</string>
+    <string name="home_dialog_unsupported_version_build">ግንባታ %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">ይህ የዚያው ስሪት ሌላ ግንባታ ነው። ፓቾቹ የተወሰነ ግንባታን ይፈልጋሉ</string>
     <string name="home_dialog_wrong_package_title">የተሳሳተ ፓኬጅ ተመርጧል</string>
     <string name="home_dialog_wrong_package_description">የተመረጠው APK ለመጠገን ላሰቡት መተግበሪያ የተዘጋጀ አይደለም</string>
     <string name="home_dialog_expected_package">የሚጠበቀው ጥቅል፦</string>
     <string name="home_dialog_selected_package">የተመረጠው ጥቅል፦</string>
-    <string name="home_outdated_patches_dialog_title">ጥገናዎች ጊዜ ያለፈባቸው ሊሆኑ ይችላሉ</string>
-    <string name="home_outdated_patches_dialog_message">የሞባይል ዳታ ንቁ ነው እና የጥገና ማሻሻያዎች ተዘግተዋል</string>
-    <string name="home_outdated_patches_dialog_warning">ጊዜ ያለፈባቸው ጥገናዎችን መጠቀም መተግበሪያው እንዳይሰራ ሊያደርግ ይችላል</string>
+    <string name="home_outdated_patches_dialog_title">ፓቾች ጊዜ ያለፈባቸው ሊሆኑ ይችላሉ</string>
+    <string name="home_outdated_patches_dialog_message">የሞባይል ዳታ ንቁ ነው እና የፓች ማሻሻያዎች ተዘግተዋል</string>
+    <string name="home_outdated_patches_dialog_warning">ጊዜ ያለፈባቸው ፓቾችን መጠቀም መተግበሪያው እንዳይሰራ ሊያደርግ ይችላል</string>
     <string name="home_outdated_patches_dialog_update_and_patch">አዘምን እና ፓች አድርግ</string>
     <string name="home_low_disk_space_dialog_title">ዝቅተኛ የዲስክ ቦታ</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <string name="home_low_disk_space_dialog_message">%1$s GB ብቻ ነፃ ስቶሬጅ አለ። ፓቺንግ በትክክል ለመሥራት ቢያንስ %2$s GB ነፃ ቦታ ያስፈልገዋል</string>
     <string name="home_low_disk_space_dialog_warning">ቀጥሎ መሄድ \"ፋይል አልተገኘም\" የሚል ስህተት ወይም የተበላሸ የውጤት APK ሊያስከትል ይችላል</string>
     <string name="home_simple_bundle_select_title">የፓች ምንጭን ይምረጡ</string>
-    <string name="home_simple_bundle_select_remember">ለዚህ መተግበሪያ ሁልጊዜ ይህንን ምንጭ ተጠቀም</string>
+    <string name="home_simple_bundle_select_remember">ለዚህ መተግበሪያ ሁልጊዜ ይህንን ምንጭ ይጠቀሙ</string>
     <!-- Color picker -->
     <string name="custom_color">ብጁ ቀለም</string>
-    <string name="color_picker_shade">የቀለም ጥንካሬ እና ብሩህነት</string>
-    <string name="color_picker_hue">የቀለም አይነት</string>
+    <string name="color_picker_shade">የቀለም ድምቀት እና ብሩህነት</string>
+    <string name="color_picker_hue">የቀለም ቅላጼ</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">መመሪያዎች</string>
     <string name="patch_option_enter_value">እሴትን ያስገቡ</string>
@@ -430,7 +430,7 @@
     <!-- Caption under the launcher icon in its own colors -->
     <string name="adaptive_icon_standard">መደበኛ</string>
     <!-- Caption under the launcher icon recolored by the system theme -->
-    <string name="adaptive_icon_themed">በትርጉም የቀለም የተቀየረ</string>
+    <string name="adaptive_icon_themed">ገጽታ ያለው</string>
     <string name="adaptive_icon_background_color">የጀርባ ቀለም</string>
     <string name="adaptive_icon_reset_transform">ቦታን እና መጠንን ወደ ነበረበት መልስ</string>
     <string name="adaptive_icon_no_transparency_warning">ይህ ምስል ምንም ግልጽ ፒክሰሎች የሉትም፣ ስለዚህ የቲም እና የማሳወቂያ አዶዎች የMorphe ሎጎን ይጠቀማሉ</string>
@@ -443,7 +443,7 @@
     <string name="adaptive_icon_guide_safe_zones_body">መስመሩ የላንቸርዎን አዶ ቅርጽ ያሳያል፣ ከእሱ ውጭ ያለ ማንኛውም ነገር ይቆረጣል። ሌሎች ላንቸሮች ሌሎች ቅርጾችን ይጠቀማሉ፣ ስለዚህ ሁሉንም ቅርጾች በሚያሳየው በሰረዘው ክበብ ውስጥ አስፈላጊ ዝርዝሮችን ያስቀምጡ።</string>
     <string name="adaptive_icon_guide_notification_title">የማሳወቂያ አይኮን</string>
     <string name="adaptive_icon_guide_notification_body">ከምስሉ የሚታየው ክፍል ተቆርጦ ፋይሉ ምንም ዓይነት ጠርዞች ቢኖሩትም እንደሌሎች የሁኔታ አሰርጥ አዶዎች መጠን ይሰጠዋል። ከቅድመ እይታው ስር ባለው ስላይደር ያስተካክሉት። Android ያሳየው በአንድ ቀለም ብቻ ነው።</string>
-    <string name="adaptive_icon_guide_monochrome_title">የቲም አዶ</string>
+    <string name="adaptive_icon_guide_monochrome_title">ገጽታ ያለው አዶ</string>
     <string name="adaptive_icon_guide_monochrome_body">ከምስሉ ጋር በተመሳሳይ ቦታ እና መጠን እንደ ላንቸር አዶ ተቆርጦ ይዘጋጃል። በAndroid 13 እና ከዚያ በላይ በሆኑ ስሪቶች ላይ፣ የቲም አዶዎች እንዲበሩ የተደረጉ ላንቸሮች ቀለሙን ከዎልፔፐሩ ያደርጉታል።</string>
     <string name="notification_icon_preview">ማሳወቂያ</string>
     <!-- Header Creator -->
@@ -454,18 +454,18 @@
     <string name="header_creator_failed">ራስጌውን መፍጠር አልተቻለም</string>
     <string name="header_creator_guide">የራስጌ ፈጠራ መመሪያ</string>
     <string name="header_creator_guide_image_title">የምስል መስፈርቶች</string>
-    <string name="header_creator_guide_image_body">ግልጽ ዳራ ያለው PNG ከਐፕ ባሩ ጋር ይቀላቀላል። በፋይሉ ውስጥ በሎጎው ዙሪያ ያሉ ማርጂኖች ችላ ይባላሉ፣ ስለዚህ የሚጀምረው በስቶክ ሎጎው መጠን እና ቦታ ላይ ነው።</string>
+    <string name="header_creator_guide_image_body">ግልጽ ዳራ ያለው PNG ከመተግበሪያ አሞሌው ጋር ይቀላቀላል። በፋይሉ ውስጥ በሎጎው ዙሪያ ያሉ ማርጂኖች ችላ ይባላሉ፣ ስለዚህ የሚጀምረው በስቶክ ሎጎው መጠን እና ቦታ ላይ ነው።</string>
     <string name="header_creator_guide_themes_title">ብሩህ እና ጥቁር ጭብጦች</string>
     <string name="header_creator_guide_themes_body">አብዛኞቹ መተግበሪያዎች ለብሩህ እና ለጥቁር ጭብጦች የተለያዩ ምስሎችን ይፈልጋሉ። አንዳንዶቹ መተግበሪያዎች (እንደ YouTube Music ያሉ) ጥቁር ጭብጥን ብቻ ይጠቀማሉ፣ ስለዚህ ያ ክፍል ብቻ ይታያል።</string>
     <string name="header_creator_guide_positioning_title">አቀማመጥ እና መጠን ማስተካከያ</string>
     <string name="header_creator_guide_positioning_body">ምስሉን በአርትዖት ማሳያ ውስጥ ይጎትቱ እና ይጭመቁ፣ ወይም በስላይደሩ መጠን ይወስኑ። የተቆራረጠው ሳጥን የኦሪጅናል ሎጎው የሚቀመጥበትን ቦታ ያሳያል፣ እንዲሁም ምስሉ ከእሱ ጋር ሲገጣጠም መመሪያዎች ይታያሉ።</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">የተመረጡት ፓች ተደርገዋል</string>
+    <string name="batch_patch_action">የተመረጡትን ፓች አድርግ</string>
     <string name="batch_patch_title">ባች ፓቺንግ</string>
-    <string name="batch_patch_planning">ተረካቢው እየተዘጋጀ ነው…</string>
+    <string name="batch_patch_planning">ወረፋው እየተዘጋጀ ነው…</string>
     <string name="batch_patch_preparing_next">ቀጣዩ መተግበሪያ እየተዘጋጀ ነው…</string>
     <string name="batch_patch_progress_counter">ከ%2$s ውስጥ %1$s እየተስተካከሉ ነው</string>
-    <string name="batch_patch_summary">%1$s ተስተካክሏል፣ %2$s አልተሳካም፣ %3$s ተለዋውጧል</string>
+    <string name="batch_patch_summary">%1$s ተስተካክሏል፣ %2$s አልተሳካም፣ %3$s ተዘልሏል</string>
     <string name="batch_patch_saved_hint">ፓች የተደረጉ መተግበሪያዎች ተቀምጠዋል። አሁኑኑ ይጫኑዋቸው፣ ወይም ቆይተው በቅንብሮች ውስጥ ካለው የፓች የተደረጉ APK ዝርዝር ውስጥ ይጫኑዋቸው</string>
     <string name="batch_patch_multiple_sources">አንዳንድ መተግበሪያዎች ከአንድ በላይ ምንጭ የሆኑ ፓቾችን ያቀናጃሉ፣ ይህም ግጭቶችን ሊያስከትል ይችላል</string>
     <string name="batch_patch_needs_apk">የሚገኝ APK የለም፣ ፋይል አያይዙ</string>
@@ -475,27 +475,30 @@
     <string name="batch_patch_source_installed">የተጫነ መተግበሪያ</string>
     <string name="batch_patch_source_file">የተያያዘ ፋይል</string>
     <string name="batch_patch_source_unavailable">APKውን ማዘጋጀት አልተቻለም</string>
-    <string name="batch_patch_force_version">ያም ሆኖ ፓች አድርግ</string>
+    <string name="batch_patch_force_version">ያም ሆኖ ፓች ያድርጉ</string>
     <string name="batch_patch_force_version_done">ቢሆንም ተሰልፏል፣ መተግበሪያው ሊበላሽ ይችላል</string>
     <string name="batch_patch_accept_signature_done">ቢሆንም ተሰልፏል፣ APK አልተረጋገጠም</string>
     <string name="batch_patch_apk_selected">APK ተመርጧል</string>
+    <string name="batch_patch_auto_download_stopped">አውቶማቲክ የAPK ውርዶዎች ቆመዋል</string>
+    <string name="batch_patch_auto_download_stop">ውርዶችን አቁም</string>
+    <string name="batch_patch_auto_download_kept">የተወረደው APK ጥቅም ላይ ሊውል አልቻለም፣ ስለዚህ የቀድሞው ተጠብቋል</string>
     <string name="batch_patch_edit_patches">ፓቾችን ይምረጡ</string>
     <string name="batch_patch_state_no_apk">APK የለም</string>
     <string name="batch_patch_state_no_patches">ፓቾች የሉም</string>
     <string name="batch_patch_state_no_selection">ምንም አልተመረጠም</string>
     <string name="batch_patch_no_selection">ከሚገኙት ፓቾች መካከል ምንም አልተመረጠም</string>
-    <string name="batch_patch_policy_install">ሲያልቅ ጫን</string>
-    <string name="batch_patch_policy_install_description">ተረኛውን ስራ እንደተጠናቀቀ እያንዳንዱን ፓች የተደረገ መተግበሪያ ይጫናል። ማጥፋት APK-ዎችን ለበኋላ ያስቀምጣል</string>
+    <string name="batch_patch_policy_install">ሲያልቅ ይጫኑ</string>
+    <string name="batch_patch_policy_install_description">ወረፋው እንደተጠናቀቀ እያንዳንዱን ፓች የተደረገ መተግበሪያ ይጭናል። ማጥፋት APKዎችን ለበኋላ ያስቀምጣል</string>
     <string name="batch_patch_policy_mount">ሲጠናቀቅ Mount አድርግ</string>
     <string name="batch_patch_policy_mount_description">ተራው ሲያልቅ እያንዳንዱን የተጠገነ መተግበሪያ Mount ያደርጋል። ማጥፋቱ APK-ዎችን ለበኋላ ያስቀምጣቸዋል</string>
     <string name="batch_patch_policy_install_mount">ሲጠናቀቅ ጫን ወይም Mount አድርግ</string>
     <string name="batch_patch_policy_install_mount_description">ተራው ሲያልቅ እያንዳንዱን የተጠገነ መተግበሪያ ይጭናል ወይም Mount ያደርጋል። ማጥፋቱ APK-ዎችን ለበኋላ ያስቀምጣቸዋል</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">ጀምር</string>
-    <string name="batch_patch_stop_title">ባች ፓቺንግን ማቆም ትፈልጋለህ?</string>
+    <string name="batch_patch_stop_title">ባች ፓቺንግን ማቆም ይፈልጋሉ?</string>
     <string name="batch_patch_stop_description">አሁን እየተስተካከለ ያለው መተግበሪያ እና ተራ በጠበቁ ነገሮች ሁሉ ይሰረዛሉ</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="batch_patch_install_all">ሁሉንም ጫን</string>
+    <string name="batch_patch_install_all">ሁሉንም ይጫኑ</string>
     <string name="batch_patch_install_failed">መጫን አልተሳካም</string>
     <string name="batch_patch_in_progress">ባች ፓቺንግ ቀድሞውኑ እየሰራ ነው</string>
     <string name="batch_patch_nothing_outdated">እያንዳንዱ ፓች የተደረገ መተግበሪያ ወቅታዊ ነው</string>
@@ -506,12 +509,12 @@
     <string name="batch_queue_keep_title">ተራው ይቀጥል?</string>
     <string name="batch_queue_keep_description">በተራ ላይ ያሉ መተግበሪያዎች ቆይተው በኋላ ላይ እንዲጀምሩ በዋናው ስክሪን ላይ ይጠበቃሉ</string>
     <string name="batch_queue_keep">አቆይ</string>
-    <string name="shortcut_repatch_short">እንደገና ፓች አድርግ</string>
-    <string name="shortcut_repatch_long">ያረጁ መተግበሪያዎችን እንደገና ፓች አድርግ</string>
-    <string name="shortcut_check_updates_short">አዳኝነቶችን ፈትሽ</string>
+    <string name="shortcut_repatch_short">እንደገና ፓች ያድርጉ</string>
+    <string name="shortcut_repatch_long">ያረጁ መተግበሪያዎችን እንደገና ፓች ያድርጉ</string>
+    <string name="shortcut_check_updates_short">ዝማኔዎችን ፈትሽ</string>
     <string name="shortcut_check_updates_long">የፓች ማሻሻያዎችን ያረጋግጡ</string>
     <!-- Home Screen - App Info Screen -->
-    <string name="home_app_info_uninstall_title">ይህንን መተግበሪያ ያጥፉ?</string>
+    <string name="home_app_info_uninstall_title">ይህን መተግበሪያ ያራግፉ?</string>
     <string name="home_app_info_uninstall_removes_data">መተግበሪያው እና መረጃዎቹ ከዚህ መሳሪያ ላይ ይወገዳሉ</string>
     <string name="batch_uninstall_confirm_body">የተመረጡት አፖች ከመሣሪያዎ ላይ በቋሚነት ይወገዳሉ</string>
     <string name="home_app_info_remove_app_warning">ይህ የሚከተሉትን በቋሚነት ያጠፋል፦</string>
@@ -521,7 +524,7 @@
     <string name="home_app_info_delete_preservation_note">የመረጧቸው ፓቾች እና አማራጮች ለቀጣይ ስራዎች ተጠብቀው ይቆያሉ</string>
     <string name="home_app_info_patches_name_default">ፓቾች</string>
     <string name="home_app_info_patches_name_fallback">ስም የሌለው</string>
-    <string name="home_app_info_patches_source_removed">የጥገናው ምንጭ ተሰርዟል</string>
+    <string name="home_app_info_patches_source_removed">የፓች ምንጭ ተሰርዟል</string>
     <string name="home_app_info_patches_replace_fail">ፓቾችን ማስገባት አልተቻለም: %s</string>
     <string name="home_app_info_repatch_no_original_apk">ኦሪጅናል APK አልተገኘም። ይህንን መተግበሪያ በድጋሚ ፓች ማድረግ አይቻልም</string>
     <string name="home_app_info_original_package_name">የመጀመሪያው የፓኬጅ ስም</string>
@@ -535,14 +538,14 @@
     <string name="home_app_info_install_type_shizuku_play_store">የShizuku Play Store ጭነት</string>
     <string name="home_app_info_patch_update_available">የፓች ማሻሻያ ይገኛል</string>
     <string name="home_app_info_patch_update_available_description">አዲስ የፓች ስሪት ይገኛል። የቅርብ ጊዜ ማሻሻያዎችን እና ጥገናዎችን ለማግኘት መተግበሪያዎን እንደገና ፓች ያድርጉ</string>
-    <string name="home_app_info_app_update_available">የመተግበሪያ ማዘዣ tersedia ነው</string>
+    <string name="home_app_info_app_update_available">የመተግበሪያ ማዘመኛ ይገኛል</string>
     <string name="home_app_info_app_update_available_description">የፓች ምንጮች የዚህን መተግበሪያ አዲስ ስሪት ይደግፋሉ። ወደዚያ ስሪት ለመሸጋገር እንደገና ፓች ያድርጉት</string>
     <string name="home_app_info_newest_supported_version">አዲሱ የተደገፈ</string>
     <string name="home_app_info_version_move">የተጫነው %1$s፣ አዲሱ የተደገፈ %2$s</string>
     <string name="home_app_info_version_restore">የተጫነው %1$s፣ የተስተካከለው %2$s</string>
-    <string name="home_app_info_app_deleted_warning">መተግበሪያው ተሰርዟል</string>
-    <string name="home_app_info_app_deleted_description">ይህ መተግበሪያ ከ Morphe ውጭ ተሰርዟል። ተግባሩን ለመመለስ እንደገና ፓች ያድርጉት</string>
-    <string name="home_app_info_not_patched_description">የዚህ መተግበሪያ ያልተስተካከለ ስሪት ተጭኗል። Morphe አሁንም የቀድሞው የጥገና መዝገቡ አለው</string>
+    <string name="home_app_info_app_deleted_warning">መተግበሪያው ተራግፏል</string>
+    <string name="home_app_info_app_deleted_description">ይህ መተግበሪያ ከ Morphe ውጭ ተራግፏል። ተግባሩን ለመመለስ እንደገና ፓች ያድርጉት</string>
+    <string name="home_app_info_not_patched_description">የዚህ መተግበሪያ ያልተስተካከለ ስሪት ተጭኗል። Morphe አሁንም የቀድሞው የፓች መዝገቡ አለው</string>
     <string name="home_app_info_mount_replaced_description">ሌላ ስሪት የተጫነውን መተግበሪያ ተክቶታል፣ ስለዚህ ማስተካከያው ከአሁን በኋላ አይሰራም። ወደ ነበረበት መመለስ የተስተካከለውን ስሪት መልሶ ይጭናል</string>
     <string name="home_app_info_mount_replaced_by_play_store_description">Google Play የተጫነውን መተግበሪያ አዘምኖታል፣ ስለዚህ ማስተካከያው ከአሁን በኋላ አይሰራም። ወደ ነበረበት መመለስ የተስተካከለውን ስሪት መልሶ ይጭናል። ማስተካከያው እንዲቀጥል በGoogle Play ውስጥ አውቶማቲክ ማዘመኛውን ያጥፉ</string>
     <string name="app_links_title">የሚደገፉ የድረ-ገጽ ሊንኮች</string>
@@ -550,28 +553,28 @@
     <string name="app_links_unverified_banner_title">የድረ-ገጽ ሊንኮች አልተረጋገጡም</string>
     <string name="app_links_unverified_banner_description">የሚደገፉ የድረ-ገጽ ሊንኮች በአሁኑ ጊዜ ከዚህ መተግበሪያ ይልቅ በብሮውዘርዎ ውስጥ ይከፈታሉ</string>
     <string name="app_links_enable_auto">በራስ-ሰር አግብር</string>
-    <string name="app_links_enable_auto_in_progress">ሊንኮች እየተفعيل እየሆኑ ነው…</string>
+    <string name="app_links_enable_auto_in_progress">ሊንኮች እየነቁ ነው…</string>
     <string name="app_links_open_settings">የሊንክ ቅንብሮችን ክፈት</string>
-    <string name="app_links_repair_success">የመተግበሪያ ሊንኮች በስኬት ተفعيل ተደርገዋል</string>
-    <string name="app_links_repair_failed">የመተግበሪያ ሊንኮችን በራስ-ሰር ለማ啟用 አልተቻለም</string>
+    <string name="app_links_repair_success">የመተግበሪያ ሊንኮች በተሳካ ሁኔታ ነቅተዋል</string>
+    <string name="app_links_repair_failed">የመተግበሪያ ሊንኮችን በራስ-ሰር ማንቃት አልተቻለም</string>
     <string name="app_links_all_verified">ሁሉም የሚደገፉ ሊንኮች በዚህ መተግበሪያ ውስጥ እንዲከፈቱ ተዋቅረዋል</string>
     <string name="app_links_fix">ሊንኮችን አስተካክል</string>
     <string name="configure">ያዋቅሩ</string>
-    <string name="patcher_rename_title">ይህ የተቀዳውን ይጫናል</string>
-    <string name="patcher_rename_description">ፓቾቹ ይህንን መተግበሪያ በራሳቸው የፓኬጅ ስም ሰርተዋል፣ ስለዚህ እሱን መጫን &lt;b&gt;%s&lt;/b&gt;ን an updating ከማድረግ ይልቅ ጎን ለጎን ሌላ ቅጂ ይጨምራል</string>
-    <string name="patcher_rename_result_package">እንደዚህ ተጭኖ ያበቃል</string>
+    <string name="patcher_rename_title">ይህ ቅጂን ይጭናል</string>
+    <string name="patcher_rename_description">ፓቾቹ ይህንን መተግበሪያ በራሳቸው የፓኬጅ ስም ሰርተዋል፣ ስለዚህ እሱን መጫን &lt;b&gt;%s&lt;/b&gt;ን ከማዘመን ይልቅ ጎን ለጎን ሌላ ቅጂ ይጨምራል</string>
+    <string name="patcher_rename_result_package">በዚህ ስም ይጫናል</string>
     <string name="patcher_rename_replaces">በዚያ ስም አንድ መተግበሪያ ቀድሞ ተጭኗል እና በዚህ ይተካል</string>
     <string name="home_app_info_apk_size">የ APK መጠን</string>
     <string name="home_app_info_cpu_arch">የ CPU አርክቴክቸር</string>
     <!-- Home Screen - Root Mode -->
     <string name="root_install_apk_required">Root mode ፓች ከማድረግዎ በፊት ኦሪጅናል APK በመሳሪያዎ ላይ እንዲጫን ይጠይቃል</string>
     <string name="root_pre_patch_installer_title">የፓች ሞድ ይምረጡ</string>
-    <string name="root_pre_patch_installer_description">መሣሪያዎ የሩት akses አለው። ይህ መተግበሪያ ለሩት ማውንት ወይስ ለመደበኛ ጭነት ፓች እንዲደረግ ይምረጡ</string>
+    <string name="root_pre_patch_installer_description">መሣሪያዎ የሩት መዳረሻ አለው። ይህ መተግበሪያ ለሩት ማውንት ወይስ ለመደበኛ ጭነት ፓች እንዲደረግ ይምረጡ</string>
     <string name="root_pre_patch_installer_mount_title">የሩት ማውንት ሞድ</string>
     <string name="root_pre_patch_installer_mount_description">ለroot mount ፓቾችን ያደርጋል፣ ከዚያም APKን ከሚዛመደው stock አፕሊኬሽን በላይ ይጭነዋል። GmsCore አያስፈልግም</string>
     <string name="root_mount_module_unmount_warning">KernelSU \"Unmount modules by default\" የሚለው በርቶ ከሆነ፣ KernelSU &gt; Superuser &gt; የጫኑት መተግበሪያ &gt; Profile &gt; Custom ውስጥ በመግባት \"Unmount modules\" የሚለውን ያጥፉ። አለበለዚያ፣ Morphe እንደተጫነ ቢያሳይም የተጫነው የተስተካከለ APK ውጤታማ ላይሆን ይችላል</string>
     <string name="root_pre_patch_installer_standard_title">መደበኛ የጫን ዘዴ</string>
-    <string name="root_pre_patch_installer_standard_description">ከGmsCore ድጋፍ ጋር እንደ መደበኛ APK ፓች ያደርጋል። ከፓቺንግ በኋላ የእርስዎ የጫን መጋጠሚያ ቅንጅት ጥቅም ላይ ይውላል</string>
+    <string name="root_pre_patch_installer_standard_description">ከGmsCore ድጋፍ ጋር እንደ መደበኛ APK ፓች ያደርጋል። ከፓቺንግ በኋላ የእርስዎ የጫኚ ቅንብር ጥቅም ላይ ይውላል</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">%1$s ወደ %2$s ተቀይሮ ሳለ ተጠይቋል። ከፓቺንግ በኋላ የፓች ሞዱን መቀየር አይቻልም</string>
     <!-- Patcher Screen -->
@@ -641,13 +644,13 @@
     <string name="patcher_mount_error_title">የመግጠም ስህተት</string>
     <string name="patcher_install_error_subtitle">አጥፍተው እንደገና ለመጫን ይሞክሩ</string>
     <string name="patcher_ready_to_mount_subtitle">ለመጫን ከታች ያለውን ቁልፍ ይጫኑ</string>
-    <string name="patcher_patches_excluded_for_installer">ለዚህ የጫን ዘዴ አይдоступም እና ተገልሏል: %s</string>
+    <string name="patcher_patches_excluded_for_installer">ለዚህ የጫኚ ዘዴ አይገኝም እና ተገልሏል: %s</string>
     <string name="patcher_back_to_game_hint">ወደ ጨዋታዎ ለመመለስ %1$sን ይጫኑ</string>
     <string name="patcher_storage_permission_dialog_title">የማከማቻ መንገድን ማግኘት አልተቻለም</string>
     <string name="patcher_incompatible_patcher_title">ማዘመኛ ያስፈልጋል</string>
     <string name="patcher_incompatible_patcher_description">ምንጩ &lt;b&gt;%1$s&lt;/b&gt; ፓቸር &lt;b&gt;%2$s&lt;/b&gt; ወይም ከዚያ በላይ ይፈልጋል። ለመጠቀም Morpheን ያዘምኑ</string>
-    <string name="patcher_storage_permission_description_api30">አንዱ ወይም ከዚያ በላይ የፓች አማራጮች Morphe ሊያነባቸው የማይችላቸውን መንገዶች ያመለክታሉ። የማከማቻ erişነትን ይፍቀዱ እና ቁልፉን ይጫኑ ከዚያም ፓቺንግ በራሱ ይጀምራል</string>
-    <string name="patcher_storage_permission_description_legacy">አንድ ወይም ከዚያ በላይ የሆኑ የማሻሻያ አማራጮች ሊደረሱባቸው የማይችሉ መንገዶችን ያመለክታሉ። እባክዎን በማሻሻያ አማራጮች ውስጥ መንገዶቹን ያዘምኑ እና እንደገና ይሞክሩ</string>
+    <string name="patcher_storage_permission_description_api30">አንዱ ወይም ከዚያ በላይ የፓች አማራጮች Morphe ሊያነባቸው የማይችላቸውን መንገዶች ያመለክታሉ። የማከማቻ መዳረሻን ይፍቀዱ እና ቁልፉን ይጫኑ ከዚያም ፓቺንግ በራሱ ይጀምራል</string>
+    <string name="patcher_storage_permission_description_legacy">አንድ ወይም ከዚያ በላይ የፓች አማራጮች ሊደረሱባቸው የማይችሉ መንገዶችን ያመለክታሉ። እባክዎን በፓች አማራጮች ውስጥ መንገዶቹን ያዘምኑ እና እንደገና ይሞክሩ</string>
     <string name="patcher_storage_permission_grant">የማከማቻ ፈቃድ ይስጡ</string>
     <string name="patcher_storage_permission_denied_warning">የማከማቻ ፈቃድ ተከልክሏል። ይህንን መንገድ ለመጠቀም ፈቃድ ይስጡ፣ ወይም ፋይሎቹን ወደ መተግበሪያው የግል ማህደር ያዛውሩ</string>
     <string name="patcher_storage_permission_open_settings">የማከማቻ ቅንብሮችን ይክፈቱ</string>
@@ -662,7 +665,7 @@
     <string name="patcher_option_paths_gone_description">አንድ ወይም ከዚያ በላይ የፓች አማራጮች አሁን ወደሌሉ ፋይሎች ያመለክታሉ። ያለ እነሱ ፓች ለማድረግ መንገዶቹን ያስወግዱ፣ ወይም ፋይሎቹን መልሰው ያስቀምጡ እና እንደገና ይሞክሩ</string>
     <string name="patcher_option_paths_rejected_title">የፓች አማራጭ ፋይሎች ጥቅም ላይ ሊውሉ አይችሉም</string>
     <string name="patcher_option_paths_rejected_description">አንድ ወይም ከዚያ በላይ የፓች አማራጮች ወደሌሉ ወይም ፓቹ የሚፈልገውን ነገር ወደማይይዙ ፋይሎች ያመለክታሉ። ያለ እነሱ ፓች ለማድረግ መንገዶቹን ያስወግዱ፣ ወይም አማራጭ መመሪያዎቹ በሚገልጹት መሠረት ፋይሎቹን ያስተካክሉ እና እንደገና ይሞክሩ</string>
-    <string name="patcher_option_paths_clear">መንገዶቹን አስወግደህ ቀጥል</string>
+    <string name="patcher_option_paths_clear">መንገዶቹን አስወግደው ይቀጥሉ</string>
     <string name="patcher_storage_permission_hint">ጠቃሚ ምክር፦ ፋይሎችን ወደ /Android/data/app.morphe.manager/files/ ያዛውሩ - ተጨማሪ ፈቃዶች አያስፈልጉም</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">በማዘጋጀት ላይ</string>
@@ -718,7 +721,7 @@
     <string name="patcher_message_19">መተግበሪያዎ ትኩሳት አለው፣ ብቸኛው መድኃኒት ደግሞ ተጨማሪ ፓቾች ናቸው… 🩺🔔</string>
     <string name="patcher_message_20">ትርጉም የሌላቸውን ነገሮች በማስወገድ ላይ ነን። እባክዎ ይጠብቁ… 🗑️</string>
     <!-- Expert patcher Screen -->
-    <string name="patching_app">መተግበሪያው እየተፓች ചെയ്തു ነው</string>
+    <string name="patching_app">መተግበሪያው እየተፓች ነው</string>
     <string name="memory_usage">የሜሞሪ አጠቃቀም</string>
     <string name="cpu_usage">የCPU አጠቃቀም</string>
     <string name="storage_io_usage">የStorage I/O አጠቃቀም</string>
@@ -734,12 +737,12 @@
     <string name="patcher_out_of_memory_message">ፓቸሩ በ %1$s MB ሂፕ ሜሞሪ አቅም አልቋል። ይህ አፕሊኬሽን ለተመረጡት ፓቾች በጣም ትልቅ ነው። በጥቂት የፓች ምንጮች በመጠቀም ይሞክሩ፣ ወይም ጥቂት ፓቾችን ይምረጡ</string>
     <string name="install_app_success">በስኬት ተጭኗል</string>
     <string name="install_app_fail">መተግበሪያውን ለመጫን አልተቻለም: %s</string>
-    <string name="install_ignore_signature">ያም ሆኖ ጫን</string>
-    <string name="install_ignore_signature_description">የመተግበሪያውን መረጃ ያስቀራል፣ ነገር ግን የሚሠራው የሩት ሞጁል የአንድሮይድን የፊርማ ማረጋገጫ ካገደ ብቻ ነው</string>
-    <string name="uninstall_app_fail">መተግበሪያውን ለማንሳት አልተቻለም: %s</string>
+    <string name="install_ignore_signature">ያም ሆኖ ይጫኑ</string>
+    <string name="install_ignore_signature_description">የመተግበሪያውን መረጃ ይይዛል፣ ነገር ግን የሚሠራው የሩት ሞጁል የአንድሮይድን የፊርማ ማረጋገጫ ካገደ ብቻ ነው</string>
+    <string name="uninstall_app_fail">መተግበሪያውን ለማራገፍ አልተቻለም: %s</string>
     <string name="uninstall_app_unverified">በቦታው ተተውለዋል፦ የተጫነው መተግበሪያ Morphe ያስተካከለው ስሪት መሆኑን ማረጋገጥ አልቻለም</string>
     <string name="launch_app_unverified">የተጫነው መተግበሪያ Morphe ያስተካከለው ስሪት መሆኑን ማረጋገጥ አልቻለም</string>
-    <string name="uninstall_timeout">የማንሳት ጊዜው አልቋል</string>
+    <string name="uninstall_timeout">የማራገፍ ጊዜው አልቋል</string>
     <string name="save_apk_success">APK ተቀምጧል</string>
     <string name="saved_app_export_failed">የተስተካከለውን መተግበሪያ ኤክስፖርት ማድረግ አልተቻለም</string>
     <string name="saved_app_removed_toast">የተቀመጠው የተስተካከለ መተግበሪያ ተሰርዟል</string>
@@ -762,11 +765,11 @@
     <string name="mini_game_flappy_tap_to_start">ለመብረር ይጫኑ</string>
     <string name="mini_game_snake_picker_subtitle">ምግብ ይብላ፣ ራስዎን እንዳይመቱ</string>
     <string name="mini_game_snake_swipe_to_start">ለመጀመር ያንሸራትቱ</string>
-    <string name="mini_game_dino_picker_subtitle">ከካክተስዎች በላይ ለመዝለል ይጫኑ</string>
+    <string name="mini_game_dino_picker_subtitle">ከካክቲ በላይ ለመዝለል ይጫኑ</string>
     <string name="mini_game_dino_tap_to_start">ለመሮጥ ይጫኑ</string>
     <string name="mini_game_blocks_picker_subtitle">ቅርጾቹን ያስተካክሉ፣ መስመሮችን ያጽዱ</string>
-    <string name="mini_game_blocks_tap_to_start">ለማሽከርከር ይንኩ፣ ለማንቀሳቀስ ይሳቡ፣ ለማስጠፍ ወደ ታች ይሳቡ</string>
-    <string name="mini_game_bricks_picker_subtitle">ኳሱን ያንጠርጥሩት፣ ግድግዳውን ያጽዱ</string>
+    <string name="mini_game_blocks_tap_to_start">ለማሽከርከር ይንኩ፣ ለማንቀሳቀስ ይሳቡ፣ ለመጣል ወደ ታች ይሳቡ</string>
+    <string name="mini_game_bricks_picker_subtitle">ኳሱን ይምቱ፣ ግድግዳውን ያጽዱ</string>
     <string name="mini_game_bricks_tap_to_start">ለመጠቆም ይጎትቱ፣ ለመተኮስ ይጫኑ</string>
     <string name="mini_game_miner_picker_subtitle">ለመክፈት ይንኩ፣ ምልክት ለማድረግ ተጭነው ይያዙ</string>
     <string name="mini_game_pairs_picker_subtitle">ካርዶችን ይገለብጡ፣ ተዛማጁን ያግኙ</string>
@@ -786,7 +789,7 @@
     <string name="settings_appearance_background_particles">ፓርቲክልስ</string>
     <string name="settings_appearance_background_lava">ላቫ ላምፕ</string>
     <string name="settings_appearance_background_halloween">ሃሎዊን</string>
-    <string name="settings_appearance_background_fireworks">የርችት anfireworks</string>
+    <string name="settings_appearance_background_fireworks">ርችቶች</string>
     <string name="settings_appearance_background_none">የለም</string>
     <string name="settings_appearance_background_random">ዘፈቀደ</string>
     <string name="settings_appearance_background_random_interval_launch">ሲጀምር</string>
@@ -809,8 +812,8 @@
     <string name="settings_appearance_dynamic">Material You</string>
     <string name="settings_appearance_monochrome">ሞኖክሮም</string>
     <string name="settings_appearance_color_style">የቀለም ስታይል</string>
-    <string name="settings_appearance_accent_color">የልዩነት ቀለም</string>
-    <string name="settings_appearance_pure_black">ጥቁር ጥቁር</string>
+    <string name="settings_appearance_accent_color">የጎላ ቀለም</string>
+    <string name="settings_appearance_pure_black">ንጹህ ጥቁር</string>
     <string name="settings_appearance_pure_black_description">እውነተኛ ጥቁር ዳራዎችን ይጠቀማል</string>
     <string name="settings_appearance_color_accents">የመተግበሪያ እና የምንጭ ቀለሞች</string>
     <string name="settings_appearance_color_accents_description">ከቀለሙ ይልቅ የእያንዳንዱን መተግበሪያ እና ምንጭ ቀለም ይጠቀማል</string>
@@ -829,23 +832,23 @@
     <string name="settings_appearance_home_screen">የቤት ስክሪን</string>
     <string name="settings_appearance_greeting_phrases">የሰላምታ ቃላት</string>
     <string name="settings_appearance_greeting_phrases_subtitle">የሰላምታ መልእክትን ያሳያል</string>
-    <string name="settings_appearance_repatch_notice">እንደገና የማጥገን ማሳሰቢያ</string>
+    <string name="settings_appearance_repatch_notice">እንደገና ፓች የማድረግ ማሳሰቢያ</string>
     <string name="settings_appearance_repatch_notice_description">የተስተካከሉ መተግበሪያዎች በድጋሚ ሊስተካከሉ የሚችሉበት ጊዜ ባነር ያሳያል</string>
     <string name="settings_appearance_more_apps_card">የተጨማሪ መተግበሪያዎች ካርድ</string>
     <string name="settings_appearance_more_apps_card_description">ወደ ማህበረሰብ ጥገናዎች የሚመራ ካርድ በመተግበሪያዎች ስር ያሳያል</string>
     <string name="settings_appearance_app_card_colors">የካርድ ቀለሞች</string>
     <string name="settings_appearance_app_card_colors_default">መደበኛ</string>
     <string name="settings_appearance_app_card_colors_default_description">ለእያንዳንዱ መተግበሪያ እና ምንጭ የራሱ የሆነ ቀለም ይስጡ</string>
-    <string name="settings_appearance_app_card_colors_accent">አክሰንት</string>
-    <string name="settings_appearance_app_card_colors_accent_description">ለመተግበሪያ እና ለምንጭ ካርዶች የመተግበሪያውን የጥበብ ቀለም ይጠቀሙ</string>
+    <string name="settings_appearance_app_card_colors_accent">የጎላ ቀለም</string>
+    <string name="settings_appearance_app_card_colors_accent_description">ለመተግበሪያ እና ለምንጭ ካርዶች የመተግበሪያውን የማድመቂያ ቀለም ይጠቀሙ</string>
     <string name="settings_appearance_app_card_colors_gradient">ግራዲየንት</string>
     <string name="settings_appearance_app_card_colors_gradient_description">ለመተግበሪያ ካርዶች አንድ የራስዎን የግራዲየንት ቀለም ይጠቀሙ፣ ለምንጭ ካርዶች ደግሞ ወደ አንድ ቀለም የተቀላቀለ ይጠቀሙ</string>
-    <string name="settings_appearance_app_card_colors_solid">ሶሊድ</string>
+    <string name="settings_appearance_app_card_colors_solid">ጠንካራ</string>
     <string name="settings_appearance_app_card_colors_solid_description">ለመተግበሪያ እና ለምንጭ ካርዶች አንድ የራስዎን ቀለም ይጠቀሙ</string>
     <string name="settings_appearance_app_card_colors_start">የመጀመሪያ ቀለም</string>
     <string name="settings_appearance_app_card_colors_middle">የመካከለኛ ቀለም</string>
     <string name="settings_appearance_app_card_colors_end">የመጨረሻ ቀለም</string>
-    <string name="settings_appearance_app_card_colors_solid_color">ሶሊድ ቀለም</string>
+    <string name="settings_appearance_app_card_colors_solid_color">ጠንካራ ቀለም</string>
     <string name="settings_appearance_app_card_colors_bundle">የመተግበሪያ ጥቅል ቀለም</string>
     <string name="settings_appearance_app_card_colors_bundle_description">እዚህ ላይ የእያንዳንዱን መተግበሪያ ወይም ምንጭ የራሱን ቀለም ይጠቀሙ፣ ይህም በራስ-ሰር እንዲስማማ ተደርጎ ይቀለማል</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
@@ -878,18 +881,18 @@
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="settings_appearance_app_icon_change_dialog_confirm">አዶውን ቀይር</string>
     <!-- Settings - Advanced Tab - Updates Section -->
-    <string name="settings_advanced_updates_manager_prereleases">ቅድመ-ብቃት ማሻሻያዎች</string>
+    <string name="settings_advanced_updates_manager_prereleases">ቅድመ-ልቀት ማሻሻያዎች</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <string name="settings_advanced_updates_manager_prereleases_description">ለአዳዲስ የ Morphe ስሪቶች ቀድሞ የመጠቀም ዕድል</string>
-    <string name="settings_advanced_updates_prerelease_warning_title">ቅድመ-ብቃት ማሻሻያዎችን ያበሩ?</string>
+    <string name="settings_advanced_updates_prerelease_warning_title">ቅድመ-ልቀት ማሻሻያዎችን ያብሩ?</string>
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
-    <string name="settings_advanced_updates_prerelease_warning_message">"የ Morphe ቅድመ-ብቃት ስሪቶች አሁንም በልማት ላይ ናቸው እና ያልተረጋጉ ሊሆኑ ይችላሉ።
+    <string name="settings_advanced_updates_prerelease_warning_message">"የ Morphe ቅድመ-ልቀት ስሪቶች አሁንም በልማት ላይ ናቸው እና ያልተረጋጉ ሊሆኑ ይችላሉ።
 
-ፓቾች በዚህ አይነኩም፦ ለእያንዳንዱ ምንጭ ቅድመ-ብቃት ፓቾችን በፓች ምንጮች ዝርዝር ውስጥ ያበሩ"</string>
+ፓቾች በዚህ አይነኩም፦ ለእያንዳንዱ ምንጭ ቅድመ-ልቀት ፓቾችን በፓች ምንጮች ዝርዝር ውስጥ ያብሩ"</string>
     <string name="settings_advanced_updates_allow_metered">የሞባይል ዳታ ማሻሻያዎች</string>
     <string name="settings_advanced_updates_allow_metered_description">የMorphe እና የፓች ዝመናዎችን በሞባይል ዳታ ያወርዳል</string>
     <string name="settings_advanced_updates_background_notifications">የጀርባ ማሻሻያ ማሳወቂያዎች</string>
-    <string name="settings_advanced_updates_background_notifications_description">በየጊዜው በጀርባ ለውድ обновленияዎች ያረጋግጡ እና ዝግጁ ሲሆኑ ያሳውቁ</string>
+    <string name="settings_advanced_updates_background_notifications_description">በየጊዜው በጀርባ ዝማኔዎችን ያረጋግጡ እና ሲኖሩ ያሳውቁ</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">መተግበሪያው ዝግ በሚሆንበት ጊዜም እንኳ ለአዳዲስ ስሪቶች የፑሽ ማሳወቂያዎችን ይላካል</string>
     <string name="settings_system_notifications_categories">የማሳወቂያ ዘርፎች</string>
     <string name="settings_system_notifications_categories_description">የትኞቹ ማሻሻያዎች እንዲያሳውቁዎት እንደሚፈልጉ በስርዓቱ ቅንብሮች ውስጥ ይምረጡ</string>
@@ -901,20 +904,20 @@
     <string name="settings_advanced_update_interval_battery_warning">እንደ Xiaomi፣ Huawei፣ Samsung እና OnePlus ባሉ የጀርባ መተግበሪያዎችን በሚገድቡ መሳሪያዎች ላይ የጀርባ ፍተሻዎች በአስተማማኝ ሁኔታ ላይሰሩ ይችላሉ</string>
     <string name="settings_advanced_external_batch_patch">የውጭ ማነቃቂያዎችን ይፍቀዱ</string>
     <string name="settings_advanced_external_batch_patch_description">የአውቶሜሽን መተግበሪያዎች የጅምላ ማስተካከያ እንዲጀምሩ ያስችላል</string>
-    <string name="external_batch_patch_title">የጅምላ ፓቺንግ ይጀምሩ?</string>
-    <string name="external_batch_patch_description">%s Morphe መተግበሪያዎችን እንዲፓች እና እንዲጫን ይፈልጋል</string>
+    <string name="external_batch_patch_title">ባች ፓቺንግ ይጀምሩ?</string>
+    <string name="external_batch_patch_description">%s Morphe መተግበሪያዎችን እንዲፓች እና እንዲጭን ይፈልጋል</string>
     <string name="external_batch_patch_trust_caller">ሁልጊዜ ይህንን መተግበሪያ ይፍቀዱ</string>
     <string name="external_batch_patch_unknown_caller">ያልታወቀ መተግበሪያ</string>
     <!-- Notification content -->
-    <string name="notification_bundle_update_title">አዳዲስ ፓቾች tersedia ናቸው</string>
+    <string name="notification_bundle_update_title">አዳዲስ ፓቾች ይገኛሉ</string>
     <string name="notification_update_text">ስሪት %s ለማውረድ ዝግጁ ነው</string>
     <string name="notification_bundle_update_text_unversioned">Morpheን ለመክፈት እና ለማዘመን ይጫኑ</string>
     <string name="notification_permission_dialog_title">ማሳወቂያዎችን ይፍቀዱ</string>
-    <string name="notification_permission_dialog_description">በጀርባ ዝመናዎች ሲኖሩ ለማሳወቅ Morphe የ通知 ፍቃድ ያስፈልገዋል</string>
-    <string name="notification_post_patch_dialog_title">የማሻሻያ ስራዎች ሲኖሩ እንዲያሳውቅዎት ይፈልጋሉ?</string>
-    <string name="notification_channel_manager_updates">የMorphe ወቅታዊ መረጃዎች</string>
+    <string name="notification_permission_dialog_description">በጀርባ ዝመናዎች ሲኖሩ ለማሳወቅ Morphe የማሳወቂያ ፍቃድ ያስፈልገዋል</string>
+    <string name="notification_post_patch_dialog_title">ማሻሻያዎች ሲኖሩ እንዲያሳውቅዎት ይፈልጋሉ?</string>
+    <string name="notification_channel_manager_updates">የMorphe ዝማኔዎች</string>
     <string name="notification_channel_manager_updates_description">ስለ አዳዲስ የMorphe ስሪቶች የሚላኩ ማሳወቂያዎች</string>
-    <string name="notification_channel_patch_updates">የፓች ወቅታዊ መረጃዎች</string>
+    <string name="notification_channel_patch_updates">የፓች ዝማኔዎች</string>
     <string name="notification_channel_patch_updates_description">ስለ አዳዲስ የፓች ስሪቶች የሚላኩ ማሳወቂያዎች</string>
     <string name="notification_channel_patcher_description">Morphe በጀርባ አንድን መተግበሪያ ፓች በሚያደርግበት ጊዜ ይታያል</string>
     <string name="notification_channel_patching_results">የፓቺንግ ውጤቶች</string>
@@ -952,7 +955,7 @@
     <string name="settings_advanced_patch_options_restart_message">የፓች አማራጮችን መቀየር ውጤታማ እንዲሆን መተግበሪያውን እንደገና ፓች ማድረግ ያስፈልጋል</string>
     <string name="settings_advanced_patch_options_expert_mode_notice">በባለሙያ ሁኔታ ውስጥ የፓች አማራጮች በፓቺንግ ሂደት ወቅት ይገኛሉ</string>
     <string name="settings_advanced_patch_options_loading">የፓች አማራጮች በመጫን ላይ ናቸው…</string>
-    <string name="settings_advanced_patch_options_waiting_for_source">የፓች ምንጩ እስኪحدث ድረስ ይጠብቁ</string>
+    <string name="settings_advanced_patch_options_waiting_for_source">የፓች ምንጩ እስኪዘመን ድረስ ይጠብቁ</string>
     <string name="settings_advanced_patch_options_load_error">የፓች አማራጮችን ለመጫን አልተቻለም</string>
     <string name="settings_advanced_patch_options_no_available">ለዚህ ፓች የሚገኙ አማራጮች የሉም</string>
     <!-- Settings - Advanced Tab - Patch Options Section: Custom Branding -->
@@ -1023,20 +1026,20 @@ morphe_header_custom_dark.png
     <string name="settings_advanced_patch_options_hide_shorts_widget">የShorts ዊጄትን ደብቅ</string>
     <string name="settings_advanced_patch_options_hide_shorts_widget_description">የShorts ቁልፍን ከላንቸር ዊጄት ያስወግዳል</string>
     <!-- Settings - System Tab - Installer Section -->
-    <string name="installer">ተ cài ጫን</string>
-    <string name="installer_settings_title">መደበኛ ጫን</string>
+    <string name="installer">ጫኚ</string>
+    <string name="installer_settings_title">መደበኛ ጫኚ</string>
     <string name="settings_installation">ተከላ</string>
-    <string name="installer_title">ጫናኝን ይምረጡ</string>
-    <string name="installer_internal_description">የአንድሮይድ ፓኬጅ ኢንስታለርን ይጠቀማል</string>
-    <string name="installer_play_store_description">የስርዓቱን ጭነት ተጠቃሚ ይሆናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
+    <string name="installer_title">ጫኚን ይምረጡ</string>
+    <string name="installer_internal_description">የአንድሮይድ ፓኬጅ ጫኚን ይጠቀማል</string>
+    <string name="installer_play_store_description">የስርዓቱን ጫኝ ይጠቀማል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
     <string name="installer_root_description">በroot በዝምታ ይጫናል</string>
     <string name="installer_root_play_store_description">በroot በዝምታ ይጭናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
     <string name="installer_shizuku_description">በShizuku ወይም Sui በመጠቀም በዝምታ ይጭናል</string>
     <string name="installer_shizuku_play_store_description">በShizuku ወይም በSui በዝምታ ይጭናል እና Google Play Storeን እንደ ጭነት ምንጭ ያደርጋል</string>
     <string name="installer_option_none">ምንም አማራጭ የለም</string>
-    <string name="installer_none_description">ምንም ተለዋጭ መጫኛ አልተቀረጸም</string>
+    <string name="installer_none_description">ምንም ተለዋጭ መጫኛ አልተዋቀረም</string>
     <string name="installer_status_requires_root">የሩት ፈቃድ ያስፈልጋል</string>
-    <string name="installer_status_not_supported">ለዚህ ተግባር አይ поддержиም</string>
+    <string name="installer_status_not_supported">ለዚህ ተግባር አይደገፍም</string>
     <string name="installer_status_shizuku_not_installed">ይህንን አማራጭ ለመጠቀም Shizuku ወይም Sui ይጫኑ</string>
     <string name="installer_status_shizuku_not_running">Shizuku ወይም Suiን ያስጀምሩ እና እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_permission">ከ Shizuku መተግበሪያ ውስጥ ለ Morphe ፈቃድ ይስጡ</string>
@@ -1045,22 +1048,22 @@ morphe_header_custom_dark.png
     <string name="mount_stock_restore_failed_message">አንድሮይድ የተቀመጠውን ኦሪጅናል APK ውድቅ አድርጓል። የሚዛመደውን stock ስሪት ይጫኑ፣ ከዚያም Mountን እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_unsupported">የተጫነው የ Shizuku ስሪት ተቀባይነት የለውም</string>
     <string name="installer_action_open_shizuku">Shizukuን ክፈት</string>
-    <string name="installer_hint_generic">መጫኑ አልተሳካም። እንደገና ይሞክሩ ወይም ወደ ሌላ የጫን መተግበሪያ ይቀይሩ</string>
-    <string name="installer_hint_conflict">በዚህ የጥቅል ስም ሌላ መተግበሪያ ቀድሞ ተጭኗል። ከመቀጠልዎ በፊት ያጥፉት</string>
+    <string name="installer_hint_generic">መጫኑ አልተሳካም። እንደገና ይሞክሩ ወይም ወደ ሌላ ጫኝ ይቀይሩ</string>
+    <string name="installer_hint_conflict">በዚህ የጥቅል ስም ሌላ መተግበሪያ ቀድሞ ተጭኗል። ከመቀጠልዎ በፊት ያራግፉት</string>
     <string name="installer_confirm_notification_title">የመጫን ሂደቱን ያረጋግጡ</string>
     <string name="installer_confirm_notification_text">የተፓች የተደረገውን መተግበሪያ መጫን ለመጨረስ ይጫኑ</string>
     <string name="installer_external_launched">%s እየተከፈተ ነው…</string>
     <string name="installer_external_timeout">%s ተከላውን አላረጋገጠም። ሌላውን መተግበሪያ አረጋግጠው እንደገና ይሞክሩ</string>
     <string name="installer_external_success">%s ተከላው ስኬታማ እንደሆነ ሪፖርት አድርጓል</string>
     <string name="installer_unavailable_title">%s አይገኝም</string>
-    <string name="installer_unavailable_message">የመረጡት የጫን መተግበሪያ (%s) በአሁኑ ጊዜ አይдоступም። ችግሩን አስተካክለው እንደገና መሞከር ወይም በምትኩ መደበኛውን የጫን መተግበሪያ መጠቀም ይችላሉ</string>
+    <string name="installer_unavailable_message">የመረጡት ጫኝ (%s) በአሁኑ ጊዜ አይገኝም። ችግሩን አስተካክለው እንደገና መሞከር ወይም በምትኩ መደበኛውን ጫኝ መጠቀም ይችላሉ</string>
     <string name="installer_unavailable_shizuku_hint">Shizuku እየሰራ መሆኑን እና ለዚህ መተግበሪያ ፈቃድ መሰጠቱን ያረጋግጡ</string>
     <string name="installer_choose_another">ሌላ ተቋናኝ ይምረጡ</string>
-    <string name="installer_play_store_warning_title">እንደ Play Store ይጫን?</string>
+    <string name="installer_play_store_warning_title">እንደ Play Store መጫን ይፈልጋሉ?</string>
     <string name="installer_play_store_warning_message">የተስተካከለው መተግበሪያ ከ Google Play Store እንደተጫነ ተመዝግቦ ይቀመጣል። ይህም እንደ Android Auto ያሉ አገልግሎቶች እንደ Play Store መተግበሪያ እንዲያውቁት ሊረዳ ይችላል፣ ነገር ግን ለሁሉም መተግበሪያዎች ወይም መሳሪያዎች ዋስትና የለውም። ባህሪው እንደ Android ስሪት፣ ROM፣ የመሳሪያ ብራንድ እና እንደ መተግበሪያው ልዩ ፍተሻዎች ሊለያይ ይችላል</string>
-    <string name="installer_play_store_warning_risk">Play Store ለተስተካከለው መተግበሪያ ማሻሻያዎችን ሊያቀርብ ይችላል። ያንን ማሻሻያ መጫን የተስተካከለውን APK በዋናው ስሪት ይተካዋል እና ማሻሻያዎቹን ያስወግዳል። ማሻሻያ እንዲያደርጉ ከተጠየቁ፣ በመተግበሪያው Play Store ገጽ ላይ የሶስት-ነጥብ ሜኑውን ተጫን እና \"ማሻሻያዎችን አጥፋ\" የሚለውን ይምረጡ</string>
+    <string name="installer_play_store_warning_risk">Play Store ለተስተካከለው መተግበሪያ ማሻሻያዎችን ሊያቀርብ ይችላል። ያንን ማሻሻያ መጫን የተስተካከለውን APK በዋናው ስሪት ይተካዋል እና ማሻሻያዎቹን ያስወግዳል። ማሻሻያ እንዲያደርጉ ከተጠየቁ፣ በመተግበሪያው Play Store ገጽ ላይ የሶስት-ነጥብ ሜኑውን ይጫኑ እና \"ማሻሻያዎችን አጥፋ\" የሚለውን ይምረጡ</string>
     <string name="installer_play_store_warning_continue">ተረድቻለሁ፣ ቀጥል</string>
-    <string name="installer_play_store_mode">እንደ Play Store ይጫን</string>
+    <string name="installer_play_store_mode">እንደ Play Store ይጫኑ</string>
     <string name="installer_play_store_mode_description">የመጫኛ ምንጩን እንደ Google Play Store ያደርገዋል</string>
     <string name="settings_section_patch_mode">የፓች ሞድ</string>
     <string name="settings_patch_mode_ask">ሁልጊዜ ጠይቅ</string>
@@ -1074,13 +1077,13 @@ morphe_header_custom_dark.png
     <string name="settings_nomount_only">NoMount ብቻ</string>
     <string name="settings_nomount_only_description">መተግበሪያዎችን በ NoMount ብቻ ይጫናል እና በፍጹም ወደ bind mount አይመለስም፣ ስለዚህ ያለ እሱ ሳይጫኑ ይቀራሉ</string>
     <string name="settings_auto_install_with_shizuku_description">ፓቺንግ እንደተጠናቀቀ የተፓች የተደረገውን APK ይጫናል ወይም ይገጥማል</string>
-    <string name="settings_auto_uninstall_with_shizuku">ግጭት ሲኖር በራስ-ሰር ይሰርዝ</string>
+    <string name="settings_auto_uninstall_with_shizuku">ግጭት ሲኖር በራስ-ሰር ያራግፉ</string>
     <string name="settings_auto_uninstall_with_shizuku_description">የፊርማ ግጭት በሚኖርበት ጊዜ ያለውን መተግበሪያ ይሰርዛል። ይህም የመተግበሪያ ዳታን ሊያጠፋ ይችላል</string>
     <string name="settings_ignore_install_target_rules">የተከላ ኢላማ መስፈርቶችን ችላ በል</string>
     <string name="settings_ignore_install_target_rules_description">የጫን መድረሻው የሚፈልጋቸውን ፓቾች ማጥፋት እና የሚቃወላቸውን ማብራት ያስችላል። የተጠገነው መተግበሪያ ላይሰራ ይችላል</string>
-    <string name="settings_auto_uninstall_warning_title">በራስ-ሰር መሰረዝን ያብሩ?</string>
-    <string name="settings_auto_uninstall_warning_message">Android በ Shizuku አውቶ-ኢንስቶል ወቅት የፊርማ ግጭት ካሳወቀ፣ Morphe የተስተካከለውን APK ከመጫኑ በፊት ያለውን መተግበሪያ ይሰርዘዋል</string>
-    <string name="settings_auto_uninstall_warning_risk">ይህ የመተግበሪያ ዳታን ሊያጠፋ ይችላል። ከተሰረዘ በኋላ የተስተካከለው APK ለመጫን ካልተቻለ፣ የቀድሞው መተግበሪያ ቀድሞውኑ ጠፍቶ ሊሆን ይችላል</string>
+    <string name="settings_auto_uninstall_warning_title">በራስ-ሰር ማራገፍን ያብሩ?</string>
+    <string name="settings_auto_uninstall_warning_message">Android በ Shizuku አውቶ-ጭነት ወቅት የፊርማ ግጭት ካሳወቀ፣ Morphe የተስተካከለውን APK ከመጫኑ በፊት ያለውን መተግበሪያ ያራግፈዋል</string>
+    <string name="settings_auto_uninstall_warning_risk">ይህ የመተግበሪያ ዳታን ሊያጠፋ ይችላል። ከተራገፈ በኋላ የተስተካከለው APK ለመጫን ካልተቻለ፣ የቀድሞው መተግበሪያ ቀድሞውኑ ጠፍቶ ሊሆን ይችላል</string>
     <string name="installer_shizuku_status_action">የ Shizuku ሁኔታን ያረጋግጡ</string>
     <string name="installer_shizuku_status_title">የ Shizuku ሁኔታ</string>
     <string name="installer_shizuku_status_ready">ዝግጁ ነው</string>
@@ -1099,13 +1102,13 @@ morphe_header_custom_dark.png
 ዝርዝሮች: %2$s"</string>
     <string name="installer_shizuku_error_permission">የShizuku ፈቃድ የለም። ለMorphe ፈቃድ ይስጡ እና እንደገና ይሞክሩ</string>
     <string name="installer_shizuku_error_timeout">Shizuku የጭነት ውጤት አልመለሰም። አሁንም እየሰራ መሆኑን ያረጋግጡ እና እንደገና ይሞክሩ</string>
-    <string name="installer_shizuku_error_downgrade">Android ይህንን የዘገደው የተጫነውን መተግበሪያ ወደ ዝቅተኛ ስሪት ስለሚቀይረው ነው</string>
+    <string name="installer_shizuku_error_downgrade">Android ይህንን አግዶታል፣ የተጫነውን መተግበሪያ ወደ ዝቅተኛ ስሪት ስለሚቀይረው ነው</string>
     <string name="installer_shizuku_error_signature">የተጫነው መተግበሪያ የተለየ ፊርማ ስላለው Android ይህንን አግዶታል</string>
     <string name="installer_shizuku_error_invalid_apk">Android ይህንን APK ማንበብ አልቻለም</string>
     <string name="installer_shizuku_error_user_profile">ስርዓቱ ይህንን ጭነት አግዶታል። በXiaomi እና መሰል መሳሪያዎች ላይ፣ በዴቨሎፐር አማራጮች ውስጥ \"Install via USB\"ን ያብሩ። በስራ ፕሮፋይል ላይ፣ ጭነቶች በፖሊሲ የተገደቡ ሊሆኑ ይችላሉ</string>
     <!-- Settings - System Tab - Performance Section -->
     <string name="settings_system_battery_optimization">የባትሪ ማመቻቻ</string>
-    <string name="settings_system_battery_optimization_description">መተግበሪያው በትንሹ ሲሆን patcher-ኡ እንዲሠራ ያደርጋል</string>
+    <string name="settings_system_battery_optimization_description">መተግበሪያው በትንሹ ሲሆን ፓቸሩ እንዲሠራ ያደርጋል</string>
     <string name="settings_system_process_runtime">የፓቸር ራንታይም</string>
     <string name="settings_system_jvm_runtime_enable">የተቀረጸ VM ይጠቀሙ</string>
     <string name="settings_system_jvm_runtime_description">በMorphe የራሱ Java VM ውስጥ ያሉ ፓቾች፣ ብዙ ሜሞሪ ሊጠቀሙ ይችላሉ። የAndroid ራንታይምን ለመጠቀም ያጥፉት</string>
@@ -1126,15 +1129,15 @@ morphe_header_custom_dark.png
     <!-- Settings - System Tab - Import and Export Section -->
     <string name="settings_system_signing_key">የፊርማ ቁልፍ</string>
     <string name="settings_system_signing_key_description">የተስተካከሉ መተግበሪያዎችን የሚፈርመውን ቁልፍ ያስቀድማል ወይም ወደ ነበረበት ይመልሳል</string>
-    <string name="settings_system_signing_key_dialog_description">Morphe ፓች የሚያደርገው እያንዳንዱ መተግበሪያ በዚህ ቁልፍ ይፈርማል። ቅጂ ያስቀምጡ፡ ያለ እሱ ፓች የተደረጉ መተግበሪያዎች ሊዘመኑ የሚችሉት ከተጫኑ በኋላ ብቻ ነው</string>
+    <string name="settings_system_signing_key_dialog_description">Morphe ፓች የሚያደርገው እያንዳንዱ መተግበሪያ በዚህ ቁልፍ ይፈርማል። ቅጂ ያስቀምጡ፡ ያለ እሱ ፓች የተደረጉ መተግበሪያዎች ሊዘመኑ የሚችሉት ከተራገፉ በኋላ ብቻ ነው</string>
     <string name="settings_system_signing_key_missing">Morphe ከመጀመሪያው ፓችዎ ጋር አንድ ይፈጥራል</string>
     <string name="settings_system_signing_key_created">የተፈጠረው %s</string>
-    <string name="settings_system_signing_key_fingerprint">የSHA-256 ፊንግርፕሪንት</string>
+    <string name="settings_system_signing_key_fingerprint">የSHA-256 የጣት አሻራ</string>
     <string name="settings_system_backup_appearance_description">ቲም፣ ቀለሞች እና ቋንቋ</string>
     <string name="settings_system_backup_home_description">ቡድኖች፣ የተደበቁ መተግበሪያዎች፣ ቅደም ተከተል እና ትግላቶች</string>
     <string name="settings_system_backup_patching">ፓቺንግ እና መጫን</string>
-    <string name="settings_system_backup_patching_description">ኢንስታለር፣ ፓቸር እና የተቀመጡ APKዎች</string>
-    <string name="settings_system_backup_updates_description">ቅድመ-የሚለቀቁ እና የዘመና aggiornamento ፍተሻዎች</string>
+    <string name="settings_system_backup_patching_description">ጫኚ፣ ፓቸር እና የተቀመጡ APKዎች</string>
+    <string name="settings_system_backup_updates_description">ቅድመ-ልቀቶች እና የዝማኔ ፍተሻዎች</string>
     <string name="settings_system_backup_sources_description">ልዩ ምንጮች እና የGitHub ቶከን</string>
     <string name="settings_system_backup_patch_selections_description">ለእያንዳንዱ መተግበሪያ የተመረጡ ፓቾች</string>
     <string name="settings_system_backup_signing_key_note">የፊርማ ቁልፉ በተናጠል ተጠባብቋል</string>
@@ -1143,14 +1146,14 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_keystore_dialog_alias_field">የተጠቃሚ ስም (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">የይለፍ ቃል</string>
     <string name="settings_system_import_keystore_wrong_credentials">የተሳሳተ የkeystore መታወቂያ</string>
-    <string name="settings_system_import_keystore_success">Keystore ተይዟል</string>
-    <string name="settings_system_import_keystore_failed">Keystore ለመያዝ አልተቻለም</string>
-    <string name="settings_system_export_keystore_success">Keystore ተላላው</string>
+    <string name="settings_system_import_keystore_success">Keystore ተጭኗል</string>
+    <string name="settings_system_import_keystore_failed">Keystore ለማስገባት አልተቻለም</string>
+    <string name="settings_system_export_keystore_success">Keystore ተላከ</string>
     <string name="settings_system_export_keystore_failed">የኪይስቶር ኤክስፖርት ማድረግ አልተቻለም</string>
     <string name="settings_system_show_password_field">የይለፍ ቃሉን አሳይ</string>
     <string name="settings_system_hide_password_field">የይለፍ ቃሉን ደብቅ</string>
     <string name="settings_system_morphe_settings">የMorphe ቅንብሮች</string>
-    <string name="settings_system_import_manager_settings_description">የMorphe ቅንብሮችዎን ያስጠባበቃል እንዲሁም ይመልሳል</string>
+    <string name="settings_system_import_manager_settings_description">የMorphe ቅንብሮችዎን ምትኬ ያስቀምጣል እንዲሁም ይመልሳል</string>
     <string name="settings_system_import_manager_settings_fail">የMorphe ቅንብሮችን ማስገባት አልተቻለም: %s</string>
     <string name="settings_system_import_manager_settings_success">የMorphe ቅንብሮች ገብተዋል</string>
     <string name="settings_system_import_manager_settings_mode_title">የMorphe ቅንብሮችን አስገባ</string>
@@ -1159,7 +1162,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_selections_mode_description">የተገቡት ምርጫዎች እና የፓች አማራጮች እንዴት ተግባራዊ መሆን እንዳለባቸው ይምረጡ</string>
     <string name="import_mode_replace_title">ያሉትን ተካ</string>
     <string name="import_mode_replace_description">ከባክአፑ ጋር በትክክል ያስማማው። በባክአፑ ውስጥ የሌሉ ንጥሎች ይወገዳሉ</string>
-    <string name="import_mode_merge_title">ከያሉት ጋር አዋህድ</string>
+    <string name="import_mode_merge_title">ካሉት ጋር አዋህድ</string>
     <string name="import_mode_merge_description">የጎደሉትን ነገሮች ከባክአፑ ያክሉ። ነባር ነገሮች ሳይቀየሩ ይቀጥላሉ</string>
     <string name="settings_system_export_manager_settings_fail">የMorphe ቅንብሮችን ወደ ውጭ ለማውጣት አልተቻለም: %s</string>
     <string name="settings_system_export_manager_settings_success">የMorphe ቅንብሮች ወደ ውጭ ተላክተዋል</string>
@@ -1167,11 +1170,11 @@ morphe_header_custom_dark.png
     <string name="settings_system_export_debug_logs_description">ለችግር አፈታት የሲስተም መዝገቦችን ያስቀምጣል</string>
     <string name="settings_system_export_debug_logs_export_read_failed">ሎጎችን ለማንበብ አልተቻለም (የመውጫ ኮድ %s)</string>
     <string name="settings_system_export_debug_logs_export_failed">ሎጎችን ለመላክ አልተቻለም</string>
-    <string name="settings_system_export_debug_logs_export_success">ሎጎች ተላላው</string>
+    <string name="settings_system_export_debug_logs_export_success">ሎጎች ተላኩ</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <string name="settings_system_apks_size">ጠቅላላ መጠን: %s</string>
     <string name="settings_system_apks_delete_all_confirm">ይህ እዚህ ላይ የሚታዩትን የተቀመጡ የAPK ፋይሎች በቋሚነት ይሰርዛል</string>
-    <string name="settings_system_apks_delete_selected_title">የተመረጡትን APKዎች ይሰርዝ?</string>
+    <string name="settings_system_apks_delete_selected_title">የተመረጡትን APKዎች ይሰርዙ?</string>
     <string name="settings_system_apks_delete_selected_confirm">ይህ የተመረጡትን የAPK ፋይሎች በቋሚነት ይሰርዛል</string>
     <string name="settings_system_apks_deleted_all">APKዎች በተሳካ ሁኔታ ተሰርዘዋል</string>
     <string name="settings_system_apks_delete_failed">አንዳንድ የ APK ፋይሎች ሊሰረዙ አልቻሉም</string>
@@ -1182,22 +1185,22 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_management_description">የዲስክ አጠቃቀምን ያሳያል እና የተቀመጡ (cached) ፋይሎችን ያጸዳል</string>
     <!-- Shown under how much Morphe takes up. "%1$s" is the space still available on the device, already formatted with its unit. "Free" as in unused, not as in free of charge. -->
     <string name="settings_system_storage_free">%1$s ክፍት</string>
-    <string name="settings_system_storage_saved_apks">የተጫኑ APKዎች</string>
+    <string name="settings_system_storage_saved_apks">የተቀመጡ APKዎች</string>
     <string name="settings_system_storage_caches">ኬሾች</string>
     <string name="settings_system_storage_keystore_title">የፊርማ ኪይስቶር</string>
     <string name="settings_system_storage_app_data_title">የመተግበሪያ መረጃ</string>
     <string name="settings_system_storage_patch_bundles_title">የፓች ጥቅሎች</string>
     <string name="settings_system_storage_http_cache_title">የኔትወርክ ካሼ</string>
     <string name="settings_system_storage_http_cache_description">የማሻሻያዎችን ፍጥነት ለመጨመር የተቀመጡ የHTTP ምላሾች</string>
-    <string name="settings_system_storage_installer_cache_title">የውጭ ላኪ ካሼ</string>
-    <string name="settings_system_storage_installer_cache_description">ለሶስተኛ ወገን ላኪዎች የተላለፉ የ APK ቅጂዎች</string>
+    <string name="settings_system_storage_installer_cache_title">የውጭ ጫኝ ካሼ</string>
+    <string name="settings_system_storage_installer_cache_description">ለሶስተኛ ወገን ጫኚዎች የተላለፉ የ APK ቅጂዎች</string>
     <string name="settings_system_storage_patcher_workspace_title">የፓቸር የስራ ቦታ</string>
     <string name="settings_system_storage_patcher_workspace_description">የፓቸር ማስኬጃ ፋይሎች እና የተተዉ ጊዜያዊ መረጃዎች</string>
     <string name="settings_system_storage_temporary_title">ጊዜያዊ ፋይሎች</string>
     <string name="settings_system_storage_temporary_description">በፓቺንግ ወቅት የተፈጠሩ የስራ ፋይሎች</string>
     <string name="settings_system_storage_clear_all">ሁሉንም ካሼዎች አጽዳ</string>
-    <string name="settings_system_storage_clear_all_description">ሊያገኝ የሚችለውን የካሼ ቦታ ሁሉ በአንድ ጊዜ ያላቅቃል</string>
-    <string name="settings_system_storage_clear_all_confirm">ይህ የተቀመጡ የኔትወርክ ምላሾችን፣ የተዘጋጁ የኢንስታለር ቅጂዎችን እና ጊዜያዊ ፋይሎችን ያጸዳል። ኦሪጅናል እና ፓች የተደረጉ APKዎች ይቀመጣሉ</string>
+    <string name="settings_system_storage_clear_all_description">ሊመለስ የሚችለውን የካሼ ቦታ ሁሉ በአንድ ጊዜ ነጻ ያደርጋል</string>
+    <string name="settings_system_storage_clear_all_confirm">ይህ የተቀመጡ የኔትወርክ ምላሾችን፣ የተዘጋጁ የጫኚ ቅጂዎችን እና ጊዜያዊ ፋይሎችን ያጸዳል። ኦሪጅናል እና ፓች የተደረጉ APKዎች ይቀመጣሉ</string>
     <string name="settings_system_storage_cleared">%s ተለቀቀ</string>
     <string name="settings_system_storage_patch_running_warning">አንድ ፓች እየሰራ ነው እና እነዚህን ፋይሎች ይጠቀማል። አሁን ማጽዳት ስህተት እንዲፈጠር ያደርጋል</string>
     <string name="settings_system_storage_clear_anyway">ቢሆንም አጽዳ</string>
@@ -1212,7 +1215,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_patched_apks_title">የተስተካከሉ APKዎች</string>
     <string name="settings_system_patched_apks_empty">እስካሁን ምንም የተስተካከሉ APKዎች አልተቀመጡም</string>
     <string name="settings_system_patched_apks_delete_title">የተስተካከለውን APK ያጥፉ?</string>
-    <string name="settings_system_patched_apks_deleted">የተስተካከለው APK በተሳካ ሁኔታ ተጥፍቷል</string>
+    <string name="settings_system_patched_apks_deleted">የተስተካከለው APK በተሳካ ሁኔታ ተሰርዟል</string>
     <string name="settings_system_patched_apks_delete_all_title">ሁሉንም የተስተካከሉ APKዎች ይሰርዙ?</string>
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <string name="settings_system_original_apks_title">ኦሪጅናል APKዎች</string>
@@ -1223,9 +1226,9 @@ morphe_header_custom_dark.png
     <string name="settings_system_original_apks_delete_all_title">ሁሉንም ዋና APKዎች ይሰርዙ?</string>
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <string name="settings_system_patch_selections_title">የፓች ምርጫዎች</string>
-    <string name="settings_system_patch_selections_description">የተቀመጡ የፓች ምርጫዎች፣ ከተጫነ በኋላ ይቀጥላሉ</string>
+    <string name="settings_system_patch_selections_description">የተቀመጡ የፓች ምርጫዎች፣ ከተራገፈ በኋላ ይቀጥላሉ</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">ሁሉንም ምርጫዎች እንደገና ማስጀመር?</string>
-    <string name="settings_system_patch_selection_reset_selected_confirm_title">የተመረጡትን ጥቅሎች ይቀይሩ?</string>
+    <string name="settings_system_patch_selection_reset_selected_confirm_title">የተመረጡትን ጥቅሎች እንደገና ማስጀመር?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">የምንጭ ምርጫን እንደገና ማስጀመር?</string>
     <string name="settings_system_patch_selection_total_summary_format">%1$s በ %2$s ውስጥ</string>
     <string name="settings_system_patch_selection_source_format">ምንጭ #%s</string>
@@ -1264,9 +1267,10 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_trust_title">ይህንን ረዳት ያምኑ?</string>
     <string name="settings_system_apk_download_helper_warning">APKው የሚመጣው ከረዳት መተግበሪያው ነው፣ ስለዚህ የሚያውቋቸውን መተግበሪያዎች ብቻ ያምኑ። Morphe አሁንም ከመጠገኑ በፊት የእያንዳንዱን ፋይል ፓኬጅ፣ ስሪት እና ፊርማ ያረጋግጣል</string>
     <string name="settings_system_apk_download_helper_installed_by">በ%s የተጫነ</string>
-    <string name="settings_system_apk_download_helper_installed_by_unknown">ተጫናቹ አይታወቅም</string>
+    <string name="settings_system_apk_download_helper_installed_by_unknown">ጫኚው አይታወቅም</string>
     <string name="settings_system_apk_download_helper_open_directly">ረዳቱን ወዲያውኑ ክፈት</string>
     <string name="settings_system_apk_download_helper_open_directly_description">የማውረጃ መመሪያዎችን ይዘልላል እና የታመነውን ረዳት ይከፍታል</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APKዎችን በጅምላ በራስ-ሰር አውርድ</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">እዚህ ምንም ፋይሎች የሉም</string>
     <string name="file_picker_read_error">ይህንን ማህደር ማንበብ አይቻልም</string>
@@ -1333,8 +1337,8 @@ morphe_header_custom_dark.png
     <string name="all">ሁሉም</string>
     <string name="filter">ማጣሪያ</string>
     <string name="group">ቡድን</string>
-    <string name="reset">እንደገና ስራ</string>
-    <string name="reset_all">ሁሉንም መልስ</string>
+    <string name="reset">እንደገና አስጀምር</string>
+    <string name="reset_all">ሁሉንም እንደገና አስጀምር</string>
     <string name="apply">ተግብር</string>
     <string name="confirm">አረጋግጥ</string>
     <string name="warning">ማስጠንቀቂያ</string>
@@ -1349,7 +1353,7 @@ morphe_header_custom_dark.png
     <string name="back">ተመለስ</string>
     <string name="next">ቀጥል</string>
     <string name="done">ተጠናቅቋል</string>
-    <string name="skip">ለፍ</string>
+    <string name="skip">ዝለል</string>
     <string name="clear">አጽዳ</string>
     <string name="paste">ፔስት ያድርጉ</string>
     <string name="delete">ሰርዝ</string>
@@ -1360,7 +1364,7 @@ morphe_header_custom_dark.png
     <string name="include">አካተት</string>
     <string name="disable">አግድ</string>
     <string name="enable">አብራ</string>
-    <string name="trust">እምነት</string>
+    <string name="trust">እመን</string>
     <string name="loading">በመጫን ላይ…</string>
     <string name="creating">በመፍጠር ላይ…</string>
     <string name="processing_apk">APK በማቀናበር ላይ…</string>
@@ -1372,24 +1376,24 @@ morphe_header_custom_dark.png
     <string name="sort">ያደራጁ</string>
     <string name="any_version">ማንኛውም</string>
     <string name="enabled">የነቃ</string>
-    <string name="disabled">ተሽሯል</string>
+    <string name="disabled">ተሰናክሏል</string>
     <string name="state_selected">ተመርጧል</string>
     <string name="state_not_selected">አልተመረጠም</string>
     <string name="select_all">ሁሉንም ምረጥ</string>
-    <string name="deselect_all">ሁሉንም አላሽር</string>
+    <string name="deselect_all">ሁሉንም ምርጫ አንሳ</string>
     <string name="reorder_list">ዝርዝሩን እንደገና ያደራጁ</string>
     <string name="reorder_list_hint">ለማደራጀት ይጎትቱ</string>
     <string name="reorder_done">ቅደም ተከተሉ ተቀምጧል</string>
     <string name="reset_order">ቅደም ተከተሉን ወደ ነበረበት መልስ</string>
     <string name="reset_order_done">ቅደም ተከተሉ ወደ ነበረበት ተመልሷል</string>
-    <string name="reset_order_confirm_title">ትዕዛዙን እንደገና ያስተካክሉ?</string>
+    <string name="reset_order_confirm_title">ቅደም ተከተሉን ዳግም ያስጀምሩ?</string>
     <string name="reset_order_confirm_message">ዝርዝሩ ወደ መደበኛው ቅደም ተከተል ይመለሳል እንዲሁም በእጅ የተሳበው ቅደም ተከተል ይጠፋል</string>
     <string name="accessibility_select_app">መተግበሪያ ይምረጡ</string>
     <string name="accessibility_select_source">ምንጩን ይምረጡ</string>
-    <string name="accessibility_move_up">ወደ ላይ አሳብ</string>
-    <string name="accessibility_move_down">ወደ ታች አሳብ</string>
+    <string name="accessibility_move_up">ወደ ላይ አንቀሳቅስ</string>
+    <string name="accessibility_move_down">ወደ ታች አንቀሳቅስ</string>
     <string name="accessibility_app_moved_announcement">%1$s ወደ ቦታ %2$s ከ %3$s ተዛውሯል</string>
-    <string name="accessibility_scroll_to_top">ወደ ዝርዝሩ አናት ይሸረሽሩ</string>
+    <string name="accessibility_scroll_to_top">ወደ ዝርዝሩ አናት ይሸብልሉ</string>
     <string name="rename">ስም ቀይር</string>
     <string name="more_options">ተጨማሪ አማራጮች</string>
     <string name="import_">አስገባ</string>
@@ -1398,7 +1402,7 @@ morphe_header_custom_dark.png
     <string name="copied_to_clipboard">ወደ ክሊፕቦርድ ተቀዳ</string>
     <string name="download">አውርድ</string>
     <string name="less">ያነሰ</string>
-    <string name="expand">ያልኩ</string>
+    <string name="expand">ዘርጋ</string>
     <string name="expanded">የተለጠጠ</string>
     <string name="collapse">ዝጋ</string>
     <string name="collapsed">የተጨመቀ</string>
@@ -1408,7 +1412,7 @@ morphe_header_custom_dark.png
     <string name="author">ደራሲ</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ፋይል</string>
-    <string name="clone">ቅዳ</string>
+    <string name="clone">ቅጂ ፍጠር</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">ፓች አድርግ</string>
     <string name="patching">ፓቺንግ</string>
@@ -1416,7 +1420,7 @@ morphe_header_custom_dark.png
     <string name="open">ክፈት</string>
     <string name="mount">ጫን</string>
     <string name="mounted">ተጭኗል</string>
-    <string name="unmount">አላቅ</string>
+    <string name="unmount">ንቀል</string>
     <string name="unmounted">ተነቅሏል</string>
     <string name="remount">እንደገና ይጫኑ</string>
     <string name="restore">ወደ ነበረበት መልስ</string>
@@ -1424,18 +1428,18 @@ morphe_header_custom_dark.png
     <string name="install">ጫን</string>
     <string name="installed">ተጭኗል</string>
     <string name="reinstall">እንደገና ይጫኑ</string>
-    <string name="uninstall">ዘርዝር</string>
-    <string name="uninstalled">ተጥፍቷል</string>
+    <string name="uninstall">አራግፍ</string>
+    <string name="uninstalled">ተራግፏል</string>
     <string name="save">አስቀምጥ</string>
     <string name="saved">ተቀምጧል</string>
     <string name="update">አሻሽል</string>
     <string name="allow">ፍቀድ</string>
     <string name="hide">ደብቅ</string>
     <string name="hidden">የተደበቀ</string>
-    <string name="unhide">አታደብቅ</string>
+    <string name="unhide">ግለጥ</string>
     <string name="show_all">ሁሉንም አሳይ</string>
-    <string name="ignore">ቸል በለው</string>
-    <string name="stop_ignoring">ቸል ማለትን አቁም</string>
+    <string name="ignore">ችላ ይበሉ</string>
+    <string name="stop_ignoring">ችላ ማለትን አቁም</string>
     <string name="stop">አቁም</string>
     <string name="logs">ሎጎች</string>
     <string name="sources">ምንጮች</string>
@@ -1443,12 +1447,12 @@ morphe_header_custom_dark.png
     <string name="mounting_ellipsis">በመጫን ላይ…</string>
     <string name="mount_stage_restoring_stock">የመጀመሪያው እየተመለሰ ነው…</string>
     <string name="mount_stage_copying">እያባዛ ነው…</string>
-    <string name="unmounting_ellipsis">እየተነሳ...</string>
+    <string name="unmounting_ellipsis">እየተነቀለ…</string>
     <string name="importing_ellipsis">በማስገባት ላይ…</string>
-    <string name="imported_successfully">በስኬት ተጫውቷል</string>
+    <string name="imported_successfully">በስኬት ገብቷል</string>
     <string name="changelog">የለውጥ ዝርዝሮችን ይመልከቱ</string>
     <string name="changelog_for_app">ለ %s የተደረጉ ለውጦች</string>
-    <string name="changelog_general_changes">ጠቅላላ ለውጦች</string>
+    <string name="changelog_general_changes">አጠቃላይ ለውጦች</string>
     <string name="whats_new">አዲስ ምን ተጨመረ</string>
     <string name="changelog_description">በዚህ ስሪት ውስጥ ምን አዲስ ነገር አለ</string>
     <string name="changelog_download_fail">የለውጥ ዝርዝሩን ለማውረድ ተሳስቷል: %s</string>
@@ -1472,7 +1476,7 @@ morphe_header_custom_dark.png
     <string name="changelog_badge_latest">የቅርብ ጊዜ</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
     <string name="changelog_badge_downloaded">የወረደ</string>
-    <string name="changelog_badge_prerelease">ቅድመ- إصدار</string>
+    <string name="changelog_badge_prerelease">ቅድመ-ልቀት</string>
     <!-- "%s" is the number of changes in the section -->
     <string name="changelog_show_all">ሁሉንም አሳይ (%s)</string>
     <string name="changelog_show_less">ያነሰ አሳይ</string>
@@ -1488,7 +1492,7 @@ morphe_header_custom_dark.png
     <string name="manager_update_progress_downloaded">%1$s MB ተውርዷል</string>
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
     <string name="manager_update_progress_size">%1$s / %2$s MB</string>
-    <string name="manager_update_not_ready">ይህ ስሪት አሁንም እየተተየበ ነው። ከጥቂት ደቂቃዎች በኋላ እንደገና ይሞክሩ</string>
+    <string name="manager_update_not_ready">ይህ ስሪት አሁንም እየተለቀቀ ነው። ከጥቂት ደቂቃዎች በኋላ እንደገና ይሞክሩ</string>
     <string name="update_download_missing">የተወረደው ማሻሻያ ከእንግዲህ አይገኝም። እባክዎን እንደገና ያውርዱት</string>
     <string name="failed_to_check_updates">ማሻሻያዎችን መፈተሽ አልተቻለም፡ %s</string>
     <string name="failed_to_download_update">የማሻሻያ ፋይሉን ማውረድ አልተቻለም፡ %s</string>
@@ -1499,12 +1503,12 @@ morphe_header_custom_dark.png
     <!-- Onboarding coach marks -->
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s ከ %2$s</string>
-    <string name="onboarding_sources_desc">የፓች ምንጮችዎን ያስተዳድሩ። እያንዳንዱ ምንጭ በ应用程序ዎችዎ ላይ ሊተገበሩ የሚችሉ ፓቾችን ያቀርባል</string>
+    <string name="onboarding_sources_desc">የፓች ምንጮችዎን ያስተዳድሩ። እያንዳንዱ ምንጭ በመተግበሪያዎችዎ ላይ ሊተገበሩ የሚችሉ ፓቾችን ያቀርባል</string>
     <string name="onboarding_other_apps_desc">በዝርዝሩ ውስጥ የሌለ አፕሊኬሽንን ከ APK ፋይል ወይም በስልክዎ ላይ ከተጫነ አፕሊኬሽን ፓች ያድርጉ</string>
     <string name="onboarding_add_source_desc">ከሊንክ ወይም ከፓች ባንድል ፋይል የፓች ምንጭ ያክሉ</string>
     <string name="onboarding_signing_key_desc">ፓች የተደረጉ አፕሊኬሽኖችን የሚፈርመውን ቁልፍ ባክአፕ ያድርጉ። ያለ እሱ፣ አፕሊኬሽኖቹን ለማዘመን መጀመሪያ ማጥፋት ይኖርብዎታል</string>
     <string name="onboarding_swipe_title">የስላይድ ምልክቶች</string>
-    <string name="onboarding_swipe_desc">ለሚገኙ ፓቾች ለማየት በአንድ የঅ্যাপ ካርድ ላይ ወደ ቀኝ ስላይድ ያድርጉ። ካርዱን ከቤት ስክሪኑ ለመደበቅ ወደ ግራ ስላይድ ያድርጉ</string>
+    <string name="onboarding_swipe_desc">ለሚገኙ ፓቾች ለማየት በአንድ የመተግበሪያ ካርድ ላይ ወደ ቀኝ ስላይድ ያድርጉ። ካርዱን ከቤት ስክሪኑ ለመደበቅ ወደ ግራ ስላይድ ያድርጉ</string>
     <string name="onboarding_settings_desc">Morphe-ን ያበጁ፡ ገጽታ፣ የላቁ አማራጮች እና የስርዓት መሳሪያዎች</string>
     <string name="onboarding_sources_patches_desc">ከዚህ ምንጭ የሚገኙ ሁሉንም ፓቾች ለማየት ይጫኑ</string>
     <string name="onboarding_sources_version_desc">የዚህን ምንጭ ሙሉ የለውጥ ዝርዝር ለማየት ስሪቱን ይጫኑ</string>

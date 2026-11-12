@@ -165,11 +165,11 @@
     <string name="sources_management_report_issue">Relatar um problema</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
     <string name="sources_apps">Aplicativos</string>
-    <string name="sources_apps_description">Os apps selecionados vêm desta fonte. Toque em um app para excluí-lo ou reincluí-lo. Um app sai da tela inicial quando nenhuma fonte o exibe, a menos que você tenha ajustado ele</string>
+    <string name="sources_apps_description">Os apps selecionados vêm desta fonte. Toque em um app para excluí-lo ou reincluí-lo. Um app sai da tela inicial quando nenhuma fonte o exibe, a menos que você já o tenha corrigido</string>
     <string name="sources_apps_brought">Trazidos por esta fonte</string>
     <string name="sources_apps_left_out">Deixados de fora desta fonte</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">Mantido como ajustado</string>
+    <string name="sources_apps_stays_patched">Mantido como corrigido</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Novo</string>
     <string name="sources_apps_new_apps">Trazer novos aplicativos</string>
@@ -197,7 +197,7 @@
     <string name="sources_management_metadata_unavailable_hint_missing_editable">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir. Toque para alterá-la</string>
     <string name="sources_management_outdated_manager_badge">Atualize o Morphe</string>
     <string name="sources_management_outdated_manager_hint">Esta fonte foi criada para o patcher %1$s, mas o Morphe %2$s já inclui o patcher %3$s. Atualize o Morphe para usá-la</string>
-    <string name="sources_management_held_back_badge">Falhou</string>
+    <string name="sources_management_held_back_badge">Travou</string>
     <string name="sources_management_held_back_hint">Esta fonte causou a falha do Morphe durante o carregamento, por isso está sendo ignorada. Atualize ou reimporte para tentar novamente</string>
     <string name="sources_management_signed_by">Assinado por</string>
     <string name="sources_management_signing_key_changed_badge">Chave alterada</string>
@@ -224,7 +224,7 @@
     <string name="sources_dialog_local_updates">Atualiza %s</string>
     <string name="sources_dialog_url_valid">Repositório ou URL JSON válidos</string>
     <string name="sources_dialog_url_invalid">A URL deve apontar para um repositório GitHub/GitLab ou arquivo .json</string>
-    <string name="sources_dialog_preinstalled">Pre-instalado</string>
+    <string name="sources_dialog_preinstalled">Pré-instalado</string>
     <string name="sources_dialog_community">Patches da comunidade</string>
     <string name="sources_dialog_choose_apps">Escolha os apps</string>
     <string name="sources_dialog_choose_apps_description">Escolha quais apps dessa fonte manter depois que ela carregar.</string>
@@ -363,7 +363,7 @@
     <string name="home_split_apk_warning_message">"Este arquivo é um pacote APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;b&gt;APK completo&lt;/b&gt;"</string>
+Para obter os melhores resultados, este aplicativo recomenda corrigir um &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>
@@ -477,11 +477,14 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="batch_patch_force_version_done">Enfileirado mesmo assim, o aplicativo pode quebrar</string>
     <string name="batch_patch_accept_signature_done">Enfileirado mesmo assim, APK não verificado</string>
     <string name="batch_patch_apk_selected">APK selecionado</string>
+    <string name="batch_patch_auto_download_stopped">Downloads automáticos de APK interrompidos</string>
+    <string name="batch_patch_auto_download_stop">Interromper downloads</string>
+    <string name="batch_patch_auto_download_kept">O APK baixado não pôde ser usado, portanto, o anterior foi mantido</string>
     <string name="batch_patch_edit_patches">Escolher patches</string>
     <string name="batch_patch_state_no_apk">Sem APK</string>
     <string name="batch_patch_state_no_patches">Sem patches</string>
     <string name="batch_patch_state_no_selection">Nenhum selecionado</string>
-    <string name="batch_patch_no_selection">Nenhuma das patches disponíveis está selecionada</string>
+    <string name="batch_patch_no_selection">Nenhum dos patches disponíveis está selecionado</string>
     <string name="batch_patch_policy_install">Instalar quando terminar</string>
     <string name="batch_patch_policy_install_description">Instala cada aplicativo corrigido logo após a fila terminar. Desativar mantém os APKs para mais tarde</string>
     <string name="batch_patch_policy_mount">Montar quando terminar</string>
@@ -489,7 +492,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="batch_patch_policy_install_mount">Instalar ou montar ao finalizar</string>
     <string name="batch_patch_policy_install_mount_description">Instala ou monta cada aplicativo corrigido assim que a fila termina. Desativar mantém os APKs para mais tarde</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="batch_patch_start">Começo</string>
+    <string name="batch_patch_start">Iniciar</string>
     <string name="batch_patch_stop_title">Parar a aplicação de patches em lote?</string>
     <string name="batch_patch_stop_description">O aplicativo que está sendo corrigido agora e tudo o que ainda está na fila será cancelado</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
@@ -899,7 +902,7 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="settings_advanced_update_interval_monthly">Mensal</string>
     <string name="settings_advanced_update_interval_battery_warning">As verificações em segundo plano podem não funcionar de forma confiável em dispositivos que restringem aplicativos em segundo plano, como Xiaomi, Huawei, Samsung e OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Permitir gatilhos externos</string>
-    <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem o reparo em lote</string>
+    <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem a aplicação de patches em lote</string>
     <string name="external_batch_patch_title">Iniciar a aplicação de patches em lote?</string>
     <string name="external_batch_patch_description">%s quer que o Morphe aplique patches e instale aplicativos</string>
     <string name="external_batch_patch_trust_caller">Sempre permitir este aplicativo</string>
@@ -924,7 +927,7 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_mount_replaced_text">v%1$s substituiu o v%2$s corrigido. Abra o Morphe para restaurá-lo</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Expert</string>
-    <string name="settings_advanced_expert_mode_description">Desbloqueia configurações avançadas de reparo e opções de patch</string>
+    <string name="settings_advanced_expert_mode_description">Desbloqueia configurações avançadas de aplicação de patches e opções de patch</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ativar o Modo Expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">O Modo Expert oferece mais controle sobre como os patches são aplicados, mas configurar incorretamente pode resultar em um aplicativo não funcional</string>
     <string name="settings_advanced_strip_unused_libs">Otimizar para a arquitetura do dispositivo</string>
@@ -1266,6 +1269,7 @@ Detalhes: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalador desconhecido</string>
     <string name="settings_system_apk_download_helper_open_directly">Abrir o assistente imediatamente</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Pula as instruções de download e abre o assistente confiável</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Baixar APKs automaticamente em lote</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nenhum arquivo aqui</string>
     <string name="file_picker_read_error">Não é possível ler este diretório</string>
