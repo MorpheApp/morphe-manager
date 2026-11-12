@@ -64,14 +64,21 @@ class PatchPipeline(
         val preparation = prepareInput()
         try {
             val input = if (preparation.merged) {
-                // Moved rather than patched where it was merged, so it outlives the cleanup below
-                // and the app can keep it for repatching
-                withContext(Dispatchers.IO) {
-                    Files.move(
-                        preparation.file.toPath(),
-                        File(request.mergedApkFile).toPath(),
-                        StandardCopyOption.REPLACE_EXISTING
-                    ).toFile()
+                if (preparation.obbFiles.isEmpty()) {
+                    // Moved rather than patched where it was merged, so it outlives the cleanup below
+                    // and the app can keep it for repatching
+                    withContext(Dispatchers.IO) {
+                        Files.move(
+                            preparation.file.toPath(),
+                            File(request.mergedApkFile).toPath(),
+                            StandardCopyOption.REPLACE_EXISTING
+                        ).toFile()
+                    }
+                } else {
+                    // The merged APK lacks the OBB files patches may read, so the app keeps the
+                    // archive for repatching instead and the merged APK is left to the cleanup
+                    logger.info("Not keeping the merged APK, as the archive has OBB files")
+                    preparation.file
                 }.also { listener.stepCompleted() }
             } else {
                 preparation.file
@@ -89,6 +96,7 @@ class PatchPipeline(
                 workspaceDir = File(request.workspaceDir),
                 logger = logger,
                 input = input,
+                obbFiles = preparation.obbFiles,
                 keepArchitectures = keepArchitectures,
                 listener = listener
             ).use { it.run(File(request.outputFile), patches) }

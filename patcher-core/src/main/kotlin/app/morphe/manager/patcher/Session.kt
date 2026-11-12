@@ -29,6 +29,7 @@ import kotlin.time.measureTime
 internal typealias PatchList = List<Patch>
 
 /**
+ * @param obbFiles The OBB files of the archive [input] was merged from, keyed by their path inside it.
  * @param keepArchitectures The native libraries the output keeps, every one of them when empty.
  */
 class Session(
@@ -36,6 +37,7 @@ class Session(
     workspaceDir: File,
     private val logger: Logger,
     input: File,
+    obbFiles: Map<String, File>,
     keepArchitectures: Set<CpuArchitecture>,
     private val listener: PatchingListener
 ) : Closeable {
@@ -52,7 +54,8 @@ class Session(
             // The patcher drops every other ABI while it writes the output, sparing a second pass over it
             keepArchitectures = keepArchitectures,
             fileWorkspacePath = fileWorkspace,
-            progress = PatcherProgress(listener::taskProgress)
+            progress = PatcherProgress(listener::taskProgress),
+            obbFiles = obbFiles
         )
     )
 

@@ -440,7 +440,7 @@ fun BatchPatcherScreen(
                         usingMountInstall = search.item.useMount,
                         stockAppInstalled = search.item.source is BatchApkSource.Installed,
                         downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
-                        isApkBundle = metadata?.apkFileType?.isApk == false,
+                        apkFileType = metadata?.apkFileType,
                         onDismiss = viewModel::cancelApkSearch,
                         onOpenApkDownloadHelper = apkDownloadHelpers.open,
                         onContinue = viewModel::confirmApkSearch
@@ -553,7 +553,7 @@ fun BatchPatcherScreen(
 
     // Patching an app looks exactly like a single run, with a queue counter on top
     if (current != null && (current.phase == BatchPhase.RUNNING || holdSummary)) {
-        // The preflight dialog is a separate window and cannot animate into this one, so the
+        // The preflight dialog is a surface of its own and cannot animate into the patcher, so the
         // patcher fades in on its own to soften the switch
         val appear = remember { MutableTransitionState(false).apply { targetState = true } }
 
