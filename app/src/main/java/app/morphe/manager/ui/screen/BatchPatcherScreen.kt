@@ -28,7 +28,10 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.currentStateAsState
 import app.morphe.manager.R
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
@@ -137,6 +140,7 @@ fun BatchPatcherScreen(
     val installRequests: List<InstallQueueRequest> = installRequestsByItem.values.toList()
 
     val useExpertMode by prefs.useExpertMode.getAsState()
+    val autoDownloadApkHelpers by prefs.autoDownloadApkHelpersInBatch.getAsState()
 
     // Outlives its item so a round in play survives the gap between apps and the end of the queue
     var lastRun by remember { mutableStateOf<PatchRunProgress?>(null) }
@@ -206,6 +210,7 @@ fun BatchPatcherScreen(
     }
     // A queue nobody chose to keep would stay behind unnoticed, so leaving it asks what to do
     val close: () -> Unit = {
+        viewModel.stopAutoDownload()
         if (current?.asksBeforeLeaving == true) showKeepDialog = true
         else leave(current?.phase == BatchPhase.FINISHED)
     }
@@ -285,7 +290,7 @@ fun BatchPatcherScreen(
     val queueDialogs = listOfNotNull(
         QueueDialog.SourcePick.takeIf { viewModel.sourcePick != null },
         QueueDialog.ApkChoice.takeIf { viewModel.apkChoice != null },
-        QueueDialog.ApkSearch.takeIf { viewModel.apkSearch != null },
+        QueueDialog.ApkSearch.takeIf { viewModel.apkSearch?.auto == false },
         QueueDialog.AttachPrompt.takeIf { viewModel.attachPrompt != null },
         QueueDialog.Edit.takeIf { viewModel.edit != null }
     )
@@ -293,8 +298,29 @@ fun BatchPatcherScreen(
     // Kept outside the dialogs so the picker state survives the download dialog's exit animation
     WithApkDownloadHelpers(
         host = viewModel,
-        enabled = viewModel.apkChoice != null || viewModel.apkSearch != null
+        // A queue that downloads on its own needs the helpers resolved before it asks for one,
+        // with no dialog of its own to trigger that
+        enabled = viewModel.apkChoice != null ||
+                viewModel.apkSearch != null ||
+                (autoDownloadApkHelpers && current?.phase == BatchPhase.PREFLIGHT)
     ) { apkDownloadHelpers ->
+        // Helpers are found and started here, while the view model decides when one is asked for
+        LaunchedEffect(apkDownloadHelpers.isResolved, apkDownloadHelpers.canOpenAutomatically) {
+            viewModel.updateAutoHelperAvailability(
+                apkDownloadHelpers.canOpenAutomatically.takeIf { apkDownloadHelpers.isResolved }
+            )
+        }
+
+        val helpers by rememberUpdatedState(apkDownloadHelpers)
+        val autoSearch = viewModel.apkSearch?.takeIf { it.auto && !it.launched }
+        val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
+        LaunchedEffect(autoSearch, lifecycleState) {
+            // A helper started from the background would be refused by the system
+            if (autoSearch == null || lifecycleState != Lifecycle.State.RESUMED) return@LaunchedEffect
+            viewModel.onAutoDownloadLaunched()
+            if (!helpers.openAutomatically()) viewModel.cancelAutoDownload()
+        }
+
         DialogStack(queueDialogs) { dialog ->
             when (dialog) {
                 // The same source question simple mode answers before a single-app patch, asked on
@@ -565,7 +591,10 @@ fun BatchPatcherScreen(
                                 TitleAction(
                                     icon = MaterialSymbols.Rounded.Delete,
                                     contentDescription = stringResource(R.string.clear),
-                                    onClick = { showClearDialog = true },
+                                    onClick = {
+                                        viewModel.stopAutoDownload()
+                                        showClearDialog = true
+                                    },
                                     style = TitleActionStyle.Destructive
                                 )
                             }
@@ -596,7 +625,10 @@ fun BatchPatcherScreen(
                 BatchDialogButtons(
                     state = current,
                     canInstall = installRequests.isNotEmpty(),
+                    canStart = current != null && viewModel.canStart(current),
+                    autoStartPending = viewModel.autoStartPending,
                     onStart = viewModel::start,
+                    onStopAutoDownload = viewModel::stopAutoDownload,
                     onInstallAll = { startInstallQueue(installRequests) },
                     onClose = close
                 )
@@ -691,20 +723,34 @@ private enum class QueueDialog { SourcePick, ApkChoice, ApkSearch, AttachPrompt,
 private fun BatchDialogButtons(
     state: BatchRunState?,
     canInstall: Boolean,
+    canStart: Boolean,
+    autoStartPending: Boolean,
     onStart: () -> Unit,
+    onStopAutoDownload: () -> Unit,
     onInstallAll: () -> Unit,
     onClose: () -> Unit
 ) {
     when (state?.phase) {
         // Closing keeps the queue for apps added later, once the user chose to keep it
-        BatchPhase.PREFLIGHT -> AppDialogButtonRow(
-            primaryText = stringResource(R.string.batch_patch_start),
-            primaryIcon = MaterialSymbols.Rounded.Play_arrow,
-            onPrimaryClick = onStart,
-            primaryEnabled = state.runnable.isNotEmpty(),
-            secondaryText = stringResource(R.string.close),
-            onSecondaryClick = onClose
-        )
+        // Start turns into a way out while it waits on the automatic downloads
+        BatchPhase.PREFLIGHT -> if (autoStartPending) {
+            AppDialogButtonRow(
+                primaryText = stringResource(R.string.batch_patch_auto_download_stop),
+                primaryIcon = MaterialSymbols.Rounded.Stop,
+                onPrimaryClick = onStopAutoDownload,
+                secondaryText = stringResource(R.string.close),
+                onSecondaryClick = onClose
+            )
+        } else {
+            AppDialogButtonRow(
+                primaryText = stringResource(R.string.batch_patch_start),
+                primaryIcon = MaterialSymbols.Rounded.Play_arrow,
+                onPrimaryClick = onStart,
+                primaryEnabled = canStart,
+                secondaryText = stringResource(R.string.close),
+                onSecondaryClick = onClose
+            )
+        }
 
         BatchPhase.FINISHED -> if (canInstall) {
             AppDialogButtonRow(

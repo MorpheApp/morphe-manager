@@ -494,6 +494,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_force_version_done">Queued anyway, the app may break</string>
     <string name="batch_patch_accept_signature_done">Queued anyway, APK not verified</string>
     <string name="batch_patch_apk_selected">APK selected</string>
+    <string name="batch_patch_auto_download_stopped">Automatic APK downloads stopped</string>
+    <string name="batch_patch_auto_download_stop">Stop downloads</string>
+    <string name="batch_patch_auto_download_kept">The downloaded APK could not be used, so the previous one is kept</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
     <string name="batch_patch_state_no_apk">No APK</string>
     <string name="batch_patch_state_no_patches">No patches</string>
@@ -1350,6 +1353,8 @@ Details: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installer unknown</string>
     <string name="settings_system_apk_download_helper_open_directly">Open helper right away</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Skips the download instructions and opens the trusted helper</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Download APKs automatically in batch</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Checks every queued app for the newest version its patches support and downloads it with the first trusted helper when it is missing or behind</string>
 
     <!-- File Picker -->
     <string name="file_picker_no_files">No files here</string>

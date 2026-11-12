@@ -44,6 +44,9 @@ interface ApkDownloadHelperHost {
 
     /** Takes a helper's answer that the user installed the app from an app store instead. */
     fun onHelperInstalledAppChosen(packageName: String)
+
+    /** Called when a helper returned without a usable answer, the user backing out of it included. */
+    fun onHelperDismissed() = Unit
 }
 
 /**
