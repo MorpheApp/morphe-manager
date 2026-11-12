@@ -180,8 +180,7 @@ internal fun LazyListScope.groupedAppCards(
                     item = item,
                     onAppClick = {
                         if (state.isMultiSelectMode) {
-                            state.selectedAppRequester = requester.takeUnless { selectedPackages.contains(item.id) }
-                            state.toggleInGroup(item.id, groupKey)
+                            state.toggleInGroup(item.id, groupKey, requester)
                         } else {
                             appActions.onAppClick(item)
                         }
@@ -196,8 +195,7 @@ internal fun LazyListScope.groupedAppCards(
                         // Skip so the category bar doesn't overlap with app multi-select
                         if (!state.isCategoryBarVisible) {
                             state.isMultiSelectMode = true
-                            state.selectedAppRequester = requester.takeUnless { selectedPackages.contains(item.id) }
-                            state.toggleInGroup(item.id, groupKey)
+                            state.toggleInGroup(item.id, groupKey, requester)
                         }
                     },
                     modifier = Modifier.animateItem().bringIntoViewRequester(requester)
@@ -248,8 +246,7 @@ internal fun LazyListScope.flatAppCards(
             onAppClick = {
                 if (state.isMultiSelectMode) {
                     // In multi-select mode taps toggle selection
-                    state.selectedAppRequester = requester.takeUnless { selectedPackages.contains(item.id) }
-                    selectedPackages.toggle(item.id)
+                    state.toggleSelection(item.id, requester)
                 } else {
                     appActions.onAppClick(item)
                 }
@@ -264,8 +261,7 @@ internal fun LazyListScope.flatAppCards(
             onLongPress = {
                 // Long-press enters multi-select and toggles this card
                 state.isMultiSelectMode = true
-                state.selectedAppRequester = requester.takeUnless { selectedPackages.contains(item.id) }
-                selectedPackages.toggle(item.id)
+                state.toggleSelection(item.id, requester)
             },
             onMoveUp = if (directReorderAllowed && index > 0) {
                 { moveBy(offset = -1, announcePosition = 0) }
