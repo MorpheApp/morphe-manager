@@ -1,12 +1,15 @@
-package app.morphe.manager.patcher.split
+/*
+ * Copyright 2026 Morphe.
+ * https://github.com/MorpheApp/morphe-manager
+ */
 
-import app.morphe.manager.patcher.logger.LogLevel
-import app.morphe.manager.patcher.logger.Logger
+package app.morphe.manager.patcher.logger
+
 import app.morphe.patcher.logging.LogLevel as PatcherLogLevel
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-internal class PatcherLoggerAdapterTest {
+internal class PatcherLoggerTest {
     @Test
     fun `forwards patcher log levels to the manager logger`() {
         val managerLogger = RecordingLogger()

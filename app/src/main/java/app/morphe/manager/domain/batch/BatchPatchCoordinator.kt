@@ -36,7 +36,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
 import java.io.File
-import java.io.IOException
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
@@ -622,6 +621,8 @@ class BatchPatchCoordinator(
             .filter { it.uid in item.selection.keys }
             .map { PatchSourceRef(it.name, it.version) }
 
+        // Whether the worker kept the APK merged from a split archive, which then stands in for it
+        var mergedApkKept = false
         val args = PatcherWorker.Args(
             input = selectedApp,
             output = outputFile.path,
@@ -633,7 +634,10 @@ class BatchPatchCoordinator(
             onPatchingRestarted = { runProgress.onRestart() },
             // Called on the worker's thread, while the steps are only ever changed on the main one
             setInputFile = { file, needsSplit, merged ->
-                withContext(Dispatchers.Main) { runProgress.updateSplitRequirement(file, needsSplit, merged) }
+                withContext(Dispatchers.Main) {
+                    if (merged) mergedApkKept = true
+                    runProgress.updateSplitRequirement(file, needsSplit, merged)
+                }
             },
             onProgress = runProgress::onProgress,
             onTaskProgress = runProgress::onTaskProgress,
@@ -659,7 +663,7 @@ class BatchPatchCoordinator(
             when (finished?.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     val retained = withContext(NonCancellable) {
-                        finishSuccessfulItem(item, selectedApp, outputFile)
+                        finishSuccessfulItem(item, selectedApp, outputFile, mergedApkKept)
                     }
                     succeeded = true
                     updateItem(index) {
@@ -757,12 +761,14 @@ class BatchPatchCoordinator(
      * Retains the original and patched APKs and records the patched app, so the summary can
      * install it and the app shows up on the home screen exactly like a single-app run.
      *
+     * @param mergedApkKept whether the worker already kept the APK merged from a split archive.
      * @return the file the summary installs from, or null when the patched APK is gone.
      */
     private suspend fun finishSuccessfulItem(
         item: BatchPatchItem,
         selectedApp: SelectedApp,
-        outputFile: File
+        outputFile: File,
+        mergedApkKept: Boolean
     ): File? = withContext(Dispatchers.IO) {
         if (!outputFile.exists()) return@withContext null
 
@@ -772,7 +778,7 @@ class BatchPatchCoordinator(
             ?: "unspecified"
         val currentPackageName = patchedInfo?.packageName ?: item.packageName
 
-        saveOriginalApk(item, selectedApp, version)
+        if (!mergedApkKept) saveOriginalApk(item, selectedApp, version)
 
         val isClone = item.producesCloneAs(currentPackageName)
         // A configuration belongs to the card it was built from, which is the app itself unless
@@ -839,11 +845,11 @@ class BatchPatchCoordinator(
     }
 
     /**
-     * Keeps the unpatched APK for future runs. Split archives are skipped because the patcher
-     * already stored the merged mono-APK it built from them, which is the better input for a
-     * later run than the archive itself. A mount keeps the archive, as the stock app it restores
-     * is installed from its signed splits. An archive with OBB files is kept as well, as the
-     * patcher does not store the merged APK, which lacks them.
+     * Keeps the unpatched APK for future runs. Not called once the worker kept the mono-APK it
+     * merged from a split archive, which is the better input for a later run than the archive.
+     * The archive itself is kept where the worker does not hand over a merged APK: for a mount,
+     * as the stock app it restores is installed from its signed splits, and for an archive with
+     * OBB files, which the merged APK lacks.
      */
     private suspend fun saveOriginalApk(
         item: BatchPatchItem,
@@ -851,7 +857,6 @@ class BatchPatchCoordinator(
         patchedVersion: String
     ) {
         val file = (selectedApp as? SelectedApp.Local)?.file?.takeIf { it.exists() } ?: return
-        if (!item.useMount && SplitApkPreparer.isSplitArchive(file) && !hasObbFiles(file)) return
         // Recorded under its own version, which a patch may have renamed in the patched build
         val version = pm.getPackageInfo(file)?.versionName?.takeUnless { it.isBlank() }
             ?: item.version
@@ -868,14 +873,6 @@ class BatchPatchCoordinator(
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }
-
-    private fun hasObbFiles(archive: File): Boolean =
-        try {
-            SplitApkPreparer.hasObbFiles(archive)
-        } catch (e: IOException) {
-            Log.w(TAG, "Failed to look for OBB files in ${archive.name}", e)
-            false
-        }
 
     private fun markRemainingCancelled() {
         _state.update { state ->
