@@ -8,7 +8,10 @@ package app.morphe.manager.ui.screen.home
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -172,11 +175,12 @@ internal fun LazyListScope.groupedAppCards(
                 key = { item -> "category_${group.id ?: "uncategorized"}_${item.id}" },
                 contentType = { APP_CARD_CONTENT_TYPE }
             ) { item ->
+                val requester = remember { BringIntoViewRequester() }
                 DynamicAppCard(
                     item = item,
                     onAppClick = {
                         if (state.isMultiSelectMode) {
-                            state.toggleInGroup(item.id, groupKey)
+                            state.toggleInGroup(item.id, groupKey, requester)
                         } else {
                             appActions.onAppClick(item)
                         }
@@ -191,10 +195,10 @@ internal fun LazyListScope.groupedAppCards(
                         // Skip so the category bar doesn't overlap with app multi-select
                         if (!state.isCategoryBarVisible) {
                             state.isMultiSelectMode = true
-                            state.toggleInGroup(item.id, groupKey)
+                            state.toggleInGroup(item.id, groupKey, requester)
                         }
                     },
-                    modifier = Modifier.animateItem()
+                    modifier = Modifier.animateItem().bringIntoViewRequester(requester)
                 )
             }
         }
@@ -219,6 +223,7 @@ internal fun LazyListScope.flatAppCards(
         key = { _, item -> item.id },
         contentType = { _, _ -> APP_CARD_CONTENT_TYPE }
     ) { index, item ->
+        val requester = remember { BringIntoViewRequester() }
         // Moves the card one step and reports where it landed, so a screen reader user hears
         // the result of an action they cannot see
         fun moveBy(offset: Int, announcePosition: Int) {
@@ -241,7 +246,7 @@ internal fun LazyListScope.flatAppCards(
             onAppClick = {
                 if (state.isMultiSelectMode) {
                     // In multi-select mode taps toggle selection
-                    selectedPackages.toggle(item.id)
+                    state.toggleSelection(item.id, requester)
                 } else {
                     appActions.onAppClick(item)
                 }
@@ -256,7 +261,7 @@ internal fun LazyListScope.flatAppCards(
             onLongPress = {
                 // Long-press enters multi-select and toggles this card
                 state.isMultiSelectMode = true
-                selectedPackages.toggle(item.id)
+                state.toggleSelection(item.id, requester)
             },
             onMoveUp = if (directReorderAllowed && index > 0) {
                 { moveBy(offset = -1, announcePosition = 0) }
@@ -266,6 +271,7 @@ internal fun LazyListScope.flatAppCards(
             } else null,
             modifier = Modifier
                 .animateItem()
+                .bringIntoViewRequester(requester)
                 .then(
                     if (index == 0 && onboardingState != null)
                         Modifier.onGloballyPositioned { coords ->
