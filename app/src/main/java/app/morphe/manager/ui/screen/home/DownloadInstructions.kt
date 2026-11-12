@@ -35,6 +35,7 @@ import app.morphe.manager.domain.manager.ApkDownloadSource
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.theme.isDarkTheme
 import app.morphe.manager.util.*
+import app.morphe.patcher.patch.ApkFileType
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import com.composables.icons.materialsymbols.roundedfilled.*
@@ -50,7 +51,9 @@ private enum class SiteButton { ApkMirror, Uptodown, GitHubAssets, ApkCube }
 
 private val UptodownBrandColor = Color(0xFF4CB050)
 
-private val ApkCubeButtonColor = Color(0xFF1F63D6)
+/** APKCube's call-to-action blue, a shade brighter on its dark theme. */
+private val ApkCubeButtonColorLight = Color(0xFF0066DB)
+private val ApkCubeButtonColorDark = Color(0xFF1368E9)
 
 /**
  * One numbered instruction line.
@@ -193,7 +196,7 @@ private fun ApkDownloadSource.instructionSteps(
  * @param downloadUrl Best link known so far. Null or still unresolved keeps the wording generic.
  * @param requestedVersion Version the APK has to be. Null when any version can be patched.
  * @param downloadColor App accent color, which APKMirror tints its download button with.
- * @param isApkBundle Whether the bundle requires a split archive, which APKMirror labels differently.
+ * @param apkFileType File type the bundle asks for, which APKMirror and APKCube put on their buttons.
  * @param onOpenApkDownloadHelper Downloads through a trusted helper app, null while none is.
  * @param onTrustApkDownloadHelpers Opens where a helper installed but not trusted yet is let in,
  * null while there is none or nowhere to open that from.
@@ -209,7 +212,7 @@ internal fun DialogHostScope.DownloadInstructionsDialog(
     usingMountInstall: Boolean,
     stockAppInstalled: Boolean,
     downloadColor: Color,
-    isApkBundle: Boolean,
+    apkFileType: ApkFileType?,
     onDismiss: () -> Unit,
     onOpenApkDownloadHelper: (() -> Unit)? = null,
     onTrustApkDownloadHelpers: (() -> Unit)? = null,
@@ -332,7 +335,7 @@ internal fun DialogHostScope.DownloadInstructionsDialog(
                                         SiteDownloadButton(
                                             button = button,
                                             downloadColor = downloadColor,
-                                            isApkBundle = isApkBundle
+                                            apkFileType = apkFileType
                                         )
                                     }
                                 }
@@ -374,7 +377,7 @@ internal fun DialogHostScope.DownloadInstructionsDialog(
 private fun SiteDownloadButton(
     button: SiteButton,
     downloadColor: Color,
-    isApkBundle: Boolean
+    apkFileType: ApkFileType?
 ) {
     val messages = koinInject<UserMessages>()
     val nudges = listOf(
@@ -394,6 +397,7 @@ private fun SiteDownloadButton(
     when (button) {
         // APKMirror tints its download button with the app's own accent color
         SiteButton.ApkMirror -> {
+            val isApkBundle = apkFileType?.isApk == false
             val buttonColor = downloadColor.ensureContrast(MaterialTheme.colorScheme.background)
             val contentColor = buttonColor.contrastingContent()
 
@@ -469,26 +473,31 @@ private fun SiteDownloadButton(
             }
         }
 
-        // APKCube's button is the same blue in light and dark themes
+        // APKCube keeps its own blue for every app and follows the page theme, as its site does
         SiteButton.ApkCube -> Surface(
             onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(ApkCubeButtonCornerRadius),
-            color = ApkCubeButtonColor,
+            color = if (isDarkTheme()) ApkCubeButtonColorDark else ApkCubeButtonColorLight,
             shadowElevation = 2.dp
         ) {
             Row(
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(ApkCubeButtonHeight)
+                    .padding(horizontal = 32.dp),
+                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     imageVector = MaterialSymbols.Rounded.Download,
                     contentDescription = null,
                     tint = Color.White,
-                    modifier = Modifier.size(Defaults.IconSizeSmall)
+                    modifier = Modifier.size(ApkCubeButtonIconSize)
                 )
                 Text(
-                    text = "Download APK",
+                    // APKCube packs every split app into an APKS, whatever archive the bundle asks for
+                    text = if (apkFileType?.isApk == false) "Download APKS" else "Download APK",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
@@ -615,8 +624,14 @@ private val UptodownButtonCornerRadius = 8.dp
 /** Rounding of the boxes GitHub draws around a release's files. */
 private val GitHubCornerRadius = 6.dp
 
-/** Rounding of APKCube's download button. */
-private val ApkCubeButtonCornerRadius = 8.dp
+/** Rounding of APKCube's download button, 0.6 of its 10px base radius. */
+private val ApkCubeButtonCornerRadius = 6.dp
+
+/** Height of the large download button on APKCube's download page. */
+private val ApkCubeButtonHeight = 48.dp
+
+/** Side of the download icon on APKCube's large button. */
+private val ApkCubeButtonIconSize = 18.dp
 
 /**
  * One step of the instructions: its [number] on a disc in the color of the app being patched, and a

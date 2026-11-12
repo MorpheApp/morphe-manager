@@ -288,9 +288,8 @@ private fun DialogHostScope.PatchFlowDialog(
                 usingMountInstall = flow.usingMountInstall,
                 stockAppInstalled = session.stockAppInstalled == true,
                 downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
-                // True when the patch bundle explicitly requires a split archive (APKM/APKS/XAPK).
-                // In that case the APKMirror button label becomes "DOWNLOAD APK BUNDLE" to match the site.
-                isApkBundle = metadata?.apkFileType?.isApk == false,
+                // File type the patch bundle asks for, so the site buttons are labeled as the sites label them
+                apkFileType = metadata?.apkFileType,
                 onDismiss = flow::backFromApkSource,
                 onOpenApkDownloadHelper = apkDownloadHelpers.open,
                 onTrustApkDownloadHelpers = onTrustApkDownloadHelpers.takeIf { apkDownloadHelpers.hasUntrusted },
