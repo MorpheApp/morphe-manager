@@ -1,3 +1,20 @@
+## [2.6.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0...v2.6.0-dev.1) (2026-11-12)
+
+### Features
+
+* Download missing and outdated APKs in batch with a trusted helper ([#1406](https://github.com/MorpheApp/morphe-manager/issues/1406)) ([19bdf7b](https://github.com/MorpheApp/morphe-manager/commit/19bdf7b2274f96e19a5c1a03e23a02d7806bf557))
+* Pass the OBB files of a split archive to patches ([#1404](https://github.com/MorpheApp/morphe-manager/issues/1404)) ([7d3a951](https://github.com/MorpheApp/morphe-manager/commit/7d3a95109373fb0ed503b6602826b6d587568926))
+
+### Performance Improvements
+
+* Keep one bring into view spec while list insets ease ([8baa7ef](https://github.com/MorpheApp/morphe-manager/commit/8baa7efa04a5916e819ffb8a7b06296518f6681f))
+
+### Bug Fixes
+
+* Draw dialogs as part of the screen they open on ([#1429](https://github.com/MorpheApp/morphe-manager/issues/1429)) ([cd702b5](https://github.com/MorpheApp/morphe-manager/commit/cd702b5402fa78db937894a89a9329fb6f4d68ae))
+* Match APKCube download button to its site ([#1379](https://github.com/MorpheApp/morphe-manager/issues/1379)) ([5a9b200](https://github.com/MorpheApp/morphe-manager/commit/5a9b2000e0cd59a46bd4155531f17c8aefd20848))
+* Scroll selected apps above the action panel ([#1405](https://github.com/MorpheApp/morphe-manager/issues/1405)) ([e215e55](https://github.com/MorpheApp/morphe-manager/commit/e215e55b1ec6ba9a6c887161cdde253fdeab7568))
+
 ## [2.5.0](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0) (2026-11-06)
 
 ### Features
