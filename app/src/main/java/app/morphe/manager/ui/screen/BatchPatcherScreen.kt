@@ -358,7 +358,7 @@ fun BatchPatcherScreen(
                         usingMountInstall = search.item.useMount,
                         stockAppInstalled = search.item.source is BatchApkSource.Installed,
                         downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
-                        isApkBundle = metadata?.apkFileType?.isApk == false,
+                        apkFileType = metadata?.apkFileType,
                         onDismiss = viewModel::cancelApkSearch,
                         onOpenApkDownloadHelper = apkDownloadHelpers.open,
                         onContinue = viewModel::confirmApkSearch
