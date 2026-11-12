@@ -495,6 +495,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_accept_signature_done">Queued anyway, APK not verified</string>
     <string name="batch_patch_apk_selected">APK selected</string>
     <string name="batch_patch_auto_download_stopped">Automatic APK downloads stopped</string>
+    <string name="batch_patch_auto_download_stop">Stop downloads</string>
+    <string name="batch_patch_auto_download_kept">The downloaded APK could not be used, so the previous one is kept</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
     <string name="batch_patch_state_no_apk">No APK</string>
     <string name="batch_patch_state_no_patches">No patches</string>

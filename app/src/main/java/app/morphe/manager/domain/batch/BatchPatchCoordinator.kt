@@ -244,6 +244,18 @@ class BatchPatchCoordinator(
     fun attachApk(itemId: String, file: File) =
         reresolveItem(itemId) { item -> resolver.reattach(item, file) }
 
+    /**
+     * Re-resolves one item against an APK fetched for it without the user picking the file. An app
+     * that had an APK already keeps it where the fetched one leaves nothing to patch, since the user
+     * never chose to give up the one that worked.
+     */
+    fun attachFetchedApk(itemId: String, file: File) =
+        reresolveItem(itemId) { item ->
+            val attached = resolver.reattach(item, file)
+            val usable = attached.state == BatchItemState.READY || attached.state == BatchItemState.NO_SELECTION
+            if (usable || item.source == null) attached else item.also { file.delete() }
+        }
+
     /** Re-resolves one item against the APK the user picked, saved original or installed app. */
     fun useSource(itemId: String, preferInstalled: Boolean) =
         reresolveItem(itemId) { item -> resolver.useSource(item, preferInstalled) }

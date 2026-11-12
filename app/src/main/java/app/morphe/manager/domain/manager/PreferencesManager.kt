@@ -186,11 +186,7 @@ class PreferencesManager(
     /** Whether asking for an APK starts the helper flow at once, over the download instructions. */
     val openApkDownloadHelperDirectly = booleanPreference("open_apk_download_helper_directly", false)
 
-    /**
-     * Whether a batch queue keeps every app at the newest APK version its patches support, asking
-     * a helper for the ones that are missing it or behind it, rather than leaving each of them for
-     * the user to send to one.
-     */
+    /** Whether a batch queue asks the trusted helper for APKs that are missing or behind on its own. */
     val autoDownloadApkHelpersInBatch = booleanPreference("auto_download_apk_helpers_in_batch", false)
 
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")

@@ -9,9 +9,8 @@ import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.util.compareVersions
 
 /**
- * Versions an automatic helper pass may choose from for [item]: the sources the app is patched
- * from, the source the user picked, or every source while nothing has contributed yet. Sources
- * keep the order the user put them in, which is what makes one version the recommended one.
+ * Versions the automatic pass may ask for [item], from the sources it is patched from. Their order
+ * is kept, as it decides which version is the recommended one.
  */
 internal fun batchAutoDownloadTargets(
     item: BatchPatchItem,
@@ -27,25 +26,8 @@ internal fun batchAutoDownloadTargets(
 }
 
 /**
- * Whether an automatic helper pass should fetch an APK for this queued app.
- *
- * The pass asks for the newest version the patches offer, so an app is wanted when it has no
- * APK at all, when the one it has is older than that version, or when a version the patches do
- * accept still carries a build code they do not. An app already at the newest version is left
- * alone, and one past it is never downgraded. An app the pass cannot check the signature of, one
- * the user took out of the run, and one whose patches are not selected have nothing to gain from
- * a download either.
- *
- * An app whose selection was edited by hand is left as it is: fetching another APK resolves the
- * app from scratch, which would drop that edit without the user asking for it. The same goes for
- * a version the user accepted despite the patches not supporting it, and for a version they
- * turned down on the home screen, which they can still pick by hand.
- *
- * @param newest Newest version the sources offer for the app, null when they name none, which is
- *   what universal patches leave behind.
- * @param canVerifySignature Whether the APK this item would receive can have its signature
- *   checked, see [app.morphe.manager.ui.model.helperSignatureCheckAvailable].
- * @param ignoredVersion Version the user turned down for this app on the home screen, if any.
+ * Whether the automatic pass should fetch [newest] for this app: it has no APK or one behind it.
+ * Choices the user made by hand are left alone, since a new APK resolves the app from scratch.
  */
 internal fun BatchPatchItem.autoDownloadWanted(
     newest: BundledAppTarget?,

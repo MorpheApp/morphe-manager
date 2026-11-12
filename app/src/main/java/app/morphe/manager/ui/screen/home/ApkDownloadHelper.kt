@@ -36,10 +36,7 @@ import org.koin.compose.koinInject
  * @param opensDirectly Whether the user asked for the helper flow to start as soon as an APK is
  *   needed, see [showInstructions].
  * @param opensAutomatically Starts the first trusted helper without asking, null while none is.
- *   Meant for a flow that already made the hand-off a choice of its own, see
- *   [app.morphe.manager.domain.manager.PreferencesManager.autoDownloadApkHelpersInBatch].
- * @param isResolved Whether the installed helpers were looked up already, so [canOpenAutomatically]
- *   answers about the device rather than about the lookup still running.
+ * @param isResolved Whether the installed helpers were looked up already.
  */
 @Immutable
 class ApkDownloadHelperOffer(
@@ -52,13 +49,7 @@ class ApkDownloadHelperOffer(
     /** Whether a helper is there for a flow that asks for one on its own. */
     val canOpenAutomatically get() = opensAutomatically != null
 
-    /**
-     * Starts the first trusted helper for an automatic download.
-     *
-     * @return False when the flow has nothing left to ask about, or the helper is gone. The
-     *   automatic flow drops its request on false rather than waiting for a result that is
-     *   not coming.
-     */
+    /** Starts the first trusted helper for an automatic download, false when it could not. */
     fun openAutomatically(): Boolean = opensAutomatically?.invoke() == true
 
     /**
