@@ -192,7 +192,7 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                     )
                 } else {
                     VersionListCard(
-                        versions = offeredVersions.map { it.target.version ?: anyString },
+                        versions = offeredVersions.map { it.target.version },
                         experimentalVersions = offeredVersions.experimentalVersions(),
                         descriptions = offeredVersions
                             .mapNotNull { b -> b.target.version?.let { v -> b.target.description?.let { d -> v to d } } }
@@ -222,7 +222,7 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                 )
 
                 VersionListCard(
-                    versions = listOf(recommendedVersion?.version ?: anyString),
+                    versions = listOf(recommendedVersion?.version),
                     showUnpatchedBadge = true,
                     versionCodes = compatibleVersions
                         .firstOrNull { it.target.version == recommendedVersion?.version }
@@ -697,6 +697,7 @@ private fun SourceVersionListCard(
     }
     val sourcesByUid = rememberSourcesByUid()
     val selectedLabel = stringResource(R.string.home_selected_version)
+    val copyToClipboard = rememberCopyToClipboard(stringResource(R.string.home_version_copied))
 
     // A card of its own for each source, headed by it and edged in its color, as the patch list
     // blocks out its sources. A lone source needs no heading, the dialog is about it already
@@ -768,7 +769,7 @@ private fun SourceVersionListCard(
                             version = versionString,
                             tags = tags,
                             buildCode = bundled.buildCodes?.firstOrNull()?.toLong(),
-                            copyable = target.version != null,
+                            onCopy = copyToClipboard.takeIf { onVersionSelect == null && target.version != null },
                             description = target.description,
                             // A list only read keeps no room for a check, and bolds the
                             // recommended version instead of the pick
@@ -788,13 +789,16 @@ private fun SourceVersionListCard(
     }
 }
 
-/** Versions only read rather than picked from, in one [VersionPanel] with an optional [title]. */
+/**
+ * Versions only read rather than picked from, in one [VersionPanel] with an optional [title].
+ * A null version stands for any version, which has nothing to copy.
+ */
 @Composable
 private fun VersionListCard(
     modifier: Modifier = Modifier,
     title: String? = null,
     icon: ImageVector? = null,
-    versions: List<String>,
+    versions: List<String?>,
     recommendedIndex: Int = 0,
     showUnpatchedBadge: Boolean = false,
     experimentalVersions: Set<String> = emptySet(),
@@ -807,6 +811,7 @@ private fun VersionListCard(
     if (versions.isEmpty()) return
 
     val anyString = stringResource(R.string.any_version)
+    val copyToClipboard = rememberCopyToClipboard(stringResource(R.string.home_version_copied))
 
     VersionPanel(
         modifier = modifier,
@@ -814,21 +819,22 @@ private fun VersionListCard(
         header = title?.let { { CardHeader(title = it, accentColor = null, icon = icon) } }
     ) {
         versions.forEachIndexed { index, version ->
+            val isIncompatible = version != null && version in incompatibleSdkVersions
             val tags = versionTagsOf(
-                isIncompatible = version in incompatibleSdkVersions,
-                isExperimental = version in experimentalVersions,
+                isIncompatible = isIncompatible,
+                isExperimental = version != null && version in experimentalVersions,
                 isUnpatched = showUnpatchedBadge && versions.size == 1,
                 isRecommended = index == recommendedIndex && !showUnpatchedBadge,
-                isSaved = version == savedVersion,
-                isInstalled = version == installedVersion
+                isSaved = version != null && version == savedVersion,
+                isInstalled = version != null && version == installedVersion
             )
             VersionRow(
-                version = version,
+                version = version ?: anyString,
                 tags = tags,
-                buildCode = versionCodes[version]?.firstOrNull()?.toLong(),
-                copyable = version != anyString,
-                description = descriptions[version],
-                enabled = version !in incompatibleSdkVersions,
+                buildCode = version?.let { versionCodes[it] }?.firstOrNull()?.toLong(),
+                onCopy = copyToClipboard.takeIf { version != null },
+                description = version?.let { descriptions[it] },
+                enabled = !isIncompatible,
                 emphasized = index == recommendedIndex
             )
             if (index < versions.lastIndex) {
@@ -876,8 +882,8 @@ private fun VersionPanel(
  *
  * @param selected Whether it is the pick, for a list picked from, which checks it in the app's
  *   color. Null for a list only read, which keeps no room for a check.
- * @param copyable Whether pressing a row that is no pick copies its version and build, for a list
- *   read to search a website by. Ignored by a row that is picked from, where a press is the pick.
+ * @param onCopy Copies the version and build of a row that is no pick, for a list read to search a
+ *   website by. Ignored by a row that is picked from, where a press is the pick.
  * @param emphasized Sets the version in bold, as the pick or the recommended one is.
  * @param contentDescription What a screen reader announces the row as, in place of its texts.
  */
@@ -889,7 +895,7 @@ private fun VersionRow(
     buildCode: Long? = null,
     description: String? = null,
     selected: Boolean? = null,
-    copyable: Boolean = false,
+    onCopy: ((String) -> Unit)? = null,
     enabled: Boolean = true,
     emphasized: Boolean = selected == true,
     versionColor: Color = dialogTextColor(),
@@ -897,7 +903,6 @@ private fun VersionRow(
     contentDescription: String? = null
 ) {
     val (onHandTags, badgeTags) = tags.partition { it.isOnHand }
-    val copyToClipboard = rememberCopyToClipboard(stringResource(R.string.home_version_copied))
     val copyLabel = stringResource(R.string.home_version_copy)
 
     Row(
@@ -906,11 +911,11 @@ private fun VersionRow(
             .then(
                 if (selected != null && onClick != null && enabled) {
                     Modifier.shapedSelectable(VersionPanelShape, selected = selected, role = Role.RadioButton, onClick = onClick)
-                } else if (copyable && onClick == null && enabled) {
+                } else if (onCopy != null && onClick == null && enabled) {
                     Modifier.shapedClickable(
                         VersionPanelShape,
                         onClickLabel = copyLabel,
-                        onClick = { copyToClipboard(copyableVersion(version, buildCode)) }
+                        onClick = { onCopy(copyableVersion(version, buildCode)) }
                     )
                 } else Modifier
             )
