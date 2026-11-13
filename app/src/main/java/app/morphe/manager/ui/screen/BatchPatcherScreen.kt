@@ -642,6 +642,19 @@ fun BatchPatcherScreen(
             ) {
                 if (current == null) return@DialogLazyList
 
+                // Heads the queue while it is planned too and stays first, as the list holds on to
+                // its first row: a row coming in above it would open the list scrolled past that row
+                if (current.phase == BatchPhase.PLANNING || current.phase == BatchPhase.PREFLIGHT) {
+                    item(key = "policy") {
+                        BatchPolicyCard(
+                            policy = current.policy,
+                            mountCount = current.runnable.count { it.useMount },
+                            runnableCount = current.runnable.size,
+                            onPolicyChange = viewModel::setPolicy
+                        )
+                    }
+                }
+
                 // Mixing sources is decided by the plan, not by the user, so this is the one place
                 // it can be pointed out. Said once for the run rather than blocking the queue
                 if (current.phase == BatchPhase.PREFLIGHT &&
@@ -665,17 +678,6 @@ fun BatchPatcherScreen(
                             text = stringResource(R.string.batch_patch_saved_hint),
                             icon = MaterialSymbols.Rounded.Save,
                             modifier = Modifier.animateItem()
-                        )
-                    }
-                }
-
-                if (current.phase == BatchPhase.PREFLIGHT) {
-                    item {
-                        BatchPolicyCard(
-                            policy = current.policy,
-                            mountCount = current.runnable.count { it.useMount },
-                            runnableCount = current.runnable.size,
-                            onPolicyChange = viewModel::setPolicy
                         )
                     }
                 }
