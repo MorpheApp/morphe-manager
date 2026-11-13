@@ -380,8 +380,11 @@ class RootInstaller(
         if (!apkFile.exists()) throw Exception("File doesn't exist")
 
         val source = if (asPlayStore) "-i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} " else ""
-        execute("pm install -t --user $appUserId $source-r ${apkFile.absolutePath.shellQuote()}")
-            .assertSuccess("Failed to install APK")
+        execute(
+            withSystemReadableCopies(INSTALL_TEMP_DIR, listOf(apkFile.absolutePath)) { (apk) ->
+                "pm install -t --user $appUserId $source-r $apk"
+            }
+        ).assertSuccess("Failed to install APK")
     }
 
     /** Uninstalls [packageName] for the user Morphe runs in, the one [installPackage] installs for. */
@@ -491,30 +494,15 @@ class RootInstaller(
      * @throws StockAppInstallException If no such build settles.
      */
     private suspend fun installStockApks(apkPaths: List<String>, packageName: String, settled: (PackageInfo) -> Boolean) {
-        val tempDirQuoted = "/data/local/tmp/morphe-stock-$packageName".shellQuote()
-        val writes = apkPaths.joinToString(" && ") { path ->
-            val name = File(path).name.shellQuote()
-            $$"""pm install-write -S "$(stat -c %s $$tempDirQuoted/$$name)" "$session" $$name $$tempDirQuoted/$$name"""
-        }
-
-        // The subshell keeps exit from closing the shared root shell, which would leave the
-        // commands queued after this one reading nothing back. A module that fails to write
-        // abandons the session, so nothing half installed is left
+        // A module that fails to write abandons the session, so nothing half installed is left
         val result = execute(
-            $$"""
-                (
-                    rm -rf $$tempDirQuoted;
-                    mkdir -p $$tempDirQuoted &&
-                    cp $${apkPaths.joinToString(" ") { it.shellQuote() }} $$tempDirQuoted/ &&
-                    chmod 644 $$tempDirQuoted/* &&
-                    session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" &&
-                    [ -n "$session" ] &&
-                    { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; };
-                    result=$?;
-                    rm -rf $$tempDirQuoted;
-                    exit $result
-                )
-            """.trimIndent()
+            withSystemReadableCopies("/data/local/tmp/morphe-stock-$packageName", apkPaths) { copies ->
+                val writes = apkPaths.zip(copies).joinToString(" && ") { (path, copy) ->
+                    val name = File(path).name.shellQuote()
+                    $$"""pm install-write -S "$(stat -c %s $$copy)" "$session" $$name $$copy"""
+                }
+                $$"""session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
+            }
         )
 
         val settledInTime = withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
@@ -524,6 +512,37 @@ class RootInstaller(
             if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
             throw StockAppInstallException("Stock app install did not settle")
         }
+    }
+
+    /**
+     * A command that runs [install] on copies of [apkPaths] in [tempDir] and removes them whatever it
+     * returns. PackageManager opens the paths as system_server, which SELinux keeps out of the app's
+     * private files under root solutions other than Magisk, while it may read /data/local/tmp.
+     *
+     * @param install Builds the single-line install command from the quoted paths of the copies.
+     */
+    private fun withSystemReadableCopies(
+        tempDir: String,
+        apkPaths: List<String>,
+        install: (copies: List<String>) -> String
+    ): String {
+        val dir = tempDir.shellQuote()
+        val copies = apkPaths.map { "$tempDir/${File(it).name}".shellQuote() }
+
+        // The subshell keeps exit from closing the shared root shell, which would leave the
+        // commands queued after this one reading nothing back
+        return $$"""
+            (
+                rm -rf $$dir;
+                mkdir -p $$dir &&
+                cp $${apkPaths.joinToString(" ") { it.shellQuote() }} $$dir/ &&
+                chmod 644 $$dir/* &&
+                $${install(copies)};
+                result=$?;
+                rm -rf $$dir;
+                exit $result
+            )
+        """.trimIndent()
     }
 
     private fun PackageInfo.isBuildOf(other: PackageInfo) =
@@ -754,6 +773,9 @@ class RootInstaller(
         private const val NO_MOUNT_CHECK_INTERVAL_MS = 5_000L
         private val STOCK_INSTALL_SETTLE_TIMEOUT = Duration.ofSeconds(30L)
         private val STOCK_INSTALL_SETTLE_POLL = 1_000.milliseconds
+
+        /** Where [installPackage] copies the APK to, a directory system_server is allowed to read. */
+        private const val INSTALL_TEMP_DIR = "/data/local/tmp/morphe-install"
 
         /** The scripts the root manager runs, which have to be executable. */
         private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
