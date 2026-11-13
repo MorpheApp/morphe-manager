@@ -696,15 +696,7 @@ fun DialogHostScope.SourceAppsDialog(
     // live read, so an app ticked or unticked here keeps its place instead of jumping away
     val broughtAtOpen = remember(sourceInfo != null && keptFrom != null) { broughtApps }
     // What each app gets from this source, so the choice is not made on a name alone
-    val patchCounts = remember(sourceInfo) {
-        buildMap {
-            sourceInfo?.patches?.forEach { patch ->
-                patch.compatiblePackages.orEmpty()
-                    .mapNotNullTo(mutableSetOf()) { it.packageName }
-                    .forEach { merge(it, 1, Int::plus) }
-            }
-        }
-    }
+    val patchCounts = remember(sourceInfo) { sourceInfo?.patchCountsByApp().orEmpty() }
     // New apps lead, as they are what the user came back for, then the brought ones, which a source
     // of hundreds of apps is usually opened again to change
     val apps = remember(listedApps, appMetadata, newApps, broughtAtOpen) {

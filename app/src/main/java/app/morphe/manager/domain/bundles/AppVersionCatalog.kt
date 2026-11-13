@@ -31,7 +31,9 @@ data class BundledAppTarget(
     /** Allowed build codes for this version, sourced from the patch bundle. Null means no constraint. */
     val buildCodes: Set<Int>? = null,
     /** Whether the source this version comes from is set to use experimental app versions. */
-    val experimentalEnabled: Boolean = false
+    val experimentalEnabled: Boolean = false,
+    /** How many patches the source has for this app, universal ones aside. */
+    val patchCount: Int = 0
 )
 
 /**
@@ -213,9 +215,12 @@ class AppVersionCatalog(
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
         // packageName → bundleUid → version → build codes (parallel to targetsByPackage)
         val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
+        // bundleUid → packageName → patches
+        val patchCounts = mutableMapOf<Int, Map<String, Int>>()
 
         bundleInfo.forEach { (bundleUid, info) ->
             if (bundleUid !in sourceOrder) return@forEach
+            patchCounts[bundleUid] = info.patchCountsByApp()
 
             info.patches.forEach { patch ->
                 patch.compatiblePackages?.forEach { pkg ->
@@ -253,6 +258,7 @@ class AppVersionCatalog(
                     .sortedBy { sourceOrder[it.key] }
                     .flatMap { (uid, versionMap) ->
                         val codesForBundle = codesByPackage[packageName]?.get(uid)
+                        val patchCount = patchCounts[uid]?.get(packageName) ?: 0
                         versionMap.values
                             .sortedDescending()
                             .map { target ->
@@ -261,7 +267,8 @@ class AppVersionCatalog(
                                     bundleUid = uid,
                                     bundleName = bundleNames[uid] ?: "Bundle $uid",
                                     buildCodes = target.version?.let { codesForBundle?.get(it) },
-                                    experimentalEnabled = uid.toString() in experimentalEnabledUids
+                                    experimentalEnabled = uid.toString() in experimentalEnabledUids,
+                                    patchCount = patchCount
                                 )
                             }
                     }

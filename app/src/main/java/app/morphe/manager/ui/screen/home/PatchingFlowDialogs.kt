@@ -43,6 +43,7 @@ import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.androidVersionName
 import app.morphe.manager.util.copyableVersion
+import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.manager.util.withVersionPrefix
 import app.morphe.patcher.patch.AppTarget
@@ -746,8 +747,15 @@ private fun SourceVersionListCard(
                     header = when {
                         hasMultipleBundles -> {
                             {
+                                // A version picked here picks its source too, so the sources are told
+                                // apart by more than their names
+                                val first = section.first()
                                 CardHeader(
-                                    title = section.first().bundleName,
+                                    title = first.bundleName,
+                                    description = listOfNotNull(
+                                        pluralStringResource(R.plurals.patch_count, first.patchCount, first.patchCount.toString()),
+                                        source?.releasedAt?.let(::getRelativeTimeString)
+                                    ).joinToString(" • "),
                                     accentColor = edgeColor,
                                     leading = source?.let {
                                         { BundleIcon(bundle = it, modifier = Modifier.size(24.dp)) }

@@ -40,6 +40,16 @@ sealed class PatchBundleInfo {
             patch.compatiblePackages.orEmpty().mapNotNull { it.packageName }
         }
 
+    /** How many of the bundle's own patches each of [listedApps] gets, universal ones aside. */
+    fun patchCountsByApp(): Map<String, Int> = buildMap {
+        patches.forEach { patch ->
+            // Once per app, however many entries of the patch name it
+            patch.compatiblePackages.orEmpty()
+                .mapNotNullTo(mutableSetOf()) { it.packageName }
+                .forEach { merge(it, 1, Int::plus) }
+        }
+    }
+
     /** Whether any of the bundle's patches marks an app version as experimental. */
     fun hasExperimentalVersions(): Boolean =
         patches.any { patch ->
