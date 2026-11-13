@@ -37,7 +37,9 @@ because the patched build is signed with a different certificate.
 
 ### Root install
 
-Rooted devices only. Installs silently with root, with no confirmation dialog.
+Rooted devices only. Installs silently with root, with no confirmation dialog. Like the other
+installers, it installs only for the user Morphe runs in, leaving a work profile or private space
+alone.
 
 Root mount is not an installer, since a mounted app is never installed. See
 [Root mount](#root-mount-in-detail) below.

@@ -216,7 +216,7 @@ class RootInstaller(
                             mountInZygoteNamespacesCommand(patchedPath, stockPath)
                 )
                 // The commands above report only the last one, so the mount is judged by what the
-                // stock path holds afterwards
+                // stock path holds afterward
                 if (!execute(isMountedOverCommand(patchedPath, stockPath)).isSuccess) {
                     throw mounted.failure("Failed to mount APK")
                 }
@@ -372,18 +372,22 @@ class RootInstaller(
     suspend fun readStockInfo(file: File): PackageInfo? =
         SplitApkInspector.withRepresentativeApk(file, app.cacheDir) { apk -> pm.getPackageInfo(apk) }
 
-    /** Installs [apkFile] with root, recording Google Play Store as its install source when [asPlayStore]. */
+    /**
+     * Installs [apkFile] with root, recording Google Play Store as its install source when [asPlayStore].
+     * Kept to the user Morphe runs in, see [appUserId], as root would otherwise install for every user.
+     */
     suspend fun installPackage(apkFile: File, asPlayStore: Boolean) = withContext(Dispatchers.IO) {
         if (!apkFile.exists()) throw Exception("File doesn't exist")
 
         val source = if (asPlayStore) "-i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} " else ""
-        execute("pm install -t $source-r ${apkFile.absolutePath.shellQuote()}")
+        execute("pm install -t --user $appUserId $source-r ${apkFile.absolutePath.shellQuote()}")
             .assertSuccess("Failed to install APK")
     }
 
+    /** Uninstalls [packageName] for the user Morphe runs in, the one [installPackage] installs for. */
     suspend fun uninstallPackage(packageName: String) = withContext(Dispatchers.IO) {
         execute(
-            "pm uninstall --user 0 ${packageName.shellQuote()}"
+            "pm uninstall --user $appUserId ${packageName.shellQuote()}"
         ).assertSuccess("Failed to uninstall app")
     }
 
