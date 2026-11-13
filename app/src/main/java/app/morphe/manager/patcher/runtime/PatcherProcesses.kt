@@ -313,6 +313,9 @@ class PatcherProcesses(
         // Set once the process ended on its own, after which its pid may belong to another
         private var ended = false
 
+        // Set once the run started its service in the foreground, which only the app stops
+        private var heldForeground = false
+
         val isAlive get() = connection.service.asBinder().isBinderAlive
 
         @Synchronized
@@ -364,10 +367,21 @@ class PatcherProcesses(
         private fun holdForeground(foreground: ForegroundInfo) {
             try {
                 app.startForegroundService(PatcherService.foregroundIntent(app, foreground))
+                heldForeground = true
             } catch (e: IllegalStateException) {
                 // Refused to a run started from the background, which goes on bound alone
                 Log.w(tag, "Could not hold the patcher process in the foreground", e)
             }
+        }
+
+        /**
+         * Stops what [holdForeground] started, from here, as the process ends as soon as its run
+         * is done, at times before the system tells it of the unbinding. A service started in the
+         * foreground that is unbound from a process ended so stays on record with the system, and
+         * keeps the notification up, which the app cannot cancel, until the app itself ends.
+         */
+        private fun releaseForeground() {
+            if (heldForeground) app.stopService(Intent(app, PatcherService::class.java))
         }
 
         /**
@@ -448,6 +462,7 @@ class PatcherProcesses(
         override fun close() {
             if (!ended) Process.killProcess(started.pid)
             runCatching { writer.close() }
+            releaseForeground()
             connection.close()
         }
     }
