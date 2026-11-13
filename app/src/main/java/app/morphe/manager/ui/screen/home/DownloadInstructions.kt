@@ -28,7 +28,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.manager.ApkDownloadSource
@@ -243,12 +249,30 @@ internal fun DialogHostScope.DownloadInstructionsDialog(
         source.destinationLabel()
     )
 
+    // What the steps fetch, since the dialog before this one named it and is gone by now. The
+    // version copies on a press, for a site searched by hand
+    val copyVersion = rememberCopyToClipboard(stringResource(R.string.home_version_copied))
+    val description = remember(appName, requestedVersion, copyVersion) {
+        buildAnnotatedString {
+            append(appName)
+            if (requestedVersion != null) {
+                append(" · ")
+                withLink(
+                    LinkAnnotation.Clickable(
+                        tag = "version",
+                        styles = TextLinkStyles(SpanStyle(textDecoration = TextDecoration.Underline)),
+                        linkInteractionListener = { copyVersion(requestedVersion) }
+                    )
+                ) { append(requestedVersion.withVersionPrefix()) }
+            }
+        }
+    }
+
     AppDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(packageName),
         title = stringResource(R.string.home_download_instructions_title),
-        // What the steps fetch, since the dialog before this one named it and is gone by now
-        description = listOfNotNull(appName, requestedVersion?.withVersionPrefix()).joinToString(" · "),
+        description = description,
         footer = {
             AppDialogActions(
                 actions = listOfNotNull(
