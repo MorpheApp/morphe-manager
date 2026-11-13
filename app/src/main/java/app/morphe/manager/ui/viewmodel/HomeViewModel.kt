@@ -146,7 +146,21 @@ class HomeViewModel(
     var pendingMpp by mutableStateOf<PendingMpp?>(null)
         private set
 
-    fun setPendingMpp(uri: Uri) {
+    /**
+     * Opens a file another app handed over. Messengers rename what they pass on, so a patch source is
+     * told by its contents; anything else shared goes on as an APK, and anything else opened is refused.
+     */
+    fun openIncomingFile(uri: Uri, shared: Boolean) {
+        viewModelScope.launch {
+            when {
+                withContext(Dispatchers.IO) { uri.isPatchBundle(contentResolver) } -> setPendingMpp(uri)
+                shared -> handleExternalApkUri(uri)
+                else -> messages.show(R.string.incoming_file_not_patch_source)
+            }
+        }
+    }
+
+    private fun setPendingMpp(uri: Uri) {
         dismissOpenDialogs()
         val pending = PendingMpp(uri, uri.displayName(contentResolver), manifest = null, check = null)
         pendingMpp = pending
@@ -819,18 +833,16 @@ class HomeViewModel(
      * Shows a message and returns early if expert mode is disabled.
      * Otherwise, waits until [installedAppsLoading] is false before handing it to the patch flow.
      */
-    fun handleExternalApkUri(uri: Uri) {
-        viewModelScope.launch {
-            if (!prefs.useExpertMode.get()) {
-                messages.show(R.string.home_external_apk_expert_mode_required)
-                return@launch
-            }
-            // Wait for patches to be ready, capped in case the sources never answer
-            withTimeoutOrNull(30.seconds) {
-                snapshotFlow { installedAppsLoading }.first { !it }
-            }
-            patchFlow.handleApkSelection(uri)
+    private suspend fun handleExternalApkUri(uri: Uri) {
+        if (!prefs.useExpertMode.get()) {
+            messages.show(R.string.home_external_apk_expert_mode_required)
+            return
         }
+        // Wait for patches to be ready, capped in case the sources never answer
+        withTimeoutOrNull(30.seconds) {
+            snapshotFlow { installedAppsLoading }.first { !it }
+        }
+        patchFlow.handleApkSelection(uri)
     }
 
     override fun onCleared() {

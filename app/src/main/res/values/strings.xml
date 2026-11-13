@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">This is a new version of %s. Do you want to update it?</string>
     <string name="mpp_import_unreadable">This file cannot be read</string>
+    <string name="incoming_file_not_patch_source">This file is not a patch source</string>
 
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>

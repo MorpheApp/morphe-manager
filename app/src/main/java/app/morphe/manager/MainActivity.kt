@@ -285,9 +285,7 @@ class MainActivity : ComponentActivity() {
             return
         }
 
-        // Handle APK-family file shared via system share sheet (.apk/.apks/.xapk/.apkm).
-        // The name is not checked: senders often drop or change the extension, and the file is
-        // read for what it is anyway, with a message when it turns out not to be an APK
+        // A file shared via the share sheet: a patch source or an APK-family file
         if (intent?.action == Intent.ACTION_SEND) {
             val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri::class.java)
@@ -295,18 +293,15 @@ class MainActivity : ComponentActivity() {
                 @Suppress("DEPRECATION")
                 intent.getParcelableExtra(Intent.EXTRA_STREAM)
             }
-            uri?.let { vm.pendingExternalApkUri = it }
+            uri?.let { vm.pendingIncomingFile = MainViewModel.IncomingFile(it, shared = true) }
             return
         }
 
         val data = intent?.data ?: return
 
-        // Handle .mpp file open from file manager
+        // A file opened with the app, which can only be a patch source
         if (intent.action == Intent.ACTION_VIEW && data.scheme in listOf("file", "content")) {
-            if (data.hasMppExtension(contentResolver)) {
-                vm.pendingMppUri = data
-            }
-            // Not .mpp - don't process further regardless
+            vm.pendingIncomingFile = MainViewModel.IncomingFile(data, shared = false)
             return
         }
 
@@ -393,12 +388,12 @@ private fun MorpheManager(vm: MainViewModel) {
         }
     }
 
-    // Handle .mpp file opened from file manager
-    LaunchedEffect(vm.pendingMppUri) {
-        vm.pendingMppUri?.let { uri ->
+    // File opened with or shared to the app
+    LaunchedEffect(vm.pendingIncomingFile) {
+        vm.pendingIncomingFile?.let { file ->
             navController.popBackStack(HomeScreen, false)
-            homeViewModel.setPendingMpp(uri)
-            vm.pendingMppUri = null
+            vm.pendingIncomingFile = null
+            homeViewModel.openIncomingFile(file.uri, file.shared)
         }
     }
 
@@ -468,15 +463,6 @@ private fun MorpheManager(vm: MainViewModel) {
             onConfirm = { trustCaller -> vm.approveExternalBatch(trustCaller) },
             onDismiss = vm::dismissExternalBatch
         )
-    }
-
-    // Handle .apk file shared via share sheet
-    LaunchedEffect(vm.pendingExternalApkUri) {
-        vm.pendingExternalApkUri?.let { uri ->
-            navController.popBackStack(HomeScreen, false)
-            vm.pendingExternalApkUri = null
-            homeViewModel.handleExternalApkUri(uri)
-        }
     }
 
     // Onboarding tour, run over the main screen from its first step
