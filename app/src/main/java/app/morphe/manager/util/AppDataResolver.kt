@@ -362,8 +362,7 @@ class AppDataResolver(
         version: String?,
         source: AppDataSource
     ): ResolvedAppData? {
-        // Activities are not parsed, as nothing here reads them
-        val packageInfo = pm.getPackageInfo(file, PackageManager.GET_META_DATA) ?: return null
+        val packageInfo = pm.getPackageInfo(file) ?: return null
         val appInfo = packageInfo.applicationInfo
 
         return ResolvedAppData(
