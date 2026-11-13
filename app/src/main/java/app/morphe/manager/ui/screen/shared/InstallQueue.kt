@@ -28,6 +28,7 @@ import org.koin.compose.koinInject
 /**
  * A single install request queued by [rememberInstallQueue].
  *
+ * @param appName the name the install overlay shows while this request runs.
  * @param installedApp the tracked app a saved patched APK belongs to, which decides with the
  *        primary installer whether it is mounted. Null for an APK that belongs to no record.
  * @param builtForMount whether [file] was patched for a root mount, which only works mounted
@@ -41,6 +42,7 @@ import org.koin.compose.koinInject
  */
 data class InstallQueueRequest(
     val file: File,
+    val appName: String,
     val originalPackageName: String,
     val installedApp: InstalledApp? = null,
     val builtForMount: Boolean = false,
@@ -73,6 +75,8 @@ fun rememberInstallQueue(
     val conflictText = stringResource(R.string.installer_hint_conflict)
     var queue by remember { mutableStateOf<List<InstallQueueRequest>>(emptyList()) }
     var active by remember { mutableStateOf<InstallQueueRequest?>(null) }
+    // Size of the queue as it started, so the overlay can say which item of how many is running
+    var total by remember { mutableIntStateOf(0) }
     // Whether the active item is mounted rather than installed, which the overlay says
     var activeMounts by remember { mutableStateOf(false) }
 
@@ -193,13 +197,20 @@ fun rememberInstallQueue(
             // A mount names the step it is on, as the patcher's install button does
             val caption = installing?.stage?.labelRes
                 ?: if (activeMounts) R.string.mounting_ellipsis else R.string.installing_ellipsis
-            PulsingLogoWithCaption(caption = stringResource(caption))
+            val position = total - queue.size
+            PulsingLogoWithCaption(
+                caption = stringResource(caption),
+                subtitle = active?.appName?.let { name ->
+                    if (total > 1) stringResource(R.string.install_queue_item, name, position, total) else name
+                }
+            )
         }
     }
 
     return { requests ->
         if (requests.isNotEmpty()) {
             queue = requests
+            total = requests.size
             active = null
             awaitedInstallerDialog = false
             completed = 0

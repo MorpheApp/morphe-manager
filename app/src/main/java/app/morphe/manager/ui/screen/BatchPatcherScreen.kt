@@ -124,6 +124,7 @@ fun BatchPatcherScreen(
             val file = item.patchedFile ?: return@mapNotNull null
             item.id to InstallQueueRequest(
                 file = file,
+                appName = item.appName,
                 originalPackageName = item.packageName,
                 builtForMount = item.useMount,
                 onPersistApp = { packageName, installType ->

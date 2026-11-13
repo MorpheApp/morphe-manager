@@ -290,6 +290,7 @@ private fun DialogHostScope.PatchedApksContent(
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
         InstallQueueRequest(
             file = file,
+            appName = item.displayName,
             originalPackageName = installedApp.originalPackageName,
             installedApp = installedApp,
             onPersistApp = { packageName, installType ->
@@ -521,6 +522,7 @@ private fun DialogHostScope.OriginalApksContent(
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
         InstallQueueRequest(
             file = file,
+            appName = item.displayName,
             originalPackageName = item.packageName,
             onPersistApp = { _, _ -> true },
             onInstalled = { packageName ->

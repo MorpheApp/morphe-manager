@@ -95,12 +95,13 @@ fun PulsingLogoIndicator(
 
 /**
  * [PulsingLogoIndicator] with a centered caption below the logo, used to describe
- * the operation running behind a full-screen overlay.
+ * the operation running behind a full-screen overlay. An optional [subtitle] names what it runs on.
  */
 @Composable
 fun PulsingLogoWithCaption(
     caption: String,
     modifier: Modifier = Modifier,
+    subtitle: String? = null,
     size: Dp = 180.dp,
     spacing: Dp = 20.dp
 ) {
@@ -110,11 +111,21 @@ fun PulsingLogoWithCaption(
         verticalArrangement = Arrangement.spacedBy(spacing)
     ) {
         PulsingLogoIndicator(size = size, contentDescription = caption)
-        Text(
-            text = caption,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = caption,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
+            subtitle?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }

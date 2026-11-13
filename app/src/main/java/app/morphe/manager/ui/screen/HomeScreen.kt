@@ -196,6 +196,7 @@ fun HomeScreen(
             val savedFile = item.savedApkFile ?: return@mapNotNull null
             InstallQueueRequest(
                 file = savedFile,
+                appName = item.displayName,
                 originalPackageName = installed.originalPackageName,
                 installedApp = installed,
                 onPersistApp = { packageName, installType ->
