@@ -669,7 +669,7 @@ class PatcherViewModel(
      * saved here, as the stock app it restores is installed from the archive's signed splits.
      * An archive with OBB files is saved here as well, since the merged APK lacks the OBB files
      * patches read, so the worker does not keep it.
-     * For regular APK files, saves the APK itself.
+     * For regular APK files, saves the APK itself, without the native libraries a run strips.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
      */
@@ -707,7 +707,8 @@ class PatcherViewModel(
                 packageName = packageName,
                 version = originalVersion,
                 sourceFile = fileToSave,
-                moveSource = moveSource
+                moveSource = moveSource,
+                forMount = usingMountInstall
             )
 
             if (savedFile != null) {

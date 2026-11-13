@@ -881,7 +881,8 @@ class BatchPatchCoordinator(
                 packageName = item.packageName,
                 version = version,
                 sourceFile = file,
-                moveSource = item.source is BatchApkSource.Installed
+                moveSource = item.source is BatchApkSource.Installed,
+                forMount = item.useMount
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }
