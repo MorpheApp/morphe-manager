@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">To je nova različica %s. Želite jo posodobiti?</string>
     <string name="mpp_import_unreadable">Ta datoteka ni berljiva</string>
+    <string name="incoming_file_not_patch_source">Ta datoteka ni vir zakrp</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe posodobitev je pripravljena</string>
     <string name="home_update_available_subtitle">Nova verzija je pripravljena za prenos</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Nekateri viri popravkov potrebujejo novejšo različico Morphe</string>
     <string name="home_held_back_title">Vir popravkov je zrušil aplikacijo Morphe</string>
     <string name="home_held_back_subtitle">Preskočen je bil, da bi se aplikacija lahko zagnala. Dotaknite se za pregled</string>
-    <string name="home_metered_skipped_title">Prenos posodobitev je prekinjen pri uporabi mobilnih podatkov</string>
-    <string name="home_metered_skipped_subtitle">Tapnite, da omogočite posodabljanje prek mobilnih podatkov</string>
+    <string name="home_source_updates_title">Na voljo so posodobitve popravkov</string>
+    <string name="home_source_updates_subtitle">Zaprte za prenos</string>
     <string name="home_repatch_available_subtitle">Tapnite, da dodate vse v čakalno vrsto</string>
     <string name="home_update_error">Posodobitev ni uspela</string>
     <string name="home_update_error_subtitle">Pri posodabljanju virov je prišlo do napake</string>
-    <string name="home_update_skipped_metered">Posodobitve so bile preskočene</string>
-    <string name="home_update_skipped_metered_subtitle">Mobilni podatki so vklopljeni </string>
     <string name="home_updating_sources">Posodabljanje virov...</string>
     <string name="home_update_success">Posodabljanje virov končano</string>
     <string name="home_update_success_subtitle">Viri so posodobljeni</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Priporočeno</string>
     <string name="home_apk_availability_unpatched_label">Nepopravljeno</string>
     <string name="home_apk_availability_incompatible_label">Nezdružljivo</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Izvorna različica %1$s na tej napravi je %2$s, kar je novejše od podprte različice za zakrpe</string>
     <string name="home_apk_availability_find">Da, pomagajte mi ga najti</string>
     <string name="home_apk_availability_have">Ne, ga že imam</string>
     <string name="home_apk_helper_download">Uporabi pomožni program</string>
@@ -379,6 +380,8 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="home_dialog_unsupported_version_dialog_proceed">Vseeno nadaljuj</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Združljive različice:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nepodprto</string>
+    <string name="home_version_copy">Kopiraj različico</string>
+    <string name="home_version_copied">Različica kopirana</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Izgradnja %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">To je druga različica iste različice. Popravki zahtevajo določeno različico</string>
@@ -387,7 +390,7 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="home_dialog_expected_package">Pričakovan paket:</string>
     <string name="home_dialog_selected_package">Izbrani paket:</string>
     <string name="home_outdated_patches_dialog_title">Popravki so lahko zastareli</string>
-    <string name="home_outdated_patches_dialog_message">Mobilni podatki so aktivni in posodobitve popravkov so onemogočene</string>
+    <string name="home_outdated_patches_dialog_message">Na voljo so novejši popravki, vendar še niso preneseni</string>
     <string name="home_outdated_patches_dialog_warning">Popravljanje z zastarelimi popravki lahko povzroči okvarjeno aplikacijo</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Posodobi &amp; popravi</string>
     <string name="home_low_disk_space_dialog_title">Malo prostega mesta na disku</string>
@@ -889,8 +892,17 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Predizdajne različice programa Morphe so še vedno v razvoju in so lahko nestabilne.
 
 Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir v seznamu virov popravkov."</string>
-    <string name="settings_advanced_updates_allow_metered">Posodobitve preko mobilnih podatkov</string>
-    <string name="settings_advanced_updates_allow_metered_description">Prenaša posodobitve programa Morphe in popravkov prek mobilnih podatkov</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Samodejne posodobitve</string>
+    <string name="settings_auto_updates_description">Kaj Morphe stori glede posodobitev ob odprtju. Povlekaj za osvežitev vedno preveri</string>
+    <string name="settings_auto_updates_download">Samodejno prenesi</string>
+    <string name="settings_auto_updates_download_description">Preveri posodobitve ob odprtju aplikacije Morphe in prenese posodobitve popravkov prek katere koli omrežja</string>
+    <string name="settings_auto_updates_wifi_only">Prenosi samo prek Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Pri mobilnih podatkih le preveri in prikaže, kaj je na voljo</string>
+    <string name="settings_auto_updates_check_only">Le preveri</string>
+    <string name="settings_auto_updates_check_only_description">Prikaže razpoložljive posodobitve in jih prenese, ko zaprete</string>
+    <string name="settings_auto_updates_off">Ne preverjaj</string>
+    <string name="settings_auto_updates_off_description">Preveri le, ko povlečete navzod za osvežitev</string>
     <string name="settings_advanced_updates_background_notifications">Obvestila o posodobitvah v ozadju</string>
     <string name="settings_advanced_updates_background_notifications_description">Občasno preverja prisotnost posodobitev v ozadju in obvesti, ko so na voljo</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Omogoči potisna obvestila za nove izdaje, tudi ko je aplikacija zaprta</string>
@@ -932,7 +944,7 @@ Ta nastavitev ne vpliva na popravke: omogočite predizdajne popravke za vsak vir
     <string name="settings_advanced_expert_mode_dialog_title">Omogoči način strokovnjaka?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Način strokovnjaka zagotavlja več nadzora nad tem, kako se uporabljajo popravki, vendar lahko napačna konfiguracija nastavitev v načinu strokovnjaka povzroči nehoteno delovanje aplikacije</string>
     <string name="settings_advanced_strip_unused_libs">Optimiziraj za arhitekturo naprave</string>
-    <string name="settings_advanced_strip_unused_libs_description">Odstrani neuporabljene domače knjižnice in razdeljene datoteke APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Odstrani neuporabljene native knjižnice in APK razdelitve iz zakrpljenih aplikacij ter shranjenih izvirnih različic</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Odklene vire povpraševanj za združevanje in zasebnih skladišč</string>
     <string name="settings_advanced_github_pat_description">Za vire povpraševanj za združevanje, zasebna skladišča in višjo omejitev hitrosti GitHub</string>
@@ -1271,6 +1283,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_apk_download_helper_open_directly">Takoj odpri pomočnik</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Preskoči navodila za prenos in odpri zaupanja vreden pomočnik</string>
     <string name="settings_system_apk_download_helper_auto_batch">Samodejno prenesi APK v paketu</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Preveri vse vrstene aplikacije za najnovejšo različico, ki jo podpirajo njuni popravki, ter jo prenese z prvim zaupanim pomočnikom, če je aplikacija odsotna ali zastarela</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Ni datotek tukaj</string>
     <string name="file_picker_read_error">Ni mogoče prebrati te mape</string>

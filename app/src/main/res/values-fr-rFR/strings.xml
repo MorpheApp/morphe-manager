@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Ceci est une nouvelle version de %s. Voulez-vous la mettre à jour ?</string>
     <string name="mpp_import_unreadable">Ce fichier ne peut pas être lu</string>
+    <string name="incoming_file_not_patch_source">Ce fichier n\'est pas une source de correctif</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Certaines sources de patchs nécessitent une version plus récente</string>
     <string name="home_held_back_title">Une source de patchs a fait planter Morphe</string>
     <string name="home_held_back_subtitle">Elle a été ignorée afin que l\'application puisse démarrer. Appuyez pour examiner</string>
-    <string name="home_metered_skipped_title">Mises à jour suspendues sur les données mobiles</string>
-    <string name="home_metered_skipped_subtitle">Appuyez pour autoriser les mises à jour via les données mobiles</string>
+    <string name="home_source_updates_title">Mise à jour de patchs disponible</string>
+    <string name="home_source_updates_subtitle">Appuyez pour les télécharger</string>
     <string name="home_repatch_available_subtitle">Appuyez pour toutes les mettre dans la file d\'attente</string>
     <string name="home_update_error">Mise à jour échouée</string>
     <string name="home_update_error_subtitle">Une erreur s\'est produite lors de la mise à jour des sources</string>
-    <string name="home_update_skipped_metered">Mises à jour passées</string>
-    <string name="home_update_skipped_metered_subtitle">Données mobiles activées</string>
     <string name="home_updating_sources">Mise à jour des sources…</string>
     <string name="home_update_success">Mise à jour des sources complète</string>
     <string name="home_update_success_subtitle">Vos sources sont à jour</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Recommandé</string>
     <string name="home_apk_availability_unpatched_label">Non patchée</string>
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">D\'origine %1$s sur cet appareil est %2$s, plus récente que celles prises en charge par les patchs</string>
     <string name="home_apk_availability_find">Oui, aidez-moi à le trouver</string>
     <string name="home_apk_availability_have">Non, je l\'ai déjà</string>
     <string name="home_apk_helper_download">Utiliser une application d\'assistance</string>
@@ -378,6 +379,8 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuer quand même</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versions compatibles :</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Non pris en charge</string>
+    <string name="home_version_copy">Copier la version</string>
+    <string name="home_version_copied">Version copiée</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Il s\'agit d\'un build différent de la même version. Les patchs nécessitent un build spécifique</string>
@@ -386,7 +389,7 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="home_dialog_expected_package">Paquet attendu :</string>
     <string name="home_dialog_selected_package">Paquet sélectionné :</string>
     <string name="home_outdated_patches_dialog_title">Les patchs peuvent être obsolètes</string>
-    <string name="home_outdated_patches_dialog_message">Les données mobiles sont activées et les mises à jour de patchs sont désactivées</string>
+    <string name="home_outdated_patches_dialog_message">De nouveaux patchs sont disponibles mais pas encore téléchargés</string>
     <string name="home_outdated_patches_dialog_warning">Le patching avec des patchs obsolètes peut rendre l\'application inutilisable</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Mise à jour &amp; patchs</string>
     <string name="home_low_disk_space_dialog_title">Espace libre faible</string>
@@ -478,7 +481,7 @@ Pour de meilleurs résultats, cette application recommande d'effectuer le patchi
     <string name="batch_patch_force_version_done">Mis en file d\'attente quand même, l\'application peut ne plus fonctionner</string>
     <string name="batch_patch_accept_signature_done">Mis en file d\'attente quand même, APK non vérifié</string>
     <string name="batch_patch_apk_selected">APK sélectionnés</string>
-    <string name="batch_patch_auto_download_stopped">Les téléchargements automatiques d\'APK ont été arrêtés</string>
+    <string name="batch_patch_auto_download_stopped">Les téléchargements automatiques des APK ont été arrêtés</string>
     <string name="batch_patch_auto_download_stop">Arrêter les téléchargements</string>
     <string name="batch_patch_auto_download_kept">L\'APK téléchargée n\'a pas pu être utilisée, la précédente est donc conservée</string>
     <string name="batch_patch_edit_patches">Choisissez les patchs</string>
@@ -890,8 +893,17 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_advanced_updates_prerelease_warning_message">"Les versions de préversion de Morphe sont encore en cours de développement et peuvent être instables.
 
 Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque source dans la liste des sources de patchs"</string>
-    <string name="settings_advanced_updates_allow_metered">Mises à jour via les données mobiles</string>
-    <string name="settings_advanced_updates_allow_metered_description">Télécharge Morphe et les mises à jour de patchs via les données mobiles</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Mises à jour automatiques</string>
+    <string name="settings_auto_updates_description">Ce que Morphe fait concernant les mises à jour à son ouverture. Un balayage vers le bas pour actualiser vérifie toujours les mises à jour</string>
+    <string name="settings_auto_updates_download">Télécharger automatiquement</string>
+    <string name="settings_auto_updates_download_description">Vérifie les mises à jour à l\'ouverture de Morphe et télécharge les mises à jour de patchs sur n\'importe quel réseau</string>
+    <string name="settings_auto_updates_wifi_only">Télécharger en Wi-Fi uniquement</string>
+    <string name="settings_auto_updates_wifi_only_description">Sur les données mobiles, vérifie et affiche uniquement ce qui est disponible</string>
+    <string name="settings_auto_updates_check_only">Vérifier uniquement</string>
+    <string name="settings_auto_updates_check_only_description">Affiche les mises à jour disponibles et les télécharge dès que vous appuyez dessus</string>
+    <string name="settings_auto_updates_off">Ne pas vérifier</string>
+    <string name="settings_auto_updates_off_description">Vérifie uniquement lorsque vous effectuez un balayage vers le bas pour actualiser</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
     <string name="settings_advanced_updates_background_notifications_description">Vérifier périodiquement les mises à jour en arrière-plan et notifier lorsqu\'elles sont disponibles</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Reçoit des notifications push instantanées pour les nouvelles versions, même lorsque l\'application est fermée</string>
@@ -933,7 +945,7 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="settings_advanced_expert_mode_dialog_title">Passer en mode Expert ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Le mode Expert offre plus de contrôle sur la manière dont les patchs sont appliqués, mais une mauvaise configuration des paramètres en mode expert peut rendre l\'application inutilisable</string>
     <string name="settings_advanced_strip_unused_libs">Optimiser pour l\'architecture de l\'appareil</string>
-    <string name="settings_advanced_strip_unused_libs_description">Supprime les bibliothèques natives et les APK fractionnés inutilisés</string>
+    <string name="settings_advanced_strip_unused_libs_description">Supprime les bibliothèques natives inutilisées et les fractions d\'APK des applications patchées et des originaux enregistrés</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Déverrouille les sources de pull request et les dépôts privés</string>
     <string name="settings_advanced_github_pat_description">Pour les sources de pull request, les dépôts privés et une limite de requêtes GitHub plus élevée</string>
@@ -1274,7 +1286,8 @@ Détails : %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Installateur inconnu</string>
     <string name="settings_system_apk_download_helper_open_directly">Ouvrir l\'assistant immédiatement</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Passe les instructions de téléchargement et ouvre l\'assistant de confiance</string>
-    <string name="settings_system_apk_download_helper_auto_batch">Télécharger automatiquement les APK par lot</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Télécharger automatiquement les APK par lots</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Vérifie pour chaque application en attente la version la plus récente prise en charge avec ses patchs puis la télécharge avec le premier assistant de confiance lorsqu\'elle est manquante ou obsolète</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Aucun fichier ici</string>
     <string name="file_picker_read_error">Impossible de lire ce répertoire</string>

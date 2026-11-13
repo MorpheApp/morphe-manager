@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Dette er en ny version af %s. Vil du opdatere den?</string>
     <string name="mpp_import_unreadable">Denne fil kan ikke læses</string>
+    <string name="incoming_file_not_patch_source">Denne fil er ikke en patch-kilde</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-opdatering tilgængelig</string>
     <string name="home_update_available_subtitle">Ny version klar til installation</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Nogle patchkilder kræver en nyere version</string>
     <string name="home_held_back_title">En patchkilde fik Morphe til at crashe</string>
     <string name="home_held_back_subtitle">Den blev sprunget over, så appen kunne starte. Tryk for at se nærmere</string>
-    <string name="home_metered_skipped_title">Opdateringer pauset på mobildata</string>
-    <string name="home_metered_skipped_subtitle">Tryk for at tillade opdateringer over mobildata</string>
+    <string name="home_source_updates_title">Patchopdateringer tilgængelige</string>
+    <string name="home_source_updates_subtitle">Tryk for at downloade dem</string>
     <string name="home_repatch_available_subtitle">Tryk for at sætte alle i kø</string>
     <string name="home_update_error">Opdatering mislykkedes</string>
     <string name="home_update_error_subtitle">Der opstod en fejl under opdatering af kilder</string>
-    <string name="home_update_skipped_metered">Opdateringer oversprunget</string>
-    <string name="home_update_skipped_metered_subtitle">Mobildata er aktiv</string>
     <string name="home_updating_sources">Opdaterer kilder…</string>
     <string name="home_update_success">Opdatering af kilder fuldført</string>
     <string name="home_update_success_subtitle">Dine kilder er opdaterede</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Anbefalet</string>
     <string name="home_apk_availability_unpatched_label">Upatchet</string>
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Den originale %1$s på denne enhed er %2$s, hvilket er nyere end hvad patches understøtter</string>
     <string name="home_apk_availability_find">Ja, hjælp mig med at finde den</string>
     <string name="home_apk_availability_have">Nej, jeg har den allerede</string>
     <string name="home_apk_helper_download">Brug en hjælpeapp</string>
@@ -379,6 +380,8 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsæt alligevel</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatible versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Ikke understøttet</string>
+    <string name="home_version_copy">Kopiér version</string>
+    <string name="home_version_copied">Version kopieret</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Dette er en anden build af den samme version. Patchene kræver en specifik build</string>
@@ -387,7 +390,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="home_dialog_expected_package">Forventet pakke:</string>
     <string name="home_dialog_selected_package">Valgt pakke:</string>
     <string name="home_outdated_patches_dialog_title">Patches kan være forældede</string>
-    <string name="home_outdated_patches_dialog_message">Mobildata er aktiv og patchopdateringer er deaktiveret</string>
+    <string name="home_outdated_patches_dialog_message">Nyere patches er tilgængelige, men er ikke downloadet endnu</string>
     <string name="home_outdated_patches_dialog_warning">At patche med forældede patches kan resultere i en defekt app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Opdater &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Lav diskplads</string>
@@ -889,8 +892,17 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Præ-release-versioner af Morphe er stadig under udvikling og kan være ustabile.
 
 Patcher er ikke påvirket: aktivér præ-release-patcher for hver kilde i patch-kildelisten"</string>
-    <string name="settings_advanced_updates_allow_metered">Mobildataopdateringer</string>
-    <string name="settings_advanced_updates_allow_metered_description">Henter Morphe og patchopdateringer over mobildata</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Automatiske opdateringer</string>
+    <string name="settings_auto_updates_description">Hvad Morphe gør ved opdateringer, når den åbnes. Træk for at opdatere tjekker altid</string>
+    <string name="settings_auto_updates_download">Download automatisk</string>
+    <string name="settings_auto_updates_download_description">Tjekker for opdateringer, når Morphe åbnes, og downloader patchopdateringer på ethvert netværk</string>
+    <string name="settings_auto_updates_wifi_only">Download kun via Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Ved brug af mobildata tjekkes og vises kun det, der er tilgængeligt</string>
+    <string name="settings_auto_updates_check_only">Kun tjek</string>
+    <string name="settings_auto_updates_check_only_description">Viser tilgængelige opdateringer og downloader dem, når du trykker</string>
+    <string name="settings_auto_updates_off">Tjek ikke</string>
+    <string name="settings_auto_updates_off_description">Tjekker kun, når du trækker for at opdatere</string>
     <string name="settings_advanced_updates_background_notifications">Baggrundsopdateringsmeddelelser</string>
     <string name="settings_advanced_updates_background_notifications_description">Tjek periodisk for opdateringer i baggrunden og informér når de er tilgængelige.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Modtag push-beskeder om nye udgivelser, selvom appen er lukket</string>
@@ -932,7 +944,7 @@ Patcher er ikke påvirket: aktivér præ-release-patcher for hver kilde i patch-
     <string name="settings_advanced_expert_mode_dialog_title">Aktiver Eksperttilstand?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Eksperttilstand giver mere kontrol over hvordan patches bliver anvendt, men en forkert konfiguration af indstillinger i eksperttilstand kan resultere i en ikke-funktionel app</string>
     <string name="settings_advanced_strip_unused_libs">Optimer for enhedens arkitektur</string>
-    <string name="settings_advanced_strip_unused_libs_description">Fjerner ubrugte native biblioteker og APK-opdelinger</string>
+    <string name="settings_advanced_strip_unused_libs_description">Fjerner ubrugte native-biblioteker og APK-splits fra patchede apps og gemte originaler</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Låser op for pull request-kilder og private repositories</string>
     <string name="settings_advanced_github_pat_description">For pull request-kilder, private repositories og en højere GitHub-rategrænse</string>
@@ -1271,6 +1283,7 @@ Detaljer: %2$s"</string>
     <string name="settings_system_apk_download_helper_open_directly">Åbn hjælper med det samme</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Springer download-instruktionerne over og åbner den betroede hjælper</string>
     <string name="settings_system_apk_download_helper_auto_batch">Download APK\'er automatisk i batch</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Kontrollerer alle apper i køen for den nyeste version, som deres patches understøtter, og downloader den med den første betroede hjælper, når den mangler eller er forældet</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Ingen filer her</string>
     <string name="file_picker_read_error">Kan ikke læse denne mappe</string>

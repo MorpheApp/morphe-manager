@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Энэ бол %s-ийн шинэ хувилбар байна. Та үүнийг шинэчлэх үү?</string>
     <string name="mpp_import_unreadable">Энэ файлыг уншиж чадахгүй байна</string>
+    <string name="incoming_file_not_patch_source">Энэ файл нь патчийн эх файл биш байна</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe-ийн шинэчлэл боломжтой</string>
     <string name="home_update_available_subtitle">Шинэ хувилбар суурилуулахад бэлэн</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Зарим патчийн эх сурвалжүүдэд шинэ хувилбар шаардлагатай байна</string>
     <string name="home_held_back_title">Патчийн эх сурвалж Morphe-ийг гацаасан</string>
     <string name="home_held_back_subtitle">Аппликейшныг эхлүүлэхийн тулд үүнийг алгасав. Шалгахын тулд товшино уу</string>
-    <string name="home_metered_skipped_title">Мобайл дата дээр шинэчлэл түр зогссон</string>
-    <string name="home_metered_skipped_subtitle">Мобайл дата дээр шинэчлэлийг зөвшөөрөхийн тулд товшино уу</string>
+    <string name="home_source_updates_title">Патчийн шинэчлэлтүүд боломжтой</string>
+    <string name="home_source_updates_subtitle">Татаж авахын тулд дарна уу</string>
     <string name="home_repatch_available_subtitle">Бүгдийг дарааллын жагсаалтад нэмэхийн тулд товшино уу</string>
     <string name="home_update_error">Шинэчлэл амжилтгүй боллоо</string>
     <string name="home_update_error_subtitle">Эх сурвалжуудыг шинэчлэх явцад алдаа гарлаа</string>
-    <string name="home_update_skipped_metered">Шинэчлэлтүүдийг алгасав</string>
-    <string name="home_update_skipped_metered_subtitle">Мобайл дата идэвхтэй байна</string>
     <string name="home_updating_sources">Эх сурвалжуудыг шинэчилж байна…</string>
     <string name="home_update_success">Эх сурвалжуудыг шинэчлэлт дууслаа</string>
     <string name="home_update_success_subtitle">Таны эх сурвалжууд шинэчлэгдсэн байна</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Зөвлөмжтэй</string>
     <string name="home_apk_availability_unpatched_label">Засваруулаагүй</string>
     <string name="home_apk_availability_incompatible_label">Тохирохгүй</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Энэ төхөөрөмж дээрх %1$s-ийн эх хувилбар нь %2$s бөгөөд энэ нь патчийн дэмжлэгээс илүү шинэ байна</string>
     <string name="home_apk_availability_find">Тийм, олоход туслаарай</string>
     <string name="home_apk_availability_have">Үгүй, би аль хэдийн авсан</string>
     <string name="home_apk_helper_download">Туслах аппликейшн ашиглах</string>
@@ -379,6 +380,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Үргэлжлүүлэх</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Тохирох хувилбарууд:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Дэмжигдэхгүй</string>
+    <string name="home_version_copy">Хувилбарыг хуулах</string>
+    <string name="home_version_copied">Хувилбарыг хууллаа</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Билд %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Энэ нь нэг хувилбарын өөр бүтээн байгуулалт юм. Патчууд нь тодорхой бүтээн байгуулалтыг шаарддаг</string>
@@ -387,7 +390,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_dialog_expected_package">Хүлээгдэж буй багц:</string>
     <string name="home_dialog_selected_package">Сонгосон багц:</string>
     <string name="home_outdated_patches_dialog_title">Патчууд хуучирсан байж болзошгүй</string>
-    <string name="home_outdated_patches_dialog_message">Мобайл дата идэвхтэй бөгөөд патчийн шинэчлэлт идэвхгүй байна</string>
+    <string name="home_outdated_patches_dialog_message">Шинэ патчууд боломжтой байгаа боловч хараахан татаж аваагүй байна</string>
     <string name="home_outdated_patches_dialog_warning">Хуучирсан патч ашиглан патчлах нь аппликейшнийг алдаатай болгох эрсдэлтэй</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Шинэчлэх &amp; патчлах</string>
     <string name="home_low_disk_space_dialog_title">Дискний зай бага байна</string>
@@ -889,8 +892,17 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe-ийн урьдчилсан хувилбарууд нь хөгжүүлэлтийн шатандаа байгаа тул тогтворгүй байж болзошгүй.
 
 Патчуудад нөлөөлөхгүй: патчийн эх сурвалж бүрийн жагсаалтаас урьдчилсан хувилбарын патчийг идэвхжүүлнэ үү"</string>
-    <string name="settings_advanced_updates_allow_metered">Мобайл датагаар шинэчлэл хийх</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe болон засваруудыг гар утасны датагаар татаж авах</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Автомат шинэчлэлт</string>
+    <string name="settings_auto_updates_description">Morphe нээгдэхэд шинэчлэлтийн талаарх үйлдэл. Доошоо татаж сэргээх үед үргэлж шалгана</string>
+    <string name="settings_auto_updates_download">Автоматаар татаж авах</string>
+    <string name="settings_auto_updates_download_description">Morphe нээгдэхэд шинэчлэлт байгаа эсэхийг шалгаж, ямар ч сүлжээгээр патчийн шинэчлэлтийг татаж авна</string>
+    <string name="settings_auto_updates_wifi_only">Зөвхөн Wi-Fi-аар татаж авах</string>
+    <string name="settings_auto_updates_wifi_only_description">Мобайл дата дээр зөвхөн боломжтой шинэчлэлтүүдийг шалгаж харуулна</string>
+    <string name="settings_auto_updates_check_only">Зөвхөн шалгах</string>
+    <string name="settings_auto_updates_check_only_description">Боломжтой шинэчлэлтүүдийг харуулах бөгөөд та да랐ж татаж авна</string>
+    <string name="settings_auto_updates_off">Шалгахгүй</string>
+    <string name="settings_auto_updates_off_description">Зөвхөн татаж шинэчлэх үед шалгана</string>
     <string name="settings_advanced_updates_background_notifications">Ард фондоор шинэчлэгдэх мэдэгдэл</string>
     <string name="settings_advanced_updates_background_notifications_description">Ард фондоор тогтмол шинэчлэлт шалгаж, бэлэн болмогц мэдэгдэнэ</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Апп хаалттай байсан ч шинэ хувилбаруудын push мэдэгдлийг хүлээн авах</string>
@@ -932,7 +944,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="settings_advanced_expert_mode_dialog_title">Мэргэжлийн горимыг идэвхжүүлэх үү?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Мэргэжлийн горим нь патчиг хэрхэн хэрэглэхэд илүү их хяналт олгодог боловч тохиргоог буруу хийснээр аппликейшн ажиллахгүй болох эрсдэлтэй</string>
     <string name="settings_advanced_strip_unused_libs">Төхөөрөмжийн архитектурт тохируулан оновчлох</string>
-    <string name="settings_advanced_strip_unused_libs_description">Ашиглаагүй native сангууд болон APK split-уудыг устгана</string>
+    <string name="settings_advanced_strip_unused_libs_description">Патч хийсэн аппликейшн болон хадгалсан эх хувилбаруудаас ашиглагдаагүй native сангууд болон APK split-үүдийг устгана</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Pull request эх сурвалж болон хувийн репозиторуудыг нээнэ</string>
     <string name="settings_advanced_github_pat_description">Pull request эх сурвалж, хувийн репозиторууд болон GitHub-ийн илүү өндөр хязгаарлалттай ашиглах эрхэд зориулагдсан</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">Туслахыг шууд нээх</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Татаж авах зааврыг алгасаад итгэмжлэгдсэн туслахыг нээнэ</string>
     <string name="settings_system_apk_download_helper_auto_batch">APK файлуудыг багцаар автоматаар татаж авах</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Дарааллын бүх апп-ыг нөхцөл бүрт дэмжигдэх хамгийн сүүлийн хувилбартай эсэхийг шалгаж, хэрэв байхгүй эсвэл хуучин байвал хамгийн эхний итгэмжлэгдсэн туслах ашиглан татаж авна</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Энд файл байхгүй байна</string>
     <string name="file_picker_read_error">Энэхүү хавтсыг унших боломжгүй</string>

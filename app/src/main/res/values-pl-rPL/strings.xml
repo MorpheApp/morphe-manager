@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">To jest nowa wersja źródła %s. Czy chcesz je zaktualizować?</string>
     <string name="mpp_import_unreadable">Nie można odczytać tego pliku</string>
+    <string name="incoming_file_not_patch_source">Ten plik nie jest źródłem poprawki</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Dostępna aktualizacja Morphe</string>
     <string name="home_update_available_subtitle">Nowa wersja gotowa do instalacji</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Niektóre źródła modyfikacji wymagają nowszej wersji</string>
     <string name="home_held_back_title">Źródło modyfikacji spowodowało awarię Morphe</string>
     <string name="home_held_back_subtitle">Zostało pominięte, aby aplikacja mogła się uruchomić. Dotknij, aby sprawdzić</string>
-    <string name="home_metered_skipped_title">Aktualizacje wstrzymane na danych mobilnych</string>
-    <string name="home_metered_skipped_subtitle">Dotknij, aby zezwolić na aktualizacje przez dane mobilne</string>
+    <string name="home_source_updates_title">Dostępne aktualizacje modyfikacji</string>
+    <string name="home_source_updates_subtitle">Dotknij, aby je pobrać</string>
     <string name="home_repatch_available_subtitle">Dotknij, aby zakolejkować wszystkie</string>
     <string name="home_update_error">Błąd aktualizacji</string>
     <string name="home_update_error_subtitle">Coś poszło nie tak podczas aktualizacji źródeł</string>
-    <string name="home_update_skipped_metered">Pominięto aktualizacje</string>
-    <string name="home_update_skipped_metered_subtitle">Dane mobilne są aktywne</string>
     <string name="home_updating_sources">Aktualizowanie źródeł…</string>
     <string name="home_update_success">Aktualizacja źródeł zakończona</string>
     <string name="home_update_success_subtitle">Źródła są aktualne</string>
@@ -254,6 +253,8 @@
     <string name="home_apk_availability_recommended_label">Zalecana</string>
     <string name="home_apk_availability_unpatched_label">Niezmodyfikowana</string>
     <string name="home_apk_availability_incompatible_label">Niezgodna</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Oryginalna wersja %1$s na tym urządzeniu to %2$s, która jest nowsza niż obsługiwane poprawki</string>
     <string name="home_apk_availability_find">Tak, pomóż mi go znaleźć</string>
     <string name="home_apk_availability_have">Nie, już go mam</string>
     <string name="home_apk_helper_download">Użyj asystenta</string>
@@ -380,6 +381,8 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Obsługiwane wersje:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nieobsługiwana</string>
+    <string name="home_version_copy">Kopiuj wersję</string>
+    <string name="home_version_copied">Wersja skopiowana</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Kompilacja %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">To inna kompilacja tej samej wersji. Te modyfikacje wymagają konkretnej kompilacji</string>
@@ -388,7 +391,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_expected_package">Oczekiwany pakiet:</string>
     <string name="home_dialog_selected_package">Wybrany pakiet:</string>
     <string name="home_outdated_patches_dialog_title">Modyfikacje mogą być przestarzałe</string>
-    <string name="home_outdated_patches_dialog_message">Dane mobilne są aktywne, a aktualizacje modyfikacji wyłączone</string>
+    <string name="home_outdated_patches_dialog_message">Dostępne są nowsze modyfikacje, ale nie zostały jeszcze pobrane</string>
     <string name="home_outdated_patches_dialog_warning">Modyfikowanie za pomocą przestarzałych modyfikacji może zepsuć aplikację</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Aktualizuj i modyfikuj</string>
     <string name="home_low_disk_space_dialog_title">Mało miejsca na dysku</string>
@@ -890,8 +893,17 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Przedpremierowe wersje Morphe są nadal w fazie rozwoju i mogą być niestabilne.
 
 Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdego źródła na liście źródeł modyfikacji"</string>
-    <string name="settings_advanced_updates_allow_metered">Aktualizacje przez dane mobilne</string>
-    <string name="settings_advanced_updates_allow_metered_description">Pobiera aktualizacje Morphe i modyfikacji przez dane mobilne</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Automatyczne aktualizacje</string>
+    <string name="settings_auto_updates_description">Działania Morphe w zakresie aktualizacji podczas uruchamiania. Przeciągnięcie w dół w celu odświeżenia zawsze wymusza sprawdzenie</string>
+    <string name="settings_auto_updates_download">Pobieraj automatycznie</string>
+    <string name="settings_auto_updates_download_description">Sprawdza dostępność aktualizacji podczas uruchamiania Morphe i pobiera aktualizacje modyfikacji w dowolnej sieci</string>
+    <string name="settings_auto_updates_wifi_only">Pobieraj tylko przez Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">W przypadku danych komórkowych sprawdza i pokazuje tylko dostępne aktualizacje</string>
+    <string name="settings_auto_updates_check_only">Tylko sprawdzaj</string>
+    <string name="settings_auto_updates_check_only_description">Pokazuje dostępne aktualizacje i pobiera je po dotknięciu</string>
+    <string name="settings_auto_updates_off">Nie sprawdzaj</string>
+    <string name="settings_auto_updates_off_description">Sprawdza tylko podczas przeciągnięcia w dół do odświeżenia</string>
     <string name="settings_advanced_updates_background_notifications">Powiadomienia o aktualizacjach w tle</string>
     <string name="settings_advanced_updates_background_notifications_description">Okresowo sprawdzaj aktualizacje w tle i powiadamiaj, gdy będą dostępne</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Powiadomienia push o nowych wersjach, nawet gdy aplikacja jest zamknięta</string>
@@ -933,7 +945,7 @@ Modyfikacje nie są tym objęte: włącz przedpremierowe modyfikacje dla każdeg
     <string name="settings_advanced_expert_mode_dialog_title">Włączyć tryb ekspercki?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tryb ekspercki zapewnia większą kontrolę nad procesem modyfikacji, jednak błędna konfiguracja ustawień może sprawić, że aplikacja przestanie działać</string>
     <string name="settings_advanced_strip_unused_libs">Optymalizuj pod kątem architektury urządzenia</string>
-    <string name="settings_advanced_strip_unused_libs_description">Usuwa nieużywane biblioteki natywne i podzielone pliki APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Usuwa nieużywane biblioteki natywne i podziały APK z poprawek aplikacji oraz zapisanych oryginałów</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Odblokowuje źródła z pull requestów i prywatne repozytoria</string>
     <string name="settings_advanced_github_pat_description">Obsługa źródeł z pull requestów, prywatnych repozytoriów oraz wyższy limit zapytań GitHub</string>
@@ -1272,6 +1284,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_apk_download_helper_open_directly">Otwórz asystenta od razu</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Pomija instrukcje pobierania i otwiera zaufanego asystenta</string>
     <string name="settings_system_apk_download_helper_auto_batch">Automatycznie pobieraj pliki APK w trybie wsadowym</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Sprawdza każdą aplikację w kolejce pod kątem najnowszej wersji obsługiwanej przez jej poprawki i pobiera ją za pomocą pierwszego zaufanego pomocnika, gdy brakuje jej lub jest nieaktualna</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Brak plików</string>
     <string name="file_picker_read_error">Nie można odczytać tego folderu</string>

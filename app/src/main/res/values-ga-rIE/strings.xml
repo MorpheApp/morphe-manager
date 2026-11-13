@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Is leagan nua de %s é seo. Ar mhaith leat é a nuashonrú?</string>
     <string name="mpp_import_unreadable">Ní féidir an comhad seo a léamh</string>
+    <string name="incoming_file_not_patch_source">Níl an comhad seo ina thosaithe patch</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Nuashonrú Morphe ar fáil</string>
     <string name="home_update_available_subtitle">Tá nuashonrú nua ar fáil</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Teastaíonn leagan níos nuaí ó roinnt foinsí paiste</string>
     <string name="home_held_back_title">Thuar foinse paiste Morphe</string>
     <string name="home_held_back_subtitle">Léiríodh é ionas go bhféadfaí an aip a thosú. Tapáil chun athbhreithniú a dhéanamh</string>
-    <string name="home_metered_skipped_title">Nuashonruithe curtha ar sos ar shonraí soghluaiste</string>
-    <string name="home_metered_skipped_subtitle">Tapáil chun nuashonruithe ar shonraí soghluaiste a cheadú</string>
+    <string name="home_source_updates_title">Nuashonrúí paiste ar fáil</string>
+    <string name="home_source_updates_subtitle">Tapáil chun iad a íoslódáil</string>
     <string name="home_repatch_available_subtitle">Tapáil chun iad uile a chur i scuaine</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
     <string name="home_update_error_subtitle">Tharla fadhb agus foinsí á nuashonrú</string>
-    <string name="home_update_skipped_metered">Nuashonruithe scipeáilte</string>
-    <string name="home_update_skipped_metered_subtitle">Tá sonraí soghluaiste gníomhach</string>
     <string name="home_updating_sources">Ag nuashonrú na foinsí…</string>
     <string name="home_update_success">Foinsí nuashonraithe críochnaithe</string>
     <string name="home_update_success_subtitle">Tá do foinsí suas chun dáta</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Molta</string>
     <string name="home_apk_availability_unpatched_label">Díphaisteáilte</string>
     <string name="home_apk_availability_incompatible_label">Neamh-chomhoiriúnach</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Is é %2$s an %1$s bunaidh ar an ngléas seo, rud atá níos nuaí ná mar a thacaíonn na paistí leis</string>
     <string name="home_apk_availability_find">Sea, cabhraigh liom é a aimsiú</string>
     <string name="home_apk_availability_have">Ní hea, tá sé agam cheana féin.</string>
     <string name="home_apk_helper_download">Bain úsáid as aip chúnta</string>
@@ -379,6 +380,8 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Lean ar aghaidh ar aon nós</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Leaganacha comhoiriúnacha:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Gan tacaíocht</string>
+    <string name="home_version_copy">Leagan cóipe</string>
+    <string name="home_version_copied">Leagan cóipeáilte</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Tóg %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Is tógáil dhifriúil den leagan céanna é seo. Éilíonn na paistí tógáil shonrach</string>
@@ -387,7 +390,7 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="home_dialog_expected_package">Pacáiste ionchais:</string>
     <string name="home_dialog_selected_package">Pacáiste roghnaithe:</string>
     <string name="home_outdated_patches_dialog_title">B’fhéidir go bhfuil na paistí as dáta</string>
-    <string name="home_outdated_patches_dialog_message">Tá sonraí soghluaiste gníomhach agus tá nuashonruithe paiste díchumasaithe</string>
+    <string name="home_outdated_patches_dialog_message">Tá paistí nuaí ar fáil ach ní íoslódálann siad fós</string>
     <string name="home_outdated_patches_dialog_warning">D’fhéadfadh go mbeadh aip briste mar thoradh ar phaistí le paistí atá as dáta</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Nuashonrú &amp; Paiste</string>
     <string name="home_low_disk_space_dialog_title">Spás diosca íseal</string>
@@ -479,9 +482,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="batch_patch_force_version_done">Curtha sa scuaine ar aon nós, d\'fhéadfadh an aip briseadh</string>
     <string name="batch_patch_accept_signature_done">Curtha sa scuaine mar sin féin, APK gan fíorú</string>
     <string name="batch_patch_apk_selected">Roghnóladh APK</string>
-    <string name="batch_patch_auto_download_stopped">Stopadh íoslódálacha APK uathoibríacha</string>
-    <string name="batch_patch_auto_download_stop">Stop íoslódálacha</string>
-    <string name="batch_patch_auto_download_kept">Ní raibh féidir an APK a íoslódaigh a úsáid, mar sin tanaí an cheana</string>
+    <string name="batch_patch_auto_download_stopped">Tá íoslódálacha uathoibríocha APK stoptha</string>
+    <string name="batch_patch_auto_download_stop">Stad íoslódálacha</string>
+    <string name="batch_patch_auto_download_kept">Níorbh fhéidir an APK a íoslódáladh a úsáid, mar sin coinnítear an ceann roimhe seo.</string>
     <string name="batch_patch_edit_patches">Roghnaigh paistí</string>
     <string name="batch_patch_state_no_apk">Gan APK</string>
     <string name="batch_patch_state_no_patches">Gan paistí</string>
@@ -889,8 +892,17 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Tá leaganacha réamh-eisiúna de Morphe fós á bhforbairt agus is féidir leo a bheith éagobhsaí.
 
 Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa liosta foinsí paistí"</string>
-    <string name="settings_advanced_updates_allow_metered">Nuashonruithe sonraí soghluaiste</string>
-    <string name="settings_advanced_updates_allow_metered_description">Íoslódálann Morphe nuashonruithe agus paistí thar sonraí soghluaiste</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Nuashonrúí uathoibríocha</string>
+    <string name="settings_auto_updates_description">Cad a dhéanann Morphe faoi nuashonrúí nuair a osclaítear é. Seiceálann тарail chun athnuachan i gcónaí</string>
+    <string name="settings_auto_updates_download">Íoslódáil go huathoibríoch</string>
+    <string name="settings_auto_updates_download_description">Seiceálann nuashonrúí nuair a osclaítear Morphe agus íoslódálann nuashonrúí paiste ar aon líonra</string>
+    <string name="settings_auto_updates_wifi_only">Íoslódáil ar Wi-Fi amháin</string>
+    <string name="settings_auto_updates_wifi_only_description">Ar shonraí móbaíle, seiceálann agus taispeánann sé amháin cad atá ar fáil</string>
+    <string name="settings_auto_updates_check_only">Seiceáil amháin</string>
+    <string name="settings_auto_updates_check_only_description">Taispeánann sé nuashonruithe atá ar fáil agus íoslódaíonn sé iad nuair a bhreáiteann tú orthu</string>
+    <string name="settings_auto_updates_off">Ná seiceáil</string>
+    <string name="settings_auto_updates_off_description">Seiceálann sé amháin nuair a tharraingíonn tú chun athnuachan</string>
     <string name="settings_advanced_updates_background_notifications">Fógraí nuashonraithe cúlra</string>
     <string name="settings_advanced_updates_background_notifications_description">Seiceáil go tréimhsiúil le haghaidh nuashonruithe sa chúlra agus cuir in iúl nuair a bhíonn siad ar fáil</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Fógraí brú le haghaidh eisiúintí nua, fiú nuair a bhíonn an aip dúnta</string>
@@ -932,7 +944,7 @@ Níl tionchar ar phaistí: cumasaigh paistí réamh-eisiúna do gach foinse sa l
     <string name="settings_advanced_expert_mode_dialog_title">Cumasaigh mód saineolaithe?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Tugann mód saineolaithe níos mó smachta ar an gcaoi a gcuirtear paistí i bhfeidhm, ach is féidir le socruithe míchumraithe i mód saineolaithe aip neamhfheidhmiúil a bheith mar thoradh air.</string>
     <string name="settings_advanced_strip_unused_libs">Optamaigh le haghaidh ailtireacht gléasanna</string>
-    <string name="settings_advanced_strip_unused_libs_description">Baineann sé leabharlanna dúchasacha neamhúsáidte agus scoilteanna APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Baineann sé leabharlanna dúchasacha nár úsáideadh agus comhaid APK scoilte ó aipeanna paistithe agus ó bhunleaganacha a sábháladh.</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Díghlasálann sé foinsí iarratas tarraingthe agus stórtha príobháideacha</string>
     <string name="settings_advanced_github_pat_description">I gcás foinsí iarratas tarraingthe, stórtha príobháideacha agus teorainn ráta GitHub níos airde</string>
@@ -1268,7 +1280,8 @@ Sonraí: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Suiteálaí anaithnid</string>
     <string name="settings_system_apk_download_helper_open_directly">Oscail an cúntóir láithreach</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Léim thar na treoracha íoslódála agus osclaíonn sé an cúntóir iontaofa</string>
-    <string name="settings_system_apk_download_helper_auto_batch">Íoslódaigh APKanna uathoibríochtach i mbatch</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Íoslódáil APKanna go huathoibríoch i mbaisceanna</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Déanann sé seiceáil ar gach aip atá sa scuaine chun an leagan is déanaí a fháil a thacaíonn a paistí leis, agus íoslódálann sé é leis an gcéad chúntóir iontaofa má tá sé ar iarraidh nó má tá leagan níos sine i gceist.</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Níl aon chomhaid anseo</string>
     <string name="file_picker_read_error">Ní féidir an t-eolaire seo a léamh</string>

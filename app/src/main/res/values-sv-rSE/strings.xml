@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Detta är en ny version av %s. Vill du uppdatera den?</string>
     <string name="mpp_import_unreadable">Den här filen kan inte läsas</string>
+    <string name="incoming_file_not_patch_source">Den här filen är inte en patch-källa</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Uppdatering för Morphe är tillgänglig</string>
     <string name="home_update_available_subtitle">Ny version är redo att installeras</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Vissa tilläggskällor behöver en nyare version</string>
     <string name="home_held_back_title">En tilläggskälla fick Morphe att krascha</string>
     <string name="home_held_back_subtitle">Den hoppades över så att appen kunde starta. Tryck för att granska</string>
-    <string name="home_metered_skipped_title">Uppdateringar via mobildata har pausats</string>
-    <string name="home_metered_skipped_subtitle">Tryck för att tillåta uppdateringar via mobildata</string>
+    <string name="home_source_updates_title">Tilläggsuppdateringar är tillgängliga</string>
+    <string name="home_source_updates_subtitle">Tryck för att ladda ned dem</string>
     <string name="home_repatch_available_subtitle">Tryck för att köa alla</string>
     <string name="home_update_error">Uppdatering misslyckades</string>
     <string name="home_update_error_subtitle">Något gick fel vid uppdatering av källor</string>
-    <string name="home_update_skipped_metered">Uppdateringar hoppas över</string>
-    <string name="home_update_skipped_metered_subtitle">Mobildata är aktivt</string>
     <string name="home_updating_sources">Uppdaterar källor …</string>
     <string name="home_update_success">Uppdatering av källor är klar</string>
     <string name="home_update_success_subtitle">Dina källor är uppdaterade</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Rekommenderas</string>
     <string name="home_apk_availability_unpatched_label">Omodifierad</string>
     <string name="home_apk_availability_incompatible_label">Inkompatibel</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Den ursprungliga %1$s på den här enheten är %2$s, vilket är nyare än vad patcharna stöder</string>
     <string name="home_apk_availability_find">Ja, hjälp mig att hitta den</string>
     <string name="home_apk_availability_have">Nej, jag har den redan</string>
     <string name="home_apk_helper_download">Använd en hjälpapp</string>
@@ -379,6 +380,8 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Fortsätt ändå</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Kompatibla versioner:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Stöds inte</string>
+    <string name="home_version_copy">Kopiera version</string>
+    <string name="home_version_copied">Versionen kopierad</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Bygge %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Det här är ett annat bygge av samma version. Tilläggen kräver ett specifikt bygge. </string>
@@ -387,7 +390,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="home_dialog_expected_package">Förväntat paket:</string>
     <string name="home_dialog_selected_package">Valt paket:</string>
     <string name="home_outdated_patches_dialog_title">Tillägg kan vara inaktuella</string>
-    <string name="home_outdated_patches_dialog_message">Mobildata är aktivt och tilläggsuppdateringar har inaktiverats</string>
+    <string name="home_outdated_patches_dialog_message">Nyare tillägg är tillgängliga men har inte laddats ned ännu</string>
     <string name="home_outdated_patches_dialog_warning">Om du modifierar med inaktuella tillägg kan det leda till en trasig app</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Uppdatera och modifiera</string>
     <string name="home_low_disk_space_dialog_title">Lågt diskutrymme</string>
@@ -479,6 +482,9 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="batch_patch_force_version_done">Köades ändå, appen kan sluta fungera</string>
     <string name="batch_patch_accept_signature_done">Köades ändå, APK-filen har inte verifierats</string>
     <string name="batch_patch_apk_selected">APK-fil har valts</string>
+    <string name="batch_patch_auto_download_stopped">Automatiska APK-nedladdningar har stoppats</string>
+    <string name="batch_patch_auto_download_stop">Stoppa nedladdningar</string>
+    <string name="batch_patch_auto_download_kept">Den nedladdade APK-filen kunde inte användas, så den tidigare behålls</string>
     <string name="batch_patch_edit_patches">Välj tillägg</string>
     <string name="batch_patch_state_no_apk">Ingen APK-fil</string>
     <string name="batch_patch_state_no_patches">Inga tillägg</string>
@@ -886,8 +892,17 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Förhandsversioner av Morphe är fortfarande under utveckling och kan vara instabila.
 
 Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje källa i listan över tilläggskällor"</string>
-    <string name="settings_advanced_updates_allow_metered">Uppdateringar via mobildata</string>
-    <string name="settings_advanced_updates_allow_metered_description">Laddar ned uppdateringar för Morphe och tillägg via mobildata</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Automatiska uppdateringar</string>
+    <string name="settings_auto_updates_description">Vad Morphe gör med uppdateringar när appen öppnas. Dra för att uppdatera kontrollerar alltid</string>
+    <string name="settings_auto_updates_download">Ladda ned automatiskt</string>
+    <string name="settings_auto_updates_download_description">Letar efter uppdateringar när Morphe öppnas och laddar ned tilläggsuppdateringar i alla nätverk</string>
+    <string name="settings_auto_updates_wifi_only">Hämta endast via Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Vid mobildata kontrolleras och visas endast det som är tillgängligt</string>
+    <string name="settings_auto_updates_check_only">Endast kontrollera</string>
+    <string name="settings_auto_updates_check_only_description">Visar tillgängliga uppdateringar och laddar ner dem när du trycker</string>
+    <string name="settings_auto_updates_off">Kontrollera inte</string>
+    <string name="settings_auto_updates_off_description">Kontrollerar endast när du drar för att uppdatera</string>
     <string name="settings_advanced_updates_background_notifications">Aviseringar om uppdateringar i bakgrunden</string>
     <string name="settings_advanced_updates_background_notifications_description">Sök regelbundet efter uppdateringar i bakgrunden och avisera när de är tillgängliga</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Pushmeddelanden om nya versioner, även när appen är stängd</string>
@@ -929,7 +944,7 @@ Tillägg påverkas inte: aktivera förhandsversioner av tillägg för varje käl
     <string name="settings_advanced_expert_mode_dialog_title">Aktivera expertläge?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expertläget ger mer kontroll över hur tilläggen tillämpas, men om du felaktigt konfigurerar inställningarna i expertläget kan det leda till att appen inte fungerar</string>
     <string name="settings_advanced_strip_unused_libs">Optimera för enhetsarkitektur</string>
-    <string name="settings_advanced_strip_unused_libs_description">Tar bort plattformsspecifika bibliotek och delade APK-moduler som inte används</string>
+    <string name="settings_advanced_strip_unused_libs_description">Tar bort oanvända nativa bibliotek och APK-splits från patchade appar och sparade original</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Låser upp möjligheten att använda pull-begäranden som källor och privata lagringsplatser</string>
     <string name="settings_advanced_github_pat_description">För pull-begäranden som källor, privata lagringsplatser och en högre frekvensgräns för GitHub</string>
@@ -1267,6 +1282,8 @@ Information: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Okänd installerare</string>
     <string name="settings_system_apk_download_helper_open_directly">Öppna hjälpprogrammet direkt</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Hoppar över nedladdningsinstruktionerna och öppnar det betrodda hjälpprogrammet</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Ladda ner APK-filer automatiskt i batch</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Kontrollerar varje köad app efter den senaste versionen som dess patchar stöder och laddar ner den med den första betrodda hjälparen när den saknas eller är föråldrad</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Inga filer här</string>
     <string name="file_picker_read_error">Det går inte att läsa den här katalogen</string>

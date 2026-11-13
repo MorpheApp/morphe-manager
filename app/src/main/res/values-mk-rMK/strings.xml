@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Ова е нова верзија од %s. Дали сакате да ја ажурирате?</string>
     <string name="mpp_import_unreadable">Овој фајл не може да се прочита</string>
+    <string name="incoming_file_not_patch_source">Овој фајл не е извор на закрпа</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Достапно е ажурирање на Morphe</string>
     <string name="home_update_available_subtitle">Достапно е ажурирање</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Некои извори на закрпи бараат понова верзија</string>
     <string name="home_held_back_title">Изворот на закрпата предизвика пад на Morphe</string>
     <string name="home_held_back_subtitle">Беше прескокнато за апликацијата да може да стартува. Допрете за преглед</string>
-    <string name="home_metered_skipped_title">Ажурирањата се паузирани при користење мобилни податоци</string>
-    <string name="home_metered_skipped_subtitle">Допрете за да дозволите ажурирања преку мобилни податоци</string>
+    <string name="home_source_updates_title">Достапни се ажурирања на закрпи</string>
+    <string name="home_source_updates_subtitle">Допрете за да ги преземете</string>
     <string name="home_repatch_available_subtitle">Допрете за да ги ставите сите во ред</string>
     <string name="home_update_error">Ажурирањето не успеа</string>
     <string name="home_update_error_subtitle">Нешто тргна наопаку при ажурирањето на изворите</string>
-    <string name="home_update_skipped_metered">Ажурирањето е прескокнато</string>
-    <string name="home_update_skipped_metered_subtitle">Мобилни податоци вклучени</string>
     <string name="home_updating_sources">Ажурирање на изворите…</string>
     <string name="home_update_success">Ажурирање на изворите завршено</string>
     <string name="home_update_success_subtitle">Вашите извори се ажурирани</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Препорачано</string>
     <string name="home_apk_availability_unpatched_label">Без закрпување</string>
     <string name="home_apk_availability_incompatible_label">Некомпатибилен</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Оригиналниот %1$s на овој уред е %2$s, понов од оној што го поддржуваат закрпите</string>
     <string name="home_apk_availability_find">Да, помогнете ми да го најдам</string>
     <string name="home_apk_availability_have">Не, веќе го имам</string>
     <string name="home_apk_helper_download">Користете помошна апликација</string>
@@ -378,6 +379,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">Продолжи сепак</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Компатибилни верзии:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Неподдржано</string>
+    <string name="home_version_copy">Копирај верзија</string>
+    <string name="home_version_copied">Верзијата е копирана</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Верзија %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ова е различна верзија на истата верзија. Поправките бараат специфична верзија</string>
@@ -386,7 +389,7 @@
     <string name="home_dialog_expected_package">Очекуван пакет:</string>
     <string name="home_dialog_selected_package">Избран пакет:</string>
     <string name="home_outdated_patches_dialog_title">Закрпите можеби се застарени</string>
-    <string name="home_outdated_patches_dialog_message">Мобилниот интернет е активен и ажурирањето на закрпите е деактивирано</string>
+    <string name="home_outdated_patches_dialog_message">Достапни се понови закрпи, но сè уште не се преземени</string>
     <string name="home_outdated_patches_dialog_warning">Закрпувањето со застарени закрпи може да резултира со дефектна апликација</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Ажурирај и закрпи</string>
     <string name="home_low_disk_space_dialog_title">Мало слободно место на дискот</string>
@@ -888,8 +891,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"Пре-релизните верзии на Morphe сè уште се во развој и можат да бидат нестабилни.
 
 Крпежите не се засегнати: овозможете пре-релизни крпежи за секој извор во листата на извори за крпежи"</string>
-    <string name="settings_advanced_updates_allow_metered">Ажурирања преку мобилен интернет</string>
-    <string name="settings_advanced_updates_allow_metered_description">Ги презема Morphe и ажурирањата за зафлакирање преку мобилни податоци</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Автоматски ажурирања</string>
+    <string name="settings_auto_updates_description">Што прави Morphe за ажурирањата при отворање. Влечењето за освежување секогаш проверува</string>
+    <string name="settings_auto_updates_download">Преземи автоматски</string>
+    <string name="settings_auto_updates_download_description">Проверува за ажурирања кога Morphe се отвора и презема ажурирања на закрпи на која било мрежа</string>
+    <string name="settings_auto_updates_wifi_only">Преземај само преку Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Преку мобилни податоци, само проверува и прикажува што е достапно</string>
+    <string name="settings_auto_updates_check_only">Само проверка</string>
+    <string name="settings_auto_updates_check_only_description">Прикажува достапни ажурирања и ги презема откако ќе допрете</string>
+    <string name="settings_auto_updates_off">Не проверувај</string>
+    <string name="settings_auto_updates_off_description">Проверува само кога ќе повлечете за освежување</string>
     <string name="settings_advanced_updates_background_notifications">Известувања за ажурирање во позадина</string>
     <string name="settings_advanced_updates_background_notifications_description">Периодично проверувај за ажурирања во позадина и извести кога се достапни</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Push известувања за нови изданија, дури и кога апликацијата е затворена</string>
@@ -931,7 +943,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">Дали сакате да го вклучите Expert режим?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Expert режимот дава повеќе контрола врз тоа како се применуваат закрпите, но лошо конфигурирање на поставките во Expert режимот може да резултира со апликација која не функционира</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизирај за архитектура на уред</string>
-    <string name="settings_advanced_strip_unused_libs_description">Ги отстранува неискористените нативни библиотеки и APK делови</string>
+    <string name="settings_advanced_strip_unused_libs_description">Ги отстранува неискористените нативни библиотеки и APK делови од закрпените апликации и зачуваните оригинали</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Овозможува извори на pull request-и и приватни репозиториуми</string>
     <string name="settings_advanced_github_pat_description">За извори на pull request-и, приватни репозиториуми и повисок GitHub лимит на барања</string>
@@ -1270,6 +1282,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">Отвори го помошникот веднаш</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Ги прескокнува упатствата за преземање и го отвора доверливиот помошник</string>
     <string name="settings_system_apk_download_helper_auto_batch">Автоматски преземај APK фајлови во група</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Проверува секоја апликација во редот за најновата верзија што ја поддржуваат нејзините закрпи и ја презема со првиот доверлив помошник кога таа недостасува или е застарена</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Нема датотеки овде</string>
     <string name="file_picker_read_error">Не може да се чита оваа директорија на датотеките</string>

@@ -24,8 +24,8 @@
     <string name="home_app_patch_sources_mixed">已向 %1$s 个应用提供（共 %2$s 个）</string>
     <string name="home_app_patch_sources_covers">拥有 %1$s 个应用的补丁（共 %2$s 个）</string>
     <string name="home_app_patch_sources_last">每个应用都需要至少保留一个补丁源。</string>
-    <string name="android_11_bug_dialog_title">Android 11 错误</string>
-    <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 系统中的某个错误对用户体验造成负面影响。</string>
+    <string name="android_11_bug_dialog_title">Android 11 漏洞</string>
+    <string name="android_11_bug_dialog_description">必须提前授予应用安装权限，以避免 Android 11 的漏洞影响用户体验。</string>
     <string name="deep_link_add_source_title">添加来源</string>
     <string name="deep_link_add_source_message">您想将此补丁源添加到Morphe吗？</string>
     <string name="deep_link_add_source_warning">仅添加您信任的来源</string>
@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">这是 %s 的新版本。您想要更新它吗？</string>
     <string name="mpp_import_unreadable">无法读取此文件</string>
+    <string name="incoming_file_not_patch_source">该文件不是补丁源文件</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe更新可用</string>
     <string name="home_update_available_subtitle">新版本已准备好安装</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">部分补丁需要更新管理器版本</string>
     <string name="home_held_back_title">一个补丁源导致 Morphe 崩溃</string>
     <string name="home_held_back_subtitle">它已被跳过，以便应用能够启动。点按以查看</string>
-    <string name="home_metered_skipped_title">在移动数据上暂停更新</string>
-    <string name="home_metered_skipped_subtitle">点击允许在移动数据上更新</string>
+    <string name="home_source_updates_title">补丁更新可用</string>
+    <string name="home_source_updates_subtitle">点击下载</string>
     <string name="home_repatch_available_subtitle">点击以全部排队</string>
     <string name="home_update_error">更新失败</string>
     <string name="home_update_error_subtitle">更新源时发生错误</string>
-    <string name="home_update_skipped_metered">更新已跳过</string>
-    <string name="home_update_skipped_metered_subtitle">移动数据已激活</string>
     <string name="home_updating_sources">正在更新源…</string>
     <string name="home_update_success">源更新完成</string>
     <string name="home_update_success_subtitle">您的源已是最新的</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">推荐</string>
     <string name="home_apk_availability_unpatched_label">未修补</string>
     <string name="home_apk_availability_incompatible_label">不兼容</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">此设备上的原版 %1$s 版本为 %2$s，高于补丁支持的版本</string>
     <string name="home_apk_availability_find">是的，帮我查找</string>
     <string name="home_apk_availability_have">不，我已经有了</string>
     <string name="home_apk_helper_download">使用辅助应用程序</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">仍然继续</string>
     <string name="home_dialog_unsupported_version_compatible_versions">兼容版本：</string>
     <string name="home_dialog_unsupported_version_unsupported_label">不支持</string>
+    <string name="home_version_copy">复制版本</string>
+    <string name="home_version_copied">版本已复制</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">构建 %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">这是同一版本的不同构建。补丁需要特定的构建</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">预期包：</string>
     <string name="home_dialog_selected_package">已选择包：</string>
     <string name="home_outdated_patches_dialog_title">补丁可能已过期</string>
-    <string name="home_outdated_patches_dialog_message">移动数据已激活，已禁用补丁更新</string>
+    <string name="home_outdated_patches_dialog_message">有更新的补丁可用，但尚未下载</string>
     <string name="home_outdated_patches_dialog_warning">使用过期补丁可能会导致应用程序无法使用</string>
     <string name="home_outdated_patches_dialog_update_and_patch">更新&amp;修补</string>
     <string name="home_low_disk_space_dialog_title">磁盘空间不足</string>
@@ -691,7 +694,7 @@
     <string name="patcher_notification_title">正在修补…</string>
     <string name="patcher_notification_text">点击返回修补程序</string>
     <string name="patcher_stop_title">停止修补？</string>
-    <string name="patcher_stop_discards">目前的进度将被丢弃，且没有任何内容被安装</string>
+    <string name="patcher_stop_discards">目前的修补进度将被丢弃，且不会安装任何内容</string>
     <!-- Keeps the run going, the way out of a dialog that asks whether to stop it -->
     <string name="patcher_keep_patching">继续修补</string>
     <!-- Patcher Screen - Patcher Messages -->
@@ -704,7 +707,7 @@
     <string name="patcher_message_7">正在调整1和0… 🤖</string>
     <string name="patcher_message_8">正在解开数字意大利面条… 🍝</string>
     <!-- Morphe patches fix YouTube bugs that Google still has not fixed. -->
-    <string name="patcher_message_9">正在修复未修补应用中的错误… 🪲</string>
+    <string name="patcher_message_9">正在修复未修补应用中的漏洞… 🪲</string>
     <string name="patcher_message_10">精彩的补丁值得等待… ⏳</string>
     <string name="patcher_message_11">抛光像素直到它们闪耀… 💎</string>
     <string name="patcher_message_12">在机长关掉\"正在进行补丁\"标识之前请保持座位…💺✈️</string>
@@ -889,8 +892,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe 的预发布版本仍在开发中，可能不稳定。
 
 补丁不受影响：为补丁来源列表中的每个来源启用预发布补丁。"</string>
-    <string name="settings_advanced_updates_allow_metered">移动数据更新</string>
-    <string name="settings_advanced_updates_allow_metered_description">允许 Morphe 通过移动数据下载补丁更新</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">自动更新</string>
+    <string name="settings_auto_updates_description">Morphe 打开时如何处理更新。下拉刷新始终会检查</string>
+    <string name="settings_auto_updates_download">自动下载</string>
+    <string name="settings_auto_updates_download_description">在 Morphe 打开时检查更新，并在任何网络环境下下载补丁更新</string>
+    <string name="settings_auto_updates_wifi_only">仅在 Wi-Fi 下下载</string>
+    <string name="settings_auto_updates_wifi_only_description">在使用移动数据时，仅检查并显示可用更新</string>
+    <string name="settings_auto_updates_check_only">仅检查</string>
+    <string name="settings_auto_updates_check_only_description">显示可用更新，并在您点击后进行下载</string>
+    <string name="settings_auto_updates_off">不检查</string>
+    <string name="settings_auto_updates_off_description">仅在您下拉刷新时检查</string>
     <string name="settings_advanced_updates_background_notifications">后台更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">定期在后台检查更新并通知可用</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">即使应用已关闭，也推送新版本的通知</string>
@@ -932,7 +944,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">启用专家模式？</string>
     <string name="settings_advanced_expert_mode_dialog_message">专家模式提供了更多控制如何应用补丁的选项，但如果错误配置专家模式设置，可能会导致应用程序无法使用</string>
     <string name="settings_advanced_strip_unused_libs">为设备架构优化</string>
-    <string name="settings_advanced_strip_unused_libs_description">移除未使用的原生库和 APK 分割包</string>
+    <string name="settings_advanced_strip_unused_libs_description">从已补丁的应用和保存的原版应用中移除未使用的原生库和 APK 分片</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">解锁拉取请求源和私有仓库</string>
     <string name="settings_advanced_github_pat_description">用于拉取请求源、私有仓库以及更高的 GitHub 速率限制</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">立即打开助手</string>
     <string name="settings_system_apk_download_helper_open_directly_description">跳过下载说明并打开可信助手</string>
     <string name="settings_system_apk_download_helper_auto_batch">批量自动下载 APK</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">检查队列中应用补丁支持的最新版本，并在版本缺失或落后时，使用第一个受信任的助手进行下载</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">这里没有文件</string>
     <string name="file_picker_read_error">无法读取此目录</string>

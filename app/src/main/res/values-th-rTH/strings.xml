@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">นี่คือเวอร์ชันใหม่ของ %s คุณต้องการอัปเดตหรือไม่?</string>
     <string name="mpp_import_unreadable">ไม่สามารถอ่านไฟล์นี้ได้</string>
+    <string name="incoming_file_not_patch_source">ไฟล์นี้ไม่ใช่แหล่งที่มาของแพตช์</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">มีการอัปเดต Morphe พร้อมใช้งาน</string>
     <string name="home_update_available_subtitle">มีเวอร์ชันใหม่พร้อมติดตั้ง</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">แหล่งแพตช์บางแหล่งจำเป็นต้องใช้เวอร์ชันที่ใหม่กว่า</string>
     <string name="home_held_back_title">แหล่งแพตช์หนึ่งทำให้ Morphe เกิดข้อขัดข้อง</string>
     <string name="home_held_back_subtitle">แหล่งนี้ถูกข้ามไปเพื่อให้แอปเริ่มทำงานได้ แตะเพื่อตรวจสอบ</string>
-    <string name="home_metered_skipped_title">การอัปเดตถูกหยุดเมื่อใช้ข้อมูลมือถือ</string>
-    <string name="home_metered_skipped_subtitle">แตะเพื่ออนุญาตการอัปเดตผ่านข้อมูลมือถือ</string>
+    <string name="home_source_updates_title">มีอัพเดทแพตช์ใหม่ให้ใช้งานแล้ว</string>
+    <string name="home_source_updates_subtitle">แตะเพื่อดาวน์โหลด</string>
     <string name="home_repatch_available_subtitle">แตะเพื่อจัดคิวทั้งหมด</string>
     <string name="home_update_error">การอัปเดตล้มเหลว</string>
     <string name="home_update_error_subtitle">เกิดข้อผิดพลาดขณะอัปเดตแหล่งที่มา</string>
-    <string name="home_update_skipped_metered">การอัปเดตถูกข้าม</string>
-    <string name="home_update_skipped_metered_subtitle">กำลังใช้งานข้อมูลมือถือ</string>
     <string name="home_updating_sources">กำลังอัปเดตแหล่งที่มา…</string>
     <string name="home_update_success">อัปเดตแหล่งที่มาเสร็จสมบูรณ์</string>
     <string name="home_update_success_subtitle">แหล่งทีมาของคุณเป็นเวอร์ชันล่าสุดแล้ว</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">แนะนำ</string>
     <string name="home_apk_availability_unpatched_label">ไม่ได้แพตช์</string>
     <string name="home_apk_availability_incompatible_label">ไม่รองรับ</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">%1$s ดั้งเดิมในอุปกรณ์นี้คือ %2$s ซึ่งใหม่กว่าที่แพตช์รองรับ</string>
     <string name="home_apk_availability_find">ใช่ ช่วยฉันหาหน่อย</string>
     <string name="home_apk_availability_have">ไม่ ฉันมีอยู่แล้ว</string>
     <string name="home_apk_helper_download">ใช้แอปตัวช่วย</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">ดำเนินต่อไป</string>
     <string name="home_dialog_unsupported_version_compatible_versions">เวอร์ชันที่เข้ากันได้:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">ไม่รองรับ</string>
+    <string name="home_version_copy">คัดลอกเวอร์ชัน</string>
+    <string name="home_version_copied">คัดลอกเวอร์ชันแล้ว</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">บิลด์ %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">นี่เป็นบิลด์ที่แตกต่างของเวอร์ชันเดียวกัน แพตช์ต้องการบิลด์ที่เฉพาะเจาะจง</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">แพ็กเกจที่คาดหวัง:</string>
     <string name="home_dialog_selected_package">แพ็คเกจที่เลือก:</string>
     <string name="home_outdated_patches_dialog_title">แพตช์อาจล้าสมัย</string>
-    <string name="home_outdated_patches_dialog_message">ใช้ข้อมูลมือถืออยู่ และการอัปเดตแพตช์ถูกปิดใช้งาน</string>
+    <string name="home_outdated_patches_dialog_message">มีแพตช์ที่ใหม่กว่าแต่ยังไม่ได้ดาวน์โหลด</string>
     <string name="home_outdated_patches_dialog_warning">การแพตช์ด้วยแพตช์ที่ล้าสมัยอาจทำให้แอปใช้งานไม่ได้</string>
     <string name="home_outdated_patches_dialog_update_and_patch">อัปเดต &amp; แพตช์</string>
     <string name="home_low_disk_space_dialog_title">พื้นที่ดิสก์เหลือน้อย</string>
@@ -466,7 +469,7 @@
     <string name="batch_patch_preparing_next">กำลังเตรียมแอปถัดไป…</string>
     <string name="batch_patch_progress_counter">กำลังแพตช์ %1$s จาก %2$s</string>
     <string name="batch_patch_summary">%1$s ถูกแพตช์, %2$s ล้มเหลว, %3$s ถูกข้าม</string>
-    <string name="batch_patch_saved_hint">แอปที่แพตช์แล้วถูกบันทึกไว้ ติดตั้งเลย หรือภายหลังได้จากรายการ APK ที่แพตช์แล้วในตั้งค่า</string>
+    <string name="batch_patch_saved_hint">แอปที่แพตช์แล้วถูกบันทึกไว้ ติดตั้งเลย หรือภายหลังได้จากรายการ APK ที่แพตช์แล้วในการตั้งค่า</string>
     <string name="batch_patch_multiple_sources">แอปบางตัวรวมแพตช์จากหลายแหล่ง ซึ่งอาจทำให้เกิดข้อขัดแย้ง</string>
     <string name="batch_patch_needs_apk">ไม่มี APK พร้อมใช้งาน, แนบไฟล์</string>
     <string name="batch_patch_wrong_package">ไฟล์ที่แนบมาเป็นของ %s</string>
@@ -479,6 +482,9 @@
     <string name="batch_patch_force_version_done">จัดคิวไว้แล้วก็ตาม แอปอาจพัง</string>
     <string name="batch_patch_accept_signature_done">จัดคิวไว้แล้วก็ตาม APK ไม่ได้รับการตรวจสอบ</string>
     <string name="batch_patch_apk_selected">เลือก APK แล้ว</string>
+    <string name="batch_patch_auto_download_stopped">หยุดการดาวน์โหลด APK อัตโนมัติแล้ว</string>
+    <string name="batch_patch_auto_download_stop">หยุดการดาวน์โหลด</string>
+    <string name="batch_patch_auto_download_kept">ไม่สามารถใช้งาน APK ที่ดาวน์โหลดมาได้ จึงยังคงใช้ไฟล์เดิมไว้</string>
     <string name="batch_patch_edit_patches">เลือกแพตช์</string>
     <string name="batch_patch_state_no_apk">ไม่มี APK</string>
     <string name="batch_patch_state_no_patches">ไม่มีแพตช์</string>
@@ -677,7 +683,7 @@
     <string name="patcher_task_extracting_resources">กำลังแยกทรัพยากร</string>
     <string name="patcher_task_decoding_resources">กำลังถอดรหัสทรัพยากร</string>
     <string name="patcher_task_indexing_classes">กำลังทำดัชนีคลาส</string>
-    <string name="patcher_task_compiling_dex">กำลังคอมไพล์ไฟล์ DEX</string>
+    <string name="patcher_task_compiling_dex">กำลังรวบรวมไฟล์ DEX</string>
     <string name="patcher_task_compiling_resources">กำลังรวบรวมทรัพยากร</string>
     <string name="patcher_task_writing_apk">กำลังเขียนไฟล์ APK</string>
     <!-- Battery optimization pre-flight dialog -->
@@ -886,8 +892,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"เวอร์ชันก่อนเผยแพร่ของ Morphe ยังอยู่ในระหว่างการพัฒนาและอาจไม่เสถียร
 
 แพตช์ไม่ได้รับผลกระทบ: เปิดใช้งานแพตช์ก่อนเผยแพร่สำหรับแต่ละแหล่งที่มาในรายการแหล่งที่มาของแพตช์"</string>
-    <string name="settings_advanced_updates_allow_metered">อัปเดตข้อมูลมือถือ</string>
-    <string name="settings_advanced_updates_allow_metered_description">ดาวน์โหลดการอัปเดต Morphe และแพตช์ผ่านข้อมูลมือถือ</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">อัปเดตอัตโนมัติ</string>
+    <string name="settings_auto_updates_description">สิ่งที่ Morphe ทำเกี่ยวกับการอัปเดตเมื่อเปิดแอป การดึงเพื่อรีเฟรชจะทำการตรวจสอบเสมอ</string>
+    <string name="settings_auto_updates_download">ดาวน์โหลดอัตโนมัติ</string>
+    <string name="settings_auto_updates_download_description">ตรวจสอบการอัปเดตเมื่อเปิด Morphe และดาวน์โหลดอัปเดตแพตช์ผ่านเครือข่ายใดก็ได้</string>
+    <string name="settings_auto_updates_wifi_only">ดาวน์โหลดผ่าน Wi-Fi เท่านั้น</string>
+    <string name="settings_auto_updates_wifi_only_description">เมื่อใช้ข้อมูลมือถือ จะทำการตรวจสอบและแสดงสิ่งที่พร้อมใช้งานเท่านั้น</string>
+    <string name="settings_auto_updates_check_only">ตรวจสอบเท่านั้น</string>
+    <string name="settings_auto_updates_check_only_description">แสดงการอัปเดตที่มีอยู่และดาวน์โหลดเมื่อคุณแตะ</string>
+    <string name="settings_auto_updates_off">ไม่ต้องตรวจสอบ</string>
+    <string name="settings_auto_updates_off_description">ตรวจสอบเมื่อคุณดึงลงเพื่อรีเฟรชเท่านั้น</string>
     <string name="settings_advanced_updates_background_notifications">การแจ้งเตือนอัปเดตพื้นหลัง</string>
     <string name="settings_advanced_updates_background_notifications_description">ตรวจสอบการอัปเดตในพื้นหลังตามเวลาที่กำหนดและแจ้งให้ทราบเมื่อมีการอัปเดตใหม่</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">รับการแจ้งเตือนแบบพุชสำหรับการเปิดตัวใหม่ๆ แม้ว่าแอปจะถูกปิดไว้</string>
@@ -929,7 +944,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">เปิดใช้งานโหมดเชี่ยวชาญ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">โหมดเชี่ยวชาญให้ควบคุมวิธีการใช้แพตช์ได้มากขึ้น แต่การตั้งค่าที่ไม่ถูกต้องในโหมดเชี่ยวชาญอาจทำให้แอปใช้งานไม่ได้</string>
     <string name="settings_advanced_strip_unused_libs">ปรับประสิทธิภาพสำหรับสถาปัตยกรรมของอุปกรณ์</string>
-    <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารีเนทีฟที่ไม่ได้ใช้และการแยก APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">ลบไลบรารี native และ APK splits ที่ไม่ได้ใช้งานออกจากแอปที่แพตช์แล้วและแอปดั้งเดิมที่บันทึกไว้</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">ปลดล็อกแหล่งที่มาของ pull request และ repository ส่วนตัว</string>
     <string name="settings_advanced_github_pat_description">สำหรับแหล่งที่มาของ pull request, repository ส่วนตัว และขีดจำกัดอัตราการเรียกใช้ GitHub ที่สูงขึ้น</string>
@@ -1267,6 +1282,8 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_installed_by_unknown">ไม่ทราบผู้ติดตั้ง</string>
     <string name="settings_system_apk_download_helper_open_directly">เปิดตัวช่วยทันที</string>
     <string name="settings_system_apk_download_helper_open_directly_description">ข้ามคำแนะนำการดาวน์โหลดและเปิดตัวช่วยที่เชื่อถือได้</string>
+    <string name="settings_system_apk_download_helper_auto_batch">ดาวน์โหลด APK แบบกลุ่มโดยอัตโนมัติ</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">ตรวจสอบแอปที่อยู่ในคิวทั้งหมดเพื่อหาเวอร์ชันล่าสุดที่แพตช์รองรับ และดาวน์โหลดด้วยตัวช่วยที่เชื่อถือได้เป็นอันดับแรกเมื่อไม่มีแอปหรือเวอร์ชันล้าสมัย</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">ไม่มีไฟล์อยู่ที่นี่</string>
     <string name="file_picker_read_error">ไม่สามารถอ่านไดเรกทอรีนี้ได้</string>

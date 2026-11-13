@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Ini adalah versi baharu %s. Adakah anda mahu mengemas kininya?</string>
     <string name="mpp_import_unreadable">Fail ini tidak dapat dibaca</string>
+    <string name="incoming_file_not_patch_source">Fail ini bukan sumber tampalan</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Kemas kini Morphie tersedia</string>
     <string name="home_update_available_subtitle">Kemas kini baharu tersedia untuk di muat turun</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Sesetengah sumber tampalan memerlukan versi lebih baharu</string>
     <string name="home_held_back_title">Sumber tampalan meranapkan Morphe</string>
     <string name="home_held_back_subtitle">Ia dilangkau supaya aplikasi boleh dimulakan. Ketuk untuk menyemak</string>
-    <string name="home_metered_skipped_title">Kemas kini dijeda pada data mudah alih</string>
-    <string name="home_metered_skipped_subtitle">Ketuk untuk membenarkan kemas kini pada data mudah alih</string>
+    <string name="home_source_updates_title">Kemas kini tampalan tersedia</string>
+    <string name="home_source_updates_subtitle">Ketik untuk memuat turunnya</string>
     <string name="home_repatch_available_subtitle">Ketuk untuk memasukkan kesemuanya dalam baris gilir</string>
     <string name="home_update_error">Kemas kini gagal</string>
     <string name="home_update_error_subtitle">Sesuatu tidak kena semasa mengemas kini sumber</string>
-    <string name="home_update_skipped_metered">Kemas kini taraf dilangkau</string>
-    <string name="home_update_skipped_metered_subtitle">Data mudah alih aktif</string>
     <string name="home_updating_sources">Kemas kini sumber-sumber… </string>
     <string name="home_update_success">Kemas kini sumber selesai</string>
     <string name="home_update_success_subtitle">Sumber-sumbee anda adalah yang terkini</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Disyorkan</string>
     <string name="home_apk_availability_unpatched_label">Tidak ditampal</string>
     <string name="home_apk_availability_incompatible_label">Tidak serasi</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">%1$s asal pada peranti ini ialah %2$s, lebih baharu daripada sokongan tampalan</string>
     <string name="home_apk_availability_find">Ya, bantu saya mencarinya</string>
     <string name="home_apk_availability_have">Tidak, saya sudah mempunyainya</string>
     <string name="home_apk_helper_download">Gunakan aplikasi pembantu</string>
@@ -380,6 +381,8 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">Teruskan juga</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versi-versi bersesuaian:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Tidak disokong</string>
+    <string name="home_version_copy">Salin versi</string>
+    <string name="home_version_copied">Versi disalin</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Binaan %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Ini ialah binaan yang berbeza bagi versi yang sama. Tampalan memerlukan binaan tertentu</string>
@@ -388,7 +391,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="home_dialog_expected_package">Pakej yang dijangkakan:</string>
     <string name="home_dialog_selected_package">Pakej terpilih:</string>
     <string name="home_outdated_patches_dialog_title">Tampalan mungkin telah ketinggalan zaman</string>
-    <string name="home_outdated_patches_dialog_message">Data mudah alih aktif dan kemas kini tampalan telah dimatikan</string>
+    <string name="home_outdated_patches_dialog_message">Tampalan yang lebih baharu tersedia tetapi belum dimuat turun</string>
     <string name="home_outdated_patches_dialog_warning">Menampal dengan tampalan ketinggalan zaman mungkin boleh menyebabkan aplikasi rosak</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Kemas kini tampalan \'&amp;\'</string>
     <string name="home_low_disk_space_dialog_title">Ruang storan sedikit</string>
@@ -890,8 +893,17 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Versi prakeluaran Morphe masih dalam pembangunan dan mungkin tidak stabil.
 
 Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam senarai sumber tampalan"</string>
-    <string name="settings_advanced_updates_allow_metered">Kemas kini data mudah alih</string>
-    <string name="settings_advanced_updates_allow_metered_description">Memuat turun Morphe dan kemas kini tampalan melalui data mudah alih</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Kemas kini automatik</string>
+    <string name="settings_auto_updates_description">Apa yang Morphe lakukan tentang kemas kini apabila ia dibuka. Tarik untuk menyegarkan sentiasa menyemak</string>
+    <string name="settings_auto_updates_download">Muat turun secara automatik</string>
+    <string name="settings_auto_updates_download_description">Menyemak kemas kini apabila Morphe dibuka dan memuat turun kemas kini tampalan pada mana-mana rangkaian</string>
+    <string name="settings_auto_updates_wifi_only">Muat turun melalui Wi-Fi sahaja</string>
+    <string name="settings_auto_updates_wifi_only_description">Pada data mudah alih, hanya menyemak dan menunjukkan apa yang tersedia</string>
+    <string name="settings_auto_updates_check_only">Semak sahaja</string>
+    <string name="settings_auto_updates_check_only_description">Menunjukkan kemas kini yang tersedia dan memuat turunnya sebaik sahaja anda mengetik</string>
+    <string name="settings_auto_updates_off">Jangan semak</string>
+    <string name="settings_auto_updates_off_description">Menyemak hanya apabila anda tarik untuk segar semula</string>
     <string name="settings_advanced_updates_background_notifications">Pemberitahuan kemas kini latar belakang</string>
     <string name="settings_advanced_updates_background_notifications_description">Semak kemas kini secara berkala di latar belakang dan beritahu apabila tersedia</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Pemberitahuan tolak untuk keluaran baharu, walaupun aplikasi ditutup</string>
@@ -933,7 +945,7 @@ Tampalan tidak terjejas: aktifkan tampalan prakeluaran untuk setiap sumber dalam
     <string name="settings_advanced_expert_mode_dialog_title">Aktifkan Mod Pakar?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mod Pakar memberikan kawalan yang lebih besar ke atas cara tampalan digunakan, tetapi tetapan yang salah konfigurasi dalam Mod Pakar boleh mengakibatkan aplikasi yang tidak berfungsi</string>
     <string name="settings_advanced_strip_unused_libs">Optimumkan untuk seni bina peranti</string>
-    <string name="settings_advanced_strip_unused_libs_description">Membuang pustaka asli dan pecahan APK yang tidak digunakan</string>
+    <string name="settings_advanced_strip_unused_libs_description">Mengeluarkan pustaka asli dan pecahan APK yang tidak digunakan daripada aplikasi yang ditampal dan asal yang disimpan</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Membuka kunci sumber permintaan tarikan dan repositori peribadi</string>
     <string name="settings_advanced_github_pat_description">Untuk sumber permintaan tarik, repositori peribadi dan had kadar GitHub yang lebih tinggi</string>
@@ -1272,6 +1284,7 @@ Butiran: %2$s"</string>
     <string name="settings_system_apk_download_helper_open_directly">Buka pembantu dengan segera</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Melepasi arahan muat turun dan membuka pembantu yang dipercayai</string>
     <string name="settings_system_apk_download_helper_auto_batch">Muat turun APK secara automatik dalam kelompok</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Menyemak setiap aplikasi yang sedang dalam giliran untuk versi terbaharu yang disokong oleh tampalannya dan memuat turunnya dengan pembantu dipercayai pertama apabila ia tiada atau ketinggalan</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Tiada fail di sini</string>
     <string name="file_picker_read_error">Tidak dapat membaca direktori ini</string>

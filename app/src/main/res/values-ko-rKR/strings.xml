@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">\'%s\'의 새로운 버전입니다. 업데이트하시겠습니까?</string>
     <string name="mpp_import_unreadable">이 파일을 읽을 수 없습니다</string>
+    <string name="incoming_file_not_patch_source">이 파일은 패치 소스가 아닙니다</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe 업데이트 사용 가능</string>
     <string name="home_update_available_subtitle">새 버전 설치 준비 완료</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">일부 패치 소스는 최신 버전이 필요합니다</string>
     <string name="home_held_back_title">패치 소스로 인해 Morphe가 충돌함</string>
     <string name="home_held_back_subtitle">앱 시작을 위해 건너뛰었습니다. 검토하려면 탭하세요</string>
-    <string name="home_metered_skipped_title">모바일 데이터에서 업데이트가 일시 중지됨</string>
-    <string name="home_metered_skipped_subtitle">모바일 데이터에서 업데이트를 허용하려면 탭하세요</string>
+    <string name="home_source_updates_title">패치 업데이트 사용 가능</string>
+    <string name="home_source_updates_subtitle">탭하여 다운로드하세요</string>
     <string name="home_repatch_available_subtitle">모두 패치 목록에 추가하려면 탭하세요</string>
     <string name="home_update_error">업데이트 실패</string>
     <string name="home_update_error_subtitle">소스 업데이트 중 오류가 발생하였습니다</string>
-    <string name="home_update_skipped_metered">업데이트를 건너뜁니다</string>
-    <string name="home_update_skipped_metered_subtitle">모바일 데이터가 활성화되어 있습니다</string>
     <string name="home_updating_sources">소스를 업데이트하는 중…</string>
     <string name="home_update_success">소스 업데이트 완료</string>
     <string name="home_update_success_subtitle">소스가 최신 상태입니다</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">권장 버전</string>
     <string name="home_apk_availability_unpatched_label">패치되지 않음</string>
     <string name="home_apk_availability_incompatible_label">호환되지 않음</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">이 기기에 설치된 원본 \'%1$s\'은는 패치에서 지원하는 버전보다 최신인 \'%2$s\' 버전입니다</string>
     <string name="home_apk_availability_find">네, 찾는 데 도움을 주세요</string>
     <string name="home_apk_availability_have">아니요, 이미 가지고 있습니다</string>
     <string name="home_apk_helper_download">Helper 앱 사용</string>
@@ -379,6 +380,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_dialog_unsupported_version_dialog_proceed">계속 진행</string>
     <string name="home_dialog_unsupported_version_compatible_versions">호환 가능한 버전:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">지원되지 않음</string>
+    <string name="home_version_copy">버전 복사</string>
+    <string name="home_version_copied">버전이 복사되었습니다</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">빌드 %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">동일 버전이지만 다른 빌드입니다. 패치하려면 특정 빌드가 필요합니다</string>
@@ -387,7 +390,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_dialog_expected_package">예상된 패키지:</string>
     <string name="home_dialog_selected_package">선택된 패키지:</string>
     <string name="home_outdated_patches_dialog_title">패치가 오래되었을 수 있습니다</string>
-    <string name="home_outdated_patches_dialog_message">모바일 데이터가 활성화되어 있고 패치 업데이트가 비활성화되었습니다</string>
+    <string name="home_outdated_patches_dialog_message">더 최신 패치를 사용할 수 있지만 아직 다운로드되지 않았습니다</string>
     <string name="home_outdated_patches_dialog_warning">오래된 패치를 사용하면 앱이 손상될 수 있습니다</string>
     <string name="home_outdated_patches_dialog_update_and_patch">업데이트 &amp; 패치</string>
     <string name="home_low_disk_space_dialog_title">디스크 공간 부족</string>
@@ -889,8 +892,17 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe의 Pre-release 버전은 아직 개발 중이며 불안정할 수 있습니다
 
 패치에는 영향을 주지 않습니다: 패치 소스 목록에서 각 소스에 대한 Pre-release 패치를 활성화하세요"</string>
-    <string name="settings_advanced_updates_allow_metered">모바일 데이터에서 업데이트</string>
-    <string name="settings_advanced_updates_allow_metered_description">모바일 데이터를 사용하여 Morphe 및 패치 업데이트를 다운로드합니다</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">자동 업데이트</string>
+    <string name="settings_auto_updates_description">Morphe가 실행될 때 업데이트를 처리하는 방식입니다. 당겨서 새로고침하면 항상 확인합니다</string>
+    <string name="settings_auto_updates_download">자동으로 다운로드</string>
+    <string name="settings_auto_updates_download_description">Morphe를 열 때 업데이트를 확인하고 모든 네트워크에서 패치 업데이트를 다운로드합니다</string>
+    <string name="settings_auto_updates_wifi_only">Wi-Fi에서만 다운로드</string>
+    <string name="settings_auto_updates_wifi_only_description">모바일 데이터에서는 사용 가능한 업데이트를 확인하고 표시만 합니다</string>
+    <string name="settings_auto_updates_check_only">확인만 하기</string>
+    <string name="settings_auto_updates_check_only_description">사용 가능한 업데이트를 표시하며, 탭하면 다운로드합니다</string>
+    <string name="settings_auto_updates_off">확인 안 함</string>
+    <string name="settings_auto_updates_off_description">당겨서 새로고침할 때만 확인합니다</string>
     <string name="settings_advanced_updates_background_notifications">백그라운드 업데이트 알림</string>
     <string name="settings_advanced_updates_background_notifications_description">백그라운드에서 주기적으로 업데이트를 확인하고 업데이트가 있을 경우에 알림을 보냅니다</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">앱이 닫혀 있어도 새 릴리스에 대한 푸시 알림을 받습니다</string>
@@ -932,7 +944,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_advanced_expert_mode_dialog_title">전문가 모드 활성화</string>
     <string name="settings_advanced_expert_mode_dialog_message">전문가 모드에서는 패치를 적용하는 방식을 더 세밀하게 조절할 수 있지만, 설정을 잘못 건드리면 앱이 정상적으로 작동하지 않을 수 있습니다</string>
     <string name="settings_advanced_strip_unused_libs">기기 아키텍처에 맞게 최적화</string>
-    <string name="settings_advanced_strip_unused_libs_description">사용하지 않는 네이티브 라이브러리와 APK 분할 파일을 제거합니다</string>
+    <string name="settings_advanced_strip_unused_libs_description">패치된 앱과 저장된 원본에서 사용하지 않는 네이티브 라이브러리 및 APK 분할 파일을 제거합니다</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">풀 리퀘스트 소스와 비공개 저장소를 잠금 해제합니다</string>
     <string name="settings_advanced_github_pat_description">Pull Request 소스, 비공개 리포지토리 지원 및 더 높은 GitHub API 요청 한도</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">Helper 바로 열기</string>
     <string name="settings_system_apk_download_helper_open_directly_description">다운로드 안내를 건너뛰고 신뢰할 수 있는 Helper 앱을 실행합니다</string>
     <string name="settings_system_apk_download_helper_auto_batch">APK 일괄 자동 다운로드</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">대기열에 있는 모든 앱에 대해 패치가 지원하는 최신 버전을 확인하고, 해당 버전이 없거나 구버전인 경우 첫 번째 신뢰할 수 있는 헬퍼를 통해 다운로드합니다</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">파일이 없습니다</string>
     <string name="file_picker_read_error">이 디렉토리를 읽을 수 없습니다</string>

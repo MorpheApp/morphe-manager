@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">এটি %s-এর একটি নতুন সংস্করণ। আপনি কি এটি আপডেট করতে চান?</string>
     <string name="mpp_import_unreadable">এই ফাইলটি পড়া যাচ্ছে না</string>
+    <string name="incoming_file_not_patch_source">এই ফাইলটি প্যাচ সোর্স নয়</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe আপডেট উপলব্ধ</string>
     <string name="home_update_available_subtitle">নতুন সংস্করণ ইনস্টল করতে প্রস্তুত</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">কিছু প্যাচ উৎসের একটি নতুন সংস্করণ প্রয়োজন</string>
     <string name="home_held_back_title">একটি প্যাচ সোর্স Morphe-কে ক্র্যাশ করেছে</string>
     <string name="home_held_back_subtitle">অ্যাপটি চালু করার জন্য এটি এড়িয়ে যাওয়া হয়েছে। পর্যালোচনা করতে ট্যাপ করুন</string>
-    <string name="home_metered_skipped_title">মোবাইল ডেটায় আপডেট বিরতিতে আছে</string>
-    <string name="home_metered_skipped_subtitle">মোবাইল ডেটাতে আপডেট করার জন্য ট্যাপ করুন</string>
+    <string name="home_source_updates_title">প্যাচ আপডেট পাওয়া গেছে</string>
+    <string name="home_source_updates_subtitle">ডাউনলোড করতে ট্যাপ করুন</string>
     <string name="home_repatch_available_subtitle">সবগুলো সারিবদ্ধ করতে ট্যাপ করুন</string>
     <string name="home_update_error">আপডেট ব্যর্থ হয়েছে</string>
     <string name="home_update_error_subtitle">সোর্স আপডেট করার সময় কিছু ভুল হয়েছে।</string>
-    <string name="home_update_skipped_metered">আপডেট এড়িয়ে যাওয়া হয়েছে</string>
-    <string name="home_update_skipped_metered_subtitle">মোবাইল ডেটা সক্রিয়</string>
     <string name="home_updating_sources">সোর্স আপডেট হচ্ছে...</string>
     <string name="home_update_success">সোর্স আপডেট সম্পূর্ণ হয়েছে</string>
     <string name="home_update_success_subtitle">আপনার সোর্সগুলি আপ-টু-ডেট আছে</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">সুপারিশকৃত</string>
     <string name="home_apk_availability_unpatched_label">অ-প্যাচড</string>
     <string name="home_apk_availability_incompatible_label">অসঙ্গতিপূর্ণ</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">এই ডিভাইসে অরিজিনাল %1$s এর ভার্সন %2$s, যা প্যাচ সাপোর্ট করা ভার্সনের চেয়ে নতুন</string>
     <string name="home_apk_availability_find">হ্যাঁ, আমাকে এটি খুঁজে পেতে সাহায্য করুন</string>
     <string name="home_apk_availability_have">না, এটি আমার কাছে ইতিমধ্যে আছে</string>
     <string name="home_apk_helper_download">একটি সহায়ক অ্যাপ ব্যবহার করুন</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">তবুও এগিয়ে যান</string>
     <string name="home_dialog_unsupported_version_compatible_versions">সামঞ্জস্যপূর্ণ সংস্করণ:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">অসমর্থিত</string>
+    <string name="home_version_copy">সংস্করণ কপি করুন</string>
+    <string name="home_version_copied">সংস্করণ কপি করা হয়েছে</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">বিল্ড %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">এটি একই সংস্করণের একটি ভিন্ন বিল্ড। প্যাচগুলো কাজ করার জন্য একটি নির্দিষ্ট বিল্ডের প্রয়োজন</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">প্রত্যাশিত প্যাকেজ:</string>
     <string name="home_dialog_selected_package">নির্বাচিত প্যাকেজ:</string>
     <string name="home_outdated_patches_dialog_title">প্যাচগুলি পুরানো হতে পারে</string>
-    <string name="home_outdated_patches_dialog_message">মোবাইল ডেটা সক্রিয় এবং প্যাচ আপডেট নিষ্ক্রিয়</string>
+    <string name="home_outdated_patches_dialog_message">নতুন প্যাচ পাওয়া গেছে কিন্তু এখনও ডাউনলোড করা হয়নি</string>
     <string name="home_outdated_patches_dialog_warning">পুরোনো প্যাচ ব্যবহার করে প্যাচ করলে অ্যাপটি কাজ নাও করতে পারে</string>
     <string name="home_outdated_patches_dialog_update_and_patch">আপডেট ও প্যাচ করুন</string>
     <string name="home_low_disk_space_dialog_title">কম ডিস্ক স্পেস</string>
@@ -889,8 +892,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe-এর প্রি-রিলিজ সংস্করণগুলো এখনও উন্নয়নাধীন এবং অস্থির হতে পারে।
 
 প্যাচগুলো প্রভাবিত হয় না: প্যাচ উৎস তালিকায় প্রতিটি উৎসের জন্য প্রি-রিলিজ প্যাচ সক্রিয় করুন।"</string>
-    <string name="settings_advanced_updates_allow_metered">মোবাইল ডেটায় আপডেট</string>
-    <string name="settings_advanced_updates_allow_metered_description">মোবাইল ডেটা দিয়ে Morphe এবং প্যাচ আপডেট ডাউনলোড করে</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">স্বয়ংক্রিয় আপডেট</string>
+    <string name="settings_auto_updates_description">Morphe খোলার সময় আপডেটের ক্ষেত্রে কী করবে। পুল টু রিফ্রেশ সব সময় পরীক্ষা করে</string>
+    <string name="settings_auto_updates_download">স্বয়ংক্রিয়ভাবে ডাউনলোড করুন</string>
+    <string name="settings_auto_updates_download_description">Morphe খোলার সময় আপডেটের জন্য চেক করে এবং যেকোনো নেটওয়ার্কের মাধ্যমে প্যাচ আপডেট ডাউনলোড করে</string>
+    <string name="settings_auto_updates_wifi_only">শুধুমাত্র ওয়াই-ফাই-এ ডাউনলোড করুন</string>
+    <string name="settings_auto_updates_wifi_only_description">মোবাইল ডেটাতে, শুধুমাত্র কী উপলব্ধ তা চেক করে এবং দেখায়</string>
+    <string name="settings_auto_updates_check_only">শুধুমাত্র চেক করুন</string>
+    <string name="settings_auto_updates_check_only_description">উপলব্ধ আপডেটগুলি দেখায় এবং আপনি ট্যাপ করলে সেগুলি ডাউনলোড করে</string>
+    <string name="settings_auto_updates_off">চেক করবেন না</string>
+    <string name="settings_auto_updates_off_description">শুধুমাত্র আপনি রিফ্রেশ করার জন্য পুল করলে চেক করে</string>
     <string name="settings_advanced_updates_background_notifications">ব্যাকগ্রাউন্ড আপডেট নোটিফিকেশন</string>
     <string name="settings_advanced_updates_background_notifications_description">ব্যাকগ্রাউন্ডে আপডেটের জন্য পর্যায়ক্রমে চেক করুন এবং উপলব্ধ হলে বিজ্ঞপ্তি দিন।</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">অ্যাপটি বন্ধ থাকা অবস্থায়ও নতুন রিলিজের জন্য পুশ বিজ্ঞপ্তি।</string>
@@ -932,7 +944,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">এক্সপার্ট মোড সক্ষম করবেন?</string>
     <string name="settings_advanced_expert_mode_dialog_message">এক্সপার্ট মোড প্যাচ কীভাবে প্রয়োগ হবে তার উপর বেশি নিয়ন্ত্রণ দেয়, কিন্তু এক্সপার্ট মোডে ভুল সেটিংস অ্যাপটিকে অকার্যকর করে দিতে পারে</string>
     <string name="settings_advanced_strip_unused_libs">ডিভাইসের আর্কিটেকচারের জন্য অপ্টিমাইজ করুন</string>
-    <string name="settings_advanced_strip_unused_libs_description">অব্যবহৃত নেটিভ লাইব্রেরি এবং APK স্প্লিটস মুছে ফেলে</string>
+    <string name="settings_advanced_strip_unused_libs_description">প্যাচ করা অ্যাপ এবং সেভ করা অরিজিনাল থেকে অব্যবহৃত নেটিভ লাইব্রেরি এবং APK স্প্লিটগুলি সরিয়ে ফেলে</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">পুল রিকোয়েস্টের সোর্স এবং প্রাইভেট রিপজিটরিগুলি আনলক করে</string>
     <string name="settings_advanced_github_pat_description">পুল রিকোয়েস্টের সোর্স, প্রাইভেট রিপজিটরি এবং উচ্চতর গিটহাব রেট লিমিটের জন্য</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">তৎক্ষণাৎ হেল্পার ওপেন করুন</string>
     <string name="settings_system_apk_download_helper_open_directly_description">ডাউনলোড নির্দেশাবলী এড়িয়ে যায় এবং বিশ্বস্ত হেল্পারটি ওপেন করে</string>
     <string name="settings_system_apk_download_helper_auto_batch">ব্যাচ হিসেবে স্বয়ংক্রিয়ভাবে APK ডাউনলোড করুন</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">কিউ করা প্রতিটি অ্যাপের জন্য তার প্যাচগুলো সমর্থন করে এমন সর্বশেষ সংস্করণটি পরীক্ষা করে এবং সেটি অনুপস্থিত থাকলে বা পুরনো হলে প্রথম বিশ্বস্ত হেল্পারের মাধ্যমে ডাউনলোড করে</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">এখানে কোনো ফাইল নেই</string>
     <string name="file_picker_read_error">এই ডিরেক্টরিটি পড়া সম্ভব নয়</string>

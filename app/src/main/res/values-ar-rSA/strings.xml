@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">هذا إصدار جديد من %s. هل تريد تحديثه؟</string>
     <string name="mpp_import_unreadable">لا يمكن قراءة هذا الملف</string>
+    <string name="incoming_file_not_patch_source">هذا الملف ليس مصدراً للتصحيح</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">بعض مصادر التعديل تتطلب إصدارًا أحدث</string>
     <string name="home_held_back_title">مصدر التعديل تسبب في تعطّل Morpe</string>
     <string name="home_held_back_subtitle">تم تخطيه حتى يتمكن التطبيق من البدء. انقر للمراجعة</string>
-    <string name="home_metered_skipped_title">التحديثات متوقفة على بيانات الجوّال</string>
-    <string name="home_metered_skipped_subtitle">انقر للسماح بالتحديثات على بيانات الجوّال</string>
+    <string name="home_source_updates_title">تحديثات تعديل متاحة</string>
+    <string name="home_source_updates_subtitle">انقر لتنزيلها</string>
     <string name="home_repatch_available_subtitle">انقر لإدراجهم جميعًا في القائمة</string>
     <string name="home_update_error">فشل التحديث</string>
     <string name="home_update_error_subtitle">حدث خطأ أثناء تحديث المصادر</string>
-    <string name="home_update_skipped_metered">التحديثات تم تخطيها</string>
-    <string name="home_update_skipped_metered_subtitle">بيانات الجوّال نشطة</string>
     <string name="home_updating_sources">جارٍ تحديث المصادر…</string>
     <string name="home_update_success">اكتمل تحديث المصادر</string>
     <string name="home_update_success_subtitle">تم تحديث المصادر</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">موصى به</string>
     <string name="home_apk_availability_unpatched_label">غير معدل</string>
     <string name="home_apk_availability_incompatible_label">غير متوافق</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">إصدار %1$s الأصلي على هذا الجهاز هو %2$s، وهو أحدث من الإصدارات التي تدعمها التعديلات</string>
     <string name="home_apk_availability_find">نعم، ساعدني في العثور عليه</string>
     <string name="home_apk_availability_have">لا، لقد حصلت عليه بالفعل</string>
     <string name="home_apk_helper_download">استخدام تطبيق مساعد</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">المتابعة على أي حال</string>
     <string name="home_dialog_unsupported_version_compatible_versions">الإصدارات المتوافقة:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">غير مدعوم</string>
+    <string name="home_version_copy">نسخ الإصدار</string>
+    <string name="home_version_copied">تم نسخ الإصدار</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">البناء ‎%s‎</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">هذا بناء مختلف من نفس الاصدار. تتطلب التعديلات بناءً معينًا</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">الحزمة المتوقعة:</string>
     <string name="home_dialog_selected_package">الحزمة المحددة:</string>
     <string name="home_outdated_patches_dialog_title">قد تكون التعديلات قديمة</string>
-    <string name="home_outdated_patches_dialog_message">بيانات الجوّال نشطة وتحديثات التعديلات معطلة</string>
+    <string name="home_outdated_patches_dialog_message">تتوفر تعديلات أحدث ولكن لم يتم تنزيلها بعد</string>
     <string name="home_outdated_patches_dialog_warning">قد يؤدي التعديل باستخدام تعديلات قديمة إلى حدوث عطل في التطبيق</string>
     <string name="home_outdated_patches_dialog_update_and_patch">تحديث &amp; تعديل</string>
     <string name="home_low_disk_space_dialog_title">مساحة تخزين منخفضة</string>
@@ -479,7 +482,7 @@
     <string name="batch_patch_force_version_done">تمت الإضافة إلى قائمة الانتظار على أي حال، قد يتعطل التطبيق</string>
     <string name="batch_patch_accept_signature_done">تمت الإضافة إلى قائمة الانتظار على أي حال، لم يتم التحقق من APK</string>
     <string name="batch_patch_apk_selected">تم تحديد ملف APK</string>
-    <string name="batch_patch_auto_download_stopped">توقفت تنزيلات APK التلقائية</string>
+    <string name="batch_patch_auto_download_stopped">توقفت تنزيلات ملفات APK التلقائية</string>
     <string name="batch_patch_auto_download_stop">إيقاف التنزيلات</string>
     <string name="batch_patch_auto_download_kept">تعذر استخدام ملف APK الذي تم تنزيله، لذا تم الاحتفاظ بالملف السابق</string>
     <string name="batch_patch_edit_patches">اختر التعديلات</string>
@@ -892,8 +895,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"الإصدارات السابقة للإطلاق من Morphe لا تزال قيد التطوير وقد تكون غير مستقرة.
 
 لا تتأثر التعديلات بذلك: قم بتمكين تعديلات ما قبل الإطلاق لكل مصدر في قائمة مصادر التعديل"</string>
-    <string name="settings_advanced_updates_allow_metered">تحديثات بيانات الجوّال</string>
-    <string name="settings_advanced_updates_allow_metered_description">يتيح تنزيل تحديثات Morphe وتحديثات التعديل عبر بيانات الجوّال</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">التحديثات التلقائية</string>
+    <string name="settings_auto_updates_description">ما يفعله Morphe بشأن التحديثات عند فتحه. السحب للتحديث يتحقق دائمًا</string>
+    <string name="settings_auto_updates_download">التنزيل تلقائيًا</string>
+    <string name="settings_auto_updates_download_description">يتحقق من وجود تحديثات عند فتح Morphe ويقوم بتنزيل تحديثات التعديل عبر أي شبكة</string>
+    <string name="settings_auto_updates_wifi_only">التنزيل عبر Wi-Fi فقط</string>
+    <string name="settings_auto_updates_wifi_only_description">عند استخدام بيانات الجوّال، يتم التحقق فقط وإظهار ما هو متاح</string>
+    <string name="settings_auto_updates_check_only">التحقق فقط</string>
+    <string name="settings_auto_updates_check_only_description">يظهر التحديثات المتاحة ويقوم بتنزيلها بمجرد النقر</string>
+    <string name="settings_auto_updates_off">عدم التحقق</string>
+    <string name="settings_auto_updates_off_description">يتحقق فقط عندما تقوم بالسحب للتحديث</string>
     <string name="settings_advanced_updates_background_notifications">إشعارات تحديث الخلفية</string>
     <string name="settings_advanced_updates_background_notifications_description">تحقق بشكل دوري من توفر تحديثات في الخلفية و الإشعار عند توفرها</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">تلقي إشعارات فورية بالإصدارات الجديدة، حتى عندما يكون التطبيق مغلقًا</string>
@@ -935,7 +947,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">تمكين وضع الخبير؟</string>
     <string name="settings_advanced_expert_mode_dialog_message">وضع الخبير يوفر مزيدًا من التحكم في كيفية تطبيق التعديلات، ولكن الإعداد الخاطئ لوضع الخبير يمكن أن يوقف التطبيق عن العمل</string>
     <string name="settings_advanced_strip_unused_libs">تحسين وفق معمارية الجهاز</string>
-    <string name="settings_advanced_strip_unused_libs_description">يزيل المكتبات الأصلية وملفات APK المقسمة غير المستخدمة</string>
+    <string name="settings_advanced_strip_unused_libs_description">إزالة المكتبات الأصلية غير المستخدمة وتقسيمات APK من التطبيقات المعدلة والأصلية المحفوظة</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">يفتح مصادر طلبات السحب والمستودعات الخاصة</string>
     <string name="settings_advanced_github_pat_description">لمصادر طلبات السحب والمستودعات الخاصة وللحصول على حد معدل أعلى في GitHub</string>
@@ -1274,7 +1286,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_apk_download_helper_installed_by_unknown">أداة التثبيت غير معروفة</string>
     <string name="settings_system_apk_download_helper_open_directly">فتح المساعد فورًا</string>
     <string name="settings_system_apk_download_helper_open_directly_description">يتخطى تعليمات التنزيل ويفتح المساعد الموثوق</string>
-    <string name="settings_system_apk_download_helper_auto_batch">تنزيل ملفات APK تلقائياً في مجموعة</string>
+    <string name="settings_system_apk_download_helper_auto_batch">تنزيل ملفات APK تلقائيًا في مجموعة</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">يفحص كل تطبيق في قائمة الانتظار بحثًا عن أحدث إصدار تدعمه التعديلات الخاصة به، ويقوم بتنزيله باستخدام أول مساعد موثوق عند فقدانه أو وجود إصدار أحدث</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">لا توجد ملفات هنا</string>
     <string name="file_picker_read_error">لا يمكن قراءة هذا المجلد</string>

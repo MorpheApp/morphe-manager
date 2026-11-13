@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Leli yinguqubulo entsha ka-%s. Uyafuna ukuluvuselela?</string>
     <string name="mpp_import_unreadable">Leli fayela alikwazi ukufundwa</string>
+    <string name="incoming_file_not_patch_source">Leli fayela aliyona imithombo ye-patch</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Kukhona ukuvuselelwa kwe-Morphe</string>
     <string name="home_update_available_subtitle">Inguqulo entsha ilungele ukufakwa</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Ezinye izimina zezipamelo zidinga inguqulo entsha</string>
     <string name="home_held_back_title">Umthombo we-patch ubangele ukuthi i-Morphe icrashe</string>
     <string name="home_held_back_subtitle">Kushiywe ukuze i-app ikwazi ukuqala. Thinta ukuze ubuyekeze</string>
-    <string name="home_metered_skipped_title">Ukubuyekeza kumile kudatha yeselula</string>
-    <string name="home_metered_skipped_subtitle">Chofoza ukuze uvumele izibuyekezo kudatha yeselula</string>
+    <string name="home_source_updates_title">Kutholakala ukuvuselelwa kwe-Patch</string>
+    <string name="home_source_updates_subtitle">Thinta ukuze uzilande</string>
     <string name="home_repatch_available_subtitle">Thinta ukuze uzifake zonke ohlwini</string>
     <string name="home_update_error">Ukubuyekeza kwephutha</string>
     <string name="home_update_error_subtitle">Kukhona okuhambe kabi ngenkathi kuvuselelwa imithombo</string>
-    <string name="home_update_skipped_metered">Izibuyekezo zishiywe</string>
-    <string name="home_update_skipped_metered_subtitle">I-Mobile data isebenza</string>
     <string name="home_updating_sources">Kuvuselelwa imithombo…</string>
     <string name="home_update_success">Ukuvuselelwa kwemithombo kuphothulwe</string>
     <string name="home_update_success_subtitle">Imithombo yakho isesikhathini</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Kunelulekile</string>
     <string name="home_apk_availability_unpatched_label">Angalungiswanga</string>
     <string name="home_apk_availability_incompatible_label">Ayihambisani</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">I-original %1$s kuleli device ngu %2$s, imisha kakhulu kunalokho okusekelwa yii-patches</string>
     <string name="home_apk_availability_find">Yebo, ngisize ngiyithole</string>
     <string name="home_apk_availability_have">Cha, senginayo</string>
     <string name="home_apk_helper_download">Sebenzisa i-app esizayo</string>
@@ -379,6 +380,8 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="home_dialog_unsupported_version_dialog_proceed">Qhubeka noma kunjalo</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Izinguqulo ezihambisana nale:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Akusekelwe</string>
+    <string name="home_version_copy">Kopisha inguqulo</string>
+    <string name="home_version_copied">Inguqulo ikopishwe</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">I-Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Leli yikwakhiwo elihlukile le nguqulo efanayo. Ama-patches adinga ikwakhiwo elithile</string>
@@ -387,7 +390,7 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="home_dialog_expected_package">Iphakheji elilindelekile:</string>
     <string name="home_dialog_selected_package">Iphakheji ekhethiwe:</string>
     <string name="home_outdated_patches_dialog_title">Ama-patch angase abe yasendulo</string>
-    <string name="home_outdated_patches_dialog_message">I-Mobile data isebenza futhi izibuyekezo zama-patch zivaliwe</string>
+    <string name="home_outdated_patches_dialog_message">Kutholakala ama-patch amasha kodwa awaka-download-wa</string>
     <string name="home_outdated_patches_dialog_warning">Uku-patcha ngama-patch asendulo kungaholela ekutheni i-app ingasebenzi</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Vuselela &amp; patch\'a</string>
     <string name="home_low_disk_space_dialog_title">Indawo encane ediskini</string>
@@ -479,6 +482,9 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="batch_patch_force_version_done">Kufakiwe noma kunjalo, i-app ingase yonele</string>
     <string name="batch_patch_accept_signature_done">Kufakiwe noma kunjalo, i-APK ayizange iqinisekiswe</string>
     <string name="batch_patch_apk_selected">APK ikhethiwe</string>
+    <string name="batch_patch_auto_download_stopped">Ukulanda ama-APK ngokuzenzakalelayo kumiswe</string>
+    <string name="batch_patch_auto_download_stop">Misa ukulanda</string>
+    <string name="batch_patch_auto_download_kept">I-APK elandwe ayikwazanga ukusetshenziswa, ngakho eyadlula isagcinwe</string>
     <string name="batch_patch_edit_patches">Khetha ama-patch</string>
     <string name="batch_patch_state_no_apk">Ayikho i-APK</string>
     <string name="batch_patch_state_no_patches">Ayikho imiphephelo</string>
@@ -886,8 +892,17 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Izinguqulo zangaphambi kokukhishwa ze-Morphe zisasebenzelwa futhi zingase zibe nezinkinga.
 
 Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke omthombo ohlelweni lwezithombo zama-patch"</string>
-    <string name="settings_advanced_updates_allow_metered">Ukubuyekeza kwedatha yeselula</string>
-    <string name="settings_advanced_updates_allow_metered_description">Kudawuniloda uMorphe kanye nezibuyekezo zokupatsha ngedatha yeselula</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Ukuvuselelwa okuzenzakalayo</string>
+    <string name="settings_auto_updates_description">Lokhu okwenza i-Morphe mayelana nokuvuselelwa lapho ivulwa. Ukudonsa ukuvuselela kuhlola njalo</string>
+    <string name="settings_auto_updates_download">Download ngokuzenzakalayo</string>
+    <string name="settings_auto_updates_download_description">Ihlola ukuvuselelwa lapho i-Morphe ivulwa futhi idownloada ukuvuselelwa kwe-patch kunoma iyiphi inethiwekhi</string>
+    <string name="settings_auto_updates_wifi_only">Download ku-Wi-Fi kuphela</string>
+    <string name="settings_auto_updates_wifi_only_description">Kudatha kwe-mobile, kuhlolwa futhi kukhonjiswe okutholakalayo kuphela</string>
+    <string name="settings_auto_updates_check_only">Hlolisa kuphela</string>
+    <string name="settings_auto_updates_check_only_description">Khombisa izibuyekezo ezitholakalayo futhi uzilanda lapho uthinta</string>
+    <string name="settings_auto_updates_off">Ungahlolisi</string>
+    <string name="settings_auto_updates_off_description">Hlolisa kuphela lapho udonsa ukuze uvuselele</string>
     <string name="settings_advanced_updates_background_notifications">Izaziso zokuvutha kwengemuva</string>
     <string name="settings_advanced_updates_background_notifications_description">Hlola imisebenzi yokuvuselelwa ngesikhathi ngemuva futhi wazise lapho itholakala</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Izaziso zokuthumela zezikhala ezintsha, ngisho noma i-app ivalele</string>
@@ -929,7 +944,7 @@ Ama-patch awathintikile: vumela ama-patch angaphambi kokukhishwa kuthumele wonke
     <string name="settings_advanced_expert_mode_dialog_title">Vula imodi yengcweti?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Imodi yengcweti inikeza ukulawula okuningi ngokuthi izipathi zinikezwa kanjani, kodwa ukulungisa kabi izilungiselelo emodini yengcweti kungaholela ekutheni uhlelo lokusebenza lungasebenzi</string>
     <string name="settings_advanced_strip_unused_libs">Hlobisa ukuze kuhambisane ne-architecture yedivayisi</string>
-    <string name="settings_advanced_strip_unused_libs_description"> Yususa imithombo yezilimi engasetshenziswa kanye ne-APK splits</string>
+    <string name="settings_advanced_strip_unused_libs_description">Isusa ama-native libraries angasetshenziswa nama-APK splits kuma-apps avelewe kanye nama-originals agcinwe</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Kuvula imithombo ye-pull request kanye nama-repository ayimfihli</string>
     <string name="settings_advanced_github_pat_description">Kwemithombo ye-pull request, ama-repository ayimfihli, kanye nomkhawulo we-GitHub ophakeme</string>
@@ -1267,6 +1282,8 @@ Imininingwane: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Umfakisi akaziwa</string>
     <string name="settings_system_apk_download_helper_open_directly">Vula usizo manje</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Iqeda imiyalelo yokulanda futhi ivula usizo olithembekile</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Landa ama-APK ngokuzenzakalelayo ngamaqoqo</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Ihlola wonke ama-app akulindile ukuze athole inguqulo yakamuva esekelwa ama-patches ayo, futhi iyilanda ngosizo lwesizalo sokuqala esithembekile lapho isishodile noma iselemuva</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Azikho izifayela lapha</string>
     <string name="file_picker_read_error">Angeke kufundwe le ndlela</string>

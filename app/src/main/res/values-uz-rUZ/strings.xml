@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Bu %s ning yangi versiyasi. Uni yangilamoqchimisiz?</string>
     <string name="mpp_import_unreadable">Ushbu faylni o\'qib bo\'lmadi</string>
+    <string name="incoming_file_not_patch_source">Ushbu fayl patch manbai emas</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe\'da yangilanish mavjud</string>
     <string name="home_update_available_subtitle">Yangi versiya o‘rnatishga tayyor</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Ba\'zi yamoq manbalari yangiroq versiyani talab qiladi</string>
     <string name="home_held_back_title">Patch manbai Morphe’ni ishdan chiqardi</string>
     <string name="home_held_back_subtitle">Ilova ishga tushishi uchun u o‘tkazib yuborildi. Ko‘rib chiqish uchun bosing</string>
-    <string name="home_metered_skipped_title">Mobil internet yoqilganda yangilanish to\'xtatilgan</string>
-    <string name="home_metered_skipped_subtitle">Mobil internet orqali yangilashga ruxsat berish uchun bosing</string>
+    <string name="home_source_updates_title">Patch yangilanishlari mavjud</string>
+    <string name="home_source_updates_subtitle">Ularni yuklab olish uchun bosing</string>
     <string name="home_repatch_available_subtitle">Barchasini navbatga qo\'yish uchun bosing</string>
     <string name="home_update_error">Yangilanishda xatolik</string>
     <string name="home_update_error_subtitle">Manbalarni yangilashda xatolik yuzaga keldi</string>
-    <string name="home_update_skipped_metered">Yangilanish o\'tkazib yuborildi</string>
-    <string name="home_update_skipped_metered_subtitle">Mobil internet faol</string>
     <string name="home_updating_sources">Manbalar yangilanmoqda…</string>
     <string name="home_update_success">Manbalar yangilanishi yakunlandi</string>
     <string name="home_update_success_subtitle">Sizning manbalaringiz yangilandi</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Tavsiya etilgan</string>
     <string name="home_apk_availability_unpatched_label">Tuzatilmagan</string>
     <string name="home_apk_availability_incompatible_label">Mos kelmaydi</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Ushbu qurilmadagi asl %1$s versiyasi %2$s bo\"lib, u patchlar qo\"llab-quvvatlaganidan ko\"ra yangiroq</string>
     <string name="home_apk_availability_find">Ha, uni topishga yordam bering</string>
     <string name="home_apk_availability_have">Yo\'q, u menda bor</string>
     <string name="home_apk_helper_download">Yordamchi ilovadan foydalaning</string>
@@ -379,6 +380,8 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_dialog_unsupported_version_dialog_proceed">Baribir davom etish</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Munosib versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Qo\'llab-quvvatlanmaydi</string>
+    <string name="home_version_copy">Versiyani nusxalash</string>
+    <string name="home_version_copied">Versiya nusxalandi</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Bu xuddi shu versiyaning boshqa qurilishi. Patchlar muayyan qurilishni talab qiladi</string>
@@ -387,7 +390,7 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="home_dialog_expected_package">Kutilgan paket:</string>
     <string name="home_dialog_selected_package">Tanlangan paket:</string>
     <string name="home_outdated_patches_dialog_title">Patchlar eskirgan bo\'lishi mumkin</string>
-    <string name="home_outdated_patches_dialog_message">Mobil internet faol va patch yangilanishlari o‘chirilgan</string>
+    <string name="home_outdated_patches_dialog_message">Yangi patchlar mavjud, ammo hali yuklab olinmagan</string>
     <string name="home_outdated_patches_dialog_warning">Eskirgan patchlar bilan patchlash ilovaning buzilishiga olib kelishi mumkin</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yangilash va patchlash</string>
     <string name="home_low_disk_space_dialog_title">Kam disk joyi</string>
@@ -479,6 +482,9 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="batch_patch_force_version_done">Baribir navbatga qo‘yildi, ilova buzilishi mumkin</string>
     <string name="batch_patch_accept_signature_done">Baribir navbatga qo‘yildi, APK tekshirilmagan</string>
     <string name="batch_patch_apk_selected">APK tanlandi</string>
+    <string name="batch_patch_auto_download_stopped">APK fayllarini avtomatik yuklab olish to\'xtatildi</string>
+    <string name="batch_patch_auto_download_stop">Yuklab olishni to\'xtatish</string>
+    <string name="batch_patch_auto_download_kept">Yuklab olingan APKdan foydalanib bo\'lmadi, shuning uchun avvalgisi saqlandi</string>
     <string name="batch_patch_edit_patches">Patchlarni tanlang</string>
     <string name="batch_patch_state_no_apk">APK yo‘q</string>
     <string name="batch_patch_state_no_patches">Hozircha patch qilinmagan</string>
@@ -886,8 +892,17 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe'ning pre-release versiyalari hali ishlab chiqish bosqichida va beqaror bo'lishi mumkin.
 
 Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-release patchlarni yoqing"</string>
-    <string name="settings_advanced_updates_allow_metered">Mobil ma\'lumotlardan yangilash</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe va patch yangilanishlarini mobil internet orqali yuklab oladi.</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Avtomatik yangilanishlar</string>
+    <string name="settings_auto_updates_description">Morphe ochilganda yangilanishlar bo\"yicha nima qilishi. Pastga tortib yangilash har doim tekshiradi</string>
+    <string name="settings_auto_updates_download">Avtomatik yuklab olish</string>
+    <string name="settings_auto_updates_download_description">Morphe ochilganda yangilanishlarni tekshiradi va har qanday tarmoqda patch yangilanishlarini yuklab oladi</string>
+    <string name="settings_auto_updates_wifi_only">Faqat Wi-Fi orqali yuklab olish</string>
+    <string name="settings_auto_updates_wifi_only_description">Mobil ma\'lumotlarda faqat nimalar mavjudligini tekshiradi va ko\'rsatadi</string>
+    <string name="settings_auto_updates_check_only">Faqat tekshirish</string>
+    <string name="settings_auto_updates_check_only_description">Mavjud yangilanishlarni ko\'rsatadi va ularni bosganingizda yuklab oladi</string>
+    <string name="settings_auto_updates_off">Tekshirmaslik</string>
+    <string name="settings_auto_updates_off_description">Faqat yangilash uchun pastga tortganingizda tekshiriladi</string>
     <string name="settings_advanced_updates_background_notifications">Orqa fonda yangilanish bildirishnomalari</string>
     <string name="settings_advanced_updates_background_notifications_description">Yangilanishlarni fonda muntazam tekshirib, mavjud bo‘lganda xabar berish</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Yangi chiqishlar uchun push-bildirishnoma olish</string>
@@ -929,7 +944,7 @@ Patchlar ta'sirlanmaydi: patch manbalari ro'yxatidagi har bir manba uchun pre-re
     <string name="settings_advanced_expert_mode_dialog_title">Ekspert rejimini yoqishni xohlaysizmi?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Ekspert rejimi patchlarni qo\'llashni boshqarishda ko\'proq kontrolni beradi, lekin ekspert rejimida sozlamalarni noto\'g\'ri sozlash ilovaning ishlamasligiga olib kelishi mumkin</string>
     <string name="settings_advanced_strip_unused_libs">Moslamaning arxitekturasiga moslab optimallashtirish</string>
-    <string name="settings_advanced_strip_unused_libs_description">Ishlatilmaydigan native kutubxonalar va APK qismlarini olib tashlaydi.</string>
+    <string name="settings_advanced_strip_unused_libs_description">Patchlangan ilovalar va saqlangan asl nusxalardan foydalanilmaydigan native kutubxonalarni va APK splitlarini olib tashlaydi</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Pull request manbalari va shaxsiy repozitoriylarni ochadi.</string>
     <string name="settings_advanced_github_pat_description">Pull request manbalari, shaxsiy repozitoriylar va yuqoriroq GitHub so\'rovlar chegarasi uchun.</string>
@@ -1267,6 +1282,8 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">O‘rnatuvchi noma’lum</string>
     <string name="settings_system_apk_download_helper_open_directly">Yordamchini darhol ochish</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Yuklab olish ko\'rsatmalarini tashlab o\'tadi va ishonchli yordamchini ochadi</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APK fayllarini guruhda avtomatik yuklab olish</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Navbatdagi har bir ilova uchun uning patchlari qo\'llab-quvvatlaydigan eng yangi versiyani tekshiradi va u yo\'q bo\'lsa yoki eskirgan bo\'lsa, birinchi ishonchli yordamchi orqali uni yuklab oladi</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Bu yerda fayllar yo‘q</string>
     <string name="file_picker_read_error">Ushbu katalogdan o\'qib bo\'lmaydi</string>

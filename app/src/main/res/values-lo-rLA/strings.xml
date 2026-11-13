@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">ນີ້ແມ່ນເວີຊັນໃໝ່ຂອງ %s. ທ່ານຕ້ອງການອັບເດດມັນບໍ?</string>
     <string name="mpp_import_unreadable">ໄຟລ໌ນີ້ບໍ່ສາມາດອ່ານໄດ້</string>
+    <string name="incoming_file_not_patch_source">ໄຟລ໌ນີ້ບໍ່ແມ່ນແຫຼ່ງຂໍ້ມູນ patch</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">ມີອັບເດດ Morphe</string>
     <string name="home_update_available_subtitle">ມີເວີຊັນໃໝ່ພ້ອມຕິດຕັ້ງ</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">ບາງແຫຼ່ງ patch ຕ້ອງການເວີຊັນທີ່ໃໝ່ກວ່າ</string>
     <string name="home_held_back_title">ແຫຼ່ງ patch ທີ່ໜຶ່ງເຮັດໃຫ້ Morphe ຢຸດເຮັດວຽກ</string>
     <string name="home_held_back_subtitle">ມັນຖືກຂ້າມໄປເພື່ອໃຫ້ແອັບສາມາດເລີ່ມຕົ້ນໄດ້. ແຕະເພື່ອທົບທວນ</string>
-    <string name="home_metered_skipped_title">ຢຸດອັບເດດຊົ່ວຄາວໃນຂໍ້ມູນມືຖື</string>
-    <string name="home_metered_skipped_subtitle">ແຕະເພື່ອອະນຸຍາດອັບເດດຜ່ານຂໍ້ມູນມືຖື</string>
+    <string name="home_source_updates_title">ມີການອັບເດດ Patch ໃຫ້ໃຊ້ງານ</string>
+    <string name="home_source_updates_subtitle">ແຕະເພື່ອດາວໂຫລດ</string>
     <string name="home_repatch_available_subtitle">ແຕະເພື່ອຈັດຄິວທັງໝົດ</string>
     <string name="home_update_error">ອັບເດດລົ້ມເຫຼວ</string>
     <string name="home_update_error_subtitle">ມີບາງຢ່າງຜິດພາດໃນຂະນະອັບເດດແຫຼ່ງຂໍ້ມູນ</string>
-    <string name="home_update_skipped_metered">ຂ້າມອັບເດດ</string>
-    <string name="home_update_skipped_metered_subtitle">ກຳລັງໃຊ້ຂໍ້ມູນມືຖື</string>
     <string name="home_updating_sources">ກຳລັງອັບເດດແຫຼ່ງຂໍ້ມູນ…</string>
     <string name="home_update_success">ອັບເດດແຫຼ່ງຂໍ້ມູນສຳເລັດ</string>
     <string name="home_update_success_subtitle">ແຫຼ່ງຂໍ້ມູນຂອງທ່ານອັບເດດແລ້ວ</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">ແນະນຳ</string>
     <string name="home_apk_availability_unpatched_label">ຍັງບໍ່ໄດ້ແພດ</string>
     <string name="home_apk_availability_incompatible_label">ບໍ່ເຂົ້າກັນໄດ້</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">%1$s ຕົ້ນສະບັບໃນອຸປະກອນນີ້ແມ່ນ %2$s, ເຊິ່ງໃໝ່ກວ່າທີ່ເວີຊັນ patch ຮອງຮັບ</string>
     <string name="home_apk_availability_find">ແມ່ນ, ຊ່ວຍຂ້ອຍຊອກຫາມັນ</string>
     <string name="home_apk_availability_have">ບໍ່, ຂ້ອຍມີມັນຢູ່ແລ້ວ</string>
     <string name="home_apk_helper_download">ໃຊ້ແອັບຊ່ວຍ</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">ດຳເນີນການຕໍ່ໄປ</string>
     <string name="home_dialog_unsupported_version_compatible_versions">ເວີຊັນທີ່ເຂົ້າກັນໄດ້:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">ບໍ່ຮອງຮັບ</string>
+    <string name="home_version_copy">ຄັດລອກເວີຊັນ</string>
+    <string name="home_version_copied">ຄັດລອກເວີຊັນແລ້ວ</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">ເວີຊັນ Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">ນີ້ແມ່ນບິວດ໌ທີ່ແຕກຕ່າງຂອງເວີຊັນດຽວກັນ. ຊຸດແພດຕ້ອງການບິວດ໌ສະເພາະ</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">ແພັກເກັດທີ່ຄາດຫວັງ:</string>
     <string name="home_dialog_selected_package">ແພັກເກັດທີ່ເລືອກ:</string>
     <string name="home_outdated_patches_dialog_title">ຊຸດແພດອາດລ້າສະໄໝ</string>
-    <string name="home_outdated_patches_dialog_message">ກຳລັງໃຊ້ຂໍ້ມູນມືຖື ແລະປິດການອັບເດດຊຸດແພດ</string>
+    <string name="home_outdated_patches_dialog_message">ມີ Patch ທີ່ໃໝ່ກວ່າ ແຕ່ຍັງບໍ່ທັນໄດ້ດາວໂຫລດ</string>
     <string name="home_outdated_patches_dialog_warning">ການແພດດ້ວຍຊຸດແພດທີ່ລ້າສະໄໝອາດເຮັດໃຫ້ແອັບເສຍຫາຍ</string>
     <string name="home_outdated_patches_dialog_update_and_patch">ອັບເດດ &amp; ແພດ</string>
     <string name="home_low_disk_space_dialog_title">ພື້ນທີ່ຈັດເກັບຂໍ້ມູນຕໍ່າ</string>
@@ -889,8 +892,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"ເວີຊັນ pre-release ຂອງ Morphe ຍັງຢູ່ໃນຂັ້ນຕອນການພັດທະນາ ແລະ ອາດຈະບໍ່ມີຄວາມສະຖຽນ.
 
 Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປີດໃຊ້ pre-release patches ສຳລັບແຕ່ລະແຫຼ່ງຂໍ້ມູນໃນລາຍຊື່ແຫຼ່ງຂໍ້ມູນ patch"</string>
-    <string name="settings_advanced_updates_allow_metered">ອັບເດດຜ່ານຂໍ້ມູນມືຖື</string>
-    <string name="settings_advanced_updates_allow_metered_description">ດາວໂຫຼດ Morphe ແລະ ການອັບເດດການປັບແກ້ຜ່ານຂໍ້ມູນມືຖື</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">ອັບເດດອັດຕະໂນມັດ</string>
+    <string name="settings_auto_updates_description">ສິ່ງທີ່ Morphe ເຮັດກ່ຽວກັບການອັບເດດເມື່ອເປີດແອັບ. ການດຶງລົງເພື່ອຣີເຟຣຊຈະກວດສອບສະເໝີ</string>
+    <string name="settings_auto_updates_download">ດາວໂຫລດອັດຕະໂນມັດ</string>
+    <string name="settings_auto_updates_download_description">ກວດສອບການອັບເດດເມື່ອເປີດ Morphe ແລະ ດາວໂຫລດການອັບເດດ patch ຜ່ານທຸກເຄືອຂ່າຍ</string>
+    <string name="settings_auto_updates_wifi_only">ດາວໂຫລດຜ່ານ Wi-Fi ເທົ່ານັ້ນ</string>
+    <string name="settings_auto_updates_wifi_only_description">ສຳລັບຂໍ້ມູນມືຖື, ຈະກວດສອບ ແລະ ສະແດງສິ່ງທີ່ມີໃຫ້ໃຊ້ງານເທົ່ານັ້ນ</string>
+    <string name="settings_auto_updates_check_only">ກວດສອບເທົ່ານັ້ນ</string>
+    <string name="settings_auto_updates_check_only_description">ສະແດງການອັບເດດທີ່ມີ ແລະ ດາວໂຫຼດເມື່ອທ່ານແຕະ</string>
+    <string name="settings_auto_updates_off">ບໍ່ກວດສອບ</string>
+    <string name="settings_auto_updates_off_description">ກວດສອບສະເພາະເວລາທີ່ທ່ານດຶງເພື່ອຣີເຟຣຊ</string>
     <string name="settings_advanced_updates_background_notifications">ການແຈ້ງເຕືອນອັບເດດໃນພື້ນຫຼັງ</string>
     <string name="settings_advanced_updates_background_notifications_description">ກວດສອບອັບເດດໃນພື້ນຫຼັງເປັນໄລຍະ ແລະແຈ້ງເຕືອນເມື່ອມີ</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">ການແຈ້ງເຕືອນສຳລັບເວີຊັນໃໝ່, ເຖິງແມ່ນວ່າແອັບຈະປິດຢູ່</string>
@@ -932,7 +944,7 @@ Patch ຈະບໍ່ໄດ້ຮັບຜົນກະທົບ: ໃຫ້ເປ
     <string name="settings_advanced_expert_mode_dialog_title">ເປີດໂໝດຜູ້ຊ່ຽວຊານບໍ?</string>
     <string name="settings_advanced_expert_mode_dialog_message">ໂໝດຜູ້ຊ່ຽວຊານໃຫ້ການຄວບຄຸມຫຼາຍຂຶ້ນກວ່າວິທີໃຊ້ຊຸດແພດ, ແຕ່ການຕັ້ງຄ່າຜິດໃນໂໝດຜູ້ຊ່ຽວຊານອາດເຮັດໃຫ້ແອັບໃຊ້ບໍ່ໄດ້</string>
     <string name="settings_advanced_strip_unused_libs">ປັບປຸງສຳລັບສະຖາປັດຕະຍະກຳຂອງອຸປະກອນ</string>
-    <string name="settings_advanced_strip_unused_libs_description">ລຶບ library ພື້ນເມືອງທີ່ບໍ່ໄດ້ໃຊ້ງານ ແລະ APK splits ອອກ</string>
+    <string name="settings_advanced_strip_unused_libs_description">ລຶບ native libraries ແລະ APK splits ທີ່ບໍ່ໄດ້ໃຊ້ງານ ອອກຈາກແອັບທີ່ຖືກ patch ແລະ ຕົ້ນສະບັບທີ່ຖືກບັນທຶກໄວ້</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">ປົດລັອກແຫຼ່ງທີ່ມາຂອງ pull request ແລະ repository ສ່ວນຕົວ</string>
     <string name="settings_advanced_github_pat_description">ສຳລັບແຫຼ່ງທີ່ມາຂອງ pull request, repository ສ່ວນຕົວ ແລະ ຂີດຈຳກັດ GitHub ທີ່ສູງຂຶ້ນ</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">ເປີດຕົວຊ່ວຍທັນທີ</string>
     <string name="settings_system_apk_download_helper_open_directly_description">ຂ້າມຄຳແນະນຳການດາວໂຫຼດ ແລະ ເປີດຕົວຊ່ວຍທີ່ເຊື່ອຖືໄດ້</string>
     <string name="settings_system_apk_download_helper_auto_batch">ດາວໂຫຼດ APK ແບບກຸ່ມອັດຕະໂນມັດ</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">ກວດສອບທຸກແອັບທີ່ຢູ່ໃນຄິວສຳລັບເວີຊັນຫຼ້າສຸດທີ່ patch ຂອງມັນຮອງຮັບ ແລະ ດາວໂຫຼດມັນດ້ວຍຕົວຊ່ວຍທີ່ເຊື່ອຖືໄດ້ທຳອິດ ເມື່ອມັນຂາດຫາຍໄປ ຫຼື ເປັນເວີຊັນເກົ່າ</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">ບໍ່ມີໄຟລ໌ຢູ່ນີ້</string>
     <string name="file_picker_read_error">ບໍ່ສາມາດອ່ານໄດເລັກທໍຣີນີ້ໄດ້</string>

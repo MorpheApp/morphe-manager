@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">ही %s ची नवीन आवृत्ती आहे. तुम्हाला ती अपडेट करायची आहे का?</string>
     <string name="mpp_import_unreadable">ही फाईल वाचता येत नाही</string>
+    <string name="incoming_file_not_patch_source">ही फाईल पॅच सोर्स नाही</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe नवीन सुधारणा उपलब्ध आहे</string>
     <string name="home_update_available_subtitle">नवीन सुधारणा स्थापनेसाठी तयार आहे</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">काही पॅच स्त्रोतांना नवीन आवृत्ती आवश्यक आहे</string>
     <string name="home_held_back_title">एका पॅच स्रोतामुळे Morphe क्रॅश झाले</string>
     <string name="home_held_back_subtitle">अॅप सुरू होण्यासाठी ते वगळले गेले. पुनरावलोकन करण्यासाठी टॅप करा</string>
-    <string name="home_metered_skipped_title">मोबाइल डेटावर अद्यतने थांबवली आहेत</string>
-    <string name="home_metered_skipped_subtitle">मोबाईल डेटावर अपडेट्सला अनुमती देण्यासाठी टॅप करा</string>
+    <string name="home_source_updates_title">पॅच अपडेट्स उपलब्ध आहेत</string>
+    <string name="home_source_updates_subtitle">ते डाउनलोड करण्यासाठी टॅप करा</string>
     <string name="home_repatch_available_subtitle">सर्वांना रांगेत जोडण्यासाठी टॅप करा</string>
     <string name="home_update_error">सुधारणा अयशस्वी झाली</string>
     <string name="home_update_error_subtitle">स्त्रोत अद्यतन करताना काहीतरी चूक झाली</string>
-    <string name="home_update_skipped_metered">सुधारणा वगळल्या</string>
-    <string name="home_update_skipped_metered_subtitle">मोबाईल डेटा/नेट चालू आहे</string>
     <string name="home_updating_sources">स्रोतांमध्ये सुधारणा करत आहे</string>
     <string name="home_update_success">स्रोतांमधील सुधारणा पूर्ण झाली</string>
     <string name="home_update_success_subtitle">तुमचे स्त्रोत अद्ययावत आहेत.</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">सुचवलेले</string>
     <string name="home_apk_availability_unpatched_label"> बदल न केलेले</string>
     <string name="home_apk_availability_incompatible_label">असंगत</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">या डिव्हाइसवरील मूळ %1$s ची आवृत्ती %2$s आहे, जी पॅचेस सपोर्टपेक्षा नवीन आहे</string>
     <string name="home_apk_availability_find">हो, मला ते शोधण्यात मदत करा</string>
     <string name="home_apk_availability_have">नाही, माझ्याकडे आधीपासूनच आहे</string>
     <string name="home_apk_helper_download">एका हेल्पर ॲपचा वापर करा</string>
@@ -378,6 +379,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">तरीही पुढे जा</string>
     <string name="home_dialog_unsupported_version_compatible_versions">सुसंगत आवृत्त्या:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">असमर्थित</string>
+    <string name="home_version_copy">आवृत्ती कॉपी करा</string>
+    <string name="home_version_copied">आवृत्ती कॉपी केली</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">बिल्ड %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">ही त्याच आवृत्तीची वेगळी बिल्ड आहे. पॅचेससाठी विशिष्ट बिल्ड आवश्यक आहे</string>
@@ -386,7 +389,7 @@
     <string name="home_dialog_expected_package">अपेक्षित पॅकेज:</string>
     <string name="home_dialog_selected_package">निवडलेले पॅकेज:</string>
     <string name="home_outdated_patches_dialog_title">पॅच कालबाह्य होऊ शकतात</string>
-    <string name="home_outdated_patches_dialog_message">मोबाइल डेटा सक्रिय आहे आणि पॅच अपडेट्स बंद आहेत</string>
+    <string name="home_outdated_patches_dialog_message">नवीन पॅचेस उपलब्ध आहेत पण अजून डाउनलोड केलेले नाहीत</string>
     <string name="home_outdated_patches_dialog_warning">कालबाह्य पॅचसह पॅचिंग केल्याने ॲप खंडित होऊ शकते</string>
     <string name="home_outdated_patches_dialog_update_and_patch">अपडेट आणि पॅच करा</string>
     <string name="home_low_disk_space_dialog_title">कमी डिस्क जागा</string>
@@ -888,8 +891,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe च्या प्री-रिलीज आवृत्त्या अद्याप विकासात आहेत आणि अस्थिर असू शकतात.
 
 पॅच प्रभावित होत नाहीत: पॅच स्रोत सूचीमधील प्रत्येक स्रोतासाठी प्री-रिलीज पॅच सक्षम करा."</string>
-    <string name="settings_advanced_updates_allow_metered">मोबाईल डेटा अद्यतने</string>
-    <string name="settings_advanced_updates_allow_metered_description">मोबाईल डेटावर Morphe आणि पॅच अपडेट्स डाउनलोड करते</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">स्वयंचलित अपडेट्स</string>
+    <string name="settings_auto_updates_description">Morphe उघडल्यावर अपडेट्सबाबत काय करते. \'पुल टू रिफ्रेश\' नेहमी तपासते</string>
+    <string name="settings_auto_updates_download">स्वयंचलितपणे डाउनलोड करा</string>
+    <string name="settings_auto_updates_download_description">Morphe उघडल्यावर अपडेट्स तपासते आणि कोणत्याही नेटवर्कवर पॅच अपडेट्स डाउनलोड करते</string>
+    <string name="settings_auto_updates_wifi_only">केवळ वाय-फायवर डाउनलोड करा</string>
+    <string name="settings_auto_updates_wifi_only_description">मोबाईल डेटावर, फक्त काय उपलब्ध आहे याची तपासणी करते आणि ते दाखवते</string>
+    <string name="settings_auto_updates_check_only">फक्त तपासणी करा</string>
+    <string name="settings_auto_updates_check_only_description">उपलब्ध अपडेट्स दाखवते आणि तुम्ही टॅप केल्यावर ते डाउनलोड करते</string>
+    <string name="settings_auto_updates_off">तपासणी करू नका</string>
+    <string name="settings_auto_updates_off_description">जेव्हा तुम्ही रिफ्रेश करण्यासाठी पुल करता तेव्हाच तपासणी करते</string>
     <string name="settings_advanced_updates_background_notifications">पार्श्वभूमी अद्यतन सूचना</string>
     <string name="settings_advanced_updates_background_notifications_description">अद्यतने उपलब्ध झाल्यावर पार्श्वभूमीमध्ये वेळोवेळी तपासणी करा आणि सूचित करा</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">ॲप बंद असतानाही नवीन रिलीझसाठी पुश सूचना</string>
@@ -931,7 +943,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">तज्ञ मोड सक्षम करायचा?</string>
     <string name="settings_advanced_expert_mode_dialog_message">तज्ञ मोड पॅच कसे लागू केले जातात यावर अधिक नियंत्रण देतो, परंतु तज्ञ मोडमधील सेटिंग्ज चुकीच्या कॉन्फिगर केल्यास ॲप कार्यान्वित होऊ शकत नाही</string>
     <string name="settings_advanced_strip_unused_libs">उपकरणाच्या आर्किटेक्चरसाठी अनुकूल करा</string>
-    <string name="settings_advanced_strip_unused_libs_description">न वापरलेल्या नेटिव्ह लायब्ररी आणि APK स्प्लिट्स काढून टाकते</string>
+    <string name="settings_advanced_strip_unused_libs_description">पॅच केलेल्या ॲप्स आणि सेव्ह केलेल्या मूळ फाईल्समधून न वापरलेली नेटिव्ह लायब्ररीज आणि APK स्प्लिट्स काढून टाकते</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">पुल रिक्वेस्ट स्रोत आणि खाजगी रिपॉझिटरी अनलॉक करते</string>
     <string name="settings_advanced_github_pat_description">पुल रिक्वेस्ट सोर्सेस, खाजगी रिपॉझिटरीज आणि उच्च GitHub रेट लिमिटसाठी</string>
@@ -1270,6 +1282,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">हेल्पर त्वरित उघडा</string>
     <string name="settings_system_apk_download_helper_open_directly_description">डाउनलोड सूचना वगळते आणि विश्वासार्ह हेल्पर उघडते</string>
     <string name="settings_system_apk_download_helper_auto_batch">बॅचमध्ये स्वयंचलितपणे APK डाउनलोड करा</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">रांगेतील प्रत्येक ॲपसाठी त्याच्या पॅचेसद्वारे समर्थित नवीनतम आवृत्ती तपासते आणि ती उपलब्ध नसल्यास किंवा जुनी असल्यास पहिल्या विश्वसनीय हेल्परद्वारे डाउनलोड करते</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">येथे कोणतीही फाईल नाही</string>
     <string name="file_picker_read_error">ही निर्देशिका वाचता येत नाही</string>

@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Бұл %s нұсқасының жаңа нұсқасы. Оны жаңартуды қалайсыз?</string>
     <string name="mpp_import_unreadable">Бұл файлды оқу мүмкін емес</string>
+    <string name="incoming_file_not_patch_source">Бұл файл патч дереккөзі емес</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe жаңартуы қолжетімді</string>
     <string name="home_update_available_subtitle">Орнатуға жаңа нұсқа дайын</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Кейбір патч дереккөздеріне жаңарақ нұсқа қажет</string>
     <string name="home_held_back_title">Патч көзі Morphe жұмысын бұзды</string>
     <string name="home_held_back_subtitle">Қолданба іске қосылуы үшін ол өткізіліп кетті. Қарау үшін басыңыз</string>
-    <string name="home_metered_skipped_title">Мобильді деректерде жаңартулар тоқтатылды</string>
-    <string name="home_metered_skipped_subtitle">Мобильді деректерде жаңартуға рұқсат беру үшін түртіңіз</string>
+    <string name="home_source_updates_title">Патч жаңартулары қолжетімді</string>
+    <string name="home_source_updates_subtitle">Жүктеу үшін басыңыз</string>
     <string name="home_repatch_available_subtitle">Бәрін кезекке қою үшін басыңыз</string>
     <string name="home_update_error">Жаңарту сәтсіз аяқталды</string>
     <string name="home_update_error_subtitle">Дереккөздерді жаңарту кезінде қате кетті</string>
-    <string name="home_update_skipped_metered">Жаңартулар өткізіліп кетті</string>
-    <string name="home_update_skipped_metered_subtitle">Мобильді деректер белсенді</string>
     <string name="home_updating_sources">Дереккөздер жаңартылуда…</string>
     <string name="home_update_success">Дереккөздерді жаңарту аяқталды</string>
     <string name="home_update_success_subtitle">Дереккөздеріңіз жаңартылды</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Ұсынылған</string>
     <string name="home_apk_availability_unpatched_label">Патчталмаған</string>
     <string name="home_apk_availability_incompatible_label">Сәйкес емес</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Бұл құрылғыдағы түпнұсқа %1$s нұсқасы %2$s, ол патчтар қолдайтын нұсқадан жаңарақ</string>
     <string name="home_apk_availability_find">Иә, оны табуға көмектесіңіз</string>
     <string name="home_apk_availability_have">Жоқ, ол менде бар</string>
     <string name="home_apk_helper_download">Көмекші қолданбаны пайдаланыңыз</string>
@@ -379,6 +380,8 @@
     <string name="home_dialog_unsupported_version_dialog_proceed">Бәрібір жалғастыру</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Үйлесімді нұсқалар:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Қолдау көрсетілмейді</string>
+    <string name="home_version_copy">Нұсқаны көшіру</string>
+    <string name="home_version_copied">Нұсқа көшірілді</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Құрастыру %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Бұл сол нұсқаның басқа құрылымы. Патчтар үшін белгілі бір құрылым қажет</string>
@@ -387,7 +390,7 @@
     <string name="home_dialog_expected_package">Күтілетін пакет:</string>
     <string name="home_dialog_selected_package">Таңдалған пакет:</string>
     <string name="home_outdated_patches_dialog_title">Патчтар ескіруі мүмкін</string>
-    <string name="home_outdated_patches_dialog_message">Мобильді деректер белсенді және патч жаңартулары өшірілген</string>
+    <string name="home_outdated_patches_dialog_message">Жаңарақ патчтар қолжетімді, бірақ әлі жүктелген жоқ</string>
     <string name="home_outdated_patches_dialog_warning">Ескірген патчтармен патчтеу қолданбаның жұмысын бұзуы мүмкін</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Жаңарту &amp; патчтеу</string>
     <string name="home_low_disk_space_dialog_title">Дискідегі бос орын аз</string>
@@ -889,8 +892,17 @@
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe-нің релиз алдындағы нұсқалары әлі де әзірленуде және тұрақсыз болуы мүмкін.
 
 Патчтарға әсер етпейді: патч көздерінің тізіміндегі әрбір көздік үшін релиз алдындағы патчтарды қосыңыз"</string>
-    <string name="settings_advanced_updates_allow_metered">Мобильді деректер арқылы жаңартулар</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe және патч жаңартуларын мобильді деректер арқылы жүктейді</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Автоматты жаңартулар</string>
+    <string name="settings_auto_updates_description">Morphe ашылғанда жаңартулар бойынша не істейтіні. Жаңарту үшін төмен қарай тарту әрқашан тексереді</string>
+    <string name="settings_auto_updates_download">Автоматты түрде жүктеу</string>
+    <string name="settings_auto_updates_download_description">Morphe ашылғанда жаңартуларды тексереді және кез келген желіде патч жаңартуларын жүктейді</string>
+    <string name="settings_auto_updates_wifi_only">Тек Wi-Fi арқылы жүктеу</string>
+    <string name="settings_auto_updates_wifi_only_description">Мобильді деректер кезінде тек қолжетімділікті тексереді және көрсетеді</string>
+    <string name="settings_auto_updates_check_only">Тек тексеру</string>
+    <string name="settings_auto_updates_check_only_description">Қолжетімді жаңартуларды көрсетеді және сіз бассаңыз, оларды жүктейді</string>
+    <string name="settings_auto_updates_off">Тексермеу</string>
+    <string name="settings_auto_updates_off_description">Тек жаңарту үшін төмен тартқанда тексереді</string>
     <string name="settings_advanced_updates_background_notifications">Фондық жаңарту хабарламалары</string>
     <string name="settings_advanced_updates_background_notifications_description">Жаңартуларды фондық режимде мерзімді түрде тексеру және қолжетімді болғанда хабарлау</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Қосымша жабық болған кезде де, жаңа шығарылымдар туралы push-хабарламалар</string>
@@ -932,7 +944,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">Эксперт режимін қосу керек пе?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Эксперт режимі патчтардың қолданылуына көбірек бақылау береді, бірақ параметрлерді қате баптау қосымшаның жұмыс істемеуіне әкелуі мүмкін</string>
     <string name="settings_advanced_strip_unused_libs">Құрылғы архитектурасы үшін оңтайландыру</string>
-    <string name="settings_advanced_strip_unused_libs_description">Пайдаланылмаған жергілікті кітапханаларды және APK бөліктерін жояды</string>
+    <string name="settings_advanced_strip_unused_libs_description">Патчталған қолданбалардан және сақталған түпнұсқалардан пайдаланылмаған native кітапханаларды және APK бөліктерін жояды</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Pull request дереккөздерін және жеке репозиторийлерді ашады</string>
     <string name="settings_advanced_github_pat_description">Pull request дереккөздері, жеке репозиторийлер және жоғарырақ GitHub rate лимиті үшін</string>
@@ -1271,6 +1283,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">Көмекшіні бірден ашу</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Жүктеу нұсқаулықтарын өткізіп, сенімді көмекшіні ашады</string>
     <string name="settings_system_apk_download_helper_auto_batch">APK файлдарын топтық түрде автоматты жүктеу</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Кезектегі әрбір қолданбаның патчтары қолдайтын ең жаңа нұсқасын тексереді және ол жоқ болса немесе ескірген болса, оны бірінші сенімді көмекші арқылы жүктейді</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Мұнда файлдар жоқ</string>
     <string name="file_picker_read_error">Бұл каталогты оқу мүмкін емес</string>

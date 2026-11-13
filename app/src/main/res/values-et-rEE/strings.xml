@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">See on %s uus versioon. Kas soovid seda uuendada?</string>
     <string name="mpp_import_unreadable">Seda faili ei saa lugeda</string>
+    <string name="incoming_file_not_patch_source">See fail ei ole plaastri allikas</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe\'i uuendus on saadaval</string>
     <string name="home_update_available_subtitle">Uus versioon on paigaldamiseks valmis</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Mõned paigaallikad vajavad uuemat versiooni</string>
     <string name="home_held_back_title">Üks paigaallikas põhjustas Morphe\'i kokkujooksmise</string>
     <string name="home_held_back_subtitle">Jäeti vahele, et rakendus saaks käivituda. Puuduta ülevaatamiseks</string>
-    <string name="home_metered_skipped_title">Uuendused on mobiilse andmeside korral peatatud</string>
-    <string name="home_metered_skipped_subtitle">Puuduta, et lubada uuendused mobiilse andmeside kaudu</string>
+    <string name="home_source_updates_title">Parandusuuendused on saadaval</string>
+    <string name="home_source_updates_subtitle">Puudutage, et neid alla laadida</string>
     <string name="home_repatch_available_subtitle">Puuduta, et lisada need kõik järjekorda</string>
     <string name="home_update_error">Uuendamine ebaõnnestus</string>
     <string name="home_update_error_subtitle">Allikate uuendamise käigus tekis viga</string>
-    <string name="home_update_skipped_metered">Uuendused jäeti vahele</string>
-    <string name="home_update_skipped_metered_subtitle">Kasutusel on mobiilne andmeside</string>
     <string name="home_updating_sources">Allikate uuendamine…</string>
     <string name="home_update_success">Allikate uuendamine lõpetatud</string>
     <string name="home_update_success_subtitle">Allikad on uuendatud</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Soovitatav</string>
     <string name="home_apk_availability_unpatched_label">Patchimata</string>
     <string name="home_apk_availability_incompatible_label">Ühildamatu</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Selle seadme alkuprogramm %1$s on versioon %2$s, mis on uuem kui paigutuste toetatud versioon</string>
     <string name="home_apk_availability_find">Jah, aita mul see leida</string>
     <string name="home_apk_availability_have">Ei, mul on see juba olemas</string>
     <string name="home_apk_helper_download">Kasuta abirakendust</string>
@@ -379,6 +380,8 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="home_dialog_unsupported_version_dialog_proceed">Jätka siiski</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Ühilduvad versioonid:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Mitte toetatud</string>
+    <string name="home_version_copy">Kopeeri versioon</string>
+    <string name="home_version_copied">Versioon kopeeritud</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Build %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">See on sama versiooni teine versioon. Parandused nõuavad konkreetset versiooni</string>
@@ -387,7 +390,7 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="home_dialog_expected_package">Oodatud pakett:</string>
     <string name="home_dialog_selected_package">Valitud pakett:</string>
     <string name="home_outdated_patches_dialog_title">Paigad võivad olla aegunud</string>
-    <string name="home_outdated_patches_dialog_message">Mobiilne andmeside on aktiivne ja paigauuendused on keelatud</string>
+    <string name="home_outdated_patches_dialog_message">Uuemad parandused on saadaval, kuid veel alla laadamata</string>
     <string name="home_outdated_patches_dialog_warning">Aegunud patchidega paigutamine võib rakenduse katki teha</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Uuenda &amp; paiguta</string>
     <string name="home_low_disk_space_dialog_title">Kettaruumi vähene kogus</string>
@@ -889,8 +892,17 @@ Rakenduse eemaldamine kustutab kõigi rakenduse andmed jäädavalt"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe eelväljalaskuse versioonid on veel arenduses ja võivad olla ebastabiilsed.
 
 Patchid ei ole sellest mõjutatud: luba eelväljalaskuse patchid iga allika jaoks patchide allikate loendis"</string>
-    <string name="settings_advanced_updates_allow_metered">Uuendused mobiilse andmesidega</string>
-    <string name="settings_advanced_updates_allow_metered_description">Laadib Morphe\'i ja patchi uuendusi mobiilsetest andmetest</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Automaatsed uuendused</string>
+    <string name="settings_auto_updates_description">Mida Morphe teeb uuendustega avamiseks. Rahvatamine värskendamiseks kontrollib alati</string>
+    <string name="settings_auto_updates_download">Laadi automaatselt alla</string>
+    <string name="settings_auto_updates_download_description">Kontrollib uuendusi Morphe avamisel ja laadib parandusuuendused alla igas võrgus</string>
+    <string name="settings_auto_updates_wifi_only">Laadi alla ainult Wi-Fi abil</string>
+    <string name="settings_auto_updates_wifi_only_description">Mobiilsetingute puhul kontrollitakse ja näidatakse ainult saadaval olevaid</string>
+    <string name="settings_auto_updates_check_only">Ainult kontrollimine</string>
+    <string name="settings_auto_updates_check_only_description">Näitab saadaval olevaid värskendusi ja allab need alla, kui puudutate</string>
+    <string name="settings_auto_updates_off">Ära kontrolli</string>
+    <string name="settings_auto_updates_off_description">Kontrollib ainult siis, kui lohutate värskendamiseks</string>
     <string name="settings_advanced_updates_background_notifications">Taustauuenduste teavitused</string>
     <string name="settings_advanced_updates_background_notifications_description">Kontrolli perioodiliselt taustal uuendusi ja teavita, kui need on saadaval</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Push-teavitused uute versioonide kohta, isegi kui rakendus on suletud</string>
@@ -932,7 +944,7 @@ Patchid ei ole sellest mõjutatud: luba eelväljalaskuse patchid iga allika jaok
     <string name="settings_advanced_expert_mode_dialog_title">Kas lülitada sisse eksperdirežiim?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Eksperdirežiim annab suurema kontrolli selle üle, kuidas patche rakendatakse, kuid valesti seadistatud sätted eksperdirežiimis võivad rakenduse toimimatuks muuta</string>
     <string name="settings_advanced_strip_unused_libs">Optimeeri seadme arhitektuuri jaoks</string>
-    <string name="settings_advanced_strip_unused_libs_description">Eemaldab kasutamata natiivsed teegid ja APK-jaotused</string>
+    <string name="settings_advanced_strip_unused_libs_description">Eemaldab kasutamata kohalike rakenduste raamatukogud ja APK-jagused paigutatud rakendustest ning salvestatud alkuprogrammidest</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Avab pull requesti allikad ja privaatsed hoidlad</string>
     <string name="settings_advanced_github_pat_description">Pull requesti allikate, privaatsete hoidlate ja kõrgema GitHubi limiidi jaoks</string>
@@ -1271,6 +1283,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="settings_system_apk_download_helper_open_directly">Ava abirakendus kohe</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Jätab allalaadimisjuhised vahele ja avab usaldatud abirakenduse</string>
     <string name="settings_system_apk_download_helper_auto_batch">Laadi APK-d automaatselt partiina alla</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Kontrollib iga järjekorra all oleva rakenduse puhul uusimat versiooni, mida selle plaastrid toetavad, ning laadib selle esimese usaldatud abilise abil alla, kui see puudub või on vananenud</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Siin pole faile</string>
     <string name="file_picker_read_error">Seda kataloogi ei õnnestunud lugeda</string>

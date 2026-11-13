@@ -38,6 +38,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Đây là phiên bản mới của %s. Bạn có muốn cập nhật không?</string>
     <string name="mpp_import_unreadable">Không thể đọc tệp này</string>
+    <string name="incoming_file_not_patch_source">Tệp này không phải là nguồn bản vá</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
@@ -49,13 +50,11 @@
     <string name="home_outdated_manager_subtitle">Một số nguồn vá yêu cầu phiên bản Morphe mới hơn</string>
     <string name="home_held_back_title">Một nguồn bản vá đã làm Morphe bị sập</string>
     <string name="home_held_back_subtitle">Nguồn này đã bị bỏ qua để ứng dụng có thể khởi động. Nhấn để xem lại</string>
-    <string name="home_metered_skipped_title">Tạm dừng cập nhật qua dữ liệu di động</string>
-    <string name="home_metered_skipped_subtitle">Bấm để tiếp tục cập nhật qua dữ liệu di động</string>
+    <string name="home_source_updates_title">Đã có các bản cập nhật vá lỗi</string>
+    <string name="home_source_updates_subtitle">Nhấn để tải chúng xuống</string>
     <string name="home_repatch_available_subtitle">Nhấn để xếp tất cả vào hàng đợi</string>
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Đã xảy ra lỗi trong khi cập nhật nguồn</string>
-    <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
-    <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
@@ -253,6 +252,8 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">%1$s gốc trên thiết bị này là %2$s, mới hơn phiên bản mà các bản vá hỗ trợ</string>
     <string name="home_apk_availability_find">Có, hãy giúp tôi tìm nó</string>
     <string name="home_apk_availability_have">Không, tôi có rồi</string>
     <string name="home_apk_helper_download">Dùng ứng dụng hỗ trợ</string>
@@ -379,6 +380,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_unsupported_version_dialog_proceed">Vẫn tiếp tục</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Phiên bản tương thích:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Không tương thích</string>
+    <string name="home_version_copy">Sao chép phiên bản</string>
+    <string name="home_version_copied">Đã sao chép phiên bản</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Bản dựng %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Mặc dù cùng phiên bản, nhưng đây là bản dựng khác. Các bản vá yêu cầu đúng bản dựng mới hỗ trợ</string>
@@ -387,7 +390,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_expected_package">Cần gói:</string>
     <string name="home_dialog_selected_package">Nhưng bạn lại chọn gói:</string>
     <string name="home_outdated_patches_dialog_title">Một số bản vá có thể đã cũ</string>
-    <string name="home_outdated_patches_dialog_message">Bạn đang bật dữ liệu di động vì vậy tự động cập nhật bản vá sẽ bị tắt</string>
+    <string name="home_outdated_patches_dialog_message">Có các bản vá mới hơn nhưng chưa được tải xuống</string>
     <string name="home_outdated_patches_dialog_warning">Sử dụng các bản vá cũ có thể khiến ứng dụng bị hỏng</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Cập nhật &amp; vá</string>
     <string name="home_low_disk_space_dialog_title">Hết dung lượng lưu trữ</string>
@@ -479,6 +482,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="batch_patch_force_version_done">Vẫn được thêm vào hàng đợi, ứng dụng có thể gặp sự cố</string>
     <string name="batch_patch_accept_signature_done">Vẫn được thêm vào hàng đợi, APK chưa được xác minh</string>
     <string name="batch_patch_apk_selected">Đã chọn APK</string>
+    <string name="batch_patch_auto_download_stopped">Đã dừng tự động tải xuống APK</string>
+    <string name="batch_patch_auto_download_stop">Dừng tải xuống</string>
+    <string name="batch_patch_auto_download_kept">APK đã tải xuống không thể sử dụng được, nên bản trước đó được giữ lại</string>
     <string name="batch_patch_edit_patches">Chọn bản vá</string>
     <string name="batch_patch_state_no_apk">Không có APK</string>
     <string name="batch_patch_state_no_patches">Không có bản vá</string>
@@ -886,8 +892,17 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_advanced_updates_prerelease_warning_message">"Các phiên bản trước khi phát hành của Morphe vẫn đang trong quá trình phát triển và có thể không ổn định.
 
 Các bản vá không bị ảnh hưởng: bật các bản vá trước khi phát hành cho từng nguồn trong danh sách nguồn vá"</string>
-    <string name="settings_advanced_updates_allow_metered">Cập nhật bằng dữ liệu di động</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tải Morphe và cập nhật bản vá qua dữ liệu di động</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Tự động cập nhật</string>
+    <string name="settings_auto_updates_description">Những gì Morphe thực hiện đối với các bản cập nhật khi mở ứng dụng. Thao tác kéo để làm mới sẽ luôn kiểm tra</string>
+    <string name="settings_auto_updates_download">Tự động tải xuống</string>
+    <string name="settings_auto_updates_download_description">Kiểm tra cập nhật khi Morphe mở và tải xuống các bản vá cập nhật trên mọi mạng</string>
+    <string name="settings_auto_updates_wifi_only">Chỉ tải xuống qua Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Trên dữ liệu di động, chỉ kiểm tra và hiển thị những gì có sẵn</string>
+    <string name="settings_auto_updates_check_only">Chỉ kiểm tra</string>
+    <string name="settings_auto_updates_check_only_description">Hiển thị các bản cập nhật có sẵn và tải xuống khi bạn nhấn vào</string>
+    <string name="settings_auto_updates_off">Không kiểm tra</string>
+    <string name="settings_auto_updates_off_description">Chỉ kiểm tra khi bạn kéo để làm mới</string>
     <string name="settings_advanced_updates_background_notifications">Thông báo cập nhật nền</string>
     <string name="settings_advanced_updates_background_notifications_description">Kiểm tra cập nhật định kỳ khi ứng dụng chạy nền và báo cho bạn khi có phiên bản mới.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Nhận ngay thông báo khi có phiên bản mới, kể cả khi ứng dụng đang tắt</string>
@@ -929,7 +944,7 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Tối ưu theo kiến trúc thiết bị</string>
-    <string name="settings_advanced_strip_unused_libs_description">Xóa các thư viện native không sử dụng và phân mảnh APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Xóa các thư viện gốc không sử dụng và các bản chia APK từ các ứng dụng đã vá và bản gốc đã lưu</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Mở khóa nguồn yêu cầu kéo và kho lưu trữ riêng tư</string>
     <string name="settings_advanced_github_pat_description">Dành cho nguồn yêu cầu kéo, kho lưu trữ riêng tư và giới hạn tốc độ GitHub cao hơn</string>
@@ -1270,6 +1285,8 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Không rõ trình cài đặt</string>
     <string name="settings_system_apk_download_helper_open_directly">Mở trình hỗ trợ ngay lập tức</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Bỏ qua hướng dẫn tải xuống và mở trình hỗ trợ đáng tin cậy</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Tự động tải xuống APK hàng loạt</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Kiểm tra mọi ứng dụng trong hàng đợi để tìm phiên bản mới nhất mà các bản vá hỗ trợ và tải xuống bằng trình hỗ trợ tin cậy đầu tiên khi phiên bản đó bị thiếu hoặc cũ hơn</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Chẳng có gì ở đây cả</string>
     <string name="file_picker_read_error">Không thể đọc thư mục này</string>
