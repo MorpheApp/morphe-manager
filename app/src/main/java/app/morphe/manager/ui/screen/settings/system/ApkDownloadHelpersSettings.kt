@@ -17,6 +17,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ApkDownloadHelperApp
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.PM
+import app.morphe.manager.util.withVersionPrefix
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.Dispatchers
@@ -113,7 +114,7 @@ fun ApkDownloadHelpersSettings(
                     title = helper.label,
                     // One fact per line, so a long package name never drags the version into a wrap
                     subtitle = listOfNotNull(
-                        info?.versionName?.let { "v$it" },
+                        info?.versionName?.withVersionPrefix(),
                         helper.packageName,
                         installedBy.takeIf { info != null }
                     ).joinToString("\n")

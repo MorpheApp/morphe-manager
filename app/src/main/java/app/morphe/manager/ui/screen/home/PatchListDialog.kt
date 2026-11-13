@@ -397,7 +397,7 @@ internal fun PatchItemCard(
     }
 
     val options = patch.options.orEmpty()
-    val compatible = patch.compatiblePackages?.firstOrNull { it.packageName == packageName }
+    val compatible = packageName?.let(patch::targetFor)
     // A universal patch has none, and most others share the versions their block names above them
     val versions = compatible?.versions.orEmpty().takeIf { it != commonVersions }.orEmpty().toList()
     val isExpertOnly = !patch.include && onExpertBadgeClick != null
@@ -584,7 +584,7 @@ private fun PatchVersionBadge(
 private fun commonTargetOf(patches: List<PatchInfo>, packageName: String?): CompatiblePackage? {
     if (packageName == null) return null
     return patches
-        .mapNotNull { patch -> patch.compatiblePackages?.firstOrNull { it.packageName == packageName } }
+        .mapNotNull { patch -> patch.targetFor(packageName) }
         .filter { !it.versions.isNullOrEmpty() }
         .groupBy { it.versions }
         .maxByOrNull { (_, entries) -> entries.size }

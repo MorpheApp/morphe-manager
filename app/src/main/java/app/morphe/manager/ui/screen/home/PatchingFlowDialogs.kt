@@ -142,11 +142,10 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                 if (savedApkInfo != null) {
                     AppDialogOutlinedButton(
                         text = stringResource(R.string.home_apk_use_saved_copy),
-                        textSuffix = if (savedApkBuildRefused) {
-                            buildVersionSuffix(savedApkInfo.version, savedApkInfo.versionCode)
-                        } else {
-                            "v${savedApkInfo.version}"
-                        },
+                        textSuffix = buildVersionSuffix(
+                            savedApkInfo.version,
+                            savedApkInfo.versionCode.takeIf { savedApkBuildRefused }
+                        ),
                         onClick = onUseSaved,
                         icon = MaterialSymbols.Rounded.History,
                         modifier = Modifier.fillMaxWidth()
@@ -159,7 +158,7 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                         text = stringResource(R.string.home_apk_use_installed_app),
                         // Never the wrong build: an installed APK the patches do not target is
                         // dropped before it reaches this dialog
-                        textSuffix = "v${installedApkInfo.version}",
+                        textSuffix = installedApkInfo.version.withVersionPrefix(),
                         onClick = onUseInstalled,
                         icon = MaterialSymbols.Rounded.Phone_android,
                         modifier = Modifier.fillMaxWidth()
@@ -1058,5 +1057,5 @@ private fun VersionDetailsLine(buildCode: Long?, onHandTags: List<VersionTag>) {
 }
 
 private fun buildVersionSuffix(version: String, versionCode: Long?): String =
-    if (versionCode != null) "v$version ($versionCode)" else "v$version"
+    version.withVersionPrefix() + versionCode?.let { " ($it)" }.orEmpty()
 

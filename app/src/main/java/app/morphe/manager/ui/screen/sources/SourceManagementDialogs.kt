@@ -305,9 +305,7 @@ private fun patchesByApp(patches: List<PatchInfo>, universalTitle: String): List
                 PatchListSection(
                     key = packageName,
                     title = app.displayName ?: packageName,
-                    patches = specific.filter { patch ->
-                        patch.compatiblePackages?.any { it.packageName == packageName } == true
-                    },
+                    patches = specific.filter { patch -> patch.names(packageName) },
                     packageName = packageName,
                     // Tinted after the app's own icon, so each block reads as that app at a glance
                     accentColor = app.appIconColor?.let(::appIconColorOf),

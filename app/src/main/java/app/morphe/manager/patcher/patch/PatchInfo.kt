@@ -137,8 +137,11 @@ data class PatchInfo(
         }
     }
 
-    /** Universal patches declare no compatible packages and therefore apply to any app. */
-    val isUniversal get() = compatiblePackages.isNullOrEmpty()
+    /**
+     * Universal patches declare no compatible packages, or one without a name, and therefore apply
+     * to any app, as the patcher counts them. An empty list names no app and applies to none.
+     */
+    val isUniversal get() = compatiblePackages == null || compatiblePackages.any { it.packageName == null }
 
     /**
      * Whether the patch answers to a search query, matched against the text the user reads of it.
@@ -149,61 +152,56 @@ data class PatchInfo(
                 displayName.contains(query, ignoreCase = true) ||
                 description?.contains(query, ignoreCase = true) == true
 
-    fun compatibleWith(packageName: String) =
-        compatiblePackages == null ||
-                compatiblePackages.any { it.packageName == null || it.packageName == packageName }
+    fun compatibleWith(packageName: String) = isUniversal || names(packageName)
 
-    fun supports(packageName: String, versionName: String?, versionCode: Long? = null): Boolean {
-        val packages = compatiblePackages ?: return true // Universal patch
-
-        return packages.any { pkg ->
-            // Universal patch (null packageName) supports everything
-            if (pkg.packageName == null) return@any true
+    fun supports(packageName: String, versionName: String?, versionCode: Long? = null): Boolean =
+        isUniversal || compatiblePackages.orEmpty().any { pkg ->
             if (pkg.packageName != packageName) return@any false
             if (pkg.versions == null) return@any true
             if (versionName == null || versionName !in pkg.versions) return@any false
             val allowedCodes = pkg.versionCodes?.get(versionName) ?: return@any true
             versionCode == null || versionCode.toInt() in allowedCodes
         }
-    }
 
     /**
      * Returns true if [versionName] is among the versions this patch names for [packageName],
      * rather than one it takes because it names none.
      */
     fun targetsVersion(packageName: String, versionName: String?): Boolean =
-        versionName != null && pkgFor(packageName)?.versions?.contains(versionName) == true
+        versionName != null && targetFor(packageName)?.versions?.contains(versionName) == true
 
     /**
      * Returns true if [versionName] is an experimental target for [packageName].
      */
     fun isExperimental(packageName: String, versionName: String?): Boolean =
-        versionName != null && pkgFor(packageName)?.experimentalVersions?.contains(versionName) == true
+        versionName != null && targetFor(packageName)?.experimentalVersions?.contains(versionName) == true
 
     /**
      * Returns the display name for [packageName] declared in the patch bundle, or null if not specified.
      */
-    fun displayNameFor(packageName: String): String? = pkgFor(packageName)?.displayName
+    fun displayNameFor(packageName: String): String? = targetFor(packageName)?.displayName
 
     /**
      * Returns the SHA-256 signatures for [packageName] declared in the patch bundle, or null if not specified.
      */
-    fun signaturesFor(packageName: String): ImmutableSet<String>? = pkgFor(packageName)?.signatures
+    fun signaturesFor(packageName: String): ImmutableSet<String>? = targetFor(packageName)?.signatures
 
     /**
      * Returns the preferred [ApkFileType] for [packageName], if specified.
      */
-    fun apkFileTypeFor(packageName: String): ApkFileType? = pkgFor(packageName)?.apkFileType
+    fun apkFileTypeFor(packageName: String): ApkFileType? = targetFor(packageName)?.apkFileType
 
     /**
      * Returns the app icon color for [packageName] as a 0xAARRGGBB int, or null if not specified.
      */
-    fun appIconColorFor(packageName: String): Int? = pkgFor(packageName)?.appIconColor
+    fun appIconColorFor(packageName: String): Int? = targetFor(packageName)?.appIconColor
 
-    /** Finds the [CompatiblePackage] entry for [packageName], or null if not found. */
-    private fun pkgFor(packageName: String): CompatiblePackage? =
+    /** The [CompatiblePackage] entry naming [packageName], or null where the patch names it nowhere. */
+    fun targetFor(packageName: String): CompatiblePackage? =
         compatiblePackages?.firstOrNull { it.packageName == packageName }
 
+    /** Whether the patch names [packageName] itself, rather than taking it as a universal patch. */
+    fun names(packageName: String): Boolean = targetFor(packageName) != null
 }
 
 /** Compatible package names, sorted, or empty for a universal patch. */

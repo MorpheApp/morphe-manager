@@ -94,9 +94,9 @@ sealed class PatchBundleInfo {
             val signaturesAcc = mutableSetOf<String>()
 
             relevantPatches.forEach { patch ->
-                // Categorise into compatible / incompatible / universal
+                // Categorize into compatible / incompatible / universal
                 val targetList = when {
-                    patch.compatiblePackages == null -> universal
+                    patch.isUniversal -> universal
                     patch.supports(packageName, version, versionCode) -> compatible
                     else -> incompatible
                 }

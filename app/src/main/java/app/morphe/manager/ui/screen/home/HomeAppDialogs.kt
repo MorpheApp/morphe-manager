@@ -410,10 +410,7 @@ fun DialogHostScope.AppPatchSourcesDialog(
         packages.associateWith { packageName ->
             bundleInfo.entries.mapNotNullTo(mutableSetOf()) { (uid, info) ->
                 uid.takeIf {
-                    info.patches.any { patch ->
-                        patch.isUniversal ||
-                                patch.compatiblePackages?.any { it.packageName == packageName } == true
-                    }
+                    info.patches.any { it.compatibleWith(packageName) }
                 }
             }
         }

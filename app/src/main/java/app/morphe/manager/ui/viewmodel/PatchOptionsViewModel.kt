@@ -96,11 +96,10 @@ class PatchOptionsViewModel(
                     // Only process allowed patches
                     if (patch.displayName !in ALLOWED_PATCHES) return@forEach
 
-                    val compatiblePackages = patch.compatiblePackages ?: return@forEach
-
                     // Check which apps this patch is compatible with
-                    val isForYouTube = compatiblePackages.any { it.packageName == KnownApps.YOUTUBE }
-                    val isForYouTubeMusic = compatiblePackages.any { it.packageName == KnownApps.YOUTUBE_MUSIC }
+                    val isForYouTube = patch.names(KnownApps.YOUTUBE)
+                    val isForYouTubeMusic = patch.names(KnownApps.YOUTUBE_MUSIC)
+                    if (!isForYouTube && !isForYouTubeMusic) return@forEach
 
                     val options = patch.options?.map { option ->
                         OptionInfo(

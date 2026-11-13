@@ -107,7 +107,7 @@ data class InstalledAppPickerItem(
  *   is picked. Sources share versions, so the pick names its source too, which answers for an
  *   APK of that version.
  * @param versionPicked Whether [selectedVersion] was picked by hand rather than preselected. Only
- *   a pick by hand narrows the run down to the source it was made under.
+ *   a pick by hand narrows the run to the source it was made under.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
  * @param installedVersion The unpatched version the device has right now, which the version list
  *   marks even when [installedApk] is not offered as a source, and which is called out when it is
@@ -847,9 +847,9 @@ class PatchFlow(
 
         // Get scoped bundles for this APK (package + version).
         // Scoped.patches contains every patch that is compatible with this packageName
-        // (including universal patches where compatiblePackages == null).
+        // (including universal patches, see PatchInfo.isUniversal).
         // Scoped.compatible = version matches, Scoped.incompatible = package matches but wrong version,
-        // Scoped.universal = compatiblePackages == null (applies to any package/version).
+        // Scoped.universal = universal patches (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository.resolvingBundleInfo(
                 selectedApp.packageName, selectedApp.version, selectedApp.versionCode, chosenBundleUidFor(selectedApp)
@@ -1203,8 +1203,8 @@ class PatchFlow(
         // Simple Mode: collect patches from all enabled bundles, then either use the sole result directly
         // or ask the user to pick one if multiple bundles have applicable patches.
         // A patch is applicable if:
-        //   - compatiblePackages == null (universal), OR
-        //   - compatiblePackages contains this packageName
+        //   - it is universal, see PatchInfo.isUniversal, OR
+        //   - it names this packageName
         val bundleWithPatches = contributingBundles
             .filter { it.enabled }
             .map { bundle ->
