@@ -1489,18 +1489,31 @@ class PatchFlow(
         val current = session ?: return
         val packageName = current.packageName ?: return
         val version = current.requestedVersion
+        val target = downloadTarget(current)
 
         // Marks the destination as unknown, which is what the dialog waits on before it can
         // say anything about the download or let the user leave for it
-        session = current.copy(downloadUrl = downloadUrlResolver.apiSearchUrl(packageName, version))
+        session = current.copy(downloadUrl = downloadUrlResolver.apiSearchUrl(packageName, version, target))
 
         downloadRedirectJob?.cancel()
         downloadRedirectJob = scope.launch {
             val resolved = withContext(Dispatchers.IO) {
                 val patchSources = patchBundleRepository.patchSourceHeaders(packageName, downloadSourceUids(current))
-                downloadUrlResolver.resolve(packageName, version, patchSources)
+                downloadUrlResolver.resolve(packageName, version, patchSources, target)
             }
             session = session?.copy(downloadUrl = resolved)
+        }
+    }
+
+    /**
+     * The source version the APK is looked for at, which names the build and form factor the
+     * patches need: the one picked, or else the first source that lists the requested version.
+     */
+    private fun downloadTarget(current: PatchFlowSession): BundledAppTarget? {
+        val version = current.requestedVersion ?: return null
+        current.selectedVersion?.takeIf { it.target.version == version }?.let { return it }
+        return current.compatibleVersions.firstOrNull {
+            it.target.version == version && (current.bundleUid == null || it.bundleUid == current.bundleUid)
         }
     }
 

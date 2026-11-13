@@ -14,6 +14,8 @@ import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.compareVersions
 import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.FormFactor
+import app.morphe.patcher.patch.SupportedAbi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -30,6 +32,10 @@ data class BundledAppTarget(
     val bundleName: String,
     /** Allowed build codes for this version, sourced from the patch bundle. Null means no constraint. */
     val buildCodes: Set<Int>? = null,
+    /** Build code of this version for each ABI, as the patch bundle declares it. Null when it declares none. */
+    val abiBuildCodes: Map<SupportedAbi, Int>? = null,
+    /** Device form factor of the app. Null when the bundle does not say, which is a phone app. */
+    val formFactor: FormFactor? = null,
     /** Whether the source this version comes from is set to use experimental app versions. */
     val experimentalEnabled: Boolean = false,
     /** How many patches the source has for this app, universal ones aside. */
@@ -215,6 +221,10 @@ class AppVersionCatalog(
         val targetsByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, AppTarget>>>()
         // packageName → bundleUid → version → build codes (parallel to targetsByPackage)
         val codesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Set<Int>>>>()
+        // packageName → bundleUid → version → build code of each ABI (parallel to targetsByPackage)
+        val abiCodesByPackage = mutableMapOf<String, MutableMap<Int, MutableMap<String, Map<SupportedAbi, Int>>>>()
+        // packageName → bundleUid → form factor
+        val formFactors = mutableMapOf<String, MutableMap<Int, FormFactor>>()
         // bundleUid → packageName → patches
         val patchCounts = mutableMapOf<Int, Map<String, Int>>()
 
@@ -231,6 +241,10 @@ class AppVersionCatalog(
                     val codesMap = codesByPackage
                         .getOrPut(packageName) { mutableMapOf() }
                         .getOrPut(bundleUid) { mutableMapOf() }
+                    val abiCodesMap = abiCodesByPackage
+                        .getOrPut(packageName) { mutableMapOf() }
+                        .getOrPut(bundleUid) { mutableMapOf() }
+                    pkg.formFactor?.let { formFactors.getOrPut(packageName) { mutableMapOf() }[bundleUid] = it }
 
                     pkg.versions?.forEach { version ->
                         val isExperimental = pkg.experimentalVersions?.contains(version) == true
@@ -245,6 +259,9 @@ class AppVersionCatalog(
                             pkg.versionCodes?.get(version)?.takeIf { it.isNotEmpty() }?.let {
                                 codesMap[version] = it.toSet()
                             }
+                            pkg.abiVersionCodes?.get(version)?.takeIf { it.isNotEmpty() }?.let {
+                                abiCodesMap[version] = it
+                            }
                         }
                     }
                 }
@@ -258,6 +275,8 @@ class AppVersionCatalog(
                     .sortedBy { sourceOrder[it.key] }
                     .flatMap { (uid, versionMap) ->
                         val codesForBundle = codesByPackage[packageName]?.get(uid)
+                        val abiCodesForBundle = abiCodesByPackage[packageName]?.get(uid)
+                        val formFactor = formFactors[packageName]?.get(uid)
                         val patchCount = patchCounts[uid]?.get(packageName) ?: 0
                         versionMap.values
                             .sortedDescending()
@@ -267,6 +286,8 @@ class AppVersionCatalog(
                                     bundleUid = uid,
                                     bundleName = bundleNames[uid] ?: "Bundle $uid",
                                     buildCodes = target.version?.let { codesForBundle?.get(it) },
+                                    abiBuildCodes = target.version?.let { abiCodesForBundle?.get(it) },
+                                    formFactor = formFactor,
                                     experimentalEnabled = uid.toString() in experimentalEnabledUids,
                                     patchCount = patchCount
                                 )

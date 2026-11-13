@@ -450,17 +450,21 @@ class BatchPatcherViewModel(
         // Read before the choice is dropped, which is where the covered versions were resolved
         val compatible = apkChoice?.takeIf { it.item.id == item.id }?.compatible.orEmpty()
         apkChoice = null
+        // Names the build and form factor the patches need
+        val target = compatible.firstOrNull {
+            it.target.version == version && (item.chosenBundleUid == null || it.bundleUid == item.chosenBundleUid)
+        }
         apkSearch = ApkSearch(
             item = item,
             version = version,
-            url = downloadUrlResolver.apiSearchUrl(item.packageName, version),
+            url = downloadUrlResolver.apiSearchUrl(item.packageName, version, target),
             compatible = compatible
         )
         viewModelScope.launch {
             val resolved = withContext(Dispatchers.IO) {
                 val uids = item.chosenBundleUid?.let(::listOf) ?: item.bundles.map { it.uid }
                 val patchSources = patchBundleRepository.patchSourceHeaders(item.packageName, uids)
-                downloadUrlResolver.resolve(item.packageName, version, patchSources)
+                downloadUrlResolver.resolve(item.packageName, version, patchSources, target)
             }
             // A search reopened meanwhile, for another version or a clone, waits on its own answer
             apkSearch = apkSearch?.takeIf { it.item.id == item.id && it.version == version }?.copy(url = resolved)
@@ -543,7 +547,7 @@ class BatchPatcherViewModel(
         apkSearch = ApkSearch(
             item = item,
             version = version,
-            url = downloadUrlResolver.apiSearchUrl(item.packageName, version),
+            url = downloadUrlResolver.apiSearchUrl(item.packageName, version, candidate.newest),
             compatible = candidate.compatible,
             auto = true
         )

@@ -343,6 +343,14 @@ class PatcherProcesses(
                 throw killed
             }
 
+            // A debug run that records an AOT configuration writes it while the JVM exits, which
+            // unbinding now would cut short by ending the process
+            if (launch?.options?.any { it.startsWith("-XX:AOTMode=record") } == true) {
+                withTimeoutOrNull(AOT_RECORD_EXIT_TIMEOUT) {
+                    while (isAlive) delay(EXIT_RECORD_POLL)
+                } ?: Log.w(tag, "The JVM recording an AOT configuration did not exit in time")
+            }
+
             val failure = finished.failure ?: return
             throw if (failure.outOfMemory) HeapExhaustedException(started.heapLimitMb, failure.stackTrace)
             else PatcherFailureException(failure.stackTrace)
@@ -561,6 +569,9 @@ class PatcherProcesses(
 
         val EXIT_RECORD_TIMEOUT = 2.seconds
         val EXIT_RECORD_POLL = 200.milliseconds
+
+        /** How long a debug run that records an AOT configuration waits for its JVM to write it and exit. */
+        val AOT_RECORD_EXIT_TIMEOUT = 2.minutes
 
         // Long enough to pick an APK and the patches, short enough not to hold memory long for nothing
         val AHEAD_LIFETIME = 5.minutes

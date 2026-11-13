@@ -92,6 +92,16 @@ data class PatchInfo(
                         .toMap()
                         .toImmutableMap()
                         .takeIf { it.isNotEmpty() },
+                    abiVersionCodes = compatibility.targets
+                        .mapNotNull { target ->
+                            val v = target.version ?: return@mapNotNull null
+                            val codes = target.versionCodes?.takeIf { it.isNotEmpty() } ?: return@mapNotNull null
+                            v to codes.toImmutableMap()
+                        }
+                        .toMap()
+                        .toImmutableMap()
+                        .takeIf { it.isNotEmpty() },
+                    formFactor = compatibility.formFactor,
                 )
             }
             ?.toImmutableList(),
@@ -236,6 +246,10 @@ data class CompatiblePackage(
     val versionMinSdks: ImmutableMap<String, Int>? = null,
     /** Per-version allowed version codes (union of all declared ABI codes). Null means no constraint. */
     val versionCodes: ImmutableMap<String, ImmutableSet<Int>>? = null,
+    /** Per-version version code of each ABI, as declared. Null when no version declares any. */
+    val abiVersionCodes: ImmutableMap<String, ImmutableMap<SupportedAbi, Int>>? = null,
+    /** Device form factor of the app. Null when the bundle does not say, which is a phone app. */
+    val formFactor: FormFactor? = null,
 )
 
 /** Returns the union of all ABI-specific version codes, or null if none are declared. */
