@@ -118,4 +118,10 @@ class VersionUtilsTest {
             releasePageUrl("https://gitlab.com/group/project", "v1.25.0")
         )
     }
+
+    @Test
+    fun `a copied version carries its build only when there is one`() {
+        assertEquals("19.16.39", copyableVersion("19.16.39", null))
+        assertEquals("19.16.39 (15230388)", copyableVersion("19.16.39", 15230388L))
+    }
 }

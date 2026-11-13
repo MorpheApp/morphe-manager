@@ -42,6 +42,7 @@ import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.androidVersionName
+import app.morphe.manager.util.copyableVersion
 import app.morphe.manager.util.htmlAnnotatedString
 import app.morphe.patcher.patch.AppTarget
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -767,6 +768,7 @@ private fun SourceVersionListCard(
                             version = versionString,
                             tags = tags,
                             buildCode = bundled.buildCodes?.firstOrNull()?.toLong(),
+                            copyable = target.version != null,
                             description = target.description,
                             // A list only read keeps no room for a check, and bolds the
                             // recommended version instead of the pick
@@ -804,6 +806,8 @@ private fun VersionListCard(
 ) {
     if (versions.isEmpty()) return
 
+    val anyString = stringResource(R.string.any_version)
+
     VersionPanel(
         modifier = modifier,
         // Neutral edge, so a neutral header band
@@ -822,6 +826,7 @@ private fun VersionListCard(
                 version = version,
                 tags = tags,
                 buildCode = versionCodes[version]?.firstOrNull()?.toLong(),
+                copyable = version != anyString,
                 description = descriptions[version],
                 enabled = version !in incompatibleSdkVersions,
                 emphasized = index == recommendedIndex
@@ -871,6 +876,8 @@ private fun VersionPanel(
  *
  * @param selected Whether it is the pick, for a list picked from, which checks it in the app's
  *   color. Null for a list only read, which keeps no room for a check.
+ * @param copyable Whether pressing a row that is no pick copies its version and build, for a list
+ *   read to search a website by. Ignored by a row that is picked from, where a press is the pick.
  * @param emphasized Sets the version in bold, as the pick or the recommended one is.
  * @param contentDescription What a screen reader announces the row as, in place of its texts.
  */
@@ -882,6 +889,7 @@ private fun VersionRow(
     buildCode: Long? = null,
     description: String? = null,
     selected: Boolean? = null,
+    copyable: Boolean = false,
     enabled: Boolean = true,
     emphasized: Boolean = selected == true,
     versionColor: Color = dialogTextColor(),
@@ -889,6 +897,8 @@ private fun VersionRow(
     contentDescription: String? = null
 ) {
     val (onHandTags, badgeTags) = tags.partition { it.isOnHand }
+    val copyToClipboard = rememberCopyToClipboard(stringResource(R.string.home_version_copied))
+    val copyLabel = stringResource(R.string.home_version_copy)
 
     Row(
         modifier = modifier
@@ -896,6 +906,12 @@ private fun VersionRow(
             .then(
                 if (selected != null && onClick != null && enabled) {
                     Modifier.shapedSelectable(VersionPanelShape, selected = selected, role = Role.RadioButton, onClick = onClick)
+                } else if (copyable && onClick == null && enabled) {
+                    Modifier.shapedClickable(
+                        VersionPanelShape,
+                        onClickLabel = copyLabel,
+                        onClick = { copyToClipboard(copyableVersion(version, buildCode)) }
+                    )
                 } else Modifier
             )
             .then(if (contentDescription != null) Modifier.semantics { this.contentDescription = contentDescription } else Modifier)
