@@ -170,6 +170,9 @@ class PreferencesManager(
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
     val autoUpdates = enumPreference("auto_updates", AutoUpdates.DOWNLOAD)
+
+    /** Home alerts swiped aside behind the bell, kept across launches, see HomeAlerts. Never exported. */
+    val snoozedAlerts = stringSetPreference("snoozed_alerts", emptySet())
     val firstLaunch = booleanPreference("first_launch", true)
 
     val installationTime = longPreference("manager_installation_time", 0L)

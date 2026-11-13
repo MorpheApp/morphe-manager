@@ -106,17 +106,17 @@ class PatchBundleRepository(
     val allBundlesInfoFlow = store.state.map { (it as? BundleState.Ready)?.info ?: persistentMapOf() }
 
     /**
-     * Whether a source was built for a newer patcher than this manager ships. Answered here
-     * rather than on screen, as reading what a source requires opens its patches.jar.
+     * Sources built for a newer patcher than this manager ships. Answered here rather than on
+     * screen, as reading what a source requires opens its patches.jar.
      */
-    val hasOutdatedManagerSources: StateFlow<Boolean> = sources
-        .map { list -> list.any { it.requiresManagerUpdate } }
-        .stateIn(scope, SharingStarted.Eagerly, false)
+    val outdatedManagerSources = sourceUidsWhere { it.requiresManagerUpdate }
 
-    /** Whether a source is skipped for having taken the process down while being read. */
-    val hasHeldBackSources: StateFlow<Boolean> = sources
-        .map { list -> list.any { it.isHeldBack } }
-        .stateIn(scope, SharingStarted.Eagerly, false)
+    /** Sources skipped for having taken the process down while being read. */
+    val heldBackSources = sourceUidsWhere { it.isHeldBack }
+
+    private fun sourceUidsWhere(predicate: (PatchBundleSource) -> Boolean): StateFlow<Set<Int>> = sources
+        .map { list -> list.filter(predicate).mapTo(mutableSetOf()) { it.uid } }
+        .stateIn(scope, SharingStarted.Eagerly, emptySet())
 
     /**
      * Sources that appear on the remote blocklist, keyed by source uid.

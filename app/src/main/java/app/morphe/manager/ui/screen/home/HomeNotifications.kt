@@ -47,6 +47,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.bundles.PatchBundleSource
+import app.morphe.manager.domain.manager.base.Preference
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.BundleUpdateStatus
@@ -57,9 +58,22 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-/** Visibility flag paired with the tap callback of a single alert in the strip. */
+/**
+ * Visibility flag paired with the tap callback of a single alert in the strip.
+ *
+ * @param revision What the alert is about, which brings it back from behind the bell once it changes.
+ */
 @Immutable
-data class AlertState(val visible: Boolean, val onShow: () -> Unit)
+data class AlertState(val visible: Boolean, val revision: String = "", val onShow: () -> Unit) {
+    companion object {
+        /** An alert raised while there are any [subjects], and raised anew once they change. */
+        fun about(subjects: Collection<Any>, onShow: () -> Unit) = AlertState(
+            visible = subjects.isNotEmpty(),
+            revision = subjects.map(Any::toString).sorted().joinToString(","),
+            onShow = onShow
+        )
+    }
+}
 
 /**
  * The apps whose patches have moved on, and the tap that queues them. Shown from one app up,
@@ -105,6 +119,8 @@ data class HomeNotificationsUi(
  * @param revision Changes when the alert has something new to say, which brings a snoozed one back.
  * @param passing Whether it only reports on something under way, which a swipe puts away for good
  *   rather than behind the bell, since brought back it would have nothing left to say.
+ * @param remembered Whether it stays behind the bell across launches until its [revision] changes,
+ *   for an alert whose revision says what it is about. Any other is snoozed for the session.
  */
 internal class HomeAlert(
     val key: String,
@@ -112,13 +128,14 @@ internal class HomeAlert(
     val snoozable: Boolean = true,
     val revision: String = "",
     val passing: Boolean = false,
+    val remembered: Boolean = false,
     val card: @Composable () -> Unit
 )
 
 /**
- * The alerts of the main screen for this session: every one raised or not, and the revision each
- * the user swiped aside was swiped at. Read by the strip that shows them and by the bell in the
- * apps page's header that brings back what was swiped aside.
+ * The alerts of the main screen: every one raised or not, and the revision each the user swiped
+ * aside was swiped at. Read by the strip that shows them and by the bell in the apps page's header
+ * that brings back what was swiped aside.
  */
 class HomeAlerts internal constructor(
     internal val all: List<HomeAlert>,
@@ -141,23 +158,46 @@ class HomeAlerts internal constructor(
     }
 }
 
-/** The [HomeAlerts] raised from [notifications], their snoozes kept across navigation and rotation. */
+/**
+ * The [HomeAlerts] raised from [notifications], their snoozes kept across navigation and rotation,
+ * and those of the remembered alerts in [savedSnoozes] across launches too.
+ */
 @Composable
-fun rememberHomeAlerts(notifications: HomeNotificationsUi): HomeAlerts {
+fun rememberHomeAlerts(notifications: HomeNotificationsUi, savedSnoozes: Preference<Set<String>>): HomeAlerts {
     val snoozed = rememberSaveable(saver = SnoozeSaver) { mutableStateMapOf() }
     val all = homeAlerts(notifications)
-    // An alert that goes away forgets its snooze, so raised again it is shown again
-    val hiddenKeys = all.filterNot { it.visible }.map { it.key }
+    val rememberedKeys = all.filter { it.remembered }.mapTo(HashSet()) { it.key }
+
+    LaunchedEffect(savedSnoozes) {
+        // What an earlier launch swiped aside, unless this session already had its say
+        savedSnoozes.get().forEach { saved ->
+            val (key, revision) = saved.split(SNOOZE_SEPARATOR, limit = 2)
+            snoozed.putIfAbsent(key, revision)
+        }
+        snapshotFlow {
+            snoozed.filterKeys(rememberedKeys::contains).mapTo(HashSet()) { (key, revision) ->
+                key + SNOOZE_SEPARATOR + revision
+            }
+        }.collect(savedSnoozes::update)
+    }
+
+    // An alert that goes away forgets its snooze, so raised again it is shown again. A remembered
+    // one keeps it, as its revision already tells a new state from the old, and on a launch it is
+    // not raised until its sources are read
+    val hiddenKeys = all.filterNot { it.visible || it.remembered }.map { it.key }
     LaunchedEffect(hiddenKeys) { hiddenKeys.forEach(snoozed::remove) }
     return HomeAlerts(all, snoozed)
 }
+
+// Alert keys never hold it, so the revision after it is read back whole
+private const val SNOOZE_SEPARATOR = "="
 
 /**
  * The [alerts] of the main screen, under the header of the page on screen.
  *
  * Alerts stack behind the most pressing one, so however many are raised they cover no more of the
- * screen than one. A swipe snoozes an alert for the session, and the bell in the apps page's
- * header brings it back.
+ * screen than one. A swipe snoozes an alert for the session, or until it has something new to say
+ * for a remembered one, and the bell in the apps page's header brings it back.
  *
  * The whole stack is laid out from one model: each card's height, how far it has come in, how far
  * it is swiped aside and how far the stack is unfolded. Every change moves the cards from wherever
@@ -441,62 +481,61 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
         // Blocked source alert takes priority and cannot be dismissed while the block persists
         alert(
             key = "blocked_sources",
-            visible = notifications.blockedSources.visible,
+            state = notifications.blockedSources,
             tone = SemanticTone.Error,
             icon = MaterialSymbols.Rounded.Block,
             title = stringResource(R.string.home_blocked_source_title),
             subtitle = stringResource(R.string.home_blocked_source_subtitle),
-            onClick = notifications.blockedSources.onShow,
             snoozable = false
         ),
         // The one alert raised by something that already went wrong rather than something
         // that might, so it sits above the rest
         alert(
             key = "held_back_sources",
-            visible = notifications.heldBackSources.visible,
+            state = notifications.heldBackSources,
             tone = SemanticTone.Error,
             icon = MaterialSymbols.Rounded.Error,
             title = stringResource(R.string.home_held_back_title),
             subtitle = stringResource(R.string.home_held_back_subtitle),
-            onClick = notifications.heldBackSources.onShow
+            remembered = true
         ),
         // A source built for a newer patcher stays unusable until the app itself is updated
         alert(
             key = "outdated_manager",
-            visible = notifications.outdatedManager.visible,
+            state = notifications.outdatedManager,
             tone = SemanticTone.Error,
             icon = MaterialSymbols.Rounded.System_update,
             title = stringResource(R.string.home_outdated_manager_title),
             subtitle = stringResource(R.string.home_outdated_manager_subtitle),
-            onClick = notifications.outdatedManager.onShow
+            remembered = true
         ),
         // Found by a check that left the download to the user
         alert(
             key = "source_updates",
-            visible = notifications.sourceUpdates.visible,
+            state = notifications.sourceUpdates,
             tone = SemanticTone.Primary,
             icon = MaterialSymbols.Rounded.Download,
             title = stringResource(R.string.home_source_updates_title),
             subtitle = stringResource(R.string.home_source_updates_subtitle),
-            onClick = notifications.sourceUpdates.onShow
+            remembered = true
         ),
         alert(
             key = "metadata_errors",
-            visible = notifications.metadataErrors.visible,
+            state = notifications.metadataErrors,
             tone = SemanticTone.Warning,
             icon = MaterialSymbols.Rounded.Cloud_off,
             title = stringResource(R.string.home_metadata_errors_title),
             subtitle = stringResource(R.string.home_metadata_errors_subtitle),
-            onClick = notifications.metadataErrors.onShow
+            remembered = true
         ),
+        // Snoozed for the session only, as a Morphe update is what keeps the rest working
         alert(
             key = "manager_update",
-            visible = notifications.managerUpdate.visible,
+            state = notifications.managerUpdate,
             tone = SemanticTone.Primary,
             icon = MaterialSymbols.Rounded.Update,
             title = stringResource(R.string.home_update_available),
-            subtitle = stringResource(R.string.home_update_available_subtitle),
-            onClick = notifications.managerUpdate.onShow
+            subtitle = stringResource(R.string.home_update_available_subtitle)
         ),
         // Once its screen is gone this is the only way back to a running queue, which holds
         // single-app patching back meanwhile, so it cannot be swiped away
@@ -558,6 +597,29 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
     )
 }
 
+/** An alert drawn as a [StatusCard], raised and tapped as [state] says. */
+private fun alert(
+    key: String,
+    state: AlertState,
+    tone: SemanticTone,
+    icon: ImageVector,
+    title: String,
+    subtitle: String,
+    snoozable: Boolean = true,
+    remembered: Boolean = false
+) = alert(
+    key = key,
+    visible = state.visible,
+    tone = tone,
+    icon = icon,
+    title = title,
+    subtitle = subtitle,
+    onClick = state.onShow,
+    snoozable = snoozable,
+    revision = state.revision,
+    remembered = remembered
+)
+
 /**
  * An alert drawn as a [StatusCard].
  *
@@ -574,8 +636,9 @@ private fun alert(
     onClick: () -> Unit,
     snoozable: Boolean = true,
     revision: String = "",
+    remembered: Boolean = false,
     progress: Float? = null
-) = HomeAlert(key = key, visible = visible, snoozable = snoozable, revision = revision) {
+) = HomeAlert(key = key, visible = visible, snoozable = snoozable, revision = revision, remembered = remembered) {
     StatusCard(
         tone = tone,
         title = title,
