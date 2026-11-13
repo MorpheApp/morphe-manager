@@ -63,10 +63,12 @@ class JvmInstallation(private val app: Application) {
                 val hostJar = root.resolve("host-${BuildConfig.VERSION_CODE}-${BuildConfig.BUILD_ID}.jar")
                 if (!hostJar.isFile) unpackHost(hostJar)
 
-                // Whatever an earlier version of the app unpacked is of no use to this one
-                root.listFiles()?.filter { it != home && it != hostJar }?.forEach { it.deleteRecursively() }
+                val installed = Installed(home, hostJar)
+                // Whatever an earlier version of the app unpacked or recorded is of no use to this one
+                val keep = setOf(home, hostJar) + installed.aotFiles
+                root.listFiles()?.filter { it !in keep }?.forEach { it.deleteRecursively() }
 
-                Installed(home, hostJar)
+                installed
             } catch (e: IOException) {
                 throw JvmUnavailableException("Could not unpack the patcher JVM", e)
             }
@@ -170,6 +172,27 @@ class JvmInstallation(private val app: Application) {
 
         /** The libraries of the runtime that others of it link against, dependencies first. */
         val preload get() = PRELOAD.map { home.resolve("lib/$it").path }
+
+        /**
+         * The AOT cache of this runtime and host: the classes of a run loaded and linked, and its
+         * profiles, so later runs start where it left off. It only fits the runtime and class path
+         * it was made with, so it is named after both.
+         */
+        val aotCache get() = aotFile("aot")
+
+        /** What a run recorded for [aotCache] to be made from. */
+        val aotConfiguration get() = aotFile("aotconf")
+
+        /** Where [aotCache] is written, renamed into place once complete. */
+        val aotStaging get() = aotFile("aot$STAGING_SUFFIX")
+
+        /** Left once making [aotCache] failed, so runs do not record for it over and over. */
+        val aotFailed get() = aotFile("aotfailed")
+
+        val aotFiles get() = listOf(aotCache, aotConfiguration, aotStaging, aotFailed)
+
+        private fun aotFile(extension: String) =
+            home.resolveSibling("${home.name}-${hostJar.nameWithoutExtension}.$extension")
     }
 
     private companion object {

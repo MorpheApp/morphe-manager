@@ -63,7 +63,7 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
 Each is pinned by SHA-256 in `app/build.gradle.kts`.
 
 - A 64-bit process runs 25, whose compact object headers leave the largest runs room for about
-  8% more than 17 does (TikTok with Hushfeed fits in a heap of a third of 3.5 GB on 25 alone).
+  8% more than 17 does.
 - A 32-bit ARM process runs 17. On 25 the run never gets past loading the patches: one thread
   loops in compiled code and the VM never reaches a safepoint again. C1 alone does it as well,
   `-Xint` does not but takes minutes for what 17 does in seconds, and the 25 of Termux loops the
@@ -124,13 +124,14 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
   collections once the 450-650M kept alive fills the old space. A 32-bit process still gets
   SerialGC, the collector with the fewest threads and the least to go wrong on that port.
-- **JIT**: the app passes `-XX:TieredStopAtLevel=1` in a 64-bit process (a 32-bit JVM only has C1
-  and fails to start with the flag), so only C1 compiles. YouTube runs started at
-  the same temperature were about 7% faster with it, almost all of it in the patches.
-  `-XX:TieredStopAtLevel=4` in `jvm-options.txt` turns C2 back on. Let the phone cool between
-  runs, as back to back runs got up to 40% slower, more than any flag changes. Read the
-  temperature from the `Current temperatures from HAL` part of `adb shell dumpsys thermalservice`,
-  as the part above it is cached.
+- **AOT cache**: a 64-bit process keeps a JDK 25 AOT cache in `no_backup/jvm`, named after the
+  runtime and the host jar. The first run records with `-XX:AOTMode=record`. Once it ends, the app
+  waits for its JVM to write the configuration as it exits, then makes the cache in a JVM of its
+  own with `-XX:AOTMode=create`. Later runs start with
+  `-XX:AOTCache`. A failed attempt leaves a `.aotfailed` file, and runs go on without a cache;
+  delete it to try again.
+- **JIT**: without an AOT cache, the app passes `-XX:TieredStopAtLevel=1` in a 64-bit process (a
+  32-bit JVM only has C1 and fails to start with the flag), so only C1 compiles.
 - **Object headers**: the app passes `-XX:+UseCompactObjectHeaders` in a 64-bit process (17,
   which a 32-bit process runs, does not have the flag), which shrinks every object header from
   12 to 8 bytes. Runs of a split YouTube bundle were about 4% faster with it, mostly in compiling
