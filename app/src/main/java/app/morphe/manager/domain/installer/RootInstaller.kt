@@ -159,7 +159,15 @@ class RootInstaller(
         val redirected = noMountBin()?.let { nm ->
             execute("${nm.shellQuote()} rule list 2>/dev/null | grep -F $stockPath").isSuccess
         } == true
-        redirected || execute("mount | grep -F $stockPath").isSuccess
+        if (redirected || execute("mount | grep -F $stockPath").isSuccess) return@withContext true
+
+        // A redirect Morphe did not set up, such as a VFS rule of another provider, shows in no
+        // table, but root reads the patched APK through the stock path. A stock APK of the very
+        // same size is not a case worth telling apart
+        val patchedPath = "$MODULES_PATH/${moduleId(packageName)}/$packageName.apk".shellQuote()
+        execute(
+            "[ -f $patchedPath ] && [ \"$(stat -c %s $stockPath)\" = \"$(stat -c %s $patchedPath)\" ]"
+        ).isSuccess
     }
 
     suspend fun mount(packageName: String) {

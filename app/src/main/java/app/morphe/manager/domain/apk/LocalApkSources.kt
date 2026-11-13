@@ -309,10 +309,10 @@ class LocalApkSources(
     }
 
     /**
-     * Whether the bind mount or NoMount redirect behind a mount install is active, read through
-     * root from the global mount table or NoMount's rules. Morphe's own namespace is not asked,
-     * because root managers can hide module mounts from it while the patched app still runs. Null
-     * when root is unavailable.
+     * Whether the bind mount or redirect behind a mount install is active, read through root from
+     * the global mount table, NoMount's rules or the APK the stock path serves. Morphe's own
+     * namespace is not asked, because root managers can hide module mounts from it while the
+     * patched app still runs. Null when root is unavailable.
      */
     private suspend fun mountState(app: InstalledApp, installedPackageInfo: PackageInfo?): Boolean? {
         if (app.installType != InstallType.MOUNT || installedPackageInfo == null) return null
