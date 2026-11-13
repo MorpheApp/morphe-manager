@@ -176,10 +176,14 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (isExpertMode && offeredVersions.isNotEmpty()) {
-                // Expert mode: selectable version list
+                // Expert mode: selectable version list, asked for in the singular when it holds one
                 Text(
                     text = htmlAnnotatedString(stringResource(
-                        R.string.home_apk_availability_dialog_expert,
+                        if (offeredVersions.size > 1) {
+                            R.string.home_apk_availability_dialog_expert
+                        } else {
+                            R.string.home_apk_availability_dialog_simple
+                        },
                         appName
                     )),
                     style = MaterialTheme.typography.bodyLarge,
