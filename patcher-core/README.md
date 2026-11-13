@@ -127,9 +127,9 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
 - **AOT cache**: a 64-bit process keeps a JDK 25 AOT cache in `no_backup/jvm`, named after the
   runtime and the host jar. The first run records with `-XX:AOTMode=record`. Once it ends, the app
   waits for its JVM to write the configuration as it exits, then makes the cache in a JVM of its
-  own with `-XX:AOTMode=create`. Later runs start with
-  `-XX:AOTCache`. A failed attempt leaves a `.aotfailed` file, and runs go on without a cache;
-  delete it to try again.
+  own with `-XX:AOTMode=create`. Later runs start with `-XX:AOTCache`. Each failed attempt
+  adds its reason to a `.aotfailed` file, and after three runs go on without a cache; delete it
+  to try again.
 - **JIT**: without an AOT cache, the app passes `-XX:TieredStopAtLevel=1` in a 64-bit process (a
   32-bit JVM only has C1 and fails to start with the flag), so only C1 compiles.
 - **Object headers**: the app passes `-XX:+UseCompactObjectHeaders` in a 64-bit process (17,

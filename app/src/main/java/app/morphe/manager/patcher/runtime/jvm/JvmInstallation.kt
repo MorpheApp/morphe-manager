@@ -186,7 +186,7 @@ class JvmInstallation(private val app: Application) {
         /** Where [aotCache] is written, renamed into place once complete. */
         val aotStaging get() = aotFile("aot$STAGING_SUFFIX")
 
-        /** Left once making [aotCache] failed, so runs do not record for it over and over. */
+        /** Why each attempt to make [aotCache] failed, one per line, so runs do not record for it over and over. */
         val aotFailed get() = aotFile("aotfailed")
 
         val aotFiles get() = listOf(aotCache, aotConfiguration, aotStaging, aotFailed)
