@@ -110,7 +110,8 @@ data class InstalledAppPickerItem(
  *   a pick by hand narrows the run down to the source it was made under.
  * @param bundleUid The source picked in simple mode before the APK, which the run patches from.
  * @param installedVersion The unpatched version the device has right now, which the version list
- *   marks even when [installedApk] is not offered as a source.
+ *   marks even when [installedApk] is not offered as a source, and which is called out when it is
+ *   past every version the patches target.
  * @param stockAppInstalled Whether a mount install would have the app itself to overlay, which a
  *   patched build under the same package name is not. Null until it is looked up.
  * @param downloadUrl Where the APK is downloaded from, the unfollowed search link until the

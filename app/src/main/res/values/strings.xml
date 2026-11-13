@@ -259,6 +259,8 @@
     <string name="home_apk_availability_recommended_label">Recommended</string>
     <string name="home_apk_availability_unpatched_label">Unpatched</string>
     <string name="home_apk_availability_incompatible_label">Incompatible</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">The original %1$s on this device is %2$s, newer than the patches support</string>
     <string name="home_apk_availability_find">Yes, help me find it</string>
     <string name="home_apk_availability_have">No, I already have it</string>
     <string name="home_apk_helper_download">Use a helper app</string>

@@ -56,7 +56,9 @@ data class InstalledApkInfo(
  *
  * [apk] and [version] are both withheld from a patched install, so neither the patcher nor the UI
  * can take Morphe's own output for the app it was built from. [hasStockInstall] outlives them,
- * because a mount install overlays the app rather than replacing it.
+ * because a mount install overlays the app rather than replacing it. [version] is also withheld
+ * from an app that is disabled or still at the version its system image shipped, which tells
+ * nothing about where the app is now.
  */
 data class InstalledAppSource(
     val hasStockInstall: Boolean = false,
@@ -232,7 +234,9 @@ class LocalApkSources(
                     )
                 }
 
-                InstalledAppSource(hasStockInstall = true, apk = apk, version = version)
+                // Only the version is withheld, the archive of such an app still patches
+                val inUse = appInfo?.enabled != false && !isUnmodifiedSystemApp(appInfo?.flags)
+                InstalledAppSource(hasStockInstall = true, apk = apk, version = version.takeIf { inUse })
             }
         }
     } catch (e: Exception) {

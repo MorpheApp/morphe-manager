@@ -56,6 +56,15 @@ fun InstalledApkInfo?.patchableBy(targets: List<BundledAppTarget>): InstalledApk
     this?.takeIf { targets.patchableAt(it.version, it.versionCode) }
 
 /**
+ * Whether [version] is newer than every version these targets name, which is how far behind the
+ * app the patches have fallen. A target carrying no version takes any, so nothing is past it.
+ */
+fun List<BundledAppTarget>.isPastEveryTarget(version: String): Boolean =
+    isNotEmpty() && all { entry ->
+        entry.target.version?.let { compareVersions(version, it) > 0 } == true
+    }
+
+/**
  * Versions any source marks experimental. The single definition every experimental badge and
  * warning is drawn from, so a version cannot read as stable in one place and not in another.
  */

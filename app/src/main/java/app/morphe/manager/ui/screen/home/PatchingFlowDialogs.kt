@@ -44,6 +44,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.androidVersionName
 import app.morphe.manager.util.copyableVersion
 import app.morphe.manager.util.htmlAnnotatedString
+import app.morphe.manager.util.withVersionPrefix
 import app.morphe.patcher.patch.AppTarget
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -103,6 +104,12 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
     // Hide the installed button in that case to avoid showing two equivalent sources
     val preferSavedOverInstalled = savedApkInfo != null &&
         savedApkInfo.version == installedApkInfo?.version
+
+    // The original app keeps itself up to date, so one past every version the patches target
+    // shows how far behind they are
+    val newerOriginalVersion = remember(installedAppVersion, compatibleVersions) {
+        installedAppVersion?.takeIf { compatibleVersions.isPastEveryTarget(it) }
+    }
 
     // Versions whose minSdk exceeds the current device - shown greyed-out and non-selectable
     val incompatibleSdkVersions: Set<String> = remember(offeredVersions) {
@@ -230,6 +237,18 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
                         ?: emptyMap(),
                     savedVersion = savedApkInfo?.version,
                     installedVersion = installedAppVersion
+                )
+            }
+
+            // Named as the original app, since the patched one beside it reports a version of its own
+            newerOriginalVersion?.let {
+                Footnote(
+                    text = stringResource(
+                        R.string.home_apk_availability_newer_original,
+                        appName,
+                        it.withVersionPrefix()
+                    ),
+                    icon = MaterialSymbols.Rounded.Install_mobile
                 )
             }
 
