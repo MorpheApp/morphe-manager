@@ -10,7 +10,6 @@
 
 package app.morphe.manager.patcher.worker
 
-import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.PowerManager
@@ -32,6 +31,7 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.worker.Worker
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.notification.PatchingNotifications
 import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
@@ -44,6 +44,7 @@ import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.runtime.Runtime
 import app.morphe.manager.patcher.runtime.PatcherVm
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.util.*
@@ -76,7 +77,8 @@ class PatcherWorker(
     private val rootInstaller: RootInstaller,
     private val installerManager: InstallerManager,
     private val patchBundleRepository: PatchBundleRepository,
-    private val patcherProcesses: PatcherProcesses
+    private val patcherProcesses: PatcherProcesses,
+    private val foregroundWork: ForegroundWork
 ) : Worker<PatcherWorker.Args>(context, parameters) {
     private fun runtime(vm: PatcherVm) =
         Runtime(applicationContext, fs, patchBundleRepository, patcherProcesses, vm, ::getForegroundInfo)
@@ -116,21 +118,28 @@ class PatcherWorker(
     /** Queue position shown in the ongoing notification, set once the args are claimed. */
     private var queueLabel: String? = null
 
-    private val notificationManager = applicationContext.getSystemService(NotificationManager::class.java)
+    // What the ongoing notification shows for the run, which a foreground taken for it starts from
+    @Volatile
+    private var progress = progressContent()
 
-    override suspend fun getForegroundInfo() =
-        ForegroundInfo(PatchingNotifications.ONGOING_ID, createNotification(), PatchingNotifications.foregroundServiceType)
+    // The run's place among the work holding the foreground, which shows its progress while it lasts
+    @Volatile
+    private var ongoing: ForegroundWork.Hold? = null
 
-    private fun createNotification(
+    override suspend fun getForegroundInfo() = ForegroundInfo(
+        PatchingNotifications.ONGOING_ID,
+        PatchingNotifications.ongoing(applicationContext, progress),
+        PatchingNotifications.foregroundServiceType
+    )
+
+    private fun progressContent(
         stepName: String? = null,
         patchProgress: Pair<Int, Int>? = null, // Completed to total patches
-        contentText: String? = null,
-        live: Boolean = true,
-    ) = PatchingNotifications.ongoing(
-        applicationContext,
+        contentText: String? = null
+    ) = OngoingContent(
         title = stepName ?: applicationContext.getString(R.string.patcher_notification_title),
         text = contentText ?: queueLabel ?: applicationContext.getText(R.string.patcher_notification_text),
-        live = live,
+        live = true,
         patchProgress = patchProgress
     )
 
@@ -139,10 +148,9 @@ class PatcherWorker(
         patchProgress: Pair<Int, Int>? = null,
         contentText: String? = null,
     ) {
-        // Android won't visually switch from indeterminate → determinate on the same notification
-        // ID unless we first post a brief non-indeterminate update. Post the real notification
-        // directly - the determinate bar replaces the spinning one cleanly this way
-        notificationManager.notify(PatchingNotifications.ONGOING_ID, createNotification(stepName, patchProgress, contentText))
+        val content = progressContent(stepName, patchProgress, contentText)
+        progress = content
+        ongoing?.update(content)
     }
 
     private fun showCompletionNotification(
@@ -195,6 +203,8 @@ class PatcherWorker(
 
         lateinit var args: Args
         var patchingSucceeded = false
+        // Shown over the work the run is part of, which gets the notification back once it is done
+        val hold = foregroundWork.hold(progress).also { ongoing = it }
         val result = try {
             args = workerRepository.claimInput(this)
             queueLabel = args.queuePosition?.let { (position, total) ->
@@ -207,9 +217,9 @@ class PatcherWorker(
             runPatcher(args).also { if (it == Result.success()) patchingSucceeded = true }
         } finally {
             wakeLock.release()
-            // Patching is over, so its Live Update ends here instead of being left to the foreground
-            // to take down, and a run denied a foreground leaves nothing it posted directly behind
-            PatchingNotifications.endOngoing(applicationContext, createNotification(live = false))
+            // Patching is over, so its Live Update ends here: the notification goes back to the work
+            // around the run, or away with the last of it
+            hold.close()
         }
 
         // A mount can still restore the stock app from it, the install flow deletes it after mounting

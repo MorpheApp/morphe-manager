@@ -39,13 +39,14 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
-import app.morphe.manager.service.ForegroundHoldService
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -92,6 +93,7 @@ class PatcherViewModel(
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
     private val originalApkRepository: OriginalApkRepository,
     private val installerManager: InstallerManager,
+    private val foregroundWork: ForegroundWork,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel(), StepProgressProvider {
 
@@ -641,19 +643,20 @@ class PatcherViewModel(
 
     // Held from the start of the run, while the screen is still up, until the original is saved
     // and an auto-install has its own hold, since both follow the worker that ends its foreground
-    private var foregroundHold: ForegroundHoldService.Hold? = null
+    private var foregroundHold: ForegroundWork.Hold? = null
 
     private fun releaseForeground() {
-        foregroundHold?.release()
+        foregroundHold?.close()
         foregroundHold = null
     }
 
     private fun startWorker(options: Options) {
         releaseForeground()
-        foregroundHold = ForegroundHoldService.Hold(
-            app,
-            app.getText(R.string.patcher_notification_title),
-            app.getText(R.string.patcher_notification_text)
+        foregroundHold = foregroundWork.hold(
+            OngoingContent(
+                app.getText(R.string.patcher_notification_title),
+                app.getText(R.string.patcher_notification_text)
+            )
         )
         val workId = launchWorker(options)
         patcherWorkerId = ParcelUuid(workId)
@@ -970,7 +973,6 @@ class PatcherViewModel(
                 when (workInfo?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         patchRun.stopStallWatch()
-                        foregroundHold?.refresh()
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
