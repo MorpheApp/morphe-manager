@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.*
@@ -54,7 +53,6 @@ private val NEW_SOURCE_LOAD_TIMEOUT = 10.minutes
 enum class BundleUpdateStatus {
     Updating, // Update in progress
     Success,  // Update completed successfully
-    Warning,  // Patches may be outdated (on metered network, updates disabled)
     Error     // Error occurred (including no internet)
 }
 
@@ -72,7 +70,6 @@ class HomeViewModel(
     private val sourceMuteRepository: SourceMuteRepository,
     optionsRepository: PatchOptionsRepository,
     private val managerUpdateRepository: ManagerUpdateRepository,
-    networkInfo: NetworkInfo,
     val prefs: PreferencesManager,
     private val pm: PM,
     private val rootInstaller: RootInstaller,
@@ -279,11 +276,6 @@ class HomeViewModel(
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing.asStateFlow()
 
-    // Latches when an update cycle was skipped due to metered network; cleared on the next
-    // successful/no-change update. Independent of the transient bundle update alert so the
-    // user still sees a persistent alert after the transient one fades
-    var updatesSkippedDueToMetered by mutableStateOf(false)
-
     // Loading state for installed apps
     var installedAppsLoading by mutableStateOf(true)
 
@@ -310,7 +302,6 @@ class HomeViewModel(
         sourceMuteRepository = sourceMuteRepository,
         optionsRepository = optionsRepository,
         patchOptionsPrefs = patchOptionsPrefs,
-        networkInfo = networkInfo,
         prefs = prefs,
         pm = pm,
         rootInstaller = rootInstaller,
@@ -328,7 +319,10 @@ class HomeViewModel(
 
     init {
         observeManagerUpdate()
-        triggerUpdateCheck()
+        // As the sources are checked on launch, see PatchBundleRepository.updateCheck
+        viewModelScope.launch {
+            if (prefs.autoUpdates.get().checksOnLaunch) checkForManagerUpdates()
+        }
         observeLoadingState()
         observeSnackbarState()
     }
@@ -356,7 +350,7 @@ class HomeViewModel(
                 val updateEnded = progress?.result in setOf(
                     PatchBundleRepository.BundleUpdateResult.NoInternet,
                     PatchBundleRepository.BundleUpdateResult.Error,
-                    PatchBundleRepository.BundleUpdateResult.SkippedMetered
+                    PatchBundleRepository.BundleUpdateResult.UpdatesAvailable
                 )
                 // If no sources are enabled (and we know the DB has been read), there is nothing
                 // to load - this is a valid terminal state, not a loading state.
@@ -377,26 +371,18 @@ class HomeViewModel(
     private fun observeSnackbarState() {
         viewModelScope.launch {
             combine(patchBundleRepository.bundleUpdateProgress, _isRefreshing, ::Pair).collect { (progress, refreshing) ->
-                // A pull spins its own indicator while the check runs, so the alert only tells how it ended
-                if (progress == null || (refreshing && progress.result == PatchBundleRepository.BundleUpdateResult.None)) {
-                    showBundleUpdateSnackbar = false
-                    return@collect
-                }
-                showBundleUpdateSnackbar = true
-                snackbarStatus = when (progress.result) {
+                // A pull spins its own indicator while the check runs, so the alert only tells how it ended.
+                // Updates left to download stay on their own alert, which outlasts this one
+                val status = when (progress?.result) {
+                    null, PatchBundleRepository.BundleUpdateResult.UpdatesAvailable -> null
+                    PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating.takeUnless { refreshing }
                     PatchBundleRepository.BundleUpdateResult.Success,
                     PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
                     PatchBundleRepository.BundleUpdateResult.NoInternet,
                     PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
-                    PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating
-                    PatchBundleRepository.BundleUpdateResult.SkippedMetered -> BundleUpdateStatus.Warning
                 }
-                updatesSkippedDueToMetered = when (progress.result) {
-                    PatchBundleRepository.BundleUpdateResult.SkippedMetered -> true
-                    PatchBundleRepository.BundleUpdateResult.Success,
-                    PatchBundleRepository.BundleUpdateResult.NoUpdates -> false
-                    else -> updatesSkippedDueToMetered
-                }
+                showBundleUpdateSnackbar = status != null
+                status?.let { snackbarStatus = it }
             }
         }
     }
@@ -454,6 +440,11 @@ class HomeViewModel(
         messages.reportingFailure(R.string.failed_to_check_updates, "Failed to check for updates") {
             managerUpdateRepository.refresh()
         }
+    }
+
+    /** Downloads the patch updates a check left to the user, as the user asked for them. */
+    fun downloadPendingUpdates() {
+        viewModelScope.launch { patchBundleRepository.updateCheckAndAwait(allowUnsafeNetwork = true) }
     }
 
     /**

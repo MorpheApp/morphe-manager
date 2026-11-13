@@ -508,17 +508,11 @@ fun DialogHostScope.InvalidSignatureDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Notice(
-                text = stringResource(R.string.home_invalid_signature_badge),
-                tone = SemanticTone.Error,
-                icon = MaterialSymbols.Rounded.Warning
-            )
-        }
+        Notice(
+            text = stringResource(R.string.home_invalid_signature_badge),
+            tone = SemanticTone.Error,
+            icon = MaterialSymbols.Rounded.Warning
+        )
     }
 }
 

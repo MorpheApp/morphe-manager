@@ -372,11 +372,12 @@ private fun DialogHostScope.PatchFlowDialog(
             onDismiss = dismiss
         )
 
-        HomeDialog.MeteredPatching -> MeteredPatchingDialog(
+        HomeDialog.OutdatedPatches -> OutdatedPatchesDialog(
             packageName = session?.packageName,
+            updates = homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle().value,
             onDismiss = dismiss,
             onRefreshAndPatch = flow::refreshBundlesAndContinuePatching,
-            onPatchAnyway = flow::dismissMeteredPatchingDialogAndProceed
+            onPatchAnyway = flow::dismissOutdatedPatchesDialogAndProceed
         )
 
         is HomeDialog.LowDiskSpace -> LowDiskSpaceDialog(
@@ -483,66 +484,77 @@ fun DialogHostScope.LowDiskSpaceDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Notice(
-                text = stringResource(R.string.home_low_disk_space_dialog_warning),
-                tone = SemanticTone.Warning,
-                icon = MaterialSymbols.Rounded.Warning
-            )
-        }
+        Notice(
+            text = stringResource(R.string.home_low_disk_space_dialog_warning),
+            tone = SemanticTone.Warning,
+            icon = MaterialSymbols.Rounded.Warning
+        )
     }
 }
 
 /**
- * Dialog shown when the user tries to patch while there is a pending bundle update
- * that has not been downloaded yet because the device is on a metered (mobile data).
+ * Dialog shown when the user tries to patch while sources have an update the auto updates setting
+ * left to the user to download, which it names with the versions waiting.
+ *
+ * @param updates The version waiting for each source, see [PatchBundleRepository.pendingUpdates].
  */
 @Composable
-fun DialogHostScope.MeteredPatchingDialog(
+fun DialogHostScope.OutdatedPatchesDialog(
     packageName: String?,
+    updates: Map<Int, String>,
     onDismiss: () -> Unit,
     onRefreshAndPatch: () -> Unit,
     onPatchAnyway: () -> Unit
 ) {
+    val sourcesByUid = rememberSourcesByUid()
+
     AppDialog(
         onDismissRequest = onDismiss,
         accentColor = rememberAppColor(packageName),
         title = stringResource(R.string.home_outdated_patches_dialog_title),
         description = stringResource(R.string.home_outdated_patches_dialog_message),
         footer = {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
-            ) {
-                AppDialogButton(
-                    text = stringResource(R.string.home_outdated_patches_dialog_update_and_patch),
-                    onClick = onRefreshAndPatch,
-                    modifier = Modifier.fillMaxWidth(),
-                    icon = MaterialSymbols.Rounded.System_update_alt
-                )
-                AppDialogButtonRow(
-                    primaryText = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
-                    onPrimaryClick = onPatchAnyway,
-                    isPrimaryDestructive = true,
-                    secondaryText = stringResource(android.R.string.cancel),
-                    onSecondaryClick = onDismiss
-                )
-            }
+            AppDialogActions(
+                actions = listOf(
+                    DialogAction(
+                        text = stringResource(R.string.home_outdated_patches_dialog_update_and_patch),
+                        onClick = onRefreshAndPatch,
+                        icon = MaterialSymbols.Rounded.Download
+                    ),
+                    DialogAction(
+                        text = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
+                        onClick = onPatchAnyway,
+                        isDestructive = true
+                    ),
+                    DialogAction(
+                        text = stringResource(android.R.string.cancel),
+                        onClick = onDismiss
+                    )
+                ),
+                layout = DialogButtonLayout.Vertical
+            )
         }
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
         ) {
-            Notice(
+            InfoPanel {
+                updates.forEach { (uid, latest) ->
+                    // Drawn the way the source list draws it, so a source is recognized at a glance
+                    val source = sourcesByUid[uid] ?: return@forEach
+                    IconTextRow(
+                        modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
+                        leadingContent = { BundleIcon(bundle = source, modifier = Modifier.size(32.dp)) },
+                        title = source.displayTitle,
+                        description = listOfNotNull(source.version?.withVersionPrefix(), latest.withVersionPrefix())
+                            .joinToString(" → ")
+                    )
+                }
+            }
+            Footnote(
                 text = stringResource(R.string.home_outdated_patches_dialog_warning),
-                tone = SemanticTone.Warning,
-                icon = MaterialSymbols.Rounded.Warning
+                tone = SemanticTone.Warning
             )
         }
     }

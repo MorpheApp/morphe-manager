@@ -21,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
-import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.mergeNewlyAdded
@@ -187,7 +186,6 @@ class PatchFlow(
     private val sourceMuteRepository: SourceMuteRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
-    private val networkInfo: NetworkInfo,
     private val prefs: PreferencesManager,
     private val pm: PM,
     private val rootInstaller: RootInstaller,
@@ -289,7 +287,7 @@ class PatchFlow(
         // Started while the user picks the APK and patches, so patching does not wait for it
         patcherProcesses.startAhead()
 
-        // Guard: if there is a pending bundle update on metered data, show the outdated-patches
+        // Guard: if a source has an update left to download, show the outdated-patches
         // dialog before proceeding with the actual APK selection flow.
         guardPatching { showPatchDialogInternal(packageName) }
     }
@@ -1407,7 +1405,8 @@ class PatchFlow(
 
     /**
      * Guard entry-point for all patching flows.
-     * Shows MeteredPatchingDialog when on metered network with updates disabled,
+     * Shows OutdatedPatchesDialog when a source has an update left to download, see
+     * [PatchBundleRepository.pendingUpdates],
      * so the user can choose to update patches first or patch anyway.
      * Otherwise, launches [action] immediately.
      */
@@ -1427,25 +1426,18 @@ class PatchFlow(
             dialogs.advanceTo(HomeDialog.LowDiskSpace(freeBytes))
             return
         }
-        guardMetered(action)
+        guardOutdatedPatches(action)
     }
 
-    // The metered check of guardPatching, which the low disk space warning resumes into
-    private fun guardMetered(action: suspend () -> Unit) {
-        if (isOnMeteredWithUpdatesDisabled()) {
+    // The outdated patches check of guardPatching, which the low disk space warning resumes into
+    private fun guardOutdatedPatches(action: suspend () -> Unit) {
+        if (patchBundleRepository.pendingUpdates.value.isNotEmpty()) {
             pendingPatchAction = action
-            dialogs.advanceTo(HomeDialog.MeteredPatching)
+            dialogs.advanceTo(HomeDialog.OutdatedPatches)
         } else {
             moveOn(action)
         }
     }
-
-    /**
-     * Returns `true` when the user has disabled metered updates AND is currently on
-     * a metered (mobile data) connection - meaning patches may not be up to date.
-     */
-    private fun isOnMeteredWithUpdatesDisabled(): Boolean =
-        !prefs.allowMeteredUpdates.getBlocking() && networkInfo.isMetered()
 
     // Takes the patching a guard dialog held back, which the dialog stays up for until it moves on
     private fun takePendingPatchAction(): (suspend () -> Unit)? =
@@ -1457,29 +1449,29 @@ class PatchFlow(
      */
     fun refreshBundlesAndContinuePatching() {
         val action = takePendingPatchAction() ?: return
-        dialogs.close(HomeDialog.MeteredPatching)
+        dialogs.close(HomeDialog.OutdatedPatches)
         moveOn {
-            // User explicitly requested update - bypass metered check and wait for completion
+            // User explicitly requested update - bypass the auto updates setting and wait for completion
             patchBundleRepository.updateCheckAndAwait(allowUnsafeNetwork = true)
             action()
         }
     }
 
     /**
-     * User chose to patch with the currently cached patches despite being on metered network.
+     * User chose to patch with the currently cached patches despite the updates waiting.
      */
-    fun dismissMeteredPatchingDialogAndProceed() {
+    fun dismissOutdatedPatchesDialogAndProceed() {
         val action = takePendingPatchAction() ?: return
         moveOn(action)
     }
 
     /**
      * User chose to proceed with patching despite low disk space.
-     * Continues to the metered network check if applicable, then launches the action.
+     * Continues to the outdated patches check if applicable, then launches the action.
      */
     fun dismissLowDiskSpaceDialogAndProceed() {
         val action = takePendingPatchAction() ?: return
-        guardMetered(action)
+        guardOutdatedPatches(action)
     }
 
     /**

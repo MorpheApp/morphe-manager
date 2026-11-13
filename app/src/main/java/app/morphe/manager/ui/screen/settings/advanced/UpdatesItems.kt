@@ -5,17 +5,20 @@
 
 package app.morphe.manager.ui.screen.settings.advanced
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
+import app.morphe.manager.domain.manager.AutoUpdates
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 
 /**
- * Rows of a settings group for updates of the manager and its sources: pre-releases, metered
- * connections and, in expert mode, the GitHub token the update checks are made with.
+ * Rows of a settings group for updates of the manager and its sources: pre-releases, how far
+ * they update on their own and, in expert mode, the GitHub token the update checks are made with.
  */
 @Composable
 fun UpdatesItems(
@@ -24,8 +27,9 @@ fun UpdatesItems(
 ) {
     val prefs = settingsViewModel.prefs
     val backgroundUpdateNotifications by prefs.backgroundUpdateNotifications.getAsState()
-    val allowMeteredUpdates by prefs.allowMeteredUpdates.getAsState()
     val useManagerPrereleases by prefs.useManagerPrereleases.getAsState()
+    val autoUpdates by prefs.autoUpdates.getAsState()
+    val showAutoUpdates = remember { mutableStateOf(false) }
     val usePatchesPrereleases by prefs.bundlePrereleasesEnabled.getAsState()
     val useExpertMode by prefs.useExpertMode.getAsState()
     val showPrereleaseWarning = remember { mutableStateOf(false) }
@@ -69,16 +73,54 @@ fun UpdatesItems(
         subtitle = stringResource(R.string.settings_advanced_updates_manager_prereleases_description)
     )
 
-    // Allow updates on metered connections
-    SettingsSwitchItem(
-        checked = allowMeteredUpdates,
-        onToggle = { settingsViewModel.toggleAllowMeteredUpdates(allowMeteredUpdates) },
-        icon = MaterialSymbols.Rounded.Signal_cellular_alt,
-        title = stringResource(R.string.settings_advanced_updates_allow_metered),
-        subtitle = stringResource(R.string.settings_advanced_updates_allow_metered_description)
+    DialogHost(visible = showAutoUpdates.value) {
+        AutoUpdatesDialog(
+            selected = autoUpdates,
+            onSelect = settingsViewModel::setAutoUpdates,
+            onDismiss = { showAutoUpdates.value = false }
+        )
+    }
+
+    SettingsItem(
+        onClick = { showAutoUpdates.value = true },
+        icon = MaterialSymbols.Rounded.Sync,
+        title = stringResource(R.string.settings_auto_updates),
+        subtitle = stringResource(autoUpdates.titleRes)
     )
 
     if (useExpertMode) {
         GitHubPatSettingsItem(settingsViewModel)
+    }
+}
+
+/** Picks how far the manager and its sources update on their own, see [AutoUpdates]. */
+@Composable
+private fun DialogHostScope.AutoUpdatesDialog(
+    selected: AutoUpdates,
+    onSelect: (AutoUpdates) -> Unit,
+    onDismiss: () -> Unit
+) {
+    AppDialog(
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.settings_auto_updates),
+        description = stringResource(R.string.settings_auto_updates_description),
+        footer = {
+            AppDialogOutlinedButton(
+                text = stringResource(android.R.string.cancel),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    ) {
+        ModeChoice(
+            modes = AutoUpdates.entries,
+            selected = selected,
+            onSelect = { mode ->
+                onSelect(mode)
+                onDismiss()
+            },
+            titleRes = AutoUpdates::titleRes,
+            descriptionRes = AutoUpdates::descriptionRes
+        )
     }
 }

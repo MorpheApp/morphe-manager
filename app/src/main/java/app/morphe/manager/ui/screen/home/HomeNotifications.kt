@@ -91,7 +91,7 @@ data class HomeNotificationsUi(
     val heldBackSources: AlertState,
     val blockedSources: AlertState,
     val metadataErrors: AlertState,
-    val meteredSkipped: AlertState,
+    val sourceUpdates: AlertState,
     val repatchAvailable: RepatchAlertState,
     val batchQueue: BatchQueueAlertState,
     val bundleUpdate: BundleUpdateState
@@ -470,14 +470,15 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
             subtitle = stringResource(R.string.home_outdated_manager_subtitle),
             onClick = notifications.outdatedManager.onShow
         ),
+        // Found by a check that left the download to the user
         alert(
-            key = "metered_skipped",
-            visible = notifications.meteredSkipped.visible,
-            tone = SemanticTone.Warning,
-            icon = MaterialSymbols.Rounded.Signal_cellular_alt,
-            title = stringResource(R.string.home_metered_skipped_title),
-            subtitle = stringResource(R.string.home_metered_skipped_subtitle),
-            onClick = notifications.meteredSkipped.onShow
+            key = "source_updates",
+            visible = notifications.sourceUpdates.visible,
+            tone = SemanticTone.Primary,
+            icon = MaterialSymbols.Rounded.Download,
+            title = stringResource(R.string.home_source_updates_title),
+            subtitle = stringResource(R.string.home_source_updates_subtitle),
+            onClick = notifications.sourceUpdates.onShow
         ),
         alert(
             key = "metadata_errors",
@@ -692,7 +693,6 @@ private val BundleUpdateStatus.tone: SemanticTone
     get() = when (this) {
         BundleUpdateStatus.Updating -> SemanticTone.Neutral
         BundleUpdateStatus.Success -> SemanticTone.Success
-        BundleUpdateStatus.Warning -> SemanticTone.Warning
         BundleUpdateStatus.Error -> SemanticTone.Error
     }
 
@@ -719,7 +719,6 @@ private fun BundleUpdateCard(
         when (status) {
             BundleUpdateStatus.Updating -> R.string.home_updating_sources
             BundleUpdateStatus.Success -> R.string.home_update_success
-            BundleUpdateStatus.Warning -> R.string.home_update_skipped_metered
             BundleUpdateStatus.Error -> R.string.home_update_error
         }
     )
@@ -737,7 +736,6 @@ private fun BundleUpdateCard(
     val subtitle = when (status) {
         BundleUpdateStatus.Updating -> listOfNotNull(activeName, arrived).joinToString(DETAIL_SEPARATOR)
         BundleUpdateStatus.Success -> stringResource(R.string.home_update_success_subtitle)
-        BundleUpdateStatus.Warning -> stringResource(R.string.home_update_skipped_metered_subtitle)
         BundleUpdateStatus.Error -> stringResource(R.string.home_update_error_subtitle)
     }
     val badge = when {
@@ -767,7 +765,6 @@ private fun BundleUpdateCard(
                         }
                     }
                     BundleUpdateStatus.Success -> StatusDisc(MaterialSymbols.Rounded.Check, SemanticTone.Success)
-                    BundleUpdateStatus.Warning -> StatusDisc(MaterialSymbols.Rounded.Signal_cellular_alt, SemanticTone.Warning)
                     BundleUpdateStatus.Error -> StatusDisc(MaterialSymbols.Rounded.Warning, SemanticTone.Error)
                 }
             }

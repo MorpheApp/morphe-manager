@@ -17,6 +17,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.AfterPatching
+import app.morphe.manager.domain.manager.AutoUpdates
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.RootPatchMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -179,9 +180,8 @@ class SettingsViewModel(
         if (!hasGms) UpdateCheckWorker.schedule(appContext, interval)
     }
 
-    /** Persists the allow-metered-updates preference. */
-    fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
-        prefs.allowMeteredUpdates.update(!current)
+    fun setAutoUpdates(mode: AutoUpdates) = viewModelScope.launch {
+        prefs.autoUpdates.update(mode)
     }
 
     /**

@@ -148,28 +148,3 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
         }
     }
 }
-
-/** One of [modes] to pick, each as a card with its title and what it does. */
-@Composable
-private fun <T> ModeChoice(
-    modes: List<T>,
-    selected: T,
-    onSelect: (T) -> Unit,
-    titleRes: (T) -> Int,
-    descriptionRes: (T) -> Int
-) {
-    SettingsGroup {
-        modes.forEach { mode ->
-            val title = stringResource(titleRes(mode))
-            val description = stringResource(descriptionRes(mode))
-            SearchableSetting(listOf(title, description)) {
-                RadioSelectionCard(
-                    selected = mode == selected,
-                    onSelect = { onSelect(mode) },
-                    title = title,
-                    description = description
-                )
-            }
-        }
-    }
-}

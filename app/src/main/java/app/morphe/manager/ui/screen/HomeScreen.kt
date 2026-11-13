@@ -254,6 +254,7 @@ fun HomeScreen(
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
+    val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()
     val hasBlockedSources = blockedSources.isNotEmpty()
 
     val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
@@ -299,7 +300,7 @@ fun HomeScreen(
         heldBackSources = AlertState(hasHeldBackSources) { openPage(MainPage.SOURCES) },
         blockedSources = AlertState(hasBlockedSources) { openPage(MainPage.SOURCES) },
         metadataErrors = AlertState(hasMetadataErrors) { openPage(MainPage.SOURCES) },
-        meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { openPage(MainPage.SETTINGS) },
+        sourceUpdates = AlertState(pendingSourceUpdates.isNotEmpty(), homeViewModel::downloadPendingUpdates),
         repatchAvailable = RepatchAlertState(
             count = repatchableApps.size,
             visible = showRepatchNotice,

@@ -27,7 +27,7 @@ sealed interface HomeDialog {
     ) : HomeDialog
 
     data class LowDiskSpace(val freeBytes: Long) : HomeDialog
-    data object MeteredPatching : HomeDialog
+    data object OutdatedPatches : HomeDialog
 
     /** A step of getting the APK to patch, which going back from returns to the step before. */
     sealed interface ApkSource : HomeDialog

@@ -169,7 +169,7 @@ class PreferencesManager(
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
-    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
+    val autoUpdates = enumPreference("auto_updates", AutoUpdates.DOWNLOAD)
     val firstLaunch = booleanPreference("first_launch", true)
 
     val installationTime = longPreference("manager_installation_time", 0L)
@@ -274,6 +274,13 @@ class PreferencesManager(
                 dataStore.edit { it.remove(legacyHelperKey) }
             }
 
+            // Mobile data updates used to be a switch, and whoever turned it off still downloads on Wi-Fi only
+            val legacyMeteredKey = booleanPreferencesKey("allow_metered_updates")
+            dataStore.data.first()[legacyMeteredKey]?.let { allowed ->
+                autoUpdates.update(autoUpdatesFromMeteredSwitch(allowed))
+                dataStore.edit { it.remove(legacyMeteredKey) }
+            }
+
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
@@ -334,6 +341,8 @@ class PreferencesManager(
         val gitHubPat: String? = null,
         val includeGitHubPatInExports: Boolean? = null,
         val useJvmRuntime: Boolean? = null,
+        val autoUpdates: AutoUpdates? = null,
+        // Read from exports older than [autoUpdates], never written
         val allowMeteredUpdates: Boolean? = null,
         val installerPrimary: String? = null,
         val rootPatchMode: RootPatchMode? = null,
@@ -408,7 +417,7 @@ class PreferencesManager(
                 gitHubPat = gitHubPat.takeIf { sources },
                 includeGitHubPatInExports = includeGitHubPatInExports.takeIf { sources },
                 useJvmRuntime = useJvmRuntime.takeIf { patching },
-                allowMeteredUpdates = allowMeteredUpdates.takeIf { updates },
+                autoUpdates = autoUpdates.takeIf { updates },
                 installerPrimary = installerPrimary.takeIf { patching },
                 rootPatchMode = rootPatchMode.takeIf { patching },
                 afterPatching = afterPatching.takeIf { patching },
@@ -472,7 +481,7 @@ class PreferencesManager(
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
         useJvmRuntime = useJvmRuntime.get(),
-        allowMeteredUpdates = allowMeteredUpdates.get(),
+        autoUpdates = autoUpdates.get(),
         installerPrimary = installerPrimary.get(),
         rootPatchMode = rootPatchMode.get(),
         afterPatching = afterPatching.get(),
@@ -533,7 +542,8 @@ class PreferencesManager(
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useJvmRuntime?.let { useJvmRuntime.value = it }
-        snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
+        (snapshot.autoUpdates ?: snapshot.allowMeteredUpdates?.let(::autoUpdatesFromMeteredSwitch))
+            ?.let { autoUpdates.value = it }
         // Older exports store root mount as the installer
         val legacyInstaller = snapshot.installerPrimary
             ?.takeIf { snapshot.rootPatchMode == null }
@@ -607,6 +617,10 @@ class PreferencesManager(
         }
     }
 }
+
+/** What the mobile data updates switch, [allowed] or not, stands for among [AutoUpdates]. */
+private fun autoUpdatesFromMeteredSwitch(allowed: Boolean) =
+    if (allowed) AutoUpdates.DOWNLOAD else AutoUpdates.WIFI_ONLY
 
 /** The installer standard builds used while [installer] stored root mount, null for any other value. */
 private fun legacyRootMountInstaller(installer: String): String? = when (installer) {
