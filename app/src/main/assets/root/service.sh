@@ -286,7 +286,7 @@ mount_patched() {
 }
 
 # Stops the watchers of this module that are already running: the shell running this script, and
-# the reader and logcat under it. This script's own subshells are left alone.
+# the reader and inotifyd under it. This script's own subshells are left alone.
 stop_other_watchers() {
   for cmdline in $(grep -lF "$module_dir/service.sh" /proc/[0-9]*/cmdline 2>/dev/null); do
     pid="${cmdline#/proc/}"
@@ -298,27 +298,47 @@ stop_other_watchers() {
   done
 }
 
+# Waits up to a minute for a system_server other than the one with pid $1. The one that ran before
+# a framework restart can still answer for a moment, ahead of the new one's package scan.
+wait_for_new_system_server() {
+  waited=0
+  while [ "$waited" -lt 60 ]; do
+    current="$(pidof system_server)"
+    [ -n "$current" ] && [ "$current" != "$1" ] && return
+    waited=$((waited + 1))
+    sleep 1
+  done
+}
+
 # A framework restart without a reboot keeps the patched APK mounted, and the new PackageManager
-# deletes the app for not matching its stock certificates. Zygote starts seconds before that scan,
-# so the APK is lifted there and mounted again once the app is reported. The event log keeps the
-# watcher asleep in between. logcat is called by its full path, as a root environment may put
-# another binary of that name first on PATH, and a watcher that is gone leaves the app unguarded
-# without any other sign, so its start, its end and logcat's errors go to the log.
+# deletes the app for not matching its stock certificates. init creates zygote's socket again as it
+# starts zygote, seconds before that scan, so the APK is lifted then and mounted again once the new
+# system_server reports the app. inotifyd keeps the watcher asleep in between. It gets no event
+# mask, which the toybox of Android 8 misreads, so the socket's creation is picked out of every
+# event in the directory. A watcher that is gone leaves the app unguarded without any other sign,
+# so its start, its end and the errors of inotifyd go to the log.
 watch_framework_restarts() {
   stop_other_watchers
   log_msg "Watching for framework restarts"
-  /system/bin/logcat -b events -v raw -s boot_progress_start -T "$(date '+%m-%d %H:%M:%S.000')" 2>> "$log" | {
-    # logcat only notices the reader is gone on the next event, so it is stopped with it
-    trap 'pkill -P $$ -x logcat' EXIT
-    while read -r line; do
-      case "$line" in
-        -*) continue ;;
+  system_server="$(pidof system_server)"
+  inotifyd - /dev/socket 2>> "$log" | {
+    # inotifyd only notices the reader is gone on the next event, so it is stopped with it
+    trap 'pkill -P $$ -f "inotifyd - /dev/socket"' EXIT
+    while read -r events _ name; do
+      [ "$name" = zygote ] || continue
+      case "$events" in
+        *n*) ;;
+        *) continue ;;
       esac
+      lift_layers /proc/self/mountinfo umount -l "$stock_path"
+      log_msg "Framework restarted, lifted the patched APK before the package scan"
+      # A module disabled or removed in the root manager only goes at the next boot, and the app
+      # stays on the stock APK until then
       if [ ! -f "$base_path" ] || [ -f "$module_dir/disable" ] || [ -f "$module_dir/remove" ]; then
         exit 0
       fi
-      lift_layers /proc/self/mountinfo umount -l "$stock_path"
-      log_msg "Framework restarted, lifted the patched APK before the package scan"
+      wait_for_new_system_server "$system_server"
+      system_server="$(pidof system_server)"
       find_stock
       mount_patched
       am force-stop "$package_name"
