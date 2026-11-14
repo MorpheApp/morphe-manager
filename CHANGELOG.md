@@ -1,3 +1,19 @@
+## [2.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.4...v2.6.0-dev.5) (2026-11-14)
+
+### Features
+
+* Match the language picker to the other radio dialogs ([c5e76c1](https://github.com/MorpheApp/morphe-manager/commit/c5e76c12c13294de87219561581d9c7a461b6d9e))
+* Show credits as a compact dialog ([1c73722](https://github.com/MorpheApp/morphe-manager/commit/1c73722bf52144bdfa41e005a66a2442cc0acda1))
+* Toggle web link domains one by one ([1e85fd4](https://github.com/MorpheApp/morphe-manager/commit/1e85fd486149d51158ee98d0563dfdda4b9e2b2e))
+
+### Performance Improvements
+
+* Poll installer availability without reloading their icons ([b13a3de](https://github.com/MorpheApp/morphe-manager/commit/b13a3deb3df41d590c09c3041d917127fd6ab1a6))
+
+### Bug Fixes
+
+* Watch for framework restarts through zygote's socket instead of logcat ([99bd564](https://github.com/MorpheApp/morphe-manager/commit/99bd564278f632f624a780dbe799aadc5b08f3b0))
+
 ## [2.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.3...v2.6.0-dev.4) (2026-11-14)
 
 ### Features
