@@ -326,6 +326,7 @@ fun DialogHostScope.FilePicker(
             // With a single storage its list holds nothing the trail does not already lead to
             val showStorages = roots.size > 1
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(
                         icon = if (allowFolderSelection) MaterialSymbols.Rounded.Folder else MaterialSymbols.Rounded.Draft.autoMirrored,

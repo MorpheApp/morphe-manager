@@ -718,6 +718,7 @@ private fun DialogHostScope.ApkManagementDialogContent(
         accentColor = meta.accentColor,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = meta.icon, color = meta.accentColor, modifier = modifier)
                 },

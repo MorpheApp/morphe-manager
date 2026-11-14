@@ -578,6 +578,7 @@ fun BatchPatcherScreen(
             header = {
                 // Headed like the other lists, with how the run stands where the subtitle goes
                 ListDialogHeader(
+                    decorativeIcon = true,
                     icon = { modifier ->
                         ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Auto_fix_high, color = accent, modifier = modifier)
                     },

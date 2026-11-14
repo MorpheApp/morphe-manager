@@ -62,6 +62,7 @@ fun DialogHostScope.CreditsDialog(onDismiss: () -> Unit) {
         onDismissRequest = onDismiss,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Group, color = accent, modifier = modifier)
                 },

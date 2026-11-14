@@ -247,6 +247,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
         dismissOnClickOutside = !isMultiSelectMode.value,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Visibility_off, color = accent, modifier = modifier)
                 },
