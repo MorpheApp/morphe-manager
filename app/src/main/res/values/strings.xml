@@ -168,7 +168,7 @@
     <string name="sources_management_report_issue">Report an issue</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_apps">Apps</string>
-    <string name="sources_apps_description">Ticked apps come from this source. Tap an app to leave it out or bring it back. An app leaves the home screen once no source brings it, unless you have patched it</string>
+    <string name="sources_apps_description">Ticked apps come from this source. Tap an app to leave it out or bring it back, swipe it to see its patches. An app no source brings leaves the home screen, unless you patched it</string>
     <string name="sources_apps_brought">Brought by this source</string>
     <string name="sources_apps_left_out">Left out of this source</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->

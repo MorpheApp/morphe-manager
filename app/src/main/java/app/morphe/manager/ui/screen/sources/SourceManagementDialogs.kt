@@ -170,12 +170,14 @@ fun DialogHostScope.ChangeSourceLinkDialog(
  * Dialog listing the patches of a source, one block per app they patch and the universal ones last.
  *
  * @param initialQuery Query to open filtered by, carried over from the search that found the source.
+ * @param initialApp Package of the app whose block the list opens on, the whole source where null.
  */
 @Composable
 fun DialogHostScope.BundlePatchesDialog(
     onDismissRequest: () -> Unit,
     src: PatchBundleSource,
-    initialQuery: String = ""
+    initialQuery: String = "",
+    initialApp: String? = null
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val messages = koinInject<UserMessages>()
@@ -206,6 +208,7 @@ fun DialogHostScope.BundlePatchesDialog(
         saveStateKey = "bundle_${src.uid}",
         onDismiss = onDismissRequest,
         initialQuery = initialQuery,
+        initialSection = initialApp,
         accentColor = rememberSourceHeaderColor(src),
         // The list is reachable while the source is off, so it says so up front rather than
         // reading as patches that are ready to be applied
@@ -682,6 +685,16 @@ fun DialogHostScope.SourceAppsDialog(
         onDismissRequest()
     }
 
+    // What this source patches in one app, opened by swiping its card
+    var patchesFor by remember { mutableStateOf<String?>(null) }
+    DialogHost(target = patchesFor) { packageName ->
+        BundlePatchesDialog(
+            onDismissRequest = { patchesFor = null },
+            src = src,
+            initialApp = packageName
+        )
+    }
+
     ListDialog(
         onDismissRequest = ::dismiss,
         accentColor = rememberSourceHeaderColor(src),
@@ -787,31 +800,35 @@ fun DialogHostScope.SourceAppsDialog(
                     isSelected = brought,
                     isSelectionMode = true
                 ) {
-                    AppCardLayout(
-                        gradientColors = gradientColors,
-                        onClick = { bring(listOf(packageName), brought = !brought) },
-                        selected = brought,
-                        modifier = Modifier.fillMaxWidth()
+                    SwipeableCardContainer(
+                        end = SwipeAction(rememberPatchesSwipeAction(packageName)) { patchesFor = packageName }
                     ) {
-                        val patchCount = patchCounts[packageName] ?: 0
-                        AppCardContent(
-                            packageName = packageName,
-                            packageInfo = null,
-                            displayName = label,
-                            subtitle = listOfNotNull(
-                                pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
-                                // Left out, it would be gone from the home screen but for its install
-                                stringResource(R.string.sources_apps_stays_patched)
-                                    .takeIf { !brought && packageName in patchedApps }
-                            ).joinToString(" · "),
-                            gradientColors = gradientColors
+                        AppCardLayout(
+                            gradientColors = gradientColors,
+                            onClick = { bring(listOf(packageName), brought = !brought) },
+                            selected = brought,
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            // Shown until the list is closed once, so it has to catch the eye
-                            if (packageName in newApps) {
-                                StatusBadge(
-                                    text = stringResource(R.string.sources_apps_new),
-                                    tone = SemanticTone.Primary
-                                )
+                            val patchCount = patchCounts[packageName] ?: 0
+                            AppCardContent(
+                                packageName = packageName,
+                                packageInfo = null,
+                                displayName = label,
+                                subtitle = listOfNotNull(
+                                    pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
+                                    // Left out, it would be gone from the home screen but for its install
+                                    stringResource(R.string.sources_apps_stays_patched)
+                                        .takeIf { !brought && packageName in patchedApps }
+                                ).joinToString(" · "),
+                                gradientColors = gradientColors
+                            ) {
+                                // Shown until the list is closed once, so it has to catch the eye
+                                if (packageName in newApps) {
+                                    StatusBadge(
+                                        text = stringResource(R.string.sources_apps_new),
+                                        tone = SemanticTone.Primary
+                                    )
+                                }
                             }
                         }
                     }

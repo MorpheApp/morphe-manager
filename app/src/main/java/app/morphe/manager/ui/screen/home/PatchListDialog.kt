@@ -61,6 +61,7 @@ internal class PatchListSection(
  * @param notice Shown above the list, for what the user should know before reading it.
  * @param onExpertBadgeClick Marks the patches left out by default, and explains the mark.
  * @param headerActions What the list's owner offers in the header, ahead of the filter.
+ * @param initialSection Key of the block the filter opens on, the whole list where null.
  */
 @Composable
 internal fun DialogHostScope.PatchListDialog(
@@ -72,6 +73,7 @@ internal fun DialogHostScope.PatchListDialog(
     saveStateKey: String,
     onDismiss: () -> Unit,
     initialQuery: String = "",
+    initialSection: String? = null,
     accentColor: Color? = null,
     notice: (@Composable () -> Unit)? = null,
     onExpertBadgeClick: (() -> Unit)? = null,
@@ -79,7 +81,7 @@ internal fun DialogHostScope.PatchListDialog(
 ) {
     val search = rememberSearchFieldState(initialQuery = initialQuery)
 
-    var selectedKey by remember { mutableStateOf<String?>(null) }
+    var selectedKey by remember { mutableStateOf(initialSection) }
     var showFilterPanel by remember { mutableStateOf(false) }
     // A block the list no longer holds cannot stay picked, or the filter would hide everything
     val selected = selectedKey?.takeIf { key -> sections.any { it.key == key } }
