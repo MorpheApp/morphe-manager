@@ -55,6 +55,7 @@ fun DialogHostScope.LanguagePickerDialog(
         onDismissRequest = onDismiss,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Language, color = accent, modifier = modifier)
                 },

@@ -40,10 +40,6 @@
         <item quantity="one">%s աղբյուր թաքցված է։ Հպեք՝ ցույց տալու համար</item>
         <item quantity="other">%s աղբյուրներ թաքցված են։ Հպեք՝ ցույց տալու համար</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s համապատասխան կարկատան</item>
-        <item quantity="other">%s համապատասխան կարկատաններ</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s աղբյուր</item>
         <item quantity="other">%s աղբյուրներ</item>

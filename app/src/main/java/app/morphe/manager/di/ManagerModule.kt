@@ -12,6 +12,8 @@ package app.morphe.manager.di
 
 import app.morphe.manager.domain.apk.ApkSignatureCache
 import app.morphe.manager.domain.apk.LocalApkSources
+import app.morphe.manager.domain.backup.AutoBackup
+import app.morphe.manager.domain.backup.SettingsExporter
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchPlanResolver
 import app.morphe.manager.domain.bundles.AppVersionCatalog
@@ -23,16 +25,21 @@ import app.morphe.manager.domain.manager.*
 import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
+import app.morphe.manager.service.ForegroundHoldService
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.screen.shared.ContentTranslation
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.ContentTranslator
 import app.morphe.manager.util.PM
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val managerModule = module {
     singleOf(::KeystoreManager)
+    singleOf(::SettingsExporter)
+    singleOf(::AutoBackup)
     singleOf(::ApkSignatureCache)
     singleOf(::PM)
     singleOf(::RootInstaller)
@@ -54,4 +61,5 @@ val managerModule = module {
     singleOf(::UserMessages)
     singleOf(::JvmInstallation)
     singleOf(::PatcherProcesses)
+    single { ForegroundWork(ForegroundHoldService.Host(androidContext())) }
 }

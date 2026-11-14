@@ -58,12 +58,6 @@
         <item quantity="many">%s šaltinio paslėpta. Palieskite norint parodyti</item>
         <item quantity="other">%s šaltinių paslėpta. Palieskite norint parodyti</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s atitinkanti pataisa</item>
-        <item quantity="few">%s atitinkančios pataisos</item>
-        <item quantity="many">%s atitinkančių pataisų</item>
-        <item quantity="other">%s atitinkančių pataisų</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s šaltinis</item>
         <item quantity="few">%s šaltiniai</item>

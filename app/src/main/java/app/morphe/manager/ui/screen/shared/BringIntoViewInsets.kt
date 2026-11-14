@@ -10,7 +10,9 @@ import androidx.compose.foundation.gestures.BringIntoViewSpec
 import androidx.compose.foundation.gestures.LocalBringIntoViewSpec
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -21,7 +23,7 @@ import androidx.compose.ui.unit.dp
  * [extraTop] adds what eases in under the top bar, such as the alerts, read as a row is brought in.
  *
  * Every scrolling container under it reads the insets, whichever way it scrolls, so one that is not
- * the list's own sets them aside: a dialog's window with [WithoutBringIntoViewInsets], a text field's
+ * the list's own sets them aside: a dialog over it with [WithoutBringIntoViewInsets], a text field's
  * line with [TextFieldLine].
  */
 @OptIn(ExperimentalFoundationApi::class)
@@ -34,15 +36,22 @@ fun ProvideBringIntoViewInsets(
 ) {
     val density = LocalDensity.current
     val outer = withoutInsets(LocalBringIntoViewSpec.current)
-    val spec = remember(outer, top, extraTop, bottom, density) {
-        InsetBringIntoViewSpec(outer, { with(density) { (top + extraTop()).toPx() } }, with(density) { bottom.toPx() })
+    // Read as a row is brought in, so insets that ease with their bars keep one spec for the list
+    val currentTop by rememberUpdatedState(top)
+    val currentBottom by rememberUpdatedState(bottom)
+    val spec = remember(outer, extraTop, density) {
+        InsetBringIntoViewSpec(
+            outer,
+            top = { with(density) { (currentTop + extraTop()).toPx() } },
+            bottom = { with(density) { currentBottom.toPx() } }
+        )
     }
     CompositionLocalProvider(LocalBringIntoViewSpec provides spec, content = content)
 }
 
 /**
  * Leaves the insets of [ProvideBringIntoViewInsets] out of what scrolls within [content], which is
- * not the list they belong to, such as a dialog's window over the list.
+ * not the list they belong to, such as a dialog over the list.
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -75,10 +84,10 @@ private fun withoutInsets(spec: BringIntoViewSpec): BringIntoViewSpec =
 private class InsetBringIntoViewSpec(
     val outer: BringIntoViewSpec,
     private val top: () -> Float,
-    private val bottom: Float
+    private val bottom: () -> Float
 ) : BringIntoViewSpec {
     override fun calculateScrollDistance(offset: Float, size: Float, containerSize: Float): Float {
         val top = top()
-        return outer.calculateScrollDistance(offset - top, size, (containerSize - top - bottom).coerceAtLeast(size))
+        return outer.calculateScrollDistance(offset - top, size, (containerSize - top - bottom()).coerceAtLeast(size))
     }
 }

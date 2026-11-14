@@ -13,26 +13,8 @@ private const val TELEGRAM = "org.telegram.messenger"
 private const val TELEGRAM_WEB = "org.telegram.messenger.web"
 
 class HomeAppNameSuffixTest {
-    private fun item(packageName: String, displayName: String, id: String = packageName) = HomeAppItem(
-        id = id,
-        packageName = packageName,
-        displayName = displayName,
-        gradientColors = emptyList(),
-        installedApp = null,
-        packageInfo = null,
-        version = "",
-        isPinnedByDefault = false,
-        isInstalledOnDevice = false,
-        isDeleted = false,
-        isInstallStateNotPatched = false,
-        isInstallStateUnknown = false,
-        isInstallStatePending = false,
-        savedApkFile = null,
-        hasUpdate = false,
-        versionStatus = null,
-        patchCount = 0,
-        isClone = false
-    )
+    private fun item(packageName: String, displayName: String, id: String = packageName) =
+        homeAppItem(id = id, packageName = packageName, displayName = displayName)
 
     @Test
     fun `the package another only extends gets no suffix`() {

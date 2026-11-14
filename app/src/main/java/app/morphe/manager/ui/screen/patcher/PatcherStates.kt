@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.patcher
 
+import android.content.pm.PackageInfo
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -195,9 +197,15 @@ private val CauseStart = Regex("""\nCaused by: |which raised an exception:\n""")
 private fun String.rootCause(): String =
     CauseStart.findAll(this).lastOrNull()?.let { substring(it.range.last + 1) } ?: this
 
-/** What a finished run patched, which the result screen heads itself with either way it ended. */
+/**
+ * What a finished run patched, which the result screen heads itself with either way it ended.
+ *
+ * @param packageInfo The APK the run built, which names the app ahead of [packageName] while it
+ *   is not installed yet. Null where there is none, or where the install stands for it.
+ */
 data class PatchedAppSummary(
     val packageName: String,
+    val packageInfo: PackageInfo?,
     val version: String?,
     val patchCount: Int,
     val sources: List<PatchSourceRef>
@@ -366,7 +374,7 @@ private fun ResultScreen(
 
     ResultLayout(
         windowSize = windowSize,
-        header = { ResultHeader(status, summary.packageName, windowSize, condensed) },
+        header = { ResultHeader(status, summary, windowSize, condensed) },
         details = {
             ResultSummary(summary.version, summary.patchCount, summary.sources)
             notices()
@@ -544,7 +552,7 @@ private fun Modifier.resultPulse(color: Color, from: Dp): Modifier {
  * a smaller icon beside the rest, for a screen with little height to give it.
  */
 @Composable
-private fun ResultHeader(status: ResultStatus, packageName: String, windowSize: WindowSize, condensed: Boolean) {
+private fun ResultHeader(status: ResultStatus, app: PatchedAppSummary, windowSize: WindowSize, condensed: Boolean) {
     val phone = windowSize.widthSizeClass == WindowWidthSizeClass.Compact
     val nameStyle = MaterialTheme.typography.run { if (phone && !condensed) headlineMedium else headlineSmall }
         .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.SemiBold)
@@ -556,18 +564,13 @@ private fun ResultHeader(status: ResultStatus, packageName: String, windowSize: 
             horizontalArrangement = Arrangement.spacedBy(windowSize.itemSpacing + IconMarkOverhang),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ResultIcon(status, packageName, iconSize = 64.dp)
+            ResultIcon(status, app, iconSize = 64.dp)
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
             ) {
                 ResultBadge(status)
-                AppLabel(
-                    packageName = packageName,
-                    style = nameStyle,
-                    maxLines = 2,
-                    modifier = Modifier.semantics { heading() }
-                )
+                ResultName(app, nameStyle, maxLines = 2)
                 ResultSubtitle(status, TextAlign.Start)
             }
         }
@@ -578,23 +581,34 @@ private fun ResultHeader(status: ResultStatus, packageName: String, windowSize: 
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(windowSize.itemSpacing)
     ) {
-        ResultIcon(status, packageName, iconSize = if (phone) 112.dp else 96.dp)
+        ResultIcon(status, app, iconSize = if (phone) 112.dp else 96.dp)
         ResultBadge(status)
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
         ) {
-            AppLabel(
-                packageName = packageName,
-                style = nameStyle,
-                modifier = Modifier.semantics { heading() }
-            )
+            ResultName(app, nameStyle, maxLines = 1)
             ResultSubtitle(status, TextAlign.Center)
         }
     }
 }
 
-/** The badge naming where the run ended up, crossfading as that changes. */
+/** The name of the [app], heading the screen. */
+@Composable
+private fun ResultName(app: PatchedAppSummary, style: TextStyle, maxLines: Int) {
+    AppLabel(
+        packageInfo = app.packageInfo,
+        packageName = app.packageName,
+        style = style,
+        maxLines = maxLines,
+        modifier = Modifier.semantics { heading() }
+    )
+}
+
+/**
+ * The badge naming where the run ended up, crossfading as that changes. The mark on the app's
+ * icon above already shows the status's icon, so the badge only names it.
+ */
 @Composable
 private fun ResultBadge(status: ResultStatus) {
     AnimatedContent(
@@ -604,7 +618,6 @@ private fun ResultBadge(status: ResultStatus) {
     ) { shown ->
         StatusBadge(
             text = stringResource(shown.label),
-            icon = shown.icon,
             tone = shown.tone
         )
     }
@@ -626,7 +639,7 @@ private fun ResultSubtitle(status: ResultStatus, textAlign: TextAlign) {
 
 /** The patched app's own icon carrying the [status]'s mark, set off by a [resultPulse]. */
 @Composable
-private fun ResultIcon(status: ResultStatus, packageName: String, iconSize: Dp) {
+private fun ResultIcon(status: ResultStatus, app: PatchedAppSummary, iconSize: Dp) {
     val color = status.color()
 
     MarkedIcon(
@@ -640,7 +653,8 @@ private fun ResultIcon(status: ResultStatus, packageName: String, iconSize: Dp) 
             .resultPulse(color, from = iconSize)
     ) {
         AppIcon(
-            packageName = packageName,
+            packageInfo = app.packageInfo,
+            packageName = app.packageName,
             contentDescription = null,
             modifier = Modifier.fillMaxSize()
         )

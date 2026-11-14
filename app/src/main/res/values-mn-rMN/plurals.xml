@@ -40,10 +40,6 @@
         <item quantity="one">%s эх сурвалж нуугдсан. Харахын тулд дарна уу</item>
         <item quantity="other">%s эх сурвалж нуугдсан. Харахын тулд дарна уу</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s тохирох патч</item>
-        <item quantity="other">%s тохирох патч</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s эх сурвалж</item>
         <item quantity="other">%s эх сурвалж</item>

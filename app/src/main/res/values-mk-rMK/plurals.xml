@@ -40,10 +40,6 @@
         <item quantity="one">%s извор е skjкриен. Допрете за да прикажете</item>
         <item quantity="other">%s извори се skjкриени. Допрете за да прикажете</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s одговарачка поправка</item>
-        <item quantity="other">%s одговарачки поправки</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s извор</item>
         <item quantity="other">%s извори</item>

@@ -31,9 +31,6 @@
     <plurals name="expert_mode_hidden_sources_notice">
         <item quantity="other">%s 件のソースは非表示になっています。タップして表示してください</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="other">%s 件の一致するパッチ</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="other">ソース %s 件</item>
     </plurals>

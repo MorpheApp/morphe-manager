@@ -22,6 +22,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
@@ -141,6 +143,8 @@ private fun Float.startingAt(start: Float): Float = ((this - start) / (1f - star
  *   It leads into the list, so the header ends as close under it as it sits under the title.
  * @param alwaysShowBand Keeps the band down while the list rests too, for a dialog about one thing,
  *   such as an app's details or a patch's options, rather than a list to browse.
+ * @param decorativeIcon Whether the [icon] only repeats what the title says, such as a glyph rather
+ *   than an app's own icon. Such an icon gives its place to a title that would be cut short beside it.
  * @param actions Title actions drawn ahead of the search toggle.
  */
 @Composable
@@ -157,6 +161,7 @@ fun ListDialogHeader(
     badges: (@Composable FlowRowScope.() -> Unit)? = null,
     content: (@Composable ColumnScope.() -> Unit)? = null,
     alwaysShowBand: Boolean = false,
+    decorativeIcon: Boolean = false,
     actions: (@Composable RowScope.() -> Unit)? = null
 ) {
     // An accent read from a picture can land after the header is up, so the band eases into it
@@ -175,6 +180,7 @@ fun ListDialogHeader(
         )
         HeaderContent(
             icon = icon,
+            decorativeIcon = decorativeIcon,
             title = title,
             subtitle = subtitle,
             subtitleLoading = subtitleLoading,
@@ -198,6 +204,7 @@ fun ListDialogHeader(
 @Composable
 private fun HeaderContent(
     icon: @Composable (Modifier) -> Unit,
+    decorativeIcon: Boolean,
     title: String,
     subtitle: String,
     subtitleLoading: Boolean,
@@ -217,18 +224,22 @@ private fun HeaderContent(
         ProvideAccent(accentColor) {
             HeaderBar(
                 title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(DialogHeaderDefaults.IconSpacing)
-                    ) {
-                        icon(Modifier.size(DialogHeaderDefaults.IconSize).headerIconEntrance(entrance))
-                        HeaderTitleText(
-                            title = title,
-                            subtitle = subtitle,
-                            subtitleLoading = subtitleLoading,
-                            entrance = entrance,
-                            modifier = Modifier.weight(1f)
-                        )
+                    BoxWithConstraints {
+                        val showIcon = !decorativeIcon ||
+                                titleFits(title, maxWidth - DialogHeaderDefaults.IconSize - DialogHeaderDefaults.IconSpacing)
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(DialogHeaderDefaults.IconSpacing)
+                        ) {
+                            if (showIcon) icon(Modifier.size(DialogHeaderDefaults.IconSize).headerIconEntrance(entrance))
+                            HeaderTitleText(
+                                title = title,
+                                subtitle = subtitle,
+                                subtitleLoading = subtitleLoading,
+                                entrance = entrance,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
                     }
                 },
                 actions = actions,
@@ -265,6 +276,15 @@ private fun HeaderContent(
             }
         }
     }
+}
+
+/** Whether [title] fits on one line in [room]. */
+@Composable
+private fun titleFits(title: String, room: Dp): Boolean {
+    val style = DialogHeaderDefaults.titleStyle
+    val measurer = rememberTextMeasurer()
+    val titleWidth = remember(title, style) { measurer.measure(title, style, maxLines = 1).size.width }
+    return titleWidth <= with(LocalDensity.current) { room.roundToPx() }
 }
 
 /** Title of a [ListDialogHeader] over the [subtitle] summing its list up. */

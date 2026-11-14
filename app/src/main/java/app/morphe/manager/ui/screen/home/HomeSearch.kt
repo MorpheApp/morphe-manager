@@ -100,6 +100,7 @@ internal fun LazyListScope.hiddenSearchAndShowHiddenItems(
                 onUnhide = unhideReporting(item, appActions.onUnhideApp),
                 onAppClick = { appActions.onAppClick(item) },
                 onShowPatches = { appActions.onShowPatches(item) },
+                onUpdate = { appActions.onUpdateApp(item) },
                 modifier = Modifier.animateItem()
             )
         }

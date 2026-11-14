@@ -36,6 +36,9 @@ internal data class GlassCardStyle(
     val subtitleStyle: TextStyle,
     val chipContainerColor: Color,
     val chipContentColor: Color,
+    /** Fill of the one action a card offers, solid in its text color so it stands out of the glass. */
+    val actionContainerColor: Color,
+    val actionContentColor: Color,
     /** Fill of the mark on the icon, denser than a chip's: it is too small to lean on a label. */
     val markContainerColor: Color,
     /** Diameter of a mark on the icon, as tall as a chip but never past the share the icon spares. */
@@ -91,6 +94,8 @@ internal data class GlassCardStyle(
             subtitleStyle = subtitleStyle.copy(shadow = null),
             chipContainerColor = Color.Black.copy(alpha = chipContainerColor.alpha),
             chipContentColor = Color.Black,
+            actionContainerColor = Color.Black,
+            actionContentColor = Color.White,
             markContainerColor = Color.Black.copy(alpha = markContainerColor.alpha)
         )
     }
@@ -145,6 +150,8 @@ internal fun glassCardStyle(subtitleAlpha: Float = 0.75f): GlassCardStyle {
         } else {
             Color.White
         },
+        actionContainerColor = if (monochrome) MaterialTheme.colorScheme.primary else Color.White,
+        actionContentColor = if (monochrome) MaterialTheme.colorScheme.onPrimary else Color.Black,
         markContainerColor = if (monochrome) {
             MaterialTheme.colorScheme.surfaceContainerHighest
         } else {

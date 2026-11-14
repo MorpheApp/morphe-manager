@@ -5,7 +5,11 @@
     <string name="home_other_apps_action">Chọn ứng dụng khác</string>
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_unpatched_version_installed">Đã cài đặt phiên bản chưa vá</string>
-    <string name="home_unpatched_badge">Chưa vá</string>
+    <string name="home_app_status_newer_version">Cập nhật lên %s</string>
+    <string name="home_app_status_newer_patches">Các bản vá mới</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Màn hình ô tô</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
     <string name="home_more_apps_title">Thêm ứng dụng</string>
@@ -38,6 +42,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Đây là phiên bản mới của %s. Bạn có muốn cập nhật không?</string>
     <string name="mpp_import_unreadable">Không thể đọc tệp này</string>
+    <string name="incoming_file_not_patch_source">Tệp này không phải là nguồn bản vá</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Đã có bản cập nhật Morphe mới</string>
     <string name="home_update_available_subtitle">Phiên bản mới đã sẵn sàng để được cài đặt</string>
@@ -49,13 +54,11 @@
     <string name="home_outdated_manager_subtitle">Một số nguồn vá yêu cầu phiên bản Morphe mới hơn</string>
     <string name="home_held_back_title">Một nguồn bản vá đã làm Morphe bị sập</string>
     <string name="home_held_back_subtitle">Nguồn này đã bị bỏ qua để ứng dụng có thể khởi động. Nhấn để xem lại</string>
-    <string name="home_metered_skipped_title">Tạm dừng cập nhật qua dữ liệu di động</string>
-    <string name="home_metered_skipped_subtitle">Bấm để tiếp tục cập nhật qua dữ liệu di động</string>
+    <string name="home_source_updates_title">Đã có các bản cập nhật vá lỗi</string>
+    <string name="home_source_updates_subtitle">Nhấn để tải chúng xuống</string>
     <string name="home_repatch_available_subtitle">Nhấn để xếp tất cả vào hàng đợi</string>
     <string name="home_update_error">Không thể cập nhật</string>
     <string name="home_update_error_subtitle">Đã xảy ra lỗi trong khi cập nhật nguồn</string>
-    <string name="home_update_skipped_metered">Đã bỏ qua bản cập nhật</string>
-    <string name="home_update_skipped_metered_subtitle">Đang bật dữ liệu di động</string>
     <string name="home_updating_sources">Đang cập nhật nguồn…</string>
     <string name="home_update_success">Cập nhật nguồn hoàn tất</string>
     <string name="home_update_success_subtitle">Đã cập nhật tất cả nguồn lên mới nhất</string>
@@ -63,11 +66,17 @@
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="list_options_title">Sắp xếp và lọc</string>
     <string name="list_options_state_description">Đã xếp theo %1$s và lọc theo %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Thủ công</string>
+    <string name="list_sort_name_asc">Tên (A–Z)</string>
+    <string name="list_sort_name_desc">Tên (Z–A)</string>
+    <string name="home_app_filter_all">Tất cả</string>
+    <string name="home_app_filter_not_patched">Chưa vá</string>
     <string name="home_app_filter_clones">Bản sao</string>
     <string name="home_app_grouping_none">Không</string>
-    <string name="home_app_sort_manual_hint">Bấm giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
-    <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
-    <string name="home_app_sort_updates_first">Ưu tiên vá cập nhật</string>
+    <string name="home_app_sort_manual_hint">Nhấn giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
+    <string name="home_app_sort_recommended">Khuyên dùng</string>
+    <string name="home_app_sort_updates_first">Ưu tiên bản cập nhật</string>
     <string name="home_app_sort_recently_patched">Mới vá gần đây</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
@@ -83,6 +92,7 @@
     <string name="home_category_new_title">Danh mục mới</string>
     <string name="home_category_rename_title">Đổi tên danh mục</string>
     <string name="home_category_name">Tên danh mục</string>
+    <string name="home_category_name_description">Màn hình chính nhóm các ứng dụng của nó dưới tên này</string>
     <string name="home_category_move_to">Di chuyển đến danh mục</string>
     <string name="home_category_move_selected_title">Di chuyển ứng dụng đã chọn</string>
     <!-- %s is the name of the category -->
@@ -156,7 +166,6 @@
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Cần xử lý</string>
-    <string name="sources_sort_manual">Sắp xếp thủ công</string>
     <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
     <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
     <string name="sources_sort_enabled_first">Ưu tiên đã kích hoạt trước</string>
@@ -165,7 +174,7 @@
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_apps">Ứng dụng</string>
-    <string name="sources_apps_description">Các ứng dụng đã chọn đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc khôi phục nó. Một ứng dụng sẽ biến khỏi màn hình chính khi không còn nguồn nào đưa nó vào, trừ khi bạn đã vá nó</string>
+    <string name="sources_apps_description">Các ứng dụng được đánh dấu đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc đưa nó trở lại, vuốt ứng dụng đó để xem các bản vá của nó. Một ứng dụng không có nguồn sẽ rời khỏi màn hình chính, trừ khi bạn đã vá nó</string>
     <string name="sources_apps_brought">Được nguồn này đưa vào</string>
     <string name="sources_apps_left_out">Đã loại khỏi nguồn này</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -253,6 +262,8 @@
     <string name="home_apk_availability_recommended_label">Khuyên dùng</string>
     <string name="home_apk_availability_unpatched_label">Chưa vá</string>
     <string name="home_apk_availability_incompatible_label">Không tương thích</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">%1$s gốc trên thiết bị này là %2$s, mới hơn phiên bản mà các bản vá hỗ trợ</string>
     <string name="home_apk_availability_find">Có, hãy giúp tôi tìm nó</string>
     <string name="home_apk_availability_have">Không, tôi có rồi</string>
     <string name="home_apk_helper_download">Dùng ứng dụng hỗ trợ</string>
@@ -379,6 +390,8 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_unsupported_version_dialog_proceed">Vẫn tiếp tục</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Phiên bản tương thích:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Không tương thích</string>
+    <string name="home_version_copy">Sao chép phiên bản</string>
+    <string name="home_version_copied">Đã sao chép phiên bản</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Bản dựng %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Mặc dù cùng phiên bản, nhưng đây là bản dựng khác. Các bản vá yêu cầu đúng bản dựng mới hỗ trợ</string>
@@ -387,7 +400,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_dialog_expected_package">Cần gói:</string>
     <string name="home_dialog_selected_package">Nhưng bạn lại chọn gói:</string>
     <string name="home_outdated_patches_dialog_title">Một số bản vá có thể đã cũ</string>
-    <string name="home_outdated_patches_dialog_message">Bạn đang bật dữ liệu di động vì vậy tự động cập nhật bản vá sẽ bị tắt</string>
+    <string name="home_outdated_patches_dialog_message">Có các bản vá mới hơn nhưng chưa được tải xuống</string>
     <string name="home_outdated_patches_dialog_warning">Sử dụng các bản vá cũ có thể khiến ứng dụng bị hỏng</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Cập nhật &amp; vá</string>
     <string name="home_low_disk_space_dialog_title">Hết dung lượng lưu trữ</string>
@@ -460,7 +473,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="header_creator_guide_positioning_title">Căn chỉnh và thu phóng</string>
     <string name="header_creator_guide_positioning_body">Kéo và chụm ảnh trong trình chỉnh sửa hoặc thay đổi kích thước ảnh bằng thanh trượt. Hộp nét đứt đánh dấu vị trí logo mặc định và các đường hướng dẫn sẽ xuất hiện khi ảnh thẳng hàng với vị trí đó.</string>
     <!-- Batch patching -->
-    <string name="batch_patch_action">Đã chọn bản vá</string>
+    <string name="batch_patch_action">Vá đã chọn</string>
     <string name="batch_patch_title">Đang vá hàng loạt</string>
     <string name="batch_patch_planning">Đang chuẩn bị hàng chờ…</string>
     <string name="batch_patch_preparing_next">Đang chuẩn bị ứng dụng tiếp theo…</string>
@@ -479,6 +492,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="batch_patch_force_version_done">Vẫn được thêm vào hàng đợi, ứng dụng có thể gặp sự cố</string>
     <string name="batch_patch_accept_signature_done">Vẫn được thêm vào hàng đợi, APK chưa được xác minh</string>
     <string name="batch_patch_apk_selected">Đã chọn APK</string>
+    <string name="batch_patch_auto_download_stopped">Đã dừng tự động tải xuống APK</string>
+    <string name="batch_patch_auto_download_stop">Dừng tải xuống</string>
+    <string name="batch_patch_auto_download_kept">APK đã tải xuống không thể sử dụng được, nên bản trước đó được giữ lại</string>
     <string name="batch_patch_edit_patches">Chọn bản vá</string>
     <string name="batch_patch_state_no_apk">Không có APK</string>
     <string name="batch_patch_state_no_patches">Không có bản vá</string>
@@ -519,7 +535,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_app_info_delete_item_patched_apk">Tệp APK đã vá</string>
     <string name="home_app_info_delete_item_original_apk">Tệp APK gốc</string>
     <string name="home_app_info_delete_preservation_note">Các bản vá bạn đã chọn và các tuỳ chỉnh sẽ được lưu lại cho những lần vá sau</string>
-    <string name="home_app_info_patches_name_default">Số bản vá</string>
+    <string name="home_app_info_patches_name_default">Bản vá</string>
     <string name="home_app_info_patches_name_fallback">Chưa có tên</string>
     <string name="home_app_info_patches_source_removed">Đã xóa nguồn vá</string>
     <string name="home_app_info_patches_replace_fail">Không thể nhập bản vá: %s</string>
@@ -536,7 +552,7 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="home_app_info_patch_update_available"> Đã có bản vá mới</string>
     <string name="home_app_info_patch_update_available_description">Đã có bản vá mới. Hãy vá lại ứng dụng để áp dụng các cải tiến và bản sửa lỗi mới nhất</string>
     <string name="home_app_info_app_update_available">Có bản cập nhật ứng dụng</string>
-    <string name="home_app_info_app_update_available_description">Các nguồn patch hỗ trợ phiên bản mới hơn của ứng dụng này. Hãy patch lại để chuyển sang phiên bản đó.</string>
+    <string name="home_app_info_app_update_available_description">Các nguồn bản vá hỗ trợ phiên bản mới hơn của ứng dụng này. Hãy vá lại để chuyển sang phiên bản đó.</string>
     <string name="home_app_info_newest_supported_version">Mới nhất được hỗ trợ</string>
     <string name="home_app_info_version_move">Đã cài %1$s, mới nhất được hỗ trợ %2$s</string>
     <string name="home_app_info_version_restore">Đã cài đặt %1$s, đã vá %2$s</string>
@@ -620,9 +636,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_success_title">Hoàn tất! 🎉</string>
     <string name="patcher_success_subtitle">Đã vá và cài đặt ứng dụng thành công!</string>
     <string name="patcher_mounted_subtitle">Ứng dụng của bạn đã được vá và gắn kết!</string>
-    <string name="patcher_complete_title">Tèn ten! ✨</string>
+    <string name="patcher_complete_title">Vá hoàn tất! ✨</string>
     <string name="patcher_failed_title">Ui, có lỗi xảy ra rồi!</string>
-    <string name="patcher_failed_dialog_title">Không thể vá</string>
+    <string name="patcher_failed_dialog_title">Vá thất bại</string>
     <string name="patcher_error_details">Chi tiết lỗi</string>
     <string name="patcher_change_patches">Thay đổi bản vá</string>
     <string name="patcher_unknown_error">Đã xảy ra lỗi không xác định</string>
@@ -657,12 +673,12 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="batch_patch_option_paths_skipped">Các tệp tùy chọn bản vá bị thiếu và sẽ bị bỏ qua: %1$s</string>
     <string name="patcher_missing_patches_title">Không còn được cung cấp</string>
     <string name="patcher_missing_patches_description">Lựa chọn đã lưu cho ứng dụng này chỉ tên các bản vá mà nguồn đang kích hoạt không còn cung cấp nữa. Tiếp tục sẽ vá ứng dụng mà không có chúng</string>
-    <string name="patcher_missing_patches_label">Một hoặc nhiều tùy chọn vá trỏ đến các tệp không còn ở đó. Hãy xóa các đường dẫn để vá mà không có chúng, hoặc đặt lại các tệp và thử lại.</string>
-    <string name="patcher_option_paths_gone_title">Xóa các đường dẫn và tiếp tục</string>
-    <string name="patcher_option_paths_gone_description">Thư mục này không thể đọc được nữa. Hãy chọn lại thư mục hoặc xóa nó, nếu không quá trình vá sẽ dừng lại và hỏi về nó.</string>
+    <string name="patcher_missing_patches_label">Không còn được cung cấp</string>
+    <string name="patcher_option_paths_gone_title">Thiếu tệp tùy chọn bản vá</string>
+    <string name="patcher_option_paths_gone_description">Một hoặc nhiều tùy chọn bản vá trỏ đến tệp không còn tồn tại. Xóa các đường dẫn để vá mà không dùng chúng, hoặc đặt lại tệp và thử lại</string>
     <string name="patcher_option_paths_rejected_title">Không thể sử dụng các tệp tùy chọn bản vá</string>
     <string name="patcher_option_paths_rejected_description">Một hoặc nhiều tùy chọn bản vá trỏ đến các tệp bị thiếu hoặc không có nội dung mà bản vá yêu cầu. Hãy xóa các đường dẫn để vá mà không cần chúng, hoặc sửa các tệp theo hướng dẫn của tùy chọn và thử lại</string>
-    <string name="patcher_option_paths_clear">Biểu tượng dùng để vá ứng dụng. Nó cũng được sử dụng ở những nơi mà ứng dụng không thể thay đổi nó sau này, chẳng hạn như Android Auto và danh sách ứng dụng trong cài đặt hệ thống.</string>
+    <string name="patcher_option_paths_clear">Xóa các đường dẫn và tiếp tục</string>
     <string name="patcher_storage_permission_hint">Gợi ý: Di chuyển tệp sang /Android/data/app.morphe.manager/files/ - sẽ không cần cấp thêm quyền truy cập</string>
     <!-- Patcher Screen - Patcher Steps -->
     <string name="patcher_step_group_preparing">Đang chuẩn bị</string>
@@ -816,7 +832,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_color_accents_description">Sử dụng màu của từng ứng dụng và nguồn thay vì màu nhấn</string>
     <string name="settings_appearance_outlines">Đường viền</string>
     <string name="settings_appearance_outlines_description">Vẽ một đường viền mỏng xung quanh các thẻ, bảng và nút bấm</string>
-    <string name="settings_appearance_blur">Tương mờ</string>
+    <string name="settings_appearance_blur">Làm mờ</string>
     <string name="settings_appearance_blur_description">Làm mờ nội dung cuộn dưới tiêu đề, thanh và bảng điều khiển</string>
     <!-- Settings - Appearance Tab - Language Selector -->
     <string name="settings_appearance_app_language">Ngôn ngữ</string>
@@ -838,9 +854,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_app_card_colors_default_description">Gán cho mỗi ứng dụng và nguồn một màu riêng</string>
     <string name="settings_appearance_app_card_colors_accent">Nổi bật</string>
     <string name="settings_appearance_app_card_colors_accent_description">Sử dụng màu nhấn của ứng dụng cho các thẻ ứng dụng và nguồn</string>
-    <string name="settings_appearance_app_card_colors_gradient">Gradient</string>
+    <string name="settings_appearance_app_card_colors_gradient">Chuyển màu</string>
     <string name="settings_appearance_app_card_colors_gradient_description">Sử dụng một dải màu tùy chỉnh cho thẻ ứng dụng, hòa trộn thành một màu cho thẻ nguồn</string>
-    <string name="settings_appearance_app_card_colors_solid">Solid</string>
+    <string name="settings_appearance_app_card_colors_solid">Đồng màu</string>
     <string name="settings_appearance_app_card_colors_solid_description">Sử dụng một màu tùy chỉnh chung cho thẻ ứng dụng và nguồn</string>
     <string name="settings_appearance_app_card_colors_start">Màu bắt đầu</string>
     <string name="settings_appearance_app_card_colors_middle">Màu giữa</string>
@@ -876,7 +892,7 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <!-- %s is the name of the icon picked -->
     <string name="settings_appearance_app_icon_change_restarts">Morphe khởi động lại để chuyển sang &lt;b&gt;%s&lt;/b&gt;</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="settings_appearance_app_icon_change_dialog_confirm">Chốt</string>
+    <string name="settings_appearance_app_icon_change_dialog_confirm">Đổi biểu tượng</string>
     <!-- Settings - Advanced Tab - Updates Section -->
     <string name="settings_advanced_updates_manager_prereleases">Bản cập nhật trước</string>
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
@@ -886,8 +902,17 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_advanced_updates_prerelease_warning_message">"Các phiên bản trước khi phát hành của Morphe vẫn đang trong quá trình phát triển và có thể không ổn định.
 
 Các bản vá không bị ảnh hưởng: bật các bản vá trước khi phát hành cho từng nguồn trong danh sách nguồn vá"</string>
-    <string name="settings_advanced_updates_allow_metered">Cập nhật bằng dữ liệu di động</string>
-    <string name="settings_advanced_updates_allow_metered_description">Tải Morphe và cập nhật bản vá qua dữ liệu di động</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Tự động cập nhật</string>
+    <string name="settings_auto_updates_description">Những gì Morphe thực hiện đối với các bản cập nhật khi mở ứng dụng. Thao tác kéo để làm mới sẽ luôn kiểm tra</string>
+    <string name="settings_auto_updates_download">Tự động tải xuống</string>
+    <string name="settings_auto_updates_download_description">Kiểm tra cập nhật khi Morphe mở và tải xuống các bản vá cập nhật trên mọi mạng</string>
+    <string name="settings_auto_updates_wifi_only">Chỉ tải xuống qua Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Trên dữ liệu di động, chỉ kiểm tra và hiển thị những gì có sẵn</string>
+    <string name="settings_auto_updates_check_only">Chỉ kiểm tra</string>
+    <string name="settings_auto_updates_check_only_description">Hiển thị các bản cập nhật có sẵn và tải xuống khi bạn nhấn vào</string>
+    <string name="settings_auto_updates_off">Không kiểm tra</string>
+    <string name="settings_auto_updates_off_description">Chỉ kiểm tra khi bạn kéo để làm mới</string>
     <string name="settings_advanced_updates_background_notifications">Thông báo cập nhật nền</string>
     <string name="settings_advanced_updates_background_notifications_description">Kiểm tra cập nhật định kỳ khi ứng dụng chạy nền và báo cho bạn khi có phiên bản mới.</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Nhận ngay thông báo khi có phiên bản mới, kể cả khi ứng dụng đang tắt</string>
@@ -929,7 +954,7 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_expert_mode_dialog_title">Bật chế độ Chuyên gia?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Chế độ chuyên gia cho phép bạn tùy chỉnh sâu hơn về cách các bản vá được áp dụng, nhưng nếu bạn chỉnh không đúng có thể khiến ứng dụng không hoạt động</string>
     <string name="settings_advanced_strip_unused_libs">Tối ưu theo kiến trúc thiết bị</string>
-    <string name="settings_advanced_strip_unused_libs_description">Xóa các thư viện native không sử dụng và phân mảnh APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Xóa các thư viện gốc không sử dụng và các bản chia APK từ các ứng dụng đã vá và bản gốc đã lưu</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Mở khóa nguồn yêu cầu kéo và kho lưu trữ riêng tư</string>
     <string name="settings_advanced_github_pat_description">Dành cho nguồn yêu cầu kéo, kho lưu trữ riêng tư và giới hạn tốc độ GitHub cao hơn</string>
@@ -960,7 +985,7 @@ Các bản vá không bị ảnh hưởng: bật các bản vá trước khi ph�
     <string name="settings_advanced_patch_options_custom_branding_description">Đổi tên hiển thị của ứng dụng</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name">Tên ứng dụng</string>
     <string name="settings_advanced_patch_options_custom_branding_app_name_hint">Nhập tên tùy chỉnh</string>
-    <string name="settings_advanced_patch_options_path_gone">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
+    <string name="settings_advanced_patch_options_path_gone">Thư mục này không thể đọc được nữa. Hãy chọn lại hoặc xóa nó, nếu không quá trình vá sẽ dừng lại và hỏi về nó</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon">Biểu tượng</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_description">Biểu tượng mà ứng dụng được vá, cũng được sử dụng ở những nơi không thể thay đổi sau này, chẳng hạn như Android Auto</string>
     <string name="settings_advanced_patch_options_custom_branding_app_icon_needs_folder">Biểu tượng ứng dụng tùy chỉnh cần một thư mục chứa hình ảnh biểu tượng.</string>
@@ -1143,17 +1168,37 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_backup_signing_key_note">Khóa ký được sao lưu riêng biệt</string>
     <string name="settings_system_import_keystore_dialog_title">Nhập thông tin xác thực kho khoá</string>
     <string name="settings_system_import_keystore_dialog_description">Bạn sẽ cần điền thông tin xác thực của kho khóa để nhập chúng</string>
-    <string name="settings_system_import_keystore_dialog_alias_field">Tên người dùng (Alias)</string>
+    <string name="settings_system_import_keystore_dialog_alias_field">Bí danh (Alias)</string>
     <string name="settings_system_import_keystore_dialog_password_field">Mật khẩu</string>
     <string name="settings_system_import_keystore_wrong_credentials">Thông tin xác thực kho khóa không đúng</string>
     <string name="settings_system_import_keystore_success">Đã nhập kho khóa</string>
-    <string name="settings_system_import_keystore_failed">Khổng thể nhập kho khóa</string>
+    <string name="settings_system_import_keystore_failed">Không thể nhập kho khóa</string>
     <string name="settings_system_export_keystore_success">Đã xuất kho khóa</string>
     <string name="settings_system_export_keystore_failed">Không thể xuất kho khóa</string>
     <string name="settings_system_show_password_field">Hiện mật khẩu</string>
     <string name="settings_system_hide_password_field">Ẩn mật khẩu</string>
     <string name="settings_system_morphe_settings">Cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
+    <string name="settings_system_export_manager_settings_title">Xuất cài đặt Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Lưu các cài đặt bạn chọn vào một tệp</string>
+    <string name="settings_system_import_manager_settings_file_description">Khôi phục cài đặt từ một tệp sao lưu</string>
+    <string name="settings_system_auto_backup">Sao lưu tự động</string>
+    <string name="settings_system_auto_backup_switch">Tự động sao lưu</string>
+    <string name="settings_system_auto_backup_now">Sao lưu ngay</string>
+    <string name="settings_system_auto_backup_saved">Đã lưu bản sao lưu</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe sẽ đợi ít nhất khoảng thời gian này sau một lần sao lưu trước khi thực hiện lần tiếp theo</string>
+    <string name="settings_system_auto_backup_description">Lưu cài đặt Morphe của bạn vào một thư mục bạn chọn</string>
+    <string name="settings_system_auto_backup_last">Sao lưu lần cuối: %s</string>
+    <string name="settings_system_auto_backup_folder">Thư mục</string>
+    <string name="settings_system_auto_backup_folder_name">Bản sao lưu Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Không thể sử dụng thư mục này: %s</string>
+    <string name="settings_system_auto_backup_interval">Tần suất sao lưu</string>
+    <string name="settings_system_auto_backup_signing_key">Bao gồm khóa ký</string>
+    <string name="settings_system_auto_backup_signing_key_description">Lưu khóa dùng để ký các ứng dụng đã vá bên cạnh các cài đặt</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Sao lưu khóa ký?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bất kỳ ai có được tệp này đều có thể ký các bản cập nhật để cài đặt đè lên các ứng dụng đã vá của bạn. Hãy giữ thư mục này riêng tư và chỉ chia sẻ với các thiết bị của chính bạn</string>
+    <string name="settings_system_auto_backup_footer">Một bản sao được lưu khi bạn rời khỏi Morphe sau khi thay đổi điều gì đó. Các %s mới nhất sẽ được giữ lại</string>
+    <string name="settings_system_auto_backup_failed">Không thể lưu bản sao lưu cuối cùng. Hãy chọn lại thư mục</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
@@ -1230,7 +1275,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_patch_selection_reset_all_confirm_title">Đặt lại toàn bộ bản vá đã chọn?</string>
     <string name="settings_system_patch_selection_reset_selected_confirm_title">Đặt lại các gói đã chọn?</string>
     <string name="settings_system_patch_selection_reset_source_confirm_title">Đặt lại nguồn đã chọn?</string>
-    <string name="settings_system_patch_selection_total_summary_format">%1$s đến %2$s</string>
+    <string name="settings_system_patch_selection_total_summary_format">%1$s trên %2$s</string>
     <string name="settings_system_patch_selection_source_format">Nguồn #%s</string>
     <string name="settings_system_patch_selection_reset_all_warning">Toàn bộ bản vá đã lưu (trong mọi gói &amp; nguồn) sẽ bị xóa vĩnh viễn</string>
     <string name="settings_system_patch_selection_reset_source_warning">Thao tác này sẽ xóa vĩnh viễn các lựa chọn bản vá đã lưu của &lt;b&gt;%1$s&lt;/b&gt; trong &lt;b&gt;%2$s&lt;/b&gt;</string>
@@ -1239,7 +1284,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_export_source_data_success">Đã xuất dữ liệu nguồn thành công</string>
     <string name="settings_system_import_source_data_fail">Không thể nhập dữ liệu nguồn</string>
     <string name="settings_system_import_source_data_success">Đã nhập dữ liệu nguồn thành công</string>
-    <string name="settings_system_selected_patches_section">Số bản vá đã chọn</string>
+    <string name="settings_system_selected_patches_section">Bản vá đã chọn</string>
     <string name="settings_system_no_patches_or_options">Không có bản vá hoặc tùy chỉnh được lưu</string>
     <!-- Selection panel: saved selection, sets and copies -->
     <string name="selection_panel_title">Các mục chọn</string>
@@ -1253,6 +1298,7 @@ Chi tiết: %2$s"</string>
     <string name="selection_set_deleted">%s đã bị xóa</string>
     <string name="selection_set_renamed">Đã đổi tên thành %s</string>
     <string name="selection_set_rename_title">Đổi tên bộ</string>
+    <string name="selection_set_rename_description">Việc đặt tên của một bộ khác sẽ thay thế bộ đó</string>
     <string name="selection_set_delete_title">Xóa bộ?</string>
     <string name="selection_set_delete_message">Thao tác này sẽ xóa vĩnh viễn bộ %s</string>
     <string name="copy_selection_empty">Không có lựa chọn đã lưu nào khác để sao chép</string>
@@ -1270,6 +1316,8 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Không rõ trình cài đặt</string>
     <string name="settings_system_apk_download_helper_open_directly">Mở trình hỗ trợ ngay lập tức</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Bỏ qua hướng dẫn tải xuống và mở trình hỗ trợ đáng tin cậy</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Tự động tải xuống APK hàng loạt</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Kiểm tra mọi ứng dụng trong hàng đợi để tìm phiên bản mới nhất mà các bản vá hỗ trợ và tải xuống bằng trình hỗ trợ tin cậy đầu tiên khi phiên bản đó bị thiếu hoặc cũ hơn</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Chẳng có gì ở đây cả</string>
     <string name="file_picker_read_error">Không thể đọc thư mục này</string>
@@ -1280,18 +1328,22 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_storages">Bộ nhớ</string>
     <string name="file_saver_downloads_failed">Không thể tạo tệp trong mục Tải xuống</string>
     <string name="file_saver_saving_to_downloads">Thiết bị này không có màn hình lưu, vì vậy tệp sẽ được lưu vào mục Tải xuống với tên %1$s</string>
-    <string name="file_picker_sort_name_asc">Tên (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Tên (Z–A)</string>
     <string name="file_picker_sort_size_desc">Kích thước (lớn nhất trước)</string>
     <string name="file_picker_sort_size_asc">Kích thước (nhỏ nhất trước)</string>
     <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
     <string name="file_picker_sort_date_asc">Ngày (cũ nhất trước)</string>
     <string name="file_picker_show_hidden_files">Hiện tệp ẩn</string>
+    <string name="file_picker_new_folder">Thư mục mới</string>
+    <string name="file_picker_folder_name">Tên thư mục</string>
+    <string name="file_picker_new_folder_description">Được tạo trong %1$s và được mở ngay lập tức</string>
+    <string name="file_picker_folder_name_taken">Đã có một mục với tên này ở đây</string>
+    <string name="file_picker_folder_name_invalid">Tên thư mục không được chứa \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Không thể tạo thư mục</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_manager_description">Một dự án mã nguồn mở, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng</string>
     <string name="credits">Đóng góp</string>
-    <string name="credits_description">Những người behind Morphe</string>
+    <string name="credits_description">Những người đứng sau Morphe</string>
     <string name="settings_about_section_project">Dự án</string>
     <string name="settings_about_section_help">Trợ giúp</string>
     <string name="credits_current_development">Hiện tại</string>
@@ -1330,6 +1382,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_section_about_summary">Thêm về Morphe và cách nhận trợ giúp</string>
     <string name="settings_section_local_files">Tập tin</string>
     <string name="settings_section_backup">Sao lưu</string>
+    <string name="settings_section_import_export">Nhập và xuất</string>
     <string name="settings_search">Tìm kiếm cài đặt</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
@@ -1348,6 +1401,7 @@ Chi tiết: %2$s"</string>
     <string name="retry">Thử lại</string>
     <string name="refresh">Làm mới</string>
     <string name="add">Thêm</string>
+    <string name="create">Tạo</string>
     <string name="close">Đóng</string>
     <string name="back">Trước</string>
     <string name="next">Tiếp</string>
@@ -1411,6 +1465,7 @@ Chi tiết: %2$s"</string>
     <string name="author">Tác giả</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Tệp</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Bản sao</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Vá</string>
@@ -1501,15 +1556,15 @@ Chi tiết: %2$s"</string>
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s/%2$s</string>
     <string name="onboarding_sources_desc">Quản lý các nguồn vá. Mỗi nguồn cung cấp các bản vá có thể được áp dụng cho ứng dụng của bạn</string>
-    <string name="onboarding_other_apps_desc">Dán vá một ứng dụng không có trong danh sách, từ file APK hoặc một ứng dụng được cài đặt trên thiết bị của bạn</string>
-    <string name="onboarding_add_source_desc">Thêm nguồn dán vá từ liên kết hoặc file gói dán vá</string>
-    <string name="onboarding_signing_key_desc">Sao lưu khóa ký các ứng dụng đã dán vá của bạn. Không có nó, chúng chỉ có thể được cập nhật sau khi xóa chúng đi</string>
+    <string name="onboarding_other_apps_desc">Vá một ứng dụng không có trong danh sách, từ tệp APK hoặc một ứng dụng đã cài đặt trên thiết bị của bạn</string>
+    <string name="onboarding_add_source_desc">Thêm nguồn vá từ liên kết hoặc tệp gói vá</string>
+    <string name="onboarding_signing_key_desc">Sao lưu khóa ký các ứng dụng đã vá của bạn. Không có nó, chúng chỉ có thể được cập nhật sau khi gỡ cài đặt chúng</string>
     <string name="onboarding_swipe_title">Cử chỉ vuốt</string>
     <string name="onboarding_swipe_desc">Vuốt phải để xem bản vá. Vuốt trái để ẩn thẻ khỏi màn hình chính</string>
     <string name="onboarding_settings_desc">Tùy chỉnh Morphe: giao diện, tùy chọn nâng cao và công cụ hệ thống</string>
     <string name="onboarding_sources_patches_desc">Bấm để xem tất cả các bản vá từ nguồn</string>
     <string name="onboarding_sources_version_desc">Bấm vào phiên bản để xem chi tiết lịch sử cập nhật của nguồn</string>
-    <string name="onboarding_sources_apps_desc">Chạm để xem các ứng dụng mà nguồn này dán vá và chọn cái nào trong số đó cung cấp dán vá</string>
+    <string name="onboarding_sources_apps_desc">Chạm để xem các ứng dụng mà nguồn này vá và chọn ứng dụng nào nó cung cấp bản vá</string>
     <string name="onboarding_sources_prerelease_desc">Bật cái này để nhận bản vá được phát hành trước từ nguồn</string>
     <string name="onboarding_appearance_tab_desc">Tùy chỉnh giao diện của ứng dụng: chủ đề, màu nổi bật và nền</string>
     <string name="onboarding_expert_mode_desc">Bật chế độ Chuyên gia để mở khóa tính năng tự chọn bản vá, tùy chỉnh bản vá và nhiều tính năng khác</string>

@@ -5,7 +5,11 @@
     <string name="home_other_apps_action">Digər tətbiqləri seç</string>
     <string name="home_not_patched_yet">Hələ yamaqlanmayıb</string>
     <string name="home_unpatched_version_installed">Yamaqlanmayan versiya quraşdırılıb</string>
-    <string name="home_unpatched_badge">Yamaqlanmayıb</string>
+    <string name="home_app_status_newer_version">%s \'ə yenilə</string>
+    <string name="home_app_status_newer_patches">Yeni yamaqlar</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Avtomobil</string>
     <string name="home_no_patches_available">Yamaqlar əlçatan deyil</string>
     <string name="home_app_hide_title">Bu tətbiq gizlədilsin?</string>
     <string name="home_more_apps_title">Daha çox tətbiq</string>
@@ -38,6 +42,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Bu, %s tətbiqinin yeni versiyasıdır. Onu yeniləmək istəyirsiniz?</string>
     <string name="mpp_import_unreadable">Bu fayl oxuna bilməz</string>
+    <string name="incoming_file_not_patch_source">Bu fayl yamaq mənbəyi deyil</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Əlçatan Morphe yenilənməsi</string>
     <string name="home_update_available_subtitle">Yeni versiya quraşdırılmağa hazırdır</string>
@@ -49,13 +54,11 @@
     <string name="home_outdated_manager_subtitle">Bəzi yamaq mənbələrinin daha yeni versiyaya ehtiyacı var</string>
     <string name="home_held_back_title">Yamaq mənbəyi Morphe-ni xətaya saldı</string>
     <string name="home_held_back_subtitle">Tətbiqin başladıla bilməsi üçün bu ötürüldü. Baxmaq üçün toxun</string>
-    <string name="home_metered_skipped_title">Mobil datada yeniləmələr dayandırıldı</string>
-    <string name="home_metered_skipped_subtitle">Mobil datada yeniləmələri qəbul etmək üçün toxun</string>
+    <string name="home_source_updates_title">Yamaq yenilənməsi var</string>
+    <string name="home_source_updates_subtitle">Onları yükləmək üçün toxun</string>
     <string name="home_repatch_available_subtitle">Hamısını növbəyə qoymaq üçün toxun</string>
     <string name="home_update_error">Yenilənmə uğursuz oldu</string>
     <string name="home_update_error_subtitle">Mənbələri yeniləyərkən nəsə səhv oldu</string>
-    <string name="home_update_skipped_metered">Yenilənmələr ötürüldü</string>
-    <string name="home_update_skipped_metered_subtitle">Mobil data işləkdir</string>
     <string name="home_updating_sources">Mənbələr yenilənir…</string>
     <string name="home_update_success">Mənbələri yeniləmə tamamlandı</string>
     <string name="home_update_success_subtitle">Mənbələriniz yenilənib</string>
@@ -63,11 +66,17 @@
     <string name="home_search_apps">Tətbiqləri axtar</string>
     <string name="list_options_title">Sırala və filtrlə</string>
     <string name="list_options_state_description">%1$s üzrə sıralanıb, %2$s üzrə filtrlənib</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Əl ilə</string>
+    <string name="list_sort_name_asc">Ad (A–Z)</string>
+    <string name="list_sort_name_desc">Ad (Z–A)</string>
+    <string name="home_app_filter_all">Hamısı</string>
+    <string name="home_app_filter_not_patched">Yamaqlanmayıb</string>
     <string name="home_app_filter_clones">Dublikatlar</string>
     <string name="home_app_grouping_none">Heç biri</string>
     <string name="home_app_sort_manual_hint">Tətbiqə uzun bas, sonra yenidən sıralama düyməsinə toxun</string>
-    <string name="home_app_sort_recommended">Tövsiyə olunan düzülüş</string>
-    <string name="home_app_sort_updates_first">Əvvəlcə yamaq yeniləmələri olan</string>
+    <string name="home_app_sort_recommended">Tövsiyə olunan</string>
+    <string name="home_app_sort_updates_first">Əvvəlcə yeniləmələr</string>
     <string name="home_app_sort_recently_patched">Təzəlikcə yamaqlandı</string>
     <string name="home_no_apps_title">Mövcud tətbiq yoxdur</string>
     <string name="home_no_apps_subtitle">%s bölməsində yamaq mənbəyi əlavə edin və ya mövcud olanı aktivləşdir</string>
@@ -83,6 +92,7 @@
     <string name="home_category_new_title">Yeni kateqoriya</string>
     <string name="home_category_rename_title">Kateqoriyanı yenidən adlandır</string>
     <string name="home_category_name">Kateqoriya adı</string>
+    <string name="home_category_name_description">Əsas ekran tətbiqlərini bu ad altında qruplaşdırır</string>
     <string name="home_category_move_to">Kateqoriyaya köçür</string>
     <string name="home_category_move_selected_title">Seçilmiş tətbiqləri köçür</string>
     <!-- %s is the name of the category -->
@@ -156,16 +166,15 @@
     <string name="sources_search">Mənbələri və yamaqları axtar</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Diqqət tələb edir</string>
-    <string name="sources_sort_manual">Əl ilə sıralama</string>
     <string name="sources_sort_manual_hint">Təkrar sıralamaq üçün mənbəyə uzun bas</string>
     <string name="sources_sort_last_updated">Axırıncı dəfə yeniləndi</string>
     <string name="sources_sort_enabled_first">Əvvəlcə aktivləşdirilmiş</string>
     <string name="sources_patches_source_disabled_hint">Bu mənbə qapadılıb. Onun yamaqları məlumat üçün siyahıya alınıb və tətbiq olunmur</string>
-    <string name="sources_management_open_in_browser">Brauzerdə açın</string>
+    <string name="sources_management_open_in_browser">Brauzerdə aç</string>
     <string name="sources_management_report_issue">Problemi bildir</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_apps">Tətbiqlər</string>
-    <string name="sources_apps_description">İşarələnmiş tətbiqlər bu mənbədəndir. Xaric etmək və ya geri qaytarmaq üçün tətbiqə toxun. Heç bir mənbə tərəfindən daxil edilmədikdə, tətbiq sizin tərəfinizdən yamaqlanmayıbsa, əsas ekrandan çıxardılacaq</string>
+    <string name="sources_apps_description">İşarələnmiş tətbiqlər bu mənbədən gəlir. Tətbiqi çıxarmaq və ya geri qaytarmaq üçün toxun, yamaqlarını görmək üçün sürüşdür. Mənbəsiz tətbiq, yamaqlamadığınız təqdirdə, əsas səhifədən çıxır</string>
     <string name="sources_apps_brought">Bu mənbə tərəfindən təmin edilir</string>
     <string name="sources_apps_left_out">Bu mənbədən çıxarılıb</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -253,6 +262,8 @@
     <string name="home_apk_availability_recommended_label">Tövsiyə olunan</string>
     <string name="home_apk_availability_unpatched_label">Yamaqlanmayan</string>
     <string name="home_apk_availability_incompatible_label">Uyuşmaz</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">Bu cihazdakı orijinal %1$s, yamaqların dəstəklədiyi daha yeni olan %2$s-dir</string>
     <string name="home_apk_availability_find">Bəli, mənə bunu tapmağa kömək et</string>
     <string name="home_apk_availability_have">Xeyr, Mənim artıq var</string>
     <string name="home_apk_helper_download">Köməkçi tətbiq istifadə et</string>
@@ -376,9 +387,11 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="home_dialog_unsupported_version_dialog_title">Dəstəklənməyən Versiya</string>
     <string name="home_dialog_unsupported_version_dialog_description">Bu APK tövsiyə olunan tətbiq versiyası deyil. Fəaliyyətdə qalmaq, tətbiqin işləməməsi ilə nəticələnə bilər</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam edilsin?</string>
+    <string name="home_dialog_unsupported_version_dialog_proceed">Yenə də davam et</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Uyuşan versiyalar:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Dəstəklənməyən</string>
+    <string name="home_version_copy">Versiyanı kopyala</string>
+    <string name="home_version_copied">Versiya kopyalandı</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Qurulma %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Bu, eyni versiyanın fərqli quruluşudur. Yamaqlar xüsusi quruluş tələb edir</string>
@@ -387,7 +400,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="home_dialog_expected_package">Gözlənilən paket:</string>
     <string name="home_dialog_selected_package">Seçilən paket:</string>
     <string name="home_outdated_patches_dialog_title">Yamaqlar köhnəlmiş ola bilər</string>
-    <string name="home_outdated_patches_dialog_message">Mobil data işləkdir və yamaq yeniləmələri qapalıdır</string>
+    <string name="home_outdated_patches_dialog_message">Daha yeni yamaqlar mövcuddur, lakin hələ yüklənməyib</string>
     <string name="home_outdated_patches_dialog_warning">Köhnə yamaqlarla yamaqlanma tətbiq pozulmasına səbəb ola bilər</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Yenilənmə &amp; yamaq</string>
     <string name="home_low_disk_space_dialog_title">Az disk yaddaşı</string>
@@ -479,6 +492,9 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="batch_patch_force_version_done">Yenə də növbəyə qoyuldu, tətbiq pozula bilər</string>
     <string name="batch_patch_accept_signature_done">Yenə də növbəyə qoyuldu, APK təsdiqlənməyib</string>
     <string name="batch_patch_apk_selected">APK seçildi</string>
+    <string name="batch_patch_auto_download_stopped">Avtomatik APK yükləmələri dayandırıldı</string>
+    <string name="batch_patch_auto_download_stop">Yükləmələri dayandır</string>
+    <string name="batch_patch_auto_download_kept">Yüklənmiş APK istifadə edilə bilmədi, ona görə də əvvəlki saxlanıldı</string>
     <string name="batch_patch_edit_patches">Yamaqları seç</string>
     <string name="batch_patch_state_no_apk">APK Yoxdur</string>
     <string name="batch_patch_state_no_patches">Yamaq yoxdur</string>
@@ -576,7 +592,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="root_pre_patch_installer_hint">%1$s %2$s olaraq təyin edildikdə soruşuldu. Yamaq rejimi yamaqlamadan sonra dəyişdirilə bilməz</string>
     <!-- Patcher Screen -->
     <string name="patcher_error_copied">Xəta buferə köçürüldü</string>
-    <string name="patcher_error_log">Xəta jurnalı</string>
+    <string name="patcher_error_log">Xəta qeydi</string>
     <string name="patcher_error_technical">Texniki təfsilatlar</string>
     <string name="patcher_error_dialog_diagnostics">Diaqnostika</string>
     <!-- Titles of the cards the expert log shows in place of the raw start and success log lines -->
@@ -886,8 +902,17 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_advanced_updates_prerelease_warning_message">"Morphe-nin ilkin buraxılış versiyaları hələ inkişaf mərhələsindədir və qeyri-sabit ola bilər.
 
 ​Yamaqlar təsirlənmir: yamaq mənbələri siyahısındakı hər bir mənbə üçün ilkin buraxılış yamaqlarını aktivləşdir"</string>
-    <string name="settings_advanced_updates_allow_metered">Mobil data yenilənmələri</string>
-    <string name="settings_advanced_updates_allow_metered_description">Morphe və yamaq yeniləmələrini mobil məlumat üzərindən yükləyir</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Avtomatik yeniləmələr</string>
+    <string name="settings_auto_updates_description">Morphe açıldıqda yeniləmələrlə bağlı nə edir. Yeniləmək üçün çəkdikdə həmişə yoxlayır</string>
+    <string name="settings_auto_updates_download">Avtomatik yüklə</string>
+    <string name="settings_auto_updates_download_description">Morphe açıldıqda yeniləmələri yoxlayır və yamaq yeniləmələrini istənilən şəbəkədə yükləyir</string>
+    <string name="settings_auto_updates_wifi_only">Yalnız Wi-Fi üzərindən yüklə</string>
+    <string name="settings_auto_updates_wifi_only_description">Mobil məlumatda yalnız mövcud olanları yoxlayır və göstərir</string>
+    <string name="settings_auto_updates_check_only">Yalnız yoxla</string>
+    <string name="settings_auto_updates_check_only_description">Mövcud yeniləmələri göstərir və toxunduqda onları yükləyir</string>
+    <string name="settings_auto_updates_off">Yoxlama</string>
+    <string name="settings_auto_updates_off_description">Yalnız yeniləmək üçün çəkdiyiniz zaman yoxlayır</string>
     <string name="settings_advanced_updates_background_notifications">Fon yenilənmə bildirişləri</string>
     <string name="settings_advanced_updates_background_notifications_description">Fonda yeniləmələri dövri yoxla və əlçatandırsa elan et</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Hətta tətbiq bağlandıqda, yeni buraxılışlar üçün təkan bildirişləri</string>
@@ -929,7 +954,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_advanced_expert_mode_dialog_title">Mütəxəssis rejimi aktivləşdirilsin?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Mütəxəssis rejimi yamaqların necə tətbiq olunduğuna daha çox nəzarət verir, lakin mütəxəssis rejimindəki tənzimləmələri səhv qurma tətbiqi funksional pozuntuya sala bilər</string>
     <string name="settings_advanced_strip_unused_libs">Cihaz quruluşu üçün optimallaşdır</string>
-    <string name="settings_advanced_strip_unused_libs_description">İstifadə olunmayan yerli kitabxanaları və APK parçalarını silir</string>
+    <string name="settings_advanced_strip_unused_libs_description">İstifadə olunmamış yerli kitabxanaları və APK bölümlərini yamaqlanmış tətbiqlərdən və saxlanılan orijinallardan silir</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Pull request mənbələrini və şəxsi depoları kiliddən açır</string>
     <string name="settings_advanced_github_pat_description">Pull request mənbələri, şəxsi depolar və daha yüksək GitHub sürət limiti üçün</string>
@@ -1150,6 +1175,26 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_hide_password_field">Parolu gizlət</string>
     <string name="settings_system_morphe_settings">Morphe tənzimləmələri</string>
     <string name="settings_system_import_manager_settings_description">Morphe tənzimləmələrinizi nüsxələyir və bərpa edir</string>
+    <string name="settings_system_export_manager_settings_title">Morphe tənzimləmələrin köçür</string>
+    <string name="settings_system_export_manager_settings_description">Seçdiyiniz tənzimləmələri faylda saxlayır</string>
+    <string name="settings_system_import_manager_settings_file_description">Tənzimləmələri nüsxə faylından bərpa edir</string>
+    <string name="settings_system_auto_backup">Avtomatik nüsxələmə</string>
+    <string name="settings_system_auto_backup_switch">Avtomatik olaraq nüsxələ</string>
+    <string name="settings_system_auto_backup_now">İndi nüsxələ</string>
+    <string name="settings_system_auto_backup_saved">Nüsxələmə saxlanıldı</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe növbəti nüsxəni yaratmazdan əvvəl ən azı bu qədər gözləyir</string>
+    <string name="settings_system_auto_backup_description">Morphe tənzimləmələrinizi seçdiyiniz qovluğda saxlayır</string>
+    <string name="settings_system_auto_backup_last">Son nüsxələmə: %s</string>
+    <string name="settings_system_auto_backup_folder">Qovluq</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe nüsxələri</string>
+    <string name="settings_system_auto_backup_folder_failed">Bu qovluğu istifadə etmək olmadı: %s</string>
+    <string name="settings_system_auto_backup_interval">Nüsxələmə tezliyi</string>
+    <string name="settings_system_auto_backup_signing_key">İmzalama açarını daxil et</string>
+    <string name="settings_system_auto_backup_signing_key_description">Yamaqlanmış tətbiqləri imzalayan açarı tənzimləmələrin yanında saxlayır</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">İmza açarını nüsxələsin?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bu faylı əldə edən istənilən biri yamaqlanmış tətbiqlərinizin üzərinə quraşdırılan yeniləmələri imzalaya bilər. Qovluğu gizli saxlayın və onu yalnız öz cihazlarınızla paylaşın</string>
+    <string name="settings_system_auto_backup_footer">Nəyisə dəyişdirdikdən sonra Morphe-dən çıxdığınız zaman nüsxə saxlanılır. Ən yeni %s ədədi saxlanılır</string>
+    <string name="settings_system_auto_backup_failed">Sonuncu nüsxə saxlanıla bilmədi. Qovluğu təkrar seçin</string>
     <string name="settings_system_import_manager_settings_fail">Morphe tənzimləmələrin idxal etmək olmadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe tənzimləmələri idxal edildi</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe tənzimləmələrin idxal et</string>
@@ -1249,6 +1294,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="selection_set_deleted">%s silindi</string>
     <string name="selection_set_renamed">Adını %s kimi adlandırdı</string>
     <string name="selection_set_rename_title">Adını yenidən təyin et</string>
+    <string name="selection_set_rename_description">Başqa təyinatın adını götürmək həmin təyinatı əvəzləyir</string>
     <string name="selection_set_delete_title">Təyinetməni silsin?</string>
     <string name="selection_set_delete_message">Bu, %s təyinetməsini həmişəlik silir</string>
     <string name="copy_selection_empty">Köçürmək üçün başqa saxlanılmış seçim yoxdur</string>
@@ -1266,6 +1312,8 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Bilinməyən quraşdırıcı</string>
     <string name="settings_system_apk_download_helper_open_directly">Köməkçini dərhal aç</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Yükləmə təlimatlarını ötürür və etibarlı köməkçini açır</string>
+    <string name="settings_system_apk_download_helper_auto_batch">APK-ları avtomatik olaraq toplu şəkildə yüklə</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Növbədəki hər bir tətbiqi, yamaqların dəstəklədiyi ən yeni versiya üçün yoxlayır; əgər versiya çatışmırsa və ya köhnəlibsə, onu ilk etibarlı köməkçi vasitəsilə yükləyir</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Burada fayl yoxdur</string>
     <string name="file_picker_read_error">Bu kataloqu oxumaq olmur</string>
@@ -1276,13 +1324,17 @@ Təfərrüatlar: %2$s"</string>
     <string name="file_picker_storages">Saxlanclar</string>
     <string name="file_saver_downloads_failed">Yükləmələrdə fayl yaradıla bilmədi</string>
     <string name="file_saver_saving_to_downloads">Bu cihazın saxlama ekranı yoxdur, ona görə də fayl %1$s olaraq Yükləmələrə göndərilir</string>
-    <string name="file_picker_sort_name_asc">Ad (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Ad (Z–A)</string>
     <string name="file_picker_sort_size_desc">Həcm (əvvəlcə ən çox)</string>
     <string name="file_picker_sort_size_asc">Həcm (əvvəlcə ən az)</string>
     <string name="file_picker_sort_date_desc">Tarix (öncə ən yeni)</string>
     <string name="file_picker_sort_date_asc">Tarix (öncə ən köhnə)</string>
     <string name="file_picker_show_hidden_files">Gizli faylları göstər</string>
+    <string name="file_picker_new_folder">Yeni qovluq</string>
+    <string name="file_picker_folder_name">Qovluq adı</string>
+    <string name="file_picker_new_folder_description">%1$s də yaradıldı və dərhal açıldı</string>
+    <string name="file_picker_folder_name_taken">Bu adla element artıq buradadır</string>
+    <string name="file_picker_folder_name_invalid">Qovluq adı ehtiva edə bilməz: \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Qovluğu yarada bilmədi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqqında</string>
     <string name="settings_system_manager_description">İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün açıq mənbəli layihə</string>
@@ -1326,6 +1378,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="settings_section_about_summary">Morphe haqqında daha çoxunu və köməyi əldə et</string>
     <string name="settings_section_local_files">Fayllar</string>
     <string name="settings_section_backup">Nüsxələmə</string>
+    <string name="settings_section_import_export">İdxal və ixrac et</string>
     <string name="settings_search">Tənzimləmələri axtar</string>
     <string name="yes">Bəli</string>
     <string name="no">Xeyr</string>
@@ -1344,6 +1397,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="retry">Təkrar sına</string>
     <string name="refresh">Təzələ</string>
     <string name="add">Əlavə et</string>
+    <string name="create">Yarat</string>
     <string name="close">Qapa</string>
     <string name="back">Geri</string>
     <string name="next">Növbəti</string>
@@ -1357,7 +1411,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="exclude">İstisna et</string>
     <string name="excluded">İstisna edildi</string>
     <string name="include">Daxil et</string>
-    <string name="disable">Qapadın</string>
+    <string name="disable">Bağla</string>
     <string name="enable">Aktivləşdir</string>
     <string name="trust">Etibar et</string>
     <string name="loading">Yüklənilir…</string>
@@ -1407,6 +1461,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="author">Müəllif</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fayl</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Yamaqla</string>
@@ -1428,7 +1483,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="save">Saxla</string>
     <string name="saved">Saxlanıldı</string>
     <string name="update">Yenilə</string>
-    <string name="allow">İcazə verin</string>
+    <string name="allow">İcazə ver</string>
     <string name="hide">Gizlət</string>
     <string name="hidden">Gizlədildi</string>
     <string name="unhide">Göstər</string>

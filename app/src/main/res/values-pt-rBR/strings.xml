@@ -5,7 +5,11 @@
     <string name="home_other_apps_action">Selecionar outros aplicativos</string>
     <string name="home_not_patched_yet">Ainda não patcheado </string>
     <string name="home_unpatched_version_installed">Unpatched version installed</string>
-    <string name="home_unpatched_badge">Não patcheado</string>
+    <string name="home_app_status_newer_version">Atualizar para %s</string>
+    <string name="home_app_status_newer_patches">Novos patches</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automóveis</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_more_apps_title">More apps</string>
@@ -38,6 +42,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">This is a new version of %s. Do you want to update it?</string>
     <string name="mpp_import_unreadable">This file cannot be read</string>
+    <string name="incoming_file_not_patch_source">Este arquivo não é uma fonte de um patch</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe update available</string>
     <string name="home_update_available_subtitle">New version ready to install</string>
@@ -49,13 +54,11 @@
     <string name="home_outdated_manager_subtitle">Some patch sources need a newer version</string>
     <string name="home_held_back_title">A patch source crashed Morphe</string>
     <string name="home_held_back_subtitle">It was skipped so the app could start. Tap to review</string>
-    <string name="home_metered_skipped_title">Updates paused on mobile data</string>
-    <string name="home_metered_skipped_subtitle">Tap to allow updates on mobile data</string>
+    <string name="home_source_updates_title">Atualizações de patch disponíveis</string>
+    <string name="home_source_updates_subtitle">Toque para baixá-las</string>
     <string name="home_repatch_available_subtitle">Tap to queue them all</string>
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Something went wrong while updating sources</string>
-    <string name="home_update_skipped_metered">Updates skipped</string>
-    <string name="home_update_skipped_metered_subtitle">Dados móveis estão ativos</string>
     <string name="home_updating_sources">Atualizando fontes…</string>
     <string name="home_update_success">Atualização de fontes concluída</string>
     <string name="home_update_success_subtitle">Suas fontes estão atualizadas</string>
@@ -63,11 +66,17 @@
     <string name="home_search_apps">Pesquisar aplicativos</string>
     <string name="list_options_title">Ordenar e filtrar</string>
     <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Nome (A–Z)</string>
+    <string name="list_sort_name_desc">Nome (Z–A)</string>
+    <string name="home_app_filter_all">Todos</string>
+    <string name="home_app_filter_not_patched">Sem patch</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">Nenhum</string>
     <string name="home_app_sort_manual_hint">Pressione e segure um aplicativo, depois toque no botão de reordenar</string>
-    <string name="home_app_sort_recommended">Ordem recomendada</string>
-    <string name="home_app_sort_updates_first">Atualizações de patches primeiro</string>
+    <string name="home_app_sort_recommended">Recomendados</string>
+    <string name="home_app_sort_updates_first">Atualizações primeiro</string>
     <string name="home_app_sort_recently_patched">Recentemente patcheados</string>
     <string name="home_no_apps_title">Nenhum aplicativo disponível</string>
     <string name="home_no_apps_subtitle">Adicione uma fonte de patches ou ative uma existente em %s</string>
@@ -83,6 +92,7 @@
     <string name="home_category_new_title">Nova categoria</string>
     <string name="home_category_rename_title">Renomear categoria</string>
     <string name="home_category_name">Nome da categoria</string>
+    <string name="home_category_name_description">A tela inicial agrupa seus aplicativos sob este nome</string>
     <string name="home_category_move_to">Mover para categoria</string>
     <string name="home_category_move_selected_title">Mover aplicativos selecionados</string>
     <!-- %s is the name of the category -->
@@ -156,7 +166,6 @@
     <string name="sources_search">Pesquisar fontes e patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Precisam de atenção</string>
-    <string name="sources_sort_manual">Ordem manual</string>
     <string name="sources_sort_manual_hint">Pressione e segure uma fonte para reordenar</string>
     <string name="sources_sort_last_updated">Última atualização</string>
     <string name="sources_sort_enabled_first">Habilitados primeiro</string>
@@ -165,11 +174,11 @@
     <string name="sources_management_report_issue">Relatar um problema</string>
     <string name="sources_management_failed_to_open_url">Falha ao abrir URL</string>
     <string name="sources_apps">Aplicativos</string>
-    <string name="sources_apps_description">Os apps selecionados vêm desta fonte. Toque em um app para excluí-lo ou reincluí-lo. Um app sai da tela inicial quando nenhuma fonte o exibe, a menos que você tenha ajustado ele</string>
+    <string name="sources_apps_description">Os apps selecionados vêm desta fonte. Toque em um app para excluí-lo ou reincluí-lo, deslize-o para ver seus patches. Um app sem fonte sai da tela inicial, a menos que você o tenha corrigido</string>
     <string name="sources_apps_brought">Trazidos por esta fonte</string>
     <string name="sources_apps_left_out">Deixados de fora desta fonte</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
-    <string name="sources_apps_stays_patched">Mantido como ajustado</string>
+    <string name="sources_apps_stays_patched">Mantido como corrigido</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <string name="sources_apps_new">Novo</string>
     <string name="sources_apps_new_apps">Trazer novos aplicativos</string>
@@ -197,7 +206,7 @@
     <string name="sources_management_metadata_unavailable_hint_missing_editable">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir. Toque para alterá-la</string>
     <string name="sources_management_outdated_manager_badge">Atualize o Morphe</string>
     <string name="sources_management_outdated_manager_hint">Esta fonte foi criada para o patcher %1$s, mas o Morphe %2$s já inclui o patcher %3$s. Atualize o Morphe para usá-la</string>
-    <string name="sources_management_held_back_badge">Falhou</string>
+    <string name="sources_management_held_back_badge">Travou</string>
     <string name="sources_management_held_back_hint">Esta fonte causou a falha do Morphe durante o carregamento, por isso está sendo ignorada. Atualize ou reimporte para tentar novamente</string>
     <string name="sources_management_signed_by">Assinado por</string>
     <string name="sources_management_signing_key_changed_badge">Chave alterada</string>
@@ -224,7 +233,7 @@
     <string name="sources_dialog_local_updates">Atualiza %s</string>
     <string name="sources_dialog_url_valid">Repositório ou URL JSON válidos</string>
     <string name="sources_dialog_url_invalid">A URL deve apontar para um repositório GitHub/GitLab ou arquivo .json</string>
-    <string name="sources_dialog_preinstalled">Pre-instalado</string>
+    <string name="sources_dialog_preinstalled">Pré-instalado</string>
     <string name="sources_dialog_community">Patches da comunidade</string>
     <string name="sources_dialog_choose_apps">Escolha os apps</string>
     <string name="sources_dialog_choose_apps_description">Escolha quais apps dessa fonte manter depois que ela carregar.</string>
@@ -253,6 +262,8 @@
     <string name="home_apk_availability_recommended_label">Recomendado</string>
     <string name="home_apk_availability_unpatched_label">Não patcheado</string>
     <string name="home_apk_availability_incompatible_label">Incompatível</string>
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">O %1$s original neste dispositivo é %2$s, mais recente do que os patches suportam</string>
     <string name="home_apk_availability_find">Sim, me ajude a encontrá-lo</string>
     <string name="home_apk_availability_have">Não, eu já tenho</string>
     <string name="home_apk_helper_download">Usar um aplicativo auxiliar</string>
@@ -363,7 +374,7 @@
     <string name="home_split_apk_warning_message">"Este arquivo é um pacote APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 
-Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;b&gt;APK completo&lt;/b&gt;"</string>
+Para obter os melhores resultados, este aplicativo recomenda corrigir um &lt;b&gt;APK completo&lt;/b&gt;"</string>
     <string name="home_split_apk_warning_pick_another">Escolha outro APK</string>
     <string name="home_dialog_unsupported_version_experimental_label">Experimental</string>
     <string name="home_dialog_unsupported_version_experimental_description">Esta versão tem suporte experimental e pode ser instável ou incompleta</string>
@@ -377,6 +388,8 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_dialog_unsupported_version_dialog_proceed">Continuar mesmo assim</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Versões compatíveis:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Não suportado</string>
+    <string name="home_version_copy">Copiar versão</string>
+    <string name="home_version_copied">Versão copiada</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Compilação %s</string>
     <string name="home_dialog_unsupported_version_build_mismatch_description">Esta é uma versão diferente da mesma versão. Os patches exigem uma versão específica</string>
@@ -385,7 +398,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="home_dialog_expected_package">Pacote esperado:</string>
     <string name="home_dialog_selected_package">Pacote selecionado:</string>
     <string name="home_outdated_patches_dialog_title">Patches podem estar desatualizados</string>
-    <string name="home_outdated_patches_dialog_message">Dados móveis estão ativos e atualizações de patch estão desativadas</string>
+    <string name="home_outdated_patches_dialog_message">Patches mais recentes estão disponíveis, mas ainda não foram baixados</string>
     <string name="home_outdated_patches_dialog_warning">Usar patches desatualizados pode resultar em um app quebrado</string>
     <string name="home_outdated_patches_dialog_update_and_patch">Atualizar &amp; patch</string>
     <string name="home_low_disk_space_dialog_title">Pouco espaço em disco</string>
@@ -477,11 +490,14 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="batch_patch_force_version_done">Enfileirado mesmo assim, o aplicativo pode quebrar</string>
     <string name="batch_patch_accept_signature_done">Enfileirado mesmo assim, APK não verificado</string>
     <string name="batch_patch_apk_selected">APK selecionado</string>
+    <string name="batch_patch_auto_download_stopped">Downloads automáticos de APK interrompidos</string>
+    <string name="batch_patch_auto_download_stop">Interromper downloads</string>
+    <string name="batch_patch_auto_download_kept">O APK baixado não pôde ser usado, portanto, o anterior foi mantido</string>
     <string name="batch_patch_edit_patches">Escolher patches</string>
     <string name="batch_patch_state_no_apk">Sem APK</string>
     <string name="batch_patch_state_no_patches">Sem patches</string>
     <string name="batch_patch_state_no_selection">Nenhum selecionado</string>
-    <string name="batch_patch_no_selection">Nenhuma das patches disponíveis está selecionada</string>
+    <string name="batch_patch_no_selection">Nenhum dos patches disponíveis está selecionado</string>
     <string name="batch_patch_policy_install">Instalar quando terminar</string>
     <string name="batch_patch_policy_install_description">Instala cada aplicativo corrigido logo após a fila terminar. Desativar mantém os APKs para mais tarde</string>
     <string name="batch_patch_policy_mount">Montar quando terminar</string>
@@ -489,7 +505,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um(a) &lt;
     <string name="batch_patch_policy_install_mount">Instalar ou montar ao finalizar</string>
     <string name="batch_patch_policy_install_mount_description">Instala ou monta cada aplicativo corrigido assim que a fila termina. Desativar mantém os APKs para mais tarde</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="batch_patch_start">Começo</string>
+    <string name="batch_patch_start">Iniciar</string>
     <string name="batch_patch_stop_title">Parar a aplicação de patches em lote?</string>
     <string name="batch_patch_stop_description">O aplicativo que está sendo corrigido agora e tudo o que ainda está na fila será cancelado</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
@@ -885,8 +901,17 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="settings_advanced_updates_prerelease_warning_message">"As versões de pré-lançamento do Morphe ainda estão em desenvolvimento e podem ser instáveis.
 
 Os patches não são afetados: ative os patches de pré-lançamento para cada fonte na lista de fontes de patches"</string>
-    <string name="settings_advanced_updates_allow_metered">Atualizações de dados móveis</string>
-    <string name="settings_advanced_updates_allow_metered_description">Baixa atualizações do Morphe e dos patches usando dados móveis</string>
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">Atualizações automáticas</string>
+    <string name="settings_auto_updates_description">O que o Morphe faz em relação às atualizações ao abrir. Arrastar para atualizar sempre verifica</string>
+    <string name="settings_auto_updates_download">Baixar automaticamente</string>
+    <string name="settings_auto_updates_download_description">Verifica atualizações quando o Morphe abre e baixa atualizações de patch em qualquer rede</string>
+    <string name="settings_auto_updates_wifi_only">Baixar apenas via Wi-Fi</string>
+    <string name="settings_auto_updates_wifi_only_description">Nos dados móveis, apenas verifica e mostra o que está disponível</string>
+    <string name="settings_auto_updates_check_only">Apenas verificar</string>
+    <string name="settings_auto_updates_check_only_description">Mostra atualizações disponíveis e faz o download assim que você toca</string>
+    <string name="settings_auto_updates_off">Não verificar</string>
+    <string name="settings_auto_updates_off_description">Verifica apenas quando você desliza para atualizar</string>
     <string name="settings_advanced_updates_background_notifications">Notificações de atualização em segundo plano</string>
     <string name="settings_advanced_updates_background_notifications_description">Verifique periodicamente por atualizações em segundo plano e notifique quando disponíveis</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Notificações push para novos lançamentos, mesmo quando o aplicativo está fechado</string>
@@ -899,7 +924,7 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="settings_advanced_update_interval_monthly">Mensal</string>
     <string name="settings_advanced_update_interval_battery_warning">As verificações em segundo plano podem não funcionar de forma confiável em dispositivos que restringem aplicativos em segundo plano, como Xiaomi, Huawei, Samsung e OnePlus</string>
     <string name="settings_advanced_external_batch_patch">Permitir gatilhos externos</string>
-    <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem o reparo em lote</string>
+    <string name="settings_advanced_external_batch_patch_description">Permite que aplicativos de automação iniciem a aplicação de patches em lote</string>
     <string name="external_batch_patch_title">Iniciar a aplicação de patches em lote?</string>
     <string name="external_batch_patch_description">%s quer que o Morphe aplique patches e instale aplicativos</string>
     <string name="external_batch_patch_trust_caller">Sempre permitir este aplicativo</string>
@@ -924,11 +949,11 @@ Os patches não são afetados: ative os patches de pré-lançamento para cada fo
     <string name="notification_mount_replaced_text">v%1$s substituiu o v%2$s corrigido. Abra o Morphe para restaurá-lo</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
     <string name="settings_advanced_expert_mode">Modo Expert</string>
-    <string name="settings_advanced_expert_mode_description">Desbloqueia configurações avançadas de reparo e opções de patch</string>
+    <string name="settings_advanced_expert_mode_description">Desbloqueia configurações avançadas de aplicação de patches e opções de patch</string>
     <string name="settings_advanced_expert_mode_dialog_title">Ativar o Modo Expert?</string>
     <string name="settings_advanced_expert_mode_dialog_message">O Modo Expert oferece mais controle sobre como os patches são aplicados, mas configurar incorretamente pode resultar em um aplicativo não funcional</string>
     <string name="settings_advanced_strip_unused_libs">Otimizar para a arquitetura do dispositivo</string>
-    <string name="settings_advanced_strip_unused_libs_description">Remove bibliotecas nativas não utilizadas e divisões de APK</string>
+    <string name="settings_advanced_strip_unused_libs_description">Remove bibliotecas nativas não utilizadas e splits de APK de apps patcheados e originais salvos</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Desbloqueia fontes de pull request e repositórios privados</string>
     <string name="settings_advanced_github_pat_description">Para fontes de pull request, repositórios privados e um limite de taxa GitHub mais alto</string>
@@ -1150,6 +1175,26 @@ Detalhes: %2$s"</string>
     <string name="settings_system_hide_password_field">Esconder senha</string>
     <string name="settings_system_morphe_settings">Configurações do Morphe</string>
     <string name="settings_system_import_manager_settings_description">Faz backup e restaura suas configurações do Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exportar configurações do Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Salva as configurações escolhidas em um arquivo</string>
+    <string name="settings_system_import_manager_settings_file_description">Restaura as configurações de um arquivo de backup</string>
+    <string name="settings_system_auto_backup">Backup automático</string>
+    <string name="settings_system_auto_backup_switch">Fazer backup automaticamente</string>
+    <string name="settings_system_auto_backup_now">Fazer backup agora</string>
+    <string name="settings_system_auto_backup_saved">Backup salvo</string>
+    <string name="settings_system_auto_backup_interval_description">O Morphe aguarda pelo menos este tempo após uma cópia antes de fazer a próxima</string>
+    <string name="settings_system_auto_backup_description">Salva suas configurações do Morphe em uma pasta escolhida</string>
+    <string name="settings_system_auto_backup_last">Último backup: %s</string>
+    <string name="settings_system_auto_backup_folder">Pasta</string>
+    <string name="settings_system_auto_backup_folder_name">Backups do Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Não foi possível usar esta pasta: %s</string>
+    <string name="settings_system_auto_backup_interval">Frequência de backup</string>
+    <string name="settings_system_auto_backup_signing_key">Incluir chave de assinatura</string>
+    <string name="settings_system_auto_backup_signing_key_description">Salva a chave que assina os apps patcheados ao lado das configurações</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Fazer backup da chave de assinatura?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Qualquer pessoa que obtenha este arquivo pode assinar atualizações que sejam instaladas sobre seus apps patcheados. Mantenha a pasta privada e compartilhe-a apenas com seus próprios dispositivos</string>
+    <string name="settings_system_auto_backup_footer">Uma cópia é salva quando você sai do Morphe após alterar algo. Os %s mais recentes são mantidos</string>
+    <string name="settings_system_auto_backup_failed">O último backup não pôde ser salvo. Escolha a pasta novamente</string>
     <string name="settings_system_import_manager_settings_fail">Falha ao importar as configurações do Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Configurações do Morphe importadas</string>
     <string name="settings_system_import_manager_settings_mode_title">Importar configurações do Morphe</string>
@@ -1249,6 +1294,7 @@ Detalhes: %2$s"</string>
     <string name="selection_set_deleted">%s excluído</string>
     <string name="selection_set_renamed">Renomeado para %s</string>
     <string name="selection_set_rename_title">Renomear conjunto</string>
+    <string name="selection_set_rename_description">Usar o nome de outro conjunto substitui esse conjunto</string>
     <string name="selection_set_delete_title">Apagar conjunto?</string>
     <string name="selection_set_delete_message">Isso apagará permanentemente o conjunto %s</string>
     <string name="copy_selection_empty">Não há outras seleções salvas para copiar</string>
@@ -1266,6 +1312,8 @@ Detalhes: %2$s"</string>
     <string name="settings_system_apk_download_helper_installed_by_unknown">Instalador desconhecido</string>
     <string name="settings_system_apk_download_helper_open_directly">Abrir o assistente imediatamente</string>
     <string name="settings_system_apk_download_helper_open_directly_description">Pula as instruções de download e abre o assistente confiável</string>
+    <string name="settings_system_apk_download_helper_auto_batch">Baixar APKs automaticamente em lote</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">Verifica cada aplicativo na fila para a versão mais recente suportada por seus patches e a baixa com o primeiro assistente confiável quando estiver ausente ou desatualizada</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">Nenhum arquivo aqui</string>
     <string name="file_picker_read_error">Não é possível ler este diretório</string>
@@ -1276,13 +1324,17 @@ Detalhes: %2$s"</string>
     <string name="file_picker_storages">Armazenamentos</string>
     <string name="file_saver_downloads_failed">Não foi possível criar o arquivo em Downloads</string>
     <string name="file_saver_saving_to_downloads">Este dispositivo não possui tela de salvamento, portanto, o arquivo será enviado para Downloads como %1$s</string>
-    <string name="file_picker_sort_name_asc">Nome (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nome (Z–A)</string>
     <string name="file_picker_sort_size_desc">Tamanho (maior primeiro)</string>
     <string name="file_picker_sort_size_asc">Tamanho (menor primeiro)</string>
     <string name="file_picker_sort_date_desc">Data (mais recente primeiro)</string>
     <string name="file_picker_sort_date_asc">Data (mais antiga primeiro)</string>
     <string name="file_picker_show_hidden_files">Mostrar arquivos ocultos</string>
+    <string name="file_picker_new_folder">Nova pasta</string>
+    <string name="file_picker_folder_name">Nome da pasta</string>
+    <string name="file_picker_new_folder_description">Criada em %1$s e aberta imediatamente</string>
+    <string name="file_picker_folder_name_taken">Algo com este nome já existe aqui</string>
+    <string name="file_picker_folder_name_invalid">O nome de uma pasta não pode conter \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Não foi possível criar a pasta</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Sobre</string>
     <string name="settings_system_manager_description">Um projeto de código aberto para a aplicação de patch moderna e simplificada em aplicativos Android populares, movido pelo feedback e contribuições da comunidade</string>
@@ -1326,6 +1378,7 @@ Detalhes: %2$s"</string>
     <string name="settings_section_about_summary">Mais sobre Morphe e como obter ajuda</string>
     <string name="settings_section_local_files">Arquivos</string>
     <string name="settings_section_backup">Backup</string>
+    <string name="settings_section_import_export">Importar e exportar</string>
     <string name="settings_search">Configurações de pesquisa</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -1344,6 +1397,7 @@ Detalhes: %2$s"</string>
     <string name="retry">Tentar novamente</string>
     <string name="refresh">Atualizar</string>
     <string name="add">Adicionar</string>
+    <string name="create">Criar</string>
     <string name="close">Fechar</string>
     <string name="back">Voltar</string>
     <string name="next">Próximo</string>
@@ -1407,6 +1461,7 @@ Detalhes: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Arquivo</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clonar</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch</string>

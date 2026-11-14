@@ -17,6 +17,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.AfterPatching
+import app.morphe.manager.domain.manager.AutoUpdates
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.manager.RootPatchMode
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -36,7 +37,7 @@ import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
 import app.morphe.manager.util.hasGooglePlayServices
 import app.morphe.manager.util.syncFcmTopics
-import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.manager.worker.ScheduleInterval
 import app.morphe.manager.worker.UpdateCheckWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -127,7 +128,7 @@ class SettingsViewModel(
         currentValue: Boolean,
         useManagerPrereleases: Boolean,
         patchesPrereleaseIds: Set<String>,
-        updateCheckInterval: UpdateCheckInterval,
+        updateCheckInterval: ScheduleInterval,
         onShowPermissionDialog: () -> Unit
     ) = viewModelScope.launch {
         val newValue = !currentValue
@@ -154,7 +155,7 @@ class SettingsViewModel(
         granted: Boolean,
         useManagerPrereleases: Boolean,
         patchesPrereleaseIds: Set<String>,
-        updateCheckInterval: UpdateCheckInterval
+        updateCheckInterval: ScheduleInterval
     ) = viewModelScope.launch {
         if (granted) {
             syncFcmTopics(
@@ -174,14 +175,13 @@ class SettingsViewModel(
     }
 
     /** Persists the selected update check interval and reschedules the worker on non-GMS devices. */
-    fun selectUpdateInterval(interval: UpdateCheckInterval) = viewModelScope.launch {
+    fun selectUpdateInterval(interval: ScheduleInterval) = viewModelScope.launch {
         prefs.updateCheckInterval.update(interval)
         if (!hasGms) UpdateCheckWorker.schedule(appContext, interval)
     }
 
-    /** Persists the allow-metered-updates preference. */
-    fun toggleAllowMeteredUpdates(current: Boolean) = viewModelScope.launch {
-        prefs.allowMeteredUpdates.update(!current)
+    fun setAutoUpdates(mode: AutoUpdates) = viewModelScope.launch {
+        prefs.autoUpdates.update(mode)
     }
 
     /**
@@ -277,6 +277,10 @@ class SettingsViewModel(
 
     fun setOpenApkDownloadHelperDirectly(enabled: Boolean) = viewModelScope.launch {
         prefs.openApkDownloadHelperDirectly.update(enabled)
+    }
+
+    fun setAutoDownloadApkHelpersInBatch(enabled: Boolean) = viewModelScope.launch {
+        prefs.autoDownloadApkHelpersInBatch.update(enabled)
     }
 
     fun setPatcherCompletionSound(enabled: Boolean) = viewModelScope.launch {

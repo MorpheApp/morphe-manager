@@ -448,7 +448,9 @@ private fun PatcherScreenContent(
         value = patcherViewModel.collectSelectedBundleMetadata()
     }
     val patchedAppSummary = PatchedAppSummary(
-        packageName = patcherViewModel.packageName,
+        // The build as it stands until it is installed, then the app it became
+        packageName = targetInstalledPackage,
+        packageInfo = patcherViewModel.patchedPackageInfo.takeIf { installedPackageName == null },
         version = patcherViewModel.version,
         patchCount = patcherViewModel.patchCount,
         sources = patchSources

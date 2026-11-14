@@ -5,6 +5,10 @@
 
 package app.morphe.manager.util
 
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
+import androidx.documentfile.provider.DocumentFile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -97,3 +101,22 @@ fun File.writeAtomically(write: (OutputStream) -> Unit) {
 }
 
 fun File.writeTextAtomically(text: String) = writeAtomically { it.write(text.toByteArray()) }
+
+/**
+ * The folder at [uri], whether the system picker granted it or Morphe's own picker named it by
+ * path, which needs no grant once storage access is given.
+ */
+fun Context.pickedFolder(uri: Uri): DocumentFile? =
+    if (uri.scheme == ContentResolver.SCHEME_FILE) {
+        uri.path?.let { DocumentFile.fromFile(File(it)) }
+    } else {
+        DocumentFile.fromTreeUri(this, uri)
+    }
+
+fun DocumentFile.getOrCreateFile(mimeType: String, name: String): DocumentFile? =
+    findFile(name) ?: if (uri.scheme == ContentResolver.SCHEME_FILE) {
+        // A plain file keeps its name as given, where createFile would add an extension for the type
+        uri.path?.let { File(it, name) }?.takeIf { it.createNewFile() }?.let(DocumentFile::fromFile)
+    } else {
+        createFile(mimeType, name)
+    }

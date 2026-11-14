@@ -24,7 +24,8 @@ import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.manager.AfterPatching
 import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.service.ForegroundHoldService
+import app.morphe.manager.notification.OngoingContent
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
@@ -56,7 +57,8 @@ class InstallViewModel(
     private val appDataResolver: AppDataResolver,
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
-    private val applicationScope: AppCoroutineScope
+    private val applicationScope: AppCoroutineScope,
+    private val foregroundWork: ForegroundWork
 ) : ViewModel() {
     /**
      * Current installation state.
@@ -210,14 +212,9 @@ class InstallViewModel(
      * it runs, since the system ends a process left without one once the user walks away.
      */
     private fun launchInstall(@StringRes title: Int, block: suspend CoroutineScope.() -> Unit): Job {
-        val hold = ForegroundHoldService.Hold(app, app.getText(title))
-        return launchDetached {
-            try {
-                block()
-            } finally {
-                hold.release()
-            }
-        }
+        // Taken here rather than in the coroutine, while the screen that started it is still up
+        val hold = foregroundWork.hold(OngoingContent(app.getText(title)))
+        return launchDetached { hold.use { block() } }
     }
 
     /**

@@ -17,6 +17,7 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.ApkDownloadHelperApp
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.PM
+import app.morphe.manager.util.withVersionPrefix
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +50,7 @@ fun ApkDownloadHelpersSettings(
     var pendingTrust by remember { mutableStateOf<ApkDownloadHelperApp?>(null) }
     val trustedPackages by settingsViewModel.prefs.trustedApkDownloadHelpers.getAsState()
     val openDirectly by settingsViewModel.prefs.openApkDownloadHelperDirectly.getAsState()
+    val autoInBatch by settingsViewModel.prefs.autoDownloadApkHelpersInBatch.getAsState()
     val unknownInstaller = stringResource(R.string.settings_system_apk_download_helper_installed_by_unknown)
 
     // Version and install source are what tell two helpers apart, so they are worth a PackageManager round trip
@@ -112,7 +114,7 @@ fun ApkDownloadHelpersSettings(
                     title = helper.label,
                     // One fact per line, so a long package name never drags the version into a wrap
                     subtitle = listOfNotNull(
-                        info?.versionName?.let { "v$it" },
+                        info?.versionName?.withVersionPrefix(),
                         helper.packageName,
                         installedBy.takeIf { info != null }
                     ).joinToString("\n")
@@ -129,6 +131,14 @@ fun ApkDownloadHelpersSettings(
                     icon = MaterialSymbols.Rounded.Download,
                     title = stringResource(R.string.settings_system_apk_download_helper_open_directly),
                     subtitle = stringResource(R.string.settings_system_apk_download_helper_open_directly_description)
+                )
+
+                SettingsSwitchItem(
+                    checked = autoInBatch,
+                    onToggle = { settingsViewModel.setAutoDownloadApkHelpersInBatch(!autoInBatch) },
+                    icon = MaterialSymbols.Rounded.Bolt,
+                    title = stringResource(R.string.settings_system_apk_download_helper_auto_batch),
+                    subtitle = stringResource(R.string.settings_system_apk_download_helper_auto_batch_description)
                 )
             }
         }

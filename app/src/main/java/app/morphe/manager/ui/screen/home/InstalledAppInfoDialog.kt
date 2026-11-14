@@ -115,7 +115,7 @@ fun resolveAppliedBundleAttribution(
 fun DialogHostScope.InstalledAppInfoDialog(
     packageName: String,
     onDismiss: () -> Unit,
-    onTriggerPatchFlow: (originalPackageName: String, repatchedPackageName: String?) -> Unit,
+    onRepatch: (InstalledApp) -> Unit,
     homeViewModel: HomeViewModel,
     viewModel: InstalledAppInfoViewModel,
     installViewModel: InstallViewModel = koinViewModel(),
@@ -431,7 +431,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // and patching closes the two together as the patcher opens
     fun handlePatchClick() {
         val app = viewModel.installedApp ?: return
-        onTriggerPatchFlow(app.originalPackageName, app.trackingKey)
+        onRepatch(app)
     }
 
     val subpage = when (page) {
@@ -547,7 +547,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
                     staggerIndex = 1,
                     accentColor = infoAccentColor,
                     mountRestore = mountRestore,
-                    onPatch = { onTriggerPatchFlow(app.originalPackageName, app.trackingKey) },
+                    onPatch = { onRepatch(app) },
                     onShowUpdateChangelog = updateChangelog,
                     onIgnoreVersion = onIgnoreVersion,
                     onOpenAppLinks = { page = InfoPage.AppLinks }
@@ -737,14 +737,17 @@ private fun InstalledAppHeader(
     pageSubtitle: String?
 ) {
     val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
+    // The home card marks it by its glyph alone, so the details name it in full
+    val formFactorMark = rememberAppMetadata()[installedApp.originalPackageName]?.formFactor.mark()
 
-    // What the install is, then when it was made. The clone chip sits between them: it
-    // qualifies the install the same way its type does, rather than dating it
+    // What the install is, then when it was made. The clone and device chips sit between them:
+    // they qualify the install the same way its type does, rather than dating it
     val installBadges = buildList {
         add(installedApp.installType.badge.let { (icon, label) -> icon to stringResource(label) })
         if (installedApp.isClone) {
             add(AppStateIcons.Clone to stringResource(R.string.clone))
         }
+        formFactorMark?.let { add(it.icon to stringResource(it.label)) }
         relativeTime?.let { add(MaterialSymbols.Rounded.Schedule to it) }
     }
     val badges = @Composable {

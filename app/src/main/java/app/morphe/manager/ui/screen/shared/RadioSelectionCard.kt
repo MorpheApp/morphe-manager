@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
@@ -313,3 +314,31 @@ private fun DefaultRadioIndicator(selected: Boolean, enabled: Boolean, accentCol
     enabled = enabled,
     accentColor = accentColor
 )
+
+/**
+ * One of [modes] to pick, each as a card with its title and, where [descriptionRes] is given, what
+ * it does.
+ */
+@Composable
+fun <T> ModeChoice(
+    modes: List<T>,
+    selected: T,
+    onSelect: (T) -> Unit,
+    titleRes: (T) -> Int,
+    descriptionRes: ((T) -> Int)? = null
+) {
+    SettingsGroup {
+        modes.forEach { mode ->
+            val title = stringResource(titleRes(mode))
+            val description = descriptionRes?.let { stringResource(it(mode)) }
+            SearchableSetting(listOfNotNull(title, description)) {
+                RadioSelectionCard(
+                    selected = mode == selected,
+                    onSelect = { onSelect(mode) },
+                    title = title,
+                    description = description
+                )
+            }
+        }
+    }
+}

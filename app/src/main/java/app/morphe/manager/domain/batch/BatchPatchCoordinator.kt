@@ -19,11 +19,11 @@ import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.notification.PatchingNotifications
-import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
-import app.morphe.manager.service.ForegroundHoldService
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.util.AppCoroutineScope
@@ -65,7 +65,8 @@ class BatchPatchCoordinator(
     private val installerManager: InstallerManager,
     private val sessionInstaller: SessionInstaller,
     private val json: Json,
-    private val scope: AppCoroutineScope
+    private val scope: AppCoroutineScope,
+    private val foregroundWork: ForegroundWork
 ) {
     private val workManager = WorkManager.getInstance(app)
 
@@ -77,7 +78,7 @@ class BatchPatchCoordinator(
 
     // Keeps the queue in the foreground between the workers of its apps
     @Volatile
-    private var foregroundHold: ForegroundHoldService.Hold? = null
+    private var foregroundHold: ForegroundWork.Hold? = null
 
     // The latest re-resolve per item, so an older one finishing last cannot undo the user's newer pick
     private val resolveJobs = ConcurrentHashMap<String, Job>()
@@ -244,6 +245,18 @@ class BatchPatchCoordinator(
     fun attachApk(itemId: String, file: File) =
         reresolveItem(itemId) { item -> resolver.reattach(item, file) }
 
+    /**
+     * Re-resolves one item against an APK fetched for it without the user picking the file. An app
+     * that had an APK already keeps it where the fetched one leaves nothing to patch, since the user
+     * never chose to give up the one that worked.
+     */
+    fun attachFetchedApk(itemId: String, file: File) =
+        reresolveItem(itemId) { item ->
+            val attached = resolver.reattach(item, file)
+            val usable = attached.state == BatchItemState.READY || attached.state == BatchItemState.NO_SELECTION
+            if (usable || item.source == null) attached else item.also { file.delete() }
+        }
+
     /** Re-resolves one item against the APK the user picked, saved original or installed app. */
     fun useSource(itemId: String, preferInstalled: Boolean) =
         reresolveItem(itemId) { item -> resolver.useSource(item, preferInstalled) }
@@ -375,11 +388,11 @@ class BatchPatchCoordinator(
         if (current.runnable.isEmpty()) return
 
         runJob?.cancel()
+        // A run canceled before it started never gets to close its own
+        foregroundHold?.close()
         // Taken while the app is still on screen, the last moment the system grants it
-        val hold = ForegroundHoldService.Hold(
-            app,
-            app.getText(R.string.batch_patch_title),
-            app.getText(R.string.patcher_notification_text)
+        val hold = foregroundWork.hold(
+            OngoingContent(app.getText(R.string.batch_patch_title), app.getText(R.string.patcher_notification_text))
         ).also { foregroundHold = it }
         runJob = scope.launch {
             _state.update { it.copy(phase = BatchPhase.RUNNING) }
@@ -392,7 +405,7 @@ class BatchPatchCoordinator(
                 withContext(NonCancellable) {
                     activeWorkId = null
                     installUnattendedIfRequested()
-                    hold.release()
+                    hold.close()
                     _state.update {
                         it.copy(
                             phase = BatchPhase.FINISHED,
@@ -412,7 +425,7 @@ class BatchPatchCoordinator(
         activeWorkId?.let(workManager::cancelWorkById)
         runJob?.cancel()
         runJob = null
-        foregroundHold?.release()
+        foregroundHold?.close()
         markRemainingCancelled()
         _state.update { it.copy(phase = BatchPhase.FINISHED, activeIndex = null, activeRun = null) }
     }
@@ -615,12 +628,8 @@ class BatchPatchCoordinator(
         // Named after the item rather than the app, so two clones of it never share a path
         val outputFile = workspace.resolve("${item.id}.apk")
 
-        // Only the sources actually contributing patches, so a source the user took nothing
-        // from is left out of the log as well as off the card
-        val patchSources = item.bundles
-            .filter { it.uid in item.selection.keys }
-            .map { PatchSourceRef(it.name, it.version) }
-
+        // Whether the worker kept the APK merged from a split archive, which then stands in for it
+        var mergedApkKept = false
         val args = PatcherWorker.Args(
             input = selectedApp,
             output = outputFile.path,
@@ -632,11 +641,14 @@ class BatchPatchCoordinator(
             onPatchingRestarted = { runProgress.onRestart() },
             // Called on the worker's thread, while the steps are only ever changed on the main one
             setInputFile = { file, needsSplit, merged ->
-                withContext(Dispatchers.Main) { runProgress.updateSplitRequirement(file, needsSplit, merged) }
+                withContext(Dispatchers.Main) {
+                    if (merged) mergedApkKept = true
+                    runProgress.updateSplitRequirement(file, needsSplit, merged)
+                }
             },
             onProgress = runProgress::onProgress,
             onTaskProgress = runProgress::onTaskProgress,
-            patchSources = patchSources,
+            patchSources = item.patchSources,
             announceCompletion = false,
             queuePosition = _state.value?.let { it.position to it.total },
             useMount = item.useMount
@@ -648,17 +660,19 @@ class BatchPatchCoordinator(
 
         try {
             val finished = workManager.getWorkInfoByIdFlow(workId).first { it?.state?.isFinished == true }
-            // The worker leaves its last step in the notification, which the queue holds on to
+            // The notification is the queue's again now that the worker is done, saying what comes next
             val preparingNext = _state.value?.runnable?.isNotEmpty() == true
             foregroundHold?.update(
-                app.getText(R.string.batch_patch_title),
-                app.getText(if (preparingNext) R.string.batch_patch_preparing_next else R.string.patcher_notification_text)
+                OngoingContent(
+                    app.getText(R.string.batch_patch_title),
+                    app.getText(if (preparingNext) R.string.batch_patch_preparing_next else R.string.patcher_notification_text)
+                )
             )
 
             when (finished?.state) {
                 WorkInfo.State.SUCCEEDED -> {
                     val retained = withContext(NonCancellable) {
-                        finishSuccessfulItem(item, selectedApp, outputFile)
+                        finishSuccessfulItem(item, selectedApp, outputFile, mergedApkKept)
                     }
                     succeeded = true
                     updateItem(index) {
@@ -756,12 +770,14 @@ class BatchPatchCoordinator(
      * Retains the original and patched APKs and records the patched app, so the summary can
      * install it and the app shows up on the home screen exactly like a single-app run.
      *
+     * @param mergedApkKept whether the worker already kept the APK merged from a split archive.
      * @return the file the summary installs from, or null when the patched APK is gone.
      */
     private suspend fun finishSuccessfulItem(
         item: BatchPatchItem,
         selectedApp: SelectedApp,
-        outputFile: File
+        outputFile: File,
+        mergedApkKept: Boolean
     ): File? = withContext(Dispatchers.IO) {
         if (!outputFile.exists()) return@withContext null
 
@@ -771,7 +787,7 @@ class BatchPatchCoordinator(
             ?: "unspecified"
         val currentPackageName = patchedInfo?.packageName ?: item.packageName
 
-        saveOriginalApk(item, selectedApp, version)
+        if (!mergedApkKept) saveOriginalApk(item, selectedApp, version)
 
         val isClone = item.producesCloneAs(currentPackageName)
         // A configuration belongs to the card it was built from, which is the app itself unless
@@ -838,10 +854,11 @@ class BatchPatchCoordinator(
     }
 
     /**
-     * Keeps the unpatched APK for future runs. Split archives are skipped because the patcher
-     * already stored the merged mono-APK it built from them, which is the better input for a
-     * later run than the archive itself. A mount keeps the archive, as the stock app it restores
-     * is installed from its signed splits.
+     * Keeps the unpatched APK for future runs. Not called once the worker kept the mono-APK it
+     * merged from a split archive, which is the better input for a later run than the archive.
+     * The archive itself is kept where the worker does not hand over a merged APK: for a mount,
+     * as the stock app it restores is installed from its signed splits, and for an archive with
+     * OBB files, which the merged APK lacks.
      */
     private suspend fun saveOriginalApk(
         item: BatchPatchItem,
@@ -849,7 +866,6 @@ class BatchPatchCoordinator(
         patchedVersion: String
     ) {
         val file = (selectedApp as? SelectedApp.Local)?.file?.takeIf { it.exists() } ?: return
-        if (!item.useMount && SplitApkPreparer.isSplitArchive(file)) return
         // Recorded under its own version, which a patch may have renamed in the patched build
         val version = pm.getPackageInfo(file)?.versionName?.takeUnless { it.isBlank() }
             ?: item.version
@@ -862,7 +878,8 @@ class BatchPatchCoordinator(
                 packageName = item.packageName,
                 version = version,
                 sourceFile = file,
-                moveSource = item.source is BatchApkSource.Installed
+                moveSource = item.source is BatchApkSource.Installed,
+                forMount = item.useMount
             )
         }.onFailure { Log.w(TAG, "Failed to save original APK for ${item.packageName}", it) }
     }

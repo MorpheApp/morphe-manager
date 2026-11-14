@@ -43,6 +43,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 import java.io.File
+import java.util.jar.JarFile
+import java.util.jar.Manifest
 import java.util.zip.ZipInputStream
 
 /** Parsed metadata from a .mpp patch bundle's META-INF/MANIFEST.MF entry. */
@@ -118,43 +120,38 @@ fun Uri.copyApkInto(dir: File, prefix: String, contentResolver: ContentResolver)
     return target
 }
 
-/** Whether the URI names a .mpp patch bundle. */
-fun Uri.hasMppExtension(contentResolver: ContentResolver): Boolean =
-    displayName(contentResolver)?.endsWith(".mpp", ignoreCase = true) == true
+/**
+ * Whether the URI holds a patch bundle: named .mpp, or carrying a bundle manifest under any name, as
+ * messengers rename the files they pass on. Reads the file, so it is called off the main thread.
+ */
+fun Uri.isPatchBundle(contentResolver: ContentResolver): Boolean =
+    displayName(contentResolver)?.endsWith(".mpp", ignoreCase = true) == true ||
+            readMppManifest(contentResolver) != null
 
 /**
- * The manifest of a .mpp patch bundle, or null when it cannot be read. Values of "na" in any case
- * count as absent.
+ * The manifest of a .mpp patch bundle, or null when it cannot be read or declares none of a bundle's
+ * attributes, as the manifest of a signed APK or plain JAR does. Values of "na" in any case count as absent.
  */
 fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
     runCatching {
         contentResolver.openInputStream(this)?.use { stream ->
             ZipInputStream(stream).use { zip ->
-                var manifest: MppManifest? = null
-                var entry = zip.nextEntry
-                while (entry != null && manifest == null) {
-                    if (entry.name == "META-INF/MANIFEST.MF") {
-                        val attrs = zip.bufferedReader().readText()
-                            .lineSequence()
-                            .filter { ":" in it }
-                            .associate { line ->
-                                val idx = line.indexOf(':')
-                                line.substring(0, idx).trim() to line.substring(idx + 1).trim()
-                            }
-                        fun attr(key: String) =
-                            attrs[key]?.takeUnless { it.isBlank() || it.equals("na", ignoreCase = true) }
-                        manifest = MppManifest(
-                            name = attr("Name"),
-                            version = attr("Version"),
-                            author = attr("Author"),
-                            description = attr("Description"),
-                            source = attr("Source") ?: attr("Website"),
-                            timestamp = attr("Timestamp")?.toLongOrNull(),
-                        )
-                    }
-                    entry = zip.nextEntry
-                }
-                manifest
+                // A bundle stores its manifest first, so this stops early on one
+                generateSequence { zip.nextEntry }
+                    .firstOrNull { it.name.equals(JarFile.MANIFEST_NAME, ignoreCase = true) }
+                    ?: return@use null
+                // Only the main section: a signed archive repeats Name in a section per entry
+                val attributes = Manifest(zip).mainAttributes
+                fun attr(key: String) = attributes.getValue(key)
+                    ?.takeUnless { it.isBlank() || it.equals("na", ignoreCase = true) }
+                MppManifest(
+                    name = attr("Name"),
+                    version = attr("Version"),
+                    author = attr("Author"),
+                    description = attr("Description"),
+                    source = attr("Source") ?: attr("Website"),
+                    timestamp = attr("Timestamp")?.toLongOrNull(),
+                ).takeIf { it.name != null || it.version != null || it.author != null }
             }
         }
     }.getOrNull()
@@ -164,7 +161,24 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
  * access comes first, then Morphe's own [FilePicker] where it is chosen or on TV, else the system one.
  */
 @Composable
-fun rememberFolderPickerWithPermission(
+fun rememberFolderPickerWithPermission(onFolderPicked: (Uri) -> Unit): () -> Unit =
+    rememberFolderPicker(byPath = true, suggestedFolderName = null, onFolderPicked)
+
+/**
+ * Folder picker for a folder written through DocumentFile, see [pickedFolder]. The system picker
+ * grants such a folder by itself, so storage access is only asked for Morphe's own [FilePicker].
+ * [suggestedFolderName] names a folder made in Morphe's own picker until the user types another.
+ */
+@Composable
+fun rememberDocumentFolderPicker(
+    suggestedFolderName: String? = null,
+    onFolderPicked: (Uri) -> Unit
+): () -> Unit = rememberFolderPicker(byPath = false, suggestedFolderName, onFolderPicked)
+
+@Composable
+private fun rememberFolderPicker(
+    byPath: Boolean,
+    suggestedFolderName: String?,
     onFolderPicked: (Uri) -> Unit
 ): () -> Unit {
     val context = LocalContext.current
@@ -178,6 +192,7 @@ fun rememberFolderPickerWithPermission(
         FilePicker(
             mimeTypes = arrayOf("*/*"),
             allowFolderSelection = true,
+            suggestedFolderName = suggestedFolderName,
             onDismiss = { showPickerState.value = false },
             onPicked = { folders ->
                 showPickerState.value = false
@@ -207,12 +222,16 @@ fun rememberFolderPickerWithPermission(
         if (granted) openPicker()
     }
 
-    return remember(isTV, useCustomPicker) {
+    return remember(byPath, isTV, useCustomPicker) {
         {
             when {
+                !byPath && !useCustomPicker && !isTV -> folderPickerLauncher.launch(null)
                 fs.hasStoragePermission() -> openPicker()
-                // No system picker to fall back on, as the patcher reads the folder by path and needs the access
-                !permissionLauncher.tryLaunch(permissionName) -> messages.showStorageAccessUnavailable(context)
+                permissionLauncher.tryLaunch(permissionName) -> Unit
+                // A file manager can still hand over a folder written through DocumentFile. One read
+                // by path has no system picker to fall back on, as the patcher needs the access
+                !byPath && folderPickerLauncher.tryLaunch(null) -> Unit
+                else -> messages.showStorageAccessUnavailable(context)
             }
         }
     }

@@ -49,11 +49,6 @@
         <item quantity="few">%s извора сакривена. Додирните да бисте приказали</item>
         <item quantity="other">%s извора сакривено. Додирните да бисте приказали</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s одговарајућа закрпа</item>
-        <item quantity="few">%s одговарајуће закрпе</item>
-        <item quantity="other">%s одговарајућих закрпа</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s извор</item>
         <item quantity="few">%s извор</item>

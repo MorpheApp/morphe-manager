@@ -40,10 +40,6 @@
         <item quantity="one">Umthombo owodwa u%s ufihliwe. Thinta ukuze ubonakale</item>
         <item quantity="other">Imithombo u%s ifihliwe. Thinta ukuze ibonakale</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">i-patch eyodwa efanayo u%s</item>
-        <item quantity="other">ama-patch angu%s afanayo</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">umthombo oyedwa %s</item>
         <item quantity="other">imithombo %s</item>

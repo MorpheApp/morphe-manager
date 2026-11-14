@@ -77,6 +77,8 @@ data class HomeAppListUi(
 @Stable
 class HomeAppActions(
     val onAppClick: (HomeAppItem) -> Unit,
+    /** Rebuilds the app a card offers to, as the patch button of its dialog does. */
+    val onUpdateApp: (HomeAppItem) -> Unit,
     val onHideApp: (String) -> Unit,
     val onHideMultiple: (Set<String>) -> Unit,
     val onUninstallMultiple: (List<HomeAppItem>) -> Unit,
@@ -781,6 +783,11 @@ internal fun MainAppsSection(
                             animationSpec = tween(Defaults.ANIMATION_DURATION, easing = FastOutSlowInEasing),
                             label = "footerClearance"
                         )
+                        // Follows the clearance as it eases in, so the card rises with the panel
+                        // rather than settling only once the panel is fully up
+                        LaunchedEffect(state.isMultiSelectMode, state.selectedAppRequester, footerClearance) {
+                            if (state.isMultiSelectMode) state.selectedAppRequester?.bringIntoView()
+                        }
                         // Cached so the LazyColumn doesn't allocate a new PaddingValues on
                         // every recomposition (which can be per-frame under scroll)
                         val listContentPadding = remember(insets, alertsHeight, footerClearance) {

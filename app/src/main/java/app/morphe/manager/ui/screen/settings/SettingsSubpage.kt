@@ -56,6 +56,11 @@ enum class SettingsSubpage(
         R.string.settings_system_storage_management_description,
         MaterialSymbols.Rounded.Storage
     ),
+    SETTINGS_BACKUP(
+        R.string.settings_system_morphe_settings,
+        R.string.settings_system_import_manager_settings_description,
+        MaterialSymbols.Rounded.Settings
+    ),
     APK_DOWNLOAD_HELPERS(
         R.string.settings_system_apk_download_helper,
         R.string.settings_system_apk_download_helper_dialog_description,

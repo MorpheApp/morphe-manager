@@ -301,10 +301,13 @@ stop_other_watchers() {
 # A framework restart without a reboot keeps the patched APK mounted, and the new PackageManager
 # deletes the app for not matching its stock certificates. Zygote starts seconds before that scan,
 # so the APK is lifted there and mounted again once the app is reported. The event log keeps the
-# watcher asleep in between.
+# watcher asleep in between. logcat is called by its full path, as a root environment may put
+# another binary of that name first on PATH, and a watcher that is gone leaves the app unguarded
+# without any other sign, so its start, its end and logcat's errors go to the log.
 watch_framework_restarts() {
   stop_other_watchers
-  logcat -b events -v raw -s boot_progress_start -T "$(date '+%m-%d %H:%M:%S.000')" 2>/dev/null | {
+  log_msg "Watching for framework restarts"
+  /system/bin/logcat -b events -v raw -s boot_progress_start -T "$(date '+%m-%d %H:%M:%S.000')" 2>> "$log" | {
     # logcat only notices the reader is gone on the next event, so it is stopped with it
     trap 'pkill -P $$ -x logcat' EXIT
     while read -r line; do
@@ -320,6 +323,7 @@ watch_framework_restarts() {
       mount_patched
       am force-stop "$package_name"
     done
+    log_msg "Stopped watching for framework restarts"
   }
 }
 

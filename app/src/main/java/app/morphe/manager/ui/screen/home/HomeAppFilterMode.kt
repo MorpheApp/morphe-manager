@@ -14,9 +14,9 @@ import app.morphe.manager.util.enumByNameOrNull
 enum class HomeAppFilterMode(
     @param:StringRes override val labelRes: Int
 ) : SortModeSpec {
-    ALL(R.string.home_category_all_apps),
+    ALL(R.string.home_app_filter_all),
     PATCHED(R.string.patched),
-    NOT_PATCHED(R.string.home_not_patched_yet),
+    NOT_PATCHED(R.string.home_app_filter_not_patched),
     INSTALLED(R.string.installed),
     UNINSTALLED(R.string.uninstalled),
     CLONES(R.string.home_app_filter_clones);

@@ -366,6 +366,7 @@ fun DialogHostScope.ExpertModeDialog(
                                     source = sourcesByUid[bundle.uid],
                                     name = bundle.name,
                                     count = "${patches.count { it.second }}/${patches.size}",
+                                    universalOnly = patches.all { (patch, _) -> patch.isUniversal },
                                     selected = currentIndex == index,
                                     onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } }
                                 )
@@ -600,6 +601,8 @@ fun DialogHostScope.ExpertModeDialog(
  * is picked. Stacked rather than in a line, so the row fits more sources before it scrolls. Each
  * sits on a pill, the open one filled with the accent.
  *
+ * @param universalOnly Whether the source has nothing for this app beyond its universal patches,
+ *   marked next to the count so such tabs need not be opened to tell.
  * @param accentColor Color of the app being patched, which the open tab fills with as the header's
  *   actions do. The dialog's own by default, or null for the theme's palette.
  */
@@ -608,6 +611,7 @@ private fun SourceTab(
     source: PatchBundleSource?,
     name: String,
     count: String,
+    universalOnly: Boolean,
     selected: Boolean,
     onClick: () -> Unit,
     accentColor: Color? = LocalAccent.current
@@ -659,11 +663,26 @@ private fun SourceTab(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-                Text(
-                    text = count,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = LocalContentColor.current.copy(alpha = 0.7f)
-                )
+                // The name sets the tab's width, so the marker fits beside the shorter count
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceExtraSmall)
+                ) {
+                    val countColor = LocalContentColor.current.copy(alpha = 0.7f)
+                    Text(
+                        text = count,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = countColor
+                    )
+                    if (universalOnly) {
+                        Icon(
+                            imageVector = MaterialSymbols.Rounded.Public,
+                            contentDescription = stringResource(R.string.expert_mode_universal_patches),
+                            modifier = Modifier.size(12.dp),
+                            tint = countColor
+                        )
+                    }
+                }
             }
         }
     }

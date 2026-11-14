@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <string name="home_app_status_newer_version">%s க்கு புதுப்பிக்கவும்</string>
+    <string name="home_app_status_newer_patches">புதிய பேட்ச்கள்</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">டிவி</string>
+    <string name="form_factor_automotive">ஆட்டோமோட்டிவ்</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_more_apps_hide_message">உங்களால் இதை எப்போது வேண்டுமானாலும் %1$s மூலம் மீண்டும் கொண்டு வர முடியும்</string>
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="incoming_file_not_patch_source">இந்தக் கோப்பு ஒரு பேட்ச் மூலக் கோப்பு அல்ல</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_source_updates_title">பேட்ச் புதுப்பிப்புகள் கிடைக்கின்றன</string>
+    <string name="home_source_updates_subtitle">அவற்றை பதிவிறக்கத் தட்டவும்</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">கைமுறை</string>
+    <string name="list_sort_name_asc">பெயர் (A–Z)</string>
+    <string name="list_sort_name_desc">பெயர் (Z–A)</string>
+    <string name="home_app_filter_all">அனைத்தும்</string>
+    <string name="home_app_filter_not_patched">பேட்ச் செய்யப்படவில்லை</string>
     <string name="home_app_sort_manual_hint">ஒரு செயலியை நீண்ட நேரம் அழுத்திப் பிடித்து, பின் மறுவரிசைப்படுத்தும் பொத்தானைத் தட்டவும்</string>
+    <string name="home_app_sort_recommended">பரிந்துரைக்கப்பட்டது</string>
+    <string name="home_app_sort_updates_first">புதுப்பிப்புகள் முதலில்</string>
     <string name="home_app_grouping_categories">வகைகள்</string>
+    <string name="home_category_name_description">முகப்புத் திரை அதன் செயலிகளை இந்தப் பெயரின் கீழ் குழுப்படுத்துகிறது</string>
     <!-- %s is the name of the category -->
     <!-- %s is the name of the category the apps fall back to -->
     <!-- Home Screen - Home Greetings -->
@@ -37,6 +54,7 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_apps_description">டிக் செய்யப்பட்ட ஆப்ஸ் இந்த மூலத்திலிருந்து வருகின்றன. ஒரு ஆப்பை நீக்க அல்லது மீண்டும் கொண்டு வர அதைத் தட்டுங்கள், அதன் பேட்ச்களைப் பார்க்க அதை ஸ்வைப் செய்யுங்கள். நீங்கள் பேட்ச் செய்யாத வரை, மூலமற்ற ஒரு ஆப் ஹோம் ஸ்கிரீனை விட்டு வெளியேறும்</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
@@ -50,6 +68,8 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <string name="sources_patch_expert_badge_tooltip">இந்த பேட்ச்-ஐ கைமுறையாகச் சேர்க்க %1$s-ஐ ஆன் செய்யவும்</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
+    <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
+    <string name="home_apk_availability_newer_original">இந்த சாதனத்தில் உள்ள அசல் %1$s பதிப்பு %2$s ஆகும், இது பேட்ச்கள் ஆதரவை விடப் புதியது</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Home Screen - Dialog 2: Download Instructions -->
     <string name="home_download_instructions_step2_apkcube">இணையப் பக்கத்தை கீழே நகர்த்தி, பதிப்பு &lt;b&gt;%s&lt;/b&gt;-ஐத் தேர்ந்தெடுத்து அழுத்தவும்</string>
@@ -64,7 +84,10 @@
     <string name="expert_mode_saved_selection">சேமிக்கப்பட்ட தேர்வு</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
+    <string name="home_version_copy">பதிப்பை நகலெடு</string>
+    <string name="home_version_copied">பதிப்பு நகலெடுக்கப்பட்டது</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
+    <string name="home_outdated_patches_dialog_message">புதிய பேட்ச்கள் கிடைக்கின்றன ஆனால் இன்னும் பதிவிறக்கம் செய்யப்படவில்லை</string>
     <!-- "%1$s" is the free storage and "%2$s" the amount patching needs, both in gigabytes. -->
     <!-- Color picker -->
     <!-- Patch Options -->
@@ -78,6 +101,9 @@
     <!-- Caption under the launcher icon recolored by the system theme -->
     <!-- Header Creator -->
     <!-- Batch patching -->
+    <string name="batch_patch_auto_download_stopped">தானியங்கி APK பதிவிறக்கங்கள் நிறுத்தப்பட்டன</string>
+    <string name="batch_patch_auto_download_stop">பதிவிறக்கங்களை நிறுத்து</string>
+    <string name="batch_patch_auto_download_kept">பதிவிறக்கம் செய்யப்பட்ட APK-வை பயன்படுத்த முடியவில்லை, எனவே முந்தையது அப்படியே வைக்கப்பட்டுள்ளது</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_queue_keep_title">வரிசையைத் தக்கவைக்க வேண்டுமா?</string>
@@ -104,7 +130,7 @@
     <string name="patcher_task_decoding_dex">DEX கோப்புகளைப் படிக்கிறது</string>
     <string name="patcher_task_extracting_resources">வளங்களை வெளியே எடுக்கிறது</string>
     <string name="patcher_task_decoding_resources">வளங்களை டிகோடிங் செய்கிறது</string>
-    <string name="patcher_task_indexing_classes">வகுப்புகளை வரிசைப்படுத்துகிறது</string>
+    <string name="patcher_task_indexing_classes">வகுப்புகளைக் குறியிடுகிறது</string>
     <string name="patcher_task_compiling_dex">DEX கோப்புகளை தொகுக்கிறது</string>
     <string name="patcher_task_compiling_resources">வளங்களை தொகுக்கிறது</string>
     <string name="patcher_task_writing_apk">APK கோப்பை எழுதுகிறது</string>
@@ -136,10 +162,22 @@
     <!-- Settings - Advanced Tab - Updates Section -->
     <!-- "Morphe" here is the app itself, not the patches. Do not translate this as pre-release patches -->
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
+    <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
+    <string name="settings_auto_updates">தானியங்கி புதுப்பிப்புகள்</string>
+    <string name="settings_auto_updates_description">Morphe திறக்கும்போது புதுப்பிப்புகளைப் பற்றி என்ன செய்கிறது. pull to refresh எப்போதும் சரிபார்க்கும்</string>
+    <string name="settings_auto_updates_download">தானாகவே பதிவிறக்கவும்</string>
+    <string name="settings_auto_updates_download_description">Morphe திறக்கும்போது புதுப்பிப்புகளைச் சரிபார்த்து, எந்தவொரு நெட்வொர்க்கிலும் பேட்ச் புதுப்பிப்புகளைப் பதிவிறக்கும்</string>
+    <string name="settings_auto_updates_wifi_only">Wi-Fi-இல் மட்டும் பதிவிறக்கவும்</string>
+    <string name="settings_auto_updates_wifi_only_description">மொபைல் டேட்டாவில், எது கிடைக்கக்கூடியதோ அதை மட்டுமே சரிபார்த்து காண்பிக்கும்</string>
+    <string name="settings_auto_updates_check_only">சரிபார் மட்டுமே</string>
+    <string name="settings_auto_updates_check_only_description">கிடைக்கக்கூடிய புதுப்பிப்புகளைக் காண்பிக்கும் மற்றும் நீங்கள் தட்டும்போது அவற்றை பதிவிறக்கும்</string>
+    <string name="settings_auto_updates_off">சரிபார்க்க வேண்டாம்</string>
+    <string name="settings_auto_updates_off_description">நீங்கள் புதுப்பிக்க இழுக்கும்போது மட்டுமே சரிபார்க்கும்</string>
     <!-- Notification content -->
     <string name="notification_channel_patching_results">பேட்ச் செய்யும் முடிவுகள்</string>
     <string name="notification_channel_patching_results_description">Morphe பின்னணியில் இருக்கும்போது, பேட்ச் செய்தல் முடிந்தாலோ அல்லது நிறுவல் உங்களுக்காகக் காத்திருக்கும்போதோ</string>
     <!-- Settings - Advanced Tab - Expert settings Section -->
+    <string name="settings_advanced_strip_unused_libs_description">பேட்ச் செய்யப்பட்ட ஆப்ஸ் மற்றும் சேமிக்கப்பட்ட அசல்களில் இருந்து பயன்படுத்தப்படாத நேட்டிவ் லைப்ரரிகள் மற்றும் APK ஸ்ப்ளிட்களை நீக்குகிறது</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <!-- "%s" is the GitHub scope name, keep it as is -->
     <!-- "%s" is the GitHub account name -->
@@ -164,6 +202,26 @@
     <!-- Settings - System Tab - Performance Section -->
     <!-- Settings - System Tab - Notifications Section -->
     <!-- Settings - System Tab - Import and Export Section -->
+    <string name="settings_system_export_manager_settings_title">Morphe அமைப்புகளை ஏற்றுமதி செய்க</string>
+    <string name="settings_system_export_manager_settings_description">நீங்கள் தேர்ந்தெடுக்கும் அமைப்புகளை ஒரு கோப்பில் சேமிக்கிறது</string>
+    <string name="settings_system_import_manager_settings_file_description">காப்புப்பிரதி கோப்பிலிருந்து அமைப்புகளை மீட்டமைக்கிறது</string>
+    <string name="settings_system_auto_backup">தானியங்கி காப்புப்பிரதி</string>
+    <string name="settings_system_auto_backup_switch">தானாகவே காப்புப்பிரதி எடுங்கள்</string>
+    <string name="settings_system_auto_backup_now">இப்பொழுதே காப்புப்பிரதி எடுங்கள்</string>
+    <string name="settings_system_auto_backup_saved">காப்புப்பிரதி சேமிக்கப்பட்டது</string>
+    <string name="settings_system_auto_backup_interval_description">அடுத்த காப்புப்பிரதியை எடுப்பதற்கு முன் Morphe குறைந்தபட்சம் இந்த நேரம் வரை காத்திருக்கும்</string>
+    <string name="settings_system_auto_backup_description">உங்கள் Morphe அமைப்புகளை நீங்கள் தேர்ந்தெடுக்கும் கோப்புறையில் சேமிக்கிறது</string>
+    <string name="settings_system_auto_backup_last">கடைசி காப்புப்பிரதி: %s</string>
+    <string name="settings_system_auto_backup_folder">கோப்புறை</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe காப்புப்பிரதிகள்</string>
+    <string name="settings_system_auto_backup_folder_failed">இந்தக் கோப்புறையைப் பயன்படுத்த முடியவில்லை: %s</string>
+    <string name="settings_system_auto_backup_interval">காப்புப்பிரதி அதிர்வெண்</string>
+    <string name="settings_system_auto_backup_signing_key">கையெழுத்திடும் விசையை உள்ளடக்கு</string>
+    <string name="settings_system_auto_backup_signing_key_description">மாற்றப்பட்ட செயலிகளை கையெழுத்திடும் விசையை அமைப்புகளுடன் சேமிக்கிறது</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">கையெழுத்திடும் விசையை காப்புப்பிரதி எடுக்கவா?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">இந்தக் கோப்பைப் பெறுபவர் எவரunque உங்கள் மாற்றப்பட்ட செயலிகளின் மீது நிறுவப்படும் புதுப்பிப்புகளை கையெழுத்திட முடியும். கோப்புறையை ரகசியமாக வைத்திருங்கள் மற்றும் உங்கள் சொந்த சாதனங்களுடன் மட்டுமே பகிர்ந்து கொள்ளுங்கள்</string>
+    <string name="settings_system_auto_backup_footer">ஏதேனும் மாற்றங்களைச் செய்த பிறகு நீங்கள் Morphe-லிருந்து வெளியேறும்போது ஒரு நகல் சேமிக்கப்படுகிறது. சமீபத்திய %s பராமரிக்கப்படும்</string>
+    <string name="settings_system_auto_backup_failed">கடைசி காப்புப்பிரதியைச் சேமிக்க முடியவில்லை. கோப்புறையை மீண்டும் தேர்வு செய்யவும்</string>
     <!-- Settings - System Tab - Files & Storage Section -->
     <!-- Settings - System Tab - Storage Management screen -->
     <!-- Shown under how much Morphe takes up. "%1$s" is the space still available on the device, already formatted with its unit. "Free" as in unused, not as in free of charge. -->
@@ -171,17 +229,29 @@
     <!-- Settings - System Tab - Storage Management - Original APKs Management -->
     <!-- Settings - System Tab - Storage Management - Patch Selection Management -->
     <!-- Selection panel: saved selection, sets and copies -->
+    <string name="selection_set_rename_description">மற்றொரு தொகுப்பின் பெயரை எடுப்பது அந்தத் தொகுப்பை மாற்றும்</string>
     <!-- Settings - System Tab - Custom file picker -->
     <!-- Settings - System Tab - APK download helper -->
+    <string name="settings_system_apk_download_helper_auto_batch">APK-களை தொகுப்பாகத் தானாகவே பதிவிறக்கவும்</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">வரிசையிடை உள்ள ஒவ்வொரு ஆப்-க்கும் அதன் பேட்ச்கள் ஆதரவளிக்கும் சமீபத்திய பதிப்பைச் சரிபார்த்து, அது விடுபட்டிருந்தாலோ அல்லது பழைய பதிப்பாக இருந்தாலோ முதல் நம்பகமான ஹெல்பர் மூலம் அதைப் பதிவிறக்கம் செய்கிறது</string>
     <!-- File Picker -->
+    <string name="file_picker_new_folder">புதிய கோப்புறை</string>
+    <string name="file_picker_folder_name">கோப்புறை பெயர்</string>
+    <string name="file_picker_new_folder_description">%1$s-இல் உருவாக்கப்பட்டு உடனடியாகத் திறக்கப்பட்டது</string>
+    <string name="file_picker_folder_name_taken">இந்தப் பெயரில் ஒன்று ஏற்கனவே இங்கே உள்ளது</string>
+    <string name="file_picker_folder_name_invalid">கோப்புறை பெயரில் \" * / : &lt; &gt; ? \\ | இருக்கக்கூடாது</string>
+    <string name="file_picker_new_folder_failed">கோப்புறையை உருவாக்க முடியவில்லை</string>
     <!-- Settings - System Tab - About Section -->
     <string name="opensource_licenses_search">நூலகங்கள் மற்றும் உரிமங்களைத் தேடுங்கள்</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
+    <string name="settings_section_import_export">இறக்குமதி மற்றும் ஏற்றுமதி</string>
+    <string name="create">உருவாக்கு</string>
     <!-- Who made a patch source, as a field label -->
     <!-- A file a patch source is added from, as a field label -->
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->

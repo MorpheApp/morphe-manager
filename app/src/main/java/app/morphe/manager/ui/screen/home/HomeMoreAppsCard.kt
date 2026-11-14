@@ -17,6 +17,8 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.ConfirmDialog
 import app.morphe.manager.ui.screen.shared.DialogHost
 import app.morphe.manager.ui.screen.shared.GlassPlaceholderIcon
+import app.morphe.manager.ui.screen.shared.SwipeAction
+import app.morphe.manager.ui.screen.shared.SwipeableCardContainer
 import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.settingsPath
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -65,7 +67,6 @@ private fun MoreAppsCard(
 
     SwipeableCardContainer(
         start = SwipeAction(hideAction) { showHideDialog = true },
-        end = null,
         modifier = modifier
     ) {
         // A long press stands in for the swipe where there is none, on a remote
@@ -77,9 +78,8 @@ private fun MoreAppsCard(
         ) {
             AppCardContent(
                 displayName = stringResource(R.string.home_more_apps_title),
-                subtitle = stringResource(R.string.sources_dialog_community),
-                gradientColors = gradientColors
-            ) { placeholderColors ->
+                subtitle = AppCardLine(stringResource(R.string.sources_dialog_community))
+            ) {
                 GlassPlaceholderIcon(
                     gradientColors = placeholderColors,
                     modifier = Modifier.fillMaxSize()

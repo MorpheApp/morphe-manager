@@ -40,10 +40,6 @@
         <item quantity="one">%s fuente oculta. Pulsa para mostrar</item>
         <item quantity="other">%s fuentes ocultas. Pulsa para mostrar</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s parche coincidente</item>
-        <item quantity="other">%s parches coincidentes</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s fuente</item>
         <item quantity="other">%s fuentes</item>

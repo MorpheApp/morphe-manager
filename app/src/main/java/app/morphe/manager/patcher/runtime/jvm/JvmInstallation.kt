@@ -47,6 +47,11 @@ class JvmInstallation(private val app: Application) {
     val isAvailable get() = abi != null
 
     private val root = app.noBackupFilesDir.resolve(ROOT_DIR)
+
+    // The AOT cache can always be made again, so it is kept with the app's cache, which clearing
+    // the cache from the app info or the app's storage settings deletes, as Android may on its own
+    private val aotDir = app.cacheDir.resolve(AOT_DIR)
+
     private val lock = Mutex()
 
     /** The runtime and host ready to start, unpacked first if they are not yet. */
@@ -63,10 +68,15 @@ class JvmInstallation(private val app: Application) {
                 val hostJar = root.resolve("host-${BuildConfig.VERSION_CODE}-${BuildConfig.BUILD_ID}.jar")
                 if (!hostJar.isFile) unpackHost(hostJar)
 
-                // Whatever an earlier version of the app unpacked is of no use to this one
-                root.listFiles()?.filter { it != home && it != hostJar }?.forEach { it.deleteRecursively() }
+                val installed = Installed(home, hostJar, aotDir)
+                // Whatever an earlier version of the app unpacked or recorded is of no use to this one
+                val keep = setOf(home, hostJar)
+                root.listFiles()?.filter { it !in keep }?.forEach { it.deleteRecursively() }
+                val keepAot = installed.aotFiles.toSet()
+                aotDir.listFiles()?.filter { it !in keepAot }?.forEach { it.deleteRecursively() }
+                if (!aotDir.isDirectory && !aotDir.mkdirs()) throw IOException("Could not make $aotDir")
 
-                Installed(home, hostJar)
+                installed
             } catch (e: IOException) {
                 throw JvmUnavailableException("Could not unpack the patcher JVM", e)
             }
@@ -162,7 +172,8 @@ class JvmInstallation(private val app: Application) {
         closeEntry()
     }
 
-    class Installed(val home: File, val hostJar: File) {
+    /** @param aotDir Where the files of the AOT cache are kept, see [aotCache]. */
+    class Installed(val home: File, val hostJar: File, val aotDir: File) {
         /** The VM the runtime ships, the server one where there is one, the client one otherwise. */
         val libjvm
             get() = VMS.map { home.resolve("lib/$it/libjvm.so") }.firstOrNull { it.isFile }
@@ -170,10 +181,32 @@ class JvmInstallation(private val app: Application) {
 
         /** The libraries of the runtime that others of it link against, dependencies first. */
         val preload get() = PRELOAD.map { home.resolve("lib/$it").path }
+
+        /**
+         * The AOT cache of this runtime and host: the classes of a run loaded and linked, and its
+         * profiles, so later runs start where it left off. It only fits the runtime and class path
+         * it was made with, so it is named after both.
+         */
+        val aotCache get() = aotFile("aot")
+
+        /** What a run recorded for [aotCache] to be made from. */
+        val aotConfiguration get() = aotFile("aotconf")
+
+        /** Where [aotCache] is written, renamed into place once complete. */
+        val aotStaging get() = aotFile("aot$STAGING_SUFFIX")
+
+        /** Why each attempt to make [aotCache] failed, one per line, so runs do not record for it over and over. */
+        val aotFailed get() = aotFile("aotfailed")
+
+        val aotFiles get() = listOf(aotCache, aotConfiguration, aotStaging, aotFailed)
+
+        private fun aotFile(extension: String) =
+            aotDir.resolve("${home.name}-${hostJar.nameWithoutExtension}.$extension")
     }
 
     private companion object {
         const val ROOT_DIR = "jvm"
+        const val AOT_DIR = "jvm-aot"
         const val ASSETS_DIR = "jvm"
         const val HOST_ARCHIVE = "patcher-host.jar.xz"
         const val STAGING_SUFFIX = ".staging"

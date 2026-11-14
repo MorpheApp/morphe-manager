@@ -198,15 +198,18 @@ private fun SourcesPageContent(
     // Every source, not only the enabled ones: a disabled source still answers a patch search
     // and still declares whether it carries experimental targets
     val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
+    val appMetadata by patchBundleRepository.allAppMetadata.collectAsStateWithLifecycle()
+    // Walked by the app counts and by every keystroke of a search, so read off the patches once
+    val listedAppsBySource = remember(bundleInfo) { bundleInfo.mapValues { (_, info) -> info.listedApps() } }
     val withExperimentalVersions = remember(bundleInfo) {
         bundleInfo.filterValues { it.hasExperimentalVersions() }.keys
     }
     val blockedSources by patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
     val unseenNewApps by sourceMuteRepository.unseenNewApps.collectAsStateWithLifecycle(emptyMap())
-    val appCounts = remember(bundleInfo, keptFrom, unseenNewApps) {
+    val appCounts = remember(bundleInfo, listedAppsBySource, keptFrom, unseenNewApps) {
         bundleInfo.mapValues { (uid, info) ->
-            val listed = info.listedApps()
+            val listed = listedAppsBySource[uid].orEmpty()
             SourceAppCount(
                 brought = info.appsBrought(keptFrom).size,
                 listed = listed.size,
@@ -271,16 +274,23 @@ private fun SourcesPageContent(
     val orderedSources = remember(localOrder, sources, sourceSortMode) {
         sources.sortedForSourceSort(sourceSortMode, localOrder)
     }
-    // Patches are searched alongside source names, so one query answers which source carries a
-    // patch instead of the user opening every source to find out. Blocked sources stay out of it,
-    // since nothing they hold is reachable anyway
-    val patchMatchCounts: Map<Int, Int> = remember(bundleInfo, blockedSources, search.query) {
+    // Apps and patches are searched alongside source names, so one query answers which source
+    // carries them. Apps kept from a source still count, as this is how they are found again.
+    // Blocked sources stay out, since nothing they hold is reachable anyway
+    val searchMatches: Map<Int, SourceSearchMatches> = remember(
+        bundleInfo, listedAppsBySource, appMetadata, blockedSources, search.query
+    ) {
         val query = search.query.takeIf { it.isNotBlank() } ?: return@remember emptyMap()
         buildMap {
             bundleInfo.forEach { (uid, info) ->
                 if (uid in blockedSources) return@forEach
-                val matches = info.patches.count { it.matchesQuery(query) }
-                if (matches > 0) put(uid, matches)
+                val matches = SourceSearchMatches(
+                    apps = listedAppsBySource[uid].orEmpty().count { packageName ->
+                        appMatchesQuery(packageName, appMetadata[packageName]?.displayName, query)
+                    },
+                    patches = info.patches.count { it.matchesQuery(query) }
+                )
+                if (matches.apps > 0 || matches.patches > 0) put(uid, matches)
             }
         }
     }
@@ -293,17 +303,18 @@ private fun SourcesPageContent(
             )
         }
     }
-    val visibleSources = remember(filteredSources, patchMatchCounts, search.query) {
+    val visibleSources = remember(filteredSources, searchMatches, search.query) {
         val query = search.query
         if (query.isBlank()) return@remember filteredSources
         filteredSources
-            .filter { source -> source.matchesQuery(query) || source.uid in patchMatchCounts }
-            // A source the query names is the one that was asked for; the rest rank by how much
-            // of the query they carry. The sort is stable, so ties keep the order the sort mode
-            // gave them, and clearing the query drops back to that order untouched
+            .filter { source -> source.matchesQuery(query) || source.uid in searchMatches }
+            // A source the query names comes first, then the ones patching an app it names, then
+            // the rest by matching patches. The sort is stable, so ties keep the order the sort
+            // mode gave them, and clearing the query drops back to that order untouched
             .sortedWith(
                 compareByDescending<PatchBundleSource> { it.matchesQuery(query) }
-                    .thenByDescending { patchMatchCounts[it.uid] ?: 0 }
+                    .thenByDescending { searchMatches[it.uid]?.apps ?: 0 }
+                    .thenByDescending { searchMatches[it.uid]?.patches ?: 0 }
             )
     }
     // The alphabet rail reads positions off a list that is in name order, which a search ranking
@@ -558,7 +569,7 @@ private fun SourcesPageContent(
                                     bundle = bundle,
                                     info = SourceCardInfo(
                                         patchCount = patchCounts[bundle.uid] ?: 0,
-                                        patchMatchCount = patchMatchCounts[bundle.uid],
+                                        searchMatches = searchMatches[bundle.uid],
                                         appCount = appCounts[bundle.uid] ?: SourceAppCount.NONE,
                                         isUpdating = bundle.uid in activeUpdateUids,
                                         metadataFetchError = metadataFetchErrors[bundle.uid],
@@ -731,7 +742,8 @@ private fun SourcesPageContent(
     DialogHost(target = bundleToShowApps.value) { src ->
         SourceAppsDialog(
             onDismissRequest = { bundleToShowApps.value = null },
-            src = src
+            src = src,
+            initialQuery = search.query
         )
     }
 
@@ -813,11 +825,14 @@ private data class SourceAppCount(val brought: Int, val listed: Int, val unseen:
     }
 }
 
+/** The apps and patches of a source the page's search finds, at least one of them above zero. */
+private data class SourceSearchMatches(val apps: Int, val patches: Int)
+
 /** What a source card reports about its source, beyond the source itself. */
 private data class SourceCardInfo(
     val patchCount: Int,
-    /** Patches matching the page's search, or null while nothing is searched. */
-    val patchMatchCount: Int?,
+    /** What the page's search finds in the source, or null while it finds nothing there. */
+    val searchMatches: SourceSearchMatches?,
     val appCount: SourceAppCount,
     val isUpdating: Boolean,
     val metadataFetchError: Throwable?,
@@ -903,7 +918,10 @@ private fun BundleManagementCard(
     val share = stringResource(R.string.share)
     val copy = stringResource(R.string.copy)
     val copyToClipboard = rememberCopyToClipboard()
-    val patchesLabel = stringResource(R.string.patches)
+    // The badge leads to the list holding what it counts, the apps when the search names any
+    val matchedApps = (info.searchMatches?.apps ?: 0) > 0
+    val searchMatchesLabel = stringResource(if (matchedApps) R.string.sources_apps else R.string.patches)
+    val onShowSearchMatches = if (matchedApps) actions.onAppsClick else actions.onPatchesClick
     val selectLabel = stringResource(R.string.accessibility_select_source)
     val moveUpLabel = stringResource(R.string.accessibility_move_up)
     val moveDownLabel = stringResource(R.string.accessibility_move_down)
@@ -1003,8 +1021,8 @@ private fun BundleManagementCard(
                             metadataFetchError = info.metadataFetchError,
                             problem = problem,
                             blockedInfo = info.blockedInfo,
-                            patchMatchCount = info.patchMatchCount,
-                            onShowPatchMatches = actions.onPatchesClick,
+                            searchMatches = info.searchMatches,
+                            onShowSearchMatches = onShowSearchMatches,
                             modifier = Modifier
                                 .background(headerColor)
                                 .padding(horizontal = cardStyle.contentPadding)
@@ -1034,8 +1052,8 @@ private fun BundleManagementCard(
                                     this.contentDescription = contentDesc
                                     customActions = buildList {
                                         // The match badge is a tap target the merged node swallows otherwise
-                                        if (info.patchMatchCount != null) {
-                                            add(CustomAccessibilityAction(patchesLabel) { actions.onPatchesClick(); true })
+                                        if (info.searchMatches != null) {
+                                            add(CustomAccessibilityAction(searchMatchesLabel) { onShowSearchMatches(); true })
                                         }
                                         // A long press is the only way into a selection, which a
                                         // screen reader cannot announce on its own
@@ -1118,11 +1136,9 @@ private fun BundleManagementCard(
                                         modifier = Modifier.tourTarget(TourTarget.SOURCE_PATCHES, tour),
                                         icon = MaterialSymbols.Rounded.Info,
                                         label = stringResource(R.string.patches),
-                                        value = if (info.patchMatchCount != null) {
-                                            "${info.patchMatchCount}/${info.patchCount}"
-                                        } else {
-                                            info.patchCount.toString()
-                                        },
+                                        value = info.searchMatches?.patches?.takeIf { it > 0 }
+                                            ?.let { matched -> "$matched/${info.patchCount}" }
+                                            ?: info.patchCount.toString(),
                                         onClick = actions.onPatchesClick,
                                         // A disabled source still lists what it holds, which is what the
                                         // decision to switch it back on is made on. A blocked one does not,
@@ -1347,8 +1363,8 @@ private fun BundleCardHeader(
     /** The most pressing problem with the source, named while the card is folded. */
     problem: SourceProblem? = null,
     blockedInfo: BlocklistRepository.BlockedEntry? = null,
-    patchMatchCount: Int? = null,
-    onShowPatchMatches: (() -> Unit)? = null,
+    searchMatches: SourceSearchMatches? = null,
+    onShowSearchMatches: (() -> Unit)? = null,
     // Whether the card is picked, null outside a selection. Marked where the chevron sits
     selected: Boolean? = null,
     // Set while reordering, which puts the drag handle where the chevron sits
@@ -1434,13 +1450,14 @@ private fun BundleCardHeader(
                     label = "bundle_subtitle_problem"
                 ) { shown ->
                     if (shown == null) {
+                        // A search badge squeezes it in the list too, so it scrolls through there as well
                         Text(
                             text = subtitle,
                             style = cardStyle.subtitleStyle,
                             color = cardStyle.subtitleColor,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.marquee(enabled = expanded)
+                            modifier = Modifier.marquee(enabled = expanded || searchMatches != null)
                         )
                     } else {
                         // As wide as its label, rather than the whole place it stands in
@@ -1455,26 +1472,28 @@ private fun BundleCardHeader(
                 }
 
                 // What the search found inside the source, pinned to the card edge like on an app
-                // card. It swaps in without an animation of its own, since the list behind it is
-                // already re-ordering on every keystroke
-                if (patchMatchCount != null) {
+                // card. Matching apps win over patches, as they answer the query more directly. It
+                // swaps in without an animation of its own, since the list behind it is already
+                // re-ordering on every keystroke
+                if (searchMatches != null) {
+                    val (count, plural) = if (searchMatches.apps > 0) {
+                        searchMatches.apps to R.plurals.home_category_app_count
+                    } else {
+                        searchMatches.patches to R.plurals.patch_count
+                    }
                     StatusBadge(
-                        text = pluralStringResource(
-                            R.plurals.sources_search_patch_matches,
-                            patchMatchCount,
-                            patchMatchCount.toString()
-                        ),
+                        text = pluralStringResource(plural, count, count.toString()),
                         icon = MaterialSymbols.Rounded.Search,
                         containerColor = cardStyle.chipContainerColor,
                         contentColor = cardStyle.chipContentColor,
-                        onClick = onShowPatchMatches
+                        onClick = onShowSearchMatches
                     )
                 }
             }
         }
 
         if (dragHandleModifier != null) {
-            DragHandle(modifier = dragHandleModifier)
+            DragHandle(modifier = dragHandleModifier, tint = cardStyle.subtitleColor)
         } else {
             // The chevron gives way to the mark while the card is picked rather than folded
             SelectionMark(

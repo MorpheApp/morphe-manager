@@ -88,7 +88,7 @@ private val ApkItemData.isInstallableFromStorage: Boolean
 
 /** Order of the saved APK lists. Entries of the same size keep to the order of their names. */
 enum class ApkSortMode(@param:StringRes val labelRes: Int) {
-    NAME(R.string.file_picker_sort_name_asc),
+    NAME(R.string.list_sort_name_asc),
     SIZE_DESC(R.string.file_picker_sort_size_desc),
     SIZE_ASC(R.string.file_picker_sort_size_asc);
 
@@ -290,6 +290,7 @@ private fun DialogHostScope.PatchedApksContent(
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
         InstallQueueRequest(
             file = file,
+            appName = item.displayName,
             originalPackageName = installedApp.originalPackageName,
             installedApp = installedApp,
             onPersistApp = { packageName, installType ->
@@ -521,6 +522,7 @@ private fun DialogHostScope.OriginalApksContent(
         val file = item.file?.takeIf { it.exists() } ?: return@mapNotNull null
         InstallQueueRequest(
             file = file,
+            appName = item.displayName,
             originalPackageName = item.packageName,
             onPersistApp = { _, _ -> true },
             onInstalled = { packageName ->
@@ -716,6 +718,7 @@ private fun DialogHostScope.ApkManagementDialogContent(
         accentColor = meta.accentColor,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = meta.icon, color = meta.accentColor, modifier = modifier)
                 },

@@ -39,13 +39,14 @@ import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
+import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
-import app.morphe.manager.service.ForegroundHoldService
+import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.patcher.PatcherErrorInfo
@@ -92,12 +93,20 @@ class PatcherViewModel(
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
     private val originalApkRepository: OriginalApkRepository,
     private val installerManager: InstallerManager,
+    private val foregroundWork: ForegroundWork,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel(), StepProgressProvider {
 
     private val saveOriginalApkMutex = Mutex()
 
     var exportMetadata by mutableStateOf<PatchedAppExportData?>(null)
+        private set
+
+    /**
+     * The APK this run built, read once it is written. A patch may give it a name, icon or
+     * package of its own, so the result is named by it rather than by the app the run started from.
+     */
+    var patchedPackageInfo by mutableStateOf<PackageInfo?>(null)
         private set
 
     /** Formatted export file name derived from [exportMetadata]. */
@@ -185,7 +194,7 @@ class PatcherViewModel(
      */
     suspend fun renameWarning(): RenameWarning? = withContext(Dispatchers.IO) {
         val target = input.targetPackageName ?: packageName
-        val result = pm.getPackageInfo(outputFile)?.packageName ?: return@withContext null
+        val result = patchedApp()?.packageName ?: return@withContext null
         if (result == target) return@withContext null
 
         // Patches rename an app for reasons of their own, and a build the user never asked to
@@ -375,7 +384,7 @@ class PatcherViewModel(
 
     // Parsing the patched APK stalls a frame, and export reaches here from the main thread
     private suspend fun buildExportMetadata(packageInfo: PackageInfo?): PatchedAppExportData? = withContext(Dispatchers.IO) {
-        val info = packageInfo ?: pm.getPackageInfo(outputFile) ?: return@withContext null
+        val info = packageInfo ?: patchedApp() ?: return@withContext null
         val label = runCatching { with(pm) { info.label() } }.getOrNull()
         val versionName = info.versionName?.takeUnless { it.isBlank() } ?: version ?: "unspecified"
         PatchedAppExportData(
@@ -412,6 +421,11 @@ class PatcherViewModel(
             stripsNativeLibs = prefs.stripUnusedNativeLibs.get()
         )
     }
+
+    /** [patchedPackageInfo], read from the APK the first time it is asked for. */
+    private suspend fun patchedApp(): PackageInfo? =
+        patchedPackageInfo ?: withContext(Dispatchers.IO) { pm.getPackageInfo(outputFile) }
+            ?.also { withContext(Dispatchers.Main) { patchedPackageInfo = it } }
 
     private fun refreshExportMetadata() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -565,6 +579,7 @@ class PatcherViewModel(
         _patcherSucceeded.value = progress.getBoolean(KEY_SUCCEEDED)
         showSuccessScreen = progress.getBoolean(KEY_SUCCESS_SCREEN)
         isPatching = false
+        if (_patcherSucceeded.value == true) viewModelScope.launch { patchedApp() }
     }
 
     /**
@@ -641,20 +656,23 @@ class PatcherViewModel(
 
     // Held from the start of the run, while the screen is still up, until the original is saved
     // and an auto-install has its own hold, since both follow the worker that ends its foreground
-    private var foregroundHold: ForegroundHoldService.Hold? = null
+    private var foregroundHold: ForegroundWork.Hold? = null
 
     private fun releaseForeground() {
-        foregroundHold?.release()
+        foregroundHold?.close()
         foregroundHold = null
     }
 
     private fun startWorker(options: Options) {
         releaseForeground()
-        foregroundHold = ForegroundHoldService.Hold(
-            app,
-            app.getText(R.string.patcher_notification_title),
-            app.getText(R.string.patcher_notification_text)
+        foregroundHold = foregroundWork.hold(
+            OngoingContent(
+                app.getText(R.string.patcher_notification_title),
+                app.getText(R.string.patcher_notification_text)
+            )
         )
+        // The run writes a new APK over the one read before
+        patchedPackageInfo = null
         val workId = launchWorker(options)
         patcherWorkerId = ParcelUuid(workId)
         observeWorker(workId)
@@ -667,7 +685,9 @@ class PatcherViewModel(
      * originalApksDir by the worker via onMergedApkReady - this call will detect the
      * existing record and skip re-saving. A mount install keeps the archive instead, which is
      * saved here, as the stock app it restores is installed from the archive's signed splits.
-     * For regular APK files, saves the APK itself.
+     * An archive with OBB files is saved here as well, since the merged APK lacks the OBB files
+     * patches read, so the worker does not keep it.
+     * For regular APK files, saves the APK itself, without the native libraries a run strips.
      *
      * Thread-safe: uses mutex to prevent concurrent saves from observeWorker and persistPatchedApp.
      */
@@ -705,7 +725,8 @@ class PatcherViewModel(
                 packageName = packageName,
                 version = originalVersion,
                 sourceFile = fileToSave,
-                moveSource = moveSource
+                moveSource = moveSource,
+                forMount = usingMountInstall
             )
 
             if (savedFile != null) {
@@ -726,9 +747,7 @@ class PatcherViewModel(
     ): Boolean = withContext(NonCancellable + Dispatchers.IO) {
         // NonCancellable: this body must run to completion even if the caller's scope is
         // canceled mid-way, so the DB row never diverges from the installed APK
-        val installedPackageInfo = currentPackageName?.let(pm::getPackageInfo)
-        val patchedPackageInfo = pm.getPackageInfo(outputFile)
-        val packageInfo = patchedPackageInfo ?: installedPackageInfo
+        val packageInfo = patchedApp() ?: currentPackageName?.let(pm::getPackageInfo)
         if (packageInfo == null) {
             Log.e(TAG, "Failed to resolve package info for patched APK")
             return@withContext false
@@ -746,7 +765,7 @@ class PatcherViewModel(
         // as terminal: skip both the internal copy and the DB entry so the app is not surfaced
         // as an installed patched app with no file to back it.
         if (!savePatchedEnabled && installType == InstallType.SAVED) {
-            val metadata = buildExportMetadata(patchedPackageInfo ?: packageInfo)
+            val metadata = buildExportMetadata(packageInfo)
             withContext(Dispatchers.Main) {
                 exportMetadata = metadata
             }
@@ -771,7 +790,7 @@ class PatcherViewModel(
             }
         }
 
-        val metadata = buildExportMetadata(patchedPackageInfo ?: packageInfo)
+        val metadata = buildExportMetadata(packageInfo)
         withContext(Dispatchers.Main) {
             exportMetadata = metadata
         }
@@ -967,7 +986,6 @@ class PatcherViewModel(
                 when (workInfo?.state) {
                     WorkInfo.State.SUCCEEDED -> {
                         patchRun.stopStallWatch()
-                        foregroundHold?.refresh()
 
                         // Save original APK before deleting temporary file (blocking).
                         // Launched independently so cancelling observeWorkerJob (new patch run)
@@ -983,6 +1001,8 @@ class PatcherViewModel(
                                         ?.takeIf { it.temporary && it.file != inputFile }
                                         ?.file?.delete()
                                 }
+                                // Read before the result shows, which names the app by it
+                                patchedApp()
                                 withContext(Dispatchers.Main) {
                                     if (!usingMountInstall) cleanupTemporaryInput()
                                     refreshExportMetadata()
@@ -1051,8 +1071,7 @@ class PatcherViewModel(
 
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
         // A patch is free to rename the app, and the name it built under is the one being replaced
-        val target = withContext(Dispatchers.IO) { pm.getPackageInfo(outputFile)?.packageName }
-            ?: packageName
+        val target = patchedApp()?.packageName ?: packageName
         if (!installerManager.autoInstallAllowed(target, mount = usingMountInstall)) {
             releaseForeground()
             return@launch

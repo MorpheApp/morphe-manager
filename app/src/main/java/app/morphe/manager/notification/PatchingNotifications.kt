@@ -25,8 +25,11 @@ import app.morphe.manager.R
  *
  * The ongoing one exists because a foreground service cannot go without one, and stays quiet on
  * [NotificationChannels.PATCHER]. Every service that holds the run in the foreground shows it under
- * [ONGOING_ID], so there is one notification whichever of them holds it. What the user should
- * notice, a result or an install waiting on them, goes to [NotificationChannels.PATCHING_RESULTS].
+ * [ONGOING_ID], so there is one notification whichever of them holds it.
+ * [ForegroundWork][app.morphe.manager.service.ForegroundWork] keeps it up to date, while the
+ * services of WorkManager and of the patcher process take their foreground under it as it stands
+ * when they start. What the user should notice, a result or an install waiting on them, goes to
+ * [NotificationChannels.PATCHING_RESULTS].
  */
 object PatchingNotifications {
     const val ONGOING_ID = 1
@@ -44,30 +47,20 @@ object PatchingNotifications {
         Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
     )
 
-    /**
-     * The ongoing notification for the run as [title] and [text] describe it.
-     *
-     * @param live Whether it is the Live Update of patching, the one step that reports progress.
-     * What holds the app in the foreground before and after it shows a plain notification.
-     * @param patchProgress Completed to total patches, or null while the step has no count.
-     */
+    /** The ongoing notification showing [content]. */
     fun ongoing(
         context: Context,
-        title: CharSequence,
-        text: CharSequence?,
-        live: Boolean,
-        patchProgress: Pair<Int, Int>? = null
+        content: OngoingContent
     ): Notification = Notification.Builder(context, NotificationChannels.PATCHER)
-        .setContentTitle(title)
-        .setContentText(text)
+        .setContentTitle(content.title)
+        .setContentText(content.text)
         .apply {
-            if (patchProgress != null) {
-                val (completed, total) = patchProgress
+            content.patchProgress?.let { (completed, total) ->
                 setSubText("$completed / $total")
                 setProgress(total, completed, false)
             }
-            if (live && Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
-                applyLiveUpdate(patchProgress)
+            if (content.live && Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+                applyLiveUpdate(content.patchProgress)
             }
             // Otherwise the system holds back a foreground started on screen for ten seconds, and
             // a run shows from its start or only near its end depending on how recent the last was
@@ -83,19 +76,9 @@ object PatchingNotifications {
         .setOnlyAlertOnce(true)
         .build()
 
-    /**
-     * Ends the Live Update with [ended], a plain notification, and takes the notification down.
-     * Left to the foreground that held it, the system removes the notification, while the Live
-     * Update shown apart from it, such as in the Now Bar of One UI, can stay behind. A foreground
-     * service that still holds the notification keeps it up as [ended] until it lets go.
-     */
-    fun endOngoing(context: Context, ended: Notification) {
-        val notificationManager = context.notificationManager
-        // Posting it again would bring back a notification the system took down already
-        if (notificationManager.activeNotifications.none { it.id == ONGOING_ID }) return
-        notificationManager.notify(ONGOING_ID, ended)
-        notificationManager.cancel(ONGOING_ID)
-    }
+    /** Whether the ongoing notification is on screen, which the user may have dismissed. */
+    fun isOngoingShown(context: Context): Boolean =
+        context.notificationManager.activeNotifications.any { it.id == ONGOING_ID }
 
     /** Request promotion to a Live Update, shown as a status bar chip while the manager is in the background. */
     @RequiresApi(Build.VERSION_CODES.BAKLAVA)

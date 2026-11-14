@@ -627,7 +627,8 @@ class HomeApps(
                     ignoredVersion = ignoredVersions[packageName]
                 ),
                 patchCount = 0,
-                isClone = slot.isClone
+                isClone = slot.isClone,
+                formFactor = bundleMeta?.formFactor
             )
         }
 
@@ -779,7 +780,8 @@ class HomeApps(
                     .reversed()
             )
             HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
-                compareByDescending<HomeAppItem> { it.showsUpdateBadge }
+                // Every card offering a rebuild, newer patches and a newer app version alike
+                compareByDescending<HomeAppItem> { it.status.offersRebuild }
                     .then(morpheComparator)
             )
             HomeAppSortMode.RECENTLY_PATCHED -> items.sortedWith(

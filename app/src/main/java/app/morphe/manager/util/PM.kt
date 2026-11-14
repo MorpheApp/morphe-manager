@@ -82,10 +82,13 @@ class PM(
             null
         }
 
-    /** [file] read as a package, its label and icon loadable. [flags] narrows what is parsed. */
+    /**
+     * [file] read as a package, its label and icon loadable. [flags] widens what is parsed, which
+     * leaves out components by default, as parsing them is the slow part of a large APK.
+     */
     fun getPackageInfo(
         file: File,
-        flags: Int = PackageManager.GET_META_DATA or PackageManager.GET_ACTIVITIES
+        flags: Int = PackageManager.GET_META_DATA
     ): PackageInfo? {
         val path = file.absolutePath
         val pkgInfo = app.packageManager.getPackageArchiveInfo(path, flags) ?: return null

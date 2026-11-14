@@ -1,3 +1,83 @@
+## [2.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.3...v2.6.0-dev.4) (2026-11-14)
+
+### Features
+
+* Create folders right from the folder picker ([a49ec92](https://github.com/MorpheApp/morphe-manager/commit/a49ec929fa2d93d492ff2b69a057c41b334fdbcf))
+* Give list sort and filter options consistent names ([e3be741](https://github.com/MorpheApp/morphe-manager/commit/e3be741803ec40828e4e706a166956ff9a84ad38))
+* List the sources an app is patched from first in its selection ([2caaf5e](https://github.com/MorpheApp/morphe-manager/commit/2caaf5e71790c327a75cc5e1d4e8a91baf971c7b))
+* Mark apps built for TV, Wear OS or cars on their cards ([b1a3c67](https://github.com/MorpheApp/morphe-manager/commit/b1a3c679aace12292c3dc89b87c5e17bc9eedcc2))
+* Redesign app cards around a single status line ([cb43863](https://github.com/MorpheApp/morphe-manager/commit/cb4386379f280add757954719e449decb86a3471))
+* Refine the install queue overlay ([8b8abfe](https://github.com/MorpheApp/morphe-manager/commit/8b8abfef6e83ab2900b2f0dcef8a74767c5cc667))
+* Swipe an app in a source's list to see its patches ([2c95d9b](https://github.com/MorpheApp/morphe-manager/commit/2c95d9b7e35626112da8694a68663f608c8f91d9))
+* Treat app version updates as updates when sorting and re-patching ([f7112d0](https://github.com/MorpheApp/morphe-manager/commit/f7112d0e5d1457ee6de218dd08498ac070c5ab5c))
+
+### Performance Improvements
+
+* Keep an AOT cache of the patcher JVM and compile with C2 alongside it ([#1433](https://github.com/MorpheApp/morphe-manager/issues/1433)) ([ded5f5b](https://github.com/MorpheApp/morphe-manager/commit/ded5f5bcbdb7c47d3dc551a882b4546dcf803b8c))
+
+### Bug Fixes
+
+* Call logcat by its full path in the root mount watcher and log its start and end ([4592f16](https://github.com/MorpheApp/morphe-manager/commit/4592f16268137b541f16aaff71ec5c94826fed46))
+* Name only the sources patches were taken from in batch export names ([b9b50f5](https://github.com/MorpheApp/morphe-manager/commit/b9b50f52ce47abbff43c4629bce9a578417c2dbc))
+
+## [2.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.2...v2.6.0-dev.3) (2026-11-14)
+
+### Features
+
+* Back up settings automatically to a folder of choice ([3bc984a](https://github.com/MorpheApp/morphe-manager/commit/3bc984a98027b80cf109ebebe59336bb62667963))
+* Find sources by the apps they patch ([749ab11](https://github.com/MorpheApp/morphe-manager/commit/749ab1108e021bcb5e500e5e5acfecbeae8e1374))
+* Give a list header's glyph up to a title that would not fit ([6a76ba8](https://github.com/MorpheApp/morphe-manager/commit/6a76ba860027a66789719d13bd3a5ae9de195d9c))
+* Show the patched app's own name and icon on the result screen ([f78f209](https://github.com/MorpheApp/morphe-manager/commit/f78f2096ecb12635c62ae3d649da860dc3a884c9))
+
+### Bug Fixes
+
+* Open the batch queue scrolled to its top ([8040c2c](https://github.com/MorpheApp/morphe-manager/commit/8040c2cb6908ed560cb6a15bbaaf8684016f13f3))
+
+## [2.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.1...v2.6.0-dev.2) (2026-11-13)
+
+### Features
+
+* Choose how far Morphe updates on its own ([de4f784](https://github.com/MorpheApp/morphe-manager/commit/de4f78424b549b8a2288320b87e0453714f6b068))
+* Copy a version and its build by pressing it in a version list ([#1431](https://github.com/MorpheApp/morphe-manager/issues/1431)) ([4c12e8a](https://github.com/MorpheApp/morphe-manager/commit/4c12e8a8ef398a31c2e6eddbb55d30db66136003))
+* Keep only the device's native libraries in saved original APKs ([9d90dfd](https://github.com/MorpheApp/morphe-manager/commit/9d90dfd7986e63fa423444f364e8521a4c61735c))
+* Keep swiped alerts behind the bell across launches and show how many wait there ([43fc10a](https://github.com/MorpheApp/morphe-manager/commit/43fc10adddd407fbbb454dc8f67450bd0445a5cb))
+* Mark sources that offer only universal patches for the app ([27f99af](https://github.com/MorpheApp/morphe-manager/commit/27f99affa5c14de84952f5ccbffc9ba181179a5c))
+* Open patch sources from messengers and the share sheet ([8fb868a](https://github.com/MorpheApp/morphe-manager/commit/8fb868a15ac7f3391ad09432aa30807379b3b552))
+* Show each source's patch count and release date when picking an APK version ([2f2106a](https://github.com/MorpheApp/morphe-manager/commit/2f2106ae009e81c73799f378430e50c34c328a0e))
+* Show the original app version when it is newer than the patches support ([11b9db1](https://github.com/MorpheApp/morphe-manager/commit/11b9db1006fa66868918ab6be75ac621ca499ed8))
+* Show which app the install queue is on ([d7ba533](https://github.com/MorpheApp/morphe-manager/commit/d7ba533f264e4139f921851becb6012dfb3ec8ac))
+
+### Bug Fixes
+
+* Ask for one APK version in the singular in expert mode ([5c3f41d](https://github.com/MorpheApp/morphe-manager/commit/5c3f41d04b279497514d46d2a985c7d6b3bc0ed3))
+* Count universal patches the way the patcher does ([257dea3](https://github.com/MorpheApp/morphe-manager/commit/257dea3daa66e87a9e908e3e55775d3af5fd5f93))
+* Inset menu entries evenly on every side ([d65f887](https://github.com/MorpheApp/morphe-manager/commit/d65f887bc79881c69ce8753119db958a70da6d4e))
+* Install with root from a location the system can read ([32585fb](https://github.com/MorpheApp/morphe-manager/commit/32585fb266891952f2e9a63ae31e62e359a332e3))
+* Install with root only for the user Morphe runs in ([651961a](https://github.com/MorpheApp/morphe-manager/commit/651961ab1d72b096acab6b6696bec60bfbc5e586))
+* Mount after patching only when installing automatically ([50aa259](https://github.com/MorpheApp/morphe-manager/commit/50aa2590aec9a4c20d326b004467e0fa4122c05e))
+* Recognize mount installs served by another redirect provider ([5bad5f0](https://github.com/MorpheApp/morphe-manager/commit/5bad5f056286f7433cc54d809cab04497ecb0053))
+* Send the build code and form factor to apk web-search ([24c8d07](https://github.com/MorpheApp/morphe-manager/commit/24c8d07acc83196a05388e6d7adea2b0e2ea2822))
+* Show the work still under way in the patching notification ([d0727d7](https://github.com/MorpheApp/morphe-manager/commit/d0727d79ef89474a22997395f30e7619ad729e6b))
+* Stop waiting on an install session that ended without a status ([901f910](https://github.com/MorpheApp/morphe-manager/commit/901f910df6f5cbaa00bb7a1e5f6af7b2e4110202))
+* Take down the patching notification once the patcher process ends ([3a551b9](https://github.com/MorpheApp/morphe-manager/commit/3a551b9e2bbf1f514c40ed06e75613bb61757aba))
+
+## [2.6.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0...v2.6.0-dev.1) (2026-11-12)
+
+### Features
+
+* Download missing and outdated APKs in batch with a trusted helper ([#1406](https://github.com/MorpheApp/morphe-manager/issues/1406)) ([19bdf7b](https://github.com/MorpheApp/morphe-manager/commit/19bdf7b2274f96e19a5c1a03e23a02d7806bf557))
+* Pass the OBB files of a split archive to patches ([#1404](https://github.com/MorpheApp/morphe-manager/issues/1404)) ([7d3a951](https://github.com/MorpheApp/morphe-manager/commit/7d3a95109373fb0ed503b6602826b6d587568926))
+
+### Performance Improvements
+
+* Keep one bring into view spec while list insets ease ([8baa7ef](https://github.com/MorpheApp/morphe-manager/commit/8baa7efa04a5916e819ffb8a7b06296518f6681f))
+
+### Bug Fixes
+
+* Draw dialogs as part of the screen they open on ([#1429](https://github.com/MorpheApp/morphe-manager/issues/1429)) ([cd702b5](https://github.com/MorpheApp/morphe-manager/commit/cd702b5402fa78db937894a89a9329fb6f4d68ae))
+* Match APKCube download button to its site ([#1379](https://github.com/MorpheApp/morphe-manager/issues/1379)) ([5a9b200](https://github.com/MorpheApp/morphe-manager/commit/5a9b2000e0cd59a46bd4155531f17c8aefd20848))
+* Scroll selected apps above the action panel ([#1405](https://github.com/MorpheApp/morphe-manager/issues/1405)) ([e215e55](https://github.com/MorpheApp/morphe-manager/commit/e215e55b1ec6ba9a6c887161cdde253fdeab7568))
+
 ## [2.5.0](https://github.com/MorpheApp/morphe-manager/compare/v2.4.0...v2.5.0) (2026-11-06)
 
 ### Features
