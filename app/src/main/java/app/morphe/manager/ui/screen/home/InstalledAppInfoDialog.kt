@@ -197,7 +197,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // The applied patches and the web links open in place of the information, under its header
     var page by rememberSaveable { mutableStateOf(InfoPage.Main) }
 
-    // The link selection is only ever changed on a system screen, which is left by coming back here
+    // The link selection can also change on a system screen, which is left by coming back here
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.refreshAppLinks()
     }
@@ -444,16 +444,17 @@ fun DialogHostScope.InstalledAppInfoDialog(
         )
         // Gone with the links, should the app drop them while the page is open
         InfoPage.AppLinks -> viewModel.appLinksStatus?.takeIf { it.hasSupportedLinks }?.let { status ->
+            val controls = rememberAppLinksControls(
+                packageName = installedApp?.currentPackageName ?: packageName,
+                status = status,
+                onRefresh = viewModel::refreshAppLinks
+            )
             InfoSubpage(
                 page = page,
                 subtitle = stringResource(R.string.app_links_title),
-                actions = rememberAppLinksActions(
-                    packageName = installedApp?.currentPackageName ?: packageName,
-                    status = status,
-                    onRefresh = viewModel::refreshAppLinks
-                )
+                actions = controls.actions
             ) {
-                AppLinksContent(status = status, accentColor = infoAccentColor)
+                AppLinksContent(status = status, controls = controls, accentColor = infoAccentColor)
             }
         }
     }
