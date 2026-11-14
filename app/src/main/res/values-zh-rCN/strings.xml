@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">选择其他应用</string>
     <string name="home_not_patched_yet">尚未修补</string>
     <string name="home_unpatched_version_installed">已安装未修补版本</string>
-    <string name="home_unpatched_badge">未修补</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">更新至 %s</string>
+    <string name="home_app_status_newer_patches">新补丁</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">电视</string>
     <string name="form_factor_automotive">汽车</string>
     <string name="home_no_patches_available">没有可用的补丁</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">搜索应用</string>
     <string name="list_options_title">排序和筛选</string>
     <string name="list_options_state_description">按 %1$s 排序，按 %2$s 筛选</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">手动</string>
+    <string name="list_sort_name_asc">名称 (A–Z)</string>
+    <string name="list_sort_name_desc">名称 (Z–A)</string>
+    <string name="home_app_filter_all">全部</string>
+    <string name="home_app_filter_not_patched">尚未修补</string>
     <string name="home_app_filter_clones">克隆应用</string>
     <string name="home_app_grouping_none">无</string>
     <string name="home_app_sort_manual_hint">长按应用，然后点击重新排序按钮</string>
-    <string name="home_app_sort_recommended">推荐顺序</string>
-    <string name="home_app_sort_updates_first">补丁更新优先</string>
+    <string name="home_app_sort_recommended">推荐</string>
+    <string name="home_app_sort_updates_first">更新优先</string>
     <string name="home_app_sort_recently_patched">最近修补的</string>
     <string name="home_no_apps_title">没有可用的应用</string>
     <string name="home_no_apps_subtitle">添加一个补丁源或在 %s 中启用现有补丁源</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">搜索源和补丁</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">需要关注</string>
-    <string name="sources_sort_manual">手动排序</string>
     <string name="sources_sort_manual_hint">长按源以重新排序</string>
     <string name="sources_sort_last_updated">上次更新</string>
     <string name="sources_sort_enabled_first">已启用优先</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">存储</string>
     <string name="file_saver_downloads_failed">无法在下载文件夹中创建文件</string>
     <string name="file_saver_saving_to_downloads">此设备没有保存界面，因此文件将以 %1$s 的名称保存到下载文件夹</string>
-    <string name="file_picker_sort_name_asc">名称 (A–Z)</string>
-    <string name="file_picker_sort_name_desc">名称 (Z–A)</string>
     <string name="file_picker_sort_size_desc">大小 (从大到小)</string>
     <string name="file_picker_sort_size_asc">大小 (从小到大)</string>
     <string name="file_picker_sort_date_desc">日期 (最新到旧)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">作者</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">文件</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">克隆</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">修补</string>

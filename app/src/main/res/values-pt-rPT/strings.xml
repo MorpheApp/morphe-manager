@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Selecionar outras aplicações</string>
     <string name="home_not_patched_yet">Ainda não foi modificado</string>
     <string name="home_unpatched_version_installed">Versão não corrigida instalada</string>
-    <string name="home_unpatched_badge">Não modificado</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Atualizar para %s</string>
+    <string name="home_app_status_newer_patches">Novas modificações</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automotivo</string>
     <string name="home_no_patches_available">Não há modificações disponíveis</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Pesquisar aplicações</string>
     <string name="list_options_title">Ordenar e filtrar</string>
     <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Nome (A–Z)</string>
+    <string name="list_sort_name_desc">Nome (Z–A)</string>
+    <string name="home_app_filter_all">Tudo</string>
+    <string name="home_app_filter_not_patched">Não modificado</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">Nenhum</string>
     <string name="home_app_sort_manual_hint">Mantenha premido um app e, em seguida, toque no botão de reordenar</string>
-    <string name="home_app_sort_recommended">Ordem recomendada</string>
-    <string name="home_app_sort_updates_first">Atualizações de patch primeiro</string>
+    <string name="home_app_sort_recommended">Recomendados</string>
+    <string name="home_app_sort_updates_first">Atualizações primeiro</string>
     <string name="home_app_sort_recently_patched">Corrigido recentemente</string>
     <string name="home_no_apps_title">Nenhuma aplicação disponível</string>
     <string name="home_no_apps_subtitle">Adiciona uma fonte de modificações ou ativa uma já existente em %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Pesquisar fontes e patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Precisa de atenção</string>
-    <string name="sources_sort_manual">Ordem manual</string>
     <string name="sources_sort_manual_hint">Mantenha pressionado uma fonte para reorganizar</string>
     <string name="sources_sort_last_updated">Última atualização</string>
     <string name="sources_sort_enabled_first">Ativados primeiro</string>
@@ -1319,8 +1325,6 @@ Detalhes: %2$s"</string>
     <string name="file_picker_storages">Armazenamentos</string>
     <string name="file_saver_downloads_failed">Não foi possível criar o ficheiro em Downloads</string>
     <string name="file_saver_saving_to_downloads">Este dispositivo não tem ecrã de guardar, pelo que o ficheiro vai para Downloads como %1$s</string>
-    <string name="file_picker_sort_name_asc">Nome (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nome (Z–A)</string>
     <string name="file_picker_sort_size_desc">Tamanho (maior primeiro)</string>
     <string name="file_picker_sort_size_asc">Tamanho (menor primeiro)</string>
     <string name="file_picker_sort_date_desc">Data (mais recente primeiro)</string>
@@ -1458,6 +1462,7 @@ Detalhes: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Ficheiro</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clonar</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Aplicar modificações</string>

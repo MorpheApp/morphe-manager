@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Veldu önnur forrit</string>
     <string name="home_not_patched_yet">Ekki breytt ennþá</string>
     <string name="home_unpatched_version_installed">Óplástruð útgáfa uppsett</string>
-    <string name="home_unpatched_badge">Ekki plástrað</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Uppfæra í %s</string>
+    <string name="home_app_status_newer_patches">Nýir plástrar</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Sjónvarp</string>
     <string name="form_factor_automotive">Ökutæki</string>
     <string name="home_no_patches_available">Engar breytistillingar eru til staðar</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Leita að forritum</string>
     <string name="list_options_title">Raða og sía</string>
     <string name="list_options_state_description">Raðað eftir %1$s, síað eftir %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Handvirkt</string>
+    <string name="list_sort_name_asc">Nafn (A–Z)</string>
+    <string name="list_sort_name_desc">Nafn (Z–A)</string>
+    <string name="home_app_filter_all">Allt</string>
+    <string name="home_app_filter_not_patched">Ekki plástrað</string>
     <string name="home_app_filter_clones">Klónar</string>
     <string name="home_app_grouping_none">Engin</string>
     <string name="home_app_sort_manual_hint">Ýttu lengi á app og ýttu svo á endurröðunarhnappinn</string>
-    <string name="home_app_sort_recommended">Ráðlögð röð</string>
-    <string name="home_app_sort_updates_first">Uppfærslur á breytistillingum fyrst</string>
+    <string name="home_app_sort_recommended">Ráðlagt</string>
+    <string name="home_app_sort_updates_first">Uppfærslur fyrst</string>
     <string name="home_app_sort_recently_patched">Nýlega plástruð</string>
     <string name="home_no_apps_title">Engin forrit í boði</string>
     <string name="home_no_apps_subtitle">Bættu við heimild eða virkjaðu núverandi í %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Leita að uppsprettum og plástrum</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Þarfnast athugunar</string>
-    <string name="sources_sort_manual">Handvirk röð</string>
     <string name="sources_sort_manual_hint">Haltu inni uppsprettu til að endurraða</string>
     <string name="sources_sort_last_updated">Síðast uppfært</string>
     <string name="sources_sort_enabled_first">Virkjaðar fyrst</string>
@@ -1318,8 +1324,6 @@ Nánari upplýsingar: %2$s"</string>
     <string name="file_picker_storages">Geymslur</string>
     <string name="file_saver_downloads_failed">Ekki tókst að búa til skrána í Niðurhal</string>
     <string name="file_saver_saving_to_downloads">Þetta tæki hefur engan vistunarskjá, svo skráin fer í Niðurhal sem %1$s</string>
-    <string name="file_picker_sort_name_asc">Nafn (A–Ö)</string>
-    <string name="file_picker_sort_name_desc">Nafn (Ö–A)</string>
     <string name="file_picker_sort_size_desc">Stærð (stærst fyrst)</string>
     <string name="file_picker_sort_size_asc">Stærð (minnst fyrst)</string>
     <string name="file_picker_sort_date_desc">Dagsetning (nýjasta fyrst)</string>
@@ -1457,6 +1461,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="author">Höfundur</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Skrá</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klóna</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Breytistilling</string>

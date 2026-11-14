@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Επιλογή άλλων εφαρμογών</string>
     <string name="home_not_patched_yet">Δεν τροποποιήθηκε ακόμη</string>
     <string name="home_unpatched_version_installed">Εγκαταστάθηκε η μη τροποποιημένη έκδοση</string>
-    <string name="home_unpatched_badge">Δεν τροποποιήθηκε</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Ενημέρωση σε %s</string>
+    <string name="home_app_status_newer_patches">Νέα διορθώματα</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Τηλεόραση</string>
     <string name="form_factor_automotive">Αυτοκίνητο</string>
     <string name="home_no_patches_available">Δεν υπάρχουν διαθέσιμες τροποποιήσεις</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Αναζήτηση εφαρμογών</string>
     <string name="list_options_title">Ταξινόμηση και φιλτράρισμα</string>
     <string name="list_options_state_description">Ταξινομημένο κατά %1$s, φιλτραρισμένο κατά %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Χειροκίνητο</string>
+    <string name="list_sort_name_asc">Όνομα (Α–Ω)</string>
+    <string name="list_sort_name_desc">Όνομα (Ω–Α)</string>
+    <string name="home_app_filter_all">Όλα</string>
+    <string name="home_app_filter_not_patched">Δεν τροποποιήθηκε</string>
     <string name="home_app_filter_clones">Κλώνοι</string>
     <string name="home_app_grouping_none">Κανένα</string>
     <string name="home_app_sort_manual_hint">Κρατήστε πατημένη μια εφαρμογή και στη συνέχεια πατήστε το κουμπί αναδιάταξης</string>
-    <string name="home_app_sort_recommended">Προτεινόμενη σειρά</string>
-    <string name="home_app_sort_updates_first">Ενημερώσεις τροποποιήσεων πρώτα</string>
+    <string name="home_app_sort_recommended">Συνιστάται</string>
+    <string name="home_app_sort_updates_first">Ενημερώσεις πρώτα</string>
     <string name="home_app_sort_recently_patched">Πρόσφατα επιδιορθωμένα</string>
     <string name="home_no_apps_title">Καμία διαθέσιμη εφαρμογή</string>
     <string name="home_no_apps_subtitle">Προσθέστε μια πηγή τροποποιήσεων ή ενεργοποιήστε μια υπάρχουσα στο %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Αναζήτηση πηγών και επιδιορθώσεων</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Απαιτούν προσοχή</string>
-    <string name="sources_sort_manual">Χειροκίνητη ταξινόμηση</string>
     <string name="sources_sort_manual_hint">Πατήστε παρατεταμένα μια πηγή για να την αναδιατάξετε</string>
     <string name="sources_sort_last_updated">Τελευταία ενημέρωση</string>
     <string name="sources_sort_enabled_first">Ενεργοποιημένες πρώτα</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Αποθηκεύσεις</string>
     <string name="file_saver_downloads_failed">Δεν ήταν δυνατή η δημιουργία του αρχείου στον φάκελο Λήψεις</string>
     <string name="file_saver_saving_to_downloads">Αυτή η συσκευή δεν διαθέτει οθόνη αποθήκευσης, επομένως το αρχείο αποθηκεύεται στις Λήψεις ως %1$s</string>
-    <string name="file_picker_sort_name_asc">Όνομα (Α–Ω)</string>
-    <string name="file_picker_sort_name_desc">Όνομα (Ω–Α)</string>
     <string name="file_picker_sort_size_desc">Μέγεθος (μεγαλύτερο πρώτο)</string>
     <string name="file_picker_sort_size_asc">Μέγεθος (μικρότερο πρώτο)</string>
     <string name="file_picker_sort_date_desc">Ημερομηνία (πιο πρόσφατο πρώτο)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Συγγραφέας</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Αρχείο</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Κλώνος</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Τροποποίηση</string>

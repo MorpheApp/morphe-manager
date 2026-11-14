@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Pilih aplikasi lain</string>
     <string name="home_not_patched_yet">Belum ditampal lagi</string>
     <string name="home_unpatched_version_installed">Versi tanpa tampalan dipasang</string>
-    <string name="home_unpatched_badge">Tidak ditampal</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Kemas kini ke %s</string>
+    <string name="home_app_status_newer_patches">Tampalan baharu</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automotif</string>
     <string name="home_no_patches_available">Tiada tampalan tersedia</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Cari aplikasi</string>
     <string name="list_options_title">Isih dan tapis</string>
     <string name="list_options_state_description">Diisih mengikut %1$s, ditapis mengikut %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Nama (A–Z)</string>
+    <string name="list_sort_name_desc">Nama (Z–A)</string>
+    <string name="home_app_filter_all">Semua</string>
+    <string name="home_app_filter_not_patched">Tidak ditampal</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_grouping_none">Tiada</string>
     <string name="home_app_sort_manual_hint">Tekan lama pada aplikasi, kemudian ketik butang susun semula</string>
-    <string name="home_app_sort_recommended">Susunan disyorkan</string>
-    <string name="home_app_sort_updates_first">Kemas kini tampalan dahulu</string>
+    <string name="home_app_sort_recommended">Disyorkan</string>
+    <string name="home_app_sort_updates_first">Kemas kini dahulu</string>
     <string name="home_app_sort_recently_patched">Baru-baru ditampal</string>
     <string name="home_no_apps_title">Tiada aplikasi tersedia</string>
     <string name="home_no_apps_subtitle">Tambahkan sumber tambalan atau benarkan yang sedia ada di %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Cari sumber dan tampalan</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Perlu perhatian</string>
-    <string name="sources_sort_manual">Susunan manual</string>
     <string name="sources_sort_manual_hint">Tekan lama sumber untuk menyusun semula</string>
     <string name="sources_sort_last_updated">Kemas kini terakhir</string>
     <string name="sources_sort_enabled_first">Diaktifkan dahulu</string>
@@ -1320,8 +1326,6 @@ Butiran: %2$s"</string>
     <string name="file_picker_storages">Storan</string>
     <string name="file_saver_downloads_failed">Tidak dapat mencipta fail dalam Muat Turun</string>
     <string name="file_saver_saving_to_downloads">Peranti ini tidak mempunyai skrin simpan, jadi fail akan disimpan ke Muat Turun sebagai %1$s</string>
-    <string name="file_picker_sort_name_asc">Nama (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nama (Z–A)</string>
     <string name="file_picker_sort_size_desc">Saiz (terbesar dahulu)</string>
     <string name="file_picker_sort_size_asc">Saiz (terkecil dahulu)</string>
     <string name="file_picker_sort_date_desc">Tarikh (terbaharu dahulu)</string>
@@ -1459,6 +1463,7 @@ Butiran: %2$s"</string>
     <string name="author">Pengarang</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fail</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Tampalan</string>

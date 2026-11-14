@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Andere Apps auswählen</string>
     <string name="home_not_patched_yet">Noch nicht gepatcht</string>
     <string name="home_unpatched_version_installed">Ungepatchte Version installiert</string>
-    <string name="home_unpatched_badge">Nicht gepatcht</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Update auf %s</string>
+    <string name="home_app_status_newer_patches">Neue Patches</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Fernseher</string>
     <string name="form_factor_automotive">Auto</string>
     <string name="home_no_patches_available">Keine Patches verfügbar</string>
@@ -66,11 +67,17 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="home_search_apps">Apps suchen</string>
     <string name="list_options_title">Sortieren und filtern</string>
     <string name="list_options_state_description">Sortiert nach %1$s, gefiltert nach %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuell</string>
+    <string name="list_sort_name_asc">Name (A–Z)</string>
+    <string name="list_sort_name_desc">Name (Z–A)</string>
+    <string name="home_app_filter_all">Alle</string>
+    <string name="home_app_filter_not_patched">Nicht gepatcht</string>
     <string name="home_app_filter_clones">Klone</string>
     <string name="home_app_grouping_none">Keine</string>
     <string name="home_app_sort_manual_hint">Halte eine App gedrückt und tippe dann auf die Schaltfläche zum Sortieren</string>
-    <string name="home_app_sort_recommended">Empfohlene Reihenfolge</string>
-    <string name="home_app_sort_updates_first">Patch-Updates zuerst</string>
+    <string name="home_app_sort_recommended">Empfohlen</string>
+    <string name="home_app_sort_updates_first">Updates zuerst</string>
     <string name="home_app_sort_recently_patched">Zuletzt gepatcht</string>
     <string name="home_no_apps_title">Keine Apps verfügbar</string>
     <string name="home_no_apps_subtitle">Eine Patch-Quelle hinzufügen oder eine vorhandene in %s aktivieren</string>
@@ -160,7 +167,6 @@ Diese App aus der vorhandenen Quelle hinzufügen?</string>
     <string name="sources_search">Quellen und Patches durchsuchen</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Aktion erforderlich</string>
-    <string name="sources_sort_manual">Manuelle Reihenfolge</string>
     <string name="sources_sort_manual_hint">Halte eine Quelle gedrückt, um sie neu anzuordnen</string>
     <string name="sources_sort_last_updated">Zuletzt aktualisiert</string>
     <string name="sources_sort_enabled_first">Aktivierte zuerst</string>
@@ -1321,8 +1327,6 @@ Details: %2$s"</string>
     <string name="file_picker_storages">Speicherorte</string>
     <string name="file_saver_downloads_failed">Die Datei konnte nicht in Downloads erstellt werden</string>
     <string name="file_saver_saving_to_downloads">Dieses Gerät verfügt über keinen Speicherbildschirm, daher wird die Datei als %1$s in Downloads gespeichert</string>
-    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
     <string name="file_picker_sort_size_desc">Größe (größte zuerst)</string>
     <string name="file_picker_sort_size_asc">Größe (kleinste zuerst)</string>
     <string name="file_picker_sort_date_desc">Datum (neueste zuerst)</string>
@@ -1460,6 +1464,7 @@ Details: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Datei</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonen</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patchen</string>

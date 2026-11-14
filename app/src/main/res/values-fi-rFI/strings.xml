@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Valitse muita sovelluksia</string>
     <string name="home_not_patched_yet">Ei vielä muokattu</string>
     <string name="home_unpatched_version_installed">Korjaamaton versio asennettu</string>
-    <string name="home_unpatched_badge">Ei muokattu</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Päivitä versioon %s</string>
+    <string name="home_app_status_newer_patches">Uusia korjauksia</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Ajoneuvo</string>
     <string name="home_no_patches_available">Lisäosia ei ole saatavilla</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Hae sovelluksia</string>
     <string name="list_options_title">Lajittele ja suodata</string>
     <string name="list_options_state_description">Järjestetty %1$s, suodatettu %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuaalinen</string>
+    <string name="list_sort_name_asc">Nimi (A–Ö)</string>
+    <string name="list_sort_name_desc">Nimi (Ö–A)</string>
+    <string name="home_app_filter_all">Kaikki</string>
+    <string name="home_app_filter_not_patched">Ei muokattu</string>
     <string name="home_app_filter_clones">Kloonit</string>
     <string name="home_app_grouping_none">Ei mitään</string>
     <string name="home_app_sort_manual_hint">Pidä sovellusta painettuna ja napauta sitten järjestyspainiketta</string>
-    <string name="home_app_sort_recommended">Suositeltu järjestys</string>
-    <string name="home_app_sort_updates_first">Paikkauspäivitykset ensin</string>
+    <string name="home_app_sort_recommended">Suositellut</string>
+    <string name="home_app_sort_updates_first">Päivitykset ensin</string>
     <string name="home_app_sort_recently_patched">Viimeksi paikatut</string>
     <string name="home_no_apps_title">Ei sovelluksia saatavilla</string>
     <string name="home_no_apps_subtitle">Lisää päivityslähde tai ota olemassa oleva käyttöön %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Hae lähteitä ja korjauksia</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Huomioitavaa</string>
-    <string name="sources_sort_manual">Manuaalinen järjestys</string>
     <string name="sources_sort_manual_hint">Paina ja pidä lähdettä uudelleenjärjestämistä varten</string>
     <string name="sources_sort_last_updated">Viimeksi päivitetty</string>
     <string name="sources_sort_enabled_first">Käytössä olevat ensin</string>
@@ -1319,8 +1325,6 @@ Yksityiskohdat: %2$s"</string>
     <string name="file_picker_storages">Tallennustilat</string>
     <string name="file_saver_downloads_failed">Tiedostoa ei voitu luoda Lataukset-kansioon</string>
     <string name="file_saver_saving_to_downloads">Tässä laitteessa ei ole tallennusnäyttöä, joten tiedosto tallennetaan Lataukset-kansioon nimellä %1$s</string>
-    <string name="file_picker_sort_name_asc">Nimi (A–Ö)</string>
-    <string name="file_picker_sort_name_desc">Nimi (Ö–A)</string>
     <string name="file_picker_sort_size_desc">Koko (suurin ensin)</string>
     <string name="file_picker_sort_size_asc">Koko (pienin ensin)</string>
     <string name="file_picker_sort_date_desc">Päivämäärä (uusin ensin)</string>
@@ -1458,6 +1462,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="author">Tekijä</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Tiedosto</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Kloonaa</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Muokkaa</string>

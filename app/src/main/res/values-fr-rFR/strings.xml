@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Sélectionner d\'autres applications</string>
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_unpatched_version_installed">Version non patchée installée</string>
-    <string name="home_unpatched_badge">Non patchée</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Mise à jour vers %s</string>
+    <string name="home_app_status_newer_patches">Nouveaux patchs</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automobile</string>
     <string name="home_no_patches_available">Aucun patch disponible</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Rechercher des applications</string>
     <string name="list_options_title">Trier et filtrer</string>
     <string name="list_options_state_description">Triées par %1$s, filtrées par %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuel</string>
+    <string name="list_sort_name_asc">Nom (A–Z)</string>
+    <string name="list_sort_name_desc">Nom (Z–A)</string>
+    <string name="home_app_filter_all">Tout</string>
+    <string name="home_app_filter_not_patched">Non patchée</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">Aucun</string>
     <string name="home_app_sort_manual_hint">Appuyez longuement sur une application, puis appuyez sur le bouton de réorganisation</string>
-    <string name="home_app_sort_recommended">Ordre recommandé</string>
-    <string name="home_app_sort_updates_first">Mises à jour de patchs en premier</string>
+    <string name="home_app_sort_recommended">Recommandé</string>
+    <string name="home_app_sort_updates_first">Mises à jour d\'abord</string>
     <string name="home_app_sort_recently_patched">Récemment patchée</string>
     <string name="home_no_apps_title">Aucune application disponible</string>
     <string name="home_no_apps_subtitle">Ajoutez une source de patchs ou activez-en une existante dans %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Rechercher des sources et des patchs</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Nécessite une attention</string>
-    <string name="sources_sort_manual">Ordre manuel</string>
     <string name="sources_sort_manual_hint">Appuyez longuement sur une source pour la réorganiser</string>
     <string name="sources_sort_last_updated">Dernière mise à jour</string>
     <string name="sources_sort_enabled_first">Activées en premier</string>
@@ -168,7 +174,7 @@
     <string name="sources_management_report_issue">Signaler un problème</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_apps">Applications</string>
-    <string name="sources_apps_description">Les applications cochées proviennent de cette source. Appuyez sur une application pour l\'exclure ou la rétablir, faites-la glisser pour voir ses patchs. Une application disparaît de l\'écran d\'accueil lorsqu\'aucune source ne la propose, sauf si vous l\'avez patchée</string>
+    <string name="sources_apps_description">Les applications cochées proviennent de cette source. Appuyez sur une application pour l\'exclure ou la réaffichées, balayer pour voir ses patchs. Une application qu\'aucune source ne propose quitte l\'écran d\'accueil, sauf si vous l\'avez patchée</string>
     <string name="sources_apps_brought">Fournies par cette source</string>
     <string name="sources_apps_left_out">Exclues de cette source</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1323,8 +1329,6 @@ Détails : %2$s"</string>
     <string name="file_picker_storages">Stockages</string>
     <string name="file_saver_downloads_failed">Impossible de créer le fichier dans Downloads</string>
     <string name="file_saver_saving_to_downloads">Cet appareil ne possède pas d\'écran d\'enregistrement, le fichier est donc enregistré dans Downloads sous le nom %1$s</string>
-    <string name="file_picker_sort_name_asc">Nom (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nom (Z–A)</string>
     <string name="file_picker_sort_size_desc">Taille (du plus grand au plus petit)</string>
     <string name="file_picker_sort_size_asc">Taille (du plus petit au plus grand)</string>
     <string name="file_picker_sort_date_desc">Date (du plus récent au plus ancien)</string>
@@ -1333,7 +1337,7 @@ Détails : %2$s"</string>
     <string name="file_picker_new_folder">Nouveau dossier</string>
     <string name="file_picker_folder_name">Nom du dossier</string>
     <string name="file_picker_new_folder_description">Créé dans %1$s et ouvert immédiatement</string>
-    <string name="file_picker_folder_name_taken">Un élément portant ce nom existe déjà ici</string>
+    <string name="file_picker_folder_name_taken">Quelque chose portant ce nom existe déjà ici</string>
     <string name="file_picker_folder_name_invalid">Un nom de dossier ne peut pas contenir \" * / : &lt; &gt; ? \\ |</string>
     <string name="file_picker_new_folder_failed">Impossible de créer le dossier</string>
     <!-- Settings - System Tab - About Section -->
@@ -1462,6 +1466,7 @@ Détails : %2$s"</string>
     <string name="author">Auteur</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fichier</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clone</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patcher</string>

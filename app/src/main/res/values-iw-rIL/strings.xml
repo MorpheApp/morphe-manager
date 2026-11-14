@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">בחר אפליקציות אחרות</string>
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_unpatched_version_installed">מותקנת גרסה לא מתוקנת</string>
-    <string name="home_unpatched_badge">לא תוקן</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">עדכון ל-%s</string>
+    <string name="home_app_status_newer_patches">תיקונים חדשים</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">טלוויזיה</string>
     <string name="form_factor_automotive">רכב</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">חיפוש אפליקציות</string>
     <string name="list_options_title">מיון וסינון</string>
     <string name="list_options_state_description">מיון לפי %1$s, סינון לפי %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">ידני</string>
+    <string name="list_sort_name_asc">שם (א–ת)</string>
+    <string name="list_sort_name_desc">שם (ת–א)</string>
+    <string name="home_app_filter_all">הכל</string>
+    <string name="home_app_filter_not_patched">לא תוקן</string>
     <string name="home_app_filter_clones">שיבוטים</string>
     <string name="home_app_grouping_none">אין</string>
     <string name="home_app_sort_manual_hint">לחץ לחיצה ארוכה על אפליקציה, ולאחר מכן הקש על כפתור הסידור מחדש</string>
-    <string name="home_app_sort_recommended">סדר מומלץ</string>
-    <string name="home_app_sort_updates_first">עדכוני טלאים קודם</string>
+    <string name="home_app_sort_recommended">מומלץ</string>
+    <string name="home_app_sort_updates_first">עדכונים תחילה</string>
     <string name="home_app_sort_recently_patched">תוקנו לאחרונה</string>
     <string name="home_no_apps_title">אין אפליקציות זמינות</string>
     <string name="home_no_apps_subtitle">הוסף מקור לאפליקציה או הפעל מקור קיים ב-\"%s\"</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">חפש מקורות ותיקונים</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">צריכים תשומת לב</string>
-    <string name="sources_sort_manual">הזמנה ידנית</string>
     <string name="sources_sort_manual_hint">לחץ לחיצה ארוכה על מקור כדי לשנות את הסדר</string>
     <string name="sources_sort_last_updated">עודכן לאחרונה</string>
     <string name="sources_sort_enabled_first">מופעלים קודם</string>
@@ -1329,8 +1335,6 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="file_picker_storages">אחסון</string>
     <string name="file_saver_downloads_failed">לא ניתן היה ליצור את הקובץ בתיקיית ההורדות</string>
     <string name="file_saver_saving_to_downloads">במכשיר זה אין מסך שמירה, לכן הקובץ נשמר בתיקיית ההורדות כ-%1$s</string>
-    <string name="file_picker_sort_name_asc">שם (A–Z)</string>
-    <string name="file_picker_sort_name_desc">שם (Z–A)</string>
     <string name="file_picker_sort_size_desc">גודל (מהגדול לקטן)</string>
     <string name="file_picker_sort_size_asc">גודל (מהקטן לגדול)</string>
     <string name="file_picker_sort_date_desc">תאריך (מהחדש לישן)</string>
@@ -1468,6 +1472,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="author">יוצר</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">קובץ</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">שכפול</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">תיקון</string>

@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Selectează alte aplicații</string>
     <string name="home_not_patched_yet">Nepatch-uit încă</string>
     <string name="home_unpatched_version_installed">Versiune nepatch-uită instalată</string>
-    <string name="home_unpatched_badge">Nepatch-uit</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Actualizare la %s</string>
+    <string name="home_app_status_newer_patches">Patch-uri noi</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automobil</string>
     <string name="home_no_patches_available">Niciun patch disponibil</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Caută aplicații</string>
     <string name="list_options_title">Sortează și filtrează</string>
     <string name="list_options_state_description">Sortate după %1$s, filtrate după %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Nume (A–Z)</string>
+    <string name="list_sort_name_desc">Nume (Z–A)</string>
+    <string name="home_app_filter_all">Toate</string>
+    <string name="home_app_filter_not_patched">Nepatch-uit</string>
     <string name="home_app_filter_clones">Clone</string>
     <string name="home_app_grouping_none">Niciunul</string>
     <string name="home_app_sort_manual_hint">Apasă lung o aplicație, apoi apasă butonul de reordonare</string>
-    <string name="home_app_sort_recommended">Ordinare recomandată</string>
-    <string name="home_app_sort_updates_first">Actualizări de patch-uri mai întâi</string>
+    <string name="home_app_sort_recommended">Recomandate</string>
+    <string name="home_app_sort_updates_first">Actualizările primele</string>
     <string name="home_app_sort_recently_patched">Patch-uite recent</string>
     <string name="home_no_apps_title">Nicio aplicație disponibilă</string>
     <string name="home_no_apps_subtitle">Adaugă o sursă de patch sau activează una existentă în %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Caută surse și patch-uri</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Necesită atenție</string>
-    <string name="sources_sort_manual">Comandă manuală</string>
     <string name="sources_sort_manual_hint">Țineți apăsat pe o sursă pentru a reordona</string>
     <string name="sources_sort_last_updated">Ultima actualizare</string>
     <string name="sources_sort_enabled_first">Activat mai întâi</string>
@@ -1319,8 +1325,6 @@ Detalii: %2$s"</string>
     <string name="file_picker_storages">Stocări</string>
     <string name="file_saver_downloads_failed">Nu s-a putut crea fișierul în Descărcări</string>
     <string name="file_saver_saving_to_downloads">Acest dispozitiv nu are un ecran de salvare, deci fișierul este salvat în Descărcări ca %1$s</string>
-    <string name="file_picker_sort_name_asc">Nume (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nume (Z–A)</string>
     <string name="file_picker_sort_size_desc">Dimensiune (cea mai mare prima)</string>
     <string name="file_picker_sort_size_asc">Dimensiune (cea mai mică prima)</string>
     <string name="file_picker_sort_date_desc">Dată (cea mai recentă prima)</string>
@@ -1458,6 +1462,7 @@ Detalii: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fișier</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clonă</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch-uiește</string>

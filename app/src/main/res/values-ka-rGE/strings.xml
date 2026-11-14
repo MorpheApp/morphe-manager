@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">სხვა აპლიკაციების არჩევა</string>
     <string name="home_not_patched_yet">ჯერ არ არის პატჩირებული</string>
     <string name="home_unpatched_version_installed">ინსტალირებულია დააპატჩერებელი ვერსია</string>
-    <string name="home_unpatched_badge">დაუპატჩებელი</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">განახლება %s-მდე</string>
+    <string name="home_app_status_newer_patches">ახალი პატჩები</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ტელევიზორი</string>
     <string name="form_factor_automotive">ავტომობილი</string>
     <string name="home_no_patches_available">პატჩები ხელმისაწვდომი არ არის</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">აპლიკაციების ძებნა</string>
     <string name="list_options_title">სორტირება და ფილტრაცია</string>
     <string name="list_options_state_description">დასორტირებული %1$s-ით, გაფილტრებული %2$s-ით</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">მექანიკური</string>
+    <string name="list_sort_name_asc">სახელი (A–Z)</string>
+    <string name="list_sort_name_desc">სახელი (Z–A)</string>
+    <string name="home_app_filter_all">ყველა</string>
+    <string name="home_app_filter_not_patched">არაპატჩებული</string>
     <string name="home_app_filter_clones">კლონები</string>
     <string name="home_app_grouping_none">არცერთი</string>
     <string name="home_app_sort_manual_hint">დააჭირეთ ხანგრძლივად აპლიკაციას, შემდეგ დააჭირეთ განლაგების შეცვლის ღილაკს</string>
-    <string name="home_app_sort_recommended">რეკომენდებული თანმიმდევრობა</string>
-    <string name="home_app_sort_updates_first">პატჩის განახლებები პირველ რიგში</string>
+    <string name="home_app_sort_recommended">რეკომენდებული</string>
+    <string name="home_app_sort_updates_first">განახლებები პირველად</string>
     <string name="home_app_sort_recently_patched">ბოლოს დაფატჩებული</string>
     <string name="home_no_apps_title">აპლიკაციები არ არის ხელმისაწვდომი</string>
     <string name="home_no_apps_subtitle">დაამატეთ პატჩის წყარო ან ჩართეთ არსებული %s-ში</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">წყაროებისა და პატჩების ძებნა</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">საჭიროებს ყურადღებას</string>
-    <string name="sources_sort_manual">ხელით თანმიმდევრობა</string>
     <string name="sources_sort_manual_hint">თანმიმდევრობის შესაცვლელად, დააჭირეთ წყაროს ხანგრძლივად</string>
     <string name="sources_sort_last_updated">ბოლო განახლება</string>
     <string name="sources_sort_enabled_first">ჩართული პირველ რიგში</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">საცავები</string>
     <string name="file_saver_downloads_failed">გადმოწერვების საქაღალდეში ფაილის შექმნა ვერ მოხერხდა</string>
     <string name="file_saver_saving_to_downloads">ამ მოწყობილობას არ აქვს შენახვის ეკრანი, ამიტომ ფაილი გადადის გადმოწერვებში სახელით %1$s</string>
-    <string name="file_picker_sort_name_asc">სახელი (A–Z)</string>
-    <string name="file_picker_sort_name_desc">სახელი (Z–A)</string>
     <string name="file_picker_sort_size_desc">ზომა (ჯერ ყველაზე დიდი)</string>
     <string name="file_picker_sort_size_asc">ზომა (ჯერ ყველაზე პატარა)</string>
     <string name="file_picker_sort_date_desc">თარიღი (უახლესი პირველი)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">ავტორი</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ფაილი</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">კლონირება</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">პატჩირება</string>

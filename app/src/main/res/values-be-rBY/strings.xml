@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Выбраць іншыя праграмы</string>
     <string name="home_not_patched_yet">Яшчэ не прапатчана</string>
     <string name="home_unpatched_version_installed">Усталявана версія без патчаў</string>
-    <string name="home_unpatched_badge">Не прапатчана</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Абнавіць да %s</string>
+    <string name="home_app_status_newer_patches">Новыя патчы</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТБ</string>
     <string name="form_factor_automotive">Аўтамабілі</string>
     <string name="home_no_patches_available">Няма даступных патчаў</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Пошук праграм</string>
     <string name="list_options_title">Сартаванне і фільтрацыя</string>
     <string name="list_options_state_description">Пасартавана па %1$s, адфільтравана па %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Уручную</string>
+    <string name="list_sort_name_asc">Назва (А–Я)</string>
+    <string name="list_sort_name_desc">Назва (Я–А)</string>
+    <string name="home_app_filter_all">Усе</string>
+    <string name="home_app_filter_not_patched">Не прапатчана</string>
     <string name="home_app_filter_clones">Клоны</string>
     <string name="home_app_grouping_none">Няма</string>
     <string name="home_app_sort_manual_hint">Націсніце і ўтрымлівайце праграму, затым націсніце кнопку перастаноўкі</string>
-    <string name="home_app_sort_recommended">Рэкамендаваны парадак</string>
-    <string name="home_app_sort_updates_first">Спачатку абнаўленні патчаў</string>
+    <string name="home_app_sort_recommended">Рэкамендаваны</string>
+    <string name="home_app_sort_updates_first">Спачатку абнаўленні</string>
     <string name="home_app_sort_recently_patched">Нядаўна патчаныя</string>
     <string name="home_no_apps_title">Няма даступных праграм</string>
     <string name="home_no_apps_subtitle">Дадайце крыніцу патча або ўключыце існуючую ў %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Пошук па крыніцах і патчах</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Патрабуе ўвагі</string>
-    <string name="sources_sort_manual">Ручны парадак</string>
     <string name="sources_sort_manual_hint">Націсніце і ўтрымлівайце крыніцу, каб перарадаваць яе.</string>
     <string name="sources_sort_last_updated">Апошняе абнаўленне</string>
     <string name="sources_sort_enabled_first">Спачатку уключаныя</string>
@@ -1320,8 +1326,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Сховішчы</string>
     <string name="file_saver_downloads_failed">Не ўдалося стварыць файл у папцы «Загрузкі»</string>
     <string name="file_saver_saving_to_downloads">Гэтая прылада не мае экрана захавання, таму файл захаваны ў «Загрузкі» як %1$s</string>
-    <string name="file_picker_sort_name_asc">Імя (А–Я)</string>
-    <string name="file_picker_sort_name_desc">Імя (Я–А)</string>
     <string name="file_picker_sort_size_desc">Памер (ад найбольшага)</string>
     <string name="file_picker_sort_size_asc">Памер (ад найменшага)</string>
     <string name="file_picker_sort_date_desc">Дата (ад найноўшага)</string>
@@ -1459,6 +1463,7 @@ morphe_header_custom_dark.png
     <string name="author">Аўтар</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Файл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клонаваць</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Патчыць</string>

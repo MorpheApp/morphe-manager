@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Izberi ostale aplikacije</string>
     <string name="home_not_patched_yet">Še ni popravljeno</string>
     <string name="home_unpatched_version_installed">Nameščena je nepopravljena različica</string>
-    <string name="home_unpatched_badge">Ni popravljeno</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Posodobitev na %s</string>
+    <string name="home_app_status_newer_patches">Novi popravki</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Avtomobil</string>
     <string name="home_no_patches_available">Na voljo ni nobenih popravkov</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Poišči aplikacije</string>
     <string name="list_options_title">Razvrsti in filtriraj</string>
     <string name="list_options_state_description">Razvrščeno po %1$s, filtrirano po %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Ročno</string>
+    <string name="list_sort_name_asc">Ime (A–Ž)</string>
+    <string name="list_sort_name_desc">Ime (Ž–A)</string>
+    <string name="home_app_filter_all">Vse</string>
+    <string name="home_app_filter_not_patched">Ni popravljeno</string>
     <string name="home_app_filter_clones">Klonirane aplikacije</string>
     <string name="home_app_grouping_none">Nič</string>
     <string name="home_app_sort_manual_hint">Dolgo držite aplikacijo, nato tapnite gumb za ponovno razvrstitev</string>
-    <string name="home_app_sort_recommended">Priporočen vrstni red</string>
-    <string name="home_app_sort_updates_first">Najprej posodobitve popravkov</string>
+    <string name="home_app_sort_recommended">Priporočeno</string>
+    <string name="home_app_sort_updates_first">Najprej posodobitve</string>
     <string name="home_app_sort_recently_patched">Nedavno popravljeno</string>
     <string name="home_no_apps_title">Nobena aplikacija ni na voljo</string>
     <string name="home_no_apps_subtitle">Dodaj vir popravkov ali omogoči že obstoječega v %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Išči vire in popravke</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Potrebuje pozornost</string>
-    <string name="sources_sort_manual">Ročni vrstni red</string>
     <string name="sources_sort_manual_hint">Dolgo pritisnite vir, da ga ponovno uredite</string>
     <string name="sources_sort_last_updated">Nazadnje posodobljeno</string>
     <string name="sources_sort_enabled_first">Omogočeni najprej</string>
@@ -1319,8 +1325,6 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_storages">Shrambe</string>
     <string name="file_saver_downloads_failed">Datoteke v mapi Prenosi ni bilo mogoče ustvariti</string>
     <string name="file_saver_saving_to_downloads">Ta naprava nima zaslona za shranjevanje, zato se datoteka shranjuje v mapo Prenosi kot %1$s</string>
-    <string name="file_picker_sort_name_asc">Ime (A–Ž)</string>
-    <string name="file_picker_sort_name_desc">Ime (Ž–A)</string>
     <string name="file_picker_sort_size_desc">Velikost (največja naprej)</string>
     <string name="file_picker_sort_size_asc">Velikost (najmanjša naprej)</string>
     <string name="file_picker_sort_date_desc">Datum (najnovejši naprej)</string>
@@ -1458,6 +1462,7 @@ Podrobnosti: %2$s"</string>
     <string name="author">Avtor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Datoteka</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Kloniraj</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Popravi</string>

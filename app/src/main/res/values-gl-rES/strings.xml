@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Seleccionar outras aplicacións</string>
     <string name="home_not_patched_yet">Aínda non parcheado</string>
     <string name="home_unpatched_version_installed">Versión non parcheada instalada</string>
-    <string name="home_unpatched_badge">Non parcheado</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Actualizar a %s</string>
+    <string name="home_app_status_newer_patches">Novos parches</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automoción</string>
     <string name="home_no_patches_available">Non hai parches dispoñibles</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Buscar apps</string>
     <string name="list_options_title">Ordenar e filtrar</string>
     <string name="list_options_state_description">Ordenado por %1$s, filtrado por %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Nome (A–Z)</string>
+    <string name="list_sort_name_desc">Nome (Z–A)</string>
+    <string name="home_app_filter_all">Todo</string>
+    <string name="home_app_filter_not_patched">Sen parches</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">Ningún</string>
     <string name="home_app_sort_manual_hint">Mantén premida unha aplicación e logo toca o botón de reordenar</string>
-    <string name="home_app_sort_recommended">Orde recomendada</string>
-    <string name="home_app_sort_updates_first">Actualizacións de parches primeiro</string>
+    <string name="home_app_sort_recommended">Recomendado</string>
+    <string name="home_app_sort_updates_first">Actualizacións primeiro</string>
     <string name="home_app_sort_recently_patched">Parcheados recentemente</string>
     <string name="home_no_apps_title">Non hai apps dispoñibles</string>
     <string name="home_no_apps_subtitle">Engade unha fonte de parche ou activa unha existente en %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Buscar orixes e parches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Necesitan atención</string>
-    <string name="sources_sort_manual">Orde manual</string>
     <string name="sources_sort_manual_hint">Mantén premida unha fonte para reordenala</string>
     <string name="sources_sort_last_updated">Última actualización</string>
     <string name="sources_sort_enabled_first">Habilitadas primeiro</string>
@@ -1320,8 +1326,6 @@ Detalles: %2$s"</string>
     <string name="file_picker_storages">Almacenamentos</string>
     <string name="file_saver_downloads_failed">Non foi posible crear o ficheiro en Descargas</string>
     <string name="file_saver_saving_to_downloads">Este dispositivo non ten pantalla de gardado, polo que o ficheiro vai a Descargas como %1$s</string>
-    <string name="file_picker_sort_name_asc">Nome (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nome (Z–A)</string>
     <string name="file_picker_sort_size_desc">Tamaño (o máis grande primeiro)</string>
     <string name="file_picker_sort_size_asc">Tamaño (o máis pequeno primeiro)</string>
     <string name="file_picker_sort_date_desc">Data (o máis recente primeiro)</string>
@@ -1459,6 +1463,7 @@ Detalles: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Ficheiro</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clonar</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Parchear</string>

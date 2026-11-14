@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Roghnaigh aipeanna eile</string>
     <string name="home_not_patched_yet">Gan paisteáil fós</string>
     <string name="home_unpatched_version_installed">Leagan neamhpháitithe suiteáilte</string>
-    <string name="home_unpatched_badge">Gan paisteáil</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Nuashonraigh go %s</string>
+    <string name="home_app_status_newer_patches">Paistí nua</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Gluaisteán</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Cuardaigh aipeanna</string>
     <string name="list_options_title">Sórtáil agus scagaire</string>
     <string name="list_options_state_description">Sórtáilte de réir %1$s, scagtha de réir %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Láimhe</string>
+    <string name="list_sort_name_asc">Ainm (A–Z)</string>
+    <string name="list_sort_name_desc">Ainm (Z–A)</string>
+    <string name="home_app_filter_all">Gach</string>
+    <string name="home_app_filter_not_patched">Gan paisteáil</string>
     <string name="home_app_filter_clones">Clóin</string>
     <string name="home_app_grouping_none">Dada</string>
     <string name="home_app_sort_manual_hint">Brúigh fada ar aip, ansin tapáil an cnaipe athordaithe</string>
-    <string name="home_app_sort_recommended">Ordú molta</string>
-    <string name="home_app_sort_updates_first">Nuashonruithe paiste ar dtús</string>
+    <string name="home_app_sort_recommended">Molta</string>
+    <string name="home_app_sort_updates_first">Nuashonruithe ar dtús</string>
     <string name="home_app_sort_recently_patched">Paisteáilte le déanaí</string>
     <string name="home_no_apps_title">Níl aon aipeanna ar fáil</string>
     <string name="home_no_apps_subtitle">Cuir foinse paiste leis nó cumasaigh ceann atá ann cheana féin i %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Cuardaigh foinsí agus paistí</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Teastaíonn aird</string>
-    <string name="sources_sort_manual">Ordú láimhe</string>
     <string name="sources_sort_manual_hint">Brúigh suas le foinse le hathordú</string>
     <string name="sources_sort_last_updated">Nuashonraithe is déanaí</string>
     <string name="sources_sort_enabled_first">Cumasaithe ar dtús</string>
@@ -1317,8 +1323,6 @@ Sonraí: %2$s"</string>
     <string name="file_picker_storages">Stórais</string>
     <string name="file_saver_downloads_failed">Níorbh fhéidir an comhad a chruthú in Íoslódálacha</string>
     <string name="file_saver_saving_to_downloads">Níl scáileán sábhála ag an bhfeiste seo, mar sin téann an comhad chuig Íoslódálacha mar %1$s</string>
-    <string name="file_picker_sort_name_asc">Ainm (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Ainm (Z–A)</string>
     <string name="file_picker_sort_size_desc">Méid (an ceann is mó ar dtús)</string>
     <string name="file_picker_sort_size_asc">Méid (an ceann is lú ar dtús)</string>
     <string name="file_picker_sort_date_desc">Dáta (an ceann is nuaí ar dtús)</string>
@@ -1456,6 +1460,7 @@ Sonraí: %2$s"</string>
     <string name="author">Údar</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Comhad</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clónáil</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Paiste</string>

@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">اختيار تطبيقات أخرى</string>
     <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_unpatched_version_installed">تم تثبيت إصدار غير معدل</string>
-    <string name="home_unpatched_badge">لم يتم تعديله</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">تحديث إلى %s</string>
+    <string name="home_app_status_newer_patches">تعديلات جديدة</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">تلفزيون</string>
     <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">لا توجد تعديلات متاحة</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">البحث عن التطبيقات</string>
     <string name="list_options_title">فرز وتصفية</string>
     <string name="list_options_state_description">تم الفرز حسب %1$s، تمت التصفية حسب %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">يدوي</string>
+    <string name="list_sort_name_asc">الاسم (A–Z)</string>
+    <string name="list_sort_name_desc">الاسم (Z–A)</string>
+    <string name="home_app_filter_all">الكل</string>
+    <string name="home_app_filter_not_patched">لم يتم تعديله</string>
     <string name="home_app_filter_clones">المستنسخة</string>
     <string name="home_app_grouping_none">بدون</string>
     <string name="home_app_sort_manual_hint">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
-    <string name="home_app_sort_recommended">الترتيب الموصى به</string>
-    <string name="home_app_sort_updates_first">تحديثات التعديل أولًا</string>
+    <string name="home_app_sort_recommended">موصّى به</string>
+    <string name="home_app_sort_updates_first">التحديثات أولاً</string>
     <string name="home_app_sort_recently_patched">تم تعديلها مؤخرًا</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">البحث في المصادر والتعديلات</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">يتطلّب إجراءًا</string>
-    <string name="sources_sort_manual">ترتيب يدوي</string>
     <string name="sources_sort_manual_hint">اضغط مطولًا على مصدر لإعادة الترتيب</string>
     <string name="sources_sort_last_updated">آخر تحديث</string>
     <string name="sources_sort_enabled_first">المفعّلة أولًا</string>
@@ -1323,8 +1329,6 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_storages">التخزين</string>
     <string name="file_saver_downloads_failed">تعذر إنشاء الملف في التنزيلات</string>
     <string name="file_saver_saving_to_downloads">لا يحتوي هذا الجهاز على شاشة حفظ، لذا سيتم نقل الملف إلى التنزيلات باسم %1$s</string>
-    <string name="file_picker_sort_name_asc">الاسم (A–Z)</string>
-    <string name="file_picker_sort_name_desc">الاسم (Z–A)</string>
     <string name="file_picker_sort_size_desc">الحجم (الأكبر أولًا)</string>
     <string name="file_picker_sort_size_asc">الحجم (الأصغر أولًا)</string>
     <string name="file_picker_sort_date_desc">التاريخ (الأحدث أولًا)</string>
@@ -1462,6 +1466,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="author">المؤلف</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">الملف</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">استنساخ</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">تعديل</string>

@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Izvēlēties citas lietotnes</string>
     <string name="home_not_patched_yet">Vēl nav labots</string>
     <string name="home_unpatched_version_installed">Nelabota versija instalēta</string>
-    <string name="home_unpatched_badge">Nav labots</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Atjaunināt uz %s</string>
+    <string name="home_app_status_newer_patches">Jauni labojumi</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Autovietnišana</string>
     <string name="home_no_patches_available">Nav pieejamu labojumu</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Meklēt lietotnes</string>
     <string name="list_options_title">Kārtot un filtrēt</string>
     <string name="list_options_state_description">Kārtots pēc %1$s, filtrēts pēc %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuāli</string>
+    <string name="list_sort_name_asc">Vārds (A–Z)</string>
+    <string name="list_sort_name_desc">Vārds (Z–A)</string>
+    <string name="home_app_filter_all">Visi</string>
+    <string name="home_app_filter_not_patched">Nav labots</string>
     <string name="home_app_filter_clones">Kloni</string>
     <string name="home_app_grouping_none">Nav</string>
     <string name="home_app_sort_manual_hint">Ilgstoši nospiediet lietotni, pēc tam nospiediet pogu kārtības maiņai</string>
-    <string name="home_app_sort_recommended">Ieteiktā secība</string>
-    <string name="home_app_sort_updates_first">Vispirms labojumu atjauninājumi</string>
+    <string name="home_app_sort_recommended">Ieteiktie</string>
+    <string name="home_app_sort_updates_first">Vispirms atjauninājumi</string>
     <string name="home_app_sort_recently_patched">Nesen labotās</string>
     <string name="home_no_apps_title">Nav pieejamu lietotnēm</string>
     <string name="home_no_apps_subtitle">Pievienojiet lāpumu avotu vai iespējojiet esošo %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Meklēt avotos un lapašos</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Nepieciešama uzmanība</string>
-    <string name="sources_sort_manual">Manuāla secība</string>
     <string name="sources_sort_manual_hint">Ilgāk nospiediet avotu, lai mainītu secību</string>
     <string name="sources_sort_last_updated">Pēdējā atjauninājuma datums</string>
     <string name="sources_sort_enabled_first">Vispirms iespējotie</string>
@@ -1318,8 +1324,6 @@ Sīkāk: %2$s"</string>
     <string name="file_picker_storages">Atmiņas</string>
     <string name="file_saver_downloads_failed">Neizdevās izveidot failu Lejupielādēšanas mapē</string>
     <string name="file_saver_saving_to_downloads">Šai ierīcei nav saglabāšanas ekrāna, tāpēc fails tiek saglabāts Lejupielādēšanas mapē kā %1$s</string>
-    <string name="file_picker_sort_name_asc">Nosaukums (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nosaukums (Z–A)</string>
     <string name="file_picker_sort_size_desc">Izmērs (vislielākie vispirms)</string>
     <string name="file_picker_sort_size_asc">Izmērs (vismazākie vispirms)</string>
     <string name="file_picker_sort_date_desc">Datums (jaunākie vispirms)</string>
@@ -1457,6 +1461,7 @@ Sīkāk: %2$s"</string>
     <string name="author">Autors</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fails</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonēt</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Lāpīts</string>

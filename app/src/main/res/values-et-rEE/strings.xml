@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Vali teised rakendused</string>
     <string name="home_not_patched_yet">Veel mitte paigatud</string>
     <string name="home_unpatched_version_installed">Paigaldatud on paikamata versioon</string>
-    <string name="home_unpatched_badge">Paikamata</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Uuenda versioonile %s</string>
+    <string name="home_app_status_newer_patches">Uued paigad</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TK</string>
     <string name="form_factor_automotive">Autojärjestem</string>
     <string name="home_no_patches_available">Paiku ei ole saadaval</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Otsi rakendusi</string>
     <string name="list_options_title">Järjesta ja filtreeri</string>
     <string name="list_options_state_description">Järjestatud %1$s järgi, filtreeritud %2$s järgi</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Käsitsi</string>
+    <string name="list_sort_name_asc">Nimi (A–Z)</string>
+    <string name="list_sort_name_desc">Nimi (Z–A)</string>
+    <string name="home_app_filter_all">Kõik</string>
+    <string name="home_app_filter_not_patched">Paikamata</string>
     <string name="home_app_filter_clones">Kloonid</string>
     <string name="home_app_grouping_none">Puudub</string>
     <string name="home_app_sort_manual_hint">Vajuta rakendust pikalt ja siis nupule järjekorra muutmiseks</string>
-    <string name="home_app_sort_recommended">Soovitatav järjestus</string>
-    <string name="home_app_sort_updates_first">Esmalt paigauuendused</string>
+    <string name="home_app_sort_recommended">Soovitatud</string>
+    <string name="home_app_sort_updates_first">Esmalt uuendused</string>
     <string name="home_app_sort_recently_patched">Viimati paigatud</string>
     <string name="home_no_apps_title">Rakendusi pole saadaval</string>
     <string name="home_no_apps_subtitle">Lisa paigaallikas või aktiveeri olemasolev jaotises %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Otsi allikaid ja paiku</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Vajab tähelepanu</string>
-    <string name="sources_sort_manual">Käsitsi järjestus</string>
     <string name="sources_sort_manual_hint">Ümberjärjestamiseks hoia allikat all</string>
     <string name="sources_sort_last_updated">Viimati uuendatud</string>
     <string name="sources_sort_enabled_first">Esmalt aktiveeritud</string>
@@ -1319,8 +1325,6 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="file_picker_storages">Salvestusruumid</string>
     <string name="file_saver_downloads_failed">Faili loomine kataloogis Downloads ebaõnnestus</string>
     <string name="file_saver_saving_to_downloads">Sellel seadmel puudub salvestamise ekraan, seega salvestatakse fail kataloogisse Downloads nimega %1$s</string>
-    <string name="file_picker_sort_name_asc">Nimi (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nimi (Z–A)</string>
     <string name="file_picker_sort_size_desc">Suurus (suurimad esimesena)</string>
     <string name="file_picker_sort_size_asc">Suurus (väikesemad esimesena)</string>
     <string name="file_picker_sort_date_desc">Kuupäev (uusim esimesena)</string>
@@ -1458,6 +1462,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fail</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klooni</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Paika</string>

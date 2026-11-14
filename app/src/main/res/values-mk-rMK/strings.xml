@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Изберете други апликации</string>
     <string name="home_not_patched_yet">Непоправено</string>
     <string name="home_unpatched_version_installed">Инсталирана е незакрпена верзија</string>
-    <string name="home_unpatched_badge">Непоправено</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Ажурирај на %s</string>
+    <string name="home_app_status_newer_patches">Нови поправки</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТВ</string>
     <string name="form_factor_automotive">Автомобил</string>
     <string name="home_no_patches_available">Нема поправки достапно</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Пребарајте апликации</string>
     <string name="list_options_title">Сортирај и филтрирај</string>
     <string name="list_options_state_description">Сортирано според %1$s, филтрирано според %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Рачно</string>
+    <string name="list_sort_name_asc">Име (А–З)</string>
+    <string name="list_sort_name_desc">Име (З–А)</string>
+    <string name="home_app_filter_all">Сите</string>
+    <string name="home_app_filter_not_patched">Непоправено</string>
     <string name="home_app_filter_clones">Клонови</string>
     <string name="home_app_grouping_none">Ниту едно</string>
     <string name="home_app_sort_manual_hint">Долг притисок на апликација, потоа допрете го копчето за преуредување</string>
-    <string name="home_app_sort_recommended">Препорачан редослед</string>
-    <string name="home_app_sort_updates_first">Прво ажурирања на закрпи</string>
+    <string name="home_app_sort_recommended">Препорачано</string>
+    <string name="home_app_sort_updates_first">Прво ажурирања</string>
     <string name="home_app_sort_recently_patched">Неодамна закрпено</string>
     <string name="home_no_apps_title">Не се достапни апликации</string>
     <string name="home_no_apps_subtitle">Додадете извор на закрпи или овозможете постоечки во %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Пребарај извори и закрпи</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Потребно е внимание</string>
-    <string name="sources_sort_manual">Рачен редослед</string>
     <string name="sources_sort_manual_hint">Долго притиснете извор за промена на редоследот</string>
     <string name="sources_sort_last_updated">Последно ажурирано</string>
     <string name="sources_sort_enabled_first">Прво овозможените</string>
@@ -1318,8 +1324,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Складишта</string>
     <string name="file_saver_downloads_failed">Не успеа да се создаде датотеката во Downloads</string>
     <string name="file_saver_saving_to_downloads">Овој уред нема екран за зачувување, па затоа датотеката оди во Downloads како %1$s</string>
-    <string name="file_picker_sort_name_asc">Име (А–З)</string>
-    <string name="file_picker_sort_name_desc">Име (Z–A)</string>
     <string name="file_picker_sort_size_desc">Големина (најголема прва)</string>
     <string name="file_picker_sort_size_asc">Големина (најмала прва)</string>
     <string name="file_picker_sort_date_desc">Дата (најнова прва)</string>
@@ -1457,6 +1461,7 @@ morphe_header_custom_dark.png
     <string name="author">Автор</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Датотека</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клонирај</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Закрпи</string>
