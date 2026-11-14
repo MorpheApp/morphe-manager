@@ -1,3 +1,25 @@
+## [2.6.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.3...v2.6.0-dev.4) (2026-11-14)
+
+### Features
+
+* Create folders right from the folder picker ([a49ec92](https://github.com/MorpheApp/morphe-manager/commit/a49ec929fa2d93d492ff2b69a057c41b334fdbcf))
+* Give list sort and filter options consistent names ([e3be741](https://github.com/MorpheApp/morphe-manager/commit/e3be741803ec40828e4e706a166956ff9a84ad38))
+* List the sources an app is patched from first in its selection ([2caaf5e](https://github.com/MorpheApp/morphe-manager/commit/2caaf5e71790c327a75cc5e1d4e8a91baf971c7b))
+* Mark apps built for TV, Wear OS or cars on their cards ([b1a3c67](https://github.com/MorpheApp/morphe-manager/commit/b1a3c679aace12292c3dc89b87c5e17bc9eedcc2))
+* Redesign app cards around a single status line ([cb43863](https://github.com/MorpheApp/morphe-manager/commit/cb4386379f280add757954719e449decb86a3471))
+* Refine the install queue overlay ([8b8abfe](https://github.com/MorpheApp/morphe-manager/commit/8b8abfef6e83ab2900b2f0dcef8a74767c5cc667))
+* Swipe an app in a source's list to see its patches ([2c95d9b](https://github.com/MorpheApp/morphe-manager/commit/2c95d9b7e35626112da8694a68663f608c8f91d9))
+* Treat app version updates as updates when sorting and re-patching ([f7112d0](https://github.com/MorpheApp/morphe-manager/commit/f7112d0e5d1457ee6de218dd08498ac070c5ab5c))
+
+### Performance Improvements
+
+* Keep an AOT cache of the patcher JVM and compile with C2 alongside it ([#1433](https://github.com/MorpheApp/morphe-manager/issues/1433)) ([ded5f5b](https://github.com/MorpheApp/morphe-manager/commit/ded5f5bcbdb7c47d3dc551a882b4546dcf803b8c))
+
+### Bug Fixes
+
+* Call logcat by its full path in the root mount watcher and log its start and end ([4592f16](https://github.com/MorpheApp/morphe-manager/commit/4592f16268137b541f16aaff71ec5c94826fed46))
+* Name only the sources patches were taken from in batch export names ([b9b50f5](https://github.com/MorpheApp/morphe-manager/commit/b9b50f52ce47abbff43c4629bce9a578417c2dbc))
+
 ## [2.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.2...v2.6.0-dev.3) (2026-11-14)
 
 ### Features
