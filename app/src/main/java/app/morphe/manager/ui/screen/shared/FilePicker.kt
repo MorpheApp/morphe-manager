@@ -209,6 +209,7 @@ private fun modDateFormat(context: Context): SimpleDateFormat {
  *
  * [onPicked] gets the open folder with [allowFolderSelection], the tapped file by default, and
  * with [multiple] the files checked across every folder visited, in the order they were checked.
+ * Picking a folder can also make a new one, named [suggestedFolderName] until the user types another.
  */
 @Composable
 fun DialogHostScope.FilePicker(
@@ -216,7 +217,8 @@ fun DialogHostScope.FilePicker(
     onDismiss: () -> Unit,
     onPicked: (List<File>) -> Unit,
     multiple: Boolean = false,
-    allowFolderSelection: Boolean = false
+    allowFolderSelection: Boolean = false,
+    suggestedFolderName: String? = null
 ) {
     val prefs: PreferencesManager = koinInject()
     val pm: PM = koinInject()
@@ -240,6 +242,7 @@ fun DialogHostScope.FilePicker(
     }
     var showHiddenFiles by remember { mutableStateOf(prefs.filePickerShowHiddenFiles.getBlocking()) }
     var showViewMenu by remember { mutableStateOf(false) }
+    var showNewFolder by remember { mutableStateOf(false) }
     val search = rememberSearchFieldState(searchable = currentDir != null)
     val checkedFiles = remember { mutableStateListOf<File>() }
 
@@ -282,6 +285,20 @@ fun DialogHostScope.FilePicker(
     val navigateBack = {
         val atStorageRoot = roots.any { (_, root) -> root == currentDir }
         currentDir = if (atStorageRoot) null else currentDir?.parentFile
+    }
+
+    DialogHost(target = currentDir.takeIf { showNewFolder }) { parent ->
+        NewFolderDialog(
+            parent = parent,
+            parentLabel = held(breadcrumbs.lastOrNull()?.first.orEmpty()),
+            suggestedName = suggestedFolderName,
+            onDismiss = { showNewFolder = false },
+            onCreated = { folder ->
+                showNewFolder = false
+                refresh()
+                currentDir = folder
+            }
+        )
     }
 
     ListDialog(
@@ -359,6 +376,15 @@ fun DialogHostScope.FilePicker(
                     }
                 } else null
             ) {
+                if (allowFolderSelection) {
+                    TitleAction(
+                        icon = MaterialSymbols.Rounded.Create_new_folder,
+                        contentDescription = stringResource(R.string.file_picker_new_folder),
+                        onClick = { showNewFolder = true },
+                        style = TitleActionStyle.Accent,
+                        enabled = currentDir != null
+                    )
+                }
                 Box {
                     TitleAction(
                         icon = MaterialSymbols.Rounded.Sort.autoMirrored,
@@ -468,6 +494,81 @@ fun DialogHostScope.FilePicker(
             }
         }
     }
+}
+
+// Characters a folder name cannot hold on every storage, FAT formatted SD cards being the strictest
+private const val FOLDER_NAME_FORBIDDEN_CHARS = "\"*/:<>?\\|"
+
+/** [name], or the first of "name (2)", "name (3)" and on that [dir] does not hold yet. */
+private fun freeChildName(dir: File, name: String): String {
+    if (!File(dir, name).exists()) return name
+    return generateSequence(2) { it + 1 }
+        .map { "$name ($it)" }
+        .first { !File(dir, it).exists() }
+}
+
+/**
+ * Asks for the name of a folder to make in [parent], shown as [parentLabel], led by [suggestedName]
+ * where there is one, numbered past the folders already called so. Hands the folder made to [onCreated].
+ */
+@Composable
+private fun DialogHostScope.NewFolderDialog(
+    parent: File,
+    parentLabel: String,
+    suggestedName: String?,
+    onDismiss: () -> Unit,
+    onCreated: (File) -> Unit
+) {
+    val messages: UserMessages = koinInject()
+    val coroutineScope = rememberCoroutineScope()
+    val failedMessage = stringResource(R.string.file_picker_new_folder_failed)
+    var name by remember { mutableStateOf("") }
+    var isCreating by remember { mutableStateOf(false) }
+    val trimmed = name.trim()
+
+    LaunchedEffect(parent, suggestedName) {
+        if (suggestedName == null) return@LaunchedEffect
+        val freeName = withContext(Dispatchers.IO) { freeChildName(parent, suggestedName) }
+        // A name the user has started typing stays
+        if (name.isEmpty()) name = freeName
+    }
+
+    // Also catches the entries for the folder itself and its parent, which every folder holds
+    val isTaken by produceState(false, parent, trimmed) {
+        value = trimmed.isNotEmpty() && withContext(Dispatchers.IO) { File(parent, trimmed).exists() }
+    }
+    val hasForbiddenChar = trimmed.any { it in FOLDER_NAME_FORBIDDEN_CHARS || it.isISOControl() }
+    val nameError = when {
+        hasForbiddenChar -> R.string.file_picker_folder_name_invalid
+        isTaken -> R.string.file_picker_folder_name_taken
+        else -> null
+    }
+    val canCreate = trimmed.isNotEmpty() && nameError == null && !isCreating
+
+    val create: () -> Unit = {
+        isCreating = true
+        coroutineScope.launch {
+            val folder = File(parent, trimmed)
+            val made = withContext(Dispatchers.IO) { folder.mkdir() }
+            isCreating = false
+            if (made) onCreated(folder) else messages.show(failedMessage)
+        }
+    }
+
+    TextInputDialog(
+        title = stringResource(R.string.file_picker_new_folder),
+        description = stringResource(R.string.file_picker_new_folder_description, parentLabel),
+        value = name,
+        onValueChange = { name = it },
+        label = stringResource(R.string.file_picker_folder_name),
+        leadingIcon = MaterialSymbols.Rounded.Folder,
+        isError = nameError != null,
+        confirmText = stringResource(R.string.create),
+        confirmEnabled = canCreate,
+        onConfirm = create,
+        onDismiss = onDismiss,
+        supporting = nameError?.let { { Footnote(text = stringResource(it), tone = SemanticTone.Error) } }
+    )
 }
 
 /**

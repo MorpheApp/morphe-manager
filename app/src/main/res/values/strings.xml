@@ -84,6 +84,7 @@
     <string name="home_category_new_title">New category</string>
     <string name="home_category_rename_title">Rename category</string>
     <string name="home_category_name">Category name</string>
+    <string name="home_category_name_description">The home screen groups its apps under this name</string>
     <string name="home_category_move_to">Move to category</string>
     <string name="home_category_move_selected_title">Move selected apps</string>
     <!-- %s is the name of the category -->
@@ -1249,6 +1250,7 @@ Details: %2$s"</string>
     <string name="settings_system_auto_backup_description">Saves your Morphe settings to a folder you pick</string>
     <string name="settings_system_auto_backup_last">Last backup: %s</string>
     <string name="settings_system_auto_backup_folder">Folder</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe backups</string>
     <string name="settings_system_auto_backup_folder_failed">Could not use this folder: %s</string>
     <string name="settings_system_auto_backup_interval">Backup frequency</string>
     <string name="settings_system_auto_backup_signing_key">Include signing key</string>
@@ -1365,6 +1367,7 @@ Details: %2$s"</string>
     <string name="selection_set_deleted">%s deleted</string>
     <string name="selection_set_renamed">Renamed to %s</string>
     <string name="selection_set_rename_title">Rename set</string>
+    <string name="selection_set_rename_description">Taking the name of another set replaces that set</string>
     <string name="selection_set_delete_title">Delete set?</string>
     <string name="selection_set_delete_message">This permanently deletes the set %s</string>
     <string name="copy_selection_empty">No other saved selections to copy from</string>
@@ -1404,6 +1407,12 @@ Details: %2$s"</string>
     <string name="file_picker_sort_date_desc">Date (newest first)</string>
     <string name="file_picker_sort_date_asc">Date (oldest first)</string>
     <string name="file_picker_show_hidden_files">Show hidden files</string>
+    <string name="file_picker_new_folder">New folder</string>
+    <string name="file_picker_folder_name">Folder name</string>
+    <string name="file_picker_new_folder_description">Created in %1$s and opened right away</string>
+    <string name="file_picker_folder_name_taken">Something with this name is already here</string>
+    <string name="file_picker_folder_name_invalid">A folder name cannot contain \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Could not create the folder</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
@@ -1470,6 +1479,7 @@ Details: %2$s"</string>
     <string name="retry">Retry</string>
     <string name="refresh">Refresh</string>
     <string name="add">Add</string>
+    <string name="create">Create</string>
     <string name="close">Close</string>
     <string name="back">Back</string>
     <string name="next">Next</string>

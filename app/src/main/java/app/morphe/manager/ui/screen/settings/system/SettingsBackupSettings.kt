@@ -250,7 +250,10 @@ private fun AutoBackupItems(
     val lastBackupAt by prefs.lastAutoBackupAt.getAsState()
     val failed by prefs.autoBackupFailed.getAsState()
     val enabled = folder.isNotEmpty()
-    val pickFolder = rememberDocumentFolderPicker(importExportViewModel::enableAutoBackup)
+    val pickFolder = rememberDocumentFolderPicker(
+        suggestedFolderName = stringResource(R.string.settings_system_auto_backup_folder_name),
+        onFolderPicked = importExportViewModel::enableAutoBackup
+    )
     var showIntervalDialog by remember { mutableStateOf(false) }
     var showSigningKeyWarning by remember { mutableStateOf(false) }
 

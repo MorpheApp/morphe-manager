@@ -9,16 +9,12 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
@@ -123,50 +119,20 @@ fun DialogHostScope.RenameBundleDialog(
     onConfirm: (String) -> Unit
 ) {
     var textValue by remember { mutableStateOf(initialValue) }
-    val keyboardController = LocalSoftwareKeyboardController.current
 
-    AppDialog(
-        onDismissRequest = onDismissRequest,
+    // Left empty, the source goes back to its own name
+    TextInputDialog(
         title = stringResource(R.string.sources_dialog_display_name),
         description = stringResource(R.string.sources_dialog_rename),
-        footer = {
-            AppDialogButtonRow(
-                primaryText = stringResource(android.R.string.ok),
-                onPrimaryClick = {
-                    keyboardController?.hide()
-                    onConfirm(textValue)
-                },
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = {
-                    keyboardController?.hide()
-                    onDismissRequest()
-                }
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
-        ) {
-            AppDialogTextField(
-                value = textValue,
-                onValueChange = { textValue = it },
-                placeholder = { Text(stringResource(R.string.patch_option_enter_value)) },
-                leadingIcon = {
-                    Icon(imageVector = MaterialSymbols.Rounded.Edit, contentDescription = null)
-                },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        keyboardController?.hide()
-                        onConfirm(textValue)
-                    }
-                )
-            )
-        }
-    }
+        value = textValue,
+        onValueChange = { textValue = it },
+        placeholder = stringResource(R.string.patch_option_enter_value),
+        leadingIcon = MaterialSymbols.Rounded.Edit,
+        confirmText = stringResource(R.string.rename),
+        confirmEnabled = true,
+        onConfirm = { onConfirm(textValue) },
+        onDismiss = onDismissRequest
+    )
 }
 
 /**
@@ -182,50 +148,22 @@ fun DialogHostScope.ChangeSourceLinkDialog(
 ) {
     var textValue by remember { mutableStateOf(initialValue) }
     val check = remember(textValue) { textValue.trim().takeIf { it.isNotEmpty() }?.let(onCheckUrl) }
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val confirm = {
-        if (check is RemoteUrlCheck.Accepted) {
-            keyboardController?.hide()
-            onConfirm(textValue.trim())
-        }
-    }
 
-    AppDialog(
-        onDismissRequest = onDismissRequest,
+    TextInputDialog(
         title = stringResource(R.string.sources_dialog_remote_url),
         description = stringResource(R.string.sources_dialog_change_url),
-        footer = {
-            AppDialogButtonRow(
-                primaryText = stringResource(android.R.string.ok),
-                onPrimaryClick = confirm,
-                primaryEnabled = check is RemoteUrlCheck.Accepted,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = {
-                    keyboardController?.hide()
-                    onDismissRequest()
-                }
-            )
-        }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
-        ) {
-            AppDialogTextField(
-                value = textValue,
-                onValueChange = { textValue = it },
-                placeholder = { Text(REMOTE_URL_PLACEHOLDER) },
-                leadingIcon = {
-                    Icon(imageVector = MaterialSymbols.Rounded.Link, contentDescription = null)
-                },
-                singleLine = true,
-                isError = check is RemoteUrlCheck.Rejected,
-                keyboardOptions = RemoteUrlKeyboardOptions,
-                keyboardActions = KeyboardActions(onDone = { confirm() })
-            )
-            RemoteUrlCheckHint(check = check, showHint = false)
-        }
-    }
+        value = textValue,
+        onValueChange = { textValue = it },
+        placeholder = REMOTE_URL_PLACEHOLDER,
+        leadingIcon = MaterialSymbols.Rounded.Link,
+        isError = check is RemoteUrlCheck.Rejected,
+        keyboardOptions = RemoteUrlKeyboardOptions,
+        confirmText = stringResource(R.string.save),
+        confirmEnabled = check is RemoteUrlCheck.Accepted,
+        onConfirm = { onConfirm(textValue.trim()) },
+        onDismiss = onDismissRequest,
+        supporting = { RemoteUrlCheckHint(check = check, showHint = false) }
+    )
 }
 
 /**

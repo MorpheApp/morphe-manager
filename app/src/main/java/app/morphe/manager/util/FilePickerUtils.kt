@@ -162,18 +162,25 @@ fun Uri.readMppManifest(contentResolver: ContentResolver): MppManifest? =
  */
 @Composable
 fun rememberFolderPickerWithPermission(onFolderPicked: (Uri) -> Unit): () -> Unit =
-    rememberFolderPicker(byPath = true, onFolderPicked)
+    rememberFolderPicker(byPath = true, suggestedFolderName = null, onFolderPicked)
 
 /**
  * Folder picker for a folder written through DocumentFile, see [pickedFolder]. The system picker
  * grants such a folder by itself, so storage access is only asked for Morphe's own [FilePicker].
+ * [suggestedFolderName] names a folder made in Morphe's own picker until the user types another.
  */
 @Composable
-fun rememberDocumentFolderPicker(onFolderPicked: (Uri) -> Unit): () -> Unit =
-    rememberFolderPicker(byPath = false, onFolderPicked)
+fun rememberDocumentFolderPicker(
+    suggestedFolderName: String? = null,
+    onFolderPicked: (Uri) -> Unit
+): () -> Unit = rememberFolderPicker(byPath = false, suggestedFolderName, onFolderPicked)
 
 @Composable
-private fun rememberFolderPicker(byPath: Boolean, onFolderPicked: (Uri) -> Unit): () -> Unit {
+private fun rememberFolderPicker(
+    byPath: Boolean,
+    suggestedFolderName: String?,
+    onFolderPicked: (Uri) -> Unit
+): () -> Unit {
     val context = LocalContext.current
     val isTV = remember { context.isAndroidTv() }
     val fs: Filesystem = koinInject()
@@ -185,6 +192,7 @@ private fun rememberFolderPicker(byPath: Boolean, onFolderPicked: (Uri) -> Unit)
         FilePicker(
             mimeTypes = arrayOf("*/*"),
             allowFolderSelection = true,
+            suggestedFolderName = suggestedFolderName,
             onDismiss = { showPickerState.value = false },
             onPicked = { folders ->
                 showPickerState.value = false
