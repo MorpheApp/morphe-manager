@@ -803,7 +803,11 @@ private fun BundleUpdateCard(
     }
     val badge = when {
         status != BundleUpdateStatus.Updating || progress == null -> null
-        progress.total > 1 -> stringResource(R.string.home_update_bundle_count, progress.completed, progress.total)
+        progress.total > 1 -> stringResource(
+            R.string.progress_count,
+            progress.completed.toString(),
+            progress.total.toString()
+        )
         isDownloading -> stringResource(R.string.patcher_percentage, (downloadFraction * 100).toInt().toString())
         else -> null
     }
@@ -812,11 +816,15 @@ private fun BundleUpdateCard(
     val activeSource = progress?.activeUids?.firstOrNull()?.let(sourcesByUid::get)
         ?.takeIf { it.state is PatchBundleSource.State.Available }
 
+    // A download's percentage ticks over in place, while the count of sources slides to the next
+    val countsSources = progress != null && progress.total > 1
+
     StatusCard(
         tone = status.tone,
         title = title,
         subtitle = subtitle,
         badge = badge,
+        badgeKey = { if (countsSources) it else Unit },
         leading = {
             Crossfade(targetState = status, label = "bundleUpdateLeading") { shown ->
                 when (shown) {
@@ -899,6 +907,7 @@ private fun StatusCard(
     subtitle: String,
     leading: @Composable () -> Unit,
     badge: String? = null,
+    badgeKey: (String) -> Any? = { it },
     onClick: (() -> Unit)? = null
 ) {
     val neutral = tone == SemanticTone.Neutral
@@ -962,7 +971,11 @@ private fun StatusCard(
             }
 
             if (badge != null) {
-                StatusBadge(text = badge, tone = if (neutral) SemanticTone.Primary else tone)
+                CounterBadge(
+                    text = badge,
+                    tone = if (neutral) SemanticTone.Primary else tone,
+                    contentKey = badgeKey
+                )
             }
             if (onClick != null) {
                 ForwardChevronIcon(size = 18.dp, tint = MaterialTheme.colorScheme.onSurfaceVariant)

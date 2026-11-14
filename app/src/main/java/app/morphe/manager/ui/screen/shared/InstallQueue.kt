@@ -143,6 +143,9 @@ fun rememberInstallQueue(
         }
     }
 
+    val installerDialogShowing = installViewModel.installerUnavailableDialog != null ||
+            installViewModel.showInstallerSelectionDialog
+
     LaunchedEffect(
         installViewModel.installState,
         installViewModel.installerUnavailableDialog,
@@ -150,14 +153,12 @@ fun rememberInstallQueue(
     ) {
         val current = active ?: return@LaunchedEffect
 
-        val dialogShowing = installViewModel.installerUnavailableDialog != null ||
-                installViewModel.showInstallerSelectionDialog
-        if (dialogShowing) awaitedInstallerDialog = true
+        if (installerDialogShowing) awaitedInstallerDialog = true
 
         when (val state = installViewModel.installState) {
             is InstallViewModel.InstallState.Ready -> {
                 // The dialog this item raised is gone and nothing began, so it was dismissed
-                if (awaitedInstallerDialog && !dialogShowing) {
+                if (awaitedInstallerDialog && !installerDialogShowing) {
                     skipped++
                     current.onFailed(null)
                     active = null
@@ -193,16 +194,20 @@ fun rememberInstallQueue(
 
     if (showOverlay) {
         val installing = installViewModel.installState as? InstallViewModel.InstallState.Installing
-        Overlay(visible = active != null && installing != null) {
+        // Up for the whole queue, also while the next item starts and is not Installing yet, so it
+        // does not dip between apps. Only the installer's own dialogs take its place
+        Overlay(visible = active != null && (installing != null || !installerDialogShowing)) {
             // A mount names the step it is on, as the patcher's install button does
             val caption = installing?.stage?.labelRes
                 ?: if (activeMounts) R.string.mounting_ellipsis else R.string.installing_ellipsis
             val position = total - queue.size
             PulsingLogoWithCaption(
                 caption = stringResource(caption),
-                subtitle = active?.appName?.let { name ->
-                    if (total > 1) stringResource(R.string.install_queue_item, name, position, total) else name
-                }
+                // The last app stays named while the overlay fades out after the queue drains
+                subtitle = rememberLatest(active?.appName),
+                badge = if (total > 1) {
+                    stringResource(R.string.progress_count, position.toString(), total.toString())
+                } else null
             )
         }
     }

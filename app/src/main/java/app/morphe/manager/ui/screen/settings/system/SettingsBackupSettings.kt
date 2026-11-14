@@ -328,7 +328,7 @@ private fun AutoBackupItems(
             text = if (failed) {
                 stringResource(R.string.settings_system_auto_backup_failed)
             } else {
-                stringResource(R.string.settings_system_auto_backup_footer, AutoBackup.KEPT_COPIES)
+                stringResource(R.string.settings_system_auto_backup_footer, AutoBackup.KEPT_COPIES.toString())
             },
             tone = if (failed) SemanticTone.Warning else SemanticTone.Neutral
         )

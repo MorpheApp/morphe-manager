@@ -57,7 +57,6 @@
     <string name="home_update_error">Update failed</string>
     <string name="home_update_error_subtitle">Something went wrong while updating sources</string>
     <string name="home_updating_sources">Updating sources…</string>
-    <string name="home_update_bundle_count" translatable="false">%1$d / %2$d</string>
     <string name="home_update_success">Update sources complete</string>
     <string name="home_update_success_subtitle">Your sources are up to date</string>
     <string name="home_sources_are_loading">Sources are loading, please wait…</string>
@@ -1257,7 +1256,7 @@ Details: %2$s"</string>
     <string name="settings_system_auto_backup_signing_key_description">Saves the key that signs patched apps beside the settings</string>
     <string name="settings_system_auto_backup_signing_key_warning_title">Back up the signing key?</string>
     <string name="settings_system_auto_backup_signing_key_warning_message">Anyone who gets this file can sign updates that install over your patched apps. Keep the folder private and share it only with your own devices</string>
-    <string name="settings_system_auto_backup_footer">A copy is saved when you leave Morphe after changing something. The newest %d are kept</string>
+    <string name="settings_system_auto_backup_footer">A copy is saved when you leave Morphe after changing something. The newest %s are kept</string>
     <string name="settings_system_auto_backup_failed">The last backup could not be saved. Pick the folder again</string>
     <string name="settings_system_import_manager_settings_fail">Failed to import Morphe settings: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe settings imported</string>
@@ -1478,6 +1477,7 @@ Details: %2$s"</string>
     <string name="ready">Ready</string>
     <string name="retry">Retry</string>
     <string name="refresh">Refresh</string>
+    <string name="progress_count" translatable="false">%1$s / %2$s</string>
     <string name="add">Add</string>
     <string name="create">Create</string>
     <string name="close">Close</string>
@@ -1576,7 +1576,6 @@ Details: %2$s"</string>
     <string name="logs">Logs</string>
     <string name="sources">Sources</string>
     <string name="installing_ellipsis">Installing…</string>
-    <string name="install_queue_item" translatable="false">%1$s · %2$d / %3$d</string>
     <string name="mounting_ellipsis">Mounting…</string>
     <string name="mount_stage_restoring_stock">Restoring original…</string>
     <string name="mount_stage_copying">Copying…</string>

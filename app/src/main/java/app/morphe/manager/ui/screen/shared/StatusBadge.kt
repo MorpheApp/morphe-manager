@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.shared
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -198,6 +199,34 @@ fun StatusBadge(
                 color = content,
                 fontWeight = FontWeight.Medium
             )
+        }
+    }
+}
+
+/**
+ * [StatusBadge] for a count, such as "2 / 5", that slides over to the next one as it changes.
+ * Texts sharing a [contentKey] update in place, as a download's percentage ticks over.
+ */
+@Composable
+fun CounterBadge(
+    text: String,
+    modifier: Modifier = Modifier,
+    tone: SemanticTone = SemanticTone.Neutral,
+    contentKey: (String) -> Any? = { it }
+) {
+    // While TalkBack runs the count swaps in place, as a CrossfadeText does
+    if (rememberAccessibilityEnabled()) {
+        StatusBadge(text = text, tone = tone, modifier = modifier)
+    } else {
+        AnimatedContent(
+            targetState = text,
+            transitionSpec = Animations.compactCounterTransitionSpec,
+            contentAlignment = Alignment.Center,
+            contentKey = contentKey,
+            modifier = modifier,
+            label = "counterBadge"
+        ) { shown ->
+            StatusBadge(text = shown, tone = tone)
         }
     }
 }

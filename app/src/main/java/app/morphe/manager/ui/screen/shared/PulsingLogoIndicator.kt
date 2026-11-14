@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,14 +94,15 @@ fun PulsingLogoIndicator(
 }
 
 /**
- * [PulsingLogoIndicator] with a centered caption below the logo, used to describe
- * the operation running behind a full-screen overlay. An optional [subtitle] names what it runs on.
+ * [PulsingLogoIndicator] with a centered caption below the logo, describing the operation running
+ * behind a full-screen overlay. [subtitle] names what it runs on and [badge] how far along it is.
  */
 @Composable
 fun PulsingLogoWithCaption(
     caption: String,
     modifier: Modifier = Modifier,
     subtitle: String? = null,
+    badge: String? = null,
     size: Dp = 180.dp,
     spacing: Dp = 20.dp
 ) {
@@ -112,20 +113,30 @@ fun PulsingLogoWithCaption(
     ) {
         PulsingLogoIndicator(size = size, contentDescription = caption)
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
+            badge?.let {
+                CounterBadge(
+                    text = it,
+                    tone = SemanticTone.Primary,
+                    modifier = Modifier.padding(bottom = Defaults.SpaceSmall)
+                )
+            }
+            CrossfadeText(
                 text = caption,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                label = "caption"
             )
-            subtitle?.let {
-                Text(
-                    text = it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
+            CrossfadeText(
+                text = subtitle,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                transitionSpec = Animations.counterTransitionSpec,
+                label = "caption_subtitle"
+            )
         }
     }
 }
