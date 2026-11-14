@@ -323,6 +323,12 @@ class PatcherProcesses(
         val configuration = installed.aotConfiguration
         val staging = installed.aotStaging.apply { delete() }
         try {
+            // The cache was cleared during the run, which took the recording with it. The next run
+            // records again, and this is not held against the cache as a failure.
+            if (!installed.aotDir.isDirectory) {
+                Log.i(tag, "The AOT cache was cleared while the run recorded for it")
+                return
+            }
             if (!configuration.isFile) throw IOException("The run recorded no AOT configuration")
 
             val launch = jvmLaunch(
