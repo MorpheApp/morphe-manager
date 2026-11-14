@@ -33,8 +33,8 @@ fun InstallerFlowDialogs(
     }
 
     DialogHost(visible = installViewModel.showInstallerSelectionDialog) {
-        val selected = remember { installViewModel.getPrimaryInstallerToken() }
-        val options = rememberPolledInstallerEntries(selected, installViewModel::getInstallerOptions)
+        val selected = remember { installViewModel.getPreferredInstallerToken() }
+        val options = rememberPolledInstallers(selected, installViewModel::getInstallerOptions)
         InstallerSelectionDialog(
             options = options,
             selected = selected,

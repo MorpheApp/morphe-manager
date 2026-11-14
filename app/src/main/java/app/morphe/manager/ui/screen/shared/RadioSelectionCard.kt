@@ -188,7 +188,7 @@ fun SelectionLeadingBox(
     selected: Boolean,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    size: Dp = 28.dp,
+    size: Dp = SelectionMarkSize,
     cornerRadius: Dp = Defaults.CornerSmall,
     content: @Composable BoxScope.() -> Unit
 ) {

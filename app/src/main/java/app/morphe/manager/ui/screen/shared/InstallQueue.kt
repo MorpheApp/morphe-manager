@@ -30,9 +30,9 @@ import org.koin.compose.koinInject
  *
  * @param appName the name the install overlay shows while this request runs.
  * @param installedApp the tracked app a saved patched APK belongs to, which decides with the
- *        primary installer whether it is mounted. Null for an APK that belongs to no record.
+ *        preferred installer whether it is mounted. Null for an APK that belongs to no record.
  * @param builtForMount whether [file] was patched for a root mount, which only works mounted
- *        over [originalPackageName] whatever the record or the primary installer say.
+ *        over [originalPackageName] whatever the record or the preferred installer say.
  * @param onPersistApp forwarded to [InstallViewModel.install] or [InstallViewModel.installSavedMount];
  *        runs after a successful install to persist app metadata in the caller's repository.
  * @param onInstalled invoked with the installed package name after a successful install,
