@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Vyberte jiné aplikace</string>
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_unpatched_version_installed">Nainstalovaná nezáplatovaná verze</string>
-    <string name="home_unpatched_badge">Nezáplatováno</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Aktualizovat na %s</string>
+    <string name="home_app_status_newer_patches">Nové záplaty</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automobilový</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Hledat aplikace</string>
     <string name="list_options_title">Seřadit a filtrovat</string>
     <string name="list_options_state_description">Seřazeno podle %1$s, filtrováno podle %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Ručně</string>
+    <string name="list_sort_name_asc">Jméno (A–Z)</string>
+    <string name="list_sort_name_desc">Jméno (Z–A)</string>
+    <string name="home_app_filter_all">Vše</string>
+    <string name="home_app_filter_not_patched">Nezáplatováno</string>
     <string name="home_app_filter_clones">Klony</string>
     <string name="home_app_grouping_none">Žádné</string>
     <string name="home_app_sort_manual_hint">Dlouhým stisknutím aplikace zvolte tlačítko pro změnu pořadí</string>
-    <string name="home_app_sort_recommended">Doporučené pořadí</string>
-    <string name="home_app_sort_updates_first">Nejprve aktualizace záplat</string>
+    <string name="home_app_sort_recommended">Doporučeno</string>
+    <string name="home_app_sort_updates_first">Nejprve aktualizace</string>
     <string name="home_app_sort_recently_patched">Nedávno záplatované</string>
     <string name="home_no_apps_title">Nenalezly se žádné aplikace</string>
     <string name="home_no_apps_subtitle">Přidejte zdroj záplat nebo povolte stávající v %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Hledat zdroje a záplaty</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Vyžadují pozornost</string>
-    <string name="sources_sort_manual">Ruční řazení</string>
     <string name="sources_sort_manual_hint">Dlouhým stisknutím zdroje jej můžete přeřadit</string>
     <string name="sources_sort_last_updated">Naposledy aktualizováno</string>
     <string name="sources_sort_enabled_first">Povoleno nejdříve</string>
@@ -1319,8 +1325,6 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_storages">Úložiště</string>
     <string name="file_saver_downloads_failed">Nepodařilo se vytvořit soubor ve složce Stahování</string>
     <string name="file_saver_saving_to_downloads">Toto zařízení nemá obrazovku pro ukládání, soubor bude tedy uložen do složky Stahování jako %1$s</string>
-    <string name="file_picker_sort_name_asc">Název (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Název (Z–A)</string>
     <string name="file_picker_sort_size_desc">Velikost (od největší)</string>
     <string name="file_picker_sort_size_asc">Velikost (od nejmenší)</string>
     <string name="file_picker_sort_date_desc">Datum (od novějšího)</string>
@@ -1458,6 +1462,7 @@ Podrobnosti: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Soubor</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonovat</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Záplata</string>

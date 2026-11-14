@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Khetha ezinye izinhlelo</string>
     <string name="home_not_patched_yet">Ayikashayelwa iphetshi</string>
     <string name="home_unpatched_version_installed">Kufakwe inguqulo engalungiswanga</string>
-    <string name="home_unpatched_badge">Alulungiswanga</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Vutha kuya ku %s</string>
+    <string name="home_app_status_newer_patches">Ama-patch amasha</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">iTV</string>
     <string name="form_factor_automotive">Izimoto</string>
     <string name="home_no_patches_available">Azikho izigaba ezitholakalayo</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Sesha ama-app</string>
     <string name="list_options_title">Hlela futhi uhluze</string>
     <string name="list_options_state_description">Hlelwe ngokuka %1$s, hlulwe ngokuka %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Ngokuzenzela</string>
+    <string name="list_sort_name_asc">Igama (A–Z)</string>
+    <string name="list_sort_name_desc">Igama (Z–A)</string>
+    <string name="home_app_filter_all">Zonke</string>
+    <string name="home_app_filter_not_patched">Azikagobishwe</string>
     <string name="home_app_filter_clones">Ama-Clones</string>
     <string name="home_app_grouping_none">Akukho</string>
     <string name="home_app_sort_manual_hint">Cindezela isikhathi eside i-app, bese uchofoza inkinobho yokuhlela kabusha</string>
-    <string name="home_app_sort_recommended">Uhlelo oluncomekile</string>
-    <string name="home_app_sort_updates_first">Izibuyekezo ze-Patch kuqala</string>
+    <string name="home_app_sort_recommended">Kunconywa</string>
+    <string name="home_app_sort_updates_first">Izivuselelo kuqala</string>
     <string name="home_app_sort_recently_patched">Kwakhelwe muva</string>
     <string name="home_no_apps_title">Azikho izinhlelo ezitholakalayo</string>
     <string name="home_no_apps_subtitle">Yengeda umthombo we-patch noma uvule lowo okhona ku-%s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Funa imithombo namaphetshi</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Kudingeka ukunaka</string>
-    <string name="sources_sort_manual">Uhlelo lwezandla</string>
     <string name="sources_sort_manual_hint">Cindezela isikhathi eside kumthombo ukuze uhlele kabusha</string>
     <string name="sources_sort_last_updated">Okugcinwe okugcina</string>
     <string name="sources_sort_enabled_first">Ezivuliwe kuqala</string>
@@ -1319,8 +1325,6 @@ Imininingwane: %2$s"</string>
     <string name="file_picker_storages">Izindawo zokugcina</string>
     <string name="file_saver_downloads_failed">Kukwazekile ukudala ifayela ku-Downloads</string>
     <string name="file_saver_saving_to_downloads">Leli device alinaso isikrini sokugcina, ngakho ifayela liya ku-Downloads njenge %1$s</string>
-    <string name="file_picker_sort_name_asc">Igama (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Igama (Z–A)</string>
     <string name="file_picker_sort_size_desc">Usayizi (enkulu kuqala)</string>
     <string name="file_picker_sort_size_asc">Usayizi (encane kuqala)</string>
     <string name="file_picker_sort_date_desc">Usuku (okusha kuqala)</string>
@@ -1458,6 +1462,7 @@ Imininingwane: %2$s"</string>
     <string name="author">Umbhalo</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Ifayela</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Clone</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch\'a</string>

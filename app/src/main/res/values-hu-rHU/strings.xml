@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Más alkalmazás kiválasztása</string>
     <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_unpatched_version_installed">A telepített verzió módosítatlan</string>
-    <string name="home_unpatched_badge">Nincs módosítva</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Frissítés a(z) %s verzióra</string>
+    <string name="home_app_status_newer_patches">Új javítások</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Autóipari</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
@@ -65,10 +66,16 @@
     <string name="home_search_apps">Alkalmazások keresése</string>
     <string name="list_options_title">Rendezés és szűrés</string>
     <string name="list_options_state_description">Rendezés: %1$s, szűrés: %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuális</string>
+    <string name="list_sort_name_asc">Név (A–Z)</string>
+    <string name="list_sort_name_desc">Név (Z–A)</string>
+    <string name="home_app_filter_all">Összes</string>
+    <string name="home_app_filter_not_patched">Nincs módosítva</string>
     <string name="home_app_filter_clones">Klónozott alkalmazások</string>
     <string name="home_app_grouping_none">Egyik sem</string>
     <string name="home_app_sort_manual_hint">Nyomj hosszan egy alkalmazásra, majd koppints az átrendezés gombra</string>
-    <string name="home_app_sort_recommended">Ajánlott sorrend</string>
+    <string name="home_app_sort_recommended">Javasolt</string>
     <string name="home_app_sort_updates_first">Frissíthető alkalmazások előre</string>
     <string name="home_app_sort_recently_patched">Legutóbb módosított</string>
     <string name="home_no_apps_title">Nincsenek elérhető alkalmazások</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Források és javítások keresése</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Figyelmet igényel</string>
-    <string name="sources_sort_manual">Kézi sorrend</string>
     <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
     <string name="sources_sort_last_updated">Utolsó frissítés</string>
     <string name="sources_sort_enabled_first">Először az engedélyezettek</string>
@@ -1319,8 +1325,6 @@ Részletek: %2$s"</string>
     <string name="file_picker_storages">Tárolók</string>
     <string name="file_saver_downloads_failed">Nem sikerült létrehozni a fájlt a Letöltések mappában</string>
     <string name="file_saver_saving_to_downloads">Ennek az eszköznek nincs mentési képernyője, ezért a fájl a Letöltések mappába kerül %1$s néven</string>
-    <string name="file_picker_sort_name_asc">Név (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Név (Z–A)</string>
     <string name="file_picker_sort_size_desc">Méret (a legnagyobbtól kezdve)</string>
     <string name="file_picker_sort_size_asc">Méret (a legkisebbtől kezdve)</string>
     <string name="file_picker_sort_date_desc">Dátum (a legújabbaktól kezdve)</string>
@@ -1458,6 +1462,7 @@ Részletek: %2$s"</string>
     <string name="author">Szerző</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fájl</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klón</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Módosítás</string>

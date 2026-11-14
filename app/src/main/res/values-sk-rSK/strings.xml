@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Vybrať iné aplikácie</string>
     <string name="home_not_patched_yet">Zatiaľ nezaplátané</string>
     <string name="home_unpatched_version_installed">Nainštalovaná nezáplatovaná verzia</string>
-    <string name="home_unpatched_badge">Nezaplátané</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Aktualizovať na %s</string>
+    <string name="home_app_status_newer_patches">Nové záplaty</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Televízor</string>
     <string name="form_factor_automotive">Automobil</string>
     <string name="home_no_patches_available">Neboli nájdené žiadne záplaty</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Vyhľadávanie aplikácií</string>
     <string name="list_options_title">Zoradiť a filtrovať</string>
     <string name="list_options_state_description">Zoradené podľa %1$s, filtrované podľa %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuálne</string>
+    <string name="list_sort_name_asc">Meno (A–Z)</string>
+    <string name="list_sort_name_desc">Meno (Z–A)</string>
+    <string name="home_app_filter_all">Všetky</string>
+    <string name="home_app_filter_not_patched">Nezaplátané</string>
     <string name="home_app_filter_clones">Klonované</string>
     <string name="home_app_grouping_none">Žiadna</string>
     <string name="home_app_sort_manual_hint">Dlho podržte aplikáciu a potom klepnite na tlačidlo pre zmenu poradia</string>
-    <string name="home_app_sort_recommended">Odporúčané poradie</string>
-    <string name="home_app_sort_updates_first">Najprv opravy</string>
+    <string name="home_app_sort_recommended">Odporúčané</string>
+    <string name="home_app_sort_updates_first">Najprv aktualizácie</string>
     <string name="home_app_sort_recently_patched">Nedávno opravené</string>
     <string name="home_no_apps_title">Nedostupné žiadne aplikácie</string>
     <string name="home_no_apps_subtitle">Pridajte zdroj záplaty alebo povoľte existujúci v %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Hľadať zdroje a záplaty</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Vyžadujú pozornosť</string>
-    <string name="sources_sort_manual">Manuálne zoradenie</string>
     <string name="sources_sort_manual_hint">Dlhým stlačením položky zdroja ju môžete presunúť</string>
     <string name="sources_sort_last_updated">Posledná aktualizácia</string>
     <string name="sources_sort_enabled_first">Najprv povolené</string>
@@ -1319,8 +1325,6 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_storages">Úložiská</string>
     <string name="file_saver_downloads_failed">Nepodarilo sa vytvoriť súbor v priečinku Stiahnuté súbory</string>
     <string name="file_saver_saving_to_downloads">Toto zariadenie nemá obrazovku pre ukladanie, takže súbor sa uloží do priečinka Stiahnuté súbory ako %1$s</string>
-    <string name="file_picker_sort_name_asc">Názov (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Názov (Z–A)</string>
     <string name="file_picker_sort_size_desc">Veľkosť (najväčšie najprv)</string>
     <string name="file_picker_sort_size_asc">Veľkosť (najmenšie najprv)</string>
     <string name="file_picker_sort_date_desc">Dátum (najnovšie najprv)</string>
@@ -1458,6 +1462,7 @@ Podrobnosti: %2$s"</string>
     <string name="author">Autor</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Súbor</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonovať</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Zaplátať</string>

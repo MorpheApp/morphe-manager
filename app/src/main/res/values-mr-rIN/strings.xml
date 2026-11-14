@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">इतर अॅप्स निवडा</string>
     <string name="home_not_patched_yet">अजून सुधारणा केलेली नाही</string>
     <string name="home_unpatched_version_installed">अनपॅच केलेली आवृत्ती स्थापित</string>
-    <string name="home_unpatched_badge">पॅच केलेले नाही</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">%s वर अपडेट करा</string>
+    <string name="home_app_status_newer_patches">नवीन पॅचेस</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">टीव्ही</string>
     <string name="form_factor_automotive">ऑटोमोटिव</string>
     <string name="home_no_patches_available">सुधारणा उपलब्ध नाहीत</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">ॲप्स शोधा</string>
     <string name="list_options_title">क्रमवारी लावा आणि फिल्टर करा</string>
     <string name="list_options_state_description">%1$s नुसार क्रमवारीबद्ध, %2$s नुसार फिल्टर केलेले</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">मॅन्युअल</string>
+    <string name="list_sort_name_asc">नाव (A–Z)</string>
+    <string name="list_sort_name_desc">नाव (Z–A)</string>
+    <string name="home_app_filter_all">सर्व</string>
+    <string name="home_app_filter_not_patched">पॅच केलेले नाही</string>
     <string name="home_app_filter_clones">क्लोन्स</string>
     <string name="home_app_grouping_none">काहीही नाही</string>
     <string name="home_app_sort_manual_hint">एका ॲपला दाबून धरा, त्यानंतर पुनर्रचना बटणावर टॅप करा</string>
-    <string name="home_app_sort_recommended">सुचित क्रमवारी</string>
-    <string name="home_app_sort_updates_first">पॅच अपडेट्स प्रथम</string>
+    <string name="home_app_sort_recommended">सुचवलेले</string>
+    <string name="home_app_sort_updates_first">आधी अपडेट्स</string>
     <string name="home_app_sort_recently_patched">नुकतेच पॅच केलेले</string>
     <string name="home_no_apps_title">ॲप्स उपलब्ध नाहीत</string>
     <string name="home_no_apps_subtitle">पॅच स्रोत जोडा किंवा %s मध्ये उपलब्ध स्त्रोत सक्षम करा</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">स्रोत आणि पॅच शोधा</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">लक्ष देणे आवश्यक आहे</string>
-    <string name="sources_sort_manual">मॅन्युअल ऑर्डर</string>
     <string name="sources_sort_manual_hint">पुन्हा क्रमवारी लावण्यासाठी स्रोतावर दाबून ठेवा</string>
     <string name="sources_sort_last_updated">शेवटची अपडेट</string>
     <string name="sources_sort_enabled_first">सक्षम केलेले प्रथम</string>
@@ -1318,8 +1324,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">स्टोरेज</string>
     <string name="file_saver_downloads_failed">Downloads मध्ये फाईल तयार होऊ शकली नाही</string>
     <string name="file_saver_saving_to_downloads">या डिव्हाइसमध्ये सेव्ह स्क्रीन नसल्यामुळे, फाईल Downloads मध्ये %1$s म्हणून सेव्ह केली जाईल</string>
-    <string name="file_picker_sort_name_asc">नाव (A–Z)</string>
-    <string name="file_picker_sort_name_desc">नाव (Z–A)</string>
     <string name="file_picker_sort_size_desc">आकार (सर्वात मोठे प्रथम)</string>
     <string name="file_picker_sort_size_asc">आकार (सर्वात लहान प्रथम)</string>
     <string name="file_picker_sort_date_desc">दिनांक (नवीनतम प्रथम)</string>
@@ -1457,6 +1461,7 @@ morphe_header_custom_dark.png
     <string name="author">लेखक</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">फाईल</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">क्लोन</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">सुधारणा</string>

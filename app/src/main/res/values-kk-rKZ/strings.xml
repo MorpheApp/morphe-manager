@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Басқа қолданбаларды таңдау</string>
     <string name="home_not_patched_yet">Әлі патчтелмеген</string>
     <string name="home_unpatched_version_installed">Патч жасалмаған нұсқа орнатылған</string>
-    <string name="home_unpatched_badge">Патчталмаған</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">%s нұсқасына жаңарту</string>
+    <string name="home_app_status_newer_patches">Жаңа патчтар</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТВ</string>
     <string name="form_factor_automotive">Автомобильдік</string>
     <string name="home_no_patches_available">Қолжетімді патчтар жоқ</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Қосымшаларды іздеу</string>
     <string name="list_options_title">Сұрыптау және сүзгілеу</string>
     <string name="list_options_state_description">%1$s бойынша сұрыпталды, %2$s бойынша сүзілді</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Қолмен</string>
+    <string name="list_sort_name_asc">Аты (A–Z)</string>
+    <string name="list_sort_name_desc">Аты (Z–A)</string>
+    <string name="home_app_filter_all">Барлығы</string>
+    <string name="home_app_filter_not_patched">Патчталмаған</string>
     <string name="home_app_filter_clones">Клондар</string>
     <string name="home_app_grouping_none">Жоқ</string>
     <string name="home_app_sort_manual_hint">Қосымшаны ұзақ басып, содан кейін қайта реттеу түймесін басыңыз</string>
-    <string name="home_app_sort_recommended">Ұсынылған реті</string>
-    <string name="home_app_sort_updates_first">Патч жаңартулары бірінші</string>
+    <string name="home_app_sort_recommended">Ұсынылған</string>
+    <string name="home_app_sort_updates_first">Жаңартулар бірінші</string>
     <string name="home_app_sort_recently_patched">Жақында патчтелген</string>
     <string name="home_no_apps_title">Қолжетімді қосымшалар жоқ</string>
     <string name="home_no_apps_subtitle">%s бөлімінде патч көзін қосыңыз немесе қолданыстағыны қосыңыз</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Дереккөздер мен патчтарды іздеу</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Назар аудару қажет</string>
-    <string name="sources_sort_manual">Қолмен реттеу</string>
     <string name="sources_sort_manual_hint">Реттеу үшін дереккөзге ұзақ басыңыз</string>
     <string name="sources_sort_last_updated">Соңғы жаңарту уақыты</string>
     <string name="sources_sort_enabled_first">Қосылғандар бірінші</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Жады</string>
     <string name="file_saver_downloads_failed">Жүктемелерге файлды жасау мүмкін болмады</string>
     <string name="file_saver_saving_to_downloads">Бұл құрылғыда сақтау экраны жоқ, сондықтан файл Жүктемелерге %1$s ретінде сақталады</string>
-    <string name="file_picker_sort_name_asc">Атауы (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Атауы (Z–A)</string>
     <string name="file_picker_sort_size_desc">Көлемі (ең үлкені бірінші)</string>
     <string name="file_picker_sort_size_asc">Көлемі (ең кішісі бірінші)</string>
     <string name="file_picker_sort_date_desc">Күні (ең жаңасы бірінші)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Авторы</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Файл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клондау</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Патч</string>

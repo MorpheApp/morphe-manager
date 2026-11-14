@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Chagua programu nyingine</string>
     <string name="home_not_patched_yet">Haijapachwa bado</string>
     <string name="home_unpatched_version_installed">Toleo lisilofanyiwa patch limesakinishwa</string>
-    <string name="home_unpatched_badge">Haijapatchedwa</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Sasisha kwenda %s</string>
+    <string name="home_app_status_newer_patches">Patch mpya</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Runinga</string>
     <string name="form_factor_automotive">Gari</string>
     <string name="home_no_patches_available">Hakuna viraka vinavyopatikana</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Tafuta programu</string>
     <string name="list_options_title">Panga na chujia</string>
     <string name="list_options_state_description">Imepangwa kwa %1$s, imechujwa kwa %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Kwa mkono</string>
+    <string name="list_sort_name_asc">Jina (A–Z)</string>
+    <string name="list_sort_name_desc">Jina (Z–A)</string>
+    <string name="home_app_filter_all">Zote</string>
+    <string name="home_app_filter_not_patched">Hazijarekebishwa</string>
     <string name="home_app_filter_clones">Nakala</string>
     <string name="home_app_grouping_none">Hakuna</string>
     <string name="home_app_sort_manual_hint">Bonyeza na ushikilie programu, kisha gusa kitufe cha kupanga upya</string>
-    <string name="home_app_sort_recommended">Mpangilio unaopendekezwa</string>
-    <string name="home_app_sort_updates_first">Sasisho za patch kwanza</string>
+    <string name="home_app_sort_recommended">Inapendekezwa</string>
+    <string name="home_app_sort_updates_first">Masasisho kwanza</string>
     <string name="home_app_sort_recently_patched">Zilizo-patch hivi karibuni</string>
     <string name="home_no_apps_title">Hakuna programu zinazopatikana</string>
     <string name="home_no_apps_subtitle">Ongeza chanzo cha patch au wezesha kilichopo katika %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Tafuta vyanzo na viraka</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Inahitaji uangalizi</string>
-    <string name="sources_sort_manual">Mpangilio wa mwongozo</string>
     <string name="sources_sort_manual_hint">Bonyeza kwa muda mrefu chanzo ili kupanga upya</string>
     <string name="sources_sort_last_updated">Imesasishwa mara ya mwisho</string>
     <string name="sources_sort_enabled_first">Zilizowezeshwa kwanza</string>
@@ -1319,8 +1325,6 @@ Maelezo: %2$s"</string>
     <string name="file_picker_storages">Hifadhi</string>
     <string name="file_saver_downloads_failed">Imeshindwa kuunda faili katika Pakua</string>
     <string name="file_saver_saving_to_downloads">Kifaa hiki hakina skrini ya kuhifadhi, hivyo faili inaenda kwenye Pakua kama %1$s</string>
-    <string name="file_picker_sort_name_asc">Jina (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Jina (Z–A)</string>
     <string name="file_picker_sort_size_desc">Ukubwa (kubwa zaidi kwanza)</string>
     <string name="file_picker_sort_size_asc">Ukubwa (ndogo zaidi kwanza)</string>
     <string name="file_picker_sort_date_desc">Tarehe (ya hivi karibuni kwanza)</string>
@@ -1458,6 +1462,7 @@ Maelezo: %2$s"</string>
     <string name="author">Mwandishi</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Faili</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonia</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Rekebisha</string>

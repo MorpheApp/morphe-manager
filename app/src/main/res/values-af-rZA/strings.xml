@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Kies ander programme</string>
     <string name="home_not_patched_yet">Nog nie verander nie</string>
     <string name="home_unpatched_version_installed">Ongepleisterde weergawe geïnstalleer</string>
-    <string name="home_unpatched_badge">Nie gepleister nie</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Opdateer na %s</string>
+    <string name="home_app_status_newer_patches">Nuwe regstellings</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Outomobiel</string>
     <string name="home_no_patches_available">Geen veranderinge beskikbaar</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Soek programme</string>
     <string name="list_options_title">Sorteer en filtreer</string>
     <string name="list_options_state_description">Gesorteer volgens %1$s, gefiltreer volgens %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Handmatig</string>
+    <string name="list_sort_name_asc">Naam (A–Z)</string>
+    <string name="list_sort_name_desc">Naam (Z–A)</string>
+    <string name="home_app_filter_all">Alles</string>
+    <string name="home_app_filter_not_patched">Nie gepleister nie</string>
     <string name="home_app_filter_clones">Klone</string>
     <string name="home_app_grouping_none">Geen</string>
     <string name="home_app_sort_manual_hint">Hou \'n toepassing lank gedruk, tik dan op die herrangskik-knoppie</string>
-    <string name="home_app_sort_recommended">Aanbevole volgorde</string>
-    <string name="home_app_sort_updates_first">Pleisteropdaterings eerste</string>
+    <string name="home_app_sort_recommended">Aanbeveel</string>
+    <string name="home_app_sort_updates_first">Opdaterings eerste</string>
     <string name="home_app_sort_recently_patched">Onlangs gepleister</string>
     <string name="home_no_apps_title">Geen programme beskikbaar nie</string>
     <string name="home_no_apps_subtitle">Voeg \'n verandering oorsprong by of aktiveer \'n bestaande een in %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Soek bronne en patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Benodig aandag</string>
-    <string name="sources_sort_manual">Handmatige volgorde</string>
     <string name="sources_sort_manual_hint">Druk lank op \'n bron om te herschik</string>
     <string name="sources_sort_last_updated">Laas opgedateer</string>
     <string name="sources_sort_enabled_first">Eerstens geaktiveer</string>
@@ -1319,8 +1325,6 @@ Besonderhede: %2$s"</string>
     <string name="file_picker_storages">Bergings</string>
     <string name="file_saver_downloads_failed">Kon nie die lêer in Aflaaie skep nie</string>
     <string name="file_saver_saving_to_downloads">Hierdie toestel het geen stoorskerm nie, dus gaan die lêer na Aflaaie as %1$s</string>
-    <string name="file_picker_sort_name_asc">Naam (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Naam (Z–A)</string>
     <string name="file_picker_sort_size_desc">Grootte (grootste eerst)</string>
     <string name="file_picker_sort_size_asc">Grootte (kleinste eerst)</string>
     <string name="file_picker_sort_date_desc">Datum (nuutste eerst)</string>
@@ -1458,6 +1462,7 @@ Besonderhede: %2$s"</string>
     <string name="author">Auteur</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Lêer</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Kloon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch</string>

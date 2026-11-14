@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Вибрати інші застосунки</string>
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_unpatched_version_installed">Встановлено непропатчену версію</string>
-    <string name="home_unpatched_badge">Не патчено</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Оновити до %s</string>
+    <string name="home_app_status_newer_patches">Нові патчі</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТВ</string>
     <string name="form_factor_automotive">Автомобільний</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Пошук застосунків</string>
     <string name="list_options_title">Сортування та фільтрування</string>
     <string name="list_options_state_description">Відсортовано за %1$s, відфільтровано за %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Вручну</string>
+    <string name="list_sort_name_asc">Назва (А–Я)</string>
+    <string name="list_sort_name_desc">Назва (Я–А)</string>
+    <string name="home_app_filter_all">Всі</string>
+    <string name="home_app_filter_not_patched">Не пропатчено</string>
     <string name="home_app_filter_clones">Клони</string>
     <string name="home_app_grouping_none">Немає</string>
     <string name="home_app_sort_manual_hint">Натисніть і утримуйте застосунок, потім натисніть кнопку зміни порядку</string>
-    <string name="home_app_sort_recommended">Рекомендований порядок</string>
-    <string name="home_app_sort_updates_first">Спочатку оновлення патчів</string>
+    <string name="home_app_sort_recommended">Рекомендовано</string>
+    <string name="home_app_sort_updates_first">Спочатку оновлення</string>
     <string name="home_app_sort_recently_patched">Нещодавно пропатчено</string>
     <string name="home_no_apps_title">Немає доступних застосунків</string>
     <string name="home_no_apps_subtitle">Додайте джерело патчів або ввімкніть існуюче в %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Пошук джерел та патчів</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Потребує уваги</string>
-    <string name="sources_sort_manual">Ручне сортування</string>
     <string name="sources_sort_manual_hint">Утримуйте джерело, щоб змінити порядок</string>
     <string name="sources_sort_last_updated">Останнє оновлення</string>
     <string name="sources_sort_enabled_first">Спочатку увімкнені</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Сховища</string>
     <string name="file_saver_downloads_failed">Не вдалося створити файл у \"Завантаження\"</string>
     <string name="file_saver_saving_to_downloads">На цьому пристрої немає екрана збереження, тому файл потрапляє до \"Завантаження\" як %1$s</string>
-    <string name="file_picker_sort_name_asc">Назва (А–Я)</string>
-    <string name="file_picker_sort_name_desc">Назва (Я–А)</string>
     <string name="file_picker_sort_size_desc">Розмір (спочатку більші)</string>
     <string name="file_picker_sort_size_asc">Розмір (спочатку менші)</string>
     <string name="file_picker_sort_date_desc">Дата (спочатку новіші)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Автор</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Файл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клон</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Патчити</string>

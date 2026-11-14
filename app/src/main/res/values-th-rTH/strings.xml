@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">เลือกแอปอื่น</string>
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตช์</string>
     <string name="home_unpatched_version_installed">ติดตั้งเวอร์ชันที่ไม่ได้รับการแพตช์แล้ว</string>
-    <string name="home_unpatched_badge">ไม่ได้รับการแพตช์</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">อัปเดตเป็น %s</string>
+    <string name="home_app_status_newer_patches">แพตช์ใหม่</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ทีวี</string>
     <string name="form_factor_automotive">ยานยนต์</string>
     <string name="home_no_patches_available">ไม่มีแพตช์ที่ใช้งานได้</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">ค้นหาแอป</string>
     <string name="list_options_title">เรียงลำดับและกรอง</string>
     <string name="list_options_state_description">เรียงลำดับโดย %1$s, กรองโดย %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">กำหนดเอง</string>
+    <string name="list_sort_name_asc">ชื่อ (A–Z)</string>
+    <string name="list_sort_name_desc">ชื่อ (Z–A)</string>
+    <string name="home_app_filter_all">ทั้งหมด</string>
+    <string name="home_app_filter_not_patched">ไม่ได้รับการแพตช์</string>
     <string name="home_app_filter_clones">โคลน</string>
     <string name="home_app_grouping_none">ไม่มี</string>
     <string name="home_app_sort_manual_hint">แตะแอปค้างไว้ แล้วแตะปุ่มจัดเรียงใหม่</string>
-    <string name="home_app_sort_recommended">เรียงตามที่แนะนำ</string>
-    <string name="home_app_sort_updates_first">อัปเดตแพตช์ก่อน</string>
+    <string name="home_app_sort_recommended">แนะนำ</string>
+    <string name="home_app_sort_updates_first">อัปเดตก่อน</string>
     <string name="home_app_sort_recently_patched">แพตช์ล่าสุด</string>
     <string name="home_no_apps_title">ไม่มีแอปที่ใช้ได้</string>
     <string name="home_no_apps_subtitle">เพิ่มแหล่งที่มาของแพตช์หรือเปิดใช้งานแหล่งที่มาที่มีอยู่แล้วใน %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">ค้นหาแหล่งที่มาและแพตช์</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">ต้องการความสนใจ</string>
-    <string name="sources_sort_manual">จัดเรียงด้วยตนเอง</string>
     <string name="sources_sort_manual_hint">แตะค้างที่แหล่งข้อมูลเพื่อจัดเรียงใหม่</string>
     <string name="sources_sort_last_updated">อัปเดตล่าสุด</string>
     <string name="sources_sort_enabled_first">เปิดใช้งานก่อน</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">ที่เก็บข้อมูล</string>
     <string name="file_saver_downloads_failed">ไม่สามารถสร้างไฟล์ในรายการดาวน์โหลดได้</string>
     <string name="file_saver_saving_to_downloads">อุปกรณ์นี้ไม่มีหน้าจอสำหรับบันทึก ดังนั้นไฟล์จะถูกบันทึกลงในรายการดาวน์โหลดในชื่อ %1$s</string>
-    <string name="file_picker_sort_name_asc">ชื่อ (A–Z)</string>
-    <string name="file_picker_sort_name_desc">ชื่อ (Z–A)</string>
     <string name="file_picker_sort_size_desc">ขนาด (ใหญ่ที่สุดก่อน)</string>
     <string name="file_picker_sort_size_asc">ขนาด (เล็กที่สุดก่อน)</string>
     <string name="file_picker_sort_date_desc">วันที่ (ใหม่ล่าสุดก่อน)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">ผู้สร้าง</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ไฟล์</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">โคลน</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">แพตช์</string>

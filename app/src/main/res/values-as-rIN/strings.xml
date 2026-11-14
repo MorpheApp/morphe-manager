@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">অন্যান্য এপসমূহ নিৰ্বাচন কৰক</string>
     <string name="home_not_patched_yet">এতিয়াও পেচ কৰা হোৱা নাই</string>
     <string name="home_unpatched_version_installed">আনপেচড সংস্কৰণ স্থাপন কৰা হৈছে</string>
-    <string name="home_unpatched_badge">প্যাচ কৰা হোৱা নাই</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">%s লৈ আপডেট কৰক</string>
+    <string name="home_app_status_newer_patches">নতুন প্যাচসমূহ</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">টিভি</string>
     <string name="form_factor_automotive">অটোমোটিভ</string>
     <string name="home_no_patches_available">কোনো পেচ উপলব্ধ নহয়</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">এপসমূহ সন্ধান কৰক</string>
     <string name="list_options_title">ছৰ্ট আৰু ফিল্টাৰ</string>
     <string name="list_options_state_description">%1$s ৰ দ্বাৰা ছৰ্ট কৰা হৈছে, %2$s ৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">ম্যানুৱেল</string>
+    <string name="list_sort_name_asc">নাম (A–Z)</string>
+    <string name="list_sort_name_desc">নাম (Z–A)</string>
+    <string name="home_app_filter_all">সকলোবোৰ</string>
+    <string name="home_app_filter_not_patched">প্যাচ কৰা হোৱা নাই</string>
     <string name="home_app_filter_clones">ক্লোনসমূহ</string>
     <string name="home_app_grouping_none">একো নহয়</string>
     <string name="home_app_sort_manual_hint">এটা এপক দীঘলীয়া সময়ৰ বাবে টিপি ৰাখক, তাৰ পিছত পুনৰ সজাই লোৱাৰ বুটামত ক্লিক কৰক</string>
-    <string name="home_app_sort_recommended">সুপাৰিশ কৰা ক্ৰম</string>
-    <string name="home_app_sort_updates_first">পেচ আপডেটসমূহ প্ৰথমে</string>
+    <string name="home_app_sort_recommended">সুপাৰিছ কৰা</string>
+    <string name="home_app_sort_updates_first">আপডেটসমূহ প্ৰথমে</string>
     <string name="home_app_sort_recently_patched">শেহতীয়াকৈ পেচিং কৰা</string>
     <string name="home_no_apps_title">কোনো এপ উপলব্ধ নাই</string>
     <string name="home_no_apps_subtitle">%s ত এটা পেচ উৎস যোগ কৰক বা বিদ্যমান এটা সক্ৰিয় কৰক</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">উৎস আৰু পেচবোৰৰ বাবে সন্ধান কৰক</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">মনোযোগৰ প্ৰয়োজন</string>
-    <string name="sources_sort_manual">ম্যানুৱেল ক্ৰম</string>
     <string name="sources_sort_manual_hint">পুনৰ সজাবলৈ এটা উৎসত লং-প্ৰেছ কৰক</string>
     <string name="sources_sort_last_updated">শেষবাৰ আপডেট কৰা হৈছে</string>
     <string name="sources_sort_enabled_first">সক্ৰিয়বোৰ আগতে</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">ষ্টোৰেজসমূহ</string>
     <string name="file_saver_downloads_failed">Downloads-ত ফাইলটো সৃষ্টি কৰিব নোৱাৰিল</string>
     <string name="file_saver_saving_to_downloads">এই ডিভাইচটোত কোনো ছেভ স্ক্ৰীন নাই, সেয়েহে ফাইলটো Downloads-লৈ %1$s হিচাপে যাব</string>
-    <string name="file_picker_sort_name_asc">নাম (A–Z)</string>
-    <string name="file_picker_sort_name_desc">নাম (Z–A)</string>
     <string name="file_picker_sort_size_desc">আকাৰ (আটাইতকৈ ডাঙৰটো আগত)</string>
     <string name="file_picker_sort_size_asc">আকাৰ (আটাইতকৈ সৰুটো আগত)</string>
     <string name="file_picker_sort_date_desc">তাৰিখ (আটাইতকৈ নতুনটো আগত)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">লেখক</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ফাইল</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">ক্লোন</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">প্যাচ</string>

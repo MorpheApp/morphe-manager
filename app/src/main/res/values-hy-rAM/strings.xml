@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Ընտրել այլ հավելվածներ</string>
     <string name="home_not_patched_yet">Դեռևս չի փոփոխվել</string>
     <string name="home_unpatched_version_installed">Տեղադրված է չփոփոխված տարբերակը</string>
-    <string name="home_unpatched_badge">Չփոփոխված</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Թարմացնել %s-ի</string>
+    <string name="home_app_status_newer_patches">Նոր պատչեր</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ՀՏՀ</string>
     <string name="form_factor_automotive">Ավտոմոբիլային</string>
     <string name="home_no_patches_available">Հասանելի փոփոխություններ չկան</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Փնտրել հավելվածները</string>
     <string name="list_options_title">Տեսակավորում և զտում</string>
     <string name="list_options_state_description">Տեսակավորված է ըստ %1$s-ի, զտված է ըստ %2$s-ի</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Ձեռքով</string>
+    <string name="list_sort_name_asc">Անուն (Ա–Ֆ)</string>
+    <string name="list_sort_name_desc">Անուն (Ֆ–Ա)</string>
+    <string name="home_app_filter_all">Բոլորը</string>
+    <string name="home_app_filter_not_patched">Չպատչված</string>
     <string name="home_app_filter_clones">Կլոններ</string>
     <string name="home_app_grouping_none">Ոչինչ</string>
     <string name="home_app_sort_manual_hint">Երկար սեղմեք հավելվածի վրա, ապա սեղմեք վերադասավորման կոճակը</string>
-    <string name="home_app_sort_recommended">Խորհուրդ տրվող հերթականություն</string>
-    <string name="home_app_sort_updates_first">Թարմացումները՝ առաջին հերթին</string>
+    <string name="home_app_sort_recommended">Խորհուրդ տրվող</string>
+    <string name="home_app_sort_updates_first">Նախ թարմացումները</string>
     <string name="home_app_sort_recently_patched">Պատչերը չեն աջակցում այս պահպանված պատճենին: Փոփոխելիս ձեզնից կպահանջվի հաստատել կամ ընտրել մեկ այլ APK</string>
     <string name="home_no_apps_title">Հավելվածներ չկան</string>
     <string name="home_no_apps_subtitle">Ավելացրեք փեթչի աղբյուր կամ ակտիվացրեք գոյություն ունեցողը %s-ում</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Որոնել աղբյուրներում և պատչերում</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Ուշադրություն է պահանջվում</string>
-    <string name="sources_sort_manual">Ձեռքով դասավորում</string>
     <string name="sources_sort_manual_hint">Սեղմեք և պահեք աղբյուրի վրա՝ դասավորությունը փոխելու համար</string>
     <string name="sources_sort_last_updated">Վերջին թարմացումը</string>
     <string name="sources_sort_enabled_first">Միացվածները՝ առաջին հերթին</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Պահոցներ</string>
     <string name="file_saver_downloads_failed">Չհաջողվեց ստեղծել ֆայլը «Ներբեռնումներ» թղթապանակում</string>
     <string name="file_saver_saving_to_downloads">Այս սարքը չունի պահպանման էկրան, ուստի ֆայլը պահպանվում է «Ներբեռնումներ» թղթապանակում որպես %1$s</string>
-    <string name="file_picker_sort_name_asc">Անուն (Ա–Զ)</string>
-    <string name="file_picker_sort_name_desc">Անուն (Զ–Ա)</string>
     <string name="file_picker_sort_size_desc">Չափս (ամենամեծից սկսած)</string>
     <string name="file_picker_sort_size_asc">Չափս (ամենափոքրից սկսած)</string>
     <string name="file_picker_sort_date_desc">Ամսաթիվ (նորերը սկզբում)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Հեղինակ</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Ֆայլ</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Կլոնավորել</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Փոփոխել</string>

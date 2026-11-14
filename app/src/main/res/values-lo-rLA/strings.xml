@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">ເລືອກແອັບອື່ນ</string>
     <string name="home_not_patched_yet">ຍັງບໍ່ໄດ້ແພດ</string>
     <string name="home_unpatched_version_installed">ຕິດຕັ້ງເວີຊັນທີ່ບໍ່ໄດ້ປັບແກ້ໄຂ</string>
-    <string name="home_unpatched_badge">ບໍ່ໄດ້ປັບແກ້ໄຂ</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">ອັບເດດເປັນ %s</string>
+    <string name="home_app_status_newer_patches">ແພັດຊ໌ໃໝ່</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ທີວີ</string>
     <string name="form_factor_automotive">ຍານພາຫະນະ</string>
     <string name="home_no_patches_available">ບໍ່ມີຊຸດແພດພ້ອມໃຊ້</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">ຄົ້ນຫາແອັບ</string>
     <string name="list_options_title">ຈັດລຽງ ແລະ ກັ່ນຕອງ</string>
     <string name="list_options_state_description">ຈັດລຽງໂດຍ %1$s, ກັ່ນຕອງໂດຍ %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">ດ້ວຍຕົນເອງ</string>
+    <string name="list_sort_name_asc">ຊື່ (A–Z)</string>
+    <string name="list_sort_name_desc">ຊື່ (Z–A)</string>
+    <string name="home_app_filter_all">ທັງໝົດ</string>
+    <string name="home_app_filter_not_patched">ບໍ່ໄດ້ປັດຊ້ອນ</string>
     <string name="home_app_filter_clones">ຕົວໂຄລນ</string>
     <string name="home_app_grouping_none">ບໍ່ມີ</string>
     <string name="home_app_sort_manual_hint">ກົດຄ້າງທີ່ແອັບ, ຈາກນັ້ນແຕະປຸ່ມຈັດລຽງໃໝ່</string>
-    <string name="home_app_sort_recommended">ລຳດັບທີ່ແນະນຳ</string>
-    <string name="home_app_sort_updates_first">ອັບເດດຊຸດແພດກ່ອນ</string>
+    <string name="home_app_sort_recommended">ແນະນຳ</string>
+    <string name="home_app_sort_updates_first">ອັບເດດກ່ອນ</string>
     <string name="home_app_sort_recently_patched">ແພັດຊ໌ຫຼ້າສຸດ</string>
     <string name="home_no_apps_title">ບໍ່ມີແອັບພ້ອມໃຊ້</string>
     <string name="home_no_apps_subtitle">ເພີ່ມແຫຼ່ງຊຸດແພດ ຫຼືເປີດໃຊ້ແຫຼ່ງທີ່ມີຢູ່ແລ້ວໃນ %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">ຄົ້ນຫາແຫຼ່ງທີ່ມາ ແລະ ແພັດຊ໌</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">ຕ້ອງການການເອົາໃຈໃສ່</string>
-    <string name="sources_sort_manual">ລຳດັບດ້ວຍມື</string>
     <string name="sources_sort_manual_hint">ກົດຄ້າງແຫຼ່ງຂໍ້ມູນເພື່ອຈັດລຳດັບ</string>
     <string name="sources_sort_last_updated">ອັບເດດຫຼ້າສຸດ</string>
     <string name="sources_sort_enabled_first">ອັນທີ່ເປີດໃຊ້ງານກ່ອນ</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">ບ່ອນເກັບຂໍ້ມູນ</string>
     <string name="file_saver_downloads_failed">ບໍ່ສາມາດສ້າງໄຟລ໌ໃນ Downloads ໄດ້</string>
     <string name="file_saver_saving_to_downloads">ອຸປະກອນນີ້ບໍ່ມີໜ້າຈໍບັນທຶກ, ດັ່ງນັ້ນ ໄຟລ໌ຈະຖືກສົ່ງໄປທີ່ Downloads ໃນຮູບແບບ %1$s</string>
-    <string name="file_picker_sort_name_asc">ຊື່ (A–Z)</string>
-    <string name="file_picker_sort_name_desc">ຊື່ (Z–A)</string>
     <string name="file_picker_sort_size_desc">ຂະໜາດ (ໃຫຍ່ກ່ອນ)</string>
     <string name="file_picker_sort_size_asc">ຂະໜາດ (ນ້ອຍກ່ອນ)</string>
     <string name="file_picker_sort_date_desc">ວັນທີ (ໃໝ່ກ່ອນ)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">ຜູ້ຂຽນ</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ໄຟລ໌</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">ໂຄລນ</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">ແພດ</string>

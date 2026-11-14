@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Бусад аппликейшн сонгох</string>
     <string name="home_not_patched_yet">Хараахан патчлаагүй</string>
     <string name="home_unpatched_version_installed">Патчлагдаагүй хувилбар суурилуулагдсан байна</string>
-    <string name="home_unpatched_badge">Патч хийгдээгүй</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">%s хувилбар руу шинэчлэх</string>
+    <string name="home_app_status_newer_patches">Шинэ патчууд</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Зурагт</string>
     <string name="form_factor_automotive">Автомашин</string>
     <string name="home_no_patches_available">Боломжтой патч байхгүй байна</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Аппликейшн хайх</string>
     <string name="list_options_title">Эрэмбэлэх ба шүүх</string>
     <string name="list_options_state_description">%1$s-ээр эрэмбэлэв, %2$s-ээр шүүв</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Гар аргаар</string>
+    <string name="list_sort_name_asc">Нэр (А–Я)</string>
+    <string name="list_sort_name_desc">Нэр (Я–А)</string>
+    <string name="home_app_filter_all">Бүгд</string>
+    <string name="home_app_filter_not_patched">Патчлаагүй</string>
     <string name="home_app_filter_clones">Хуулбарууд</string>
     <string name="home_app_grouping_none">Байхгүй</string>
     <string name="home_app_sort_manual_hint">Аппликейшн дээр удаан дарж, дараа нь дарааллыг өөрчлөх товчийг дарна уу</string>
-    <string name="home_app_sort_recommended">Зөвлөсөн дараалал</string>
-    <string name="home_app_sort_updates_first">Засваруудыг эхлээд харуулах</string>
+    <string name="home_app_sort_recommended">Зөвлөмж</string>
+    <string name="home_app_sort_updates_first">Шинэчлэлтүүдийг эхлээд</string>
     <string name="home_app_sort_recently_patched">Сүүлд патлагдсан</string>
     <string name="home_no_apps_title">Боломжтой апп байхгүй байна</string>
     <string name="home_no_apps_subtitle">Патчийн эх сурвалж нэмэх эсвэл %s хэсэгт байгааг идэвхжүүлнэ үү</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Эх сурвалж болон патчуудыг хайх</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Анхаарал шаардлагатай</string>
-    <string name="sources_sort_manual">Гар аргаар эрэмбэлэх</string>
     <string name="sources_sort_manual_hint">Эрэмбэ өөрчлөхийн тулд эх сурвалж дээр удаан дарна уу</string>
     <string name="sources_sort_last_updated">Хамгийн сүүлд шинэчилсэн</string>
     <string name="sources_sort_enabled_first">Идэвхжүүлсэнийг эхлээд харуулах</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Хадгалах байрлалууд</string>
     <string name="file_saver_downloads_failed">Downloads хавтсанд файл үүсгэж чадсангүй</string>
     <string name="file_saver_saving_to_downloads">Энэ төхөөрөмжид хадгалах дэлгэц байхгүй тул файл Downloads хавтас руу %1$s нэрээр хадгалагдана</string>
-    <string name="file_picker_sort_name_asc">Нэр (А–Я)</string>
-    <string name="file_picker_sort_name_desc">Нэр (Я–А)</string>
     <string name="file_picker_sort_size_desc">Хэмжээ (хамгийн том нь эхлээд)</string>
     <string name="file_picker_sort_size_asc">Хэмжээ (хамгийн бага нь эхлээд)</string>
     <string name="file_picker_sort_date_desc">Огноо (хамгийн сүүлийнх нь түрүүлж)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Зохиогч</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Файл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клон хийх</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Патчлах</string>

@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">ሌሎች መተግበሪያዎችን ይምረጡ</string>
     <string name="home_not_patched_yet">ገና አልተስተካከለም</string>
     <string name="home_unpatched_version_installed">ያልተስተካከለ ስሪት ተጭኗል</string>
-    <string name="home_unpatched_badge">ያልተስተካከለ</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">ወደ %s ያዘምኑ</string>
+    <string name="home_app_status_newer_patches">አዲስ ፓቾች</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ቲቪ</string>
     <string name="form_factor_automotive">የመኪና</string>
     <string name="home_no_patches_available">የሚገኙ ፓቾች የሉም</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">መተግበሪያዎችን ፈልግ</string>
     <string name="list_options_title">ደራጅ እና አጥልት</string>
     <string name="list_options_state_description">በ %1$s ተደራጅቷል፣ በ %2$s ተጥልቷል</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">በእጅ</string>
+    <string name="list_sort_name_asc">ስም (A–Z)</string>
+    <string name="list_sort_name_desc">ስም (Z–A)</string>
+    <string name="home_app_filter_all">ሁሉም</string>
+    <string name="home_app_filter_not_patched">ያልተስተካከለ</string>
     <string name="home_app_filter_clones">ቅጂዎች</string>
     <string name="home_app_grouping_none">ምንም</string>
     <string name="home_app_sort_manual_hint">አንድን መተግበሪያ ለረጅም ጊዜ ተጭነው ይያዙ፣ ከዚያም የቅደም ተከተል ማስተካከያ ቁልፉን ይጫኑ</string>
-    <string name="home_app_sort_recommended">የሚመከር ቅደም ተከተል</string>
-    <string name="home_app_sort_updates_first">የፓች ማሻሻያዎች መጀመሪያ</string>
+    <string name="home_app_sort_recommended">የሚመከር</string>
+    <string name="home_app_sort_updates_first">ማሻሻያዎች መጀመሪያ</string>
     <string name="home_app_sort_recently_patched">በቅርቡ ፓች የተደረጉ</string>
     <string name="home_no_apps_title">ምንም መተግበሪያዎች የሉም</string>
     <string name="home_no_apps_subtitle">በ%s ውስጥ የፓች ምንጭ ያክሉ ወይም ያለውን ያብሩ</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">ምንጮችን እና ፓቾችን ፈልግ</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">ትኩረት የሚሹ</string>
-    <string name="sources_sort_manual">በእጅ ቅደም ተከተል</string>
     <string name="sources_sort_manual_hint">የምንጩን ቅደም ተከተል ለመቀየር ምንጩን ተጭነው ይያዙ</string>
     <string name="sources_sort_last_updated">ለመጨረሻ ጊዜ የተዘመነው</string>
     <string name="sources_sort_enabled_first">የነቁዎች መጀመሪያ</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">ማከማቻዎች</string>
     <string name="file_saver_downloads_failed">ፋይሉን በDownloads ውስጥ መፍጠር አልተቻለም</string>
     <string name="file_saver_saving_to_downloads">ይህ መሣሪያ የማስቀመጫ ስክሪን የለውም፣ ስለዚህ ፋይሉ ወደ Downloads እንደ %1$s ይሄዳል</string>
-    <string name="file_picker_sort_name_asc">ስም (A–Z)</string>
-    <string name="file_picker_sort_name_desc">ስም (Z–A)</string>
     <string name="file_picker_sort_size_desc">መጠን (ትልቁ መጀመሪያ)</string>
     <string name="file_picker_sort_size_asc">መጠን (ትንሹ መጀመሪያ)</string>
     <string name="file_picker_sort_date_desc">ቀን (አዲሱ መጀመሪያ)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">ደራሲ</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ፋይል</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">ቅጂ ፍጠር</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">ፓች አድርግ</string>

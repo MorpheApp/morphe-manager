@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Chọn ứng dụng khác</string>
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_unpatched_version_installed">Đã cài đặt phiên bản chưa vá</string>
-    <string name="home_unpatched_badge">Chưa vá</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Cập nhật lên %s</string>
+    <string name="home_app_status_newer_patches">Các bản vá mới</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Màn hình ô tô</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Tìm ứng dụng</string>
     <string name="list_options_title">Sắp xếp và lọc</string>
     <string name="list_options_state_description">Đã xếp theo %1$s và lọc theo %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Thủ công</string>
+    <string name="list_sort_name_asc">Tên (A–Z)</string>
+    <string name="list_sort_name_desc">Tên (Z–A)</string>
+    <string name="home_app_filter_all">Tất cả</string>
+    <string name="home_app_filter_not_patched">Chưa vá</string>
     <string name="home_app_filter_clones">Bản sao</string>
     <string name="home_app_grouping_none">Không</string>
     <string name="home_app_sort_manual_hint">Nhấn giữ một ứng dụng, sau đó chọn nút sắp xếp lại</string>
-    <string name="home_app_sort_recommended">Thứ tự đề xuất</string>
-    <string name="home_app_sort_updates_first">Ưu tiên vá cập nhật</string>
+    <string name="home_app_sort_recommended">Khuyên dùng</string>
+    <string name="home_app_sort_updates_first">Ưu tiên bản cập nhật</string>
     <string name="home_app_sort_recently_patched">Mới vá gần đây</string>
     <string name="home_no_apps_title">Không có ứng dụng nào có sẵn</string>
     <string name="home_no_apps_subtitle">Thêm nguồn vá mới hoặc bật nguồn có sẵn trong %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Tìm kiếm nguồn và bản vá</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Cần xử lý</string>
-    <string name="sources_sort_manual">Sắp xếp thủ công</string>
     <string name="sources_sort_manual_hint">Bấm giữ một nguồn để sắp xếp lại</string>
     <string name="sources_sort_last_updated">Cập nhật lần cuối</string>
     <string name="sources_sort_enabled_first">Ưu tiên đã kích hoạt trước</string>
@@ -1322,8 +1328,6 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_storages">Bộ nhớ</string>
     <string name="file_saver_downloads_failed">Không thể tạo tệp trong mục Tải xuống</string>
     <string name="file_saver_saving_to_downloads">Thiết bị này không có màn hình lưu, vì vậy tệp sẽ được lưu vào mục Tải xuống với tên %1$s</string>
-    <string name="file_picker_sort_name_asc">Tên (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Tên (Z–A)</string>
     <string name="file_picker_sort_size_desc">Kích thước (lớn nhất trước)</string>
     <string name="file_picker_sort_size_asc">Kích thước (nhỏ nhất trước)</string>
     <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
@@ -1461,6 +1465,7 @@ Chi tiết: %2$s"</string>
     <string name="author">Tác giả</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Tệp</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Bản sao</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Vá</string>

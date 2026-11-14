@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Pumili ng iba pang mga app</string>
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_unpatched_version_installed">Naka-install ang hindi na-patch na bersyon</string>
-    <string name="home_unpatched_badge">Hindi pa na-patch</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Mag-update sa %s</string>
+    <string name="home_app_status_newer_patches">Mga bagong patch</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automotibo</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Maghanap ng mga app</string>
     <string name="list_options_title">I-uri at i-filter</string>
     <string name="list_options_state_description">Na-sort ayon kay %1$s, na-filter ayon kay %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manu-mano</string>
+    <string name="list_sort_name_asc">Pangalan (A–Z)</string>
+    <string name="list_sort_name_desc">Pangalan (Z–A)</string>
+    <string name="home_app_filter_all">Lahat</string>
+    <string name="home_app_filter_not_patched">Hindi na-patch</string>
     <string name="home_app_filter_clones">Mga clone</string>
     <string name="home_app_grouping_none">Wala</string>
     <string name="home_app_sort_manual_hint">I-long-press ang isang app, pagkatapos ay i-tap ang button para sa pag-aayos muli</string>
-    <string name="home_app_sort_recommended">Inirerekomendang bersyon</string>
-    <string name="home_app_sort_updates_first">Mga pag-update ng patch muna</string>
+    <string name="home_app_sort_recommended">Inirerekomenda</string>
+    <string name="home_app_sort_updates_first">Una ang mga update</string>
     <string name="home_app_sort_recently_patched">Kamakailang na-patch</string>
     <string name="home_no_apps_title">Walang available na mga app</string>
     <string name="home_no_apps_subtitle">Magdagdag ng pinagmulan ng patch o paganahin ang isang umiiral na isa sa %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Maghanap ng mga source at mga patch</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Kailangan ng atensyon</string>
-    <string name="sources_sort_manual">Manu-manong pagkakasunud-sunod</string>
     <string name="sources_sort_manual_hint">Pindutin nang matagal ang isang pinagmulan upang muling ayusin</string>
     <string name="sources_sort_last_updated">Huling in-update</string>
     <string name="sources_sort_enabled_first">Naka-enable muna</string>
@@ -1319,8 +1325,6 @@ Mga Detalye: %2$s"</string>
     <string name="file_picker_storages">Mga imbakan</string>
     <string name="file_saver_downloads_failed">Hindi makagawa ng file sa Downloads</string>
     <string name="file_saver_saving_to_downloads">Ang device na ito ay walang save screen, kaya ang file ay pupunta sa Downloads bilang %1$s</string>
-    <string name="file_picker_sort_name_asc">Pangalan (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Pangalan (Z–A)</string>
     <string name="file_picker_sort_size_desc">Laki (pinakamalaki muna)</string>
     <string name="file_picker_sort_size_asc">Laki (pinakamaliit muna)</string>
     <string name="file_picker_sort_date_desc">Petsa (pinakabago muna)</string>
@@ -1458,6 +1462,7 @@ Mga Detalye: %2$s"</string>
     <string name="author">May-akda</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">File</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">I-clone</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch</string>

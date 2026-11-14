@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Sepanên din hilbijêre</string>
     <string name="home_not_patched_yet">Hê patch nehatiye kirin</string>
     <string name="home_unpatched_version_installed">Versiyona nepatchkirî hatiye sazkirin</string>
-    <string name="home_unpatched_badge">Nehatiye patchkirin</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Nûkirin bo %s</string>
+    <string name="home_app_status_newer_patches">Patchên nû</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Otomotîv</string>
     <string name="home_no_patches_available">Patch tune ne.</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Appan bigere</string>
     <string name="list_options_title">Rêzkirin û filtrekirin</string>
     <string name="list_options_state_description">Li gorî %1$s hatine rêzkirin, li gorî %2$s hatine filtrekirin</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuel</string>
+    <string name="list_sort_name_asc">Nav (A–Z)</string>
+    <string name="list_sort_name_desc">Nav (Z–A)</string>
+    <string name="home_app_filter_all">Hemû</string>
+    <string name="home_app_filter_not_patched">Ne hatine patchkirin</string>
     <string name="home_app_filter_clones">Klon</string>
     <string name="home_app_grouping_none">Netû</string>
     <string name="home_app_sort_manual_hint">Li ser appekî bi dirêjî bitikîne, paşê li bişkoja rêzkirinê bitikîne</string>
-    <string name="home_app_sort_recommended">Rêza pêşniyarkirî</string>
-    <string name="home_app_sort_updates_first">Pêşîn nûvekirinên patchê</string>
+    <string name="home_app_sort_recommended">Pêşniyarkirî</string>
+    <string name="home_app_sort_updates_first">Nûvekirin pêşî</string>
     <string name="home_app_sort_recently_patched">Nû patchkirî</string>
     <string name="home_no_apps_title">Tu app tune ne</string>
     <string name="home_no_apps_subtitle">Çavkaniyekê zêde bike an yek ji %s çalak bike</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Çavkanî û patchan bigere</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Pêdiviya bi baldarbûnê heye</string>
-    <string name="sources_sort_manual">Rêzkirina destan</string>
     <string name="sources_sort_manual_hint">Ji bo rêzkirinê li ser çavkaniyekê bi dirêjî bitikîne</string>
     <string name="sources_sort_last_updated">Nûvekirina dawî</string>
     <string name="sources_sort_enabled_first">Pêşîn çalak</string>
@@ -1319,8 +1325,6 @@ Detay: %2$s"</string>
     <string name="file_picker_storages">Cîhên hilanînê</string>
     <string name="file_saver_downloads_failed">Nebûya fayla di Downloads de were çêkirin</string>
     <string name="file_saver_saving_to_downloads">Ev amûr ekrana tomarkirinê nîne, lewma pel wek %1$s diçe Downloads</string>
-    <string name="file_picker_sort_name_asc">Nav (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Nav (Z–A)</string>
     <string name="file_picker_sort_size_desc">Mezinahî (ji mezintir heta biçiktir)</string>
     <string name="file_picker_sort_size_asc">Mezinahî (ji biçiktir heta mezintir)</string>
     <string name="file_picker_sort_date_desc">Dîrok (ji nûve heta kevn)</string>
@@ -1458,6 +1462,7 @@ Detay: %2$s"</string>
     <string name="author">Nivîskar</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Pel</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klon</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Patch</string>

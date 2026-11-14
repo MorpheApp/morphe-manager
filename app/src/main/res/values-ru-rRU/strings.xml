@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Выбрать другие приложения</string>
     <string name="home_not_patched_yet">Еще не пропатчено</string>
     <string name="home_unpatched_version_installed">Установлена непатченная версия</string>
-    <string name="home_unpatched_badge">Не пропатчено</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Обновиться до %s</string>
+    <string name="home_app_status_newer_patches">Новые патчи</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТВ</string>
     <string name="form_factor_automotive">Автомобильный</string>
     <string name="home_no_patches_available">Нет доступных патчей</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Поиск приложений</string>
     <string name="list_options_title">Сортировка и фильтрация</string>
     <string name="list_options_state_description">Отсортировано по %1$s, отфильтровано по %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Вручную</string>
+    <string name="list_sort_name_asc">Имя (А–Я)</string>
+    <string name="list_sort_name_desc">Имя (Я–А)</string>
+    <string name="home_app_filter_all">Все</string>
+    <string name="home_app_filter_not_patched">Не пропатчено</string>
     <string name="home_app_filter_clones">Клоны</string>
     <string name="home_app_grouping_none">Нет</string>
     <string name="home_app_sort_manual_hint">Нажмите и удерживайте значок приложения, затем нажмите кнопку изменения порядка</string>
-    <string name="home_app_sort_recommended">Рекомендуемый порядок</string>
-    <string name="home_app_sort_updates_first">Сначала обновите патчи</string>
+    <string name="home_app_sort_recommended">Рекомендуемый</string>
+    <string name="home_app_sort_updates_first">Сначала обновления</string>
     <string name="home_app_sort_recently_patched">Недавно пропатченные</string>
     <string name="home_no_apps_title">Нет доступных приложений</string>
     <string name="home_no_apps_subtitle">Добавить источник патчей или включить существующий в %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Поиск источников и патчей</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Требуют внимания</string>
-    <string name="sources_sort_manual">Ручная сортировка</string>
     <string name="sources_sort_manual_hint">Нажмите и удерживайте источник, чтобы изменить порядок</string>
     <string name="sources_sort_last_updated">Последнее обновление</string>
     <string name="sources_sort_enabled_first">Сначала включенные</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Хранилища</string>
     <string name="file_saver_downloads_failed">Не удалось создать файл в папке «Загрузки»</string>
     <string name="file_saver_saving_to_downloads">У этого устройства нет экрана сохранения, поэтому файл будет сохранен в «Загрузки» как %1$s</string>
-    <string name="file_picker_sort_name_asc">Имя (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Имя (Z–A)</string>
     <string name="file_picker_sort_size_desc">Размер (от большего к меньшему)</string>
     <string name="file_picker_sort_size_asc">Размер (от меньшего к большему)</string>
     <string name="file_picker_sort_date_desc">Дата (от новых к старым)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Автор</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Файл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клон</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Патч</string>

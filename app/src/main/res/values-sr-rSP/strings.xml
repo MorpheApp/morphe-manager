@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Изаберите друге апликације</string>
     <string name="home_not_patched_yet">Још није закрпљено</string>
     <string name="home_unpatched_version_installed">Инсталирана незакрпљена верзија</string>
-    <string name="home_unpatched_badge">Није исправљено</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Ажурирај на %s</string>
+    <string name="home_app_status_newer_patches">Нове закрпе</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">ТВ</string>
     <string name="form_factor_automotive">Аутомобилски</string>
     <string name="home_no_patches_available">Нема доступних закрпа</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Претрага апликација</string>
     <string name="list_options_title">Сортирај и филтрирај</string>
     <string name="list_options_state_description">Сортирано по %1$s, филтрирано по %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Ручно</string>
+    <string name="list_sort_name_asc">Име (А–З)</string>
+    <string name="list_sort_name_desc">Име (З–А)</string>
+    <string name="home_app_filter_all">Све</string>
+    <string name="home_app_filter_not_patched">Није закрпљено</string>
     <string name="home_app_filter_clones">Клонови</string>
     <string name="home_app_grouping_none">Нема</string>
     <string name="home_app_sort_manual_hint">Држите прст на апликацији, а затим додирните дугме за промену редоследа</string>
-    <string name="home_app_sort_recommended">Препоручени поредак</string>
-    <string name="home_app_sort_updates_first">Прво ажурирања закрпа</string>
+    <string name="home_app_sort_recommended">Препоручено</string>
+    <string name="home_app_sort_updates_first">Прво ажурирања</string>
     <string name="home_app_sort_recently_patched">Недавно закрпљене</string>
     <string name="home_no_apps_title">Нису доступне апликације</string>
     <string name="home_no_apps_subtitle">Додајте извор закрпи или омогућите постојећи у %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Претражите изворе и закрпе</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Захтевају пажњу</string>
-    <string name="sources_sort_manual">Ручно поређање</string>
     <string name="sources_sort_manual_hint">Притисните и задржите извор да бисте променили редослед</string>
     <string name="sources_sort_last_updated">Последње ажурирање</string>
     <string name="sources_sort_enabled_first">Омогућени први</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">Складишта</string>
     <string name="file_saver_downloads_failed">Није могуће направити датотеку у фолдеру Downloads</string>
     <string name="file_saver_saving_to_downloads">Овај уређај нема екран за чување, па датотека иде у Преузето као %1$s</string>
-    <string name="file_picker_sort_name_asc">Назив (А–Ш)</string>
-    <string name="file_picker_sort_name_desc">Назив (Ш–А)</string>
     <string name="file_picker_sort_size_desc">Величина (највећа прва)</string>
     <string name="file_picker_sort_size_asc">Величина (најмања прва)</string>
     <string name="file_picker_sort_date_desc">Датум (најновији први)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">Аутор</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Фајл</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Клон</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Закрпа</string>

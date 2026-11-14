@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Välj andra appar</string>
     <string name="home_not_patched_yet">Inte modifierad än</string>
     <string name="home_unpatched_version_installed">Omodifierad version installerad</string>
-    <string name="home_unpatched_badge">Inte modifierad</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Uppdatera till %s</string>
+    <string name="home_app_status_newer_patches">Nya patchar</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Bil</string>
     <string name="home_no_patches_available">Inga tillägg är tillgängliga</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Sök efter appar</string>
     <string name="list_options_title">Sortera och filtrera</string>
     <string name="list_options_state_description">Sorterad efter %1$s, filtrerad efter %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manuell</string>
+    <string name="list_sort_name_asc">Namn (A–Ö)</string>
+    <string name="list_sort_name_desc">Namn (Ö–A)</string>
+    <string name="home_app_filter_all">Alla</string>
+    <string name="home_app_filter_not_patched">Inte modifierad</string>
     <string name="home_app_filter_clones">Kloner</string>
     <string name="home_app_grouping_none">Ingen</string>
     <string name="home_app_sort_manual_hint">Tryck länge på en app och tryck sedan på knappen för att ändra ordning</string>
-    <string name="home_app_sort_recommended">Rekommenderad ordning</string>
-    <string name="home_app_sort_updates_first">Tilläggsuppdateringar först</string>
+    <string name="home_app_sort_recommended">Rekommenderas</string>
+    <string name="home_app_sort_updates_first">Uppdateringar först</string>
     <string name="home_app_sort_recently_patched">Nyligen modifierade</string>
     <string name="home_no_apps_title">Inga appar är tillgängliga</string>
     <string name="home_no_apps_subtitle">Lägg till en källa eller aktivera en befintlig i %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Sök efter källor och tillägg</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Åtgärd krävs</string>
-    <string name="sources_sort_manual">Manuell ordning</string>
     <string name="sources_sort_manual_hint">Tryck länge på en källa för att ändra ordning</string>
     <string name="sources_sort_last_updated">Senast uppdaterade</string>
     <string name="sources_sort_enabled_first">Aktiverade först</string>
@@ -1319,8 +1325,6 @@ Information: %2$s"</string>
     <string name="file_picker_storages">Lagringsplatser</string>
     <string name="file_saver_downloads_failed">Kunde inte skapa filen i Hämtade filer</string>
     <string name="file_saver_saving_to_downloads">Den här enheten har ingen sparskärm, så filen sparas i Hämtade filer som %1$s</string>
-    <string name="file_picker_sort_name_asc">Namn (A–Ö)</string>
-    <string name="file_picker_sort_name_desc">Namn (Ö–A)</string>
     <string name="file_picker_sort_size_desc">Storlek (största först)</string>
     <string name="file_picker_sort_size_asc">Storlek (minsta först)</string>
     <string name="file_picker_sort_date_desc">Datum (nyaste först)</string>
@@ -1458,6 +1462,7 @@ Information: %2$s"</string>
     <string name="author">Upphovsperson</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Fil</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klona</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Modifiera</string>

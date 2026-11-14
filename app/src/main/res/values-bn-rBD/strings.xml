@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">অন্যান্য অ্যাপ নির্বাচন করুন</string>
     <string name="home_not_patched_yet">এখনো প্যাচ করা হয়নি</string>
     <string name="home_unpatched_version_installed">অ-প্যাচড সংস্করণ ইনস্টল করা হয়েছে</string>
-    <string name="home_unpatched_badge">প্যাচ করা হয়নি</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">%s-এ আপডেট করুন</string>
+    <string name="home_app_status_newer_patches">নতুন প্যাচগুলি</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">টিভি</string>
     <string name="form_factor_automotive">অটোমোটিভ</string>
     <string name="home_no_patches_available">কোনো প্যাচ পাওয়া যায়নি</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">অ্যাপস অনুসন্ধান করুন</string>
     <string name="list_options_title">সাজান ও ফিল্টার করুন</string>
     <string name="list_options_state_description">%1$s দ্বারা সাজানো, %2$s দ্বারা ফিল্টার করা</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">ম্যানুয়াল</string>
+    <string name="list_sort_name_asc">নাম (A–Z)</string>
+    <string name="list_sort_name_desc">নাম (Z–A)</string>
+    <string name="home_app_filter_all">সবগুলো</string>
+    <string name="home_app_filter_not_patched">প্যাচ করা হয়নি</string>
     <string name="home_app_filter_clones">ক্লোন</string>
     <string name="home_app_grouping_none">কোনোটিই নয়</string>
     <string name="home_app_sort_manual_hint">একটি অ্যাপ দীর্ঘক্ষণ চেপে ধরুন, তারপর রিঅর্ডার বাটনে ট্যাপ করুন</string>
-    <string name="home_app_sort_recommended">সুপারিশকৃত ক্রম</string>
-    <string name="home_app_sort_updates_first">প্রথমে প্যাচ আপডেট</string>
+    <string name="home_app_sort_recommended">সুপারিশকৃত</string>
+    <string name="home_app_sort_updates_first">আপডেট আগে</string>
     <string name="home_app_sort_recently_patched">সম্প্রতি প্যাচ করা</string>
     <string name="home_no_apps_title">কোনো অ্যাপস পাওয়া যায়নি</string>
     <string name="home_no_apps_subtitle">একটি প্যাচ উৎস যোগ করুন অথবা %s-এ বিদ্যমান একটি সক্ষম করুন</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">উৎস এবং প্যাচ অনুসন্ধান করুন</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">মনোযোগের প্রয়োজন</string>
-    <string name="sources_sort_manual">ম্যানুয়াল অর্ডার</string>
     <string name="sources_sort_manual_hint">পুনরায় সাজানোর জন্য একটি উৎসের উপর দীর্ঘক্ষণ চাপুন</string>
     <string name="sources_sort_last_updated">সর্বশেষ আপডেট করা হয়েছে</string>
     <string name="sources_sort_enabled_first">প্রথমে সক্ষম</string>
@@ -1319,8 +1325,6 @@ morphe_header_custom_dark.png
     <string name="file_picker_storages">স্টোরেজ</string>
     <string name="file_saver_downloads_failed">Downloads-এ ফাইলটি তৈরি করা সম্ভব হয়নি</string>
     <string name="file_saver_saving_to_downloads">এই ডিভাইসে কোনো সেভ স্ক্রিন নেই, তাই ফাইলটি %1$s হিসেবে Downloads-এ যাচ্ছে</string>
-    <string name="file_picker_sort_name_asc">নাম (A–Z)</string>
-    <string name="file_picker_sort_name_desc">নাম (Z–A)</string>
     <string name="file_picker_sort_size_desc">সাইজ (বৃহত্তম প্রথমে)</string>
     <string name="file_picker_sort_size_asc">সাইজ (ক্ষুদ্রতম প্রথমে)</string>
     <string name="file_picker_sort_date_desc">তারিখ (নতুনতম প্রথমে)</string>
@@ -1458,6 +1462,7 @@ morphe_header_custom_dark.png
     <string name="author">লেখক</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">ফাইল</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">ক্লোন করুন</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">প্যাচ</string>

@@ -5,8 +5,9 @@
     <string name="home_other_apps_action">Pasirinkti kitas programas</string>
     <string name="home_not_patched_yet">Dar nepataisyta</string>
     <string name="home_unpatched_version_installed">Įdiegta nepataisyta versija</string>
-    <string name="home_unpatched_badge">Nepataisyta</string>
-    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_app_status_newer_version">Atnaujinkite iki %s</string>
+    <string name="home_app_status_newer_patches">Nauji pataisai</string>
+    <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Televizorius</string>
     <string name="form_factor_automotive">Automobiliai</string>
     <string name="home_no_patches_available">Nėra prieinamų pataisų</string>
@@ -65,11 +66,17 @@
     <string name="home_search_apps">Ieškoti programų</string>
     <string name="list_options_title">Rūšiuoti ir filtruoti</string>
     <string name="list_options_state_description">Rūšiuojama pagal %1$s, filtruojama pagal %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Rankinis</string>
+    <string name="list_sort_name_asc">Pavadinimas (A–Ž)</string>
+    <string name="list_sort_name_desc">Pavadinimas (Ž–A)</string>
+    <string name="home_app_filter_all">Visi</string>
+    <string name="home_app_filter_not_patched">Nepataisyta</string>
     <string name="home_app_filter_clones">Klonai</string>
     <string name="home_app_grouping_none">Nieko</string>
     <string name="home_app_sort_manual_hint">Ilgai paspauskite programėlę, tada bakstelėkite pertvarkymo mygtuką</string>
-    <string name="home_app_sort_recommended">Rekomenduojama eilė</string>
-    <string name="home_app_sort_updates_first">Pataisų naujinimai pirmiausia</string>
+    <string name="home_app_sort_recommended">Rekomenduojama</string>
+    <string name="home_app_sort_updates_first">Pirmiausia atnaujinimai</string>
     <string name="home_app_sort_recently_patched">Neseniai pataisytos</string>
     <string name="home_no_apps_title">Nėra pasiekiamų programų</string>
     <string name="home_no_apps_subtitle">Pridėti pataisos šaltinį arba įjungti jau esantį iš %s</string>
@@ -159,7 +166,6 @@
     <string name="sources_search">Ieškoti šaltinių ir pataisų</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Reikalauja dėmesio</string>
-    <string name="sources_sort_manual">Rankinis rikiavimas</string>
     <string name="sources_sort_manual_hint">Ilgu paspaudimu perkelkite šaltinį į norimą vietą</string>
     <string name="sources_sort_last_updated">Pagal atnaujinimo datą</string>
     <string name="sources_sort_enabled_first">Įjungti pirmiausia</string>
@@ -1319,8 +1325,6 @@ Išsami informacija: %2$s"</string>
     <string name="file_picker_storages">Saugyklos</string>
     <string name="file_saver_downloads_failed">Nepavyko sukurti failo aplanke „Atsisiųsti“</string>
     <string name="file_saver_saving_to_downloads">Šis įrenginys neturi išsaugojimo ekrano, todėl failas išsaugomas aplanke „Atsisiųsti“ kaip %1$s</string>
-    <string name="file_picker_sort_name_asc">Pavadinimas (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Pavadinimas (Z–A)</string>
     <string name="file_picker_sort_size_desc">Dydis (didžiausi pirmiausia)</string>
     <string name="file_picker_sort_size_asc">Dydis (mažiausi pirmiausia)</string>
     <string name="file_picker_sort_date_desc">Data (naujausi pirmiausia)</string>
@@ -1458,6 +1462,7 @@ Išsami informacija: %2$s"</string>
     <string name="author">Autorius</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Failas</string>
+    <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
     <string name="clone">Klonas</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Pataisyti</string>
