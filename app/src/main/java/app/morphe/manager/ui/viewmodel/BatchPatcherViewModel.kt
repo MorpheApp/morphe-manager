@@ -105,7 +105,7 @@ class BatchPatchEdit(
     private var universalArmedFor by mutableStateOf<Pair<Int, Set<String>>?>(null)
 
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
-        get() = bundles.listedWith(selection)
+        get() = bundles.listedWith(selection, openedWith = savedSelection)
 
     val totalSelectedCount get() = selection.values.sumOf { it.size }
 

@@ -464,6 +464,21 @@ class PatchSelectionExtensionsTest {
     }
 
     @Test
+    fun `a bundle the app is patched from is listed after the leading one and ahead of the rest`() {
+        val most = bundleFor(1, patchFor("A", setOf(LISTED_VERSION)), patchFor("B", setOf(LISTED_VERSION)))
+        val used = bundleFor(2, patchFor("C", null))
+        val leading = bundleFor(3, patchFor("D", null))
+
+        val listed = listOf(most, used, leading).listedWith(
+            selection = emptyMap(),
+            openedWith = mapOf(2 to setOf("C")),
+            leadingBundleUid = 3
+        )
+
+        assertEquals(listOf(3, 2, 1), listed.map { (bundle, _) -> bundle.uid })
+    }
+
+    @Test
     fun `the listing marks what the selection holds and drops bundles with nothing for the app`() {
         val bundle = bundleFor(1, patchFor("B", null), patchFor("A", null))
         val empty = bundleFor(2)

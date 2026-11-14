@@ -151,7 +151,7 @@ class ExpertModeSelection(
      * applied in the UI layer.
      */
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
-        get() = bundles.listedWith(patches, leadingBundleUid)
+        get() = bundles.listedWith(patches, openedWith = savedPatches, leadingBundleUid = leadingBundleUid)
 
     /**
      * The selection as the run would use it: what the dialog shows, minus what it holds back.
