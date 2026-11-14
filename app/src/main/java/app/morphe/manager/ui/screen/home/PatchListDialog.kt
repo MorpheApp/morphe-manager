@@ -77,13 +77,7 @@ internal fun DialogHostScope.PatchListDialog(
     onExpertBadgeClick: (() -> Unit)? = null,
     headerActions: @Composable RowScope.() -> Unit = {}
 ) {
-    val search = rememberSearchFieldState()
-    LaunchedEffect(Unit) {
-        if (initialQuery.isNotBlank()) {
-            search.toggle()
-            search.query = initialQuery
-        }
-    }
+    val search = rememberSearchFieldState(initialQuery = initialQuery)
 
     var selectedKey by remember { mutableStateOf<String?>(null) }
     var showFilterPanel by remember { mutableStateOf(false) }

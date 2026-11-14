@@ -661,11 +661,14 @@ private fun String.sanitizePatchChangelogMarkdown(): String =
  * Laid out like a patch list: a ticked app is brought, a tap answers for one app and the header
  * answers for everything the search left, so the few wanted out of hundreds take one tap there and
  * a few on them. Leaving out the apps the source adds later keeps that cut as it grows.
+ *
+ * @param initialQuery Query to open filtered by, carried over from the search that found the source.
  */
 @Composable
 fun DialogHostScope.SourceAppsDialog(
     onDismissRequest: () -> Unit,
-    src: PatchBundleSource
+    src: PatchBundleSource,
+    initialQuery: String = ""
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val sourceMuteRepository: SourceMuteRepository = koinInject()
@@ -709,13 +712,14 @@ fun DialogHostScope.SourceAppsDialog(
             )
     }
 
-    val search = rememberSearchFieldState(searchable = apps.size > 1)
+    // Searchable until the source is read, so a query carried over is not dropped before the
+    // apps it was looking for arrive
+    val search = rememberSearchFieldState(
+        searchable = sourceInfo == null || apps.size > 1,
+        initialQuery = initialQuery
+    )
     val filtered = remember(apps, search.query) {
-        if (search.query.isBlank()) apps
-        else apps.filter { (packageName, label) ->
-            label.contains(search.query, ignoreCase = true) ||
-                    packageName.contains(search.query, ignoreCase = true)
-        }
+        apps.filter { (packageName, label) -> appMatchesQuery(packageName, label, search.query) }
     }
 
     // Scoped to the search, so bringing or leaving out all never reaches apps out of view
@@ -824,7 +828,7 @@ fun DialogHostScope.SourceAppsDialog(
                 }
             }
 
-            if (filtered.isEmpty() && search.query.isNotBlank()) {
+            if (sourceInfo != null && filtered.isEmpty() && search.query.isNotBlank()) {
                 item(key = "empty_state") {
                     EmptyState(
                         message = stringResource(R.string.search_no_results),
@@ -878,3 +882,12 @@ fun DialogHostScope.SourceAppsDialog(
         }
     }
 }
+
+/**
+ * Whether an app answers to a search query, by the name the sources give it or by its package. A
+ * blank query matches every app, so a search field can be passed through unchecked.
+ */
+internal fun appMatchesQuery(packageName: String, label: String?, query: String): Boolean =
+    query.isBlank() ||
+            label?.contains(query, ignoreCase = true) == true ||
+            packageName.contains(query, ignoreCase = true)
