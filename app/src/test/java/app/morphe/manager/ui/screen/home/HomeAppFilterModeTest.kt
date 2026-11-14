@@ -27,7 +27,7 @@ class HomeAppFilterModeTest {
 
         assertTrue(HomeAppFilterMode.INSTALLED.matches(item))
         assertFalse(HomeAppFilterMode.UNINSTALLED.matches(item))
-        assertFalse(item.isPatchUpdatePending)
+        assertFalse(item.status.offersRebuild)
     }
 
     @Test

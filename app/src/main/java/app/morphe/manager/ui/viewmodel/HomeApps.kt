@@ -780,7 +780,8 @@ class HomeApps(
                     .reversed()
             )
             HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
-                compareByDescending<HomeAppItem> { it.isPatchUpdatePending }
+                // Every card offering a rebuild, newer patches and a newer app version alike
+                compareByDescending<HomeAppItem> { it.status.offersRebuild }
                     .then(morpheComparator)
             )
             HomeAppSortMode.RECENTLY_PATCHED -> items.sortedWith(

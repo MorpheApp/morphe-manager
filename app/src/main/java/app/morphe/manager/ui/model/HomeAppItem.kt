@@ -71,13 +71,6 @@ data class HomeAppItem(
             else -> HomeAppStatus.Patched(version)
         }
     }
-
-    /**
-     * Whether newer patches wait for a settled install. Rebuilding at a version the sources still
-     * cover returns the install as it went in, so queueing and sorting go by this rather than by
-     * every rebuild the card offers.
-     */
-    val isPatchUpdatePending: Boolean get() = hasUpdate && status.offersRebuild
 }
 
 /**

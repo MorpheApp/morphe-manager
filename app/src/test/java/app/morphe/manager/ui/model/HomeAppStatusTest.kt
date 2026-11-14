@@ -34,7 +34,6 @@ class HomeAppStatusTest {
         assertEquals(HomeAppStatus.Uninstalled, update.copy(isDeleted = true, isInstallStateUnknown = true).status)
         assertEquals(HomeAppStatus.Unverified, update.copy(isInstallStateUnknown = true).status)
         assertEquals(HomeAppStatus.NewerPatches, update.status)
-        assertFalse(update.copy(isInstallStatePending = true).isPatchUpdatePending)
     }
 
     @Test
@@ -42,17 +41,14 @@ class HomeAppStatusTest {
         val item = patchedAppItem().copy(hasUpdate = true, versionStatus = behind())
 
         assertEquals(HomeAppStatus.NewerVersion("9.13.50"), item.status)
-        assertTrue(item.isPatchUpdatePending)
     }
 
     @Test
-    fun `a newer supported version offers a rebuild without queueing a repatch`() {
+    fun `a newer supported version alone offers a rebuild`() {
         val item = patchedAppItem().copy(versionStatus = behind())
 
+        assertEquals(HomeAppStatus.NewerVersion("9.13.50"), item.status)
         assertTrue(item.status.offersRebuild)
-        // Patching at a version the sources still cover returns the install unchanged, so the
-        // repatch count and the update sort are left out of it
-        assertFalse(item.isPatchUpdatePending)
     }
 
     @Test
