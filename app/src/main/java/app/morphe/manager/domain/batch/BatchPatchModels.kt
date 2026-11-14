@@ -6,6 +6,7 @@
 package app.morphe.manager.domain.batch
 
 import android.os.Parcelable
+import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.producesClone
 import app.morphe.manager.util.Options
@@ -196,6 +197,13 @@ data class BatchPatchItem(
 
     val patchCount get() = selection.values.sumOf { it.size }
     val version get() = source?.version
+
+    /**
+     * The sources [selection] takes patches from. [bundles] also lists those the user took nothing
+     * from, which the app is not patched from and nothing should name as if it were.
+     */
+    val patchSources: List<PatchSourceRef>
+        get() = bundles.filter { it.uid in selection.keys }.map { PatchSourceRef(it.name, it.version) }
 
     /**
      * State of this item with a selection picked by hand, over the [resolved] one: nothing picked

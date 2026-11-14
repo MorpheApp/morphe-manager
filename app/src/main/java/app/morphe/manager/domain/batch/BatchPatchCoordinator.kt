@@ -21,7 +21,6 @@ import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.notification.PatchingNotifications
-import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.service.ForegroundWork
@@ -629,12 +628,6 @@ class BatchPatchCoordinator(
         // Named after the item rather than the app, so two clones of it never share a path
         val outputFile = workspace.resolve("${item.id}.apk")
 
-        // Only the sources actually contributing patches, so a source the user took nothing
-        // from is left out of the log as well as off the card
-        val patchSources = item.bundles
-            .filter { it.uid in item.selection.keys }
-            .map { PatchSourceRef(it.name, it.version) }
-
         // Whether the worker kept the APK merged from a split archive, which then stands in for it
         var mergedApkKept = false
         val args = PatcherWorker.Args(
@@ -655,7 +648,7 @@ class BatchPatchCoordinator(
             },
             onProgress = runProgress::onProgress,
             onTaskProgress = runProgress::onTaskProgress,
-            patchSources = patchSources,
+            patchSources = item.patchSources,
             announceCompletion = false,
             queuePosition = _state.value?.let { it.position to it.total },
             useMount = item.useMount

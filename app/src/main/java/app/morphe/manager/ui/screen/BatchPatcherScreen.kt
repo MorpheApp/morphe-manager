@@ -37,7 +37,6 @@ import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
@@ -473,11 +472,9 @@ fun BatchPatcherScreen(
                 appName = item.appName,
                 packageName = item.packageName,
                 appVersion = item.version.orEmpty(),
-                patchCount = item.selection.values.sumOf { it.size },
+                patchCount = item.patchCount,
                 failedPatch = item.failedPatch,
-                bundles = item.bundles.map {
-                    PatchSourceRef(name = it.name, version = null)
-                },
+                bundles = item.patchSources,
                 stripsNativeLibs = null
             ),
             onDismiss = { errorItem = null }
@@ -1143,7 +1140,7 @@ private fun BatchPatchItem.exportFileName(): String = ExportNameFormatter.format
         appName = appName,
         packageName = id,
         appVersion = version,
-        sources = bundles.map { PatchSourceRef(it.name, it.version) }
+        sources = patchSources
     )
 )
 
@@ -1183,10 +1180,11 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
             item.patchCount.toString()
         )
         // Only the sources actually contributing patches, so a source the user took nothing
-        // from is not listed as one the app is patched from
-        val bundles = item.bundles
-            .filter { item.selection.isEmpty() || it.uid in item.selection.keys }
-            .joinToString(", ") { it.name }
+        // from is not listed as one the app is patched from. With nothing picked yet, every
+        // source the patches could come from
+        val bundles = item.patchSources.map { it.name }
+            .ifEmpty { item.bundles.map { it.name } }
+            .joinToString(", ")
             .takeIf { it.isNotEmpty() }
         listOfNotNull(item.version, source, patches, bundles).joinToString(" • ")
     }
