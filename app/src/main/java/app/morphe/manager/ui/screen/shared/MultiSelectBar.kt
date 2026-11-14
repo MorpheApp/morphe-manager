@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -75,9 +76,14 @@ internal fun MultiSelectBar(
 /**
  * The handle a list item is dragged into a new order by, to be given the reorderable library's
  * `draggableHandle` through [modifier] so its state stays with the list.
+ *
+ * @param tint Color of the glyph, the card's own text color on one drawn in a color of its own.
  */
 @Composable
-internal fun DragHandle(modifier: Modifier = Modifier) {
+internal fun DragHandle(
+    modifier: Modifier = Modifier,
+    tint: Color = MaterialTheme.colorScheme.onSurfaceVariant
+) {
     Box(
         modifier = modifier.size(32.dp),
         contentAlignment = Alignment.Center
@@ -86,7 +92,7 @@ internal fun DragHandle(modifier: Modifier = Modifier) {
             imageVector = MaterialSymbols.Rounded.Drag_handle,
             contentDescription = stringResource(R.string.reorder_list),
             modifier = Modifier.size(24.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant
+            tint = tint
         )
     }
 }

@@ -189,6 +189,7 @@ internal fun LazyListScope.groupedAppCards(
                     onShowPatches = { appActions.onShowPatches(item) },
                     showGestureHint = item.id == firstFilteredPackage && showGestureHint,
                     onGestureHintShown = appActions.onGestureHintShown,
+                    onUpdate = { appActions.onUpdateApp(item) },
                     isSelected = selectedPackages.contains(item.id),
                     isMultiSelectMode = state.isMultiSelectMode,
                     onLongPress = {
@@ -256,6 +257,7 @@ internal fun LazyListScope.flatAppCards(
             // Hint plays only on the first card
             showGestureHint = index == 0 && showGestureHint,
             onGestureHintShown = appActions.onGestureHintShown,
+            onUpdate = { appActions.onUpdateApp(item) },
             isSelected = selectedPackages.contains(item.id),
             isMultiSelectMode = state.isMultiSelectMode,
             onLongPress = {

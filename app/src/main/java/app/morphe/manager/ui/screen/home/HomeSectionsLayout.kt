@@ -77,6 +77,8 @@ data class HomeAppListUi(
 @Stable
 class HomeAppActions(
     val onAppClick: (HomeAppItem) -> Unit,
+    /** Rebuilds the app a card offers to, as the patch button of its dialog does. */
+    val onUpdateApp: (HomeAppItem) -> Unit,
     val onHideApp: (String) -> Unit,
     val onHideMultiple: (Set<String>) -> Unit,
     val onUninstallMultiple: (List<HomeAppItem>) -> Unit,

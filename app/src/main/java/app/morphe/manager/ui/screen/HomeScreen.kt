@@ -222,7 +222,7 @@ fun HomeScreen(
     // Those already queued are left to the queue's own alert
     val repatchableApps = remember(homeAppItems, savedBatchQueue) {
         val queued = savedBatchQueue?.targets.orEmpty().mapTo(HashSet()) { it.id }
-        homeAppItems.filter { it.showsUpdateBadge && it.batchTarget().id !in queued }
+        homeAppItems.filter { it.isPatchUpdatePending && it.batchTarget().id !in queued }
     }
 
     val batchInProgressText = stringResource(R.string.batch_patch_in_progress)
@@ -419,6 +419,7 @@ fun HomeScreen(
                                 homeViewModel.patchFlow.openInstalledAppInfo(it.currentPackageName)
                             }
                         },
+                        onUpdateApp = { item -> item.installedApp?.let(homeViewModel.patchFlow::repatch) },
                         onHideApp = { packageName -> homeViewModel.apps.hideApp(packageName) },
                         onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.apps.hideApp(it) } },
                         onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },

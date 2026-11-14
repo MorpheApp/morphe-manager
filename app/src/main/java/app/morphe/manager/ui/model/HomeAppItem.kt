@@ -49,28 +49,35 @@ data class HomeAppItem(
     val hasSavedCopy: Boolean get() = savedApkFile != null
 
     /**
-     * Whether the install is settled enough for pending work on it to be worth surfacing. A record
-     * in any other state keeps its flags but is described by the state it is in instead.
+     * What the card says about the app, the most pressing state first. A record that is gone,
+     * replaced or unchecked keeps its update flags but is described by the state it is in, and a
+     * newer app version leads newer patches, as only it asks for a newer APK.
+     *
+     * An install past everything the sources cover has already lost its patches, so only the
+     * rebuildable end of [versionStatus] counts here.
+     *
+     * Settled once per item, as cards read it on every recomposition and sorting on every comparison.
      */
-    private val isSettledInstall: Boolean get() = !isDeleted &&
-            !isInstallStateNotPatched &&
-            !isInstallStateUnknown &&
-            !isInstallStatePending
-
-    val showsUpdateBadge: Boolean get() = hasUpdate && isSettledInstall
+    val status: HomeAppStatus = run {
+        val newerVersion = versionStatus?.takeIf { it.isBehind }?.supportedVersion
+        when {
+            installedApp == null -> HomeAppStatus.NotPatchedYet
+            isInstallStatePending -> HomeAppStatus.Pending
+            isInstallStateNotPatched -> HomeAppStatus.UnpatchedInstall
+            isDeleted -> HomeAppStatus.Uninstalled
+            isInstallStateUnknown -> HomeAppStatus.Unverified
+            newerVersion != null -> HomeAppStatus.NewerVersion(newerVersion)
+            hasUpdate -> HomeAppStatus.NewerPatches
+            else -> HomeAppStatus.Patched(version)
+        }
+    }
 
     /**
-     * An install past everything the sources cover has already lost its patches, so the state it
-     * is in says more than the version it is at, and only the rebuildable end is badged here.
+     * Whether newer patches wait for a settled install. Rebuilding at a version the sources still
+     * cover returns the install as it went in, so queueing and sorting go by this rather than by
+     * every rebuild the card offers.
      */
-    val showsVersionBadge: Boolean get() = versionStatus?.isBehind == true && isSettledInstall
-
-    /**
-     * Whether the card is marked for a rebuild: newer patches, a newer supported app version, or
-     * both. Only what the mark says: rebuilding at a version the sources still cover returns the
-     * install as it went in, so queueing and sorting stay with [showsUpdateBadge] alone.
-     */
-    val showsRebuildBadge: Boolean get() = showsUpdateBadge || showsVersionBadge
+    val isPatchUpdatePending: Boolean get() = hasUpdate && status.offersRebuild
 }
 
 /**

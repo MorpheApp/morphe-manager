@@ -8,10 +8,8 @@ package app.morphe.manager.ui.screen.home
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
@@ -70,6 +68,7 @@ internal fun DynamicAppCard(
     onShowPatches: () -> Unit,
     showGestureHint: Boolean,
     onGestureHintShown: () -> Unit,
+    onUpdate: (() -> Unit)? = null,
     isSelected: Boolean = false,
     isMultiSelectMode: Boolean = false,
     onLongPress: () -> Unit = {},
@@ -134,30 +133,14 @@ internal fun DynamicAppCard(
                 HomeAppCard(
                     item = item,
                     onClick = onAppClick,
+                    onUpdate = onUpdate,
                     // The drag handle takes the end of the card over while reordering
-                    showStatusBadges = dragHandleModifier == null,
                     selected = isSelected.takeIf { isMultiSelectMode && dragHandleModifier == null },
                     onLongClick = {
                         view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                         onLongPress()
-                    }
-                )
-            }
-        }
-
-        if (dragHandleModifier != null) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .size(48.dp)
-                    .then(dragHandleModifier),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = MaterialSymbols.Rounded.Drag_handle,
-                    contentDescription = null,
-                    modifier = Modifier.size(28.dp),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    },
+                    dragHandleModifier = dragHandleModifier
                 )
             }
         }
@@ -188,7 +171,8 @@ internal fun HiddenSearchAppCard(
     item: HomeAppItem,
     onUnhide: () -> Unit,
     onAppClick: () -> Unit,
-    onShowPatches: () -> Unit
+    onShowPatches: () -> Unit,
+    onUpdate: (() -> Unit)? = null
 ) {
     SwipeableCardContainer(
         start = SwipeAction(rememberUnhideSwipeAction(), onUnhide),
@@ -197,7 +181,8 @@ internal fun HiddenSearchAppCard(
     ) {
         HomeAppCard(
             item = item,
-            onClick = onAppClick
+            onClick = onAppClick,
+            onUpdate = onUpdate
         )
     }
 }

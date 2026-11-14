@@ -78,9 +78,8 @@ private fun MoreAppsCard(
         ) {
             AppCardContent(
                 displayName = stringResource(R.string.home_more_apps_title),
-                subtitle = stringResource(R.string.sources_dialog_community),
-                gradientColors = gradientColors
-            ) { placeholderColors ->
+                subtitle = AppCardLine(stringResource(R.string.sources_dialog_community))
+            ) {
                 GlassPlaceholderIcon(
                     gradientColors = placeholderColors,
                     modifier = Modifier.fillMaxSize()

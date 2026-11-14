@@ -168,8 +168,7 @@ internal fun DialogHostScope.HideAppDialog(
                 packageName = item.id,
                 packageInfo = item.packageInfo,
                 displayName = item.displayName,
-                subtitle = stringResource(R.string.home_app_will_be_hidden),
-                gradientColors = item.gradientColors,
+                subtitle = AppCardLine(stringResource(R.string.home_app_will_be_hidden))
             )
         }
     }
@@ -370,8 +369,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
                                 packageInfo = item.packageInfo,
                                 displayName = item.displayName,
                                 subtitle = if (isMultiSelectMode.value) null
-                                else stringResource(R.string.home_app_hidden_apps_hint),
-                                gradientColors = item.gradientColors,
+                                else AppCardLine(stringResource(R.string.home_app_hidden_apps_hint))
                             )
                         }
                     }

@@ -780,7 +780,7 @@ class HomeApps(
                     .reversed()
             )
             HomeAppSortMode.UPDATES_FIRST -> items.sortedWith(
-                compareByDescending<HomeAppItem> { it.showsUpdateBadge }
+                compareByDescending<HomeAppItem> { it.isPatchUpdatePending }
                     .then(morpheComparator)
             )
             HomeAppSortMode.RECENTLY_PATCHED -> items.sortedWith(

@@ -1493,7 +1493,7 @@ private fun BundleCardHeader(
         }
 
         if (dragHandleModifier != null) {
-            DragHandle(modifier = dragHandleModifier)
+            DragHandle(modifier = dragHandleModifier, tint = cardStyle.subtitleColor)
         } else {
             // The chevron gives way to the mark while the card is picked rather than folded
             SelectionMark(

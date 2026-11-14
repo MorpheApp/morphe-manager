@@ -245,7 +245,7 @@ private fun DialogHostScope.PatchFlowDialog(
             InstalledAppInfoDialog(
                 packageName = dialog.packageName,
                 onDismiss = flow::dismissInstalledAppInfo,
-                onTriggerPatchFlow = flow::showPatchDialog,
+                onRepatch = flow::repatch,
                 homeViewModel = homeViewModel,
                 viewModel = installedAppInfoViewModel
             )

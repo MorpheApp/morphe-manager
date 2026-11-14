@@ -814,15 +814,16 @@ fun DialogHostScope.SourceAppsDialog(
                                 packageName = packageName,
                                 packageInfo = null,
                                 displayName = label,
-                                subtitle = listOfNotNull(
-                                    pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
-                                    // Left out, it would be gone from the home screen but for its install
-                                    stringResource(R.string.sources_apps_stays_patched)
-                                        .takeIf { !brought && packageName in patchedApps }
-                                ).joinToString(" · "),
-                                gradientColors = gradientColors
+                                subtitle = AppCardLine(
+                                    listOfNotNull(
+                                        pluralStringResource(R.plurals.patch_count, patchCount, patchCount.toString()),
+                                        // Left out, it would be gone from the home screen but for its install
+                                        stringResource(R.string.sources_apps_stays_patched)
+                                            .takeIf { !brought && packageName in patchedApps }
+                                    ).joinToString(" · ")
+                                )
                             ) {
-                                FormFactorBadge(appMetadata[packageName]?.formFactor, gradientColors)
+                                FormFactorTag(appMetadata[packageName]?.formFactor)
                                 // Shown until the list is closed once, so it has to catch the eye
                                 if (packageName in newApps) {
                                     StatusBadge(

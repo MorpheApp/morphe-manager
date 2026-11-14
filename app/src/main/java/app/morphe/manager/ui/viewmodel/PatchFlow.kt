@@ -21,6 +21,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.mergeNewlyAdded
@@ -291,6 +293,9 @@ class PatchFlow(
         // dialog before proceeding with the actual APK selection flow.
         guardPatching { showPatchDialogInternal(packageName) }
     }
+
+    /** Rebuilds [app] from the app it was patched from, over the install it is tracked as. */
+    fun repatch(app: InstalledApp) = showPatchDialog(app.originalPackageName, app.trackingKey)
 
     /**
      * What the run calls [packageName]: the name the sources give it, see
