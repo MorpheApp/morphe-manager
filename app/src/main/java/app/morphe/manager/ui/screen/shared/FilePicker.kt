@@ -167,8 +167,8 @@ private enum class SortMode {
     NAME_ASC, NAME_DESC, SIZE_DESC, SIZE_ASC, DATE_DESC, DATE_ASC;
 
     fun labelRes() = when (this) {
-        NAME_ASC  -> R.string.file_picker_sort_name_asc
-        NAME_DESC -> R.string.file_picker_sort_name_desc
+        NAME_ASC  -> R.string.list_sort_name_asc
+        NAME_DESC -> R.string.list_sort_name_desc
         SIZE_DESC -> R.string.file_picker_sort_size_desc
         SIZE_ASC  -> R.string.file_picker_sort_size_asc
         DATE_DESC -> R.string.file_picker_sort_date_desc

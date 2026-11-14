@@ -68,10 +68,16 @@
     <string name="home_search_apps">Search apps</string>
     <string name="list_options_title">Sort and filter</string>
     <string name="list_options_state_description">Sorted by %1$s, filtered by %2$s</string>
+    <!-- Orders every sortable list offers -->
+    <string name="list_sort_manual">Manual</string>
+    <string name="list_sort_name_asc">Name (A–Z)</string>
+    <string name="list_sort_name_desc">Name (Z–A)</string>
+    <string name="home_app_filter_all">All</string>
+    <string name="home_app_filter_not_patched">Not patched</string>
     <string name="home_app_filter_clones">Clones</string>
     <string name="home_app_grouping_none">None</string>
     <string name="home_app_sort_manual_hint">Long-press an app, then tap the reorder button</string>
-    <string name="home_app_sort_recommended">Recommended order</string>
+    <string name="home_app_sort_recommended">Recommended</string>
     <string name="home_app_sort_updates_first">Updates first</string>
     <string name="home_app_sort_recently_patched">Recently patched</string>
     <string name="home_no_apps_title">No apps available</string>
@@ -164,7 +170,6 @@
     <string name="sources_search">Search sources and patches</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Need attention</string>
-    <string name="sources_sort_manual">Manual order</string>
     <string name="sources_sort_manual_hint">Long-press a source to reorder</string>
     <string name="sources_sort_last_updated">Last updated</string>
     <string name="sources_sort_enabled_first">Enabled first</string>
@@ -1404,8 +1409,6 @@ Details: %2$s"</string>
     <string name="file_picker_storages">Storages</string>
     <string name="file_saver_downloads_failed">Could not create the file in Downloads</string>
     <string name="file_saver_saving_to_downloads">This device has no save screen, so the file goes to Downloads as %1$s</string>
-    <string name="file_picker_sort_name_asc">Name (A–Z)</string>
-    <string name="file_picker_sort_name_desc">Name (Z–A)</string>
     <string name="file_picker_sort_size_desc">Size (largest first)</string>
     <string name="file_picker_sort_size_asc">Size (smallest first)</string>
     <string name="file_picker_sort_date_desc">Date (newest first)</string>

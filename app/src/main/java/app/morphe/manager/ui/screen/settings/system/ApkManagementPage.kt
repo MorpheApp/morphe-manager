@@ -88,7 +88,7 @@ private val ApkItemData.isInstallableFromStorage: Boolean
 
 /** Order of the saved APK lists. Entries of the same size keep to the order of their names. */
 enum class ApkSortMode(@param:StringRes val labelRes: Int) {
-    NAME(R.string.file_picker_sort_name_asc),
+    NAME(R.string.list_sort_name_asc),
     SIZE_DESC(R.string.file_picker_sort_size_desc),
     SIZE_ASC(R.string.file_picker_sort_size_asc);
 

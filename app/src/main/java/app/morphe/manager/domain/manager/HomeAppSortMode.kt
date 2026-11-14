@@ -12,10 +12,10 @@ import app.morphe.manager.util.enumByNameOrNull
 enum class HomeAppSortMode(
     @param:StringRes override val labelRes: Int
 ) : SortModeSpec {
-    MANUAL(R.string.sources_sort_manual),
+    MANUAL(R.string.list_sort_manual),
     RECOMMENDED(R.string.home_app_sort_recommended),
-    NAME_ASC(R.string.file_picker_sort_name_asc),
-    NAME_DESC(R.string.file_picker_sort_name_desc),
+    NAME_ASC(R.string.list_sort_name_asc),
+    NAME_DESC(R.string.list_sort_name_desc),
     UPDATES_FIRST(R.string.home_app_sort_updates_first),
     RECENTLY_PATCHED(R.string.home_app_sort_recently_patched);
 
