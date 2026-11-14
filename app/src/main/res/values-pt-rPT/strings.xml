@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ainda não foi modificado</string>
     <string name="home_unpatched_version_installed">Versão não corrigida instalada</string>
     <string name="home_unpatched_badge">Não modificado</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automotivo</string>
     <string name="home_no_patches_available">Não há modificações disponíveis</string>
     <string name="home_app_hide_title">Esconder esta aplicação?</string>
     <string name="home_more_apps_title">Mais aplicações</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nova categoria</string>
     <string name="home_category_rename_title">Renomear categoria</string>
     <string name="home_category_name">Nome da categoria</string>
+    <string name="home_category_name_description">A tela inicial agrupa seus aplicativos sob este nome</string>
     <string name="home_category_move_to">Mover para categoria</string>
     <string name="home_category_move_selected_title">Mover aplicações selecionadas</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Comunicar um problema</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir URL</string>
     <string name="sources_apps">Aplicações</string>
-    <string name="sources_apps_description">As aplicações marcadas vêm desta fonte. Toque numa aplicação para a deixar de fora ou a repor. Uma aplicação sai do ecrã inicial quando nenhuma fonte a traz, a menos que tenha aplicado um patch</string>
+    <string name="sources_apps_description">As aplicações marcadas vêm desta fonte. Toque numa aplicação para a deixar de fora ou a repor, deslize-a para ver os seus patches. Uma aplicação sem fonte sai do ecrã inicial, a menos que tenha aplicado um patch</string>
     <string name="sources_apps_brought">Trazidos por esta fonte</string>
     <string name="sources_apps_left_out">Deixados de fora desta fonte</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Detalhes: %2$s"</string>
     <string name="settings_system_hide_password_field">Ocultar palavra-passe</string>
     <string name="settings_system_morphe_settings">Definições do Morphe</string>
     <string name="settings_system_import_manager_settings_description">Fazer cópia de segurança e restaurar as tuas definições do Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exportar as definições do Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Guarda as definições que escolher num ficheiro</string>
+    <string name="settings_system_import_manager_settings_file_description">Restaura as definições a partir de um ficheiro de cópia de segurança</string>
+    <string name="settings_system_auto_backup">Cópia de segurança automática</string>
+    <string name="settings_system_auto_backup_switch">Fazer cópia de segurança automaticamente</string>
+    <string name="settings_system_auto_backup_now">Fazer cópia de segurança agora</string>
+    <string name="settings_system_auto_backup_saved">Cópia de segurança guardada</string>
+    <string name="settings_system_auto_backup_interval_description">O Morphe aguarda pelo menos este tempo após uma cópia antes de fazer a próxima</string>
+    <string name="settings_system_auto_backup_description">Guarda as suas definições do Morphe numa pasta que escolher</string>
+    <string name="settings_system_auto_backup_last">Último backup: %s</string>
+    <string name="settings_system_auto_backup_folder">Pasta</string>
+    <string name="settings_system_auto_backup_folder_name">Backups do Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Não foi possível usar esta pasta: %s</string>
+    <string name="settings_system_auto_backup_interval">Frequência de backup</string>
+    <string name="settings_system_auto_backup_signing_key">Incluir chave de assinatura</string>
+    <string name="settings_system_auto_backup_signing_key_description">Salva a chave que assina os apps modificados ao lado das configurações</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Fazer backup da chave de assinatura?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Qualquer pessoa que obtenha este arquivo pode assinar atualizações que sejam instaladas sobre seus apps modificados. Mantenha a pasta privada e compartilhe-a apenas com seus próprios dispositivos</string>
+    <string name="settings_system_auto_backup_footer">Uma cópia é salva quando você sai do Morphe após alterar algo. Os %s mais recentes são mantidos</string>
+    <string name="settings_system_auto_backup_failed">O último backup não pôde ser salvo. Escolha a pasta novamente</string>
     <string name="settings_system_import_manager_settings_fail">Erro ao importar as definições do Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Definições do Morphe importadas</string>
     <string name="settings_system_import_manager_settings_mode_title">Importar definições do Morphe</string>
@@ -1265,6 +1289,7 @@ Detalhes: %2$s"</string>
     <string name="selection_set_deleted">%s eliminado</string>
     <string name="selection_set_renamed">Renomeado para %s</string>
     <string name="selection_set_rename_title">Mudar o nome do conjunto</string>
+    <string name="selection_set_rename_description">Usar o nome de outro conjunto substitui esse conjunto</string>
     <string name="selection_set_delete_title">Eliminar conjunto?</string>
     <string name="selection_set_delete_message">Isto elimina permanentemente o conjunto %s</string>
     <string name="copy_selection_empty">Nenhuma outra seleção guardada para copiar</string>
@@ -1301,6 +1326,12 @@ Detalhes: %2$s"</string>
     <string name="file_picker_sort_date_desc">Data (mais recente primeiro)</string>
     <string name="file_picker_sort_date_asc">Data (mais antiga primeiro)</string>
     <string name="file_picker_show_hidden_files">Mostrar ficheiros ocultos</string>
+    <string name="file_picker_new_folder">Nova pasta</string>
+    <string name="file_picker_folder_name">Nome da pasta</string>
+    <string name="file_picker_new_folder_description">Criada em %1$s e aberta imediatamente</string>
+    <string name="file_picker_folder_name_taken">Já existe algo com este nome aqui</string>
+    <string name="file_picker_folder_name_invalid">O nome de uma pasta não pode conter \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Não foi possível criar a pasta</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de</string>
     <string name="settings_system_manager_description">Um projeto de código aberto para a modificação de aplicações Android populares, moderno e otimizado, impulsionado pelas opiniões e contribuições da comunidade</string>
@@ -1344,6 +1375,7 @@ Detalhes: %2$s"</string>
     <string name="settings_section_about_summary">Mais sobre o Morphe e como obter ajuda</string>
     <string name="settings_section_local_files">Ficheiros</string>
     <string name="settings_section_backup">Cópia de segurança</string>
+    <string name="settings_section_import_export">Importar e exportar</string>
     <string name="settings_search">Definições de pesquisa</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -1362,6 +1394,7 @@ Detalhes: %2$s"</string>
     <string name="retry">Tentar de novo</string>
     <string name="refresh">Atualizar</string>
     <string name="add">Adicionar</string>
+    <string name="create">Criar</string>
     <string name="close">Fechar</string>
     <string name="back">Voltar</string>
     <string name="next">Seguinte</string>

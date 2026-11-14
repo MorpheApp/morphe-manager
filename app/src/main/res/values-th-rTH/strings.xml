@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">ยังไม่ได้รับการแพตช์</string>
     <string name="home_unpatched_version_installed">ติดตั้งเวอร์ชันที่ไม่ได้รับการแพตช์แล้ว</string>
     <string name="home_unpatched_badge">ไม่ได้รับการแพตช์</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ทีวี</string>
+    <string name="form_factor_automotive">ยานยนต์</string>
     <string name="home_no_patches_available">ไม่มีแพตช์ที่ใช้งานได้</string>
     <string name="home_app_hide_title">ซ่อนแอปนี้หรือไม่?</string>
     <string name="home_more_apps_title">แอปเพิ่มเติม</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">หมวดหมู่ใหม่</string>
     <string name="home_category_rename_title">เปลี่ยนชื่อหมวดหมู่</string>
     <string name="home_category_name">ชื่อหมวดหมู่</string>
+    <string name="home_category_name_description">หน้าจอหลักจะจัดกลุ่มแอปต่าง ๆ ไว้ภายใต้ชื่อนี้</string>
     <string name="home_category_move_to">ย้ายไปที่หมวดหมู่</string>
     <string name="home_category_move_selected_title">ย้ายแอปที่เลือกไว้</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">รายงานปัญหา</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_apps">แอป</string>
-    <string name="sources_apps_description">แอปที่ติ๊กมาจากแหล่งนี้ แตะแอปเพื่อไม่ต้องนำเข้ามา หรือนำกลับเข้ามา แอปจะออกจากหน้าจอหลักเมื่อไม่มีแหล่งใดนำเข้ามา ยกเว้นว่าคุณได้แพตช์มัน</string>
+    <string name="sources_apps_description">แอปที่ถูกเลือกมาจากแหล่งที่มานี้ แตะที่แอปเพื่อนำออกหรือนำกลับมา และปัดเพื่อดูแพตช์ของแอปนั้น แอปที่ไม่มีแหล่งที่มาจะถูกนำออกจากหน้าจอหลัก เว้นแต่คุณจะทำการแพตช์แอปนั้นไว้</string>
     <string name="sources_apps_brought">นำมาโดยแหล่งข้อมูลนี้</string>
     <string name="sources_apps_left_out">ไม่รวมอยู่ในแหล่งข้อมูลนี้</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">ซ่อนรหัสผ่าน</string>
     <string name="settings_system_morphe_settings">การตั้งค่า Morphe</string>
     <string name="settings_system_import_manager_settings_description">สำรองและกู้คืนการตั้งค่า Morphe ของคุณ</string>
+    <string name="settings_system_export_manager_settings_title">ส่งออกการตั้งค่า Morphe</string>
+    <string name="settings_system_export_manager_settings_description">บันทึกการตั้งค่าที่คุณเลือกไปยังไฟล์</string>
+    <string name="settings_system_import_manager_settings_file_description">คืนค่าการตั้งค่าจากไฟล์สำรอง</string>
+    <string name="settings_system_auto_backup">การสำรองข้อมูลอัตโนมัติ</string>
+    <string name="settings_system_auto_backup_switch">สำรองข้อมูลโดยอัตโนมัติ</string>
+    <string name="settings_system_auto_backup_now">สำรองข้อมูลตอนนี้</string>
+    <string name="settings_system_auto_backup_saved">บันทึกการสำรองข้อมูลแล้ว</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe จะรออย่างน้อยตามระยะเวลานี้หลังจากคัดลอกก่อนที่จะทำการคัดลอกครั้งถัดไป</string>
+    <string name="settings_system_auto_backup_description">บันทึกการตั้งค่า Morphe ของคุณไปยังโฟลเดอร์ที่คุณเลือก</string>
+    <string name="settings_system_auto_backup_last">การสำรองข้อมูลครั้งล่าสุด: %s</string>
+    <string name="settings_system_auto_backup_folder">โฟลเดอร์</string>
+    <string name="settings_system_auto_backup_folder_name">การสำรองข้อมูล Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">ไม่สามารถใช้โฟลเดอร์นี้ได้: %s</string>
+    <string name="settings_system_auto_backup_interval">ความถี่ในการสำรองข้อมูล</string>
+    <string name="settings_system_auto_backup_signing_key">รวมคีย์สำหรับการลงชื่อ</string>
+    <string name="settings_system_auto_backup_signing_key_description">บันทึกคีย์ที่ใช้ลงชื่อแอปที่ผ่านการแพตช์ไว้ข้างๆ การตั้งค่า</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">สำรองข้อมูลคีย์สำหรับการลงชื่อหรือไม่?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">ใครก็ตามที่ได้รับไฟล์นี้จะสามารถลงชื่ออัปเดตเพื่อติดตั้งทับแอปที่ผ่านการแพตช์ของคุณได้ โปรดเก็บโฟลเดอร์นี้ไว้เป็นส่วนตัวและแชร์กับอุปกรณ์ของคุณเองเท่านั้น</string>
+    <string name="settings_system_auto_backup_footer">สำเนาจะถูกบันทึกเมื่อคุณออกจาก Morphe หลังจากมีการเปลี่ยนแปลงบางอย่าง โดยจะเก็บ %s ล่าสุดเอาไว้</string>
+    <string name="settings_system_auto_backup_failed">ไม่สามารถบันทึกการสำรองข้อมูลครั้งล่าสุดได้ โปรดเลือกโฟลเดอร์อีกครั้ง</string>
     <string name="settings_system_import_manager_settings_fail">ไม่สามารถนำเข้าการตั้งค่า Morphe ได้: %s</string>
     <string name="settings_system_import_manager_settings_success">นำเข้าการตั้งค่า Morphe สำเร็จ</string>
     <string name="settings_system_import_manager_settings_mode_title">นำเข้าการตั้งค่า Morphe</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">ลบ %s แล้ว</string>
     <string name="selection_set_renamed">เปลี่ยนชื่อเป็น %s แล้ว</string>
     <string name="selection_set_rename_title">เปลี่ยนชื่อชุด</string>
+    <string name="selection_set_rename_description">การใช้ชื่อเดียวกับเซตอื่นจะทำให้เซตนั้นถูกแทนที่</string>
     <string name="selection_set_delete_title">ลบชุดนี้หรือไม่?</string>
     <string name="selection_set_delete_message">การดำเนินการนี้จะลบชุด %s อย่างถาวร</string>
     <string name="copy_selection_empty">ไม่มีส่วนที่เลือกไว้ก่อนหน้านี้ที่จะคัดลอก</string>
@@ -1301,6 +1326,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">วันที่ (ใหม่ล่าสุดก่อน)</string>
     <string name="file_picker_sort_date_asc">วันที่ (เก่าที่สุดก่อน)</string>
     <string name="file_picker_show_hidden_files">แสดงไฟล์ที่ซ่อนไว้</string>
+    <string name="file_picker_new_folder">โฟลเดอร์ใหม่</string>
+    <string name="file_picker_folder_name">ชื่อโฟลเดอร์</string>
+    <string name="file_picker_new_folder_description">สร้างใน %1$s และเปิดทันที</string>
+    <string name="file_picker_folder_name_taken">มีสิ่งที่ใช้ชื่อนี้อยู่แล้วที่นี่</string>
+    <string name="file_picker_folder_name_invalid">ชื่อโฟลเดอร์ไม่สามารถมีตัวอักษร \" * / : &lt; &gt; ? \\ | ได้</string>
+    <string name="file_picker_new_folder_failed">ไม่สามารถสร้างโฟลเดอร์ได้</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
     <string name="settings_system_manager_description">โครงการโอเพนซอร์สสำหรับการแพตช์แอป Android ยอดนิยมที่ทันสมัยและราบรื่น ซึ่งขับเคลื่อนด้วยข้อเสนอแนะและการมีส่วนร่วมจากชุมชน</string>
@@ -1344,6 +1375,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">ข้อมูลเพิ่มเติมเกี่ยวกับ Morphe และการรับความช่วยเหลือ</string>
     <string name="settings_section_local_files">ไฟล์</string>
     <string name="settings_section_backup">สำรองข้อมูล</string>
+    <string name="settings_section_import_export">นำเข้าและส่งออก</string>
     <string name="settings_search">ค้นหาในการตั้งค่า</string>
     <string name="yes">ใช่</string>
     <string name="no">ไม่</string>
@@ -1362,6 +1394,7 @@ morphe_header_custom_dark.png
     <string name="retry">ลองใหม่</string>
     <string name="refresh">รีเฟรช</string>
     <string name="add">เพิ่ม</string>
+    <string name="create">สร้าง</string>
     <string name="close">ปิด</string>
     <string name="back">ย้อนกลับ</string>
     <string name="next">ถัดไป</string>

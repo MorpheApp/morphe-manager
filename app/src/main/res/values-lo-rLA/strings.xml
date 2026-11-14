@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">ຍັງບໍ່ໄດ້ແພດ</string>
     <string name="home_unpatched_version_installed">ຕິດຕັ້ງເວີຊັນທີ່ບໍ່ໄດ້ປັບແກ້ໄຂ</string>
     <string name="home_unpatched_badge">ບໍ່ໄດ້ປັບແກ້ໄຂ</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ທີວີ</string>
+    <string name="form_factor_automotive">ຍານພາຫະນະ</string>
     <string name="home_no_patches_available">ບໍ່ມີຊຸດແພດພ້ອມໃຊ້</string>
     <string name="home_app_hide_title">ເຊື່ອງແອັບນີ້ບໍ?</string>
     <string name="home_more_apps_title">ແອັບເພີ່ມເຕີມ</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">ໝວດໝູ່ໃໝ່</string>
     <string name="home_category_rename_title">ປ່ຽນຊື່ໝວດໝູ່</string>
     <string name="home_category_name">ຊື່ໝວດໝູ່</string>
+    <string name="home_category_name_description">ໜ້າຈໍຫຼັກຈັດກຸ່ມແອັບຂອງມັນພາຍໃຕ້ຊື່ນີ້</string>
     <string name="home_category_move_to">ຍ້າຍໄປໝວດໝູ່</string>
     <string name="home_category_move_selected_title">ຍ້າຍແອັບທີ່ເລືອກ</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">ລາຍງານບັນຫາ</string>
     <string name="sources_management_failed_to_open_url">ເປີດ URL ລົ້ມເຫຼວ</string>
     <string name="sources_apps">ແອັບ</string>
-    <string name="sources_apps_description">ແອັບທີ່ຖືກໝາຍແມ່ນມາຈາກແຫຼ່ງນີ້. ແຕະທີ່ແອັບເພື່ອເອົາມັນອອກ ຫຼື ນຳມັນກັບຄືນມາ. ແອັບຈະອອກຈາກໜ້າຈໍຫຼັກເມື່ອບໍ່ມີແຫຼ່ງໃດນຳມັນເຂົ້າມາ, ຍົກເວັ້ນວ່າທ່ານໄດ້ patch ມັນແລ້ວ</string>
+    <string name="sources_apps_description">ແອັບທີ່ຖືກໝາຍແມ່ນມາຈາກແຫຼ່ງນີ້. ແຕະແອັບເພື່ອເອົາມັນອອກ ຫຼື ນຳມັນກັບຄືນມາ, ປັດມັນເພື່ອເບິ່ງການປັບປຸງຂອງມັນ. ແອັບທີ່ບໍ່ມີແຫຼ່ງທີ່ມາຈະອອກຈາກໜ້າຈໍຫຼັກ, ຍົກເວັ້ນວ່າທ່ານໄດ້ປັບປຸງມັນ</string>
     <string name="sources_apps_brought">ນຳເຂົ້າມາໂດຍແຫຼ່ງຂໍ້ມູນນີ້</string>
     <string name="sources_apps_left_out">ຖືກຍົກເວັ້ນອອກຈາກແຫຼ່ງຂໍ້ມູນນີ້</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">ເຊື່ອງລະຫັດຜ່ານ</string>
     <string name="settings_system_morphe_settings">ການຕັ້ງຄ່າ Morphe</string>
     <string name="settings_system_import_manager_settings_description">ສຳຮອງ ແລະກູ້ຄືນການຕັ້ງຄ່າ Morphe ຂອງທ່ານ</string>
+    <string name="settings_system_export_manager_settings_title">ສົ່ງອອກການຕັ້ງຄ່າ Morphe</string>
+    <string name="settings_system_export_manager_settings_description">ບັນທຶກການຕັ້ງຄ່າທີ່ທ່ານເລືອກລົງໃນໄຟລ໌</string>
+    <string name="settings_system_import_manager_settings_file_description">ກູ້ຄືນການຕັ້ງຄ່າຈາກໄຟລ໌ສຳຮອງ</string>
+    <string name="settings_system_auto_backup">ສຳຮອງຂໍ້ມູນອັດຕະໂນມັດ</string>
+    <string name="settings_system_auto_backup_switch">ສຳຮອງຂໍ້ມູນອັດຕະໂນມັດ</string>
+    <string name="settings_system_auto_backup_now">ສຳຮອງຂໍ້ມູນດຽວນີ້</string>
+    <string name="settings_system_auto_backup_saved">ບັນທຶກການສຳຮອງຂໍ້ມູນແລ້ວ</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe ຈະລໍຖ້າຢ່າງໜ້ອຍໄລຍະເວລານີ້ ຫຼັງຈາກການຄັດລອກ ກ່ອນທີ່ຈະສຳຮອງຂໍ້ມູນຄັ້ງຕໍ່ໄປ</string>
+    <string name="settings_system_auto_backup_description">ບັນທຶກການຕັ້ງຄ່າ Morphe ຂອງທ່ານລົງໃນໂຟນເດີທີ່ທ່ານເລືອກ</string>
+    <string name="settings_system_auto_backup_last">ສຳຮອງຂໍ້ມູນຫຼ້າສຸດ: %s</string>
+    <string name="settings_system_auto_backup_folder">ໂຟນເດີ</string>
+    <string name="settings_system_auto_backup_folder_name">ການສຳຮອງຂໍ້ມູນຂອງ Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">ບໍ່ສາມາດໃຊ້ໂຟນເດີນີ້ໄດ້: %s</string>
+    <string name="settings_system_auto_backup_interval">ຄວາມຖີ່ໃນການສຳຮອງຂໍ້ມູນ</string>
+    <string name="settings_system_auto_backup_signing_key">ລວມເອົາກຸນແຈລົງລາຍເຊັນ</string>
+    <string name="settings_system_auto_backup_signing_key_description">ບັນທຶກກຸນແຈທີ່ໃຊ້ລົງລາຍເຊັນແອັບທີ່ຖືກປັບແກ້ໄວ້ຂ້າງໆການຕັ້ງຄ່າ</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">ສຳຮອງຂໍ້ມູນກຸນແຈລົງລາຍເຊັນບໍ?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">ໃຜກໍຕາມທີ່ໄດ້ໄຟລ໌ນີ້ສາມາດລົງລາຍເຊັນການອັບເດດທີ່ຕິດຕັ້ງທັບແອັບທີ່ຖືກປັບແກ້ຂອງທ່ານໄດ້. ໃຫ້ເກັບຮັກສາໂຟນເດີເປັນຄວາມລັບ ແລະ ແບ່ງປັນມັນໃຫ້ກັບອຸປະກອນຂອງທ່ານເອງເທົ່ານັ້ນ</string>
+    <string name="settings_system_auto_backup_footer">ສຳເນົາຈະຖືກບັນທຶກໄວ້ເມື່ອທ່ານອອກຈາກ Morphe ຫຼັງຈາກການປ່ຽນແປງບາງຢ່າງ. %s ຫຼ້າສຸດຈະຖືກເກັບໄວ້</string>
+    <string name="settings_system_auto_backup_failed">ບໍ່ສາມາດບັນທຶກການສຳຮອງຂໍ້ມູນຄັ້ງຫຼ້າສຸດໄດ້. ກະລຸນາເລືອກໂຟນເດີອີກຄັ້ງ</string>
     <string name="settings_system_import_manager_settings_fail">ນຳເຂົ້າການຕັ້ງຄ່າ Morphe ລົ້ມເຫຼວ: %s</string>
     <string name="settings_system_import_manager_settings_success">ນຳເຂົ້າການຕັ້ງຄ່າ Morphe ແລ້ວ</string>
     <string name="settings_system_import_manager_settings_mode_title">ນຳເຂົ້າການຕັ້ງຄ່າ Morphe</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">ລຶບ %s ແລ້ວ</string>
     <string name="selection_set_renamed">ປ່ຽນຊື່ເປັນ %s ແລ້ວ</string>
     <string name="selection_set_rename_title">ປ່ຽນຊື່ຊຸດ</string>
+    <string name="selection_set_rename_description">ການໃຊ້ຊື່ຂອງຊຸດອື່ນຈະແທນທີ່ຊຸດນັ້ນ</string>
     <string name="selection_set_delete_title">ລຶບຊຸດນີ້ບໍ?</string>
     <string name="selection_set_delete_message">ການເຮັດແບບນີ້ຈະລຶບຊຸດ %s ຢ່າງຖາວອນ</string>
     <string name="copy_selection_empty">ບໍ່ມີການເລືອກທີ່ບັນທຶກໄວ້ອື່ນເພື່ອຄັດລອກ</string>
@@ -1301,6 +1326,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">ວັນທີ (ໃໝ່ກ່ອນ)</string>
     <string name="file_picker_sort_date_asc">ວັນທີ (ເກົ່າກ່ອນ)</string>
     <string name="file_picker_show_hidden_files">ສະແດງໄຟລ໌ທີ່ເຊື່ອງໄວ້</string>
+    <string name="file_picker_new_folder">ໂຟນເດີໃໝ່</string>
+    <string name="file_picker_folder_name">ຊື່ໂຟນເດີ</string>
+    <string name="file_picker_new_folder_description">ສ້າງໃນ %1$s ແລະ ເປີດໃຊ້ທັນທີ</string>
+    <string name="file_picker_folder_name_taken">ມີບາງຢ່າງທີ່ໃຊ້ຊື່ນີ້ຢູ່ແລ້ວ</string>
+    <string name="file_picker_folder_name_invalid">ຊື່ໂຟນເດີບໍ່ສາມາດມີ \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">ບໍ່ສາມາດສ້າງໂຟນເດີໄດ້</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">ກ່ຽວກັບ</string>
     <string name="settings_system_manager_description">ໂຄງການໂອເພນຊອດສຳລັບການແພດແອັບ Android ຍອດນິຍົມແບບທັນສະໄໝ ແລະກະທັດຮັດ, ຂັບເຄື່ອນໂດຍຄຳຕິຊົມ ແລະການປະກອບສ່ວນຈາກຊຸມຊົນ</string>
@@ -1344,6 +1375,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">ຂໍ້ມູນເພີ່ມເຕີມກ່ຽວກັບ Morphe ແລະ ການຊ່ວຍເຫຼືອ</string>
     <string name="settings_section_local_files">ໄຟລ໌</string>
     <string name="settings_section_backup">ສຳຮອງຂໍ້ມູນ</string>
+    <string name="settings_section_import_export">ນຳເຂົ້າ ແລະ ສົ່ງອອກ</string>
     <string name="settings_search">ຄົ້ນຫາການຕັ້ງຄ່າ</string>
     <string name="yes">ແມ່ນແລ້ວ</string>
     <string name="no">ບໍ່</string>
@@ -1362,6 +1394,7 @@ morphe_header_custom_dark.png
     <string name="retry">ລອງໃໝ່</string>
     <string name="refresh">ໂຫຼດໃໝ່</string>
     <string name="add">ເພີ່ມ</string>
+    <string name="create">ສ້າງ</string>
     <string name="close">ປິດ</string>
     <string name="back">ກັບ</string>
     <string name="next">ຖັດໄປ</string>

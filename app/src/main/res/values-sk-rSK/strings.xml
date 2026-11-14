@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Zatiaľ nezaplátané</string>
     <string name="home_unpatched_version_installed">Nainštalovaná nezáplatovaná verzia</string>
     <string name="home_unpatched_badge">Nezaplátané</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">Televízor</string>
+    <string name="form_factor_automotive">Automobil</string>
     <string name="home_no_patches_available">Neboli nájdené žiadne záplaty</string>
     <string name="home_app_hide_title">Skryť túto aplikáciu?</string>
     <string name="home_more_apps_title">Ďalšie aplikácie</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nová kategória</string>
     <string name="home_category_rename_title">Premenovať kategóriu</string>
     <string name="home_category_name">Názov kategórie</string>
+    <string name="home_category_name_description">Domovská obrazovka gruppuje svoje aplikácie pod týmto názvom</string>
     <string name="home_category_move_to">Presunúť do kategórie</string>
     <string name="home_category_move_selected_title">Presunúť vybrané aplikácie</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Nahlásiť problém</string>
     <string name="sources_management_failed_to_open_url">Nepodarilo sa otvoriť URL</string>
     <string name="sources_apps">Aplikácie</string>
-    <string name="sources_apps_description">Aplikácie z tohto zdroja. Klepnutím na aplikáciu ju vylúčte alebo zobrazte späť. Aplikácia sa odstráni z domovskej obrazovky, ak už žiadny zdroj neprichádza do úvahy, okrem prípadu, keď bola opravená</string>
+    <string name="sources_apps_description">Zaškrtnuté aplikácie pochádzajú z tohto zdroja. Klepnutím na aplikáciu ju vynechajte alebo vráťte, potiahnutím zistíte jej patche. Aplikácia bez zdroja opustí domovskú obrazovku, pokiaľ ste ju nepatchovali</string>
     <string name="sources_apps_brought">Prinášané týmto zdrojom</string>
     <string name="sources_apps_left_out">Vynechané z tohto zdroja</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_hide_password_field">Skryť heslo</string>
     <string name="settings_system_morphe_settings">Nastavenia Morphe</string>
     <string name="settings_system_import_manager_settings_description">Zálohuje a obnovuje nastavenia Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exportovať nastavenia Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Uloží vybrané nastavenia do súboru</string>
+    <string name="settings_system_import_manager_settings_file_description">Obnoví nastavenia zo zálohovacieho súboru</string>
+    <string name="settings_system_auto_backup">Automatické zálohovanie</string>
+    <string name="settings_system_auto_backup_switch">Zálohovať automaticky</string>
+    <string name="settings_system_auto_backup_now">Zálohovať teraz</string>
+    <string name="settings_system_auto_backup_saved">Záloha bola uložená</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe po jednej kópii počká aspoň takto dlho pred vytvorením ďalšej</string>
+    <string name="settings_system_auto_backup_description">Uloží vaše nastavenia Morphe do vybranej priečinka</string>
+    <string name="settings_system_auto_backup_last">Posledná záloha: %s</string>
+    <string name="settings_system_auto_backup_folder">Paliar</string>
+    <string name="settings_system_auto_backup_folder_name">Zálohy Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Nepodarilo sa použiť tento priečinok: %s</string>
+    <string name="settings_system_auto_backup_interval">Frekvencia zálohovania</string>
+    <string name="settings_system_auto_backup_signing_key">Zahrnúť podpisový kľúč</string>
+    <string name="settings_system_auto_backup_signing_key_description">Uloží kľúč, ktorým sa podpisujú upravené aplikácie, vedľa nastavení</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Zálohovať podpisový kľúč?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Každý, kto získa tento súbor, môže podpísať aktualizácie, ktoré sa nainštalujú cez vaše upravené aplikácie. Priečinok udržujte v súkromí a zdieľajte ho len so svojimi vlastnými zariadeniami</string>
+    <string name="settings_system_auto_backup_footer">Kópia sa uloží, keď opustíte Morphe po zmene niečoho. Uchovávajú sa najnovšie %s</string>
+    <string name="settings_system_auto_backup_failed">Posledná záloha sa nepodarilo uložiť. Vyberte priečinok znova</string>
     <string name="settings_system_import_manager_settings_fail">Nepodarilo sa importovať nastavenia Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavenia Morphe boli importované</string>
     <string name="settings_system_import_manager_settings_mode_title">Importovať nastavenia Morphe</string>
@@ -1265,6 +1289,7 @@ Podrobnosti: %2$s"</string>
     <string name="selection_set_deleted">%s bolo odstránené</string>
     <string name="selection_set_renamed">Premenované na %s</string>
     <string name="selection_set_rename_title">Premenovať sadu</string>
+    <string name="selection_set_rename_description">Prisvojenie mena inej sady nahradí túto sadu</string>
     <string name="selection_set_delete_title">Odstrániť sadu?</string>
     <string name="selection_set_delete_message">Týmto sa sada %s natrvalo odstráni</string>
     <string name="copy_selection_empty">Nie sú k dispozícii žiadne iné uložené výbery na kopírovanie</string>
@@ -1301,6 +1326,12 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dátum (najnovšie najprv)</string>
     <string name="file_picker_sort_date_asc">Dátum (najstaršie najprv)</string>
     <string name="file_picker_show_hidden_files">Zobraziť skryté súbory</string>
+    <string name="file_picker_new_folder">Nový priečinok</string>
+    <string name="file_picker_folder_name">Názov priečinka</string>
+    <string name="file_picker_new_folder_description">Vytvorené v %1$s a okamžite otvorené</string>
+    <string name="file_picker_folder_name_taken">Tu už existuje niečo s týmto názvom</string>
+    <string name="file_picker_folder_name_invalid">Názov priečinka nesmie obsahovať \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Nepodarilo sa vytvoriť priečinok</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikácii</string>
     <string name="settings_system_manager_description">Projekt otvoreného zdroja pre moderné a zjednodušené záplatovanie populárnych aplikácií Android, poháňaný spätnou väzbou a príspevkom komunity</string>
@@ -1344,6 +1375,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_section_about_summary">Viac o Morphe a získanie pomoci</string>
     <string name="settings_section_local_files">Súbory</string>
     <string name="settings_section_backup">Záloha</string>
+    <string name="settings_section_import_export">Import a export</string>
     <string name="settings_search">Nastavenia vyhľadávania</string>
     <string name="yes">Áno</string>
     <string name="no">Nie</string>
@@ -1362,6 +1394,7 @@ Podrobnosti: %2$s"</string>
     <string name="retry">Znova</string>
     <string name="refresh">Obnoviť</string>
     <string name="add">Pridať</string>
+    <string name="create">Vytvoriť</string>
     <string name="close">Zatvoriť</string>
     <string name="back">Späť</string>
     <string name="next">Ďalej</string>

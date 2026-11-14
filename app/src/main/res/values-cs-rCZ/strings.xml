@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ještě nezáplatováno</string>
     <string name="home_unpatched_version_installed">Nainstalovaná nezáplatovaná verze</string>
     <string name="home_unpatched_badge">Nezáplatováno</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automobilový</string>
     <string name="home_no_patches_available">Žádné záplaty k dispozici</string>
     <string name="home_app_hide_title">Skrýt tuto aplikaci?</string>
     <string name="home_more_apps_title">Více aplikací</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nová kategorie</string>
     <string name="home_category_rename_title">Přejmenovat kategorii</string>
     <string name="home_category_name">Název kategorie</string>
+    <string name="home_category_name_description">Domovská obrazovka skupuje své aplikace pod tímto názvem</string>
     <string name="home_category_move_to">Přesunout do kategorie</string>
     <string name="home_category_move_selected_title">Přesunout vybrané aplikace</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Nahlásit problém</string>
     <string name="sources_management_failed_to_open_url">Nepodařilo se otevřít URL</string>
     <string name="sources_apps">Aplikace</string>
-    <string name="sources_apps_description">Aplikace ze tohoto zdroje mají zaškrtnutá pole. Klepnutím na aplikaci ji můžete vyloučit nebo znovu zahrnout. Aplikace zmizí z domovské obrazovky, jakmile ji žádný zdroj nepřináší, pokud jste ji nezáplatovali.</string>
+    <string name="sources_apps_description">Aplikace z tohoto zdroje mají zaškrtnutá pole. Klepnutím na aplikaci ji můžete vyloučit nebo znovu zahrnout, svisovným posunutím u ní uvidíte její záplaty. Aplikace zmizí z domovské obrazovky, jakmile ji žádný zdroj nepřináší, pokud jste ji nezáplatovali</string>
     <string name="sources_apps_brought">Přinášené tímto zdrojem</string>
     <string name="sources_apps_left_out">Vyřazené z tohoto zdroje</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Podrobnosti: %2$s"</string>
     <string name="settings_system_hide_password_field">Skrýt heslo</string>
     <string name="settings_system_morphe_settings">Nastavení Morphe</string>
     <string name="settings_system_import_manager_settings_description">Zálohuje a obnovuje nastavení aplikace Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exportovat nastavení Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Uloží vybraná nastavení do souboru</string>
+    <string name="settings_system_import_manager_settings_file_description">Obnoví nastavení із zálohovacího souboru</string>
+    <string name="settings_system_auto_backup">Automatická záloha</string>
+    <string name="settings_system_auto_backup_switch">Zálohovat automaticky</string>
+    <string name="settings_system_auto_backup_now">Zálohovat nyní</string>
+    <string name="settings_system_auto_backup_saved">Záloha uložena</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe počká po kopii alespoň takto dlouho, než provede další</string>
+    <string name="settings_system_auto_backup_description">Uloží vaše nastavení Morphe do vybrané složky</string>
+    <string name="settings_system_auto_backup_last">Poslední záloha: %s</string>
+    <string name="settings_system_auto_backup_folder">Složka</string>
+    <string name="settings_system_auto_backup_folder_name">Zálohy Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Tuto složku nešlo použít: %s</string>
+    <string name="settings_system_auto_backup_interval">Četnost záloh</string>
+    <string name="settings_system_auto_backup_signing_key">Zahrnout podpisovací klíč</string>
+    <string name="settings_system_auto_backup_signing_key_description">Uloží klíč, kterým jsou podepsány upravené aplikace, vedle nastavení</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Zálohovat podpisovací klíč?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Kdoenikoliv, kdo získá tento soubor, může podepisovat aktualizace, které se instalují přes vaše upravené aplikace. Složku udržujte v soukromí a sdílejte ji pouze se svými vlastními zařízeními</string>
+    <string name="settings_system_auto_backup_footer">Kopie je uložena, když opustíte Morphe poté, co jste něco změnili. Zachovávají se nejnovější %s</string>
+    <string name="settings_system_auto_backup_failed">Poslední zálohu nešlo uložit. Vyberte složku znovu</string>
     <string name="settings_system_import_manager_settings_fail">Nepodařilo se importovat nastavení Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Nastavení Morphe importována</string>
     <string name="settings_system_import_manager_settings_mode_title">Importovat nastavení Morphe</string>
@@ -1265,6 +1289,7 @@ Podrobnosti: %2$s"</string>
     <string name="selection_set_deleted">%s smazáno</string>
     <string name="selection_set_renamed">Přejmenováno na %s</string>
     <string name="selection_set_rename_title">Přejmenovat sadu</string>
+    <string name="selection_set_rename_description">Použití názvu jiné sady nahradí tuto sadu</string>
     <string name="selection_set_delete_title">Smazat sadu?</string>
     <string name="selection_set_delete_message">Tímto bude sada %s trvale smazána</string>
     <string name="copy_selection_empty">Není k dispozici žádný další uložený výběr ke kopírování</string>
@@ -1301,6 +1326,12 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_sort_date_desc">Datum (od novějšího)</string>
     <string name="file_picker_sort_date_asc">Datum (od staršího)</string>
     <string name="file_picker_show_hidden_files">Zobrazit skryté soubory</string>
+    <string name="file_picker_new_folder">Nová složka</string>
+    <string name="file_picker_folder_name">Název složky</string>
+    <string name="file_picker_new_folder_description">Vytvořeno v %1$s a ihned otevřeno</string>
+    <string name="file_picker_folder_name_taken">Zde už existuje něco s tímto názvem</string>
+    <string name="file_picker_folder_name_invalid">Název složky nesmí obsahovat \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Nepodařilo se vytvořit složku</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaci</string>
     <string name="settings_system_manager_description">Projekt s otevřeným zdrojovým kódem pro moderní, optimalizované záplaty populárních Android aplikací, řízený zpětnou vazbou a příspěvky komunity</string>
@@ -1344,6 +1375,7 @@ Podrobnosti: %2$s"</string>
     <string name="settings_section_about_summary">Další informace o aplikaci Morphe a způsobech získání pomoci</string>
     <string name="settings_section_local_files">Soubory</string>
     <string name="settings_section_backup">Záloha</string>
+    <string name="settings_section_import_export">Import a export</string>
     <string name="settings_search">Hledat nastavení</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
@@ -1362,6 +1394,7 @@ Podrobnosti: %2$s"</string>
     <string name="retry">Zkuste znova</string>
     <string name="refresh">Obnovit</string>
     <string name="add">Přidat</string>
+    <string name="create">Vytvořit</string>
     <string name="close">Zavřít</string>
     <string name="back">Zpět</string>
     <string name="next">Další</string>

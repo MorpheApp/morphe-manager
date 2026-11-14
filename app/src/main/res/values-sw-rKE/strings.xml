@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Haijapachwa bado</string>
     <string name="home_unpatched_version_installed">Toleo lisilofanyiwa patch limesakinishwa</string>
     <string name="home_unpatched_badge">Haijapatchedwa</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">Runinga</string>
+    <string name="form_factor_automotive">Gari</string>
     <string name="home_no_patches_available">Hakuna viraka vinavyopatikana</string>
     <string name="home_app_hide_title">Ficha programu hii?</string>
     <string name="home_more_apps_title">Programu zaidi</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Kategoria mpya</string>
     <string name="home_category_rename_title">Badilisha jina la kategoria</string>
     <string name="home_category_name">Jina la kategoria</string>
+    <string name="home_category_name_description">Kioo cha nyumbani huweka programu zake chini ya jina hili</string>
     <string name="home_category_move_to">Hamisha kwenda kwenye kategoria</string>
     <string name="home_category_move_selected_title">Hamisha programu zilizochaguliwa</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Ripoti tatizo</string>
     <string name="sources_management_failed_to_open_url">Imeshindwa kufungua URL</string>
     <string name="sources_apps">Programu</string>
-    <string name="sources_apps_description">Programu zilizowekwa alama zinatoka kwenye chanzo hiki. Gusa programu ili kuiondoa au kuirudisha. Programu huondoka kwenye skrini ya nyumbani pindi hakuna chanzo kinachoileta, isipokuwa kama umeifanyia marekebisho</string>
+    <string name="sources_apps_description">Programu zilizochaguliwa zinatoka kwenye chanzo hiki. Gusa programu ili kuiondoa au kuirudisha, ishie kuisogeza ili kuona viraka vyake. Programu isiyo na chanzo huondoka kwenye skrini ya kuanzia, isipokuwa kama uliiraka</string>
     <string name="sources_apps_brought">Iletwa na chanzo hiki</string>
     <string name="sources_apps_left_out">Imeachwa nje ya chanzo hiki</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Maelezo: %2$s"</string>
     <string name="settings_system_hide_password_field">Ficha nywila</string>
     <string name="settings_system_morphe_settings">Mipangilio ya Morphe</string>
     <string name="settings_system_import_manager_settings_description">Huhifadhi na kurejesha mipangilio yako ya Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Export mipangilio ya Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Hifadhi mipangilio uliyochagua kwenye faili</string>
+    <string name="settings_system_import_manager_settings_file_description">Rejesha mipangilio kutoka kwenye faili ya nakala</string>
+    <string name="settings_system_auto_backup">Nakala ya automatic</string>
+    <string name="settings_system_auto_backup_switch">Hifadhi nakala automatically</string>
+    <string name="settings_system_auto_backup_now">Hifadhi nakala sasa</string>
+    <string name="settings_system_auto_backup_saved">Nakala imehifadhiwa</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe husubiri angalau muda huu baada ya nakala moja kabla ya kutengeneza nyingine</string>
+    <string name="settings_system_auto_backup_description">Hifadhi mipangilio yako ya Morphe kwenye folda utakayochagua</string>
+    <string name="settings_system_auto_backup_last">Nakala ya mwisho: %s</string>
+    <string name="settings_system_auto_backup_folder">Folda</string>
+    <string name="settings_system_auto_backup_folder_name">Nakala za Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Hakuwezi kutumika folda hii: %s</string>
+    <string name="settings_system_auto_backup_interval">Mzunguko wa nakala</string>
+    <string name="settings_system_auto_backup_signing_key">Jumuisha ufunguo wa saini</string>
+    <string name="settings_system_auto_backup_signing_key_description">Huhifadhi ufunguo unaotia saini programu zilizorekebishwa kando ya mipangilio</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Nakala ya ufunguo wa saini?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Yeyote anayepata faili hii anaweza kutia saini sasisho zinazowekwa juu ya programu zako zilizorekebishwa. Weka folda hii kuwa ya siri na ushiriki tu na vifaa vyako mwenyewe</string>
+    <string name="settings_system_auto_backup_footer">Nakala huhifadhiwa unapoondoka Morphe baada ya kubadilisha kitu. %s za hivi karibuni huhifadhiwa</string>
+    <string name="settings_system_auto_backup_failed">Nakala ya mwisho haikuweza kuhifadhiwa. Chagua folda tena</string>
     <string name="settings_system_import_manager_settings_fail">Imeshindwa kuagiza mipangilio ya Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Mipangilio ya Morphe imeagizwa</string>
     <string name="settings_system_import_manager_settings_mode_title">Ingiza mipangilio ya Morphe</string>
@@ -1265,6 +1289,7 @@ Maelezo: %2$s"</string>
     <string name="selection_set_deleted">%s imefutwa</string>
     <string name="selection_set_renamed">Imepewa jina jipya la %s</string>
     <string name="selection_set_rename_title">Badili jina la seti</string>
+    <string name="selection_set_rename_description">Kuchukua jina la seti nyingine kunabadilisha seti hiyo</string>
     <string name="selection_set_delete_title">Futa seti?</string>
     <string name="selection_set_delete_message">Hii itafuta seti %s moja kwa moja</string>
     <string name="copy_selection_empty">Hakuna machaguo mengine yaliyohifadhiwa ya kunakili</string>
@@ -1301,6 +1326,12 @@ Maelezo: %2$s"</string>
     <string name="file_picker_sort_date_desc">Tarehe (ya hivi karibuni kwanza)</string>
     <string name="file_picker_sort_date_asc">Tarehe (ya zamani kwanza)</string>
     <string name="file_picker_show_hidden_files">Onyesha faili zilizofichwa</string>
+    <string name="file_picker_new_folder">Folda mpya</string>
+    <string name="file_picker_folder_name">Jina la folda</string>
+    <string name="file_picker_new_folder_description">Imeundwa katika %1$s na kufunguliwa mara moja</string>
+    <string name="file_picker_folder_name_taken">Kuna kitu chenye jina hili hapa tayari</string>
+    <string name="file_picker_folder_name_invalid">Jina la folda haliwezi kuwa na \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Hakuwezekana kuunda folda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Kuhusu</string>
     <string name="settings_system_manager_description">Mradi wa chanzo wazi kwa ajili ya upachaji wa kisasa na uliorahisishwa wa programu maarufu za Android, unaoendeshwa na maoni na michango ya jamii</string>
@@ -1344,6 +1375,7 @@ Maelezo: %2$s"</string>
     <string name="settings_section_about_summary">Zaidi kuhusu Morphe na kupata msaada</string>
     <string name="settings_section_local_files">Faili</string>
     <string name="settings_section_backup">Nakala ya akiba</string>
+    <string name="settings_section_import_export">Import na export</string>
     <string name="settings_search">Tafuta mipangilio</string>
     <string name="yes">Ndiyo</string>
     <string name="no">Hapana</string>
@@ -1362,6 +1394,7 @@ Maelezo: %2$s"</string>
     <string name="retry">Jaribu tena</string>
     <string name="refresh">Osha</string>
     <string name="add">Ongeza</string>
+    <string name="create">Unde</string>
     <string name="close">Funga</string>
     <string name="back">Rudi</string>
     <string name="next">Inayofuata</string>

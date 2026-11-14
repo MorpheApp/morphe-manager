@@ -40,10 +40,6 @@
         <item quantity="one">سەرچاوەی %s شاردراوەتەوە. کلیک بکە بۆ پیشاندانی</item>
         <item quantity="other">%s سەرچاوە شاراوەن. کلیک بکە بۆ پیشاندان</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s پینی گونجاو</item>
-        <item quantity="other">%s پینی گونجاو</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s سەرچاوە</item>
         <item quantity="other">%s سەرچاوەکان</item>

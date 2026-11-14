@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Nog niet gepatcht</string>
     <string name="home_unpatched_version_installed">Ongepatchte versie geïnstalleerd</string>
     <string name="home_unpatched_badge">Ongepatcht</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Auto</string>
     <string name="home_no_patches_available">Geen patches beschikbaar</string>
     <string name="home_app_hide_title">Deze app verbergen?</string>
     <string name="home_more_apps_title">Meer apps</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nieuwe categorie</string>
     <string name="home_category_rename_title">Categorie hernoemen</string>
     <string name="home_category_name">Categorienaam</string>
+    <string name="home_category_name_description">Het startscherm groepeert apps onder deze naam</string>
     <string name="home_category_move_to">Verplaatsen naar categorie</string>
     <string name="home_category_move_selected_title">Verplaats geselecteerde apps</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Een probleem melden</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
     <string name="sources_apps">Apps</string>
-    <string name="sources_apps_description">Apps die van deze bron komen. Tik op een app om het over te slaan of terug te brengen. Een app verdwijnt van het startscherm zodra geen enkele bron het nog toont, tenzij je het hebt gepatcht</string>
+    <string name="sources_apps_description">Aangevinkte apps komen uit deze bron. Tik op een app om deze weg te laten of terug te brengen, veeg over een app om de patches ervan te zien. Een app zonder bron verlaat het startscherm, tenzij je deze hebt gepatcht</string>
     <string name="sources_apps_brought">Aangeleverd door deze bron</string>
     <string name="sources_apps_left_out">Uitgesloten van deze bron</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Details: %2$s"</string>
     <string name="settings_system_hide_password_field">Wachtwoord verbergen</string>
     <string name="settings_system_morphe_settings">Morphe instellingen</string>
     <string name="settings_system_import_manager_settings_description">Maakt een back-up van en herstelt uw Morphe-instellingen</string>
+    <string name="settings_system_export_manager_settings_title">Morphe-instellingen exporteren</string>
+    <string name="settings_system_export_manager_settings_description">Slaat de door u gekozen instellingen op in een bestand</string>
+    <string name="settings_system_import_manager_settings_file_description">Herstelt instellingen vanuit een reservekopiebestand</string>
+    <string name="settings_system_auto_backup">Automatische reservekopie</string>
+    <string name="settings_system_auto_backup_switch">Automatisch reservekopie maken</string>
+    <string name="settings_system_auto_backup_now">Nu reservekopie maken</string>
+    <string name="settings_system_auto_backup_saved">Reservekopie opgeslagen</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe wacht na een kopie minstens deze tijd voordat de volgende wordt gemaakt</string>
+    <string name="settings_system_auto_backup_description">Slaat uw Morphe-instellingen op in een door u gekozen map</string>
+    <string name="settings_system_auto_backup_last">Laatste reservekopie: %s</string>
+    <string name="settings_system_auto_backup_folder">Map</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe-back-ups</string>
+    <string name="settings_system_auto_backup_folder_failed">Deze map kon niet worden gebruikt: %s</string>
+    <string name="settings_system_auto_backup_interval">Backupfrequentie</string>
+    <string name="settings_system_auto_backup_signing_key">Ondertekeningssleutel opnemen</string>
+    <string name="settings_system_auto_backup_signing_key_description">Slaat de sleutel op waarmee gepatchte apps worden ondertekend naast de instellingen op</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Ondertekeningssleutel back-uppen?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Iedereen die dit bestand krijgt, kan updates ondertekenen die over je gepatchte apps worden geïnstalleerd. Houd de map privé en deel deze alleen met je eigen apparaten</string>
+    <string name="settings_system_auto_backup_footer">Er wordt een kopie opgeslagen wanneer je Morphe verlaat na iets te hebben gewijzigd. De nieuwste %s worden bewaard</string>
+    <string name="settings_system_auto_backup_failed">De laatste backup kon niet worden opgeslagen. Selecteer de map opnieuw</string>
     <string name="settings_system_import_manager_settings_fail">Importeren van Morphe-instellingen mislukt: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellingen geïmporteerd</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe-instellingen importeren</string>
@@ -1265,6 +1289,7 @@ Details: %2$s"</string>
     <string name="selection_set_deleted">%s verwijderd</string>
     <string name="selection_set_renamed">Hernoemd naar %s</string>
     <string name="selection_set_rename_title">Set hernoemen</string>
+    <string name="selection_set_rename_description">Het overnemen van de naam van een andere set vervangt die set</string>
     <string name="selection_set_delete_title">Set verwijderen?</string>
     <string name="selection_set_delete_message">Dit verwijdert de set %s permanent</string>
     <string name="copy_selection_empty">Geen andere opgeslagen selecties om van te kopiëren</string>
@@ -1301,6 +1326,12 @@ Details: %2$s"</string>
     <string name="file_picker_sort_date_desc">Datum (nieuwste eerst)</string>
     <string name="file_picker_sort_date_asc">Datum (oudste eerst)</string>
     <string name="file_picker_show_hidden_files">Verborgen bestanden tonen</string>
+    <string name="file_picker_new_folder">Nieuwe map</string>
+    <string name="file_picker_folder_name">Mapnaam</string>
+    <string name="file_picker_new_folder_description">Aangemaakt in %1$s en direct geopend</string>
+    <string name="file_picker_folder_name_taken">Er is al iets met deze naam aanwezig</string>
+    <string name="file_picker_folder_name_invalid">Een mapnaam mag geen \" * / : &lt; &gt; ? \\ | bevatten</string>
+    <string name="file_picker_new_folder_failed">De map kon niet worden aangemaakt</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Over</string>
     <string name="settings_system_manager_description">Een open-source project voor modern, gestroomlijnd patchen van populaire Android-apps, aangedreven door community-feedback en -bijdragen</string>
@@ -1344,6 +1375,7 @@ Details: %2$s"</string>
     <string name="settings_section_about_summary">Meer over Morphe en hulp krijgen</string>
     <string name="settings_section_local_files">Bestanden</string>
     <string name="settings_section_backup">Back-up</string>
+    <string name="settings_section_import_export">Importeren en exporteren</string>
     <string name="settings_search">Zoekinstellingen</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
@@ -1362,6 +1394,7 @@ Details: %2$s"</string>
     <string name="retry">Opnieuw proberen</string>
     <string name="refresh">Vernieuwen</string>
     <string name="add">Toevoegen</string>
+    <string name="create">Maak aan</string>
     <string name="close">Sluiten</string>
     <string name="back">Terug</string>
     <string name="next">Volgende</string>

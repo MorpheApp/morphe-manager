@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Դեռևս չի փոփոխվել</string>
     <string name="home_unpatched_version_installed">Տեղադրված է չփոփոխված տարբերակը</string>
     <string name="home_unpatched_badge">Չփոփոխված</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ՀՏՀ</string>
+    <string name="form_factor_automotive">Ավտոմոբիլային</string>
     <string name="home_no_patches_available">Հասանելի փոփոխություններ չկան</string>
     <string name="home_app_hide_title">Թաքցնե՞լ այս հավելվածը։</string>
     <string name="home_more_apps_title">Ավելի շատ հավելվածներ</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Նոր կատեգորիա</string>
     <string name="home_category_rename_title">Վերանվանել կատեգորիան</string>
     <string name="home_category_name">Կատեգորիայի անվանումը</string>
+    <string name="home_category_name_description">Գլխավոր էջը խմբավորում է իր հավելվածները այս անվան տակ</string>
     <string name="home_category_move_to">Տեղափոխել կատեգորիա</string>
     <string name="home_category_move_selected_title">Տեղափոխել ընտրված հավելվածները</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Հայտնել խնդրի մասին</string>
     <string name="sources_management_failed_to_open_url">Չհաջողվեց բացել URL-ը</string>
     <string name="sources_apps">Հավելվածներ</string>
-    <string name="sources_apps_description">Նշված հավելվածները գալիս են այս աղբյուրից: Հպեք հավելվածին՝ այն հեռացնելու կամ վերադարձնելու համար: Հավելվածը հեռանում է գլխավոր էկրանից, երբ ոչ մի աղբյուր չի բերում այն, եթե դուք այն չեք փեթչել</string>
+    <string name="sources_apps_description">Նշված հավելվածները գալիս են այս աղբյուրից: Հպեք հավելվածին՝ այն հեռացնելու կամ վերադարձնելու համար, սլայդեք այն՝ նրա փեթչերը տեսնելու համար: Հավելվածը հեռանում է գլխավոր էկրանից, եթե ոչ մի աղբյուր չի բերում այն, եթե դուք այն չեք փեթչել</string>
     <string name="sources_apps_brought">Բերված է այս աղբյուրից</string>
     <string name="sources_apps_left_out">Բաց թողնված է այս աղբյուրից</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">Թաքցնել գաղտնաբառը</string>
     <string name="settings_system_morphe_settings">Morphe-ի կարգավորումներ</string>
     <string name="settings_system_import_manager_settings_description">Պահպանում և վերականգնում է ձեր Morphe կարգավորումները</string>
+    <string name="settings_system_export_manager_settings_title">Արտահանել Morphe-ի կարգավորումները</string>
+    <string name="settings_system_export_manager_settings_description">Պահպանում է ձեր ընտրած կարգավորումները ֆայլի մեջ</string>
+    <string name="settings_system_import_manager_settings_file_description">Վերականգնում է կարգավորումները պահուստային պատճենի ֆայլից</string>
+    <string name="settings_system_auto_backup">Ավտոմատ պահուստավորում</string>
+    <string name="settings_system_auto_backup_switch">Պահուստավորել ավտոմատ կերպով</string>
+    <string name="settings_system_auto_backup_now">Պահուստավորել հիմա</string>
+    <string name="settings_system_auto_backup_saved">Պահուստային պատճենը պահպանված է</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe-ն սպասում է առնվազն այսքան ժամանակ պատճենի ստեղծումից առաջ՝ հաջորդը կատարելու համար</string>
+    <string name="settings_system_auto_backup_description">Պահպանում է ձեր Morphe կարգավորումները ձեր ընտրած թղթապանակում</string>
+    <string name="settings_system_auto_backup_last">Վերջին պահուստավորումը՝ %s</string>
+    <string name="settings_system_auto_backup_folder">Թղթապանակ</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe-ի պահուստային պատճենները</string>
+    <string name="settings_system_auto_backup_folder_failed">Չհաջողվեց օգտագործել այս թղթապանակը. %s</string>
+    <string name="settings_system_auto_backup_interval">Պահպանման հաճախականությունը</string>
+    <string name="settings_system_auto_backup_signing_key">Ներառել ստորագրման բանալին</string>
+    <string name="settings_system_auto_backup_signing_key_description">Պահպանում է փոփոխված հավելվածները ստորագրող բանալին կարգավորումների կողքին</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Պահպանե՞լ ստորագրման բանալին։</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Ցանկացած ոք, ով կստանա այս ֆայլը, կարող է ստորագրել թարմացումներ, որոնք կտեղադրվեն ձեր փոփոխված հավելվածների վրա: Պահպանեք թղթապանակը գաղտնի և կիսվեք դրան միայն ձեր սեփական սարքերի հետ</string>
+    <string name="settings_system_auto_backup_footer">Պատճենը պահպանվում է, երբ դուք լքում եք Morphe-ը՝ որևէ բան փոփոխելուց հետո: Պահպանվում են ամենանոր %s-ները</string>
+    <string name="settings_system_auto_backup_failed">Վերջին պահպանումը չհաջողվեց կատարել։ Ընտրեք թղթապանակը նորից</string>
     <string name="settings_system_import_manager_settings_fail">Morphe կարգավորումների ներմուծումը ձախողվեց. %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe կարգավորումները ներմուծվեցին</string>
     <string name="settings_system_import_manager_settings_mode_title">Ներմուծել Morphe-ի կարգավորումները</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s-ը ջնջվեց</string>
     <string name="selection_set_renamed">Վերանվանվեց %s-ի</string>
     <string name="selection_set_rename_title">Վերանվանել հավաքածուն</string>
+    <string name="selection_set_rename_description">Մեկ այլ հավաքածուի անվան ընդունումը փոխարինում է այդ հավաքածուն</string>
     <string name="selection_set_delete_title">Ջնջե՞լ հավաքածուն։</string>
     <string name="selection_set_delete_message">Սա մնայուն կերպով կջնջի %s հավաքածուն</string>
     <string name="copy_selection_empty">Չկան այլ պահպանված ընտրություններ պատճենելու համար</string>
@@ -1301,6 +1326,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">Ամսաթիվ (նորերը սկզբում)</string>
     <string name="file_picker_sort_date_asc">Ամսաթիվ (հիները սկզբում)</string>
     <string name="file_picker_show_hidden_files">Ցուցադրել թաքցված ֆայլերը</string>
+    <string name="file_picker_new_folder">Նոր թղթապանակ</string>
+    <string name="file_picker_folder_name">Թղթապանակի անվանումը</string>
+    <string name="file_picker_new_folder_description">Ստեղծվել է %1$s-ում և անմիջապես բացվել է</string>
+    <string name="file_picker_folder_name_taken">Այս անվամբ արդեն կա օբյեկտ այստեղ</string>
+    <string name="file_picker_folder_name_invalid">Թղթապանակի անվանումը չի կարող պարունակել \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Չհաջողվեց ստեղծել թղթապանակը</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Մասին</string>
     <string name="settings_system_manager_description">Բաց կոդով նախագիծ հայտնի Android հավելվածների ժամանակակից, օպտիմալացված փոփոխման համար, որը զարգացվում է համայնքի արձագանքների և ներդրումների հիման վրա</string>
@@ -1344,6 +1375,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">Ավելին Morphe-ի մասին և օգնության ստացում</string>
     <string name="settings_section_local_files">Ֆայլեր</string>
     <string name="settings_section_backup">Պահպանման պատճեն</string>
+    <string name="settings_section_import_export">Ներմուծում և արտահանում</string>
     <string name="settings_search">Որոնել կարգավորումներում</string>
     <string name="yes">Այո</string>
     <string name="no">Ոչ</string>
@@ -1362,6 +1394,7 @@ morphe_header_custom_dark.png
     <string name="retry">Կրկնել</string>
     <string name="refresh">Թարմացնել</string>
     <string name="add">Ավելացնել</string>
+    <string name="create">Ստեղծել</string>
     <string name="close">Փակել</string>
     <string name="back">Հետ</string>
     <string name="next">Հաջորդ</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
+    <!-- Badge on the card of an app built for a device other than a phone -->
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->

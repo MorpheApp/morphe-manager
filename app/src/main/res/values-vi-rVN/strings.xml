@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Chưa vá</string>
     <string name="home_unpatched_version_installed">Đã cài đặt phiên bản chưa vá</string>
     <string name="home_unpatched_badge">Chưa vá</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Màn hình ô tô</string>
     <string name="home_no_patches_available">Không có bản vá nào</string>
     <string name="home_app_hide_title">Ẩn ứng dụng này?</string>
     <string name="home_more_apps_title">Thêm ứng dụng</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Danh mục mới</string>
     <string name="home_category_rename_title">Đổi tên danh mục</string>
     <string name="home_category_name">Tên danh mục</string>
+    <string name="home_category_name_description">Màn hình chính nhóm các ứng dụng của nó dưới tên này</string>
     <string name="home_category_move_to">Di chuyển đến danh mục</string>
     <string name="home_category_move_selected_title">Di chuyển ứng dụng đã chọn</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_apps">Ứng dụng</string>
-    <string name="sources_apps_description">Các ứng dụng đã chọn đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc khôi phục nó. Một ứng dụng sẽ biến khỏi màn hình chính khi không còn nguồn nào đưa nó vào, trừ khi bạn đã vá nó</string>
+    <string name="sources_apps_description">Các ứng dụng được đánh dấu đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc đưa nó trở lại, vuốt ứng dụng đó để xem các bản vá của nó. Một ứng dụng không có nguồn sẽ rời khỏi màn hình chính, trừ khi bạn đã vá nó</string>
     <string name="sources_apps_brought">Được nguồn này đưa vào</string>
     <string name="sources_apps_left_out">Đã loại khỏi nguồn này</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1169,6 +1173,26 @@ Chi tiết: %2$s"</string>
     <string name="settings_system_hide_password_field">Ẩn mật khẩu</string>
     <string name="settings_system_morphe_settings">Cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_description">Sao lưu và khôi phục lại cài đặt Morphe của bạn</string>
+    <string name="settings_system_export_manager_settings_title">Xuất cài đặt Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Lưu các cài đặt bạn chọn vào một tệp</string>
+    <string name="settings_system_import_manager_settings_file_description">Khôi phục cài đặt từ một tệp sao lưu</string>
+    <string name="settings_system_auto_backup">Sao lưu tự động</string>
+    <string name="settings_system_auto_backup_switch">Tự động sao lưu</string>
+    <string name="settings_system_auto_backup_now">Sao lưu ngay</string>
+    <string name="settings_system_auto_backup_saved">Đã lưu bản sao lưu</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe sẽ đợi ít nhất khoảng thời gian này sau một lần sao lưu trước khi thực hiện lần tiếp theo</string>
+    <string name="settings_system_auto_backup_description">Lưu cài đặt Morphe của bạn vào một thư mục bạn chọn</string>
+    <string name="settings_system_auto_backup_last">Sao lưu lần cuối: %s</string>
+    <string name="settings_system_auto_backup_folder">Thư mục</string>
+    <string name="settings_system_auto_backup_folder_name">Bản sao lưu Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Không thể sử dụng thư mục này: %s</string>
+    <string name="settings_system_auto_backup_interval">Tần suất sao lưu</string>
+    <string name="settings_system_auto_backup_signing_key">Bao gồm khóa ký</string>
+    <string name="settings_system_auto_backup_signing_key_description">Lưu khóa dùng để ký các ứng dụng đã vá bên cạnh các cài đặt</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Sao lưu khóa ký?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bất kỳ ai có được tệp này đều có thể ký các bản cập nhật để cài đặt đè lên các ứng dụng đã vá của bạn. Hãy giữ thư mục này riêng tư và chỉ chia sẻ với các thiết bị của chính bạn</string>
+    <string name="settings_system_auto_backup_footer">Một bản sao được lưu khi bạn rời khỏi Morphe sau khi thay đổi điều gì đó. Các %s mới nhất sẽ được giữ lại</string>
+    <string name="settings_system_auto_backup_failed">Không thể lưu bản sao lưu cuối cùng. Hãy chọn lại thư mục</string>
     <string name="settings_system_import_manager_settings_fail">Không thể nhập cài đặt Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Đã nhập cài đặt Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">Nhập cài đặt Morphe</string>
@@ -1268,6 +1292,7 @@ Chi tiết: %2$s"</string>
     <string name="selection_set_deleted">%s đã bị xóa</string>
     <string name="selection_set_renamed">Đã đổi tên thành %s</string>
     <string name="selection_set_rename_title">Đổi tên bộ</string>
+    <string name="selection_set_rename_description">Việc đặt tên của một bộ khác sẽ thay thế bộ đó</string>
     <string name="selection_set_delete_title">Xóa bộ?</string>
     <string name="selection_set_delete_message">Thao tác này sẽ xóa vĩnh viễn bộ %s</string>
     <string name="copy_selection_empty">Không có lựa chọn đã lưu nào khác để sao chép</string>
@@ -1304,6 +1329,12 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_sort_date_desc">Ngày (mới nhất trước)</string>
     <string name="file_picker_sort_date_asc">Ngày (cũ nhất trước)</string>
     <string name="file_picker_show_hidden_files">Hiện tệp ẩn</string>
+    <string name="file_picker_new_folder">Thư mục mới</string>
+    <string name="file_picker_folder_name">Tên thư mục</string>
+    <string name="file_picker_new_folder_description">Được tạo trong %1$s và được mở ngay lập tức</string>
+    <string name="file_picker_folder_name_taken">Đã có một mục với tên này ở đây</string>
+    <string name="file_picker_folder_name_invalid">Tên thư mục không được chứa \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Không thể tạo thư mục</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
     <string name="settings_system_manager_description">Một dự án mã nguồn mở, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng</string>
@@ -1347,6 +1378,7 @@ Chi tiết: %2$s"</string>
     <string name="settings_section_about_summary">Thêm về Morphe và cách nhận trợ giúp</string>
     <string name="settings_section_local_files">Tập tin</string>
     <string name="settings_section_backup">Sao lưu</string>
+    <string name="settings_section_import_export">Nhập và xuất</string>
     <string name="settings_search">Tìm kiếm cài đặt</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
@@ -1365,6 +1397,7 @@ Chi tiết: %2$s"</string>
     <string name="retry">Thử lại</string>
     <string name="refresh">Làm mới</string>
     <string name="add">Thêm</string>
+    <string name="create">Tạo</string>
     <string name="close">Đóng</string>
     <string name="back">Trước</string>
     <string name="next">Tiếp</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Все още не е патчнато</string>
     <string name="home_unpatched_version_installed">Инсталирана е версия без пачове</string>
     <string name="home_unpatched_badge">Не е пачнато</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ТВ</string>
+    <string name="form_factor_automotive">Автомобилен</string>
     <string name="home_no_patches_available">Няма достъпни патчове</string>
     <string name="home_app_hide_title">Скриване на това приложение?</string>
     <string name="home_more_apps_title">Още приложения</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Нова категория</string>
     <string name="home_category_rename_title">Преименувай категория</string>
     <string name="home_category_name">Име на категория</string>
+    <string name="home_category_name_description">На началния екран приложенията са групирани под това име</string>
     <string name="home_category_move_to">Премести в категория</string>
     <string name="home_category_move_selected_title">Премести избрани приложения</string>
     <!-- %s is the name of the category -->
@@ -165,7 +169,7 @@
     <string name="sources_management_report_issue">Докладвай за проблем</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
     <string name="sources_apps">Приложения</string>
-    <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете. Приложението се премахва от началния екран, когато никой източник вече не го предоставя, освен ако не сте го пачнали.</string>
+    <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете, плъзнете го, за да видите пачовете му. Приложението се премахва от началния екран, когато никой източник вече не го предоставя, освен ако не сте го пачнали</string>
     <string name="sources_apps_brought">Включени от този източник</string>
     <string name="sources_apps_left_out">Изключени от този източник</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1169,6 +1173,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">Скриване на парола</string>
     <string name="settings_system_morphe_settings">Настройки на Morphe</string>
     <string name="settings_system_import_manager_settings_description">Създава резервно копие и възстановява настройките на Morphe.</string>
+    <string name="settings_system_export_manager_settings_title">Експортиране на настройките на Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Запазва избраните от вас настройки във файл</string>
+    <string name="settings_system_import_manager_settings_file_description">Възстановява настройки от файл за резервно копие</string>
+    <string name="settings_system_auto_backup">Автоматично резервно копие</string>
+    <string name="settings_system_auto_backup_switch">Архивирай автоматично</string>
+    <string name="settings_system_auto_backup_now">Архивирай сега</string>
+    <string name="settings_system_auto_backup_saved">Резервното копие е запазено</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe изчаква поне толкова време след едно копиране, преди да направи следващото</string>
+    <string name="settings_system_auto_backup_description">Запазва настройките на Morphe в избрана от вас папка</string>
+    <string name="settings_system_auto_backup_last">Последно резервно копие: %s</string>
+    <string name="settings_system_auto_backup_folder">Папка</string>
+    <string name="settings_system_auto_backup_folder_name">Архиви на Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Не можа да се използва тази папка: %s</string>
+    <string name="settings_system_auto_backup_interval">Честота на архивиране</string>
+    <string name="settings_system_auto_backup_signing_key">Включване на ключ за подпис</string>
+    <string name="settings_system_auto_backup_signing_key_description">Запазва ключа, с който се подписват пачнатите приложения, до настройките</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Архивиране на ключа за подпис?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Всеки, който получи този файл, може да подписва актуализации, които се инсталират върху вашите пачнати приложения. Пазете папката поверителна и я споделяйте само с ваши собствени устройства</string>
+    <string name="settings_system_auto_backup_footer">Копие се запазва, когато напуснете Morphe след промяна на нещо. Запазват се най-новите %s</string>
+    <string name="settings_system_auto_backup_failed">Последното архивиране не можа да бъде запазено. Изберете папката отново</string>
     <string name="settings_system_import_manager_settings_fail">Неуспешно импортиране на настройките на Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Настройките на Morphe са импортирани</string>
     <string name="settings_system_import_manager_settings_mode_title">Импортиране на настройките на Morphe</string>
@@ -1268,6 +1292,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s е изтрит</string>
     <string name="selection_set_renamed">Преименувано на %s</string>
     <string name="selection_set_rename_title">Преименувай комплект</string>
+    <string name="selection_set_rename_description">Приемането на името на друг комплект замества този комплект</string>
     <string name="selection_set_delete_title">Изтриване на комплект?</string>
     <string name="selection_set_delete_message">Това ще изтрие окончателно комплекта %s</string>
     <string name="copy_selection_empty">Няма други запазени селекции за копиране</string>
@@ -1304,6 +1329,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">Дата (най-нова към най-стара)</string>
     <string name="file_picker_sort_date_asc">Дата (най-стара към най-нова)</string>
     <string name="file_picker_show_hidden_files">Покажи скрити файлове</string>
+    <string name="file_picker_new_folder">Нова папка</string>
+    <string name="file_picker_folder_name">Име на папка</string>
+    <string name="file_picker_new_folder_description">Създадена в %1$s и отворена веднага</string>
+    <string name="file_picker_folder_name_taken">Вече съществува обект с това име тук</string>
+    <string name="file_picker_folder_name_invalid">Името на папката не може да съдържа \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Папката не можа да бъде създадена</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
     <string name="settings_system_manager_description">Отворен проект с изходен код за модерен, оптимизиран процес на пачване на популярни Android приложения, поддържан от обратна връзка и приноси от общността</string>
@@ -1347,6 +1378,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">Още за Morphe и получаване на помощ</string>
     <string name="settings_section_local_files">Файлове</string>
     <string name="settings_section_backup">Архив</string>
+    <string name="settings_section_import_export">Импорт и износ</string>
     <string name="settings_search">Търсене на настройки</string>
     <string name="yes">Да</string>
     <string name="no">Не</string>
@@ -1365,6 +1397,7 @@ morphe_header_custom_dark.png
     <string name="retry">Повтори</string>
     <string name="refresh">Опресни</string>
     <string name="add">Добави</string>
+    <string name="create">Създай</string>
     <string name="close">Затвори</string>
     <string name="back">Назад</string>
     <string name="next">Напред</string>

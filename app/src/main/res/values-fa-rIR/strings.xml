@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">هنوز پچ نشده </string>
     <string name="home_unpatched_version_installed">نسخهٔ پچ‌نشده نصب شده است</string>
     <string name="home_unpatched_badge">پچ‌نشده</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">تلویزیون</string>
+    <string name="form_factor_automotive">خودرویی</string>
     <string name="home_no_patches_available">هیچ پچی در دسترس نیست</string>
     <string name="home_app_hide_title">این برنامه پنهان شود؟ </string>
     <string name="home_more_apps_title">برنامه‌های بیشتر</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">دستهٔ جدید</string>
     <string name="home_category_rename_title">تغییر نام دسته</string>
     <string name="home_category_name">نام دسته</string>
+    <string name="home_category_name_description">صفحه اصلی، برنامه‌های خود را تحت این نام گروه‌بندی می‌کند</string>
     <string name="home_category_move_to">انتقال به دسته</string>
     <string name="home_category_move_selected_title">انتقال برنامه‌های انتخاب‌شده</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">گزارش مشکل</string>
     <string name="sources_management_failed_to_open_url">بازکردن نشانی اینترنتی ناموفق بود</string>
     <string name="sources_apps">برنامه‌ها</string>
-    <string name="sources_apps_description">برنامه‌های فعال از این منبع دریافت می‌شوند. برای حذف یا بازگرداندن یک برنامه، روی آن ضربه بزنید. یک برنامه زمانی که دیگر توسط هیچ منبعی ارائه نشود، از صفحه اصلی خارج می‌شود، مگر اینکه شما آن را پچ کرده باشید</string>
+    <string name="sources_apps_description">برنامه‌های علامت‌گذاری شده از این منبع می‌آیند. برای حذف یا بازگرداندن یک برنامه روی آن ضربه بزنید و برای مشاهده پچ‌های آن، آن را بکشید. برنامه‌ای که منبعی نداشته باشد از صفحه اصلی حذف می‌شود، مگر اینکه آن را پچ کرده باشید</string>
     <string name="sources_apps_brought">ارائه‌شده توسط این منبع</string>
     <string name="sources_apps_left_out">کنار گذاشته‌شده از این منبع</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">پنهان‌کردن گذرواژه</string>
     <string name="settings_system_morphe_settings">تنظیمات Morphe</string>
     <string name="settings_system_import_manager_settings_description">از تنظیمات Morphe پشتیبان می‌گیرد و آن‌ها را بازیابی می‌کند</string>
+    <string name="settings_system_export_manager_settings_title">خروجی گرفتن از تنظیمات Morphe</string>
+    <string name="settings_system_export_manager_settings_description">تنظیماتی را که انتخاب می‌کنید در یک فایل ذخیره می‌کند</string>
+    <string name="settings_system_import_manager_settings_file_description">تنظیمات را از یک فایل پشتیبان بازیابی می‌کند</string>
+    <string name="settings_system_auto_backup">پشتیبان‌گیری خودکار</string>
+    <string name="settings_system_auto_backup_switch">پشتیبان‌گیری خودکار</string>
+    <string name="settings_system_auto_backup_now">هم‌اکنون پشتیبان‌گیری کن</string>
+    <string name="settings_system_auto_backup_saved">پشتیبان‌گیری ذخیره شد</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe پس از هر کپی، حداقل این مدت زمان را پیش از ایجاد کپی بعدی منتظر می‌ماند</string>
+    <string name="settings_system_auto_backup_description">تنظیمات Morphe شما را در پوشه‌ای که انتخاب می‌کنید ذخیره می‌کند</string>
+    <string name="settings_system_auto_backup_last">آخرین پشتیبان‌گیری: %s</string>
+    <string name="settings_system_auto_backup_folder">پوشه</string>
+    <string name="settings_system_auto_backup_folder_name">پشتیبان‌های Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">استفاده از این پوشه امکان‌پذیر نبود: %s</string>
+    <string name="settings_system_auto_backup_interval">بازه زمانی پشتیبان‌گیری</string>
+    <string name="settings_system_auto_backup_signing_key">شامل کردن کلید امضا</string>
+    <string name="settings_system_auto_backup_signing_key_description">کلیدی که اپلیکیشن‌های اصلاح‌شده را امضا می‌کند در کنار تنظیمات ذخیره می‌کند</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">پشتیبان‌گیری از کلید امضا؟</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">هر کسی که به این فایل دسترسی داشته باشد می‌تواند به‌روزرسانی‌هایی را امضا کند که روی اپلیکیشن‌های اصلاح‌شده شما نصب می‌شوند. پوشه را خصوصی نگه دارید و آن را فقط با دستگاه‌های خودتان به اشتراک بگذارید</string>
+    <string name="settings_system_auto_backup_footer">وقتی پس از تغییر چیزی از Morphe خارج می‌شوید، یک نسخه ذخیره می‌شود. جدیدترین %s نگه داشته می‌شوند</string>
+    <string name="settings_system_auto_backup_failed">آخرین نسخه پشتیبان ذخیره نشد. پوشه را دوباره انتخاب کنید</string>
     <string name="settings_system_import_manager_settings_fail">واردکردن تنظیمات Morphe ناموفق بود: %s</string>
     <string name="settings_system_import_manager_settings_success">تنظیمات Morphe وارد شد</string>
     <string name="settings_system_import_manager_settings_mode_title">واردکردن تنظیمات Morphe</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s حذف شد</string>
     <string name="selection_set_renamed">نام به %s تغییر یافت</string>
     <string name="selection_set_rename_title">تغییر نام مجموعه</string>
+    <string name="selection_set_rename_description">انتخاب نام یکی دیگر از مجموعه‌ها، جایگزین آن مجموعه می‌شود</string>
     <string name="selection_set_delete_title">حذف مجموعه؟</string>
     <string name="selection_set_delete_message">این کار مجموعه %s را برای همیشه حذف می‌کند</string>
     <string name="copy_selection_empty">انتخاب ذخیره‌شدهٔ دیگری برای کپی وجود ندارد</string>
@@ -1303,6 +1328,12 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_sort_date_desc">تاریخ (جدیدترین ابتدا)</string>
     <string name="file_picker_sort_date_asc">تاریخ (قدیمی‌ترین ابتدا)</string>
     <string name="file_picker_show_hidden_files">نمایش فایل‌های مخفی</string>
+    <string name="file_picker_new_folder">پوشه جدید</string>
+    <string name="file_picker_folder_name">نام پوشه</string>
+    <string name="file_picker_new_folder_description">در %1$s ایجاد و بلافاصله باز شود</string>
+    <string name="file_picker_folder_name_taken">موردی با این نام از قبل در اینجا وجود دارد</string>
+    <string name="file_picker_folder_name_invalid">نام پوشه نمی‌تواند شامل این کاراکترها باشد: \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">پوشه ایجاد نشد</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">درباره</string>
     <string name="settings_system_manager_description">پروژه‌ای متن‌باز برای پچ‌کردن مدرن و سادهٔ برنامه‌های محبوب Android که با بازخورد و مشارکت جامعه پیش می‌رود</string>
@@ -1346,6 +1377,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="settings_section_about_summary">اطلاعات بیشتر درباره Morphe و دریافت راهنمایی</string>
     <string name="settings_section_local_files">فایل‌ها</string>
     <string name="settings_section_backup">پشتیبان‌گیری</string>
+    <string name="settings_section_import_export">واردکردن و خروجی‌گرفتن</string>
     <string name="settings_search">جست‌وجوی تنظیمات</string>
     <string name="yes">بله</string>
     <string name="no">خیر</string>
@@ -1364,6 +1396,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="retry">تلاش دوباره</string>
     <string name="refresh">تازه‌سازی</string>
     <string name="add">افزودن</string>
+    <string name="create">ایجاد</string>
     <string name="close">بستن</string>
     <string name="back">بازگشت</string>
     <string name="next">بعدی</string>

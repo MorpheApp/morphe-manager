@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Hindi pa na-patch</string>
     <string name="home_unpatched_version_installed">Naka-install ang hindi na-patch na bersyon</string>
     <string name="home_unpatched_badge">Hindi pa na-patch</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automotibo</string>
     <string name="home_no_patches_available">Walang patch na magagamit</string>
     <string name="home_app_hide_title">Itago ang aplikasyong ito?</string>
     <string name="home_more_apps_title">Higit pang mga aplikasyon</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Bagong kategorya</string>
     <string name="home_category_rename_title">Palitan ang pangalan ng kategorya</string>
     <string name="home_category_name">Pangalan ng kategorya</string>
+    <string name="home_category_name_description">Pinapangkat ng home screen ang mga app nito sa ilalim ng pangalang ito</string>
     <string name="home_category_move_to">Ilipat sa kategorya</string>
     <string name="home_category_move_selected_title">Ilipat ang mga napiling app</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Mag-ulat ng isyu</string>
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_apps">Mga app</string>
-    <string name="sources_apps_description">Ang mga napiling app ay nanggaling sa pinagmulan na ito. Pindutin ang isang app para iwasan ito o ibalik. Ang isang app ay aalis sa home screen kapag walang pinagmulan na magdadala dito, maliban na lang kung napatch mo ito</string>
+    <string name="sources_apps_description">Ang mga naka-check na app ay galing sa source na ito. I-tap ang app para alisin ito o ibalik, i-swipe ito para makita ang mga patch nito. Ang app na walang source ay aalis sa home screen, maliban kung ni-patch mo ito</string>
     <string name="sources_apps_brought">Dala ng source na ito</string>
     <string name="sources_apps_left_out">Hindi kasama sa source na ito</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Mga Detalye: %2$s"</string>
     <string name="settings_system_hide_password_field">Itago ang password</string>
     <string name="settings_system_morphe_settings">Mga setting ng Morphe</string>
     <string name="settings_system_import_manager_settings_description">Nagba-backup at nagre-restore ng iyong mga setting ng Morphe</string>
+    <string name="settings_system_export_manager_settings_title">I-export ang mga setting ng Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Ini-save ang mga setting na pinili mo sa isang file</string>
+    <string name="settings_system_import_manager_settings_file_description">Ibalik ang mga setting mula sa isang backup file</string>
+    <string name="settings_system_auto_backup">Awtomatikong backup</string>
+    <string name="settings_system_auto_backup_switch">Mag-back up nang awtomatiko</string>
+    <string name="settings_system_auto_backup_now">Mag-back up ngayon</string>
+    <string name="settings_system_auto_backup_saved">Na-save ang backup</string>
+    <string name="settings_system_auto_backup_interval_description">Maghihintay ang Morphe nang hindi bababa sa ganitong katagal pagkatapos ng isang kopya bago gumawa ng susunod</string>
+    <string name="settings_system_auto_backup_description">Ini-save ang iyong mga setting ng Morphe sa isang folder na pipiliin mo</string>
+    <string name="settings_system_auto_backup_last">Huling backup: %s</string>
+    <string name="settings_system_auto_backup_folder">Folder</string>
+    <string name="settings_system_auto_backup_folder_name">Mga backup ng Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Hindi magamit ang folder na ito: %s</string>
+    <string name="settings_system_auto_backup_interval">Prikwensiya ng backup</string>
+    <string name="settings_system_auto_backup_signing_key">Isama ang signing key</string>
+    <string name="settings_system_auto_backup_signing_key_description">Sinasave ang key na pumipirma sa mga patched app sa tabi ng mga setting</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">I-backup ang signing key?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Kahit sino na makakuha ng file na ito ay maaaring pumirma ng mga update na mai-iinstall sa ibabaw ng iyong mga patched app. Panatilihing pribado ang folder at ibahagi lamang ito sa iyong sariling mga device</string>
+    <string name="settings_system_auto_backup_footer">Isang kopya ang nai-save kapag iniwan mo ang Morphe pagkatapos magbago ng anuman. Ang mga pinakabagong %s ay pinapanatili</string>
+    <string name="settings_system_auto_backup_failed">Hindi na-save ang huling backup. Pumili muli ng folder</string>
     <string name="settings_system_import_manager_settings_fail">Nabigong ma-import ang mga setting ng Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Na-import ang mga setting ng Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">I-import ang mga setting ng Morphe</string>
@@ -1265,6 +1289,7 @@ Mga Detalye: %2$s"</string>
     <string name="selection_set_deleted">Binura ang %s</string>
     <string name="selection_set_renamed">Pinangalanang muli bilang %s</string>
     <string name="selection_set_rename_title">Palitan ang pangalan ng set</string>
+    <string name="selection_set_rename_description">Ang paggamit ng pangalan ng ibang set ay papalitan ang set na iyon</string>
     <string name="selection_set_delete_title">Burahin ang set?</string>
     <string name="selection_set_delete_message">Permanenteng buburahin nito ang set na %s</string>
     <string name="copy_selection_empty">Walang iba pang mga pagpiling naka-save para kopyahin</string>
@@ -1301,6 +1326,12 @@ Mga Detalye: %2$s"</string>
     <string name="file_picker_sort_date_desc">Petsa (pinakabago muna)</string>
     <string name="file_picker_sort_date_asc">Petsa (pinakaluma muna)</string>
     <string name="file_picker_show_hidden_files">Ipakita ang mga nakatagong file</string>
+    <string name="file_picker_new_folder">Bagong folder</string>
+    <string name="file_picker_folder_name">Pangalan ng folder</string>
+    <string name="file_picker_new_folder_description">Ginawa sa %1$s at binuksan agad</string>
+    <string name="file_picker_folder_name_taken">Mayroon nang bagay na may ganitong pangalan dito</string>
+    <string name="file_picker_folder_name_invalid">Ang pangalan ng folder ay hindi maaaring maglaman ng \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Hindi magawang gumawa ng folder</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tungkol sa</string>
     <string name="settings_system_manager_description">Isang open-source na proyekto para sa moderno, pinasimpleng pag-aayos ng mga sikat na app ng Android, na pinapatakbo ng feedback at kontribusyon ng komunidad</string>
@@ -1344,6 +1375,7 @@ Mga Detalye: %2$s"</string>
     <string name="settings_section_about_summary">Dagdag tungkol sa Morphe at pagkuha ng tulong</string>
     <string name="settings_section_local_files">Mga file</string>
     <string name="settings_section_backup">Mag-backup</string>
+    <string name="settings_section_import_export">I-import at i-export</string>
     <string name="settings_search">Maghanap sa mga pagpipilian</string>
     <string name="yes">Oo</string>
     <string name="no">Hindi</string>
@@ -1362,6 +1394,7 @@ Mga Detalye: %2$s"</string>
     <string name="retry">Subukan muli</string>
     <string name="refresh">I-refresh</string>
     <string name="add">Idagdag</string>
+    <string name="create">Gumawa</string>
     <string name="close">Isara</string>
     <string name="back">Bumalik</string>
     <string name="next">Susunod</string>

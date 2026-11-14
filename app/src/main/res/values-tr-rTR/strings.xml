@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Henüz yamalanmadı</string>
     <string name="home_unpatched_version_installed">Yamalanmamış sürüm yüklendi</string>
     <string name="home_unpatched_badge">Yamalanmadı</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Otomotiv</string>
     <string name="home_no_patches_available">Yama mevcut değil</string>
     <string name="home_app_hide_title">Uygulama gizlensin mi?</string>
     <string name="home_more_apps_title">Daha fazla uygulama</string>
@@ -38,7 +41,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Bu, %s\'nin yeni bir versiyonudur. Güncellemek ister misiniz?</string>
     <string name="mpp_import_unreadable">Bu dosya okunamıyor</string>
-    <string name="incoming_file_not_patch_source">Bu dosya bir yama kaynağı değildir</string>
+    <string name="incoming_file_not_patch_source">Bu dosya bir yama kaynağı değil</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe güncellemesi mevcut</string>
     <string name="home_update_available_subtitle">Yeni sürüm yüklenmeye hazır</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Yeni kategori</string>
     <string name="home_category_rename_title">Kategoriyi yeniden adlandır</string>
     <string name="home_category_name">Kategori adı</string>
+    <string name="home_category_name_description">Ana ekran uygulamaları bu isim altında gruplandırır</string>
     <string name="home_category_move_to">Kategoriye taşı</string>
     <string name="home_category_move_selected_title">Seçili uygulamaları taşı</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Sorun bildir</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_apps">Uygulamalar</string>
-    <string name="sources_apps_description">İşaretli uygulamalar bu kaynaktan gelir. Bir uygulamayı hariç tutmak veya geri getirmek için üzerine dokunun. Yama uygulamadığınız sürece, hiçbir kaynak tarafından sağlanmayan bir uygulama ana ekrandan kaldırılır.</string>
+    <string name="sources_apps_description">İşaretli uygulamalar bu kaynaktan gelir. Bir uygulamayı hariç tutmak veya geri getirmek için üzerine dokunun, yamalarını görmek için kaydırın. Yama uygulamadığınız sürece, hiçbir kaynak tarafından sağlanmayan bir uygulama ana ekrandan kaldırılır</string>
     <string name="sources_apps_brought">Bu kaynağın getirdiği</string>
     <string name="sources_apps_left_out">Bu kaynaktan hariç tutulanlar</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_system_hide_password_field">Parolayı gizle</string>
     <string name="settings_system_morphe_settings">Morphe ayarları</string>
     <string name="settings_system_import_manager_settings_description">Morphe ayarlarınızı yedekler ve geri yükler</string>
+    <string name="settings_system_export_manager_settings_title">Morphe ayarlarını dışa aktar</string>
+    <string name="settings_system_export_manager_settings_description">Seçtiğiniz ayarları bir dosyaya kaydeder</string>
+    <string name="settings_system_import_manager_settings_file_description">Ayarları bir yedek dosyasından geri yükler</string>
+    <string name="settings_system_auto_backup">Otomatik yedekleme</string>
+    <string name="settings_system_auto_backup_switch">Otomatik olarak yedekle</string>
+    <string name="settings_system_auto_backup_now">Şimdi yedekle</string>
+    <string name="settings_system_auto_backup_saved">Yedek kaydedildi</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe, bir sonraki yedeği almadan önce bir kopyalamadan sonra en az bu kadar bekler</string>
+    <string name="settings_system_auto_backup_description">Morphe ayarlarınızı seçtiğiniz bir klasöre kaydeder</string>
+    <string name="settings_system_auto_backup_last">Son yedekleme: %s</string>
+    <string name="settings_system_auto_backup_folder">Klasör</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe yedekleri</string>
+    <string name="settings_system_auto_backup_folder_failed">Bu klasör kullanılamadı: %s</string>
+    <string name="settings_system_auto_backup_interval">Yedekleme sıklığı</string>
+    <string name="settings_system_auto_backup_signing_key">İmza anahtarını dahil et</string>
+    <string name="settings_system_auto_backup_signing_key_description">Yamanmış uygulamaları imzalayan anahtarı, ayarların yanına kaydeder</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">İmza anahtarı yedeklensin mi?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bu dosyayı ele geçiren herkes, yamanmış uygulamalarınızın üzerine yüklenecek güncellemeleri imzalayabilir. Klasörü gizli tutun ve yalnızca kendi cihazlarınızla paylaşın</string>
+    <string name="settings_system_auto_backup_footer">Bir şeyi değiştirdikten sonra Morphe\'den ayrıldığınızda bir kopya kaydedilir. En yeni %s tutulur</string>
+    <string name="settings_system_auto_backup_failed">Son yedekleme kaydedilemedi. Klasörü tekrar seçin</string>
     <string name="settings_system_import_manager_settings_fail">Morphe ayarları içe aktarılamadı: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe ayarları içe aktarıldı</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe ayarlarını içe aktar</string>
@@ -1265,6 +1289,7 @@ Ayrıntılar: %2$s"</string>
     <string name="selection_set_deleted">%s silindi</string>
     <string name="selection_set_renamed">%s olarak yeniden adlandırıldı</string>
     <string name="selection_set_rename_title">Seti yeniden adlandır</string>
+    <string name="selection_set_rename_description">Başka bir setin adını almak, o seti değiştirir</string>
     <string name="selection_set_delete_title">Set silinsin mi?</string>
     <string name="selection_set_delete_message">Bu %s setini kalıcı olarak siler</string>
     <string name="copy_selection_empty">Kopyalanacak başka kaydedilmiş seçim yok</string>
@@ -1301,6 +1326,12 @@ Ayrıntılar: %2$s"</string>
     <string name="file_picker_sort_date_desc">Tarih (en yenisi önce)</string>
     <string name="file_picker_sort_date_asc">Tarih (en eskisi önce)</string>
     <string name="file_picker_show_hidden_files">Gizli dosyaları göster</string>
+    <string name="file_picker_new_folder">Yeni klasör</string>
+    <string name="file_picker_folder_name">Klasör adı</string>
+    <string name="file_picker_new_folder_description">%1$s içinde oluşturulur ve hemen açılır</string>
+    <string name="file_picker_folder_name_taken">Bu isimde bir öğe zaten burada mevcut</string>
+    <string name="file_picker_folder_name_invalid">Bir klasör adı \" * / : &lt; &gt; ? \\ | içeremez</string>
+    <string name="file_picker_new_folder_failed">Klasör oluşturulamadı</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
     <string name="settings_system_manager_description">Popüler Android uygulamalarının modern ve verimli şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen açık kaynaklı bir proje</string>
@@ -1344,6 +1375,7 @@ Ayrıntılar: %2$s"</string>
     <string name="settings_section_about_summary">Morphe hakkında daha fazla bilgi ve yardım alma</string>
     <string name="settings_section_local_files">Dosyalar</string>
     <string name="settings_section_backup">Yedekleme</string>
+    <string name="settings_section_import_export">İçe ve dışa aktar</string>
     <string name="settings_search">Ayarları ara</string>
     <string name="yes">Evet</string>
     <string name="no">Hayır</string>
@@ -1362,6 +1394,7 @@ Ayrıntılar: %2$s"</string>
     <string name="retry">Tekrar dene</string>
     <string name="refresh">Yenile</string>
     <string name="add">Ekle</string>
+    <string name="create">Oluştur</string>
     <string name="close">Kapat</string>
     <string name="back">Geri</string>
     <string name="next">İleri</string>

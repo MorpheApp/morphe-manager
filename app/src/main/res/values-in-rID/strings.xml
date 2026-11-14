@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Belum ditambal</string>
     <string name="home_unpatched_version_installed">Versi tanpa tambalan terpasang</string>
     <string name="home_unpatched_badge">Tidak ditambal</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Otomotif</string>
     <string name="home_no_patches_available">Tidak ada tambalan yang tersedia</string>
     <string name="home_app_hide_title">Sembunyikan aplikasi ini?</string>
     <string name="home_more_apps_title">Lebih banyak aplikasi</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Kategori baru</string>
     <string name="home_category_rename_title">Ganti nama kategori</string>
     <string name="home_category_name">Nama kategori</string>
+    <string name="home_category_name_description">Layar beranda mengelompokkan aplikasinya di bawah nama ini</string>
     <string name="home_category_move_to">Pindahkan ke kategori</string>
     <string name="home_category_move_selected_title">Pindahkan aplikasi terpilih</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Laporkan masalah</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
-    <string name="sources_apps_description">Aplikasi yang dicentang berasal dari sumber ini. Ketuk aplikasi untuk mengeluarkannya atau mengembalikannya. Aplikasi akan hilang dari layar beranda begitu tidak ada sumber yang memasukkannya, kecuali jika Anda telah menambalnya</string>
+    <string name="sources_apps_description">Aplikasi yang dicentang berasal dari sumber ini. Ketuk aplikasi untuk mengeluarkannya atau mengembalikannya, geser untuk melihat patch-nya. Aplikasi tanpa sumber akan meninggalkan layar utama, kecuali jika Anda telah melakukan patch padanya</string>
     <string name="sources_apps_brought">Dibawa oleh sumber ini</string>
     <string name="sources_apps_left_out">Dikecualikan dari sumber ini</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Rincian: %2$s"</string>
     <string name="settings_system_hide_password_field">Sembunyikan kata sandi</string>
     <string name="settings_system_morphe_settings">Setelan Morphe</string>
     <string name="settings_system_import_manager_settings_description">Mencadangkan dan mengembalikan pengaturan Morphe Anda</string>
+    <string name="settings_system_export_manager_settings_title">Ekspor setelan Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Menyimpan pengaturan yang Anda pilih ke berkas</string>
+    <string name="settings_system_import_manager_settings_file_description">Memulihkan pengaturan dari berkas cadangan</string>
+    <string name="settings_system_auto_backup">Cadangan otomatis</string>
+    <string name="settings_system_auto_backup_switch">Cadangkan secara otomatis</string>
+    <string name="settings_system_auto_backup_now">Cadangkan sekarang</string>
+    <string name="settings_system_auto_backup_saved">Cadangan tersimpan</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe menunggu setidaknya selama ini setelah penyalinan sebelum membuat yang berikutnya</string>
+    <string name="settings_system_auto_backup_description">Menyimpan pengaturan Morphe Anda ke folder yang Anda pilih</string>
+    <string name="settings_system_auto_backup_last">Cadangan terakhir: %s</string>
+    <string name="settings_system_auto_backup_folder">Folder</string>
+    <string name="settings_system_auto_backup_folder_name">Cadangan Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Tidak dapat menggunakan folder ini: %s</string>
+    <string name="settings_system_auto_backup_interval">Frekuensi cadangan</string>
+    <string name="settings_system_auto_backup_signing_key">Sertakan kunci penandatanganan</string>
+    <string name="settings_system_auto_backup_signing_key_description">Menyimpan kunci yang menandatangani aplikasi yang telah dipatch di samping pengaturan</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Cadangkan kunci penandatanganan?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Siapa pun yang mendapatkan file ini dapat menandatangani pembaruan yang menginstal di atas aplikasi yang telah Anda patch. Jaga kerahasiaan folder dan bagikan hanya dengan perangkat Anda sendiri</string>
+    <string name="settings_system_auto_backup_footer">Salinan disimpan saat Anda meninggalkan Morphe setelah mengubah sesuatu. %s terbaru akan disimpan</string>
+    <string name="settings_system_auto_backup_failed">Cadangan terakhir tidak dapat disimpan. Pilih foldernya lagi</string>
     <string name="settings_system_import_manager_settings_fail">Gagal mengimpor pengaturan Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Setelan Morphe diimpor</string>
     <string name="settings_system_import_manager_settings_mode_title">Impor setelan Morphe</string>
@@ -1265,6 +1289,7 @@ Rincian: %2$s"</string>
     <string name="selection_set_deleted">%s dihapus</string>
     <string name="selection_set_renamed">Diubah namanya menjadi %s</string>
     <string name="selection_set_rename_title">Ubah nama set</string>
+    <string name="selection_set_rename_description">Menggunakan nama dari set lain akan menggantikan set tersebut</string>
     <string name="selection_set_delete_title">Hapus set?</string>
     <string name="selection_set_delete_message">Ini akan menghapus set %s secara permanen</string>
     <string name="copy_selection_empty">Tidak ada pilihan tersimpan lainnya untuk disalin</string>
@@ -1301,6 +1326,12 @@ Rincian: %2$s"</string>
     <string name="file_picker_sort_date_desc">Tanggal (terbaru dahulu)</string>
     <string name="file_picker_sort_date_asc">Tanggal (terlama dahulu)</string>
     <string name="file_picker_show_hidden_files">Tampilkan berkas tersembunyi</string>
+    <string name="file_picker_new_folder">Folder baru</string>
+    <string name="file_picker_folder_name">Nama folder</string>
+    <string name="file_picker_new_folder_description">Dibuat di %1$s dan langsung dibuka</string>
+    <string name="file_picker_folder_name_taken">Sesuatu dengan nama ini sudah ada di sini</string>
+    <string name="file_picker_folder_name_invalid">Nama folder tidak boleh mengandung \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Tidak dapat membuat folder</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
     <string name="settings_system_manager_description">Sebuah proyek sumber terbuka untuk penambalan yang modern dan efisien pada aplikasi Android populer, dikembangkan berdasarkan masukan dan kontribusi dari komunitas</string>
@@ -1344,6 +1375,7 @@ Rincian: %2$s"</string>
     <string name="settings_section_about_summary">Selengkapnya tentang Morphe dan cara mendapatkan bantuan</string>
     <string name="settings_section_local_files">File</string>
     <string name="settings_section_backup">Cadangan</string>
+    <string name="settings_section_import_export">Impor dan ekspor</string>
     <string name="settings_search">Cari setelan</string>
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
@@ -1362,6 +1394,7 @@ Rincian: %2$s"</string>
     <string name="retry">Coba lagi</string>
     <string name="refresh">Segarkan</string>
     <string name="add">Tambah</string>
+    <string name="create">Buat</string>
     <string name="close">Tutup</string>
     <string name="back">Kembali</string>
     <string name="next">Berikutnya</string>

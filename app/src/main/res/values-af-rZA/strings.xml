@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Nog nie verander nie</string>
     <string name="home_unpatched_version_installed">Ongepleisterde weergawe geïnstalleer</string>
     <string name="home_unpatched_badge">Nie gepleister nie</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Outomobiel</string>
     <string name="home_no_patches_available">Geen veranderinge beskikbaar</string>
     <string name="home_app_hide_title">Versteek hierdie program?</string>
     <string name="home_more_apps_title">Meer programme</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nuwe kategorie</string>
     <string name="home_category_rename_title">Hernoem kategorie</string>
     <string name="home_category_name">Kategorienaam</string>
+    <string name="home_category_name_description">Die tuisskerm groepeer sy toepassings onder hierdie naam</string>
     <string name="home_category_move_to">Verskuif na kategorie</string>
     <string name="home_category_move_selected_title">Verskuif gekose toepassings</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Rapporteer \'n probleem</string>
     <string name="sources_management_failed_to_open_url">Mislukking om URL oop te maak</string>
     <string name="sources_apps">Toepassings</string>
-    <string name="sources_apps_description">Aangetekende apps kom van hierdie bron. Tik op \'n app om dit uit te los of terug te bring. \'n App verdwyn van die tuisskerm sodra geen bron dit meer bring nie, tensy jy dit gepatch het</string>
+    <string name="sources_apps_description">Aangetekende apps kom van hierdie bron. Tik op \'n app om dit uit te los of terug te bring, vee dit om sy patches te sien. \'n App verdwyn van die tuisskerm sodra geen bron dit bring nie, tensy jy dit gepatch het</string>
     <string name="sources_apps_brought">Deur hierdie bron gebring</string>
     <string name="sources_apps_left_out">Uitgelaat uit hierdie bron</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Besonderhede: %2$s"</string>
     <string name="settings_system_hide_password_field">Verberg wagwoord</string>
     <string name="settings_system_morphe_settings">Morphe-instellings</string>
     <string name="settings_system_import_manager_settings_description">Maak \'n rugsteun van en herstel jou Morphe-instellings</string>
+    <string name="settings_system_export_manager_settings_title">Voer Morphe-instellings uit</string>
+    <string name="settings_system_export_manager_settings_description">Stoor die instellings wat jy kies in \'n lêer</string>
+    <string name="settings_system_import_manager_settings_file_description">Herstel instellings vanaf \'n rugsteunlêer</string>
+    <string name="settings_system_auto_backup">Outomatiese rugsteun</string>
+    <string name="settings_system_auto_backup_switch">Rugsteun outomaties</string>
+    <string name="settings_system_auto_backup_now">Rugsteun nou</string>
+    <string name="settings_system_auto_backup_saved">Rugsteun gestoor</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe wag ten minste so lank na \'n kopie voordat die volgende een gemaak word</string>
+    <string name="settings_system_auto_backup_description">Stoor jou Morphe-instellings in \'n gids wat jy kies</string>
+    <string name="settings_system_auto_backup_last">Laaste rugsteun: %s</string>
+    <string name="settings_system_auto_backup_folder">Gids</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe-rugsteunings</string>
+    <string name="settings_system_auto_backup_folder_failed">Kon nie hierdie gids gebruik nie: %s</string>
+    <string name="settings_system_auto_backup_interval">Rugsteunfrekwensie</string>
+    <string name="settings_system_auto_backup_signing_key">Sluit ondertekeningsleutel in</string>
+    <string name="settings_system_auto_backup_signing_key_description">Stoor die sleutel wat gepatchte toepassings teken langs die instellings</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Rugsteun die ondertekeningsleutel?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Enigiemand wat hierdie lêer kry, kan opdaterings teken wat oor jou gepatchte toepassings geïnstalleer word. Hou die gids privaat en deel dit slegs met jou eie toestelle</string>
+    <string name="settings_system_auto_backup_footer">\'n Kopie word gestoor wanneer jy Morphe verlaat nadat jy iets verander het. Die nuutste %s word gehou</string>
+    <string name="settings_system_auto_backup_failed">Die laaste rugsteun kon nie gestoor word nie. Kies die gids weer</string>
     <string name="settings_system_import_manager_settings_fail">Kon Morphe-instellings nie importeer nie: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-instellings geïmporteer</string>
     <string name="settings_system_import_manager_settings_mode_title">Importeer Morphe-instellings</string>
@@ -1265,6 +1289,7 @@ Besonderhede: %2$s"</string>
     <string name="selection_set_deleted">%s is geskrap</string>
     <string name="selection_set_renamed">Hernoem na %s</string>
     <string name="selection_set_rename_title">Hernoem stel</string>
+    <string name="selection_set_rename_description">Om die naam van \'n ander stel oor te neem, vervang daardie stel</string>
     <string name="selection_set_delete_title">Skrap stel?</string>
     <string name="selection_set_delete_message">Dit vee die stel %s permanent uit</string>
     <string name="copy_selection_empty">Geen ander gestoorde seleksies om van te kopieer nie</string>
@@ -1301,6 +1326,12 @@ Besonderhede: %2$s"</string>
     <string name="file_picker_sort_date_desc">Datum (nuutste eerst)</string>
     <string name="file_picker_sort_date_asc">Datum (oudste eerst)</string>
     <string name="file_picker_show_hidden_files">Wys versteekte lêers</string>
+    <string name="file_picker_new_folder">Nuwe vouer</string>
+    <string name="file_picker_folder_name">Vouernaam</string>
+    <string name="file_picker_new_folder_description">Geskep in %1$s en dadelik oopgemaak</string>
+    <string name="file_picker_folder_name_taken">Iets met hierdie naam is reeds hier</string>
+    <string name="file_picker_folder_name_invalid">\'n Vouernaam kan nie \" * / : &lt; &gt; ? \\ | bevat nie</string>
+    <string name="file_picker_new_folder_failed">Kon nie die vouer skep nie</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Oor</string>
     <string name="settings_system_manager_description">\'n Openbron-projek vir moderne, gestroomlijnde pleistering van gewilde Android-toepassings, gedryf deur gemeenskapsterugvoer en bydraes</string>
@@ -1344,6 +1375,7 @@ Besonderhede: %2$s"</string>
     <string name="settings_section_about_summary">Meer oor Morphe en hoe om hulp te kry</string>
     <string name="settings_section_local_files">Lêers</string>
     <string name="settings_section_backup">Rugsteun</string>
+    <string name="settings_section_import_export">Invoer en uitvoer</string>
     <string name="settings_search">Soek instellings</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
@@ -1362,6 +1394,7 @@ Besonderhede: %2$s"</string>
     <string name="retry">Probeer weer</string>
     <string name="refresh">Herlaai</string>
     <string name="add">Voeg by</string>
+    <string name="create">Skep</string>
     <string name="close">Sluit</string>
     <string name="back">Terug</string>
     <string name="next">Volgende</string>

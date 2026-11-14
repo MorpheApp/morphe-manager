@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">अजून सुधारणा केलेली नाही</string>
     <string name="home_unpatched_version_installed">अनपॅच केलेली आवृत्ती स्थापित</string>
     <string name="home_unpatched_badge">पॅच केलेले नाही</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">टीव्ही</string>
+    <string name="form_factor_automotive">ऑटोमोटिव</string>
     <string name="home_no_patches_available">सुधारणा उपलब्ध नाहीत</string>
     <string name="home_app_hide_title">हे ॲप लपवायचे का</string>
     <string name="home_more_apps_title">अधिक ॲप्स</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">नवीन श्रेणी</string>
     <string name="home_category_rename_title">श्रेणीचे नाव बदला</string>
     <string name="home_category_name">श्रेणीचे नाव</string>
+    <string name="home_category_name_description">होम स्क्रीन तिच्या ॲप्सना या नावाखाली गटबद्ध करते</string>
     <string name="home_category_move_to">श्रेणीत हलवा</string>
     <string name="home_category_move_selected_title">निवडलेले ॲप्स हलवा</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">समस्या नोंदवा</string>
     <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
     <string name="sources_apps">अॅप्स</string>
-    <string name="sources_apps_description">टिक केलेल्या ॲप्स या स्रोतातून येतात. एखादे ॲप वगळण्यासाठी किंवा पुन्हा समाविष्ट करण्यासाठी त्यावर टॅप करा. जेव्हा कोणतेही स्रोत ॲपला आणत नाही, तेव्हा ते होम स्क्रीनवरून निघून जाते, जोपर्यंत तुम्ही त्याला पॅच केलेले नसते</string>
+    <string name="sources_apps_description">टिक केलेले अॅप्स या स्त्रोताकडून येतात. एखादे अॅप वगळण्यासाठी किंवा पुन्हा समाविष्ट करण्यासाठी त्यावर टॅप करा, त्याचे पॅचेस पाहण्यासाठी ते स्वाइप करा. स्त्रोत नसलेले अॅप होम स्क्रीनवरून निघून जाते, जोपर्यंत तुम्ही त्याला पॅच केले नसेल</string>
     <string name="sources_apps_brought">या स्रोताने आणलेले</string>
     <string name="sources_apps_left_out">या स्रोतातून वगळलेले</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1165,6 +1169,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">पासवर्ड लपवा</string>
     <string name="settings_system_morphe_settings">Morphe सेटिंग्ज</string>
     <string name="settings_system_import_manager_settings_description">तुमच्या Morphe सेटिंग्जचा बॅकअप घेते आणि पुनर्संचयित करते</string>
+    <string name="settings_system_export_manager_settings_title">Morphe सेटिंग्ज निर्यात करा</string>
+    <string name="settings_system_export_manager_settings_description">तुम्ही निवडलेली सेटिंग्ज फाईलमध्ये सेव्ह करा</string>
+    <string name="settings_system_import_manager_settings_file_description">बॅकअप फाईलमधून सेटिंग्ज रिस्टोअर करा</string>
+    <string name="settings_system_auto_backup">स्वयंचलित बॅकअप</string>
+    <string name="settings_system_auto_backup_switch">स्वयंचलितपणे बॅकअप घ्या</string>
+    <string name="settings_system_auto_backup_now">आता बॅकअप घ्या</string>
+    <string name="settings_system_auto_backup_saved">बॅकअप सेव्ह झाला</string>
+    <string name="settings_system_auto_backup_interval_description">पुढचा बॅकअप घेण्यापूर्वी Morphe किमान इतका वेळ थांबते</string>
+    <string name="settings_system_auto_backup_description">तुमच्या Morphe सेटिंग्ज तुम्ही निवडलेल्या फोल्डरमध्ये सेव्ह करा</string>
+    <string name="settings_system_auto_backup_last">शेवटचा बॅकअप: %s</string>
+    <string name="settings_system_auto_backup_folder">फोल्डर</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe बॅकअप्स</string>
+    <string name="settings_system_auto_backup_folder_failed">हे फोल्डर वापरता आले नाही: %s</string>
+    <string name="settings_system_auto_backup_interval">बॅकअप वारंवारता</string>
+    <string name="settings_system_auto_backup_signing_key">साइनिंग की समाविष्ट करा</string>
+    <string name="settings_system_auto_backup_signing_key_description">सेटिंग्जसोबत पॅच केलेल्या ॲप्सना साइन करणारी की सेव्ह करते</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">साइनिंग कीचा बॅकअप घ्यायचा आहे?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">ज्या कोणाला ही फाईल मिळेल तो तुमच्या पॅच केलेल्या ॲप्सवर इंस्टॉल होणारे अपडेट्स साइन करू शकतो. हे फोल्डर खाजगी ठेवा आणि ते फक्त तुमच्या स्वतःच्या उपकरणांशी शेअर करा</string>
+    <string name="settings_system_auto_backup_footer">काही बदल केल्यानंतर तुम्ही Morphe सोडता तेव्हा एक प्रत जतन केली जाते. सर्वात नवीन %s ठेवले जातात</string>
+    <string name="settings_system_auto_backup_failed">शेवटचा बॅकअप सेव्ह करता आला नाही. पुन्हा फोल्डर निवडा</string>
     <string name="settings_system_import_manager_settings_fail">Morphe सेटिंग्ज आयात करण्यात अयशस्वी: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe सेटिंग्ज आयात केली</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe सेटिंग्ज आयात करा</string>
@@ -1264,6 +1288,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s हटवले</string>
     <string name="selection_set_renamed">%s असे नाव बदलले</string>
     <string name="selection_set_rename_title">सेटचे नाव बदला</string>
+    <string name="selection_set_rename_description">दुसऱ्या सेटचे नाव घेतल्यास तो सेट बदलला जाईल</string>
     <string name="selection_set_delete_title">सेट हटवायचा आहे?</string>
     <string name="selection_set_delete_message">हा %s सेट कायमचा हटवला जाईल</string>
     <string name="copy_selection_empty">कॉपी करण्यासाठी इतर कोणतीही जतन केलेली निवड नाही</string>
@@ -1300,6 +1325,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">दिनांक (नवीनतम प्रथम)</string>
     <string name="file_picker_sort_date_asc">दिनांक (जुने प्रथम)</string>
     <string name="file_picker_show_hidden_files">लपवलेल्या फाईल्स दाखवा</string>
+    <string name="file_picker_new_folder">नवीन फोल्डर</string>
+    <string name="file_picker_folder_name">फोल्डरचे नाव</string>
+    <string name="file_picker_new_folder_description">%1$s मध्ये तयार केले आणि लगेच उघडले</string>
+    <string name="file_picker_folder_name_taken">या नावाचे काहीतरी आधीपासूनच येथे आहे</string>
+    <string name="file_picker_folder_name_invalid">फोल्डरच्या नावात \" * / : &lt; &gt; ? \\ | असू शकत नाही</string>
+    <string name="file_picker_new_folder_failed">फोल्डर तयार करता आले नाही</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">बद्दल</string>
     <string name="settings_system_manager_description">हे लोकप्रिय Android ॲप्सच्या आधुनिक, सुव्यवस्थित पॅचिंगसाठी एक मुक्त-स्रोत प्रकल्प आहे, जो समुदाय अभिप्राय आणि योगदानातून चालतो.</string>
@@ -1343,6 +1374,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">Morphe बद्दल अधिक माहिती आणि मदत मिळवा</string>
     <string name="settings_section_local_files">फाईल्स</string>
     <string name="settings_section_backup">बॅकअप</string>
+    <string name="settings_section_import_export">इम्पोर्ट आणि एक्सपोर्ट</string>
     <string name="settings_search">सेटिंग्ज शोधा</string>
     <string name="yes">होय</string>
     <string name="no">नाही</string>
@@ -1361,6 +1393,7 @@ morphe_header_custom_dark.png
     <string name="retry">पुन्हा प्रयत्न करा</string>
     <string name="refresh">रिफ्रेश करा</string>
     <string name="add">जोडा</string>
+    <string name="create">तयार करा</string>
     <string name="close">बंद करा</string>
     <string name="back">मागे</string>
     <string name="next">पुढे</string>

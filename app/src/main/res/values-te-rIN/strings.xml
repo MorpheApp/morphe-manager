@@ -2,13 +2,53 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">ఇతర యాప్‌లు</string>
-    <string name="home_other_apps_action">ఇతర అప్లికేషన్‌లను ఎంచుకోండి</string>
+    <string name="home_other_apps_action">ఇతర అప్ ను ఎంచుకోండి</string>
+    <string name="home_not_patched_yet">ఇంకా ప్యాచ్ చేయలేదు </string>
+    <string name="home_unpatched_version_installed">ప్యాచ్ చేయని వెర్షన్ ఇన్స్టాలయ్యింది</string>
+    <string name="home_unpatched_badge">ప్యాచ్ చేయలే </string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="home_no_patches_available">ఏ ప్యాచ్లు లేవు </string>
+    <string name="home_app_hide_title">ఈ యాప్‌ని దాచలా?</string>
+    <string name="home_more_apps_title">మరిన్ని యాప్లు</string>
+    <string name="home_more_apps_hide_title">ఈ కార్డును దాచలా?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
+    <string name="home_more_apps_hide_message">మీరు దిన్ని మళ్ళీ ఎప్పుడైనా తిరిగి %1$s లో తెచ్చుకోయచు</string>
+    <string name="home_app_hide_message">ఈ యాప్ హోల్ స్క్రీన్ నుంచి దాచపడుతుంది.
+మీరు దాచిన యాప్లా నుంచి తిరిగితెచ్చుకోవచ్చు 
+లిస్ట్ కింది బట్టన్ ని ఉపయోగించి </string>
+    <string name="home_app_will_be_hidden">ఈ యాప్ దాచబడుతుంది</string>
+    <string name="home_app_hidden_named">%s దాచబడుతుంది</string>
+    <string name="home_app_shown_named">%s దాయలేదు </string>
+    <string name="home_app_no_hidden">ఏ యాపూ దాచలే </string>
+    <string name="home_app_hidden_apps_title">దాచిపెట్టిన అప్లు</string>
+    <string name="home_app_hidden_apps_hint">చూపడానికి నొక్కు</string>
+    <string name="home_apps_unhide_message">దాచిన యాప్లు హోంస్క్రీన్ పైకి వస్తాయి</string>
+    <string name="home_app_patch_sources_last">ప్రతి యాప్ ఒక్క మూలం మిగిలి ఉండాలి ప్యాచ్ చేయడానికి</string>
+    <string name="android_11_bug_dialog_title">Android 11 బగ్గు </string>
+    <string name="deep_link_add_source_title">మూలాన్ని జోడించు </string>
+    <string name="deep_link_add_source_message">మీరు Morpheకి ఈ ప్యాచ్ మూలాన్ని జోడించాలనుకుంటున్నారా? </string>
+    <string name="deep_link_add_source_warning">మీరు నమ్మే మూలాలనే జోడించండి </string>
     <!-- Shown under the app a link was opened for -->
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
     <!-- Asked when the link names an app of a source that is already added -->
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
+    <string name="mpp_import_update_message">ఇది %s కొత్త వెర్షన్. మీరు దిన్ని నవీకరించాలనుకుంకున్నారా?</string>
+    <string name="mpp_import_unreadable">ఈ ఫైల్ను చదవలేం</string>
+    <string name="incoming_file_not_patch_source">ఈ ఫైలు ఒక ప్యాచ్ మూలం కాదు</string>
     <!-- Home Screen - Update Notifications -->
+    <string name="home_update_available">Morphe అప్డేటు అందుబాటులోవుంది</string>
+    <string name="home_update_available_subtitle">కొత్త వెర్షను ఎక్కించడానికి సిద్ధంగుండి </string>
+    <string name="home_blocked_source_title">నిషేధించిన ప్యాచు మూలం గుర్తించబడింది</string>
+    <string name="home_blocked_source_subtitle">చూసి తీసేయడానికి నొక్కు</string>
+    <string name="home_metadata_errors_title">కొన్ని ప్యాచు మూలాలు అందుబాటులోలేవు</string>
+    <string name="home_metadata_errors_subtitle">మూలాలను సమీక్షించడానికి నొక్కు</string>
+    <string name="home_outdated_manager_title">Morphe పాతదైపోయింది</string>
+    <string name="home_outdated_manager_subtitle">కొన్ని ప్యాచు మూలాలకు కొత్త వెర్షను కావాలి</string>
+    <string name="home_held_back_title">ఒక ప్యాచు మూలం Morphe తో ఢీకొనుండి </string>
+    <string name="home_held_back_subtitle"> అప్మొదలవుతానికి దాన్ని వదిలేసారు. చూడడానికి నొక్కు</string>
+    <string name="home_source_updates_title">ప్యాచు అప్డేటు అందుబాటులోవుంది</string>
+    <string name="home_source_updates_subtitle">వీటిని దించడానికి నొక్కు</string>
+    <string name="home_app_sort_recently_patched">ఇటీవల బ్యాచ్ చేశారు</string>
     <!-- %s is the name of the category -->
     <!-- %s is the name of the category the apps fall back to -->
     <!-- Home Screen - Home Greetings -->
@@ -28,6 +68,7 @@
     <!-- Super late night greetings (0:00–4:59) -->
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
+    <string name="home_greeting_halloween_2">ఈ APKలలో దెయ్యలేవి లేవు, మేము చూసాము</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->

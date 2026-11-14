@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ei vielä muokattu</string>
     <string name="home_unpatched_version_installed">Korjaamaton versio asennettu</string>
     <string name="home_unpatched_badge">Ei muokattu</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Ajoneuvo</string>
     <string name="home_no_patches_available">Lisäosia ei ole saatavilla</string>
     <string name="home_app_hide_title">Piilota tämä sovellus?</string>
     <string name="home_more_apps_title">Lisää sovelluksia</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Uusi luokka</string>
     <string name="home_category_rename_title">Nimeä luokka uudelleen</string>
     <string name="home_category_name">Luokan nimi</string>
+    <string name="home_category_name_description">Aloitusnäyttö ryhmittelee sovelluksensa tämän nimen alle</string>
     <string name="home_category_move_to">Siirrä luokkaan</string>
     <string name="home_category_move_selected_title">Siirrä valitut sovellukset</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Ilmoita ongelmasta</string>
     <string name="sources_management_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
     <string name="sources_apps">Sovellukset</string>
-    <string name="sources_apps_description">Valitut sovellukset tulevat tästä lähteestä. Napauta sovellusta jättääksesi sen pois tai palauttaaksesi sen. Sovellus poistuu aloitusnäytöstä, kun mikään lähde ei tuo sitä, paitsi jos olet pitänyt sen paikattuna</string>
+    <string name="sources_apps_description">Valitut sovellukset tulevat tästä lähteestä. Napauta sovellusta jättääksesi sen pois tai palauttaaksesi sen, pyyhkäise nähdäksesi sen paikkaukset. Sovellus poistuu aloitusnäytöstä, kun mikään lähde ei tuo sitä, paitsi jos olet paikannut sen</string>
     <string name="sources_apps_brought">Tämän lähteen tuomat</string>
     <string name="sources_apps_left_out">Tästä lähteestä pois jätetyt</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_system_hide_password_field">Piilota salasana</string>
     <string name="settings_system_morphe_settings">Morphe-asetukset</string>
     <string name="settings_system_import_manager_settings_description">Varmuuskopioi ja palauta Morphen asetukset</string>
+    <string name="settings_system_export_manager_settings_title">Vie Morphen asetukset</string>
+    <string name="settings_system_export_manager_settings_description">Tallentaa valitsemasi asetukset tiedostoon</string>
+    <string name="settings_system_import_manager_settings_file_description">Palauttaa asetukset varmuuskopiotiedostosta</string>
+    <string name="settings_system_auto_backup">Automaattinen varmuuskopiointi</string>
+    <string name="settings_system_auto_backup_switch">Varmuuskopioi automaattisesti</string>
+    <string name="settings_system_auto_backup_now">Varmuuskopioi nyt</string>
+    <string name="settings_system_auto_backup_saved">Varmuuskopio tallennettu</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe odottaa vähintään tämän ajan kopioinnin jälkeen ennen seuraavaa kopiota</string>
+    <string name="settings_system_auto_backup_description">Tallentaa Morphe-asetuksesi valitsemaasi kansioon</string>
+    <string name="settings_system_auto_backup_last">Viimeisin varmuuskopio: %s</string>
+    <string name="settings_system_auto_backup_folder">Kansio</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe-varmuuskopiot</string>
+    <string name="settings_system_auto_backup_folder_failed">Tätä kansiota ei voitu käyttää: %s</string>
+    <string name="settings_system_auto_backup_interval">Varmuuskopiointitiheys</string>
+    <string name="settings_system_auto_backup_signing_key">Sisällytä allekirjoitusavain</string>
+    <string name="settings_system_auto_backup_signing_key_description">Tallentaa asetusten viereen avaimen, jolla muokatut sovellukset allekirjoitetaan</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Varmuuskopioidaanko allekirjoitusavain?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Kuka tahansa, joka saa tämän tiedoston, voi allekirjoittaa päivityksiä, jotka asennetaan muokattujen sovellustesi päälle. Pidä kansio yksityisenä ja jaa se vain omien laitteidesi kanssa</string>
+    <string name="settings_system_auto_backup_footer">Kopio tallennetaan, kun poistut Morphesta jotakin muutettuaasi. Uusimmat %s säilytetään</string>
+    <string name="settings_system_auto_backup_failed">Viimeisintä varmuuskopiota ei voitu tallentaa. Valitse kansio uudelleen</string>
     <string name="settings_system_import_manager_settings_fail">Morphen asetusten tuonti epäonnistui: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphen asetukset tuotu</string>
     <string name="settings_system_import_manager_settings_mode_title">Tuo Morphen asetukset</string>
@@ -1265,6 +1289,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="selection_set_deleted">%s poistettu</string>
     <string name="selection_set_renamed">Nimetty uudelleen nimelle %s</string>
     <string name="selection_set_rename_title">Nimeä setti uudelleen</string>
+    <string name="selection_set_rename_description">Toisen sarjan nimen käyttäminen korvaa kyseisen sarjan</string>
     <string name="selection_set_delete_title">Poistetaanko setti?</string>
     <string name="selection_set_delete_message">Tämä poistaa setin %s pysyvästi</string>
     <string name="copy_selection_empty">Ei muita tallennettuja valintoja kopioitavaksi</string>
@@ -1301,6 +1326,12 @@ Yksityiskohdat: %2$s"</string>
     <string name="file_picker_sort_date_desc">Päivämäärä (uusin ensin)</string>
     <string name="file_picker_sort_date_asc">Päivämäärä (vanhin ensin)</string>
     <string name="file_picker_show_hidden_files">Näytä piilotetut tiedostot</string>
+    <string name="file_picker_new_folder">Uusi kansio</string>
+    <string name="file_picker_folder_name">Kansion nimi</string>
+    <string name="file_picker_new_folder_description">Luodaan kohtaan %1$s ja avataan heti</string>
+    <string name="file_picker_folder_name_taken">Tällä nimellä on jo jotakin täällä</string>
+    <string name="file_picker_folder_name_invalid">Kansion nimi ei voi sisältää merkkejä \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Kansiota ei voitu luoda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
     <string name="settings_system_manager_description">Avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja suoraviivaiseen muokkaukseen, jota ohjaavat yhteisön palaute ja panokset</string>
@@ -1344,6 +1375,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="settings_section_about_summary">Lisätietoja Morpheestä ja ohjeiden hakemisesta</string>
     <string name="settings_section_local_files">Tiedostot</string>
     <string name="settings_section_backup">Varmuuskopio</string>
+    <string name="settings_section_import_export">Tuo ja vie</string>
     <string name="settings_search">Hae asetuksista</string>
     <string name="yes">Kyllä</string>
     <string name="no">Ei</string>
@@ -1362,6 +1394,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="retry">Yritä uudelleen</string>
     <string name="refresh">Päivitä</string>
     <string name="add">Lisää</string>
+    <string name="create">Luo</string>
     <string name="close">Sulje</string>
     <string name="back">Takaisin</string>
     <string name="next">Seuraava</string>

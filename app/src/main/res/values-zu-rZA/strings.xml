@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ayikashayelwa iphetshi</string>
     <string name="home_unpatched_version_installed">Kufakwe inguqulo engalungiswanga</string>
     <string name="home_unpatched_badge">Alulungiswanga</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">iTV</string>
+    <string name="form_factor_automotive">Izimoto</string>
     <string name="home_no_patches_available">Azikho izigaba ezitholakalayo</string>
     <string name="home_app_hide_title">Fihla lolu hlelo?</string>
     <string name="home_more_apps_title">Ezinye izinhlelo</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Uhlobo olusha</string>
     <string name="home_category_rename_title">Shintsha igama lohlobo</string>
     <string name="home_category_name">Igama lohlobo</string>
+    <string name="home_category_name_description">Isikrini sasekhaya sihlanganisa izinhlelo zaso phansi kwalo gama</string>
     <string name="home_category_move_to">Yisa ohlobo</string>
     <string name="home_category_move_selected_title">Yisa izinhlelo ezikhethiwe</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Bika inkinga</string>
     <string name="sources_management_failed_to_open_url">Kwephuthelwa ukuvula i-URL</string>
     <string name="sources_apps">Izinhlelo</string>
-    <string name="sources_apps_description">Izinhlelo ezikhethiwe zivela kulo mthombo. Thinta uhlelo ukuze ulukhiphe noma ulubuyise. Uhlelo luyashona esikrinini sasekhaya lapho kungekho mthombo oluletha, ngaphandle kokuba ululungise</string>
+    <string name="sources_apps_description">Izinhlelo ezikhethiwe zivela kuleli thuluzi. Thinta uhlelo ukuze ulukhiphe noma ulubuyisele, luswayize ukuze ubone ama-patches alo. Uhlelo olungenalo ithuluzi lushiya isikrini sasekhaya, ngaphandle kokuba ulupatche</string>
     <string name="sources_apps_brought">Kulethwe yilolu thombo</string>
     <string name="sources_apps_left_out">Kushiywe kuleli thombo</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Imininingwane: %2$s"</string>
     <string name="settings_system_hide_password_field">Fihla iphasiwudi</string>
     <string name="settings_system_morphe_settings">Izilungiselelo ze-Morphe</string>
     <string name="settings_system_import_manager_settings_description">Yenza i-backup futhi ubuyise izilungiselelo zakho ze-Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Thumela izilungiselelo zeMorphe ngaphandle</string>
+    <string name="settings_system_export_manager_settings_description">Ugcina izilungiselelo ozikhethile kufayela</string>
+    <string name="settings_system_import_manager_settings_file_description">Buyisela izilungiselelo kufayela lokugcina</string>
+    <string name="settings_system_auto_backup">Ukugcina ngokuzenzakalela</string>
+    <string name="settings_system_auto_backup_switch">Gcina ngokuzenzakalela</string>
+    <string name="settings_system_auto_backup_now">Gcina manje</string>
+    <string name="settings_system_auto_backup_saved">Ukugcina kusondelwe</string>
+    <string name="settings_system_auto_backup_interval_description">uMorphe ulinda okukungencane this long ngemva kokukopisha ngaphambi kokwenza okulandelayo</string>
+    <string name="settings_system_auto_backup_description">Ugcina izilungiselelo zakho zeMorphe kufolda ozikhethile</string>
+    <string name="settings_system_auto_backup_last">Ukugcina kokugcina: %s</string>
+    <string name="settings_system_auto_backup_folder">Ifolda</string>
+    <string name="settings_system_auto_backup_folder_name">Izikophi ze-Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Kukwazala ukusebenzisa le folder: %s</string>
+    <string name="settings_system_auto_backup_interval">Iphuzu lokubuyisela imininingwane</string>
+    <string name="settings_system_auto_backup_signing_key">Faka isikhiyela sokusayina</string>
+    <string name="settings_system_auto_backup_signing_key_description">Yondolo isikhiyela esisayina izinhlelo ezilungisiwe eceleni kwezilungiselelo</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Buyisela isikhiyela sokusayina?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Noma ubani othola le fayile angasayina izibuyekezo ezifakwayo ezinhlelweni zakho ezilungisiwe. Gcina le folder iyimfihlo futhi uyihlanganyele kuphela nezinto zakho</string>
+    <string name="settings_system_auto_backup_footer">Ikhophi igcinwa lapho ushiya i-Morphe ngemuva kokushintsha okuthile. Okusha kakhulu u-%s kugcinwa</string>
+    <string name="settings_system_auto_backup_failed">Ukubuyisela imininingwane kokugcina akukwazanga ukuyondolwa. Khetha futhi ifolder</string>
     <string name="settings_system_import_manager_settings_fail">Kuhleleke ukungenisa izilungiselelo zeMorphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Izilungiselelo zeMorphe zingeniswe</string>
     <string name="settings_system_import_manager_settings_mode_title">Ngenisa izilungiselelo zeMorphe</string>
@@ -1265,6 +1289,7 @@ Imininingwane: %2$s"</string>
     <string name="selection_set_deleted">u-%s ususwe</string>
     <string name="selection_set_renamed">Kuguqulwe igama laba u-%s</string>
     <string name="selection_set_rename_title">Guqula igama le-set</string>
+    <string name="selection_set_rename_description">Ukuthatha igama lenye iqembu kuthatha indawo yalelo qembu</string>
     <string name="selection_set_delete_title">Susa i-set?</string>
     <string name="selection_set_delete_message">Lokhu kuzosusa isethi %s ngokuphelele</string>
     <string name="copy_selection_empty">Azikho ezinye izikhetho ezigcinwe zokukopisha kuzo</string>
@@ -1301,6 +1326,12 @@ Imininingwane: %2$s"</string>
     <string name="file_picker_sort_date_desc">Usuku (okusha kuqala)</string>
     <string name="file_picker_sort_date_asc">Usuku (okudala kuqala)</string>
     <string name="file_picker_show_hidden_files">Khombisa amafayela afihliwe</string>
+    <string name="file_picker_new_folder">Ifolda entsha</string>
+    <string name="file_picker_folder_name">Igama lefolda</string>
+    <string name="file_picker_new_folder_description">Idalwe ku %1$s futhi yavulwa ngokushesha</string>
+    <string name="file_picker_folder_name_taken">Kukhona okuthile okunesigama esifanayo lapha</string>
+    <string name="file_picker_folder_name_invalid">Igama lefolda alikwazi ukuba nala maphuzu \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Akukwazanga ukudala ifolda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Mayelana</string>
     <string name="settings_system_manager_description">Iphrojekthi ye-open-source yokupatcha izinhlelo ze-Android ezidumile ngendlela yesimanjemanje nehlanzekile, eqhutshwa imibono neminikelo yomphakathi</string>
@@ -1344,6 +1375,7 @@ Imininingwane: %2$s"</string>
     <string name="settings_section_about_summary">Okwengeziwe ngeMorphe nokuthola usizo</string>
     <string name="settings_section_local_files">Amafaili</string>
     <string name="settings_section_backup">Uku-backup</string>
+    <string name="settings_section_import_export">Ngena naphuma</string>
     <string name="settings_search">Sesha izilungiselelo</string>
     <string name="yes">Yebo</string>
     <string name="no">Cha</string>
@@ -1362,6 +1394,7 @@ Imininingwane: %2$s"</string>
     <string name="retry">Zama futhi</string>
     <string name="refresh">Vuselela</string>
     <string name="add">Yenge</string>
+    <string name="create">Dala</string>
     <string name="close">Vala</string>
     <string name="back">Buyela emuva</string>
     <string name="next">Okulandelayo</string>

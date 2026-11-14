@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">עדיין לא תוקן</string>
     <string name="home_unpatched_version_installed">מותקנת גרסה לא מתוקנת</string>
     <string name="home_unpatched_badge">לא תוקן</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">טלוויזיה</string>
+    <string name="form_factor_automotive">רכב</string>
     <string name="home_no_patches_available">אין תיקונים זמינים</string>
     <string name="home_app_hide_title">להסתיר את האפליקציה הזאת?</string>
     <string name="home_more_apps_title">עוד אפליקציות</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">קטגוריה חדשה</string>
     <string name="home_category_rename_title">שנה שם קטגוריה</string>
     <string name="home_category_name">שם קטגוריה</string>
+    <string name="home_category_name_description">מסך הבית מקבץ את האפליקציות שלו תחת שם זה</string>
     <string name="home_category_move_to">העבר לקטגוריה</string>
     <string name="home_category_move_selected_title">העבר אפליקציות נבחרות</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">דווח על בעיה</string>
     <string name="sources_management_failed_to_open_url">כישלון בפתיחת כתובת אינטרנט</string>
     <string name="sources_apps">אפליקציות</string>
-    <string name="sources_apps_description">אפליקציה יוצאת מהמסך הביתי ברגע שאף מקור לא מביא אותה, אלא אם כן תיקנת אותה</string>
+    <string name="sources_apps_description">אפליקציות מסומנות מגיעות ממקור זה. הקישו על אפליקציה כדי להוציא אותה או להחזירה, והחליקו אותה כדי לראות את התיקונים שלה. אפליקציה ללא מקור המביא אותה תעזוב את המסך הביתי, אלא אם תיקנתם אותה</string>
     <string name="sources_apps_brought">מסופקות על ידי המקור הזה</string>
     <string name="sources_apps_left_out">הוחרגו מהמקור הזה</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1176,6 +1180,26 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_system_hide_password_field">הסתר סיסמה</string>
     <string name="settings_system_morphe_settings">הגדרות Morphe</string>
     <string name="settings_system_import_manager_settings_description">גיבוי ושחזור של הגדרות Morphe שלך</string>
+    <string name="settings_system_export_manager_settings_title">ייצוא הגדרות Morphe</string>
+    <string name="settings_system_export_manager_settings_description">שומר את ההגדרות שבחרת לקובץ</string>
+    <string name="settings_system_import_manager_settings_file_description">משחזר הגדרות מקובץ גיבוי</string>
+    <string name="settings_system_auto_backup">גיבוי אוטומטי</string>
+    <string name="settings_system_auto_backup_switch">גבה באופן אוטומטי</string>
+    <string name="settings_system_auto_backup_now">גבה עכשיו</string>
+    <string name="settings_system_auto_backup_saved">הגיבוי נשמר</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe ממתינה לפחות זמן זה לאחר העתקה לפני ביצוע ההעתקה הבאה</string>
+    <string name="settings_system_auto_backup_description">שומר את הגדרות ה-Morphe שלך לתיקייה שתבחר</string>
+    <string name="settings_system_auto_backup_last">גיבוי אחרון: %s</string>
+    <string name="settings_system_auto_backup_folder">תיקייה</string>
+    <string name="settings_system_auto_backup_folder_name">גיבויים של Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">לא ניתן להשתמש בתיקייה זו: %s</string>
+    <string name="settings_system_auto_backup_interval">תדירות גיבוי</string>
+    <string name="settings_system_auto_backup_signing_key">כלול מפתח חתימה</string>
+    <string name="settings_system_auto_backup_signing_key_description">שומר את המפתח שחותם על אפליקציות שעברו התאמה לצד ההגדרות</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">גבה את מפתח החתימה?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">כל מי שישיג קובץ זה יוכל לחתום על עדכונים שמותקנים מעל האפליקציות שעברו התאמה שלך. שמור את התיקייה פרטית ושתף אותה רק עם המכשירים שלך</string>
+    <string name="settings_system_auto_backup_footer">עותק נשמר כאשר אתה עוזב את Morphe לאחר שינוי של משהו. ה-%s החדשים ביותר נשמרים</string>
+    <string name="settings_system_auto_backup_failed">לא ניתן היה לשמור את הגיבוי האחרון. בחר את התיקייה שוב</string>
     <string name="settings_system_import_manager_settings_fail">נכשל ייבוא הגדרות Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">הגדרות Morphe יובאו</string>
     <string name="settings_system_import_manager_settings_mode_title">ייבוא הגדרות Morphe</string>
@@ -1275,6 +1299,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="selection_set_deleted">%s נמחק</string>
     <string name="selection_set_renamed">שונה ל-%s</string>
     <string name="selection_set_rename_title">שנה שם של סט</string>
+    <string name="selection_set_rename_description">שימוש בשם של סט אחר מחליף את אותו סט</string>
     <string name="selection_set_delete_title">מחק סט?</string>
     <string name="selection_set_delete_message">פעולה זו תמחק לצמיתות את הסט %s</string>
     <string name="copy_selection_empty">אין בחירות שמורות אחרות להעתקה מהן</string>
@@ -1311,6 +1336,12 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="file_picker_sort_date_desc">תאריך (מהחדש לישן)</string>
     <string name="file_picker_sort_date_asc">תאריך (מהישן לחדש)</string>
     <string name="file_picker_show_hidden_files">הצג קבצים מוסתרים</string>
+    <string name="file_picker_new_folder">תיקייה חדשה</string>
+    <string name="file_picker_folder_name">שם תיקייה</string>
+    <string name="file_picker_new_folder_description">נוצרה ב-%1$s ונפתחה מיד</string>
+    <string name="file_picker_folder_name_taken">כבר קיים פריט בשם זה</string>
+    <string name="file_picker_folder_name_invalid">שם תיקייה אינו יכול להכיל \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">לא ניתן היה ליצור את התיקייה</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">אודות</string>
     <string name="settings_system_manager_description">פרויקט קוד פתוח לתיקון יעיל ומודרני של אפליקציות אנדרואיד פופולריות, המונע על ידי משוב ותרומות של הקהילה</string>
@@ -1354,6 +1385,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="settings_section_about_summary">מידע נוסף על Morphe וקבלת עזרה</string>
     <string name="settings_section_local_files">קבצים</string>
     <string name="settings_section_backup">גיבוי</string>
+    <string name="settings_section_import_export">ייבוא וייצוא</string>
     <string name="settings_search">חפש בהגדרות</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
@@ -1372,6 +1404,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="retry">נסה שוב</string>
     <string name="refresh">רענן</string>
     <string name="add">הוסף</string>
+    <string name="create">צור</string>
     <string name="close">סגור</string>
     <string name="back">חזרה</string>
     <string name="next">הבא</string>

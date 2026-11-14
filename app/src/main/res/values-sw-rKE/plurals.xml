@@ -40,10 +40,6 @@
         <item quantity="one">Chanzo %s kimefichwa. Gusa ili kuonyesha</item>
         <item quantity="other">Vyanzo %s vimefichwa. Gusa ili kuonyesha</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">patch %s inayolingana</item>
-        <item quantity="other">patch %s zinazolingana</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">chanzo %s</item>
         <item quantity="other">vyanzo %s</item>

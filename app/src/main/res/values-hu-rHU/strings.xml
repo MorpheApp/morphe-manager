@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Még nincs módosítva</string>
     <string name="home_unpatched_version_installed">A telepített verzió módosítatlan</string>
     <string name="home_unpatched_badge">Nincs módosítva</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Autóipari</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
     <string name="home_app_hide_title">Elrejti az alkalmazást?</string>
     <string name="home_more_apps_title">További alkalmazások</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Új kategória</string>
     <string name="home_category_rename_title">Kategória átnevezése</string>
     <string name="home_category_name">Kategória neve</string>
+    <string name="home_category_name_description">A kezdőképernyő e név alatt csoportosítja az alkalmazásait</string>
     <string name="home_category_move_to">Kategóriába helyezés</string>
     <string name="home_category_move_selected_title">Kiválasztott alkalmazások áthelyezése</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Hiba jelentése</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_apps">Alkalmazások</string>
-    <string name="sources_apps_description">A bekapcsolt alkalmazások forrása ez. Érintse meg az alkalmazást a kihagyáshoz vagy visszaállításhoz. Egy alkalmazás eltűnik a kezdőképernyőről, ha egyik forrás sem szolgáltatja, kivéve, ha módosította</string>
+    <string name="sources_apps_description">A bejelölt alkalmazások ebből a forrásból származnak. Koppints egy alkalmazásra a kihagyáshoz vagy a visszaadásához, csúsztasd el a javításai megtekintéséhez. Egy forrás nélküli alkalmazás eltűnik a kezdőképernyőről, hacsak nem javítottad</string>
     <string name="sources_apps_brought">Ebből a forrásból származó</string>
     <string name="sources_apps_left_out">Ebből a forrásból kihagyott</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Részletek: %2$s"</string>
     <string name="settings_system_hide_password_field">Jelszó elrejtése</string>
     <string name="settings_system_morphe_settings">Morphe beállítások</string>
     <string name="settings_system_import_manager_settings_description">A Morphe beállításainak biztonsági mentése és visszaállítása.</string>
+    <string name="settings_system_export_manager_settings_title">Morphe beállítások exportálása</string>
+    <string name="settings_system_export_manager_settings_description">Menti a kiválasztott beállításokat egy fájlba</string>
+    <string name="settings_system_import_manager_settings_file_description">Visszaállítja a beállításokat egy mentési fájlból</string>
+    <string name="settings_system_auto_backup">Automatikus mentés</string>
+    <string name="settings_system_auto_backup_switch">Automatikusan mentés</string>
+    <string name="settings_system_auto_backup_now">Mentés most</string>
+    <string name="settings_system_auto_backup_saved">Mentés sikeres</string>
+    <string name="settings_system_auto_backup_interval_description">A Morphe legalább ennyi időt wait az egy másolat elkészítése után a következő előtt</string>
+    <string name="settings_system_auto_backup_description">Menti a Morphe beállításait egy kiválasztott mappába</string>
+    <string name="settings_system_auto_backup_last">Utolsó mentés: %s</string>
+    <string name="settings_system_auto_backup_folder">Mappa</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe biztonsági másolatok</string>
+    <string name="settings_system_auto_backup_folder_failed">Nem sikerült használni ezt a mappát: %s</string>
+    <string name="settings_system_auto_backup_interval">Mentés gyakorisága</string>
+    <string name="settings_system_auto_backup_signing_key">Aláírási kulcs be inclusion-ja</string>
+    <string name="settings_system_auto_backup_signing_key_description">Menti a módosított alkalmazásokat aláíró kulcsot a beállítások mellé</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Mentjük az aláírási kulcsot?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bárki, aki hozzájut ehhez a fájlhoz, aláírhat olyan frissítéseket, amelyek felülírják a módosított alkalmazásaidat. Tartsd a mappát privátnak, és oszd meg csak a saját eszközeiddel</string>
+    <string name="settings_system_auto_backup_footer">Módosítás után egy másolat zostanie mentve, amikor kilép a Morphe alkalmazásból. A legfrissebb %s zostanie megtartva</string>
+    <string name="settings_system_auto_backup_failed">Az utolsó mentés nem sikerült. Válaszd ki újra a mappát</string>
     <string name="settings_system_import_manager_settings_fail">Hiba történt a Morphe beállításainak importálásakor: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe beállítások importálva</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe beállítások importálása</string>
@@ -1265,6 +1289,7 @@ Részletek: %2$s"</string>
     <string name="selection_set_deleted">%s törölve</string>
     <string name="selection_set_renamed">Átnevezve: %s</string>
     <string name="selection_set_rename_title">Készlet átnevezése</string>
+    <string name="selection_set_rename_description">Egy másik készlet nevének átvétele felváltja azt a készletet</string>
     <string name="selection_set_delete_title">Készlet törlése?</string>
     <string name="selection_set_delete_message">Ez véglegesen törli a %s készletet</string>
     <string name="copy_selection_empty">Nincs más mentett kiválasztás, amiből másolhatna</string>
@@ -1301,6 +1326,12 @@ Részletek: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dátum (a legújabbaktól kezdve)</string>
     <string name="file_picker_sort_date_asc">Dátum (a legrégebbtől kezdve)</string>
     <string name="file_picker_show_hidden_files">Rejtett fájlok megjelenítése</string>
+    <string name="file_picker_new_folder">Új mappa</string>
+    <string name="file_picker_folder_name">Mappa neve</string>
+    <string name="file_picker_new_folder_description">Létrehozva a %1$s mappában, és azonnal megnyitva</string>
+    <string name="file_picker_folder_name_taken">Már létezik egy ilyen nevű elem</string>
+    <string name="file_picker_folder_name_invalid">A mappa neve nem tartalmazhat \" * / : &lt; &gt; ? \\ | karaktereket</string>
+    <string name="file_picker_new_folder_failed">A mappa nem oluşturható</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Névjegy</string>
     <string name="settings_system_manager_description">Egy nyílt forráskódú projekt népszerű Android-alkalmazások modern, hatékony módosításához, amelyet a közösség visszajelzései és hozzájárulásai hajtanak</string>
@@ -1344,6 +1375,7 @@ Részletek: %2$s"</string>
     <string name="settings_section_about_summary">További információk a Morphéről és a segítségnyújtásról</string>
     <string name="settings_section_local_files">Fájlok</string>
     <string name="settings_section_backup">Biztonsági mentés</string>
+    <string name="settings_section_import_export">Importálás és exportálás</string>
     <string name="settings_search">Beállítások keresése</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
@@ -1362,6 +1394,7 @@ Részletek: %2$s"</string>
     <string name="retry">Újra</string>
     <string name="refresh">Frissítés</string>
     <string name="add">Hozzáadás</string>
+    <string name="create">Létrehozás</string>
     <string name="close">Bezárás</string>
     <string name="back">Vissza</string>
     <string name="next">Következő</string>

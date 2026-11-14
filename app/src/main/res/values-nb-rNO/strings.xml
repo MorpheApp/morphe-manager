@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ikke patchet ennå</string>
     <string name="home_unpatched_version_installed">Upatchet versjon installert</string>
     <string name="home_unpatched_badge">Ikke patchet</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Bil</string>
     <string name="home_no_patches_available">Ingen patcher tilgjengelig</string>
     <string name="home_app_hide_title">Skjul denne appen?</string>
     <string name="home_more_apps_title">Flere apper</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Ny kategori</string>
     <string name="home_category_rename_title">Gi nytt navn til kategori</string>
     <string name="home_category_name">Kategorinavn</string>
+    <string name="home_category_name_description">Hjemmeskjermen grupperer appene sine under dette navnet</string>
     <string name="home_category_move_to">Flytt til kategori</string>
     <string name="home_category_move_selected_title">Flytt valgte apper</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Rapporter et problem</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åpne linken</string>
     <string name="sources_apps">Apper</string>
-    <string name="sources_apps_description">Avkryssede apper kommer fra denne kilden. Trykk på en app for å ekskludere den eller inkludere den igjen. En app forsvinner fra startskjermen når ingen kilde leverer den, med mindre du har patchet den</string>
+    <string name="sources_apps_description">Avkryssede apper kommer fra denne kilden. Trykk på en app for å ekskludere den eller inkludere den igjen, sveip den for å se patchene dens. En app uten kilde forsvinner fra startskjermen, med mindre du har patchet den</string>
     <string name="sources_apps_brought">Levert av denne kilden</string>
     <string name="sources_apps_left_out">Utelatt fra denne kilden</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Detaljer: %2$s"</string>
     <string name="settings_system_hide_password_field">Skjul passord</string>
     <string name="settings_system_morphe_settings">Morphe-innstillinger</string>
     <string name="settings_system_import_manager_settings_description">Sikkerhetskopierer og gjenoppretter Morphe-innstillingene dine</string>
+    <string name="settings_system_export_manager_settings_title">Eksporter Morphe-innstillinger</string>
+    <string name="settings_system_export_manager_settings_description">Lagrer innstillingene du velger til en fil</string>
+    <string name="settings_system_import_manager_settings_file_description">Gjenoppretter innstillinger fra en sikkerhetskopieringsfil</string>
+    <string name="settings_system_auto_backup">Automatisk sikkerhetskopiering</string>
+    <string name="settings_system_auto_backup_switch">Sikkerhetskopier automatisk</string>
+    <string name="settings_system_auto_backup_now">Sikkerhetskopier nå</string>
+    <string name="settings_system_auto_backup_saved">Sikkerhetskopiering lagret</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe venter minst så lenge etter en kopi før den lager den neste</string>
+    <string name="settings_system_auto_backup_description">Lagrer Morphe-innstillingene dine til en mappe du velger</string>
+    <string name="settings_system_auto_backup_last">Siste sikkerhetskopiering: %s</string>
+    <string name="settings_system_auto_backup_folder">Mappe</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe-sikkerhetskopier</string>
+    <string name="settings_system_auto_backup_folder_failed">Kunne ikke bruke denne mappen: %s</string>
+    <string name="settings_system_auto_backup_interval">Sikkerhetskopieringsfrekvens</string>
+    <string name="settings_system_auto_backup_signing_key">Inkluder signeringsnøkkel</string>
+    <string name="settings_system_auto_backup_signing_key_description">Lagrer nøkkelen som signerer patchede apper ved siden av innstillingene</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Sikkerhetskopiere signeringsnøkkelen?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Alle som får tak i denne filen kan signere oppdateringer som installeres over dine patchede apper. Hold mappen privat og del den kun med dine egne enheter</string>
+    <string name="settings_system_auto_backup_footer">En kopi lagres når du forlater Morphe etter å ha endret noe. De nyeste %s beholdes</string>
+    <string name="settings_system_auto_backup_failed">Den siste sikkerhetskopien kunne ikke lagres. Velg mappen på nytt</string>
     <string name="settings_system_import_manager_settings_fail">Kunne ikke importere Morphe-innstillinger: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe-innstillinger importert</string>
     <string name="settings_system_import_manager_settings_mode_title">Importer Morphe-innstillinger</string>
@@ -1265,6 +1289,7 @@ Detaljer: %2$s"</string>
     <string name="selection_set_deleted">%s slettet</string>
     <string name="selection_set_renamed">Omdøpt til %s</string>
     <string name="selection_set_rename_title">Gi nytt navn til sett</string>
+    <string name="selection_set_rename_description">Å bruke navnet til et annet sett erstatter det settet</string>
     <string name="selection_set_delete_title">Slette sett?</string>
     <string name="selection_set_delete_message">Dette sletter settet %s permanent</string>
     <string name="copy_selection_empty">Ingen andre lagrede utvalg å kopiere fra</string>
@@ -1301,6 +1326,12 @@ Detaljer: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dato (nyeste først)</string>
     <string name="file_picker_sort_date_asc">Dato (eldste først)</string>
     <string name="file_picker_show_hidden_files">Vis skjulte filer</string>
+    <string name="file_picker_new_folder">Ny mappe</string>
+    <string name="file_picker_folder_name">Mappenavn</string>
+    <string name="file_picker_new_folder_description">Opprettet i %1$s og åpnet umiddelbart</string>
+    <string name="file_picker_folder_name_taken">Noe med dette navnet finnes allerede her</string>
+    <string name="file_picker_folder_name_invalid">Et mappenavn kan ikke inneholde \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Kunne ikke opprette mappen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
     <string name="settings_system_manager_description">Et åpen kildekode-prosjekt for moderne, strømlinjeformet patching av populære Android-apper, drevet av fellesskapets tilbakemeldinger og bidrag</string>
@@ -1344,6 +1375,7 @@ Detaljer: %2$s"</string>
     <string name="settings_section_about_summary">Mer om Morphe og hvordan du får hjelp</string>
     <string name="settings_section_local_files">Filer</string>
     <string name="settings_section_backup">Sikkerhetskopi</string>
+    <string name="settings_section_import_export">Import og eksport</string>
     <string name="settings_search">Søk innstillinger</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>
@@ -1362,6 +1394,7 @@ Detaljer: %2$s"</string>
     <string name="retry">Prøv igjen</string>
     <string name="refresh">Oppdater</string>
     <string name="add">Legg til</string>
+    <string name="create">Opprett</string>
     <string name="close">Lukk</string>
     <string name="back">Tilbake</string>
     <string name="next">Neste</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Dar nepataisyta</string>
     <string name="home_unpatched_version_installed">Įdiegta nepataisyta versija</string>
     <string name="home_unpatched_badge">Nepataisyta</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">Televizorius</string>
+    <string name="form_factor_automotive">Automobiliai</string>
     <string name="home_no_patches_available">Nėra prieinamų pataisų</string>
     <string name="home_app_hide_title">Paslėpti šią programą?</string>
     <string name="home_more_apps_title">Daugiau programų</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nauja kategorija</string>
     <string name="home_category_rename_title">Pervadinti kategoriją</string>
     <string name="home_category_name">Kategorijos pavadinimas</string>
+    <string name="home_category_name_description">Pagrindiniame ekrane programėlės grupuojamos pagal šį pavadinimą</string>
     <string name="home_category_move_to">Perkelti į kategoriją</string>
     <string name="home_category_move_selected_title">Perkelti pasirinktas programas</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Pranešti apie problemą</string>
     <string name="sources_management_failed_to_open_url">Nepavyko atidaryti nuorodos</string>
     <string name="sources_apps">Programos</string>
-    <string name="sources_apps_description">Programėlės, pažymėtos šaltinyje. Bakstelėkite programėlę, kad ją pašalintumėte arba grąžintumėte. Programėlė palieka namų ekraną, jei nė vienas šaltinys jos neatneša, nebent jūs ją pataisėte</string>
+    <string name="sources_apps_description">Pažymėtos programėlės yra iš šio šaltinio. Bakstelėkite programėlę, kad ją pašalintumėte arba grąžintumėte, braukite per ją, kad pamatytumėte pataisymus. Programėlė be šaltinio išnyksta iš pagrindinio ekrano, nebent ją pataisėte</string>
     <string name="sources_apps_brought">Pateikia šis šaltinis</string>
     <string name="sources_apps_left_out">Pašalinta iš šio šaltinio</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Išsami informacija: %2$s"</string>
     <string name="settings_system_hide_password_field">Slėpti slaptažodį</string>
     <string name="settings_system_morphe_settings">„Morphe“ nustatymai</string>
     <string name="settings_system_import_manager_settings_description">Kuria atsargines kopijas ir atkuria jūsų „Morphe“ nustatymus</string>
+    <string name="settings_system_export_manager_settings_title">Eksportuoti „Morphe“ nustatymus</string>
+    <string name="settings_system_export_manager_settings_description">Išsirinktas nustatymus išsaugo į failą</string>
+    <string name="settings_system_import_manager_settings_file_description">Atkuria nustatymus iš atsarginio kopijos failo</string>
+    <string name="settings_system_auto_backup">Automatinė atsarginė kopija</string>
+    <string name="settings_system_auto_backup_switch">Kurti atsargines kopijas automatiškai</string>
+    <string name="settings_system_auto_backup_now">Kurti atsarginę kopiją dabar</string>
+    <string name="settings_system_auto_backup_saved">Atsarginė kopija išsaugota</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe palaukia bent tiek laiko po kopijavimo, kol sukuria kitą</string>
+    <string name="settings_system_auto_backup_description">Išsaugo jūsų Morphe nustatymus į pasirinktą aplanką</string>
+    <string name="settings_system_auto_backup_last">Pastaroji atsarginė kopija: %s</string>
+    <string name="settings_system_auto_backup_folder">Aplankas</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe atsarginės kopijos</string>
+    <string name="settings_system_auto_backup_folder_failed">Nepavyko naudoti šio aplanko: %s</string>
+    <string name="settings_system_auto_backup_interval">Atsarginių kopijų dažnumas</string>
+    <string name="settings_system_auto_backup_signing_key">Įtraukti pasirašymo raktą</string>
+    <string name="settings_system_auto_backup_signing_key_description">Išsaugo programėlių modifikacijas pasirašantį raktą šalia nustatymų</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Ar atsirinkti pasirašymo raktą?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Bet kas, gavęs šį failą, gali pasirašyti atnaujinimus, kurie bus įdiegti virš jūsų modifikuotų programėlių. Laikykite aplanką privačiu ir bendraukite juo tik su savo įrenginiais</string>
+    <string name="settings_system_auto_backup_footer">Kopija išsaugoma, kai paliekate „Morphe“ po kažko pakeitimo. Išlaikomos naujausios %s</string>
+    <string name="settings_system_auto_backup_failed">Nepavyko išsaugoti paskutinės atsarginės kopijos. Pasirinkite aplanką dar kartą</string>
     <string name="settings_system_import_manager_settings_fail">Nepavyko importuoti „Morphe“ nustatymų: %s</string>
     <string name="settings_system_import_manager_settings_success">„Morphe“ nustatymai importuoti</string>
     <string name="settings_system_import_manager_settings_mode_title">Importuoti Morphe nustatymus</string>
@@ -1265,6 +1289,7 @@ Išsami informacija: %2$s"</string>
     <string name="selection_set_deleted">%s ištrinta</string>
     <string name="selection_set_renamed">Pervardyta į %s</string>
     <string name="selection_set_rename_title">Pervardyti rinkinį</string>
+    <string name="selection_set_rename_description">Naudojant kitos rinkinys pavadinimą, tas rinkinys bus pakeistas</string>
     <string name="selection_set_delete_title">Ištrinti rinkinį?</string>
     <string name="selection_set_delete_message">Ši operacija visiškai ištrins rinkinį %s</string>
     <string name="copy_selection_empty">Nėra kitų išsaugotų pasirinkimų, iš kurių būtų galima kopijuoti</string>
@@ -1301,6 +1326,12 @@ Išsami informacija: %2$s"</string>
     <string name="file_picker_sort_date_desc">Data (naujausi pirmiausia)</string>
     <string name="file_picker_sort_date_asc">Data (seniausi pirmiausia)</string>
     <string name="file_picker_show_hidden_files">Rodyti paslėptus failus</string>
+    <string name="file_picker_new_folder">Naujas aplankas</string>
+    <string name="file_picker_folder_name">Aplanko pavadinimas</string>
+    <string name="file_picker_new_folder_description">Sukurta %1$s ir iškart atidaryta</string>
+    <string name="file_picker_folder_name_taken">Šio pavadinimo objektas čia jau yra</string>
+    <string name="file_picker_folder_name_invalid">Aplanko pavadinime negali būti šių simbolių: \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Nepavyko sukurti aplanko</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Apie</string>
     <string name="settings_system_manager_description">Atvirojo kodo projektas, skirtas moderniam ir sklandžiam populiarių „Android“ programų pataisymui, kurį skatina bendruomenės atsiliepimai ir indėlis</string>
@@ -1344,6 +1375,7 @@ Išsami informacija: %2$s"</string>
     <string name="settings_section_about_summary">Daugiau apie „Morphe“ ir kaip gauti pagalbą</string>
     <string name="settings_section_local_files">Failai</string>
     <string name="settings_section_backup">Atsarginė kopija</string>
+    <string name="settings_section_import_export">Importavimas ir eksportavimas</string>
     <string name="settings_search">Paieškos nustatymai</string>
     <string name="yes">Taip</string>
     <string name="no">Ne</string>
@@ -1362,6 +1394,7 @@ Išsami informacija: %2$s"</string>
     <string name="retry">Bandyti dar kartą</string>
     <string name="refresh">Atnaujinti</string>
     <string name="add">Pridėti</string>
+    <string name="create">Sukurti</string>
     <string name="close">Uždaryti</string>
     <string name="back">Atgal</string>
     <string name="next">Toliau</string>

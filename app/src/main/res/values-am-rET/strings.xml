@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">ገና አልተስተካከለም</string>
     <string name="home_unpatched_version_installed">ያልተስተካከለ ስሪት ተጭኗል</string>
     <string name="home_unpatched_badge">ያልተስተካከለ</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ቲቪ</string>
+    <string name="form_factor_automotive">የመኪና</string>
     <string name="home_no_patches_available">የሚገኙ ፓቾች የሉም</string>
     <string name="home_app_hide_title">ይህንን መተግበሪያ ይደብቁ?</string>
     <string name="home_more_apps_title">ተጨማሪ መተግበሪያዎች</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">አዲስ ምድብ</string>
     <string name="home_category_rename_title">የምድብ ስም ቀይር</string>
     <string name="home_category_name">የምድብ ስም</string>
+    <string name="home_category_name_description">የመጀመሪያው ስክሪን መተግበሪያዎቹን በዚህ ስም ስር ያከማቻቸዋል</string>
     <string name="home_category_move_to">ወደ ምድብ አዛውር</string>
     <string name="home_category_move_selected_title">የተመረጡትን መተግበሪያዎች አዛውር</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">ችግርን ሪፖርት ያድርጉ</string>
     <string name="sources_management_failed_to_open_url">URL-ን ለመክፈት አልተቻለም</string>
     <string name="sources_apps">መተግበሪያዎች</string>
-    <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ እርስዎ ካስተካከሉት ግን ይቀራል</string>
+    <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት፣ ፓቾቹን ለማየት ደግሞ ወደ ጎን ይሳቡት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ እርስዎ ካስተካከሉት ግን ይቀራል</string>
     <string name="sources_apps_brought">በዚህ ምንጭ የመጡ</string>
     <string name="sources_apps_left_out">ከዚህ ምንጭ የተተዉ</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">የይለፍ ቃሉን ደብቅ</string>
     <string name="settings_system_morphe_settings">የMorphe ቅንብሮች</string>
     <string name="settings_system_import_manager_settings_description">የMorphe ቅንብሮችዎን ምትኬ ያስቀምጣል እንዲሁም ይመልሳል</string>
+    <string name="settings_system_export_manager_settings_title">የMorphe ቅንብሮችን ላክ</string>
+    <string name="settings_system_export_manager_settings_description">የመረጧቸውን ቅንብሮች ወደ ፋይል ያስቀምጣል</string>
+    <string name="settings_system_import_manager_settings_file_description">ቅንብሮችን ከባክአፕ ፋይል ወደ መልሶ ያስገባል</string>
+    <string name="settings_system_auto_backup">ራስ-ሰር ባክአፕ</string>
+    <string name="settings_system_auto_backup_switch">በራስ-ሰር ባክአፕ ያድርጉ</string>
+    <string name="settings_system_auto_backup_now">አሁን ባክአፕ ያድርጉ</string>
+    <string name="settings_system_auto_backup_saved">ባክአፕ ተቀምጧል</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe ቀጣዩን ቅጂ ከመሥራቱ በፊት ከአንድ ቅጂ በኋላ ቢያንስ ይህን ያህል ጊዜ ይጠብቃል</string>
+    <string name="settings_system_auto_backup_description">የMorphe ቅንብሮችዎን እርስዎ በሚመርጡት ፎልደር ውስጥ ያስቀምጣል</string>
+    <string name="settings_system_auto_backup_last">የመጨረሻው ባክአፕ፦ %s</string>
+    <string name="settings_system_auto_backup_folder">ፎልደር</string>
+    <string name="settings_system_auto_backup_folder_name">የMorphe መጠባበቂያዎች</string>
+    <string name="settings_system_auto_backup_folder_failed">ይህንን ፎልደር መጠቀም አልተቻለም: %s</string>
+    <string name="settings_system_auto_backup_interval">የባክአፕ ድግግሞሽ</string>
+    <string name="settings_system_auto_backup_signing_key">የፊርማ ቁልፍን አካትት</string>
+    <string name="settings_system_auto_backup_signing_key_description">የተስተካከሉ አፕሊኬሽኖችን የሚፈርመውን ቁልፍ ከቅንብሮች ጎን ያስቀምጣል</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">የፊርማ ቁልፉን ባክአፕ ማድረግ ይፈለጋል?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">ይህንን ፋይል የሚያገኝ ማንኛውም ሰው በተስተካከሉ አፕሊኬሽኖችዎ ላይ የሚጫኑ ማሻሻያዎችን መፈረም ይችላል። ፎልደሩን በሚስጥር ይጠብቁ እና ለራስዎ መሳሪያዎች ብቻ ያጋሩት</string>
+    <string name="settings_system_auto_backup_footer">አንድን ነገር ከቀየሩ በኋላ Morpheን ሲለቁ ቅጂ ይቀመጣል። አዳዲስ %s ይቀመጣሉ</string>
+    <string name="settings_system_auto_backup_failed">የመጨረሻው ባክአፕ ሊቀመጥ አልቻለም። ፎልደሩን እንደገና ይምረጡ</string>
     <string name="settings_system_import_manager_settings_fail">የMorphe ቅንብሮችን ማስገባት አልተቻለም: %s</string>
     <string name="settings_system_import_manager_settings_success">የMorphe ቅንብሮች ገብተዋል</string>
     <string name="settings_system_import_manager_settings_mode_title">የMorphe ቅንብሮችን አስገባ</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s ተሰርዟል</string>
     <string name="selection_set_renamed">ወደ %s ተቀይሯል</string>
     <string name="selection_set_rename_title">ስብስቡን ስም ቀይር</string>
+    <string name="selection_set_rename_description">የሌላ ስብስብ ስም መውሰድ ያንን ስብስብ ይተካል</string>
     <string name="selection_set_delete_title">ስብስቡን ይሰርዙ?</string>
     <string name="selection_set_delete_message">ይህ ስብስቡን %s በቋሚነት ይሰርዘዋል</string>
     <string name="copy_selection_empty">ለኮፒ የሚሆኑ ሌሎች የተቀመጡ ምርጫዎች የሉም</string>
@@ -1301,6 +1326,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">ቀን (አዲሱ መጀመሪያ)</string>
     <string name="file_picker_sort_date_asc">ቀን (አሮጌው መጀመሪያ)</string>
     <string name="file_picker_show_hidden_files">የተደበቁ ፋይሎችን አሳይ</string>
+    <string name="file_picker_new_folder">አዲስ ፎልደር</string>
+    <string name="file_picker_folder_name">የፎልደር ስም</string>
+    <string name="file_picker_new_folder_description">በ %1$s ውስጥ ተፈጥሮ ወዲያውኑ ተከፈተ</string>
+    <string name="file_picker_folder_name_taken">በዚህ ስም የተጠራ ነገር አስቀድሞ እዚህ አለ</string>
+    <string name="file_picker_folder_name_invalid">የፎልደር ስም \" * / : &lt; &gt; ? \\ | እነዚህን ምልክቶች ሊያካትት አይችልም</string>
+    <string name="file_picker_new_folder_failed">ፎልደሩን መፍጠር አልተቻለም</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">ስለ</string>
     <string name="settings_system_manager_description">በማህበረሰቡ አስተያየት እና አስተዋጽኦ የሚመራ፣ የታወቁ የAndroid መተግበሪያዎችን ዘመናዊ እና ቀልጣፋ በሆነ መንገድ ለመጠገን የሚያገለግል ክፍት የሶፍትዌር ፕሮጀክት</string>
@@ -1344,6 +1375,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">ስለ Morphe ተጨማሪ መረጃ እና እርዳታ ማግኘት</string>
     <string name="settings_section_local_files">ፋይሎች</string>
     <string name="settings_section_backup">ባክአፕ</string>
+    <string name="settings_section_import_export">አስገባ እና ላክ</string>
     <string name="settings_search">ቅንብሮችን ፈልግ</string>
     <string name="yes">አዎ</string>
     <string name="no">አይ</string>
@@ -1362,6 +1394,7 @@ morphe_header_custom_dark.png
     <string name="retry">እንደገና ይሞክሩ</string>
     <string name="refresh">አድስ</string>
     <string name="add">ጨምር</string>
+    <string name="create">ፍጠር</string>
     <string name="close">ዝጋ</string>
     <string name="back">ተመለስ</string>
     <string name="next">ቀጥል</string>

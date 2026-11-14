@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Encara no s\'ha aplicat la correcció</string>
     <string name="home_unpatched_version_installed">Versió sense patxar instal·lada</string>
     <string name="home_unpatched_badge">No pegat</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automoció</string>
     <string name="home_no_patches_available">No hi ha pegats disponibles</string>
     <string name="home_app_hide_title">Amagar aquesta aplicació?</string>
     <string name="home_more_apps_title">Més aplicacions</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Categoria nova</string>
     <string name="home_category_rename_title">Canvia el nom de la categoria</string>
     <string name="home_category_name">Nom de la categoria</string>
+    <string name="home_category_name_description">La pantalla d\'inici agrupa les seves aplicacions sota aquest nom</string>
     <string name="home_category_move_to">Moure a la categoria</string>
     <string name="home_category_move_selected_title">Moure les apps seleccionades</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Informa d\'un problema</string>
     <string name="sources_management_failed_to_open_url">Error en obrir l\'URL</string>
     <string name="sources_apps">Aplicacions</string>
-    <string name="sources_apps_description">Les aplicacions marcades provenen d\'aquesta font. Toca una aplicació per excloure-la o recuperar-la. Una aplicació desapareix de la pantalla d\'inici quan cap font la proporciona, a menys que l\'hagis patxat</string>
+    <string name="sources_apps_description">Les aplicacions marcades provenen d\'aquesta font. Toqueu una aplicació per excloure-la o recuperar-la, i deslliseu-la per veure els seus retalls. Una aplicació sense font surt de la pantalla d\'inici, a menys que l\'hayeu retallat</string>
     <string name="sources_apps_brought">Portades per aquesta font</string>
     <string name="sources_apps_left_out">Excludes d\'aquesta font</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Detalls: %2$s"</string>
     <string name="settings_system_hide_password_field">Oculta la contrasenya</string>
     <string name="settings_system_morphe_settings">Configuració de Morphe</string>
     <string name="settings_system_import_manager_settings_description">Fa una còpia de seguretat i restaura la configuració de Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exporta la configuració de Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Desa la configuració que triïs en un arxiu</string>
+    <string name="settings_system_import_manager_settings_file_description">Restaura la configuració d\'un arxiu de còpia de seguretat</string>
+    <string name="settings_system_auto_backup">Còpia de seguretat automàtica</string>
+    <string name="settings_system_auto_backup_switch">Fes còpies de seguretat automàticament</string>
+    <string name="settings_system_auto_backup_now">Fes una còpia de seguretat ara</string>
+    <string name="settings_system_auto_backup_saved">Còpia de seguretat guardada</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe espera almenys aquest temps després d\'una còpia abans de fer la següent</string>
+    <string name="settings_system_auto_backup_description">Desa la configuració de Morphe en una carpeta que triïs</string>
+    <string name="settings_system_auto_backup_last">Última còpia de seguretat: %s</string>
+    <string name="settings_system_auto_backup_folder">Carpeta</string>
+    <string name="settings_system_auto_backup_folder_name">Còpies de seguretat de Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">No s\'ha pogut utilitzar aquesta carpeta: %s</string>
+    <string name="settings_system_auto_backup_interval">Freqüència de còpia de seguretat</string>
+    <string name="settings_system_auto_backup_signing_key">Inclou la clau de signatura</string>
+    <string name="settings_system_auto_backup_signing_key_description">Desa la clau que signa les aplicacions modificades al costat de la configuració</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Fer una còpia de seguretat de la clau de signatura?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Qualsevol persona que tingui aquest fitxer pot signar actualitzacions que s\'instal·lin sobre les vostres aplicacions modificades. Mantingueu la carpeta privada i compartiu-la només amb els vostres propis dispositius</string>
+    <string name="settings_system_auto_backup_footer">Es guarda una còpia quan surts de Morphe després de canviar alguna cosa. Es conserven els %s més recents</string>
+    <string name="settings_system_auto_backup_failed">No s\'ha pogut desar l\'última còpia de seguretat. Torneu a triar la carpeta</string>
     <string name="settings_system_import_manager_settings_fail">Error en importar la configuració de Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Configuració de Morphe importada</string>
     <string name="settings_system_import_manager_settings_mode_title">Importa la configuració de Morphe</string>
@@ -1265,6 +1289,7 @@ Detalls: %2$s"</string>
     <string name="selection_set_deleted">%s eliminat</string>
     <string name="selection_set_renamed">Renomat a %s</string>
     <string name="selection_set_rename_title">Renomar conjunt</string>
+    <string name="selection_set_rename_description">Si fas servir el nom d\'un altre conjunt, aquest conjunt serà substituït</string>
     <string name="selection_set_delete_title">Eliminar conjunt?</string>
     <string name="selection_set_delete_message">Això elimina permanentment el conjunt %s</string>
     <string name="copy_selection_empty">No hi ha altres seleccions desades per copiar</string>
@@ -1301,6 +1326,12 @@ Detalls: %2$s"</string>
     <string name="file_picker_sort_date_desc">Data (la més recent primer)</string>
     <string name="file_picker_sort_date_asc">Data (la més antiga primer)</string>
     <string name="file_picker_show_hidden_files">Mostrar fitxers ocults</string>
+    <string name="file_picker_new_folder">Carpeta nova</string>
+    <string name="file_picker_folder_name">Nom de la carpeta</string>
+    <string name="file_picker_new_folder_description">Creada a %1$s i oberta immediatament</string>
+    <string name="file_picker_folder_name_taken">Ja hi ha alguna cosa amb aquest nom aquí</string>
+    <string name="file_picker_folder_name_invalid">El nom d\'una carpeta no pot contenir \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">No s\'ha pogut crear la carpeta</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Quant a</string>
     <string name="settings_system_manager_description">Un projecte de codi obert per a un pegat modern i optimitzat d\'aplicacions populars d\'Android, impulsat pels comentaris i contribucions de la comunitat</string>
@@ -1344,6 +1375,7 @@ Detalls: %2$s"</string>
     <string name="settings_section_about_summary">Més sobre Morphe i com obtenir ajuda</string>
     <string name="settings_section_local_files">Fitxers</string>
     <string name="settings_section_backup">Còpia de seguretat</string>
+    <string name="settings_section_import_export">Importar i exportar</string>
     <string name="settings_search">Cerca a la configuració</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
@@ -1362,6 +1394,7 @@ Detalls: %2$s"</string>
     <string name="retry">Reintentar</string>
     <string name="refresh">Actualitzar</string>
     <string name="add">Afegir</string>
+    <string name="create">Crear</string>
     <string name="close">Tanca</string>
     <string name="back">Tornar</string>
     <string name="next">Següent</string>

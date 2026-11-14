@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ekki breytt ennþá</string>
     <string name="home_unpatched_version_installed">Óplástruð útgáfa uppsett</string>
     <string name="home_unpatched_badge">Ekki plástrað</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">Sjónvarp</string>
+    <string name="form_factor_automotive">Ökutæki</string>
     <string name="home_no_patches_available">Engar breytistillingar eru til staðar</string>
     <string name="home_app_hide_title">Fela þetta app?</string>
     <string name="home_more_apps_title">Fleiri öpp</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nýr flokkur</string>
     <string name="home_category_rename_title">Endurnefna flokk</string>
     <string name="home_category_name">Heiti flokks</string>
+    <string name="home_category_name_description">Heimaskjáinn flokkar forrit sín undir þessu nafni</string>
     <string name="home_category_move_to">Færa í flokk</string>
     <string name="home_category_move_selected_title">Færa valin öpp</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Tilkynna vandamál</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
     <string name="sources_apps">Forrit</string>
-    <string name="sources_apps_description">Öpp sem eru hakuð koma frá þessari uppsprettu. Ýttu á app til að sleppa því eða taka það aftur með. App hverfur af heimaskjánum um leið og engin uppspretta ber það lengur, nema þú hafir plástrað það</string>
+    <string name="sources_apps_description">Öpp sem eru hakuð koma frá þessari uppsprettu. Ýttu á app til að sleppa því eða taka það aftur með, renndu yfir það til að sjá plástra þess. App hverfur af heimaskjánum ef engin uppspretta ber það, nema þú hafir plástrað það</string>
     <string name="sources_apps_brought">Frá þessari uppsprettu</string>
     <string name="sources_apps_left_out">Undanskilin þessari uppsprettu</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1165,6 +1169,26 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_system_hide_password_field">Fela lykilorð</string>
     <string name="settings_system_morphe_settings">Morphe stillingar</string>
     <string name="settings_system_import_manager_settings_description">Tekur öryggisafrit og endurheimtir Morphe-stillingar</string>
+    <string name="settings_system_export_manager_settings_title">Flytja út Morphe-stillingar</string>
+    <string name="settings_system_export_manager_settings_description">Vista stillingum sem þú velur í skrá</string>
+    <string name="settings_system_import_manager_settings_file_description">Endurtekur stillingar úr öryggiskopy</string>
+    <string name="settings_system_auto_backup">Sjálfvirk öryggiskopy</string>
+    <string name="settings_system_auto_backup_switch">Gera öryggiskopy sjálfkrafa</string>
+    <string name="settings_system_auto_backup_now">Gera öryggiskopy núna</string>
+    <string name="settings_system_auto_backup_saved">Öryggiskopy vistuð</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe bíður að minnsta kosti þessa tíma eftir afritun áður en næsta er gerð</string>
+    <string name="settings_system_auto_backup_description">Vistar Morphe stillingum þínum í möppu sem þú velur</string>
+    <string name="settings_system_auto_backup_last">Síðasta öryggiskopy: %s</string>
+    <string name="settings_system_auto_backup_folder">Möppu</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe öryggiskopy</string>
+    <string name="settings_system_auto_backup_folder_failed">Gat ekki notað þessa möppu: %s</string>
+    <string name="settings_system_auto_backup_interval">Tíðni öryggisafritunar</string>
+    <string name="settings_system_auto_backup_signing_key">Fela meðundaðlykil</string>
+    <string name="settings_system_auto_backup_signing_key_description">Geymir lykilinn sem undirritaðar forrit nota ásamt stillingunum</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Öryggisafrita meðundaðlykil?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Sá sem fær þessa skrá getur undirritað uppfærslur sem uppsetningar yfir þínar breyttu forrit. Haltu möppunni einkastróngri og deilðu henni aðeins með þínum eigin tækjum</string>
+    <string name="settings_system_auto_backup_footer">Afrit er vistað þegar þú yfirgefir Morphe eftir að hafa breytt einhverju. Nýjastu %s eru geymd</string>
+    <string name="settings_system_auto_backup_failed">Gat ekki vistað síðasta öryggisafritið. Veldu möppuna aftur</string>
     <string name="settings_system_import_manager_settings_fail">Ekki tókst að flytja inn Morphe stillingar: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe stillingar fluttar inn</string>
     <string name="settings_system_import_manager_settings_mode_title">Flytja inn Morphe-stillingar</string>
@@ -1264,6 +1288,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="selection_set_deleted">%s eytt</string>
     <string name="selection_set_renamed">Endurnefnt í %s</string>
     <string name="selection_set_rename_title">Endurnefna sett</string>
+    <string name="selection_set_rename_description">Ef notað er nafn annars sets kemur það í staðinn fyrir það set</string>
     <string name="selection_set_delete_title">Eyða setti?</string>
     <string name="selection_set_delete_message">Þetta eyðir setinu %s varanlega</string>
     <string name="copy_selection_empty">Engin önnur vistuð val til að afrita</string>
@@ -1300,6 +1325,12 @@ Nánari upplýsingar: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dagsetning (nýjasta fyrst)</string>
     <string name="file_picker_sort_date_asc">Dagsetning (elst fyrst)</string>
     <string name="file_picker_show_hidden_files">Sýna falnar skrár</string>
+    <string name="file_picker_new_folder">Ný möppu</string>
+    <string name="file_picker_folder_name">Mappanafn</string>
+    <string name="file_picker_new_folder_description">Búa til í %1$s og opna strax</string>
+    <string name="file_picker_folder_name_taken">Eitthvað með þetta nafn er þegar til hér</string>
+    <string name="file_picker_folder_name_invalid">Mappanafn má ekki innihalda \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Tókst ekki að búa til möppuna</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Um</string>
     <string name="settings_system_manager_description">Opið verkefni fyrir nútímalega og straumlínulagaða breytingu á vinsælum Android-öppum, knúið áfram af endurgjöf og framlögum samfélagsins</string>
@@ -1343,6 +1374,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="settings_section_about_summary">Meira um Morphe og að fá aðstoð</string>
     <string name="settings_section_local_files">Skrár</string>
     <string name="settings_section_backup">Öryggisafrit</string>
+    <string name="settings_section_import_export">Flytja inn og út</string>
     <string name="settings_search">Leitarstillingar</string>
     <string name="yes">Já</string>
     <string name="no">Nei</string>
@@ -1361,6 +1393,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="retry">Reyna aftur</string>
     <string name="refresh">Endurhlaða</string>
     <string name="add">Bæta við</string>
+    <string name="create">Búa til</string>
     <string name="close">Loka</string>
     <string name="back">Til baka</string>
     <string name="next">Áfram</string>

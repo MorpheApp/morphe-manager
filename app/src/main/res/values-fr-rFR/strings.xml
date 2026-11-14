@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Pas encore patchée</string>
     <string name="home_unpatched_version_installed">Version non patchée installée</string>
     <string name="home_unpatched_badge">Non patchée</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automobile</string>
     <string name="home_no_patches_available">Aucun patch disponible</string>
     <string name="home_app_hide_title">Masquer cette application ?</string>
     <string name="home_more_apps_title">Plus d\'applications</string>
@@ -38,7 +41,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">Ceci est une nouvelle version de %s. Voulez-vous la mettre à jour ?</string>
     <string name="mpp_import_unreadable">Ce fichier ne peut pas être lu</string>
-    <string name="incoming_file_not_patch_source">Ce fichier n\'est pas une source de correctif</string>
+    <string name="incoming_file_not_patch_source">Ce fichier n\'est pas une source de patchs</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Mise à jour de Morphe disponible</string>
     <string name="home_update_available_subtitle">Nouvelle version prête à installer</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nouvelle catégorie</string>
     <string name="home_category_rename_title">Renommer la catégorie</string>
     <string name="home_category_name">Nom de la catégorie</string>
+    <string name="home_category_name_description">L\'écran d\'accueil regroupe ses applications sous ce nom</string>
     <string name="home_category_move_to">Déplacer vers la catégorie</string>
     <string name="home_category_move_selected_title">Déplacer les applications sélectionnées</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Signaler un problème</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_apps">Applications</string>
-    <string name="sources_apps_description">Les applications cochées proviennent de cette source. Appuyez sur une application pour l\'exclure ou la rétablir. Une application disparaît de l\'écran d\'accueil lorsqu\'aucune source ne la propose, sauf si vous l\'avez patchée</string>
+    <string name="sources_apps_description">Les applications cochées proviennent de cette source. Appuyez sur une application pour l\'exclure ou la rétablir, faites-la glisser pour voir ses patchs. Une application disparaît de l\'écran d\'accueil lorsqu\'aucune source ne la propose, sauf si vous l\'avez patchée</string>
     <string name="sources_apps_brought">Fournies par cette source</string>
     <string name="sources_apps_left_out">Exclues de cette source</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1169,6 +1173,26 @@ Détails : %2$s"</string>
     <string name="settings_system_hide_password_field">Masquer le mot de passe</string>
     <string name="settings_system_morphe_settings">Paramètres de Morphe</string>
     <string name="settings_system_import_manager_settings_description">Sauvegardez et restaurez vos paramètres Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exporter les paramètres de Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Enregistre les paramètres que vous choisissez dans un fichier</string>
+    <string name="settings_system_import_manager_settings_file_description">Restaure les paramètres à partir d\'un fichier de sauvegarde</string>
+    <string name="settings_system_auto_backup">Sauvegarde automatique</string>
+    <string name="settings_system_auto_backup_switch">Sauvegarder automatiquement</string>
+    <string name="settings_system_auto_backup_now">Sauvegarder maintenant</string>
+    <string name="settings_system_auto_backup_saved">Sauvegarde enregistrée</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe attend au moins ce délai après une copie avant d\'en effectuer la suivante</string>
+    <string name="settings_system_auto_backup_description">Enregistre vos paramètres de Morphe dans le dossier de votre choix</string>
+    <string name="settings_system_auto_backup_last">Dernière sauvegarde : %s</string>
+    <string name="settings_system_auto_backup_folder">Dossier</string>
+    <string name="settings_system_auto_backup_folder_name">Sauvegardes Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Impossible d\'utiliser ce dossier : %s</string>
+    <string name="settings_system_auto_backup_interval">Fréquence des sauvegardes</string>
+    <string name="settings_system_auto_backup_signing_key">Inclure la clé de signature</string>
+    <string name="settings_system_auto_backup_signing_key_description">Enregistre la clé qui signe les applications patchées à côté des paramètres</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Sauvegarder la clé de signature ?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Toute personne qui possède ce fichier peut signer des mises à jour qui s\'installent par-dessus vos applications patchées. Gardez le dossier privé et partagez-le uniquement avec vos propres appareils</string>
+    <string name="settings_system_auto_backup_footer">Une copie est enregistrée lorsque vous quittez Morphe après avoir modifié quelque chose. Les %s plus récentes sont conservées</string>
+    <string name="settings_system_auto_backup_failed">La dernière sauvegarde n\'a pas pu être enregistrée. Choisissez à nouveau le dossier</string>
     <string name="settings_system_import_manager_settings_fail">Échec de l\'importation des paramètres de Morphe : %s</string>
     <string name="settings_system_import_manager_settings_success">Paramètres de Morphe importés</string>
     <string name="settings_system_import_manager_settings_mode_title">Importer les paramètres de Morphe</string>
@@ -1269,6 +1293,7 @@ Détails : %2$s"</string>
     <string name="selection_set_deleted">%s supprimé</string>
     <string name="selection_set_renamed">Renommé en %s</string>
     <string name="selection_set_rename_title">Renommer l\'ensemble</string>
+    <string name="selection_set_rename_description">Prendre le nom d\'un autre ensemble remplace cet ensemble</string>
     <string name="selection_set_delete_title">Supprimer l\'ensemble ?</string>
     <string name="selection_set_delete_message">Cela supprimera définitivement l\'ensemble %s</string>
     <string name="copy_selection_empty">Aucune autre sélection enregistrée à partir de laquelle copier</string>
@@ -1305,6 +1330,12 @@ Détails : %2$s"</string>
     <string name="file_picker_sort_date_desc">Date (du plus récent au plus ancien)</string>
     <string name="file_picker_sort_date_asc">Date (du plus ancien au plus récent)</string>
     <string name="file_picker_show_hidden_files">Afficher les fichiers masqués</string>
+    <string name="file_picker_new_folder">Nouveau dossier</string>
+    <string name="file_picker_folder_name">Nom du dossier</string>
+    <string name="file_picker_new_folder_description">Créé dans %1$s et ouvert immédiatement</string>
+    <string name="file_picker_folder_name_taken">Un élément portant ce nom existe déjà ici</string>
+    <string name="file_picker_folder_name_invalid">Un nom de dossier ne peut pas contenir \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Impossible de créer le dossier</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>
     <string name="settings_system_manager_description">Un projet open source expérimental pour le patching moderne et simplifié des applications Android populaires, guidé par les retours et les contributions de la communauté</string>
@@ -1348,6 +1379,7 @@ Détails : %2$s"</string>
     <string name="settings_section_about_summary">En savoir plus sur Morphe et obtenir de l\'aide</string>
     <string name="settings_section_local_files">Fichiers</string>
     <string name="settings_section_backup">Sauvegarde</string>
+    <string name="settings_section_import_export">Importer et exporter</string>
     <string name="settings_search">Rechercher des paramètres</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
@@ -1366,6 +1398,7 @@ Détails : %2$s"</string>
     <string name="retry">Réessayer</string>
     <string name="refresh">Actualiser</string>
     <string name="add">Ajouter</string>
+    <string name="create">Créer</string>
     <string name="close">Fermer</string>
     <string name="back">Retour</string>
     <string name="next">Suivant</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Oraindik ez dago patchatuta</string>
     <string name="home_unpatched_version_installed">Bertsio patchagaririk gabe instalatua</string>
     <string name="home_unpatched_badge">Ez dago patchatuta</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">Telebista</string>
+    <string name="form_factor_automotive">Automobila</string>
     <string name="home_no_patches_available">Ez dago patchingik eskuragarri</string>
     <string name="home_app_hide_title">Ezkutatu aplikazio hau ?</string>
     <string name="home_more_apps_title">Aplikazio gehiago</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Kategoria berria</string>
     <string name="home_category_rename_title">Berrizendatu kategoria</string>
     <string name="home_category_name">Kategoriaren izena</string>
+    <string name="home_category_name_description">Pantaila nagusiak bere aplikazioak izen honenpean taldeka gordetzen ditu</string>
     <string name="home_category_move_to">Kategoriara mugitu</string>
     <string name="home_category_move_selected_title">Hautatutako aplikazioak mugitu</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Eman arazo baten berri</string>
     <string name="sources_management_failed_to_open_url">Ezin izan da URLa ireki</string>
     <string name="sources_apps">Aplikazioak</string>
-    <string name="sources_apps_description">Markatutako aplikazioak iturri honetatik datoz. Sakatu aplikazio bat kanpora uzteko edo berriz sartzeko. Aplikazio bat etxeko pantailatik desagertzen da iturri batek ekartzen ez duenean, baldin eta patchatu ez baduzu</string>
+    <string name="sources_apps_description">Markatutako aplikazioak iturri honetatik datoz. Sakatu aplikazio bat kanpora uzteko edo berriz sartzeko, eta irrastu haren patchak ikusteko. Aplikazio bat etxeko pantailatik desagertzen da iturri batek ekartzen ez duenean, baldin eta patchatu ez baduzu</string>
     <string name="sources_apps_brought">Iturri honek ekarria</string>
     <string name="sources_apps_left_out">Iturri honetatik kanpo utzia</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Xehetasunak: %2$s"</string>
     <string name="settings_system_hide_password_field">Ezkutatu pasahitza</string>
     <string name="settings_system_morphe_settings">Morphe konfigurazioak</string>
     <string name="settings_system_import_manager_settings_description">Zure Morphe konfigurazioaren babes-kopia egiten du eta berrezartzen du</string>
+    <string name="settings_system_export_manager_settings_title">Esportatu Morphe-ren konfigurazioak</string>
+    <string name="settings_system_export_manager_settings_description">Hautatzen dituzun konfigurazioak fitxategi batean gordetzen ditu</string>
+    <string name="settings_system_import_manager_settings_file_description">Konfigurazioak kopia bateko fitxategi batetik berreskuratzen ditu</string>
+    <string name="settings_system_auto_backup">Kopia automatikoa</string>
+    <string name="settings_system_auto_backup_switch">Kopia automatikoa egin</string>
+    <string name="settings_system_auto_backup_now">Kopia orain egin</string>
+    <string name="settings_system_auto_backup_saved">Kopia gordeta da</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe-k kopia bat egin ondoren, gutxienez denbora hau itxaroko du hurrengoa egiteko</string>
+    <string name="settings_system_auto_backup_description">Zure Morphe konfigurazioak hautatzen duzun karpetan gordetzen ditu</string>
+    <string name="settings_system_auto_backup_last">Azken kopia: %s</string>
+    <string name="settings_system_auto_backup_folder">Karpeta</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe backupak</string>
+    <string name="settings_system_auto_backup_folder_failed">Ezin izan da karpeta hau erabili: %s</string>
+    <string name="settings_system_auto_backup_interval">Backup-en maiztasuna</string>
+    <string name="settings_system_auto_backup_signing_key">Saga-giltza inprimatu</string>
+    <string name="settings_system_auto_backup_signing_key_description">Aplikazio patchedak sinatzen dituen giltza gordetzen du arauetan ondo</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Saga-giltza backup-atu?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Fitxategi hau lortu duen edozein norbitek zure aplikazio patchedak gainditzen dituzten eguneratzeak sinatu ditzake. Mantendu karpeta pribatu eta parteka soilik zure gailuekin</string>
+    <string name="settings_system_auto_backup_footer">Kopia bat gorde egiten da zerbait aldatu ondoren Morphe utzi zuenean. Berrienak %s mantentzen dira</string>
+    <string name="settings_system_auto_backup_failed">Azken backup-a ezin izan da gorde. Aukeratu berriro karpeta</string>
     <string name="settings_system_import_manager_settings_fail">Morphe konfigurazioa inportatzeak huts egin du: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe konfigurazioak importatu dira</string>
     <string name="settings_system_import_manager_settings_mode_title">Inportatu Morphe-ren konfigurazioak</string>
@@ -1265,6 +1289,7 @@ Xehetasunak: %2$s"</string>
     <string name="selection_set_deleted">%s ezabatu da</string>
     <string name="selection_set_renamed">%s izendatu da</string>
     <string name="selection_set_rename_title">Multzoa izendatu</string>
+    <string name="selection_set_rename_description">Beste multzo baten izena hartzeak multzo hori ordezkatuko du</string>
     <string name="selection_set_delete_title">Multzoa ezabatu?</string>
     <string name="selection_set_delete_message">Honek %s multzoa betiko ezabatuko du</string>
     <string name="copy_selection_empty">Ez dago kopiatzeko gordetako beste hautaketarik</string>
@@ -1301,6 +1326,12 @@ Xehetasunak: %2$s"</string>
     <string name="file_picker_sort_date_desc">Data (berriena lehenik)</string>
     <string name="file_picker_sort_date_asc">Data (zaharrena lehenik)</string>
     <string name="file_picker_show_hidden_files">Ezkutuko fitxategiak erakutsi</string>
+    <string name="file_picker_new_folder">Karpeta berria</string>
+    <string name="file_picker_folder_name">Karpeta-izena</string>
+    <string name="file_picker_new_folder_description">%1$s-en sortua eta berehala irekita</string>
+    <string name="file_picker_folder_name_taken">Izen honekin zerbait dagoleba dirudi</string>
+    <string name="file_picker_folder_name_invalid">Karpeta-izenak ezin ditu \" * / : &lt; &gt; ? \\ | zehazkinak izan</string>
+    <string name="file_picker_new_folder_failed">Ezin izan da karpeta sortu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Honi buruz</string>
     <string name="settings_system_manager_description">Android aplikazio popularren patch-ing modernorako eta optimizatorako proiektu open-source bat, komunitatearen iritzi eta ekarpenekin bultzatua</string>
@@ -1344,6 +1375,7 @@ Xehetasunak: %2$s"</string>
     <string name="settings_section_about_summary">Morphe-ri buruz gehiago eta laguntza jasotzeko</string>
     <string name="settings_section_local_files">Fitxategiak</string>
     <string name="settings_section_backup">Babeskopia</string>
+    <string name="settings_section_import_export">Importatu eta esportatu</string>
     <string name="settings_search">Bilatu konfigurazioan</string>
     <string name="yes">Bai</string>
     <string name="no">Ez</string>
@@ -1362,6 +1394,7 @@ Xehetasunak: %2$s"</string>
     <string name="retry">Saiatu berriro</string>
     <string name="refresh">Freskatu</string>
     <string name="add">Gehitu</string>
+    <string name="create">Sortu</string>
     <string name="close">Itxi</string>
     <string name="back">Atzera</string>
     <string name="next">Hurrengoa</string>

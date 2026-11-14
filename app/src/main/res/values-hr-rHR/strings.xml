@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Još nije patchano</string>
     <string name="home_unpatched_version_installed">Instalirana nepatchana verzija</string>
     <string name="home_unpatched_badge">Nije patchano</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automobilni</string>
     <string name="home_no_patches_available">Nema dostupnih patcheva</string>
     <string name="home_app_hide_title">Sakriti ovu aplikaciju?</string>
     <string name="home_more_apps_title">Više aplikacija</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Nova kategorija</string>
     <string name="home_category_rename_title">Preimenuj kategoriju</string>
     <string name="home_category_name">Naziv kategorije</string>
+    <string name="home_category_name_description">Početni zaslon grupirao je svoje aplikacije pod ovim nazivom</string>
     <string name="home_category_move_to">Premjesti u kategoriju</string>
     <string name="home_category_move_selected_title">Premjesti odabrane aplikacije</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Prijavite problem</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_apps">Aplikacije</string>
-    <string name="sources_apps_description">Označene aplikacije dolaze iz ovog izvora. Dodirnite aplikaciju kako biste je uklonili ili vratili. Aplikacija nestaje s početnog zaslona kada je više ne nudi nijedan izvor, osim ako je niste patchali</string>
+    <string name="sources_apps_description">Označene aplikacije dolaze iz ovog izvora. Dodirnite aplikaciju kako biste je uklonili ili vratili, prevucite je kako biste vidjeli njezine patchove. Aplikacija nestaje s početnog zaslona kada je više ne nudi nijedan izvor, osim ako je niste patchali</string>
     <string name="sources_apps_brought">Donesene iz ovog izvora</string>
     <string name="sources_apps_left_out">Izuzete iz ovog izvora</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1169,6 +1173,26 @@ Detalji: %2$s"</string>
     <string name="settings_system_hide_password_field">Sakrij zaporku</string>
     <string name="settings_system_morphe_settings">Morphe postavke</string>
     <string name="settings_system_import_manager_settings_description">Izrađuje sigurnosne kopije i vraća Morphe postavke</string>
+    <string name="settings_system_export_manager_settings_title">Izvezi Morphe postavke</string>
+    <string name="settings_system_export_manager_settings_description">Sprema odabrane postavke u datoteku</string>
+    <string name="settings_system_import_manager_settings_file_description">Vraća postavke iz datoteke sigurnosne kopije</string>
+    <string name="settings_system_auto_backup">Automatska sigurnosna kopija</string>
+    <string name="settings_system_auto_backup_switch">Automatski izradi sigurnosnu kopiju</string>
+    <string name="settings_system_auto_backup_now">Izradi sigurnosnu kopiju sada</string>
+    <string name="settings_system_auto_backup_saved">Sigurnosna kopija spremljena</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe čeka barem toliko vremena nakon kopije prije izrade sljedeće</string>
+    <string name="settings_system_auto_backup_description">Sprema vaše Morphe postavke u odabrani folder</string>
+    <string name="settings_system_auto_backup_last">Zadnja sigurnosna kopija: %s</string>
+    <string name="settings_system_auto_backup_folder">Mapa</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe sigurnosne kopije</string>
+    <string name="settings_system_auto_backup_folder_failed">Nije moguće koristiti ovu mapu: %s</string>
+    <string name="settings_system_auto_backup_interval">Učestalost sigurnosnog kopiranja</string>
+    <string name="settings_system_auto_backup_signing_key">Uključi ključ za potpisivanje</string>
+    <string name="settings_system_auto_backup_signing_key_description">Sprema ključ kojim se potpisuju zakrpljene aplikacije pored postavki</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Napraviti sigurnosnu kopiju ključa za potpisivanje?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Svatko tko dođe do ove datoteke može potpisati ažuriranja koja se instaliraju preko vaših zakrpljenih aplikacija. Mapu držite privatnom i dijelite je samo sa svojim uređajima</string>
+    <string name="settings_system_auto_backup_footer">Kopija se sprema kada napustite Morphe nakon promjene nečega. Zadržavat će se najnoviji %s</string>
+    <string name="settings_system_auto_backup_failed">Zadnja sigurnosna kopija nije mogla biti spremljena. Ponovno odaberite mapu</string>
     <string name="settings_system_import_manager_settings_fail">Uvoz postavki Morphea nije uspio: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe postavke uvezene</string>
     <string name="settings_system_import_manager_settings_mode_title">Uvezi Morphe postavke</string>
@@ -1268,6 +1292,7 @@ Detalji: %2$s"</string>
     <string name="selection_set_deleted">%s izbrisano</string>
     <string name="selection_set_renamed">Preimenovano u %s</string>
     <string name="selection_set_rename_title">Preimenuj skup</string>
+    <string name="selection_set_rename_description">Preuzimanje imena drugog seta zamjenjuje taj set</string>
     <string name="selection_set_delete_title">Izbrisati skup?</string>
     <string name="selection_set_delete_message">Ovo trajno briše skup %s</string>
     <string name="copy_selection_empty">Nema drugih spremljenih odabira za kopiranje</string>
@@ -1304,6 +1329,12 @@ Detalji: %2$s"</string>
     <string name="file_picker_sort_date_desc">Datum (najnovije prvo)</string>
     <string name="file_picker_sort_date_asc">Datum (najstarije prvo)</string>
     <string name="file_picker_show_hidden_files">Prikaži skrivene datoteke</string>
+    <string name="file_picker_new_folder">Nova mapa</string>
+    <string name="file_picker_folder_name">Ime mape</string>
+    <string name="file_picker_new_folder_description">Izrađeno u %1$s i odmah otvoreno</string>
+    <string name="file_picker_folder_name_taken">Nešto s ovim imenom već postoji ovdje</string>
+    <string name="file_picker_folder_name_invalid">Ime mape ne može sadržavati \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Mapa nije mogla biti izgrađena</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>
     <string name="settings_system_manager_description">Projekt otvorenog koda za moderno, pojednostavljeno ažuriranje popularnih Android aplikacija, potaknut povratnim informacijama i doprinosima zajednice</string>
@@ -1347,6 +1378,7 @@ Detalji: %2$s"</string>
     <string name="settings_section_about_summary">Više o Morpheu i načinima dobivanja pomoći</string>
     <string name="settings_section_local_files">Datoteke</string>
     <string name="settings_section_backup">Sigurnosna kopija</string>
+    <string name="settings_section_import_export">Uvoz i izvoz</string>
     <string name="settings_search">Postavke pretraživanja</string>
     <string name="yes">Da</string>
     <string name="no">Ne</string>
@@ -1365,6 +1397,7 @@ Detalji: %2$s"</string>
     <string name="retry">Pokušaj ponovno</string>
     <string name="refresh">Osvježi</string>
     <string name="add">Dodaj</string>
+    <string name="create">Izradi</string>
     <string name="close">Zatvori</string>
     <string name="back">Natrag</string>
     <string name="next">Dalje</string>

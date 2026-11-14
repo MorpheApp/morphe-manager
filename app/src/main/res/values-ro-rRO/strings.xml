@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Nepatch-uit încă</string>
     <string name="home_unpatched_version_installed">Versiune nepatch-uită instalată</string>
     <string name="home_unpatched_badge">Nepatch-uit</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Automobil</string>
     <string name="home_no_patches_available">Niciun patch disponibil</string>
     <string name="home_app_hide_title">Ascunzi această aplicație?</string>
     <string name="home_more_apps_title">Mai multe aplicații</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Categorie nouă</string>
     <string name="home_category_rename_title">Redenumire categorie</string>
     <string name="home_category_name">Nume categorie</string>
+    <string name="home_category_name_description">Ecranul principal își grupează aplicațiile sub acest nume</string>
     <string name="home_category_move_to">Mută în categorie</string>
     <string name="home_category_move_selected_title">Mută aplicațiile selectate</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Raportează o problemă</string>
     <string name="sources_management_failed_to_open_url">Eroarea la deschiderea URL-ului</string>
     <string name="sources_apps">Aplicații</string>
-    <string name="sources_apps_description">Aplicațiile bifațe provin din această sursă. Atingeți o aplicație pentru a o exclude sau a o readuce. O aplicație părăsește ecranul de start atunci când nicio sursă nu o mai aduce, decât dacă ați patch-uit-o</string>
+    <string name="sources_apps_description">Aplicațiile bifate provin din această sursă. Apasă pe o aplicație pentru a o exclude sau a o readuce, gliseaz-o pentru a vedea patch-urile sale. O aplicație fără sursă părăsește ecranul principal, cu excepția cazului în care a fost patch-uită</string>
     <string name="sources_apps_brought">Aduse de această sursă</string>
     <string name="sources_apps_left_out">Excluse din această sursă</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Detalii: %2$s"</string>
     <string name="settings_system_hide_password_field">Ascunde parolă</string>
     <string name="settings_system_morphe_settings">Setări Morphe</string>
     <string name="settings_system_import_manager_settings_description">Realizează copii de rezervă și restaurează setările Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Exportă setările Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Salvează setările alese într-un fișier</string>
+    <string name="settings_system_import_manager_settings_file_description">Restaurați setările dintr-un fișier de rezervă</string>
+    <string name="settings_system_auto_backup">Rezervă automată</string>
+    <string name="settings_system_auto_backup_switch">Efectuați rezervă automat</string>
+    <string name="settings_system_auto_backup_now">Efectuați rezervă acum</string>
+    <string name="settings_system_auto_backup_saved">Rezerva salvată</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe așteaptă cel puțin acest interval după o copie înainte de a crea următoarea</string>
+    <string name="settings_system_auto_backup_description">Salvează setările Morphe într-un folder ales de dvs</string>
+    <string name="settings_system_auto_backup_last">Ultima rezervă: %s</string>
+    <string name="settings_system_auto_backup_folder">Dosar</string>
+    <string name="settings_system_auto_backup_folder_name">Copii de rezervă Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Nu s-a putut utiliza acest dosar: %s</string>
+    <string name="settings_system_auto_backup_interval">Frecvența backup-ului</string>
+    <string name="settings_system_auto_backup_signing_key">Include cheia de semnare</string>
+    <string name="settings_system_auto_backup_signing_key_description">Salvează cheia care semnează aplicațiile patch-uite lângă setări</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Să se facă backup la cheia de semnare?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Oricine obține acest fișier poate semna actualizări care se instalează peste aplicațiile tale patch-uite. Păstrează dosarul privat și partajează-l doar cu propriile dispozitive</string>
+    <string name="settings_system_auto_backup_footer">O copie este salvată atunci când părăsești Morphe după ce ai modificat ceva. Cele mai recente %s sunt păstrate</string>
+    <string name="settings_system_auto_backup_failed">Ultimul backup nu a putut fi salvat. Alege din nou dosarul</string>
     <string name="settings_system_import_manager_settings_fail">Eșec la importarea setărilor Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Setările Morphe au fost importate</string>
     <string name="settings_system_import_manager_settings_mode_title">Importă setări Morphe</string>
@@ -1265,6 +1289,7 @@ Detalii: %2$s"</string>
     <string name="selection_set_deleted">%s a fost șters</string>
     <string name="selection_set_renamed">Redenumit în %s</string>
     <string name="selection_set_rename_title">Redenumește setul</string>
+    <string name="selection_set_rename_description">Preluarea numelui altui set înlocuiește acel set</string>
     <string name="selection_set_delete_title">Șterge setul?</string>
     <string name="selection_set_delete_message">Această acțiune șterge definitiv setul %s</string>
     <string name="copy_selection_empty">Nu există alte selecții salvate de copiat</string>
@@ -1301,6 +1326,12 @@ Detalii: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dată (cea mai recentă prima)</string>
     <string name="file_picker_sort_date_asc">Dată (cea mai veche prima)</string>
     <string name="file_picker_show_hidden_files">Arată fișierele ascunse</string>
+    <string name="file_picker_new_folder">Folder nou</string>
+    <string name="file_picker_folder_name">Numele folderului</string>
+    <string name="file_picker_new_folder_description">Creat în %1$s și deschis imediat</string>
+    <string name="file_picker_folder_name_taken">Există deja ceva cu acest nume aici</string>
+    <string name="file_picker_folder_name_invalid">Numele unui folder nu poate conține \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Folderul nu a putut fi creat</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
     <string name="settings_system_manager_description">Un proiect open-source pentru patch-uri moderne și simplificate ale aplicațiilor Android populare, ghidat de feedback-ul și contribuțiile comunității</string>
@@ -1344,6 +1375,7 @@ Detalii: %2$s"</string>
     <string name="settings_section_about_summary">Mai multe despre Morphe și obținerea de ajutor</string>
     <string name="settings_section_local_files">Fișiere</string>
     <string name="settings_section_backup">Backup</string>
+    <string name="settings_section_import_export">Importare și exportare</string>
     <string name="settings_search">Caută în setări</string>
     <string name="yes">Da</string>
     <string name="no">Nu</string>
@@ -1362,6 +1394,7 @@ Detalii: %2$s"</string>
     <string name="retry">Reîncearcă</string>
     <string name="refresh">Reîmprospătează</string>
     <string name="add">Adaugă</string>
+    <string name="create">Creare</string>
     <string name="close">Închide</string>
     <string name="back">Înapoi</string>
     <string name="next">Următorul</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Hê patch nehatiye kirin</string>
     <string name="home_unpatched_version_installed">Versiyona nepatchkirî hatiye sazkirin</string>
     <string name="home_unpatched_badge">Nehatiye patchkirin</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Otomotîv</string>
     <string name="home_no_patches_available">Patch tune ne.</string>
     <string name="home_app_hide_title">Ev app veşêre?</string>
     <string name="home_more_apps_title">Zêde sepan</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Kategoriya nû</string>
     <string name="home_category_rename_title">Navê kategoriyê biguherîne</string>
     <string name="home_category_name">Navê kategoriyê</string>
+    <string name="home_category_name_description">Ekranê sereke appên xwe bi vê navî kom dike</string>
     <string name="home_category_move_to">Veguhezîne kategoriyê</string>
     <string name="home_category_move_selected_title">Sepanên hilbijartî veguhezîne</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Pirsgirêkek rapor bike</string>
     <string name="sources_management_failed_to_open_url">Vekirina URL têk çû</string>
     <string name="sources_apps">Sepan</string>
-    <string name="sources_apps_description">Appên nîşanî ji vê çavkaniyê ne. Li appekê bitikîne da ku wê derxe an jî vegere. Appek ji ekrana sereke diçe gava tu çavkanî wê nanîne, mêger te patch kiriye</string>
+    <string name="sources_apps_description">Aplîkasyonên nîşanî ji vê çavkaniyê tên. Ji bo derxistin an zivaran li aplikasyonê bisekinê, ji bo dîtina patchên wê wê bişike. Aplîkasyonek bê çavkanî ji ekrana sereke derdikeve, mêger te patch kiribe</string>
     <string name="sources_apps_brought">Ji aliyê vê çavkaniyê ve tê</string>
     <string name="sources_apps_left_out">Ji vê çavkaniyê hatiye derxistin</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Detay: %2$s"</string>
     <string name="settings_system_hide_password_field">Şifreyê veşêre</string>
     <string name="settings_system_morphe_settings">Mîhengên Morphe</string>
     <string name="settings_system_import_manager_settings_description">Mîhengên Morphe pişgirî dike û vedigerîne</string>
+    <string name="settings_system_export_manager_settings_title">Mîhengên Morphe export bike</string>
+    <string name="settings_system_export_manager_settings_description">Mîhengên ku tu hilbijêrî di fîlekê de diparêze</string>
+    <string name="settings_system_import_manager_settings_file_description">Mîhengên ji fîleya rezervê ve zivirîne</string>
+    <string name="settings_system_auto_backup">Rezerva otomatîk</string>
+    <string name="settings_system_auto_backup_switch">Bi awayekî otomatîk rezerv bike</string>
+    <string name="settings_system_auto_backup_now">Niha rezerv bike</string>
+    <string name="settings_system_auto_backup_saved">Rezerv hat parastin</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe piştî kopiyekê herî kêm vê qas demê li benda kopiya din dimîne</string>
+    <string name="settings_system_auto_backup_description">Mîhengên Morphe yên te di foldereke ku tu hilbijêrî de diparêze</string>
+    <string name="settings_system_auto_backup_last">Rezerva dawî: %s</string>
+    <string name="settings_system_auto_backup_folder">Peldank</string>
+    <string name="settings_system_auto_backup_folder_name">Backupên Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Nekirî ev foldera bikar bîne: %s</string>
+    <string name="settings_system_auto_backup_interval">Frekansa backupê</string>
+    <string name="settings_system_auto_backup_signing_key">Kêya îmzayê bibe navê</string>
+    <string name="settings_system_auto_backup_signing_key_description">Kêya ku appên patched îmze dike li kêleka mîhengên saved dike</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Kêya îmzayê backup bike?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Her kesê ku vê dosyeyê bidest bîne dikare nûjenkirinên ku li ser appên patched yên we têne sazkirin îmze bike. Folderê veşartî bihêle û tenê bi amûrên xwe re parve bike</string>
+    <string name="settings_system_auto_backup_footer">Gava hûn piştî guhertina tiştekî Morphe terik dikin, kopiyek têne parastin. %s yên herî nû tên girtin</string>
+    <string name="settings_system_auto_backup_failed">Backupa dawî nehat save kirin. Careke din folderê hilbijêre</string>
     <string name="settings_system_import_manager_settings_fail">Importkirina mîhengên Morphe bi ser neket: %s</string>
     <string name="settings_system_import_manager_settings_success">Mîhengên Morphe bi serkeftî hatin importkirin</string>
     <string name="settings_system_import_manager_settings_mode_title">Mîhengên Morphe import bike</string>
@@ -1265,6 +1289,7 @@ Detay: %2$s"</string>
     <string name="selection_set_deleted">%s hat jêbirin</string>
     <string name="selection_set_renamed">Hat guhertin bo %s</string>
     <string name="selection_set_rename_title">Navê setê biguherîne</string>
+    <string name="selection_set_rename_description">Girtina navê setek din, wê setê şîno dike</string>
     <string name="selection_set_delete_title">Setê jêbibire?</string>
     <string name="selection_set_delete_message">Ev yek seta %s bi temamî jêdibe</string>
     <string name="copy_selection_empty">Ji bo kopîkirinê hilbijartinên din ên tomarkirî tune ne</string>
@@ -1301,6 +1326,12 @@ Detay: %2$s"</string>
     <string name="file_picker_sort_date_desc">Dîrok (ji nûve heta kevn)</string>
     <string name="file_picker_sort_date_asc">Dîrok (ji kevn heta nûve)</string>
     <string name="file_picker_show_hidden_files">Pelên veşartî nîşan bide</string>
+    <string name="file_picker_new_folder">Peldanka nû</string>
+    <string name="file_picker_folder_name">Navê peldankê</string>
+    <string name="file_picker_new_folder_description">Di %1$s de hat afirandin û hemen hat vekirin</string>
+    <string name="file_picker_folder_name_taken">Tiştekî bi vê navî jixwe li vir heye</string>
+    <string name="file_picker_folder_name_invalid">Navê peldankê nikare van pîşanan bibe: \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Peldanka nehat afirandin</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Derbarê</string>
     <string name="settings_system_manager_description">Projeyeke çavkaniya vekirî ji bo patchkirina nûjen û hêsan a appên populer ên Android, ku bi hişmendiya civakê û tevkariyan ve tê rêvebirin</string>
@@ -1344,6 +1375,7 @@ Detay: %2$s"</string>
     <string name="settings_section_about_summary">Zêdetir li ser Morphe û girtina alîkariyê</string>
     <string name="settings_section_local_files">Pel</string>
     <string name="settings_section_backup">Paşgiran</string>
+    <string name="settings_section_import_export">Import û export</string>
     <string name="settings_search">Mîhengan bigere</string>
     <string name="yes">Bêlî</string>
     <string name="no">Na</string>
@@ -1362,6 +1394,7 @@ Detay: %2$s"</string>
     <string name="retry">Dîsa biceribîne</string>
     <string name="refresh">Nûve bike</string>
     <string name="add">Zêde bike</string>
+    <string name="create">Afirîne</string>
     <string name="close">Vediwere</string>
     <string name="back">Paşve</string>
     <string name="next">Pêşî</string>

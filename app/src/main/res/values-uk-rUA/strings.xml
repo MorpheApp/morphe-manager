@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Ще не патчено</string>
     <string name="home_unpatched_version_installed">Встановлено непропатчену версію</string>
     <string name="home_unpatched_badge">Не патчено</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">ТВ</string>
+    <string name="form_factor_automotive">Автомобільний</string>
     <string name="home_no_patches_available">Немає доступних патчів</string>
     <string name="home_app_hide_title">Приховати цей застосунок?</string>
     <string name="home_more_apps_title">Більше застосунків</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Нова категорія</string>
     <string name="home_category_rename_title">Перейменувати категорію</string>
     <string name="home_category_name">Назва категорії</string>
+    <string name="home_category_name_description">Головний екран групує свої застосунки під цією назвою</string>
     <string name="home_category_move_to">Перемістити до категорії</string>
     <string name="home_category_move_selected_title">Перемістити вибрані застосунки</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Повідомити про проблему</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_apps">Застосунки</string>
-    <string name="sources_apps_description">Позначені застосунки надходять із цього джерела. Натисніть на застосунок, щоб виключити його або повернути. Застосунок зникає з головного екрана, коли жодне джерело його не надає, якщо ви його не патчили</string>
+    <string name="sources_apps_description">Позначені застосунки надходять із цього джерела. Натисніть на застосунок, щоб виключити його або повернути, проведіть по ньому, щоб переглянути його патчі. Застосунок, якого не надає жодне джерело, зникає з головного екрана, якщо ви його не пропатчили</string>
     <string name="sources_apps_brought">Додано цим джерелом</string>
     <string name="sources_apps_left_out">Виключено з цього джерела</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">Приховати пароль</string>
     <string name="settings_system_morphe_settings">Налаштування Morphe</string>
     <string name="settings_system_import_manager_settings_description">Створює резервну копію та відновлює ваші налаштування Morphe</string>
+    <string name="settings_system_export_manager_settings_title">Експорт налаштувань Morphe</string>
+    <string name="settings_system_export_manager_settings_description">Зберігає вибрані вами налаштування у файл</string>
+    <string name="settings_system_import_manager_settings_file_description">Відновлює налаштування з файлу резервної копії</string>
+    <string name="settings_system_auto_backup">Автоматичне резервне копіювання</string>
+    <string name="settings_system_auto_backup_switch">Створювати резервну копію автоматично</string>
+    <string name="settings_system_auto_backup_now">Створити резервну копію зараз</string>
+    <string name="settings_system_auto_backup_saved">Резервну копію збережено</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe чекає принаймні стільки часу після створення копії, перш ніж створити наступну</string>
+    <string name="settings_system_auto_backup_description">Зберігає налаштування Morphe у вибрану вами теку</string>
+    <string name="settings_system_auto_backup_last">Остання резервна копія: %s</string>
+    <string name="settings_system_auto_backup_folder">Тека</string>
+    <string name="settings_system_auto_backup_folder_name">Резервні копії Morphe</string>
+    <string name="settings_system_auto_backup_folder_failed">Не вдалося використати цю теку: %s</string>
+    <string name="settings_system_auto_backup_interval">Частота резервного копіювання</string>
+    <string name="settings_system_auto_backup_signing_key">Додати ключ підпису</string>
+    <string name="settings_system_auto_backup_signing_key_description">Зберігає ключ, яким підписуються пропатчені застосунки, поруч із налаштуваннями</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Створити резервну копію ключа підпису?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Будь-хто, хто отримає цей файл, зможе підписувати оновлення, які встановлюються поверх ваших пропатчених застосунків. Тримайте теку в таємниці та діліться нею лише зі своїми пристроями</string>
+    <string name="settings_system_auto_backup_footer">Копія зберігається, коли ви виходите з Morphe після внесення змін. Зберігаються найновіші %s</string>
+    <string name="settings_system_auto_backup_failed">Останню резервну копію не вдалося зберегти. Виберіть теку знову</string>
     <string name="settings_system_import_manager_settings_fail">Не вдалося імпортувати налаштування Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">Налаштування Morphe імпортовано</string>
     <string name="settings_system_import_manager_settings_mode_title">Імпорт налаштувань Morphe</string>
@@ -1265,6 +1289,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">Видалено %s</string>
     <string name="selection_set_renamed">Перейменовано на %s</string>
     <string name="selection_set_rename_title">Перейменувати набір</string>
+    <string name="selection_set_rename_description">Якщо дати набору ім\'я іншого набору, той набір буде замінено</string>
     <string name="selection_set_delete_title">Видалити набір?</string>
     <string name="selection_set_delete_message">Це назавжди видалить набір %s</string>
     <string name="copy_selection_empty">Немає інших збережених виборів для копіювання</string>
@@ -1301,6 +1326,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">Дата (спочатку новіші)</string>
     <string name="file_picker_sort_date_asc">Дата (спочатку старіші)</string>
     <string name="file_picker_show_hidden_files">Показати приховані файли</string>
+    <string name="file_picker_new_folder">Нова тека</string>
+    <string name="file_picker_folder_name">Назва теки</string>
+    <string name="file_picker_new_folder_description">Створено в %1$s і відкрито одразу</string>
+    <string name="file_picker_folder_name_taken">Тут уже є щось із такою назвою</string>
+    <string name="file_picker_folder_name_invalid">Назва теки не може містити \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Не вдалося створити теку</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Про нас</string>
     <string name="settings_system_manager_description">Проєкт із відкритим кодом для сучасного, спрощеного патчингу популярних Android-застосунків, що розвивається завдяки відгукам та внескам спільноти</string>
@@ -1344,6 +1375,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">Докладніше про Morphe та отримання допомоги</string>
     <string name="settings_section_local_files">Файли</string>
     <string name="settings_section_backup">Резервна копія</string>
+    <string name="settings_section_import_export">Імпорт і експорт</string>
     <string name="settings_search">Пошук налаштувань</string>
     <string name="yes">Так</string>
     <string name="no">Ні</string>
@@ -1362,6 +1394,7 @@ morphe_header_custom_dark.png
     <string name="retry">Повторити</string>
     <string name="refresh">Оновити</string>
     <string name="add">Додати</string>
+    <string name="create">Створити</string>
     <string name="close">Закрити</string>
     <string name="back">Назад</string>
     <string name="next">Далі</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Vēl nav labots</string>
     <string name="home_unpatched_version_installed">Nelabota versija instalēta</string>
     <string name="home_unpatched_badge">Nav labots</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Autovietnišana</string>
     <string name="home_no_patches_available">Nav pieejamu labojumu</string>
     <string name="home_app_hide_title">Paslēpt šo lietotni?</string>
     <string name="home_more_apps_title">Vairāk lietotnes</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Jauna kategorija</string>
     <string name="home_category_rename_title">Pārdēvēt kategoriju</string>
     <string name="home_category_name">Kategorijas nosaukums</string>
+    <string name="home_category_name_description">Sākuma ekrāna lietotnes ir sagrupētas zem šī nosaukuma</string>
     <string name="home_category_move_to">Pārcelt uz kategoriju</string>
     <string name="home_category_move_selected_title">Pārcelt atlasītas lietotnes</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Ziņot par problēmu</string>
     <string name="sources_management_failed_to_open_url">Neizdevās atvērt URL</string>
     <string name="sources_apps">Lietotnes</string>
-    <string name="sources_apps_description">Atzīmētās lietotnes nāk no šī avota. Pieskarieties lietotnei, lai to izslēgtu vai atgrieztu. Lietotne pazūd no sākuma ekrāna, kad to vairs nepiedāvā neviens avots, ja vien neesat to patchējis</string>
+    <string name="sources_apps_description">Atzīmētās lietotnes nāk no šī avota. Pieskarieties lietotnei, lai to izslēgtu vai atgrieztu, vai slapjiet, lai redzētu tās patchus. Lietotne pazūd no sākuma ekrāna, ja to vairs nepiedāvā neviens avots, ja vien neesat to patchējis</string>
     <string name="sources_apps_brought">Šī avota nodrošinātās</string>
     <string name="sources_apps_left_out">Izlaists no šī avota</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1165,6 +1169,26 @@ Sīkāk: %2$s"</string>
     <string name="settings_system_hide_password_field">Paslēpt paroli</string>
     <string name="settings_system_morphe_settings">Morphe iestatījumi</string>
     <string name="settings_system_import_manager_settings_description">Veic Morphe iestatījumu kopijas izveidi un atjaunošanu</string>
+    <string name="settings_system_export_manager_settings_title">Eksportēt Morphe iestatījumus</string>
+    <string name="settings_system_export_manager_settings_description">Saglabā jūsu izvēlētos iestatījumus failā</string>
+    <string name="settings_system_import_manager_settings_file_description">Atjaunā iestatījumus no rezervēšanas faila</string>
+    <string name="settings_system_auto_backup">Automātiska rezervēšana</string>
+    <string name="settings_system_auto_backup_switch">Rezervēt automātiski</string>
+    <string name="settings_system_auto_backup_now">Rezervēt tagad</string>
+    <string name="settings_system_auto_backup_saved">Rezervējums saglabāts</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe gaida vismaz šo laiku pēc kopēšanas, pirms veic nākamo rezervēšanu</string>
+    <string name="settings_system_auto_backup_description">Saglabā jūsu Morphe iestatījumus jūsu izvēlētajā mapē</string>
+    <string name="settings_system_auto_backup_last">Pēdējā rezervēšana: %s</string>
+    <string name="settings_system_auto_backup_folder">Mape</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe rezervācijas</string>
+    <string name="settings_system_auto_backup_folder_failed">Neizdevās izmantot šo mapi: %s</string>
+    <string name="settings_system_auto_backup_interval">Rezervēšanas biežums</string>
+    <string name="settings_system_auto_backup_signing_key">Iekļaut parakstīšanas atslēgu</string>
+    <string name="settings_system_auto_backup_signing_key_description">Saglabā atslēgu, ar kuru tiek parakstītas patched lietotnes, blakus iestatījumiem</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Izveidot parakstīšanas atslēgas rezervēto kopiju?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Ikvienu, kurš iegūs šo failu, var parakstīt atjauninājumus, kas tiks instalēti virs jūsu patched lietotnēm. Turiet mapi privāti un kopīgojiet to tikai ar savām ierīcēm</string>
+    <string name="settings_system_auto_backup_footer">Kopija tiek saglabāta, kad pamējat Morphe pēc kaut kāda mainīšanas. Tiek saglabātas jaunākās %s</string>
+    <string name="settings_system_auto_backup_failed">Pēdējo rezervēto kopiju neizdevās saglabāt. Izvēlieties mapi vēlreiz</string>
     <string name="settings_system_import_manager_settings_fail">Neizdevās importēt Morphe iestatījumus: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe iestatījumi importēti</string>
     <string name="settings_system_import_manager_settings_mode_title">Importēt Morphe iestatījumus</string>
@@ -1264,6 +1288,7 @@ Sīkāk: %2$s"</string>
     <string name="selection_set_deleted">%s dzēsts</string>
     <string name="selection_set_renamed">Pārdēvēts uz %s</string>
     <string name="selection_set_rename_title">Pārdēvēt kopumu</string>
+    <string name="selection_set_rename_description">Ņemot cita kopuma nosaukumu, tas kopums tiek aizstāts</string>
     <string name="selection_set_delete_title">Dzēst kopumu?</string>
     <string name="selection_set_delete_message">Šī darbība neatgriezeniski dzēš kopumu %s</string>
     <string name="copy_selection_empty">Nav citu saglabātu izvēļu, no kurām kopēt</string>
@@ -1300,6 +1325,12 @@ Sīkāk: %2$s"</string>
     <string name="file_picker_sort_date_desc">Datums (jaunākie vispirms)</string>
     <string name="file_picker_sort_date_asc">Datums (vecākie pirmie)</string>
     <string name="file_picker_show_hidden_files">Rādīt slēptos failus</string>
+    <string name="file_picker_new_folder">Jauna mapa</string>
+    <string name="file_picker_folder_name">Mapas nosaukums</string>
+    <string name="file_picker_new_folder_description">Izveidots %1$s un uzreiz atvērts</string>
+    <string name="file_picker_folder_name_taken">Šāda nosaukuma elements šeit jau eksistē</string>
+    <string name="file_picker_folder_name_invalid">Mapas nosaukums nedrīkst saturēt \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">Neizdevās izveidot mapu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Par</string>
     <string name="settings_system_manager_description">Atklātā pirmkoda projekts populāru Android lietotņu modernai un vienkāršotai labošanai, ko veicina kopienas atsauksmes un ieguldījumi</string>
@@ -1343,6 +1374,7 @@ Sīkāk: %2$s"</string>
     <string name="settings_section_about_summary">Vairāk par Morphe un palīdzības saņemšanu</string>
     <string name="settings_section_local_files">Faili</string>
     <string name="settings_section_backup">Rezerves kopija</string>
+    <string name="settings_section_import_export">Importēšana un eksportēšana</string>
     <string name="settings_search">Meklēt iestatījumos</string>
     <string name="yes">Jā</string>
     <string name="no">Nē</string>
@@ -1361,6 +1393,7 @@ Sīkāk: %2$s"</string>
     <string name="retry">Mēģināt vēlreiz</string>
     <string name="refresh">Atjaunināt</string>
     <string name="add">Pievienot</string>
+    <string name="create">Izveidot</string>
     <string name="close">Aizvērt</string>
     <string name="back">Atpakaļ</string>
     <string name="next">Tālāk</string>

@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">Hozircha patch qilinmagan</string>
     <string name="home_unpatched_version_installed">Patch qilinmagan versiya oʻrnatilgan</string>
     <string name="home_unpatched_badge">Patch qilinmagan</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_automotive">Avtomobillar</string>
     <string name="home_no_patches_available">Hozircha patch yo\'q</string>
     <string name="home_app_hide_title">Ushbu ilovani yashirasizmi?</string>
     <string name="home_more_apps_title">Yana ko\'proq ilovalar</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">Yangi kategoriya</string>
     <string name="home_category_rename_title">Kategoriyani qayta nomlash</string>
     <string name="home_category_name">Kategoriya nomi</string>
+    <string name="home_category_name_description">Bosh ekran ilovalarni shu nom ostida guruhlaydi</string>
     <string name="home_category_move_to">Kategoriyaga ko\'chirish</string>
     <string name="home_category_move_selected_title">Tanlangan ilovalarni ko\'chirish</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">Muammo haqida xabar berish</string>
     <string name="sources_management_failed_to_open_url">URL ochishda xatolik</string>
     <string name="sources_apps">Ilovalar</string>
-    <string name="sources_apps_description">Belgilangan ilovalar shu manbadan keladi. Biror ilovani tashlab qo\'yish yoki qaytarish uchun unga teging. Agar siz uni patchlagan bo\'lmasangiz, hech qanday manba uni keltirmasa, ilova bosh ekrandan ketadi.</string>
+    <string name="sources_apps_description">Belgilangan ilovalar ushbu manbadan keladi. Ilovani chiqarib tashlash yoki qaytarish uchun uni bosing, patchlarini ko\'rish uchun esa suring. Manbasiz ilova, agar siz uni patch qilmagan bo\'lsangiz, bosh sahifani tark etadi</string>
     <string name="sources_apps_brought">Bu manba orqali kelgan</string>
     <string name="sources_apps_left_out">Bu manbadan chiqarilgan</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1166,6 +1170,26 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_system_hide_password_field">Parolni yashirish</string>
     <string name="settings_system_morphe_settings">Morphe sozlamalari</string>
     <string name="settings_system_import_manager_settings_description">Morphe sozlamalaringizni saqlab qolish va tiklash</string>
+    <string name="settings_system_export_manager_settings_title">Morphe sozlamalarini eksport qilish</string>
+    <string name="settings_system_export_manager_settings_description">Siz tanlagan sozlamalarni faylga saqlaydi</string>
+    <string name="settings_system_import_manager_settings_file_description">Sozlamalarni zaxira nusxa faylidan tiklaydi</string>
+    <string name="settings_system_auto_backup">Avtomatik zaxira nusxalash</string>
+    <string name="settings_system_auto_backup_switch">Avtomatik ravishda zaxira nusxalash</string>
+    <string name="settings_system_auto_backup_now">Hozir zaxira nusxalash</string>
+    <string name="settings_system_auto_backup_saved">Zaxira nusxa saqlandi</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe keyingi nusxani yaratishdan oldin nusxa ko\'chirilganidan keyin kamida shu vaqt davomida kutadi</string>
+    <string name="settings_system_auto_backup_description">Siz tanlagan papkaga Morphe sozlamalarini saqlaydi</string>
+    <string name="settings_system_auto_backup_last">Oxirgi zaxira nusxa: %s</string>
+    <string name="settings_system_auto_backup_folder">Papka</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe zaxira nusxalari</string>
+    <string name="settings_system_auto_backup_folder_failed">Ushbu papkadan foydalanib bo\"lib bo\"lmadi: %s</string>
+    <string name="settings_system_auto_backup_interval">Zaxiralash chastotasi</string>
+    <string name="settings_system_auto_backup_signing_key">Imzolash kalitini kiritish</string>
+    <string name="settings_system_auto_backup_signing_key_description">Sozlamalar bilan birga patch qilingan ilovalarni imzolaydigan kalitni saqlaydi</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">Imzolash kalitini zaxiralashmi?</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">Ushbu faylni qo\"lga kiritgan har qanday shaxs patch qilingan ilovalaringiz ustiga o\"rnatiladigan yangilanishlarni imzolashi mumkin. Papkani maxfiy saqlang va uni faqat o\"z qurilmalaringiz bilan baham ko\"ring</string>
+    <string name="settings_system_auto_backup_footer">Biror narsani o\'zgartirgandan so\'ng Morphe\'dan chiqqanda nusxa saqlanadi. Eng yangi %s saqlanadi</string>
+    <string name="settings_system_auto_backup_failed">Oxirgi zaxira nusxasini saqlab bo\"lmadi. Papkani qaytadan tanlang</string>
     <string name="settings_system_import_manager_settings_fail">Morphe sozlamalarini import qilishda xatolik: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe sozlamalari import qilindi</string>
     <string name="settings_system_import_manager_settings_mode_title">Morphe sozlamalarini import qilish</string>
@@ -1265,6 +1289,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="selection_set_deleted">%s o\'chirildi</string>
     <string name="selection_set_renamed">%s ga qayta nomlandi</string>
     <string name="selection_set_rename_title">To\'plamni qayta nomlash</string>
+    <string name="selection_set_rename_description">Boshqa to\'plam nomini olish o\'sha to\'plamni almashtiradi</string>
     <string name="selection_set_delete_title">To\'plamni o\'chirish?</string>
     <string name="selection_set_delete_message">Bu %s to\'plamini butunlay o\'chirib tashlaydi</string>
     <string name="copy_selection_empty">Nusxalash uchun boshqa saqlangan tanlovlar yo‘q</string>
@@ -1301,6 +1326,12 @@ Ma’lumotlar: %2$s"</string>
     <string name="file_picker_sort_date_desc">Sana (eng yangi birinchi)</string>
     <string name="file_picker_sort_date_asc">Sana (eng eski birinchi)</string>
     <string name="file_picker_show_hidden_files">Yashirin fayllarni ko\'rsatish</string>
+    <string name="file_picker_new_folder">Yangi papka</string>
+    <string name="file_picker_folder_name">Papka nomi</string>
+    <string name="file_picker_new_folder_description">%1$s da yaratiladi va darhol ochiladi</string>
+    <string name="file_picker_folder_name_taken">Bunday nomli element allaqachon mavjud</string>
+    <string name="file_picker_folder_name_invalid">Papka nomi \" * / : &lt; &gt; ? \\ | belgilarini o\'z ichiga olmasligi kerak</string>
+    <string name="file_picker_new_folder_failed">Papka yaratib bo\'lmadi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqida</string>
     <string name="settings_system_manager_description">Zamonaviy, soddalashtirilgan Android ilovalarini patchlash uchun mo‘ljallangan ochiq kodli loyiha, hamjamiyatning fikr-mulohazalari va hissalariga asoslangan</string>
@@ -1344,6 +1375,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="settings_section_about_summary">Morphe haqida ko\'proq va yordam olish</string>
     <string name="settings_section_local_files">Fayllar</string>
     <string name="settings_section_backup">Zaxira</string>
+    <string name="settings_section_import_export">Import va eksport</string>
     <string name="settings_search">Sozlamalarni qidirish</string>
     <string name="yes">Ha</string>
     <string name="no">Yo‘q</string>
@@ -1362,6 +1394,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="retry">Qayta urinish</string>
     <string name="refresh">Yangilash</string>
     <string name="add">Qo‘shish</string>
+    <string name="create">Yaratish</string>
     <string name="close">Yopish</string>
     <string name="back">Ortga</string>
     <string name="next">Keyingisi</string>

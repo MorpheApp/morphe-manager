@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_unpatched_version_installed">已安裝未修補版本</string>
     <string name="home_unpatched_badge">尚未修補</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">電視</string>
+    <string name="form_factor_automotive">汽車</string>
     <string name="home_no_patches_available">沒有可用的修補程式</string>
     <string name="home_app_hide_title">要隱藏這個應用程式嗎？</string>
     <string name="home_more_apps_title">更多應用程式</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">新增類別</string>
     <string name="home_category_rename_title">重新命名類別</string>
     <string name="home_category_name">類別名稱</string>
+    <string name="home_category_name_description">主畫面將其應用程式分群在此名稱下</string>
     <string name="home_category_move_to">移至類別</string>
     <string name="home_category_move_selected_title">移動所選應用程式</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">回報問題</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
     <string name="sources_apps">應用程式</string>
-    <string name="sources_apps_description">勾選的應用程式來自此來源。輕按應用程式可將其排除或恢復。一旦沒有來源提供給該應用程式，它就會退出主畫面，除非你已對它做過修補</string>
+    <string name="sources_apps_description">勾選的應用程式來自此來源。輕按應用程式可將其排除或恢復，向其滑動可查看其修補項目。一旦沒有來源提供給該應用程式，它就會退出主畫面，除非你已對它做過修補</string>
     <string name="sources_apps_brought">由此來源提供</string>
     <string name="sources_apps_left_out">已從此來源排除</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1164,6 +1168,26 @@ morphe_header_custom_dark.png
     <string name="settings_system_hide_password_field">隱藏密碼</string>
     <string name="settings_system_morphe_settings">Morphe 設定</string>
     <string name="settings_system_import_manager_settings_description">備份和還原您的 Morphe 設定</string>
+    <string name="settings_system_export_manager_settings_title">匯出 Morphe 設定</string>
+    <string name="settings_system_export_manager_settings_description">將您選擇的設定儲存至檔案</string>
+    <string name="settings_system_import_manager_settings_file_description">從備份檔案還原設定</string>
+    <string name="settings_system_auto_backup">自動備份</string>
+    <string name="settings_system_auto_backup_switch">自動進行備份</string>
+    <string name="settings_system_auto_backup_now">立即備份</string>
+    <string name="settings_system_auto_backup_saved">備份已儲存</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe 在進行下一次複製之前，會至少等待這麼長時間</string>
+    <string name="settings_system_auto_backup_description">將您的 Morphe 設定儲存至您選擇的資料夾</string>
+    <string name="settings_system_auto_backup_last">上次備份：%s</string>
+    <string name="settings_system_auto_backup_folder">資料夾</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe 備份</string>
+    <string name="settings_system_auto_backup_folder_failed">無法使用此資料夾：%s</string>
+    <string name="settings_system_auto_backup_interval">備份頻率</string>
+    <string name="settings_system_auto_backup_signing_key">包含簽署金鑰</string>
+    <string name="settings_system_auto_backup_signing_key_description">將簽署修補應用程式的金鑰與設定一起儲存</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">要備份簽署金鑰嗎？</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">任何取得此檔案的人都可以簽署可用於覆蓋您的修補應用程式之更新。請保持資料夾私密，且僅與您自己的裝置共享</string>
+    <string name="settings_system_auto_backup_footer">在更改內容並離開 Morphe 時會儲存一份副本。將保留最新的 %s</string>
+    <string name="settings_system_auto_backup_failed">無法儲存上一次的備份。請重新選擇資料夾</string>
     <string name="settings_system_import_manager_settings_fail">無法匯入 Morphe 設定：%s</string>
     <string name="settings_system_import_manager_settings_success">已匯入 Morphe 設定</string>
     <string name="settings_system_import_manager_settings_mode_title">匯入 Morphe 設定</string>
@@ -1263,6 +1287,7 @@ morphe_header_custom_dark.png
     <string name="selection_set_deleted">%s 已刪除</string>
     <string name="selection_set_renamed">已重新命名為 %s</string>
     <string name="selection_set_rename_title">重新命名集組</string>
+    <string name="selection_set_rename_description">使用另一個集組的名稱將會取代該集組</string>
     <string name="selection_set_delete_title">刪除集組？</string>
     <string name="selection_set_delete_message">這將永久刪除集組 %s</string>
     <string name="copy_selection_empty">沒有其他已儲存的選取項目可供複製</string>
@@ -1299,6 +1324,12 @@ morphe_header_custom_dark.png
     <string name="file_picker_sort_date_desc">日期 (最新到舊)</string>
     <string name="file_picker_sort_date_asc">日期 (由舊到新)</string>
     <string name="file_picker_show_hidden_files">顯示隱藏的檔案</string>
+    <string name="file_picker_new_folder">新資料夾</string>
+    <string name="file_picker_folder_name">資料夾名稱</string>
+    <string name="file_picker_new_folder_description">在 %1$s 中建立並立即開啟</string>
+    <string name="file_picker_folder_name_taken">已有相同名稱的項目</string>
+    <string name="file_picker_folder_name_invalid">資料夾名稱不能包含 \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">無法建立資料夾</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>
     <string name="settings_system_manager_description">\"這是一個開源專案，用於對熱門的 Android 應用程式進行現代、簡化的修補，並由社群的意見回饋和貢獻所驅動\"</string>
@@ -1342,6 +1373,7 @@ morphe_header_custom_dark.png
     <string name="settings_section_about_summary">關於 Morphe 及如何取得協助</string>
     <string name="settings_section_local_files">檔案</string>
     <string name="settings_section_backup">備份</string>
+    <string name="settings_section_import_export">匯入與匯出</string>
     <string name="settings_search">搜尋設定</string>
     <string name="yes">是</string>
     <string name="no">否</string>
@@ -1360,6 +1392,7 @@ morphe_header_custom_dark.png
     <string name="retry">重試</string>
     <string name="refresh">重新整理</string>
     <string name="add">新增</string>
+    <string name="create">建立</string>
     <string name="close">關閉</string>
     <string name="back">返回</string>
     <string name="next">下一步</string>

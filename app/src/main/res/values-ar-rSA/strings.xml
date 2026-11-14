@@ -6,6 +6,9 @@
     <string name="home_not_patched_yet">لم يتم تعديله بعد</string>
     <string name="home_unpatched_version_installed">تم تثبيت إصدار غير معدل</string>
     <string name="home_unpatched_badge">لم يتم تعديله</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">تلفزيون</string>
+    <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">لا توجد تعديلات متاحة</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
     <string name="home_more_apps_title">المزيد من التطبيقات</string>
@@ -38,7 +41,7 @@
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">هذا إصدار جديد من %s. هل تريد تحديثه؟</string>
     <string name="mpp_import_unreadable">لا يمكن قراءة هذا الملف</string>
-    <string name="incoming_file_not_patch_source">هذا الملف ليس مصدراً للتصحيح</string>
+    <string name="incoming_file_not_patch_source">هذا الملف ليس مصدرًا للتعديل</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">تحديث Morphe متاح</string>
     <string name="home_update_available_subtitle">إصدار جديد جاهز للتثبيت</string>
@@ -82,6 +85,7 @@
     <string name="home_category_new_title">فئة جديدة</string>
     <string name="home_category_rename_title">إعادة تسمية الفئة</string>
     <string name="home_category_name">اسم الفئة</string>
+    <string name="home_category_name_description">تجمع الشاشة الرئيسية تطبيقاتها تحت هذا الاسم</string>
     <string name="home_category_move_to">نقل إلى فئة</string>
     <string name="home_category_move_selected_title">نقل التطبيقات المحددة</string>
     <!-- %s is the name of the category -->
@@ -164,7 +168,7 @@
     <string name="sources_management_report_issue">الإبلاغ عن مشكلة</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_apps">التطبيقات</string>
-    <string name="sources_apps_description">التطبيقات المحددة تأتي من هذا المصدر. انقر على تطبيق لاستبعاده أو إعادته. يغادر التطبيق الشاشة الرئيسية بمجرد توقف أي مصدر عن تقديمه، ما لم تكن قد قمت بتعديله</string>
+    <string name="sources_apps_description">التطبيقات المحددة تأتي من هذا المصدر. انقر على تطبيق لاستبعاده أو إعادته، ومرره لرؤية تعديلاته. يغادر التطبيق الشاشة الرئيسية بمجرد توقف أي مصدر عن تقديمه، ما لم تكن قد قمت بتعديله</string>
     <string name="sources_apps_brought">ما يجلبه هذا المصدر</string>
     <string name="sources_apps_left_out">المستبعدة من هذا المصدر</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -1170,6 +1174,26 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_hide_password_field">إخفاء كلمة المرور</string>
     <string name="settings_system_morphe_settings">إعدادات Morphe</string>
     <string name="settings_system_import_manager_settings_description">ينسخ إعدادات Morphe احتياطيًا ويستعيدها</string>
+    <string name="settings_system_export_manager_settings_title">تصدير إعدادات Morphe</string>
+    <string name="settings_system_export_manager_settings_description">يحفظ الإعدادات التي تختارها في ملف</string>
+    <string name="settings_system_import_manager_settings_file_description">استعادة الإعدادات من ملف نسخ احتياطي</string>
+    <string name="settings_system_auto_backup">نسخ احتياطي تلقائي</string>
+    <string name="settings_system_auto_backup_switch">النسخ احتياطيًا تلقائيًا</string>
+    <string name="settings_system_auto_backup_now">نسخ احتياطي الآن</string>
+    <string name="settings_system_auto_backup_saved">تم حفظ النسخة الاحتياطية</string>
+    <string name="settings_system_auto_backup_interval_description">ينتظر Morphe هذه المدة على الأقل بعد النسخ قبل إنشاء نسخة أخرى</string>
+    <string name="settings_system_auto_backup_description">يحفظ إعدادات Morphe في مجلد تختاره</string>
+    <string name="settings_system_auto_backup_last">آخر نسخة احتياطية: %s</string>
+    <string name="settings_system_auto_backup_folder">المجلد</string>
+    <string name="settings_system_auto_backup_folder_name">نسخ Morphe الاحتياطية</string>
+    <string name="settings_system_auto_backup_folder_failed">تعذر استخدام هذا المجلد: %s</string>
+    <string name="settings_system_auto_backup_interval">تكرار النسخ الاحتياطي</string>
+    <string name="settings_system_auto_backup_signing_key">تضمين مفتاح التوقيع</string>
+    <string name="settings_system_auto_backup_signing_key_description">يحفظ المفتاح الذي يوقع التطبيقات المعدلة بجانب الإعدادات</string>
+    <string name="settings_system_auto_backup_signing_key_warning_title">نسخ مفتاح التوقيع احتياطيًا؟</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">يمكن لأي شخص يحصل على هذا الملف توقيع تحديثات يتم تثبيتها فوق تطبيقاتك المعدلة. حافظ على خصوصية المجلد وشاركه فقط مع أجهزتك الخاصة</string>
+    <string name="settings_system_auto_backup_footer">يتم حفظ نسخة عند مغادرة Morphe بعد تغيير شيء ما. يتم الاحتفاظ بأحدث %s نسخ</string>
+    <string name="settings_system_auto_backup_failed">تعذر حفظ النسخة الاحتياطية الأخيرة. اختر المجلد مرة أخرى</string>
     <string name="settings_system_import_manager_settings_fail">تعذر استيراد إعدادات Morphe: %s</string>
     <string name="settings_system_import_manager_settings_success">تم استيراد إعدادات Morphe</string>
     <string name="settings_system_import_manager_settings_mode_title">استيراد إعدادات Morphe</string>
@@ -1269,6 +1293,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="selection_set_deleted">تم حذف %s</string>
     <string name="selection_set_renamed">تم تغيير الاسم إلى %s</string>
     <string name="selection_set_rename_title">إعادة تسمية المجموعة</string>
+    <string name="selection_set_rename_description">إن استخدام اسم مجموعة أخرى يؤدي إلى استبدال تلك المجموعة</string>
     <string name="selection_set_delete_title">حذف المجموعة؟</string>
     <string name="selection_set_delete_message">سيؤدي هذا إلى حذف المجموعة %s بشكل دائم</string>
     <string name="copy_selection_empty">لا توجد تحديدات أخرى محفوظة للنسخ منها</string>
@@ -1305,6 +1330,12 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_sort_date_desc">التاريخ (الأحدث أولًا)</string>
     <string name="file_picker_sort_date_asc">التاريخ (الأقدم أولًا)</string>
     <string name="file_picker_show_hidden_files">إظهار الملفات المخفية</string>
+    <string name="file_picker_new_folder">مجلد جديد</string>
+    <string name="file_picker_folder_name">اسم المجلد</string>
+    <string name="file_picker_new_folder_description">تم الإنشاء في %1$s والفتح على الفور</string>
+    <string name="file_picker_folder_name_taken">يوجد شيء بهذا الاسم هنا بالفعل</string>
+    <string name="file_picker_folder_name_invalid">لا يمكن أن يحتوي اسم المجلد على \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_failed">تعذر إنشاء المجلد</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
     <string name="settings_system_manager_description">مشروع مفتوح المصدر يهدف إلى توفير طريقة حديثة ومبسطة لتعديل تطبيقات Android الشهيرة، مستندًا إلى ملاحظات المستخدمين ومساهمات المجتمع</string>
@@ -1348,6 +1379,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_section_about_summary">المزيد حول Morphe والحصول على المساعدة</string>
     <string name="settings_section_local_files">الملفات</string>
     <string name="settings_section_backup">النسخ الاحتياطي</string>
+    <string name="settings_section_import_export">استيراد وتصدير</string>
     <string name="settings_search">بحث الإعدادات</string>
     <string name="yes">نعم</string>
     <string name="no">لا</string>
@@ -1366,6 +1398,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="retry">إعادة المحاولة</string>
     <string name="refresh">تحديث</string>
     <string name="add">إضافة</string>
+    <string name="create">إنشاء</string>
     <string name="close">إغلاق</string>
     <string name="back">رجوع</string>
     <string name="next">التالي</string>
