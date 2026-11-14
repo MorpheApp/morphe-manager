@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.content.pm.PackageInfo
+import androidx.annotation.StringRes
 import android.view.HapticFeedbackConstants
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -27,6 +28,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -41,6 +43,9 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.*
+import app.morphe.patcher.patch.FormFactor
+import com.composables.icons.materialsymbols.MaterialSymbols
+import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -141,6 +146,37 @@ internal fun RowScope.AppCardContent(
     }
 }
 
+/** How a card names and draws the device an app is built for. */
+private class FormFactorMark(@StringRes val label: Int, val icon: ImageVector)
+
+/** The mark of a device other than a phone, null for a phone app or one any device runs. */
+private fun FormFactor?.mark(): FormFactorMark? = when (this) {
+    FormFactor.TV -> FormFactorMark(R.string.form_factor_tv, MaterialSymbols.Rounded.Tv)
+    FormFactor.WEARABLE -> FormFactorMark(R.string.form_factor_wearable, MaterialSymbols.Rounded.Watch)
+    FormFactor.AUTOMOTIVE -> FormFactorMark(R.string.form_factor_automotive, MaterialSymbols.Rounded.Directions_car)
+    FormFactor.MOBILE, null -> null
+}
+
+/** What the badge of [FormFactorBadge] says, for a card's description to read out too. */
+@Composable
+internal fun FormFactor?.cardLabel(): String? = mark()?.let { stringResource(it.label) }
+
+/**
+ * Marks an app built for a device other than a phone. Only marked, never hidden, as a TV app is
+ * often patched on a phone and carried over.
+ */
+@Composable
+internal fun FormFactorBadge(formFactor: FormFactor?, gradientColors: List<Color>) {
+    val mark = formFactor.mark() ?: return
+    val cardStyle = glassCardStyle().onCard(gradientColors)
+    StatusBadge(
+        text = stringResource(mark.label),
+        icon = mark.icon,
+        containerColor = cardStyle.chipContainerColor,
+        contentColor = cardStyle.chipContentColor
+    )
+}
+
 /**
  * One home screen card for [item]: the build Morphe keeps a record of, or the not-patched-yet
  * button when there is no record to show.
@@ -207,6 +243,7 @@ private fun InstalledAppCard(
     val replacementBadgeLabel = stringResource(R.string.home_unpatched_badge)
     val unverifiedLabel = stringResource(R.string.home_unverified)
     val pendingLabel = stringResource(R.string.home_install_verification_pending)
+    val formFactorLabel = item.formFactor.cardLabel()
 
     val showsPendingBadge = remember { mutableStateOf(false) }
     LaunchedEffect(item.isInstallStatePending) {
@@ -256,12 +293,14 @@ private fun InstalledAppCard(
         replacementLabel,
         unverifiedLabel,
         showsPendingBadge.value,
-        pendingLabel
+        pendingLabel,
+        formFactorLabel
     ) {
         buildString {
             append(item.displayName)
             item.nameSuffix?.let { append(", $it") }
             if (item.isClone) append(", $cloneLabel")
+            formFactorLabel?.let { append(", $it") }
             if (version.isNotEmpty()) {
                 append(", $versionLabel $version")
             }
@@ -355,6 +394,8 @@ private fun InstalledAppCard(
                 // The drag handle rides over this edge of the card while reordering, so the
                 // badges pinned here stand down rather than crowd it
                 if (showStatusBadges) {
+                    FormFactorBadge(item.formFactor, item.gradientColors)
+
                     // Frosted-glass colors: a white semi-transparent fill reads on any accent
                     // color the card's bundle brings, and on the user's dynamic theme
                     if (item.isDeleted && !item.isInstallStateNotPatched) {
@@ -418,8 +459,9 @@ private fun NotPatchedAppCard(
         listOfNotNull(item.nameSuffix, version?.withVersionPrefix(), notPatchedText).joinToString(" • ")
     }
 
-    val contentDesc = remember(item.displayName, subtitle) {
-        "${item.displayName}, $subtitle"
+    val formFactorLabel = item.formFactor.cardLabel()
+    val contentDesc = remember(item.displayName, subtitle, formFactorLabel) {
+        listOfNotNull(item.displayName, formFactorLabel, subtitle).joinToString(", ")
     }
 
     AppCardLayout(
@@ -438,7 +480,9 @@ private fun NotPatchedAppCard(
             displayName = item.displayName,
             subtitle = subtitle,
             gradientColors = item.gradientColors,
-        )
+        ) {
+            FormFactorBadge(item.formFactor, item.gradientColors)
+        }
     }
 }
 

@@ -5,6 +5,10 @@
     <string name="home_not_patched_yet">Not patched yet</string>
     <string name="home_unpatched_version_installed">Unpatched version installed</string>
     <string name="home_unpatched_badge">Not patched</string>
+    <!-- Badge on the card of an app built for a device other than a phone -->
+    <string name="form_factor_tv">TV</string>
+    <string name="form_factor_wearable" translatable="false">Wear OS</string>
+    <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">No patches available</string>
     <string name="home_app_hide_title">Hide this app?</string>
     <string name="home_more_apps_title">More apps</string>

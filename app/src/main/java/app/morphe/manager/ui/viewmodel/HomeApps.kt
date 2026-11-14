@@ -627,7 +627,8 @@ class HomeApps(
                     ignoredVersion = ignoredVersions[packageName]
                 ),
                 patchCount = 0,
-                isClone = slot.isClone
+                isClone = slot.isClone,
+                formFactor = bundleMeta?.formFactor
             )
         }
 

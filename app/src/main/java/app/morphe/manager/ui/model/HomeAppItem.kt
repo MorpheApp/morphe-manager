@@ -10,6 +10,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.AppVersionStatus
+import app.morphe.patcher.patch.FormFactor
 import java.io.File
 
 /**
@@ -41,7 +42,9 @@ data class HomeAppItem(
     val patchCount: Int,
     val isClone: Boolean,
     /** What tells the card from another app of the same name, see [withNameSuffixes]. */
-    val nameSuffix: String? = null
+    val nameSuffix: String? = null,
+    /** Device the sources say the app is built for, null where they do not say. */
+    val formFactor: FormFactor? = null
 ) {
     val hasSavedCopy: Boolean get() = savedApkFile != null
 
