@@ -1,3 +1,16 @@
+## [2.6.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.2...v2.6.0-dev.3) (2026-11-14)
+
+### Features
+
+* Back up settings automatically to a folder of choice ([3bc984a](https://github.com/MorpheApp/morphe-manager/commit/3bc984a98027b80cf109ebebe59336bb62667963))
+* Find sources by the apps they patch ([749ab11](https://github.com/MorpheApp/morphe-manager/commit/749ab1108e021bcb5e500e5e5acfecbeae8e1374))
+* Give a list header's glyph up to a title that would not fit ([6a76ba8](https://github.com/MorpheApp/morphe-manager/commit/6a76ba860027a66789719d13bd3a5ae9de195d9c))
+* Show the patched app's own name and icon on the result screen ([f78f209](https://github.com/MorpheApp/morphe-manager/commit/f78f2096ecb12635c62ae3d649da860dc3a884c9))
+
+### Bug Fixes
+
+* Open the batch queue scrolled to its top ([8040c2c](https://github.com/MorpheApp/morphe-manager/commit/8040c2cb6908ed560cb6a15bbaaf8684016f13f3))
+
 ## [2.6.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.1...v2.6.0-dev.2) (2026-11-13)
 
 ### Features
