@@ -738,8 +738,9 @@ class PatcherProcesses(
         const val DEBUG_OPTIONS_FILE = "jvm-options.txt"
         const val NO_EXIT_RECORD = "no exit record"
 
-        // The patcher keeps close to a gigabyte alive for the largest apps. The JVM only takes what
-        // it uses, so the limit is a ceiling that keeps a runaway patch from taking the device
+        // The patcher keeps close to a gigabyte alive for the largest apps. Past the heap it starts
+        // with, see PatcherService, the JVM only takes what it uses, so the limit is a ceiling that
+        // keeps a runaway patch from taking the device
         const val HEAP_LIMIT_MINIMUM_MB = 1536
         const val HEAP_LIMIT_MAXIMUM_MB = 3072
 
