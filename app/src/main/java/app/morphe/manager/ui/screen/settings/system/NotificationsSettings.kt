@@ -33,7 +33,7 @@ import app.morphe.manager.util.displayName
 import app.morphe.manager.util.openAppNotificationSettings
 import app.morphe.manager.util.rememberAdaptiveFilePicker
 import app.morphe.manager.util.tryLaunch
-import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.manager.worker.ScheduleInterval
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import org.koin.androidx.compose.koinViewModel
@@ -365,8 +365,8 @@ fun DialogHostScope.NotificationPermissionDialog(
 /** How often the background update check runs, picked in place among the few there are. */
 @Composable
 private fun UpdateIntervalSetting(
-    selected: UpdateCheckInterval,
-    onSelect: (UpdateCheckInterval) -> Unit
+    selected: ScheduleInterval,
+    onSelect: (ScheduleInterval) -> Unit
 ) {
     val title = stringResource(R.string.settings_advanced_update_interval)
     SearchableSetting(listOf(title)) {
@@ -378,7 +378,7 @@ private fun UpdateIntervalSetting(
                 leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Schedule) },
                 title = title
             )
-            OptionGroup(items = UpdateCheckInterval.entries) { interval, shape, source, itemModifier ->
+            OptionGroup(items = ScheduleInterval.entries) { interval, shape, source, itemModifier ->
                 ModernIconOptionCard(
                     selected = interval == selected,
                     onClick = { onSelect(interval) },
@@ -394,10 +394,10 @@ private fun UpdateIntervalSetting(
     }
 }
 
-private val UpdateCheckInterval.icon: ImageVector
+private val ScheduleInterval.icon: ImageVector
     get() = when (this) {
-        UpdateCheckInterval.HOURLY -> MaterialSymbols.Rounded.Timer
-        UpdateCheckInterval.DAILY -> MaterialSymbols.Rounded.Today
-        UpdateCheckInterval.WEEKLY -> MaterialSymbols.Rounded.Date_range
-        UpdateCheckInterval.MONTHLY -> MaterialSymbols.Rounded.Calendar_month
+        ScheduleInterval.HOURLY -> MaterialSymbols.Rounded.Timer
+        ScheduleInterval.DAILY -> MaterialSymbols.Rounded.Today
+        ScheduleInterval.WEEKLY -> MaterialSymbols.Rounded.Date_range
+        ScheduleInterval.MONTHLY -> MaterialSymbols.Rounded.Calendar_month
     }

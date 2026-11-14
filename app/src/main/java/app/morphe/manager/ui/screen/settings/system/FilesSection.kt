@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -18,13 +17,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
-import app.morphe.manager.domain.manager.SettingsSection
 import app.morphe.manager.domain.manager.SigningKeyInfo
 import app.morphe.manager.ui.screen.home.OnboardingState
 import app.morphe.manager.ui.screen.home.TourTarget
@@ -35,8 +31,6 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
-import app.morphe.manager.util.JSON_MIMETYPE
-import app.morphe.manager.util.TEXT_MIMETYPE
 import app.morphe.manager.util.isAndroidTv
 import app.morphe.manager.util.rememberAdaptiveFilePicker
 import app.morphe.manager.util.rememberDocumentSaver
@@ -54,7 +48,7 @@ private const val FINGERPRINT_BYTES_PER_LINE = 8
 /**
  * The files the manager works with: where the APKs it patches come from and what it keeps on the
  * device, then the backups of it: the signing key, which a lost install cannot recreate, and the
- * manager's settings.
+ * page backing up the manager's settings.
  */
 @Composable
 fun FilesSection(
@@ -77,25 +71,7 @@ fun FilesSection(
         onResult = { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
     )
 
-    // Replace and Merge only differ for sources and patch selections, so the mode is asked only
-    // when one of them is taken
-    var pendingSettingsImportUri by remember { mutableStateOf<Uri?>(null) }
-    val importSettingsLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf(JSON_MIMETYPE, TEXT_MIMETYPE),
-        customPickerMimeTypes = arrayOf(JSON_MIMETYPE),
-        onResult = { uri ->
-            uri ?: return@rememberAdaptiveFilePicker
-            val sections = importExportViewModel.settingsSections
-            if (SettingsSection.SOURCES in sections || SettingsSection.PATCH_SELECTIONS in sections) {
-                pendingSettingsImportUri = uri
-            } else {
-                importExportViewModel.importManagerSettings(uri)
-            }
-        }
-    )
-
     val exportKeystore = rememberDocumentSaver("application/x-pkcs12", importExportViewModel::exportKeystore)
-    val exportSettings = rememberDocumentSaver(JSON_MIMETYPE, importExportViewModel::exportManagerSettings)
 
     DialogHost(visible = importExportViewModel.showCredentialsDialog) {
         KeystoreCredentialsDialog(
@@ -106,18 +82,6 @@ fun FilesSection(
                         messages.show(wrongCredentialsText)
                     }
                 }
-            }
-        )
-    }
-
-    DialogHost(target = pendingSettingsImportUri) { uri ->
-        ImportModeDialog(
-            titleRes = R.string.settings_system_import_manager_settings_mode_title,
-            descriptionRes = R.string.settings_system_import_manager_settings_mode_description,
-            onDismiss = { pendingSettingsImportUri = null },
-            onSelect = { mode ->
-                importExportViewModel.importManagerSettings(uri, mode)
-                pendingSettingsImportUri = null
             }
         )
     }
@@ -137,33 +101,33 @@ fun FilesSection(
         icon = MaterialSymbols.Rounded.Backup
     ) {
         SettingsGroup {
-            ImportExportItems(
+            SigningKeyItem(
                 importExportViewModel = importExportViewModel,
                 tour = tour,
-                onImportKeystore = { importKeystoreLauncher() },
-                onExportKeystore = { exportKeystore("Morphe.p12") },
-                onImportSettings = { importSettingsLauncher() },
-                onExportSettings = { exportSettings("morphe_manager_settings.json") }
+                onImport = { importKeystoreLauncher() },
+                onExport = { exportKeystore("Morphe.p12") }
+            )
+            SubpageItem(
+                subpage = SettingsSubpage.SETTINGS_BACKUP,
+                onOpen = onOpenSubpage,
+                subtitle = settingsBackupSummary(settingsViewModel.prefs)
             )
         }
     }
 }
 
 /**
- * The signing key and Morphe's own settings as rows of a settings group, each behind a dialog
- * that says what it holds before offering to move it.
+ * The signing key as a row of a settings group, behind a dialog that shows which key it is before
+ * moving it.
  */
 @Composable
-private fun ImportExportItems(
+private fun SigningKeyItem(
     importExportViewModel: ImportExportViewModel,
     tour: OnboardingState?,
-    onImportKeystore: () -> Unit,
-    onExportKeystore: () -> Unit,
-    onImportSettings: () -> Unit,
-    onExportSettings: () -> Unit
+    onImport: () -> Unit,
+    onExport: () -> Unit
 ) {
     var showSigningKeyDialog by remember { mutableStateOf(false) }
-    var showSettingsDialog by remember { mutableStateOf(false) }
     val signingKey = importExportViewModel.signingKey
 
     // Patching creates the key and an import replaces it, both away from this screen
@@ -173,8 +137,8 @@ private fun ImportExportItems(
         ImportExportDialog(
             title = stringResource(R.string.settings_system_signing_key),
             description = stringResource(R.string.settings_system_signing_key_dialog_description),
-            onImport = onImportKeystore,
-            onExport = onExportKeystore.takeIf { signingKey != null },
+            onImport = onImport,
+            onExport = onExport.takeIf { signingKey != null },
             onDismiss = { showSigningKeyDialog = false }
         ) {
             if (signingKey != null) {
@@ -191,39 +155,12 @@ private fun ImportExportItems(
         }
     }
 
-    DialogHost(visible = showSettingsDialog) {
-        ImportExportDialog(
-            title = stringResource(R.string.settings_system_morphe_settings),
-            // The sections below say what the backup holds, so this says the one thing no settings
-            // backup carries: moving to a new phone with only this file would otherwise look like
-            // a complete backup. Held above the list, a list taller than the screen cannot push
-            // it out of sight
-            description = stringResource(R.string.settings_system_backup_signing_key_note),
-            onImport = onImportSettings,
-            onExport = onExportSettings,
-            onDismiss = { showSettingsDialog = false },
-            enabled = importExportViewModel.settingsSections.isNotEmpty()
-        ) {
-            SettingsBackupContents(
-                selected = importExportViewModel.settingsSections,
-                onToggle = importExportViewModel::toggleSettingsSection
-            )
-        }
-    }
-
     SettingsItem(
         onClick = { showSigningKeyDialog = true },
         leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Key) },
         title = stringResource(R.string.settings_system_signing_key),
         subtitle = stringResource(R.string.settings_system_signing_key_description),
         modifier = Modifier.tourTarget(TourTarget.SIGNING_KEY, tour)
-    )
-
-    SettingsItem(
-        onClick = { showSettingsDialog = true },
-        leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Settings) },
-        title = stringResource(R.string.settings_system_morphe_settings),
-        subtitle = stringResource(R.string.settings_system_import_manager_settings_description)
     )
 }
 
@@ -232,14 +169,15 @@ private fun ImportExportItems(
  * what the user is here for far more often than a restore.
  * Left open while a picker runs, so a key that was just imported shows up in place of the old one.
  *
- * @param onExport Null while there is nothing to export yet.
+ * @param onImport Null where the dialog only exports.
+ * @param onExport Null while there is nothing to export yet, or where the dialog only imports.
  * @param enabled False while nothing is picked to move either way.
  */
 @Composable
-private fun DialogHostScope.ImportExportDialog(
+internal fun DialogHostScope.ImportExportDialog(
     title: String,
     description: String?,
-    onImport: () -> Unit,
+    onImport: (() -> Unit)?,
     onExport: (() -> Unit)?,
     onDismiss: () -> Unit,
     enabled: Boolean = true,
@@ -323,50 +261,6 @@ private fun SigningKeyPreview(key: SigningKeyInfo) {
         }
     }
 }
-
-/** Sections of the settings a backup moves, picked the same way for both directions. */
-@Composable
-private fun SettingsBackupContents(
-    selected: Set<SettingsSection>,
-    onToggle: (SettingsSection) -> Unit
-) {
-    SettingsGroup {
-        SettingsSection.entries.forEach { section ->
-            val isSelected = section in selected
-            RadioSelectionCard(
-                selected = isSelected,
-                onSelect = { onToggle(section) },
-                title = stringResource(section.titleRes),
-                description = stringResource(section.descriptionRes),
-                role = Role.Checkbox,
-                leadingContent = {
-                    SelectionCheckIndicator(ToggleableState(isSelected))
-                }
-            )
-        }
-    }
-}
-
-// Named after the places these settings live, so a section reads the same here as where it is set
-private val SettingsSection.titleRes: Int
-    get() = when (this) {
-        SettingsSection.APPEARANCE -> R.string.appearance
-        SettingsSection.HOME -> R.string.settings_appearance_home_screen
-        SettingsSection.PATCHING -> R.string.settings_system_backup_patching
-        SettingsSection.UPDATES -> R.string.settings_section_updates
-        SettingsSection.SOURCES -> R.string.sources
-        SettingsSection.PATCH_SELECTIONS -> R.string.settings_system_patch_selections_title
-    }
-
-private val SettingsSection.descriptionRes: Int
-    get() = when (this) {
-        SettingsSection.APPEARANCE -> R.string.settings_system_backup_appearance_description
-        SettingsSection.HOME -> R.string.settings_system_backup_home_description
-        SettingsSection.PATCHING -> R.string.settings_system_backup_patching_description
-        SettingsSection.UPDATES -> R.string.settings_system_backup_updates_description
-        SettingsSection.SOURCES -> R.string.settings_system_backup_sources_description
-        SettingsSection.PATCH_SELECTIONS -> R.string.settings_system_backup_patch_selections_description
-    }
 
 /** Key icon on a gradient of two hues read off [sha256], see [fingerprintColors]. */
 @Composable

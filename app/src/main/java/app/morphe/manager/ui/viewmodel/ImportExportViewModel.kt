@@ -22,6 +22,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
+import app.morphe.manager.domain.backup.AutoBackup
+import app.morphe.manager.domain.backup.SettingsExporter
+import app.morphe.manager.domain.backup.SettingsExporter.Companion.json
+import app.morphe.manager.domain.backup.SettingsExporter.Companion.settingsJson
 import app.morphe.manager.domain.manager.HomeAppButtonPreferences
 import app.morphe.manager.domain.manager.KeystoreManager
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -35,6 +39,7 @@ import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.domain.repository.StoredSelectionSet
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
+import app.morphe.manager.worker.ScheduleInterval
 import app.morphe.patcher.apk.ApkSigner
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CancellationException
@@ -43,7 +48,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import kotlinx.serialization.json.encodeToStream
 import java.io.BufferedWriter
@@ -157,7 +161,9 @@ class ImportExportViewModel(
     private val sourceMuteRepository: SourceMuteRepository,
     private val patchOptionsRepository: PatchOptionsRepository,
     private val selectionSetRepository: SelectionSetRepository,
-    private val patchBundleRepository: PatchBundleRepository
+    private val patchBundleRepository: PatchBundleRepository,
+    private val settingsExporter: SettingsExporter,
+    private val autoBackup: AutoBackup
 ) : ViewModel() {
     private val contentResolver = app.contentResolver
 
@@ -283,28 +289,12 @@ class ImportExportViewModel(
         }
     }
 
-    /** Everything a settings backup holds, cut down to [settingsSections]. */
-    private suspend fun managerSettingsExportFile(): ManagerSettingsExportFile {
-        val sections = settingsSections
-        val snapshot = preferencesManager.exportSettings()
-        val bundles = withContext(Dispatchers.IO) { patchBundleRepository.exportCustomBundles() }
-        val homeAppButtons = homeAppButtonPreferences.exportState()
-        return ManagerSettingsExportFile(
-            settings = snapshot.copy(
-                appLanguage = AppLocale.selected.value,
-                customBundles = bundles.ifEmpty { null },
-                homeAppButtons = homeAppButtons
-            ).restrictedTo(sections),
-            selections = if (SettingsSection.PATCH_SELECTIONS in sections) allSelectionsExportFile() else null
-        )
-    }
-
     fun exportManagerSettings(target: Uri) = viewModelScope.launch {
         messages.reportingFailure(
             R.string.settings_system_export_manager_settings_fail,
             "Failed to export manager settings"
         ) {
-            val exportFile = managerSettingsExportFile()
+            val exportFile = settingsExporter.managerSettings(settingsSections)
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target, "wt")!!.use { output ->
                     settingsJson.encodeToStream(exportFile, output)
@@ -314,6 +304,25 @@ class ImportExportViewModel(
             messages.show(R.string.settings_system_export_manager_settings_success)
         }
     }
+
+    /** Starts automatic backups into [folder], just picked by the user, see [AutoBackup.enable]. */
+    fun enableAutoBackup(folder: Uri) = viewModelScope.launch {
+        messages.reportingFailure(R.string.settings_system_auto_backup_folder_failed, "Failed to use the backup folder") {
+            reportBackup(autoBackup.enable(folder))
+        }
+    }
+
+    fun disableAutoBackup() = viewModelScope.launch { autoBackup.disable() }
+
+    fun backUpNow() = viewModelScope.launch { reportBackup(autoBackup.backUpNow()) }
+
+    private fun reportBackup(saved: Boolean) = messages.show(
+        if (saved) R.string.settings_system_auto_backup_saved else R.string.settings_system_auto_backup_failed
+    )
+
+    fun setAutoBackupInterval(interval: ScheduleInterval) = viewModelScope.launch { autoBackup.setInterval(interval) }
+
+    fun setAutoBackupSigningKey(include: Boolean) = viewModelScope.launch { autoBackup.setIncludesSigningKey(include) }
 
     /**
      * Export patch selections and options for a specific package+bundle combination.
@@ -374,7 +383,7 @@ class ImportExportViewModel(
      */
     fun exportAllSelections(target: Uri) = viewModelScope.launch {
         messages.reportingFailure(R.string.settings_system_export_source_data_fail, "Failed to export selections") {
-            val exportFile = allSelectionsExportFile()
+            val exportFile = settingsExporter.allSelections()
 
             withContext(Dispatchers.IO) {
                 contentResolver.openOutputStream(target, "wt")!!.use { output ->
@@ -384,64 +393,6 @@ class ImportExportViewModel(
 
             messages.show(R.string.settings_system_export_source_data_success)
         }
-    }
-
-    /** Every source's patch selections, options and kept apps, and every set, as one export. */
-    private suspend fun allSelectionsExportFile(): AllSelectionsExportFile {
-        val exportDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now())
-
-        val bundles = withContext(Dispatchers.IO) {
-            // A source can be one an app is kept from without anything ever being selected
-            // from it, and that decision is worth restoring on its own
-            val packagesByBundle = (
-                    patchSelectionRepository.getAllBundleUids() +
-                            sourceMuteRepository.getAllBundleUids()
-                    ).distinct()
-
-            packagesByBundle.map { bundleUid ->
-                val selections = patchSelectionRepository.exportAllForBundle(bundleUid)
-                val options = buildMap {
-                    selections.keys.forEach { packageName ->
-                        val rawOptions = patchOptionsRepository.exportOptionsForBundle(packageName, bundleUid)
-                        if (rawOptions.isNotEmpty()) put(packageName, rawOptions)
-                    }
-                }
-                PatchBundleDataExportFile(
-                    bundleUid = bundleUid,
-                    bundleName = patchBundleRepository.getNameForUid(bundleUid),
-                    bundleSource = patchBundleRepository.getEndpointForUid(bundleUid),
-                    exportDate = exportDate,
-                    selections = selections,
-                    options = options.ifEmpty { null },
-                    mutedPackages = sourceMuteRepository.exportForBundle(bundleUid).ifEmpty { null },
-                    knownApps = sourceMuteRepository.exportKnownApps(bundleUid)
-                )
-            }.filter { it.selections.isNotEmpty() || it.mutedPackages != null || it.knownApps != null }
-        }
-
-        val sets = withContext(Dispatchers.IO) {
-            selectionSetRepository.exportAll().map { set ->
-                SelectionSetExportFile(
-                    packageName = set.packageName,
-                    name = set.name,
-                    sources = (set.patches.keys + set.options.keys).map { bundleUid ->
-                        SelectionSetSourceExport(
-                            bundleUid = bundleUid,
-                            bundleSource = patchBundleRepository.getEndpointForUid(bundleUid),
-                            patches = set.patches[bundleUid].orEmpty(),
-                            options = set.options[bundleUid]
-                        )
-                    }
-                )
-            }
-        }
-
-        return AllSelectionsExportFile(
-            exportDate = exportDate,
-            bundles = bundles,
-            // Written even when empty, so a backup restored in Replace mode clears the sets it lacks
-            sets = sets
-        )
     }
 
     /**
@@ -699,19 +650,6 @@ class ImportExportViewModel(
     }
 
     companion object {
-        // Reusable JSON instances to avoid redundant creation. Both are internal so the export
-        // format stays under test instead of the tests rebuilding their own configuration
-        internal val json = Json {
-            ignoreUnknownKeys = true
-            prettyPrint = true // Make exports human-readable
-        }
-
-        /**
-         * Settings exports omit unset fields instead of writing a wall of nulls. Every field in
-         * that file has a default, so older manager versions still read the trimmed form.
-         */
-        internal val settingsJson = Json(json) { explicitNulls = false }
-
         private val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
         private val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
     }

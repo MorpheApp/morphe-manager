@@ -315,20 +315,23 @@ private fun DefaultRadioIndicator(selected: Boolean, enabled: Boolean, accentCol
     accentColor = accentColor
 )
 
-/** One of [modes] to pick, each as a card with its title and what it does. */
+/**
+ * One of [modes] to pick, each as a card with its title and, where [descriptionRes] is given, what
+ * it does.
+ */
 @Composable
 fun <T> ModeChoice(
     modes: List<T>,
     selected: T,
     onSelect: (T) -> Unit,
     titleRes: (T) -> Int,
-    descriptionRes: (T) -> Int
+    descriptionRes: ((T) -> Int)? = null
 ) {
     SettingsGroup {
         modes.forEach { mode ->
             val title = stringResource(titleRes(mode))
-            val description = stringResource(descriptionRes(mode))
-            SearchableSetting(listOf(title, description)) {
+            val description = descriptionRes?.let { stringResource(it(mode)) }
+            SearchableSetting(listOfNotNull(title, description)) {
                 RadioSelectionCard(
                     selected = mode == selected,
                     onSelect = { onSelect(mode) },
