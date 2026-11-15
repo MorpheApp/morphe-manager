@@ -741,7 +741,7 @@ class PatcherProcesses(
         // The patcher keeps close to a gigabyte alive for the largest apps. Past the heap it starts
         // with, see PatcherService, the JVM only takes what it uses, so the limit is a ceiling that
         // keeps a runaway patch from taking the device
-        const val HEAP_LIMIT_MINIMUM_MB = 1536
+        const val HEAP_LIMIT_MINIMUM_MB = 2048
         const val HEAP_LIMIT_MAXIMUM_MB = 3072
 
         // The heap is reserved in one piece, which a 32 bit process seldom finds much more of in
