@@ -62,11 +62,13 @@ object PatchSelectionUtils {
      * Every patch of these bundles with whether [selection] holds it, as the expert dialog lists
      * them: each bundle's patches by name, and the bundles that name the APK's version themselves
      * first, as the version was found through one of them, then those with the most patches for it.
-     * The [leadingBundleUid] the user chose goes ahead of all of them. A bundle without a patch for
-     * the app is left out.
+     * The [leadingBundleUid] the user chose goes ahead of all of them, then the bundles the app is
+     * patched from, read off the selection as the dialog [openedWith] so no tab moves while patches
+     * are ticked. A bundle without a patch for the app is left out.
      */
     fun List<PatchBundleInfo.Scoped>.listedWith(
         selection: PatchSelection,
+        openedWith: PatchSelection = emptyMap(),
         leadingBundleUid: Int? = null
     ): List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>> =
         mapNotNull { bundle ->
@@ -78,6 +80,7 @@ object PatchSelectionUtils {
             patches.takeIf { it.isNotEmpty() }?.let { bundle to it }
         }.sortedWith(
             compareByDescending<Pair<PatchBundleInfo.Scoped, *>> { (bundle, _) -> bundle.uid == leadingBundleUid }
+                .thenByDescending { (bundle, _) -> openedWith[bundle.uid].orEmpty().isNotEmpty() }
                 .thenByDescending { (bundle, _) -> bundle.targetsVersion }
                 .thenByDescending { (bundle, _) -> bundle.compatible.size }
         )

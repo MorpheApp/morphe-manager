@@ -184,33 +184,19 @@ fun DialogHostScope.RenameSelectionSetDialog(
     val canRename = trimmed.isNotEmpty() && trimmed != set.name
     val replaces = trimmed != set.name && trimmed in takenNames
 
-    AppDialog(
-        onDismissRequest = onDismiss,
+    TextInputDialog(
         title = stringResource(R.string.selection_set_rename_title),
-        footer = {
-            AppDialogButtonRow(
-                primaryText = stringResource(if (replaces) R.string.selection_set_replace else R.string.rename),
-                onPrimaryClick = { onConfirm(trimmed) },
-                primaryEnabled = canRename,
-                secondaryText = stringResource(android.R.string.cancel),
-                onSecondaryClick = onDismiss
-            )
-        }
-    ) {
-        AppDialogTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text(stringResource(R.string.selection_set_name)) },
-            leadingIcon = { Icon(MaterialSymbols.Rounded.Bookmark, contentDescription = null) },
-            showClearButton = true,
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.Sentences,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(onDone = { if (canRename) onConfirm(trimmed) }),
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+        description = stringResource(R.string.selection_set_rename_description),
+        value = name,
+        onValueChange = { name = it },
+        label = stringResource(R.string.selection_set_name),
+        leadingIcon = MaterialSymbols.Rounded.Bookmark,
+        keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+        confirmText = stringResource(if (replaces) R.string.selection_set_replace else R.string.rename),
+        confirmEnabled = canRename,
+        onConfirm = { onConfirm(trimmed) },
+        onDismiss = onDismiss
+    )
 }
 
 /** What can be done with a set besides applying it, for a [RowActionsMenu]. */

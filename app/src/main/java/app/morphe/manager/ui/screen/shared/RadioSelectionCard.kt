@@ -10,8 +10,8 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,10 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.contrastingContent
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -44,6 +43,8 @@ import com.composables.icons.materialsymbols.rounded.*
  *                        since a screen reader offers to turn a checkbox off and a radio never.
  * @param accentColor     Color of what the card stands for, or the surrounding one, see [LocalAccent].
  *                        A selected card wears it on its edge and indicator, never as a fill.
+ * @param shape           Its place in a block of a lazy segmented list, see [ListSegment]. A
+ *                        [SettingsGroup] works it out for its rows on its own.
  */
 @Composable
 fun RadioSelectionCard(
@@ -58,6 +59,7 @@ fun RadioSelectionCard(
     leadingContent: (@Composable () -> Unit)? = null,
     footerContent: (@Composable () -> Unit)? = null,
     accentColor: Color? = LocalAccent.current,
+    shape: CornerBasedShape? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     val colors = MaterialTheme.colorScheme
@@ -87,6 +89,7 @@ fun RadioSelectionCard(
         showBorder = true,
         borderColor = borderColor,
         color = fill,
+        shape = shape,
         modifier = modifier.semantics {
             this.role = role
             this.selected = selected
@@ -179,37 +182,6 @@ fun RadioSelectionCard(
 }
 
 /**
- * Bordered square container for custom leading indicators in [RadioSelectionCard].
- * Border turns primary when selected, outlineVariant otherwise.
- */
-@Composable
-fun SelectionLeadingBox(
-    selected: Boolean,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    size: Dp = 28.dp,
-    cornerRadius: Dp = Defaults.CornerSmall,
-    content: @Composable BoxScope.() -> Unit
-) {
-    val borderColor by animateColorAsState(
-        targetValue = selectionBorderColor(selected, enabled),
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
-        label = "selection_leading_border"
-    )
-    Box(
-        modifier = modifier
-            .size(size)
-            .border(
-                width = 1.dp,
-                color = borderColor,
-                shape = RoundedCornerShape(cornerRadius)
-            ),
-        contentAlignment = Alignment.Center,
-        content = content
-    )
-}
-
-/**
  * The round indicator [RadioSelectionCard] carries, in the three states a list where several rows
  * can be on at once needs. A dash stands for "some of them", which neither circle can say.
  *
@@ -299,7 +271,7 @@ fun SelectionCheckRow(
     }
 }
 
-/** Border of a selectable card or its leading box: the primary color while it is the one picked. */
+/** Border of a selectable card: the primary color while it is the one picked. */
 @Composable
 private fun selectionBorderColor(selected: Boolean, enabled: Boolean) = when {
     !enabled -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
@@ -313,3 +285,31 @@ private fun DefaultRadioIndicator(selected: Boolean, enabled: Boolean, accentCol
     enabled = enabled,
     accentColor = accentColor
 )
+
+/**
+ * One of [modes] to pick, each as a card with its title and, where [descriptionRes] is given, what
+ * it does.
+ */
+@Composable
+fun <T> ModeChoice(
+    modes: List<T>,
+    selected: T,
+    onSelect: (T) -> Unit,
+    titleRes: (T) -> Int,
+    descriptionRes: ((T) -> Int)? = null
+) {
+    SettingsGroup {
+        modes.forEach { mode ->
+            val title = stringResource(titleRes(mode))
+            val description = descriptionRes?.let { stringResource(it(mode)) }
+            SearchableSetting(listOfNotNull(title, description)) {
+                RadioSelectionCard(
+                    selected = mode == selected,
+                    onSelect = { onSelect(mode) },
+                    title = title,
+                    description = description
+                )
+            }
+        }
+    }
+}

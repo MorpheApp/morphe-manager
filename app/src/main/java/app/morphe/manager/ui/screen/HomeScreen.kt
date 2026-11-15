@@ -196,6 +196,7 @@ fun HomeScreen(
             val savedFile = item.savedApkFile ?: return@mapNotNull null
             InstallQueueRequest(
                 file = savedFile,
+                appName = item.displayName,
                 originalPackageName = installed.originalPackageName,
                 installedApp = installed,
                 onPersistApp = { packageName, installType ->
@@ -216,12 +217,12 @@ fun HomeScreen(
         repatchedPackageName = installedApp?.trackingKey
     )
 
-    // Only the apps a rebuild actually moves on: one the sources still cover at its installed
-    // version comes back from patching exactly as it went in, however its card is badged.
-    // Those already queued are left to the queue's own alert
+    // Every app whose card offers a rebuild, a newer app version as much as newer patches: the
+    // queue fetches the newer APK itself where it may, and asks for one otherwise. Those already
+    // queued are left to the queue's own alert
     val repatchableApps = remember(homeAppItems, savedBatchQueue) {
         val queued = savedBatchQueue?.targets.orEmpty().mapTo(HashSet()) { it.id }
-        homeAppItems.filter { it.showsUpdateBadge && it.batchTarget().id !in queued }
+        homeAppItems.filter { it.status.offersRebuild && it.batchTarget().id !in queued }
     }
 
     val batchInProgressText = stringResource(R.string.batch_patch_in_progress)
@@ -254,18 +255,17 @@ fun HomeScreen(
     val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
-    val hasBlockedSources = blockedSources.isNotEmpty()
+    val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()
 
     val metadataFetchErrors by homeViewModel.patchBundleRepository.metadataFetchErrors.collectAsStateWithLifecycle(emptyMap())
-    val hasMetadataErrors = metadataFetchErrors.isNotEmpty()
 
     // Sources built for a newer patcher than this manager ships. They cannot be loaded or patched
     // with until the app is updated, so surface it instead of leaving the source silently broken
-    val hasOutdatedManagerSources by homeViewModel.patchBundleRepository.hasOutdatedManagerSources.collectAsStateWithLifecycle()
+    val outdatedManagerSources by homeViewModel.patchBundleRepository.outdatedManagerSources.collectAsStateWithLifecycle()
 
     // Reading these took the process down, so they are skipped until the file changes. Nothing
     // else on this screen would explain why their patches are suddenly gone
-    val hasHeldBackSources by homeViewModel.patchBundleRepository.hasHeldBackSources.collectAsStateWithLifecycle()
+    val heldBackSources by homeViewModel.patchBundleRepository.heldBackSources.collectAsStateWithLifecycle()
 
     // Manager update details dialog
     DialogHost(visible = showUpdateDetailsDialog.value) {
@@ -295,11 +295,14 @@ fun HomeScreen(
 
     val notifications = HomeNotificationsUi(
         managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
-        outdatedManager = AlertState(hasOutdatedManagerSources) { openPage(MainPage.SOURCES) },
-        heldBackSources = AlertState(hasHeldBackSources) { openPage(MainPage.SOURCES) },
-        blockedSources = AlertState(hasBlockedSources) { openPage(MainPage.SOURCES) },
-        metadataErrors = AlertState(hasMetadataErrors) { openPage(MainPage.SOURCES) },
-        meteredSkipped = AlertState(homeViewModel.updatesSkippedDueToMetered) { openPage(MainPage.SETTINGS) },
+        outdatedManager = AlertState.about(outdatedManagerSources) { openPage(MainPage.SOURCES) },
+        heldBackSources = AlertState.about(heldBackSources) { openPage(MainPage.SOURCES) },
+        blockedSources = AlertState.about(blockedSources.keys) { openPage(MainPage.SOURCES) },
+        metadataErrors = AlertState.about(metadataFetchErrors.keys) { openPage(MainPage.SOURCES) },
+        // By the versions waiting, so a newer release brings a swiped one back
+        sourceUpdates = AlertState.about(pendingSourceUpdates.map { (uid, version) -> "$uid:$version" }) {
+            homeViewModel.downloadPendingUpdates()
+        },
         repatchAvailable = RepatchAlertState(
             count = repatchableApps.size,
             visible = showRepatchNotice,
@@ -321,7 +324,7 @@ fun HomeScreen(
             progress = bundleUpdateProgress
         )
     )
-    val alerts = rememberHomeAlerts(notifications)
+    val alerts = rememberHomeAlerts(notifications, prefs.snoozedAlerts)
     // Each page's header, which the alerts hang under on whichever page is on screen
     val pageHeaderHeights = remember { mutableStateMapOf<MainPage, Dp>() }
     // How far down the alerts reach under the header, which the lists keep clear of. Read only
@@ -416,6 +419,7 @@ fun HomeScreen(
                                 homeViewModel.patchFlow.openInstalledAppInfo(it.currentPackageName)
                             }
                         },
+                        onUpdateApp = { item -> item.installedApp?.let(homeViewModel.patchFlow::repatch) },
                         onHideApp = { packageName -> homeViewModel.apps.hideApp(packageName) },
                         onHideMultiple = { packageNames -> packageNames.forEach { homeViewModel.apps.hideApp(it) } },
                         onUninstallMultiple = { items -> homeViewModel.uninstallApps(items) },

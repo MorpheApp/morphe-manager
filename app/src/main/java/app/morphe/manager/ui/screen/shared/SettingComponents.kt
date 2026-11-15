@@ -239,7 +239,7 @@ fun ThemedIcon(
 @Composable
 fun StatusCirclePlaceholder(
     modifier: Modifier = Modifier,
-    size: Dp = 28.dp,
+    size: Dp = SelectionMarkSize,
     color: Color = MaterialTheme.colorScheme.outlineVariant
 ) {
     Spacer(
@@ -298,7 +298,7 @@ fun StatusCircleIcon(
     containerColor: Color,
     contentColor: Color,
     modifier: Modifier = Modifier,
-    size: Dp = 28.dp
+    size: Dp = SelectionMarkSize
 ) {
     // Callers tint the circle translucent, which leaves the icon on a blend of the tint and the
     // surface rather than on the container the palette paired it with

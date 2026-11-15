@@ -5,12 +5,14 @@
 
 package app.morphe.manager.domain.repository
 
+import android.os.Build
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.apps.original.OriginalApk
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.split.SplitApkPreparer
+import app.morphe.manager.patcher.util.NativeLibs
 import app.morphe.manager.util.FilenameUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -27,22 +29,36 @@ private const val TAG = "Morphe OriginalApkRepository"
 internal const val STAGING_SUFFIX = ".part"
 
 /**
- * Copies [source] over [target] through a staging file, so an archive is only ever replaced by a
- * copy that is already written in full. A failure drops the staged copy and leaves whatever sits
- * at [target] as it was.
+ * Writes [target] through a staging file, so an archive is only ever replaced by one that is
+ * already written in full. [write] fills the staging file, or answers false to leave [target] as
+ * it is. A failure drops the staged file and leaves whatever sits at [target] as it was.
  */
-internal fun copyThroughStaging(source: File, target: File) {
+private inline fun writeThroughStaging(target: File, write: (staging: File) -> Boolean): Boolean {
     val staging = File(target.path + STAGING_SUFFIX)
     try {
-        source.copyTo(staging, overwrite = true)
+        if (!write(staging)) return false
         // Files.move replaces the archive in one step and reports why it could not, which
         // File.renameTo neither guarantees nor tells
         Files.move(staging.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
+        return true
     } catch (e: Exception) {
         staging.delete()
         throw e
     }
 }
+
+/** Copies [source] over [target] through a staging file, see [writeThroughStaging]. */
+internal fun copyThroughStaging(source: File, target: File) {
+    writeThroughStaging(target) { staging -> source.copyTo(staging, overwrite = true); true }
+}
+
+/**
+ * Writes [source] over [target] without the native libraries the device does not run, through a
+ * staging file, see [NativeLibs.writeStripped]. False, leaving [target] as it is, when there are
+ * none to drop.
+ */
+internal fun stripThroughStaging(source: File, target: File, supportedAbis: List<String>): Boolean =
+    writeThroughStaging(target) { staging -> NativeLibs.writeStripped(source, staging, supportedAbis) }
 
 /**
  * Moves [source] over [target] in one step where both sit on the same filesystem, which spares
@@ -104,12 +120,15 @@ class OriginalApkRepository(
      *
      * @param moveSource whether [sourceFile] is a temporary file the caller has no further use
      *                   for, so it can be moved into place rather than copied.
+     * @param forMount whether a mount restores the stock app from the APK, which needs it signed
+     *                 as it came, so its native libraries are kept even where runs strip them.
      */
     suspend fun saveOriginalApk(
         packageName: String,
         version: String,
         sourceFile: File,
-        moveSource: Boolean = false
+        moveSource: Boolean = false,
+        forMount: Boolean = false
     ): File? = withContext(Dispatchers.IO) {
         if (!prefs.saveOriginalApks.get()) {
             Log.d(TAG, "Original APK retention disabled, skipping save for $packageName")
@@ -123,7 +142,20 @@ class OriginalApkRepository(
         try {
             val existing = dao.get(packageName)
 
-            retainOriginalApk(sourceFile, targetFile, moveSource)
+            // A split archive is kept only for a mount or for its OBB files, both of which need it whole
+            val strips = !forMount && prefs.stripUnusedNativeLibs.get() &&
+                !SplitApkPreparer.isSplitArchive(sourceFile)
+            val stripped = strips && runCatching {
+                stripThroughStaging(sourceFile, targetFile, Build.SUPPORTED_ABIS.toList())
+            }.onFailure {
+                Log.w(TAG, "Failed to strip native libraries of $packageName, keeping them", it)
+            }.getOrDefault(false)
+
+            when {
+                !stripped -> retainOriginalApk(sourceFile, targetFile, moveSource)
+                // Written anew rather than moved, so the temporary input goes as a move would take it
+                moveSource && sourceFile != targetFile -> sourceFile.delete()
+            }
 
             // Save to database
             val originalApk = OriginalApk(

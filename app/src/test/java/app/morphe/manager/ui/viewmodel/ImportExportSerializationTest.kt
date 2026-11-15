@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.viewmodel
 
+import app.morphe.manager.domain.backup.SettingsExporter
 import kotlin.test.*
 
 /**
@@ -13,8 +14,8 @@ import kotlin.test.*
  * drop unset fields while selection exports must keep writing them.
  */
 class ImportExportSerializationTest {
-    private val json = ImportExportViewModel.json
-    private val settingsJson = ImportExportViewModel.settingsJson
+    private val json = SettingsExporter.json
+    private val settingsJson = SettingsExporter.settingsJson
 
     private fun bundleSnapshot(
         prerelease: Boolean? = null,

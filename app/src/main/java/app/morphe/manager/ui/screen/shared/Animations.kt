@@ -120,14 +120,6 @@ fun sharedAxisZExit(forward: Boolean): ExitTransition =
     scaleOut(SharedAxisScale, targetScale = if (forward) SHARED_AXIS_Z_ABOVE else SHARED_AXIS_Z_BELOW) + SharedAxisFadeOut
 
 /**
- * The backdrop of something leaving with its screen in a [sharedAxisZExit]: it gives way to the
- * screen fading in, so the one leaving under it never shows through.
- */
-fun sharedAxisZBackdropExit(): ExitTransition = fadeOut(
-    tween(SHARED_AXIS_FADE_IN, delayMillis = SHARED_AXIS_FADE_OUT, easing = LinearOutSlowInEasing)
-)
-
-/**
  * Shared [EnterTransition] and [ExitTransition] for all AppDialog and ListDialog instances and
  * dialog-level AnimatedVisibility wrappers. Changing these values updates every dialog
  * animation in the app at once.

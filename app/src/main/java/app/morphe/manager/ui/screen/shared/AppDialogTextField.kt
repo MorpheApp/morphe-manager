@@ -18,7 +18,9 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -70,11 +72,17 @@ fun AppDialogTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
+    // Text set from outside, such as a prefilled name, takes the cursor after it rather than before
+    var fieldValue by remember { mutableStateOf(TextFieldValue(value, TextRange(value.length))) }
+    val shownValue = fieldValue.takeIf { it.text == value } ?: TextFieldValue(value, TextRange(value.length))
 
     TextFieldLine {
         OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
+            value = shownValue,
+            onValueChange = { next ->
+                fieldValue = next
+                if (next.text != value) onValueChange(next.text)
+            },
             label = label,
             placeholder = placeholder,
             leadingIcon = leadingIcon,

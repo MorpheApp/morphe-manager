@@ -49,11 +49,6 @@
         <item quantity="few">%s izvora skrivena. Dodirnite za prikaz</item>
         <item quantity="other">%s izvora skriveno. Dodirnite za prikaz</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s odgovarajuća zakrpa</item>
-        <item quantity="few">%s odgovarajuće zakrpe</item>
-        <item quantity="other">%s odgovarajućih zakrpa</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s izvor</item>
         <item quantity="few">%s izvori patcheva</item>

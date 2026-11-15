@@ -15,6 +15,7 @@ import app.morphe.manager.ui.screen.settings.system.AboutSettings
 import app.morphe.manager.ui.screen.settings.system.ApkDownloadHelpersSettings
 import app.morphe.manager.ui.screen.settings.system.InstallerSettings
 import app.morphe.manager.ui.screen.settings.system.NotificationsSettings
+import app.morphe.manager.ui.screen.settings.system.SettingsBackupSettings
 import app.morphe.manager.ui.screen.settings.system.StorageSettings
 import app.morphe.manager.ui.screen.shared.SubpageScaffold
 import app.morphe.manager.ui.viewmodel.HomeViewModel
@@ -52,6 +53,7 @@ internal fun SettingsSubpageContent(
         SettingsSubpage.INSTALLER -> InstallerSettings()
         SettingsSubpage.PATCHER -> PatcherSettings()
         SettingsSubpage.STORAGE -> StorageSettings()
+        SettingsSubpage.SETTINGS_BACKUP -> SettingsBackupSettings()
         SettingsSubpage.APK_DOWNLOAD_HELPERS -> ApkDownloadHelpersSettings()
         SettingsSubpage.ABOUT -> AboutSettings(
             onOpenLicenses = navigation.openLicenses,

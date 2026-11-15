@@ -153,9 +153,7 @@ class UpdateViewModel(
     fun downloadUpdate(ignoreInternetCheck: Boolean = false) = viewModelScope.launch {
         messages.reportingFailure(R.string.failed_to_download_update, "Failed to download update") {
             val release = releaseInfo ?: return@reportingFailure
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-
-            if (!allowMeteredUpdates && networkInfo.isMetered() && !ignoreInternetCheck) {
+            if (!prefs.autoUpdates.get().downloadsOnMobileData && networkInfo.isMetered() && !ignoreInternetCheck) {
                 showInternetCheckDialog = true
                 return@reportingFailure
             }

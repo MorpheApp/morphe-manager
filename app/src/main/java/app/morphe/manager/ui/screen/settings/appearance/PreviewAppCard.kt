@@ -13,6 +13,9 @@ import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.ui.screen.home.AppCardContent
 import app.morphe.manager.ui.screen.home.AppCardLayout
+import app.morphe.manager.ui.screen.home.AppCardLine
+import app.morphe.manager.ui.screen.home.AppCardUpdateButton
+import app.morphe.manager.ui.screen.home.AppStateIcons
 import app.morphe.manager.ui.screen.shared.rememberAppMetadata
 import app.morphe.manager.util.KnownApps
 
@@ -32,7 +35,8 @@ internal fun rememberPreviewApp(): BundleAppMetadata? {
 
 /**
  * A home screen card for [app], drawn by the same layout as the real ones so a preview of the
- * appearance settings matches the home screen exactly. It stands for no app the user can open
+ * appearance settings matches the home screen exactly. It shows a build with an update waiting,
+ * which wears the card colors and the action a card offers. It stands for no app the user can open
  * from here, so the preview holding it lays it out of reach, see
  * [app.morphe.manager.ui.screen.shared.DisplayOnly].
  *
@@ -41,16 +45,21 @@ internal fun rememberPreviewApp(): BundleAppMetadata? {
  */
 @Composable
 internal fun PreviewAppCard(app: BundleAppMetadata?, appColors: List<Color>) {
+    val displayName = app?.displayName ?: stringResource(R.string.app_name)
     AppCardLayout(
         gradientColors = appColors,
-        onClick = {}
+        onClick = {},
+        trailing = { AppCardUpdateButton(appName = displayName, onClick = {}) }
     ) {
         AppCardContent(
             packageName = app?.packageName,
             packageInfo = null,
-            displayName = app?.displayName ?: stringResource(R.string.app_name),
-            subtitle = stringResource(R.string.home_not_patched_yet),
-            gradientColors = appColors
+            displayName = displayName,
+            subtitle = AppCardLine(
+                text = stringResource(R.string.home_app_status_newer_patches),
+                icon = AppStateIcons.NewerPatches,
+                emphasized = true
+            )
         )
     }
 }

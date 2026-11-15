@@ -7,7 +7,7 @@ package app.morphe.manager.patcher.patch
 
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.patch
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -21,35 +21,35 @@ import kotlin.test.assertTrue
 class PatchKeysTest {
     private val app = "com.example.app"
 
-    private fun patch(name: String, vararg packages: String) = bytecodePatch(name = name) {
+    private fun patchOf(name: String, vararg packages: String) = patch(name = name) {
         packages.forEach { compatibleWith(Compatibility(packageName = it, name = it)) }
     }
 
-    private fun universal(name: String) = bytecodePatch(name = name) {
+    private fun universal(name: String) = patch(name = name) {
         compatibleWith(Compatibility(description = "Any app"))
     }
 
     @Test
     fun `a patch applies to the packages it names and to none else`() {
-        assertTrue(patch("Ads", app).compatibleWith(app))
-        assertFalse(patch("Ads", "com.other").compatibleWith(app))
+        assertTrue(patchOf("Ads", app).compatibleWith(app))
+        assertFalse(patchOf("Ads", "com.other").compatibleWith(app))
     }
 
     @Test
     fun `a patch that names no package, or a target of any package, applies everywhere`() {
-        assertTrue(bytecodePatch(name = "Theme") {}.compatibleWith(app))
+        assertTrue(patch(name = "Theme") {}.compatibleWith(app))
         assertTrue(universal("Theme").compatibleWith(app))
     }
 
     @Test
     fun `a patch with an empty compatibility list applies nowhere`() {
-        assertFalse(bytecodePatch(name = "Nothing") { compatibleWith() }.compatibleWith(app))
+        assertFalse(patch(name = "Nothing") { compatibleWith() }.compatibleWith(app))
     }
 
     @Test
     fun `patches are keyed by name, leaving out those for other packages`() {
-        val ads = patch("Ads", app)
-        val keyed = listOf(ads, patch("Other", "com.other"), universal("Theme")).keyedFor(app)
+        val ads = patchOf("Ads", app)
+        val keyed = listOf(ads, patchOf("Other", "com.other"), universal("Theme")).keyedFor(app)
 
         assertEquals(setOf("Ads", "Theme"), keyed.keys)
         assertSame(ads, keyed["Ads"])
@@ -58,7 +58,7 @@ class PatchKeysTest {
     @Test
     fun `the most specific of same-named patches keeps the plain name`() {
         val generic = universal("Ads")
-        val specific = patch("Ads", app)
+        val specific = patchOf("Ads", app)
 
         val keyed = listOf(generic, specific).keyedFor(app)
 
@@ -79,7 +79,7 @@ class PatchKeysTest {
 
     @Test
     fun `keys do not depend on the order the bundle lists the patches in`() {
-        val patches: List<Patch> = listOf(universal("Ads"), patch("Ads", app), patch("Ads", app, "com.other"))
+        val patches: List<Patch> = listOf(universal("Ads"), patchOf("Ads", app), patchOf("Ads", app, "com.other"))
 
         val forward = patches.keyedFor(app)
         val backward = patches.reversed().keyedFor(app)

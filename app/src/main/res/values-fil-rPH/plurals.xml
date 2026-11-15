@@ -40,10 +40,6 @@
         <item quantity="one">Nakatago ang %s na pinagmumulan. I-tap upang ipakita</item>
         <item quantity="other">Nakatago ang %s na pinagmumulan. I-tap upang ipakita</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s katugmang patch</item>
-        <item quantity="other">%s katugmang patch</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s mapagkukunan</item>
         <item quantity="other">%s mga mapagkukunan</item>

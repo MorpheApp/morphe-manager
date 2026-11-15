@@ -26,9 +26,9 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
     val prefs = settingsViewModel.prefs
-    val primaryToken = settingsViewModel.primaryInstallerToken()
-    val options = rememberPolledInstallerEntries(primaryToken) {
-        settingsViewModel.getInstallerEntries(InstallerManager.InstallTarget.PATCHER, primaryToken)
+    val preferredToken = settingsViewModel.preferredInstallerToken()
+    val options = rememberPolledInstallers(preferredToken) {
+        settingsViewModel.getInstallerEntries(InstallerManager.InstallTarget.PATCHER, preferredToken)
     }
 
     val afterPatching by prefs.afterPatching.getAsState()
@@ -65,7 +65,7 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
         ) {
             InstallerChoice(
                 options = options,
-                selected = primaryToken,
+                selected = preferredToken,
                 onSelect = settingsViewModel::confirmInstallerSelection,
                 onOpenShizuku = settingsViewModel::openShizukuApp,
                 shizukuStatusProvider = settingsViewModel::getShizukuStatus,
@@ -84,7 +84,7 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
                 titleRes = AfterPatching::titleRes,
                 descriptionRes = AfterPatching::descriptionRes
             )
-            FoldingVisibility(visible = afterPatching == AfterPatching.INSTALL && primaryToken.isShizukuToken()) {
+            FoldingVisibility(visible = afterPatching == AfterPatching.INSTALL && preferredToken.isShizukuToken()) {
                 SettingsGroup {
                     SettingsSwitchItem(
                         checked = autoUninstallEnabled,
@@ -144,31 +144,6 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
                         }
                     }
                 }
-            }
-        }
-    }
-}
-
-/** One of [modes] to pick, each as a card with its title and what it does. */
-@Composable
-private fun <T> ModeChoice(
-    modes: List<T>,
-    selected: T,
-    onSelect: (T) -> Unit,
-    titleRes: (T) -> Int,
-    descriptionRes: (T) -> Int
-) {
-    SettingsGroup {
-        modes.forEach { mode ->
-            val title = stringResource(titleRes(mode))
-            val description = stringResource(descriptionRes(mode))
-            SearchableSetting(listOf(title, description)) {
-                RadioSelectionCard(
-                    selected = mode == selected,
-                    onSelect = { onSelect(mode) },
-                    title = title,
-                    description = description
-                )
             }
         }
     }

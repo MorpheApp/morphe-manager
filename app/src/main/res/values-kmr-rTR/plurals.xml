@@ -40,10 +40,6 @@
         <item quantity="one">%s çavkanî veşartî ye. Ji bo nîşandanê bikirtîne</item>
         <item quantity="other">%s çavkanî veşartî ne. Ji bo nîşandana wan bikirtîne</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s pêçeka lihevhatî</item>
-        <item quantity="other">%s pêçekên lihevhatî</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s çavkanî</item>
         <item quantity="other">%s çavkanîyên</item>

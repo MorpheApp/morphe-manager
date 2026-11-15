@@ -6,6 +6,9 @@
 package app.morphe.manager.domain.repository
 
 import java.nio.file.Files
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipOutputStream
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -110,5 +113,30 @@ class OriginalApkStagingTest {
 
         assertEquals("existing archive", target.readText())
         assertTrue(stagedCopies().isEmpty())
+    }
+
+    @Test
+    fun `a stripped APK replaces the archive, and one with nothing to strip leaves it alone`() {
+        target.writeText("old archive")
+
+        val abis = listOf("arm64-v8a")
+
+        assertFalse(stripThroughStaging(apk("classes.dex", "lib/arm64-v8a/a.so"), target, abis))
+        assertEquals("old archive", target.readText())
+
+        assertTrue(stripThroughStaging(apk("classes.dex", "lib/arm64-v8a/a.so", "lib/x86/a.so"), target, abis))
+        val entries = ZipFile(target).use { zip -> zip.entries().asSequence().map { it.name }.sorted().toList() }
+        assertEquals(listOf("classes.dex", "lib/arm64-v8a/a.so"), entries)
+        assertTrue(stagedCopies().isEmpty())
+    }
+
+    private fun apk(vararg entries: String) = dir.resolve("input.apk").apply {
+        ZipOutputStream(outputStream()).use { zip ->
+            entries.forEach { entry ->
+                zip.putNextEntry(ZipEntry(entry))
+                zip.write(entry.toByteArray())
+                zip.closeEntry()
+            }
+        }
     }
 }

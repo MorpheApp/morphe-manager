@@ -24,6 +24,9 @@ import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.PLAY_STORE_INSTALLER_PACKAGE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import rikka.shizuku.Shizuku
@@ -31,12 +34,17 @@ import java.io.File
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.time.Duration.Companion.seconds
 
 private const val TAG = "Morphe SessionInstaller"
 private const val ACTION_INSTALL_STATUS = "app.morphe.manager.INSTALL_STATUS"
 private const val ACTION_UNINSTALL_STATUS = "app.morphe.manager.UNINSTALL_STATUS"
 private const val EXTRA_SESSION_ID = "session_id"
 private const val EXTRA_UNINSTALL_REQUEST_ID = "uninstall_request_id"
+
+// How often a session awaiting its status is checked for, and how long its broadcast may lag behind
+private val SESSION_WATCH_POLL = 2.seconds
+private val SESSION_GONE_GRACE = 5.seconds
 
 /**
  * PackageInstaller-based installer.
@@ -65,7 +73,8 @@ class SessionInstaller(private val app: Application) {
      * OEM builds that refuse one destroy the session instead of falling back, so the install is
      * repeated with the dialog and silent updates are dropped for the rest of the process.
      *
-     * @throws InstallCancelledException if the user dismissed the dialog or install was aborted.
+     * @throws InstallCancelledException if the user dismissed the dialog, install was aborted, or
+     * the session ended without reporting how.
      * @throws SessionDeadException if the session was killed before completion.
      */
     suspend fun installInternal(apkFile: File): InstallResult {
@@ -139,81 +148,101 @@ class SessionInstaller(private val app: Application) {
             throw e
         }
 
-        return suspendCancellableCoroutine { cont ->
-            var registered: BroadcastReceiver? = null
+        // Some systems end a session without its status broadcast, which would leave the install
+        // waiting for good. Once the session is gone, the caller checks what was installed instead
+        return coroutineScope {
+            val watchdog = launch {
+                awaitSessionGone(installer, sessionId)
+                delay(SESSION_GONE_GRACE)
+                Log.w(TAG, "Session $sessionId ended without a status")
+                throw InstallCancelledException()
+            }
             try {
-                installer.openSession(sessionId).use { session ->
-                    val pi = statusPendingIntent(ACTION_INSTALL_STATUS, EXTRA_SESSION_ID, sessionId)
+                suspendCancellableCoroutine { cont ->
+                    var registered: BroadcastReceiver? = null
+                    try {
+                        installer.openSession(sessionId).use { session ->
+                            val pi = statusPendingIntent(ACTION_INSTALL_STATUS, EXTRA_SESSION_ID, sessionId)
 
-                    val receiver = object : BroadcastReceiver() {
-                        override fun onReceive(context: Context, intent: Intent) {
-                            if (intent.getIntExtra(EXTRA_SESSION_ID, -1) != sessionId) return
+                            val receiver = object : BroadcastReceiver() {
+                                override fun onReceive(context: Context, intent: Intent) {
+                                    if (intent.getIntExtra(EXTRA_SESSION_ID, -1) != sessionId) return
 
-                            val status = intent.getIntExtra(
-                                PackageInstaller.EXTRA_STATUS,
-                                PackageInstaller.STATUS_FAILURE
-                            )
-                            val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
-                            Log.d(TAG, "Session $sessionId status=$status message=$message")
-
-                            when (status) {
-                                PackageInstaller.STATUS_SUCCESS -> {
-                                    app.unregisterReceiver(this)
-                                    cont.resume(InstallResult.Success)
-                                }
-
-                                PackageInstaller.STATUS_PENDING_USER_ACTION -> {
-                                    // The session may be killed by a system component after this
-                                    // broadcast, so the receiver is kept alive intentionally.
-                                    userActionShown = true
-                                    launchUserConfirmation(intent)
-                                }
-
-                                PackageInstaller.STATUS_FAILURE_ABORTED -> {
-                                    app.unregisterReceiver(this)
-                                    cont.resumeWithException(
-                                        if (userActionShown) {
-                                            InstallCancelledException()
-                                        } else {
-                                            SilentInstallRefusedException(message)
-                                        }
+                                    val status = intent.getIntExtra(
+                                        PackageInstaller.EXTRA_STATUS,
+                                        PackageInstaller.STATUS_FAILURE
                                     )
-                                }
+                                    val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                                    Log.d(TAG, "Session $sessionId status=$status message=$message")
 
-                                PackageInstaller.STATUS_FAILURE_CONFLICT -> {
-                                    app.unregisterReceiver(this)
-                                    cont.resume(InstallResult.Conflict(message))
-                                }
+                                    when (status) {
+                                        PackageInstaller.STATUS_SUCCESS -> {
+                                            app.unregisterReceiver(this)
+                                            cont.resume(InstallResult.Success)
+                                        }
 
-                                else -> {
-                                    app.unregisterReceiver(this)
-                                    if (message?.contains("dead", ignoreCase = true) == true ||
-                                        message?.contains("abandoned", ignoreCase = true) == true
-                                    ) {
-                                        cont.resumeWithException(SessionDeadException(message))
-                                    } else {
-                                        cont.resume(InstallResult.Failure(message))
+                                        PackageInstaller.STATUS_PENDING_USER_ACTION -> {
+                                            // The session may be killed by a system component after this
+                                            // broadcast, so the receiver is kept alive intentionally.
+                                            userActionShown = true
+                                            launchUserConfirmation(intent)
+                                        }
+
+                                        PackageInstaller.STATUS_FAILURE_ABORTED -> {
+                                            app.unregisterReceiver(this)
+                                            cont.resumeWithException(
+                                                if (userActionShown) {
+                                                    InstallCancelledException()
+                                                } else {
+                                                    SilentInstallRefusedException(message)
+                                                }
+                                            )
+                                        }
+
+                                        PackageInstaller.STATUS_FAILURE_CONFLICT -> {
+                                            app.unregisterReceiver(this)
+                                            cont.resume(InstallResult.Conflict(message))
+                                        }
+
+                                        else -> {
+                                            app.unregisterReceiver(this)
+                                            if (message?.contains("dead", ignoreCase = true) == true ||
+                                                message?.contains("abandoned", ignoreCase = true) == true
+                                            ) {
+                                                cont.resumeWithException(SessionDeadException(message))
+                                            } else {
+                                                cont.resume(InstallResult.Failure(message))
+                                            }
+                                        }
                                     }
                                 }
                             }
+
+                            registerReceiverCompat(receiver, IntentFilter(ACTION_INSTALL_STATUS))
+                            registered = receiver
+
+                            cont.invokeOnCancellation {
+                                runCatching { app.unregisterReceiver(receiver) }
+                                runCatching { installer.abandonSession(sessionId) }
+                            }
+
+                            session.commit(pi.intentSender)
                         }
-                    }
-
-                    registerReceiverCompat(receiver, IntentFilter(ACTION_INSTALL_STATUS))
-                    registered = receiver
-
-                    cont.invokeOnCancellation {
-                        runCatching { app.unregisterReceiver(receiver) }
+                    } catch (e: Exception) {
+                        registered?.let { runCatching { app.unregisterReceiver(it) } }
                         runCatching { installer.abandonSession(sessionId) }
+                        throw e
                     }
-
-                    session.commit(pi.intentSender)
                 }
-            } catch (e: Exception) {
-                registered?.let { runCatching { app.unregisterReceiver(it) } }
-                runCatching { installer.abandonSession(sessionId) }
-                throw e
+            } finally {
+                watchdog.cancel()
             }
+        }
+    }
+
+    private suspend fun awaitSessionGone(installer: PackageInstaller, sessionId: Int) {
+        while (withContext(Dispatchers.IO) { installer.getSessionInfo(sessionId) } != null) {
+            delay(SESSION_WATCH_POLL)
         }
     }
 

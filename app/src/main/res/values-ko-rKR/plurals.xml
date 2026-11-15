@@ -31,9 +31,6 @@
     <plurals name="expert_mode_hidden_sources_notice">
         <item quantity="other">%s 개의 소스가 숨겨져 있습니다. 표시하려면 탭하세요</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="other">%s 개의 일치하는 패치</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="other">%s 개의 소스</item>
     </plurals>

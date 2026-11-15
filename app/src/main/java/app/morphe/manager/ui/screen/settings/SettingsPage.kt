@@ -204,12 +204,13 @@ private fun UpdatesSection(settingsViewModel: SettingsViewModel, homeViewModel: 
 internal fun SubpageItem(
     subpage: SettingsSubpage,
     onOpen: (SettingsSubpage) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    subtitle: String = stringResource(subpage.summaryRes)
 ) {
     SettingsItem(
         onClick = { onOpen(subpage) },
         title = stringResource(subpage.titleRes),
-        subtitle = stringResource(subpage.summaryRes),
+        subtitle = subtitle,
         icon = subpage.icon,
         modifier = modifier
     )

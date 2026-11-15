@@ -17,11 +17,11 @@ import com.composables.icons.materialsymbols.rounded.*
  * clears the query, so a field the user can no longer reach cannot leave a list filtered.
  */
 @Stable
-class SearchFieldState internal constructor() {
-    var visible by mutableStateOf(false)
+class SearchFieldState internal constructor(initialQuery: String = "") {
+    var visible by mutableStateOf(initialQuery.isNotBlank())
         private set
 
-    var query by mutableStateOf("")
+    var query by mutableStateOf(initialQuery)
 
     /** Whether the query currently narrows the list. */
     val isFiltering: Boolean get() = query.isNotBlank()
@@ -54,10 +54,12 @@ class SearchFieldState internal constructor() {
  * or sheet content to make the back gesture close the field.
  *
  * @param searchable Whether the caller still offers the toggle. Turning it off collapses the field.
+ * @param initialQuery Query the field opens with, carried over from a search that led here. Read
+ * only when the state is first created, so a restored field keeps what the user made of it.
  */
 @Composable
-fun rememberSearchFieldState(searchable: Boolean = true): SearchFieldState {
-    val state = rememberSaveable(saver = SearchFieldState.Saver) { SearchFieldState() }
+fun rememberSearchFieldState(searchable: Boolean = true, initialQuery: String = ""): SearchFieldState {
+    val state = rememberSaveable(saver = SearchFieldState.Saver) { SearchFieldState(initialQuery) }
 
     LaunchedEffect(searchable) {
         if (!searchable) state.collapse()
@@ -69,8 +71,8 @@ fun rememberSearchFieldState(searchable: Boolean = true): SearchFieldState {
 /**
  * Routes the back gesture to close [state] before the surrounding dialog or sheet reacts to it.
  *
- * Compose it inside the dialog or sheet content, not next to [rememberSearchFieldState]:
- * both host their own back dispatcher, and a handler registered outside that window never runs.
+ * Compose it inside the dialog or sheet content, not next to [rememberSearchFieldState]: the
+ * screen under a dialog takes no back while the dialog is open, see [ModalLayer].
  */
 @Composable
 fun SearchFieldBackHandler(state: SearchFieldState) {

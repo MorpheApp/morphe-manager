@@ -40,10 +40,6 @@
         <item quantity="one">%s көз жасырындалды. Көрсету үшін түктіңіз</item>
         <item quantity="other">%s көздер жасырындалды. Көрсету үшін түктіңіз</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s сәйкес келетін патч</item>
-        <item quantity="other">%s сәйкес келетін патчтар</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s дереккөз </item>
         <item quantity="other">%s Дереккөздер</item>

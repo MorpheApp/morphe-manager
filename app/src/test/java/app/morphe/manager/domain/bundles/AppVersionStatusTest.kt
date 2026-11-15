@@ -81,5 +81,23 @@ class AppVersionStatusTest {
         assertNull(versionStatus("", target("9.13.50")))
     }
 
+    @Test
+    fun `only a version past every target is past the patches`() {
+        val targets = listOf(bundled("9.13.50"), bundled("9.12.51"))
+
+        assertTrue(targets.isPastEveryTarget("9.14.10"))
+        assertFalse(targets.isPastEveryTarget("9.13.50"))
+        assertFalse(targets.isPastEveryTarget("9.12.00"))
+    }
+
+    @Test
+    fun `nothing is past patches that take any version`() {
+        assertFalse(emptyList<BundledAppTarget>().isPastEveryTarget("9.14.10"))
+        assertFalse(listOf(bundled("9.13.50"), bundled(null)).isPastEveryTarget("9.14.10"))
+    }
+
     private fun target(version: String?) = AppTarget(version = version)
+
+    private fun bundled(version: String?) =
+        BundledAppTarget(target = target(version), bundleUid = 0, bundleName = "Source")
 }

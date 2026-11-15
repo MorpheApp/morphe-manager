@@ -31,9 +31,6 @@
     <plurals name="expert_mode_hidden_sources_notice">
         <item quantity="other">ເຊື່ອງແຫຼ່ງຂໍ້ມູນ %s ແຫຼ່ງ. ແຕະເພື່ອສະແດງ</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="other">ພົບແພັດຊ໌ທີ່ກົງກັນ %s ລາຍການ</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="other">%s ແຫຼ່ງຂໍ້ມູນ</item>
     </plurals>

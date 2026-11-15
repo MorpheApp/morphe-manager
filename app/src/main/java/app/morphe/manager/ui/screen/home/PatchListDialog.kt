@@ -61,6 +61,7 @@ internal class PatchListSection(
  * @param notice Shown above the list, for what the user should know before reading it.
  * @param onExpertBadgeClick Marks the patches left out by default, and explains the mark.
  * @param headerActions What the list's owner offers in the header, ahead of the filter.
+ * @param initialSection Key of the block the filter opens on, the whole list where null.
  */
 @Composable
 internal fun DialogHostScope.PatchListDialog(
@@ -72,20 +73,15 @@ internal fun DialogHostScope.PatchListDialog(
     saveStateKey: String,
     onDismiss: () -> Unit,
     initialQuery: String = "",
+    initialSection: String? = null,
     accentColor: Color? = null,
     notice: (@Composable () -> Unit)? = null,
     onExpertBadgeClick: (() -> Unit)? = null,
     headerActions: @Composable RowScope.() -> Unit = {}
 ) {
-    val search = rememberSearchFieldState()
-    LaunchedEffect(Unit) {
-        if (initialQuery.isNotBlank()) {
-            search.toggle()
-            search.query = initialQuery
-        }
-    }
+    val search = rememberSearchFieldState(initialQuery = initialQuery)
 
-    var selectedKey by remember { mutableStateOf<String?>(null) }
+    var selectedKey by remember { mutableStateOf(initialSection) }
     var showFilterPanel by remember { mutableStateOf(false) }
     // A block the list no longer holds cannot stay picked, or the filter would hide everything
     val selected = selectedKey?.takeIf { key -> sections.any { it.key == key } }
@@ -397,7 +393,7 @@ internal fun PatchItemCard(
     }
 
     val options = patch.options.orEmpty()
-    val compatible = patch.compatiblePackages?.firstOrNull { it.packageName == packageName }
+    val compatible = packageName?.let(patch::targetFor)
     // A universal patch has none, and most others share the versions their block names above them
     val versions = compatible?.versions.orEmpty().takeIf { it != commonVersions }.orEmpty().toList()
     val isExpertOnly = !patch.include && onExpertBadgeClick != null
@@ -584,7 +580,7 @@ private fun PatchVersionBadge(
 private fun commonTargetOf(patches: List<PatchInfo>, packageName: String?): CompatiblePackage? {
     if (packageName == null) return null
     return patches
-        .mapNotNull { patch -> patch.compatiblePackages?.firstOrNull { it.packageName == packageName } }
+        .mapNotNull { patch -> patch.targetFor(packageName) }
         .filter { !it.versions.isNullOrEmpty() }
         .groupBy { it.versions }
         .maxByOrNull { (_, entries) -> entries.size }

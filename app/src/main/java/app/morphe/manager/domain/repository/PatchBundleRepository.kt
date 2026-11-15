@@ -106,17 +106,17 @@ class PatchBundleRepository(
     val allBundlesInfoFlow = store.state.map { (it as? BundleState.Ready)?.info ?: persistentMapOf() }
 
     /**
-     * Whether a source was built for a newer patcher than this manager ships. Answered here
-     * rather than on screen, as reading what a source requires opens its patches.jar.
+     * Sources built for a newer patcher than this manager ships. Answered here rather than on
+     * screen, as reading what a source requires opens its patches.jar.
      */
-    val hasOutdatedManagerSources: StateFlow<Boolean> = sources
-        .map { list -> list.any { it.requiresManagerUpdate } }
-        .stateIn(scope, SharingStarted.Eagerly, false)
+    val outdatedManagerSources = sourceUidsWhere { it.requiresManagerUpdate }
 
-    /** Whether a source is skipped for having taken the process down while being read. */
-    val hasHeldBackSources: StateFlow<Boolean> = sources
-        .map { list -> list.any { it.isHeldBack } }
-        .stateIn(scope, SharingStarted.Eagerly, false)
+    /** Sources skipped for having taken the process down while being read. */
+    val heldBackSources = sourceUidsWhere { it.isHeldBack }
+
+    private fun sourceUidsWhere(predicate: (PatchBundleSource) -> Boolean): StateFlow<Set<Int>> = sources
+        .map { list -> list.filter(predicate).mapTo(mutableSetOf()) { it.uid } }
+        .stateIn(scope, SharingStarted.Eagerly, emptySet())
 
     /**
      * Sources that appear on the remote blocklist, keyed by source uid.
@@ -245,6 +245,15 @@ class PatchBundleRepository(
 
     private val bundleUpdateProgressFlow = MutableStateFlow<BundleUpdateProgress?>(null)
     val bundleUpdateProgress: StateFlow<BundleUpdateProgress?> = bundleUpdateProgressFlow.asStateFlow()
+
+    private val pendingUpdatesFlow = MutableStateFlow<Map<Int, String>>(emptyMap())
+
+    /**
+     * Sources a check found an update for and left it to the user to download, see
+     * [PreferencesManager.autoUpdates], each with the version waiting. A source leaves it once
+     * it is updated.
+     */
+    val pendingUpdates: StateFlow<Map<Int, String>> = pendingUpdatesFlow.asStateFlow()
 
     private val bundleImportProgressFlow = MutableStateFlow<ImportProgress?>(null)
 
@@ -845,6 +854,8 @@ class PatchBundleRepository(
         val showMessage: Boolean = false,
         val allowUnsafeNetwork: Boolean = false,
         val reportUpToDate: Boolean = true,
+        // The check opening Morphe runs, which the auto updates setting holds to less
+        val onLaunch: Boolean = false,
     ) {
         /**
          * True when running this request already does everything [other] asks for. A request
@@ -856,6 +867,7 @@ class PatchBundleRepository(
                     !other.showMessage &&
                     (allowUnsafeNetwork || !other.allowUnsafeNetwork) &&
                     (reportUpToDate || !other.reportUpToDate) &&
+                    (!onLaunch || other.onLaunch) &&
                     target.covers(other.target)
     }
 
@@ -871,6 +883,7 @@ class PatchBundleRepository(
             showMessage = requests.any { it.showMessage },
             allowUnsafeNetwork = requests.all { it.allowUnsafeNetwork },
             reportUpToDate = requests.any { it.reportUpToDate },
+            onLaunch = requests.all { it.onLaunch },
             target = requests.map { it.target }.reduce(UpdateTarget::plus),
         )
     }
@@ -1387,7 +1400,7 @@ class PatchBundleRepository(
             keptApps?.let { apps ->
                 created.forEach { sourceMuteRepository.setBringsNewApps(it.uid, false, apps) }
             }
-            update(*created.toTypedArray(), allowUnsafeNetwork = prefs.allowMeteredUpdates.get())
+            update(*created.toTypedArray())
             ready.copy(sources = ready.sources.mutate { sources -> created.forEach { sources[it.uid] = it } })
         }
         return added.await()
@@ -1419,7 +1432,7 @@ class PatchBundleRepository(
             metadataFetchErrorsFlow.update { it - current.uid }
 
             val changed = createEntity("", SourceInfo.from(endpoint), uid = current.uid).load() as RemotePatchBundle
-            update(changed, allowUnsafeNetwork = prefs.allowMeteredUpdates.get())
+            update(changed)
             ready.copy(sources = ready.sources.putting(changed.uid, changed))
         }
 
@@ -1826,12 +1839,11 @@ class PatchBundleRepository(
      * Updates every remote bundle that is currently enabled.
      * Disabled bundles are skipped - they will be updated automatically when re-enabled.
      * Blocked sources are skipped even if enabled.
-     * Respects [PreferencesManager.allowMeteredUpdates]: if the network is metered and the
-     * user has disabled metered updates, the update is skipped and
-     * [BundleUpdateResult.SkippedMetered] is emitted so the UI can warn the user before patching.
+     * Follows [PreferencesManager.autoUpdates], which can hold it to a check that leaves what it
+     * finds in [pendingUpdates], or skip it altogether.
      *
-     * @param allowUnsafeNetwork When `true`, bypasses the metered network check and downloads
-     *   regardless. Use this when the user explicitly requests an update (e.g. "Update & patch"
+     * @param allowUnsafeNetwork When `true`, downloads whatever the auto updates setting and the
+     *   network allow. Use this when the user explicitly requests an update (e.g. "Update & patch"
      *   dialog action).
      */
     suspend fun updateCheck(allowUnsafeNetwork: Boolean = false) {
@@ -1843,6 +1855,7 @@ class PatchBundleRepository(
             UpdateRequest(
                 target = UpdateTarget(allEnabled = true),
                 allowUnsafeNetwork = allowUnsafeNetwork,
+                onLaunch = true,
             )
         )
     }
@@ -1862,21 +1875,27 @@ class PatchBundleRepository(
     suspend fun checkForBundleUpdatesQuiet(): AvailableBundleUpdate? {
         if (!networkInfo.isConnected()) return null
 
-        val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-        if (!allowMeteredUpdates && networkInfo.isMetered()) return null
+        // Only sources an update can reach, or the notification points at one that never comes
+        val remoteBundles = (store.state.value as? BundleState.Ready)?.sources?.values
+            .orEmpty()
+            .filterIsInstance<RemotePatchBundle>()
+            .filter { it.enabled && !isSourceBlocked(it) }
+
+        return availableUpdates(remoteBundles).firstOrNull()
+    }
+
+    /**
+     * The [bundles] with a newer release than the one installed, read from the versions alone,
+     * which costs a few kilobytes rather than the bundles themselves. A source that cannot be
+     * reached is left out.
+     */
+    private suspend fun availableUpdates(bundles: List<RemotePatchBundle>): List<AvailableBundleUpdate> {
+        if (bundles.isEmpty()) return emptyList()
 
         return try {
-            // Only sources an update can reach, or the notification points at one that never comes
-            val remoteBundles = (store.state.value as? BundleState.Ready)?.sources?.values
-                .orEmpty()
-                .filterIsInstance<RemotePatchBundle>()
-                .filter { it.enabled && !isSourceBlocked(it) }
-
-            if (remoteBundles.isEmpty()) return null
-
-            // Check all remote bundles in parallel for speed; return the first updated version found
+            // Checked in parallel, as each one waits on the network
             coroutineScope {
-                remoteBundles
+                bundles
                     .map { bundle ->
                         async {
                             try {
@@ -1894,11 +1913,11 @@ class PatchBundleRepository(
                         }
                     }
                     .awaitAll()
-                    .firstNotNullOfOrNull { it }
+                    .filterNotNull()
             }
         } catch (e: Exception) {
             Log.e(tag, "Failed to quietly check for bundle updates", e)
-            null
+            emptyList()
         }
     }
 
@@ -1959,45 +1978,14 @@ class PatchBundleRepository(
         val showMessage = request.showMessage
         val allowUnsafeNetwork = request.allowUnsafeNetwork
         val predicate = predicateFor(request.target)
+        val autoUpdates = prefs.autoUpdates.get()
         try {
-            // Check network connectivity first
+            // Turned off, the launch check does not even say it is offline
+            if (request.onLaunch && !allowUnsafeNetwork && !autoUpdates.checksOnLaunch) return@coroutineScope
+
             if (!networkInfo.isConnected()) {
                 Log.d(tag, "No internet connection for bundle update")
-
-                // Show "No Internet" state
-                val noInternetProgress = BundleUpdateProgress(
-                    total = 1,
-                    completed = 1,
-                    phase = BundleUpdatePhase.Checking,
-                    result = BundleUpdateResult.NoInternet,
-                )
-                bundleUpdateProgressFlow.value = noInternetProgress
-
-                scope.launch {
-                    delay(3.5.seconds)
-                    if (bundleUpdateProgressFlow.value == noInternetProgress) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
-                return@coroutineScope
-            }
-
-            val allowMeteredUpdates = prefs.allowMeteredUpdates.get()
-            if (!allowUnsafeNetwork && !allowMeteredUpdates && networkInfo.isMetered()) {
-                Log.d(tag, "Skipping update check because the network is metered.")
-                val skippedProgress = BundleUpdateProgress(
-                    total = 1,
-                    completed = 1,
-                    phase = BundleUpdatePhase.Checking,
-                    result = BundleUpdateResult.SkippedMetered,
-                )
-                bundleUpdateProgressFlow.value = skippedProgress
-                scope.launch {
-                    delay(3.5.seconds)
-                    if (bundleUpdateProgressFlow.value == skippedProgress) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
+                showFinished(BundleUpdateResult.NoInternet)
                 return@coroutineScope
             }
 
@@ -2012,7 +2000,25 @@ class PatchBundleRepository(
                 return@coroutineScope
             }
 
-            markActiveUpdateUids(targets.map(RemotePatchBundle::uid).toSet())
+            val metered = networkInfo.isMetered()
+            val downloads = allowUnsafeNetwork || if (request.onLaunch) {
+                autoUpdates.downloadsOnLaunch(metered)
+            } else {
+                autoUpdates.downloadsOnMobileData || !metered
+            }
+            if (!downloads) {
+                // The versions alone cost a few kilobytes, so what is waiting is still known
+                val available = availableUpdates(targets).associate { it.bundleUid to it.version }
+                pendingUpdatesFlow.update { it - targets.uids() + available }
+                when {
+                    available.isNotEmpty() -> showFinished(BundleUpdateResult.UpdatesAvailable, targets.size)
+                    request.reportUpToDate -> showFinished(BundleUpdateResult.NoUpdates, targets.size)
+                    else -> bundleUpdateProgressFlow.value = null
+                }
+                return@coroutineScope
+            }
+
+            markActiveUpdateUids(targets.uids())
 
             bundleUpdateProgressFlow.value = BundleUpdateProgress(
                 total = currentUpdateTotal(targets.size),
@@ -2097,26 +2103,13 @@ class PatchBundleRepository(
                 }
             } catch (e: Exception) {
                 Log.e(tag, "Failed to update patches", e)
-
-                // Show error state
-                val errorProgress = BundleUpdateProgress(
-                    total = 1,
-                    completed = 1,
-                    phase = BundleUpdatePhase.Finalizing,
-                    result = BundleUpdateResult.Error,
-                )
-                bundleUpdateProgressFlow.value = errorProgress
-
-                scope.launch {
-                    delay(3.5.seconds)
-                    if (bundleUpdateProgressFlow.value == errorProgress) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
-
+                showFinished(BundleUpdateResult.Error, phase = BundleUpdatePhase.Finalizing)
                 messages.showIfInForeground(R.string.sources_download_fail, e.simpleMessage())
                 return@coroutineScope
             }
+
+            // Updated, or found to have nothing newer, so nothing waits on the user anymore
+            pendingUpdatesFlow.update { it - targets.uids() }
 
             if (updated.isEmpty()) {
                 if (showMessage) messages.showIfInForeground(R.string.sources_update_unavailable)
@@ -2124,22 +2117,7 @@ class PatchBundleRepository(
                     bundleUpdateProgressFlow.value = null
                     return@coroutineScope
                 }
-
-                // No updates available - already up to date
-                val noUpdatesProgress = BundleUpdateProgress(
-                    total = targets.size,
-                    completed = targets.size,
-                    phase = BundleUpdatePhase.Checking,
-                    result = BundleUpdateResult.NoUpdates,
-                )
-                bundleUpdateProgressFlow.value = noUpdatesProgress
-
-                scope.launch {
-                    delay(3.5.seconds)
-                    if (bundleUpdateProgressFlow.value == noUpdatesProgress) {
-                        bundleUpdateProgressFlow.value = null
-                    }
-                }
+                showFinished(BundleUpdateResult.NoUpdates, targets.size)
                 return@coroutineScope
             }
 
@@ -2166,26 +2144,27 @@ class PatchBundleRepository(
             }
 
             if (showMessage) messages.showIfInForeground(R.string.sources_update_success)
-
-            // Show success state
-            val successProgress = BundleUpdateProgress(
-                total = targets.size,
-                completed = targets.size,
-                phase = BundleUpdatePhase.Finalizing,
-                result = BundleUpdateResult.Success,
-            )
-            bundleUpdateProgressFlow.value = successProgress
-
-            scope.launch {
-                delay(3.5.seconds)
-                if (bundleUpdateProgressFlow.value == successProgress) {
-                    bundleUpdateProgressFlow.value = null
-                }
-            }
+            showFinished(BundleUpdateResult.Success, targets.size, BundleUpdatePhase.Finalizing)
         } finally {
             clearActiveUpdateState()
         }
     }
+
+    /** Shows how an update of [count] sources ended, until the next one starts or for a few seconds. */
+    private fun showFinished(
+        result: BundleUpdateResult,
+        count: Int = 1,
+        phase: BundleUpdatePhase = BundleUpdatePhase.Checking
+    ) {
+        val finished = BundleUpdateProgress(total = count, completed = count, phase = phase, result = result)
+        bundleUpdateProgressFlow.value = finished
+        scope.launch {
+            delay(3.5.seconds)
+            bundleUpdateProgressFlow.compareAndSet(finished, null)
+        }
+    }
+
+    private fun List<RemotePatchBundle>.uids() = mapTo(mutableSetOf(), RemotePatchBundle::uid)
 
     private class BundleUpdateCancelled : Exception()
 
@@ -2239,7 +2218,7 @@ class PatchBundleRepository(
         NoUpdates,      // Already up to date
         NoInternet,     // No internet connection
         Error,          // Error occurred
-        SkippedMetered, // Update skipped - network is metered and allowMeteredUpdates is false
+        UpdatesAvailable, // Checked only, the updates found wait in pendingUpdates
     }
 
     data class BundleUpdateProgress(
@@ -2453,7 +2432,6 @@ class PatchBundleRepository(
 
             startRemoteUpdateJob(
                 UpdateRequest(
-                    allowUnsafeNetwork = prefs.allowMeteredUpdates.get(),
                     target = UpdateTarget(custom = { bundle ->
                         bundle.uid != DEFAULT_SOURCE_UID &&
                                 // Disabled bundles are not refreshed, but ones that were never

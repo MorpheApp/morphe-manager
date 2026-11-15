@@ -40,10 +40,6 @@
         <item quantity="one">%s iturri ezkutatuta. Sakatu erakusteko</item>
         <item quantity="other">%s iturri ezkutatuta. Sakatu erakusteko</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s patch bat aurkituta</item>
-        <item quantity="other">%s patch aurkituta</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s iturri</item>
         <item quantity="other">%s iturri</item>

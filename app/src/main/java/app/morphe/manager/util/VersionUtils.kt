@@ -27,6 +27,13 @@ fun String.normalizeVersion(): String = removePrefix("v").trim()
 /** Adds the conventional display prefix without duplicating one already supplied by the app. */
 fun String.withVersionPrefix(): String = if (startsWith("v")) this else "v$this"
 
+/**
+ * The text copied from a version listing, ready to paste into a website search: the version, and
+ * the build in brackets after it when the patches require one specific build of that version.
+ */
+fun copyableVersion(version: String, buildCode: Long?): String =
+    if (buildCode != null) "$version ($buildCode)" else version
+
 // Compiled once, since versions are compared for every app a source lists
 private val PreReleaseVersion = """^([\d.]+)[-._]?(dev|beta|rc|alpha|preview)""".toRegex(RegexOption.IGNORE_CASE)
 private val SuffixedVersion = """^([\d.]+)(.*)$""".toRegex()

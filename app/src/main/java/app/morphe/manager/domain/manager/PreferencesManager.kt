@@ -30,7 +30,7 @@ import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppCardColorMode
 import app.morphe.manager.util.tag
-import app.morphe.manager.worker.UpdateCheckInterval
+import app.morphe.manager.worker.ScheduleInterval
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
@@ -114,7 +114,7 @@ class PreferencesManager(
     val backgroundUpdateNotifications = booleanPreference("background_update_notifications", false)
 
     /**  How often the background update check should run. */
-    val updateCheckInterval = enumPreference("update_check_interval", UpdateCheckInterval.DAILY)
+    val updateCheckInterval = enumPreference("update_check_interval", ScheduleInterval.DAILY)
 
     /** Whether other apps may start a batch patch run through an intent. */
     val externalBatchPatchEnabled = booleanPreference("external_batch_patch_enabled", false)
@@ -165,11 +165,34 @@ class PreferencesManager(
     val keystorePass = stringPreference("keystore_pass", KeystoreManager.DEFAULT)
     val keystorePassword = stringPreference("keystore_password", "")
 
+    // Automatic backups, tied to this device and the folder it was granted, so never exported
+
+    /** Folder automatic backups go to, a granted tree or a path. Empty while they are off. */
+    val autoBackupFolder = stringPreference("auto_backup_folder", "")
+
+    /** Shortest time between two automatic backups. */
+    val autoBackupInterval = enumPreference("auto_backup_interval", ScheduleInterval.DAILY)
+
+    /** Whether automatic backups keep a copy of the signing key beside the settings. */
+    val autoBackupSigningKey = booleanPreference("auto_backup_signing_key", false)
+
+    /** When the last automatic backup was written, 0 before the first. */
+    val lastAutoBackupAt = longPreference("last_auto_backup_at", 0L)
+
+    /** What the last automatic backup held, so an unchanged one is not written again. */
+    val lastAutoBackupDigest = stringPreference("last_auto_backup_digest", "")
+
+    /** Whether the last automatic backup failed, most often because its folder is gone. */
+    val autoBackupFailed = booleanPreference("auto_backup_failed", false)
+
     // Other hidden settings
     val gitHubPat = stringPreference("github_pat", "")
     val includeGitHubPatInExports = booleanPreference("include_github_pat_in_exports", false)
 
-    val allowMeteredUpdates = booleanPreference("allow_metered_updates", true)
+    val autoUpdates = enumPreference("auto_updates", AutoUpdates.DOWNLOAD)
+
+    /** Home alerts swiped aside behind the bell, kept across launches, see HomeAlerts. Never exported. */
+    val snoozedAlerts = stringSetPreference("snoozed_alerts", emptySet())
     val firstLaunch = booleanPreference("first_launch", true)
 
     val installationTime = longPreference("manager_installation_time", 0L)
@@ -185,6 +208,9 @@ class PreferencesManager(
 
     /** Whether asking for an APK starts the helper flow at once, over the download instructions. */
     val openApkDownloadHelperDirectly = booleanPreference("open_apk_download_helper_directly", false)
+
+    /** Whether a batch queue asks the trusted helper for APKs that are missing or behind on its own. */
+    val autoDownloadApkHelpersInBatch = booleanPreference("auto_download_apk_helpers_in_batch", false)
 
     val lastFilePickerPath = stringPreference("last_file_picker_path", "")
     val filePickerSortMode = stringPreference("file_picker_sort_mode", "DATE_DESC")
@@ -271,6 +297,13 @@ class PreferencesManager(
                 dataStore.edit { it.remove(legacyHelperKey) }
             }
 
+            // Mobile data updates used to be a switch, and whoever turned it off still downloads on Wi-Fi only
+            val legacyMeteredKey = booleanPreferencesKey("allow_metered_updates")
+            dataStore.data.first()[legacyMeteredKey]?.let { allowed ->
+                autoUpdates.update(autoUpdatesFromMeteredSwitch(allowed))
+                dataStore.edit { it.remove(legacyMeteredKey) }
+            }
+
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
                 Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
@@ -331,6 +364,8 @@ class PreferencesManager(
         val gitHubPat: String? = null,
         val includeGitHubPatInExports: Boolean? = null,
         val useJvmRuntime: Boolean? = null,
+        val autoUpdates: AutoUpdates? = null,
+        // Read from exports older than [autoUpdates], never written
         val allowMeteredUpdates: Boolean? = null,
         val installerPrimary: String? = null,
         val rootPatchMode: RootPatchMode? = null,
@@ -355,7 +390,7 @@ class PreferencesManager(
         val matrixBackgroundUnlocked: Boolean? = null,
         val seasonalThemes: Boolean? = null,
         val useExpertMode: Boolean? = null,
-        val updateCheckInterval: UpdateCheckInterval? = null,
+        val updateCheckInterval: ScheduleInterval? = null,
         val externalBatchPatchEnabled: Boolean? = null,
         val externalBatchPatchAllowlist: Set<String>? = null,
         val customBundles: List<BundleSnapshot>? = null,
@@ -367,6 +402,7 @@ class PreferencesManager(
         val useApkDownloadHelper: Boolean? = null,
         val trustedApkDownloadHelpers: Set<String>? = null,
         val openApkDownloadHelperDirectly: Boolean? = null,
+        val autoDownloadApkHelpersInBatch: Boolean? = null,
         val sourceBundleSortMode: String? = null,
         val saveOriginalApks: Boolean? = null,
         val savePatchedApks: Boolean? = null,
@@ -404,7 +440,7 @@ class PreferencesManager(
                 gitHubPat = gitHubPat.takeIf { sources },
                 includeGitHubPatInExports = includeGitHubPatInExports.takeIf { sources },
                 useJvmRuntime = useJvmRuntime.takeIf { patching },
-                allowMeteredUpdates = allowMeteredUpdates.takeIf { updates },
+                autoUpdates = autoUpdates.takeIf { updates },
                 installerPrimary = installerPrimary.takeIf { patching },
                 rootPatchMode = rootPatchMode.takeIf { patching },
                 afterPatching = afterPatching.takeIf { patching },
@@ -439,6 +475,7 @@ class PreferencesManager(
                 useApkDownloadHelper = useApkDownloadHelper.takeIf { patching },
                 trustedApkDownloadHelpers = trustedApkDownloadHelpers.takeIf { patching },
                 openApkDownloadHelperDirectly = openApkDownloadHelperDirectly.takeIf { patching },
+                autoDownloadApkHelpersInBatch = autoDownloadApkHelpersInBatch.takeIf { patching },
                 sourceBundleSortMode = sourceBundleSortMode.takeIf { sources },
                 saveOriginalApks = saveOriginalApks.takeIf { patching },
                 savePatchedApks = savePatchedApks.takeIf { patching },
@@ -467,7 +504,7 @@ class PreferencesManager(
         gitHubPat = gitHubPat.get().takeIf { includeGitHubPatInExports.get() },
         includeGitHubPatInExports = includeGitHubPatInExports.get(),
         useJvmRuntime = useJvmRuntime.get(),
-        allowMeteredUpdates = allowMeteredUpdates.get(),
+        autoUpdates = autoUpdates.get(),
         installerPrimary = installerPrimary.get(),
         rootPatchMode = rootPatchMode.get(),
         afterPatching = afterPatching.get(),
@@ -498,6 +535,7 @@ class PreferencesManager(
         customFilePickerUserConfigured = customFilePickerUserConfigured.get(),
         trustedApkDownloadHelpers = trustedApkDownloadHelpers.get(),
         openApkDownloadHelperDirectly = openApkDownloadHelperDirectly.get(),
+        autoDownloadApkHelpersInBatch = autoDownloadApkHelpersInBatch.get(),
         sourceBundleSortMode = sourceBundleSortMode.get(),
         saveOriginalApks = saveOriginalApks.get(),
         savePatchedApks = savePatchedApks.get(),
@@ -527,7 +565,8 @@ class PreferencesManager(
         snapshot.gitHubPat?.let { gitHubPat.value = it }
         snapshot.includeGitHubPatInExports?.let { includeGitHubPatInExports.value = it }
         snapshot.useJvmRuntime?.let { useJvmRuntime.value = it }
-        snapshot.allowMeteredUpdates?.let { allowMeteredUpdates.value = it }
+        (snapshot.autoUpdates ?: snapshot.allowMeteredUpdates?.let(::autoUpdatesFromMeteredSwitch))
+            ?.let { autoUpdates.value = it }
         // Older exports store root mount as the installer
         val legacyInstaller = snapshot.installerPrimary
             ?.takeIf { snapshot.rootPatchMode == null }
@@ -582,6 +621,7 @@ class PreferencesManager(
                 }
             }
         snapshot.openApkDownloadHelperDirectly?.let { openApkDownloadHelperDirectly.value = it }
+        snapshot.autoDownloadApkHelpersInBatch?.let { autoDownloadApkHelpersInBatch.value = it }
         snapshot.sourceBundleSortMode?.let { sourceBundleSortMode.value = it }
         snapshot.saveOriginalApks?.let { saveOriginalApks.value = it }
         snapshot.savePatchedApks?.let { savePatchedApks.value = it }
@@ -600,6 +640,10 @@ class PreferencesManager(
         }
     }
 }
+
+/** What the mobile data updates switch, [allowed] or not, stands for among [AutoUpdates]. */
+private fun autoUpdatesFromMeteredSwitch(allowed: Boolean) =
+    if (allowed) AutoUpdates.DOWNLOAD else AutoUpdates.WIFI_ONLY
 
 /** The installer standard builds used while [installer] stored root mount, null for any other value. */
 private fun legacyRootMountInstaller(installer: String): String? = when (installer) {

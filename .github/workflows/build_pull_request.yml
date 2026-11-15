@@ -58,6 +58,18 @@ jobs:
       - name: Cache Gradle
         uses: burrunan/gradle-cache-action@v3
 
+      # Robolectric fetches the Android platform its tests run on into the Maven repository rather
+      # than Gradle's, so the Gradle cache leaves it out. It changes with Robolectric and the SDK
+      - name: Read Robolectric version
+        id: robolectric
+        run: echo "version=$(sed -n 's/^robolectric = "\(.*\)"/\1/p' gradle/libs.versions.toml)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Robolectric platform
+        uses: actions/cache@v6
+        with:
+          path: ~/.m2/repository/org/robolectric
+          key: robolectric-${{ steps.robolectric.outputs.version }}-${{ hashFiles('app/src/test/resources/robolectric.properties') }}
+
       - name: Run unit tests
         env:
           # Needed to resolve morphe-patcher from GitHub Packages, which rejects

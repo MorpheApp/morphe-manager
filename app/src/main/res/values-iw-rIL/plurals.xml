@@ -49,11 +49,6 @@
         <item quantity="two">%s מקורות מוסתרים. הקש כדי להציג</item>
         <item quantity="other">%s מקורות מוסתרים. הקש כדי להציג</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s תיקון תואם</item>
-        <item quantity="two">%s תיקונים תואמים</item>
-        <item quantity="other">%s תיקונים תואמים</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">מקור אחד</item>
         <item quantity="two">שני מקורות</item>

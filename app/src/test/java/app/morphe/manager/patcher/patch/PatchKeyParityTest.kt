@@ -7,7 +7,7 @@ package app.morphe.manager.patcher.patch
 
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.patch
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -18,8 +18,11 @@ import kotlin.test.assertEquals
 class PatchKeyParityTest {
     private val app = "com.example.app"
 
+    // A compatibility list left empty names no app, which the patcher applies to none
+    private val namingNone = patch(name = "Empty", description = "naming none") { compatibleWith() }
+
     // The description tells the patches apart, as several share a name
-    private fun patch(name: String, description: String, vararg packages: String?) = bytecodePatch(
+    private fun patchOf(name: String, description: String, vararg packages: String?) = patch(
         name = name,
         description = description
     ) {
@@ -43,14 +46,29 @@ class PatchKeyParityTest {
     @Test
     fun `the app and the patcher key the same patches alike`() {
         val patches = listOf(
-            patch("Ads", "universal", null),
-            patch("Ads", "app", app),
-            patch("Ads", "app and other", app, "com.other"),
-            patch("Theme", "unrestricted"),
-            patch("Other", "elsewhere", "com.other")
+            patchOf("Ads", "universal", null),
+            patchOf("Ads", "app", app),
+            patchOf("Ads", "app and other", app, "com.other"),
+            patchOf("Theme", "unrestricted"),
+            patchOf("Other", "elsewhere", "com.other"),
+            namingNone
         )
 
         assertEquals(listedKeys(patches), patcherKeys(patches))
         assertEquals(listedKeys(patches.reversed()), patcherKeys(patches.reversed()))
+    }
+
+    @Test
+    fun `a patch is universal where the patcher takes it for any app`() {
+        val cases = mapOf(
+            patchOf("Theme", "unrestricted") to true,
+            patchOf("Ads", "universal", null) to true,
+            patchOf("Ads", "app", app) to false,
+            namingNone to false
+        )
+
+        cases.forEach { (patch, universal) ->
+            assertEquals(universal, PatchInfo(patch).isUniversal, patch.description)
+        }
     }
 }

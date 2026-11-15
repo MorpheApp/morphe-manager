@@ -67,6 +67,7 @@ fun DialogHostScope.InstalledAppPickerDialog(
         hideFooterWhileTyping = true,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Apps, color = accent, modifier = modifier)
                 },

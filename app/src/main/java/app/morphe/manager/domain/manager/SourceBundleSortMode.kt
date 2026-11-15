@@ -12,10 +12,10 @@ import app.morphe.manager.util.enumByNameOrNull
 enum class SourceBundleSortMode(
     @param:StringRes override val labelRes: Int
 ) : SortModeSpec {
-    MANUAL(R.string.sources_sort_manual),
+    MANUAL(R.string.list_sort_manual),
     LAST_UPDATED(R.string.sources_sort_last_updated),
-    NAME_ASC(R.string.file_picker_sort_name_asc),
-    NAME_DESC(R.string.file_picker_sort_name_desc),
+    NAME_ASC(R.string.list_sort_name_asc),
+    NAME_DESC(R.string.list_sort_name_desc),
     ENABLED_FIRST(R.string.sources_sort_enabled_first);
 
     companion object {

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.AppVersionStatus
+import app.morphe.patcher.patch.FormFactor
 import java.io.File
 
 /**
@@ -41,33 +42,35 @@ data class HomeAppItem(
     val patchCount: Int,
     val isClone: Boolean,
     /** What tells the card from another app of the same name, see [withNameSuffixes]. */
-    val nameSuffix: String? = null
+    val nameSuffix: String? = null,
+    /** Device the sources say the app is built for, null where they do not say. */
+    val formFactor: FormFactor? = null
 ) {
     val hasSavedCopy: Boolean get() = savedApkFile != null
 
     /**
-     * Whether the install is settled enough for pending work on it to be worth surfacing. A record
-     * in any other state keeps its flags but is described by the state it is in instead.
+     * What the card says about the app, the most pressing state first. A record that is gone,
+     * replaced or unchecked keeps its update flags but is described by the state it is in, and a
+     * newer app version leads newer patches, as only it asks for a newer APK.
+     *
+     * An install past everything the sources cover has already lost its patches, so only the
+     * rebuildable end of [versionStatus] counts here.
+     *
+     * Settled once per item, as cards read it on every recomposition and sorting on every comparison.
      */
-    private val isSettledInstall: Boolean get() = !isDeleted &&
-            !isInstallStateNotPatched &&
-            !isInstallStateUnknown &&
-            !isInstallStatePending
-
-    val showsUpdateBadge: Boolean get() = hasUpdate && isSettledInstall
-
-    /**
-     * An install past everything the sources cover has already lost its patches, so the state it
-     * is in says more than the version it is at, and only the rebuildable end is badged here.
-     */
-    val showsVersionBadge: Boolean get() = versionStatus?.isBehind == true && isSettledInstall
-
-    /**
-     * Whether the card is marked for a rebuild: newer patches, a newer supported app version, or
-     * both. Only what the mark says: rebuilding at a version the sources still cover returns the
-     * install as it went in, so queueing and sorting stay with [showsUpdateBadge] alone.
-     */
-    val showsRebuildBadge: Boolean get() = showsUpdateBadge || showsVersionBadge
+    val status: HomeAppStatus = run {
+        val newerVersion = versionStatus?.takeIf { it.isBehind }?.supportedVersion
+        when {
+            installedApp == null -> HomeAppStatus.NotPatchedYet
+            isInstallStatePending -> HomeAppStatus.Pending
+            isInstallStateNotPatched -> HomeAppStatus.UnpatchedInstall
+            isDeleted -> HomeAppStatus.Uninstalled
+            isInstallStateUnknown -> HomeAppStatus.Unverified
+            newerVersion != null -> HomeAppStatus.NewerVersion(newerVersion)
+            hasUpdate -> HomeAppStatus.NewerPatches
+            else -> HomeAppStatus.Patched(version)
+        }
+    }
 }
 
 /**

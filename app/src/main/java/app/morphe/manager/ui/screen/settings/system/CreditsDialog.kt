@@ -6,8 +6,8 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.Modifier
@@ -56,24 +56,15 @@ private val priorContributors = listOf(
 @Composable
 fun DialogHostScope.CreditsDialog(onDismiss: () -> Unit) {
     val openUrl = rememberOpenUrl()
-    val accent = MaterialTheme.colorScheme.primary
 
-    ListDialog(
+    // A few links that fit on any screen, so they stand as one centered block rather than a list
+    AppDialog(
         onDismissRequest = onDismiss,
-        header = {
-            ListDialogHeader(
-                icon = { modifier ->
-                    ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Group, color = accent, modifier = modifier)
-                },
-                title = stringResource(R.string.credits),
-                subtitle = listOf(
-                    stringResource(R.string.app_name),
-                    BuildConfig.VERSION_NAME.withVersionPrefix().isolateLtr()
-                ).joinToString(" · "),
-                accentColor = accent,
-                alwaysShowBand = true
-            )
-        },
+        title = stringResource(R.string.credits),
+        description = listOf(
+            stringResource(R.string.app_name),
+            BuildConfig.VERSION_NAME.withVersionPrefix().isolateLtr()
+        ).joinToString(" · "),
         footer = {
             AppDialogOutlinedButton(
                 text = stringResource(R.string.close),
@@ -82,10 +73,7 @@ fun DialogHostScope.CreditsDialog(onDismiss: () -> Unit) {
             )
         }
     ) {
-        DialogScrollColumn(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)) {
             ContributorSection(
                 title = stringResource(R.string.credits_current_development),
                 icon = MaterialSymbols.Rounded.Code,

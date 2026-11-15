@@ -4,6 +4,7 @@
  */
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
@@ -20,6 +21,7 @@ import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.jvm.toolchain.JavaLauncher
 import org.gradle.process.ExecOperations
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.zip.ZipFile
 import javax.inject.Inject
@@ -100,12 +102,21 @@ abstract class ShrinkJarTask : DefaultTask() {
             }
         )
 
-        exec.javaexec {
+        // ProGuard prints its version on every run, so what it reports is shown only when it fails
+        val log = ByteArrayOutputStream()
+        val result = exec.javaexec {
             executable = jdk.get().executablePath.asFile.path
             classpath = proguardClasspath
             mainClass.set("proguard.ProGuard")
             args("@${configuration.path}")
+            standardOutput = log
+            errorOutput = log
+            isIgnoreExitValue = true
         }
+        if (result.exitValue != 0) {
+            throw GradleException("ProGuard failed with exit code ${result.exitValue}:\n$log")
+        }
+        logger.info(log.toString())
     }
 
     private fun File.tool(name: String) = resolve(name).takeIf { it.exists() }?.path ?: resolve("$name.exe").path

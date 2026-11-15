@@ -13,7 +13,8 @@ import kotlinx.serialization.json.JsonElement
  * the JVM that patches when the run happens there.
  *
  * @param mergedApkFile Where a split archive merged into one APK is left, for the app to keep it
- *                      for repatching once the run is over.
+ *                      for repatching once the run is over. Nothing is left there when the archive
+ *                      has OBB files, which the merged APK lacks, so the app keeps the archive.
  * @param temporaryDir Scratch space of the run, cleared by the app.
  * @param workspaceDir Scratch space patches write their own files to.
  */

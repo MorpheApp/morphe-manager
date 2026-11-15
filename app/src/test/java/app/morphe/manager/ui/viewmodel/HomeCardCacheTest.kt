@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import app.morphe.manager.domain.bundles.AppVersionStatus
 import app.morphe.manager.domain.manager.HomeAppSortMode
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.ui.model.homeAppItem
 import java.io.File
 import java.nio.file.Files
 import kotlin.test.AfterTest
@@ -34,25 +35,17 @@ class HomeCardCacheTest {
         sortMode = HomeAppSortMode.entries.first()
     )
 
-    private fun item(packageName: String, savedApk: File? = null) = HomeAppItem(
+    private fun item(packageName: String, savedApk: File? = null) = homeAppItem(
         id = packageName,
         packageName = packageName,
-        displayName = "App $packageName",
+        displayName = "App $packageName"
+    ).copy(
         gradientColors = listOf(Color(0xFF112233), Color(0xFF445566)),
-        installedApp = null,
-        packageInfo = null,
         version = "1.0",
-        isPinnedByDefault = false,
         isInstalledOnDevice = true,
-        isDeleted = false,
-        isInstallStateNotPatched = false,
-        isInstallStateUnknown = false,
-        isInstallStatePending = false,
         savedApkFile = savedApk,
         hasUpdate = true,
         versionStatus = AppVersionStatus("1.0", "2.0", isBehind = true),
-        patchCount = 0,
-        isClone = false,
         nameSuffix = "web"
     )
 

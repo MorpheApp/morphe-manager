@@ -10,9 +10,9 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.patcher.patch.Patch
-import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.intOption
 import app.morphe.patcher.patch.longOption
+import app.morphe.patcher.patch.patch
 import app.morphe.patcher.patch.stringOption
 import app.morphe.patcher.patch.stringsOption
 import kotlin.reflect.typeOf
@@ -121,7 +121,7 @@ class OptionValuesTest {
     @Test
     fun `patch options are set as the types their patches declare`() {
         val patches = patchesByName(
-            bytecodePatch(name = "Numbers") {
+            patch(name = "Numbers") {
                 intOption("versionCode")
                 longOption("maxDuration")
                 stringOption("packageName")
@@ -151,7 +151,7 @@ class OptionValuesTest {
     @Test
     fun `a stale or unusable value is reported instead of failing the run`() {
         val patches = patchesByName(
-            bytecodePatch(name = "Numbers") {
+            patch(name = "Numbers") {
                 intOption("versionCode", default = 1)
             }
         )
@@ -177,7 +177,7 @@ class OptionValuesTest {
     @Test
     fun `an option without a value keeps the default of its patch`() {
         val patches = patchesByName(
-            bytecodePatch(name = "Numbers") {
+            patch(name = "Numbers") {
                 intOption("versionCode", default = 7)
             }
         )
@@ -190,7 +190,7 @@ class OptionValuesTest {
     @Test
     fun `a text field the user cleared leaves the default of its patch in place`() {
         val patches = patchesByName(
-            bytecodePatch(name = "Branding") {
+            patch(name = "Branding") {
                 stringOption("appName", default = "Morphe", required = true)
             }
         )
@@ -205,7 +205,7 @@ class OptionValuesTest {
     @Test
     fun `a blank left over on a number keeps the default instead of failing the run`() {
         val patches = patchesByName(
-            bytecodePatch(name = "Upload") {
+            patch(name = "Upload") {
                 longOption("maxDuration", default = 60L)
             }
         )

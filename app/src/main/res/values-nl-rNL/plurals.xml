@@ -40,10 +40,6 @@
         <item quantity="one">%s bron verborgen. Tik om te tonen</item>
         <item quantity="other">%s bronnen verborgen. Tik om te tonen</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s overeenkomende patch</item>
-        <item quantity="other">%s overeenkomende patches</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s bron</item>
         <item quantity="other">%s bronnen</item>

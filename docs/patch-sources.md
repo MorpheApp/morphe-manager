@@ -225,8 +225,9 @@ The **Update** badge on a home card is tied to the source the app was patched wi
 
 Remote sources refresh in the background, and the **Update** pill on a card forces a check
 right away. On devices without Google Play services the schedule is set by **Check frequency**
-in **Settings → Notifications**. If **Mobile data updates** is off and you are not on Wi-Fi,
-checks are skipped and Morphe warns you before patching with what may be an outdated bundle.
+in **Settings → Notifications**. How far Morphe goes on its own when it opens is set by
+**Automatic updates**: where it only checks, it shows the updates it found on the home screen
+and warns you before patching with a source that has one waiting.
 
 With two or more sources the header gets a sort button. **Sort** offers **Manual order**
 (long-press a card to reorder), **Last updated**, **Name (A-Z)** and **(Z-A)**, and **Enabled

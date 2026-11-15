@@ -40,10 +40,6 @@
         <item quantity="one">%s kilde er skjult. Trykk for å vise</item>
         <item quantity="other">%s kilder er skjult. Trykk for å vise</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s matchende patch</item>
-        <item quantity="other">%s matchende patcher</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s kilde</item>
         <item quantity="other">%s kilder</item>

@@ -287,7 +287,7 @@ internal fun HomeCategoryHeader(
     val isSourceGroup = group.sourceUid != null
     val leadingIcon = if (group.collapsed) MaterialSymbols.Rounded.Folder else MaterialSymbols.Rounded.Folder_open
     // Surface pending updates on the header so collapsed groups still hint at work to do
-    val hasPendingUpdate = group.items.any { it.showsRebuildBadge }
+    val hasPendingUpdate = group.items.any { it.status.offersRebuild }
     val folderTint = if (hasPendingUpdate) MaterialTheme.colorScheme.primary else mutedContentColor
     // A source's group takes on the color of its icon, as the source's own dialogs do
     val sourceAccent = rememberSourceAccent(group.sourceIsDefault, group.sourceAvatarUrl, group.sourceFallbackAvatarUrl)

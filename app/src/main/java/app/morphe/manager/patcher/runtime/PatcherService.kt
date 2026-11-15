@@ -49,6 +49,11 @@ class PatcherService : Service() {
 
             val options = listOfNotNull(
                 "-Xmx${heapLimitMb}m",
+                // The heap starts this large rather than at the 64th of the RAM HotSpot starts with, so
+                // the collector runs less often while the heap grows to what a large run needs. That
+                // matters most on slow devices, and for the serial collector of a 32-bit JVM, which
+                // has no concurrent phases and stops the run for each collection
+                "-Xms${minOf(INITIAL_HEAP_MB, heapLimitMb)}m",
                 // A cap on the code cache, reserved apart from the heap in address space a 32-bit heap needs more
                 "-XX:ReservedCodeCacheSize=${CODE_CACHE_32_BIT_MB}m".takeUnless { Process.is64Bit() }
             ) + launch.options // Last, so a flag the app gives again wins
@@ -130,6 +135,10 @@ class PatcherService : Service() {
 
         // A heap below this is no bigger than ART gives a 32-bit app, so ART patches instead
         private const val HEAP_LIMIT_USABLE_MB = 512
+
+        // The heap the JVM starts with, or its limit if that is smaller. A gigabyte made no
+        // difference on a recent 64-bit phone, so this stays small enough to cost little memory
+        private const val INITIAL_HEAP_MB = 512
 
         private const val EXTRA_NOTIFICATION_ID = "notification_id"
         private const val EXTRA_NOTIFICATION = "notification"

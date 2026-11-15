@@ -51,19 +51,10 @@ class MainViewModel(
     var pendingDeepLinkSource: DeepLinkSource? by mutableStateOf(null)
 
     /**
-     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when the app is opened
-     * by tapping a .mpp file in a file manager. HomeScreen observes this via LaunchedEffect,
-     * shows a confirmation dialog, then resets the flag to null.
+     * A file opened with Morphe or shared to it, set by [app.morphe.manager.MainActivity.handleDeepLinkIntent]
+     * and handed to [app.morphe.manager.ui.viewmodel.HomeViewModel.openIncomingFile], which tells what it is.
      */
-    var pendingMppUri: Uri? by mutableStateOf(null)
-
-    /**
-     * Set by [app.morphe.manager.MainActivity.handleDeepLinkIntent] when an APK-family file
-     * is shared to Morphe via the system share sheet.
-     * HomeScreen observes this via LaunchedEffect, triggers
-     * [app.morphe.manager.ui.viewmodel.HomeViewModel.handleExternalApkUri], then resets to null.
-     */
-    var pendingExternalApkUri: Uri? by mutableStateOf(null)
+    var pendingIncomingFile: IncomingFile? by mutableStateOf(null)
 
     /** Batch patch request received from another app, waiting to be gated. */
     var pendingBatchPatch: BatchPatchRequest? by mutableStateOf(null)
@@ -164,6 +155,12 @@ class MainViewModel(
     fun consumeApprovedBatch() {
         approvedBatchPatch = null
     }
+
+    /**
+     * A file another app handed over. [shared] when it came through the share sheet, which also
+     * takes APK-family files, rather than opened with Morphe.
+     */
+    data class IncomingFile(val uri: Uri, val shared: Boolean)
 
     /** A source a link asks to add, as much of it as [scope] says. */
     data class DeepLinkSource(

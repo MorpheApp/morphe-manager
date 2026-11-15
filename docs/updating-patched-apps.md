@@ -39,9 +39,15 @@ controls that:
 
 The **Updates** section of the settings holds the rest:
 
-- **Mobile data updates** - allows update downloads over mobile data. With this off and no
-  Wi-Fi, checks are skipped, and Morphe warns you if you patch with sources it could not
-  refresh.
+- **Automatic updates** - what Morphe does when it opens:
+  - **Download automatically** - checks and downloads patch updates on any network.
+  - **Download on Wi-Fi only** - on mobile data it only checks and shows what is available.
+  - **Check only** - shows the updates it found, and downloads them once you tap.
+  - **Don't check** - checks only when you pull to refresh.
+
+  Updates found but not downloaded wait on the home screen, and Morphe warns you if you patch
+  with a source that has one waiting. Morphe updates are never downloaded on their own, and on
+  mobile data only **Download automatically** skips the warning before downloading one.
 - **Pre-release updates** - early access to new Morphe versions. Pre-release for individual
   patch sources is toggled per source in **Sources**.
 
@@ -156,7 +162,7 @@ and does not affect your patched apps.
 | --- | --- |
 | No update mark although the source released a new version | The release contains no changes for this app, so there is nothing to repatch for |
 | A mark for an app version you do not want | Open the app and tap **Ignore** in the update banner. The offer comes back for the version after it |
-| "Patches may be outdated" before patching | Mobile data updates are off and Morphe could not refresh its sources. Connect to Wi-Fi, or choose **Update & patch** |
+| "Patches may be outdated" before patching | A source has an update that **Automatic updates** left for you to download. Choose **Update & patch**, or tap the update on the home screen first |
 | Signature conflict when installing the update | The keystore changed since the app was patched. Uninstall the patched app, which erases its data, then install the new build |
 | The app was uninstalled outside Morphe | The card shows **Uninstalled**, and its info dialog **App was uninstalled**. Reinstall the saved build or patch it again |
 | You want the previous build back | Install the APK you exported earlier. Saved copies are listed under **Settings → Storage management → Patched APKs** |

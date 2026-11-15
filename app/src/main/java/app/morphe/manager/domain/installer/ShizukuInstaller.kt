@@ -22,7 +22,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Process
 import android.os.RemoteException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
@@ -170,16 +169,13 @@ class ShizukuInstaller(private val app: Application) {
         )
     }
 
-    /** Returns the user ID derived from the current process UID. */
-    private fun currentUserId(): Int = Process.myUid() / 100000
-
     private fun installerIdentity(installerPackageNameOverride: String? = null): InstallerIdentity {
         val isRoot = runCatching { Shizuku.getUid() }.getOrDefault(-1) == 0
         return InstallerIdentity(
             packageName = installerPackageNameOverride
                 ?: if (isRoot) app.packageName else SHELL_PACKAGE,
             attributionTag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) app.attributionTag else null,
-            userId = if (isRoot) currentUserId() else 0
+            userId = if (isRoot) appUserId else 0
         )
     }
 

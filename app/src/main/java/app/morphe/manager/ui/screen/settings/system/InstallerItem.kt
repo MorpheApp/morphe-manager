@@ -5,13 +5,14 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.domain.installer.InstallerManager
@@ -38,49 +39,42 @@ fun InstallerItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val primaryToken = settingsViewModel.primaryInstallerToken()
-    val installTarget = InstallerManager.InstallTarget.PATCHER
-    val primaryEntries = rememberPolledInstallerEntries(primaryToken) {
-        settingsViewModel.getInstallerEntries(installTarget, primaryToken)
+    val preferredToken = settingsViewModel.preferredInstallerToken()
+    val preferredEntry = rememberPolledInstallers(preferredToken) {
+        settingsViewModel.describeInstallerEntry(preferredToken, InstallerManager.InstallTarget.PATCHER)
     }
 
-    val primaryEntry = primaryEntries.find { it.token == primaryToken }
-        ?: settingsViewModel.describeInstallerEntry(primaryToken, installTarget)
-        ?: primaryEntries.firstOrNull()
-
-    if (primaryEntry != null) {
-        InstallerSettingsItem(
-            title = stringResource(R.string.settings_installation),
-            entry = primaryEntry,
-            onClick = onClick,
-            modifier = modifier
-        )
-    }
+    InstallerSettingsItem(
+        title = stringResource(R.string.settings_installation),
+        entry = preferredEntry,
+        onClick = onClick,
+        modifier = modifier
+    )
 }
 
 /** The default installer, as the preference holding it reads now. */
 @Composable
-internal fun SettingsViewModel.primaryInstallerToken(): InstallerManager.Token {
+internal fun SettingsViewModel.preferredInstallerToken(): InstallerManager.Token {
     val preference by prefs.installerPrimary.getAsState()
     return remember(preference) { parseInstallerToken(preference) }
 }
 
-/** Installer entries from [provider], read again every so often so a change in availability shows up. */
+/**
+ * Installer entries from [provider], one or a list, read again every so often so a change in
+ * availability shows up. A read equal to the last one changes no state, so it recomposes nothing.
+ */
 @Composable
-internal fun rememberPolledInstallerEntries(
-    key: Any?,
-    provider: () -> List<InstallerManager.Entry>
-): List<InstallerManager.Entry> {
+internal fun <T> rememberPolledInstallers(key: Any?, provider: () -> T): T {
     val currentProvider by rememberUpdatedState(provider)
-    var entries by remember(key) { mutableStateOf(provider()) }
+    var value by remember(key) { mutableStateOf(provider()) }
     LaunchedEffect(key) {
         while (isActive) {
             delay(1.5.seconds)
             // Each read queries PackageManager for every installer, too slow to repeat on the main thread
-            entries = withContext(Dispatchers.IO) { currentProvider() }
+            value = withContext(Dispatchers.IO) { currentProvider() }
         }
     }
-    return entries
+    return value
 }
 
 /**
@@ -106,12 +100,12 @@ private fun InstallerSettingsItem(
     SettingsItem(
         onClick = onClick,
         leadingContent = {
-            if (entry.hasOwnIcon) {
-                Image(
-                    painter = rememberDrawablePainter(drawable = entry.icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(Defaults.IconSize),
-                    alpha = if (entry.availability.available) 1f else 0.4f
+            val iconPackageName = entry.iconPackageName
+            if (iconPackageName != null) {
+                InstallerAppIcon(
+                    packageName = iconPackageName,
+                    available = entry.availability.available,
+                    size = Defaults.IconSize
                 )
             } else {
                 ThemedIcon(icon = MaterialSymbols.Rounded.Android)
@@ -123,14 +117,21 @@ private fun InstallerSettingsItem(
     )
 }
 
-/** Whether the entry is drawn with the icon of the app behind it rather than a generic one. */
-private val InstallerManager.Entry.hasOwnIcon: Boolean
-    get() = icon != null &&
-            (token == InstallerManager.Token.Shizuku ||
-                    token == InstallerManager.Token.ShizukuPlayStore ||
-                    token == InstallerManager.Token.PlayStore ||
-                    token == InstallerManager.Token.RootPlayStore ||
-                    token is InstallerManager.Token.Component)
+/**
+ * The icon of the app behind an installer, dimmed while the installer cannot be used.
+ *
+ * @param size As wide as what leads the rows or cards next to it, so their titles line up.
+ */
+@Composable
+private fun InstallerAppIcon(packageName: String, available: Boolean, size: Dp) {
+    AppIcon(
+        packageName = packageName,
+        contentDescription = null,
+        modifier = Modifier
+            .size(size)
+            .alpha(if (available) 1f else 0.4f)
+    )
+}
 
 /**
  * The installers to pick from, with Play Store mode for one that offers it. [selected] is the
@@ -575,18 +576,10 @@ private fun InstallerOptionItem(
         enabled = enabled,
         hasWarning = footerText != null,
         stateDescription = stateDescription,
-        leadingContent = if (option.hasOwnIcon) {
-            {
-                SelectionLeadingBox(selected = selected, enabled = enabled) {
-                    Image(
-                        painter = rememberDrawablePainter(drawable = option.icon),
-                        contentDescription = null,
-                        modifier = Modifier.size(Defaults.IconSize),
-                        alpha = if (enabled) 1f else 0.4f
-                    )
-                }
-            }
-        } else null,
+        // Bare in place of the selection mark, as the card's own border already marks the pick
+        leadingContent = option.iconPackageName?.let { iconPackageName ->
+            { InstallerAppIcon(packageName = iconPackageName, available = enabled, size = SelectionMarkSize) }
+        },
         footerContent = if (reasonText != null || footerText != null || footerActions.isNotEmpty()) {
             {
                 Column(

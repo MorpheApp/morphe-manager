@@ -6,14 +6,14 @@
 package app.morphe.manager.ui.screen.settings.appearance
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.*
@@ -55,6 +55,7 @@ fun DialogHostScope.LanguagePickerDialog(
         onDismissRequest = onDismiss,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Language, color = accent, modifier = modifier)
                 },
@@ -78,7 +79,7 @@ fun DialogHostScope.LanguagePickerDialog(
 
         DialogLazyList(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(DialogListSpacing)
+            verticalArrangement = Arrangement.spacedBy(SegmentGap)
         ) {
             // Offered ahead of the languages rather than in a dialog of its own before them, and
             // left out of a search, which looks for a language rather than how to add one
@@ -92,7 +93,9 @@ fun DialogHostScope.LanguagePickerDialog(
                         subtitle = stringResource(R.string.settings_appearance_translations_info_title),
                         // Leaves for the browser rather than going on within the dialog
                         trailingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored) },
-                        modifier = Modifier.animatedListItem(this)
+                        modifier = Modifier
+                            .animatedListItem(this)
+                            .endsBlock()
                     )
                 }
             }
@@ -107,11 +110,13 @@ fun DialogHostScope.LanguagePickerDialog(
                 }
             }
 
-            items(items = filteredLanguages, key = { it.code }) { language ->
+            // Joined into one group, as the choices of the other pickers are
+            itemsIndexed(items = filteredLanguages, key = { _, language -> language.code }) { index, language ->
                 LanguageItem(
                     language = language,
                     isSelected = currentLanguage == language.code,
                     onClick = { onLanguageSelected(language.code) },
+                    segment = ListSegment.of(index, filteredLanguages.size),
                     modifier = Modifier.animatedListItem(this)
                 )
             }
@@ -127,40 +132,27 @@ private fun LanguageItem(
     language: LanguageOption,
     isSelected: Boolean,
     onClick: () -> Unit,
+    segment: ListSegment,
     modifier: Modifier = Modifier
 ) {
-    val stateDescription = stringResource(
-        if (isSelected) R.string.state_selected else R.string.state_not_selected
-    )
     RadioSelectionCard(
         selected = isSelected,
         onSelect = onClick,
-        modifier = modifier,
-        stateDescription = stateDescription,
-        leadingContent = {
-            SelectionLeadingBox(selected = isSelected, size = 40.dp) {
-                Text(
-                    text = language.flag,
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-        }
+        modifier = modifier.endsBlock(segment.endsBlock),
+        shape = segment.shape
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = language.displayName,
-                style = MaterialTheme.typography.bodyLarge,
-                color = dialogTextColor(),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                text = language.nativeName,
-                style = MaterialTheme.typography.bodyMedium,
-                color = dialogSecondaryTextColor(),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        IconTextRow(
+            modifier = Modifier.weight(1f),
+            // The flag sits beside the name, as an icon does in the other pickers, and leaves the
+            // lead to the same radio mark they carry
+            leadingContent = {
+                Box(modifier = Modifier.size(40.dp), contentAlignment = Alignment.Center) {
+                    Text(text = language.flag, style = MaterialTheme.typography.titleLarge)
+                }
+            },
+            title = language.displayName,
+            // A language already shown in its own name has nothing more to say here
+            description = language.nativeName.takeIf { it != language.displayName }
+        )
     }
 }

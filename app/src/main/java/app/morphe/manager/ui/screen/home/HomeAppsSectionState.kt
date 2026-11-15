@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.home
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.runtime.*
 import app.morphe.manager.domain.manager.HomeAppCategory
 import app.morphe.manager.ui.model.HomeAppItem
@@ -38,6 +39,8 @@ internal class HomeAppsSectionState(
 ) {
     // Selection
     var isMultiSelectMode by mutableStateOf(false)
+    /** The card the latest pick selected, which the list keeps clear of the selection panel. */
+    var selectedAppRequester by mutableStateOf<BringIntoViewRequester?>(null)
     /** Group the latest card was picked in, which decides the selection's group when an app sits in several. */
     var pickedGroupKey by mutableStateOf<String?>(null)
 
@@ -100,6 +103,7 @@ internal class HomeAppsSectionState(
 
     fun exitMultiSelect() {
         isMultiSelectMode = false
+        selectedAppRequester = null
         selectedPackages.clear()
         pickedGroupKey = null
     }
@@ -122,10 +126,16 @@ internal class HomeAppsSectionState(
         isCategoryReorderMode = false
     }
 
-    /** Toggles a card in a grouped view, remembering the group it was picked in. */
-    fun toggleInGroup(packageName: String, groupKey: String) {
-        pickedGroupKey = groupKey
+    /** Toggles a card, which [requester] brings out from under the selection panel once selected. */
+    fun toggleSelection(packageName: String, requester: BringIntoViewRequester) {
+        selectedAppRequester = requester.takeUnless { selectedPackages.contains(packageName) }
         selectedPackages.toggle(packageName)
+    }
+
+    /** Toggles a card in a grouped view, remembering the group it was picked in. */
+    fun toggleInGroup(packageName: String, groupKey: String, requester: BringIntoViewRequester) {
+        pickedGroupKey = groupKey
+        toggleSelection(packageName, requester)
     }
 }
 

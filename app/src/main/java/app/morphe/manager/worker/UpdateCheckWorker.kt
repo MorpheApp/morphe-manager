@@ -9,7 +9,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import app.morphe.manager.BuildConfig
-import app.morphe.manager.R
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
@@ -20,38 +19,9 @@ import kotlinx.coroutines.flow.first
 import java.util.concurrent.TimeUnit
 
 /**
- * How often the background update check WorkManager job should repeat.
- *
- * Each entry carries [minutes] - the repeat interval passed to
- * [PeriodicWorkRequestBuilder] - and a string resource ID for the
- * human-readable label shown in Settings.
- *
- * WorkManager enforces a minimum of 15 minutes, so [HOURLY] is the
- * shortest practical option that also keeps battery impact negligible.
- */
-enum class UpdateCheckInterval(val minutes: Long, val labelResId: Int) {
-    HOURLY(
-        minutes = 60L,
-        labelResId = R.string.settings_advanced_update_interval_hourly
-    ),
-    DAILY(
-        minutes = 24 * 60L,
-        labelResId = R.string.settings_advanced_update_interval_daily
-    ),
-    WEEKLY(
-        minutes = 7 * 24 * 60L,
-        labelResId = R.string.settings_advanced_update_interval_weekly
-    ),
-    MONTHLY(
-        minutes = 30 * 24 * 60L,
-        labelResId = R.string.settings_advanced_update_interval_monthly
-    )
-}
-
-/**
  * WorkManager worker that periodically checks for updates in the background.
- * The repeat interval is controlled by [UpdateCheckInterval] and stored in
- * [PreferencesManager.updateCheckInterval] (default: [UpdateCheckInterval.DAILY]).
+ * The repeat interval is controlled by [ScheduleInterval] and stored in
+ * [PreferencesManager.updateCheckInterval] (default: [ScheduleInterval.DAILY]).
  *
  * Checks for:
  * - Morphe Manager app updates
@@ -129,7 +99,7 @@ class UpdateCheckWorker(
          *
          * Uses [ExistingPeriodicWorkPolicy.UPDATE] so that changing the interval in Settings takes effect immediately.
          */
-        fun schedule(context: Context, interval: UpdateCheckInterval = UpdateCheckInterval.DAILY) {
+        fun schedule(context: Context, interval: ScheduleInterval = ScheduleInterval.DAILY) {
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build()

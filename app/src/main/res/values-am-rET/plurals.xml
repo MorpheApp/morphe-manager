@@ -40,10 +40,6 @@
         <item quantity="one">%s ምንጭ ተደብቋል። ለማሳየት ይጫኑ</item>
         <item quantity="other">%s ምንጮች ተደብቀዋል። ለማሳየት ይጫኑ</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%s የሚዛመድ ፓች</item>
-        <item quantity="other">%s የሚዛመዱ ፓቾች</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s ምንጭ</item>
         <item quantity="other">%s ምንጮች</item>

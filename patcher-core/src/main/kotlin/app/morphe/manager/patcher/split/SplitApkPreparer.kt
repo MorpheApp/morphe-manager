@@ -12,8 +12,10 @@ package app.morphe.manager.patcher.split
 
 import app.morphe.manager.patcher.DeviceConfig
 import app.morphe.manager.patcher.logger.Logger
+import app.morphe.manager.patcher.logger.toPatcherLogger
 import app.morphe.manager.patcher.util.Abi
 import app.morphe.manager.patcher.util.NativeLibs
+import app.morphe.patcher.apk.ApkMerger
 import com.reandroid.arsc.chunk.xml.AndroidManifestBlock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runInterruptible
@@ -156,6 +158,26 @@ object SplitApkPreparer {
                 onEvent = onEvent
             )
 
+            // Patches read the OBB files of the bundle, which are not part of the merged APK.
+            // Most patches never read them, so a bundle whose OBB cannot be extracted is still
+            // patched, and a patch that needs it fails on its own
+            val obbDir = workingDir.resolve("obb")
+            val obbFiles = try {
+                runInterruptible(Dispatchers.IO) {
+                    ApkMerger(logger.toPatcherLogger()).extractObbFiles(source, obbDir)
+                }
+            } catch (e: IOException) {
+                logger.warn("Failed to extract the OBB files, patching without them: $e")
+                obbDir.deleteRecursively()
+                emptyMap()
+            }
+            if (obbFiles.isNotEmpty()) {
+                logger.info(
+                    "Extracted ${obbFiles.size} OBB files: " +
+                            obbFiles.entries.joinToString { (path, file) -> "$path=${file.length()} bytes" }
+                )
+            }
+
             onEvent?.invoke(SplitPreparationEvent.Finalizing)
 
             logger.info(
@@ -164,7 +186,8 @@ object SplitApkPreparer {
             )
             PreparationResult(
                 file = mergedApk,
-                merged = true
+                merged = true,
+                obbFiles = obbFiles
             ) {
                 workingDir.deleteRecursively()
             }
@@ -428,10 +451,16 @@ object SplitApkPreparer {
             extracted
         }
 
-    /** Result of [prepareIfNeeded]. */
+    /**
+     * Result of [prepareIfNeeded].
+     *
+     * @param obbFiles The OBB files of the bundle, keyed by their path inside it. They are removed
+     *                 by [cleanup], so they must not be used after it.
+     */
     data class PreparationResult(
         val file: File,
         val merged: Boolean,
+        val obbFiles: Map<String, File> = emptyMap(),
         val cleanup: () -> Unit = {}
     )
 }

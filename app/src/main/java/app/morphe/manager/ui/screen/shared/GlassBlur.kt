@@ -28,7 +28,7 @@ import dev.chrisbanes.haze.blur.hazeBlur
  *
  * Provided only to what floats over the content marked as its source, never inside that content,
  * where a surface would blur the layer it is drawn into. A dialog or sheet resets it to null, as
- * its window cannot draw the one it was opened from.
+ * it stands over the content it was opened from rather than in it.
  */
 val LocalBackdropHaze = staticCompositionLocalOf<HazeState?> { null }
 

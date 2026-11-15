@@ -40,10 +40,6 @@
         <item quantity="one">%sটি সোর্স লুকানো। দেখানোর জন্য আলতো চাপুন</item>
         <item quantity="other">%sটি সোর্স লুকানো। দেখানোর জন্য আলতো চাপুন</item>
     </plurals>
-    <plurals name="sources_search_patch_matches">
-        <item quantity="one">%sটি ম্যাচিং প্যাচ</item>
-        <item quantity="other">%sটি ম্যাচিং প্যাচ</item>
-    </plurals>
     <plurals name="source_count">
         <item quantity="one">%s উৎস</item>
         <item quantity="other">%s টি সোর্স</item>

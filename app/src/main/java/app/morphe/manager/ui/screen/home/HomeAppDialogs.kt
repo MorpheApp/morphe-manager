@@ -168,8 +168,7 @@ internal fun DialogHostScope.HideAppDialog(
                 packageName = item.id,
                 packageInfo = item.packageInfo,
                 displayName = item.displayName,
-                subtitle = stringResource(R.string.home_app_will_be_hidden),
-                gradientColors = item.gradientColors,
+                subtitle = AppCardLine(stringResource(R.string.home_app_will_be_hidden))
             )
         }
     }
@@ -247,6 +246,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
         dismissOnClickOutside = !isMultiSelectMode.value,
         header = {
             ListDialogHeader(
+                decorativeIcon = true,
                 icon = { modifier ->
                     ListDialogHeaderIcon(icon = MaterialSymbols.Rounded.Visibility_off, color = accent, modifier = modifier)
                 },
@@ -369,8 +369,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
                                 packageInfo = item.packageInfo,
                                 displayName = item.displayName,
                                 subtitle = if (isMultiSelectMode.value) null
-                                else stringResource(R.string.home_app_hidden_apps_hint),
-                                gradientColors = item.gradientColors,
+                                else AppCardLine(stringResource(R.string.home_app_hidden_apps_hint))
                             )
                         }
                     }
@@ -410,10 +409,7 @@ fun DialogHostScope.AppPatchSourcesDialog(
         packages.associateWith { packageName ->
             bundleInfo.entries.mapNotNullTo(mutableSetOf()) { (uid, info) ->
                 uid.takeIf {
-                    info.patches.any { patch ->
-                        patch.isUniversal ||
-                                patch.compatiblePackages?.any { it.packageName == packageName } == true
-                    }
+                    info.patches.any { it.compatibleWith(packageName) }
                 }
             }
         }

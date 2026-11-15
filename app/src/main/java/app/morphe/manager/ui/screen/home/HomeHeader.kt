@@ -13,6 +13,10 @@ import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -20,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -28,6 +33,7 @@ import app.morphe.manager.R
 import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.HeaderBar
+import app.morphe.manager.ui.screen.shared.LocalAccent
 import app.morphe.manager.ui.screen.shared.ListOptionsButton
 import app.morphe.manager.ui.screen.shared.ListReorder
 import app.morphe.manager.ui.screen.shared.MorpheWordmark
@@ -37,6 +43,7 @@ import app.morphe.manager.ui.screen.shared.SearchFieldState
 import app.morphe.manager.ui.screen.shared.TitleAction
 import app.morphe.manager.ui.screen.shared.TitleActionStyle
 import app.morphe.manager.ui.screen.shared.rememberLatest
+import app.morphe.manager.util.contrastingContent
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 
@@ -96,17 +103,27 @@ internal fun HomeHeader(
                 exit = Animations.headerActionExit
             ) {
                 val shownCount = rememberLatest(snoozedCount.takeIf { it > 0 }) ?: 0
-                TitleAction(
-                    icon = MaterialSymbols.Rounded.Notifications,
-                    contentDescription = pluralStringResource(
-                        R.plurals.home_alerts_snoozed_count,
-                        shownCount,
-                        shownCount.toString()
-                    ),
-                    onClick = alerts::restoreSnoozed,
-                    style = TitleActionStyle.Neutral,
+                val accent = LocalAccent.current ?: MaterialTheme.colorScheme.primary
+                // How many wait behind it, as they pile up across launches. Read out with the bell
+                BadgedBox(
+                    badge = {
+                        Badge(containerColor = accent, contentColor = accent.contrastingContent()) {
+                            Text(text = shownCount.toString(), modifier = Modifier.clearAndSetSemantics {})
+                        }
+                    },
                     modifier = Modifier.ringOnArrival(this)
-                )
+                ) {
+                    TitleAction(
+                        icon = MaterialSymbols.Rounded.Notifications,
+                        contentDescription = pluralStringResource(
+                            R.plurals.home_alerts_snoozed_count,
+                            shownCount,
+                            shownCount.toString()
+                        ),
+                        onClick = alerts::restoreSnoozed,
+                        style = TitleActionStyle.Neutral
+                    )
+                }
             }
 
             ListOptionsButton(
