@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-14T23:45:34",
-  "description": "## [2.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.4...v2.6.0-dev.5) (2026-11-14)\n\n### Features\n\n* Match the language picker to the other radio dialogs ([c5e76c1](https://github.com/MorpheApp/morphe-manager/commit/c5e76c12c13294de87219561581d9c7a461b6d9e))\n* Show credits as a compact dialog ([1c73722](https://github.com/MorpheApp/morphe-manager/commit/1c73722bf52144bdfa41e005a66a2442cc0acda1))\n* Toggle web link domains one by one ([1e85fd4](https://github.com/MorpheApp/morphe-manager/commit/1e85fd486149d51158ee98d0563dfdda4b9e2b2e))\n\n### Performance Improvements\n\n* Poll installer availability without reloading their icons ([b13a3de](https://github.com/MorpheApp/morphe-manager/commit/b13a3deb3df41d590c09c3041d917127fd6ab1a6))\n\n### Bug Fixes\n\n* Watch for framework restarts through zygote's socket instead of logcat ([99bd564](https://github.com/MorpheApp/morphe-manager/commit/99bd564278f632f624a780dbe799aadc5b08f3b0))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.6.0-dev.5/morphe-manager-2.6.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.6.0-dev.5/morphe-manager-2.6.0-dev.5.apk.asc",
-  "version": "2.6.0-dev.5"
+  "created_at": "2026-11-15T09:34:35",
+  "description": "## [2.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.5...v2.6.0-dev.6) (2026-11-15)\n\n### Performance Improvements\n\n* Increase patcher 64-bit JVM min heap to 2 GB heap ([1b670e1](https://github.com/MorpheApp/morphe-manager/commit/1b670e196260774aa0029026f01365192c6fa234))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.6.0-dev.6/morphe-manager-2.6.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.6.0-dev.6/morphe-manager-2.6.0-dev.6.apk.asc",
+  "version": "2.6.0-dev.6"
 }
