@@ -1,3 +1,9 @@
+## [2.6.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.5...v2.6.0-dev.6) (2026-11-15)
+
+### Performance Improvements
+
+* Increase patcher 64-bit JVM min heap to 2 GB heap ([1b670e1](https://github.com/MorpheApp/morphe-manager/commit/1b670e196260774aa0029026f01365192c6fa234))
+
 ## [2.6.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0-dev.4...v2.6.0-dev.5) (2026-11-14)
 
 ### Features
