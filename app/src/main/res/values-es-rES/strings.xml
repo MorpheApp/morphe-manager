@@ -570,6 +570,7 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="app_links_open_settings">Abrir ajustes de enlaces</string>
     <string name="app_links_repair_success">Enlaces de aplicaciones activados correctamente</string>
     <string name="app_links_repair_failed">Error al activar automáticamente los enlaces de aplicaciones</string>
+    <string name="app_links_change_failed">Error al cambiar los enlaces de la aplicación</string>
     <string name="app_links_all_verified">Todos los enlaces compatibles están configurados para abrirse en esta aplicación</string>
     <string name="app_links_fix">Corregir enlaces</string>
     <string name="configure">Configurar</string>

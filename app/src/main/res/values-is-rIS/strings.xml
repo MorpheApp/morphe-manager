@@ -569,6 +569,7 @@ Til að ná bestum árangri mælir þetta app með því að breyta &lt;b&gt;hei
     <string name="app_links_open_settings">Opna tenglastillingar</string>
     <string name="app_links_repair_success">Tenglar appsins virkjaðir</string>
     <string name="app_links_repair_failed">Mistókst að virkja app-tengla sjálfkrafa</string>
+    <string name="app_links_change_failed">Mislaðistst við að breyta tenglum forritsins</string>
     <string name="app_links_all_verified">Allir studdir tenglar eru stilltir til að opnast í þessu appi</string>
     <string name="app_links_fix">Laga tengla</string>
     <string name="configure">Stilla</string>

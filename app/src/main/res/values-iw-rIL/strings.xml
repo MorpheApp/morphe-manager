@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">פתח הגדרות קישורים</string>
     <string name="app_links_repair_success">קישורי אפליקציה הופעלו בהצלחה</string>
     <string name="app_links_repair_failed">הפעלת קישורי אפליקציות באופן אוטומטי נכשלה</string>
+    <string name="app_links_change_failed">שינוי קישורי האפליקציה נכשל</string>
     <string name="app_links_all_verified">כל הקישורים הנתמכים מוגדרים להיפתח באפליקציה זו</string>
     <string name="app_links_fix">תקן קישורים</string>
     <string name="configure">הגדר</string>

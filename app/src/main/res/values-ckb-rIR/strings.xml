@@ -571,6 +571,7 @@
     <string name="app_links_open_settings">کردنەوەی ڕێکخستنەکانی لینک</string>
     <string name="app_links_repair_success">لینکەکانی ئەپ بە سەرکەوتوویی چالاککرا</string>
     <string name="app_links_repair_failed">چالاککردنی لینکەکانی ئەپ بە شێوەیەکی ئۆتۆماتیکی سەرکەوتوو نەبوو</string>
+    <string name="app_links_change_failed">گۆڕینی لینکەکانی ئەپەکە سەرکەوتوو نەبوو</string>
     <string name="app_links_all_verified">هەموو ئەو لینکانەی پشتگیرییان لێکراوە ڕێکخراون بۆ ئەوەی لەم ئەپەدا بکرێنەوە</string>
     <string name="app_links_fix">چاککردنی لینکەکان</string>
     <string name="configure">ڕێکخستن</string>

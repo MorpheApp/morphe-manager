@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">เปิดการตั้งค่าลิงก์</string>
     <string name="app_links_repair_success">เปิดใช้ลิงก์แอปสำเร็จแล้ว</string>
     <string name="app_links_repair_failed">ไม่สามารถเปิดใช้งานลิงก์แอปโดยอัตโนมัติได้</string>
+    <string name="app_links_change_failed">เปลี่ยนลิงก์แอปไม่สำเร็จ</string>
     <string name="app_links_all_verified">ลิงก์ที่รองรับทั้งหมดได้รับการกำหนดค่าให้เปิดในแอปนี้แล้ว</string>
     <string name="app_links_fix">แก้ไขลิงก์</string>
     <string name="configure">กำหนดค่า</string>

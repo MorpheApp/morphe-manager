@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">Открыть настройки ссылок</string>
     <string name="app_links_repair_success">Ссылки на приложение успешно включены</string>
     <string name="app_links_repair_failed">Не удалось автоматически включить ссылки приложения</string>
+    <string name="app_links_change_failed">Не удалось изменить ссылки приложения</string>
     <string name="app_links_all_verified">Все поддерживаемые ссылки настроены на открытие в этом приложении</string>
     <string name="app_links_fix">Исправить ссылки</string>
     <string name="configure">Настроить</string>

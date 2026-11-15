@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">ເປີດການຕັ້ງຄ່າລິ້ງ</string>
     <string name="app_links_repair_success">ເປີດໃຊ້ງານລິ້ງແອັບສຳເລັດແລ້ວ</string>
     <string name="app_links_repair_failed">ບໍ່ສາມາດເປີດໃຊ້ງານລິ້ງແອັບໂດຍອັດຕະໂນມັດໄດ້</string>
+    <string name="app_links_change_failed">ການປ່ຽນແປງລິ້ງແອັບຫຼົ້ມເຫຼວ</string>
     <string name="app_links_all_verified">ລິ້ງທີ່ຮອງຮັບທັງໝົດຖືກຕັ້ງຄ່າໃຫ້ເປີດໃນແອັບນີ້</string>
     <string name="app_links_fix">ແກ້ໄຂລິ້ງ</string>
     <string name="configure">ຕັ້ງຄ່າ</string>

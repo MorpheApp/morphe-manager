@@ -570,6 +570,7 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="app_links_open_settings">Atidaryti nuorodų nustatymus</string>
     <string name="app_links_repair_success">Programėlės nuorodos sėkmingai įjungtos</string>
     <string name="app_links_repair_failed">Nepavyko automatiškai įjungti programėlės nuorodų</string>
+    <string name="app_links_change_failed">Nepavyko pakeisti programėlės nuorodų</string>
     <string name="app_links_all_verified">Visos palaikomos nuorodos sukonfigūruotos atidaryti šioje programėlėje</string>
     <string name="app_links_fix">Ištaisyti nuorodas</string>
     <string name="configure">Konfigūruoti</string>

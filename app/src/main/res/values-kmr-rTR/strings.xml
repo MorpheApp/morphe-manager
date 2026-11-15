@@ -570,6 +570,7 @@ Ji bo encamên çêtir, ev app pêşniyar dike ku APKya &lt;b&gt;tam&lt;/b&gt; w
     <string name="app_links_open_settings">Mîhengên girêdanê veke</string>
     <string name="app_links_repair_success">Girêdanên sepanê bi serfirazî hatin çalakkirin.</string>
     <string name="app_links_repair_failed">Çalakkirina otomatîkî ya girêdanên sepanê têk çû.</string>
+    <string name="app_links_change_failed">Guherandina girêdanên sepanê bi ser neket</string>
     <string name="app_links_all_verified">Hemû girêdanên piştgirîkirî hatine mîhengkirin ku di vê sepanê de vebin.</string>
     <string name="app_links_fix">Girêdanan rast bike</string>
     <string name="configure">Mîheng bike</string>

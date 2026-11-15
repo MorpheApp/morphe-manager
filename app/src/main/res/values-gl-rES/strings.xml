@@ -571,6 +571,7 @@ Elixe outro APK</string>
     <string name="app_links_open_settings">Abrir configuración de ligazóns</string>
     <string name="app_links_repair_success">Ligazóns da aplicación activadas con éxito</string>
     <string name="app_links_repair_failed">Erro ao activar as ligazóns da aplicación automaticamente</string>
+    <string name="app_links_change_failed">Fallou ao cambiar os ligazóns da aplicación</string>
     <string name="app_links_all_verified">Todas as ligazóns compatibles están configuradas para abrirse nesta aplicación</string>
     <string name="app_links_fix">Correxir ligazóns</string>
     <string name="configure">Configurar</string>

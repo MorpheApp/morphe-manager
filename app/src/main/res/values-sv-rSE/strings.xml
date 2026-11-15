@@ -570,6 +570,7 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="app_links_open_settings">Öppna länkinställningar</string>
     <string name="app_links_repair_success">Applänkar har aktiverats</string>
     <string name="app_links_repair_failed">Det gick inte att aktivera applänkar automatiskt</string>
+    <string name="app_links_change_failed">Misslyckades med att ändra applänkar</string>
     <string name="app_links_all_verified">Alla stödda länkar är konfigurerade för att öppnas i den här appen</string>
     <string name="app_links_fix">Åtgärda länkar</string>
     <string name="configure">Konfigurera</string>

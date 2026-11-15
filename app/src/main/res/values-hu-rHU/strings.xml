@@ -570,6 +570,7 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="app_links_open_settings">Hivatkozásbeállítások megnyitása</string>
     <string name="app_links_repair_success">Alkalmazáshivatkozások sikeresen engedélyezve</string>
     <string name="app_links_repair_failed">Nem sikerült automatikusan engedélyezni az alkalmazáshivatkozásokat</string>
+    <string name="app_links_change_failed">Sikertetlen alkalmazáslinkek módosítása</string>
     <string name="app_links_all_verified">Minden támogatott hivatkozás úgy van beállítva, hogy ebben az alkalmazásban nyíljon meg</string>
     <string name="app_links_fix">Hivatkozások javítása</string>
     <string name="configure">Beállítás</string>

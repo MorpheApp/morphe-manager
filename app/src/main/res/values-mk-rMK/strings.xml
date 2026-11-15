@@ -569,6 +569,7 @@
     <string name="app_links_open_settings">Отвори ги поставките за врски</string>
     <string name="app_links_repair_success">Врските на апликацијата се овозможени успешно</string>
     <string name="app_links_repair_failed">Не успеа автоматското овозможување на врските на апликацијата</string>
+    <string name="app_links_change_failed">Неуспешно менување на врските до апликацијата</string>
     <string name="app_links_all_verified">Сите поддржани врски се конфигурирани да се отвораат во оваа апликација</string>
     <string name="app_links_fix">Поправете ги врските</string>
     <string name="configure">Конфигурирај</string>

@@ -569,6 +569,7 @@
     <string name="app_links_open_settings">लिंक सेटिंग्ज उघडा</string>
     <string name="app_links_repair_success">अॅप लिंक यशस्वीरित्या सक्षम केल्या</string>
     <string name="app_links_repair_failed">अॅप लिंक आपोआप सक्षम करण्यात अपयश</string>
+    <string name="app_links_change_failed">ॲप लिंक्स बदलण्यात अयशस्वी</string>
     <string name="app_links_all_verified">सर्व समर्थित लिंक या अॅपमध्ये उघडण्यासाठी कॉन्फिगर केल्या आहेत</string>
     <string name="app_links_fix">लिंक दुरुस्त करा</string>
     <string name="configure">कॉन्फिगर करा</string>

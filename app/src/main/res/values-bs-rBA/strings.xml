@@ -570,6 +570,7 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;punog 
     <string name="app_links_open_settings">Otvori postavke poveznica</string>
     <string name="app_links_repair_success">Poveznice aplikacije su uspješno omogućene</string>
     <string name="app_links_repair_failed">Neuspjelo automatsko omogućavanje poveznica aplikacije</string>
+    <string name="app_links_change_failed">Neuspješna promjena poveznica aplikacije</string>
     <string name="app_links_all_verified">Sve podržane poveznice su konfigurirane da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
     <string name="configure">Konfiguriši</string>

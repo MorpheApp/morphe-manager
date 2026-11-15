@@ -570,6 +570,7 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="app_links_open_settings">링크 설정 열기</string>
     <string name="app_links_repair_success">앱 링크 활성화 성공</string>
     <string name="app_links_repair_failed">앱 링크 자동 활성화 실패</string>
+    <string name="app_links_change_failed">앱 링크를 변경하지 못하였습니다</string>
     <string name="app_links_all_verified">지원되는 모든 링크가 이 앱에서 열리도록 설정되었습니다</string>
     <string name="app_links_fix">링크 수정</string>
     <string name="configure">설정</string>

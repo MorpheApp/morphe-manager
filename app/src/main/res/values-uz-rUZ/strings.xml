@@ -570,6 +570,7 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="app_links_open_settings">Havola sozlamalarini ochish</string>
     <string name="app_links_repair_success">Ilova havolalari muvaffaqiyatli yoqildi</string>
     <string name="app_links_repair_failed">Ilova havolalarini avtomatik yoqib bo‘lmadi</string>
+    <string name="app_links_change_failed">Ilova havolalarini o\'zgartirish imkonsiz bo\'ldi</string>
     <string name="app_links_all_verified">Barcha qo‘llab-quvvatlanadigan havolalar ushbu ilovada ochiladigan qilib sozlangan</string>
     <string name="app_links_fix">Havolalarni tuzatish</string>
     <string name="configure">Sozlash</string>

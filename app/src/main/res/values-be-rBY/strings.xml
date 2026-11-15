@@ -571,6 +571,7 @@
     <string name="app_links_open_settings">Адкрыць налады спасылак</string>
     <string name="app_links_repair_success">Спасылкі праграмы паспяхова ўключаны</string>
     <string name="app_links_repair_failed">Не ўдалося аўтаматычна ўключыць спасылкі праграмы</string>
+    <string name="app_links_change_failed">Не ўдалося змяніць спасылкі праграмы</string>
     <string name="app_links_all_verified">Усе падтрыманыя спасылкі наладжаны на адкрыццё ў гэтай праграме</string>
     <string name="app_links_fix">Выправіць спасылкі</string>
     <string name="configure">Наладзіць</string>

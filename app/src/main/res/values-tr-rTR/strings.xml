@@ -570,6 +570,7 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="app_links_open_settings">Bağlantı ayarlarını aç</string>
     <string name="app_links_repair_success">Uygulama bağlantıları başarıyla etkinleştirildi</string>
     <string name="app_links_repair_failed">Uygulama bağlantıları otomatik olarak etkinleştirilemedi</string>
+    <string name="app_links_change_failed">Uygulama bağlantıları değiştirilemedi</string>
     <string name="app_links_all_verified">Desteklenen tüm bağlantılar, bu uygulamada açılacak şekilde yapılandırılmıştır.</string>
     <string name="app_links_fix">Bağlantıları düzelt</string>
     <string name="configure">Yapılandır</string>

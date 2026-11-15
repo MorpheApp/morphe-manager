@@ -570,6 +570,7 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="app_links_open_settings">Odpri nastavitve povezav</string>
     <string name="app_links_repair_success">Povezave aplikacij so uspešno omogočene</string>
     <string name="app_links_repair_failed">Ni uspelo samodejno omogočiti povezav aplikacij</string>
+    <string name="app_links_change_failed">Ni uspelo spremeniti povezav aplikacije</string>
     <string name="app_links_all_verified">Vse podprte povezave so nastavljene tako, da se odpirajo v tej aplikaciji</string>
     <string name="app_links_fix">Popravite povezave</string>
     <string name="configure">Nastavite</string>

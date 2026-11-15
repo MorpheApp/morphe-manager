@@ -570,6 +570,7 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="app_links_open_settings">Avaa linkkien asetukset</string>
     <string name="app_links_repair_success">Sovelluslinkit on otettu käyttöön onnistuneesti</string>
     <string name="app_links_repair_failed">Sovelluslinkkien automaattinen käyttöönotto epäonnistui</string>
+    <string name="app_links_change_failed">Sovelluslinkkien muuttaminen epäonnistui</string>
     <string name="app_links_all_verified">Kaikki tuetut linkit on määritetty avautumaan tässä sovelluksessa</string>
     <string name="app_links_fix">Korjaa linkit</string>
     <string name="configure">Määritä</string>

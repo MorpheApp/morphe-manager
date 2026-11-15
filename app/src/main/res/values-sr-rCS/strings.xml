@@ -570,6 +570,7 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;celog 
     <string name="app_links_open_settings">Otvori podešavanja linkova</string>
     <string name="app_links_repair_success">Linkovi aplikacije su uspešno omogućeni</string>
     <string name="app_links_repair_failed">Automatsko omogućavanje aplikacionih linkova nije uspelo</string>
+    <string name="app_links_change_failed">Neuspešna promena aplikacionih linkova</string>
     <string name="app_links_all_verified">Svi podržani linkovi su konfigurisani da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravite linkove</string>
     <string name="configure">Konfigurišite</string>

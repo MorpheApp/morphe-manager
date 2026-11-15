@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">Шилтемелердин жөндөөлөрүн ачуу</string>
     <string name="app_links_repair_success">Колдонмонун шилтемелери ийгиликтүү күйгүзүлдү</string>
     <string name="app_links_repair_failed">Колдонмонун шилтемелерин автоматтык түрдө күйгүзүү мүмкүн болбоду</string>
+    <string name="app_links_change_failed">Тиркеме шилтемелерин өзгөртүү мүмкүн болгон жок</string>
     <string name="app_links_all_verified">Бардык колдоого алынган шилтемелер ушул колдонмодо ачылуучу болуп жөндөлдү</string>
     <string name="app_links_fix">Шилтемелерди оңдоо</string>
     <string name="configure">Жөндөө</string>

@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">লিংক ছেটিংখিনি খোলক</string>
     <string name="app_links_repair_success">এপ লিংকসমূহ সফলতাৰে সক্ৰিয় কৰা হৈছে</string>
     <string name="app_links_repair_failed">এপ লিংকসমূহ স্বয়ংক্ৰিয়ভাৱে সক্ৰিয় কৰাত ব্যৰ্থ হৈছে</string>
+    <string name="app_links_change_failed">এপ লিংকসমূহ সলনি কৰাত ব্যৰ্থ হৈছে</string>
     <string name="app_links_all_verified">সমৰ্থিত সকলো লিংক এই এপটোত খোলাৰ বাবে কনফিগাৰ কৰা হৈছে</string>
     <string name="app_links_fix">লিংকসমূহ ঠিক কৰক</string>
     <string name="configure">কনফিগাৰ কৰক</string>

@@ -570,6 +570,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="app_links_open_settings">リンク設定を開く</string>
     <string name="app_links_repair_success">アプリリンクが正常に有効化されました</string>
     <string name="app_links_repair_failed">アプリリンクを自動的に有効にできませんでした</string>
+    <string name="app_links_change_failed">アプリリンクの変更に失敗しました</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
     <string name="configure">設定</string>

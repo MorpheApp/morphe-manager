@@ -570,6 +570,7 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="app_links_open_settings">Link tənzimləmələrini aç</string>
     <string name="app_links_repair_success">Tətbiq linkləri uğurla aktivləşdirildi</string>
     <string name="app_links_repair_failed">Tətbiq linklərini avtomatik aktivləşdirmək olmadı</string>
+    <string name="app_links_change_failed">Tətbiq linklərini dəyişdirmək olmadı</string>
     <string name="app_links_all_verified">Bütün dəstəklənən keçidlər bu tətbiqdə açılmaq üçün tənzimlənib</string>
     <string name="app_links_fix">Linkləri düzəlt</string>
     <string name="configure">Tənzimlə</string>

@@ -568,6 +568,7 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um &lt;b&g
     <string name="app_links_open_settings">Abrir configurações de links</string>
     <string name="app_links_repair_success">Links do app ativados com sucesso</string>
     <string name="app_links_repair_failed">Falha ao ativar os links do aplicativo automaticamente</string>
+    <string name="app_links_change_failed">Falha ao alterar links do app</string>
     <string name="app_links_all_verified">Todos os links suportados estão configurados para abrir neste aplicativo</string>
     <string name="app_links_fix">Corrigir links</string>
     <string name="configure">Configurar</string>
