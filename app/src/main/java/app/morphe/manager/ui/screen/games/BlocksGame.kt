@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -103,10 +103,8 @@ class BlocksGameState(
     /** Rows that are complete and lit, waiting for [finishClear] to take them out. */
     var clearingRows by mutableStateOf<List<Int>>(emptyList())
         private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
+    override val points = GameScore(initialHighScore, onHighScoreUpdated)
     override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
     override var isGameOver by mutableStateOf(false)
         private set
     var isStarted by mutableStateOf(false)
@@ -115,6 +113,9 @@ class BlocksGameState(
         private set
 
     val level: Int get() = 1 + lines / BLOCKS_LINES_PER_LEVEL
+
+    override val stats: List<GameStat>
+        get() = listOf(GameStat(R.string.mini_game_level, level), GameStat(R.string.mini_game_lines, lines))
 
     val tickMs: Long get() = max(110L, 550L - (level - 1) * 45L)
 

@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -59,10 +59,8 @@ class PairsGameState(
         private set
     var strikes by mutableIntStateOf(PAIRS_STRIKES)
         private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
+    override val points = GameScore(initialHighScore, onHighScoreUpdated)
     override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
     override var isGameOver by mutableStateOf(false)
         private set
     var isStarted by mutableStateOf(false)

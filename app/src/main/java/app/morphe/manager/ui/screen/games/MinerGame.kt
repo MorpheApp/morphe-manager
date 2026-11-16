@@ -3,14 +3,13 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -78,10 +76,8 @@ class MinerGameState(
     private var mineField by mutableStateOf(MineField.empty())
     var mineCount by mutableIntStateOf(MINE_COUNT_START)
         private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
+    override val points = GameScore(initialHighScore, onHighScoreUpdated)
     override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
     override var isGameOver by mutableStateOf(false)
         private set
     var isStarted by mutableStateOf(false)
@@ -90,6 +86,9 @@ class MinerGameState(
         private set
 
     val flagsPlaced: Int get() = mineField.flagged.count { it }
+
+    override val stats: List<GameStat>
+        get() = listOf(GameStat(R.string.mini_game_flags, flagsPlaced, of = mineCount))
 
     fun isRevealed(index: Int) = mineField.revealed[index]
     fun isFlagged(index: Int) = mineField.flagged[index]
@@ -203,25 +202,6 @@ fun MinerGame(state: MinerGameState) {
             .padding(Defaults.SpaceExtraSmall),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = Defaults.SpaceExtraSmall, vertical = 2.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                imageVector = MaterialSymbols.Rounded.Flag,
-                contentDescription = null,
-                tint = MineFlag,
-                modifier = Modifier.size(16.dp)
-            )
-            Spacer(Modifier.width(Defaults.SpaceSmall))
-            Text(
-                text = stringResource(R.string.mini_game_miner_flags, state.flagsPlaced, state.mineCount),
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.White
-            )
-        }
         BoxWithConstraints(modifier = Modifier.weight(1f).fillMaxWidth()) {
             val cell = minOf(maxWidth, maxHeight) / MINE_GRID
             Column(modifier = Modifier.align(Alignment.Center)) {

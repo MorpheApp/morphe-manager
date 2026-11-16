@@ -67,14 +67,16 @@ fun AboutGroup(onOpenSubpage: (SettingsSubpage) -> Unit) {
 /**
  * What there is to know about the manager past its version, and help with it, on a page of its
  * own, see [SettingsSubpage.ABOUT]: its changelog and licenses, the logs a bug report
- * asks for and the tour.
+ * asks for, the tour and the mini-games.
  *
  * @param onOpenLicenses Opens the open-source licenses the manager is built on.
+ * @param onOpenMiniGames Opens the mini-games.
  * @param onStartTour Restarts the onboarding tour, when no tour is running.
  */
 @Composable
 fun AboutSettings(
     onOpenLicenses: () -> Unit,
+    onOpenMiniGames: () -> Unit,
     onStartTour: (() -> Unit)?,
     importExportViewModel: ImportExportViewModel = koinViewModel()
 ) {
@@ -129,6 +131,12 @@ fun AboutSettings(
                         onClick = onStartTour
                     )
                 }
+                SettingsItem(
+                    icon = MaterialSymbols.Rounded.Sports_esports,
+                    title = stringResource(R.string.mini_games),
+                    subtitle = stringResource(R.string.mini_games_description),
+                    onClick = onOpenMiniGames
+                )
             }
         }
     }

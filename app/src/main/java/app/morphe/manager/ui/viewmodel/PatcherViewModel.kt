@@ -153,29 +153,11 @@ class PatcherViewModel(
     var showSuccessScreen: Boolean by mutableStateOf(false)
         private set
 
-    // A finished run that arrived while the user was playing, waiting for them to be done
-    private var successScreenHeldBack = false
-    private var successScreenDeferred = false
-
     fun showSuccess() {
-        successScreenHeldBack = false
         showSuccessScreen = true
     }
 
     fun hideSuccessScreen() { showSuccessScreen = false }
-
-    /**
-     * Holds the automatic switch to the success screen back while the user is busy with something
-     * the run has no right to interrupt, currently a mini-game, and releases it again afterward.
-     *
-     * A run that finishes meanwhile is not lost: the progress screen turns its own action bar into
-     * an install button, and the screen appears on its own once [defer] goes back to false,
-     * bringing along whatever an auto-install that ran meanwhile has to ask.
-     */
-    fun deferSuccessScreen(defer: Boolean) {
-        successScreenDeferred = defer
-        if (!defer && successScreenHeldBack) showSuccess()
-    }
 
     var isPatching: Boolean by mutableStateOf(true)
         private set
@@ -1053,7 +1035,7 @@ class PatcherViewModel(
 
     private fun scheduleSuccessScreen() = viewModelScope.launch {
         delay(successScreenDelay)
-        if (successScreenDeferred) successScreenHeldBack = true else showSuccess()
+        showSuccess()
     }
 
     // An install outlives this screen and reads output.apk until it is done

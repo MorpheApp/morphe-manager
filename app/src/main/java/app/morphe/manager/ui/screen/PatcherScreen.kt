@@ -31,7 +31,6 @@ import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.ui.model.RenameWarning
 import app.morphe.manager.ui.screen.home.AppLinksDialog
 import app.morphe.manager.ui.screen.patcher.*
-import app.morphe.manager.ui.screen.patcher.game.MiniGameState
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InstallViewModel
@@ -107,27 +106,15 @@ private fun PatcherScreenContent(
     var errorInfo by remember { mutableStateOf<PatcherErrorInfo?>(null) }
     var showCancelDialog by rememberSaveable { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    val miniGameState = remember { MiniGameState(prefs, scope) }
 
     val isSaving by patcherViewModel.isSaving.collectAsStateWithLifecycle()
 
     val showLongStepWarning by patcherViewModel.showLongStepWarning.collectAsStateWithLifecycle()
     val showSuccessScreen = patcherViewModel.showSuccessScreen
 
-    LaunchedEffect(showSuccessScreen) {
-        if (showSuccessScreen) miniGameState.pauseActiveGame()
-    }
-
-    // An auto-install runs under a game still in play, so whatever it has to ask waits for the
-    // success screen, the one place an install started by the user comes from as well
+    // Whatever an install has to ask waits for the success screen, the one place an install
+    // started by the user comes from as well, rather than popping up over the logs
     val installPromptsShown = showSuccessScreen
-
-    // A run that finishes mid-round waits for the player instead of taking the screen away. The
-    // action bar below the game turns into an install button meanwhile, so the way on is in reach
-    LaunchedEffect(miniGameState) {
-        snapshotFlow { miniGameState.isPlaying }
-            .collect { patcherViewModel.deferSuccessScreen(it) }
-    }
 
     val reduceMotion = rememberAccessibilityEnabled()
     val displayProgress = rememberDisplayedPatchProgress(
@@ -480,10 +467,6 @@ private fun PatcherScreenContent(
     ) {
         val useExpertMode by prefs.useExpertMode.getAsState()
 
-        // Retired for good once the user has taken the way back it points at
-        val backToGameHintSeen by prefs.backToGameHintSeen.getAsState()
-        val showBackToGameHint = useExpertMode && miniGameState.hasOpenGame && !backToGameHintSeen
-
         AnimatedContent(
             targetState = if (showSuccessScreen) PatcherState.of(patcherSucceeded) else PatcherState.IN_PROGRESS,
             transitionSpec = if (reduceMotion) {
@@ -502,7 +485,6 @@ private fun PatcherScreenContent(
                             patchProgress = patcherViewModel.patchRun,
                             packageName = patcherViewModel.packageName,
                             patcherSucceeded = patcherSucceeded,
-                            miniGameState = miniGameState,
                             onCancelClick = { showCancelDialog = true },
                             resultButton = resultButton(shownInstallState, installedPackageName, usingMountInstall),
                             onResultClick = { patcherViewModel.showSuccess() }
@@ -542,15 +524,8 @@ private fun PatcherScreenContent(
                         ),
                         excludedPatches = excludedPatches,
                         isExpertMode = useExpertMode,
-                        showBackToGameHint = showBackToGameHint,
                         onConfigureAppLinks = { showAppLinksDialog = true }.takeIf { linksOpenInBrowser },
-                        onLogsClick = {
-                            // Only the hint that was actually on screen counts as found
-                            if (showBackToGameHint) {
-                                scope.launch { prefs.backToGameHintSeen.update(true) }
-                            }
-                            patcherViewModel.hideSuccessScreen()
-                        },
+                        onLogsClick = patcherViewModel::hideSuccessScreen,
                         onHomeClick = onBackClick,
                         onSaveClick = {
                             if (!isSaving) {

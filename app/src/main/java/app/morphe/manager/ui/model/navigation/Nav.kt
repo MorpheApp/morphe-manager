@@ -36,6 +36,10 @@ data object PatchSelections
 @Serializable
 data object Licenses
 
+/** The mini-games, a page of their own opened from the settings. */
+@Serializable
+data object MiniGames
+
 @Serializable
 data object BatchPatcher : ComplexParameter<BatchPatcher.ViewModelParams> {
     @Parcelize
@@ -55,7 +59,7 @@ data object Patcher : ComplexParameter<Patcher.ViewModelParams> {
      * @param selectedByHand Whether the patches were picked by hand rather than taken from the
      *   source defaults. Only then do [options] belong to the configuration the run leaves
      *   behind, simple mode keeps its own in its settings.
-     * @param sourceScope The sources the run was offered. What is saved for the app afterwards
+     * @param sourceScope The sources the run was offered. What is saved for the app afterward
      *   is replaced for these alone, so a source held back keeps what it had.
      * @param targetPackageName The install this run is aimed at when that is a clone rather than
      *   the app's own, which is not something [selectedApp] can say.

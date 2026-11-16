@@ -232,7 +232,6 @@ fun PatchingSuccess(
     installActions: InstallResultActions,
     excludedPatches: List<String> = emptyList(),
     isExpertMode: Boolean = false,
-    showBackToGameHint: Boolean = false,
     onConfigureAppLinks: (() -> Unit)? = null,
     onHomeClick: () -> Unit,
     onLogsClick: () -> Unit,
@@ -284,10 +283,6 @@ fun PatchingSuccess(
             )
         },
         bottomBar = { horizontalPadding ->
-            BackToGameCallout(
-                visible = showBackToGameHint && !status.failed,
-                horizontalPadding = horizontalPadding
-            )
             PatcherBottomActionBar(
                 horizontalPadding = horizontalPadding,
                 showCancelButton = false,
@@ -687,24 +682,6 @@ private fun ResultSummary(version: String?, patchCount: Int, sources: List<Patch
             )
         }
     }
-}
-
-/**
- * Callout pointing at the button that leads back to the mini-game this screen took the place of.
- * It sits on the button because the way back is not obvious from a label reading "Logs".
- */
-@Composable
-private fun BackToGameCallout(visible: Boolean, horizontalPadding: Dp) {
-    if (!visible) return
-
-    PatcherActionCallout(
-        text = stringResource(R.string.patcher_back_to_game_hint, stringResource(R.string.logs)),
-        // Logs comes first in a bar of Logs and Home
-        slot = 0,
-        slots = 2,
-        icon = MaterialSymbols.Rounded.Sports_esports,
-        horizontalPadding = horizontalPadding
-    )
 }
 
 /** A [Notice] explaining the result, easing in and out as [text] comes and goes. */

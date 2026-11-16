@@ -53,6 +53,7 @@ import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.BatchPatcherScreen
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
+import app.morphe.manager.ui.screen.games.MiniGamesPage
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.SettingsNavigation
 import app.morphe.manager.ui.screen.settings.SettingsSubpage
@@ -678,6 +679,10 @@ private fun MorpheManager(vm: MainViewModel) {
             screen<Licenses> {
                 LicensesPage(onBack = { navController.popBackStack() })
             }
+
+            screen<MiniGames> {
+                MiniGamesPage(onBack = { navController.popBackStack() })
+            }
         }
 
         if (showOnboarding) {
@@ -705,6 +710,7 @@ private fun NavController.settingsNavigation(startTour: (() -> Unit)?) = Setting
     openSubpage = { subpage -> navigate(SettingsDetail(subpage.name)) { launchSingleTop = true } },
     openPatchSelections = { navigate(PatchSelections) { launchSingleTop = true } },
     openLicenses = { navigate(Licenses) { launchSingleTop = true } },
+    openMiniGames = { navigate(MiniGames) { launchSingleTop = true } },
     startTour = startTour
 )
 

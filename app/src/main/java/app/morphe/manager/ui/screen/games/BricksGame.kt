@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -76,12 +76,14 @@ class BricksGameState(
         private set
     var lives by mutableIntStateOf(BRICKS_LIVES)
         private set
+
+    override val stats: List<GameStat>
+        get() = listOf(GameStat(R.string.mini_game_lives, lives, of = BRICKS_LIVES))
+
     var isLaunched by mutableStateOf(false)
         private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
+    override val points = GameScore(initialHighScore, onHighScoreUpdated)
     override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
     override var isGameOver by mutableStateOf(false)
         private set
     var isStarted by mutableStateOf(false)
@@ -279,15 +281,6 @@ private fun BricksCanvas(state: BricksGameState, modifier: Modifier) {
                 radius = BALL_RADIUS * w,
                 center = Offset(state.ballX * w, state.ballY * h)
             )
-
-            // Remaining lives, kept in the strip below the paddle so they never overlap play
-            repeat(state.lives) { i ->
-                drawCircle(
-                    color = BricksLife,
-                    radius = w * 0.011f,
-                    center = Offset(w * (0.04f + i * 0.04f), h * 0.98f)
-                )
-            }
         }
 
         if (!state.isLaunched && !state.isGameOver) {
@@ -311,7 +304,6 @@ private fun BricksCanvas(state: BricksGameState, modifier: Modifier) {
 private val BricksBg     = Color(0xFF101828)
 private val BricksPaddle = MorpheBrandTeal
 private val BricksBall   = Color(0xFFF5F7FA)
-private val BricksLife   = Color(0xFF5CE8E7)
 
 // Warm at the top, cool at the bottom, so the rows still read apart in monochrome
 private val BrickColors = listOf(

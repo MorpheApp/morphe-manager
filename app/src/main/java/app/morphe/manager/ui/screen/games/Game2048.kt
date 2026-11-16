@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -41,13 +41,11 @@ class Game2048State(
     private var _isGameOver by mutableStateOf(false)
     private var _hasWon by mutableStateOf(false)
     private var _isPaused by mutableStateOf(false)
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
+    override val points = GameScore(initialHighScore, onHighScoreUpdated)
     override val haptics = GameHaptics()
 
     // board is read-only from outside; only accessed within this file via BoardGrid
     val board: Array<IntArray> get() = _board
-    override val score: Int get() = points.value
-    override val highScore: Int get() = points.high
     override val isGameOver: Boolean get() = _isGameOver
     // hasWon stays true even after game over so the win message persists until restart
     val hasWon: Boolean get() = _hasWon
