@@ -1,3 +1,18 @@
+## [2.7.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0...v2.7.0-dev.1) (2026-11-16)
+
+### Features
+
+* Disable all web links of an app at once ([ec0359b](https://github.com/MorpheApp/morphe-manager/commit/ec0359b7bbc90a1291ff5b4ca78162eb2a03ba5f))
+* Mark cloned apps in exported APK names ([17f4775](https://github.com/MorpheApp/morphe-manager/commit/17f47754b594d66b9fc9c9f9b4a8daa8fb380078))
+* Redesign of the About dialog ([beedd3f](https://github.com/MorpheApp/morphe-manager/commit/beedd3fd9697abc61f8c040835f2f5be4d2b1615))
+* Search the options of a patch ([884ad7c](https://github.com/MorpheApp/morphe-manager/commit/884ad7c9558fd645dcb949643fb042e5d0b9f66a))
+
+### Bug Fixes
+
+* Fold and unfold dialog headers with the scrollbar ([3d9d202](https://github.com/MorpheApp/morphe-manager/commit/3d9d202aa0bf847795d5392188379b107db52a75))
+* Group the choices of patch mode, category and patch source dialogs ([1cc5bf0](https://github.com/MorpheApp/morphe-manager/commit/1cc5bf0bf7708e3060537db9423ca04b6db7979e))
+* Open the keyboard with the search when animations are off ([996eadc](https://github.com/MorpheApp/morphe-manager/commit/996eadcb5c338bf0786f2010d0b618227b074cd9))
+
 ## [2.6.0](https://github.com/MorpheApp/morphe-manager/compare/v2.5.0...v2.6.0) (2026-11-15)
 
 ### Features
