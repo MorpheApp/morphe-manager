@@ -19,10 +19,13 @@ import app.morphe.manager.network.service.HttpService.Companion.PROGRESS_MIN_BYT
 import app.morphe.manager.network.utils.APIError
 import app.morphe.manager.network.utils.APIFailure
 import app.morphe.manager.network.utils.APIResponse
+import app.morphe.manager.util.MORPHE_USER_AGENT
 import app.morphe.manager.util.tag
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeoutConfig
+import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
 import io.ktor.client.statement.HttpResponse
@@ -30,11 +33,17 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Url
 import io.ktor.http.isSuccess
+import io.ktor.http.takeFrom
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.readAvailable
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -43,9 +52,11 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.nio.file.StandardOpenOption
 import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.abs
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Central HTTP service built on Ktor Client. Handles:
@@ -57,8 +68,35 @@ import kotlin.time.Duration.Companion.milliseconds
  */
 class HttpService(
     val json: Json,
-    val http: HttpClient
+    val http: HttpClient,
+    okHttpClient: OkHttpClient
 ) {
+    /**
+     * Built on the same connections as [http], for the requests that read a redirect instead of
+     * following it. It also negotiates no content: the JSON Accept header of [http] is appended to
+     * whatever the caller sets, and an endpoint that serves either metadata or raw bytes would
+     * then pick metadata.
+     */
+    private val redirectless = HttpClient(OkHttp) {
+        engine {
+            preconfigured = okHttpClient
+            config {
+                followRedirects(false)
+                followSslRedirects(false)
+            }
+        }
+        followRedirects = false
+        install(UserAgent) {
+            agent = MORPHE_USER_AGENT
+        }
+    }
+
+    /**
+     * Connections all downloads share. Past a handful more of them only split the same line
+     * further, so several downloads at once take turns rather than each opening its own set.
+     */
+    private val downloadConnections = Semaphore(MAX_DOWNLOAD_CONNECTIONS)
+
     /**
      * Executes an HTTP request and deserializes the response body to [T].
      *
@@ -174,74 +212,74 @@ class HttpService(
     }
 
     /**
-     * Downloads a file to [saveLocation] using up to [threads] parallel connections.
+     * Downloads a file to [saveLocation], over several connections where the server allows it.
      *
-     * Workflow:
-     * 1. Probe the server with HEAD (+ fallback GET Range: bytes=0-0) to check range support.
-     * 2. If ranges are supported and the file is large enough, split into [threads] equal chunks
-     *    and download each concurrently.
-     * 3. Otherwise, fall back to a single-connection [streamTo].
+     * A server that serves byte ranges of a file large enough has it fetched by [downloadConcurrent],
+     * anything else comes over a single connection.
      *
      * Progress is reported via [onProgress] as (bytesDownloaded, totalBytes?).
      */
     suspend fun downloadToFile(
         saveLocation: File,
-        threads: Int = DEFAULT_DOWNLOAD_THREADS,
         builder: HttpRequestBuilder.() -> Unit,
         onProgress: ((bytesRead: Long, contentLength: Long?) -> Unit)? = null
     ) {
         val host = hostOf(builder)
         val probe = probeRangeSupport(builder, host)
         val totalSize = probe.contentLength
-        val canParallelize = threads > 1
-                && probe.supportsRanges
-                && totalSize != null
-                && totalSize >= MIN_MULTIPART_SIZE
 
-        if (!canParallelize) {
+        if (!probe.supportsRanges || totalSize == null || totalSize < MIN_MULTIPART_SIZE) {
             // The stream cannot be rewound, so each attempt reopens the file in truncating mode
             // rather than appending a second copy of the body to the partial one
             runWithRetry("downloadToFile", host) {
-                withContext(Dispatchers.IO) {
-                    FileOutputStream(saveLocation, false).use { out ->
-                        streamTo(out, builder, onProgress)
+                downloadConnections.withPermit {
+                    withContext(Dispatchers.IO) {
+                        FileOutputStream(saveLocation, false).use { out ->
+                            streamTo(out, builder, onProgress)
+                        }
                     }
                 }
             }
             return
         }
 
-        // totalSize is non-null here because canParallelize requires it
-        downloadConcurrent(
-            saveLocation = saveLocation,
-            totalSize = totalSize,
-            threads = threads,
-            builder = builder,
-            host = host,
-            onProgress = onProgress
-        )
+        downloadConcurrent(saveLocation, totalSize, builder, host, onProgress)
     }
 
     /**
-     * Downloads [totalSize] bytes into [saveLocation] using [threads] concurrent coroutines,
-     * each fetching a disjoint byte range.
+     * Downloads [totalSize] bytes into [saveLocation] in chunks of [CHUNK_SIZE], which up to
+     * [CONNECTIONS_PER_DOWNLOAD] connections take from a shared queue, each holding one of the
+     * [downloadConnections] while it fetches a chunk.
      *
-     * Uses a single [FileChannel] so every coroutine can write to its own region via absolute
-     * position — no seek/write race condition that existed with per-chunk RandomAccessFile.
+     * The speed of single connections to a CDN varies widely. With the file split into one equal
+     * part per connection, the slowest of them would carry the tail alone long after the rest are
+     * done, while from a queue it only ever holds up one chunk. An attempt that outlasts
+     * [CHUNK_ATTEMPT] goes on over a new connection, which usually lands on a faster edge.
+     *
+     * Every chunk writes at its own offset of one [FileChannel], so the chunks need no
+     * coordination, and the file has its full size once every chunk has arrived.
      */
     private suspend fun downloadConcurrent(
         saveLocation: File,
         totalSize: Long,
-        threads: Int,
         builder: HttpRequestBuilder.() -> Unit,
         host: String?,
         onProgress: ((bytesRead: Long, contentLength: Long?) -> Unit)?
-    ) = coroutineScope {
+    ) = withContext(Dispatchers.IO) {
         saveLocation.parentFile?.mkdirs()
         saveLocation.delete()
 
-        // Each chunk writes at its own offset and the file grows to meet it, so the chunks need
-        // no coordination, and the file has its full size once every chunk has arrived
+        // A GitHub release link answers every request with a redirect to a signed CDN address.
+        // Resolved once, the chunks go straight there, and back through the link once the
+        // signature expires
+        val direct = AtomicReference(directUrlOf(builder))
+
+        val chunks = Channel<LongRange>(Channel.UNLIMITED)
+        for (start in 0 until totalSize step CHUNK_SIZE) {
+            chunks.trySend(start until minOf(start + CHUNK_SIZE, totalSize))
+        }
+        chunks.close()
+
         FileChannel.open(
             saveLocation.toPath(),
             StandardOpenOption.CREATE,
@@ -266,76 +304,95 @@ class HttpService(
                 }
             }
 
-            val chunkSize = totalSize / threads
-            val ranges = (0 until threads).map { i ->
-                val start = i * chunkSize
-                val end = if (i == threads - 1) totalSize - 1 else (start + chunkSize - 1)
-                start to end
-            }
+            suspend fun download(chunk: LongRange) {
+                val end = chunk.last
+                // Held across attempts so a dropped connection resumes mid-chunk instead of
+                // refetching bytes that are already on disk and counting them twice
+                var position = chunk.first
 
-            ranges.map { (start, end) ->
-                async(Dispatchers.IO) {
-                    // Held across attempts so a dropped connection resumes mid-chunk instead of
-                    // refetching bytes that are already on disk and counting them twice
-                    var position = start
+                runWithRetry("downloadRange[$chunk]", host) {
+                    // A response that ends early is resumed from where it stopped right away: a
+                    // host that caps how much one response carries serves a chunk this way, and a
+                    // slow attempt is cut short the same way, so only a response that brings
+                    // nothing counts as a failed attempt
+                    while (position <= end) {
+                        val resumedAt = position
+                        val via = direct.get()
 
-                    runWithRetry("downloadRange[$start-$end]", host) {
-                        // A response that ends early is resumed from where it stopped right away:
-                        // a host that caps how much one response carries serves a chunk this way,
-                        // so only a response that brings nothing counts as a failed attempt
-                        while (position <= end) {
-                            val resumedAt = position
+                        runWith429Retry("downloadRange[$chunk]") {
+                            http.prepareGet {
+                                header(HttpHeaders.Range, "bytes=$position-$end")
+                                builder()
+                                via?.let { retarget(it) }
+                            }.execute { response ->
+                                when {
+                                    response.status == HttpStatusCode.TooManyRequests ->
+                                        throw TooManyRequestsException(response.retryAfterMillis())
 
-                            runWith429Retry("downloadRange[$start-$end]") {
-                                http.prepareGet {
-                                    header(HttpHeaders.Range, "bytes=$position-$end")
-                                    builder()
-                                }.execute { response ->
-                                    when (response.status) {
-                                        HttpStatusCode.TooManyRequests ->
-                                            throw TooManyRequestsException(response.retryAfterMillis())
+                                    // The signature of the CDN address ran out
+                                    via != null && response.status.value in EXPIRED_LINK_STATUSES ->
+                                        direct.compareAndSet(via, null)
 
-                                        HttpStatusCode.PartialContent -> {
-                                            // The body is written where the request asked for it,
-                                            // so a part that starts anywhere else would land at the
-                                            // wrong offset
-                                            val contentRange = response.headers[HttpHeaders.ContentRange]
-                                            if (parseContentRangeStart(contentRange) != position) {
-                                                throw IOException("Range $position-$end answered with $contentRange")
-                                            }
+                                    response.status == HttpStatusCode.PartialContent -> {
+                                        // The body is written where the request asked for it, so a
+                                        // part that starts anywhere else would land at the wrong offset
+                                        val contentRange = response.headers[HttpHeaders.ContentRange]
+                                        if (parseContentRangeStart(contentRange) != position) {
+                                            throw IOException("Range $position-$end answered with $contentRange")
+                                        }
 
-                                            val channel: ByteReadChannel = response.body()
-                                            val buf = ByteArray(DEFAULT_BUFFER_SIZE)
+                                        val channel: ByteReadChannel = response.body()
+                                        val buf = ByteArray(DEFAULT_BUFFER_SIZE)
 
-                                            // Bytes past the end belong to the next chunk, which
-                                            // fetches them itself
+                                        // Bytes past the end belong to the next chunk, which fetches
+                                        // them itself
+                                        withTimeoutOrNull(CHUNK_ATTEMPT) {
                                             while (position <= end && !channel.isClosedForRead) {
                                                 val wanted = minOf(buf.size.toLong(), end - position + 1).toInt()
                                                 val read = channel.readAvailable(buf, 0, wanted)
                                                 if (read <= 0) continue
-                                                // Write directly at chunk offset, no global seek needed
                                                 fileChannel.write(ByteBuffer.wrap(buf, 0, read), position)
                                                 position += read
                                                 totalRead.addAndGet(read.toLong())
                                                 reportProgress()
                                             }
                                         }
-
-                                        else -> throw HttpException(response.status)
                                     }
+
+                                    else -> throw HttpException(response.status)
                                 }
                             }
+                        }
 
-                            if (position == resumedAt) {
-                                throw IOException("Range $start-$end returned no bytes at $position")
-                            }
+                        if (position == resumedAt && direct.get() == via) {
+                            throw IOException("Range $chunk returned no bytes at $position")
                         }
                     }
                 }
-            }.awaitAll()
+            }
+
+            coroutineScope {
+                repeat(minOf(CONNECTIONS_PER_DOWNLOAD.toLong(), (totalSize + CHUNK_SIZE - 1) / CHUNK_SIZE).toInt()) {
+                    launch {
+                        for (chunk in chunks) downloadConnections.withPermit { download(chunk) }
+                    }
+                }
+            }
 
             reportProgress(force = true)
         }
+    }
+
+    /** Where the address [builder] targets redirects to, or null where it serves the file itself. */
+    private suspend fun directUrlOf(builder: HttpRequestBuilder.() -> Unit): Url? {
+        val url = HttpRequestBuilder().apply(builder).url.buildString()
+        return headRedirect(url, builder)?.let(::Url)
+    }
+
+    /** Aims the request at [target], without the credentials meant for the host it was built for. */
+    private fun HttpRequestBuilder.retarget(target: Url) {
+        if (url.host != target.host) headers.remove(HttpHeaders.Authorization)
+        url.takeFrom(target)
     }
 
     private data class RangeProbe(val supportsRanges: Boolean, val contentLength: Long?)
@@ -588,10 +645,8 @@ class HttpService(
     /**
      * Returns where [url] redirects, without following it, or null if it did not redirect.
      *
-     * Uses a throwaway client rather than the shared one because the latter negotiates content:
-     * its JSON Accept header is appended to whatever the caller sets, and an endpoint that serves
-     * either metadata or raw bytes will then pick metadata. Resolving the redirect here yields a
-     * pre-signed URL that needs no headers of its own to download.
+     * Resolving the redirect here yields a pre-signed URL that needs no headers of its own to
+     * download.
      */
     suspend fun resolveRedirect(
         url: String,
@@ -610,19 +665,16 @@ class HttpService(
             runCatching { java.net.URI(url).resolve(location).toString() }.getOrNull()
         }
 
-    // A client of its own, as the shared one follows redirects; closed so each call frees its engine
     private suspend fun locationOf(
         httpMethod: HttpMethod,
         url: String,
         builder: HttpRequestBuilder.() -> Unit = {}
     ): String? = try {
-        HttpClient { followRedirects = false }.use { client ->
-            client.request {
-                method = httpMethod
-                url(url)
-                builder()
-            }.headers[HttpHeaders.Location]
-        }
+        redirectless.request {
+            method = httpMethod
+            url(url)
+            builder()
+        }.headers[HttpHeaders.Location]
     } catch (e: CancellationException) {
         // A caller's timeout has to end the wait rather than read as "no redirect"
         throw e
@@ -647,9 +699,20 @@ class HttpService(
          * and resume, so it is not worth a full cycle before the real request is even tried.
          */
         private const val PROBE_RETRY_ATTEMPTS = 2
-        private const val DEFAULT_DOWNLOAD_THREADS = 5
+        private const val CONNECTIONS_PER_DOWNLOAD = 5
+        /** Connections all downloads may hold at once, see [downloadConnections]. */
+        private const val MAX_DOWNLOAD_CONNECTIONS = 8
         /** Minimum file size to bother with parallel download (1 MB). */
         private const val MIN_MULTIPART_SIZE = 1024L * 1024L
+        /**
+         * Share of a parallel download one request fetches. Smaller leaves a slow connection less
+         * to hold up, larger costs fewer requests.
+         */
+        private const val CHUNK_SIZE = 1024L * 1024L
+        /** How long one attempt at a chunk may take before it goes on over a new connection. */
+        private val CHUNK_ATTEMPT = 15.seconds
+        /** What a signed CDN address answers with once its signature has run out. */
+        private val EXPIRED_LINK_STATUSES = setOf(400, 401, 403, 410)
         /** Minimum bytes between progress callbacks. */
         private const val PROGRESS_MIN_BYTES = 64 * 1024L
         /** Minimum ms between progress callbacks. */
