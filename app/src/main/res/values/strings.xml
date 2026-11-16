@@ -355,8 +355,6 @@ Choose where to take its APK from"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Search patches</string>
-    <string name="expert_mode_disable_all">Disable all</string>
-    <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_enable_all_universal_pending">Tap again for universal patches</string>
     <string name="expert_mode_universal_all_warning_title">Enable all universal patches?</string>
     <string name="expert_mode_universal_all_warning_message">Universal patches are not tested together. Enabling all of them at once can cause conflicts, failed patching, or crashes</string>
@@ -584,9 +582,12 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="app_links_unverified_banner_description">Supported web links currently open in your browser instead of this app</string>
     <string name="app_links_enable_auto">Enable automatically</string>
     <string name="app_links_enable_auto_in_progress">Enabling links…</string>
+    <string name="app_links_disable_all_in_progress">Disabling links…</string>
     <string name="app_links_open_settings">Open link settings</string>
     <string name="app_links_repair_success">App links enabled successfully</string>
     <string name="app_links_repair_failed">Failed to enable app links automatically</string>
+    <string name="app_links_disable_success">App links disabled</string>
+    <string name="app_links_disable_failed">Failed to disable app links</string>
     <string name="app_links_change_failed">Failed to change app links</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
@@ -1504,6 +1505,8 @@ Details: %2$s"</string>
     <string name="include">Include</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
+    <string name="enable_all">Enable all</string>
+    <string name="disable_all">Disable all</string>
     <string name="trust">Trust</string>
     <string name="loading">Loading…</string>
     <string name="creating">Creating…</string>

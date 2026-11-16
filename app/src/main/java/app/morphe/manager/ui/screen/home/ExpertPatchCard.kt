@@ -65,14 +65,14 @@ internal fun BulkSelectActions(
 
     TitleAction(
         icon = MaterialSymbols.Rounded.Remove_done,
-        contentDescription = stringResource(R.string.expert_mode_disable_all),
+        contentDescription = stringResource(R.string.disable_all),
         onClick = onDeselectAll,
         style = TitleActionStyle.Neutral,
         enabled = canDisable
     )
     TitleAction(
         icon = MaterialSymbols.Rounded.Done_all,
-        contentDescription = stringResource(R.string.expert_mode_enable_all),
+        contentDescription = stringResource(R.string.enable_all),
         onClick = { if (warnOnUniversalAll) showUniversalAllWarning = true else selectAll() },
         style = TitleActionStyle.Neutral,
         enabled = canEnableMore

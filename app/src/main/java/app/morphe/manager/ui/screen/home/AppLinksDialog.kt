@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
@@ -119,28 +120,33 @@ fun rememberAppLinksControls(
     }
 
     val actions = buildList {
-        if (canChange && status.needsAttention) {
-            // Every link left to the browser is what selecting them all changes
-            val selectingAll = pendingDomains.containsAll(status.unhandledDomains)
-            add(
-                DialogAction(
-                    text = stringResource(
-                        if (selectingAll) R.string.app_links_enable_auto_in_progress
-                        else R.string.app_links_enable_auto
-                    ),
-                    icon = MaterialSymbols.Rounded.Auto_fix_high,
-                    onClick = {
-                        change(
-                            domains = status.unhandledDomains.toSet(),
-                            successMessage = R.string.app_links_repair_success,
-                            failureMessage = R.string.app_links_repair_failed
-                        ) { appLinksManager.selectAllDomains(packageName) }
-                    },
-                    enabled = pendingDomains.isEmpty(),
-                    // Pressed for only while no link reaches the app, as a few left out can be on purpose
-                    emphasis = if (status.opensInBrowser) DialogActionEmphasis.Filled else DialogActionEmphasis.Outlined
+        if (canChange) {
+            BulkLinkChange.entries.forEach { bulk ->
+                // Offered only while some link would change, and those links are what it marks pending
+                val domains = if (bulk.selected) status.unhandledDomains else status.handledDomains
+                if (domains.isEmpty()) return@forEach
+                val inProgress = pendingDomains.containsAll(domains)
+                add(
+                    DialogAction(
+                        text = stringResource(if (inProgress) bulk.progressLabel else bulk.label),
+                        icon = bulk.icon,
+                        onClick = {
+                            change(
+                                domains = domains.toSet(),
+                                successMessage = bulk.successMessage,
+                                failureMessage = bulk.failureMessage
+                            ) { appLinksManager.setAllDomainsSelected(packageName, bulk.selected) }
+                        },
+                        enabled = pendingDomains.isEmpty(),
+                        // Pressed for only while no link reaches the app, as a few left out can be on purpose
+                        emphasis = if (bulk.selected && status.opensInBrowser) {
+                            DialogActionEmphasis.Filled
+                        } else {
+                            DialogActionEmphasis.Outlined
+                        }
+                    )
                 )
-            )
+            }
         }
         add(
             DialogAction(
@@ -161,6 +167,33 @@ fun rememberAppLinksControls(
             }
         } else null,
         pendingDomains = pendingDomains
+    )
+}
+
+/** Selecting or deselecting every web link of an app at once, in the order the dialog offers them. */
+private enum class BulkLinkChange(
+    val selected: Boolean,
+    @param:StringRes val label: Int,
+    @param:StringRes val progressLabel: Int,
+    val icon: ImageVector,
+    @param:StringRes val successMessage: Int,
+    @param:StringRes val failureMessage: Int
+) {
+    ENABLE(
+        selected = true,
+        label = R.string.app_links_enable_auto,
+        progressLabel = R.string.app_links_enable_auto_in_progress,
+        icon = MaterialSymbols.Rounded.Auto_fix_high,
+        successMessage = R.string.app_links_repair_success,
+        failureMessage = R.string.app_links_repair_failed
+    ),
+    DISABLE(
+        selected = false,
+        label = R.string.disable_all,
+        progressLabel = R.string.app_links_disable_all_in_progress,
+        icon = MaterialSymbols.Rounded.Link_off,
+        successMessage = R.string.app_links_disable_success,
+        failureMessage = R.string.app_links_disable_failed
     )
 }
 

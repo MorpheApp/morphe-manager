@@ -5,6 +5,7 @@
 
 package app.morphe.manager.domain.links
 
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -31,6 +32,7 @@ class AppLinksStatusTest {
         assertFalse(status.isFullyConfigured)
         assertTrue(status.needsAttention)
         assertTrue(status.opensInBrowser)
+        assertEquals(emptyList<String>(), status.handledDomains)
     }
 
     @Test
@@ -43,6 +45,7 @@ class AppLinksStatusTest {
         assertFalse(status.isFullyConfigured)
         assertTrue(status.needsAttention)
         assertFalse(status.opensInBrowser)
+        assertEquals(youTubeDomains, status.handledDomains)
     }
 
     @Test
@@ -52,5 +55,6 @@ class AppLinksStatusTest {
         assertTrue(status.isFullyConfigured)
         assertFalse(status.needsAttention)
         assertFalse(status.opensInBrowser)
+        assertEquals(youTubeDomains, status.handledDomains)
     }
 }
