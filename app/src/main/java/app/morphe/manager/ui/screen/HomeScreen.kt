@@ -251,9 +251,6 @@ fun HomeScreen(
         }
     }
 
-    // Check for manager update
-    val hasManagerUpdate = !homeViewModel.updatedManagerVersion.isNullOrEmpty()
-
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()
 
@@ -294,7 +291,10 @@ fun HomeScreen(
     InstallerFlowDialogs(installViewModel = installViewModel)
 
     val notifications = HomeNotificationsUi(
-        managerUpdate = AlertState(hasManagerUpdate) { showUpdateDetailsDialog.value = true },
+        // By the version found, so a newer release brings a swiped one back
+        managerUpdate = AlertState.about(
+            listOfNotNull(homeViewModel.updatedManagerVersion?.takeIf(String::isNotEmpty))
+        ) { showUpdateDetailsDialog.value = true },
         outdatedManager = AlertState.about(outdatedManagerSources) { openPage(MainPage.SOURCES) },
         heldBackSources = AlertState.about(heldBackSources) { openPage(MainPage.SOURCES) },
         blockedSources = AlertState.about(blockedSources.keys) { openPage(MainPage.SOURCES) },
@@ -303,11 +303,11 @@ fun HomeScreen(
         sourceUpdates = AlertState.about(pendingSourceUpdates.map { (uid, version) -> "$uid:$version" }) {
             homeViewModel.downloadPendingUpdates()
         },
-        repatchAvailable = RepatchAlertState(
-            count = repatchableApps.size,
-            visible = showRepatchNotice,
-            onShow = { startBatchPatch(repatchableApps) }
-        ),
+        // By what each app would be rebuilt for, so a newer version or another app brings a
+        // swiped one back
+        repatchAvailable = AlertState.about(
+            repatchableApps.takeIf { showRepatchNotice }.orEmpty().map { "${it.id}:${it.status}" }
+        ) { startBatchPatch(repatchableApps) },
         // Reopened on its own apps, so the batch screen keeps the run instead of
         // planning a new one. A queue left by an earlier process is only stored
         batchQueue = BatchQueueAlertState(batchRun, savedBatchQueue) {

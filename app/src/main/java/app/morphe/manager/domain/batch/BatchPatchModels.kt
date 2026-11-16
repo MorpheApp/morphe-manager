@@ -350,5 +350,5 @@ data class SavedBatchQueue(
     val policy: BatchInstallPolicy = BatchInstallPolicy.SAVE_ONLY
 ) {
     /** Apps the queue would patch if it were started now. */
-    val queuedCount get() = targets.count { it.id !in excluded }
+    val queued get() = targets.filter { it.id !in excluded }
 }

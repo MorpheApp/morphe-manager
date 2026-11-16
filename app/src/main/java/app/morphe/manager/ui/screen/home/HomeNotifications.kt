@@ -62,25 +62,28 @@ import kotlin.math.roundToInt
  * Visibility flag paired with the tap callback of a single alert in the strip.
  *
  * @param revision What the alert is about, which brings it back from behind the bell once it changes.
+ * @param count How many things the alert is about, for an alert that names their number.
  */
 @Immutable
-data class AlertState(val visible: Boolean, val revision: String = "", val onShow: () -> Unit) {
+data class AlertState(
+    val visible: Boolean,
+    val revision: String = "",
+    val count: Int = 0,
+    val onShow: () -> Unit
+) {
     companion object {
         /** An alert raised while there are any [subjects], and raised anew once they change. */
         fun about(subjects: Collection<Any>, onShow: () -> Unit) = AlertState(
             visible = subjects.isNotEmpty(),
-            revision = subjects.map(Any::toString).sorted().joinToString(","),
+            revision = revisionOf(subjects),
+            count = subjects.size,
             onShow = onShow
         )
     }
 }
 
-/**
- * The apps whose patches have moved on, and the tap that queues them. Shown from one app up,
- * which is also when the cards themselves start showing their update badge.
- */
-@Immutable
-data class RepatchAlertState(val count: Int, val visible: Boolean, val onShow: () -> Unit)
+/** A revision naming [subjects] whatever order they come in. */
+private fun revisionOf(subjects: Collection<Any>) = subjects.map(Any::toString).sorted().joinToString(",")
 
 /**
  * The batch queue while it waits to be started, patches or holds results nobody closed yet, and
@@ -106,7 +109,7 @@ data class HomeNotificationsUi(
     val blockedSources: AlertState,
     val metadataErrors: AlertState,
     val sourceUpdates: AlertState,
-    val repatchAvailable: RepatchAlertState,
+    val repatchAvailable: AlertState,
     val batchQueue: BatchQueueAlertState,
     val bundleUpdate: BundleUpdateState
 )
@@ -463,7 +466,7 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
     val batchRunning = batchRun?.isActive == true
     val batchFinished = batchRun?.hasOutcome == true
     val batchSucceeded = (batchRun?.succeeded ?: 0) > 0
-    val queuedCount = notifications.batchQueue.saved?.queuedCount ?: 0
+    val queued = notifications.batchQueue.saved?.queued.orEmpty()
     val repatch = notifications.repatchAvailable
     val bundleUpdate = notifications.bundleUpdate
 
@@ -573,26 +576,28 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
         ),
         alert(
             key = "batch_queued",
-            visible = queuedCount > 0 && !batchRunning && !batchFinished,
+            visible = queued.isNotEmpty() && !batchRunning && !batchFinished,
             tone = SemanticTone.Primary,
             icon = MaterialSymbols.Rounded.Playlist_add.autoMirrored,
-            title = pluralStringResource(R.plurals.batch_queue_pending_count, queuedCount, queuedCount.toString()),
+            title = pluralStringResource(R.plurals.batch_queue_pending_count, queued.size, queued.size.toString()),
             subtitle = stringResource(R.string.batch_queue_pending_subtitle),
             onClick = notifications.batchQueue.onShow,
-            revision = queuedCount.toString()
+            revision = revisionOf(queued.map { it.id }),
+            remembered = true
         ),
         // The badges on the cards say the same thing one app at a time. This says it once
         // and queues every one of them, which is the part that is otherwise several taps.
         // While a queue is patching or awaiting review, its own alert stands in for this one
         alert(
             key = "repatch_available",
-            visible = repatch.visible && repatch.count > 0 && !batchRunning && !batchFinished,
+            visible = repatch.visible && !batchRunning && !batchFinished,
             tone = SemanticTone.Primary,
             icon = MaterialSymbols.Rounded.Auto_fix_high,
             title = pluralStringResource(R.plurals.repatch_available_count, repatch.count, repatch.count.toString()),
             subtitle = stringResource(R.string.home_repatch_available_subtitle),
             onClick = repatch.onShow,
-            revision = repatch.count.toString()
+            revision = repatch.revision,
+            remembered = true
         )
     )
 }
