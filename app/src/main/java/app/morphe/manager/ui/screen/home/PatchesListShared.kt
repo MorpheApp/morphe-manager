@@ -33,28 +33,11 @@ import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.ui.screen.shared.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import org.koin.compose.koinInject
 
-/**
- * Matches patches against [query] by name, description and, while translation is on, translated
- * description. The descriptions of [patches] translate in the background, so the search finds them
- * without waiting for a scroll.
- */
+/** Matches patches against [query] by name and description, see [rememberTranslatedMatcher]. */
 @Composable
-internal fun rememberPatchMatcher(query: String, patches: List<PatchInfo>): (PatchInfo) -> Boolean {
-    val translation: ContentTranslation = koinInject()
-    val descriptions = remember(patches) { patches.mapNotNull { it.description }.distinct() }
-    PrefetchTranslations(descriptions)
-
-    // Read only while searching, so translations landing in the background leave the list alone
-    val revision = if (query.isBlank()) 0 else translation.revision
-    return remember(query, translation.isEnabled, revision) {
-        { patch ->
-            patch.matchesQuery(query) ||
-                    patch.description?.let(translation::cached)?.contains(query, ignoreCase = true) == true
-        }
-    }
-}
+internal fun rememberPatchMatcher(query: String, patches: List<PatchInfo>): (PatchInfo) -> Boolean =
+    rememberTranslatedMatcher(query, patches, PatchInfo::description, PatchInfo::matchesQuery)
 
 /**
  * One collapsible block of a patch list.
