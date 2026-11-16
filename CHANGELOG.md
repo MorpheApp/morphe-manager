@@ -1,3 +1,18 @@
+## [2.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.1...v2.7.0-dev.2) (2026-11-16)
+
+### Features
+
+* Move the mini-games to Help & info ([28f7a06](https://github.com/MorpheApp/morphe-manager/commit/28f7a06fe938c28ab2fb50f20df932d1690db8c9))
+
+### Performance Improvements
+
+* Download large files from a shared chunk queue ([0b1538a](https://github.com/MorpheApp/morphe-manager/commit/0b1538a55787b68b6950816a74cb45178ce62a81))
+
+### Bug Fixes
+
+* Keep swiped re-patch and queue alerts behind the bell across launches ([e0074e1](https://github.com/MorpheApp/morphe-manager/commit/e0074e10e946e05eaa13294ba46ed7c8dd5d4c19))
+* Stop crashing when the system denies network access ([96ff910](https://github.com/MorpheApp/morphe-manager/commit/96ff910c5c7bf2b0f96c8454777d6acdd102c33d))
+
 ## [2.7.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0...v2.7.0-dev.1) (2026-11-16)
 
 ### Features
