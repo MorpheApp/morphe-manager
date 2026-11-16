@@ -11,6 +11,7 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -445,9 +446,10 @@ fun DialogHostScope.AppPatchSourcesDialog(
     ) {
         DialogLazyList(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(DialogListSpacing)
+            verticalArrangement = Arrangement.spacedBy(SegmentGap)
         ) {
-            items(items = rows, key = { (uid, _, _) -> uid }) { (uid, title, counts) ->
+            itemsIndexed(items = rows, key = { _, (uid, _, _) -> uid }) { index, (uid, title, counts) ->
+                val segment = ListSegment.of(index, rows.size)
                 val (held, reaches) = counts
                 // Worn the way the source list wears it, so a source reads as the same one there
                 val accentColor = sourcesByUid[uid]?.let { rememberBundleAccent(it) }
@@ -479,8 +481,10 @@ fun DialogHostScope.AppPatchSourcesDialog(
                     role = Role.Checkbox,
                     leadingContent = { SelectionCheckIndicator(state, accentColor = accentColor) },
                     accentColor = accentColor,
+                    shape = segment.shape,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .endsBlock(segment.endsBlock)
                         .animatedListItem(this)
                 ) {
                     IconTextRow(
