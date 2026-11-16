@@ -53,7 +53,6 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchInfo
-import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.sources.*
@@ -244,15 +243,8 @@ fun DialogHostScope.InstalledAppInfoDialog(
             ?: KnownApps.getAppName(packageName)
     }
 
-    // Export file name
-    val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles, appLabel) {
-        val app = installedApp ?: return@remember "morphe_export.apk"
-        ExportNameFormatter.format(PatchedAppExportData(
-            appName = appLabel,
-            packageName = app.currentPackageName,
-            appVersion = appInfo?.versionName ?: app.version,
-            sources = appliedBundles.map { PatchSourceRef(it.title, it.version) }
-        ))
+    val exportFileName = remember(installedApp, appLabel) {
+        installedApp?.exportFileName(appLabel) ?: "morphe_export.apk"
     }
 
     // Offered under the name an export would suggest, so the file lands the same either way

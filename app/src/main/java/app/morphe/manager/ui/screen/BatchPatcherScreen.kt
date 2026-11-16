@@ -119,7 +119,7 @@ fun BatchPatcherScreen(
     val installRequestsByItem: Map<String, InstallQueueRequest> = remember(current?.items) {
         current?.patchedItems.orEmpty().mapNotNull { item ->
             if (item.installOutcome == BatchInstallOutcome.INSTALLED) return@mapNotNull null
-            val file = item.patchedFile ?: return@mapNotNull null
+            val file = item.patchedBuild?.file ?: return@mapNotNull null
             item.id to InstallQueueRequest(
                 file = file,
                 appName = item.appName,
@@ -442,8 +442,8 @@ fun BatchPatcherScreen(
 
     // Shared under the names a save would give them, so each app can be told apart where it lands
     fun share(items: List<BatchPatchItem>) {
-        val names = items.mapNotNull { item -> item.patchedFile?.let { it to item.exportFileName() } }.toMap()
-        scope.launch { context.shareApks(names.keys.toList()) { names.getValue(it) } }
+        val builds = items.mapNotNull { it.patchedBuild }.associateBy { it.file }
+        scope.launch { context.shareApks(builds.keys.toList()) { builds.getValue(it).exportFileName } }
     }
 
     // The question a rooted device asks before a single-app patch, asked here per queued app
@@ -690,8 +690,8 @@ fun BatchPatcherScreen(
                             ?.takeIf { useExpertMode || item.selectedByHand }
                             ?.let { { viewModel.beginEdit(item) } },
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
-                        onExport = item.patchedFile?.let { file -> { exporter.export(file, item.exportFileName()) } },
-                        onShare = item.patchedFile?.let { { share(listOf(item)) } },
+                        onExport = item.patchedBuild?.let { build -> { exporter.export(build.file, build.exportFileName) } },
+                        onShare = item.patchedBuild?.let { { share(listOf(item)) } },
                         onOpen = item.installedPackageName
                             ?.takeIf { item.installOutcome == BatchInstallOutcome.INSTALLED }
                             ?.let { { viewModel.openApp(it) } },
@@ -1133,16 +1133,6 @@ private fun BatchItemCard(
         }
     }
 }
-
-/** The name a saved or shared APK of [this] item goes by, the one the single-app flow gives it. */
-private fun BatchPatchItem.exportFileName(): String = ExportNameFormatter.format(
-    PatchedAppExportData(
-        appName = appName,
-        packageName = id,
-        appVersion = version,
-        sources = patchSources
-    )
-)
 
 /** Second detail line: either why the app cannot run, or what it will be patched from. */
 @Composable

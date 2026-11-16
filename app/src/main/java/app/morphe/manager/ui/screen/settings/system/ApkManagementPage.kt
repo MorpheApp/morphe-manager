@@ -65,6 +65,8 @@ enum class ApkManagementType {
 data class ApkItemData(
     val packageName: String,
     val displayName: String,
+    /** The name the APK is shared and exported under, rather than the one it is stored under. */
+    val exportFileName: String,
     val version: String,
     val fileSize: Long,
     val file: File? = null,
@@ -82,6 +84,10 @@ data class ApkItemData(
 
 private val ApkItemData.selectionKey: String
     get() = file?.absolutePath ?: "$packageName:$version"
+
+/** The files of these rows still on disk, each with the name it is handed out under. */
+private fun List<ApkItemData>.exportedFiles(): Map<File, String> =
+    mapNotNull { item -> item.file?.takeIf(File::exists)?.let { it to item.exportFileName } }.toMap()
 
 private val ApkItemData.isInstallableFromStorage: Boolean
     get() = file?.exists() == true && installType != InstallType.MOUNT
@@ -127,6 +133,7 @@ private data class ApkItemDataWithApp(
     fun toApkItemData() = ApkItemData(
         packageName = packageName,
         displayName = displayName,
+        exportFileName = installedApp.exportFileName(displayName),
         version = version,
         fileSize = fileSize,
         file = file,
@@ -167,8 +174,6 @@ data class ApkListMeta(
 /** Callbacks for per-item and bulk APK operations. */
 @Stable
 class ApkListActions(
-    val onShare: ((ApkItemData) -> Unit)?,
-    val onExport: ((ApkItemData) -> Unit)?,
     val onInstall: ((ApkItemData) -> Unit)?,
     val onInstallSelected: ((List<ApkItemData>) -> Unit)?,
     val onUninstall: ((ApkItemData) -> Unit)?,
@@ -368,8 +373,6 @@ private fun DialogHostScope.PatchedApksContent(
         }
     }
 
-    val exporter = rememberApkExporter()
-
     ApkManagementDialogContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_patched_apks_title),
@@ -384,14 +387,6 @@ private fun DialogHostScope.PatchedApksContent(
             zipExportFileName = stringResource(R.string.settings_system_patched_apks_export_zip_name)
         ),
         actions = ApkListActions(
-            onShare = { item ->
-                item.file?.let { file ->
-                    scope.launch { context.shareApks(listOf(file)) }
-                }
-            },
-            onExport = { item ->
-                item.file?.let { exporter.export(it, "${item.displayName.replace(" ", "_")}.apk") }
-            },
             onInstall = { item ->
                 if (item.installType == InstallType.MOUNT) {
                     installViewModel.mount(
@@ -483,6 +478,13 @@ private fun DialogHostScope.OriginalApksContent(
                             data = ApkItemData(
                                 packageName = apk.packageName,
                                 displayName = resolvedData.displayName,
+                                exportFileName = ExportNameFormatter.format(
+                                    ApkExportData(
+                                        appName = resolvedData.displayName,
+                                        packageName = apk.packageName,
+                                        appVersion = apk.version
+                                    )
+                                ),
                                 version = apk.version,
                                 fileSize = apk.fileSize,
                                 file = apkFile,
@@ -573,8 +575,6 @@ private fun DialogHostScope.OriginalApksContent(
         }
     }
 
-    val exporter = rememberApkExporter()
-
     ApkManagementDialogContent(
         meta = ApkListMeta(
             title = stringResource(R.string.settings_system_original_apks_title),
@@ -589,14 +589,6 @@ private fun DialogHostScope.OriginalApksContent(
             zipExportFileName = stringResource(R.string.settings_system_original_apks_export_zip_name)
         ),
         actions = ApkListActions(
-            onShare = { item ->
-                item.file?.let { file ->
-                    scope.launch { context.shareApks(listOf(file)) }
-                }
-            },
-            onExport = { item ->
-                item.file?.let { exporter.export(it, "${item.displayName.replace(" ", "_")}.apk") }
-            },
             onInstall = { item -> startInstallQueue(installRequests(listOf(item))) },
             onInstallSelected = { selectedItems -> startInstallQueue(installRequests(selectedItems)) },
             onUninstall = { item -> uninstallItems(listOf(item)) },
@@ -674,7 +666,7 @@ private fun DialogHostScope.ApkManagementDialogContent(
         }
     }
     val selectedItems = items.filter { selection.contains(it.selectionKey) }
-    val selectedFiles = selectedItems.mapNotNull { item -> item.file?.takeIf { it.exists() } }
+    val selectedExports = selectedItems.exportedFiles()
     val selectedInstalledItems = selectedItems.filter { it.isInstalledOnDevice }
     val selectedInstallableItems = selectedItems.filter {
         !it.isInstalledOnDevice && it.isInstallableFromStorage
@@ -687,21 +679,27 @@ private fun DialogHostScope.ApkManagementDialogContent(
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
     val zipExportSuccessText = stringResource(R.string.settings_system_apks_export_zip_success)
     val zipExportFailedText = stringResource(R.string.settings_system_apks_export_zip_failed)
-    var zipExportItems by remember { mutableStateOf<List<ApkItemData>>(emptyList()) }
+    var zipExports by remember { mutableStateOf<Map<File, String>>(emptyMap()) }
 
     LaunchedEffect(items) {
         val currentKeys = items.map { it.selectionKey }.toSet()
         selection.retain { it in currentKeys }
     }
 
+    val exporter = rememberApkExporter()
+
+    fun share(exports: Map<File, String>) {
+        scope.launch { context.shareApks(exports.keys.toList(), exports::getValue) }
+    }
+
     val exportZip = rememberDocumentSaver("application/zip") { uri ->
-        val itemsToExport = zipExportItems
-        zipExportItems = emptyList()
+        val exports = zipExports
+        zipExports = emptyMap()
         scope.launch {
             isExporting = true
             try {
                 val exported = withContext(Dispatchers.IO) {
-                    ZipUtils.zip(context, uri, itemsToExport.mapNotNull { it.file })
+                    ZipUtils.zip(context, uri, exports.keys.toList(), exports::getValue)
                 }
                 messages.show(if (exported) zipExportSuccessText else zipExportFailedText)
                 if (exported) selection.clear()
@@ -819,16 +817,12 @@ private fun DialogHostScope.ApkManagementDialogContent(
                                 )
                             }
 
-                            if (selectedFiles.isNotEmpty()) {
+                            if (selectedExports.isNotEmpty()) {
                                 add(
                                     SelectionAction(
                                         icon = MaterialSymbols.Rounded.Share,
                                         label = shareLabel,
-                                        onClick = {
-                                            scope.launch {
-                                                context.shareApks(selectedFiles)
-                                            }
-                                        }
+                                        onClick = { share(selectedExports) }
                                     )
                                 )
                                 add(
@@ -836,7 +830,7 @@ private fun DialogHostScope.ApkManagementDialogContent(
                                         icon = MaterialSymbols.Rounded.Upload,
                                         label = exportLabel,
                                         onClick = {
-                                            zipExportItems = selectedItems
+                                            zipExports = selectedExports
                                             exportZip(FilenameUtils.timestamped(meta.zipExportFileName))
                                         }
                                     )
@@ -893,8 +887,8 @@ private fun DialogHostScope.ApkManagementDialogContent(
                         selected = selected,
                         selectionMode = isMultiSelectMode,
                         onToggleSelection = { isMultiSelectMode = true; selection.toggle(item.selectionKey) },
-                        onShare = if (item.file != null) { { actions.onShare?.invoke(item) } } else null,
-                        onExport = if (item.file != null) { { actions.onExport?.invoke(item) } } else null,
+                        onShare = item.file?.let { file -> { share(mapOf(file to item.exportFileName)) } },
+                        onExport = item.file?.let { file -> { exporter.export(file, item.exportFileName) } },
                         onInstall = if (!item.isInstalledOnDevice && item.file != null && actions.onInstall != null) {
                             { actions.onInstall.invoke(item) }
                         } else null,

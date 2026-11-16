@@ -16,18 +16,18 @@ import java.util.zip.ZipOutputStream
  */
 object ZipUtils {
     /**
-     * Writes the existing files in [files] into a new zip archive at [uri].
-     * Non-existent files are silently skipped. Returns false if nothing was
+     * Writes the existing files in [files] into a new zip archive at [uri], each under the name
+     * [nameOf] gives it. Non-existent files are silently skipped. Returns false if nothing was
      * written or write failed.
      */
-    fun zip(context: Context, uri: Uri, files: List<File>): Boolean {
+    fun zip(context: Context, uri: Uri, files: List<File>, nameOf: (File) -> String = File::getName): Boolean {
         val existingFiles = files.filter { it.exists() }
         return existingFiles.isNotEmpty() && runCatching {
             context.contentResolver.openOutputStream(uri)?.use { output ->
                 val usedNames = mutableSetOf<String>()
                 ZipOutputStream(output).use { zip ->
                     existingFiles.forEach { file ->
-                        zip.putNextEntry(ZipEntry(uniqueEntryName(file, usedNames)))
+                        zip.putNextEntry(ZipEntry(uniqueEntryName(nameOf(file), usedNames)))
                         file.inputStream().use { input -> input.copyTo(zip) }
                         zip.closeEntry()
                     }
@@ -36,8 +36,8 @@ object ZipUtils {
         }.isSuccess
     }
 
-    private fun uniqueEntryName(file: File, usedNames: MutableSet<String>): String {
-        val originalName = file.name.ifBlank { "file-${usedNames.size + 1}" }
+    private fun uniqueEntryName(name: String, usedNames: MutableSet<String>): String {
+        val originalName = name.ifBlank { "file-${usedNames.size + 1}" }
         var candidate = originalName
         val dotIndex = originalName.lastIndexOf('.')
         val base = if (dotIndex > 0) originalName.substring(0, dotIndex) else originalName
