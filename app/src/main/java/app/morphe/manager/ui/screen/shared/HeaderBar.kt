@@ -67,7 +67,10 @@ fun HeaderBar(
 ) {
     val label = searchLabel ?: stringResource(R.string.search)
     val open = search?.visible == true
-    // A field restored open, such as on coming back to the page, stands open rather than opening again
+    // A field restored open, such as on coming back to the page, stands open rather than opening again,
+    // and leaves the keyboard down until it is closed and opened anew. Not told from the morph, which
+    // is already over by the time the field composes when the system turns animations off
+    var restoredOpen by remember { mutableStateOf(open) }
     val progress = remember { Animatable(if (open) 1f else 0f) }
     val focusManager = LocalFocusManager.current
     // Cleared only off the field itself: a header composed closed, as a page turned to is, would
@@ -76,7 +79,10 @@ fun HeaderBar(
     LaunchedEffect(open) {
         // The keyboard goes as the field starts to close, so what it leaves room for settles alongside
         // rather than jumping once the field is gone
-        if (!open && fieldFocused) focusManager.clearFocus()
+        if (!open) {
+            restoredOpen = false
+            if (fieldFocused) focusManager.clearFocus()
+        }
         progress.animateTo(if (open) 1f else 0f, SearchMorphSpec)
     }
     // Composed only while any of it shows, so a closed field holds no focus and takes no taps
@@ -105,7 +111,7 @@ fun HeaderBar(
                         onValueChange = { search.query = it },
                         label = label,
                         // Only a field opened here takes the keyboard, not one restored open
-                        requestFocus = remember { progress.value < 1f },
+                        requestFocus = remember { !restoredOpen },
                         // Drawn out of the toggle's circle and back into it, fading as it nears the
                         // toggle so the two never show as one darker circle
                         modifier = Modifier.onFocusChanged { fieldFocused = it.hasFocus }.graphicsLayer {
