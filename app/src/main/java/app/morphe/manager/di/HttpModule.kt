@@ -26,13 +26,21 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.Inet4Address
+import java.net.UnknownHostException
 
 val httpModule = module {
     fun provideHttpClient(context: Context, json: Json) = HttpClient(OkHttp) {
         engine {
             config {
                 dns { hostname ->
-                    val addresses = Dns.SYSTEM.lookup(hostname)
+                    val addresses = try {
+                        Dns.SYSTEM.lookup(hostname)
+                    } catch (e: SecurityException) {
+                        // A firewall or a revoked network permission fails the lookup with EPERM,
+                        // which OkHttp would rethrow on its dispatcher thread instead of failing
+                        // the call
+                        throw UnknownHostException(hostname).apply { initCause(e) }
+                    }
                     val ipv4Addresses = addresses.filterIsInstance<Inet4Address>()
                     // Force IPv4 if available, fallback to IPv6 only if no IPv4 addresses are found
                     ipv4Addresses.ifEmpty { addresses }
