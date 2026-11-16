@@ -8,11 +8,14 @@ package app.morphe.manager.ui.screen.shared
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.filter
 
 /**
  * Room at a [ListDialog]'s content ends for the bars floating over them. A scrolling list takes it
@@ -105,6 +108,13 @@ private fun ListDialogLayout(
 ) {
     val collapse = remember { DialogHeaderCollapse() }
     val backdrop = remember { HeaderBackdrop() }
+    // A list back at its start shows the whole header however it got there, as a jump made in
+    // code, such as to the top or onto another page, leaves no scroll for the header to follow
+    if (header != null) {
+        LaunchedEffect(collapse, backdrop) {
+            snapshotFlow { backdrop.atStart }.filter { it }.collect { collapse.unfold() }
+        }
+    }
     val split = sidePane != null
     val columnWidth = if (split) Defaults.SplitContentMaxWidth else Defaults.ContentMaxWidth
     DialogLayout(
@@ -133,11 +143,9 @@ private fun ListDialogLayout(
         val navigationBar = WindowInsets.systemBars.exclude(WindowInsets.ime).asPaddingValues().calculateBottomPadding()
         // Only a bottom bar hides what scrolls under it, so the scrollbar runs on past a footer
         val scrollbarBottom = if (bottomBar != null) bottomHeight else navigationBar + Defaults.SpaceMedium
-        CompositionLocalProvider(
-            LocalDialogHeaderCollapse provides collapse.takeIf { header != null },
-            // The list's scrollbar tells the header when the list runs on under it
-            LocalHeaderBackdrop provides backdrop
-        ) {
+        // The list's scrollbar tells the header when the list runs on under it, and when it is back
+        // at its start
+        CompositionLocalProvider(LocalHeaderBackdrop provides backdrop) {
             if (sidePane == null) {
                 DialogPane(
                     barInsets = PaddingValues(top = topInset, bottom = bottomHeight),

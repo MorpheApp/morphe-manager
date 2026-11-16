@@ -36,6 +36,9 @@ class HeaderBackdrop {
      */
     val scrolledPast: Float get() = source?.hiddenAtStart() ?: 0f
 
+    /** Whether the list rests at its start, as one still loading does. */
+    val atStart: Boolean get() = source?.canScrollBackward != true
+
     internal fun track(state: ScrollableState) {
         source = state
     }
