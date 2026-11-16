@@ -346,8 +346,6 @@ Vyberte, odkud vzít její APK"</string>
     <string name="home_external_apk_expert_mode_required">Tato funkce je dostupná pouze v expertním režimu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Vyhledat záplaty</string>
-    <string name="expert_mode_disable_all">Vypnout vše</string>
-    <string name="expert_mode_enable_all">Zapnout vše</string>
     <string name="expert_mode_enable_all_universal_pending">Klepněte znovu pro univerzální záplaty</string>
     <string name="expert_mode_universal_all_warning_title">Povolit všechny univerzální záplaty?</string>
     <string name="expert_mode_universal_all_warning_message">Univerzální záplaty nejsou testovány společně. Povolení všech najednou může způsobit konflikty, selhání záplatování nebo pády.</string>
@@ -567,9 +565,12 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="app_links_unverified_banner_description">Podporované webové odkazy se nyní otevírají ve vašem prohlížeči místo v této aplikaci</string>
     <string name="app_links_enable_auto">Povolit automaticky</string>
     <string name="app_links_enable_auto_in_progress">Povolování odkazů…</string>
+    <string name="app_links_disable_all_in_progress">Zakazování odkazů…</string>
     <string name="app_links_open_settings">Otevřít nastavení odkazů</string>
     <string name="app_links_repair_success">Odkazy aplikací byly úspěšně povoleny</string>
     <string name="app_links_repair_failed">Nepodařilo se automaticky povolit odkazy aplikací</string>
+    <string name="app_links_disable_success">Odkazy aplikací zakázány</string>
+    <string name="app_links_disable_failed">Nepodařilo se zakázat odkazy aplikací</string>
     <string name="app_links_change_failed">Nepodařilo se změnit odkazy aplikace</string>
     <string name="app_links_all_verified">Všechny podporované odkazy jsou nastaveny tak, aby se otevíraly v této aplikaci</string>
     <string name="app_links_fix">Opravit odkazy</string>
@@ -628,8 +629,6 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="patcher_field_value_stripped">odstraněno</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">zachováno</string>
-    <string name="patcher_tab_logs">Protokoly záplat</string>
-    <string name="patcher_tab_game">Hry</string>
     <string name="patcher_logs_waiting">Čekání na výstup logu…</string>
     <string name="patcher_logs_lost">Výstup logu není uchováván mezi restartováním aplikace</string>
     <string name="patcher_long_step_warning">Tento krok může chvíli trvat. Počkejte prosím…</string>
@@ -659,7 +658,6 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patcher_install_error_subtitle">Zkuste odinstalovat a nainstalovat znovu</string>
     <string name="patcher_ready_to_mount_subtitle">Stiskněte tlačítko níže pro zavedení</string>
     <string name="patcher_patches_excluded_for_installer">Není k dispozici pro tuto metodu instalace a je vyloučeno: %s</string>
-    <string name="patcher_back_to_game_hint">Klepněte na %1$s pro návrat do hry</string>
     <string name="patcher_storage_permission_dialog_title">Nelze přistupovat k cestě úložiště</string>
     <string name="patcher_incompatible_patcher_title">Aktualizace požadována</string>
     <string name="patcher_incompatible_patcher_description">Zdroj &lt;b&gt;%1$s&lt;/b&gt; vyžaduje patcher &lt;b&gt;%2$s&lt;/b&gt; nebo novější. Aktualizujte Morphe, abyste jej mohli použít</string>
@@ -764,7 +762,9 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="package_name">Název balíčku</string>
     <string name="failed_to_mount">Selhalo připojení: %s</string>
     <string name="failed_to_unmount">Selhalo odpojení: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minihry</string>
+    <string name="mini_games_description">Rychlé hry na vyplnění volného času</string>
     <string name="mini_game_score">Skóre %s</string>
     <string name="mini_game_best">Nejlepší %s</string>
     <string name="mini_game_new_record">Nový rekord!</string>
@@ -773,7 +773,14 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="mini_game_paused">Pozastaveno</string>
     <string name="mini_game_resume">Pokračovat</string>
     <string name="mini_game_restart">Začít znovu</string>
-    <string name="mini_game_change">Vybrat jinou hru</string>
+    <string name="mini_game_pause">Pauza</string>
+    <string name="mini_game_score_label">Skóre</string>
+    <string name="mini_game_best_label">Nejlepší</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Úroveň</string>
+    <string name="mini_game_lines">Čáry</string>
+    <string name="mini_game_lives">Životy</string>
+    <string name="mini_game_flags">Vlajky</string>
     <string name="mini_game_2048_picker_subtitle">Skládejte dlaždice, abyste je spojili</string>
     <string name="mini_game_flappy_picker_subtitle">Klepnutím proleťte trubkami</string>
     <string name="mini_game_flappy_tap_to_start">Klepnutím pro létání</string>
@@ -1339,13 +1346,26 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_new_folder_failed">Nepodařilo se vytvořit složku</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaci</string>
-    <string name="settings_system_manager_description">Projekt s otevřeným zdrojovým kódem pro moderní, optimalizované záplaty populárních Android aplikací, řízený zpětnou vazbou a příspěvky komunity</string>
-    <string name="credits">Kredity</string>
-    <string name="credits_description">Lidé stojící za Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Nápověda</string>
-    <string name="credits_current_development">Současný vývoj</string>
     <string name="credits_prior_development">Předchozí vývoj</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Správce</string>
+    <string name="about_update_available">K dispozici aktualizace: %s</string>
+    <string name="about_up_to_date">Aktuální verze</string>
+    <string name="about_links">Odkazy na oficiální stránky</string>
+    <string name="about_link_donate">Darovat</string>
+    <string name="about_link_website">Webové stránky</string>
+    <string name="about_link_translations">Překlady</string>
+    <string name="contributors">Přispěvatelé</string>
+    <string name="contributors_description">Posledních 12 měsíců</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Podporovatelé</string>
+    <string name="supporters_description">Podporovatelé na Open Collective</string>
+    <string name="supporters_become">Stát se podporovatelem</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">A %s dalších</string>
+    <string name="people_unavailable">Seznam nešlo načíst</string>
     <string name="opensource_licenses">Open-source licence</string>
     <string name="opensource_licenses_description">Knihovny, na kterých je Morphe postaven</string>
     <string name="opensource_licenses_search">Hledat knihovny a licence</string>
@@ -1415,6 +1435,8 @@ Podrobnosti: %2$s"</string>
     <string name="include">Zahrnout</string>
     <string name="disable">Zakázat</string>
     <string name="enable">Povolit</string>
+    <string name="enable_all">Povolit vše</string>
+    <string name="disable_all">Vypnout vše</string>
     <string name="trust">Důvěřovat</string>
     <string name="loading">Načítání…</string>
     <string name="creating">Vytvářím…</string>

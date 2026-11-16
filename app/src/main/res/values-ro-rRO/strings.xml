@@ -346,8 +346,6 @@ Selectați locul de unde să fie preluat fișierul APK"</string>
     <string name="home_external_apk_expert_mode_required">Această funcție este disponibilă doar în modul Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Caută patch-uri</string>
-    <string name="expert_mode_disable_all">Dezactivează toate</string>
-    <string name="expert_mode_enable_all">Activează toate</string>
     <string name="expert_mode_enable_all_universal_pending">Atingeți din nou pentru patch-uri universale</string>
     <string name="expert_mode_universal_all_warning_title">Activezi toate patch-urile universale?</string>
     <string name="expert_mode_universal_all_warning_message">Patch-urile universale nu sunt testate împreună. Activarea tuturor simultan poate cauza conflicte, patch-are eșuată sau blocări.</string>
@@ -567,9 +565,12 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="app_links_unverified_banner_description">Linkurile web acceptate se deschid în prezent în browserul dvs., în locul acestei aplicații</string>
     <string name="app_links_enable_auto">Activați automat</string>
     <string name="app_links_enable_auto_in_progress">Se activează linkurile…</string>
+    <string name="app_links_disable_all_in_progress">Dezactivare link-uri…</string>
     <string name="app_links_open_settings">Deschideți setările pentru linkuri</string>
     <string name="app_links_repair_success">Linkurile aplicației au fost activate cu succes</string>
     <string name="app_links_repair_failed">Nu s-a reușit activarea automată a linkurilor aplicației</string>
+    <string name="app_links_disable_success">Link-uri de aplicație dezactivate</string>
+    <string name="app_links_disable_failed">Eșec la dezactivarea link-urilor de aplicație</string>
     <string name="app_links_change_failed">Eșec la modificarea linkurilor aplicației</string>
     <string name="app_links_all_verified">Toate linkurile acceptate sunt configurate să se deschidă în această aplicație</string>
     <string name="app_links_fix">Repară linkurile</string>
@@ -628,8 +629,6 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="patcher_field_value_stripped">eliminate</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">păstrate</string>
-    <string name="patcher_tab_logs">Jurnale de patch-uri</string>
-    <string name="patcher_tab_game">Jocuri</string>
     <string name="patcher_logs_waiting">Se așteaptă ieșirea jurnalului…</string>
     <string name="patcher_logs_lost">Ieșirea jurnalului nu este păstrată la repornirea aplicației</string>
     <string name="patcher_long_step_warning">Acest pas poate dura ceva timp. Vă rugăm să așteptați…</string>
@@ -659,7 +658,6 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patcher_install_error_subtitle">Încearcă să dezinstalezi și să instalezi din nou</string>
     <string name="patcher_ready_to_mount_subtitle">Apăsați butonul de mai jos pentru a monta</string>
     <string name="patcher_patches_excluded_for_installer">Nu este disponibil pentru această metodă de instalare și exclus: %s</string>
-    <string name="patcher_back_to_game_hint">Atinge %1$s pentru a reveni la jocul tău</string>
     <string name="patcher_storage_permission_dialog_title">Nu se poate accesa calea de stocare</string>
     <string name="patcher_incompatible_patcher_title">Actualizare necesară</string>
     <string name="patcher_incompatible_patcher_description">Sursa &lt;b&gt;%1$s&lt;/b&gt; necesită patcher-ul &lt;b&gt;%2$s&lt;/b&gt; sau o versiune mai nouă. Actualizează Morphe pentru a o folosi</string>
@@ -764,7 +762,9 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="package_name">Nume pachet</string>
     <string name="failed_to_mount">Montare eșuată: %s</string>
     <string name="failed_to_unmount">Demontare eșuată: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-jocuri</string>
+    <string name="mini_games_description">Jocuri rapide pentru a petrece un minut liber</string>
     <string name="mini_game_score">Scor %s</string>
     <string name="mini_game_best">Cel mai bun %s</string>
     <string name="mini_game_new_record">Record nou!</string>
@@ -773,7 +773,14 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="mini_game_paused">Pauză</string>
     <string name="mini_game_resume">Continuă</string>
     <string name="mini_game_restart">Reîncepe</string>
-    <string name="mini_game_change">Alege alt joc</string>
+    <string name="mini_game_pause">Pauză</string>
+    <string name="mini_game_score_label">Scor</string>
+    <string name="mini_game_best_label">Cel mai bun</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Nivel</string>
+    <string name="mini_game_lines">Linii</string>
+    <string name="mini_game_lives">Vieți</string>
+    <string name="mini_game_flags">Steaguri</string>
     <string name="mini_game_2048_picker_subtitle">Glisează plăcile pentru a le îmbina</string>
     <string name="mini_game_flappy_picker_subtitle">Atinge pentru a zbura printre țevi</string>
     <string name="mini_game_flappy_tap_to_start">Atinge pentru a zbura</string>
@@ -1339,13 +1346,26 @@ Detalii: %2$s"</string>
     <string name="file_picker_new_folder_failed">Folderul nu a putut fi creat</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Despre</string>
-    <string name="settings_system_manager_description">Un proiect open-source pentru patch-uri moderne și simplificate ale aplicațiilor Android populare, ghidat de feedback-ul și contribuțiile comunității</string>
-    <string name="credits">Credite</string>
-    <string name="credits_description">Oamenii din spatele Morphe</string>
     <string name="settings_about_section_project">Proiect</string>
     <string name="settings_about_section_help">Ajutor</string>
-    <string name="credits_current_development">Dezvoltare curentă</string>
     <string name="credits_prior_development">Dezvoltare anterioară</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manager</string>
+    <string name="about_update_available">Există actualizări disponibile: %s</string>
+    <string name="about_up_to_date">La zi</string>
+    <string name="about_links">Link-uri oficiale</string>
+    <string name="about_link_donate">Donează</string>
+    <string name="about_link_website">Site web</string>
+    <string name="about_link_translations">Traduceri</string>
+    <string name="contributors">Contribuitori</string>
+    <string name="contributors_description">Ultimele 12 luni</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Susținători</string>
+    <string name="supporters_description">Susținători pe Open Collective</string>
+    <string name="supporters_become">Devino un susținător</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Și încă %s</string>
+    <string name="people_unavailable">Lista nu a putut fi încărcată</string>
     <string name="opensource_licenses">Licențe open-source</string>
     <string name="opensource_licenses_description">Bibliotecile pe care se bazează Morphe</string>
     <string name="opensource_licenses_search">Căutare în biblioteci și licențe</string>
@@ -1415,6 +1435,8 @@ Detalii: %2$s"</string>
     <string name="include">Include</string>
     <string name="disable">Dezactivează</string>
     <string name="enable">Activează</string>
+    <string name="enable_all">Activați tot</string>
+    <string name="disable_all">Dezactivează tot</string>
     <string name="trust">Încredere</string>
     <string name="loading">Se încarcă…</string>
     <string name="creating">Se creează…</string>

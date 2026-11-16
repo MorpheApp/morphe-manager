@@ -346,8 +346,6 @@ Vælg, hvor dens APK skal hentes fra"</string>
     <string name="home_external_apk_expert_mode_required">Denne funktion er kun tilgængelig i Eksperttilstand</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Søg patches</string>
-    <string name="expert_mode_disable_all">Deaktiver alle</string>
-    <string name="expert_mode_enable_all">Aktiver alle</string>
     <string name="expert_mode_enable_all_universal_pending">Tryk igen for universelle patches</string>
     <string name="expert_mode_universal_all_warning_title">Aktivér alle universelle patcher?</string>
     <string name="expert_mode_universal_all_warning_message">Universelle patcher er ikke testet sammen. Aktivering af alle på én gang kan forårsage konflikter, mislykket patchning eller nedbrud</string>
@@ -567,9 +565,12 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="app_links_unverified_banner_description">Understøttede weblinks åbnes i øjeblikket i din browser i stedet for denne app</string>
     <string name="app_links_enable_auto">Aktivér automatisk</string>
     <string name="app_links_enable_auto_in_progress">Aktiverer links…</string>
+    <string name="app_links_disable_all_in_progress">Deaktiverer links…</string>
     <string name="app_links_open_settings">Åbn linkindstillinger</string>
     <string name="app_links_repair_success">App-links blev aktiveret med succes</string>
     <string name="app_links_repair_failed">Kunne ikke aktivere app-links automatisk</string>
+    <string name="app_links_disable_success">App-links deaktiveret</string>
+    <string name="app_links_disable_failed">Kunne ikke deaktivere app-links</string>
     <string name="app_links_change_failed">Kunne ikke ændre app-links</string>
     <string name="app_links_all_verified">Alle understøttede links er konfigureret til at åbne i denne app</string>
     <string name="app_links_fix">Reparer links</string>
@@ -628,8 +629,6 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="patcher_field_value_stripped">strippet</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">beholdt</string>
-    <string name="patcher_tab_logs">Patch-logfiler</string>
-    <string name="patcher_tab_game">Spil</string>
     <string name="patcher_logs_waiting">Venter på logoutput…</string>
     <string name="patcher_logs_lost">Logoutput gemmes ikke mellem genstarter af appen</string>
     <string name="patcher_long_step_warning">Dette trin kan tage et stykke tid. Vent venligst...</string>
@@ -659,7 +658,6 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patcher_install_error_subtitle">Prøv at afinstallere og installere igen</string>
     <string name="patcher_ready_to_mount_subtitle">Tryk på knappen nedenfor for at montere</string>
     <string name="patcher_patches_excluded_for_installer">Ikke tilgængelig for denne installationsmetode og udeladt: %s</string>
-    <string name="patcher_back_to_game_hint">Tryk på %1$s for at gå tilbage til dit spil</string>
     <string name="patcher_storage_permission_dialog_title">Kan ikke tilgå lagringssti</string>
     <string name="patcher_incompatible_patcher_title">Opdatering påkrævet</string>
     <string name="patcher_incompatible_patcher_description">Kilden &lt;b&gt;%1$s&lt;/b&gt; kræver patcher &lt;b&gt;%2$s&lt;/b&gt; eller nyere. Opdater Morphe for at bruge den</string>
@@ -764,7 +762,9 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="package_name">Pakkenavn</string>
     <string name="failed_to_mount">Kunne ikke montere: %s</string>
     <string name="failed_to_unmount">Kunne ikke afmontere: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minispil</string>
+    <string name="mini_games_description">Hurtige spil til at få tiden til at gå</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Bedste %s</string>
     <string name="mini_game_new_record">Ny rekord!</string>
@@ -773,7 +773,14 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="mini_game_paused">Pauset</string>
     <string name="mini_game_resume">Fortsæt</string>
     <string name="mini_game_restart">Start forfra</string>
-    <string name="mini_game_change">Vælg et andet spil</string>
+    <string name="mini_game_pause">Pause</string>
+    <string name="mini_game_score_label">Score</string>
+    <string name="mini_game_best_label">Bedst</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Niveau</string>
+    <string name="mini_game_lines">Linjer</string>
+    <string name="mini_game_lives">Liv</string>
+    <string name="mini_game_flags">Flag</string>
     <string name="mini_game_2048_picker_subtitle">Skub fliser for at sammenlægge</string>
     <string name="mini_game_flappy_picker_subtitle">Tryk for at flyve gennem rør</string>
     <string name="mini_game_flappy_tap_to_start">Tryk for at flyve</string>
@@ -1339,13 +1346,26 @@ Detaljer: %2$s"</string>
     <string name="file_picker_new_folder_failed">Kunne ikke oprette mappen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
-    <string name="settings_system_manager_description">Et open source-projekt til moderne, strømlinet patching af populære Android-apps, drevet af community-feedback og -bidrag</string>
-    <string name="credits">Credits</string>
-    <string name="credits_description">Menneskene bag Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Hjælp</string>
-    <string name="credits_current_development">Nuværende udvikling</string>
     <string name="credits_prior_development">Tidligere udvikling</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Administrator</string>
+    <string name="about_update_available">Opdatering tilgængelig: %s</string>
+    <string name="about_up_to_date">Opdateret</string>
+    <string name="about_links">Officielle links</string>
+    <string name="about_link_donate">Donér</string>
+    <string name="about_link_website">Hjemmeside</string>
+    <string name="about_link_translations">Oversættelser</string>
+    <string name="contributors">Bidragsydere</string>
+    <string name="contributors_description">Sidste 12 måneder</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Støtter</string>
+    <string name="supporters_description">Backere på Open Collective</string>
+    <string name="supporters_become">Bliv støtte</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Og %s flere</string>
+    <string name="people_unavailable">Kunne ikke indlæse listen</string>
     <string name="opensource_licenses">Open-source licenser</string>
     <string name="opensource_licenses_description">De biblioteker, Morphe er bygget på</string>
     <string name="opensource_licenses_search">Søg efter biblioteker og licenser</string>
@@ -1415,6 +1435,8 @@ Detaljer: %2$s"</string>
     <string name="include">Inkluder</string>
     <string name="disable">Deaktivér</string>
     <string name="enable">Aktiver</string>
+    <string name="enable_all">Aktiver alle</string>
+    <string name="disable_all">Deaktivér alle</string>
     <string name="trust">Stol på</string>
     <string name="loading">Indlæser…</string>
     <string name="creating">Opretter…</string>

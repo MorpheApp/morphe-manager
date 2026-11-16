@@ -346,8 +346,6 @@ Wähle aus, woher die APK bezogen werden soll"</string>
     <string name="home_external_apk_expert_mode_required">Diese Funktion ist nur im Expertenmodus verfügbar</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Suche nach Patches</string>
-    <string name="expert_mode_disable_all">Alle deaktivieren</string>
-    <string name="expert_mode_enable_all">Alle aktivieren</string>
     <string name="expert_mode_enable_all_universal_pending">Erneut tippen für universelle Patches</string>
     <string name="expert_mode_universal_all_warning_title">Alle universellen Patches aktivieren?</string>
     <string name="expert_mode_universal_all_warning_message">Universelle Patches werden nicht gemeinsam getestet. Wenn sie alle auf einmal aktiviert werden, kann dies zu Konflikten, fehlgeschlagenen Patches oder Abstürzen führen.</string>
@@ -567,9 +565,12 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="app_links_unverified_banner_description">Unterstützte Weblinks werden derzeit in deinem Browser geöffnet, anstatt in dieser App</string>
     <string name="app_links_enable_auto">Automatisch aktivieren</string>
     <string name="app_links_enable_auto_in_progress">Links werden aktiviert…</string>
+    <string name="app_links_disable_all_in_progress">Links werden deaktiviert…</string>
     <string name="app_links_open_settings">Link-Einstellungen öffnen</string>
     <string name="app_links_repair_success">App-Links erfolgreich aktiviert</string>
     <string name="app_links_repair_failed">Automatisches Aktivieren von App-Links fehlgeschlagen</string>
+    <string name="app_links_disable_success">App-Links deaktiviert</string>
+    <string name="app_links_disable_failed">App-Links konnten nicht deaktiviert werden</string>
     <string name="app_links_change_failed">App-Links konnten nicht geändert werden</string>
     <string name="app_links_all_verified">Alle unterstützten Links sind so konfiguriert, dass sie in dieser App geöffnet werden</string>
     <string name="app_links_fix">Links reparieren</string>
@@ -628,8 +629,6 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="patcher_field_value_stripped">entfernt</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behalten</string>
-    <string name="patcher_tab_logs">Patcher-Protokolle</string>
-    <string name="patcher_tab_game">Spiele</string>
     <string name="patcher_logs_waiting">Warte auf die Log-Ausgabe…</string>
     <string name="patcher_logs_lost">Die Log-Ausgabe wird zwischen App-Neustarts nicht gespeichert</string>
     <string name="patcher_long_step_warning">Dieser Schritt kann eine Weile dauern. Bitte warten…</string>
@@ -660,7 +659,6 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="patcher_install_error_subtitle">Versuche, die App zu entfernen und erneut zu installieren</string>
     <string name="patcher_ready_to_mount_subtitle">Drücke die Schaltfläche unten zum Mounten</string>
     <string name="patcher_patches_excluded_for_installer">Nicht verfügbar für diese Installationsmethode und ausgeschlossen: %s</string>
-    <string name="patcher_back_to_game_hint">Tippe auf %1$s, um zu deinem Spiel zurückzukehren</string>
     <string name="patcher_storage_permission_dialog_title">Auf den Speicherpfad kann nicht zugegriffen werden</string>
     <string name="patcher_incompatible_patcher_title">Update erforderlich</string>
     <string name="patcher_incompatible_patcher_description">Die Quelle &lt;b&gt;%1$s&lt;/b&gt; erfordert Patcher &lt;b&gt;%2$s&lt;/b&gt; oder neuer. Aktualisiere Morphe, um sie zu verwenden</string>
@@ -765,7 +763,9 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="package_name">Paketname</string>
     <string name="failed_to_mount">Mounten fehlgeschlagen: %s</string>
     <string name="failed_to_unmount">Unmounten fehlgeschlagen: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-Spiele</string>
+    <string name="mini_games_description">Schnelle Spiele, um eine freie Minute zu überbrücken</string>
     <string name="mini_game_score">Punktzahl %s</string>
     <string name="mini_game_best">Beste(r) %s</string>
     <string name="mini_game_new_record">Neuer Rekord!</string>
@@ -774,7 +774,14 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="mini_game_paused">Pausiert</string>
     <string name="mini_game_resume">Weiter</string>
     <string name="mini_game_restart">Neu starten</string>
-    <string name="mini_game_change">Ein anderes Spiel wählen</string>
+    <string name="mini_game_pause">Pause</string>
+    <string name="mini_game_score_label">Punktzahl</string>
+    <string name="mini_game_best_label">Bestwert</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Level</string>
+    <string name="mini_game_lines">Linien</string>
+    <string name="mini_game_lives">Leben</string>
+    <string name="mini_game_flags">Flaggen</string>
     <string name="mini_game_2048_picker_subtitle">Schieben Sie die Kacheln, um sie zu verbinden</string>
     <string name="mini_game_flappy_picker_subtitle">Tippen, um durch Rohre zu fliegen</string>
     <string name="mini_game_flappy_tap_to_start">Tippen zum Fliegen</string>
@@ -1340,13 +1347,26 @@ Details: %2$s"</string>
     <string name="file_picker_new_folder_failed">Ordner konnte nicht erstellt werden</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Über</string>
-    <string name="settings_system_manager_description">Ein Open-Source-Projekt für modernes, optimiertes Patchen beliebter Android-Apps, das von Community-Feedback und -beiträgen angetrieben wird</string>
-    <string name="credits">Credits</string>
-    <string name="credits_description">Die Menschen hinter Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Hilfe</string>
-    <string name="credits_current_development">Aktuelle Entwicklung</string>
     <string name="credits_prior_development">Frühere Entwicklung</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manager</string>
+    <string name="about_update_available">Update verfügbar: %s</string>
+    <string name="about_up_to_date">Aktuell</string>
+    <string name="about_links">Offizielle Links</string>
+    <string name="about_link_donate">Spenden</string>
+    <string name="about_link_website">Website</string>
+    <string name="about_link_translations">Übersetzungen</string>
+    <string name="contributors">Mitwirkende</string>
+    <string name="contributors_description">Letzte 12 Monate</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Unterstützer</string>
+    <string name="supporters_description">Unterstützer auf Open Collective</string>
+    <string name="supporters_become">Unterstützer werden</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Und %s weitere</string>
+    <string name="people_unavailable">Liste konnte nicht geladen werden</string>
     <string name="opensource_licenses">Open-Source-Lizenzen</string>
     <string name="opensource_licenses_description">Die Bibliotheken, auf denen Morphe aufbaut</string>
     <string name="opensource_licenses_search">Bibliotheken und Lizenzen suchen</string>
@@ -1416,6 +1436,8 @@ Details: %2$s"</string>
     <string name="include">Einschließen</string>
     <string name="disable">Deaktivieren</string>
     <string name="enable">Aktivieren</string>
+    <string name="enable_all">Alle aktivieren</string>
+    <string name="disable_all">Alle deaktivieren</string>
     <string name="trust">Vertrauen</string>
     <string name="loading">Lädt…</string>
     <string name="creating">Wird erstellt…</string>

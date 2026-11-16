@@ -346,8 +346,6 @@ Izberite,  iz kje izbrati APK"</string>
     <string name="home_external_apk_expert_mode_required">Ta funkcija je na voljo samo v strokovnem načinu</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Išči popravke</string>
-    <string name="expert_mode_disable_all">Onemogoči vse</string>
-    <string name="expert_mode_enable_all">Omogoči vse</string>
     <string name="expert_mode_enable_all_universal_pending">Ponovno se dotaknite za univerzalne popravke.</string>
     <string name="expert_mode_universal_all_warning_title">Omogoči vse univerzalne popravke?</string>
     <string name="expert_mode_universal_all_warning_message">Univerzalni popravki niso testirani skupaj. Omogočanje vseh hkrati lahko povzroči konflikte, neuspešno popravljanje ali sesutje.</string>
@@ -567,9 +565,12 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="app_links_unverified_banner_description">Podprte spletne povezave se trenutno odpirajo v vašem brskalniku namesto v tej aplikaciji</string>
     <string name="app_links_enable_auto">Omogoči samodejno</string>
     <string name="app_links_enable_auto_in_progress">Omogočanje povezav…</string>
+    <string name="app_links_disable_all_in_progress">Onemogočanje povezav…</string>
     <string name="app_links_open_settings">Odpri nastavitve povezav</string>
     <string name="app_links_repair_success">Povezave aplikacij so uspešno omogočene</string>
     <string name="app_links_repair_failed">Ni uspelo samodejno omogočiti povezav aplikacij</string>
+    <string name="app_links_disable_success">Povezave aplikacije so onemogočene</string>
+    <string name="app_links_disable_failed">Onemogočanje povezav aplikacije je spodletelo</string>
     <string name="app_links_change_failed">Ni uspelo spremeniti povezav aplikacije</string>
     <string name="app_links_all_verified">Vse podprte povezave so nastavljene tako, da se odpirajo v tej aplikaciji</string>
     <string name="app_links_fix">Popravite povezave</string>
@@ -628,8 +629,6 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="patcher_field_value_stripped">odstranjene</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">ohranjene</string>
-    <string name="patcher_tab_logs">Dnevniki popravkov</string>
-    <string name="patcher_tab_game">Igre</string>
     <string name="patcher_logs_waiting">Čakam na izpis dnevnika…</string>
     <string name="patcher_logs_lost">Izpis dnevnika ni shranjen ob ponovnem zagonu aplikacije.</string>
     <string name="patcher_long_step_warning">Ta korak lahko traja nekaj časa. Prosim, počakajte…</string>
@@ -659,7 +658,6 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patcher_install_error_subtitle">Poskusite aplikacijo ponovno odstraniti in namestiti</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite gumb spodaj za montažo</string>
     <string name="patcher_patches_excluded_for_installer">Ni na voljo za to metodo namestitve in je izključeno: %s</string>
-    <string name="patcher_back_to_game_hint">Dotaknite se %1$s, da se vrnete v svojo igro.</string>
     <string name="patcher_storage_permission_dialog_title">Dostopa do poti shrambe ni možen</string>
     <string name="patcher_incompatible_patcher_title">Posodobitev je zahtevana</string>
     <string name="patcher_incompatible_patcher_description">Vir &lt;b&gt;%1$s&lt;/b&gt; zahteva orodje za popravljanje &lt;b&gt;%2$s&lt;/b&gt; ali novejše. Posodobite Morphe, da ga boste lahko uporabili</string>
@@ -764,7 +762,9 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="package_name">Ime paketa</string>
     <string name="failed_to_mount">Montiranje ni uspelo: %s</string>
     <string name="failed_to_unmount">Demontiranje ni uspelo: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-igre</string>
+    <string name="mini_games_description">Hitre igre za krajšanje prostega časa</string>
     <string name="mini_game_score">Rezultat %s</string>
     <string name="mini_game_best">Najboljši %s</string>
     <string name="mini_game_new_record">Nov rekord!</string>
@@ -773,7 +773,14 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="mini_game_paused">Pavza</string>
     <string name="mini_game_resume">Nadaljuj</string>
     <string name="mini_game_restart">Začni znova</string>
-    <string name="mini_game_change">Izberi drugo igro</string>
+    <string name="mini_game_pause">Konec</string>
+    <string name="mini_game_score_label">Rezultat</string>
+    <string name="mini_game_best_label">Najboljši</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Stopnja</string>
+    <string name="mini_game_lines">Vrstice</string>
+    <string name="mini_game_lives">Življenja</string>
+    <string name="mini_game_flags">Zastavice</string>
     <string name="mini_game_2048_picker_subtitle">Združite ploščice, da pridete do čim višje številke</string>
     <string name="mini_game_flappy_picker_subtitle">Tapkajte in poletite skozi cevi</string>
     <string name="mini_game_flappy_tap_to_start">Tapnite za polet</string>
@@ -1339,13 +1346,26 @@ Podrobnosti: %2$s"</string>
     <string name="file_picker_new_folder_failed">Mapke ni bilo mogoče ustvariti</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O aplikaciji</string>
-    <string name="settings_system_manager_description">Odprtokodni projekt za sodobno in prilagodljivo popravljanje priljubljenih aplikacij za Android, ki ga gonijo povratne informacije in prispevki skupnosti</string>
-    <string name="credits">Zasluge</string>
-    <string name="credits_description">Ljudje za Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Pomoč</string>
-    <string name="credits_current_development">Trenuten razvoj</string>
     <string name="credits_prior_development">Dosedanji razvoj</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Upravitelj</string>
+    <string name="about_update_available">Na voljo je posodobitev: %s</string>
+    <string name="about_up_to_date">Posodobljeno</string>
+    <string name="about_links">Uradne povezave</string>
+    <string name="about_link_donate">Doniraj</string>
+    <string name="about_link_website">Spletna stran</string>
+    <string name="about_link_translations">Prevajanje</string>
+    <string name="contributors">Prispevalci</string>
+    <string name="contributors_description">Zadnjih 12 mesecev</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Podporniki</string>
+    <string name="supporters_description">Podporniki na Open Collective</string>
+    <string name="supporters_become">Postani podpornik</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">In še %s</string>
+    <string name="people_unavailable">Seznama ni bilo mogoče naložiti</string>
     <string name="opensource_licenses">Odprtokodne licence</string>
     <string name="opensource_licenses_description">Knjižnice, na katerih je zgrajeno Morphe</string>
     <string name="opensource_licenses_search">Išči knjižnice in licence</string>
@@ -1415,6 +1435,8 @@ Podrobnosti: %2$s"</string>
     <string name="include">Vključi</string>
     <string name="disable">Onemogoči</string>
     <string name="enable">Omogoči</string>
+    <string name="enable_all">Omogoči vse</string>
+    <string name="disable_all">Onemogoči vse</string>
     <string name="trust">Zaupanje</string>
     <string name="loading">Nalaganje…</string>
     <string name="creating">Ustvarjam…</string>

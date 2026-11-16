@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">Ця функція доступна лише в режимі Експерта</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Пошук патчів</string>
-    <string name="expert_mode_disable_all">Вимкнути всі</string>
-    <string name="expert_mode_enable_all">Увімкнути всі</string>
     <string name="expert_mode_enable_all_universal_pending">Натисніть ще раз для універсальних патчів</string>
     <string name="expert_mode_universal_all_warning_title">Увімкнути всі універсальні патчі?</string>
     <string name="expert_mode_universal_all_warning_message">Універсальні патчі не тестуються разом. Увімкнення всіх одночасно може спричинити конфлікти, невдалий патчинг або збої</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">Підтримувані вебпосилання наразі відкриваються у браузері замість цього застосунку</string>
     <string name="app_links_enable_auto">Увімкнути автоматично</string>
     <string name="app_links_enable_auto_in_progress">Увімкнення посилань…</string>
+    <string name="app_links_disable_all_in_progress">Вимкнення посилань…</string>
     <string name="app_links_open_settings">Відкрити налаштування посилань</string>
     <string name="app_links_repair_success">Посилання застосунку успішно увімкнено</string>
     <string name="app_links_repair_failed">Не вдалося автоматично увімкнути посилання застосунку</string>
+    <string name="app_links_disable_success">Посилання застосунку вимкнено</string>
+    <string name="app_links_disable_failed">Не вдалося вимкнути посилання застосунку</string>
     <string name="app_links_change_failed">Не вдалося змінити посилання застосунку</string>
     <string name="app_links_all_verified">Усі підтримувані посилання налаштовано на відкриття в цьому застосунку</string>
     <string name="app_links_fix">Виправити посилання</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">видалено</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">збережено</string>
-    <string name="patcher_tab_logs">Журнали патчера</string>
-    <string name="patcher_tab_game">Ігри</string>
     <string name="patcher_logs_waiting">Очікування виводу журналу…</string>
     <string name="patcher_logs_lost">Вивід журналу не зберігається після перезапуску застосунку</string>
     <string name="patcher_long_step_warning">Цей крок може тривати деякий час. Будь ласка, зачекайте…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">Спробуйте видалити та встановити знову</string>
     <string name="patcher_ready_to_mount_subtitle">Натисніть кнопку нижче, щоб монтувати</string>
     <string name="patcher_patches_excluded_for_installer">Недоступно для цього методу встановлення і виключено: %s</string>
-    <string name="patcher_back_to_game_hint">Натисніть %1$s, щоб повернутися до гри</string>
     <string name="patcher_storage_permission_dialog_title">Не вдається отримати доступ до шляху зберігання</string>
     <string name="patcher_incompatible_patcher_title">Потрібне оновлення</string>
     <string name="patcher_incompatible_patcher_description">Джерело &lt;b&gt;%1$s&lt;/b&gt; вимагає патчер &lt;b&gt;%2$s&lt;/b&gt; або новіший. Оновіть Morphe, щоб використовувати його</string>
@@ -764,7 +762,9 @@
     <string name="package_name">Назва пакета</string>
     <string name="failed_to_mount">Не вдалося змонтувати: %s</string>
     <string name="failed_to_unmount">Не вдалося демонтувати: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Міні-ігри</string>
+    <string name="mini_games_description">Швидкі ігри, щоб скоротити вільну хвилину</string>
     <string name="mini_game_score">Рахунок %s</string>
     <string name="mini_game_best">Найкращий %s</string>
     <string name="mini_game_new_record">Новий рекорд!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">Призупинено</string>
     <string name="mini_game_resume">Продовжити</string>
     <string name="mini_game_restart">Почати спочатку</string>
-    <string name="mini_game_change">Виберіть іншу гру</string>
+    <string name="mini_game_pause">Пауза</string>
+    <string name="mini_game_score_label">Рахунок</string>
+    <string name="mini_game_best_label">Рекорд</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Рівень</string>
+    <string name="mini_game_lines">Лінії</string>
+    <string name="mini_game_lives">Життя</string>
+    <string name="mini_game_flags">Прапорці</string>
     <string name="mini_game_2048_picker_subtitle">Зсувайте плитки, щоб об’єднати їх</string>
     <string name="mini_game_flappy_picker_subtitle">Натискайте, щоб пролетіти крізь труби</string>
     <string name="mini_game_flappy_tap_to_start">Натисніть, щоб полетіти</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Не вдалося створити теку</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Про нас</string>
-    <string name="settings_system_manager_description">Проєкт із відкритим кодом для сучасного, спрощеного патчингу популярних Android-застосунків, що розвивається завдяки відгукам та внескам спільноти</string>
-    <string name="credits">Подяки</string>
-    <string name="credits_description">Люди, які створюють Morphe</string>
     <string name="settings_about_section_project">Проєкт</string>
     <string name="settings_about_section_help">Допомога</string>
-    <string name="credits_current_development">Поточна розробка</string>
     <string name="credits_prior_development">Попередня розробка</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Менеджер</string>
+    <string name="about_update_available">Доступне оновлення: %s</string>
+    <string name="about_up_to_date">Актуальна версія</string>
+    <string name="about_links">Офіційні посилання</string>
+    <string name="about_link_donate">Підтримати</string>
+    <string name="about_link_website">Вебсайт</string>
+    <string name="about_link_translations">Переклади</string>
+    <string name="contributors">Учасники</string>
+    <string name="contributors_description">Останні 12 місяців</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Підтримувачі</string>
+    <string name="supporters_description">Спонсори в Open Collective</string>
+    <string name="supporters_become">Стати підтримувачем</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">І ще %s</string>
+    <string name="people_unavailable">Не вдалося завантажити список</string>
     <string name="opensource_licenses">Ліцензії відкритого коду</string>
     <string name="opensource_licenses_description">Бібліотеки, на яких побудовано Morphe</string>
     <string name="opensource_licenses_search">Пошук бібліотек і ліцензій</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">Включити</string>
     <string name="disable">Вимкнути</string>
     <string name="enable">Увімкнути</string>
+    <string name="enable_all">Увімкнути всі</string>
+    <string name="disable_all">Вимкнути всі</string>
     <string name="trust">Довіряти</string>
     <string name="loading">Завантаження…</string>
     <string name="creating">Створення…</string>

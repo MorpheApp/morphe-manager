@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">Бұл мүмкіндік тек Сарапшы режимінде қолжетімді</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Патчтарды іздеу</string>
-    <string name="expert_mode_disable_all">Барлығын өшіру</string>
-    <string name="expert_mode_enable_all">Бәрін қосу</string>
     <string name="expert_mode_enable_all_universal_pending">Универсал патчтар үшін қайта басыңыз</string>
     <string name="expert_mode_universal_all_warning_title">Барлық әмбебап патчтарды қосу керек пе?</string>
     <string name="expert_mode_universal_all_warning_message">Универсалды патчтар бірге тестіленбеген. Барлығын бірден қосу қақтығыстарға, патчтаудың сәтсіз болуына немесе қосымшаның жабылуына әкелуі мүмкін</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">Қолдау көрсетілетін веб-сілтемелер қазіргі уақытта осы қолданбаның орнына браузерде ашылады</string>
     <string name="app_links_enable_auto">Автоматты түрде қосу</string>
     <string name="app_links_enable_auto_in_progress">Сілтемелер қосылуда…</string>
+    <string name="app_links_disable_all_in_progress">Сілтемелер өшірілуде…</string>
     <string name="app_links_open_settings">Сілтеме параметрлерін ашу</string>
     <string name="app_links_repair_success">Қолданба сілтемелері сәтті қосылды</string>
     <string name="app_links_repair_failed">Қолданба сілтемелерін автоматты түрде қосу сәтсіз аяқталды</string>
+    <string name="app_links_disable_success">Қолданба сілтемелері өшірілді</string>
+    <string name="app_links_disable_failed">Қолданба сілтемелерін өшіру сәтсіз аяқталды</string>
     <string name="app_links_change_failed">Қолданба сілтемелерін өзгерту сәтсіз аяқталды</string>
     <string name="app_links_all_verified">Барлық қолдау көрсетілетін сілтемелер осы қолданбада ашуға бапталған</string>
     <string name="app_links_fix">Сілтемелерді түзету</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">алынған</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">сақталған</string>
-    <string name="patcher_tab_logs">Патчер логтары</string>
-    <string name="patcher_tab_game">Ойындар</string>
     <string name="patcher_logs_waiting">Лог шығысын күту...</string>
     <string name="patcher_logs_lost">Қолданба қайта іске қосылғанда лог шығысы сақталмайды</string>
     <string name="patcher_long_step_warning">Бұл қадам біраз уақыт алуы мүмкін. Күте тұрыңыз…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">Жойып, қайта орнатып көріңіз</string>
     <string name="patcher_ready_to_mount_subtitle">Монтаждау үшін төмендегі батырманы басыңыз</string>
     <string name="patcher_patches_excluded_for_installer">Осы орнату әдісі үшін қолжетімді емес және алып тасталды: %s</string>
-    <string name="patcher_back_to_game_hint">Ойынға қайту үшін %1$s басыңыз</string>
     <string name="patcher_storage_permission_dialog_title">Сақтау жолына қол жеткізу мүмкін емес</string>
     <string name="patcher_incompatible_patcher_title">Жаңарту қажет</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; дереккөзі &lt;b&gt;%2$s&lt;/b&gt; патчерін немесе одан жаңасын талап етеді. Оны пайдалану үшін Morphe-ді жаңартыңыз</string>
@@ -764,7 +762,9 @@
     <string name="package_name">Пакет атауы</string>
     <string name="failed_to_mount">Монталау сәтсіз аяқталды: %s</string>
     <string name="failed_to_unmount">Демонталау сәтсіз аяқталды: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Шағын ойындар</string>
+    <string name="mini_games_description">Бос уақытта ойнауға арналған жылдам ойындар</string>
     <string name="mini_game_score">Ұпай %s</string>
     <string name="mini_game_best">Ең жақсы %s</string>
     <string name="mini_game_new_record">Жаңа рекорд!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">Тоқтатылды</string>
     <string name="mini_game_resume">Жалғастыру</string>
     <string name="mini_game_restart">Басынан бастау</string>
-    <string name="mini_game_change">Басқа ойынды таңдаңыз</string>
+    <string name="mini_game_pause">Кідірту</string>
+    <string name="mini_game_score_label">Ұпай</string>
+    <string name="mini_game_best_label">Ең жақсы</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Деңгей</string>
+    <string name="mini_game_lines">Жолдар</string>
+    <string name="mini_game_lives">Өмірлер</string>
+    <string name="mini_game_flags">Желгілер</string>
     <string name="mini_game_2048_picker_subtitle">Біріктіру үшін плиткаларды жылжытыңыз</string>
     <string name="mini_game_flappy_picker_subtitle">Трубалар арасымен ұшу үшін түртіңіз</string>
     <string name="mini_game_flappy_tap_to_start">Ұшу үшін түртіңіз</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Папканы жасау мүмкін болмады</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Туралы</string>
-    <string name="settings_system_manager_description">Қоғамдылық кері байланысы мен үлестері негізінде жұмыс істейтін, танымал Android қолданбаларын заманауи, оңтайландырылған патчтеуге арналған ашық бастапқы коды бар жоба</string>
-    <string name="credits">Авторлары</string>
-    <string name="credits_description">Morphe-нің авторы</string>
     <string name="settings_about_section_project">Жоба</string>
     <string name="settings_about_section_help">Көмек</string>
-    <string name="credits_current_development">Ағымдағы әзірлеу</string>
     <string name="credits_prior_development">Алдыңғы әзірлеу</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Менеджер</string>
+    <string name="about_update_available">Жаңарту қолжетімді: %s</string>
+    <string name="about_up_to_date">Соңғы нұсқасы орнатылған</string>
+    <string name="about_links">Ресми сілтемелер</string>
+    <string name="about_link_donate">Қайырымдылық жасау</string>
+    <string name="about_link_website">Веб-сайт</string>
+    <string name="about_link_translations">Аудармалар</string>
+    <string name="contributors">Үлес қосқандар</string>
+    <string name="contributors_description">Соңғы 12 ай</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Қолдаушылар</string>
+    <string name="supporters_description">Open Collective платформасындағы қолдаушылар</string>
+    <string name="supporters_become">Қолдаушы болу</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Және тағы %s адам</string>
+    <string name="people_unavailable">Тізімді жүктеу мүмкін болмады</string>
     <string name="opensource_licenses">Ашық бастапқы кодтық лицензиялар</string>
     <string name="opensource_licenses_description">Morphe құрылған кітапханалар</string>
     <string name="opensource_licenses_search">Кітапханалар мен лицензияларды іздеу</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">Қосу</string>
     <string name="disable">Өшіру</string>
     <string name="enable">Қосу</string>
+    <string name="enable_all">Барлығын қосу</string>
+    <string name="disable_all">Бәрін өшіру</string>
     <string name="trust">Сенім білдіру</string>
     <string name="loading">Жүктелуде…</string>
     <string name="creating">Жасалуда…</string>

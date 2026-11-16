@@ -346,8 +346,6 @@ Chagua mahali pa kuchukulia APK yake"</string>
     <string name="home_external_apk_expert_mode_required">Kipengele hiki kinapatikana tu katika modi ya Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Tafuta viraka</string>
-    <string name="expert_mode_disable_all">Zima zote</string>
-    <string name="expert_mode_enable_all">Washa zote</string>
     <string name="expert_mode_enable_all_universal_pending">Gusa tena kwa ajili ya marekebisho ya ulimwengu</string>
     <string name="expert_mode_universal_all_warning_title">Washa viraka vyote vya ulimwengu?</string>
     <string name="expert_mode_universal_all_warning_message">Viraka vya ulimwengu havijajaribiwa pamoja. Kuwashwa kwa vyote kwa wakati mmoja kunaweza kusababisha migongano, kushindwa kwa viraka, au programu kufungwa ghafla</string>
@@ -567,9 +565,12 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="app_links_unverified_banner_description">Viungo vya wavuti vinavyokubalika hivi sasa hufunguka kwenye kivinjari chako badala ya programu hii</string>
     <string name="app_links_enable_auto">Washa kiotomatiki</string>
     <string name="app_links_enable_auto_in_progress">Inawasha viungo…</string>
+    <string name="app_links_disable_all_in_progress">Inazima viungo…</string>
     <string name="app_links_open_settings">Fungua mipangilio ya kiungo</string>
     <string name="app_links_repair_success">Viungo vya programu vimewashwa kwa mafanikio</string>
     <string name="app_links_repair_failed">Imeshindwa kuwasha viungo vya programu kiotomatiki</string>
+    <string name="app_links_disable_success">Viungo vya programu vimezimwa</string>
+    <string name="app_links_disable_failed">Imeshindwa kuzima viungo vya programu</string>
     <string name="app_links_change_failed">Imeshindwa kubadilisha viunganishi vya programu</string>
     <string name="app_links_all_verified">Viungo vyote vinavyokubalika vimepangwa kufunguka katika programu hii</string>
     <string name="app_links_fix">Rekebisha viungo</string>
@@ -628,8 +629,6 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="patcher_field_value_stripped">imeondolewa</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">imehifadhiwa</string>
-    <string name="patcher_tab_logs">Kumbukumbu za Patcher</string>
-    <string name="patcher_tab_game">Michezo</string>
     <string name="patcher_logs_waiting">Inasubiri matokeo ya log…</string>
     <string name="patcher_logs_lost">Matokeo ya log hayahifadhiwi baada ya kuanzisha programu upya</string>
     <string name="patcher_long_step_warning">Hatua hii inaweza kuchukua muda. Tafadhali subiri…</string>
@@ -659,7 +658,6 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <string name="patcher_install_error_subtitle">Jaribu kuondoa na kusakinisha tena</string>
     <string name="patcher_ready_to_mount_subtitle">Bonyeza kitufe hapa chini ili kuunganisha</string>
     <string name="patcher_patches_excluded_for_installer">Haikupatikana kwa njia hii ya usakinishaji na imetengwa: %s</string>
-    <string name="patcher_back_to_game_hint">Gusa %1$s ili kurudi kwenye mchezo wako</string>
     <string name="patcher_storage_permission_dialog_title">Huwezi kufikia njia ya hifadhi</string>
     <string name="patcher_incompatible_patcher_title">Sasisho linahitajika</string>
     <string name="patcher_incompatible_patcher_description">Chanzo &lt;b&gt;%1$s&lt;/b&gt; kinahitaji patcher &lt;b&gt;%2$s&lt;/b&gt; au mpya zaidi. Sasisha Morphe ili kukitumia</string>
@@ -764,7 +762,9 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <string name="package_name">Jina la kifurushi</string>
     <string name="failed_to_mount">Imeshindwa kuweka: %s</string>
     <string name="failed_to_unmount">Imeshindwa kuondoa: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Michezo midogo</string>
+    <string name="mini_games_description">Michezo ya haraka ya kupitisha dakika chache</string>
     <string name="mini_game_score">Alama %s</string>
     <string name="mini_game_best">Bora %s</string>
     <string name="mini_game_new_record">Rekodi mpya!</string>
@@ -773,7 +773,14 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <string name="mini_game_paused">Imesitishwa</string>
     <string name="mini_game_resume">Endelea</string>
     <string name="mini_game_restart">Anza upya</string>
-    <string name="mini_game_change">Chagua mchezo mwingine</string>
+    <string name="mini_game_pause">Simamisha</string>
+    <string name="mini_game_score_label">Alama</string>
+    <string name="mini_game_best_label">Bora</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Kiwango</string>
+    <string name="mini_game_lines">Mistari</string>
+    <string name="mini_game_lives">Maisha</string>
+    <string name="mini_game_flags">Bendera</string>
     <string name="mini_game_2048_picker_subtitle">Telezesha vigae ili kuunganisha</string>
     <string name="mini_game_flappy_picker_subtitle">Gusa ili kuruka kupitia mabomba</string>
     <string name="mini_game_flappy_tap_to_start">Gusa ili uruke</string>
@@ -1339,13 +1346,26 @@ Maelezo: %2$s"</string>
     <string name="file_picker_new_folder_failed">Hakuwezekana kuunda folda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Kuhusu</string>
-    <string name="settings_system_manager_description">Mradi wa chanzo wazi kwa ajili ya upachaji wa kisasa na uliorahisishwa wa programu maarufu za Android, unaoendeshwa na maoni na michango ya jamii</string>
-    <string name="credits">Shukrani</string>
-    <string name="credits_description">Watu walio nyuma ya Morphe</string>
     <string name="settings_about_section_project">Mradi</string>
     <string name="settings_about_section_help">Msaada</string>
-    <string name="credits_current_development">Uendelezaji wa sasa</string>
     <string name="credits_prior_development">Uendelezaji wa awali</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Meneja</string>
+    <string name="about_update_available">Sasisho linapatikana: %s</string>
+    <string name="about_up_to_date">Imesasishwa</string>
+    <string name="about_links">Viungo rasmi</string>
+    <string name="about_link_donate">Changia</string>
+    <string name="about_link_website">Tovuti</string>
+    <string name="about_link_translations">Tafsiri</string>
+    <string name="contributors">Wachangia</string>
+    <string name="contributors_description">Miezi 12 ya mwisho</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Wafadhili</string>
+    <string name="supporters_description">Wafadhili kwenye Open Collective</string>
+    <string name="supporters_become">Kuwa mfadhili</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Na %s zaidi</string>
+    <string name="people_unavailable">Hakuweza kupakiwa orodha</string>
     <string name="opensource_licenses">Leseni za chanzo cha wazi</string>
     <string name="opensource_licenses_description">Maktaba ambazo Morphe imejengwa nazo</string>
     <string name="opensource_licenses_search">Tafuta maktaba na leseni</string>
@@ -1415,6 +1435,8 @@ Maelezo: %2$s"</string>
     <string name="include">Jumuisha</string>
     <string name="disable">Zima</string>
     <string name="enable">Washa</string>
+    <string name="enable_all">Washa vyote</string>
+    <string name="disable_all">Zima zote</string>
     <string name="trust">Aminia</string>
     <string name="loading">Inapakia…</string>
     <string name="creating">Inaunda…</string>

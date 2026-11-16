@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">ຟີເຈີນີ້ມີໃຫ້ພຽງແຕ່ໃນໂໝດຜູ້ຊ່ຽວຊານ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">ຄົ້ນຫາຊຸດແພດ</string>
-    <string name="expert_mode_disable_all">ປິດທັງໝົດ</string>
-    <string name="expert_mode_enable_all">ເປີດທັງໝົດ</string>
     <string name="expert_mode_enable_all_universal_pending">ແຕະອີກຄັ້ງ ສຳລັບ universal patches</string>
     <string name="expert_mode_universal_all_warning_title">ເປີດໃຊ້ແພັດຊ໌ສາກົນທັງໝົດບໍ?</string>
     <string name="expert_mode_universal_all_warning_message">ແພັດຊ໌ສາກົນບໍ່ໄດ້ຖືກທົດສອບຮ່ວມກັນ. ການເປີດໃຊ້ທັງໝົດພ້ອມກັນອາດເຮັດໃຫ້ເກີດຄວາມຂັດແຍ່ງ, ການແພັດຊ໌ລົ້ມເຫຼວ ຫຼື ແອັບປິດໂຕເອງ</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">ລິ້ງເວັບທີ່ຮອງຮັບໃນປະຈຸບັນຈະເປີດໃນບຣາວເຊີຂອງທ່ານ ແທນທີ່ຈະເປັນແອັບນີ້</string>
     <string name="app_links_enable_auto">ເປີດໃຊ້ງານໂດຍອັດຕະໂນມັດ</string>
     <string name="app_links_enable_auto_in_progress">ກຳລັງເປີດໃຊ້ງານລິ້ງ…</string>
+    <string name="app_links_disable_all_in_progress">ກຳລັງປິດການໃຊ້ງານລິ້ງ…</string>
     <string name="app_links_open_settings">ເປີດການຕັ້ງຄ່າລິ້ງ</string>
     <string name="app_links_repair_success">ເປີດໃຊ້ງານລິ້ງແອັບສຳເລັດແລ້ວ</string>
     <string name="app_links_repair_failed">ບໍ່ສາມາດເປີດໃຊ້ງານລິ້ງແອັບໂດຍອັດຕະໂນມັດໄດ້</string>
+    <string name="app_links_disable_success">ປິດການໃຊ້ງານລິ້ງແອັບແລ້ວ</string>
+    <string name="app_links_disable_failed">ບໍ່ສາມາດປິດການໃຊ້ງານລິ້ງແອັບໄດ້</string>
     <string name="app_links_change_failed">ການປ່ຽນແປງລິ້ງແອັບຫຼົ້ມເຫຼວ</string>
     <string name="app_links_all_verified">ລິ້ງທີ່ຮອງຮັບທັງໝົດຖືກຕັ້ງຄ່າໃຫ້ເປີດໃນແອັບນີ້</string>
     <string name="app_links_fix">ແກ້ໄຂລິ້ງ</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">ຖືກຕັດອອກ</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">ເກັບໄວ້</string>
-    <string name="patcher_tab_logs">ບັນທຶກຕົວແພດ</string>
-    <string name="patcher_tab_game">ເກມ</string>
     <string name="patcher_logs_waiting">ກຳລັງລໍຖ້າຜົນລັດຂອງ log…</string>
     <string name="patcher_logs_lost">ຜົນລັດຂອງ log ຈະບໍ່ຖືກເກັບໄວ້ເມື່ອມີການເລີ່ມຕົ້ນແອັບໃໝ່</string>
     <string name="patcher_long_step_warning">ຂັ້ນຕອນນີ້ອາດໃຊ້ເວລາ. ກະລຸນາລໍຖ້າ…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">ລອງຖອນການຕິດຕັ້ງ ແລ້ວຕິດຕັ້ງໃໝ່</string>
     <string name="patcher_ready_to_mount_subtitle">ກົດປຸ່ມດ້ານລຸ່ມເພື່ອແນບ</string>
     <string name="patcher_patches_excluded_for_installer">ບໍ່ມີໃຫ້ໃຊ້ສຳລັບວິທີການຕິດຕັ້ງນີ້ ແລະ ຖືກຍົກເວັ້ນ: %s</string>
-    <string name="patcher_back_to_game_hint">ແຕະ %1$s ເພື່ອກັບຄືນໄປທີ່ເກມຂອງທ່ານ</string>
     <string name="patcher_storage_permission_dialog_title">ບໍ່ສາມາດເຂົ້າເຖິງເສັ້ນທາງທີ່ຢູ່ໃນການເກັບຂໍ້ມູນ</string>
     <string name="patcher_incompatible_patcher_title">ຕ້ອງອັບເດດ</string>
     <string name="patcher_incompatible_patcher_description">ແຫຼ່ງທີ່ມາ &lt;b&gt;%1$s&lt;/b&gt; ຕ້ອງການ patcher &lt;b&gt;%2$s&lt;/b&gt; ຫຼື ໃໝ່ກວ່າ. ອັບເດດ Morphe ເພື່ອໃຊ້ງານມັນ</string>
@@ -764,7 +762,9 @@
     <string name="package_name">ຊື່ແພັກເກັດ</string>
     <string name="failed_to_mount">ແນບລົ້ມເຫຼວ: %s</string>
     <string name="failed_to_unmount">ຖອດແນບລົ້ມເຫຼວ: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">ເກມນ້ອຍໆ</string>
+    <string name="mini_games_description">ເກມທີ່ຫຼິ້ນໄດ້ໄວໆເພື່ອຜ່ອນຄາຍໃນເວລາຫວ່າງ</string>
     <string name="mini_game_score">ຄະແນນ %s</string>
     <string name="mini_game_best">ດີທີ່ສຸດ %s</string>
     <string name="mini_game_new_record">ສະຖິຕິໃໝ່!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">ຢຸດຊົ່ວຄາວ</string>
     <string name="mini_game_resume">ສືບຕໍ່</string>
     <string name="mini_game_restart">ເລີ່ມຕົ້ນໃໝ່</string>
-    <string name="mini_game_change">ເລືອກເກມອື່ນ</string>
+    <string name="mini_game_pause">ຢຸດຊົ່ວຄາວ</string>
+    <string name="mini_game_score_label">ຄະແນນ</string>
+    <string name="mini_game_best_label">ດີທີ່ສຸດ</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">ລະດັບ</string>
+    <string name="mini_game_lines">ແຖວ</string>
+    <string name="mini_game_lives">ຊີວິດ</string>
+    <string name="mini_game_flags">ທຸງ</string>
     <string name="mini_game_2048_picker_subtitle">ເລື່ອນກະເບື້ອງເພື່ອຮວມ</string>
     <string name="mini_game_flappy_picker_subtitle">ແຕະເພື່ອບິນຜ່ານທໍ່</string>
     <string name="mini_game_flappy_tap_to_start">ແຕະເພື່ອບິນ</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">ບໍ່ສາມາດສ້າງໂຟນເດີໄດ້</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">ກ່ຽວກັບ</string>
-    <string name="settings_system_manager_description">ໂຄງການໂອເພນຊອດສຳລັບການແພດແອັບ Android ຍອດນິຍົມແບບທັນສະໄໝ ແລະກະທັດຮັດ, ຂັບເຄື່ອນໂດຍຄຳຕິຊົມ ແລະການປະກອບສ່ວນຈາກຊຸມຊົນ</string>
-    <string name="credits">ກຽດຕິຄຸນ</string>
-    <string name="credits_description">ບຸກຄົນທີ່ຢູ່ເບື້ອງຫຼັງ Morphe</string>
     <string name="settings_about_section_project">ໂຄງການ</string>
     <string name="settings_about_section_help">ຄວາມຊ່ວຍເຫຼືອ</string>
-    <string name="credits_current_development">ການພັດທະນາປັດຈຸບັນ</string>
     <string name="credits_prior_development">ການພັດທະນາກ່ອນໜ້າ</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">ຜູ້ຈັດການ</string>
+    <string name="about_update_available">ມີການອັບເດດ: %s</string>
+    <string name="about_up_to_date">ເປັນເວີຊັນຫຼ້າສຸດແລ້ວ</string>
+    <string name="about_links">ລິງກ໌ທາງການ</string>
+    <string name="about_link_donate">ບໍລິຈາກ</string>
+    <string name="about_link_website">ເວັບໄຊ</string>
+    <string name="about_link_translations">ການແປພາສາ</string>
+    <string name="contributors">ຜູ້ປະກອບສ່ວນ</string>
+    <string name="contributors_description">12 ເດືອນຜ່ານມາ</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">ຜູ້ສະໜັບສະໜູນ</string>
+    <string name="supporters_description">ຜູ້ສະໜັບສະໜູນໃນ Open Collective</string>
+    <string name="supporters_become">ກາຍເປັນຜູ້ສະໜັບສະໜູນ</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">ແລະ ອີກ %s ຄົນ</string>
+    <string name="people_unavailable">ບໍ່ສາມາດໂຫຼດລາຍຊື່ໄດ້</string>
     <string name="opensource_licenses">ໃບອະນຸຍາດໂອເພນຊອດ</string>
     <string name="opensource_licenses_description">ໄລບຣາຣີທີ່ Morphe ຖືກສ້າງຂຶ້ນ</string>
     <string name="opensource_licenses_search">ຄົ້ນຫາຫໍສະໝຸດ ແລະ ໃບອະນຸຍາດ</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">ລວມເຂົ້າ</string>
     <string name="disable">ປິດໃຊ້ງານ</string>
     <string name="enable">ເປີດໃຊ້ງານ</string>
+    <string name="enable_all">ເປີດໃຊ້ງານທັງໝົດ</string>
+    <string name="disable_all">ປິດທັງໝົດ</string>
     <string name="trust">ເຊື່ອໝັ້ນ</string>
     <string name="loading">ກຳລັງໂຫຼດ…</string>
     <string name="creating">ກຳລັງສ້າງ…</string>

@@ -346,8 +346,6 @@ Uning APK faylini qayerdan olishni tanlang"</string>
     <string name="home_external_apk_expert_mode_required">Bu funksiya faqat Ekspert rejimida mavjud</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Patchlarni qidirish</string>
-    <string name="expert_mode_disable_all">Hammasini o\'chirish</string>
-    <string name="expert_mode_enable_all">Hammasini yoqish</string>
     <string name="expert_mode_enable_all_universal_pending">Universal yamalar uchun yana bir marta bosing</string>
     <string name="expert_mode_universal_all_warning_title">Barcha universal yangilanishlarni yoqish?</string>
     <string name="expert_mode_universal_all_warning_message">Universal yangilanishlar birgalikda sinovdan o\'tkazilmagan. Ularning hammasini bir vaqtda yoqish konfliktlarga, yangilanishning muvaffaqiyatsiz bo\'lishiga yoki ishdan chiqishiga olib kelishi mumkin.</string>
@@ -567,9 +565,12 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="app_links_unverified_banner_description">Qo‘llab-quvvatlanadigan veb havolalar hozirda ushbu ilova o‘rniga brauzeringizda ochiladi</string>
     <string name="app_links_enable_auto">Avtomatik yoqish</string>
     <string name="app_links_enable_auto_in_progress">Havolalar yoqilmoqda…</string>
+    <string name="app_links_disable_all_in_progress">Havolalar o\'chirilmoqda…</string>
     <string name="app_links_open_settings">Havola sozlamalarini ochish</string>
     <string name="app_links_repair_success">Ilova havolalari muvaffaqiyatli yoqildi</string>
     <string name="app_links_repair_failed">Ilova havolalarini avtomatik yoqib bo‘lmadi</string>
+    <string name="app_links_disable_success">Ilova havolalari o\'chirildi</string>
+    <string name="app_links_disable_failed">Ilova havolalarini o\'chirish imkonsiz bo\'ldi</string>
     <string name="app_links_change_failed">Ilova havolalarini o\'zgartirish imkonsiz bo\'ldi</string>
     <string name="app_links_all_verified">Barcha qo‘llab-quvvatlanadigan havolalar ushbu ilovada ochiladigan qilib sozlangan</string>
     <string name="app_links_fix">Havolalarni tuzatish</string>
@@ -628,8 +629,6 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="patcher_field_value_stripped">olib tashlangan</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">saqlangan</string>
-    <string name="patcher_tab_logs">Patcher jurnallari</string>
-    <string name="patcher_tab_game">O‘yinlar</string>
     <string name="patcher_logs_waiting">Jurnal chiqishini kutish…</string>
     <string name="patcher_logs_lost">Jurnal chiqishi ilovani qayta ishga tushirgandan keyin saqlanmaydi</string>
     <string name="patcher_long_step_warning">Kutib o‘tiring, bu biroz vaqt olishi mumkin…</string>
@@ -659,7 +658,6 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="patcher_install_error_subtitle">O‘chirib, qayta o‘rnatib ko‘ring</string>
     <string name="patcher_ready_to_mount_subtitle">Ulanish uchun quyidagi tugmani bosing</string>
     <string name="patcher_patches_excluded_for_installer">Ushbu oʻrnatish usuli uchun mavjud emas va istisno qilingan: %s</string>
-    <string name="patcher_back_to_game_hint">O\'yiningizga qaytish uchun %1$s ni bosing</string>
     <string name="patcher_storage_permission_dialog_title">Xotira yo\'liga kirib bo\'lmadi</string>
     <string name="patcher_incompatible_patcher_title">Yangilash talab qilinadi</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; manbasi &lt;b&gt;%2$s&lt;/b&gt; yoki undan yangiroq patcher’ni talab qiladi. Undan foydalanish uchun Morphe’ni yangilang</string>
@@ -764,7 +762,9 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="package_name">Paket nomi</string>
     <string name="failed_to_mount">Ulanishda xatolik: %s</string>
     <string name="failed_to_unmount">Ulanishi bekor qilinishida xatolik: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-o\'yinlar</string>
+    <string name="mini_games_description">Bo\'sh vaqtlarni o\'tkazish uchun tezkor o\'yinlar</string>
     <string name="mini_game_score">Hisob %s</string>
     <string name="mini_game_best">Eng yaxshisi %s</string>
     <string name="mini_game_new_record">Yangi rekord!</string>
@@ -773,7 +773,14 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="mini_game_paused">To‘xtatildi</string>
     <string name="mini_game_resume">Davom etish</string>
     <string name="mini_game_restart">Qaytadan boshlash</string>
-    <string name="mini_game_change">Boshqa o‘yin tanlash</string>
+    <string name="mini_game_pause">Tanaqlash</string>
+    <string name="mini_game_score_label">Hisob</string>
+    <string name="mini_game_best_label">Eng yaxshi</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Daraja</string>
+    <string name="mini_game_lines">Satrlar</string>
+    <string name="mini_game_lives">Yonlar</string>
+    <string name="mini_game_flags">Bayroqlar</string>
     <string name="mini_game_2048_picker_subtitle">Plitkalarni surib birlashtiring</string>
     <string name="mini_game_flappy_picker_subtitle">Quvurlar orasidan uchish uchun bosing</string>
     <string name="mini_game_flappy_tap_to_start">Uchish uchun bosing</string>
@@ -1339,13 +1346,26 @@ Ma’lumotlar: %2$s"</string>
     <string name="file_picker_new_folder_failed">Papka yaratib bo\'lmadi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqida</string>
-    <string name="settings_system_manager_description">Zamonaviy, soddalashtirilgan Android ilovalarini patchlash uchun mo‘ljallangan ochiq kodli loyiha, hamjamiyatning fikr-mulohazalari va hissalariga asoslangan</string>
-    <string name="credits">Mualliflar</string>
-    <string name="credits_description">Morphe ortidagi odamlar</string>
     <string name="settings_about_section_project">Loyiha</string>
     <string name="settings_about_section_help">Yordam</string>
-    <string name="credits_current_development">Hozirgi rivojlanish</string>
     <string name="credits_prior_development">Oldingi rivojlanish</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manager</string>
+    <string name="about_update_available">Yangilanish mavjud: %s</string>
+    <string name="about_up_to_date">Oxirgi versiya</string>
+    <string name="about_links">Rasmiy havolalar</string>
+    <string name="about_link_donate">Homiylik qilish</string>
+    <string name="about_link_website">Veb-sayt</string>
+    <string name="about_link_translations">Tarjimalar</string>
+    <string name="contributors">Hissa qo\'shganlar</string>
+    <string name="contributors_description">Oxirgi 12 oy</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Homiylar</string>
+    <string name="supporters_description">Open Collective-dagi homiylar</string>
+    <string name="supporters_become">Homiylikka qo\'shiling</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Yana %s ta</string>
+    <string name="people_unavailable">Roºtni yuklab bo¼lmadi</string>
     <string name="opensource_licenses">Ochiq kodli litsenziyalar</string>
     <string name="opensource_licenses_description">Morphe qurilgan kutubxonalar</string>
     <string name="opensource_licenses_search">Kutubxonalar va litsenziyalarni qidirish</string>
@@ -1415,6 +1435,8 @@ Ma’lumotlar: %2$s"</string>
     <string name="include">Kiritish</string>
     <string name="disable">O\'chirish</string>
     <string name="enable">Yoqish</string>
+    <string name="enable_all">Barchasini yoqish</string>
+    <string name="disable_all">Hammasini o\'chirish</string>
     <string name="trust">Ishonish</string>
     <string name="loading">Yuklanmoqda…</string>
     <string name="creating">Yaratilmoqda…</string>

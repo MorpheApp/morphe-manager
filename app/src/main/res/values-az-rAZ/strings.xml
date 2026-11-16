@@ -346,8 +346,6 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="home_external_apk_expert_mode_required">Bu xüsusiyyət yalnız mütəxəssis rejimində əlçatandır</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Yamaqları axtar</string>
-    <string name="expert_mode_disable_all">Hamısını qapa</string>
-    <string name="expert_mode_enable_all">Hamısını aktivləşdir</string>
     <string name="expert_mode_enable_all_universal_pending">Ümumi yamaqlar üçün təkrar toxun</string>
     <string name="expert_mode_universal_all_warning_title">Bütün ümumi yamaqlar aktivləşdirilsin?</string>
     <string name="expert_mode_universal_all_warning_message">Ümumi yamaqlar birlikdə sınaqdan keçirilməyib. Hamısını eyni anda aktivləşdirmək ziddiyyətlərə, yamaqlamanın uğursuz olmasına və ya çökmələrə səbəb ola bilər</string>
@@ -567,9 +565,12 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="app_links_unverified_banner_description">Dəstəklənən veb keçidlər hazırda bu tətbiq əvəzinə brauzerinizdə açılır</string>
     <string name="app_links_enable_auto">Avtomatik olaraq aktivləşdir</string>
     <string name="app_links_enable_auto_in_progress">Linklər aktivləşdirilir…</string>
+    <string name="app_links_disable_all_in_progress">Linkləri bağlayır…</string>
     <string name="app_links_open_settings">Link tənzimləmələrini aç</string>
     <string name="app_links_repair_success">Tətbiq linkləri uğurla aktivləşdirildi</string>
     <string name="app_links_repair_failed">Tətbiq linklərini avtomatik aktivləşdirmək olmadı</string>
+    <string name="app_links_disable_success">Tətbiq linkləri bağlanıb</string>
+    <string name="app_links_disable_failed">Tətbiq linklərini bağlamaq olmadı</string>
     <string name="app_links_change_failed">Tətbiq linklərini dəyişdirmək olmadı</string>
     <string name="app_links_all_verified">Bütün dəstəklənən keçidlər bu tətbiqdə açılmaq üçün tənzimlənib</string>
     <string name="app_links_fix">Linkləri düzəlt</string>
@@ -628,8 +629,6 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="patcher_field_value_stripped">təmizlənmiş</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">saxlanıldı</string>
-    <string name="patcher_tab_logs">Yamaqlayıcı qeydləri</string>
-    <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_logs_waiting">Qeyd çıxarışı gözlənilir…</string>
     <string name="patcher_logs_lost">Qeyd çıxarışı tətbiq yenidən başladıldıqda saxlanılmır</string>
     <string name="patcher_long_step_warning">Bu keçid bir müddət çəkə bilər. Zəhmət olmasa, gözləyin...</string>
@@ -659,7 +658,6 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patcher_install_error_subtitle">Silməyə və təkrar quraşdırmağa çalış</string>
     <string name="patcher_ready_to_mount_subtitle">Montajlamaq üçün aşağıdakı düyməyə toxun</string>
     <string name="patcher_patches_excluded_for_installer">Bu quraşdırma üsulu üçün əlçatan deyil və xaric edilib: %s</string>
-    <string name="patcher_back_to_game_hint">Oyununuza qayıtmaq üçün %1$s kliklə</string>
     <string name="patcher_storage_permission_dialog_title">Saxlanc keçidinə keçmək olmur</string>
     <string name="patcher_incompatible_patcher_title">Yenilənmə tələb olundu</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; mənbəsi &lt;b&gt;%2$s&lt;/b&gt; və ya daha yeni yamaqlayıcı tələb edir. Onu istifadə etmək üçün Morphe-ni yenilə</string>
@@ -764,7 +762,9 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Montajlama uğursuzdu: %s</string>
     <string name="failed_to_unmount">Montajı silmək olmadı: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini oyunlar</string>
+    <string name="mini_games_description">Boş vaxtı keçirmək üçün sürətli oyunlar</string>
     <string name="mini_game_score">Hesab %s</string>
     <string name="mini_game_best">Ən yaxşı %s</string>
     <string name="mini_game_new_record">Yeni rekord!</string>
@@ -773,7 +773,14 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="mini_game_paused">Fasilə edildi</string>
     <string name="mini_game_resume">Davam et</string>
     <string name="mini_game_restart">Yenidən başla</string>
-    <string name="mini_game_change">Başqa bir oyun seç</string>
+    <string name="mini_game_pause">Fasilə ver</string>
+    <string name="mini_game_score_label">Hesab</string>
+    <string name="mini_game_best_label">Ən yaxşı</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Səviyyə</string>
+    <string name="mini_game_lines">Cizgilər</string>
+    <string name="mini_game_lives">Canlar</string>
+    <string name="mini_game_flags">Nişanlar</string>
     <string name="mini_game_2048_picker_subtitle">Birləşdirmək üçün xanaları sürüşdür</string>
     <string name="mini_game_flappy_picker_subtitle">Borular arasından uçmaq üçün toxun</string>
     <string name="mini_game_flappy_tap_to_start">Uçmaq üçün toxun</string>
@@ -1338,13 +1345,26 @@ Təfərrüatlar: %2$s"</string>
     <string name="file_picker_new_folder_failed">Qovluğu yarada bilmədi</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Haqqında</string>
-    <string name="settings_system_manager_description">İcma əlaqələri və töhfələri ilə idarə olunan məşhur Android tətbiqlərinin müasir, rəvan yamaqlanması üçün açıq mənbəli layihə</string>
-    <string name="credits">Heyət</string>
-    <string name="credits_description">Morphe-nin arxasında duran insanlar</string>
     <string name="settings_about_section_project">Layihə</string>
     <string name="settings_about_section_help">Kömək</string>
-    <string name="credits_current_development">Hazırkı inkişaf</string>
     <string name="credits_prior_development">Əvvəlki inkişaf</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">İdarəedici</string>
+    <string name="about_update_available">Yeniləmə var: %s</string>
+    <string name="about_up_to_date">Yenilənib</string>
+    <string name="about_links">Rəsmi bağlantılar</string>
+    <string name="about_link_donate">İanə et</string>
+    <string name="about_link_website">Veb-sayt</string>
+    <string name="about_link_translations">Tərcümələr</string>
+    <string name="contributors">Töhfəçilər</string>
+    <string name="contributors_description">Son 12 ay</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Dəstəkçilər</string>
+    <string name="supporters_description">Open Collective-də Dəstəkçilər</string>
+    <string name="supporters_become">Dəstəkçi ol</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Və daha %s</string>
+    <string name="people_unavailable">Siyahını yükləmək olmadı</string>
     <string name="opensource_licenses">Açıq mənbə lisenziyaları</string>
     <string name="opensource_licenses_description">Morphe-nin əsaslandığı kitabxanalar</string>
     <string name="opensource_licenses_search">Kitabxanaları və lisenziyaları axtar</string>
@@ -1414,6 +1434,8 @@ Təfərrüatlar: %2$s"</string>
     <string name="include">Daxil et</string>
     <string name="disable">Bağla</string>
     <string name="enable">Aktivləşdir</string>
+    <string name="enable_all">Hamısını aktivləşdir</string>
+    <string name="disable_all">Hamısını qapa</string>
     <string name="trust">Etibar et</string>
     <string name="loading">Yüklənilir…</string>
     <string name="creating">Yaradılır…</string>

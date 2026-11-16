@@ -346,8 +346,6 @@ Pasirinkite, iš kur paimti jos APK"</string>
     <string name="home_external_apk_expert_mode_required">Ši funkcija yra prieinama tik Ekspertų režime</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Ieškoti modifikacijų</string>
-    <string name="expert_mode_disable_all">Išjungti viską</string>
-    <string name="expert_mode_enable_all">Įjungti visus</string>
     <string name="expert_mode_enable_all_universal_pending">Palieskite dar kartą, kad įjungtumėte universalias pataisas</string>
     <string name="expert_mode_universal_all_warning_title">Įjungti visas universalias pataisas?</string>
     <string name="expert_mode_universal_all_warning_message">Universalios pataisos nėra išbandytos kartu. Įjungus jas visas vienu metu, gali kilti konfliktų, pataisymas gali nepavykti arba programa gali strigti</string>
@@ -567,9 +565,12 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="app_links_unverified_banner_description">Palaikomos žiniatinklio nuorodos dabar atidaromos naršyklėje, o ne šioje programėlėje</string>
     <string name="app_links_enable_auto">Įjungti automatiškai</string>
     <string name="app_links_enable_auto_in_progress">Įjungiamos nuorodos…</string>
+    <string name="app_links_disable_all_in_progress">Išjungiamos nuorodos…</string>
     <string name="app_links_open_settings">Atidaryti nuorodų nustatymus</string>
     <string name="app_links_repair_success">Programėlės nuorodos sėkmingai įjungtos</string>
     <string name="app_links_repair_failed">Nepavyko automatiškai įjungti programėlės nuorodų</string>
+    <string name="app_links_disable_success">Programos nuorodos išjungtos</string>
+    <string name="app_links_disable_failed">Nepavyko išjungti programos nuorodų</string>
     <string name="app_links_change_failed">Nepavyko pakeisti programėlės nuorodų</string>
     <string name="app_links_all_verified">Visos palaikomos nuorodos sukonfigūruotos atidaryti šioje programėlėje</string>
     <string name="app_links_fix">Ištaisyti nuorodas</string>
@@ -628,8 +629,6 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="patcher_field_value_stripped">pašalintos</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">išlaikytos</string>
-    <string name="patcher_tab_logs">Patcher žurnalai</string>
-    <string name="patcher_tab_game">Žaidimai</string>
     <string name="patcher_logs_waiting">Laukiama žurnalo išvesties…</string>
     <string name="patcher_logs_lost">Žurnalo išvestis neišsaugoma perkraunant programą</string>
     <string name="patcher_long_step_warning">Šis žingsnis gali užtrukti. Palaukite…</string>
@@ -659,7 +658,6 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patcher_install_error_subtitle">Pabandykite išdiegti ir vėl įdiekti</string>
     <string name="patcher_ready_to_mount_subtitle">Paspauskite žemiau esantį mygtuką, kad montuotimete</string>
     <string name="patcher_patches_excluded_for_installer">Neprieinama šiam diegimo metodui ir neįtraukta: %s</string>
-    <string name="patcher_back_to_game_hint">Palieskite %1$s, kad grįžtumėte į savo žaidimą</string>
     <string name="patcher_storage_permission_dialog_title">Nepavyksta pasiekti saugyklos kelio</string>
     <string name="patcher_incompatible_patcher_title">Būtina atnaujinti</string>
     <string name="patcher_incompatible_patcher_description">Šaltinis &lt;b&gt;%1$s&lt;/b&gt; reikalauja &lt;b&gt;%2$s&lt;/b&gt; ar naujesnio pataisos įrankio. Atnaujinkite Morphe, kad galėtumėte jį naudoti</string>
@@ -764,7 +762,9 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="package_name">Pakuotės pavadinimas</string>
     <string name="failed_to_mount">Nepavyko prijungti: %s</string>
     <string name="failed_to_unmount">Nepavyko atjungti: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini žaidimai</string>
+    <string name="mini_games_description">Greiti žaidimai, kuo galima užpildyti laisvą minutę</string>
     <string name="mini_game_score">Rezultatas %s</string>
     <string name="mini_game_best">Geriausias %s</string>
     <string name="mini_game_new_record">Naujas rekordas!</string>
@@ -773,7 +773,14 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="mini_game_paused">Pristabdyta</string>
     <string name="mini_game_resume">Tęsti</string>
     <string name="mini_game_restart">Pradėti iš naujo</string>
-    <string name="mini_game_change">Pasirinkti kitą žaidimą</string>
+    <string name="mini_game_pause">Pristabdyti</string>
+    <string name="mini_game_score_label">Taškai</string>
+    <string name="mini_game_best_label">Geriausias</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Lygis</string>
+    <string name="mini_game_lines">Linijos</string>
+    <string name="mini_game_lives">Gyvybės</string>
+    <string name="mini_game_flags">Vėliavos</string>
     <string name="mini_game_2048_picker_subtitle">Slinkite plyteles, kad jas sujungtumėte</string>
     <string name="mini_game_flappy_picker_subtitle">Palieskite, kad skristumėte per vamzdžius</string>
     <string name="mini_game_flappy_tap_to_start">Palieskite, kad skristumėte</string>
@@ -1339,13 +1346,26 @@ Išsami informacija: %2$s"</string>
     <string name="file_picker_new_folder_failed">Nepavyko sukurti aplanko</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Apie</string>
-    <string name="settings_system_manager_description">Atvirojo kodo projektas, skirtas moderniam ir sklandžiam populiarių „Android“ programų pataisymui, kurį skatina bendruomenės atsiliepimai ir indėlis</string>
-    <string name="credits">Autoriai</string>
-    <string name="credits_description">Žmonės, kuriantys „Morphe“</string>
     <string name="settings_about_section_project">Projektas</string>
     <string name="settings_about_section_help">Pagalba</string>
-    <string name="credits_current_development">Dabartinis vystymas</string>
     <string name="credits_prior_development">Ankstesnis vystymas</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Valdytojas</string>
+    <string name="about_update_available">Yra atnaujinimas: %s</string>
+    <string name="about_up_to_date">Atnaujinta</string>
+    <string name="about_links">Oficialios nuorodos</string>
+    <string name="about_link_donate">Aukoti</string>
+    <string name="about_link_website">Svetainė</string>
+    <string name="about_link_translations">Vertimai</string>
+    <string name="contributors">Kūryboi</string>
+    <string name="contributors_description">Pastarieji 12 mėnesiai</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Rėmėjai</string>
+    <string name="supporters_description">Rėmėjai platformoje Open Collective</string>
+    <string name="supporters_become">Tapkite rėmėju</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Ir dar %s</string>
+    <string name="people_unavailable">Nepavyko užkrauti sąrašo</string>
     <string name="opensource_licenses">Atvirojo kodo licencijos</string>
     <string name="opensource_licenses_description">Programinės įrangos bibliotekos, naudojamos kuriant „Morphe“</string>
     <string name="opensource_licenses_search">Ieškoti bibliotekų ir licencijų</string>
@@ -1415,6 +1435,8 @@ Išsami informacija: %2$s"</string>
     <string name="include">Įtraukti</string>
     <string name="disable">Išjungti</string>
     <string name="enable">Įjungti</string>
+    <string name="enable_all">Įjungti visus</string>
+    <string name="disable_all">Išjungti viską</string>
     <string name="trust">Pasitikėti</string>
     <string name="loading">Įkeliama…</string>
     <string name="creating">Kuriama…</string>

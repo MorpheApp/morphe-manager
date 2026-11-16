@@ -347,8 +347,6 @@
     <string name="home_external_apk_expert_mode_required">Ta funkcja jest dostępna tylko w trybie eksperckim</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Szukaj modyfikacji</string>
-    <string name="expert_mode_disable_all">Wyłącz wszystkie</string>
-    <string name="expert_mode_enable_all">Włącz wszystkie</string>
     <string name="expert_mode_enable_all_universal_pending">Dotknij ponownie dla uniwersalnych modyfikacji</string>
     <string name="expert_mode_universal_all_warning_title">Włączyć wszystkie uniwersalne modyfikacje?</string>
     <string name="expert_mode_universal_all_warning_message">Uniwersalne modyfikacje nie są testowane razem. Włączenie ich wszystkich naraz może spowodować konflikty, niepowodzenie modyfikowania lub awarie</string>
@@ -568,9 +566,12 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="app_links_unverified_banner_description">Obsługiwane linki internetowe otwierają się obecnie w przeglądarce zamiast w tej aplikacji</string>
     <string name="app_links_enable_auto">Włącz automatycznie</string>
     <string name="app_links_enable_auto_in_progress">Włączanie linków…</string>
+    <string name="app_links_disable_all_in_progress">Wyłączanie linków…</string>
     <string name="app_links_open_settings">Otwórz ustawienia linków</string>
     <string name="app_links_repair_success">Pomyślnie włączono linki aplikacji</string>
     <string name="app_links_repair_failed">Nie udało się automatycznie włączyć linków aplikacji</string>
+    <string name="app_links_disable_success">Wyłączono linki aplikacji</string>
+    <string name="app_links_disable_failed">Nie udało się wyłączyć linków aplikacji</string>
     <string name="app_links_change_failed">Nie udało się zmienić linków aplikacji</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
@@ -629,8 +630,6 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="patcher_field_value_stripped">usunięte</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">zachowane</string>
-    <string name="patcher_tab_logs">Logi modyfikatora</string>
-    <string name="patcher_tab_game">Gry</string>
     <string name="patcher_logs_waiting">Oczekiwanie na logi…</string>
     <string name="patcher_logs_lost">Logi nie są zachowywane po ponownym uruchomieniu aplikacji</string>
     <string name="patcher_long_step_warning">Ten krok może trochę potrwać. Proszę czekać…</string>
@@ -660,7 +659,6 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patcher_install_error_subtitle">Spróbuj odinstalować aplikację i zainstalować ją ponownie</string>
     <string name="patcher_ready_to_mount_subtitle">Naciśnij przycisk poniżej, aby zamontować</string>
     <string name="patcher_patches_excluded_for_installer">Niedostępne dla tej metody instalacji i wykluczone: %s</string>
-    <string name="patcher_back_to_game_hint">Dotknij %1$s, aby wrócić do gry</string>
     <string name="patcher_storage_permission_dialog_title">Brak dostępu do ścieżki pamięci</string>
     <string name="patcher_incompatible_patcher_title">Wymagana aktualizacja</string>
     <string name="patcher_incompatible_patcher_description">Źródło &lt;b&gt;%1$s&lt;/b&gt; wymaga modyfikatora w wersji &lt;b&gt;%2$s&lt;/b&gt; lub nowszej. Zaktualizuj Morphe, aby go używać</string>
@@ -765,7 +763,9 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="package_name">Nazwa pakietu</string>
     <string name="failed_to_mount">Nie udało się zamontować: %s</string>
     <string name="failed_to_unmount">Nie udało się odmontować: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-gry</string>
+    <string name="mini_games_description">Szybkie gry, aby zająć wolną chwilę</string>
     <string name="mini_game_score">Wynik %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nowy rekord!</string>
@@ -774,7 +774,14 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="mini_game_paused">Pauza</string>
     <string name="mini_game_resume">Kontynuuj</string>
     <string name="mini_game_restart">Zacznij od nowa</string>
-    <string name="mini_game_change">Wybierz inną grę</string>
+    <string name="mini_game_pause">Wstrzymaj</string>
+    <string name="mini_game_score_label">Wynik</string>
+    <string name="mini_game_best_label">Rekord</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Poziom</string>
+    <string name="mini_game_lines">Linie</string>
+    <string name="mini_game_lives">Życia</string>
+    <string name="mini_game_flags">Flagi</string>
     <string name="mini_game_2048_picker_subtitle">Przesuwaj i łącz kafelki</string>
     <string name="mini_game_flappy_picker_subtitle">Dotykaj, by lecieć między rurami</string>
     <string name="mini_game_flappy_tap_to_start">Dotknij, aby lecieć</string>
@@ -1340,13 +1347,26 @@ Wymagane są następujące wymiary obrazów:
     <string name="file_picker_new_folder_failed">Nie udało się utworzyć folderu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Informacje</string>
-    <string name="settings_system_manager_description">Projekt otwartoźródłowy służący do nowoczesnego i sprawnego modyfikowania popularnych aplikacji na Androida, rozwijany dzięki opiniom i zaangażowaniu społeczności</string>
-    <string name="credits">Podziękowania</string>
-    <string name="credits_description">Osoby stojące za Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Pomoc</string>
-    <string name="credits_current_development">Obecni twórcy</string>
     <string name="credits_prior_development">Poprzedni twórcy</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Menedżer</string>
+    <string name="about_update_available">Dostępna aktualizacja: %s</string>
+    <string name="about_up_to_date">Aktualny</string>
+    <string name="about_links">Oficjalne linki</string>
+    <string name="about_link_donate">Wesprzyj</string>
+    <string name="about_link_website">Strona internetowa</string>
+    <string name="about_link_translations">Tłumaczenia</string>
+    <string name="contributors">Współtwórcy</string>
+    <string name="contributors_description">Ostatnie 12 miesięcy</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Wspierający</string>
+    <string name="supporters_description">Darczyńcy na Open Collective</string>
+    <string name="supporters_become">Zostań wspierającym</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Oraz %s więcej</string>
+    <string name="people_unavailable">Nie udało się wczytać listy</string>
     <string name="opensource_licenses">Licencje otwartoźródłowe</string>
     <string name="opensource_licenses_description">Biblioteki, na których opiera się Morphe</string>
     <string name="opensource_licenses_search">Szukaj bibliotek i licencji</string>
@@ -1416,6 +1436,8 @@ Wymagane są następujące wymiary obrazów:
     <string name="include">Uwzględnij</string>
     <string name="disable">Wyłącz</string>
     <string name="enable">Włącz</string>
+    <string name="enable_all">Włącz wszystkie</string>
+    <string name="disable_all">Wyłącz wszystkie</string>
     <string name="trust">Zaufaj</string>
     <string name="loading">Wczytywanie…</string>
     <string name="creating">Tworzenie…</string>

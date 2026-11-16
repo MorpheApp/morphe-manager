@@ -174,7 +174,7 @@
     <string name="sources_management_report_issue">問題を報告</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
     <string name="sources_apps">アプリ</string>
-    <string name="sources_apps_description">チェックされたアプリはこのソースから提供されています。アプリをタップすると、対象から外したり戻したりでき、スワイプするとパッチを確認できます。どのソースからも提供されなくなったアプリは、パッチ適用済みでない限りホーム画面から消えます</string>
+    <string name="sources_apps_description">チェックマーク付きのアプリはこのソースから提供されています。アプリをタップすると、ホーム画面で非表示にしたり、再表示したりできます。スワイプするとパッチを確認できます。ソースが指定されていないアプリは、パッチを適用していない限りホーム画面から非表示になります</string>
     <string name="sources_apps_brought">このソースから提供されています</string>
     <string name="sources_apps_left_out">このソースから除外されています</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -263,7 +263,7 @@
     <string name="home_apk_availability_unpatched_label">未パッチ</string>
     <string name="home_apk_availability_incompatible_label">非対応</string>
     <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
-    <string name="home_apk_availability_newer_original">このデバイスの元の%1$sは%2$sであり、パッチがサポートしているバージョンより新しいです</string>
+    <string name="home_apk_availability_newer_original">このデバイスのオリジナルの %1$s は %2$s であり、パッチのサポート対象よりも新しいものです</string>
     <string name="home_apk_availability_find">はい、探すのを手伝ってください</string>
     <string name="home_apk_availability_have">いいえ、すでに持っています</string>
     <string name="home_apk_helper_download">ヘルパーアプリを使用する</string>
@@ -346,8 +346,6 @@ APK ファイルの取得元を選択してください"</string>
     <string name="home_external_apk_expert_mode_required">この機能は、エキスパート モードでのみ利用可能です</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">パッチを検索</string>
-    <string name="expert_mode_disable_all">すべて無効化</string>
-    <string name="expert_mode_enable_all">すべて有効化</string>
     <string name="expert_mode_enable_all_universal_pending">ユニバーサル パッチを有効にするには、もう一度タップしてください</string>
     <string name="expert_mode_universal_all_warning_title">すべてのユニバーサル パッチを有効にしますか？</string>
     <string name="expert_mode_universal_all_warning_message">ユニバーサル パッチは、すべてを同時に使用した場合の動作をテストしていません。すべてを一度に有効にすると、競合やパッチの失敗、クラッシュが発生する可能性があります</string>
@@ -567,9 +565,12 @@ APK ファイルの取得元を選択してください"</string>
     <string name="app_links_unverified_banner_description">サポートされているウェブリンクは現在、このアプリではなくブラウザで開かれます</string>
     <string name="app_links_enable_auto">自動的に有効にする</string>
     <string name="app_links_enable_auto_in_progress">リンクを有効化しています…</string>
+    <string name="app_links_disable_all_in_progress">リンクを無効にしています…</string>
     <string name="app_links_open_settings">リンク設定を開く</string>
     <string name="app_links_repair_success">アプリリンクが正常に有効化されました</string>
     <string name="app_links_repair_failed">アプリリンクを自動的に有効にできませんでした</string>
+    <string name="app_links_disable_success">アプリリンクを無効にしました</string>
+    <string name="app_links_disable_failed">アプリリンクの無効化に失敗しました</string>
     <string name="app_links_change_failed">アプリリンクの変更に失敗しました</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
@@ -628,8 +629,6 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_field_value_stripped">削除済み</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">保持済み</string>
-    <string name="patcher_tab_logs">パッチャーのログ</string>
-    <string name="patcher_tab_game">ゲーム</string>
     <string name="patcher_logs_waiting">ログの出力を待機中…</string>
     <string name="patcher_logs_lost">ログの出力はアプリを再起動すると消去されます</string>
     <string name="patcher_long_step_warning">この処理には時間がかかる場合があります。お待ちください…</string>
@@ -659,7 +658,6 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patcher_install_error_subtitle">一度アンインストールしてから、再度インストールしてください</string>
     <string name="patcher_ready_to_mount_subtitle">マウントするには以下のボタンを押してください</string>
     <string name="patcher_patches_excluded_for_installer">このインストール方法では利用できません: %s</string>
-    <string name="patcher_back_to_game_hint">%1$s をタップしてゲームを再開</string>
     <string name="patcher_storage_permission_dialog_title">ストレージパスにアクセスできません</string>
     <string name="patcher_incompatible_patcher_title">アップデートが必要です</string>
     <string name="patcher_incompatible_patcher_description">ソース &lt;b&gt;%1$s&lt;/b&gt; にはパッチャー &lt;b&gt;%2$s&lt;/b&gt; 以降が必要です。これを使用するには Morphe を更新してください</string>
@@ -765,7 +763,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="package_name">パッケージ名</string>
     <string name="failed_to_mount">マウントに失敗しました: %s</string>
     <string name="failed_to_unmount">アンマウントに失敗しました: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">ミニゲーム</string>
+    <string name="mini_games_description">ちょっとした空き時間に楽しめるクイックゲーム</string>
     <string name="mini_game_score">スコア %s</string>
     <string name="mini_game_best">最高記録 %s</string>
     <string name="mini_game_new_record">新記録！</string>
@@ -774,7 +774,14 @@ APK ファイルの取得元を選択してください"</string>
     <string name="mini_game_paused">ポーズ中</string>
     <string name="mini_game_resume">続行</string>
     <string name="mini_game_restart">やり直す</string>
-    <string name="mini_game_change">別のゲームを選ぶ</string>
+    <string name="mini_game_pause">一時停止</string>
+    <string name="mini_game_score_label">スコア</string>
+    <string name="mini_game_best_label">最高記録</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">レベル</string>
+    <string name="mini_game_lines">ライン</string>
+    <string name="mini_game_lives">ライフ</string>
+    <string name="mini_game_flags">フラグ</string>
     <string name="mini_game_2048_picker_subtitle">タイルをスライドして合体させよう</string>
     <string name="mini_game_flappy_picker_subtitle">タップしてパイプの間を飛び抜けよう</string>
     <string name="mini_game_flappy_tap_to_start">タップして開始</string>
@@ -909,12 +916,12 @@ APK ファイルの取得元を選択してください"</string>
     <string name="settings_auto_updates_description">Morphe 起動時の更新に関する設定です。プルして更新すると常にチェックされます</string>
     <string name="settings_auto_updates_download">自動的にダウンロード</string>
     <string name="settings_auto_updates_download_description">Morphe 起動時に更新を確認し、ネットワークの種類に関わらずパッチをダウンロードします</string>
-    <string name="settings_auto_updates_wifi_only">Wi-Fi接続時のみダウンロード</string>
+    <string name="settings_auto_updates_wifi_only">Wi-Fi 接続時のみダウンロード</string>
     <string name="settings_auto_updates_wifi_only_description">モバイルデータ通信では、利用可能な更新の確認と表示のみを行います</string>
     <string name="settings_auto_updates_check_only">確認のみ</string>
     <string name="settings_auto_updates_check_only_description">利用可能な更新を表示し、タップした時にダウンロードします</string>
     <string name="settings_auto_updates_off">確認しない</string>
-    <string name="settings_auto_updates_off_description">プルして更新した時にのみ確認を行います</string>
+    <string name="settings_auto_updates_off_description">引っ張って更新した時にのみ確認を行います</string>
     <string name="settings_advanced_updates_background_notifications">バックグラウンドでの更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">バックグラウンドで定期的に更新を確認し、利用可能な場合に通知します</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">アプリを閉じていても、新しいリリースの通知をすぐに受け取れます</string>
@@ -956,7 +963,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="settings_advanced_expert_mode_dialog_title">エキスパート モードを有効にしますか？</string>
     <string name="settings_advanced_expert_mode_dialog_message">エキスパート モードでは、パッチの適用方法をより細かく制御できますが、設定を誤るとアプリが正常に動作しなくなる可能性があります</string>
     <string name="settings_advanced_strip_unused_libs">デバイスのアーキテクチャに最適化</string>
-    <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリおよび保存されたオリジナルから、未使用のネイティブライブラリとAPK分割ファイルを削除します</string>
+    <string name="settings_advanced_strip_unused_libs_description">パッチ適用済みアプリおよび保存済みオリジナル アプリから、未使用のネイティブ ライブラリと APK 分割ファイルを削除します</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">プルリクエストのソースやプライベート リポジトリを利用できるようにします</string>
     <string name="settings_advanced_github_pat_description">プルリクエストのソースやプライベート リポジトリを利用し、GitHub の API 利用制限を緩和するために使用します</string>
@@ -1180,23 +1187,23 @@ morphe_header_custom_dark.png
     <string name="settings_system_import_manager_settings_description">Morphe の設定をバックアップ・復元します</string>
     <string name="settings_system_export_manager_settings_title">Morphe の設定をエクスポート</string>
     <string name="settings_system_export_manager_settings_description">選択した設定をファイルに保存します</string>
-    <string name="settings_system_import_manager_settings_file_description">バックアップファイルから設定を復元します</string>
+    <string name="settings_system_import_manager_settings_file_description">バックアップ ファイルから設定を復元します</string>
     <string name="settings_system_auto_backup">自動バックアップ</string>
-    <string name="settings_system_auto_backup_switch">自動的にバックアップする</string>
+    <string name="settings_system_auto_backup_switch">自動的にバックアップ</string>
     <string name="settings_system_auto_backup_now">今すぐバックアップ</string>
     <string name="settings_system_auto_backup_saved">バックアップを保存しました</string>
-    <string name="settings_system_auto_backup_interval_description">Morphe は、次回のコピーを作成するまで、前回のコピーから少なくともこの時間を待ちます</string>
+    <string name="settings_system_auto_backup_interval_description">Morphe は、コピーを作成した後、次のコピーを作成するまで最低この時間待機します</string>
     <string name="settings_system_auto_backup_description">Morphe の設定を選択したフォルダに保存します</string>
     <string name="settings_system_auto_backup_last">最終バックアップ: %s</string>
     <string name="settings_system_auto_backup_folder">フォルダ</string>
-    <string name="settings_system_auto_backup_folder_name">Morpheのバックアップ</string>
+    <string name="settings_system_auto_backup_folder_name">Morphe のバックアップ</string>
     <string name="settings_system_auto_backup_folder_failed">このフォルダを使用できませんでした: %s</string>
     <string name="settings_system_auto_backup_interval">バックアップ頻度</string>
     <string name="settings_system_auto_backup_signing_key">署名キーを含める</string>
     <string name="settings_system_auto_backup_signing_key_description">パッチ済みアプリに署名するキーを設定と一緒に保存します</string>
     <string name="settings_system_auto_backup_signing_key_warning_title">署名キーをバックアップしますか？</string>
-    <string name="settings_system_auto_backup_signing_key_warning_message">このファイルを入手した人は誰でも、パッチ済みアプリに上書きインストールされるアップデートに署名できます。フォルダを非公開にし、自分のデバイスのみで共有してください</string>
-    <string name="settings_system_auto_backup_footer">変更を加えてMorpheを終了すると、コピーが保存されます。最新の%s件が保持されます</string>
+    <string name="settings_system_auto_backup_signing_key_warning_message">このファイルを入手した人は誰でも、パッチ適用済みアプリを上書きインストールするアップデートに署名できます。フォルダは非公開にし、ご自身のデバイスにのみ共有してください</string>
+    <string name="settings_system_auto_backup_footer">Morphe で変更を行って終了すると、コピーが保存されます。最新の %s 件が保持されます</string>
     <string name="settings_system_auto_backup_failed">最後のバックアップを保存できませんでした。フォルダを再度選択してください</string>
     <string name="settings_system_import_manager_settings_fail">Morphe の設定のインポートに失敗しました: %s</string>
     <string name="settings_system_import_manager_settings_success">Morphe の設定をインポートしました</string>
@@ -1340,13 +1347,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">フォルダを作成できませんでした</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Morphe について</string>
-    <string name="settings_system_manager_description">人気の Android アプリにモダンで効率的にパッチを適用するためのオープンソース プロジェクトです。コミュニティからのフィードバックや貢献によって発展しています</string>
-    <string name="credits">クレジット</string>
-    <string name="credits_description">Morphe の開発メンバー</string>
     <string name="settings_about_section_project">プロジェクト</string>
     <string name="settings_about_section_help">ヘルプ</string>
-    <string name="credits_current_development">現在の開発</string>
     <string name="credits_prior_development">過去の開発</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">マネージャー</string>
+    <string name="about_update_available">利用可能な更新があります: %s</string>
+    <string name="about_up_to_date">最新の状態です</string>
+    <string name="about_links">公式リンク</string>
+    <string name="about_link_donate">寄付</string>
+    <string name="about_link_website">ウェブサイト</string>
+    <string name="about_link_translations">翻訳</string>
+    <string name="contributors">貢献者</string>
+    <string name="contributors_description">過去 12 ヶ月</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">サポーター</string>
+    <string name="supporters_description">Open Collective の支援者</string>
+    <string name="supporters_become">サポーターになる</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">他 %s 件</string>
+    <string name="people_unavailable">リストを読み込めませんでした</string>
     <string name="opensource_licenses">オープンソース ライセンス</string>
     <string name="opensource_licenses_description">Morphe が使用しているライブラリ</string>
     <string name="opensource_licenses_search">ライブラリとライセンスを検索</string>
@@ -1416,6 +1436,8 @@ morphe_header_custom_dark.png
     <string name="include">含める</string>
     <string name="disable">無効化</string>
     <string name="enable">有効化</string>
+    <string name="enable_all">すべて有効化</string>
+    <string name="disable_all">すべて無効化</string>
     <string name="trust">信頼</string>
     <string name="loading">読み込み中…</string>
     <string name="creating">作成中…</string>

@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">此功能僅在專家模式中提供</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">搜尋修補程式</string>
-    <string name="expert_mode_disable_all">全部停用</string>
-    <string name="expert_mode_enable_all">全部啟用</string>
     <string name="expert_mode_enable_all_universal_pending">再點按一次以套用通用修補程式</string>
     <string name="expert_mode_universal_all_warning_title">啟用所有通用修補程式？</string>
     <string name="expert_mode_universal_all_warning_message">通用修補程式未經過共同測試。同時啟用所有修補程式可能導致衝突、修補失敗或當機</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">目前支援的網頁連結會在瀏覽器中開啟，而非在此應用程式中開啟</string>
     <string name="app_links_enable_auto">自動啟用</string>
     <string name="app_links_enable_auto_in_progress">正在啟用連結……</string>
+    <string name="app_links_disable_all_in_progress">正在停用連結……</string>
     <string name="app_links_open_settings">開啟連結設定</string>
     <string name="app_links_repair_success">已成功啟用應用程式連結</string>
     <string name="app_links_repair_failed">自動啟用應用程式連結失敗</string>
+    <string name="app_links_disable_success">App 連結已停用</string>
+    <string name="app_links_disable_failed">停用 App 連結失敗</string>
     <string name="app_links_change_failed">變更應用程式連結失敗</string>
     <string name="app_links_all_verified">所有受支援的連結都已設定為在此應用程式中開啟</string>
     <string name="app_links_fix">修正連結</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">已移除</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">已保留</string>
-    <string name="patcher_tab_logs">修補程式記錄</string>
-    <string name="patcher_tab_game">遊戲</string>
     <string name="patcher_logs_waiting">正在等待日誌輸出…</string>
     <string name="patcher_logs_lost">日誌輸出不會跨應用程式重新啟動保留</string>
     <string name="patcher_long_step_warning">此步驟可能需要一些時間。請稍候…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">嘗試解除安裝並重新安裝</string>
     <string name="patcher_ready_to_mount_subtitle">點擊下方的按鈕進行掛載</string>
     <string name="patcher_patches_excluded_for_installer">未針對此安裝方法提供且已排除：%s</string>
-    <string name="patcher_back_to_game_hint">點擊%1$s返回您的遊戲</string>
     <string name="patcher_storage_permission_dialog_title">無法存取儲存路徑</string>
     <string name="patcher_incompatible_patcher_title">需要更新</string>
     <string name="patcher_incompatible_patcher_description">來源 &lt;b&gt;%1$s&lt;/b&gt; 需要修補程式 &lt;b&gt;%2$s&lt;/b&gt; 或更新版本。更新 Morphe 以使用它</string>
@@ -764,7 +762,9 @@
     <string name="package_name">套件名稱</string>
     <string name="failed_to_mount">無法掛載：%s</string>
     <string name="failed_to_unmount">無法解除掛載：%s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">小遊戲</string>
+    <string name="mini_games_description">適合利用碎片時間遊玩的快速遊戲</string>
     <string name="mini_game_score">分數 %s</string>
     <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新紀錄！</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">已暫停</string>
     <string name="mini_game_resume">繼續</string>
     <string name="mini_game_restart">重新開始</string>
-    <string name="mini_game_change">選擇其他遊戲</string>
+    <string name="mini_game_pause">暫停</string>
+    <string name="mini_game_score_label">分數</string>
+    <string name="mini_game_best_label">最佳</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">等級</string>
+    <string name="mini_game_lines">行數</string>
+    <string name="mini_game_lives">生命值</string>
+    <string name="mini_game_flags">旗幟</string>
     <string name="mini_game_2048_picker_subtitle">滑動方塊合併</string>
     <string name="mini_game_flappy_picker_subtitle">點擊穿過管道</string>
     <string name="mini_game_flappy_tap_to_start">點擊飛行</string>
@@ -1337,13 +1344,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">無法建立資料夾</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">關於</string>
-    <string name="settings_system_manager_description">\"這是一個開源專案，用於對熱門的 Android 應用程式進行現代、簡化的修補，並由社群的意見回饋和貢獻所驅動\"</string>
-    <string name="credits">鳴謝</string>
-    <string name="credits_description">Morphe 的開發團隊</string>
     <string name="settings_about_section_project">專案</string>
     <string name="settings_about_section_help">協助</string>
-    <string name="credits_current_development">目前開發</string>
     <string name="credits_prior_development">先前開發</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">管理員</string>
+    <string name="about_update_available">可用更新：%s</string>
+    <string name="about_up_to_date">已追上</string>
+    <string name="about_links">官方連結</string>
+    <string name="about_link_donate">捐贈</string>
+    <string name="about_link_website">網站</string>
+    <string name="about_link_translations">翻譯</string>
+    <string name="contributors">貢獻者</string>
+    <string name="contributors_description">過去 12 個月</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">支持者</string>
+    <string name="supporters_description">Open Collective 的支持者</string>
+    <string name="supporters_become">成為支持者</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">以及其他 %s 人</string>
+    <string name="people_unavailable">無法載入清單</string>
     <string name="opensource_licenses">開源授權</string>
     <string name="opensource_licenses_description">Morphe 所建構使用的函式庫</string>
     <string name="opensource_licenses_search">搜尋函式庫與授權</string>
@@ -1413,6 +1433,8 @@ morphe_header_custom_dark.png
     <string name="include">包含</string>
     <string name="disable">停用</string>
     <string name="enable">啟用</string>
+    <string name="enable_all">全部啟用</string>
+    <string name="disable_all">全部停用</string>
     <string name="trust">信任</string>
     <string name="loading">載入中……</string>
     <string name="creating">正在建立…</string>

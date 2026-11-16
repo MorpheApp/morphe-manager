@@ -346,8 +346,6 @@ Valitse, mistä sen APK haetaan"</string>
     <string name="home_external_apk_expert_mode_required">Tämä ominaisuus on käytettävissä vain asiantuntijatilassa</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Hae lisäosia</string>
-    <string name="expert_mode_disable_all">Poista kaikki käytöstä</string>
-    <string name="expert_mode_enable_all">Ota kaikki käyttöön</string>
     <string name="expert_mode_enable_all_universal_pending">Napauta uudelleen ottaaksesi universaalit paikkaukset käyttöön</string>
     <string name="expert_mode_universal_all_warning_title">Ota käyttöön kaikki universaalit paikkaukset?</string>
     <string name="expert_mode_universal_all_warning_message">Universaalit paikkaukset eivät ole testattuja yhdessä. Kaikkien käyttöönotto kerralla voi aiheuttaa ristiriitoja, epäonnistuneita paikkauksia tai kaatumisia</string>
@@ -567,9 +565,12 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="app_links_unverified_banner_description">Tuetut verkkolinkit avautuvat tällä hetkellä selaimessasi tämän sovelluksen sijaan</string>
     <string name="app_links_enable_auto">Ota käyttöön automaattisesti</string>
     <string name="app_links_enable_auto_in_progress">Otetaan linkkejä käyttöön…</string>
+    <string name="app_links_disable_all_in_progress">Poistetaan linkkejä käytöstä…</string>
     <string name="app_links_open_settings">Avaa linkkien asetukset</string>
     <string name="app_links_repair_success">Sovelluslinkit on otettu käyttöön onnistuneesti</string>
     <string name="app_links_repair_failed">Sovelluslinkkien automaattinen käyttöönotto epäonnistui</string>
+    <string name="app_links_disable_success">Sovelluslinkit poistettu käytöstä</string>
+    <string name="app_links_disable_failed">Sovelluslinkkien poistaminen käytöstä epäonnistui</string>
     <string name="app_links_change_failed">Sovelluslinkkien muuttaminen epäonnistui</string>
     <string name="app_links_all_verified">Kaikki tuetut linkit on määritetty avautumaan tässä sovelluksessa</string>
     <string name="app_links_fix">Korjaa linkit</string>
@@ -628,8 +629,6 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="patcher_field_value_stripped">poistettu</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">säilytetty</string>
-    <string name="patcher_tab_logs">Paikkauksen lokit</string>
-    <string name="patcher_tab_game">Pelit</string>
     <string name="patcher_logs_waiting">Odotetaan lokitulostetta…</string>
     <string name="patcher_logs_lost">Lokitulostetta ei tallenneta sovelluksen uudelleenkäynnistyksen yli</string>
     <string name="patcher_long_step_warning">Tämä vaihe voi kestää hetken. Odota...</string>
@@ -659,7 +658,6 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patcher_install_error_subtitle">Kokeile poistaa sovelluksen asennus ja asentaa se uudelleen</string>
     <string name="patcher_ready_to_mount_subtitle">Liitä napauttamalla alla olevaa painiketta</string>
     <string name="patcher_patches_excluded_for_installer">Ei saatavilla tälle asennusmenetelmälle ja pois suljettu: %s</string>
-    <string name="patcher_back_to_game_hint">Napauta %1$s palataksesi peliisi</string>
     <string name="patcher_storage_permission_dialog_title">Tallennuspolkua ei voida käyttää</string>
     <string name="patcher_incompatible_patcher_title">Päivitys vaaditaan</string>
     <string name="patcher_incompatible_patcher_description">Lähde &lt;b&gt;%1$s&lt;/b&gt; vaatii &lt;b&gt;%2$s&lt;/b&gt;-patcherin tai uudemman. Päivitä Morphe käyttääksesi sitä</string>
@@ -764,7 +762,9 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="package_name">Paketin nimi</string>
     <string name="failed_to_mount">Liittäminen epäonnistui: %s</string>
     <string name="failed_to_unmount">Irrottaminen epäonnistui: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minipelit</string>
+    <string name="mini_games_description">Nopeita pelejä vapaan hetken viettoon</string>
     <string name="mini_game_score">Pisteet %s</string>
     <string name="mini_game_best">Paras %s</string>
     <string name="mini_game_new_record">Uusi ennätys!</string>
@@ -773,7 +773,14 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="mini_game_paused">Tauolla</string>
     <string name="mini_game_resume">Jatka</string>
     <string name="mini_game_restart">Aloita alusta</string>
-    <string name="mini_game_change">Valitse toinen peli</string>
+    <string name="mini_game_pause">Tauko</string>
+    <string name="mini_game_score_label">Pisteet</string>
+    <string name="mini_game_best_label">Paras</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Taso</string>
+    <string name="mini_game_lines">Rivit</string>
+    <string name="mini_game_lives">Henget</string>
+    <string name="mini_game_flags">Liput</string>
     <string name="mini_game_2048_picker_subtitle">Liu\'uta laattoja yhdistääksesi ne</string>
     <string name="mini_game_flappy_picker_subtitle">Napauta lentääksesi putkien läpi</string>
     <string name="mini_game_flappy_tap_to_start">Napauta lentääksesi</string>
@@ -1339,13 +1346,26 @@ Yksityiskohdat: %2$s"</string>
     <string name="file_picker_new_folder_failed">Kansiota ei voitu luoda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tietoja</string>
-    <string name="settings_system_manager_description">Avoimen lähdekoodin projekti suosittujen Android-sovellusten moderniin ja suoraviivaiseen muokkaukseen, jota ohjaavat yhteisön palaute ja panokset</string>
-    <string name="credits">Tekijät</string>
-    <string name="credits_description">Morpheen takana olevat ihmiset</string>
     <string name="settings_about_section_project">Projekti</string>
     <string name="settings_about_section_help">Ohjeet</string>
-    <string name="credits_current_development">Nykyinen kehitys</string>
     <string name="credits_prior_development">Aikaisempi kehitys</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Hallinta</string>
+    <string name="about_update_available">Päivitys saatavilla: %s</string>
+    <string name="about_up_to_date">Ajantasainen</string>
+    <string name="about_links">Viralliset linkit</string>
+    <string name="about_link_donate">Lahjoita</string>
+    <string name="about_link_website">Verkkosivusto</string>
+    <string name="about_link_translations">Käännökset</string>
+    <string name="contributors">Avustajat</string>
+    <string name="contributors_description">Viimeiset 12 kuukautta</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Tukijat</string>
+    <string name="supporters_description">Tukijat Open Collectivessa</string>
+    <string name="supporters_become">Tule tukijaksi</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Ja %s muuta</string>
+    <string name="people_unavailable">Listaa ei voitu ladata</string>
     <string name="opensource_licenses">Avoimen lähdekoodin lisenssit</string>
     <string name="opensource_licenses_description">Kirjastot, joille Morphe perustuu</string>
     <string name="opensource_licenses_search">Hae kirjastoja ja lisenssejä</string>
@@ -1415,6 +1435,8 @@ Yksityiskohdat: %2$s"</string>
     <string name="include">Sisällytä</string>
     <string name="disable">Poista käytöstä</string>
     <string name="enable">Ota käyttöön</string>
+    <string name="enable_all">Ota kaikki käyttöön</string>
+    <string name="disable_all">Poista kaikki käytöstä</string>
     <string name="trust">Luota</string>
     <string name="loading">Ladataan…</string>
     <string name="creating">Luodaan…</string>

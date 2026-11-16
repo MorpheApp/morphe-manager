@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">此功能仅在专家模式下可用</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">搜索补丁</string>
-    <string name="expert_mode_disable_all">禁用所有</string>
-    <string name="expert_mode_enable_all">启用所有</string>
     <string name="expert_mode_enable_all_universal_pending">再次点按以启用通用补丁</string>
     <string name="expert_mode_universal_all_warning_title">启用所有通用补丁？</string>
     <string name="expert_mode_universal_all_warning_message">通用补丁未经全面测试。同时启用可能导致冲突、补丁失败或崩溃。</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">受支持的网页链接目前会在您的浏览器中打开，而不是在此应用中打开</string>
     <string name="app_links_enable_auto">自动启用</string>
     <string name="app_links_enable_auto_in_progress">正在启用链接……</string>
+    <string name="app_links_disable_all_in_progress">正在禁用链接……</string>
     <string name="app_links_open_settings">打开链接设置</string>
     <string name="app_links_repair_success">应用链接已成功启用</string>
     <string name="app_links_repair_failed">自动启用应用链接失败</string>
+    <string name="app_links_disable_success">应用链接已禁用</string>
+    <string name="app_links_disable_failed">禁用应用链接失败</string>
     <string name="app_links_change_failed">更改应用链接失败</string>
     <string name="app_links_all_verified">所有受支持的链接均已配置为在此应用中打开</string>
     <string name="app_links_fix">修复链接</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">已移除</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">已保留</string>
-    <string name="patcher_tab_logs">补丁日志</string>
-    <string name="patcher_tab_game">游戏</string>
     <string name="patcher_logs_waiting">正在等待日志输出…</string>
     <string name="patcher_logs_lost">应用程序重启后，日志输出不会保留</string>
     <string name="patcher_long_step_warning">此步骤可能需要一段时间。请稍候…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">尝试重新卸载并安装</string>
     <string name="patcher_ready_to_mount_subtitle">按下方按钮挂载</string>
     <string name="patcher_patches_excluded_for_installer">不适用于此安装方法并已排除：%s</string>
-    <string name="patcher_back_to_game_hint">点击%1$s返回游戏</string>
     <string name="patcher_storage_permission_dialog_title">无法访问存储路径</string>
     <string name="patcher_incompatible_patcher_title">更新要求</string>
     <string name="patcher_incompatible_patcher_description">源 &lt;b&gt;%1$s&lt;/b&gt; 需要修补程序 &lt;b&gt;%2$s&lt;/b&gt; 或更高版本。更新 Morphe 以使用它</string>
@@ -764,7 +762,9 @@
     <string name="package_name">包名</string>
     <string name="failed_to_mount">挂载失败：%s</string>
     <string name="failed_to_unmount">取消挂载失败：%s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">小游戏</string>
+    <string name="mini_games_description">利用碎片时间快速游玩</string>
     <string name="mini_game_score">得分 %s</string>
     <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新的记录！</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">暂停</string>
     <string name="mini_game_resume">继续</string>
     <string name="mini_game_restart">重新开始</string>
-    <string name="mini_game_change">选择其他游戏</string>
+    <string name="mini_game_pause">暂停</string>
+    <string name="mini_game_score_label">得分</string>
+    <string name="mini_game_best_label">最高分</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">关卡</string>
+    <string name="mini_game_lines">行数</string>
+    <string name="mini_game_lives">生命值</string>
+    <string name="mini_game_flags">旗帜</string>
     <string name="mini_game_2048_picker_subtitle">滑动方块进行合并</string>
     <string name="mini_game_flappy_picker_subtitle">点击穿过管道</string>
     <string name="mini_game_flappy_tap_to_start">点击飞行</string>
@@ -1227,7 +1234,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_storage_management_title">存储管理</string>
     <string name="settings_system_storage_management_description">显示磁盘使用情况并清除缓存文件</string>
     <!-- Shown under how much Morphe takes up. "%1$s" is the space still available on the device, already formatted with its unit. "Free" as in unused, not as in free of charge. -->
-    <string name="settings_system_storage_free">%1$s 免费空间</string>
+    <string name="settings_system_storage_free">%1$s 可用空间</string>
     <string name="settings_system_storage_saved_apks">保存的 APK</string>
     <string name="settings_system_storage_caches">缓存</string>
     <string name="settings_system_storage_keystore_title">签名密钥库</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">无法创建文件夹</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">关于</string>
-    <string name="settings_system_manager_description">一个开源项目，用于现代化的、流线型的流行 Android 应用补丁，由社区反馈和贡献驱动</string>
-    <string name="credits">功劳簿</string>
-    <string name="credits_description">Morphe 背后的团队</string>
     <string name="settings_about_section_project">项目</string>
     <string name="settings_about_section_help">帮助</string>
-    <string name="credits_current_development">当前开发</string>
     <string name="credits_prior_development">先前开发</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">管理器</string>
+    <string name="about_update_available">有可用更新：%s</string>
+    <string name="about_up_to_date">最新版本</string>
+    <string name="about_links">官方链接</string>
+    <string name="about_link_donate">捐赠</string>
+    <string name="about_link_website">网站</string>
+    <string name="about_link_translations">翻译</string>
+    <string name="contributors">贡献者</string>
+    <string name="contributors_description">过去 12 个月</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">支持者</string>
+    <string name="supporters_description">Open Collective 上的赞助者</string>
+    <string name="supporters_become">成为支持者</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">以及另外 %s 位</string>
+    <string name="people_unavailable">无法加载列表</string>
     <string name="opensource_licenses">开源许可证</string>
     <string name="opensource_licenses_description">构建 Morphe 所使用的库</string>
     <string name="opensource_licenses_search">搜索库和许可证</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">包括</string>
     <string name="disable">禁用</string>
     <string name="enable">启用</string>
+    <string name="enable_all">全部启用</string>
+    <string name="disable_all">全部禁用</string>
     <string name="trust">信任</string>
     <string name="loading">正在加载…</string>
     <string name="creating">创建中…</string>

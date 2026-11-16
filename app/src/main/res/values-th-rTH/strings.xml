@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">คุณสมบัตินี้มีให้ใช้งานเฉพาะในโหมดผู้เชี่ยวชาญเท่านั้น</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">ค้นหาแพตช์</string>
-    <string name="expert_mode_disable_all">ปิดการใช้งานทั้งหมด</string>
-    <string name="expert_mode_enable_all">เปิดการใช้งานทั้งหมด</string>
     <string name="expert_mode_enable_all_universal_pending">แตะอีกครั้งสำหรับแพตช์สากล</string>
     <string name="expert_mode_universal_all_warning_title">เปิดใช้แพตช์สากลทั้งหมดหรือไม่?</string>
     <string name="expert_mode_universal_all_warning_message">แพตช์สากลไม่ได้ทดสอบร่วมกัน การเปิดใช้ทั้งหมดพร้อมกันอาจทำให้เกิดความขัดแย้ง การแพตช์ล้มเหลว หรือการขัดข้อง</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">ขณะนี้ลิงก์เว็บที่รองรับเปิดในเบราว์เซอร์ของคุณแทนที่จะเป็นในแอปนี้</string>
     <string name="app_links_enable_auto">เปิดใช้โดยอัตโนมัติ</string>
     <string name="app_links_enable_auto_in_progress">กำลังเปิดใช้ลิงก์…</string>
+    <string name="app_links_disable_all_in_progress">กำลังปิดใช้งานลิงก์…</string>
     <string name="app_links_open_settings">เปิดการตั้งค่าลิงก์</string>
     <string name="app_links_repair_success">เปิดใช้ลิงก์แอปสำเร็จแล้ว</string>
     <string name="app_links_repair_failed">ไม่สามารถเปิดใช้งานลิงก์แอปโดยอัตโนมัติได้</string>
+    <string name="app_links_disable_success">ปิดใช้งานลิงก์ของแอปแล้ว</string>
+    <string name="app_links_disable_failed">ไม่สามารถปิดใช้งานลิงก์ของแอปได้</string>
     <string name="app_links_change_failed">เปลี่ยนลิงก์แอปไม่สำเร็จ</string>
     <string name="app_links_all_verified">ลิงก์ที่รองรับทั้งหมดได้รับการกำหนดค่าให้เปิดในแอปนี้แล้ว</string>
     <string name="app_links_fix">แก้ไขลิงก์</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">ถูกตัดออก</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">คงไว้</string>
-    <string name="patcher_tab_logs">บันทึกตัวแพตช์</string>
-    <string name="patcher_tab_game">เกม</string>
     <string name="patcher_logs_waiting">กำลังรอผลลัพธ์บันทึก…</string>
     <string name="patcher_logs_lost">ผลลัพธ์บันทึกจะไม่ถูกเก็บไว้เมื่อรีสตาร์ทแอป</string>
     <string name="patcher_long_step_warning">ขั้นตอนนี้อาจใช้เวลานาน โปรดรอสักครู่…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">ลองถอนการติดตั้งแล้วติดตั้งใหม่อีกครั้ง</string>
     <string name="patcher_ready_to_mount_subtitle">กดปุ่มด้านล่างเพื่อ Mount</string>
     <string name="patcher_patches_excluded_for_installer">ไม่สามารถใช้ได้กับวิธีการติดตั้งนี้ และไม่รวม: %s</string>
-    <string name="patcher_back_to_game_hint">แตะ %1$s เพื่อกลับไปยังเกมของคุณ</string>
     <string name="patcher_storage_permission_dialog_title">ไม่สามารถเข้าถึงเส้นทางเก็บข้อมูล</string>
     <string name="patcher_incompatible_patcher_title">จำเป็นต้องอัปเดต</string>
     <string name="patcher_incompatible_patcher_description">แหล่งที่มา &lt;b&gt;%1$s&lt;/b&gt; ต้องใช้ตัวแพตช์ &lt;b&gt;%2$s&lt;/b&gt; หรือใหม่กว่า อัปเดต Morphe เพื่อใช้งาน</string>
@@ -764,7 +762,9 @@
     <string name="package_name">ชื่อแพ็กเกจ</string>
     <string name="failed_to_mount">ไม่สามารถเมานต์ได้: %s</string>
     <string name="failed_to_unmount">ไม่สามารถยกเลิกการเมานต์ได้: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">มินิเกม</string>
+    <string name="mini_games_description">เกมสั้นๆ สำหรับใช้เวลาว่าง</string>
     <string name="mini_game_score">คะแนน %s</string>
     <string name="mini_game_best">ดีที่สุด %s</string>
     <string name="mini_game_new_record">บันทึกใหม่!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">หยุดชั่วคราว</string>
     <string name="mini_game_resume">ดำเนินการต่อ</string>
     <string name="mini_game_restart">เริ่มใหม่</string>
-    <string name="mini_game_change">เลือกเกมอื่น</string>
+    <string name="mini_game_pause">หยุดชั่วคราว</string>
+    <string name="mini_game_score_label">คะแนน</string>
+    <string name="mini_game_best_label">ดีที่สุด</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">เลเวล</string>
+    <string name="mini_game_lines">แถว</string>
+    <string name="mini_game_lives">ชีวิต</string>
+    <string name="mini_game_flags">ธง</string>
     <string name="mini_game_2048_picker_subtitle">เลื่อนไทล์เพื่อรวมกัน</string>
     <string name="mini_game_flappy_picker_subtitle">แตะเพื่อบินผ่านท่อ</string>
     <string name="mini_game_flappy_tap_to_start">แตะเพื่อบิน</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">ไม่สามารถสร้างโฟลเดอร์ได้</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">เกี่ยวกับ</string>
-    <string name="settings_system_manager_description">โครงการโอเพนซอร์สสำหรับการแพตช์แอป Android ยอดนิยมที่ทันสมัยและราบรื่น ซึ่งขับเคลื่อนด้วยข้อเสนอแนะและการมีส่วนร่วมจากชุมชน</string>
-    <string name="credits">เครดิต</string>
-    <string name="credits_description">บุคคลที่อยู่เบื้องหลัง Morphe</string>
     <string name="settings_about_section_project">โครงการ</string>
     <string name="settings_about_section_help">ช่วยเหลือ</string>
-    <string name="credits_current_development">การพัฒนาปัจจุบัน</string>
     <string name="credits_prior_development">การพัฒนาที่ผ่านมา</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">ตัวจัดการ</string>
+    <string name="about_update_available">มีอัปเดตพร้อมใช้งาน: %s</string>
+    <string name="about_up_to_date">เป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="about_links">ลิงก์อย่างเป็นทางการ</string>
+    <string name="about_link_donate">บริจาค</string>
+    <string name="about_link_website">เว็บไซต์</string>
+    <string name="about_link_translations">การแปล</string>
+    <string name="contributors">ผู้สนับสนุน</string>
+    <string name="contributors_description">12 เดือนที่ผ่านมา</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">ผู้ให้การสนับสนุน</string>
+    <string name="supporters_description">ผู้สนับสนุนบน Open Collective</string>
+    <string name="supporters_become">ร่วมเป็นผู้สนับสนุน</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">และอีก %s คน</string>
+    <string name="people_unavailable">ไม่สามารถโหลดรายการได้</string>
     <string name="opensource_licenses">สัญญาอนุญาตโอเพนซอร์ส</string>
     <string name="opensource_licenses_description">ไลบรารีที่สร้าง Morphe ขึ้นมา</string>
     <string name="opensource_licenses_search">ค้นหาไลบรารีและใบอนุญาต</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">รวม</string>
     <string name="disable">ปิดการใช้งาน</string>
     <string name="enable">เปิดใช้งาน</string>
+    <string name="enable_all">เปิดการใช้งานทั้งหมด</string>
+    <string name="disable_all">ปิดการใช้งานทั้งหมด</string>
     <string name="trust">เชื่อถือ</string>
     <string name="loading">กำลังโหลด…</string>
     <string name="creating">กำลังสร้าง…</string>

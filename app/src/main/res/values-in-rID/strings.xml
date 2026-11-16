@@ -346,8 +346,6 @@ Pilih dari mana Anda ingin mengambil APK-nya"</string>
     <string name="home_external_apk_expert_mode_required">Fitur ini hanya tersedia dalam Mode Ahli</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Cari tambalan</string>
-    <string name="expert_mode_disable_all">Nonaktifkan semua</string>
-    <string name="expert_mode_enable_all">Aktifkan semua</string>
     <string name="expert_mode_enable_all_universal_pending">Ketuk lagi untuk tambalan universal</string>
     <string name="expert_mode_universal_all_warning_title">Aktifkan semua tambalan universal?</string>
     <string name="expert_mode_universal_all_warning_message">Tambalan universal tidak diuji secara bersamaan. Mengaktifkan semuanya sekaligus dapat menyebabkan konflik, kegagalan dalam penambalan, atau crash</string>
@@ -567,9 +565,12 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="app_links_unverified_banner_description">Tautan web yang didukung saat ini terbuka di browser Anda, bukan di aplikasi ini</string>
     <string name="app_links_enable_auto">Aktifkan otomatis</string>
     <string name="app_links_enable_auto_in_progress">Mengaktifkan tautan…</string>
+    <string name="app_links_disable_all_in_progress">Menonaktifkan tautan…</string>
     <string name="app_links_open_settings">Buka pengaturan tautan</string>
     <string name="app_links_repair_success">Tautan aplikasi berhasil diaktifkan</string>
     <string name="app_links_repair_failed">Gagal mengaktifkan tautan aplikasi secara otomatis</string>
+    <string name="app_links_disable_success">Tautan aplikasi dinonaktifkan</string>
+    <string name="app_links_disable_failed">Gagal menonaktifkan tautan aplikasi</string>
     <string name="app_links_change_failed">Gagal mengubah tautan aplikasi</string>
     <string name="app_links_all_verified">Semua tautan yang didukung dikonfigurasi untuk dibuka di aplikasi ini</string>
     <string name="app_links_fix">Perbaiki tautan</string>
@@ -628,8 +629,6 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="patcher_field_value_stripped">dihilangkan</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">dipertahankan</string>
-    <string name="patcher_tab_logs">Catatan Penambal</string>
-    <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_logs_waiting">Menunggu keluaran log…</string>
     <string name="patcher_logs_lost">Keluaran log tidak disimpan saat aplikasi dimulai ulang</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin memerlukan waktu. Harap tunggu…</string>
@@ -659,7 +658,6 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patcher_install_error_subtitle">Coba copot dan pasang lagi</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan tombol di bawah untuk memasang</string>
     <string name="patcher_patches_excluded_for_installer">Tidak tersedia untuk metode pemasangan ini dan dikecualikan: %s</string>
-    <string name="patcher_back_to_game_hint">Ketuk %1$s untuk kembali ke permainan Anda</string>
     <string name="patcher_storage_permission_dialog_title">Tidak dapat mengakses jalur penyimpanan</string>
     <string name="patcher_incompatible_patcher_title">Pembaruan diperlukan</string>
     <string name="patcher_incompatible_patcher_description">Sumber &lt;b&gt;%1$s&lt;/b&gt; memerlukan patcher &lt;b&gt;%2$s&lt;/b&gt; atau yang lebih baru. Perbarui Morphe untuk menggunakannya</string>
@@ -764,7 +762,9 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="package_name">Nama paket</string>
     <string name="failed_to_mount">Gagal memasang: %s</string>
     <string name="failed_to_unmount">Gagal melepas pemasangan: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-game</string>
+    <string name="mini_games_description">Game cepat untuk mengisi waktu luang</string>
     <string name="mini_game_score">Skor %s</string>
     <string name="mini_game_best">%s terbaik</string>
     <string name="mini_game_new_record">Rekor baru!</string>
@@ -773,7 +773,14 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="mini_game_paused">Dijeda</string>
     <string name="mini_game_resume">Lanjutkan</string>
     <string name="mini_game_restart">Mulai dari awal</string>
-    <string name="mini_game_change">Pilih permainan lain</string>
+    <string name="mini_game_pause">Jeda</string>
+    <string name="mini_game_score_label">Skor</string>
+    <string name="mini_game_best_label">Terbaik</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Level</string>
+    <string name="mini_game_lines">Baris</string>
+    <string name="mini_game_lives">Nyawa</string>
+    <string name="mini_game_flags">Bendera</string>
     <string name="mini_game_2048_picker_subtitle">Geser balok untuk menggabungkan</string>
     <string name="mini_game_flappy_picker_subtitle">Ketuk untuk terbang melewati pipa</string>
     <string name="mini_game_flappy_tap_to_start">Ketuk untuk terbang</string>
@@ -1339,13 +1346,26 @@ Rincian: %2$s"</string>
     <string name="file_picker_new_folder_failed">Tidak dapat membuat folder</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tentang</string>
-    <string name="settings_system_manager_description">Sebuah proyek sumber terbuka untuk penambalan yang modern dan efisien pada aplikasi Android populer, dikembangkan berdasarkan masukan dan kontribusi dari komunitas</string>
-    <string name="credits">Kredit</string>
-    <string name="credits_description">Para pembuat Morphe</string>
     <string name="settings_about_section_project">Proyek</string>
     <string name="settings_about_section_help">Bantuan</string>
-    <string name="credits_current_development">Pengembangan saat ini</string>
     <string name="credits_prior_development">Pengembangan sebelumnya</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manajer</string>
+    <string name="about_update_available">Tersedia pembaruan: %s</string>
+    <string name="about_up_to_date">Terbaru</string>
+    <string name="about_links">Tautan resmi</string>
+    <string name="about_link_donate">Donasi</string>
+    <string name="about_link_website">Situs Web</string>
+    <string name="about_link_translations">Terjemahan</string>
+    <string name="contributors">Kontributor</string>
+    <string name="contributors_description">12 bulan terakhir</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Pendukung</string>
+    <string name="supporters_description">Pendukung di Open Collective</string>
+    <string name="supporters_become">Jadi pendukung</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Dan %s lainnya</string>
+    <string name="people_unavailable">Tidak dapat memuat daftar</string>
     <string name="opensource_licenses">Lisensi sumber terbuka</string>
     <string name="opensource_licenses_description">Perpustakaan yang digunakan untuk membangun Morphe</string>
     <string name="opensource_licenses_search">Cari pustaka dan lisensi</string>
@@ -1415,6 +1435,8 @@ Rincian: %2$s"</string>
     <string name="include">Termasuk</string>
     <string name="disable">Nonaktifkan</string>
     <string name="enable">Aktifkan</string>
+    <string name="enable_all">Aktifkan semua</string>
+    <string name="disable_all">Nonaktifkan semua</string>
     <string name="trust">Percayai</string>
     <string name="loading">Memuat…</string>
     <string name="creating">Membuat…</string>

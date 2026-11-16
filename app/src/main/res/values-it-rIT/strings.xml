@@ -346,8 +346,6 @@ Scegli da dove scaricare l'APK."</string>
     <string name="home_external_apk_expert_mode_required">Questa funzione è disponibile solo in modalità Esperto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Cerca patch</string>
-    <string name="expert_mode_disable_all">Disabilita tutte</string>
-    <string name="expert_mode_enable_all">Abilita tutte</string>
     <string name="expert_mode_enable_all_universal_pending">Tocca di nuovo per le patch universali</string>
     <string name="expert_mode_universal_all_warning_title">Abilitare tutte le patch universali?</string>
     <string name="expert_mode_universal_all_warning_message">Le patch universali non sono testate insieme. Abilitarle tutte contemporaneamente può causare conflitti, errori di patch o arresti anomali.</string>
@@ -567,9 +565,12 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="app_links_unverified_banner_description">I collegamenti web supportati attualmente si aprono nel browser invece che in questa app</string>
     <string name="app_links_enable_auto">Abilita automaticamente</string>
     <string name="app_links_enable_auto_in_progress">Abilitazione dei collegamenti…</string>
+    <string name="app_links_disable_all_in_progress">Disattivazione link…</string>
     <string name="app_links_open_settings">Apri le impostazioni dei collegamenti</string>
     <string name="app_links_repair_success">Collegamenti all\'app abilitati correttamente</string>
     <string name="app_links_repair_failed">Non è stato possibile abilitare automaticamente i collegamenti all\'app</string>
+    <string name="app_links_disable_success">Link dell\'app disattivati</string>
+    <string name="app_links_disable_failed">Impossibile disattivare i link dell\'app</string>
     <string name="app_links_change_failed">Impossibile modificare i collegamenti all\'app</string>
     <string name="app_links_all_verified">Tutti i collegamenti supportati sono configurati per aprirsi in questa app</string>
     <string name="app_links_fix">Correggi i collegamenti</string>
@@ -628,8 +629,6 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="patcher_field_value_stripped">rimosse</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">mantenute</string>
-    <string name="patcher_tab_logs">Log del patcher</string>
-    <string name="patcher_tab_game">Giochi</string>
     <string name="patcher_logs_waiting">In attesa dell\'output del log…</string>
     <string name="patcher_logs_lost">L\'output del log non viene mantenuto tra un riavvio dell\'app e l\'altro</string>
     <string name="patcher_long_step_warning">Questo passaggio potrebbe richiedere un po\'  di tempo. Si prega di attendere…</string>
@@ -659,7 +658,6 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patcher_install_error_subtitle">Prova a disinstallare e installare di nuovo</string>
     <string name="patcher_ready_to_mount_subtitle">Premi il pulsante qui sotto per montare</string>
     <string name="patcher_patches_excluded_for_installer">Non disponibile per questo metodo di installazione ed escluso: %s</string>
-    <string name="patcher_back_to_game_hint">Tocca %1$s per tornare al tuo gioco</string>
     <string name="patcher_storage_permission_dialog_title">Non è possibile accedere alla cartella di archiviazione</string>
     <string name="patcher_incompatible_patcher_title">Aggiornamento richiesto</string>
     <string name="patcher_incompatible_patcher_description">La sorgente &lt;b&gt;%1$s&lt;/b&gt; richiede il patcher &lt;b&gt;%2$s&lt;/b&gt; o una versione successiva. Aggiorna Morphe per usarla</string>
@@ -764,7 +762,9 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="package_name">Nome pacchetto</string>
     <string name="failed_to_mount">Impossibile montare: %s</string>
     <string name="failed_to_unmount">Impossibile smontare: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-giochi</string>
+    <string name="mini_games_description">Giochi rapidi per passare un minuto libero</string>
     <string name="mini_game_score">Punteggio %s</string>
     <string name="mini_game_best">Miglior %s</string>
     <string name="mini_game_new_record">Nuovo record!</string>
@@ -773,7 +773,14 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="mini_game_paused">In pausa</string>
     <string name="mini_game_resume">Continua</string>
     <string name="mini_game_restart">Ricomincia</string>
-    <string name="mini_game_change">Scegli un altro gioco</string>
+    <string name="mini_game_pause">Pausa</string>
+    <string name="mini_game_score_label">Punteggio</string>
+    <string name="mini_game_best_label">Migliore</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Livello</string>
+    <string name="mini_game_lines">Linee</string>
+    <string name="mini_game_lives">Vite</string>
+    <string name="mini_game_flags">Bandiere</string>
     <string name="mini_game_2048_picker_subtitle">Fai scorrere le tessere per unirle</string>
     <string name="mini_game_flappy_picker_subtitle">Tocca per volare tra i tubi</string>
     <string name="mini_game_flappy_tap_to_start">Tocca per volare</string>
@@ -1339,13 +1346,26 @@ Dettagli: %2$s"</string>
     <string name="file_picker_new_folder_failed">Impossibile creare la cartella</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">A proposito di</string>
-    <string name="settings_system_manager_description">Un progetto open-source per un patching moderno e semplificato delle app Android popolari, guidato dal feedback e dai contributi della community</string>
-    <string name="credits">Crediti</string>
-    <string name="credits_description">Le persone dietro Morphe</string>
     <string name="settings_about_section_project">Progetto</string>
     <string name="settings_about_section_help">Aiuto</string>
-    <string name="credits_current_development">Sviluppo attuale</string>
     <string name="credits_prior_development">Sviluppo precedente</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Gestore</string>
+    <string name="about_update_available">Aggiornamento disponibile: %s</string>
+    <string name="about_up_to_date">Aggiornato</string>
+    <string name="about_links">Link ufficiali</string>
+    <string name="about_link_donate">Dona</string>
+    <string name="about_link_website">Sito web</string>
+    <string name="about_link_translations">Traduzioni</string>
+    <string name="contributors">Collaboratori</string>
+    <string name="contributors_description">Ultimi 12 mesi</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Sostenitori</string>
+    <string name="supporters_description">Sostenitori su Open Collective</string>
+    <string name="supporters_become">Diventa un sostenitore</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">E altri %s</string>
+    <string name="people_unavailable">Impossibile caricare l\'elenco</string>
     <string name="opensource_licenses">Licenze open-source</string>
     <string name="opensource_licenses_description">Le librerie su cui è costruito Morphe</string>
     <string name="opensource_licenses_search">Cerca librerie e licenze</string>
@@ -1415,6 +1435,8 @@ Dettagli: %2$s"</string>
     <string name="include">Includi</string>
     <string name="disable">Disabilita</string>
     <string name="enable">Attiva</string>
+    <string name="enable_all">Abilita tutto</string>
+    <string name="disable_all">Disattiva tutto</string>
     <string name="trust">Fidati</string>
     <string name="loading">Caricamento in corso…</string>
     <string name="creating">Creazione…</string>

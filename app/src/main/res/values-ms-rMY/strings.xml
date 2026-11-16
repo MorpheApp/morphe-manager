@@ -346,8 +346,6 @@ Pilih dari mana untuk mengambil APK tersebut"</string>
     <string name="home_external_apk_expert_mode_required">Ciri ini hanya tersedia dalam mod Pakar</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Cari tampalan</string>
-    <string name="expert_mode_disable_all">Matikan semua</string>
-    <string name="expert_mode_enable_all">Dayakan semua</string>
     <string name="expert_mode_enable_all_universal_pending">Ketuk sekali lagi untuk tampalan universal</string>
     <string name="expert_mode_universal_all_warning_title">Aktifkan semua tampalan universal?</string>
     <string name="expert_mode_universal_all_warning_message">Tampalan universal tidak diuji bersama. Mengaktifkan kesemuanya sekaligus boleh menyebabkan konflik, kegagalan tampalan atau ranap</string>
@@ -568,9 +566,12 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="app_links_unverified_banner_description">Pautan web disokong kini dibuka dalam pelayar anda dan bukannya aplikasi ini</string>
     <string name="app_links_enable_auto">Aktifkan secara automatik</string>
     <string name="app_links_enable_auto_in_progress">Mengaktifkan pautan…</string>
+    <string name="app_links_disable_all_in_progress">Melumpuhkan pautan…</string>
     <string name="app_links_open_settings">Buka tetapan pautan</string>
     <string name="app_links_repair_success">Pautan aplikasi berjaya diaktifkan</string>
     <string name="app_links_repair_failed">Gagal mengaktifkan pautan aplikasi secara automatik</string>
+    <string name="app_links_disable_success">Pautan aplikasi dilumpuhkan</string>
+    <string name="app_links_disable_failed">Gagal melumpuhkan pautan aplikasi</string>
     <string name="app_links_change_failed">Gagal mengubah pautan aplikasi</string>
     <string name="app_links_all_verified">Semua pautan disokong dikonfigurasikan untuk dibuka dalam aplikasi ini</string>
     <string name="app_links_fix">Baiki pautan</string>
@@ -629,8 +630,6 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="patcher_field_value_stripped">dibuang</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">disimpan</string>
-    <string name="patcher_tab_logs">Log patcher</string>
-    <string name="patcher_tab_game">Permainan</string>
     <string name="patcher_logs_waiting">Menunggu output log…</string>
     <string name="patcher_logs_lost">Output log tidak disimpan semasa aplikasi dimulakan semula</string>
     <string name="patcher_long_step_warning">Langkah ini mungkin mengambil sedikit masa. Sila tunggu…</string>
@@ -660,7 +659,6 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="patcher_install_error_subtitle">Cuba nyahpasang dan pasang semula</string>
     <string name="patcher_ready_to_mount_subtitle">Tekan butang dibawah untuk memasang</string>
     <string name="patcher_patches_excluded_for_installer">Tidak tersedia untuk kaedah pemasangan ini dan dikecualikan: %s</string>
-    <string name="patcher_back_to_game_hint">Ketuk %1$s untuk kembali ke permainan anda</string>
     <string name="patcher_storage_permission_dialog_title">Laluan storan tidak dapat diakses</string>
     <string name="patcher_incompatible_patcher_title">Kemas kini diperlukan</string>
     <string name="patcher_incompatible_patcher_description">Sumber &lt;b&gt;%1$s&lt;/b&gt; memerlukan patcher &lt;b&gt;%2$s&lt;/b&gt; atau lebih baharu. Kemas kini Morphe untuk menggunakannya</string>
@@ -765,7 +763,9 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="package_name">Nama pakej</string>
     <string name="failed_to_mount">Gagal untuk ditunggang: %s</string>
     <string name="failed_to_unmount">Gagal untuk nyah-tunggang %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Permainan mini</string>
+    <string name="mini_games_description">Permainan pantas untuk mengisi masa lapang</string>
     <string name="mini_game_score">Markah %s</string>
     <string name="mini_game_best">Terbaik %s</string>
     <string name="mini_game_new_record">Rekod baharu!</string>
@@ -774,7 +774,14 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="mini_game_paused">Dijedakan</string>
     <string name="mini_game_resume">Teruskan</string>
     <string name="mini_game_restart">Mula semula</string>
-    <string name="mini_game_change">Pilih permainan lain</string>
+    <string name="mini_game_pause">Jeda</string>
+    <string name="mini_game_score_label">Markah</string>
+    <string name="mini_game_best_label">Terbaik</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Tahap</string>
+    <string name="mini_game_lines">Barisan</string>
+    <string name="mini_game_lives">Nyawa</string>
+    <string name="mini_game_flags">Bendera</string>
     <string name="mini_game_2048_picker_subtitle">Leret jubin untuk menggabungkan</string>
     <string name="mini_game_flappy_picker_subtitle">Ketuk untuk terbang melalui paip</string>
     <string name="mini_game_flappy_tap_to_start">Ketuk untuk terbang</string>
@@ -1340,13 +1347,26 @@ Butiran: %2$s"</string>
     <string name="file_picker_new_folder_failed">Tidak dapat mencipta folder</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Mengenai</string>
-    <string name="settings_system_manager_description">Projek sumber terbuka untuk tampalan moden dan diperkemas aplikasi Android popular, dipacu oleh maklum balas dan sumbangan komuniti</string>
-    <string name="credits">Pengakuan</string>
-    <string name="credits_description">Individu di sebalik Morphe</string>
     <string name="settings_about_section_project">Projek</string>
     <string name="settings_about_section_help">Bantuan</string>
-    <string name="credits_current_development">Pembangunan semasa</string>
     <string name="credits_prior_development">Pembangunan sebelumnya</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Pengurus</string>
+    <string name="about_update_available">Kemas kini tersedia: %s</string>
+    <string name="about_up_to_date">Terkini</string>
+    <string name="about_links">Pautan rasmi</string>
+    <string name="about_link_donate">Derma</string>
+    <string name="about_link_website">Laman web</string>
+    <string name="about_link_translations">Terjemahan</string>
+    <string name="contributors">Penyumbang</string>
+    <string name="contributors_description">12 bulan terakhir</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Penyokong</string>
+    <string name="supporters_description">Penyokong di Open Collective</string>
+    <string name="supporters_become">Jadi penyokong</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Dan %s lagi</string>
+    <string name="people_unavailable">Gagal memuatkan senarai</string>
     <string name="opensource_licenses">Lesen sumber terbuka</string>
     <string name="opensource_licenses_description">Pustaka yang membina Morphe</string>
     <string name="opensource_licenses_search">Cari pustaka dan lesen</string>
@@ -1416,6 +1436,8 @@ Butiran: %2$s"</string>
     <string name="include">Sertakan</string>
     <string name="disable">Lumpuhkan</string>
     <string name="enable">Dayakan</string>
+    <string name="enable_all">Dayakan semua</string>
+    <string name="disable_all">Matikan semua</string>
     <string name="trust">Percayai</string>
     <string name="loading">Memuat…</string>
     <string name="creating">Mencipta…</string>

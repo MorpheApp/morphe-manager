@@ -346,8 +346,6 @@ Escolle de onde collegar o seu APK"</string>
     <string name="home_external_apk_expert_mode_required">Esta funcionalidade só está dispoñible no modo Experto</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Buscar parches</string>
-    <string name="expert_mode_disable_all">Desactivar todo</string>
-    <string name="expert_mode_enable_all">Activar todo</string>
     <string name="expert_mode_enable_all_universal_pending">Toca de novo para os parches universais</string>
     <string name="expert_mode_universal_all_warning_title">Activar todos os parches universais?</string>
     <string name="expert_mode_universal_all_warning_message">Os parches universais non foron probados xuntos. Activalos todos a veza pode causar conflitos, fallos no parcheo ou erros do sistema</string>
@@ -568,9 +566,12 @@ Elixe outro APK</string>
     <string name="app_links_unverified_banner_description">As ligazóns web compatibles ábrense actualmente no seu navegador en vez desta aplicación</string>
     <string name="app_links_enable_auto">Activar automaticamente</string>
     <string name="app_links_enable_auto_in_progress">Activando ligazóns…</string>
+    <string name="app_links_disable_all_in_progress">Desactivando ligazóns…</string>
     <string name="app_links_open_settings">Abrir configuración de ligazóns</string>
     <string name="app_links_repair_success">Ligazóns da aplicación activadas con éxito</string>
     <string name="app_links_repair_failed">Erro ao activar as ligazóns da aplicación automaticamente</string>
+    <string name="app_links_disable_success">Ligazóns da app desactivadas</string>
+    <string name="app_links_disable_failed">Erro ao desactivar as ligazóns da app</string>
     <string name="app_links_change_failed">Fallou ao cambiar os ligazóns da aplicación</string>
     <string name="app_links_all_verified">Todas as ligazóns compatibles están configuradas para abrirse nesta aplicación</string>
     <string name="app_links_fix">Correxir ligazóns</string>
@@ -629,8 +630,6 @@ Elixe outro APK</string>
     <string name="patcher_field_value_stripped">eliminadas</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">mantidas</string>
-    <string name="patcher_tab_logs">Logs do patcher</string>
-    <string name="patcher_tab_game">Xogos</string>
     <string name="patcher_logs_waiting">Agardando a saída do rexistro…</string>
     <string name="patcher_logs_lost">A saída do rexistro non se conserva ao reiniciar a aplicación</string>
     <string name="patcher_long_step_warning">Este paso poderá tardar un tempo. Por favor, agarde…</string>
@@ -660,7 +659,6 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patcher_install_error_subtitle">Tente desinstalar e instalar de novo</string>
     <string name="patcher_ready_to_mount_subtitle">Prema o botón de abaixo para montar</string>
     <string name="patcher_patches_excluded_for_installer">Non dispoñible para este método de instalación e excluído: %s</string>
-    <string name="patcher_back_to_game_hint">Toca %1$s para volver ao teu xogo</string>
     <string name="patcher_storage_permission_dialog_title">Non se pode acceder á ruta de almacenamento</string>
     <string name="patcher_incompatible_patcher_title">Actualización necesaria</string>
     <string name="patcher_incompatible_patcher_description">A fonte &lt;b&gt;%1$s&lt;/b&gt; require o parcheador &lt;b&gt;%2$s&lt;/b&gt; ou un máis recente. Actualiza Morphe para usalo</string>
@@ -765,7 +763,9 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="package_name">Nome do paquete</string>
     <string name="failed_to_mount">Fallo ao montar: %s</string>
     <string name="failed_to_unmount">Fallo ao desmontar: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minixogos</string>
+    <string name="mini_games_description">Xogos rápidos para pasar un minuto libre</string>
     <string name="mini_game_score">Puntuación %s</string>
     <string name="mini_game_best">Mellor %s</string>
     <string name="mini_game_new_record">Novo récorde!</string>
@@ -774,7 +774,14 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="mini_game_paused">Pausado</string>
     <string name="mini_game_resume">Continuar</string>
     <string name="mini_game_restart">Comezar de novo</string>
-    <string name="mini_game_change">Elixe outro xogo</string>
+    <string name="mini_game_pause">Pausa</string>
+    <string name="mini_game_score_label">Puntuación</string>
+    <string name="mini_game_best_label">Mellor</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Nivel</string>
+    <string name="mini_game_lines">Liñas</string>
+    <string name="mini_game_lives">Vidas</string>
+    <string name="mini_game_flags">Bandeiras</string>
     <string name="mini_game_2048_picker_subtitle">Desliza as fichas para fusionalas</string>
     <string name="mini_game_flappy_picker_subtitle">Toca para voar entre tubos</string>
     <string name="mini_game_flappy_tap_to_start">Toca para voar</string>
@@ -1340,13 +1347,26 @@ Detalles: %2$s"</string>
     <string name="file_picker_new_folder_failed">Non foi posible crear a cartafol</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Acerca de</string>
-    <string name="settings_system_manager_description">Un proxecto de código aberto para un parcheo moderno e simplificado de aplicacións populares de Android, impulsado polos comentarios e contribucións da comunidade</string>
-    <string name="credits">Créditos</string>
-    <string name="credits_description">As persoas detrás de Morphe</string>
     <string name="settings_about_section_project">Proxecto</string>
     <string name="settings_about_section_help">Axuda</string>
-    <string name="credits_current_development">Desenvolvemento actual</string>
     <string name="credits_prior_development">Desenvolvemento previo</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Xestor ብ</string>
+    <string name="about_update_available">Actualización dispoñible: %s</string>
+    <string name="about_up_to_date">Ao día</string>
+    <string name="about_links">Ligazóns oficiais</string>
+    <string name="about_link_donate">Doar</string>
+    <string name="about_link_website">Sitio web</string>
+    <string name="about_link_translations">Traducións</string>
+    <string name="contributors">Contribuidores</string>
+    <string name="contributors_description">Últimos 12 meses</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Apoiadores</string>
+    <string name="supporters_description">Apoiadores en Open Collective</string>
+    <string name="supporters_become">Converteute nun apoiador</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">E %s máis</string>
+    <string name="people_unavailable">Non foi posible cargar a lista</string>
     <string name="opensource_licenses">Licenzas de código aberto</string>
     <string name="opensource_licenses_description">As bibliotecas nas que se basea Morphe</string>
     <string name="opensource_licenses_search">Buscar bibliotecas e licenzas</string>
@@ -1416,6 +1436,8 @@ Detalles: %2$s"</string>
     <string name="include">Incluir</string>
     <string name="disable">Desactivar</string>
     <string name="enable">Activar</string>
+    <string name="enable_all">Activar todo</string>
+    <string name="disable_all">Desactivar todo</string>
     <string name="trust">Confiar</string>
     <string name="loading">Cargando…</string>
     <string name="creating">Creando…</string>

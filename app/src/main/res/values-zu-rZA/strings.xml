@@ -346,8 +346,6 @@ Khetha ukuthi uthathe i-APK yayo kuphi"</string>
     <string name="home_external_apk_expert_mode_required">Le ncwaba itholakala kuphela kumode we-Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Funa izigaba</string>
-    <string name="expert_mode_disable_all">Vala zonke</string>
-    <string name="expert_mode_enable_all">Vula zonke</string>
     <string name="expert_mode_enable_all_universal_pending">Thinta futhi ukuze uthole ama-patches onke</string>
     <string name="expert_mode_universal_all_warning_title">Vula wonke ama-patches universal?</string>
     <string name="expert_mode_universal_all_warning_message">Ama-patches universal awakuhloliswana. Ukuvula wonke ngasikhathi sinye kungabangela ukungahambisani, ukuhluleka kokufaka i-patch, noma ukuqhuma kwe-app</string>
@@ -567,9 +565,12 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="app_links_unverified_banner_description">Izixhumanisi zewebhu ezisekelwe njengamanje zivulwa kubrowser yakho esikhundleni salolu hlelo</string>
     <string name="app_links_enable_auto">Vumela ngokuzenzakalelayo</string>
     <string name="app_links_enable_auto_in_progress">Kuvunyelwa izixhumanisi…</string>
+    <string name="app_links_disable_all_in_progress">Kukhubazwa amalinki…</string>
     <string name="app_links_open_settings">Vula izilungiselelo zezixhumanisi</string>
     <string name="app_links_repair_success">Izixhumanisi zehlelo zivunyelwe ngempumelelo</string>
     <string name="app_links_repair_failed">Kuhlulekile ukuvumela izixhumanisi zehlelo ngokuzenzakalelayo</string>
+    <string name="app_links_disable_success">Amalinki ohlelo akhubaziwe</string>
+    <string name="app_links_disable_failed">Kuhlulekile ukukhubaza amalinki ohlelo</string>
     <string name="app_links_change_failed">Kuhleleke ukushintsha ama-app links</string>
     <string name="app_links_all_verified">Zonke izixhumanisi ezisekelwe zilungiselelwe ukuvulwa kulolu hlelo</string>
     <string name="app_links_fix">Lungisa izixhumanisi</string>
@@ -628,8 +629,6 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="patcher_field_value_stripped">kukhishwe</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">kugcinwe</string>
-    <string name="patcher_tab_logs">Ama-log e-Patcher</string>
-    <string name="patcher_tab_game">Imidlalo</string>
     <string name="patcher_logs_waiting">Kulindwe okuphumayo kwelogi…</string>
     <string name="patcher_logs_lost">Okuphumayo kwelogi akugcinwa lapho uhlanzwa uhlaziya uhlelo</string>
     <string name="patcher_long_step_warning">Leli nyathelo lingathatha isikhathi. Sicela ulinde…</string>
@@ -659,7 +658,6 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patcher_install_error_subtitle">Zama ukususa bese ufaka futhi</string>
     <string name="patcher_ready_to_mount_subtitle">Cindezela inkinobho engaphansi ukuze uxhumeze</string>
     <string name="patcher_patches_excluded_for_installer">Alitholakali kule ndlela yokuhlanganisa futhi kukhishwe: %s</string>
-    <string name="patcher_back_to_game_hint">Thinta u-%1$s ukuze ubuyele emdlalweni wakho</string>
     <string name="patcher_storage_permission_dialog_title">Awukwazi ukufinyelela endleleni yokugcina (storage path)</string>
     <string name="patcher_incompatible_patcher_title">Kudingeka ukubuyekeza</string>
     <string name="patcher_incompatible_patcher_description">Umthombo &lt;b&gt;%1$s&lt;/b&gt; udinga i-patcher &lt;b&gt;%2$s&lt;/b&gt; noma entsha kakhulu. Thuthukisa i-Morphe ukuze uyisebenzise</string>
@@ -764,7 +762,9 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="package_name">Igama leapakiage</string>
     <string name="failed_to_mount">Kuhleleke ukumount-a: %s</string>
     <string name="failed_to_unmount">Kuhleleke ukunmount-a: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Imidlalo emincane</string>
+    <string name="mini_games_description">Imidlalo esheshayo yokuchitha imizuzu embalwa</string>
     <string name="mini_game_score">Amaphuzu %s</string>
     <string name="mini_game_best">Engcono kakhulu %s</string>
     <string name="mini_game_new_record">Irekhodi entsha!</string>
@@ -773,7 +773,14 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="mini_game_paused">Umiswe</string>
     <string name="mini_game_resume">Qhubeka</string>
     <string name="mini_game_restart">Qala kabusha</string>
-    <string name="mini_game_change">Khetha omunye umdlalo</string>
+    <string name="mini_game_pause">Yema</string>
+    <string name="mini_game_score_label">Amaphuzu</string>
+    <string name="mini_game_best_label">Engcono kakhulu</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Izinga</string>
+    <string name="mini_game_lines">Imigqa</string>
+    <string name="mini_game_lives">Izimpilo</string>
+    <string name="mini_game_flags">Iziflagi</string>
     <string name="mini_game_2048_picker_subtitle">Slayida ama-tiles ukuze uhlanganise</string>
     <string name="mini_game_flappy_picker_subtitle">Thinta ukuze undize phakathi kwamapayipi</string>
     <string name="mini_game_flappy_tap_to_start">Thinta ukuze undize</string>
@@ -1339,13 +1346,26 @@ Imininingwane: %2$s"</string>
     <string name="file_picker_new_folder_failed">Akukwazanga ukudala ifolda</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Mayelana</string>
-    <string name="settings_system_manager_description">Iphrojekthi ye-open-source yokupatcha izinhlelo ze-Android ezidumile ngendlela yesimanjemanje nehlanzekile, eqhutshwa imibono neminikelo yomphakathi</string>
-    <string name="credits">Amakhredithi</string>
-    <string name="credits_description">Abantu bangemuva kwe-Morphe</string>
     <string name="settings_about_section_project">Iphrojekthi</string>
     <string name="settings_about_section_help">Usizo</string>
-    <string name="credits_current_development">Ukuthuthukiswa kwamanje</string>
     <string name="credits_prior_development">Ukuthuthukiswa kwangaphambilini</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Imphathi</string>
+    <string name="about_update_available">Ukuvuselelwa okutholakalayo: %s</string>
+    <string name="about_up_to_date">Sekuvuselelwe</string>
+    <string name="about_links">Izixhumeli zesemthethweni</string>
+    <string name="about_link_donate">Nikela</string>
+    <string name="about_link_website">Iwebhusayithi</string>
+    <string name="about_link_translations">Ukuhumusha</string>
+    <string name="contributors">Abahambisana</string>
+    <string name="contributors_description">Izinyanga ezingu-12 zokugcina</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Abasekela</string>
+    <string name="supporters_description">Abaxhasi ku-Open Collective</string>
+    <string name="supporters_become">Ba abe ngumsekeli</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Kanye nezinye u-%s</string>
+    <string name="people_unavailable">Akukwazanga ukuloda uhlu</string>
     <string name="opensource_licenses">Ama-license we-open-source</string>
     <string name="opensource_licenses_description">Imilayibrari i-Morphe eyakhiwe ngayo</string>
     <string name="opensource_licenses_search">Sesha imilayibrari namalayisense</string>
@@ -1415,6 +1435,8 @@ Imininingwane: %2$s"</string>
     <string name="include">Faka</string>
     <string name="disable">Khutsaza</string>
     <string name="enable">Vula</string>
+    <string name="enable_all">Vula konke</string>
+    <string name="disable_all">Khubaza konke</string>
     <string name="trust">Thembela</string>
     <string name="loading">Kulayidwa…</string>
     <string name="creating">Kudalwa…</string>

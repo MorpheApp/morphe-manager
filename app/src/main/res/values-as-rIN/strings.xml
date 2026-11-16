@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">এই বৈশিষ্ট্যটো কেৱল এক্সপাৰ্ট মোডত উপলব্ধ</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">পেচসমূহৰ বাবে সন্ধান কৰক</string>
-    <string name="expert_mode_disable_all">সকলো নিষ্ক্ৰিয় কৰক</string>
-    <string name="expert_mode_enable_all">সকলো সক্ৰিয় কৰক</string>
     <string name="expert_mode_enable_all_universal_pending">ইউনিভাৰ্চেল পেচৰ বাবে পুনৰ টেপ কৰক</string>
     <string name="expert_mode_universal_all_warning_title">সকলো সৰ্বজনীন পেচ সক্ৰিয় কৰিব নেকি?</string>
     <string name="expert_mode_universal_all_warning_message">ইউনিভাৰ্চেল পেচবোৰ একেলগে পৰীক্ষা কৰা হোৱা নাই। এই সকলোবোৰ একেলগে সক্ৰিয় কৰিলে সংঘাত, পেচিংত বিফলতা বা ক্ৰেশ হ\'ব পাৰে</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">সমৰ্থিত ৱেব লিংকসমূহ বৰ্তমান এই এপটোৰ পৰিৱৰ্তে আপোনাৰ ব্ৰাউজাৰত খোল</string>
     <string name="app_links_enable_auto">স্বয়ংক্ৰিয়ভাৱে সক্ৰিয় কৰক</string>
     <string name="app_links_enable_auto_in_progress">লিংকসমূহ সক্ৰিয় কৰা হৈছে…</string>
+    <string name="app_links_disable_all_in_progress">লিংকসমূহ নিষ্ক্ৰিয় কৰা হৈছে…</string>
     <string name="app_links_open_settings">লিংক ছেটিংখিনি খোলক</string>
     <string name="app_links_repair_success">এপ লিংকসমূহ সফলতাৰে সক্ৰিয় কৰা হৈছে</string>
     <string name="app_links_repair_failed">এপ লিংকসমূহ স্বয়ংক্ৰিয়ভাৱে সক্ৰিয় কৰাত ব্যৰ্থ হৈছে</string>
+    <string name="app_links_disable_success">এপ লিংকসমূহ নিষ্ক্ৰিয় কৰা হৈছে</string>
+    <string name="app_links_disable_failed">এপ লিংকসমূহ নিষ্ক্ৰিয় কৰাত ব্যৰ্থ হৈছে</string>
     <string name="app_links_change_failed">এপ লিংকসমূহ সলনি কৰাত ব্যৰ্থ হৈছে</string>
     <string name="app_links_all_verified">সমৰ্থিত সকলো লিংক এই এপটোত খোলাৰ বাবে কনফিগাৰ কৰা হৈছে</string>
     <string name="app_links_fix">লিংকসমূহ ঠিক কৰক</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">ষ্ট্ৰিপ কৰা হৈছে</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">ৰখা হৈছে</string>
-    <string name="patcher_tab_logs">পেচাৰ লগসমূহ</string>
-    <string name="patcher_tab_game">খেলবোৰ</string>
     <string name="patcher_logs_waiting">লগ আউটপুটৰ বাবে অপেক্ষা কৰিছে…</string>
     <string name="patcher_logs_lost">এপ্লিকেচন পুনৰ আৰম্ভ কৰিলে লগ আউটপুট সংৰক্ষিত নহয়</string>
     <string name="patcher_long_step_warning">এই পদক্ষেপটোৰ বাবে কিছু সময় লাগিব পাৰে। অনুগ্ৰহ কৰি অপেক্ষা কৰক…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">আনইনষ্টল কৰি পুনৰ সংস্থাপন কৰিবলৈ চেষ্টা কৰক</string>
     <string name="patcher_ready_to_mount_subtitle">মাউন্ট কৰিবলৈ তলৰ বুটামটোত ক্লিক কৰক</string>
     <string name="patcher_patches_excluded_for_installer">এই ইনষ্টল পদ্ধতিৰ বাবে উপলব্ধ নহয় আৰু বাদ দিয়া হৈছে: %s</string>
-    <string name="patcher_back_to_game_hint">আপোনাৰ গেমলৈ উভতি যাবলৈ %1$s ট্যাপ কৰক</string>
     <string name="patcher_storage_permission_dialog_title">ষ্টৰেজ পাথ এক্সেছ কৰিব পৰা নাই</string>
     <string name="patcher_incompatible_patcher_title">আপডেটৰ প্ৰয়োজন</string>
     <string name="patcher_incompatible_patcher_description">উৎস &lt;b&gt;%1$s&lt;/b&gt; ৰ বাবে পেচাৰ &lt;b&gt;%2$s&lt;/b&gt; বা তাতকৈ নতুন সংস্কৰণৰ প্ৰয়োজন। ইয়াক ব্যৱহাৰ কৰিবলৈ Morphe আপডেট কৰক</string>
@@ -764,7 +762,9 @@
     <string name="package_name">পেকেজৰ নাম</string>
     <string name="failed_to_mount">মাউন্ট কৰাত ব্যৰ্থ হৈছে: %s</string>
     <string name="failed_to_unmount">আন-মাউন্ট কৰাত ব্যৰ্থ হৈছে: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">মিনি-গেমছ</string>
+    <string name="mini_games_description">খালী সময় কটাকটি কৰিবলৈ কিছু কম সময়ৰ গেম</string>
     <string name="mini_game_score">স্কৰ %s</string>
     <string name="mini_game_best">শ্ৰেষ্ঠ %s</string>
     <string name="mini_game_new_record">নতুন ৰেকৰ্ড!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">ৰৈ আছে</string>
     <string name="mini_game_resume">আগবাঢ়ক</string>
     <string name="mini_game_restart">আৰম্ভৰ পৰা আৰম্ভ কৰক</string>
-    <string name="mini_game_change">আন এটা খেল বাছনি কৰক</string>
+    <string name="mini_game_pause">পজ কৰক</string>
+    <string name="mini_game_score_label">স্ক’ৰ</string>
+    <string name="mini_game_best_label">শ্ৰেষ্ঠ</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">লেভেল</string>
+    <string name="mini_game_lines">লাইন</string>
+    <string name="mini_game_lives">জীৱন</string>
+    <string name="mini_game_flags">পতাকাসমূহ</string>
     <string name="mini_game_2048_picker_subtitle">মিলাবলৈ টাইলেবোৰ সলাই নিওক</string>
     <string name="mini_game_flappy_picker_subtitle">পাইপবোৰৰ মাজেৰে উৰিবলৈ টেপ কৰক</string>
     <string name="mini_game_flappy_tap_to_start">উৰিবলৈ টেপ কৰক</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">ফোল্ডাৰটো সৃষ্টি কৰিব পৰা নগ\'ল</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">সম্পৰ্কে</string>
-    <string name="settings_system_manager_description">জনপ্ৰিয় অ্যান্ড্রয়েড এপৰ আধুনিক, সুশৃংখল পেচিংৰ বাবে এটা মুকলি উৎসৰ প্ৰজেক্ট, যিটো সম্প্ৰদায়ৰ মতামত আৰু অৱদানৰ দ্বাৰা পৰিচালিত</string>
-    <string name="credits">ক্ৰেডিট্ছ</string>
-    <string name="credits_description">Morphe ৰ পিছৰ মানুহবোৰ</string>
     <string name="settings_about_section_project">প্ৰজেক্ট</string>
     <string name="settings_about_section_help">সহায়</string>
-    <string name="credits_current_development">বৰ্তমানৰ উন্নয়ন</string>
     <string name="credits_prior_development">পূৰ্বৰ উন্নয়ন</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">পৰিচালক</string>
+    <string name="about_update_available">আপডেট উপলব্ধ: %s</string>
+    <string name="about_up_to_date">আপ-টু-ডেট</string>
+    <string name="about_links">আধিকাৰিক লিংকসমূহ</string>
+    <string name="about_link_donate">দান কৰক</string>
+    <string name="about_link_website">ৱেবছাইট</string>
+    <string name="about_link_translations">অনুবাদ</string>
+    <string name="contributors">অৱদানকাৰী</string>
+    <string name="contributors_description">যোৱা ১২ মাহ</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">সমৰ্থক</string>
+    <string name="supporters_description">Open Collective ৰ সমৰ্থক</string>
+    <string name="supporters_become">এজন সমৰ্থক হওক</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">আৰু %s জন</string>
+    <string name="people_unavailable">তালিকটো লোড কৰিব পৰা নগ\'ল</string>
     <string name="opensource_licenses">মুক্ত উৎসৰ লাইচেন্সসমূহ</string>
     <string name="opensource_licenses_description">Morphe নিৰ্মাণ কৰিবলৈ ব্যৱহাৰ কৰা লাইব্ৰেৰীসমূহ</string>
     <string name="opensource_licenses_search">লাইব্ৰেৰী আৰু লাইচেন্সসমূহ বিচাৰক</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">অন্তৰ্ভুক্ত কৰক</string>
     <string name="disable">নিষ্ক্ৰিয় কৰক</string>
     <string name="enable">সক্ৰিয় কৰক</string>
+    <string name="enable_all">সকলো সক্ৰিয় কৰক</string>
+    <string name="disable_all">সকলো নিষ্ক্ৰিয় কৰক</string>
     <string name="trust">বিশ্বাস কৰক</string>
     <string name="loading">লোডিং কৰিছে…</string>
     <string name="creating">সৃষ্টি কৰা হৈছে…</string>

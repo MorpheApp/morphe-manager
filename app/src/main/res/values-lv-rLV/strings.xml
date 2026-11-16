@@ -346,8 +346,6 @@ Izvēlieties, no kurienes ņemt tās APK"</string>
     <string name="home_external_apk_expert_mode_required">Šī funkcija ir pieejama tikai Eksperta režīmā</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Meklēt patchus</string>
-    <string name="expert_mode_disable_all">Atslēgt visu</string>
-    <string name="expert_mode_enable_all">Iespējot visu</string>
     <string name="expert_mode_enable_all_universal_pending">Pieskarieties vēlreiz universālajiem labojumiem</string>
     <string name="expert_mode_universal_all_warning_title">Aktivizēt visus universālos labojumus?</string>
     <string name="expert_mode_universal_all_warning_message">Universālie labojumi nav testēti kopā. Aktivizējot visus vienlaikus, var rasties konflikti, labošanas kļūme vai avārijas</string>
@@ -566,9 +564,12 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <string name="app_links_unverified_banner_description">Atbalstītās tīmekļa saites pašlaik atveras jūsu pārlūkā nevis šajā lietotnē</string>
     <string name="app_links_enable_auto">Iespējot automātiski</string>
     <string name="app_links_enable_auto_in_progress">Saites tiek iespējotas…</string>
+    <string name="app_links_disable_all_in_progress">Atspējo saites…</string>
     <string name="app_links_open_settings">Atvērt saites iestatījumus</string>
     <string name="app_links_repair_success">Lietotnes saites veiksmīgi iespējotas</string>
     <string name="app_links_repair_failed">Neizdevās automātiski iespējot lietotnes saites</string>
+    <string name="app_links_disable_success">Lietotnes saites atspējotas</string>
+    <string name="app_links_disable_failed">Neizdevās atspējot lietotnes saites</string>
     <string name="app_links_change_failed">Neizdevās mainīt lietotnes saites</string>
     <string name="app_links_all_verified">Visas atbalstītās saites ir konfigurētas atvēršanai šajā lietotnē</string>
     <string name="app_links_fix">Labot saites</string>
@@ -627,8 +628,6 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <string name="patcher_field_value_stripped">noņemts</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">atstātas</string>
-    <string name="patcher_tab_logs">Labotāja žurnāli</string>
-    <string name="patcher_tab_game">Spēles</string>
     <string name="patcher_logs_waiting">Gaida žurnāla izvadi…</string>
     <string name="patcher_logs_lost">Žurnāla izvade netiek saglabāta pēc lietotnes restartēšanas</string>
     <string name="patcher_long_step_warning">Šis solis var aizņemt laiku. Lūdzu, uzgaidiet…</string>
@@ -658,7 +657,6 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="patcher_install_error_subtitle">Mēģiniet atinstalēt un instalēt vēlreiz</string>
     <string name="patcher_ready_to_mount_subtitle">Nospiediet zemāk esošo pogu, lai montētu</string>
     <string name="patcher_patches_excluded_for_installer">Nav pieejams šai instalācijas metodei un izslēgts: %s</string>
-    <string name="patcher_back_to_game_hint">Pieskarieties %1$s, lai atgrieztos spēlē</string>
     <string name="patcher_storage_permission_dialog_title">Nav piekļuves krātuves ceļam</string>
     <string name="patcher_incompatible_patcher_title">Nepieciešams atjauninājums</string>
     <string name="patcher_incompatible_patcher_description">Avotu &lt;b&gt;%1$s&lt;/b&gt; prasa patchera &lt;b&gt;%2$s&lt;/b&gt; vai jaunāku versiju. Atjauniniet Morphe, lai to izmantotu</string>
@@ -763,7 +761,9 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="package_name">Paketes nosaukums</string>
     <string name="failed_to_mount">Neizdevās montēt: %s</string>
     <string name="failed_to_unmount">Neizdevās atmontēt: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini spēles</string>
+    <string name="mini_games_description">Ātras spēles, lai aizpildītu brīvu minūti</string>
     <string name="mini_game_score">Rezultāts %s</string>
     <string name="mini_game_best">Labākais %s</string>
     <string name="mini_game_new_record">Jauns rekords!</string>
@@ -772,7 +772,14 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="mini_game_paused">Pauzēts</string>
     <string name="mini_game_resume">Turpināt</string>
     <string name="mini_game_restart">Sākt no sākuma</string>
-    <string name="mini_game_change">Izvēlēties citu spēli</string>
+    <string name="mini_game_pause">Pauzēt</string>
+    <string name="mini_game_score_label">Rezultāts</string>
+    <string name="mini_game_best_label">Labākais</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Līmenis</string>
+    <string name="mini_game_lines">Līnijas</string>
+    <string name="mini_game_lives">Dzīves</string>
+    <string name="mini_game_flags">Karogi</string>
     <string name="mini_game_2048_picker_subtitle">Velciet flīzes, lai tās apvienotu</string>
     <string name="mini_game_flappy_picker_subtitle">Pieskarieties, lai lidotu caur caurulēm</string>
     <string name="mini_game_flappy_tap_to_start">Pieskarieties, lai lidotu</string>
@@ -1338,13 +1345,26 @@ Sīkāk: %2$s"</string>
     <string name="file_picker_new_folder_failed">Neizdevās izveidot mapu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Par</string>
-    <string name="settings_system_manager_description">Atklātā pirmkoda projekts populāru Android lietotņu modernai un vienkāršotai labošanai, ko veicina kopienas atsauksmes un ieguldījumi</string>
-    <string name="credits">Krediti</string>
-    <string name="credits_description">Cilvēki aiz Morphe</string>
     <string name="settings_about_section_project">Projekts</string>
     <string name="settings_about_section_help">Palīdzība</string>
-    <string name="credits_current_development">Pašreizējā izstrāde</string>
     <string name="credits_prior_development">Iepriekšējā izstrāde</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Vadītājs</string>
+    <string name="about_update_available">Pieejams atjauninājums: %s</string>
+    <string name="about_up_to_date">Aktuāla versija</string>
+    <string name="about_links">Oficiālās saites</string>
+    <string name="about_link_donate">Ziedot</string>
+    <string name="about_link_website">Tīmekļa vietne</string>
+    <string name="about_link_translations">Tulkojumi</string>
+    <string name="contributors">Ieg contributed</string>
+    <string name="contributors_description">Pēdējie 12 mēneši</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Atbalstītāji</string>
+    <string name="supporters_description">Atbalstītāji Open Collective</string>
+    <string name="supporters_become">Kļuviet par atbalstītāju</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Un vēl %s</string>
+    <string name="people_unavailable">Neizdevās ielādēt sarakstu</string>
     <string name="opensource_licenses">Atklātā pirmkoda licences</string>
     <string name="opensource_licenses_description">Bibliotēkas, uz kurām Morphe ir uzbūvēta</string>
     <string name="opensource_licenses_search">Meklēt bibliotēkas un licences</string>
@@ -1414,6 +1434,8 @@ Sīkāk: %2$s"</string>
     <string name="include">Iekļaut</string>
     <string name="disable">Atslēgt</string>
     <string name="enable">Iespējot</string>
+    <string name="enable_all">Iespējot visu</string>
+    <string name="disable_all">Atspēt visu</string>
     <string name="trust">Uzticēties</string>
     <string name="loading">Ielādē…</string>
     <string name="creating">Veido...</string>

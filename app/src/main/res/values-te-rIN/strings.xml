@@ -55,6 +55,7 @@
     <!-- Home Screen - Home Greetings -->
     <!-- Humorous hype message with light nostalgia -->
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
+    <string name="home_greeting_3">సిద్ధమవ్వండి, ఇది ప్యాచ్ చేసే వేళ</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
@@ -65,6 +66,7 @@
     <!-- Morning greetings (5:00–11:59) -->
     <!-- Afternoon greetings (12:00–16:59) -->
     <!-- Evening greetings (17:00–21:59) -->
+    <string name="home_greeting_evening_1">శుభ సాయంకాలం! సాయంకాలంలో ప్యాచులే వేరు</string>
     <!-- Late night greetings (22:00–23:59) -->
     <!-- Super late night greetings (0:00–4:59) -->
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
@@ -140,7 +142,8 @@
     <!-- Patcher Screen - Other hidden strings -->
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <!-- Counts a game keeps besides its score, shown above the field -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
@@ -181,6 +184,9 @@
     <!-- Settings - System Tab - APK download helper -->
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <!-- People who donate to Morphe -->
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

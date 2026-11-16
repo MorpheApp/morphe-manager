@@ -347,8 +347,6 @@
     <string name="home_external_apk_expert_mode_required">ئەم تایبەتمەندیە تەنها لە مۆدی شارەزا بەردەستە</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">گەڕانی پینەکان</string>
-    <string name="expert_mode_disable_all">هەموو لە کاربخە</string>
-    <string name="expert_mode_enable_all">هەموو چالاک بکە</string>
     <string name="expert_mode_enable_all_universal_pending">دووبارە کلیک بکە بۆ پاتچەکانی گشتگیر</string>
     <string name="expert_mode_universal_all_warning_title">چالاککردنی هەموو پاتچە گشتگییەکان؟</string>
     <string name="expert_mode_universal_all_warning_message">پاتچە گشتگییەکان پێکەوە تاقی نەکراونەتەوە. چالاککردنی هەموویان بە یەکجار دەکرێت ببێتە هۆی دژایەتی، سەرنەکەوتنی پاتچکردن، یان داخستنی کتوپڕی ئەپەکە</string>
@@ -568,9 +566,12 @@
     <string name="app_links_unverified_banner_description">لینکەکانی وێبی پشتگیرکراو لە ئێستادا لە وێبگەڕەکەتدا دەکرێنەوە لەجیاتی ئەم ئەپە</string>
     <string name="app_links_enable_auto">چالاککردنی ئۆتۆماتیکی</string>
     <string name="app_links_enable_auto_in_progress">چالاککردنی لینکەکان...</string>
+    <string name="app_links_disable_all_in_progress">بەکارنەهێنانی لینکەکان...</string>
     <string name="app_links_open_settings">کردنەوەی ڕێکخستنەکانی لینک</string>
     <string name="app_links_repair_success">لینکەکانی ئەپ بە سەرکەوتوویی چالاککرا</string>
     <string name="app_links_repair_failed">چالاککردنی لینکەکانی ئەپ بە شێوەیەکی ئۆتۆماتیکی سەرکەوتوو نەبوو</string>
+    <string name="app_links_disable_success">لینکەکانی ئەپەکە بەکارنەهێنراون</string>
+    <string name="app_links_disable_failed">بەکارنەهێنانی لینکەکانی ئەپەکە سەرکەوتوو نەبوو</string>
     <string name="app_links_change_failed">گۆڕینی لینکەکانی ئەپەکە سەرکەوتوو نەبوو</string>
     <string name="app_links_all_verified">هەموو ئەو لینکانەی پشتگیرییان لێکراوە ڕێکخراون بۆ ئەوەی لەم ئەپەدا بکرێنەوە</string>
     <string name="app_links_fix">چاککردنی لینکەکان</string>
@@ -629,8 +630,6 @@
     <string name="patcher_field_value_stripped">لابراون</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">ماونەتەوە</string>
-    <string name="patcher_tab_logs">لۆگەکانی پاتچەر</string>
-    <string name="patcher_tab_game">یارییەکان</string>
     <string name="patcher_logs_waiting">چاوەڕوانی دەرئەنجامی لۆگ...</string>
     <string name="patcher_logs_lost">دەرئەنجامی لۆگەکان دوای دووبارە کردنەوەی ئەپەکە نامێنێتەوە</string>
     <string name="patcher_long_step_warning">ئەم هەنگاوە لەوانەیە ماوەیەک بخایەنێت. تکایه چاوەڕوان بکه...</string>
@@ -660,7 +659,6 @@
     <string name="patcher_install_error_subtitle">هەوڵی سڕینەوە و دووبارە دامەزراندن بدە</string>
     <string name="patcher_ready_to_mount_subtitle">دوگمەی خوارەوە دابگرە بۆ جێگیرکردن</string>
     <string name="patcher_patches_excluded_for_installer">بۆ ئەم ڕێگەی دامەزراندنە بەردەست نییە و بەدەرکراوە: %s</string>
-    <string name="patcher_back_to_game_hint">کلیک لەسەر %1$s بکە بۆ گەڕانەوە بۆ یارییەکەت</string>
     <string name="patcher_storage_permission_dialog_title">ناتوانیت بچیتە ناو ڕێڕەوی هەمارگە</string>
     <string name="patcher_incompatible_patcher_title">نوێکردنەوە پێویستە</string>
     <string name="patcher_incompatible_patcher_description">سەرچاوەی &lt;b&gt;%1$s&lt;/b&gt; پێویستی بە پاتچەری &lt;b&gt;%2$s&lt;/b&gt; یان نوێتر هەیە. Morphe نوێ بکەرەوە بۆ بەکارهێنانی</string>
@@ -765,7 +763,9 @@
     <string name="package_name">ناوی پاکەت</string>
     <string name="failed_to_mount">سەرکەوتوو نەبوو لە جێگیرکردنی: %s</string>
     <string name="failed_to_unmount">سەرکەوتوو نەبوو لە لابردنی جێگیری: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">کێڵە-یارییەکان</string>
+    <string name="mini_games_description">یارییە خێراکان بۆ بەسەربردنی خشتەیەک لە کاتی بەتاڵیدا</string>
     <string name="mini_game_score">نمرە %s</string>
     <string name="mini_game_best">باشترین %s</string>
     <string name="mini_game_new_record">تۆمارێکی نوێ!</string>
@@ -774,7 +774,14 @@
     <string name="mini_game_paused">ڕاگیراوە</string>
     <string name="mini_game_resume">بەردەوامبوون</string>
     <string name="mini_game_restart">دووبارە دەستپێبکەرەوە</string>
-    <string name="mini_game_change">یارییەکی تری هەڵبژێرە</string>
+    <string name="mini_game_pause">پسیار</string>
+    <string name="mini_game_score_label">نمرە</string>
+    <string name="mini_game_best_label">باشترین</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">ئاست</string>
+    <string name="mini_game_lines">هێڵەکان</string>
+    <string name="mini_game_lives">ژیانەکان</string>
+    <string name="mini_game_flags">ئاڵاكان</string>
     <string name="mini_game_2048_picker_subtitle">تایلەکان ڕاکێشە بۆ تێکەڵکردن</string>
     <string name="mini_game_flappy_picker_subtitle">دەست لێبدە بۆ فڕین لە نێوان بۆڕەکان</string>
     <string name="mini_game_flappy_tap_to_start">دەست لێبدە بۆ فڕین</string>
@@ -1340,13 +1347,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">نەتوانرا فۆڵدەرەکە دروست بکرێت</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">دەربارە</string>
-    <string name="settings_system_manager_description">پڕۆژەیەکی سەرچاوە-کراوەیە بۆ چاکسازیی سەردەمیی و ڕێکخراوی ئەپڵیکەیشنە باوەکانی ئەندرۆید، کە لە ڕێگەی فیدباک و بەشداریی کۆمەڵگەوە بەڕێوەدەبرێت</string>
-    <string name="credits">بەشداربووان</string>
-    <string name="credits_description">ئەو کەسانەی لە پشت Morpheن</string>
     <string name="settings_about_section_project">پڕۆژەکە</string>
     <string name="settings_about_section_help">یارمەتی</string>
-    <string name="credits_current_development">گەشەپێدانی ئێستا</string>
     <string name="credits_prior_development">گەشەپێدانی پێشوو</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">بەڕێوەبەر</string>
+    <string name="about_update_available">نوێکردنەوەی بەردەستە: %s</string>
+    <string name="about_up_to_date">نوێکراوە</string>
+    <string name="about_links">لینکە فەرمییەکان</string>
+    <string name="about_link_donate">بەخشین</string>
+    <string name="about_link_website">وێب سایت</string>
+    <string name="about_link_translations">وەرگێڕانەکان</string>
+    <string name="contributors">بەشداریکاران</string>
+    <string name="contributors_description">١٢ مانگی ڕابردوو</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">پشتیوەران</string>
+    <string name="supporters_description">پشتیوەران لە Open Collective</string>
+    <string name="supporters_become">ببە بە پشتگیر</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">و %s کەسی تر</string>
+    <string name="people_unavailable">نەتوانرا لیستەکە باربکرێت</string>
     <string name="opensource_licenses">مۆڵەتنامەکانی سەرچاوەی کراوە</string>
     <string name="opensource_licenses_description">ئەو کتێبخانانەی Morphe لەسەری دروست کراوە</string>
     <string name="opensource_licenses_search">گەڕان لە کتێبخانەکان و مۆڵەتەکاندا</string>
@@ -1416,6 +1436,8 @@ morphe_header_custom_dark.png
     <string name="include">بیناندن</string>
     <string name="disable">ناچالاککردن</string>
     <string name="enable">چالاککردن</string>
+    <string name="enable_all">هەموو چالاک بکە</string>
+    <string name="disable_all">هەموو لە کاربخە</string>
     <string name="trust">متمانە</string>
     <string name="loading">بارکردن…</string>
     <string name="creating">دروستکردن…</string>

@@ -346,8 +346,6 @@ Pumili kung saan kukunin ang APK nito"</string>
     <string name="home_external_apk_expert_mode_required">Ang tampok na ito ay available lamang sa Expert mode</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Maghanap ng mga patch</string>
-    <string name="expert_mode_disable_all">Patayin lahat</string>
-    <string name="expert_mode_enable_all">Paganahin lahat</string>
     <string name="expert_mode_enable_all_universal_pending">I-tap muli para sa mga unibersal na patch</string>
     <string name="expert_mode_universal_all_warning_title">Paganahin ang lahat ng universal patches?</string>
     <string name="expert_mode_universal_all_warning_message">Ang mga universal patch ay hindi nasusubok nang sabay. Ang pag-enable ng lahat ng ito nang sabay ay maaaring magdulot ng mga salungatan, pagkabigo ng pag-patch, o pag-crash.</string>
@@ -567,9 +565,12 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="app_links_unverified_banner_description">Ang mga sinusuportahang web link ay kasalukuyang bumubukas sa iyong browser sa halip na sa app na ito</string>
     <string name="app_links_enable_auto">I-enable nang awtomatiko</string>
     <string name="app_links_enable_auto_in_progress">Ini-enable ang mga link…</string>
+    <string name="app_links_disable_all_in_progress">Hindi pinapagana ang mga link…</string>
     <string name="app_links_open_settings">Buksan ang mga setting ng link</string>
     <string name="app_links_repair_success">Matagumpay na na-enable ang mga link ng app</string>
     <string name="app_links_repair_failed">Hindi nagawang paganahin ang mga link ng app nang awtomatiko</string>
+    <string name="app_links_disable_success">Hindi na pinapagana ang mga link ng app</string>
+    <string name="app_links_disable_failed">Nabigong hindi papaganahin ang mga link ng app</string>
     <string name="app_links_change_failed">Nabigong baguhin ang mga app link</string>
     <string name="app_links_all_verified">Lahat ng suportadong link ay naka-configure upang buksan sa app na ito</string>
     <string name="app_links_fix">Ayusin ang mga link</string>
@@ -628,8 +629,6 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="patcher_field_value_stripped">tinanggal</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">pinanatili</string>
-    <string name="patcher_tab_logs">Mga log ng Patcher</string>
-    <string name="patcher_tab_game">Mga Laro</string>
     <string name="patcher_logs_waiting">Naghihintay ng log output…</string>
     <string name="patcher_logs_lost">Ang log output ay hindi napananatili pagkatapos mag-restart ang app</string>
     <string name="patcher_long_step_warning">Maaaring magtagal ang hakbang ito. Mangyaring maghintay…</string>
@@ -659,7 +658,6 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patcher_install_error_subtitle">Subukan mong burahin at i-install muli</string>
     <string name="patcher_ready_to_mount_subtitle">Pindutin ang button sa ibaba upang i-mount</string>
     <string name="patcher_patches_excluded_for_installer">Hindi magagamit para sa paraang ito ng pag-install at hindi kasama: %s</string>
-    <string name="patcher_back_to_game_hint">I-tap ang %1$s upang bumalik sa iyong laro</string>
     <string name="patcher_storage_permission_dialog_title">Hindi ma-access ang landas ng imbakan</string>
     <string name="patcher_incompatible_patcher_title">Kinakailangan ang pag-update</string>
     <string name="patcher_incompatible_patcher_description">Ang source &lt;b&gt;%1$s&lt;/b&gt; ay nangangailangan ng patcher &lt;b&gt;%2$s&lt;/b&gt; o mas bago. I-update ang Morphe upang magamit ito</string>
@@ -764,7 +762,9 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="package_name">Pangalan ng pakete</string>
     <string name="failed_to_mount">Nabigong i-mount: %s</string>
     <string name="failed_to_unmount">Nabigong i-unmount: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mga mini-game</string>
+    <string name="mini_games_description">Mga mabilis na laro para pampalipas-oras</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Pinakamahusay %s</string>
     <string name="mini_game_new_record">Bagong rekord!</string>
@@ -773,7 +773,14 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="mini_game_paused">Naka-pause</string>
     <string name="mini_game_resume">Magpatuloy</string>
     <string name="mini_game_restart">Magsimula muli</string>
-    <string name="mini_game_change">Pumili ng ibang laro</string>
+    <string name="mini_game_pause">I-pause</string>
+    <string name="mini_game_score_label">Iskor</string>
+    <string name="mini_game_best_label">Pinakamahusay</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Antas</string>
+    <string name="mini_game_lines">Mga Linya</string>
+    <string name="mini_game_lives">Mga Buhay</string>
+    <string name="mini_game_flags">Mga Bandila</string>
     <string name="mini_game_2048_picker_subtitle">I-slide ang mga tile para pagsamahin</string>
     <string name="mini_game_flappy_picker_subtitle">I-tap para lumipad sa mga tubo</string>
     <string name="mini_game_flappy_tap_to_start">I-tap para lumipad</string>
@@ -1339,13 +1346,26 @@ Mga Detalye: %2$s"</string>
     <string name="file_picker_new_folder_failed">Hindi magawang gumawa ng folder</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Tungkol sa</string>
-    <string name="settings_system_manager_description">Isang open-source na proyekto para sa moderno, pinasimpleng pag-aayos ng mga sikat na app ng Android, na pinapatakbo ng feedback at kontribusyon ng komunidad</string>
-    <string name="credits">Kredito</string>
-    <string name="credits_description">Ang mga tao sa likod ng Morphe</string>
     <string name="settings_about_section_project">Projekto</string>
     <string name="settings_about_section_help">Tulong</string>
-    <string name="credits_current_development">Kasalukuyang pag-unlad</string>
     <string name="credits_prior_development">Naunang pag-unlad</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Tagapamahala</string>
+    <string name="about_update_available">May available na update: %s</string>
+    <string name="about_up_to_date">Napapanahon na</string>
+    <string name="about_links">Mga opisyal na link</string>
+    <string name="about_link_donate">Magbigay</string>
+    <string name="about_link_website">Website</string>
+    <string name="about_link_translations">Mga Pagsasalin</string>
+    <string name="contributors">Mga Contributor</string>
+    <string name="contributors_description">Huling 12 buwan</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Mga Supporter</string>
+    <string name="supporters_description">Mga Backer sa Open Collective</string>
+    <string name="supporters_become">Maging isang supporter</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">At %s pa</string>
+    <string name="people_unavailable">Hindi ma-load ang listahan</string>
     <string name="opensource_licenses">Mga open-source na lisensya</string>
     <string name="opensource_licenses_description">Mga library kung saan binuo ang Morphe</string>
     <string name="opensource_licenses_search">Maghanap ng mga library at lisensya</string>
@@ -1415,6 +1435,8 @@ Mga Detalye: %2$s"</string>
     <string name="include">Isama</string>
     <string name="disable">Patayin</string>
     <string name="enable">Paganahin</string>
+    <string name="enable_all">Paganahin lahat</string>
+    <string name="disable_all">Patayin lahat</string>
     <string name="trust">Magtiwala</string>
     <string name="loading">Naglo-load…</string>
     <string name="creating">Ginagawa…</string>

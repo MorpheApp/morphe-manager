@@ -346,8 +346,6 @@ Aukeratu non hartu APK-a"</string>
     <string name="home_external_apk_expert_mode_required">Ezaugarri hau Aditu moduan soilik dago eskuragarri</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Bilatu patchak</string>
-    <string name="expert_mode_disable_all">Desaktibu dena</string>
-    <string name="expert_mode_enable_all">Aktibu dena</string>
     <string name="expert_mode_enable_all_universal_pending">Sakatu berriro patch universalentzat</string>
     <string name="expert_mode_universal_all_warning_title">Universal patch guztiak aktibatzea?</string>
     <string name="expert_mode_universal_all_warning_message">Universal patch-ak ez dira elkarrekin probatu. Guztiak batera aktibatzeak gatazkak, patchatze hutsegiteak edo crash-ak eragin ditzake</string>
@@ -567,9 +565,12 @@ Emaitza onenak lortzeko, aplikazio honek &lt;b&gt;APK osoa&lt;/b&gt; patchatzea 
     <string name="app_links_unverified_banner_description">Onartutako web estekak zure nabigatzailean irekitzen dira gaur egun, aplikazio honen ordez</string>
     <string name="app_links_enable_auto">Gaitu automatikoki</string>
     <string name="app_links_enable_auto_in_progress">Estekak gaitzen ari dira…</string>
+    <string name="app_links_disable_all_in_progress">Estekak desaktibatzen...</string>
     <string name="app_links_open_settings">Ireki esteken konfigurazioa</string>
     <string name="app_links_repair_success">Aplikazio-estekak arrakastaz gaitu dira</string>
     <string name="app_links_repair_failed">Aplikazio-estekak automatikoki gaitzea huts egin du</string>
+    <string name="app_links_disable_success">Aplikazio-estekak desaktibatuta</string>
+    <string name="app_links_disable_failed">Aplikazio-estekak desaktibatzea huts egin du</string>
     <string name="app_links_change_failed">App-estekak aldatzea huts egin da</string>
     <string name="app_links_all_verified">Onartutako esteka guztiak aplikazio honetan irekitzeko konfiguratuta daude</string>
     <string name="app_links_fix">Konpondu estekak</string>
@@ -628,8 +629,6 @@ Emaitza onenak lortzeko, aplikazio honek &lt;b&gt;APK osoa&lt;/b&gt; patchatzea 
     <string name="patcher_field_value_stripped">kenduta</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">mantenduta</string>
-    <string name="patcher_tab_logs">Patcher-en logak</string>
-    <string name="patcher_tab_game">Jokoak</string>
     <string name="patcher_logs_waiting">Log-irteeraren zain...</string>
     <string name="patcher_logs_lost">Log-irteera ez da gordetzen aplikazioa berrifiziatu ostean</string>
     <string name="patcher_long_step_warning">Pauso honek denbora behar dezake. Mesedez, itxaron…</string>
@@ -659,7 +658,6 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="patcher_install_error_subtitle">Saiatu desinstalatu eta berriro instalatzen</string>
     <string name="patcher_ready_to_mount_subtitle">Sakatu beheko botoia muntatzeko</string>
     <string name="patcher_patches_excluded_for_installer">Ez dago eskuragarri instalazio metodo honetarako eta kanpokoa da: %s</string>
-    <string name="patcher_back_to_game_hint">Sakatu %1$s zure jokora itzultzeko</string>
     <string name="patcher_storage_permission_dialog_title">Ezin da biltegi-bidera sartu</string>
     <string name="patcher_incompatible_patcher_title">Eguneratzea beharrezkoa da</string>
     <string name="patcher_incompatible_patcher_description">Iturriak &lt;b&gt;%1$s&lt;/b&gt; patcher &lt;b&gt;%2$s&lt;/b&gt; edo berriagoa eskatzen ditu. Eguneratu Morphe erabiltzeko</string>
@@ -764,7 +762,9 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="package_name">Paketearen izena</string>
     <string name="failed_to_mount">Muntatzeak huts egin du: %s</string>
     <string name="failed_to_unmount">Desmuntatzeak huts egin du: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-jokoak</string>
+    <string name="mini_games_description">Minuturik lotan pasatzeko joko azkarrak</string>
     <string name="mini_game_score">Puntuazioa %s</string>
     <string name="mini_game_best">Onena %s</string>
     <string name="mini_game_new_record">Errekor berria!</string>
@@ -773,7 +773,14 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="mini_game_paused">Pausatuta</string>
     <string name="mini_game_resume">Jarraitu</string>
     <string name="mini_game_restart">Hasi berriro</string>
-    <string name="mini_game_change">Aukeratu beste joko bat</string>
+    <string name="mini_game_pause">Pausatu</string>
+    <string name="mini_game_score_label">Puntuazioa</string>
+    <string name="mini_game_best_label">Onena</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Maila</string>
+    <string name="mini_game_lines">Lerrak</string>
+    <string name="mini_game_lives">Bizitzak</string>
+    <string name="mini_game_flags">Banderak</string>
     <string name="mini_game_2048_picker_subtitle">Lauzak irristatu elkartzeko</string>
     <string name="mini_game_flappy_picker_subtitle">Sakatu hodien artean hegan egiteko</string>
     <string name="mini_game_flappy_tap_to_start">Tokatu heganatzeko</string>
@@ -1339,13 +1346,26 @@ Xehetasunak: %2$s"</string>
     <string name="file_picker_new_folder_failed">Ezin izan da karpeta sortu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Honi buruz</string>
-    <string name="settings_system_manager_description">Android aplikazio popularren patch-ing modernorako eta optimizatorako proiektu open-source bat, komunitatearen iritzi eta ekarpenekin bultzatua</string>
-    <string name="credits">Kredituak</string>
-    <string name="credits_description">Morphe-ren atzean dauden pertsonak</string>
     <string name="settings_about_section_project">Proiektua</string>
     <string name="settings_about_section_help">Laguntza</string>
-    <string name="credits_current_development">Uneko garapena</string>
     <string name="credits_prior_development">Aurreko garapena</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Kudeatzailea</string>
+    <string name="about_update_available">Eguneratzea eskuragarri: %s</string>
+    <string name="about_up_to_date">Eguneratuta</string>
+    <string name="about_links">Esteka ofizialak</string>
+    <string name="about_link_donate">Doatua</string>
+    <string name="about_link_website">Webgunea</string>
+    <string name="about_link_translations">Itzulpenak</string>
+    <string name="contributors">Collaboratzaileak</string>
+    <string name="contributors_description">Azken 12 hilabeteetan</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Sarea</string>
+    <string name="supporters_description">Open Collective-ko babesleak</string>
+    <string name="supporters_become">Bifesi laguntzaile bat</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Eta %s gehiago</string>
+    <string name="people_unavailable">Ezin izan da zerrenda kargatu</string>
     <string name="opensource_licenses">Iturri irekiko lizentziak</string>
     <string name="opensource_licenses_description">Morphe-k erabiltzen dituen liburutegiak</string>
     <string name="opensource_licenses_search">Bilatu liburutegiak eta lizentziak</string>
@@ -1415,6 +1435,8 @@ Xehetasunak: %2$s"</string>
     <string name="include">Sartu</string>
     <string name="disable">Desaktibu</string>
     <string name="enable">Aktibu</string>
+    <string name="enable_all">Gaitzen dena guztia</string>
+    <string name="disable_all">Denak desgaitu</string>
     <string name="trust">Konfiantza</string>
     <string name="loading">Kargatzen…</string>
     <string name="creating">Sortzen…</string>

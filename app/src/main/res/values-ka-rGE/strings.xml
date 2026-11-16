@@ -346,8 +346,6 @@
     <string name="home_external_apk_expert_mode_required">ეს ფუნქცია ხელმისაწვდომია მხოლოდ ექსპერტის რეჟიმში</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">პატჩების ძებნა</string>
-    <string name="expert_mode_disable_all">გამორთეთ ყველა</string>
-    <string name="expert_mode_enable_all">ჩართეთ ყველა</string>
     <string name="expert_mode_enable_all_universal_pending">კვლავ დააჭირეთ უნივერსალური პატჩებისთვის</string>
     <string name="expert_mode_universal_all_warning_title">ყველა უნივერსალური პატჩის ჩართვა?</string>
     <string name="expert_mode_universal_all_warning_message">უნივერსალური პატჩები ერთად არ არის დატესტავებული. მათი ერთდროულად ჩართვამ შესაძლოა გამოიწვიოს კონფლიქტები, პატჩირების ჩაგდება ან აპლიკაციის გათიშვა</string>
@@ -567,9 +565,12 @@
     <string name="app_links_unverified_banner_description">მხარდაჭერილი ვებ-ბმულები ამჟამად იხსნება თქვენს ბრაუზერში და არა ამ აპლიკაციაში</string>
     <string name="app_links_enable_auto">გააქტიურება ავტომატურად</string>
     <string name="app_links_enable_auto_in_progress">ბმულების გააქტიურება...</string>
+    <string name="app_links_disable_all_in_progress">ბმულების გათიშვა…</string>
     <string name="app_links_open_settings">ბმულების პარამეტრების გახსნა</string>
     <string name="app_links_repair_success">აპლიკაციის ბმულები წარმატებით გააქტიურდა</string>
     <string name="app_links_repair_failed">აპლიკაციის ბმულების ავტომატური გააქტიურება ვერ მოხერხდა</string>
+    <string name="app_links_disable_success">აპლიკაციის ბმულები გათიშულია</string>
+    <string name="app_links_disable_failed">აპლიკაციის ბმულების გათიშვა ვერ მოხერხდა</string>
     <string name="app_links_change_failed">აპლიკაციის ბმულების შეცვლამ ვერ იმუშავა</string>
     <string name="app_links_all_verified">ყველა მხარდაჭერი ბმული კონფიგურირებულია ამ აპლიკაციაში გასახსნელად</string>
     <string name="app_links_fix">ბმულების გასწორება</string>
@@ -628,8 +629,6 @@
     <string name="patcher_field_value_stripped">ამოღებული</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">შენარჩუნებული</string>
-    <string name="patcher_tab_logs">პატჩერის ლოგები</string>
-    <string name="patcher_tab_game">თამაშები</string>
     <string name="patcher_logs_waiting">ლოგების გამოსვლის მოლოდინი…</string>
     <string name="patcher_logs_lost">ლოგების გამოსვლები არ ინახება აპლიკაციის რესტარტის შემდეგ</string>
     <string name="patcher_long_step_warning">ამ ნაბიჯს შესაძლოა გარკვეული დრო დასჭირდეს. გთხოვთ, დაელოდოთ…</string>
@@ -659,7 +658,6 @@
     <string name="patcher_install_error_subtitle">სცადეთ წაშლა და ხელახლა ინსტალაცია</string>
     <string name="patcher_ready_to_mount_subtitle">დააჭირეთ ქვემოთ მოცემულ ღილაკს დასამონტაჟებლად</string>
     <string name="patcher_patches_excluded_for_installer">ხელმისაწვდომი არ არის ინსტალაციის ამ მეთოდისთვის და გამოირიცხა: %s</string>
-    <string name="patcher_back_to_game_hint">დააჭირეთ %1$s-ს, რათა დაუბრუნდეთ თამაშს</string>
     <string name="patcher_storage_permission_dialog_title">წვდომა მეხსიერების გზაზე შეუძლებელია</string>
     <string name="patcher_incompatible_patcher_title">საჭიროა განახლება</string>
     <string name="patcher_incompatible_patcher_description">წყარო &lt;b&gt;%1$s&lt;/b&gt; მოითხოვს პატჩერს &lt;b&gt;%2$s&lt;/b&gt; ან უფრო ახალს. გამოიყენეთ Morphe-ის განახლებული ვერსია</string>
@@ -764,7 +762,9 @@
     <string name="package_name">პაკეტის სახელი</string>
     <string name="failed_to_mount">მონტაჟი ვერ მოხერხდა: %s</string>
     <string name="failed_to_unmount">გადმონტაჟება ვერ მოხერხდა: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">მინი-თამაშები</string>
+    <string name="mini_games_description">სწრაფი თამაშები თავისუფალი წუთების გასატარებლად</string>
     <string name="mini_game_score">ქულა %s</string>
     <string name="mini_game_best">საუკეთესო %s</string>
     <string name="mini_game_new_record">ახალი რეკორდი!</string>
@@ -773,7 +773,14 @@
     <string name="mini_game_paused">შეჩერებულია</string>
     <string name="mini_game_resume">გაგრძელება</string>
     <string name="mini_game_restart">თავიდან დაწყება</string>
-    <string name="mini_game_change">სხვა თამაშის არჩევა</string>
+    <string name="mini_game_pause">პაუზა</string>
+    <string name="mini_game_score_label">ქულა</string>
+    <string name="mini_game_best_label">საუკეთესო</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">დონე</string>
+    <string name="mini_game_lines">ხაზები</string>
+    <string name="mini_game_lives">სიცოცხლეები</string>
+    <string name="mini_game_flags">დროშები</string>
     <string name="mini_game_2048_picker_subtitle">გადაანაცვლეთ ფილებში გასაერთიანებლად</string>
     <string name="mini_game_flappy_picker_subtitle">დააჭირეთ მილებს შორის გასაფრენად</string>
     <string name="mini_game_flappy_tap_to_start">დააჭირეთ გასაფრენად</string>
@@ -1339,13 +1346,26 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">საქაღალდის შექმნა ვერ მოხერხდა</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">შესახებ</string>
-    <string name="settings_system_manager_description">ღია კოდის პროექტი პოპულარული Android აპლიკაციების თანამედროვე და ოპტიმიზირებული პატჩინგისთვის, რომელიც ეფუძნება საზოგადოების უკუკავშირს და წვლილს</string>
-    <string name="credits">კრედიტები</string>
-    <string name="credits_description">ხალხი Morphe-ის უკან</string>
     <string name="settings_about_section_project">პროექტი</string>
     <string name="settings_about_section_help">დახმარება</string>
-    <string name="credits_current_development">მიმდინარე დეველოპმენტი</string>
     <string name="credits_prior_development">წინა დეველოპმენტი</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">მენეჯერი</string>
+    <string name="about_update_available">ხელმისაწვდომია განახლება: %s</string>
+    <string name="about_up_to_date">განახლებულია</string>
+    <string name="about_links">ოფიციალური ბმულები</string>
+    <string name="about_link_donate">შემოწირულება</string>
+    <string name="about_link_website">ვებგვერდი</string>
+    <string name="about_link_translations">თარგმანები</string>
+    <string name="contributors">კონტრიბუტორები</string>
+    <string name="contributors_description">ბოლო 12 თვე</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">მხარდამჭერები</string>
+    <string name="supporters_description">მხარდამჭერები Open Collective-ზე</string>
+    <string name="supporters_become">გახდით მხარდამჭერი</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">და კიდევ %s</string>
+    <string name="people_unavailable">სიის ჩატვირთვა ვერ მოხერხდა</string>
     <string name="opensource_licenses">ღია კოდის ლიცენზიები</string>
     <string name="opensource_licenses_description">ბიბლიოთეკები, რომლებსაც Morphe ეფუძნება</string>
     <string name="opensource_licenses_search">ბიბლიოთეკებისა და ლიცენზიების ძებნა</string>
@@ -1415,6 +1435,8 @@ morphe_header_custom_dark.png
     <string name="include">ჩართვა</string>
     <string name="disable">გამორთვა</string>
     <string name="enable">ჩართვა</string>
+    <string name="enable_all">ყველას ჩართვა</string>
+    <string name="disable_all">ყველას გამორთვა</string>
     <string name="trust">დანდობა</string>
     <string name="loading">იტვირთება…</string>
     <string name="creating">შექმნა…</string>
