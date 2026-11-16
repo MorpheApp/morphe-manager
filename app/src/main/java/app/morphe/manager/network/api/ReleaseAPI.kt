@@ -435,7 +435,13 @@ class ReleaseAPI(
     }
 
     /**
-     * Returns a newer [ReleaseAsset] if one is available, or null if the app is up to date.
+     * Returns a newer [ReleaseAsset] if one is available, or null if the app is up to date or
+     * the check could not be made, see [checkAppUpdate] to tell those apart.
+     */
+    suspend fun getAppUpdate(): ReleaseAsset? = (checkAppUpdate() as? AppUpdateCheck.Available)?.asset
+
+    /**
+     * Checks whether a newer version of the manager is out.
      *
      * Channel selection logic (mirrors FCM subscription matrix in [app.morphe.manager.util.syncFcmTopics]):
      *  - `usePrereleases == true` OR current build is dev → use `dev` branch / prerelease channel
@@ -448,7 +454,7 @@ class ReleaseAPI(
      * A newer version is reported only once its APK is downloadable, so a release that is
      * already announced but still uploading is treated as if it did not exist yet.
      */
-    suspend fun getAppUpdate(): ReleaseAsset? {
+    suspend fun checkAppUpdate(): AppUpdateCheck {
         val usePrereleases = prefs.useManagerPrereleases.get()
         val branch = if (usePrereleases) "dev" else "main"
 
@@ -459,24 +465,24 @@ class ReleaseAPI(
             }
         } else {
             getManagerFromGitHub()
-        }.getOrNull()
+        }.getOrNull() ?: return AppUpdateCheck.Failed
 
         // Return only if the remote version is strictly newer than what's installed. The stable
         // channel offers stable builds alone: merging dev into main carries the dev release file
         // along, and it stays there until the stable release replaces it
-        val update = candidate?.takeIf {
+        val update = candidate.takeIf {
             (usePrereleases || !it.version.contains('-')) &&
                     isNewerVersion(BuildConfig.VERSION_NAME, it.version)
-        } ?: return null
+        } ?: return AppUpdateCheck.UpToDate
 
         // Only a definitive "not there" hides the update: a check that could not run at all
         // must not keep a real release from being offered
         if (client.isReachable(update.downloadUrl) == false) {
             Log.d(tag, "Manager update ${update.version} is announced but its APK is not downloadable yet")
-            return null
+            return AppUpdateCheck.UpToDate
         }
 
-        return update
+        return AppUpdateCheck.Available(update)
     }
 
     /**

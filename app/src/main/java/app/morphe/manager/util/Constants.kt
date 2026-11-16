@@ -28,6 +28,9 @@ const val MORPHE_WEBSITE_URL = "https://morphe.software"
 const val COMMUNITY_PATCHES_URL = "https://morphe-patches.software"
 const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"
 
+/** Who works on Morphe and who backs it, see [app.morphe.manager.domain.repository.PeopleRepository]. */
+const val PEOPLE_URL = "$MORPHE_API_URL/v2/people"
+
 /** Website page behind add-source links: ?github|gitlab=owner/repo(&name=...) */
 const val ADD_SOURCE_PATH = "/add-source"
 

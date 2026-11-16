@@ -75,6 +75,9 @@ class Filesystem(
 
     /** Avatars of patch sources, kept apart for the same reason as [homeCardCacheDir]. */
     val avatarCacheDir: File = app.cacheDir.resolve("avatars")
+
+    /** The people behind Morphe as last fetched, shown again while the network has no answer. */
+    val peopleCacheFile: File = app.cacheDir.resolve("people.json")
     private val patchedAppsDir: File = app.getDir("patched-apps", Context.MODE_PRIVATE).apply { mkdirs() }
 
     /**
