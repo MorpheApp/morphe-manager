@@ -35,8 +35,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -55,7 +57,6 @@ import org.koin.compose.koinInject
 // Cards keep a readable width and the column count follows the space available, so the
 // picker stays two-up on a phone and fills the row on a tablet or in landscape
 private val GamePickerMinCardWidth = 150.dp
-private val GamePickerCardHeight = 140.dp
 private val GamePickerIconTileSize = 44.dp
 private val GamePickerIconTileShape = RoundedCornerShape(Defaults.CornerMedium)
 
@@ -152,8 +153,7 @@ private fun GamePicker(
         items(MiniGame.entries, key = { it.name }) { game ->
             GamePickerCard(
                 game = game,
-                onClick = { onSelect(game) },
-                modifier = Modifier.height(GamePickerCardHeight)
+                onClick = { onSelect(game) }
             )
         }
     }
@@ -177,12 +177,9 @@ private fun GamePickerCard(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(Defaults.SpaceMedium),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            // Anchored to the top rather than centered, so the icons line up across a row
-            // whether a card's subtitle takes one line or two
-            verticalArrangement = Arrangement.Top
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
@@ -201,13 +198,40 @@ private fun GamePickerCard(
                 textAlign = TextAlign.Center
             )
             Spacer(Modifier.height(Defaults.SpaceExtraSmall))
-            Text(
-                text = stringResource(game.subtitleRes),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
-            )
+            GamePickerSubtitle(text = stringResource(game.subtitleRes))
         }
+    }
+}
+
+/**
+ * A picker card's subtitle, given as many lines as the longest of all the subtitles takes at this
+ * width, so every card in the grid comes out as tall as the others in any language or window.
+ */
+@Composable
+private fun GamePickerSubtitle(text: String) {
+    val style = MaterialTheme.typography.bodySmall
+    val measurer = rememberTextMeasurer()
+    val subtitles = MiniGame.entries.map { stringResource(it.subtitleRes) }
+
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        val width = constraints.maxWidth
+        val lines = remember(subtitles, style, width) {
+            subtitles.maxOf { subtitle ->
+                measurer.measure(
+                    text = subtitle,
+                    style = style.copy(textAlign = TextAlign.Center),
+                    constraints = Constraints(maxWidth = width)
+                ).lineCount
+            }
+        }
+        Text(
+            text = text,
+            style = style,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center,
+            minLines = lines,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
