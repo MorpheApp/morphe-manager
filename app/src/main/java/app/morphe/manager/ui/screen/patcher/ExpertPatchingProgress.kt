@@ -616,7 +616,7 @@ private fun ExpertProgressHeader(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f),
-                        transitionSpec = Animations.fadeCrossfade(300),
+                        transitionSpec = { Animations.fadeCrossfade(300)(this) using null },
                         label = "expert_step_name"
                     )
 
