@@ -307,14 +307,14 @@ class MainActivity : ComponentActivity() {
         }
 
         val isAddSource = data.scheme == "https" &&
-                data.host == "morphe.software" &&
+                data.host == MORPHE_WEBSITE_HOST &&
                 data.path?.startsWith(ADD_SOURCE_PATH) == true
         if (!isAddSource) return
 
         fun param(key: String) = data.getQueryParameter(key)?.takeIf { it.isNotBlank() }
 
-        val url = param("github")?.let { "https://github.com/$it" }
-            ?: param("gitlab")?.let { "https://gitlab.com/$it" }
+        val url = param("github")?.let { "https://$GITHUB_HOST/$it" }
+            ?: param("gitlab")?.let { "https://$GITLAB_HOST/$it" }
             ?: return
         vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(
             url = url,

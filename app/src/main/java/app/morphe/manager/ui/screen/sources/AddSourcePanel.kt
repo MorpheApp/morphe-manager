@@ -38,6 +38,9 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteUrlCheck
 import app.morphe.manager.ui.model.NewSourceOptions
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel.PickedBundle
+import app.morphe.manager.util.GITHUB_HOST
+import app.morphe.manager.util.GITHUB_RAW_HOST
+import app.morphe.manager.util.GITLAB_HOST
 import app.morphe.manager.util.REMOTE_URL_PLACEHOLDER
 import app.morphe.manager.util.toFilePath
 import com.composables.icons.fontawesome.FontAwesome
@@ -297,9 +300,9 @@ private val RemoteSourceRejection.hintRes: Int
 /** Hosts whose links name a repository, by the icon they show. Any other host serves a bundle file. */
 private val REPOSITORY_HOST_ICONS: Map<String, ImageVector> by lazy {
     mapOf(
-        "github.com" to FontAwesome.Brands.Github,
-        "raw.githubusercontent.com" to FontAwesome.Brands.Github,
-        "gitlab.com" to FontAwesome.Brands.Gitlab
+        GITHUB_HOST to FontAwesome.Brands.Github,
+        GITHUB_RAW_HOST to FontAwesome.Brands.Github,
+        GITLAB_HOST to FontAwesome.Brands.Gitlab
     )
 }
 

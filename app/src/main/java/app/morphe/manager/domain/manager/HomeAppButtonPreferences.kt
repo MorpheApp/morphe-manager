@@ -90,7 +90,7 @@ data class HomeAppButtonSnapshot(
  *
  * Recommended ordering:
  * 1. Patched (installed) apps first
- * 2. Apps with isPinnedByDefault = true
+ * 2. Known apps, see [app.morphe.manager.util.KnownApps]
  * 3. All other apps, alphabetical
  *
  * Manual sort mode applies the user's saved order, falling back to recommended ordering when no

@@ -17,6 +17,7 @@ import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.domain.repository.PeopleRepository
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.dto.AppUpdateCheck
+import app.morphe.manager.util.MORPHE_GITHUB_URL
 import app.morphe.manager.util.MORPHE_WEBSITE_URL
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -78,7 +79,7 @@ class AboutViewModel(
             AboutLink(
                 title = R.string.about_link_github,
                 icon = MaterialSymbols.Rounded.Code,
-                url = "https://github.com/MorpheApp"
+                url = MORPHE_GITHUB_URL
             ),
             AboutLink(
                 title = R.string.about_link_reddit,

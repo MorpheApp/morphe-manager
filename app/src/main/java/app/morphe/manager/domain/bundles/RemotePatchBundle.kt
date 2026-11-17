@@ -264,9 +264,9 @@ sealed class RemotePatchBundle(
             if (segments.size < 2) return null
 
             return when (host) {
-                "raw.githubusercontent.com", "github.com" -> "https://github.com/${segments[0]}/${segments[1]}"
+                GITHUB_RAW_HOST, GITHUB_HOST -> "https://$GITHUB_HOST/${segments[0]}/${segments[1]}"
                 // gitlab.com/owner/repo/-/raw/branch/... or gitlab.com/owner/repo
-                "gitlab.com" -> "https://gitlab.com/${segments[0]}/${segments[1]}"
+                GITLAB_HOST -> "https://$GITLAB_HOST/${segments[0]}/${segments[1]}"
                 else -> null
             }
         }
@@ -281,11 +281,11 @@ sealed class RemotePatchBundle(
             val branches = setOf(BRANCH_STABLE, BRANCH_DEV)
 
             val provider = when (host) {
-                "raw.githubusercontent.com" -> "github".takeIf {
+                GITHUB_RAW_HOST -> "github".takeIf {
                     segments.size == 4 && segments[2] in branches && segments[3] == DEFAULT_BUNDLE_FILE
                 }
 
-                "gitlab.com" -> "gitlab".takeIf {
+                GITLAB_HOST -> "gitlab".takeIf {
                     segments.size == 6 && segments[2] == "-" && segments[3] == "raw" &&
                             segments[4] in branches && segments[5] == DEFAULT_BUNDLE_FILE
                 }
@@ -309,10 +309,10 @@ sealed class RemotePatchBundle(
         fun patchSourceEntryForEndpoint(endpoint: String): String {
             val (host, segments) = endpointParts(endpoint) ?: return "url=unknown"
             val entry = when {
-                segments.size >= 2 && (host == "raw.githubusercontent.com" || host == "github.com") ->
+                segments.size >= 2 && (host == GITHUB_RAW_HOST || host == GITHUB_HOST) ->
                     "github=${segments[0]}/${segments[1]}"
 
-                segments.size >= 2 && host == "gitlab.com" -> "gitlab=${segments[0]}/${segments[1]}"
+                segments.size >= 2 && host == GITLAB_HOST -> "gitlab=${segments[0]}/${segments[1]}"
                 else -> "url=" + (listOf(host) + segments).joinToString("/")
             }
             // Commas separate entries, and the API takes printable ASCII only
@@ -339,8 +339,8 @@ sealed class RemotePatchBundle(
 
         /** Appends the host's issues path to an already resolved repository URL. */
         fun issuesUrlForRepoUrl(repoUrl: String): String? = when {
-            repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
-            repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
+            repoUrl.startsWith("https://$GITHUB_HOST/") -> "$repoUrl/issues"
+            repoUrl.startsWith("https://$GITLAB_HOST/") -> "$repoUrl/-/issues"
             else -> null
         }
     }
@@ -385,15 +385,15 @@ class JsonPatchBundle(
             val uri = java.net.URI(url)
             val host = uri.host?.lowercase(java.util.Locale.US)
             when (host) {
-                "raw.githubusercontent.com" -> {
+                GITHUB_RAW_HOST -> {
                     val parts = uri.path.trim('/').split('/')
                     if (parts.size < 3) return url
                     // Don't modify refs/heads/... - it's a direct immutable link
                     if (parts[2] == "refs") return url
                     val newPath = "/${parts[0]}/${parts[1]}/$targetBranch/${parts.drop(3).joinToString("/")}"
-                    "https://raw.githubusercontent.com$newPath"
+                    "https://$GITHUB_RAW_HOST$newPath"
                 }
-                "github.com" -> {
+                GITHUB_HOST -> {
                     // Parse: /owner/repo/tree|blob/branch/path/to/file.json
                     val pathParts = uri.path?.trim('/')?.split('/') ?: return url
                     if (pathParts.size < 5) return url // Need at least: owner, repo, tree/blob, branch, file
@@ -402,15 +402,15 @@ class JsonPatchBundle(
                     val owner = pathParts[0]
                     val repo = pathParts[1]
                     val filePath = pathParts.drop(4).joinToString("/")
-                    "https://raw.githubusercontent.com/$owner/$repo/$targetBranch/$filePath"
+                    "https://$GITHUB_RAW_HOST/$owner/$repo/$targetBranch/$filePath"
                 }
-                "gitlab.com" -> {
+                GITLAB_HOST -> {
                     // Format: owner/repo/-/raw/BRANCH/path/file.json
                     val parts = uri.path.trim('/').split('/').toMutableList()
                     val rawIndex = parts.indexOf("raw")
                     if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
                         parts[rawIndex + 1] = targetBranch
-                        "https://gitlab.com/${parts.joinToString("/")}"
+                        "https://$GITLAB_HOST/${parts.joinToString("/")}"
                     } else url
                 }
                 else -> url // Unknown host, return as-is
@@ -543,16 +543,16 @@ class JsonPatchBundle(
                 val host = uri.host?.lowercase(java.util.Locale.US)
                 val parts = uri.path.trim('/').split('/')
                 when (host) {
-                    "raw.githubusercontent.com" -> {
+                    GITHUB_RAW_HOST -> {
                         // Format: owner/repo/BRANCH/path...
                         // But refs/heads/BRANCH is a direct file link - not switchable
                         val branch = parts.getOrNull(2) ?: return null
                         if (branch == "refs") null else branch
                     }
-                    "github.com" -> {
+                    GITHUB_HOST -> {
                         if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
                     }
-                    "gitlab.com" -> {
+                    GITLAB_HOST -> {
                         // Format: owner/repo/-/raw/BRANCH/path...
                         val rawIndex = parts.indexOf("raw")
                         if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-")
@@ -685,7 +685,7 @@ class GitHubPullRequestBundle(
 
                                 var entry = zis.nextEntry
                                 while (entry != null) {
-                                    if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
+                                    if (!entry.isDirectory && entry.name.endsWith(".$MPP_EXTENSION")) {
                                         extractedTotal = entry.size.takeIf { it > 0 }
 
                                         while (true) {

@@ -34,11 +34,9 @@ import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
-private const val GITHUB_URL_PREFIX = "https://github.com/"
+private const val GITHUB_URL_PREFIX = "https://$GITHUB_HOST/"
 
-private const val GITHUB_API_PREFIX = "https://api.github.com/"
-
-private const val GITHUB_RAW_HOST = "raw.githubusercontent.com"
+private const val GITHUB_API_PREFIX = "https://$GITHUB_API_HOST/"
 
 /** Whether [url] is a file served from a repository by raw.githubusercontent.com. */
 internal fun isRawGitHubUrl(url: String): Boolean = runCatching {
@@ -122,7 +120,7 @@ internal fun parseTimestamp(timestamp: String): LocalDateTime {
  *  - Fetching and parsing CHANGELOG.md files from repositories
  *  - Resolving GitHub pull request build artifacts
  *
- * All methods return [APIResponse] or nullable results — no exceptions propagate to callers
+ * All methods return [APIResponse] or nullable results, no exceptions propagate to callers
  * except [getAssetFromPullRequest], which throws on hard failure.
  */
 class ReleaseAPI(
@@ -155,7 +153,7 @@ class ReleaseAPI(
      */
     val rejectedPat: StateFlow<String?> = rejected.asStateFlow()
 
-    // Lazy so URL parsing doesn't happen on construction — only when first needed
+    // Lazy so URL parsing doesn't happen on construction, only when first needed
     private val managerConfig: RepoConfig by lazy { parseRepoUrl(MANAGER_REPO_URL) }
     private val patchesConfig: RepoConfig by lazy { parseRepoUrl(SOURCE_REPO_URL) }
 
@@ -639,21 +637,21 @@ class ReleaseAPI(
                     RepoConfig(parts[0], parts[1]).rawFileUrl(parts[2], "CHANGELOG.md")
                 }
 
-                "github.com" -> {
+                GITHUB_HOST -> {
                     // path: owner/repo  or  owner/repo/tree/branch/...
                     if (parts.size < 2) return null
                     val branch = if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else "main"
                     RepoConfig(parts[0], parts[1]).rawFileUrl(branch, "CHANGELOG.md")
                 }
 
-                "gitlab.com" -> {
+                GITLAB_HOST -> {
                     // path: owner/repo/-/raw/branch/...
                     if (parts.size < 2) return null
                     val rawIndex = parts.indexOf("raw")
                     val branch = if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
                         parts.getOrNull(rawIndex + 1) ?: "main"
                     } else "main"
-                    "https://gitlab.com/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
+                    "https://$GITLAB_HOST/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
                 }
 
                 else -> null

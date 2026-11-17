@@ -187,7 +187,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // source, a disabled one included, so the app keeps its color with nothing left to patch it.
     // originalPackageName needed because metadata is keyed by original pkg, not patched.
     val appAccentColor = rememberAppColor(viewModel.installedApp?.originalPackageName ?: packageName)
-        ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
+        ?: AppCardColorDefaults.defaultDownloadColor
     val infoAccentColor = ThemeTraitsDefaults.accentColor(appAccentColor)
 
     // Dialog states

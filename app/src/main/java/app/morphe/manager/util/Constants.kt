@@ -5,137 +5,73 @@
 
 package app.morphe.manager.util
 
-import androidx.compose.ui.graphics.Color
 import app.morphe.manager.BuildConfig
-import app.morphe.manager.ui.theme.MorpheBrandBlue
-import app.morphe.manager.ui.theme.MorpheBrandTeal
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
 const val tag = "Morphe Manager"
 
-const val SOURCE_NAME = "Morphe Patches"
+// Code hosts a source or a release can live on
+
+const val GITHUB_HOST = "github.com"
+const val GITHUB_RAW_HOST = "raw.githubusercontent.com"
+const val GITHUB_API_HOST = "api.github.com"
+const val GITLAB_HOST = "gitlab.com"
+
+/** What a source link looks like, shown in a field waiting for one. */
+const val REMOTE_URL_PLACEHOLDER = "$GITHUB_HOST/owner/repo"
+
+// Morphe on GitHub
+
 const val MORPHE_GITHUB_ORG = "MorpheApp"
-const val MANAGER_REPO_URL = "https://github.com/$MORPHE_GITHUB_ORG/morphe-manager"
-const val SOURCE_REPO_URL = "https://github.com/$MORPHE_GITHUB_ORG/morphe-patches"
+const val MORPHE_GITHUB_URL = "https://$GITHUB_HOST/$MORPHE_GITHUB_ORG"
+const val MANAGER_REPO_URL = "$MORPHE_GITHUB_URL/morphe-manager"
+const val SOURCE_REPO_URL = "$MORPHE_GITHUB_URL/morphe-patches"
+
+const val SOURCE_NAME = "Morphe Patches"
 
 /** Key the releases of [SOURCE_REPO_URL] are signed with, see PatchBundleSignature. */
 const val SOURCE_SIGNING_KEY = "g8Ys9leTu2yeixojeR35HrNkK6eOSLpA6nNIizRutqI="
-const val MORPHE_API_URL = "https://api.morphe.software"
+
+private const val MANAGER_RAW_URL = "https://$GITHUB_RAW_HOST/$MORPHE_GITHUB_ORG/morphe-manager/refs/heads"
+
+/** Raw GitHub URL for the stable manager release JSON (main branch). */
+const val MANAGER_RELEASE_JSON_URL = "$MANAGER_RAW_URL/main/app-release.json"
+
+/** Raw GitHub URL for the pre-release manager release JSON (dev branch). */
+const val MANAGER_PRERELEASE_JSON_URL = "$MANAGER_RAW_URL/dev/app-release.json"
+
+/**
+ * Controls whether manager updates are fetched directly from JSON files in the repository instead
+ * of using the GitHub API.
+ */
+const val USE_MANAGER_DIRECT_JSON = true
+
+/**
+ * Controls whether patches are fetched directly from JSON files in the repository instead of using
+ * the Morphe API.
+ */
+const val USE_PATCHES_DIRECT_JSON = true
+
+// Morphe website and API
+
+const val MORPHE_WEBSITE_HOST = "morphe.software"
+const val MORPHE_WEBSITE_URL = "https://$MORPHE_WEBSITE_HOST"
+const val MORPHE_API_URL = "https://api.$MORPHE_WEBSITE_HOST"
+const val COMMUNITY_PATCHES_URL = "https://morphe-patches.software"
 
 /** Sent on every request to [MORPHE_API_URL]. */
-const val MORPHE_USER_AGENT ="Morphe-Manager/${BuildConfig.VERSION_CODE}"
-const val MORPHE_WEBSITE_URL = "https://morphe.software"
-const val COMMUNITY_PATCHES_URL = "https://morphe-patches.software"
+const val MORPHE_USER_AGENT = "Morphe-Manager/${BuildConfig.VERSION_CODE}"
+
+/** Website page behind add-source links: ?github|gitlab=owner/repo(&name=...). */
+const val ADD_SOURCE_PATH = "/add-source"
+
 const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"
 
 /** Who works on Morphe and who backs it, see [app.morphe.manager.domain.repository.PeopleRepository]. */
 const val PEOPLE_URL = "$MORPHE_API_URL/v2/people"
 
-/** Website page behind add-source links: ?github|gitlab=owner/repo(&name=...) */
-const val ADD_SOURCE_PATH = "/add-source"
-
-/** What a source link looks like, shown in a field waiting for one. */
-const val REMOTE_URL_PLACEHOLDER = "github.com/owner/repo"
-
-/** Raw GitHub URL for the stable manager release JSON (main branch) */
-const val MANAGER_RELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/main/app-release.json"
-
-/** Raw GitHub URL for the pre-release manager release JSON (dev branch) */
-const val MANAGER_PRERELEASE_JSON_URL = "https://raw.githubusercontent.com/MorpheApp/morphe-manager/refs/heads/dev/app-release.json"
-
-/** Controls whether manager updates are fetched directly from JSON files in the repository instead of using the GitHub API */
-const val USE_MANAGER_DIRECT_JSON = true
-
-/** Controls whether patches are fetched directly from JSON files in the repository instead of using the Morphe API */
-const val USE_PATCHES_DIRECT_JSON = true
-
-/**
- * Registry of known patchable apps.
- */
-object KnownApps {
-    const val YOUTUBE       = "com.google.android.youtube"
-    const val YOUTUBE_MUSIC = "com.google.android.apps.youtube.music"
-    const val REDDIT        = "com.reddit.frontpage"
-    // const val X_TWITTER     = "com.twitter.android"
-
-    // Shared Morphe brand gradient tail
-    val GRADIENT_MID = MorpheBrandBlue
-    val GRADIENT_END = MorpheBrandTeal
-
-    val DEFAULT_DOWNLOAD_COLOR = Color(0xFF0E3F6E)
-
-    // Default gradient for packages with no bundle-declared color
-    val DEFAULT_COLORS = listOf(DEFAULT_DOWNLOAD_COLOR, GRADIENT_MID, GRADIENT_END)
-
-    /**
-     * A known patchable app entry.
-     *
-     * @param packageName The app's package name.
-     * @param isPinnedByDefault Whether this app appears pinned on the home screen by default.
-     * @param brandColor App brand color for the shimmer placeholder shown before any bundle loads.
-     *   Should match the appIconColor value shipped in the bundle's Compatibility declaration.
-     *   Null means fall back to [DEFAULT_COLORS].
-     */
-    data class Entry(
-        val packageName: String,
-        val isPinnedByDefault: Boolean = true,
-        val brandColor: Color? = null,
-    )
-
-    /** All known app entries in display order. */
-    val all: List<Entry> = listOf(
-        Entry(REDDIT,        brandColor = Color(0xFFFF4500)),
-        Entry(YOUTUBE,       brandColor = Color(0xFFFF0033)),
-        Entry(YOUTUBE_MUSIC, brandColor = Color(0xFFFF0000)),
-        // Entry(X_TWITTER, brandColor = Color(0xFF000000)),  // Uncomment when release
-    )
-
-    // Fast lookup map - built once at startup.
-    private val byPackage: Map<String, Entry> = all.associateBy { it.packageName }
-
-    /** Returns the [Entry] for [packageName], or null if not a known app. */
-    fun fromPackage(packageName: String): Entry? = byPackage[packageName]
-
-    /**
-     * Ordered list of shimmer placeholder gradient colors shown during cold-start loading.
-     * Uses each app's [Entry.brandColor] as the gradient start — actual bundle colors will
-     * replace them once the bundle loads. Falls back to [DEFAULT_COLORS] if no brand color
-     * is declared.
-     */
-    val DEFAULT_SHIMMER_GRADIENTS: List<List<Color>> by lazy {
-        all.filter { it.isPinnedByDefault }.map { entry ->
-            entry.brandColor?.let { color -> listOf(color, GRADIENT_MID, GRADIENT_END) }
-                ?: DEFAULT_COLORS
-        }
-    }
-
-    /**
-     * Fallback display names for all packages - used only when bundle metadata and installed
-     * app labels are both unavailable. Includes KnownApps entries so no separate localization
-     * path is needed (bundle always provides the authoritative name anyway).
-     */
-    private val FALLBACK_NAMES = mapOf(
-        YOUTUBE       to "YouTube",
-        YOUTUBE_MUSIC to "YouTube Music",
-        REDDIT        to "Reddit",
-    )
-
-    /**
-     * Returns a display name for [packageName].
-     * Priority: fallback table → raw package name.
-     * Used as the last resort when bundle metadata and installed labels are unavailable.
-     */
-    fun getAppName(packageName: String): String =
-        FALLBACK_NAMES[packageName] ?: packageName
-
-    /**
-     * Returns a fallback display name for [packageName], or null if not in the table.
-     * Unlike [getAppName], does not fall back to the raw package name — null means unknown.
-     * Used for transitional metadata fallbacks where absence should be preserved.
-     */
-    fun fallbackName(packageName: String): String? = FALLBACK_NAMES[packageName]
-}
+// Timings
 
 /**
  * Timeout applied to a single uninstall step when running as part of a batch.
@@ -150,7 +86,7 @@ val BATCH_UNINSTALL_TIMEOUT: Duration = 2.minutes
  */
 const val PACKAGE_CHANGE_DEBOUNCE_MS = 400L
 
-const val APK_MIMETYPE  = "application/vnd.android.package-archive"
+// Installers
 
 const val PLAY_STORE_INSTALLER_PACKAGE = "com.android.vending"
 
@@ -161,12 +97,22 @@ const val AOSP_INSTALLER_LABEL          = "Package installer"
 // Attribution left behind by anything running as the shell user, which is how Shizuku installs
 const val SHELL_INSTALLER_PACKAGE = "com.android.shell"
 
-const val JSON_MIMETYPE     = "application/json"
-const val BIN_MIMETYPE      = "application/octet-stream"
-const val TEXT_MIMETYPE     = "text/plain"
-const val MPP_MIMETYPE      = "application/vnd.ms-project"
-const val IMAGE_MIMETYPE    = "image/*"
-const val WILDCARD_MIMETYPE = "*/*"
+// File types
+
+const val APK_MIMETYPE         = "application/vnd.android.package-archive"
+const val JSON_MIMETYPE        = "application/json"
+const val BIN_MIMETYPE         = "application/octet-stream"
+const val TEXT_MIMETYPE        = "text/plain"
+const val MPP_MIMETYPE         = "application/vnd.ms-project"
+const val IMAGE_MIMETYPE       = "image/*"
+const val APPLICATION_MIMETYPE = "application/*"
+const val WILDCARD_MIMETYPE    = "*/*"
+
+/** Extension of a patch bundle file. */
+const val MPP_EXTENSION = "mpp"
+
+/** File extensions recognized as APK-family archives that Morphe can patch. */
+val APK_EXTENSIONS = setOf("apk", "apks", "xapk", "apkm")
 
 val APK_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
@@ -176,14 +122,11 @@ val APK_FILE_MIME_TYPES = arrayOf(
     // removing "apkmirror.com" from the file name fixes the issue, but that's not something the
     // end user will know or should have to do. Instead, show all files to ensure the user can
     // always select no matter what file naming ApkMirror uses.
-    "application/*",
+    APPLICATION_MIMETYPE,
 )
 
 val MPP_FILE_MIME_TYPES = arrayOf(
     BIN_MIMETYPE,
     MPP_MIMETYPE,
-    "*/*"
+    WILDCARD_MIMETYPE
 )
-
-/** File extensions recognized as APK-family archives that Morphe can patch. */
-val APK_EXTENSIONS = setOf("apk", "apks", "xapk", "apkm")

@@ -287,7 +287,7 @@ private fun DialogHostScope.PatchFlowDialog(
                 requestedVersion = session.requestedVersion,
                 usingMountInstall = flow.usingMountInstall,
                 stockAppInstalled = session.stockAppInstalled == true,
-                downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
+                downloadColor = metadata?.downloadColor ?: AppCardColorDefaults.defaultDownloadColor,
                 // File type the patch bundle asks for, so the site buttons are labeled as the sites label them
                 apkFileType = metadata?.apkFileType,
                 onDismiss = flow::backFromApkSource,

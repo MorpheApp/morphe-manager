@@ -461,8 +461,8 @@ class PatchBundleRepository(
         // Fallbacks for common GitHub URL patterns.
         if (segments.isEmpty()) return host
         return when (host) {
-            "github.com" if segments.size >= 2 -> segments[1]
-            "api.github.com" if segments.size >= 3 && segments[0] == "repos" -> segments[2]
+            GITHUB_HOST if segments.size >= 2 -> segments[1]
+            GITHUB_API_HOST if segments.size >= 3 && segments[0] == "repos" -> segments[2]
             else -> host
         }
     }
@@ -1586,10 +1586,10 @@ class PatchBundleRepository(
         val segments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
         when {
             segments.size < 2 -> null
-            parsed.host.equals("raw.githubusercontent.com", ignoreCase = true) ||
-                parsed.host.equals("github.com", ignoreCase = true) ->
+            parsed.host.equals(GITHUB_RAW_HOST, ignoreCase = true) ||
+                parsed.host.equals(GITHUB_HOST, ignoreCase = true) ->
                 "github=${segments[0]}/${segments[1]}".lowercase(Locale.US)
-            parsed.host.equals("gitlab.com", ignoreCase = true) ->
+            parsed.host.equals(GITLAB_HOST, ignoreCase = true) ->
                 "gitlab=${segments[0]}/${segments[1]}".lowercase(Locale.US)
             else -> null
         }
@@ -1608,7 +1608,7 @@ class PatchBundleRepository(
         val pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
 
         // Handle GitHub repository URLs
-        if (host.equals("github.com", ignoreCase = true)) {
+        if (host.equals(GITHUB_HOST, ignoreCase = true)) {
             if (pathSegments.size < 2) {
                 throw IllegalArgumentException("Invalid GitHub repository URL")
             }
@@ -1673,13 +1673,13 @@ class PatchBundleRepository(
                 }
             }
 
-            return "https://raw.githubusercontent.com$finalPath"
+            return "https://$GITHUB_RAW_HOST$finalPath"
         }
 
         // Handle GitLab repository URLs
         // Accepts short form: gitlab.com/owner/repo
         // Or full raw URL:    gitlab.com/owner/repo/-/raw/branch/patches-bundle.json
-        if (host.equals("gitlab.com", ignoreCase = true)) {
+        if (host.equals(GITLAB_HOST, ignoreCase = true)) {
             if (pathSegments.size < 2) {
                 throw IllegalArgumentException("Invalid GitLab repository URL")
             }
@@ -1697,7 +1697,7 @@ class PatchBundleRepository(
                     throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
                 }
                 val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-                return "https://gitlab.com$normalizedPath$query"
+                return "https://$GITLAB_HOST$normalizedPath$query"
             }
 
             // Determine branch from GitLab UI URLs (/-/tree/branch or /-/blob/branch)
@@ -1711,11 +1711,11 @@ class PatchBundleRepository(
                 else -> "main"
             }
 
-            return "https://gitlab.com/$owner/$repo/-/raw/$branch/patches-bundle.json"
+            return "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/patches-bundle.json"
         }
 
         // Handle raw.githubusercontent.com URLs (legacy support)
-        if (host.equals("raw.githubusercontent.com", ignoreCase = true)) {
+        if (host.equals(GITHUB_RAW_HOST, ignoreCase = true)) {
             if (pathSegments.size < 3) {
                 throw IllegalArgumentException("Invalid raw GitHub URL")
             }

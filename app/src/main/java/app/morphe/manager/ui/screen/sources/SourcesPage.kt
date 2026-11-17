@@ -388,7 +388,7 @@ private fun SourcesPageContent(
 
     fun shareText(text: String) {
         val intent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
+            type = TEXT_MIMETYPE
             putExtra(Intent.EXTRA_TEXT, text)
         }
         context.startActivity(Intent.createChooser(intent, null))

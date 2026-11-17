@@ -125,7 +125,7 @@ fun Uri.copyApkInto(dir: File, prefix: String, contentResolver: ContentResolver)
  * messengers rename the files they pass on. Reads the file, so it is called off the main thread.
  */
 fun Uri.isPatchBundle(contentResolver: ContentResolver): Boolean =
-    displayName(contentResolver)?.endsWith(".mpp", ignoreCase = true) == true ||
+    displayName(contentResolver)?.endsWith(".$MPP_EXTENSION", ignoreCase = true) == true ||
             readMppManifest(contentResolver) != null
 
 /**
@@ -190,7 +190,7 @@ private fun rememberFolderPicker(
 
     DialogHost(visible = showPickerState.value) {
         FilePicker(
-            mimeTypes = arrayOf("*/*"),
+            mimeTypes = arrayOf(WILDCARD_MIMETYPE),
             allowFolderSelection = true,
             suggestedFolderName = suggestedFolderName,
             onDismiss = { showPickerState.value = false },
@@ -440,7 +440,7 @@ fun rememberImagePicker(onLoaded: (Bitmap) -> Unit): () -> Unit {
     val loadFailedMessage = stringResource(R.string.image_load_failed)
 
     return rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("image/*"),
+        mimeTypes = arrayOf(IMAGE_MIMETYPE),
         onResult = { uri ->
             if (uri == null) return@rememberAdaptiveFilePicker
             scope.launch {
@@ -511,7 +511,7 @@ private fun rememberAdaptivePicker(
 
     val messages: UserMessages = koinInject()
     val systemLauncher = if (multiple) multipleLauncher else singleLauncher
-    val systemPickerType = if (mimeTypes.size == 1) mimeTypes[0] else "*/*"
+    val systemPickerType = if (mimeTypes.size == 1) mimeTypes[0] else WILDCARD_MIMETYPE
 
     return remember(isTV, useCustomPicker, multiple) {
         {

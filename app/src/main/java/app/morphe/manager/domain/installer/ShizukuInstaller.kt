@@ -23,6 +23,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.os.RemoteException
+import app.morphe.manager.util.SHELL_INSTALLER_PACKAGE
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -173,7 +174,7 @@ class ShizukuInstaller(private val app: Application) {
         val isRoot = runCatching { Shizuku.getUid() }.getOrDefault(-1) == 0
         return InstallerIdentity(
             packageName = installerPackageNameOverride
-                ?: if (isRoot) app.packageName else SHELL_PACKAGE,
+                ?: if (isRoot) app.packageName else SHELL_INSTALLER_PACKAGE,
             attributionTag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) app.attributionTag else null,
             userId = if (isRoot) appUserId else 0
         )
@@ -189,7 +190,6 @@ class ShizukuInstaller(private val app: Application) {
     class InstallerOperationException(val status: Int, override val message: String?) : Exception(message)
 
     companion object {
-        private const val SHELL_PACKAGE = "com.android.shell"
         private const val BASE_APK_NAME = "base.apk"
         private val INSTALL_RESULT_TIMEOUT = 5.minutes
         private val UNINSTALL_RESULT_TIMEOUT = 30.seconds

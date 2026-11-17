@@ -216,7 +216,7 @@ class HomeViewModel(
     fun pickBundles(uris: List<Uri>) {
         val fresh = uris.distinct().filter { uri -> pickedBundles.none { it.uri == uri } }.map { uri ->
             val name = uri.displayName(contentResolver) ?: uri.toString()
-            val isBundle = name.endsWith(".mpp", ignoreCase = true)
+            val isBundle = name.endsWith(".$MPP_EXTENSION", ignoreCase = true)
             PickedBundle(uri, name, bundleName = null, check = if (isBundle) null else LocalFileCheck.NotBundle)
         }
         pickedBundles = pickedBundles + fresh

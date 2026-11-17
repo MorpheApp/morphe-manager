@@ -13,6 +13,9 @@ package app.morphe.manager.domain.bundles
 import androidx.compose.runtime.Stable
 import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.util.GITHUB_HOST
+import app.morphe.manager.util.GITHUB_RAW_HOST
+import app.morphe.manager.util.GITLAB_HOST
 import app.morphe.manager.util.MORPHE_GITHUB_ORG
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
@@ -347,7 +350,7 @@ sealed class PatchBundleSource(
         fun ownerAvatarUrl(url: String): String? =
             extractGitHubOwner(url)?.let(::githubAvatar) ?: extractGitLabOwner(url)?.let(::gitlabAvatar)
 
-        private fun githubAvatar(owner: String) = "https://github.com/$owner.png"
+        private fun githubAvatar(owner: String) = "https://$GITHUB_HOST/$owner.png"
 
         private fun gitlabAvatar(owner: String) = "https://unavatar.io/gitlab/$owner"
 
@@ -362,10 +365,10 @@ sealed class PatchBundleSource(
 
                 when (host) {
                     // raw.githubusercontent.com/owner/repo/...
-                    "raw.githubusercontent.com" if segments.isNotEmpty() -> segments[0]
+                    GITHUB_RAW_HOST if segments.isNotEmpty() -> segments[0]
 
                     // github.com/owner/repo/...
-                    "github.com" if segments.isNotEmpty() -> segments[0]
+                    GITHUB_HOST if segments.isNotEmpty() -> segments[0]
                     else -> null
                 }
             } catch (_: Exception) {
@@ -383,7 +386,7 @@ sealed class PatchBundleSource(
             return try {
                 val uri = java.net.URI(endpoint)
                 val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
-                if (host != "gitlab.com") return null
+                if (host != GITLAB_HOST) return null
                 val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
                 segments.firstOrNull()
             } catch (_: Exception) {

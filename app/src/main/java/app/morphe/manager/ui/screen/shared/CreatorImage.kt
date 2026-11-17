@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.toSize
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.scale
 import androidx.documentfile.provider.DocumentFile
+import app.morphe.manager.util.BIN_MIMETYPE
 import app.morphe.manager.util.getOrCreateFile
 import app.morphe.manager.util.rememberImagePicker
 import kotlinx.coroutines.Dispatchers
@@ -195,7 +196,7 @@ fun DocumentFile.requireDir(name: String): DocumentFile =
  */
 fun DocumentFile.brandingFolder(): DocumentFile? {
     val folder = if (name == BRANDING_FOLDER_NAME) this else getOrCreateDir(BRANDING_FOLDER_NAME)
-    folder?.getOrCreateFile("application/octet-stream", ".nomedia")
+    folder?.getOrCreateFile(BIN_MIMETYPE, ".nomedia")
     return folder
 }
 
