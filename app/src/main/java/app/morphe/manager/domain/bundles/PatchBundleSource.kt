@@ -13,6 +13,7 @@ package app.morphe.manager.domain.bundles
 import androidx.compose.runtime.Stable
 import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.util.MORPHE_GITHUB_ORG
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
 import app.morphe.patcher.patch.PatchBundleSignature
@@ -302,6 +303,14 @@ sealed class PatchBundleSource(
                 }
             )
         }
+
+        /**
+         * Whether the source comes from Morphe itself, the preinstalled one or another repository
+         * or pull request of the project, which all wear the logo rather than the owner's avatar.
+         */
+        val PatchBundleSource.isMorpheSource: Boolean get() =
+            isDefault || (this as? RemotePatchBundle)?.let { extractGitHubOwner(it.endpoint) }
+                .equals(MORPHE_GITHUB_ORG, ignoreCase = true)
 
         /** Get custom bundle avatar URL, see [bundleAvatarUrl]. */
         val PatchBundleSource.bundleAvatarUrl: String? get() =

@@ -15,8 +15,9 @@ import kotlin.time.Duration.Companion.minutes
 const val tag = "Morphe Manager"
 
 const val SOURCE_NAME = "Morphe Patches"
-const val MANAGER_REPO_URL = "https://github.com/MorpheApp/morphe-manager"
-const val SOURCE_REPO_URL = "https://github.com/MorpheApp/morphe-patches"
+const val MORPHE_GITHUB_ORG = "MorpheApp"
+const val MANAGER_REPO_URL = "https://github.com/$MORPHE_GITHUB_ORG/morphe-manager"
+const val SOURCE_REPO_URL = "https://github.com/$MORPHE_GITHUB_ORG/morphe-patches"
 
 /** Key the releases of [SOURCE_REPO_URL] are signed with, see PatchBundleSignature. */
 const val SOURCE_SIGNING_KEY = "g8Ys9leTu2yeixojeR35HrNkK6eOSLpA6nNIizRutqI="

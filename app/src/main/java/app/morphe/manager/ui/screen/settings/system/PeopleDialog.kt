@@ -50,6 +50,8 @@ import app.morphe.manager.domain.repository.PeopleRepository.Person
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.AboutViewModel
 import app.morphe.manager.util.AvatarCache
+import app.morphe.manager.util.MANAGER_REPO_URL
+import app.morphe.manager.util.MORPHE_GITHUB_ORG
 import app.morphe.manager.util.loadRemoteAvatar
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -87,8 +89,8 @@ private data class Project(
 
 private val currentProject = Project(
     name = "Morphe",
-    organization = "MorpheApp",
-    url = "https://github.com/MorpheApp/morphe-manager/graphs/contributors",
+    organization = MORPHE_GITHUB_ORG,
+    url = "$MANAGER_REPO_URL/graphs/contributors",
     ownPicture = true
 )
 
