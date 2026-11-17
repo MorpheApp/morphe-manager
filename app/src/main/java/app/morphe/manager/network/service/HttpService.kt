@@ -19,8 +19,8 @@ import app.morphe.manager.network.service.HttpService.Companion.PROGRESS_MIN_BYT
 import app.morphe.manager.network.utils.APIError
 import app.morphe.manager.network.utils.APIFailure
 import app.morphe.manager.network.utils.APIResponse
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.MORPHE_USER_AGENT
-import app.morphe.manager.util.tag
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
@@ -120,7 +120,7 @@ class HttpService(
                     try {
                         val response = http.request {
                             builder()
-                            Log.i(tag, "HttpService.request: Connecting to URL: ${url.buildString()}")
+                            Log.i(LOG_TAG, "HttpService.request: Connecting to URL: ${url.buildString()}")
                         }
 
                         if (response.status == HttpStatusCode.TooManyRequests) {
@@ -139,7 +139,7 @@ class HttpService(
                             APIResponse.Success(json.decodeFromString(body!!))
                         } else {
                             body = runCatching { response.bodyAsText() }.getOrNull()
-                            Log.e(tag, "HTTP error ${response.status}, body: $body")
+                            Log.e(LOG_TAG, "HTTP error ${response.status}, body: $body")
                             APIResponse.Error(APIError(response.status, body))
                         }
                     } catch (t: TooManyRequestsException) {
@@ -150,18 +150,18 @@ class HttpService(
                         // Hand dropped connections to runWithRetry rather than collapsing them into
                         // a failure, which would strand the caller on a network blip
                         if (isTransientNetworkError(t)) throw t
-                        Log.e(tag, "Request failed: ${t::class.simpleName}: ${t.message}, body: $body")
+                        Log.e(LOG_TAG, "Request failed: ${t::class.simpleName}: ${t.message}, body: $body")
                         APIResponse.Failure(APIFailure(t, body))
                     }
                 }
             }
         } catch (_: TooManyRequestsException) {
-            Log.w(tag, "request failed with HTTP 429 after all retries")
+            Log.w(LOG_TAG, "request failed with HTTP 429 after all retries")
             APIResponse.Error(APIError(HttpStatusCode.TooManyRequests, body))
         } catch (t: CancellationException) {
             throw t
         } catch (t: Throwable) {
-            Log.e(tag, "Request failed after retries: ${t::class.simpleName}: ${t.message}, body: $body")
+            Log.e(LOG_TAG, "Request failed after retries: ${t::class.simpleName}: ${t.message}, body: $body")
             APIResponse.Failure(APIFailure(t, body))
         }
     }
@@ -187,7 +187,7 @@ class HttpService(
                     // on a slow link outlasts while bytes are still arriving. The socket timeout
                     // still ends a stalled connection.
                     timeout { requestTimeoutMillis = HttpTimeoutConfig.INFINITE_TIMEOUT_MS }
-                    Log.i(tag, "HttpService.streamTo: ${url.buildString()}")
+                    Log.i(LOG_TAG, "HttpService.streamTo: ${url.buildString()}")
                 }.execute { response ->
                     when {
                         response.status == HttpStatusCode.TooManyRequests ->
@@ -523,7 +523,7 @@ class HttpService(
             } catch (t: TooManyRequestsException) {
                 if (!retry || attempt >= MAX_RETRY_ATTEMPTS) throw t
                 val wait = (t.retryAfterMillis ?: delayMs).coerceAtMost(MAX_RETRY_DELAY_MS)
-                Log.w(tag, "$operationName hit 429 (attempt $attempt/$MAX_RETRY_ATTEMPTS), waiting ${wait}ms")
+                Log.w(LOG_TAG, "$operationName hit 429 (attempt $attempt/$MAX_RETRY_ATTEMPTS), waiting ${wait}ms")
                 delay(wait.milliseconds)
                 delayMs = (delayMs * 2).coerceAtMost(MAX_RETRY_DELAY_MS)
             }
@@ -565,13 +565,13 @@ class HttpService(
                 if (!isTransientNetworkError(t)) throw t
                 if (attempt >= maxAttempts) {
                     if (marksHost) host?.let(failingHosts::markFailed)
-                    Log.e(tag, "$operationName failed after $attempt attempts: ${t::class.simpleName}: ${t.message}")
+                    Log.e(LOG_TAG, "$operationName failed after $attempt attempts: ${t::class.simpleName}: ${t.message}")
                     throw t
                 }
                 // Jitter keeps the parallel chunks of one download from retrying in lockstep and
                 // walking into the same failure together
                 val wait = currentDelay + Random.nextLong(currentDelay / 2 + 1)
-                Log.w(tag, "$operationName attempt $attempt failed (${t::class.simpleName}: ${t.message}), retrying in ${wait}ms")
+                Log.w(LOG_TAG, "$operationName attempt $attempt failed (${t::class.simpleName}: ${t.message}), retrying in ${wait}ms")
                 delay(wait.milliseconds)
                 currentDelay = (currentDelay * 2).coerceAtMost(MAX_RETRY_DELAY_MS)
             }
@@ -626,7 +626,7 @@ class HttpService(
         }
     }.getOrElse { error ->
         if (error is CancellationException) throw error
-        Log.w(tag, "isReachable($url) could not be determined: ${error::class.simpleName}: ${error.message}")
+        Log.w(LOG_TAG, "isReachable($url) could not be determined: ${error::class.simpleName}: ${error.message}")
         null
     }
 

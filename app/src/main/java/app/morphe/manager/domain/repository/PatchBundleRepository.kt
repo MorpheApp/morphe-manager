@@ -587,18 +587,18 @@ class PatchBundleRepository(
                 if (error is PatchBundleHeldBackException) {
                     // The bundle took the process down with it, so the launch it would break is
                     // worth more than the patches it carries
-                    Log.e(tag, "Held back bundle ${src.name}", error)
+                    Log.e(LOG_TAG, "Held back bundle ${src.name}", error)
                 } else if (requiredPatcher != null && isPatcherOutdated(requiredPatcher)) {
                     // Loading fails with linkage errors when the bundle uses patcher APIs this
                     // manager does not have. Spell it out so logs are not just a NoSuchMethodError
                     Log.e(
-                        tag,
+                        LOG_TAG,
                         "Failed to load bundle ${src.name}: it requires patcher $requiredPatcher, " +
                                 "but this manager ships ${BuildConfig.PATCHER_VERSION}. Update the manager",
                         error
                     )
                 } else {
-                    Log.e(tag, "Failed to load bundle ${src.name}", error)
+                    Log.e(LOG_TAG, "Failed to load bundle ${src.name}", error)
                 }
                 null
             }
@@ -609,7 +609,7 @@ class PatchBundleRepository(
         try {
             sourceMuteRepository.leaveOutNewApps(metadata)
         } catch (e: SQLException) {
-            Log.e(tag, "Failed to leave out new apps", e)
+            Log.e(LOG_TAG, "Failed to leave out new apps", e)
         }
 
         if (failures.isNotEmpty()) {
@@ -710,7 +710,7 @@ class PatchBundleRepository(
 
     private suspend fun loadEntitiesEnforcingOfficialOrder(): List<PatchBundleEntity> {
         val entities = loadFromDb()
-        entities.forEach { Log.d(tag, "Bundle: $it") }
+        entities.forEach { Log.d(LOG_TAG, "Bundle: $it") }
         return entities
     }
 
@@ -945,12 +945,12 @@ class PatchBundleRepository(
 
             // After store is updated, trigger update for bundles that were just enabled
             if (beingEnabledUids.isNotEmpty()) {
-                Log.d(tag, "Triggering update for re-enabled bundles: $beingEnabledUids")
+                Log.d(LOG_TAG, "Triggering update for re-enabled bundles: $beingEnabledUids")
                 startRemoteUpdateJob(
                     UpdateRequest(
                         target = UpdateTarget(custom = { bundle ->
                             val matches = bundle.uid in beingEnabledUids && bundle.enabled
-                            Log.d(tag, "  predicate check uid=${bundle.uid} inEnabled=${bundle.uid in beingEnabledUids} enabled=${bundle.enabled} → $matches")
+                            Log.d(LOG_TAG, "  predicate check uid=${bundle.uid} inEnabled=${bundle.uid in beingEnabledUids} enabled=${bundle.enabled} → $matches")
                             matches
                         })
                     )
@@ -1135,7 +1135,7 @@ class PatchBundleRepository(
         var importedUid: Int? = null
         fun reportFailure(e: Exception) {
             if (e is CancellationException) throw e
-            Log.e(tag, "Got exception while importing bundle", e)
+            Log.e(LOG_TAG, "Got exception while importing bundle", e)
             if (e is PatchBundleSignerChangedException) {
                 messages.showIfInForeground(R.string.sources_signing_key_changed_local)
             } else {
@@ -1373,7 +1373,7 @@ class PatchBundleRepository(
                 for (url in urls) {
                     when (val check = checkRemoteUrl(url, takenKeys)) {
                         is RemoteUrlCheck.Rejected -> {
-                            Log.i(tag, "Skipped source $url: ${check.reason}")
+                            Log.i(LOG_TAG, "Skipped source $url: ${check.reason}")
                             rejections += check.reason
                         }
                         is RemoteUrlCheck.Accepted -> {
@@ -1534,7 +1534,7 @@ class PatchBundleRepository(
      */
     private fun handleBundleDownloadError(e: Exception, bundle: RemotePatchBundle) {
         val code = e.httpCodeOrNull()
-        Log.e(tag, "Failed to update bundle ${bundle.name} (HTTP $code)", e)
+        Log.e(LOG_TAG, "Failed to update bundle ${bundle.name} (HTTP $code)", e)
         if (e is PatchBundleSignerChangedException) {
             messages.showIfInForeground(R.string.sources_signing_key_changed_named, bundle.displayTitle)
         } else if (code != null && code in 400..499
@@ -1564,9 +1564,9 @@ class PatchBundleRepository(
             val entry = blocked[key] ?: return@mapNotNull null
             Triple(remote.endpoint, remote.name, entry)
         }
-        Log.d(tag, "logBlockedSources: blocked=${blocked.size}, matched=${matched.size}")
+        Log.d(LOG_TAG, "logBlockedSources: blocked=${blocked.size}, matched=${matched.size}")
         matched.forEach { (endpoint, name, entry) ->
-            Log.i(tag, "Blocked source disabled: $name endpoint=$endpoint reason=${entry.reason}")
+            Log.i(LOG_TAG, "Blocked source disabled: $name endpoint=$endpoint reason=${entry.reason}")
         }
     }
 
@@ -1890,7 +1890,7 @@ class PatchBundleRepository(
                                 else
                                     null
                             } catch (e: Exception) {
-                                Log.w(tag, "Failed to check update for bundle ${bundle.name}", e)
+                                Log.w(LOG_TAG, "Failed to check update for bundle ${bundle.name}", e)
                                 null
                             }
                         }
@@ -1899,7 +1899,7 @@ class PatchBundleRepository(
                     .filterNotNull()
             }
         } catch (e: Exception) {
-            Log.e(tag, "Failed to quietly check for bundle updates", e)
+            Log.e(LOG_TAG, "Failed to quietly check for bundle updates", e)
             emptyList()
         }
     }
@@ -1915,7 +1915,7 @@ class PatchBundleRepository(
         }
 
         override suspend fun catch(exception: Exception) {
-            Log.e(tag, "Failed to update patches", exception)
+            Log.e(LOG_TAG, "Failed to update patches", exception)
             messages.showIfInForeground(R.string.sources_download_fail, exception.simpleMessage())
         }
     }
@@ -1929,7 +1929,7 @@ class PatchBundleRepository(
                 // the same bundles, so running the second one would download them twice and raise
                 // a duplicate progress snackbar
                 if (activeUpdateRequest?.covers(request) == true) {
-                    Log.d(tag, "Skipping update request already covered by the running one")
+                    Log.d(LOG_TAG, "Skipping update request already covered by the running one")
                     return
                 }
                 queued = true
@@ -1967,7 +1967,7 @@ class PatchBundleRepository(
             if (request.onLaunch && !allowUnsafeNetwork && !autoUpdates.checksOnLaunch) return@coroutineScope
 
             if (!networkInfo.isConnected()) {
-                Log.d(tag, "No internet connection for bundle update")
+                Log.d(LOG_TAG, "No internet connection for bundle update")
                 showFinished(BundleUpdateResult.NoInternet)
                 return@coroutineScope
             }
@@ -2026,7 +2026,7 @@ class PatchBundleRepository(
                         async(downloadDispatcher) {
                             if (isRemoteUpdateCancelled(bundle.uid)) return@async null
 
-                            Log.d(tag, "Updating patch bundle: ${bundle.name}")
+                            Log.d(LOG_TAG, "Updating patch bundle: ${bundle.name}")
 
                             activeNamesMap[bundle.uid] = progressLabelFor(bundle)
                             val active = activeNamesMap.entries.toMutableList()
@@ -2085,7 +2085,7 @@ class PatchBundleRepository(
                     }.awaitAll().filterNotNull().toMap()
                 }
             } catch (e: Exception) {
-                Log.e(tag, "Failed to update patches", e)
+                Log.e(LOG_TAG, "Failed to update patches", e)
                 showFinished(BundleUpdateResult.Error, phase = BundleUpdatePhase.Finalizing)
                 messages.showIfInForeground(R.string.sources_download_fail, e.simpleMessage())
                 return@coroutineScope

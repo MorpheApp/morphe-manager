@@ -193,7 +193,7 @@ class LocalApkSources(
             )
         }
     } catch (e: Exception) {
-        Log.e(tag, "Failed to load saved APK info", e)
+        Log.e(LOG_TAG, "Failed to load saved APK info", e)
         null
     }
 
@@ -240,7 +240,7 @@ class LocalApkSources(
             }
         }
     } catch (e: Exception) {
-        Log.e(tag, "Failed to load installed app info", e)
+        Log.e(LOG_TAG, "Failed to load installed app info", e)
         InstalledAppSource.None
     }
 
@@ -323,7 +323,7 @@ class LocalApkSources(
             // A superseded refresh is not a failure to read the table
             throw e
         } catch (e: Exception) {
-            Log.e(tag, "Failed to read the mount table", e)
+            Log.e(LOG_TAG, "Failed to read the mount table", e)
             null
         }
     }

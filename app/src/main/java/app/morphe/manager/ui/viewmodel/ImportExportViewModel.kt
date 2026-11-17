@@ -633,7 +633,7 @@ class ImportExportViewModel(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.e(tag, "Got exception while exporting logs", e)
+            Log.e(LOG_TAG, "Got exception while exporting logs", e)
             messages.show(R.string.settings_system_export_debug_logs_export_failed)
             return@launch
         }

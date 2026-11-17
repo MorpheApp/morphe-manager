@@ -29,7 +29,7 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppCardColorMode
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.worker.ScheduleInterval
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -268,7 +268,7 @@ class PreferencesManager(
             if (freshInstall) {
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
-                Log.d(tag, "Installation time set to $now")
+                Log.d(LOG_TAG, "Installation time set to $now")
             }
 
             // Existing installs stored their Material You preference in `dynamic_color`;
@@ -303,7 +303,7 @@ class PreferencesManager(
 
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
-                Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
+                Log.d(LOG_TAG, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
                 edit {
                     useManagerPrereleases.value = true
                     bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()

@@ -15,8 +15,8 @@ import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.options.Option
 import app.morphe.manager.data.room.options.OptionGroup
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.Options
-import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
@@ -155,7 +155,7 @@ internal inline fun <T> Map<String, Map<String, Any?>>.serializedOptions(
         val serialized = try {
             Option.SerializedValue.fromValue(value)
         } catch (e: Option.SerializationException) {
-            Log.e(tag, "Option $patchName:$key could not be serialized", e)
+            Log.e(LOG_TAG, "Option $patchName:$key could not be serialized", e)
             return@mapNotNull null
         }
         row(patchName, key, serialized)
@@ -179,7 +179,7 @@ internal inline fun <T> List<T>.readAgainst(
         try {
             deserializedPatchOptions[patchOption.key] = value(row).deserializeFor(patchOption)
         } catch (e: Option.SerializationException) {
-            Log.w(tag, "Option $name:${patchOption.key} could not be deserialized", e)
+            Log.w(LOG_TAG, "Option $name:${patchOption.key} could not be deserialized", e)
         }
     }
 }

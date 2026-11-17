@@ -210,7 +210,7 @@ class MainActivity : ComponentActivity() {
         val shortcutId = intent?.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
         intent.removeExtra(EXTRA_SHORTCUT_ID)
         runCatching { ShortcutManagerCompat.reportShortcutUsed(this, shortcutId) }
-            .onFailure { Log.w(tag, "Failed to report shortcut usage", it) }
+            .onFailure { Log.w(LOG_TAG, "Failed to report shortcut usage", it) }
     }
 
     /**

@@ -299,7 +299,7 @@ private fun Context.newDownloadsFile(name: String, mimeType: String): Uri? = run
         dir.mkdirs()
         Uri.fromFile(File(dir, name))
     }
-}.onFailure { Log.e(tag, "Could not create $name in Downloads", it) }.getOrNull()
+}.onFailure { Log.e(LOG_TAG, "Could not create $name in Downloads", it) }.getOrNull()
 
 /**
  * A path-valued patch option that cannot be used for the run.
@@ -448,10 +448,10 @@ fun rememberImagePicker(onLoaded: (Bitmap) -> Unit): () -> Unit {
                     try {
                         context.contentResolver.decodeSampledBitmap(uri)
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to decode image $uri", e)
+                        Log.e(LOG_TAG, "Failed to decode image $uri", e)
                         null
                     } catch (e: OutOfMemoryError) {
-                        Log.e(tag, "Out of memory decoding image $uri", e)
+                        Log.e(LOG_TAG, "Out of memory decoding image $uri", e)
                         null
                     }
                 }

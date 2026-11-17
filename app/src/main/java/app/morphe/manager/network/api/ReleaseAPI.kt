@@ -218,7 +218,7 @@ class ReleaseAPI(
         if (!response.isUnauthorized()) return response
 
         rejected.value = pat
-        Log.w(tag, "GitHub rejected the configured PAT, retrying $path anonymously")
+        Log.w(LOG_TAG, "GitHub rejected the configured PAT, retrying $path anonymously")
         return client.request { url(url) }
     }
 
@@ -288,7 +288,7 @@ class ReleaseAPI(
         branch: String
     ): APIResponse<T> {
         val url = cacheBusted(config.rawFileUrl(branch, DEFAULT_BUNDLE_FILE))
-        Log.d(tag, "rawPatchesBundleRequest: $url")
+        Log.d(LOG_TAG, "rawPatchesBundleRequest: $url")
         return client.request { url(url) }
     }
 
@@ -313,7 +313,7 @@ class ReleaseAPI(
         return release.assets
             .firstOrNull { it.name == ref.fileName || it.name == ref.decodedFileName }
             ?.url
-            .also { Log.d(tag, "releaseAssetApiUrl: $downloadUrl -> $it") }
+            .also { Log.d(LOG_TAG, "releaseAssetApiUrl: $downloadUrl -> $it") }
     }
 
     /**
@@ -408,12 +408,12 @@ class ReleaseAPI(
         }) {
             is APIResponse.Success -> runCatching {
                 mapManagerJsonToAsset(managerConfig, response.data).also {
-                    Log.d(tag, "Manager JSON ($branch): ${it.version} → ${it.downloadUrl}")
+                    Log.d(LOG_TAG, "Manager JSON ($branch): ${it.version} → ${it.downloadUrl}")
                 }
             }.fold(
                 onSuccess = { APIResponse.Success(it) },
                 onFailure = {
-                    Log.w(tag, "Failed to map manager JSON ($branch)", it)
+                    Log.w(LOG_TAG, "Failed to map manager JSON ($branch)", it)
                     APIResponse.Failure(APIFailure(it, null))
                 }
             )
@@ -449,7 +449,7 @@ class ReleaseAPI(
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {
-                Log.w(tag, "Manager JSON unavailable, falling back to GitHub API")
+                Log.w(LOG_TAG, "Manager JSON unavailable, falling back to GitHub API")
                 getManagerFromGitHub()
             }
         } else {
@@ -467,7 +467,7 @@ class ReleaseAPI(
         // Only a definitive "not there" hides the update: a check that could not run at all
         // must not keep a real release from being offered
         if (client.isReachable(update.downloadUrl) == false) {
-            Log.d(tag, "Manager update ${update.version} is announced but its APK is not downloadable yet")
+            Log.d(LOG_TAG, "Manager update ${update.version} is announced but its APK is not downloadable yet")
             return AppUpdateCheck.UpToDate
         }
 
@@ -492,12 +492,12 @@ class ReleaseAPI(
         return when (val r = rawPatchesBundleRequest<PatchesReleaseInfo>(patchesConfig, branch)) {
             is APIResponse.Success -> runCatching {
                 mapPatchesJsonToAsset(patchesConfig, r.data).also {
-                    Log.d(tag, "Patches JSON ($branch): ${it.version} → ${it.downloadUrl}")
+                    Log.d(LOG_TAG, "Patches JSON ($branch): ${it.version} → ${it.downloadUrl}")
                 }
             }.fold(
                 onSuccess = { APIResponse.Success(it) },
                 onFailure = {
-                    Log.w(tag, "Failed to map patches JSON ($branch)", it)
+                    Log.w(LOG_TAG, "Failed to map patches JSON ($branch)", it)
                     APIResponse.Failure(APIFailure(it, null))
                 }
             )
@@ -518,7 +518,7 @@ class ReleaseAPI(
     suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
         return if (USE_PATCHES_DIRECT_JSON) {
             getPatchesFromJson(usePrerelease).fallbackTo {
-                Log.w(tag, "Patches JSON unavailable, falling back to Morphe API")
+                Log.w(LOG_TAG, "Patches JSON unavailable, falling back to Morphe API")
                 getPatchesFromApi(usePrerelease)
             }
         } else {
@@ -571,7 +571,7 @@ class ReleaseAPI(
      * Used for third-party bundles that follow the Morphe changelog format.
      */
     suspend fun fetchChangelogFromUrl(changelogUrl: String, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> {
-        Log.d(tag, "fetchChangelogFromUrl: $changelogUrl")
+        Log.d(LOG_TAG, "fetchChangelogFromUrl: $changelogUrl")
         return parseChangelog(rawFileRequest<String>(changelogUrl), stopAfterFirstStable, changelogUrl)
     }
 
@@ -582,7 +582,7 @@ class ReleaseAPI(
         stopAfterFirstStable: Boolean = false
     ): List<ChangelogEntry> {
         val url = cacheBusted(config.rawFileUrl(branch, path))
-        Log.d(tag, "fetchChangelog: $url")
+        Log.d(LOG_TAG, "fetchChangelog: $url")
         val response = client.request<String> {
             url(url)
             header("Cache-Control", "no-cache")
@@ -603,11 +603,11 @@ class ReleaseAPI(
             ChangelogParser.parse(response.data, stopAfterFirstStable)
         }
         is APIResponse.Error -> {
-            Log.w(tag, "Failed to fetch changelog from $source: ${response.error.statusCode}")
+            Log.w(LOG_TAG, "Failed to fetch changelog from $source: ${response.error.statusCode}")
             if (response.error.statusCode == HttpStatusCode.NotFound) emptyList() else throw response.error
         }
         is APIResponse.Failure -> {
-            Log.w(tag, "Failed to fetch changelog from $source", response.error)
+            Log.w(LOG_TAG, "Failed to fetch changelog from $source", response.error)
             throw response.error
         }
     }

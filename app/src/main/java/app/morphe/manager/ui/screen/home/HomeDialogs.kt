@@ -416,7 +416,7 @@ private fun DialogHostScope.PatchFlowDialog(
                     ),
                     hasMultipleBundles = selection.hasMultipleBundles,
                     patchActions = ExpertPatchActions(
-                        onPatchToggle = selection::toggle,
+                        onPatchToggle = selection::togglePatch,
                         onSelectAll = selection::selectAll,
                         onDeselectAll = selection::deselectAll,
                         onOptionChange = selection::updateOption,

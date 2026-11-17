@@ -10,7 +10,7 @@ import android.util.Log
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.apk.ApkSignature
 import app.morphe.manager.util.AppCoroutineScope
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -70,7 +70,7 @@ class ApkSignatureCache(
             persistenceMutex.withLock {
                 if (file.apkFileStampOrNull() != stamp) return@withLock
                 runCatching { dao.upsert(record) }
-                    .onFailure { Log.e(tag, "Failed to persist signatures for ${file.absolutePath}", it) }
+                    .onFailure { Log.e(LOG_TAG, "Failed to persist signatures for ${file.absolutePath}", it) }
             }
         }
     }
@@ -87,7 +87,7 @@ class ApkSignatureCache(
         restored = true
 
         val persisted = runCatching { dao.getAllBlocking() }
-            .onFailure { Log.e(tag, "Failed to read persisted APK signatures", it) }
+            .onFailure { Log.e(LOG_TAG, "Failed to read persisted APK signatures", it) }
             .getOrNull()
             ?: return
 
@@ -109,7 +109,7 @@ class ApkSignatureCache(
                     stale.forEach { record ->
                         dao.deleteRevision(record.filePath, record.fileSize, record.lastModified)
                     }
-                }.onFailure { Log.e(tag, "Failed to drop stale APK signatures", it) }
+                }.onFailure { Log.e(LOG_TAG, "Failed to drop stale APK signatures", it) }
             }
         }
     }

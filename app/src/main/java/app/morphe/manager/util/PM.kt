@@ -102,6 +102,10 @@ class PM(
         return pkgInfo
     }
 
+    /** [getPackageInfo] of [file], failing when the archive cannot be read as an app. */
+    fun requirePackageInfo(file: File): PackageInfo =
+        checkNotNull(getPackageInfo(file)) { "Failed to load application info" }
+
     @Suppress("DEPRECATION", "QueryPermissionsNeeded")
     fun getInstalledPackages(flags: Int = 0): List<PackageInfo> =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)

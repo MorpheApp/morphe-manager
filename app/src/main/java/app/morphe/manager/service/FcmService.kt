@@ -8,7 +8,7 @@ package app.morphe.manager.service
 import android.annotation.SuppressLint
 import android.util.Log
 import app.morphe.manager.notification.UpdateNotifications
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.koin.android.ext.android.inject
@@ -65,18 +65,18 @@ class FcmService : FirebaseMessagingService() {
         val data = message.data
 
         if (data.isEmpty()) {
-            Log.w(tag, "FcmService: received empty data payload - ignoring")
+            Log.w(LOG_TAG, "FcmService: received empty data payload - ignoring")
             return
         }
 
         val type = data[KEY_TYPE]
         val version = data[KEY_VERSION]
-        Log.d(tag, "FcmService: message received, type=$type, topic=${message.from}")
+        Log.d(LOG_TAG, "FcmService: message received, type=$type, topic=${message.from}")
 
         when (type) {
             TYPE_MANAGER_UPDATE -> notificationManager.showManagerUpdateNotification(version)
             TYPE_BUNDLE_UPDATE  -> notificationManager.showBundleUpdateNotification(version)
-            else -> Log.d(tag, "FcmService: unknown type '$type' - ignoring")
+            else -> Log.d(LOG_TAG, "FcmService: unknown type '$type' - ignoring")
         }
     }
 

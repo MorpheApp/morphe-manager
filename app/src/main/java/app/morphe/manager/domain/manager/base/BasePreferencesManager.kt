@@ -20,7 +20,7 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.domain.manager.base.BasePreferencesManager.Companion.editor
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -30,7 +30,7 @@ import java.io.IOException
 
 internal fun preferencesCorruptionHandler(
     name: String,
-    onCorrupt: (String, Throwable) -> Unit = { message, e -> Log.e(tag, message, e) }
+    onCorrupt: (String, Throwable) -> Unit = { message, e -> Log.e(LOG_TAG, message, e) }
 ) = ReplaceFileCorruptionHandler { e ->
     onCorrupt("Preferences file '$name' is corrupt, starting from defaults", e)
     emptyPreferences()
@@ -49,7 +49,7 @@ abstract class BasePreferencesManager(private val context: Context, name: String
         try {
             dataStore.data.first()
         } catch (e: IOException) {
-            Log.e(tag, "Could not preload preferences", e)
+            Log.e(LOG_TAG, "Could not preload preferences", e)
         }
     }
 
@@ -64,11 +64,15 @@ abstract class BasePreferencesManager(private val context: Context, name: String
     protected fun booleanPreference(key: String, default: Boolean) =
         BooleanPreference(dataStore, key, default)
 
+    // The factories cover every type a preference can take, whatever values the current ones use
+    @Suppress("SameParameterValue")
     protected fun intPreference(key: String, default: Int) = IntPreference(dataStore, key, default)
 
+    @Suppress("SameParameterValue")
     protected fun longPreference(key: String, default: Long) =
         LongPreference(dataStore, key, default)
 
+    @Suppress("SameParameterValue")
     protected fun floatPreference(key: String, default: Float) =
         FloatPreference(dataStore, key, default)
 
@@ -89,7 +93,7 @@ abstract class BasePreferencesManager(private val context: Context, name: String
                     EditorContext(it).run(block)
                 }
             } catch (e: IOException) {
-                Log.e(tag, "Could not write preferences", e)
+                Log.e(LOG_TAG, "Could not write preferences", e)
             }
         }
     }
@@ -117,7 +121,7 @@ abstract class Preference<T>(
     val flow = dataStore.data
         .catch { error ->
             if (error !is IOException) throw error
-            Log.e(tag, "Could not read preferences", error)
+            Log.e(LOG_TAG, "Could not read preferences", error)
             emit(emptyPreferences())
         }
         .map { with(it) { read() } ?: default }

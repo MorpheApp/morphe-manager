@@ -254,8 +254,7 @@ class InstallViewModel(
             try {
                 // APK metadata reads parse the archive on disk; keep them off the main thread
                 val (packageInfo, existingInfo) = withContext(Dispatchers.IO) {
-                    val pi = pm.getPackageInfo(outputFile)
-                        ?: throw Exception("Failed to load application info")
+                    val pi = pm.requirePackageInfo(outputFile)
                     pi to pm.getPackageInfo(pi.packageName)
                 }
 
@@ -456,7 +455,7 @@ class InstallViewModel(
             }
             is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
             is InstallResult.Failure -> handleInstallError(
-                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                app.getString(R.string.install_app_fail, result.message ?: app.getString(R.string.patcher_unknown_error))
             )
         }
     }
@@ -515,7 +514,7 @@ class InstallViewModel(
 
     /** Package name [apk] installs as. */
     private suspend fun readPackageName(apk: File): String = withContext(Dispatchers.IO) {
-        pm.getPackageInfo(apk)?.packageName ?: throw Exception("Failed to load application info")
+        pm.requirePackageInfo(apk).packageName
     }
 
     /** Lifts a root mount over [packageName], which would otherwise keep showing the build being replaced. */
@@ -797,8 +796,7 @@ class InstallViewModel(
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
-                    val patchedInfo = pm.getPackageInfo(outputFile)
-                        ?: throw Exception("Failed to load application info")
+                    val patchedInfo = pm.requirePackageInfo(outputFile)
                     val savedOriginal = originalApkRepository.get(packageName)?.filePath?.let(::File)
 
                     MountInstallInputs(
@@ -1351,7 +1349,7 @@ class InstallViewModel(
                     "failed_user" in lower ||
                     "profile" in lower ->
                 app.getString(R.string.installer_shizuku_error_user_profile)
-            else -> raw ?: "Unknown error"
+            else -> raw ?: app.getString(R.string.patcher_unknown_error)
         }
 
         return if (raw != null && raw != summary) {
@@ -1367,7 +1365,7 @@ class InstallViewModel(
             installState = signatureConflictState(targetPackageName)
         } else {
             // Target not installed - not a real signature conflict (e.g. renamed package)
-            handleInstallError(app.getString(R.string.install_app_fail, conflictMessage ?: "Unknown error"))
+            handleInstallError(app.getString(R.string.install_app_fail, conflictMessage ?: app.getString(R.string.patcher_unknown_error)))
         }
     }
 

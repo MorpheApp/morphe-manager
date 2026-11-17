@@ -9,7 +9,7 @@ import android.util.Log
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.network.api.isRawGitHubUrl
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import io.ktor.client.request.header
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
@@ -55,7 +55,7 @@ class AssetDownloader(
                 when {
                     isTransientNetworkError(e) -> {
                         val signedUrl = resolveThroughApi(downloadUrl) ?: throw e
-                        Log.i(tag, "Retrying $downloadUrl through the GitHub API")
+                        Log.i(LOG_TAG, "Retrying $downloadUrl through the GitHub API")
                         direct(signedUrl, saveLocation, onProgress)
                     }
                     e is HttpService.HttpException && e.status == HttpStatusCode.NotFound ->
@@ -94,12 +94,12 @@ class AssetDownloader(
     ): Boolean {
         val pat = prefs.gitHubPat.get().ifBlank { return false }
         if (isRawGitHubUrl(downloadUrl)) {
-            Log.i(tag, "Retrying $downloadUrl with the GitHub PAT")
+            Log.i(LOG_TAG, "Retrying $downloadUrl with the GitHub PAT")
             direct(downloadUrl, saveLocation, onProgress, pat)
             return true
         }
         val signedUrl = resolveThroughApi(downloadUrl) ?: return false
-        Log.i(tag, "Retrying $downloadUrl through the GitHub API with the GitHub PAT")
+        Log.i(LOG_TAG, "Retrying $downloadUrl through the GitHub API with the GitHub PAT")
         direct(signedUrl, saveLocation, onProgress)
         return true
     }

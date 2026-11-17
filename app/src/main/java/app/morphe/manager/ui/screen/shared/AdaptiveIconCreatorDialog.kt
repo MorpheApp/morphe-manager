@@ -778,7 +778,7 @@ private suspend fun createAdaptiveIcons(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        Log.e(tag, "Failed to create adaptive icons", e)
+        Log.e(LOG_TAG, "Failed to create adaptive icons", e)
         null
     }
 }

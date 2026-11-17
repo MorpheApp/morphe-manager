@@ -20,7 +20,7 @@ import app.morphe.manager.patcher.host.serveRun
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.runtime.jvm.EmbeddedJvm
 import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import kotlinx.parcelize.Parcelize
 import kotlin.concurrent.thread
 
@@ -112,7 +112,7 @@ class PatcherService : Service() {
                 // Refused where the system withholds the service type's permission or a start from
                 // the background, as it does for the app's own foreground service then. The run goes
                 // on bound alone, and the start is dropped so the system does not wait for the foreground
-                Log.w(tag, "Could not hold the patcher process in the foreground", e)
+                Log.w(LOG_TAG, "Could not hold the patcher process in the foreground", e)
                 stopSelf(startId)
             }
         }

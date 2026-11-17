@@ -32,8 +32,8 @@ import app.morphe.manager.patcher.logger.Logger
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
 import app.morphe.manager.util.AppCoroutineScope
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.bytesToMebibytes
-import app.morphe.manager.util.tag
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart
@@ -159,7 +159,7 @@ class PatcherProcesses(
             ahead = try {
                 start(enabledBundleFiles(), vm)
             } catch (e: Exception) {
-                Log.w(tag, "Could not start the patcher ahead of a run", e)
+                Log.w(LOG_TAG, "Could not start the patcher ahead of a run", e)
                 return@withLock
             }
             expiry?.cancel()
@@ -326,7 +326,7 @@ class PatcherProcesses(
             // The cache was cleared during the run, which took the recording with it. The next run
             // records again, and this is not held against the cache as a failure.
             if (!installed.aotDir.isDirectory) {
-                Log.i(tag, "The AOT cache was cleared while the run recorded for it")
+                Log.i(LOG_TAG, "The AOT cache was cleared while the run recorded for it")
                 return
             }
             if (!configuration.isFile) throw IOException("The run recorded no AOT configuration")
@@ -357,16 +357,16 @@ class PatcherProcesses(
 
             if (!staging.isFile) throw IOException("The JVM made no AOT cache")
             if (!staging.renameTo(installed.aotCache)) throw IOException("Could not move the AOT cache into place")
-            Log.i(tag, "Made the AOT cache of the patcher JVM, ${bytesToMebibytes(installed.aotCache.length())}MB")
+            Log.i(LOG_TAG, "Made the AOT cache of the patcher JVM, ${bytesToMebibytes(installed.aotCache.length())}MB")
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.e(tag, "Could not make the AOT cache of the patcher JVM", e)
+            Log.e(LOG_TAG, "Could not make the AOT cache of the patcher JVM", e)
             withContext(Dispatchers.IO) {
                 try {
                     installed.aotFailed.appendText("${e.toString().replace('\n', ' ')}\n")
                 } catch (markFailure: IOException) {
-                    Log.e(tag, "Could not note that the AOT cache failed", markFailure)
+                    Log.e(LOG_TAG, "Could not note that the AOT cache failed", markFailure)
                 }
             }
         } finally {
@@ -511,7 +511,7 @@ class PatcherProcesses(
                 heldForeground = true
             } catch (e: IllegalStateException) {
                 // Refused to a run started from the background, which goes on bound alone
-                Log.w(tag, "Could not hold the patcher process in the foreground", e)
+                Log.w(LOG_TAG, "Could not hold the patcher process in the foreground", e)
             }
         }
 
@@ -626,7 +626,7 @@ class PatcherProcesses(
             try {
                 withTimeoutOrNull(AOT_RECORD_EXIT_TIMEOUT) {
                     while (isAlive) delay(EXIT_RECORD_POLL)
-                } ?: Log.w(tag, "The patcher JVM recording for the AOT cache did not exit in time")
+                } ?: Log.w(LOG_TAG, "The patcher JVM recording for the AOT cache did not exit in time")
                 connection.close()
                 createAotCache(installed)
             } finally {

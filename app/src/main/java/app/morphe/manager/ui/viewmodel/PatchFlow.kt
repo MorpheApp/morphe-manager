@@ -489,7 +489,7 @@ class PatchFlow(
                     try {
                         copyInstalledApk(packageName, installedInfo)
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to prepare installed APK", e)
+                        Log.e(LOG_TAG, "Failed to prepare installed APK", e)
                         null
                     }
                 }
@@ -637,7 +637,7 @@ class PatchFlow(
                             .filterNot { it.packageName in patched }
                             .sortedBy { it.label.lowercase() }
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to load installed apps for picker", e)
+                        Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
                         emptyList()
                     }
                 }
@@ -661,7 +661,7 @@ class PatchFlow(
                     try {
                         copyInstalledApk(item.packageName, item.info)
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to prepare APK from picker", e)
+                        Log.e(LOG_TAG, "Failed to prepare APK from picker", e)
                         null
                     }
                 }
@@ -757,7 +757,7 @@ class PatchFlow(
                             temporary = false // Don't delete saved APK files
                         )
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to load saved APK", e)
+                        Log.e(LOG_TAG, "Failed to load saved APK", e)
                         null
                     }
                 }
@@ -1573,7 +1573,7 @@ class PatchFlow(
         if (handOff(urlToOpen)) {
             dialogs.open(HomeDialog.FilePickerPrompt)
         } else {
-            Log.w(tag, "Failed to open URL")
+            Log.w(LOG_TAG, "Failed to open URL")
             messages.show(R.string.sources_management_failed_to_open_url)
             endRun()
         }
@@ -1658,12 +1658,12 @@ class PatchFlow(
             }
 
             if (result == ApkLoadResult.NotAnApk) {
-                Log.w(tag, "Picked file ${tempFile.name} could not be parsed as an APK")
+                Log.w(LOG_TAG, "Picked file ${tempFile.name} could not be parsed as an APK")
             }
             if (result !is ApkLoadResult.Success) tempFile.delete()
             result
         } catch (e: Exception) {
-            Log.e(tag, "Failed to load APK", e)
+            Log.e(LOG_TAG, "Failed to load APK", e)
             ApkLoadResult.IoError
         }
     }

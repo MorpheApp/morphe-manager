@@ -449,7 +449,7 @@ private suspend fun createHeaderFiles(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        Log.e(tag, "Failed to create header images", e)
+        Log.e(LOG_TAG, "Failed to create header images", e)
         null
     }
 }

@@ -10,11 +10,11 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.patcher.runtime.JvmUnavailableException
-import app.morphe.manager.util.tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import app.morphe.manager.util.LOG_TAG
 import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
@@ -107,7 +107,7 @@ class JvmInstallation(private val app: Application) {
         unpackImage(abi, staging.resolve(IMAGE_PATH))
 
         if (!staging.renameTo(home)) throw IOException("Could not move the runtime into $home")
-        Log.i(tag, "Unpacked the patcher JVM for $abi")
+        Log.i(LOG_TAG, "Unpacked the patcher JVM for $abi")
     }
 
     // The app ships one image for all ABIs, and for each whose image differs the delta to it

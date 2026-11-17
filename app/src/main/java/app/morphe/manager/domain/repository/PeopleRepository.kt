@@ -7,8 +7,8 @@ package app.morphe.manager.domain.repository
 
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.PEOPLE_URL
-import app.morphe.manager.util.tag
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
@@ -61,20 +61,20 @@ class PeopleRepository(
         val body = try {
             val response = http.get(PEOPLE_URL)
             if (!response.status.isSuccess()) {
-                Log.w(tag, "Failed to fetch people: ${response.status}")
+                Log.w(LOG_TAG, "Failed to fetch people: ${response.status}")
                 return
             }
             response.bodyAsText()
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.w(tag, "Failed to fetch people", e)
+            Log.w(LOG_TAG, "Failed to fetch people", e)
             return
         }
         val fresh = decode(body) ?: return
         _people.value = fresh
         runCatching { fs.peopleCacheFile.writeText(body) }
-            .onFailure { Log.w(tag, "Failed to cache people", it) }
+            .onFailure { Log.w(LOG_TAG, "Failed to cache people", it) }
     }
 
     private fun readCache(): People? {
@@ -86,7 +86,7 @@ class PeopleRepository(
     private fun decode(body: String): People? = try {
         json.decodeFromString<People>(body)
     } catch (e: Exception) {
-        Log.w(tag, "Failed to decode people", e)
+        Log.w(LOG_TAG, "Failed to decode people", e)
         null
     }
 

@@ -44,8 +44,13 @@ import app.morphe.manager.util.APK_EXTENSIONS
 import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.APPLICATION_MIMETYPE
 import app.morphe.manager.util.BIN_MIMETYPE
+import app.morphe.manager.util.BKS_MIMETYPE
 import app.morphe.manager.util.IMAGE_MIMETYPE
+import app.morphe.manager.util.JKS_MIMETYPE
+import app.morphe.manager.util.JSON_EXTENSION
 import app.morphe.manager.util.JSON_MIMETYPE
+import app.morphe.manager.util.KEYSTORE_MIMETYPE
+import app.morphe.manager.util.KEYSTORE_MIME_TYPES
 import app.morphe.manager.util.MPP_EXTENSION
 import app.morphe.manager.util.MPP_MIMETYPE
 import app.morphe.manager.util.PM
@@ -73,12 +78,12 @@ import kotlin.time.Duration.Companion.milliseconds
 // Exact MIME type → extensions
 private val MIME_EXTENSION_MAP: Map<String, Set<String>> = mapOf(
     APK_MIMETYPE to APK_EXTENSIONS,
-    JSON_MIMETYPE to setOf("json"),
+    JSON_MIMETYPE to setOf(JSON_EXTENSION),
     TEXT_MIMETYPE to setOf("txt", "log"),
     MPP_MIMETYPE to setOf(MPP_EXTENSION), // Morphe patch bundle format
-    "application/x-pkcs12" to setOf("p12", "pfx"),
-    "application/x-java-keystore" to setOf("jks"),
-    "application/vnd.morphe.keystore" to setOf("keystore", "bks"), // BKS keystores, no standard MIME
+    KEYSTORE_MIMETYPE to setOf("p12", "pfx"),
+    JKS_MIMETYPE to setOf("jks"),
+    BKS_MIMETYPE to setOf("keystore", "bks"),
     "image/png" to setOf("png"),
     "image/jpeg" to setOf("jpg", "jpeg"),
     "image/gif" to setOf("gif"),
@@ -142,7 +147,8 @@ private fun storageRootIcon(root: File): ImageVector {
 private val IMAGE_EXTENSIONS = setOf("png", "jpg", "jpeg", "gif", "webp", "bmp")
 private val AUDIO_EXTENSIONS = setOf("mp3", "wav", "ogg", "flac", "aac", "m4a", "opus", "wma", "mid", "midi")
 private val SPLIT_ICON_EXTENSIONS = setOf("apkm", "xapk")
-private val KEYSTORE_EXTENSIONS = setOf("jks", "keystore", "bks", "p12", "pfx")
+private val KEYSTORE_EXTENSIONS =
+    KEYSTORE_MIME_TYPES.flatMapTo(mutableSetOf()) { MIME_EXTENSION_MAP.getValue(it) }
 
 private val iconLoadDispatcher = Dispatchers.IO.limitedParallelism(2)
 private val apkPackageInfoCache = LruCache<String, PackageInfo>(100)
@@ -823,7 +829,7 @@ private fun FileEntryRow(
         isDir -> MaterialSymbols.Rounded.Folder
         isApk -> MaterialSymbols.Rounded.Android
         ext in KEYSTORE_EXTENSIONS -> MaterialSymbols.Rounded.Key
-        ext == "json" -> MaterialSymbols.Rounded.Data_object
+        ext == JSON_EXTENSION -> MaterialSymbols.Rounded.Data_object
         isImage -> MaterialSymbols.Rounded.Image
         ext in AUDIO_EXTENSIONS -> MaterialSymbols.Rounded.Music_note
         else -> MaterialSymbols.Rounded.Draft.autoMirrored

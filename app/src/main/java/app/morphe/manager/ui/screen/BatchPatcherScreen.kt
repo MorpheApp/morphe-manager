@@ -393,7 +393,7 @@ fun BatchPatcherScreen(
                             options = edit.options,
                             totalSelectedCount = edit.totalSelectedCount,
                             newPatches = edit.newPatches,
-                            lockStateOf = edit::lockStateOf,
+                            lockStateOf = edit::lockState,
                             holdsUniversalPatches = edit::selectAllHoldsUniversal
                         ),
                         hasMultipleBundles = edit.hasMultipleBundles,

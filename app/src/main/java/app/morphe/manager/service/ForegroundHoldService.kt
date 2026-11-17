@@ -16,7 +16,7 @@ import android.util.Log
 import androidx.core.app.ServiceCompat
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.notification.PatchingNotifications
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 
 /**
  * The foreground [ForegroundWork] holds the app in, showing the ongoing notification of
@@ -53,7 +53,7 @@ class ForegroundHoldService : Service() {
         } catch (e: RuntimeException) {
             // The work goes on without it, as it would have without the hold
             refused = true
-            Log.w(tag, "Could not hold the app in the foreground", e)
+            Log.w(LOG_TAG, "Could not hold the app in the foreground", e)
         }
     }
 

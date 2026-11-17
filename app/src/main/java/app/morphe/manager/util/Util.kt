@@ -52,7 +52,7 @@ inline fun UserMessages.reportingFailure(@StringRes failure: Int, logMsg: String
         if (error is CancellationException) throw error
 
         show(failure, error.simpleMessage())
-        Log.e(tag, logMsg, error)
+        Log.e(LOG_TAG, logMsg, error)
     }
 }
 

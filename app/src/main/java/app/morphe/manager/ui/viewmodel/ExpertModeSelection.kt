@@ -14,15 +14,9 @@ import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
-import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
 import app.morphe.manager.util.PatchSelectionUtils.listedWith
 import app.morphe.manager.util.PatchSelectionUtils.mergeBundleOptions
-import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.spansMultipleBundles
-import app.morphe.manager.util.PatchSelectionUtils.togglePatch
-import app.morphe.manager.util.PatchSelectionUtils.updateOption
-import app.morphe.manager.util.PatchSelectionUtils.withBundle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -34,9 +28,9 @@ import kotlinx.coroutines.launch
  * and the selections a source can be copied from.
  */
 class ExpertModeSelection(
-    private val scope: CoroutineScope,
+    scope: CoroutineScope,
     override val panel: SelectionPanelController
-) : SelectionPanelHost {
+) : PatchSelectionEditor(scope) {
     /** The APK the selection is for, null while the dialog is closed. */
     var app by mutableStateOf<SelectedApp?>(null)
         private set
@@ -60,23 +54,14 @@ class ExpertModeSelection(
      */
     val hiddenSources get() = allBundles.size - bundles.size
 
-    private var patches by mutableStateOf<PatchSelection>(emptyMap())
-
     // The selection and options as the dialog opened, which restoring the saved selection goes
     // back to. Options too, as switching to a set replaces them
     private var savedPatches by mutableStateOf<PatchSelection>(emptyMap())
     private var savedOptions: Options = emptyMap()
 
-    var options by mutableStateOf<Options>(emptyMap())
-        private set
-
     /** Patches that are new in the current bundle version relative to the last saved selection. */
     var newPatches by mutableStateOf<Map<Int, Set<String>>>(emptyMap())
         private set
-
-    // Bundle and selection left behind by the last "Enable all". Universal patches are applied
-    // only while this still matches the live selection, so any other edit disarms them again
-    private var universalArmedFor by mutableStateOf<Pair<Int, Set<String>>?>(null)
 
     /**
      * Whether the run reaches patches that declare other app versions, so bulk actions offer the
@@ -117,14 +102,12 @@ class ExpertModeSelection(
         this.mutedSources = mutedSources
         this.leadingBundleUid = leadingBundleUid
         applyMutes()
-        this.patches = patches
+        start(patches, options)
         savedPatches = patches
         savedOptions = options
-        this.options = options
         this.newPatches = newPatches
         this.allowIncompatible = allowIncompatible
         this.target = target
-        universalArmedFor = null
     }
 
     /** Drops everything the selection holds, as the dialog closes. */
@@ -134,12 +117,10 @@ class ExpertModeSelection(
         allBundles = emptyList()
         mutedSources = emptySet()
         leadingBundleUid = null
-        patches = emptyMap()
+        start(emptyMap(), emptyMap())
         savedPatches = emptyMap()
         savedOptions = emptyMap()
-        options = emptyMap()
         newPatches = emptyMap()
-        universalArmedFor = null
         allowIncompatible = false
         unreadablePaths = emptyList()
         panel.close()
@@ -151,7 +132,7 @@ class ExpertModeSelection(
      * applied in the UI layer.
      */
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
-        get() = bundles.listedWith(patches, openedWith = savedPatches, leadingBundleUid = leadingBundleUid)
+        get() = bundles.listedWith(selection, openedWith = savedPatches, leadingBundleUid = leadingBundleUid)
 
     /**
      * The selection as the run would use it: what the dialog shows, minus what it holds back.
@@ -163,9 +144,9 @@ class ExpertModeSelection(
      */
     val runSelection: PatchSelection
         get() {
-            if (mutedSources.isEmpty()) return patches
+            if (mutedSources.isEmpty()) return selection
             val shown = bundles.mapTo(mutableSetOf()) { it.uid }
-            return patches.filterKeys { it in shown }
+            return selection.filterKeys { it in shown }
         }
 
     /** Total number of currently selected patches across all bundles. */
@@ -176,92 +157,18 @@ class ExpertModeSelection(
     val hasMultipleBundles: Boolean
         get() = runSelection.spansMultipleBundles()
 
-    /**
-     * Toggle a patch.
-     * Supports adding patches from bundles not yet in the selection.
-     */
-    fun toggle(bundleUid: Int, patchName: String) {
-        // Locked patches are toggled only through availability rules; no-op here
-        val patch = bundlePatches(bundleUid)[patchName]
-        val selected = patchName in patches[bundleUid].orEmpty()
-        if (patch != null && lockState(patch).blocksToggle(selected)) return
+    override fun lockState(patch: PatchInfo) = target.lockState(patch, singleBundle = !hasMultipleBundles)
 
-        update(patches.togglePatch(bundleUid, patchName))
-    }
+    // The install target's rules have the last say on every edit, scoped to the sources shown
+    override fun settle(selection: PatchSelection) = target.applyTo(selection, bundles)
 
-    /**
-     * Select all given patches for a bundle.
-     * Only adds patches that are not already selected. LOCKED_OFF patches are skipped.
-     *
-     * Universal patches are staged behind the regular ones and need a second call, see
-     * [PatchSelectionUtils.bulkEnablePatches]. [patches] is the list the dialog currently
-     * shows, so an active search narrows the scope of both stages.
-     */
-    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val selected = this.patches[bundleUid].orEmpty()
-        val updated = bulkEnablePatches(
-            patches,
-            selected,
-            universalArmed(bundleUid, selected),
-            ::lockState
-        )
+    override fun patchOf(bundleUid: Int, patchName: String) = bundlePatches(bundleUid)[patchName]
 
-        update(this.patches.withBundle(bundleUid, updated))
-        // Armed against what the availability rules left behind, so the next tap sees the
-        // selection it is compared to
-        universalArmedFor = bundleUid to this.patches[bundleUid].orEmpty()
-    }
-
-    /** True when the next [selectAll] holds universal patches back for another tap. */
-    fun selectAllHoldsUniversal(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>): Boolean {
-        val selected = this.patches[bundleUid].orEmpty()
-        return bulkEnableHoldsUniversal(
-            patches,
-            universalArmed(bundleUid, selected),
-            ::lockState
-        )
-    }
-
-    /**
-     * Lock state of [patch] for the install target the dialog is configuring.
-     *
-     * A REQUIRED patch only locks while the selection stays within one bundle, see
-     * [PatchSelectionUtils.applyAvailability].
-     */
-    fun lockState(patch: PatchInfo) = target.lockState(patch, singleBundle = !hasMultipleBundles)
-
-    private fun universalArmed(bundleUid: Int, selected: Set<String>) =
-        universalArmedFor == (bundleUid to selected)
-
-    /**
-     * Deselect all given patches for a bundle.
-     * Removes the bundle entry entirely if nothing remains selected. LOCKED_ON patches are kept.
-     */
-    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val kept = this.patches[bundleUid]?.toMutableSet() ?: mutableSetOf()
-        patches.forEach { (patch, enabled) ->
-            if (lockState(patch) == PatchLockState.LOCKED_ON) return@forEach
-            if (enabled) kept.remove(patch.name)
-        }
-        update(this.patches.withBundle(bundleUid, kept))
-    }
-
-    /**
-     * Reset a bundle's selection to the default patches for the current install target.
-     *
-     * Defaults are read from the bundle itself rather than the dialog's list, so they cover the
-     * complete set instead of just search results and reach only the patches the run would have
-     * started with: the dialog lists patches declaring other app versions so they can be enabled
-     * by hand, but they are no more part of the defaults here than they were on first open.
-     */
-    override fun resetToDefault(bundleUid: Int) {
-        val bundle = bundles.firstOrNull { it.uid == bundleUid } ?: return
-        val defaults = bundle.patchSequence(allowIncompatible)
-            .filter(target::defaultSelected)
-            .mapTo(mutableSetOf()) { it.name }
-        update(patches.withBundle(bundleUid, defaults))
-        panel.defaultsApplied()
-    }
+    /** The patches the run would have started with, the bundle's defaults for the install target. */
+    override fun defaultsOf(bundleUid: Int) = bundles.firstOrNull { it.uid == bundleUid }
+        ?.patchSequence(allowIncompatible)
+        ?.filter(target::defaultSelected)
+        ?.mapTo(mutableSetOf()) { it.name }
 
     override val setsPackageName get() = app?.packageName.orEmpty()
 
@@ -271,14 +178,6 @@ class ExpertModeSelection(
         update(savedPatches)
         options = savedOptions
         panel.restored()
-    }
-
-    fun updateOption(bundleUid: Int, patchName: String, optionKey: String, value: Any?) {
-        options = options.updateOption(bundleUid, patchName, optionKey, value)
-    }
-
-    fun resetOptions(bundleUid: Int, patchName: String) {
-        options = options.resetOptionsForPatch(bundleUid, patchName)
     }
 
     /**
@@ -324,7 +223,7 @@ class ExpertModeSelection(
             if (app !== forApp) return@launch
 
             // The copy comes from a run that may have targeted another installer
-            update(patches.withBundle(targetBundleUid, copied.patches))
+            replaceBundle(targetBundleUid, copied.patches)
             options = options.mergeBundleOptions(targetBundleUid, copied.options)
 
             panel.copied(copied.patches.size)
@@ -351,14 +250,6 @@ class ExpertModeSelection(
         panel.saveSet(scope, selectedApp.packageName, name, runSelection, options)
     }
 
-    override fun deleteSet(set: SelectionSetSummary) {
-        panel.deleteSet(scope, set)
-    }
-
-    override fun renameSet(set: SelectionSetSummary, name: String) {
-        panel.renameSet(scope, set, name)
-    }
-
     /** Raises [failures] over the dialog, for the user to fix or drop before the run goes on. */
     fun reportUnreadablePaths(failures: List<PathValidationResult>) {
         unreadablePaths = failures
@@ -376,11 +267,6 @@ class ExpertModeSelection(
     fun dropUnreadablePaths() {
         options = options.withoutFailingPaths(unreadablePaths)
         unreadablePaths = emptyList()
-    }
-
-    // The install target's rules have the last say on every edit, scoped to the sources shown
-    private fun update(selection: PatchSelection) {
-        patches = target.applyTo(selection, bundles)
     }
 
     private fun bundlePatches(bundleUid: Int): Map<String, PatchInfo> =

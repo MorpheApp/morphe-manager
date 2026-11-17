@@ -177,7 +177,7 @@ class PatcherWorker(
 
     override suspend fun doWork(): Result {
         if (runAttemptCount > 0) {
-            Log.d(tag, "Android requested retrying but retrying is disabled.".logFmt())
+            Log.d(LOG_TAG, "Android requested retrying but retrying is disabled.".logFmt())
             return Result.failure()
         }
 
@@ -187,18 +187,18 @@ class PatcherWorker(
         } catch (e: Exception) {
             // Foreground promotion can fail on some devices or when notification permission is
             // denied. Log it but continue - patching still works, just with less OS protection
-            Log.w(tag, "Failed to promote worker to foreground service:".logFmt(), e)
+            Log.w(LOG_TAG, "Failed to promote worker to foreground service:".logFmt(), e)
         }
 
         val wakeLock: PowerManager.WakeLock =
             (applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager)
-                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "$tag::Patcher")
+                .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "$LOG_TAG::Patcher")
                 .apply {
                     // No timeout: the finally block below always releases this lock, so a cap
                     // would only risk the CPU sleeping mid-patch on large or slow devices
                     @Suppress("WakelockTimeout")
                     acquire()
-                    Log.d(tag, "Acquired wakelock.")
+                    Log.d(LOG_TAG, "Acquired wakelock.")
                 }
 
         lateinit var args: Args
@@ -418,7 +418,7 @@ class PatcherWorker(
                 // Nothing was patched yet, and ART can still take the run
                 // The cause tells a JVM that crashed on start from one the device had no room for
                 args.logger.warn("${e.message} (${e.cause?.javaClass?.simpleName}), patching on ART instead")
-                Log.w(tag, "Patcher JVM unavailable".logFmt(), e)
+                Log.w(LOG_TAG, "Patcher JVM unavailable".logFmt(), e)
                 onRestart()
                 args.logger.logRuntime(PatcherVm.ART)
                 runtime(PatcherVm.ART).patchInput()
@@ -440,13 +440,13 @@ class PatcherWorker(
                         "$LOG_WORKER_FIELD_ELAPSED=${elapsed.inWholeMilliseconds}ms"
             )
 
-            Log.i(tag, "Patching succeeded".logFmt())
+            Log.i(LOG_TAG, "Patching succeeded".logFmt())
             val outputPackageName = pm.getPackageInfo(File(args.output))?.packageName ?: args.packageName
             autoInstallPending = installerManager.autoInstallAllowed(outputPackageName, mount = args.useMount)
             succeeded = true
             Result.success()
         } catch (e: PatcherKilledException) {
-            Log.e(tag, "Patcher process ended: ${e.reason}".logFmt(), e)
+            Log.e(LOG_TAG, "Patcher process ended: ${e.reason}".logFmt(), e)
             args.logger.error("Patcher process ended: ${e.reason}")
             val message = if (e.crashed) {
                 applicationContext.getString(
@@ -462,7 +462,7 @@ class PatcherWorker(
             )
         } catch (e: HeapExhaustedException) {
             Log.e(
-                tag,
+                LOG_TAG,
                 "Patcher exhausted its ${e.heapLimitMb}MB heap. ${e.originalStackTrace}".logFmt()
             )
             // The stack trace is already in the log; the failure itself says what the user can
@@ -477,7 +477,7 @@ class PatcherWorker(
             )
         } catch (e: PatcherFailureException) {
             Log.e(
-                tag,
+                LOG_TAG,
                 "An exception occurred in the patcher process while patching. ${e.originalStackTrace}".logFmt()
             )
             updateProgress(state = State.FAILED, message = e.originalStackTrace)
@@ -486,10 +486,10 @@ class PatcherWorker(
             )
         } catch (e: Exception) {
             if (isStopped || e is CancellationException) {
-                Log.i(tag, "Patching was cancelled".logFmt())
+                Log.i(LOG_TAG, "Patching was cancelled".logFmt())
                 throw e
             }
-            Log.e(tag, "An exception occurred while patching".logFmt(), e)
+            Log.e(LOG_TAG, "An exception occurred while patching".logFmt(), e)
             updateProgress(state = State.FAILED, message = e.stackTraceToString())
             Result.failure(
                 workDataOf(FAILURE_MESSAGE_KEY to e.stackTraceToString().truncateForWorkData())
@@ -498,10 +498,10 @@ class PatcherWorker(
             // Unmounted only to read the stock APK, so a run that produced nothing puts the patched one back
             if (unmounted && !succeeded) withContext(NonCancellable) {
                 runCatching { rootInstaller.mount(args.packageName) }
-                    .onFailure { Log.w(tag, "Failed to mount ${args.packageName} again".logFmt(), it) }
+                    .onFailure { Log.w(LOG_TAG, "Failed to mount ${args.packageName} again".logFmt(), it) }
             }
             if (!patchedApk.delete() && patchedApk.exists()) {
-                Log.w(tag, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
+                Log.w(LOG_TAG, "Failed to delete temporary patched APK: ${patchedApk.absolutePath}".logFmt())
             }
             if (!isStopped && args.announceCompletion) showCompletionNotification(
                 succeeded,

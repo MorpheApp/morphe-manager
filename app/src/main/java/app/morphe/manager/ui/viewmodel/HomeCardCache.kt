@@ -11,8 +11,8 @@ import androidx.compose.ui.graphics.toArgb
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.bundles.AppVersionStatus
 import app.morphe.manager.ui.model.HomeAppItem
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.enumByNameOrNull
-import app.morphe.manager.util.tag
 import app.morphe.manager.util.writeTextAtomically
 import app.morphe.patcher.patch.FormFactor
 import kotlinx.serialization.Serializable
@@ -38,7 +38,7 @@ internal class HomeCardCache(private val file: File) {
         json.decodeFromString<CachedHome>(file.readText())
             .takeIf { it.format == CACHE_FORMAT }
             ?.also { lastWritten = it }
-    }.onFailure { if (file.exists()) Log.w(tag, "Discarding unreadable home card cache", it) }
+    }.onFailure { if (file.exists()) Log.w(LOG_TAG, "Discarding unreadable home card cache", it) }
         .getOrNull()
 
     /**
@@ -54,7 +54,7 @@ internal class HomeCardCache(private val file: File) {
         runCatching {
             file.writeTextAtomically(json.encodeToString(CachedHome.serializer(), cached))
             lastWritten = cached
-        }.onFailure { Log.w(tag, "Could not keep the home cards", it) }
+        }.onFailure { Log.w(LOG_TAG, "Could not keep the home cards", it) }
     }
 }
 

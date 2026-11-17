@@ -217,9 +217,9 @@ class ManagerApplication : Application() {
                 // We do not want to call onFreshProcessStart() if there is state to restore.
                 // This can happen on system-initiated process death
                 if (savedInstanceState == null) {
-                    Log.d(tag, "Fresh process created")
+                    Log.d(LOG_TAG, "Fresh process created")
                     onFreshProcessStart()
-                } else Log.d(tag, "System-initiated process death detected")
+                } else Log.d(LOG_TAG, "System-initiated process death detected")
             }
 
             override fun onActivityStarted(activity: Activity) { startedActivityCount++ }
@@ -327,7 +327,7 @@ class ManagerApplication : Application() {
 
         runCatching {
             ShortcutManagerCompat.setDynamicShortcuts(this, shortcuts)
-        }.onFailure { Log.w(tag, "Failed to publish launcher shortcuts", it) }
+        }.onFailure { Log.w(LOG_TAG, "Failed to publish launcher shortcuts", it) }
     }
 
     private fun shortcutIntent(action: String) = Intent(this, MainActivity::class.java).apply {

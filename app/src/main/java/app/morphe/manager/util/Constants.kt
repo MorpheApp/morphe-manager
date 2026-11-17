@@ -9,7 +9,11 @@ import app.morphe.manager.BuildConfig
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
-const val tag = "Morphe Manager"
+/** Log tag of the manager, which a file with logs of its own extends as "Morphe <area>". */
+const val LOG_TAG = "Morphe Manager"
+
+/** Log tag of a patching run, apart from the rest of the manager. */
+const val PATCHER_LOG_TAG = "Morphe Patcher"
 
 // Code hosts a source or a release can live on
 
@@ -114,6 +118,14 @@ const val MPP_MIMETYPE         = "application/vnd.ms-project"
 const val IMAGE_MIMETYPE       = "image/*"
 const val APPLICATION_MIMETYPE = "application/*"
 const val WILDCARD_MIMETYPE    = "*/*"
+
+const val KEYSTORE_MIMETYPE     = "application/x-pkcs12"
+const val JKS_MIMETYPE          = "application/x-java-keystore"
+// BKS keystores, no standard MIME
+const val BKS_MIMETYPE          = "application/vnd.morphe.keystore"
+
+/** Keystore formats a signing key can be imported from. */
+val KEYSTORE_MIME_TYPES = arrayOf(KEYSTORE_MIMETYPE, JKS_MIMETYPE, BKS_MIMETYPE)
 
 /** Extension of a patch bundle file. */
 const val MPP_EXTENSION = "mpp"
