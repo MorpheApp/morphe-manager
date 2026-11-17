@@ -1,3 +1,12 @@
+## [2.7.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.3...v2.7.0-dev.4) (2026-11-17)
+
+### Bug Fixes
+
+* Find the pull request build among all workflow runs of its commit ([cb32a70](https://github.com/MorpheApp/morphe-manager/commit/cb32a70a18e6e37e1a37a7da36062c9aceab2308))
+* Keep the expert patching step name in place while counters grow ([51cbfc4](https://github.com/MorpheApp/morphe-manager/commit/51cbfc44259b08183be7b689f9bbb233269b73fb))
+* Show the install queue counter as text on the overlay ([56ef9d2](https://github.com/MorpheApp/morphe-manager/commit/56ef9d27dc8eb292ff01b1d3f7b5e7ab16f7101e))
+* Show the Morphe logo on every source from the Morphe repositories ([284137e](https://github.com/MorpheApp/morphe-manager/commit/284137ec0fcb77ea7ee8e38f27b8e3bba1361ec8))
+
 ## [2.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.2...v2.7.0-dev.3) (2026-11-17)
 
 ### Bug Fixes
