@@ -21,6 +21,13 @@ const val GITLAB_HOST = "gitlab.com"
 /** What a source link looks like, shown in a field waiting for one. */
 const val REMOTE_URL_PLACEHOLDER = "$GITHUB_HOST/owner/repo"
 
+// Branches a source follows for the stable and prerelease channels
+const val BRANCH_STABLE = "main"
+const val BRANCH_DEV = "dev"
+
+/** Bundle file a repository-only link resolves to. */
+const val DEFAULT_BUNDLE_FILE = "patches-bundle.json"
+
 // Morphe on GitHub
 
 const val MORPHE_GITHUB_ORG = "MorpheApp"
@@ -110,6 +117,8 @@ const val WILDCARD_MIMETYPE    = "*/*"
 
 /** Extension of a patch bundle file. */
 const val MPP_EXTENSION = "mpp"
+
+const val JSON_EXTENSION = "json"
 
 /** File extensions recognized as APK-family archives that Morphe can patch. */
 val APK_EXTENSIONS = setOf("apk", "apks", "xapk", "apkm")

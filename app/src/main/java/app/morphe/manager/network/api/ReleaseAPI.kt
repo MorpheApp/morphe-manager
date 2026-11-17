@@ -38,6 +38,8 @@ private const val GITHUB_URL_PREFIX = "https://$GITHUB_HOST/"
 
 private const val GITHUB_API_PREFIX = "https://$GITHUB_API_HOST/"
 
+private const val CHANGELOG_FILE = "CHANGELOG.md"
+
 /** Whether [url] is a file served from a repository by raw.githubusercontent.com. */
 internal fun isRawGitHubUrl(url: String): Boolean = runCatching {
     java.net.URI(url).host.equals(GITHUB_RAW_HOST, ignoreCase = true)
@@ -285,7 +287,7 @@ class ReleaseAPI(
         config: RepoConfig,
         branch: String
     ): APIResponse<T> {
-        val url = cacheBusted(config.rawFileUrl(branch, "patches-bundle.json"))
+        val url = cacheBusted(config.rawFileUrl(branch, DEFAULT_BUNDLE_FILE))
         Log.d(tag, "rawPatchesBundleRequest: $url")
         return client.request { url(url) }
     }
@@ -399,7 +401,7 @@ class ReleaseAPI(
      * The request is cache busted because the raw CDN serves stale copies of freshly pushed files.
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<ReleaseAsset> {
-        val url = cacheBusted(if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
+        val url = cacheBusted(if (branch == BRANCH_DEV) MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
         return when (val response = client.request<ManagerReleaseInfo> {
             url(url)
             header("Cache-Control", "no-cache")
@@ -443,7 +445,7 @@ class ReleaseAPI(
      */
     suspend fun checkAppUpdate(): AppUpdateCheck {
         val usePrereleases = prefs.useManagerPrereleases.get()
-        val branch = if (usePrereleases) "dev" else "main"
+        val branch = if (usePrereleases) BRANCH_DEV else BRANCH_STABLE
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {
@@ -486,7 +488,7 @@ class ReleaseAPI(
      * Uses the `dev` branch for pre-releases, `main` for stable.
      */
     private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
-        val branch = if (usePrerelease) "dev" else "main"
+        val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE
         return when (val r = rawPatchesBundleRequest<PatchesReleaseInfo>(patchesConfig, branch)) {
             is APIResponse.Success -> runCatching {
                 mapPatchesJsonToAsset(patchesConfig, r.data).also {
@@ -556,12 +558,12 @@ class ReleaseAPI(
 
     /** Fetches and parses the manager's CHANGELOG.md from the appropriate branch. */
     suspend fun fetchManagerChangelog(forDevBranch: Boolean = isDevBuild): List<ChangelogEntry> {
-        val branch = if (forDevBranch) "dev" else "main"
-        return fetchChangelogFromRepo(managerConfig, branch, "CHANGELOG.md")
+        val branch = if (forDevBranch) BRANCH_DEV else BRANCH_STABLE
+        return fetchChangelogFromRepo(managerConfig, branch, CHANGELOG_FILE)
     }
 
     /** Fetches and parses CHANGELOG.md from the first-party patches repository. */
-    suspend fun fetchPatchesChangelog(branch: String = "main", stopAfterFirstStable: Boolean = false): List<ChangelogEntry> =
+    suspend fun fetchPatchesChangelog(branch: String = BRANCH_STABLE, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> =
         fetchChangelogFromRepo(patchesConfig, branch, stopAfterFirstStable = stopAfterFirstStable)
 
     /**
@@ -576,7 +578,7 @@ class ReleaseAPI(
     private suspend fun fetchChangelogFromRepo(
         config: RepoConfig,
         branch: String,
-        path: String = "CHANGELOG.md",
+        path: String = CHANGELOG_FILE,
         stopAfterFirstStable: Boolean = false
     ): List<ChangelogEntry> {
         val url = cacheBusted(config.rawFileUrl(branch, path))
@@ -622,42 +624,18 @@ class ReleaseAPI(
      * → https://raw.githubusercontent.com/MorpheApp/morphe-patches/main/CHANGELOG.md
      * ```
      *
-     * Returns null for unrecognized URL formats.
+     * A link that names no branch, or pins one through refs/heads, reads the [BRANCH_STABLE]
+     * changelog. Returns null for unrecognized URL formats.
      */
     fun changelogUrlFromBundleEndpoint(endpoint: String): String? {
-        return try {
-            val uri = java.net.URI(endpoint)
-            val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
-            val parts = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
-
-            when (host) {
-                GITHUB_RAW_HOST -> {
-                    // path: owner/repo/branch/...
-                    if (parts.size < 3) return null
-                    RepoConfig(parts[0], parts[1]).rawFileUrl(parts[2], "CHANGELOG.md")
-                }
-
-                GITHUB_HOST -> {
-                    // path: owner/repo  or  owner/repo/tree/branch/...
-                    if (parts.size < 2) return null
-                    val branch = if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else "main"
-                    RepoConfig(parts[0], parts[1]).rawFileUrl(branch, "CHANGELOG.md")
-                }
-
-                GITLAB_HOST -> {
-                    // path: owner/repo/-/raw/branch/...
-                    if (parts.size < 2) return null
-                    val rawIndex = parts.indexOf("raw")
-                    val branch = if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
-                        parts.getOrNull(rawIndex + 1) ?: "main"
-                    } else "main"
-                    "https://$GITLAB_HOST/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
-                }
-
-                else -> null
-            }
-        } catch (_: Exception) {
-            null
+        val source = SourceUrl.parse(endpoint) ?: return null
+        val owner = source.owner ?: return null
+        val repo = source.repo ?: return null
+        val branch = source.branch ?: BRANCH_STABLE
+        return when (source.codeHost) {
+            CodeHost.GITHUB -> RepoConfig(owner, repo).rawFileUrl(branch, CHANGELOG_FILE)
+            CodeHost.GITLAB -> "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$CHANGELOG_FILE"
+            null -> null
         }
     }
 

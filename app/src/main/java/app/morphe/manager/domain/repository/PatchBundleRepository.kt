@@ -52,8 +52,6 @@ import kotlinx.coroutines.sync.withLock
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
-import java.net.URI
-import java.net.URISyntaxException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.security.MessageDigest
@@ -428,13 +426,9 @@ class PatchBundleRepository(
     }
 
     private fun guessNameFromEndpoint(endpoint: String): String? {
-        val uri = try {
-            URI(endpoint)
-        } catch (_: URISyntaxException) {
-            return null
-        }
-        val host = uri.host?.lowercase(Locale.US) ?: return null
-        val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() }.orEmpty()
+        val source = SourceUrl.parse(endpoint) ?: return null
+        val host = source.host
+        val segments = source.segments
 
         // Prefer a segment containing "bundle" (case-insensitive), e.g. ".../piko-latest-patches-bundle.json".
         val bundleCandidates = segments.filter { it.contains("bundle", ignoreCase = true) }
@@ -461,7 +455,7 @@ class PatchBundleRepository(
         // Fallbacks for common GitHub URL patterns.
         if (segments.isEmpty()) return host
         return when (host) {
-            GITHUB_HOST if segments.size >= 2 -> segments[1]
+            GITHUB_HOST -> source.repo ?: host
             GITHUB_API_HOST if segments.size >= 3 && segments[0] == "repos" -> segments[2]
             else -> host
         }
@@ -1506,7 +1500,7 @@ class PatchBundleRepository(
 
         // Auto-enable prerelease if asked for or if the URL explicitly targets the "dev" branch
         if (src is JsonPatchBundle &&
-            (src.endpointBranch == RemotePatchBundle.BRANCH_DEV || usePrerelease && src.supportsPrerelease)
+            (src.endpointBranch == BRANCH_DEV || usePrerelease && src.supportsPrerelease)
         ) {
             val current = prefs.bundlePrereleasesEnabled.get().toMutableSet()
             current.add(src.uid.toString())
@@ -1520,11 +1514,11 @@ class PatchBundleRepository(
      * Returns true if 'usePrerelease' should be enabled for a [JsonPatchBundle] with the given [url].
      * Prerelease is enabled if:
      * - the uid is already stored in [PreferencesManager.bundlePrereleasesEnabled] (user toggled it on)
-     * - the endpoint URL explicitly targets the "dev" branch.
+     * - the endpoint URL explicitly targets the [BRANCH_DEV] branch.
      */
     private fun shouldUsePrerelease(uid: Int, url: String): Boolean =
         prefs.bundlePrereleasesEnabled.getBlocking().contains(uid.toString()) ||
-                JsonPatchBundle.extractBranch(url) == "dev"
+                SourceUrl.parse(url)?.branch == BRANCH_DEV
 
     /**
      * Extracts the HTTP status code from an exception.
@@ -1581,19 +1575,8 @@ class PatchBundleRepository(
         bundleState.filterIsInstance<BundleState.Ready>().first()
 
     /** Returns the blocklist key for a normalized bundle URL, or null for non-GitHub/GitLab hosts. */
-    private fun toBlocklistKey(normalizedUrl: String): String? = try {
-        val parsed = Url(normalizedUrl)
-        val segments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
-        when {
-            segments.size < 2 -> null
-            parsed.host.equals(GITHUB_RAW_HOST, ignoreCase = true) ||
-                parsed.host.equals(GITHUB_HOST, ignoreCase = true) ->
-                "github=${segments[0]}/${segments[1]}".lowercase(Locale.US)
-            parsed.host.equals(GITLAB_HOST, ignoreCase = true) ->
-                "gitlab=${segments[0]}/${segments[1]}".lowercase(Locale.US)
-            else -> null
-        }
-    } catch (_: Exception) { null }
+    private fun toBlocklistKey(normalizedUrl: String): String? =
+        SourceUrl.parse(normalizedUrl)?.repositoryKey?.lowercase(Locale.US)
 
     fun normalizeRemoteBundleUrl(input: String): String {
         // A link is usually pasted without its scheme, and every host here serves https
@@ -1631,14 +1614,14 @@ class PatchBundleRepository(
                 pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
                     val branchSegments = pathSegments.drop(3)
                     // Find where the branch name ends (could be multi-segment like "refs/heads/main")
-                    branchSegments.takeWhile { !it.endsWith(".json") }.joinToString("/")
+                    branchSegments.takeWhile { !it.endsWith(".$JSON_EXTENSION") }.joinToString("/")
                 }
                 // URL format: github.com/owner/repo/blob/branch/path...
                 pathSegments.size >= 4 && pathSegments[2] == "blob" -> {
                     pathSegments[3]
                 }
-                // Default to main branch
-                else -> "main"
+                // Default to the stable branch
+                else -> BRANCH_STABLE
             }
 
             // Get the remaining path after branch (if any)
@@ -1664,12 +1647,12 @@ class PatchBundleRepository(
                 append("/$owner/$repo/$branch")
                 if (remainingPath.isNotEmpty()) {
                     append("/$remainingPath")
-                    // Add patches-bundle.json only if the path doesn't already end with .json
-                    if (!remainingPath.endsWith(".json", ignoreCase = true)) {
-                        append("/patches-bundle.json")
+                    // Add the default bundle file only if the path doesn't already end with .json
+                    if (!remainingPath.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
+                        append("/$DEFAULT_BUNDLE_FILE")
                     }
                 } else {
-                    append("/patches-bundle.json")
+                    append("/$DEFAULT_BUNDLE_FILE")
                 }
             }
 
@@ -1693,7 +1676,7 @@ class PatchBundleRepository(
                 // Already a raw URL - normalize it
                 val normalizedPath = "/" + pathSegments.joinToString("/")
                 val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
-                if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+                if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
                     throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
                 }
                 val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
@@ -1705,13 +1688,13 @@ class PatchBundleRepository(
             val blobIndex = pathSegments.indexOf("blob")
             val branch = when {
                 treeIndex >= 2 && pathSegments.getOrNull(treeIndex - 1) == "-" ->
-                    pathSegments.getOrNull(treeIndex + 1) ?: "main"
+                    pathSegments.getOrNull(treeIndex + 1) ?: BRANCH_STABLE
                 blobIndex >= 2 && pathSegments.getOrNull(blobIndex - 1) == "-" ->
-                    pathSegments.getOrNull(blobIndex + 1) ?: "main"
-                else -> "main"
+                    pathSegments.getOrNull(blobIndex + 1) ?: BRANCH_STABLE
+                else -> BRANCH_STABLE
             }
 
-            return "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/patches-bundle.json"
+            return "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$DEFAULT_BUNDLE_FILE"
         }
 
         // Handle raw.githubusercontent.com URLs (legacy support)
@@ -1723,7 +1706,7 @@ class PatchBundleRepository(
             val normalizedPath = "/" + pathSegments.joinToString("/")
             val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
 
-            if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+            if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
                 throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
             }
 
@@ -1735,7 +1718,7 @@ class PatchBundleRepository(
         val normalizedPath = "/" + pathSegments.joinToString("/")
         val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
 
-        if (!pathNoQuery.endsWith(".json", ignoreCase = true)) {
+        if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
             throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
         }
 

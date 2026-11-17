@@ -242,12 +242,6 @@ sealed class RemotePatchBundle(
     }
 
     companion object {
-        const val BRANCH_STABLE = "main"
-        const val BRANCH_DEV = "dev"
-
-        /** Bundle file a repository-only link resolves to. */
-        private const val DEFAULT_BUNDLE_FILE = "patches-bundle.json"
-
         internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val releaseInfoCache = TimedCache<String, ReleaseAsset>(CHANGELOG_CACHE_TTL)
         private val entriesCache = TimedCache<String, List<ChangelogEntry>>(CHANGELOG_CACHE_TTL)
@@ -259,17 +253,8 @@ sealed class RemotePatchBundle(
          * Infer the repository page URL from various endpoint formats.
          * Returns null for hosts other than GitHub and GitLab, whose repository layout is unknown.
          */
-        fun inferPageUrlFromEndpoint(endpoint: String): String? {
-            val (host, segments) = endpointParts(endpoint) ?: return null
-            if (segments.size < 2) return null
-
-            return when (host) {
-                GITHUB_RAW_HOST, GITHUB_HOST -> "https://$GITHUB_HOST/${segments[0]}/${segments[1]}"
-                // gitlab.com/owner/repo/-/raw/branch/... or gitlab.com/owner/repo
-                GITLAB_HOST -> "https://$GITLAB_HOST/${segments[0]}/${segments[1]}"
-                else -> null
-            }
-        }
+        fun inferPageUrlFromEndpoint(endpoint: String): String? =
+            SourceUrl.parse(endpoint)?.repositoryUrl
 
         /**
          * Add-source link for [endpoint], or null when it would add a different source. The link
@@ -277,15 +262,16 @@ sealed class RemotePatchBundle(
          * the stable or dev branch qualifies.
          */
         fun addSourceLinkForEndpoint(endpoint: String, name: String?): String? {
-            val (host, segments) = endpointParts(endpoint) ?: return null
+            val source = SourceUrl.parse(endpoint) ?: return null
+            val segments = source.segments
             val branches = setOf(BRANCH_STABLE, BRANCH_DEV)
 
-            val provider = when (host) {
-                GITHUB_RAW_HOST -> "github".takeIf {
+            val provider = when (source.host) {
+                GITHUB_RAW_HOST -> CodeHost.GITHUB.key.takeIf {
                     segments.size == 4 && segments[2] in branches && segments[3] == DEFAULT_BUNDLE_FILE
                 }
 
-                GITLAB_HOST -> "gitlab".takeIf {
+                GITLAB_HOST -> CodeHost.GITLAB.key.takeIf {
                     segments.size == 6 && segments[2] == "-" && segments[3] == "raw" &&
                             segments[4] in branches && segments[5] == DEFAULT_BUNDLE_FILE
                 }
@@ -307,27 +293,12 @@ sealed class RemotePatchBundle(
          * query and user info are left out, as they can hold a token.
          */
         fun patchSourceEntryForEndpoint(endpoint: String): String {
-            val (host, segments) = endpointParts(endpoint) ?: return "url=unknown"
-            val entry = when {
-                segments.size >= 2 && (host == GITHUB_RAW_HOST || host == GITHUB_HOST) ->
-                    "github=${segments[0]}/${segments[1]}"
-
-                segments.size >= 2 && host == GITLAB_HOST -> "gitlab=${segments[0]}/${segments[1]}"
-                else -> "url=" + (listOf(host) + segments).joinToString("/")
-            }
+            val source = SourceUrl.parse(endpoint) ?: return "url=unknown"
+            val entry = source.repositoryKey
+                ?: ("url=" + (listOf(source.host) + source.segments).joinToString("/"))
             // Commas separate entries, and the API takes printable ASCII only
             return entry.replace(",", "%2C").filter { it in '!'..'~' }
                 .take(MAX_PATCH_SOURCE_ENTRY_LENGTH)
-        }
-
-        /** Lowercased host and path segments of [endpoint], or null when it is not a valid URL. */
-        private fun endpointParts(endpoint: String): Pair<String, List<String>>? = try {
-            val uri = java.net.URI(endpoint)
-            uri.host?.lowercase(java.util.Locale.US)?.let { host ->
-                host to uri.path.orEmpty().trim('/').split('/').filter { it.isNotBlank() }
-            }
-        } catch (_: Exception) {
-            null
         }
 
         /**
@@ -367,7 +338,7 @@ class JsonPatchBundle(
      * The branch the endpoint URL currently points to.
      * Returns null if the URL uses refs/heads/... or is not a recognized format.
      */
-    val endpointBranch: String? get() = extractBranch(endpoint)
+    val endpointBranch: String? get() = SourceUrl.parse(endpoint)?.branch
 
     /**
      * Returns [url] with its branch segment replaced by [targetBranch].
@@ -381,42 +352,15 @@ class JsonPatchBundle(
      * or when parsing fails.
      */
     private fun switchBranchInUrl(url: String, targetBranch: String): String {
-        return try {
-            val uri = java.net.URI(url)
-            val host = uri.host?.lowercase(java.util.Locale.US)
-            when (host) {
-                GITHUB_RAW_HOST -> {
-                    val parts = uri.path.trim('/').split('/')
-                    if (parts.size < 3) return url
-                    // Don't modify refs/heads/... - it's a direct immutable link
-                    if (parts[2] == "refs") return url
-                    val newPath = "/${parts[0]}/${parts[1]}/$targetBranch/${parts.drop(3).joinToString("/")}"
-                    "https://$GITHUB_RAW_HOST$newPath"
-                }
-                GITHUB_HOST -> {
-                    // Parse: /owner/repo/tree|blob/branch/path/to/file.json
-                    val pathParts = uri.path?.trim('/')?.split('/') ?: return url
-                    if (pathParts.size < 5) return url // Need at least: owner, repo, tree/blob, branch, file
-                    val type = pathParts[2] // "tree" or "blob"
-                    if (type !in listOf("tree", "blob")) return url
-                    val owner = pathParts[0]
-                    val repo = pathParts[1]
-                    val filePath = pathParts.drop(4).joinToString("/")
-                    "https://$GITHUB_RAW_HOST/$owner/$repo/$targetBranch/$filePath"
-                }
-                GITLAB_HOST -> {
-                    // Format: owner/repo/-/raw/BRANCH/path/file.json
-                    val parts = uri.path.trim('/').split('/').toMutableList()
-                    val rawIndex = parts.indexOf("raw")
-                    if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
-                        parts[rawIndex + 1] = targetBranch
-                        "https://$GITLAB_HOST/${parts.joinToString("/")}"
-                    } else url
-                }
-                else -> url // Unknown host, return as-is
-            }
-        } catch (_: Exception) {
-            url // If parsing fails, return original URL
+        val source = SourceUrl.parse(url) ?: return url
+        val index = source.branchIndex ?: return url
+        val segments = source.segments.toMutableList().apply { set(index, targetBranch) }
+        return when (source.host) {
+            // A tree or blob page names a file, which raw.githubusercontent.com serves
+            GITHUB_HOST -> segments.takeIf { it.size >= 5 }
+                ?.let { "https://$GITHUB_RAW_HOST/" + (it.take(2) + it.drop(3)).joinToString("/") }
+                ?: url
+            else -> "https://${source.host}/" + segments.joinToString("/")
         }
     }
 
@@ -527,44 +471,7 @@ class JsonPatchBundle(
          * explicitly points to the `BRANCH_STABLE` or `BRANCH_DEV` branch can.
          */
         fun supportsPrerelease(endpoint: String): Boolean =
-            extractBranch(endpoint).let { it == BRANCH_STABLE || it == BRANCH_DEV }
-
-        /**
-         * Extracts the branch name from a GitHub or GitLab URL.
-         *
-         * Supported formats:
-         * - raw.githubusercontent.com/owner/repo/BRANCH/path  (returns null for refs/heads/...)
-         * - github.com/owner/repo/tree|blob/BRANCH/path
-         * - gitlab.com/owner/repo/-/raw/BRANCH/path
-         */
-        internal fun extractBranch(url: String): String? {
-            return try {
-                val uri = java.net.URI(url)
-                val host = uri.host?.lowercase(java.util.Locale.US)
-                val parts = uri.path.trim('/').split('/')
-                when (host) {
-                    GITHUB_RAW_HOST -> {
-                        // Format: owner/repo/BRANCH/path...
-                        // But refs/heads/BRANCH is a direct file link - not switchable
-                        val branch = parts.getOrNull(2) ?: return null
-                        if (branch == "refs") null else branch
-                    }
-                    GITHUB_HOST -> {
-                        if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
-                    }
-                    GITLAB_HOST -> {
-                        // Format: owner/repo/-/raw/BRANCH/path...
-                        val rawIndex = parts.indexOf("raw")
-                        if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-")
-                            parts.getOrNull(rawIndex + 1)
-                        else null
-                    }
-                    else -> null
-                }
-            } catch (_: Exception) {
-                null
-            }
-        }
+            SourceUrl.parse(endpoint)?.branch.let { it == BRANCH_STABLE || it == BRANCH_DEV }
     }
 }
 
