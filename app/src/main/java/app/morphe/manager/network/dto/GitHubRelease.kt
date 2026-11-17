@@ -68,8 +68,6 @@ data class GitHubActionRuns(
 @Serializable
 data class GitHubActionRun(
     val id: String,
-    @SerialName("head_sha")
-    val headSha: String,
     @SerialName("display_title")
     val displayTitle: String
 )
@@ -85,5 +83,6 @@ data class GitHubActionArtifact(
     @SerialName("archive_download_url")
     val archiveDownloadUrl: String,
     @SerialName("created_at")
-    val createdAt: String
+    val createdAt: String,
+    val expired: Boolean = false
 )
