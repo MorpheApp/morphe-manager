@@ -1,3 +1,9 @@
+## [2.7.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.2...v2.7.0-dev.3) (2026-11-17)
+
+### Bug Fixes
+
+* Fit long subtitles on the mini-game cards ([532b6d9](https://github.com/MorpheApp/morphe-manager/commit/532b6d9d6821908ce5fdcb39b4cb76ec7d1f4ce8))
+
 ## [2.7.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.1...v2.7.0-dev.2) (2026-11-16)
 
 ### Features
