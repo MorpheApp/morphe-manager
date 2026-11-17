@@ -585,9 +585,7 @@ class GitHubPullRequestBundle(
                             ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
                                 // Use larger buffer for faster I/O (512 KB)
                                 val buffer = ByteArray(512 * 1024)
-                                var copiedBytes = 0L
-                                var lastReportedBytes = 0L
-                                var lastReportedAt = 0L
+                                val progress = ThrottledDownloadProgress(onProgress)
                                 var extractedTotal: Long? = null
 
                                 var entry = zis.nextEntry
@@ -599,16 +597,8 @@ class GitHubPullRequestBundle(
                                             val read = zis.read(buffer)
                                             if (read == -1) break
                                             patchOutput.write(buffer, 0, read)
-                                            copiedBytes += read.toLong()
-                                            val now = System.currentTimeMillis()
-                                            // Report progress less frequently: every 256KB or 500ms
-                                            if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
-                                                lastReportedBytes = copiedBytes
-                                                lastReportedAt = now
-                                                // Update total size if we now have extracted size
-                                                val currentTotal = extractedTotal ?: archiveSize
-                                                onProgress?.invoke(copiedBytes, currentTotal)
-                                            }
+                                            // The extracted size, once known, is the real total
+                                            progress.copied(read, extractedTotal ?: archiveSize)
                                         }
                                         break
                                     }
@@ -616,40 +606,28 @@ class GitHubPullRequestBundle(
                                     entry = zis.nextEntry
                                 }
 
-                                if (copiedBytes <= 0L) {
+                                if (progress.bytes <= 0L) {
                                     throw IOException("No .mpp file found in the PR artifact")
                                 }
-                                // Final progress - use actual copied bytes as total if we don't have size
-                                val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
-                                onProgress?.invoke(copiedBytes, finalTotal)
+                                progress.finished(extractedTotal ?: archiveSize)
                             }
                         } else {
                             // Raw .mpp artifact - stream directly without unzipping
                             val buffer = ByteArray(512 * 1024)
                             val channel = httpResponse.bodyAsChannel()
-                            var copiedBytes = 0L
-                            var lastReportedBytes = 0L
-                            var lastReportedAt = 0L
+                            val progress = ThrottledDownloadProgress(onProgress)
 
                             while (!channel.isClosedForRead) {
                                 val read = channel.readAvailable(buffer)
                                 if (read <= 0) continue
                                 patchOutput.write(buffer, 0, read)
-                                copiedBytes += read.toLong()
-                                val now = System.currentTimeMillis()
-                                // Report progress less frequently: every 256KB or 500ms
-                                if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
-                                    lastReportedBytes = copiedBytes
-                                    lastReportedAt = now
-                                    // Update total size if we now have extracted size
-                                    onProgress?.invoke(copiedBytes, archiveSize)
-                                }
+                                progress.copied(read, archiveSize)
                             }
 
-                            if (copiedBytes <= 0L) {
+                            if (progress.bytes <= 0L) {
                                 throw IOException("Empty .mpp artifact received from PR")
                             }
-                            onProgress?.invoke(copiedBytes, archiveSize ?: copiedBytes)
+                            progress.finished(archiveSize)
                         }
                     }
                 }
@@ -682,4 +660,30 @@ class GitHubPullRequestBundle(
         enabled,
         services
     )
+}
+
+/**
+ * Bytes copied by a download, reported at most every 256 KB or 500 ms so a fast link does not
+ * flood the UI, and once more when the copy ends.
+ */
+private class ThrottledDownloadProgress(private val onProgress: PatchBundleDownloadProgress?) {
+    var bytes = 0L
+        private set
+    private var reportedBytes = 0L
+    private var reportedAt = 0L
+
+    fun copied(read: Int, total: Long?) {
+        bytes += read
+        val now = System.currentTimeMillis()
+        if (bytes - reportedBytes >= 256 * 1024 || now - reportedAt >= 500) {
+            reportedBytes = bytes
+            reportedAt = now
+            onProgress?.invoke(bytes, total)
+        }
+    }
+
+    /** The final report, which falls back to the bytes copied when the size was never known. */
+    fun finished(total: Long?) {
+        onProgress?.invoke(bytes, total ?: bytes)
+    }
 }

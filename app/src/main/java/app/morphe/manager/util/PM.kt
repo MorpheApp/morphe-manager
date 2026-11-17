@@ -139,13 +139,7 @@ class PM(
         } else {
             PackageManager.GET_SIGNATURES
         }
-        val info = getPackageInfo(packageName, flags) ?: return null
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            info.signingInfo?.apkContentsSigners?.firstOrNull()
-                ?: info.signatures?.firstOrNull()
-        } else {
-            info.signatures?.firstOrNull()
-        }
+        return getPackageInfo(packageName, flags)?.firstSigner()
     }
 
     /**
@@ -158,14 +152,17 @@ class PM(
         } else {
             PackageManager.GET_SIGNATURES
         }
-        val info = app.packageManager.getPackageArchiveInfo(file.absolutePath, flags) ?: return null
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            info.signingInfo?.apkContentsSigners?.firstOrNull()
-                ?: info.signatures?.firstOrNull()
-        } else {
-            info.signatures?.firstOrNull()
-        }
+        return app.packageManager.getPackageArchiveInfo(file.absolutePath, flags)?.firstSigner()
     }
+
+    /** The first certificate the package is signed with, from the signing info where there is one. */
+    @Suppress("DEPRECATION")
+    private fun PackageInfo.firstSigner(): Signature? =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            signingInfo?.apkContentsSigners?.firstOrNull() ?: signatures?.firstOrNull()
+        } else {
+            signatures?.firstOrNull()
+        }
 
     /**
      * Returns true if the signing certificate of [file] differs from the installed package.

@@ -10,7 +10,7 @@
 
 package app.morphe.manager.di
 
-import android.content.Context
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.util.MORPHE_USER_AGENT
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
@@ -23,7 +23,6 @@ import okhttp3.Cache
 import okhttp3.Dns
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.Inet4Address
@@ -31,7 +30,7 @@ import java.net.UnknownHostException
 
 val httpModule = module {
     // The connections, DNS and cache every HTTP client of the app shares
-    fun provideOkHttpClient(context: Context) = OkHttpClient.Builder()
+    fun provideOkHttpClient(fs: Filesystem) = OkHttpClient.Builder()
         .dns { hostname ->
             val addresses = try {
                 Dns.SYSTEM.lookup(hostname)
@@ -48,7 +47,7 @@ val httpModule = module {
         // Force HTTP/1.1 to avoid intermittent HTTP/2 PROTOCOL_ERROR stream resets when
         // downloading patch bundles from GitHub-backed endpoints.
         .protocols(listOf(Protocol.HTTP_1_1))
-        .cache(Cache(context.cacheDir.resolve("cache").also { it.mkdirs() }, 1024 * 1024 * 100))
+        .cache(Cache(fs.httpCacheDir.also { it.mkdirs() }, 1024 * 1024 * 100))
         .build()
 
     fun provideHttpClient(okHttpClient: OkHttpClient, json: Json) = HttpClient(OkHttp) {
@@ -78,9 +77,7 @@ val httpModule = module {
         ignoreUnknownKeys = true
     }
 
-    single {
-        provideOkHttpClient(androidContext())
-    }
+    singleOf(::provideOkHttpClient)
     singleOf(::provideHttpClient)
     singleOf(::provideJson)
 }

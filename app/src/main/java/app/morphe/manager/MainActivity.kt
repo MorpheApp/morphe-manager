@@ -313,9 +313,10 @@ class MainActivity : ComponentActivity() {
 
         fun param(key: String) = data.getQueryParameter(key)?.takeIf { it.isNotBlank() }
 
-        val url = param("github")?.let { "https://$GITHUB_HOST/$it" }
-            ?: param("gitlab")?.let { "https://$GITLAB_HOST/$it" }
-            ?: return
+        // The website names the host by the same key the manager builds these links with
+        val url = CodeHost.entries.firstNotNullOfOrNull { host ->
+            param(host.key)?.let { "https://${host.host}/$it" }
+        } ?: return
         vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(
             url = url,
             name = param("name"),

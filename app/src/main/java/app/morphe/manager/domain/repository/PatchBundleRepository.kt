@@ -11,7 +11,6 @@
 package app.morphe.manager.domain.repository
 
 import android.app.Application
-import android.content.Context
 import android.database.SQLException
 import android.util.Log
 import androidx.annotation.StringRes
@@ -21,6 +20,7 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.redux.Action
 import app.morphe.manager.data.redux.ActionContext
 import app.morphe.manager.data.redux.Store
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.AppDatabase.Companion.generateUid
 import app.morphe.manager.data.room.apps.installed.SelectionPayload
@@ -70,9 +70,10 @@ class PatchBundleRepository(
     private val blocklistRepository: BlocklistRepository,
     private val sourceMuteRepository: SourceMuteRepository,
     db: AppDatabase,
+    fs: Filesystem,
 ) {
     private val dao = db.patchBundleDao()
-    private val bundlesDir = app.getDir("patch_bundles", Context.MODE_PRIVATE)
+    private val bundlesDir = fs.patchBundlesDir
 
     /** Crash attribution for every in-process bundle read, the patcher runtime's included. */
     val loadGuard = PatchBundleLoadGuard(app, bundlesDir)

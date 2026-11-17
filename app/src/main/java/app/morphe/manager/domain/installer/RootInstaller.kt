@@ -66,26 +66,11 @@ class RootInstaller(
     }
 
     fun hasRootAccess(): Boolean {
-        Shell.isAppGrantedRoot()?.let { granted ->
-            if (granted) cachedHasRoot = true
-            return granted
-        }
-
-        cachedHasRoot?.let { cached ->
-            if (cached) return true
-            if (SystemClock.elapsedRealtime() - lastRootCheck < ROOT_CHECK_INTERVAL_MS) return false
-        }
+        knownRootAccess()?.let { return it }
 
         synchronized(this) {
-            Shell.isAppGrantedRoot()?.let { granted ->
-                if (granted) cachedHasRoot = true
-                return granted
-            }
-
-            cachedHasRoot?.let { cached ->
-                if (cached) return true
-                if (SystemClock.elapsedRealtime() - lastRootCheck < ROOT_CHECK_INTERVAL_MS) return false
-            }
+            // Another caller may have probed while this one waited for the lock
+            knownRootAccess()?.let { return it }
 
             val probeResult = runCatching { Shell.cmd("id").exec() }.getOrNull()
             lastRootCheck = SystemClock.elapsedRealtime()
@@ -94,6 +79,22 @@ class RootInstaller(
             cachedHasRoot = granted
 
             return granted
+        }
+    }
+
+    /**
+     * Root access as known without probing: what libsu learned, else a cached answer that is
+     * still fresh. Null when only a probe can tell.
+     */
+    private fun knownRootAccess(): Boolean? {
+        Shell.isAppGrantedRoot()?.let { granted ->
+            if (granted) cachedHasRoot = true
+            return granted
+        }
+        return when (cachedHasRoot) {
+            true -> true
+            false if SystemClock.elapsedRealtime() - lastRootCheck < ROOT_CHECK_INTERVAL_MS -> false
+            else -> null
         }
     }
 
