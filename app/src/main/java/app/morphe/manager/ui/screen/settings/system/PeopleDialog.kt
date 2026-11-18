@@ -5,6 +5,7 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.core.EaseOutBack
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -26,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -46,6 +48,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.repository.PeopleRepository.People
 import app.morphe.manager.domain.repository.PeopleRepository.Person
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.AboutViewModel
@@ -60,11 +63,18 @@ import org.koin.androidx.compose.koinViewModel
 
 /** Which of the people behind Morphe a [PeopleDialog] lists. */
 enum class PeopleList {
-    /** Everyone who committed to the project over the last year. */
+    /** Everyone who committed to the project, for one of the [ContributorPeriod]s. */
     CONTRIBUTORS,
 
     /** Everyone who backs it with a donation. */
     SUPPORTERS
+}
+
+/** A period the contributors are listed for, picked from a row of chips. */
+private enum class ContributorPeriod(@StringRes val label: Int, val contributors: (People) -> List<Person>) {
+    ALL_TIME(R.string.contributors_all_time, People::contributors),
+    SIX_MONTHS(R.string.contributors_6_months, People::contributors6Months),
+    THREE_MONTHS(R.string.contributors_3_months, People::contributors3Months)
 }
 
 /**
@@ -158,8 +168,12 @@ fun DialogHostScope.PeopleDialog(
     LaunchedEffect(Unit) { viewModel.loadPeople() }
 
     val accent = MaterialTheme.colorScheme.primary
+    // A period with no one in it, or that the API does not serve yet, gets no chip
+    val periods = people?.let { loaded -> ContributorPeriod.entries.filter { it.contributors(loaded).isNotEmpty() } }.orEmpty()
+    var pickedPeriod by rememberSaveable { mutableStateOf(ContributorPeriod.ALL_TIME) }
+    val period = pickedPeriod.takeIf { it in periods } ?: ContributorPeriod.ALL_TIME
     val persons = when (list) {
-        PeopleList.CONTRIBUTORS -> people?.contributors
+        PeopleList.CONTRIBUTORS -> people?.let(period.contributors)
         PeopleList.SUPPORTERS -> people?.supporters
     }
     // Every backer for the supporters, of whom only the named ones are listed
@@ -169,7 +183,7 @@ fun DialogHostScope.PeopleDialog(
     }
     val summary = stringResource(
         when (list) {
-            PeopleList.CONTRIBUTORS -> R.string.contributors_description
+            PeopleList.CONTRIBUTORS -> period.label
             PeopleList.SUPPORTERS -> R.string.supporters_description
         }
     )
@@ -197,7 +211,23 @@ fun DialogHostScope.PeopleDialog(
                 ),
                 subtitle = listOfNotNull(summary, count?.takeIf { it > 0 }?.toString()).joinToString(" · "),
                 subtitleLoading = people == null && !unavailable,
-                accentColor = accent
+                accentColor = accent,
+                content = if (list == PeopleList.CONTRIBUTORS && periods.size > 1) {
+                    {
+                        Row(
+                            modifier = Modifier.padding(top = Defaults.SpaceSmall),
+                            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
+                        ) {
+                            periods.forEach {
+                                AppFilterChip(
+                                    selected = it == period,
+                                    onClick = { pickedPeriod = it },
+                                    label = stringResource(it.label)
+                                )
+                            }
+                        }
+                    }
+                } else null
             )
         },
         footer = {
@@ -221,35 +251,17 @@ fun DialogHostScope.PeopleDialog(
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
             val columns = (maxWidth / PersonCellWidth).toInt().coerceAtLeast(MIN_PERSON_COLUMNS)
 
-            DialogLazyList(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(SegmentGap)
-            ) {
-                if (persons.isNullOrEmpty() && unavailable) {
-                    item(key = "unavailable") {
-                        EmptyState(
-                            message = stringResource(R.string.people_unavailable),
-                            icon = MaterialSymbols.Rounded.Cloud_off,
-                            modifier = Modifier
-                                .animatedListItem(this)
-                                .endsBlock()
-                        )
-                    }
-                }
-
-                people(persons.orEmpty(), columns, openUrl)
-
-                when (list) {
-                    // Shown with the list or without it, as the manager stands on these either
-                    // way, though not ahead of it: a list keeps its place by the row it already
-                    // shows, so people arriving above this would open the dialog scrolled past them
-                    PeopleList.CONTRIBUTORS -> if (people != null || unavailable) {
-                        item(key = "prior") {
-                            PriorDevelopment(
-                                // The people of the project itself, where the list cannot name them
-                                showCurrent = persons.isNullOrEmpty() && unavailable,
-                                onOpen = openUrl,
-                                // Ends the list as the row closing the supporters does
+            // A list of its own for each period, which opens at its top and comes in as a wave
+            key(period) {
+                DialogLazyList(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(SegmentGap)
+                ) {
+                    if (persons.isNullOrEmpty() && unavailable) {
+                        item(key = "unavailable") {
+                            EmptyState(
+                                message = stringResource(R.string.people_unavailable),
+                                icon = MaterialSymbols.Rounded.Cloud_off,
                                 modifier = Modifier
                                     .animatedListItem(this)
                                     .endsBlock()
@@ -257,23 +269,44 @@ fun DialogHostScope.PeopleDialog(
                         }
                     }
 
-                    PeopleList.SUPPORTERS -> {
-                        val unlisted = (count ?: 0) - persons.orEmpty().size
-                        if (!persons.isNullOrEmpty() && unlisted > 0) {
-                            item(key = "unlisted") {
-                                SettingsItem(
-                                    onClick = { openUrl(AboutViewModel.SUPPORTERS_URL) },
-                                    showBorder = true,
-                                    icon = MaterialSymbols.Rounded.Volunteer_activism,
-                                    title = stringResource(R.string.people_more, unlisted.toString()),
-                                    // Leaves for the browser rather than going on within the dialog
-                                    trailingContent = {
-                                        ThemedIcon(icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored)
-                                    },
+                    people(persons.orEmpty(), columns, openUrl)
+
+                    when (list) {
+                        // Shown with the list or without it, as the manager stands on these either
+                        // way, though not ahead of it: a list keeps its place by the row it already
+                        // shows, so people arriving above this would open the dialog scrolled past them
+                        PeopleList.CONTRIBUTORS -> if (people != null || unavailable) {
+                            item(key = "prior") {
+                                PriorDevelopment(
+                                    // The people of the project itself, where the list cannot name them
+                                    showCurrent = persons.isNullOrEmpty() && unavailable,
+                                    onOpen = openUrl,
+                                    // Ends the list as the row closing the supporters does
                                     modifier = Modifier
                                         .animatedListItem(this)
                                         .endsBlock()
                                 )
+                            }
+                        }
+
+                        PeopleList.SUPPORTERS -> {
+                            val unlisted = (count ?: 0) - persons.orEmpty().size
+                            if (!persons.isNullOrEmpty() && unlisted > 0) {
+                                item(key = "unlisted") {
+                                    SettingsItem(
+                                        onClick = { openUrl(AboutViewModel.SUPPORTERS_URL) },
+                                        showBorder = true,
+                                        icon = MaterialSymbols.Rounded.Volunteer_activism,
+                                        title = stringResource(R.string.people_more, unlisted.toString()),
+                                        // Leaves for the browser rather than going on within the dialog
+                                        trailingContent = {
+                                            ThemedIcon(icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored)
+                                        },
+                                        modifier = Modifier
+                                            .animatedListItem(this)
+                                            .endsBlock()
+                                    )
+                                }
                             }
                         }
                     }

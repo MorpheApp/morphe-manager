@@ -26,7 +26,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 /**
- * The people behind Morphe: who committed to it over the last year and who backs it, both put
+ * The people behind Morphe: who committed to it and who backs it, both put
  * together by the Morphe API. The last answer is kept on disk, so the lists show at once, are
  * fetched again only once it has aged, and still show while the network has none.
  */
@@ -90,9 +90,18 @@ class PeopleRepository(
         null
     }
 
+    /**
+     * @param contributors Everyone who committed, most first by what their commits count for.
+     * @param contributors6Months Who committed over the last 6 months, the same way.
+     * @param contributors3Months Who committed over the last 3 months, the same way.
+     */
     @Serializable
     data class People(
         val contributors: List<Person> = emptyList(),
+        @SerialName("contributors_6_months")
+        val contributors6Months: List<Person> = emptyList(),
+        @SerialName("contributors_3_months")
+        val contributors3Months: List<Person> = emptyList(),
         val supporters: List<Person> = emptyList(),
         /** Every backer, the ones too many or too anonymous to list included. */
         @SerialName("supporters_total")
