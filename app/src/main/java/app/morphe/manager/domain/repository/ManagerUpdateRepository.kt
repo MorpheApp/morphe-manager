@@ -50,9 +50,9 @@ class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
     /**
      * Re-checks for an update and publishes the result.
      *
-     * Returns null both when the app is up to date and when the check failed, mirroring
-     * [ReleaseAPI.getAppUpdate], and clears the cached asset so the next reader resolves the
-     * state from scratch instead of acting on a stale release.
+     * Returns null both when the app is up to date and when the check failed, which
+     * [ReleaseAPI.checkAppUpdate] tells apart. Clears the cached asset, so the next reader
+     * resolves the state from scratch instead of acting on a stale release.
      */
     suspend fun refresh(): ReleaseAsset? = awaitFetch()
 

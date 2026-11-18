@@ -87,4 +87,70 @@ class SourceUrlTest {
         assertNull(SourceUrl.parse("github.com/owner/repo"))
         assertNull(SourceUrl.parse("not a url"))
     }
+
+    private fun normalize(input: String) = SourceUrl.normalizeBundleUrl(input)
+
+    @Test
+    fun `github repository resolves to the default bundle on the stable branch`() {
+        assertEquals(
+            "https://raw.githubusercontent.com/owner/repo/main/patches-bundle.json",
+            normalize("github.com/owner/repo")
+        )
+    }
+
+    @Test
+    fun `github tree and blob pages resolve to their raw file`() {
+        assertEquals(
+            "https://raw.githubusercontent.com/owner/repo/dev/patches-bundle.json",
+            normalize("https://github.com/owner/repo/tree/dev")
+        )
+        assertEquals(
+            "https://raw.githubusercontent.com/owner/repo/dev/bundles/custom.json",
+            normalize("https://github.com/owner/repo/blob/dev/bundles/custom.json")
+        )
+        assertEquals(
+            "https://raw.githubusercontent.com/owner/repo/main/patches-bundle.json",
+            normalize("https://github.com/owner/repo/blob/main")
+        )
+    }
+
+    @Test
+    fun `github pull request link is kept`() {
+        assertEquals("https://github.com/owner/repo/pull/12", normalize("https://github.com/owner/repo/pull/12"))
+    }
+
+    @Test
+    fun `gitlab pages resolve to their raw file`() {
+        assertEquals(
+            "https://gitlab.com/owner/repo/-/raw/main/patches-bundle.json",
+            normalize("https://gitlab.com/owner/repo")
+        )
+        assertEquals(
+            "https://gitlab.com/owner/repo/-/raw/dev/patches-bundle.json",
+            normalize("https://gitlab.com/owner/repo/-/tree/dev")
+        )
+        assertEquals(
+            "https://gitlab.com/owner/repo/-/raw/dev/bundle.json?inline=false",
+            normalize("https://gitlab.com/owner/repo/-/raw/dev/bundle.json?inline=false")
+        )
+    }
+
+    @Test
+    fun `raw and other links keep their json file, query and port`() {
+        assertEquals(
+            "https://raw.githubusercontent.com/owner/repo/dev/bundle.json",
+            normalize("https://raw.githubusercontent.com/owner/repo/dev/bundle.json")
+        )
+        assertEquals(
+            "https://example.com:8443/patches/bundle.json?v=2",
+            normalize("http://example.com:8443/patches/bundle.json?v=2")
+        )
+    }
+
+    @Test
+    fun `links that cannot name a bundle are rejected`() {
+        assertFailsWith<IllegalArgumentException> { normalize("https://github.com/owner") }
+        assertFailsWith<IllegalArgumentException> { normalize("https://raw.githubusercontent.com/owner/repo") }
+        assertFailsWith<IllegalArgumentException> { normalize("https://example.com/patches/bundle.zip") }
+    }
 }

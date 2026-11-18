@@ -424,12 +424,6 @@ class ReleaseAPI(
     }
 
     /**
-     * Returns a newer [ReleaseAsset] if one is available, or null if the app is up to date or
-     * the check could not be made, see [checkAppUpdate] to tell those apart.
-     */
-    suspend fun getAppUpdate(): ReleaseAsset? = (checkAppUpdate() as? AppUpdateCheck.Available)?.asset
-
-    /**
      * Checks whether a newer version of the manager is out.
      *
      * Channel selection logic (mirrors FCM subscription matrix in [app.morphe.manager.util.syncFcmTopics]):

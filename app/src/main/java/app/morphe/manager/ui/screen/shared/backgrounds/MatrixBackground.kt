@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.createBitmap
@@ -99,14 +98,12 @@ fun MatrixBackground(
     patchingCompleted: Boolean = false
 ) {
     val isDarkTheme = isDarkTheme()
-    val context = LocalContext.current
 
     val maxAlpha = if (isDarkTheme) 0.85f else 0.5f
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.15f,
-        context = context
+        sensitivity = 0.15f
     )
 
     val density = LocalDensity.current

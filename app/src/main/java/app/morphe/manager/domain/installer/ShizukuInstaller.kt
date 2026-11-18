@@ -47,25 +47,14 @@ import kotlin.time.Duration.Companion.seconds
  */
 class ShizukuInstaller(private val app: Application) {
 
-    /** Result of a silent PackageInstaller operation. */
-    data class OperationResult(val status: Int, val message: String?)
-
     /**
-     * An [IntentSender] paired with the [OperationResult] the intent delivered to it completes,
+     * An [IntentSender] paired with the [InstallerStatus] the intent delivered to it completes,
      * which is the only way the system reports the outcome of a session.
      */
     private class PendingOperation {
-        val result = CompletableDeferred<OperationResult>()
+        val result = CompletableDeferred<InstallerStatus>()
         val intentSender: IntentSender = IntentSenderCompat.create { intent ->
-            result.complete(
-                OperationResult(
-                    status = intent.getIntExtra(
-                        PackageInstaller.EXTRA_STATUS,
-                        PackageInstaller.STATUS_FAILURE
-                    ),
-                    message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
-                )
-            )
+            result.complete(InstallerStatus.from(intent))
         }
     }
 
@@ -82,7 +71,7 @@ class ShizukuInstaller(private val app: Application) {
         sourceFile: File,
         expectedPackage: String,
         installerPackageNameOverride: String? = null
-    ): OperationResult = withContext(Dispatchers.IO) {
+    ): InstallerStatus = withContext(Dispatchers.IO) {
         val packageInstaller = obtainPackageInstaller()
         val packageInstallerWrapper = packageInstaller.asPackageInstaller(installerPackageNameOverride)
         val params = PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL).apply {
@@ -128,7 +117,7 @@ class ShizukuInstaller(private val app: Application) {
      *
      * @throws InstallerOperationException if the uninstall fails or is aborted.
      */
-    suspend fun uninstall(packageName: String): OperationResult = withContext(Dispatchers.IO) {
+    suspend fun uninstall(packageName: String): InstallerStatus = withContext(Dispatchers.IO) {
         val packageInstallerWrapper = obtainPackageInstaller().asPackageInstaller()
         val operation = PendingOperation()
 
@@ -137,7 +126,7 @@ class ShizukuInstaller(private val app: Application) {
     }
 
     /** Returns this result, or throws [InstallerOperationException] when the operation failed. */
-    private fun OperationResult.requireSuccess(): OperationResult {
+    private fun InstallerStatus.requireSuccess(): InstallerStatus {
         if (status != PackageInstaller.STATUS_SUCCESS) {
             throw InstallerOperationException(status, message)
         }

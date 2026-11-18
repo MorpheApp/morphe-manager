@@ -81,7 +81,7 @@ private const val BLOCKS_AXIS_LOCK_CELLS = 0.6f
 class BlocksGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     // Locked cells only; the falling piece is tracked separately so gravity does not
     // rewrite the whole board on every tick
     var board by mutableStateOf(emptyBoard())
@@ -102,14 +102,6 @@ class BlocksGameState(
 
     /** Rows that are complete and lit, waiting for [finishClear] to take them out. */
     var clearingRows by mutableStateOf<List<Int>>(emptyList())
-        private set
-    override val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
-    override var isPaused by mutableStateOf(false)
         private set
 
     val level: Int get() = 1 + lines / BLOCKS_LINES_PER_LEVEL
@@ -188,17 +180,9 @@ class BlocksGameState(
         lines = 0
         pieceCount = 0
         clearingRows = emptyList()
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
         spawn()
     }
-
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false }
 
     /** True while completed rows are lit, which holds the board still until they are taken out. */
     val isClearing get() = clearingRows.isNotEmpty()

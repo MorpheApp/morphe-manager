@@ -18,7 +18,6 @@ import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -427,21 +426,16 @@ private fun IconEditor(
     val selectImage = stringResource(R.string.adaptive_icon_select_image)
     val shape = RoundedCornerShape(Defaults.CornerLargeIncreased)
 
-    val input = if (foreground != null) {
-        Modifier.imageTransformGestures(
-            transform = transform,
-            scaleRange = AdaptiveIconConfig.MIN_SCALE..maxScale,
-            onTransformChange = onTransformChange,
-            onGestureChange = { isGesturing.value = it }
-        )
-    } else {
-        Modifier.clickable(
-            interactionSource = null,
-            indication = shapedIndication(shape),
-            onClickLabel = selectImage,
-            onClick = onSelectImage
-        )
-    }
+    val input = Modifier.imageEditorInput(
+        hasImage = foreground != null,
+        transform = transform,
+        scaleRange = AdaptiveIconConfig.MIN_SCALE..maxScale,
+        shape = shape,
+        selectLabel = selectImage,
+        onTransformChange = onTransformChange,
+        onGestureChange = { isGesturing.value = it },
+        onSelectImage = onSelectImage
+    )
 
     Box(
         modifier = modifier

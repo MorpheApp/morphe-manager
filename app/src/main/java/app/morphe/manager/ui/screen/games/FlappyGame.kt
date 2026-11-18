@@ -55,20 +55,12 @@ data class FlappyPipe(
 class FlappyGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     var birdY by mutableFloatStateOf(0.45f)
         private set
     var velocity by mutableFloatStateOf(0f)
         private set
     var pipes by mutableStateOf<List<FlappyPipe>>(emptyList())
-        private set
-    override val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
-    override var isPaused by mutableStateOf(false)
         private set
 
     private var lastTickMs = 0L
@@ -125,17 +117,14 @@ class FlappyGameState(
         birdY = 0.45f
         velocity = 0f
         pipes = emptyList()
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
         lastTickMs = 0L
     }
 
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false; lastTickMs = 0L }
+    override fun resume() {
+        super.resume()
+        lastTickMs = 0L
+    }
 }
 
 @Composable

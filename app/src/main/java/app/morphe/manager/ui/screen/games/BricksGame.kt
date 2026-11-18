@@ -65,7 +65,7 @@ private const val WAVE_BONUS = 50
 class BricksGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     var paddleX by mutableFloatStateOf(0.5f)
         private set
     var ballX by mutableFloatStateOf(0.5f)
@@ -81,14 +81,6 @@ class BricksGameState(
         get() = listOf(GameStat(R.string.mini_game_lives, lives, of = BRICKS_LIVES))
 
     var isLaunched by mutableStateOf(false)
-        private set
-    override val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
-    override var isPaused by mutableStateOf(false)
         private set
 
     private var velocityX = 0f
@@ -139,18 +131,15 @@ class BricksGameState(
         bricks = fullWave()
         lives = BRICKS_LIVES
         speed = BALL_SPEED_START
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
         lastTickMs = 0L
         resetBall()
     }
 
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false; lastTickMs = 0L }
+    override fun resume() {
+        super.resume()
+        lastTickMs = 0L
+    }
 
     // Bricks are a flat grid, so the ball's own position tells which one it is inside
     private fun hitBrick(prevY: Float) {

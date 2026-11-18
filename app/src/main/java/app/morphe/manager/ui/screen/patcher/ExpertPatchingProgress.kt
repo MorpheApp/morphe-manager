@@ -366,17 +366,6 @@ internal class LogItemAccumulator(
 }
 
 /**
- * Converts the full raw log list into display [LogItem]s in a single stateful pass.
- *
- * Lines that carry metadata for the banner/summary cards (Runtime, heap limit,
- * heap-after-patching) are consumed and never emitted as plain [LogItem.Entry]s.
- */
-internal fun List<Pair<LogLevel, String>>.toLogItems(): List<LogItem> {
-    val accumulator = LogItemAccumulator()
-    return accumulator.appendAll(this).toList()
-}
-
-/**
  * Expert mode patching screen.
  *
  * Shows a horizontal linear progress bar, step pipeline, and real-time log

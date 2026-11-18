@@ -39,8 +39,6 @@ import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.*
 import io.ktor.client.plugins.ResponseException
-import io.ktor.http.Url
-import io.ktor.http.hostWithPortIfSpecified
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.mutate
 import kotlinx.collections.immutable.persistentMapOf
@@ -1148,15 +1146,15 @@ class PatchBundleRepository(
         enqueueLocalImport()
         localImportMutex.withLock {
             val baseProcessed = localImportBaseSteps()
+            // Every step reports against the same place in the queue, under the name read so far
+            fun reportProgress(offset: Int, phase: BundleImportPhase, bytesRead: Long = 0L, bytesTotal: Long? = null) =
+                setLocalImportProgress(baseProcessed, offset, displayName, phase, bytesRead, bytesTotal)
+            val reportProcessing = { read: Long, total: Long? ->
+                reportProgress(1, BundleImportPhase.Processing, read, total)
+            }
+
             try {
-                setLocalImportProgress(
-                    baseProcessed = baseProcessed,
-                    offset = 0,
-                    displayName = null,
-                    phase = BundleImportPhase.Downloading,
-                    bytesRead = 0L,
-                    bytesTotal = null,
-                )
+                reportProgress(0, BundleImportPhase.Downloading)
 
                 val tempFile = withContext(Dispatchers.IO) {
                     File.createTempFile("local_bundle", ".jar", app.cacheDir)
@@ -1173,26 +1171,12 @@ class PatchBundleRepository(
                                             else -> runCatching { input.available().takeIf { it > 0 }?.toLong() }.getOrNull()
                                         }
                                     }
-                                    setLocalImportProgress(
-                                        baseProcessed = baseProcessed,
-                                        offset = 0,
-                                        displayName = displayName,
-                                        phase = BundleImportPhase.Downloading,
-                                        bytesRead = 0L,
-                                        bytesTotal = copyTotal,
-                                    )
+                                    reportProgress(0, BundleImportPhase.Downloading, bytesTotal = copyTotal)
 
                                     sha256Of(input) { buffer, read ->
                                         output.write(buffer, 0, read)
                                         copyRead += read
-                                        setLocalImportProgress(
-                                            baseProcessed = baseProcessed,
-                                            offset = 0,
-                                            displayName = displayName,
-                                            phase = BundleImportPhase.Downloading,
-                                            bytesRead = copyRead,
-                                            bytesTotal = copyTotal,
-                                        )
+                                        reportProgress(0, BundleImportPhase.Downloading, copyRead, copyTotal)
                                     }
                                 }
                             }
@@ -1214,14 +1198,7 @@ class PatchBundleRepository(
                     displayName = (manifestName ?: existingProps?.name).orEmpty()
 
                     val replaceTotal = tempFile.length().takeIf { it > 0L } ?: copyTotal
-                    setLocalImportProgress(
-                        baseProcessed = baseProcessed,
-                        offset = 1,
-                        displayName = displayName,
-                        phase = BundleImportPhase.Processing,
-                        bytesRead = 0L,
-                        bytesTotal = replaceTotal,
-                    )
+                    reportProgress(1, BundleImportPhase.Processing, bytesTotal = replaceTotal)
 
                     // Updating a source keeps the name it is listed under: the file it points at
                     // changed, the source did not, and renaming stays a separate action
@@ -1238,32 +1215,16 @@ class PatchBundleRepository(
                     try {
                         val moved = localBundle.replaceFromTempFile(
                             tempFile,
-                            totalBytes = replaceTotal
-                        ) { read, total ->
-                            setLocalImportProgress(
-                                baseProcessed = baseProcessed,
-                                offset = 1,
-                                displayName = displayName,
-                                phase = BundleImportPhase.Processing,
-                                bytesRead = read,
-                                bytesTotal = total,
-                            )
-                        }
+                            totalBytes = replaceTotal,
+                            onProgress = reportProcessing
+                        )
                         if (!moved) {
                             tempFile.inputStream().use { patches ->
                                 localBundle.replace(
                                     patches,
-                                    totalBytes = replaceTotal
-                                ) { read, total ->
-                                    setLocalImportProgress(
-                                        baseProcessed = baseProcessed,
-                                        offset = 1,
-                                        displayName = displayName,
-                                        phase = BundleImportPhase.Processing,
-                                        bytesRead = read,
-                                        bytesTotal = total,
-                                    )
-                                }
+                                    totalBytes = replaceTotal,
+                                    onProgress = reportProcessing
+                                )
                             }
                         }
                         importedUid = uid
@@ -1279,23 +1240,9 @@ class PatchBundleRepository(
                 } finally {
                     tempFile.delete()
                 }
-                setLocalImportProgress(
-                    baseProcessed = baseProcessed,
-                    offset = LOCAL_IMPORT_STEPS - 1,
-                    displayName = displayName,
-                    phase = BundleImportPhase.Finalizing,
-                    bytesRead = 0L,
-                    bytesTotal = null,
-                )
+                reportProgress(LOCAL_IMPORT_STEPS - 1, BundleImportPhase.Finalizing)
                 dispatchAction(if (targetUid != null) "Replace bundle" else "Add bundle") { doReload() }
-                setLocalImportProgress(
-                    baseProcessed = baseProcessed,
-                    offset = LOCAL_IMPORT_STEPS,
-                    displayName = displayName,
-                    phase = BundleImportPhase.Finalizing,
-                    bytesRead = 0L,
-                    bytesTotal = null,
-                )
+                reportProgress(LOCAL_IMPORT_STEPS, BundleImportPhase.Finalizing)
             } finally {
                 completeLocalImport()
             }
@@ -1446,12 +1393,12 @@ class PatchBundleRepository(
      */
     fun typedRemoteLink(src: RemotePatchBundle): String =
         RemotePatchBundle.inferPageUrlFromEndpoint(src.endpoint)
-            ?.takeIf { runCatching { normalizeRemoteBundleUrl(it) }.getOrNull() == src.endpoint }
+            ?.takeIf { runCatching { SourceUrl.normalizeBundleUrl(it) }.getOrNull() == src.endpoint }
             ?: src.endpoint
 
     private fun checkRemoteUrl(url: String, takenKeys: Set<String>): RemoteUrlCheck {
         val endpoint = try {
-            normalizeRemoteBundleUrl(url)
+            SourceUrl.normalizeBundleUrl(url)
         } catch (_: IllegalArgumentException) {
             return RemoteUrlCheck.Rejected(RemoteSourceRejection.Invalid)
         }
@@ -1482,7 +1429,7 @@ class PatchBundleRepository(
 
     private fun RemotePatchBundle.sourceKeys(): Set<String> = buildSet {
         add(endpoint.lowercase(Locale.US))
-        if (this@sourceKeys is APIPatchBundle) toBlocklistKey(normalizeRemoteBundleUrl(SOURCE_REPO_URL))?.let(::add)
+        if (this@sourceKeys is APIPatchBundle) toBlocklistKey(SourceUrl.normalizeBundleUrl(SOURCE_REPO_URL))?.let(::add)
     }
 
     /** The source [url] would duplicate, by the same rule [createRemotes] turns it down with. */
@@ -1581,156 +1528,6 @@ class PatchBundleRepository(
     private fun toBlocklistKey(normalizedUrl: String): String? =
         SourceUrl.parse(normalizedUrl)?.repositoryKey?.lowercase(Locale.US)
 
-    fun normalizeRemoteBundleUrl(input: String): String {
-        // A link is usually pasted without its scheme, and every host here serves https
-        val trimmed = input.trim().let { if ("://" in it) it else "https://$it" }
-        val parsed = try {
-            Url(trimmed)
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Invalid bundle URL: ${e.message ?: trimmed}")
-        }
-
-        val host = parsed.host
-        val pathSegments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
-
-        // Handle GitHub repository URLs
-        if (host.equals(GITHUB_HOST, ignoreCase = true)) {
-            if (pathSegments.size < 2) {
-                throw IllegalArgumentException("Invalid GitHub repository URL")
-            }
-
-            // Check if it's a pull request URL
-            if (pathSegments.size >= 3 && pathSegments[2] == "pull") {
-                val scheme = if (parsed.protocol.name.equals("https", ignoreCase = true)) "https" else "http"
-                val basePath = "/" + pathSegments.joinToString("/")
-                val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-                return "$scheme://$host$basePath$query"
-            }
-
-            // Transform GitHub repository URL to raw.githubusercontent.com
-            val owner = pathSegments[0]
-            val repo = pathSegments[1]
-
-            // Determine branch and additional path
-            val branch = when {
-                // URL format: github.com/owner/repo/tree/branch/path...
-                pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
-                    val branchSegments = pathSegments.drop(3)
-                    // Find where the branch name ends (could be multi-segment like "refs/heads/main")
-                    branchSegments.takeWhile { !it.endsWith(".$JSON_EXTENSION") }.joinToString("/")
-                }
-                // URL format: github.com/owner/repo/blob/branch/path...
-                pathSegments.size >= 4 && pathSegments[2] == "blob" -> {
-                    pathSegments[3]
-                }
-                // Default to the stable branch
-                else -> BRANCH_STABLE
-            }
-
-            // Get the remaining path after branch (if any)
-            val remainingPath = when {
-                pathSegments.size >= 4 && pathSegments[2] == "tree" -> {
-                    // For tree URLs, get everything after the branch
-                    val branchSegmentCount = branch.split("/").size
-                    pathSegments.drop(3 + branchSegmentCount).joinToString("/")
-                }
-                pathSegments.size >= 5 && pathSegments[2] == "blob" -> {
-                    // For blob URLs, get everything after the branch
-                    pathSegments.drop(4).joinToString("/")
-                }
-                pathSegments.size >= 3 -> {
-                    // Direct path after repo (e.g., github.com/owner/repo/legacy)
-                    pathSegments.drop(2).joinToString("/")
-                }
-                else -> ""
-            }
-
-            // Build the final path
-            val finalPath = buildString {
-                append("/$owner/$repo/$branch")
-                if (remainingPath.isNotEmpty()) {
-                    append("/$remainingPath")
-                    // Add the default bundle file only if the path doesn't already end with .json
-                    if (!remainingPath.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
-                        append("/$DEFAULT_BUNDLE_FILE")
-                    }
-                } else {
-                    append("/$DEFAULT_BUNDLE_FILE")
-                }
-            }
-
-            return "https://$GITHUB_RAW_HOST$finalPath"
-        }
-
-        // Handle GitLab repository URLs
-        // Accepts short form: gitlab.com/owner/repo
-        // Or full raw URL:    gitlab.com/owner/repo/-/raw/branch/patches-bundle.json
-        if (host.equals(GITLAB_HOST, ignoreCase = true)) {
-            if (pathSegments.size < 2) {
-                throw IllegalArgumentException("Invalid GitLab repository URL")
-            }
-
-            val owner = pathSegments[0]
-            val repo = pathSegments[1]
-
-            // Check if this is already a raw URL: owner/repo/-/raw/branch/path
-            val rawIndex = pathSegments.indexOf("raw")
-            if (rawIndex >= 2 && pathSegments.getOrNull(rawIndex - 1) == "-") {
-                // Already a raw URL - normalize it
-                val normalizedPath = "/" + pathSegments.joinToString("/")
-                val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
-                if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
-                    throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
-                }
-                val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-                return "https://$GITLAB_HOST$normalizedPath$query"
-            }
-
-            // Determine branch from GitLab UI URLs (/-/tree/branch or /-/blob/branch)
-            val treeIndex = pathSegments.indexOf("tree")
-            val blobIndex = pathSegments.indexOf("blob")
-            val branch = when {
-                treeIndex >= 2 && pathSegments.getOrNull(treeIndex - 1) == "-" ->
-                    pathSegments.getOrNull(treeIndex + 1) ?: BRANCH_STABLE
-                blobIndex >= 2 && pathSegments.getOrNull(blobIndex - 1) == "-" ->
-                    pathSegments.getOrNull(blobIndex + 1) ?: BRANCH_STABLE
-                else -> BRANCH_STABLE
-            }
-
-            return "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$DEFAULT_BUNDLE_FILE"
-        }
-
-        // Handle raw.githubusercontent.com URLs (legacy support)
-        if (host.equals(GITHUB_RAW_HOST, ignoreCase = true)) {
-            if (pathSegments.size < 3) {
-                throw IllegalArgumentException("Invalid raw GitHub URL")
-            }
-
-            val normalizedPath = "/" + pathSegments.joinToString("/")
-            val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
-
-            if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
-                throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
-            }
-
-            val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-            return "https://$host$normalizedPath$query"
-        }
-
-        // Handle direct JSON URLs from other hosts
-        val normalizedPath = "/" + pathSegments.joinToString("/")
-        val pathNoQuery = normalizedPath.substringBefore('?').substringBefore('#')
-
-        if (!pathNoQuery.endsWith(".$JSON_EXTENSION", ignoreCase = true)) {
-            throw IllegalArgumentException("Patch bundle URL must point to a .json file.")
-        }
-
-        val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-        // Rebuilt from the host and port rather than the host alone, so that a bundle served on a
-        // custom port is not silently requested on the protocol default one
-        return "https://${parsed.hostWithPortIfSpecified}$normalizedPath$query"
-    }
-
     /** Returns true if [uid] corresponds to a currently loaded bundle. */
     fun isUidLoaded(uid: Int): Boolean =
         (store.state.value as? BundleState.Ready)?.sources?.containsKey(uid) == true
@@ -1745,16 +1542,16 @@ class PatchBundleRepository(
 
     /**
      * Returns the current UID of the loaded bundle whose endpoint matches [endpoint], or null
-     * if no such bundle is loaded. Uses [normalizeRemoteBundleUrl] for comparison so that
+     * if no such bundle is loaded. Uses [SourceUrl.normalizeBundleUrl] for comparison so that
      * GitHub shorthand and raw URLs for the same repo are treated as equal.
      */
     fun resolveUidForEndpoint(endpoint: String): Int? {
-        val normalizedInput = runCatching { normalizeRemoteBundleUrl(endpoint) }
+        val normalizedInput = runCatching { SourceUrl.normalizeBundleUrl(endpoint) }
             .getOrElse { endpoint.lowercase(Locale.US) }
         return (store.state.value as? BundleState.Ready)?.sources?.entries
             ?.firstOrNull { (_, src) ->
                 (src as? RemotePatchBundle)?.let { bundle ->
-                    runCatching { normalizeRemoteBundleUrl(bundle.endpoint) }
+                    runCatching { SourceUrl.normalizeBundleUrl(bundle.endpoint) }
                         .getOrElse { bundle.endpoint.lowercase(Locale.US) } == normalizedInput
                 } == true
             }?.key
@@ -2311,7 +2108,7 @@ class PatchBundleRepository(
             val ready = state as? BundleState.Ready ?: return@dispatchAction state
 
             val incomingEndpoints = snapshots
-                .mapNotNull { runCatching { normalizeRemoteBundleUrl(it.source) }.getOrNull() }
+                .mapNotNull { runCatching { SourceUrl.normalizeBundleUrl(it.source) }.getOrNull() }
                 .map { it.lowercase(Locale.US) }
                 .toSet()
 
@@ -2359,7 +2156,7 @@ class PatchBundleRepository(
             // Replace mode also reconciles the enabled toggle; Merge preserves the local state.
             if (mode == ImportMode.Replace) {
                 val snapshotByEndpoint = snapshots.mapNotNull { snapshot ->
-                    runCatching { normalizeRemoteBundleUrl(snapshot.source) }.getOrNull()
+                    runCatching { SourceUrl.normalizeBundleUrl(snapshot.source) }.getOrNull()
                         ?.lowercase(Locale.US)
                         ?.let { it to snapshot }
                 }.toMap()
@@ -2383,7 +2180,7 @@ class PatchBundleRepository(
 
             snapshots.forEach { snapshot ->
                 val normalizedUrl = runCatching {
-                    normalizeRemoteBundleUrl(snapshot.source)
+                    SourceUrl.normalizeBundleUrl(snapshot.source)
                 }.getOrNull() ?: return@forEach
 
                 if (!knownEndpoints.add(normalizedUrl.lowercase(Locale.US))) return@forEach
@@ -2429,7 +2226,7 @@ class PatchBundleRepository(
                                 (bundle.enabled || bundle.state is PatchBundleSource.State.Missing) &&
                                 snapshots.any { s ->
                                     bundle.endpoint.equals(
-                                        runCatching { normalizeRemoteBundleUrl(s.source) }.getOrNull(),
+                                        runCatching { SourceUrl.normalizeBundleUrl(s.source) }.getOrNull(),
                                         ignoreCase = true
                                     )
                                 }

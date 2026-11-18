@@ -30,34 +30,12 @@ class APIFailure(error: Throwable, body: String?) : Exception(body ?: error.mess
 
 inline fun <T, R> APIResponse<T>.fold(
     success: (T) -> R,
-    error: (APIError) -> R,
-    failure: (APIFailure) -> R
-): R {
-    return when (this) {
-        is APIResponse.Success -> success(this.data)
-        is APIResponse.Error -> error(this.error)
-        is APIResponse.Failure -> failure(this.error)
-    }
-}
-
-inline fun <T, R> APIResponse<T>.fold(
-    success: (T) -> R,
     fail: (Exception) -> R,
 ): R {
     return when (this) {
         is APIResponse.Success -> success(data)
         is APIResponse.Error -> fail(error)
         is APIResponse.Failure -> fail(error)
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-inline fun <T, R> APIResponse<T>.transform(block: (T) -> R): APIResponse<R> {
-    return if (this !is APIResponse.Success) {
-        // Error and Failure do not use the generic value
-        this as APIResponse<R>
-    } else {
-        APIResponse.Success(block(data))
     }
 }
 
@@ -73,24 +51,4 @@ inline fun <T> APIResponse<T>.getOrNull(): T? {
         success = { it },
         fail = { null }
     )
-}
-
-@Suppress("UNCHECKED_CAST")
-inline fun <T, R> APIResponse<T>.chain(block: (T) -> APIResponse<R>): APIResponse<R> {
-    return if (this !is APIResponse.Success) {
-        // Error and Failure do not use the generic value
-        this as APIResponse<R>
-    } else {
-        block(data)
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-inline fun <T, R> APIResponse<T>.chain(secondary: APIResponse<R>): APIResponse<R> {
-    return if (secondary is APIResponse.Success) {
-        secondary
-    } else {
-        // Error and Failure do not use the generic value
-        this as APIResponse<R>
-    }
 }

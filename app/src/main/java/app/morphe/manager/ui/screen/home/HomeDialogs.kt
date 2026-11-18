@@ -753,8 +753,7 @@ fun DialogHostScope.DeepLinkAddSourceDialog(
     val bringsAppBack = scope is SourceScope.App && isAdded
     // Links reach here for a repository only, which reads as owner/repo
     val repository = remoteLinkTitle(url)
-    val patchBundleRepository: PatchBundleRepository = koinInject()
-    val endpoint = remember(url) { runCatching { patchBundleRepository.normalizeRemoteBundleUrl(url) }.getOrNull() }
+    val endpoint = remember(url) { runCatching { SourceUrl.normalizeBundleUrl(url) }.getOrNull() }
     // The picture a source ships beside its bundle, as an added source shows it
     val bundlePicture = endpoint?.let(::bundleAvatarUrl)
 

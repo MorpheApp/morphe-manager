@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import app.morphe.manager.ui.theme.isDarkTheme
@@ -44,12 +43,10 @@ fun SnowBackground(
 ) {
     val isDarkTheme = isDarkTheme()
     val snowColor = if (isDarkTheme) Color.White else Color(0xFF4A5F7A)
-    val context = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.2f,
-        context = context
+        sensitivity = 0.2f
     )
 
     // Create cached snowflake bitmaps with different detail levels

@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.PI
@@ -45,12 +44,10 @@ fun HalloweenBackground(
     val moonColor = if (isDarkTheme) Color(0xFFFFCC80) else Color(0xFFFFA726)
     val moonAlpha = if (isDarkTheme) 0.5f else 0.4f
     val lanternAlpha = if (isDarkTheme) 0.35f else 0.3f
-    val context = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.2f,
-        context = context
+        sensitivity = 0.2f
     )
 
     // Sorted far to close once, so nearer bats pass in front without a sort every frame

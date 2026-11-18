@@ -126,6 +126,39 @@ interface MiniGameStateBase {
 }
 
 /**
+ * A game whose round starts with the player's first move and runs until it is lost. Holds the
+ * started, over and paused flags such a round moves through, while the game keeps its own board
+ * and resets it in [restart] beside [resetRound].
+ */
+@Stable
+abstract class RoundGameState(
+    initialHighScore: Int,
+    onHighScoreUpdated: (Int) -> Unit
+) : MiniGameStateBase {
+    final override val points = GameScore(initialHighScore, onHighScoreUpdated)
+    final override val haptics = GameHaptics()
+    final override var isGameOver by mutableStateOf(false)
+        protected set
+    var isStarted by mutableStateOf(false)
+        protected set
+    final override var isPaused by mutableStateOf(false)
+        private set
+
+    final override val isPlaying get() = isStarted && !isGameOver && !isPaused
+
+    final override fun pause() { if (isStarted && !isGameOver) isPaused = true }
+    override fun resume() { isPaused = false }
+
+    /** Scores from zero again with a round that has not started yet, part of every [restart]. */
+    protected fun resetRound() {
+        points.reset()
+        isGameOver = false
+        isStarted = false
+        isPaused = false
+    }
+}
+
+/**
  * A count a game keeps besides its score, such as the lines Blocks has cleared.
  *
  * @param of The most [value] can reach, such as the mines a Miner field holds, shown after it.
