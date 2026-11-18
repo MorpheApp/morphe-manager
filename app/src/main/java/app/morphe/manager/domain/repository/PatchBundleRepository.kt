@@ -848,6 +848,8 @@ class PatchBundleRepository(
         val force: Boolean = false,
         val showMessage: Boolean = false,
         val allowUnsafeNetwork: Boolean = false,
+        // False for a check that only speaks up once something arrives, and ends without a word
+        // when nothing was new
         val reportUpToDate: Boolean = true,
         // The check opening Morphe runs, which the auto updates setting holds to less
         val onLaunch: Boolean = false,
@@ -1836,9 +1838,11 @@ class PatchBundleRepository(
         // queue, so it does not wait out the disabled sources being read in the meantime
         awaitReady()
         startRemoteUpdateJob(
+            // Nobody asked for it, so it only tells what it brought or what went wrong
             UpdateRequest(
                 target = UpdateTarget(allEnabled = true),
                 allowUnsafeNetwork = allowUnsafeNetwork,
+                reportUpToDate = false,
                 onLaunch = true,
             )
         )
@@ -1994,11 +1998,8 @@ class PatchBundleRepository(
                 // The versions alone cost a few kilobytes, so what is waiting is still known
                 val available = availableUpdates(targets).associate { it.bundleUid to it.version }
                 pendingUpdatesFlow.update { it - targets.uids() + available }
-                when {
-                    available.isNotEmpty() -> showFinished(BundleUpdateResult.UpdatesAvailable, targets.size)
-                    request.reportUpToDate -> showFinished(BundleUpdateResult.NoUpdates, targets.size)
-                    else -> bundleUpdateProgressFlow.value = null
-                }
+                if (available.isNotEmpty()) showFinished(BundleUpdateResult.UpdatesAvailable, targets.size)
+                else showUpToDate(request, targets.size)
                 return@coroutineScope
             }
 
@@ -2009,6 +2010,7 @@ class PatchBundleRepository(
                 completed = 0,
                 phase = BundleUpdatePhase.Checking,
                 result = BundleUpdateResult.None,
+                quiet = !request.reportUpToDate,
             )
 
             val bundleBytes = ConcurrentHashMap<Int, Pair<Long, Long?>>()
@@ -2097,11 +2099,7 @@ class PatchBundleRepository(
 
             if (updated.isEmpty()) {
                 if (showMessage) messages.showIfInForeground(R.string.sources_update_unavailable)
-                if (!request.reportUpToDate) {
-                    bundleUpdateProgressFlow.value = null
-                    return@coroutineScope
-                }
-                showFinished(BundleUpdateResult.NoUpdates, targets.size)
+                showUpToDate(request, targets.size)
                 return@coroutineScope
             }
 
@@ -2132,6 +2130,12 @@ class PatchBundleRepository(
         } finally {
             clearActiveUpdateState()
         }
+    }
+
+    /** Ends a check of [count] sources that found nothing new, said only by a check that reports it. */
+    private fun showUpToDate(request: UpdateRequest, count: Int) {
+        if (request.reportUpToDate) showFinished(BundleUpdateResult.NoUpdates, count)
+        else bundleUpdateProgressFlow.value = null
     }
 
     /** Shows how an update of [count] sources ended, until the next one starts or for a few seconds. */
@@ -2216,6 +2220,8 @@ class PatchBundleRepository(
         val bytesRead: Long = 0L,
         val bytesTotal: Long? = null,
         val result: BundleUpdateResult = BundleUpdateResult.None, // Morphe
+        /** Whether the update says nothing while it only checks, as nothing new may turn up. */
+        val quiet: Boolean = false,
     )
 
     enum class BundleUpdatePhase {

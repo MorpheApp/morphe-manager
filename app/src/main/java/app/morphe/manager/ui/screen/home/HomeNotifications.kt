@@ -120,8 +120,11 @@ data class HomeNotificationsUi(
  * @param snoozable Whether a swipe may put it away. Alerts that are the only way back to running
  *   work, or that block patching outright, stay put.
  * @param revision Changes when the alert has something new to say, which brings a snoozed one back.
- * @param passing Whether it only reports on something under way, which a swipe puts away for good
- *   rather than behind the bell, since brought back it would have nothing left to say.
+ * @param passing Whether it only reports on something under way, shown on every page. Once that
+ *   has ended a swipe puts it away for good rather than behind the bell, since brought back it
+ *   would have nothing left to say.
+ * @param ongoing Whether what a [passing] alert reports on is still running, so a swipe puts it
+ *   behind the bell like any other until it ends.
  * @param remembered Whether it stays behind the bell across launches until its [revision] changes,
  *   for an alert whose revision says what it is about. Any other is snoozed for the session.
  */
@@ -131,6 +134,7 @@ internal class HomeAlert(
     val snoozable: Boolean = true,
     val revision: String = "",
     val passing: Boolean = false,
+    val ongoing: Boolean = false,
     val remembered: Boolean = false,
     val card: @Composable () -> Unit
 )
@@ -150,14 +154,17 @@ class HomeAlerts internal constructor(
         snoozed[alert.key] = alert.revision
     }
 
+    /** Whether a swipe puts it away for good rather than behind the bell. */
+    private val HomeAlert.ended get() = passing && !ongoing
+
     /** Alerts still up that were swiped aside behind the bell. */
     val snoozedCount: Int
-        get() = all.count { it.visible && !it.passing && it.isSnoozed() }
+        get() = all.count { it.visible && !it.ended && it.isSnoozed() }
 
-    /** Brings back what was swiped aside, but not the passing alerts, with nothing left to say. */
+    /** Brings back what was swiped aside, but not the ended passing alerts, with nothing left to say. */
     fun restoreSnoozed() {
-        val passingKeys = all.filter { it.passing }.mapTo(HashSet()) { it.key }
-        snoozed.keys.retainAll(passingKeys)
+        val endedKeys = all.filter { it.ended }.mapTo(HashSet()) { it.key }
+        snoozed.keys.retainAll(endedKeys)
     }
 }
 
@@ -472,12 +479,13 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
 
     return listOf(
         // Leads while it lasts, so the progress of a running update stays in sight until swiped
-        // aside, and how the update ended brings it back
+        // aside behind the bell, and how the update ended brings it back
         HomeAlert(
             key = "bundle_update",
             visible = bundleUpdate.visible,
             revision = bundleUpdate.status.name,
-            passing = true
+            passing = true,
+            ongoing = bundleUpdate.status == BundleUpdateStatus.Updating
         ) {
             BundleUpdateCard(status = bundleUpdate.status, progress = bundleUpdate.progress)
         },
@@ -761,7 +769,7 @@ private val BundleUpdateStatus.tone: SemanticTone
     get() = when (this) {
         BundleUpdateStatus.Updating -> SemanticTone.Neutral
         BundleUpdateStatus.Success -> SemanticTone.Success
-        BundleUpdateStatus.Error -> SemanticTone.Error
+        BundleUpdateStatus.Offline, BundleUpdateStatus.Error -> SemanticTone.Error
     }
 
 /** The card of the bundle update, from its progress while it runs to how it ended. */
@@ -787,7 +795,7 @@ private fun BundleUpdateCard(
         when (status) {
             BundleUpdateStatus.Updating -> R.string.home_updating_sources
             BundleUpdateStatus.Success -> R.string.home_update_success
-            BundleUpdateStatus.Error -> R.string.home_update_error
+            BundleUpdateStatus.Offline, BundleUpdateStatus.Error -> R.string.home_update_error
         }
     )
 
@@ -804,6 +812,7 @@ private fun BundleUpdateCard(
     val subtitle = when (status) {
         BundleUpdateStatus.Updating -> listOfNotNull(activeName, arrived).joinToString(DETAIL_SEPARATOR)
         BundleUpdateStatus.Success -> stringResource(R.string.home_update_success_subtitle)
+        BundleUpdateStatus.Offline -> stringResource(R.string.no_network_toast)
         BundleUpdateStatus.Error -> stringResource(R.string.home_update_error_subtitle)
     }
     val badge = when {
@@ -841,6 +850,7 @@ private fun BundleUpdateCard(
                         }
                     }
                     BundleUpdateStatus.Success -> StatusDisc(MaterialSymbols.Rounded.Check, SemanticTone.Success)
+                    BundleUpdateStatus.Offline -> StatusDisc(MaterialSymbols.Rounded.Cloud_off, SemanticTone.Error)
                     BundleUpdateStatus.Error -> StatusDisc(MaterialSymbols.Rounded.Warning, SemanticTone.Error)
                 }
             }
