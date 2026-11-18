@@ -65,6 +65,14 @@ if [ ! -f "$stock_apk" ]; then
   exit 0
 fi
 
+# An old module has no verified record, and a changed backup must not reach PackageManager.
+if [ ! -r "$module_dir/stock-integrity.sh" ] ||
+    ! . "$module_dir/stock-integrity.sh" || ! verify_stock_apks; then
+  log_msg "Skipping stock mount; reinstall the original app and module in Morphe"
+  sed -i 's|^description=.*|description=Not mounted at boot: stock verification failed. Reinstall the original app and module in Morphe|' "$module_dir/module.prop"
+  exit 0
+fi
+
 chcon u:object_r:apk_data_file:s0 "$stock_apk" 2>> "$log" || true
 
 if [ ! -f "$stock_paths" ]; then

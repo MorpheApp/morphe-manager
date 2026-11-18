@@ -877,7 +877,7 @@ class BatchPatchCoordinator(
             ?: item.version
             ?: patchedVersion
 
-        if (originalApkRepository.hasOriginal(item.packageName, version, file)) return
+        if (originalApkRepository.hasOriginal(item.packageName, version, file, forMount = item.useMount)) return
 
         runCatching {
             originalApkRepository.saveOriginalApk(

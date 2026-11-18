@@ -43,6 +43,16 @@ not_mounted() {
 
 base_path="$base_dir/$package_name.apk"
 
+verify_stock_backup() {
+  if [ ! -r "$module_dir/stock-integrity.sh" ] ||
+      ! . "$module_dir/stock-integrity.sh" || ! verify_stock_apks; then
+    # Morphe starts "watch" after it puts the patched mount in place. A failed watcher
+    # must not leave that mount behind without protection for the next framework restart.
+    [ "$1" != watch ] || clear_failed_watch_mounts
+    not_mounted "stock verification failed. Reinstall the original app and module in Morphe"
+  fi
+}
+
 resolve_apk_from_path() {
   path="$1"
   if [ -z "$path" ]; then
@@ -83,6 +93,66 @@ unmount_from_zygote_namespaces() {
   for zpid in $(pidof zygote64) $(pidof zygote); do
     lift_layers "/proc/$zpid/mountinfo" nsenter -t "$zpid" -m -- umount -l "$stock_path"
   done
+}
+
+# Only the visible, topmost layer at the installed APK path can safely be unmounted.
+# A different provider above a Morphe layer is left alone, rather than lifted by accident.
+is_visible_morphe_mount() {
+  awk -v target="$stock_path" -v module="${module_dir##*/}" -v pkg="$package_name" '
+    function decode(path) { gsub(/\\040/, " ", path); return path }
+    function owned(source, patched, stock) {
+      source = decode(source)
+      sub(/ \(deleted\)$/, "", source)
+      sub(/\/\/deleted$/, "", source)
+      patched = "/" module "/" pkg ".apk"
+      stock = "/" module "/" pkg "-stock.apk"
+      return substr(source, length(source) - length(patched) + 1) == patched ||
+             substr(source, length(source) - length(stock) + 1) == stock
+    }
+    decode($5) == target { sources[$1] = $4; parents[$2] = 1 }
+    END {
+      for (id in sources) {
+        if (id in parents) continue
+        visible++
+        ours = owned(sources[id])
+      }
+      exit !(visible == 1 && ours)
+    }
+  ' "$1" 2>/dev/null
+}
+
+lift_failed_watch_layers() {
+  failed_watch_table="$1"
+  shift
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    is_visible_morphe_mount "$failed_watch_table" || return 0
+    "$@" 2>/dev/null || {
+      log_msg "Could not lift the Morphe APK mount after watcher verification failed"
+      return 1
+    }
+  done
+}
+
+clear_failed_watch_mounts() {
+  # No retry loop: PackageManager already knows the path when Morphe starts its watcher.
+  failed_watch_paths="$(pm path "$package_name" 2>/dev/null | sed -n 's/^package://p')"
+  [ -n "$failed_watch_paths" ] ||
+    failed_watch_paths="$(cmd package path "$package_name" 2>/dev/null | sed -n 's/^package://p')"
+  stock_path="$(printf '%s\n' "$failed_watch_paths" | awk '/\/base\.apk$/ { print; exit }')"
+  [ -n "$stock_path" ] || stock_path="$(printf '%s\n' "$failed_watch_paths" | head -n 1)"
+  if [ -z "$stock_path" ] && [ -r "$module_dir/stock-paths.txt" ]; then
+    while IFS= read -r failed_watch_path; do
+      [ -f "$failed_watch_path" ] || continue
+      stock_path="$failed_watch_path"
+      break
+    done < "$module_dir/stock-paths.txt"
+  fi
+  [ -n "$stock_path" ] || return 0
+
+  for zpid in $(pidof zygote64) $(pidof zygote); do
+    lift_failed_watch_layers "/proc/$zpid/mountinfo" nsenter -t "$zpid" -m -- umount -l "$stock_path"
+  done
+  lift_failed_watch_layers /proc/self/mountinfo umount -l "$stock_path"
 }
 
 # Processes started before the mount, such as System UI, keep what their namespace held, and an
@@ -238,6 +308,7 @@ detach_from_play_store() {
 }
 
 mount_patched() {
+  verify_stock_backup
   log_msg "base_path: $base_path"
   log_msg "stock_path: $stock_path"
   log_msg "base_version: $version"
@@ -349,6 +420,7 @@ watch_framework_restarts() {
 
 case "$1" in
   watch)
+    verify_stock_backup watch
     find_stock
     watch_framework_restarts
     exit 0
@@ -358,6 +430,8 @@ case "$1" in
     exit 0
     ;;
 esac
+
+verify_stock_backup
 
 # Wait for the system to fully boot before proceeding.
 until [ "$(getprop sys.boot_completed)" = 1 ]; do sleep 3; done

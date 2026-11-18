@@ -7,6 +7,8 @@ package app.morphe.manager.domain.installer
 
 import android.app.Application
 import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Process
 import android.os.SystemClock
 import android.util.Log
@@ -18,12 +20,19 @@ import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.time.withTimeoutOrNull
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.nio.file.Files
+import java.security.MessageDigest
 import java.time.Duration
 import java.util.zip.ZipFile
 import kotlin.time.Duration.Companion.milliseconds
@@ -49,6 +58,7 @@ class RootInstaller(
     private var lastNoMountCheck = 0L
 
     private val _mountChanges = MutableSharedFlow<String>(extraBufferCapacity = 8)
+    private val moduleWriteMutex = Mutex()
 
     /** Package names whose mount or redirect was put in place or lifted, which no package broadcast reports. */
     val mountChanges = _mountChanges.asSharedFlow()
@@ -173,6 +183,7 @@ class RootInstaller(
 
     suspend fun mount(packageName: String) {
         withContext(Dispatchers.IO) {
+            verifyModuleStockCopies(packageName)
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
                 ?: throw Exception("Failed to load application info")
             val patchedAPK = resolvePatchedApkPath(packageName)
@@ -270,8 +281,9 @@ class RootInstaller(
      * A process killed during the slow copies leaves the previous module in place, still
      * matching what was recorded about it.
      *
-     * [stockAPK], an APK or a split archive, is only installed when the matching stock app is
-     * missing. The stock copy the module mounts at boot always comes from the installed APK.
+     * [stockAPK], an APK or a split archive, repairs missing, mismatched or unverifiable stock
+     * while preserving app data. Boot backups are created only from fully verified snapshots of
+     * the installed original APKs as seen by the root shell.
      */
     suspend fun install(
         patchedAPK: File,
@@ -282,6 +294,20 @@ class RootInstaller(
         onStage: (MountStage) -> Unit = {},
         onStaged: suspend () -> Unit = {}
     ) = withContext(Dispatchers.IO) {
+        moduleWriteMutex.withLock {
+            installVerifiedModule(patchedAPK, stockAPK, packageName, version, label, onStage, onStaged)
+        }
+    }
+
+    private suspend fun installVerifiedModule(
+        patchedAPK: File,
+        stockAPK: File?,
+        packageName: String,
+        version: String,
+        label: String,
+        onStage: (MountStage) -> Unit,
+        onStaged: suspend () -> Unit
+    ) {
         require(isValidPackageName(packageName)) { "Invalid package name: $packageName" }
 
         // Use new path for new installations
@@ -291,83 +317,112 @@ class RootInstaller(
         unmount(packageName)
         removeOtherRootInstalls(packageName)
 
-        var installedStockInfo = pm.getPackageInfo(packageName)
-
-        stockAPK?.let { stockApp ->
-            val stockInfo = readStockInfo(stockApp)
-                ?: error("Failed to get package info for stock app")
-            if (stockInfo.packageName != packageName) {
-                error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
+        val originalStockInfo = stockAPK?.let { stockApp ->
+            val stockInfo = readStockInfo(stockApp) ?: throw StockApkIntegrityException()
+            if (stockInfo.packageName != packageName || stockInfo.versionName != version) {
+                error("The original APK does not match $packageName v$version")
             }
+            stockInfo
+        }
+        val originalSigners = stockAPK?.let { stockApp ->
+            SplitApkInspector.withRepresentativeApk(stockApp, app.cacheDir) { apk ->
+                verifiedStockApkSigners(apk, Build.VERSION.SDK_INT)
+            }.takeIf { it.isNotEmpty() } ?: throw StockApkIntegrityException()
+        }
+        val originalRelease = originalStockInfo?.let { info ->
+            StockApkIdentity(info.packageName, pm.getVersionCode(info), info.versionName, null)
+        }
+        val snapshots = Files.createTempDirectory(app.cacheDir.toPath(), "root-stock-").toFile()
+        var stagedTargets = emptySet<String>()
+        var committed = false
+        try {
+            onStage(MountStage.COPYING)
+            var installedStockInfo: PackageInfo? = null
+            val stockCopies = ensureVerifiedInstalledStock(
+                canRestore = stockAPK != null,
+                capture = {
+                    installedStockInfo = pm.getPackageInfo(packageName)
+                    val info = installedStockInfo
+                    val installedRelease = info?.let {
+                        StockApkIdentity(it.packageName, pm.getVersionCode(it), it.versionName, null)
+                    }
+                    if (!canCaptureInstalledStockRelease(installedRelease, originalRelease)) null
+                    else captureVerifiedStockApks(packageName, version, info, originalSigners, modulePath, snapshots)
+                },
+                restore = {
+                    // A stale mounted or merged view is not promoted into a boot backup merely
+                    // because PackageManager's recorded version still matches the patched APK.
+                    onStage(MountStage.RESTORING_STOCK)
+                    installStockApp(checkNotNull(stockAPK), packageName) { it.isBuildOf(checkNotNull(originalStockInfo)) }
+                    onStage(MountStage.COPYING)
+                }
+            )
+            val installedStockPath = checkNotNull(installedStockInfo?.applicationInfo?.sourceDir)
+            val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
+            if (stockMountPaths.isEmpty()) throw StockApkIntegrityException()
+            val stockHashes = stockCopies.mapValues { (_, copy) -> copy.sha256 }
+            val stockSplitPaths = stockCopies.keys.drop(1).toSet()
 
-            if (installedStockInfo?.isBuildOf(stockInfo) != true) {
-                onStage(MountStage.RESTORING_STOCK)
-                installStockApp(stockApp, packageName) { it.isBuildOf(stockInfo) }
+            val placeholders = mapOf(
+                "__PKG_NAME__" to packageName,
+                "__MANAGER_PKG__" to app.packageName,
+                "__MODULE_ID__" to moduleId,
+                "__VERSION__" to version,
+                "__LABEL__" to label
+            )
+            val moduleFiles = MODULE_FILES.associateWith { file ->
+                // Version and label come from the APK, and the scripts run as root at every boot
+                val escape: (String) -> String =
+                    if (file in MODULE_SCRIPTS) { value -> value.shellQuote() } else { value -> value.singleLine() }
+                app.assets.open("root/$file").use { String(it.readBytes()) }
+                    .replace("\r\n", "\n")
+                    .replace("\r", "\n")
+                    .let { text -> placeholders.entries.fold(text) { acc, (key, value) -> acc.replace(key, escape(value)) } }
             }
+            val stockPathsFile = mapOf(STOCK_PATHS_FILE to stockMountPaths.joinToString("\n", postfix = "\n"))
+            val noMountFile = NO_MOUNT_MARKER to noMountMarker(prefs.noMountOnly.get())
+            val textFiles = (moduleFiles + stockPathsFile + noMountFile).mapKeys { (name, _) -> "$modulePath/$name" }
+            val patchedModuleApk = "$modulePath/$packageName.apk"
+            val integrityPath = "$modulePath/$STOCK_INTEGRITY_FILE"
+            stagedTargets = (textFiles.keys + stockCopies.keys + patchedModuleApk + integrityPath).toSet()
+            stageModuleFiles(modulePath, textFiles)
 
-            installedStockInfo = pm.getPackageInfo(packageName)
+            stockCopies.forEach { (target, copy) -> stageCopy(copy.file.absolutePath, target, "Verified stock copy is missing") }
+            stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
+
+            val apkPaths = listOf(patchedModuleApk) + stockCopies.keys
+            setStagedFilePermissions(
+                apkPaths = apkPaths,
+                scriptPaths = MODULE_SCRIPTS.map { "$modulePath/$it" }
+            )
+            stageModuleFiles(modulePath, mapOf(
+                integrityPath to stockApkHashManifest(stockHashes.mapKeys { (path, _) -> File(path).name })
+            ))
+            val commitFiles = (textFiles.keys + apkPaths + integrityPath).associateWith(::staged)
+            // Before persistence, and again with the moves: callbacks can take time and root
+            // namespaces may expose a different copy than the one the app just verified.
+            verifyStagedStockHashes(stockHashes)
+            onStaged()
+            val saved = execute(verifiedStockCommitCommand(commitFiles, stockHashes))
+            if (!saved.isSuccess) {
+                Log.w(TAG, "Stock module commit failed: ${saved.failureDetail()}")
+                throw StockApkIntegrityException()
+            }
+            committed = true
+
+            // Splits of the version staged before would not install beside this one.
+            val staleSplits = moduleStockSplits(packageName) - stockSplitPaths
+            if (staleSplits.isNotEmpty()) execute("rm -f ${staleSplits.joinToString(" ") { it.shellQuote() }}")
+        } finally {
+            snapshots.deleteRecursively()
+            if (!committed && stagedTargets.isNotEmpty()) {
+                // Only this writer's inactive staging files are reclaimed; never the previous
+                // module, installed app, retained originals, or app data.
+                withContext(NonCancellable) {
+                    execute("rm -f ${stagedTargets.joinToString(" ") { staged(it).shellQuote() }}")
+                }
+            }
         }
-
-        onStage(MountStage.COPYING)
-        val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
-        val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
-        val stockModuleApk = "$modulePath/$packageName-stock.apk"
-        // post-fs-data mounts this copy over the installed APK at boot, where one that differs fails
-        // PackageManager's certificate check and the app is removed
-        val stockModuleApkWritten = !installedStockPath.isNullOrBlank() && stockMountPaths.isNotEmpty()
-        // Kept for restoreFromModule alone, as the stock app installed again needs its splits too
-        val stockSplitApks = if (stockModuleApkWritten) {
-            installedStockInfo.applicationInfo?.splitSourceDirs.orEmpty()
-                .associateWith { "$modulePath/$packageName$STOCK_SPLIT_INFIX${File(it).name}" }
-        } else {
-            emptyMap()
-        }
-
-        val placeholders = mapOf(
-            "__PKG_NAME__" to packageName,
-            "__MANAGER_PKG__" to app.packageName,
-            "__MODULE_ID__" to moduleId,
-            "__VERSION__" to version,
-            "__LABEL__" to label
-        )
-        val moduleFiles = MODULE_FILES.associateWith { file ->
-            // Version and label come from the APK, and the scripts run as root at every boot
-            val escape: (String) -> String =
-                if (file in MODULE_SCRIPTS) { value -> value.shellQuote() } else { value -> value.singleLine() }
-            app.assets.open("root/$file").use { String(it.readBytes()) }
-                .replace("\r\n", "\n")
-                .replace("\r", "\n")
-                .let { text -> placeholders.entries.fold(text) { acc, (key, value) -> acc.replace(key, escape(value)) } }
-        }
-        val stockPathsFile = if (stockModuleApkWritten) {
-            mapOf(STOCK_PATHS_FILE to stockMountPaths.joinToString("\n", postfix = "\n"))
-        } else {
-            emptyMap()
-        }
-        val noMountFile = NO_MOUNT_MARKER to noMountMarker(prefs.noMountOnly.get())
-        val textFiles = (moduleFiles + stockPathsFile + noMountFile).mapKeys { (name, _) -> "$modulePath/$name" }
-        stageModuleFiles(modulePath, textFiles)
-
-        val patchedModuleApk = "$modulePath/$packageName.apk"
-        if (stockModuleApkWritten) {
-            stageCopy(installedStockPath, stockModuleApk, "Stock APK doesn't exist")
-        }
-        stockSplitApks.forEach { (source, target) -> stageCopy(source, target, "Stock split APK doesn't exist") }
-        stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
-
-        val apkPaths = listOfNotNull(patchedModuleApk, stockModuleApk.takeIf { stockModuleApkWritten }) +
-                stockSplitApks.values
-        setStagedFilePermissions(
-            apkPaths = apkPaths,
-            scriptPaths = MODULE_SCRIPTS.map { "$modulePath/$it" }
-        )
-
-        onStaged()
-        commitStaged(textFiles.keys + apkPaths)
-
-        // Splits of the version staged before would not install beside this one
-        val staleSplits = moduleStockSplits(packageName) - stockSplitApks.values.toSet()
-        if (staleSplits.isNotEmpty()) execute("rm -f ${staleSplits.joinToString(" ") { it.shellQuote() }}")
     }
 
     /** The split APKs of the stock app the module of [packageName] keeps beside its stock APK. */
@@ -377,9 +432,111 @@ class RootInstaller(
             .out.filter { it.isNotBlank() }
     }
 
-    /** The package info of a stock APK, or of the base module of a split archive. */
-    suspend fun readStockInfo(file: File): PackageInfo? =
+    /** The package info only once every original APK verifies as this device checks it. */
+    suspend fun readStockInfo(file: File): PackageInfo? = withContext(Dispatchers.IO) {
+        currentCoroutineContext().ensureActive()
+        val verified = isVerifiedStockArchive(file, Build.VERSION.SDK_INT, app.cacheDir)
+        currentCoroutineContext().ensureActive()
+        if (!verified) return@withContext null
         SplitApkInspector.withRepresentativeApk(file, app.cacheDir) { apk -> pm.getPackageInfo(apk) }
+    }
+
+    private data class StockCopy(val file: File, val sha256: String)
+
+    /**
+     * Reads what the root shell actually sees after unmount, into app-owned snapshots. A stale
+     * patched overlay or a merged original must never be used as the source of a boot backup.
+     */
+    private suspend fun captureVerifiedStockApks(
+        packageName: String,
+        version: String,
+        info: PackageInfo?,
+        originalSigners: Set<String>?,
+        modulePath: String,
+        directory: File
+    ): Map<String, StockCopy>? {
+        val stock = info?.takeIf { it.packageName == packageName && it.versionName == version } ?: return null
+        val source = stock.applicationInfo?.sourceDir?.takeIf { it.isNotBlank() } ?: return null
+        val recorded = pm.getPackageInfo(
+            packageName, PackageManager.GET_SIGNING_CERTIFICATES or PackageManager.GET_SIGNATURES
+        )?.takeIf { it.isBuildOf(stock) } ?: return null
+        val expectedSigners = recorded.currentSignerHashes()
+        if (expectedSigners.isEmpty() || originalSigners != null && originalSigners != expectedSigners) return null
+
+        val splitNames = stock.splitNames.orEmpty().asList()
+        val splitPaths = stock.applicationInfo?.splitSourceDirs.orEmpty().asList()
+        // A same-version update can still have changed its paths or split set between queries.
+        if (recorded.applicationInfo?.sourceDir != source ||
+            recorded.splitNames.orEmpty().asList() != splitNames ||
+            recorded.applicationInfo?.splitSourceDirs.orEmpty().asList() != splitPaths
+        ) return null
+        val sourceSplits = installedStockSourceSplits(source, splitNames, splitPaths) ?: return null
+        val sources = sourceSplits.mapValues { (path, splitName) ->
+            if (splitName == null) "$modulePath/$packageName-stock.apk"
+            else "$modulePath/$packageName$STOCK_SPLIT_INFIX${File(path).name}"
+        }
+        val copies = linkedMapOf<String, StockCopy>()
+        for ((index, entry) in sources.entries.withIndex()) {
+            currentCoroutineContext().ensureActive()
+            // Precreating the file in the app preserves its owner and SELinux label while root
+            // fills it. Merely reading sourceDir in the app can inspect a different namespace.
+            val copy = File.createTempFile("stock-$index-", ".apk", directory)
+            val copied = execute("cat ${entry.key.shellQuote()} > ${copy.absolutePath.shellQuote()}")
+            if (!copied.isSuccess) return null
+            val verified = verifiedStockSnapshot(copy, Build.VERSION.SDK_INT)
+            currentCoroutineContext().ensureActive()
+            if (verified == null) return null
+            if (verified.signers != expectedSigners) return null
+            val expectedSplit = sourceSplits.getValue(entry.key)
+            // versionName may be a resource reference. Android resolves it using this verified
+            // private APK's resources; no certificate metadata from the platform is trusted.
+            val identity = if (expectedSplit == null) {
+                val metadata = pm.getPackageInfo(copy) ?: return null
+                resolvedStockBaseIdentity(
+                    verified.identity, metadata.packageName, pm.getVersionCode(metadata), metadata.versionName
+                ) ?: return null
+            } else verified.identity
+            if (!matchesInstalledStockIdentity(
+                    identity, packageName, pm.getVersionCode(stock), version, expectedSplit
+                )) return null
+            copies[entry.value] = StockCopy(copy, verified.sha256)
+        }
+        return copies
+    }
+
+    /** The currently installed signers come from binder, never the APK at its mounted path. */
+    @Suppress("DEPRECATION")
+    private fun PackageInfo.currentSignerHashes(): Set<String> {
+        val current = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            signingInfo?.apkContentsSigners ?: signatures
+        } else signatures
+        return current.orEmpty().mapTo(mutableSetOf()) { signature ->
+            MessageDigest.getInstance("SHA-256").digest(signature.toByteArray())
+                .joinToString("") { "%02x".format(it.toInt() and 0xff) }
+        }
+    }
+
+    private suspend fun verifyStagedStockHashes(hashes: Map<String, String>) {
+        val checks = hashes.entries.joinToString("\n", postfix = "\n") { (path, hash) -> "$hash  ${staged(path)}" }
+        if (!execute("printf '%s' ${checks.shellQuote()} | sha256sum -c").isSuccess) {
+            throw StockApkIntegrityException()
+        }
+    }
+
+    /** Old modules without verified backups must be restaged before a new mount can expose them. */
+    private suspend fun verifyModuleStockCopies(packageName: String) {
+        val modulePath = "$MODULES_PATH/${moduleId(packageName)}"
+        val helper = "$modulePath/stock-integrity.sh".shellQuote()
+        val verified = execute(
+            "( module_dir=${modulePath.shellQuote()}; " +
+                    "package_name=${packageName.shellQuote()}; " +
+                    "log=${"$modulePath/log.txt".shellQuote()}; " +
+                    "[ -r $helper ] && . $helper && verify_stock_apks )"
+        )
+        if (!verified.isSuccess) {
+            error("The stock backup is not verified. Reinstall the original app and restage its Morphe module.")
+        }
+    }
 
     /**
      * Installs [apkFile] with root, recording Google Play Store as its install source when [asPlayStore].
@@ -459,11 +616,6 @@ class RootInstaller(
             .assertSuccess("Failed to copy the APK to $targetPath")
     }
 
-    /** Moves the staged files of [targetPaths] over them in a single call, so the switch is near instant. */
-    private suspend fun commitStaged(targetPaths: Collection<String>) {
-        execute(targetPaths.joinToString(" && ") { "mv -f ${staged(it).shellQuote()} ${it.shellQuote()}" })
-            .assertSuccess("Failed to put the module in place")
-    }
 
     /**
      * Installs the stock app from [stockApp], see [installStockApks]. A split archive is installed
@@ -510,7 +662,7 @@ class RootInstaller(
                     val name = File(path).name.shellQuote()
                     $$"""pm install-write -S "$(stat -c %s $$copy)" "$session" $$name $$copy"""
                 }
-                $$"""session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
+                $$"""session="$(pm install-create -r -d --user $$appUserId | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
             }
         )
 
@@ -581,6 +733,7 @@ class RootInstaller(
         onStage: (MountStage) -> Unit = {}
     ) = withContext(Dispatchers.IO) {
         val modulePath = "$MODULES_PATH/${moduleId(packageName)}"
+        verifyModuleStockCopies(packageName)
 
         onStage(MountStage.RESTORING_STOCK)
         installStockApks(
@@ -788,7 +941,8 @@ class RootInstaller(
 
         /** The scripts the root manager runs, which have to be executable. */
         private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
-        private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
+        private val MODULE_FILES = MODULE_SCRIPTS + listOf("module.prop", "stock-integrity.sh")
+        private const val STOCK_INTEGRITY_FILE = "stock-apk-sha256.txt"
         private const val STOCK_PATHS_FILE = "stock-paths.txt"
 
         // Between the package name and the split's own file name, so no split reads as the stock APK

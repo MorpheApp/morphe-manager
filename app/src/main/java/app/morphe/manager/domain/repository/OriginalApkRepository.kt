@@ -10,6 +10,7 @@ import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.AppDatabase
 import app.morphe.manager.data.room.apps.original.OriginalApk
+import app.morphe.manager.domain.installer.isVerifiedStockArchive
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibs
@@ -41,9 +42,8 @@ private inline fun writeThroughStaging(target: File, write: (staging: File) -> B
         // File.renameTo neither guarantees nor tells
         Files.move(staging.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
         return true
-    } catch (e: Exception) {
+    } finally {
         staging.delete()
-        throw e
     }
 }
 
@@ -79,15 +79,42 @@ internal fun moveIntoPlace(source: File, target: File) {
 }
 
 /**
- * Retains [source] as the original APK at [target]. Ephemeral inputs are moved directly into
- * place to avoid rewriting the file, while non-temporary inputs are copied through staging.
+ * Retains [source] as the original APK at [target]. With [verify], the completed staged copy
+ * must pass before replacing [target] or removing an ephemeral input. Repatching inputs that
+ * need no verification can still be moved directly into place.
  */
-internal fun retainOriginalApk(source: File, target: File, moveSource: Boolean) {
+internal fun retainOriginalApk(
+    source: File,
+    target: File,
+    moveSource: Boolean,
+    verify: ((File) -> Boolean)? = null
+): Boolean {
+    if (verify != null) {
+        if (source == target) return verify(source)
+        val retained = writeThroughStaging(target) { staging ->
+            source.copyTo(staging, overwrite = true)
+            verify(staging)
+        }
+        if (retained && moveSource) source.delete()
+        return retained
+    }
     // Copy file if source is different, and move it into place only once written in full
     if (source != target) {
         if (moveSource) moveIntoPlace(source, target)
         else copyThroughStaging(source, target)
     }
+    return true
+}
+
+/** A transformed repatching input can be reused, but cannot stand in for a root restore. */
+internal fun canReuseSavedOriginal(
+    saved: File,
+    supplied: File,
+    forMount: Boolean,
+    verifyStock: (File) -> Boolean
+): Boolean {
+    if (!saved.exists() || forMount && !verifyStock(saved)) return false
+    return SplitApkPreparer.isSplitArchive(saved) || !SplitApkPreparer.isSplitArchive(supplied)
 }
 
 class OriginalApkRepository(
@@ -98,6 +125,7 @@ class OriginalApkRepository(
     private val dao = db.originalApkDao()
     // Use permanent directory from Filesystem instead of temporary directory
     private val originalApksDir: File = fs.originalApksDir
+    private val stockVerificationDir: File = fs.uiTempDir.resolve("stock-original-verification")
 
     fun getAll() = dao.getAll().distinctUntilChanged()
 
@@ -105,13 +133,21 @@ class OriginalApkRepository(
 
     /**
      * Whether the saved original of [packageName] already stands for [file] of [version]. A split
-     * archive still replaces a merged APK, which a mount cannot restore the stock app from.
+     * archive still replaces a merged APK. For a mount, legacy merged or stripped copies must
+     * also verify before they can suppress retaining the new original.
      */
-    suspend fun hasOriginal(packageName: String, version: String, file: File): Boolean {
-        val existing = get(packageName)?.takeIf { it.version == version } ?: return false
-        val saved = File(existing.filePath).takeIf { it.exists() } ?: return false
-        return SplitApkPreparer.isSplitArchive(saved) || !SplitApkPreparer.isSplitArchive(file)
+    suspend fun hasOriginal(
+        packageName: String,
+        version: String,
+        file: File,
+        forMount: Boolean = false
+    ): Boolean = withContext(Dispatchers.IO) {
+        val existing = get(packageName)?.takeIf { it.version == version } ?: return@withContext false
+        canReuseSavedOriginal(File(existing.filePath), file, forMount, ::verifyStockArchive)
     }
+
+    private fun verifyStockArchive(file: File) =
+        isVerifiedStockArchive(file, Build.VERSION.SDK_INT, stockVerificationDir)
 
     /**
      * Save original APK file for later repatching.
@@ -152,7 +188,13 @@ class OriginalApkRepository(
             }.getOrDefault(false)
 
             when {
-                !stripped -> retainOriginalApk(sourceFile, targetFile, moveSource)
+                !stripped -> {
+                    val verify = if (forMount) ::verifyStockArchive else null
+                    if (!retainOriginalApk(sourceFile, targetFile, moveSource, verify)) {
+                        Log.w(TAG, "Original APK cannot restore $packageName; keeping the previous retained copy")
+                        return@withContext null
+                    }
+                }
                 // Written anew rather than moved, so the temporary input goes as a move would take it
                 moveSource && sourceFile != targetFile -> sourceFile.delete()
             }

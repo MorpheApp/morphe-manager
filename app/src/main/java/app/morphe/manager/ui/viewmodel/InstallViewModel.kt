@@ -816,14 +816,14 @@ class InstallViewModel(
                     packageName == this.packageName &&
                             versionName == patchedVersion
 
-                // Either file can be a split archive, read through its base module, so they are
-                // only read when the installed app does not already match
-                val restorableStock = if (stockInfo?.matchesPatched() == true) null else withContext(Dispatchers.IO) {
-                    inputs.stockFiles.firstNotNullOfOrNull { file ->
-                        rootInstaller.readStockInfo(file)
-                            ?.takeIf { it.matchesPatched() }
-                            ?.let { MountStockCandidate(file, it) }
-                    }
+                // Matching installed metadata does not prove the on-disk stock APK is usable.
+                // Keep a verified original available if the installer needs to repair its bytes.
+                val restorableStock = withContext(Dispatchers.IO) {
+                    selectMountStockCandidate(
+                        files = inputs.stockFiles,
+                        readVerified = rootInstaller::readStockInfo,
+                        matches = { it.matchesPatched() }
+                    )?.let { (file, info) -> MountStockCandidate(file, info) }
                 }
 
                 // Only worth waiting for when nothing here can restore the stock app, since the
@@ -837,7 +837,7 @@ class InstallViewModel(
 
                 val stockMatchesPatched = stockInfo?.matchesPatched() == true
 
-                val stockCandidate = restorableStock.takeUnless { stockMatchesPatched }
+                val stockCandidate = restorableStock
 
                 // Check version mismatch for mount
                 val stockVersion = stockInfo?.versionName
@@ -855,7 +855,12 @@ class InstallViewModel(
                 // Check for base APK - app must be installed for mount
                 if (stockInfo == null) {
                     if (stockCandidate == null || packageInfo.splitNames.isNotEmpty()) {
-                        handleInstallError(app.getString(R.string.installer_hint_generic))
+                        val message = if (stockCandidate == null && inputs.stockFiles.isNotEmpty()) {
+                            R.string.mount_original_required_message
+                        } else {
+                            R.string.installer_hint_generic
+                        }
+                        handleInstallError(app.getString(message))
                         return@launchInstall
                     }
                 }
@@ -933,12 +938,11 @@ class InstallViewModel(
         }
     }
 
-    private fun mountFailureMessage(e: Exception): String =
-        if (e is StockAppInstallException) {
-            app.getString(R.string.mount_stock_restore_failed_message)
-        } else {
-            app.getString(R.string.install_app_fail, e.simpleMessage() ?: e.javaClass.simpleName)
-        }
+    private fun mountFailureMessage(e: Exception): String = when (e) {
+        is StockApkIntegrityException -> app.getString(R.string.mount_original_required_message)
+        is StockAppInstallException -> app.getString(R.string.mount_stock_restore_failed_message)
+        else -> app.getString(R.string.install_app_fail, e.simpleMessage() ?: e.javaClass.simpleName)
+    }
 
     fun installSavedMount(
         outputFile: File,

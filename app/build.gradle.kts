@@ -58,6 +58,8 @@ dependencies {
     // Morphe
     implementation(project(":patcher-core"))
     implementation(libs.morphe.patcher)
+    implementation(libs.apksig)
+    implementation(libs.arsclib)
     patcherHost(project(":patcher-core", "hostJar"))
     // Unpacks the embedded JVM, which ships compressed with xz
     implementation(libs.xz)

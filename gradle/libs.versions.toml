@@ -2,6 +2,8 @@
 activity = "1.13.0"
 # 9.5.0 fails to configure :app: its Compose Preview task requires unit tests to include Android resources
 android-gradle-plugin = "9.4.1"
+# The same verifier version the pinned Morphe Patcher already uses.
+apksig = "9.1.1"
 app-icon-loader-coil = "1.5.0"
 # MorpheApp fork until its changes (MorpheApp/ARSCLib#1) land in REAndroid/ARSCLib
 # Keep in step with morphe-patcher: Gradle ships only one of the two, picked by comparing hashes as versions
@@ -43,6 +45,7 @@ work-runtime = "2.12.0"
 xz = "1.12"
 
 [libraries]
+apksig = { module = "com.android.tools.build:apksig", version.ref = "apksig" }
 # AndroidX Core
 androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }

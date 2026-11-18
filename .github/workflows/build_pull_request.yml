@@ -18,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
+      - name: Run root module tests
+        run: python3 -B -m unittest discover -s app/src/test/python -p test_root_stock_integrity.py -v
+
       # Fork PRs cannot access repository secrets by design, so we detect them
       # here and fall back to an unsigned debug build instead of a signed release.
       - name: Determine if PR is from a fork

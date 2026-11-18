@@ -697,7 +697,7 @@ class PatcherViewModel(
                 ?: "unknown"
 
             // Does original already exist in repository?
-            if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave)) {
+            if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave, forMount = usingMountInstall)) {
                 Log.d(PATCHER_LOG_TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
                 return@withLock
             }
