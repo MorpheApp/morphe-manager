@@ -150,28 +150,98 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
     "\"$tag\""
 }
 
+/** The release of BellSoft's Liberica that every ABI embeds, the same build for each. */
+val libericaVersion = "25.0.5.0.3+5"
+
+/** The feature release of [libericaVersion], which the JDK that links its image has to match. */
+val libericaFeature = libericaVersion.substringBefore('.').toInt()
+
 /**
- * An Android build of OpenJDK by AngelAuraMC, pinned by [sha256].
+ * The JVM the app embeds for one ABI: Liberica for Linux, pinned by [sha256], which runs on the
+ * GNU C library as termux-pacman builds it for Android, see [glibcPackages].
  *
- * @param feature The feature release, which the JDK that links its image has to match.
- * @param platform The platform its modules are linked for, as jmod names it.
+ * @param platform The platform of the Liberica build, as its file names it.
+ * @param jmodPlatform The platform its modules are linked for, as jmod names it.
+ * @param termuxArch The architecture of the termux-pacman packages, as their repository names it.
+ * @param glibcPackages The packages of the GNU C library, each pinned by its SHA-256.
+ * @param loader The dynamic loader of the GNU C library, which starts the JVM.
  */
-data class EmbeddedJvm(val feature: Int, val file: String, val sha256: String, val platform: String) {
-    val url get() = "https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre$feature/$file"
+data class EmbeddedJvm(
+    val platform: String,
+    val sha256: String,
+    val jmodPlatform: String,
+    val termuxArch: String,
+    val glibcPackages: Map<String, String>,
+    val loader: String
+) {
+    val url get() = "https://github.com/bell-sw/Liberica/releases/download/$libericaVersion/bellsoft-jre$libericaVersion-$platform.tar.gz"
+
+    val glibcUrls get() = glibcPackages.mapKeys { (name, _) -> "https://service.termux-pacman.dev/gpkg/$termuxArch/$name-$termuxArch.pkg.tar.xz" }
 }
 
 /**
  * The JVM the app embeds for patching per ABI it ships one for. A 32 bit x86 device patches inside
  * the app instead.
  *
- * 25 in a 64-bit process, whose compact object headers leave a large run room for about 8% more.
- * 17 on 32-bit ARM, as the JIT of 25 there loops for good on loading the patches, C1 alone
- * included, in more than one build of it. PatcherProcesses tunes each by the bitness of the process.
+ * Liberica rather than an Android build of OpenJDK: on 32-bit ARM every Android build of 25 loops
+ * for good on loading the patches, while Liberica patches there about a fifth faster than the
+ * client VM of 17 did. Android's C library cannot load a build for Linux, so the JVM runs as a
+ * process of its own, started by the loader of the GNU C library, which ships as a native library.
+ *
+ * Android ends an app's process, and the processes it starts, on any system call its own C library
+ * never makes, which every other build of glibc makes from its start on, such as set_robust_list,
+ * rseq and clone3. termux-pacman builds it for Android, answering those as a kernel without them
+ * would, or with the call bionic makes in their place. Its repository only keeps the latest build
+ * of each package, so these fail the build by their SHA-256 once it moves on, and then get updated.
  */
 val embeddedJvms = mapOf(
-    "arm64-v8a" to EmbeddedJvm(25, "jre25-android-arm64.tar.xz", "d3eb7afe2240c26728a1bb440502c5f18ac3883e932d202dd7f0c9bcbbce4c37", "linux-aarch64"),
-    "armeabi-v7a" to EmbeddedJvm(17, "jre17-android-arm.tar.xz", "4a9134f1ebf6340dd855805d351712462cddab6f3c2684da7e7da10ccf06648d", "linux-arm"),
-    "x86_64" to EmbeddedJvm(25, "jre25-android-x86_64.tar.xz", "7fca862ee1b2d5fe23cd9c9c3d9b7ad3c241947ad1a6cc9464ef2e674867105d", "linux-amd64")
+    "arm64-v8a" to EmbeddedJvm(
+        platform = "linux-aarch64",
+        sha256 = "5b7e75b779c3f512a838d7dfe7d841bd20516b5c8049f7667092142bc7cf0071",
+        jmodPlatform = "linux-aarch64",
+        termuxArch = "aarch64",
+        glibcPackages = mapOf(
+            "glibc-2.44-0" to "8725a20d85fa35a094cf092286295668fd5292247128c4bb8101585ba063799c",
+            "zlib-glibc-1.3.2-0" to "823322a4dfaccf77ead5935941320c53cf25f73d113253c53382ac6f42d7868b",
+            "gcc-libs-glibc-14.2.1-1" to "9316728ceeb23c320756aa0bb03460f9767b6efdc44a478c86f7fcc44c6e11ec"
+        ),
+        loader = "ld-linux-aarch64.so.1"
+    ),
+    "armeabi-v7a" to EmbeddedJvm(
+        platform = "linux-arm32-vfp-hflt",
+        sha256 = "d8df8d25b1d3892302ee9527275b2ef6a1f35a10318ae3efe97ac209c7924b20",
+        jmodPlatform = "linux-arm",
+        termuxArch = "arm",
+        glibcPackages = mapOf(
+            "glibc-2.44-0" to "15ec643be00e9c7ac6cdd1d10cb38778d36c6d1b1ff7211f1beaddca1eb9bb61",
+            "zlib-glibc-1.3.2-0" to "f0489608b9ae7249c72df983b8ed5ee61d9ef0052e5d3398eca139275d1485a0",
+            "gcc-libs-glibc-14.2.1-1" to "5b253b412651218f7478de4b747d8f851dc9609e1f218246d841e44caa81613a"
+        ),
+        loader = "ld-linux-armhf.so.3"
+    ),
+    "x86_64" to EmbeddedJvm(
+        platform = "linux-amd64",
+        sha256 = "78846aeed480e29ba3c987e61d3c7b437163f005b20e41bb2cdf7cf8ccbe76f3",
+        jmodPlatform = "linux-amd64",
+        termuxArch = "x86_64",
+        glibcPackages = mapOf(
+            "glibc-2.44-0" to "a09a3649a0febc5b04e30756f1599958f33f2f50a7db1b271c2320337d6cf0de",
+            "zlib-glibc-1.3.2-0" to "aea6ba84be3801808bd5bd06fddf6e304ceaea75a5e73d5248bf99406b0b88bb",
+            "gcc-libs-glibc-14.2.1-1" to "5f7fd3600a4ac83357c91cd30641eae488c9afc1e2549e62429cafa4d0badf5a"
+        ),
+        loader = "ld-linux-x86-64.so.2"
+    )
+)
+
+/**
+ * What of a build the linked modules need: the server VM, the launcher the loader starts it
+ * through, the native libraries of the modules and their configuration.
+ */
+val embeddedJvmFiles = listOf(
+    "bin/java", "lib/libjli.so", "lib/server/libjvm.so",
+    "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
+    "lib/libverify.so", "lib/libmanagement.so", "lib/libsyslookup.so",
+    "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
 )
 
 /**
@@ -179,35 +249,50 @@ val embeddedJvms = mapOf(
  * beyond that, so a patch that runs inside the app also runs in the JVM.
  */
 val embeddedJvmModules = listOf(
-    "java.base", "java.logging", "java.xml", "java.sql", "jdk.unsupported", "jdk.charsets", "jdk.crypto.ec",
+    // Elliptic curve cryptography is part of java.base since 22, which leaves jdk.crypto.ec empty
+    "java.base", "java.logging", "java.xml", "java.sql", "jdk.unsupported", "jdk.charsets",
     // The time spent collecting garbage, which the host watches for a heap too small for the run
     "java.management"
 )
 
-/**
- * What of a build the linked modules need, its native libraries above all, whichever of them the
- * build has. A build ships the server VM, but for the 32-bit ARM one, which ships the client VM.
- */
-val embeddedJvmFiles = listOf(
-    "lib/*/libjvm.so",
-    "lib/libjava.so", "lib/libjimage.so", "lib/libzip.so", "lib/libnet.so", "lib/libnio.so",
-    "lib/libverify.so", "lib/libmanagement.so",
-    // Only in 25, whose java.base looks up native symbols through it
-    "lib/libsyslookup.so",
-    "lib/jvm.cfg", "lib/tzdb.dat", "lib/security", "conf"
-)
+/** The name the dynamic loader of the GNU C library ships under, as a native library of the app. */
+val glibcLoaderLibrary = "libglibc_loader.so"
+
+/** Where downloaded builds are kept between builds, as they rarely change. */
+val embeddedJvmDownloads = File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm")
+
+/** The task name part of an ABI, such as Arm64v8a. */
+fun abiTaskName(abi: String) = abi.replace("-", "").replace("_", "").replaceFirstChar(Char::uppercase)
+
+val prepareGlibcTasks = embeddedJvms.mapValues { (abi, build) ->
+    tasks.register<PrepareGlibcTask>("prepareGlibc${abiTaskName(abi)}") {
+        group = "build"
+        description = "Takes the GNU C library the embedded JVM for $abi runs on."
+        packages.set(build.glibcUrls)
+        libraryDirectory.set("data/data/com.termux/files/usr/glibc/lib")
+        // What the linked modules and the launcher link against, and libgcc_s, which that zlib does
+        libraries.set(listOf("libc.so.6", "libm.so.6", "libdl.so.2", "libpthread.so.0", "librt.so.1", "libz.so.1", "libgcc_s.so.1"))
+        loader.set(build.loader)
+        this.abi.set(abi)
+        loaderLibraryName.set(glibcLoaderLibrary)
+        downloadCache.set(embeddedJvmDownloads)
+        runtimeFiles.set(layout.buildDirectory.dir("intermediates/embeddedJvm/glibc/$abi"))
+        nativeLibraries.set(layout.buildDirectory.dir("generated/glibcLoader/$abi"))
+    }
+}
 
 val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
-    tasks.register<PrepareEmbeddedJvmTask>("prepareEmbeddedJvm${abi.replace("-", "").replace("_", "").replaceFirstChar(Char::uppercase)}") {
+    tasks.register<PrepareEmbeddedJvmTask>("prepareEmbeddedJvm${abiTaskName(abi)}") {
         group = "build"
         description = "Links the embedded JVM for $abi."
         url.set(build.url)
         sha256.set(build.sha256)
-        targetPlatform.set(build.platform)
+        targetPlatform.set(build.jmodPlatform)
         modules.set(embeddedJvmModules)
         runtimeFiles.set(embeddedJvmFiles)
-        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(build.feature)) })
-        downloadCache.set(File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm"))
+        additionalFiles.from(prepareGlibcTasks.getValue(abi).flatMap { it.runtimeFiles })
+        jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(libericaFeature)) })
+        downloadCache.set(embeddedJvmDownloads)
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
         outputImage.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.modules"))
     }
@@ -217,8 +302,8 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
 val embeddedJvmAbis = embeddedJvms.keys.joinToString(prefix = "{", postfix = "}") { abi -> "\"$abi\"" }
 
 /** Changes with whatever goes into the runtime, which the app then unpacks again. */
-val embeddedJvmId = (embeddedJvms.values.map { build -> build.sha256 } + embeddedJvmModules + embeddedJvmFiles)
-    .hashCode().toUInt().toString(16)
+val embeddedJvmId = (embeddedJvms.values.flatMap { build -> listOf(build.sha256) + build.glibcPackages.values } +
+        embeddedJvmFiles + embeddedJvmModules).hashCode().toUInt().toString(16)
 
 /** Assets the embedded JVM runs from, read by JvmInstallation. */
 val embeddedJvmAssets = tasks.register<EmbeddedJvmAssetsTask>("embeddedJvmAssets") {
@@ -259,12 +344,15 @@ android {
 
         buildConfigField("String[]", "EMBEDDED_JVM_ABIS", embeddedJvmAbis)
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
+        buildConfigField("String", "GLIBC_LOADER_LIBRARY", "\"$glibcLoaderLibrary\"")
+        // Built from glibc_compat.c for the ABIs whose build of glibc needs it
+        buildConfigField("String", "GLIBC_COMPAT_LIBRARY", "\"libglibc_compat.so\"")
 
-        // The embedded JVM links against the shared C++ runtime, which the app ships alongside the launcher
+        // The launcher is the only C++ of the app, so it takes in what it uses of the C++ runtime
         @Suppress("UnstableApiUsage")
         externalNativeBuild {
             cmake {
-                arguments += "-DANDROID_STL=c++_shared"
+                arguments += "-DANDROID_STL=c++_static"
                 // Only an ABI the app ships a JVM for starts one
                 abiFilters += embeddedJvms.keys
             }
@@ -355,6 +443,8 @@ android {
 
         jniLibs {
             useLegacyPackaging = true
+            // Debian's build as it is, which the app runs as a program rather than loads
+            keepDebugSymbols += "**/$glibcLoaderLibrary"
         }
     }
 
@@ -512,6 +602,9 @@ androidComponents {
         variant.sources.kotlin?.addGeneratedSourceDirectory(generateLauncherIcons, GenerateLauncherIconsTask::kotlinDirectory)
         variant.sources.manifests.addGeneratedManifestFile(generateLauncherIcons, GenerateLauncherIconsTask::manifestFile)
         variant.sources.assets?.addGeneratedSourceDirectory(embeddedJvmAssets, EmbeddedJvmAssetsTask::outputDirectory)
+        prepareGlibcTasks.values.forEach { task ->
+            variant.sources.jniLibs?.addGeneratedSourceDirectory(task, PrepareGlibcTask::nativeLibraries)
+        }
 
         val variantName = variant.name.replaceFirstChar(Char::uppercase)
         val licensesAssets = tasks.register<LicensesAssetsTask>("${variant.name}LicensesAssets") {

@@ -44,7 +44,7 @@ import kotlin.time.TimeSource
  */
 fun main(args: Array<String>) {
     // Patches tell Android from a desktop host by java.vendor, which ART sets to this and the
-    // embedded OpenJDK build leaves as N/A
+    // embedded JVM, a build for Linux, to its own vendor
     System.setProperty("java.vendor", "The Android Project")
     val (commandsFile, eventsFile) = args
     val collectors = ManagementFactory.getGarbageCollectorMXBeans().toTypedArray()

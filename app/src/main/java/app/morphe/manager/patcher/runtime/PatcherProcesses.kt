@@ -117,10 +117,7 @@ class PatcherProcesses(
         }
     }
 
-    /**
-     * The heap a JVM is started with: a third of the RAM within bounds, or a fixed one in a 32-bit
-     * process, which may find room for less, see [PatcherService].
-     */
+    /** The heap a JVM is started with: a third of the RAM within bounds, or a fixed one in a 32-bit process. */
     private val jvmHeapLimitMb by lazy {
         if (Process.is64Bit()) {
             val memoryInfo = ActivityManager.MemoryInfo()
@@ -287,8 +284,7 @@ class PatcherProcesses(
     }
 
     private fun jvmLaunch(installed: JvmInstallation.Installed, tuning: List<String>) = JvmLaunch(
-        libjvm = installed.libjvm.path,
-        preload = installed.preload,
+        command = installed.command,
         options = jvmOptions(installed) + tuning,
         mainClass = HOST_MAIN_CLASS,
         heapLimitMb = jvmHeapLimitMb
@@ -299,7 +295,7 @@ class PatcherProcesses(
      * time, and none while the cache is being made from what one recorded.
      */
     private fun aotUse(installed: JvmInstallation.Installed) = when {
-        // JDK 17, which a 32-bit process runs, has no AOT cache
+        // Only tried in a 64-bit process
         !Process.is64Bit() -> AotUse.NONE
         installed.aotCache.isFile -> AotUse.USE
         aotFailures(installed) >= AOT_ATTEMPTS -> AotUse.NONE
@@ -343,15 +339,11 @@ class PatcherProcesses(
                 )
             )
             PatcherConnection.connect(app).use { connection ->
-                val host = try {
-                    startIn(connection, launch)
-                } catch (_: RemoteException) {
-                    // The JVM exits once it wrote the cache, and its process with it
-                    null
-                }
-                if (host != null) {
-                    host.close()
-                    throw IllegalStateException("The JVM to make the AOT cache started the host instead of exiting")
+                // The JVM exits once it wrote the cache, and its process with it
+                startIn(connection, launch).use {
+                    withTimeoutOrNull(AOT_RECORD_EXIT_TIMEOUT) {
+                        while (connection.service.asBinder().isBinderAlive) delay(EXIT_RECORD_POLL)
+                    } ?: throw IllegalStateException("The JVM to make the AOT cache did not exit")
                 }
             }
 
@@ -375,15 +367,13 @@ class PatcherProcesses(
         }
     }
 
-    /** The options any JVM needs to run inside an app, the same on every device. */
+    /** The options any JVM needs to run for an app, the same on every device. */
     private fun jvmOptions(installed: JvmInstallation.Installed) = listOf(
         "-Djava.class.path=${installed.hostJar}",
         // The JVM falls back to /tmp, which an app cannot write to
         "-Djava.io.tmpdir=${fs.tempDir}",
         // Patches that ship a JNI library load it from an unnamed module
         "--enable-native-access=ALL-UNNAMED",
-        // Leaves the signals ART relies on to ART, such as the one that dumps its threads
-        "-Xrs",
         // Nothing reads the performance counters, which would otherwise be kept in a file of their own
         "-XX:-UsePerfData",
         // The working directory of an app is not writable, which is where the report would go
@@ -392,8 +382,8 @@ class PatcherProcesses(
 
     /**
      * The options that tune the JVM to the process, then [aot], the options of the AOT cache, and
-     * last those of a debug build, so a debug build can override any flag by giving it again. A
-     * 64-bit process runs JDK 25 and a 32-bit one JDK 17, see embeddedJvms of the app.
+     * last those of a debug build, so a debug build can override any flag by giving it again.
+     * Every process runs JDK 25, see embeddedJvms of the app.
      */
     private suspend fun jvmTuning(aot: List<String>) = (if (Process.is64Bit()) listOfNotNull(
         // C1 only for a run that neither starts from an AOT cache nor records for one. Most runs
@@ -407,8 +397,8 @@ class PatcherProcesses(
         // the headers it was made with
         "-XX:+UseCompactObjectHeaders"
     ) + aot else listOf(
-        // The simplest collector, with no threads of its own, on a port that runs few others. A
-        // 32-bit JVM is the client VM, which only has C1 to begin with
+        // The simplest collector, with no threads of its own, on a port that runs few others. C2
+        // stays on, as the runs that take long on 32-bit phones gain the most from it
         "-XX:+UseSerialGC"
     )) + debugOptions()
 
@@ -485,7 +475,7 @@ class PatcherProcesses(
             ended = true
             if (finished == null) {
                 val killed = killedException()
-                val errorFile = errorFile(started.pid)
+                val errorFile = errorFile(started.jvmPid)
                 if (errorFile.exists()) {
                     logger.error("Patcher JVM error report:\n${errorFile.readText()}")
                     errorFile.delete()
@@ -536,9 +526,7 @@ class PatcherProcesses(
                 "Patcher process: pid=${started.pid} vm=$vm heap=${started.heapLimitMb}MB bits=$bits " +
                         "abis=${Build.SUPPORTED_ABIS.joinToString(",")} age=${age}s"
             )
-            launch?.let {
-                logger.info("Patcher JVM: libjvm=${it.libjvm.substringAfter("/lib/")} options=${tuning.joinToString(" ")}")
-            }
+            if (launch != null) logger.info("Patcher JVM: pid=${started.jvmPid} options=${tuning.joinToString(" ")}")
         }
 
         /**
@@ -734,7 +722,7 @@ class PatcherProcesses(
     }
 
     private companion object {
-        const val HOST_MAIN_CLASS = "app/morphe/manager/patcher/host/HostMainKt"
+        const val HOST_MAIN_CLASS = "app.morphe.manager.patcher.host.HostMainKt"
         const val DEBUG_OPTIONS_FILE = "jvm-options.txt"
         const val NO_EXIT_RECORD = "no exit record"
 

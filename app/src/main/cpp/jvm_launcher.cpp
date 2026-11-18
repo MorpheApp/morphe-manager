@@ -1,53 +1,28 @@
-// Starts a HotSpot JVM inside the calling process and runs a main class in it.
+// Starts the JVM that patches as a process of the patcher service and waits for it to end.
 //
-// The JVM keeps its heap in native memory, so it is bound by what the device can spare rather than
-// the heap limit ART puts on a process. HotSpot cannot be started twice in one process, so the
-// JVM stays for as long as the process does.
-#include <android/log.h>
-#include <dlfcn.h>
+// The JVM is built for the GNU C library, which Android's own cannot load into the service, so the
+// loader of that library runs it as a program of its own. The service hands it the pipes of the run
+// and outlives it, as nothing but the end of its process stops a JVM.
+#include <fcntl.h>
 #include <jni.h>
-#include <malloc.h>
-#include <pthread.h>
-#include <sys/mman.h>
 #include <sys/prctl.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
-#include <cstdarg>
-#include <cstdio>
-#include <future>
-#include <sstream>
+#include <algorithm>
+#include <cerrno>
+#include <csignal>
 #include <string>
 #include <vector>
 
-#define TAG "EmbeddedJvm"
-
 namespace {
 
-using CreateJavaVm = jint (*)(JavaVM **, void **, void *);
-
-struct Launch {
-    std::string libjvm;
-    std::vector<std::string> preload;
-    std::vector<std::string> options;
-    std::string mainClass;
-    std::vector<std::string> args;
-    // Set once main is about to be called, to 0, or to why the JVM did not get that far
-    std::promise<int> started;
-};
-
-// HotSpot hands every write it makes through here, files it opened itself (such as -Xlog:...:file=)
-// included, so only the standard streams go to the log
-jint logJvmOutput(FILE *stream, const char *format, va_list args) {
-    if (stream != stdout && stream != stderr) return vfprintf(stream, format, args);
-    __android_log_vprint(ANDROID_LOG_INFO, TAG, format, args);
-    return 0;
-}
-
-// System.exit ends up here. The JVM cannot be shut down without ending the process, so it ends at once
-void exitHook(jint code) {
-    __android_log_print(ANDROID_LOG_INFO, TAG, "JVM exited with %d", code);
-    _exit(code);
-}
+// The exit code of a child that could not run the program, as a shell reports it
+constexpr int CHILD_FAILED = 127;
+constexpr int SIGNAL_EXIT_BASE = 128;
+// How many file descriptors a started process closes at most, the app keeps far fewer open
+constexpr int MAX_CLOSED_FD = 65536;
 
 std::vector<std::string> toStrings(JNIEnv *env, jobjectArray array) {
     std::vector<std::string> strings;
@@ -63,217 +38,66 @@ std::vector<std::string> toStrings(JNIEnv *env, jobjectArray array) {
     return strings;
 }
 
-// The stack trace of throwable as printStackTrace writes it, empty if writing it threw as well
-std::string stackTrace(JNIEnv *env, jthrowable throwable) {
-    // Any of the calls below may throw, which has to be cleared before JNI is called again
-    const auto threw = [env] {
-        if (!env->ExceptionCheck()) return false;
-        env->ExceptionClear();
-        return true;
-    };
-
-    jclass stringWriterClass = env->FindClass("java/io/StringWriter");
-    if (threw()) return {};
-    jclass printWriterClass = env->FindClass("java/io/PrintWriter");
-    if (threw()) return {};
-    jmethodID newStringWriter = env->GetMethodID(stringWriterClass, "<init>", "()V");
-    if (threw()) return {};
-    jmethodID newPrintWriter = env->GetMethodID(printWriterClass, "<init>", "(Ljava/io/Writer;)V");
-    if (threw()) return {};
-    jmethodID printStackTrace = env->GetMethodID(env->GetObjectClass(throwable), "printStackTrace", "(Ljava/io/PrintWriter;)V");
-    if (threw()) return {};
-    jmethodID toString = env->GetMethodID(stringWriterClass, "toString", "()Ljava/lang/String;");
-    if (threw()) return {};
-
-    jobject stringWriter = env->NewObject(stringWriterClass, newStringWriter);
-    if (threw()) return {};
-    jobject printWriter = env->NewObject(printWriterClass, newPrintWriter, stringWriter);
-    if (threw()) return {};
-    env->CallVoidMethod(throwable, printStackTrace, printWriter);
-    if (threw()) return {};
-    // toString of a StringWriter returns a String, which JNI hands out as jobject
-    auto text = static_cast<jstring>(env->CallObjectMethod(stringWriter, toString)); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-    if (threw()) return {};
-
-    const char *chars = env->GetStringUTFChars(text, nullptr);
-    std::string trace = chars;
-    env->ReleaseStringUTFChars(text, chars);
-    return trace;
-}
-
-// HotSpot only writes which thread an exception ended through logJvmOutput, and the trace itself to
-// System.err, which leads nowhere in an app. The trace is logged here instead, a line at a time, as
-// the log cuts a message off at a few kilobytes
-void describeException(JNIEnv *env) {
-    jthrowable throwable = env->ExceptionOccurred();
-    if (throwable == nullptr) return;
-    env->ExceptionClear();
-
-    const std::string trace = stackTrace(env, throwable);
-    if (trace.empty()) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "The JVM threw an exception it could not describe");
-        return;
-    }
-    std::istringstream lines(trace);
-    for (std::string line; std::getline(lines, line);) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "%s", line.c_str());
-    }
-}
-
-// Why the JVM did not start, next to the JNI_CreateJavaVM codes, which are all negative
-constexpr int LOAD_FAILED = 1;
-constexpr int MAIN_MISSING = 2;
-constexpr int TAG_CHECKS_ON = 3;
-
-constexpr size_t JVM_THREAD_STACK_SIZE = 8UL * 1024 * 1024;
-
-constexpr size_t MEBIBYTE = 1024UL * 1024;
-constexpr jint RESERVATION_STEP_MB = 64;
-
-// HotSpot keeps flags in the top bits of native pointers and drops the memory tag with them, so a
-// device that checks tags, which the user can turn on for any app, faults on its first access. The
-// checks are turned off for the whole process, which runs nothing but the patcher. Returns false
-// where they are still on
-bool disableTagChecks() {
-#if defined(__aarch64__)
-    const int control = prctl(PR_GET_TAGGED_ADDR_CTRL, 0, 0, 0, 0);
-    // Fails on a kernel or CPU without tagged addresses, where there is nothing to turn off
-    if (control < 0 || (control & PR_MTE_TCF_MASK) == 0) return true;
-    if (mallopt(M_BIONIC_SET_HEAP_TAGGING_LEVEL, M_HEAP_TAGGING_LEVEL_NONE) == 0) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "Memory tag checks could not be turned off");
-        return false;
-    }
-    __android_log_print(ANDROID_LOG_WARN, TAG, "Memory tag checks turned off for the JVM");
-#endif
-    return true;
-}
-
-// Creates the JVM and finds the main method, returning 0 or why it could not
-int createJvm(Launch *launch, JNIEnv **env, jclass *mainClass, jmethodID *main) {
-    // A release build starts the process as not dumpable, which hands /proc/self over to root, and
-    // the I/O accounting of the run in /proc/self/io is then out of reach of the process itself
-    prctl(PR_SET_DUMPABLE, 1);
-
-    // Before the runtime is loaded, as its libraries allocate as they load
-    if (!disableTagChecks()) return TAG_CHECKS_ON;
-
-    void *handle = dlopen(launch->libjvm.c_str(), RTLD_NOW | RTLD_GLOBAL);
-    if (handle == nullptr) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "dlopen failed: %s", dlerror());
-        return LOAD_FAILED;
-    }
-    // The linker namespace of an app does not search the runtime's directory, so a library another
-    // one of it names would not be found. Loaded up front, in order, a name is matched instead
-    for (auto &library: launch->preload) {
-        if (dlopen(library.c_str(), RTLD_NOW | RTLD_GLOBAL) == nullptr) {
-            __android_log_print(ANDROID_LOG_ERROR, TAG, "dlopen failed: %s", dlerror());
-            return LOAD_FAILED;
-        }
-    }
-    auto createJavaVm = reinterpret_cast<CreateJavaVm>(dlsym(handle, "JNI_CreateJavaVM"));
-    if (createJavaVm == nullptr) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "JNI_CreateJavaVM missing: %s", dlerror());
-        return LOAD_FAILED;
-    }
-
-    std::vector<JavaVMOption> options;
-    options.reserve(launch->options.size() + 2);
-    for (auto &option: launch->options) options.push_back({const_cast<char *>(option.c_str()), nullptr});
-    options.push_back({const_cast<char *>("vfprintf"), reinterpret_cast<void *>(logJvmOutput)});
-    options.push_back({const_cast<char *>("exit"), reinterpret_cast<void *>(exitHook)});
-
-    JavaVMInitArgs initArgs{};
-    // The NDK headers stop at 1.6, which HotSpot still accepts
-    initArgs.version = JNI_VERSION_1_6;
-    initArgs.nOptions = static_cast<jint>(options.size());
-    initArgs.options = options.data();
-    initArgs.ignoreUnrecognized = JNI_FALSE;
-
-    JavaVM *vm = nullptr;
-    const jint created = createJavaVm(&vm, reinterpret_cast<void **>(env), &initArgs);
-    if (created != JNI_OK) {
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "JNI_CreateJavaVM failed: %d", created);
-        return created;
-    }
-
-    *mainClass = (*env)->FindClass(launch->mainClass.c_str());
-    *main = *mainClass == nullptr ? nullptr
-            : (*env)->GetStaticMethodID(*mainClass, "main", "([Ljava/lang/String;)V");
-    if (*main == nullptr) {
-        describeException(*env);
-        return MAIN_MISSING;
-    }
-    return 0;
-}
-
-void *runJvm(void *data) {
-    auto *launch = static_cast<Launch *>(data);
-
-    JNIEnv *env = nullptr;
-    jclass mainClass = nullptr;
-    jmethodID main = nullptr;
-    const int created = createJvm(launch, &env, &mainClass, &main);
-    launch->started.set_value(created);
-    if (created == 0) {
-        jobjectArray args = env->NewObjectArray(static_cast<jsize>(launch->args.size()),
-                                                env->FindClass("java/lang/String"), nullptr);
-        for (size_t i = 0; i < launch->args.size(); i++) {
-            env->SetObjectArrayElement(args, static_cast<jsize>(i), env->NewStringUTF(launch->args[i].c_str()));
-        }
-        // Ends the process once the run is over, so returning means the host broke down
-        env->CallStaticVoidMethod(mainClass, main, args);
-        describeException(env);
-        __android_log_print(ANDROID_LOG_ERROR, TAG, "The main method of the JVM returned");
-    }
-
-    delete launch;
-    return nullptr;
-}
-
 } // namespace
 
+// Starts argv as a process of its own. The process keeps keepFds open under the same numbers,
+// writes its standard output and error to outputFd, and is killed once the thread that called this
+// ends, so it does not outlive the service. Returns its pid, or a negative errno
 extern "C" JNIEXPORT jint JNICALL
-Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_startJvm(
-        JNIEnv *env, jobject, jstring libjvm, jobjectArray preload, jobjectArray options,
-        jstring mainClass, jobjectArray args) {
-    const char *libjvmChars = env->GetStringUTFChars(libjvm, nullptr);
-    const char *mainClassChars = env->GetStringUTFChars(mainClass, nullptr);
-    auto *launch = new Launch;
-    launch->libjvm = libjvmChars;
-    launch->preload = toStrings(env, preload);
-    launch->options = toStrings(env, options);
-    launch->mainClass = mainClassChars;
-    launch->args = toStrings(env, args);
-    env->ReleaseStringUTFChars(libjvm, libjvmChars);
-    env->ReleaseStringUTFChars(mainClass, mainClassChars);
-    std::future<int> started = launch->started.get_future();
+Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_spawnProcess(
+        JNIEnv *env, jobject, jobjectArray argv, jintArray keepFds, jint outputFd) {
+    // Everything the child needs is made here, as it may only make async-signal-safe calls until exec
+    const std::vector<std::string> args = toStrings(env, argv);
+    std::vector<char *> argPointers;
+    argPointers.reserve(args.size() + 1);
+    for (auto &arg: args) argPointers.push_back(const_cast<char *>(arg.c_str()));
+    argPointers.push_back(nullptr);
 
-    // A thread of its own, so HotSpot does not share the caller's stack and thread state with ART
-    pthread_attr_t attr;
-    pthread_attr_init(&attr);
-    pthread_attr_setstacksize(&attr, JVM_THREAD_STACK_SIZE);
-    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    pthread_t thread;
-    const int threadCreated = pthread_create(&thread, &attr, runJvm, launch);
-    pthread_attr_destroy(&attr);
-    if (threadCreated != 0) {
-        delete launch;
-        return LOAD_FAILED;
+    const jsize keepCount = env->GetArrayLength(keepFds);
+    std::vector<jint> keep(static_cast<size_t>(keepCount));
+    env->GetIntArrayRegion(keepFds, 0, keepCount, keep.data());
+
+    rlimit files{};
+    const int maxFd = getrlimit(RLIMIT_NOFILE, &files) == 0 && files.rlim_cur != RLIM_INFINITY
+                      ? static_cast<int>(std::min<rlim_t>(files.rlim_cur, MAX_CLOSED_FD)) : MAX_CLOSED_FD;
+    const pid_t parent = getpid();
+
+    const pid_t pid = fork();
+    if (pid < 0) return -errno;
+    if (pid > 0) return pid;
+
+    // The child. A parent that ended before this point would leave it to init, so it ends at once
+    prctl(PR_SET_PDEATHSIG, SIGKILL);
+    if (getppid() != parent) _exit(CHILD_FAILED);
+
+    // ART blocks and ignores signals the JVM relies on, which a new program inherits
+    sigset_t none;
+    sigemptyset(&none);
+    sigprocmask(SIG_SETMASK, &none, nullptr);
+    for (int sig = 1; sig < NSIG; sig++) signal(sig, SIG_DFL);
+
+    const int devNull = open("/dev/null", O_RDONLY);
+    if (devNull < 0 || dup2(devNull, STDIN_FILENO) < 0 || dup2(outputFd, STDOUT_FILENO) < 0 ||
+        dup2(outputFd, STDERR_FILENO) < 0) {
+        _exit(CHILD_FAILED);
     }
-    return started.get();
+    // Nothing of the app but what the JVM is handed reaches it
+    for (int fd = STDERR_FILENO + 1; fd < maxFd; fd++) {
+        if (std::find(keep.begin(), keep.end(), fd) == keep.end()) close(fd);
+    }
+    for (const jint fd: keep) fcntl(fd, F_SETFD, 0);
+
+    execv(argPointers[0], argPointers.data());
+    _exit(CHILD_FAILED);
 }
 
-// The largest block of address space up to limitMb that a single reservation gets, in steps of
-// RESERVATION_STEP_MB, or 0. The block is handed back at once, as the JVM reserves it itself
+// Waits for the process pid started, returning its exit code, or 128 plus the signal that ended it
 extern "C" JNIEXPORT jint JNICALL
-Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_largestReservationMb(JNIEnv *, jobject, jint limitMb) {
-    for (jint mb = limitMb; mb > 0; mb -= RESERVATION_STEP_MB) {
-        const size_t size = static_cast<size_t>(mb) * MEBIBYTE;
-        void *block = mmap(nullptr, size, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
-        if (block != MAP_FAILED) {
-            munmap(block, size);
-            return mb;
-        }
+Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_waitProcess(JNIEnv *, jobject, jint pid) {
+    int status = 0;
+    while (waitpid(pid, &status, 0) < 0) {
+        if (errno != EINTR) return -errno;
     }
-    return 0;
+    if (WIFSIGNALED(status)) return SIGNAL_EXIT_BASE + WTERMSIG(status);
+    return WEXITSTATUS(status);
 }
