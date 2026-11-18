@@ -14,6 +14,7 @@ import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
@@ -66,6 +67,14 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
     @get:InputFiles
     @get:PathSensitive(PathSensitivity.RELATIVE)
     abstract val additionalFiles: ConfigurableFileCollection
+
+    /**
+     * llvm-strip of the NDK, which takes the symbol tables and debug sections off the native files.
+     * The builds ship them, and nothing but a crash report of the JVM reads them.
+     */
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val stripTool: RegularFileProperty
 
     /** The JDK whose tools link the image, which has to be of the same feature release. */
     @get:Nested
@@ -150,6 +159,7 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
             from(additionalFiles)
             into(image)
         }
+        image.walkTopDown().filter { it.isFile && it.isElf() }.forEach { run(stripTool.get().asFile.path, "--strip-all", it.path) }
         writeXzArchive(
             outputArchive.get().asFile,
             image.walkTopDown().filter { it.isFile }.map { file ->
@@ -200,6 +210,8 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
             ?.filter { it.isNotBlank() }
             ?: throw GradleException("$release lists no modules")
 
+    private fun File.isElf() = inputStream().use { it.readNBytes(ELF_MAGIC.size) }.contentEquals(ELF_MAGIC)
+
     private fun run(vararg command: String) {
         exec.exec { commandLine(*command) }
     }
@@ -208,5 +220,6 @@ abstract class PrepareEmbeddedJvmTask : DefaultTask() {
         const val JAVA_BASE = "java.base"
         const val RELEASE_MODULES = "MODULES="
         const val IMAGE_PATH = "lib/modules"
+        val ELF_MAGIC = byteArrayOf(0x7f, 'E'.code.toByte(), 'L'.code.toByte(), 'F'.code.toByte())
     }
 }

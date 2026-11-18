@@ -261,6 +261,12 @@ val glibcLoaderLibrary = "libglibc_loader.so"
 /** Where downloaded builds are kept between builds, as they rarely change. */
 val embeddedJvmDownloads = File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm")
 
+/** llvm-strip of the NDK the app builds its native code with. */
+val ndkStripTool = androidComponents.sdkComponents.ndkDirectory.map { ndk ->
+    val bin = ndk.dir("toolchains/llvm/prebuilt").asFile.listFiles()!!.single().resolve("bin")
+    ndk.file(bin.listFiles()!!.single { it.nameWithoutExtension == "llvm-strip" }.relativeTo(ndk.asFile).invariantSeparatorsPath)
+}
+
 /** The task name part of an ABI, such as Arm64v8a. */
 fun abiTaskName(abi: String) = abi.replace("-", "").replace("_", "").replaceFirstChar(Char::uppercase)
 
@@ -291,6 +297,7 @@ val embeddedJvmTasks = embeddedJvms.map { (abi, build) ->
         modules.set(embeddedJvmModules)
         runtimeFiles.set(embeddedJvmFiles)
         additionalFiles.from(prepareGlibcTasks.getValue(abi).flatMap { it.runtimeFiles })
+        stripTool.set(ndkStripTool)
         jdk.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(libericaFeature)) })
         downloadCache.set(embeddedJvmDownloads)
         outputArchive.set(layout.buildDirectory.file("intermediates/embeddedJvm/$abi.zip.xz"))
@@ -443,8 +450,6 @@ android {
 
         jniLibs {
             useLegacyPackaging = true
-            // Debian's build as it is, which the app runs as a program rather than loads
-            keepDebugSymbols += "**/$glibcLoaderLibrary"
         }
     }
 
