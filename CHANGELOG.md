@@ -1,3 +1,9 @@
+## [2.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.4...v2.7.0-dev.5) (2026-11-18)
+
+### Bug Fixes
+
+* Keep the launch source check quiet unless it brings something ([a1c95cb](https://github.com/MorpheApp/morphe-manager/commit/a1c95cbf43daed4dc215eac358a87cd69972280c))
+
 ## [2.7.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.3...v2.7.0-dev.4) (2026-11-17)
 
 ### Bug Fixes
