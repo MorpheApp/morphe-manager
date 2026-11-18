@@ -68,7 +68,7 @@ class JvmInstallation(private val app: Application) {
                 val hostJar = root.resolve("host-${BuildConfig.VERSION_CODE}-${BuildConfig.BUILD_ID}.jar")
                 if (!hostJar.isFile) unpackHost(hostJar)
 
-                val installed = Installed(home, hostJar, aotDir, nativeLibrary(BuildConfig.GLIBC_LOADER_LIBRARY), glibcCompat())
+                val installed = Installed(home, hostJar, aotDir, nativeLibrary(BuildConfig.GLIBC_LOADER_LIBRARY))
                 // Whatever an earlier version of the app unpacked or recorded is of no use to this one
                 val keep = setOf(home, hostJar)
                 root.listFiles()?.filter { it !in keep }?.forEach { it.deleteRecursively() }
@@ -89,12 +89,6 @@ class JvmInstallation(private val app: Application) {
      */
     private fun nativeLibrary(name: String) = File(app.applicationInfo.nativeLibraryDir, name).takeIf { it.isFile }
         ?: throw IOException("The app ships no $name")
-
-    /**
-     * What the runtime needs that its build of glibc gets wrong on Android, which the app ships as
-     * a native library where there is any, see glibc_compat.c.
-     */
-    private fun glibcCompat() = File(app.applicationInfo.nativeLibraryDir, BuildConfig.GLIBC_COMPAT_LIBRARY).takeIf { it.isFile }
 
     // Unpacked beside the destination and renamed into place, so a half unpacked runtime left by
     // a process that died midway is never taken for a complete one
@@ -188,15 +182,12 @@ class JvmInstallation(private val app: Application) {
     /**
      * @param aotDir Where the files of the AOT cache are kept, see [aotCache].
      * @param glibcLoader The loader of the GNU C library the runtime is built for, see [command].
-     * @param glibcCompat A library loaded before that C library, which the calls of the JVM resolve
-     *                    to first, or null if the runtime needs none.
      */
     class Installed(
         val home: File,
         val hostJar: File,
         val aotDir: File,
-        private val glibcLoader: File,
-        private val glibcCompat: File?
+        private val glibcLoader: File
     ) {
         /**
          * The command that starts the JVM as a process of its own: the launcher of the runtime,
@@ -205,8 +196,7 @@ class JvmInstallation(private val app: Application) {
         val command: List<String>
             get() {
                 val libraries = listOf(GLIBC_DIR, "lib", "lib/server").joinToString(":") { home.resolve(it).path }
-                val preload = glibcCompat?.let { listOf("--preload", it.path) }.orEmpty()
-                return listOf(glibcLoader.path, "--library-path", libraries) + preload + home.resolve(LAUNCHER_PATH).path
+                return listOf(glibcLoader.path, "--library-path", libraries, home.resolve(LAUNCHER_PATH).path)
             }
 
         /**

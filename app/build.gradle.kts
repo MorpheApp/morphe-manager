@@ -102,7 +102,6 @@ dependencies {
     // Unit tests
     testImplementation(libs.kotlin.test.junit)
     // Compose UI under Robolectric, for behavior only a composition shows
-    testImplementation(platform(libs.compose.bom))
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.robolectric)
     debugImplementation(libs.compose.ui.test.manifest)
@@ -157,8 +156,14 @@ val libericaVersion = "25.0.5.0.3+5"
 val libericaFeature = libericaVersion.substringBefore('.').toInt()
 
 /**
+ * The release of MorpheApp/morphe-jvm the packages of the GNU C library come from: termux-pacman's
+ * recipes with what Android needs on top, and the packages of termux-pacman kept as they built them.
+ */
+val glibcRelease = "gpkg-1"
+
+/**
  * The JVM the app embeds for one ABI: Liberica for Linux, pinned by [sha256], which runs on the
- * GNU C library as termux-pacman builds it for Android, see [glibcPackages].
+ * GNU C library as termux-pacman builds it for Android, see [glibcPackages] and [glibcRelease].
  *
  * @param platform The platform of the Liberica build, as its file names it.
  * @param jmodPlatform The platform its modules are linked for, as jmod names it.
@@ -176,7 +181,7 @@ data class EmbeddedJvm(
 ) {
     val url get() = "https://github.com/bell-sw/Liberica/releases/download/$libericaVersion/bellsoft-jre$libericaVersion-$platform.tar.gz"
 
-    val glibcUrls get() = glibcPackages.mapKeys { (name, _) -> "https://service.termux-pacman.dev/gpkg/$termuxArch/$name-$termuxArch.pkg.tar.xz" }
+    val glibcUrls get() = glibcPackages.mapKeys { (name, _) -> "https://github.com/MorpheApp/morphe-jvm/releases/download/$glibcRelease/$name-$termuxArch.pkg.tar.xz" }
 }
 
 /**
@@ -192,7 +197,7 @@ data class EmbeddedJvm(
  * never makes, which every other build of glibc makes from its start on, such as set_robust_list,
  * rseq and clone3. termux-pacman builds it for Android, answering those as a kernel without them
  * would, or with the call bionic makes in their place. Its repository only keeps the latest build
- * of each package, so these fail the build by their SHA-256 once it moves on, and then get updated.
+ * of each package, so the app takes them from a release of its own, see [glibcRelease].
  */
 val embeddedJvms = mapOf(
     "arm64-v8a" to EmbeddedJvm(
@@ -201,7 +206,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-aarch64",
         termuxArch = "aarch64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "8725a20d85fa35a094cf092286295668fd5292247128c4bb8101585ba063799c",
+            "glibc-2.44-0" to "736b29e9d9615645be81c79667aad079741fd6482329cec5424a0a225cf6e53c",
             "zlib-glibc-1.3.2-0" to "823322a4dfaccf77ead5935941320c53cf25f73d113253c53382ac6f42d7868b",
             "gcc-libs-glibc-14.2.1-1" to "9316728ceeb23c320756aa0bb03460f9767b6efdc44a478c86f7fcc44c6e11ec"
         ),
@@ -213,7 +218,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-arm",
         termuxArch = "arm",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "15ec643be00e9c7ac6cdd1d10cb38778d36c6d1b1ff7211f1beaddca1eb9bb61",
+            "glibc-2.44-0" to "120bed98e3b7be1e2751fef091c3e17c295179b222aa18c6f7fc5ee781884a12",
             "zlib-glibc-1.3.2-0" to "f0489608b9ae7249c72df983b8ed5ee61d9ef0052e5d3398eca139275d1485a0",
             "gcc-libs-glibc-14.2.1-1" to "5b253b412651218f7478de4b747d8f851dc9609e1f218246d841e44caa81613a"
         ),
@@ -225,7 +230,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-amd64",
         termuxArch = "x86_64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "a09a3649a0febc5b04e30756f1599958f33f2f50a7db1b271c2320337d6cf0de",
+            "glibc-2.44-0" to "9e8171f946aa4a7d00f740b56924c38e2bdfeec8c57b8555b78366c8d5941c8c",
             "zlib-glibc-1.3.2-0" to "aea6ba84be3801808bd5bd06fddf6e304ceaea75a5e73d5248bf99406b0b88bb",
             "gcc-libs-glibc-14.2.1-1" to "5f7fd3600a4ac83357c91cd30641eae488c9afc1e2549e62429cafa4d0badf5a"
         ),
@@ -352,8 +357,6 @@ android {
         buildConfigField("String[]", "EMBEDDED_JVM_ABIS", embeddedJvmAbis)
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
         buildConfigField("String", "GLIBC_LOADER_LIBRARY", "\"$glibcLoaderLibrary\"")
-        // Built from glibc_compat.c for the ABIs whose build of glibc needs it
-        buildConfigField("String", "GLIBC_COMPAT_LIBRARY", "\"libglibc_compat.so\"")
 
         // The launcher is the only C++ of the app, so it takes in what it uses of the C++ runtime
         @Suppress("UnstableApiUsage")

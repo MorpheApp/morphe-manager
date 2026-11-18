@@ -31,8 +31,9 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   `set_robust_list` on its start, newer ones `rseq`, `clone3`, `statx` and the calls of 64-bit
   time too, so the runtime takes glibc from termux-pacman, which builds it for Android and
   answers those as a kernel without them would. Its 32-bit ARM build makes `ftruncate` in place
-  of `ftruncate64` though, which Android allows there alone, so `glibc_compat.c` defines both
-  as `ftruncate64` and the loader puts it first with `--preload`. None of this shows from a shell,
+  of `ftruncate64` though, which Android allows there alone, so the app takes its glibc from
+  [MorpheApp/morphe-jvm](https://github.com/MorpheApp/morphe-jvm), termux-pacman's recipes with
+  that changed, which also keeps the packages termux-pacman replaces. None of this shows from a shell,
   which has no filter: a blocked call is found with a preloaded `SIGSYS` handler that logs
   `si_syscall`.
 - **`ManagerApplication.onCreate` runs in `:patcher` too**, and returns right away there.
