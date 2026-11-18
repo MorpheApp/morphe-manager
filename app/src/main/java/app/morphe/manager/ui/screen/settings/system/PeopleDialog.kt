@@ -5,6 +5,9 @@
 
 package app.morphe.manager.ui.screen.settings.system
 
+import android.os.SystemClock
+import androidx.annotation.StringRes
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseOutBack
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -25,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,13 +43,21 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.repository.PeopleRepository.People
 import app.morphe.manager.domain.repository.PeopleRepository.Person
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.AboutViewModel
@@ -60,11 +72,18 @@ import org.koin.androidx.compose.koinViewModel
 
 /** Which of the people behind Morphe a [PeopleDialog] lists. */
 enum class PeopleList {
-    /** Everyone who committed to the project over the last year. */
+    /** Everyone who committed to the project, for one of the [ContributorPeriod]s. */
     CONTRIBUTORS,
 
     /** Everyone who backs it with a donation. */
     SUPPORTERS
+}
+
+/** A period the contributors are listed for, picked from a menu in the header. */
+private enum class ContributorPeriod(@StringRes val label: Int, val contributors: (People) -> List<Person>) {
+    ALL_TIME(R.string.contributors_all_time, People::contributors),
+    SIX_MONTHS(R.string.contributors_6_months, People::contributors6Months),
+    THREE_MONTHS(R.string.contributors_3_months, People::contributors3Months)
 }
 
 /**
@@ -140,6 +159,13 @@ private const val STAGGERED_ROWS = 8
 // How small a picture starts out as it comes in
 private const val AVATAR_ENTRANCE_SCALE = 0.6f
 
+// How long after a change of period someone laid out still moves to their new place, so rows
+// scrolled to later do not set off from where their people stood before
+private const val PERIOD_MOVE_WINDOW_MILLIS = 600L
+
+// Rows a person moves at most, so someone from far down the list comes from just past the screen
+private const val PERIOD_MOVE_MAX_ROWS = 6
+
 /**
  * The people behind Morphe, one [list] of them: its contributors over the projects the manager
  * grew out of, or its supporters. Both come from the Morphe API, the same lists the patched apps
@@ -158,21 +184,40 @@ fun DialogHostScope.PeopleDialog(
     LaunchedEffect(Unit) { viewModel.loadPeople() }
 
     val accent = MaterialTheme.colorScheme.primary
+    // A period with no one in it, or that the API does not serve yet, is not offered
+    val periods = people?.takeIf { list == PeopleList.CONTRIBUTORS }
+        ?.let { loaded -> ContributorPeriod.entries.filter { it.contributors(loaded).isNotEmpty() } }
+        .orEmpty()
+    var pickedPeriod by rememberSaveable { mutableStateOf(ContributorPeriod.ALL_TIME) }
+    val period = pickedPeriod.takeIf { it in periods } ?: ContributorPeriod.ALL_TIME
+    val periodOptions = periods.map { SortModeOption(it, stringResource(it.label)) }
+    var periodMenuOpen by remember { mutableStateOf(false) }
     val persons = when (list) {
-        PeopleList.CONTRIBUTORS -> people?.contributors
+        PeopleList.CONTRIBUTORS -> people?.let(period.contributors)
         PeopleList.SUPPORTERS -> people?.supporters
     }
+    // A change of period moves everyone from where they stood to their new place, rather than
+    // laying the list out anew
+    val periodChange = if (list == PeopleList.CONTRIBUTORS) {
+        val shownPlaces = remember { ShownPlaces() }
+        SideEffect { shownPlaces.places = persons.orEmpty().withIndex().associate { (place, person) -> person.url to place } }
+        remember(period) { PeriodChange(shownPlaces.places) }
+    } else null
     // Every backer for the supporters, of whom only the named ones are listed
     val count = when (list) {
         PeopleList.CONTRIBUTORS -> persons?.size
         PeopleList.SUPPORTERS -> people?.supportersTotal
     }
-    val summary = stringResource(
-        when (list) {
-            PeopleList.CONTRIBUTORS -> R.string.contributors_description
-            PeopleList.SUPPORTERS -> R.string.supporters_description
-        }
-    )
+    val shownCount = count?.takeIf { it > 0 }
+    val subtitle = when (list) {
+        // The period names itself here, so switching it says what the list now holds
+        PeopleList.CONTRIBUTORS -> shownCount
+            ?.let { listOf(pluralStringResource(R.plurals.contributor_count, it, it.toString()), stringResource(period.label)) }
+            ?.joinToString(" · ")
+            ?: stringResource(R.string.people_unavailable)
+        PeopleList.SUPPORTERS -> listOfNotNull(stringResource(R.string.supporters_description), shownCount?.toString())
+            .joinToString(" · ")
+    }
 
     ListDialog(
         onDismissRequest = onDismiss,
@@ -195,9 +240,34 @@ fun DialogHostScope.PeopleDialog(
                         PeopleList.SUPPORTERS -> R.string.supporters
                     }
                 ),
-                subtitle = listOfNotNull(summary, count?.takeIf { it > 0 }?.toString()).joinToString(" · "),
+                subtitle = subtitle,
                 subtitleLoading = people == null && !unavailable,
-                accentColor = accent
+                accentColor = accent,
+                actions = if (periodOptions.size > 1) {
+                    {
+                        // The menu hangs off the button, so it opens under the header's end
+                        Box {
+                            TitleAction(
+                                icon = MaterialSymbols.Rounded.Date_range,
+                                contentDescription = stringResource(R.string.filter),
+                                onClick = { periodMenuOpen = true },
+                                style = TitleActionStyle.Toggle,
+                                // Engaged while its menu is open, and marked once the list is off
+                                // the all-time one it starts on
+                                active = periodMenuOpen,
+                                marked = period != ContributorPeriod.ALL_TIME,
+                                modifier = Modifier.semantics { stateDescription = periodOptions.first { it.value == period }.title }
+                            )
+                            SortModeMenu(
+                                expanded = periodMenuOpen,
+                                onDismissRequest = { periodMenuOpen = false },
+                                current = period,
+                                options = periodOptions,
+                                onSelect = { pickedPeriod = it }
+                            )
+                        }
+                    }
+                } else null
             )
         },
         footer = {
@@ -237,7 +307,7 @@ fun DialogHostScope.PeopleDialog(
                     }
                 }
 
-                people(persons.orEmpty(), columns, openUrl)
+                people(persons.orEmpty(), columns, openUrl, periodChange)
 
                 when (list) {
                     // Shown with the list or without it, as the manager stands on these either
@@ -283,11 +353,17 @@ fun DialogHostScope.PeopleDialog(
     }
 }
 
-/** [people] as a grid of pictures, [columns] to a row, each opening that person's page. */
+/**
+ * [people] as a grid of pictures, [columns] to a row, each opening that person's page.
+ *
+ * @param periodChange The last change of the period listed, which moves everyone to their new
+ *   place. Null for a list that is not listed by period.
+ */
 private fun LazyListScope.people(
     people: List<Person>,
     columns: Int,
-    onOpen: (String) -> Unit
+    onOpen: (String) -> Unit,
+    periodChange: PeriodChange?
 ) {
     val rows = people.chunked(columns)
     // Keyed by place: two supporters may well link to the same website
@@ -304,11 +380,72 @@ private fun LazyListScope.people(
                     // Across the rows as well as along them, so the wave runs corner to corner
                     entranceOrder = if (index < STAGGERED_ROWS) index + column else column,
                     onClick = { onOpen(person.url) },
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .then(
+                            periodChange
+                                ?.let { Modifier.movesOnPeriodChange(it, person, index * columns + column, columns) }
+                                ?: Modifier
+                        )
                 )
             }
             // Keeps the cells of a short last row as wide as the ones above them
             repeat(columns - row.size) { Spacer(modifier = Modifier.weight(1f)) }
+        }
+    }
+}
+
+/** Where everyone stands in the list last shown, by the page they open. */
+private class ShownPlaces {
+    var places: Map<String, Int> = emptyMap()
+}
+
+/**
+ * A change of the period the contributors are listed for: where everyone stood in the list shown
+ * before it, by the page they open, and when it happened. The first has no places, so nobody
+ * moves as the dialog opens.
+ */
+private class PeriodChange(val places: Map<String, Int>) {
+    val atMillis = SystemClock.uptimeMillis()
+}
+
+/**
+ * Moves a person from where they stood before the last [change] to their [place], [columns] to
+ * a row, and fades in one who was not listed before. Rows scrolled to once the move is over are
+ * laid out for the period as it is, and stand still.
+ */
+@Composable
+private fun Modifier.movesOnPeriodChange(change: PeriodChange, person: Person, place: Int, columns: Int): Modifier {
+    val from = change.places[person.url]
+    // How much of the move is left, from 1 where the person stood to 0 at their place
+    val remaining = remember(change) {
+        val moves = change.places.isNotEmpty() && from != place &&
+            SystemClock.uptimeMillis() - change.atMillis < PERIOD_MOVE_WINDOW_MILLIS
+        Animatable(if (moves) 1f else 0f)
+    }
+    LaunchedEffect(change) { remaining.animateTo(0f, Animations.listSpring()) }
+
+    val mirrored = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val rowGap = with(LocalDensity.current) { SegmentGap.toPx() }
+    return layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        layout(placeable.width, placeable.height) {
+            placeable.placeWithLayer(0, 0) {
+                val left = remaining.value
+                if (left == 0f) return@placeWithLayer
+                if (from == null) {
+                    val shown = (1f - left).coerceIn(0f, 1f)
+                    alpha = shown
+                    scaleX = AVATAR_ENTRANCE_SCALE + (1f - AVATAR_ENTRANCE_SCALE) * shown
+                    scaleY = scaleX
+                } else {
+                    val columnShift = from % columns - place % columns
+                    // Someone from far down the list comes from just past the screen
+                    val rowShift = (from / columns - place / columns).coerceIn(-PERIOD_MOVE_MAX_ROWS, PERIOD_MOVE_MAX_ROWS)
+                    translationX = columnShift * placeable.width * left * if (mirrored) -1 else 1
+                    translationY = rowShift * (placeable.height + rowGap) * left
+                }
+            }
         }
     }
 }
