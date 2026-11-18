@@ -1445,7 +1445,7 @@ Details: %2$s"</string>
     <string name="about_link_reddit" translatable="false">Reddit</string>
     <string name="about_link_translations">Translations</string>
     <string name="contributors">Contributors</string>
-    <!-- Periods the contributors are listed for, picked from a row of chips -->
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
     <string name="contributors_all_time">All time</string>
     <string name="contributors_6_months">6 months</string>
     <string name="contributors_3_months">3 months</string>

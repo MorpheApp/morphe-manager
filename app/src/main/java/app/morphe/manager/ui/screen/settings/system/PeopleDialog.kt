@@ -48,6 +48,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -77,7 +79,7 @@ enum class PeopleList {
     SUPPORTERS
 }
 
-/** A period the contributors are listed for, picked from a row of chips. */
+/** A period the contributors are listed for, picked from a menu in the header. */
 private enum class ContributorPeriod(@StringRes val label: Int, val contributors: (People) -> List<Person>) {
     ALL_TIME(R.string.contributors_all_time, People::contributors),
     SIX_MONTHS(R.string.contributors_6_months, People::contributors6Months),
@@ -182,19 +184,25 @@ fun DialogHostScope.PeopleDialog(
     LaunchedEffect(Unit) { viewModel.loadPeople() }
 
     val accent = MaterialTheme.colorScheme.primary
-    // A period with no one in it, or that the API does not serve yet, gets no chip
-    val periods = people?.let { loaded -> ContributorPeriod.entries.filter { it.contributors(loaded).isNotEmpty() } }.orEmpty()
+    // A period with no one in it, or that the API does not serve yet, is not offered
+    val periods = people?.takeIf { list == PeopleList.CONTRIBUTORS }
+        ?.let { loaded -> ContributorPeriod.entries.filter { it.contributors(loaded).isNotEmpty() } }
+        .orEmpty()
     var pickedPeriod by rememberSaveable { mutableStateOf(ContributorPeriod.ALL_TIME) }
     val period = pickedPeriod.takeIf { it in periods } ?: ContributorPeriod.ALL_TIME
+    val periodOptions = periods.map { SortModeOption(it, stringResource(it.label)) }
+    var periodMenuOpen by remember { mutableStateOf(false) }
     val persons = when (list) {
         PeopleList.CONTRIBUTORS -> people?.let(period.contributors)
         PeopleList.SUPPORTERS -> people?.supporters
     }
     // A change of period moves everyone from where they stood to their new place, rather than
     // laying the list out anew
-    val shownPlaces = remember { ShownPlaces() }
-    val periodChange = remember(period) { PeriodChange(shownPlaces.places) }
-    SideEffect { shownPlaces.places = persons.orEmpty().withIndex().associate { (place, person) -> person.url to place } }
+    val periodChange = if (list == PeopleList.CONTRIBUTORS) {
+        val shownPlaces = remember { ShownPlaces() }
+        SideEffect { shownPlaces.places = persons.orEmpty().withIndex().associate { (place, person) -> person.url to place } }
+        remember(period) { PeriodChange(shownPlaces.places) }
+    } else null
     // Every backer for the supporters, of whom only the named ones are listed
     val count = when (list) {
         PeopleList.CONTRIBUTORS -> persons?.size
@@ -202,9 +210,10 @@ fun DialogHostScope.PeopleDialog(
     }
     val shownCount = count?.takeIf { it > 0 }
     val subtitle = when (list) {
-        // The period is on the chip picked, so only how many there are is left to say
+        // The period names itself here, so switching it says what the list now holds
         PeopleList.CONTRIBUTORS -> shownCount
-            ?.let { pluralStringResource(R.plurals.contributor_count, it, it.toString()) }
+            ?.let { listOf(pluralStringResource(R.plurals.contributor_count, it, it.toString()), stringResource(period.label)) }
+            ?.joinToString(" · ")
             ?: stringResource(R.string.people_unavailable)
         PeopleList.SUPPORTERS -> listOfNotNull(stringResource(R.string.supporters_description), shownCount?.toString())
             .joinToString(" · ")
@@ -234,19 +243,28 @@ fun DialogHostScope.PeopleDialog(
                 subtitle = subtitle,
                 subtitleLoading = people == null && !unavailable,
                 accentColor = accent,
-                content = if (list == PeopleList.CONTRIBUTORS && periods.size > 1) {
+                actions = if (periodOptions.size > 1) {
                     {
-                        Row(
-                            modifier = Modifier.padding(top = Defaults.SpaceSmall),
-                            horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
-                        ) {
-                            periods.forEach {
-                                AppFilterChip(
-                                    selected = it == period,
-                                    onClick = { pickedPeriod = it },
-                                    label = stringResource(it.label)
-                                )
-                            }
+                        // The menu hangs off the button, so it opens under the header's end
+                        Box {
+                            TitleAction(
+                                icon = MaterialSymbols.Rounded.Date_range,
+                                contentDescription = stringResource(R.string.filter),
+                                onClick = { periodMenuOpen = true },
+                                style = TitleActionStyle.Toggle,
+                                // Engaged while its menu is open, and marked once the list is off
+                                // the all-time one it starts on
+                                active = periodMenuOpen,
+                                marked = period != ContributorPeriod.ALL_TIME,
+                                modifier = Modifier.semantics { stateDescription = periodOptions.first { it.value == period }.title }
+                            )
+                            SortModeMenu(
+                                expanded = periodMenuOpen,
+                                onDismissRequest = { periodMenuOpen = false },
+                                current = period,
+                                options = periodOptions,
+                                onSelect = { pickedPeriod = it }
+                            )
                         }
                     }
                 } else null
@@ -289,7 +307,7 @@ fun DialogHostScope.PeopleDialog(
                     }
                 }
 
-                people(persons.orEmpty(), columns, openUrl, periodChange.takeIf { list == PeopleList.CONTRIBUTORS })
+                people(persons.orEmpty(), columns, openUrl, periodChange)
 
                 when (list) {
                     // Shown with the list or without it, as the manager stands on these either
@@ -345,7 +363,7 @@ private fun LazyListScope.people(
     people: List<Person>,
     columns: Int,
     onOpen: (String) -> Unit,
-    periodChange: PeriodChange? = null
+    periodChange: PeriodChange?
 ) {
     val rows = people.chunked(columns)
     // Keyed by place: two supporters may well link to the same website
@@ -365,9 +383,9 @@ private fun LazyListScope.people(
                     modifier = Modifier
                         .weight(1f)
                         .then(
-                            if (periodChange != null) {
-                                Modifier.movesOnPeriodChange(periodChange, person, index * columns + column, columns)
-                            } else Modifier
+                            periodChange
+                                ?.let { Modifier.movesOnPeriodChange(it, person, index * columns + column, columns) }
+                                ?: Modifier
                         )
                 )
             }
