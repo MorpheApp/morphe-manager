@@ -150,7 +150,7 @@ val translationTags = translations.joinToString(prefix = "{", postfix = "}") { (
 }
 
 /** The release of BellSoft's Liberica that every ABI embeds, the same build for each. */
-val libericaVersion = "25.0.5.0.3+5"
+val libericaVersion = "25.0.5.1+5"
 
 /** The feature release of [libericaVersion], which the JDK that links its image has to match. */
 val libericaFeature = libericaVersion.substringBefore('.').toInt()
@@ -202,7 +202,7 @@ data class EmbeddedJvm(
 val embeddedJvms = mapOf(
     "arm64-v8a" to EmbeddedJvm(
         platform = "linux-aarch64",
-        sha256 = "5b7e75b779c3f512a838d7dfe7d841bd20516b5c8049f7667092142bc7cf0071",
+        sha256 = "335eb057b9b9d7e2c2d62c86b3c042be3974808f9592af608542f949accdb3fa",
         jmodPlatform = "linux-aarch64",
         termuxArch = "aarch64",
         glibcPackages = mapOf(
@@ -214,7 +214,7 @@ val embeddedJvms = mapOf(
     ),
     "armeabi-v7a" to EmbeddedJvm(
         platform = "linux-arm32-vfp-hflt",
-        sha256 = "d8df8d25b1d3892302ee9527275b2ef6a1f35a10318ae3efe97ac209c7924b20",
+        sha256 = "40285dd2d6f8562be9296bb0ef505ca2b1e655ed07248ade110d46cff8ec28de",
         jmodPlatform = "linux-arm",
         termuxArch = "arm",
         glibcPackages = mapOf(
@@ -226,7 +226,7 @@ val embeddedJvms = mapOf(
     ),
     "x86_64" to EmbeddedJvm(
         platform = "linux-amd64",
-        sha256 = "78846aeed480e29ba3c987e61d3c7b437163f005b20e41bb2cdf7cf8ccbe76f3",
+        sha256 = "b76a06e75c1910e96eeb32232a14e260b1d374b9433b7e9e3525a65b70cde731",
         jmodPlatform = "linux-amd64",
         termuxArch = "x86_64",
         glibcPackages = mapOf(
