@@ -5,7 +5,10 @@
 
 package app.morphe.manager.patcher.util
 
+import com.reandroid.archive.ArchiveFile
 import java.io.File
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
@@ -14,6 +17,7 @@ import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
@@ -40,6 +44,42 @@ class StripNativeLibsTest {
         }
         return file
     }
+
+    private fun withSigningBlock(apk: File, pairs: Map<Int, ByteArray>): File {
+        val signed = File(workspace, "signed.apk")
+        val bytes = apk.readBytes()
+        val archive = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
+        val endOfCentralDirectory = (bytes.size - Int.SIZE_BYTES downTo 0)
+            .first { archive.getInt(it) == END_OF_CENTRAL_DIRECTORY_SIGNATURE }
+        val offsetField = endOfCentralDirectory + CENTRAL_DIRECTORY_OFFSET_FIELD
+        val centralDirectory = archive.getInt(offsetField)
+
+        val pairsSize = pairs.values.sumOf { Long.SIZE_BYTES + Int.SIZE_BYTES + it.size }
+        val blockSize = pairsSize + Long.SIZE_BYTES + SIGNING_BLOCK_MAGIC.size
+        val block = ByteBuffer.allocate(Long.SIZE_BYTES + blockSize).order(ByteOrder.LITTLE_ENDIAN)
+        block.putLong(blockSize.toLong())
+        pairs.forEach { (id, value) ->
+            block.putLong((Int.SIZE_BYTES + value.size).toLong())
+            block.putInt(id)
+            block.put(value)
+        }
+        block.putLong(blockSize.toLong())
+        block.put(SIGNING_BLOCK_MAGIC)
+
+        archive.putInt(offsetField, centralDirectory + block.capacity())
+        signed.writeBytes(
+            bytes.copyOfRange(0, centralDirectory) + block.array() + bytes.copyOfRange(centralDirectory, bytes.size)
+        )
+        return signed
+    }
+
+    private fun signingBlockOf(file: File): Map<Int, List<Byte>>? =
+        ArchiveFile(file).use { archive ->
+            archive.apkSignatureBlock?.filter { it.idValue != PADDING_ID }?.associate { pair ->
+                val raw = File(workspace, "pair.bin").also(pair::writeRaw).readBytes()
+                pair.idValue to raw.toList()
+            }
+        }
 
     private fun entriesOf(file: File) = ZipFile(file).use { zip -> zip.entries().asSequence().map { it.name }.toList() }
 
@@ -75,5 +115,36 @@ class StripNativeLibsTest {
 
         assertFalse(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
         assertFalse(output.exists())
+    }
+
+    @Test
+    fun `the signing block of the input is kept`() {
+        val input = withSigningBlock(
+            apk("classes.dex", "lib/arm64-v8a/libapp.so", "lib/x86_64/libapp.so"),
+            mapOf(FIRST_UNKNOWN_ID to "certificate chain".toByteArray(), SECOND_UNKNOWN_ID to "other signer".toByteArray())
+        )
+        val signingBlock = signingBlockOf(input)
+
+        assertTrue(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
+        assertEquals(listOf("classes.dex", "lib/arm64-v8a/libapp.so"), entriesOf(output).sorted())
+        assertEquals(setOf(FIRST_UNKNOWN_ID, SECOND_UNKNOWN_ID), signingBlock?.keys)
+        assertEquals(signingBlock, signingBlockOf(output))
+    }
+
+    @Test
+    fun `an unsigned APK stays unsigned`() {
+        val input = apk("classes.dex", "lib/arm64-v8a/libapp.so", "lib/x86_64/libapp.so")
+
+        assertTrue(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
+        assertNull(signingBlockOf(output))
+    }
+
+    private companion object {
+        const val END_OF_CENTRAL_DIRECTORY_SIGNATURE = 0x06054b50
+        const val CENTRAL_DIRECTORY_OFFSET_FIELD = 16
+        const val FIRST_UNKNOWN_ID = 0x0dec0ded
+        const val SECOND_UNKNOWN_ID = 0x0badf00d
+        const val PADDING_ID = 0x42726577
+        val SIGNING_BLOCK_MAGIC = "APK Sig Block 42".toByteArray()
     }
 }

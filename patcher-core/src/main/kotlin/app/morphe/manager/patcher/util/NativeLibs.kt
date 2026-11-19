@@ -107,8 +107,9 @@ object NativeLibs {
     /**
      * Writes [apkFile] to [output] without the native libraries the patcher strips from it, see
      * [keptArchitectures], copying every other entry as it is stored. False, writing nothing, when
-     * there is nothing to strip. The signature does not survive, so the result is an input to
-     * patch rather than an APK to install.
+     * there is nothing to strip. The APK signing block is carried over unchanged, which is where
+     * patches read the signing certificates from, but its digests no longer match the entries, so
+     * the result is an input to patch rather than an APK to install.
      */
     fun writeStripped(apkFile: File, output: File, supportedAbis: List<String>): Boolean {
         val kept = keptArchitectures(apkFile, supportedAbis).singleOrNull()?.arch ?: return false
@@ -119,7 +120,7 @@ object NativeLibs {
                 entry.isFile && extractAbiFromEntry(entry.name).let { it == null || it == kept }
             }
             // Closes the file itself once written
-            ApkFileWriter(output, sources).write()
+            ApkFileWriter(output, sources).apply { apkSignatureBlock = archive.apkSignatureBlock }.write()
         }
         return true
     }
