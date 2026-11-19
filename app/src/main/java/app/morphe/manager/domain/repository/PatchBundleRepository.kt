@@ -243,6 +243,9 @@ class PatchBundleRepository(
     private val bundleUpdateProgressFlow = MutableStateFlow<BundleUpdateProgress?>(null)
     val bundleUpdateProgress: StateFlow<BundleUpdateProgress?> = bundleUpdateProgressFlow.asStateFlow()
 
+    /** Takes down the result of the last update, see [showFinished]. */
+    private var bundleUpdateAutoClearJob: Job? = null
+
     private val pendingUpdatesFlow = MutableStateFlow<Map<Int, String>>(emptyMap())
 
     /**
@@ -1943,8 +1946,10 @@ class PatchBundleRepository(
     ) {
         val finished = BundleUpdateProgress(total = count, completed = count, phase = phase, result = result)
         bundleUpdateProgressFlow.value = finished
-        scope.launch {
-            delay(3.5.seconds)
+        // A result equal to the one before would otherwise be taken down on the earlier clock
+        bundleUpdateAutoClearJob?.cancel()
+        bundleUpdateAutoClearJob = scope.launch {
+            delay(4.seconds)
             bundleUpdateProgressFlow.compareAndSet(finished, null)
         }
     }
