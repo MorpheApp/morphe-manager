@@ -207,22 +207,23 @@ class PatcherProcesses(
     }
 
     private suspend fun start(bundles: List<String>, vm: PatcherVm): PatcherProcess {
-        val process = try {
-            startHost(vm)
+        var process: PatcherProcess? = null
+        try {
+            process = startHost(vm)
+            try {
+                process.send(HostCommand.Preload(bundles))
+            } catch (_: IOException) {
+                // Gone already, which awaitStarted tells
+            }
+            process.awaitStarted()
+            return process
         } catch (e: Exception) {
-            // What the run falls back to ART on
-            throw if (vm == PatcherVm.JVM && (e is IllegalStateException || e is RemoteException)) {
+            process?.close()
+            // What the run falls back to ART on, which a canceled start is not, an IllegalStateException as well
+            throw if (vm == PatcherVm.JVM && e !is CancellationException && (e is IllegalStateException || e is RemoteException)) {
                 JvmUnavailableException(e.message ?: "The patcher JVM did not start", e)
             } else {
                 e
-            }
-        }
-
-        return process.apply {
-            try {
-                send(HostCommand.Preload(bundles))
-            } catch (_: IOException) {
-                // Gone already, which isAlive tells whoever takes it
             }
         }
     }
@@ -453,7 +454,40 @@ class PatcherProcesses(
         // Set once a run that records for the AOT cache succeeded, to make the cache from
         private var recorded = false
 
+        // How the process of the JVM ended, as its service reports it
+        private var jvmEnded: HostEvent.JvmEnded? = null
+
         val isAlive get() = connection.service.asBinder().isBinderAlive
+
+        /**
+         * Waits for the host to report that it runs. A JVM that could not start, for an option, a
+         * library or a heap the device has no room for, ends before that, which the service of the
+         * process reports with what the JVM wrote.
+         *
+         * @throws IllegalStateException If the process ended first or did not start in time.
+         */
+        suspend fun awaitStarted() {
+            val logged = mutableListOf<String>()
+            val started = withTimeoutOrNull(HOST_START_TIMEOUT) {
+                for (event in events) when (event) {
+                    HostEvent.Started -> return@withTimeoutOrNull true
+                    is HostEvent.JvmEnded -> jvmEnded = event
+                    is HostEvent.Log -> logged += event.message
+                    // Nothing else comes before the host runs
+                    else -> Unit
+                }
+                false
+            }
+            if (started == true) return
+
+            if (started == false) ended = true
+            val cause = when {
+                started == null -> "did not start within $HOST_START_TIMEOUT"
+                else -> jvmEnded?.let { "ended before it started, its process ${it.describe()}" } ?: "ended before it started"
+            }
+            val details = (logged + jvmEnded?.output.orEmpty()).joinToString("\n")
+            throw IllegalStateException("The patcher $vm $cause" + if (details.isNotEmpty()) ":\n$details" else "")
+        }
 
         @Synchronized
         fun send(command: HostCommand) {
@@ -474,11 +508,16 @@ class PatcherProcesses(
             val finished = relay(logger, listener)
             ended = true
             if (finished == null) {
-                val killed = killedException()
+                // The system records the end of the service, which outlives a JVM that crashed or was killed
+                val end = jvmEnded
+                val killed = end?.let { PatcherKilledException("the JVM ${it.describe()}", it.crashed) } ?: killedException()
                 val errorFile = errorFile(started.jvmPid)
                 if (errorFile.exists()) {
                     logger.error("Patcher JVM error report:\n${errorFile.readText()}")
                     errorFile.delete()
+                } else if (end != null && end.output.isNotEmpty()) {
+                    // The report opens with what a crashing JVM prints, which is all there is without one
+                    logger.error("Patcher JVM output:\n${end.output.joinToString("\n")}")
                 }
                 throw killed
             }
@@ -538,6 +577,9 @@ class PatcherProcesses(
             val runningPatch = RunningPatchWatch(this, logger)
             try {
                 for (event in events) when (event) {
+                    // Taken by awaitStarted already
+                    HostEvent.Started -> Unit
+                    is HostEvent.JvmEnded -> jvmEnded = event
                     is HostEvent.Log -> logger.log(event.level, event.message)
                     HostEvent.StepCompleted -> listener.stepCompleted()
                     is HostEvent.SplitPreparation -> listener.splitPreparation(event.event)
@@ -738,6 +780,9 @@ class PatcherProcesses(
 
         // Generous because a slow device on a cold start can take many seconds to start a process
         val CONNECT_TIMEOUT = 30.seconds
+
+        // A JVM starts in well under a second on a recent phone, and in a few on a slow one
+        val HOST_START_TIMEOUT = 1.minutes
 
         val EXIT_RECORD_TIMEOUT = 2.seconds
         val EXIT_RECORD_POLL = 200.milliseconds

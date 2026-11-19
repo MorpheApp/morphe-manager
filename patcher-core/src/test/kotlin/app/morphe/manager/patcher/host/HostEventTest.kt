@@ -18,6 +18,8 @@ class HostEventTest {
     @Test
     fun `every event comes back as it was sent`() {
         val events = listOf(
+            HostEvent.Started,
+            HostEvent.JvmEnded(139, listOf("# A fatal error has been detected")),
             HostEvent.Log(LogLevel.WARN, "line one\nline two"),
             HostEvent.StepCompleted,
             HostEvent.SplitPreparation(SplitPreparationEvent.Merging("split_config.arm64_v8a.apk")),
@@ -48,6 +50,25 @@ class HostEventTest {
     @Test
     fun `an event takes a single line`() {
         assertFalse('\n' in HostEvent.encode(HostEvent.Log(LogLevel.INFO, "a\nb")))
+    }
+
+    @Test
+    fun `the end of a JVM tells a crash from a kill and an exit`() {
+        val segfault = HostEvent.JvmEnded(139, emptyList())
+        assertTrue(segfault.crashed)
+        assertEquals("crashed with signal 11", segfault.describe())
+
+        val blocked = HostEvent.JvmEnded(159, emptyList())
+        assertTrue(blocked.crashed)
+        assertEquals("made a system call Android blocks (signal 31)", blocked.describe())
+
+        val killed = HostEvent.JvmEnded(137, emptyList())
+        assertFalse(killed.crashed)
+        assertEquals("was killed by signal 9", killed.describe())
+
+        val exited = HostEvent.JvmEnded(1, emptyList())
+        assertFalse(exited.crashed)
+        assertEquals("exited with 1", exited.describe())
     }
 
     @Test

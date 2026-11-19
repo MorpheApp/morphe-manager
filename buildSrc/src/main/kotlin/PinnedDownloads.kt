@@ -36,7 +36,7 @@ internal fun downloadPinned(url: String, sha256: String, cache: File, logger: Lo
 
 private fun archiveExtension(url: String): String {
     val name = url.substringAfterLast('/')
-    return listOf(".tar.xz", ".tar.gz", ".deb").firstOrNull { name.endsWith(it) } ?: ""
+    return listOf(".tar.xz", ".tar.gz").firstOrNull { name.endsWith(it) } ?: ""
 }
 
 private fun File.sha256(): String {
@@ -50,23 +50,6 @@ private fun File.sha256(): String {
         }
     }
     return digest.digest().joinToString("") { "%02x".format(it) }
-}
-
-/** The members of an ar archive, the format a Debian package comes in, by name. */
-internal fun readArMembers(archive: File): Map<String, ByteArray> {
-    val data = archive.readBytes()
-    if (String(data, 0, AR_MAGIC.length, Charsets.US_ASCII) != AR_MAGIC) throw GradleException("$archive is not an ar archive")
-    val members = mutableMapOf<String, ByteArray>()
-    var offset = AR_MAGIC.length
-    while (offset + AR_HEADER_SIZE <= data.size) {
-        val name = String(data, offset, 16, Charsets.US_ASCII).trim().removeSuffix("/")
-        val size = String(data, offset + 48, 10, Charsets.US_ASCII).trim().toInt()
-        val start = offset + AR_HEADER_SIZE
-        members[name] = data.copyOfRange(start, start + size)
-        // Members are aligned to an even offset
-        offset = start + size + size % 2
-    }
-    return members
 }
 
 /** A regular file or a symbolic link of a tar archive. */
@@ -84,7 +67,7 @@ internal fun readTarEntries(input: InputStream): Map<String, TarEntry> {
         val type = header[156].toInt().toChar()
         val content = ByteArray(size).also { if (!input.readFully(it)) throw GradleException("Truncated tar entry $name") }
         // The content is padded to whole blocks
-        input.skipNBytes(((TAR_BLOCK - size % TAR_BLOCK) % TAR_BLOCK).toLong())
+        input.readFully(ByteArray((TAR_BLOCK - size % TAR_BLOCK) % TAR_BLOCK))
 
         val path = (if (prefix.isEmpty()) name else "$prefix/$name").removePrefix("./").removePrefix("/")
         when (type) {
@@ -96,8 +79,8 @@ internal fun readTarEntries(input: InputStream): Map<String, TarEntry> {
 }
 
 /**
- * The content of the file at [path], following symbolic links within the archive, which Debian
- * packages use to name a library by its soname.
+ * The content of the file at [path], following symbolic links within the archive, which packages
+ * use to name a library by its soname.
  */
 internal fun Map<String, TarEntry>.resolve(path: String): ByteArray {
     var current = path
@@ -126,7 +109,5 @@ private fun InputStream.readFully(buffer: ByteArray): Boolean {
     return true
 }
 
-private const val AR_MAGIC = "!<arch>\n"
-private const val AR_HEADER_SIZE = 60
 private const val TAR_BLOCK = 512
 private const val MAX_LINKS = 8

@@ -18,13 +18,13 @@ import androidx.core.content.IntentCompat
 import androidx.work.ForegroundInfo
 import app.morphe.manager.patcher.host.HostEvent
 import app.morphe.manager.patcher.host.serveRun
-import app.morphe.manager.patcher.logger.LogLevel
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.runtime.jvm.EmbeddedJvm
 import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
 import app.morphe.manager.util.LOG_TAG
 import kotlinx.parcelize.Parcelize
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.ExecutionException
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
@@ -101,50 +101,86 @@ class PatcherService : Service() {
         val fds = intArrayOf(commands.fd, events.fd)
         val args = command + fds.map { "/proc/self/fd/$it" }
         val pid = CompletableFuture<Int>()
+        val jvmOutput = JvmOutput(output)
 
         thread(name = "PatcherJvm") {
-            val started = EmbeddedJvm.spawn(args, fds, outputSink.fd)
+            val started = try {
+                EmbeddedJvm.spawn(args, fds, outputSink.fd)
+            } catch (e: Throwable) {
+                endReport.close()
+                pid.completeExceptionally(e)
+                return@thread
+            }
             pid.complete(started)
             if (started <= 0) {
                 endReport.close()
                 return@thread
             }
-            endWith(endReport, EmbeddedJvm.waitProcess(started))
+            endWith(endReport, EmbeddedJvm.waitProcess(started), jvmOutput)
         }
         val started = try {
             pid.get()
+        } catch (e: ExecutionException) {
+            throw IllegalStateException("The patcher JVM did not start", e.cause)
         } finally {
             // The process has its copies, and the pipes end with it
             outputSink.close()
             commands.close()
             events.close()
         }
-        check(started > 0) { "The patcher JVM did not start (${-started})" }
-
-        thread(isDaemon = true, name = "PatcherJvmOutput") {
-            ParcelFileDescriptor.AutoCloseInputStream(output).bufferedReader().useLines { lines ->
-                lines.forEach { Log.i(JVM_LOG_TAG, it) }
-            }
-        }
+        check(started > 0) { "The patcher JVM did not start (errno ${-started})" }
         return started
     }
 
     /**
-     * Ends this process with the JVM, which exited with [status], as the app tells the end of a run
-     * by the end of the process. The host reports its own end and exits right after, unless the
-     * system or a crash ended it first, which only the exit status tells, so that is reported here.
+     * Ends this process with the JVM, which ended with [status], as the app tells the end of a run
+     * by the end of the process. The host reports its own end and exits right after. A crash, a
+     * kill or a JVM that never got as far as running leaves that to the exit status and the
+     * [output] of the JVM, so those are reported here.
      */
-    private fun endWith(endReport: ParcelFileDescriptor, status: Int): Nothing {
+    private fun endWith(endReport: ParcelFileDescriptor, status: Int, output: JvmOutput): Nothing {
+        if (status != 0) Log.w(JVM_LOG_TAG, "The patcher JVM ended with $status")
+        val ended = HostEvent.JvmEnded(status, output.tail())
         ParcelFileDescriptor.AutoCloseOutputStream(endReport).bufferedWriter().use { writer ->
-            if (status != 0) {
-                val cause = if (status > SIGNAL_EXIT_BASE) "was killed by signal ${status - SIGNAL_EXIT_BASE}" else "exited with $status"
-                runCatching {
-                    writer.write(HostEvent.encode(HostEvent.Log(LogLevel.ERROR, "The patcher JVM process $cause")))
-                    writer.newLine()
-                }
+            // The app may have stopped reading, as it does once the run finished
+            runCatching {
+                writer.write(HostEvent.encode(ended))
+                writer.newLine()
             }
         }
         exitProcess(status)
+    }
+
+    /**
+     * Logs what the JVM writes to its standard streams, which is little once the host runs, as it
+     * takes them over, and keeps the last lines for [endWith].
+     */
+    private class JvmOutput(source: ParcelFileDescriptor) {
+        private val lines = ArrayDeque<String>()
+
+        private val reader = thread(isDaemon = true, name = "PatcherJvmOutput") {
+            ParcelFileDescriptor.AutoCloseInputStream(source).bufferedReader().useLines { lines ->
+                lines.forEach { line ->
+                    Log.i(JVM_LOG_TAG, line)
+                    synchronized(this) {
+                        this.lines.addLast(line)
+                        if (this.lines.size > TAIL_LINES) this.lines.removeFirst()
+                    }
+                }
+            }
+        }
+
+        /** The last lines, once the JVM ended and what it wrote last was read. */
+        fun tail(): List<String> {
+            reader.join(DRAIN_TIMEOUT_MS)
+            return synchronized(this) { lines.toList() }
+        }
+
+        private companion object {
+            // Enough for the error a JVM that could not start prints, and the summary of a crash
+            const val TAIL_LINES = 30
+            const val DRAIN_TIMEOUT_MS = 1000L
+        }
     }
 
     // Started once the run begins, as some systems end a process that holds no foreground service
@@ -185,10 +221,6 @@ class PatcherService : Service() {
 
         // What the output of the JVM is logged under
         private const val JVM_LOG_TAG = "EmbeddedJvm"
-
-        // An exit status above this is 128 plus the signal that ended the process
-        private const val SIGNAL_EXIT_BASE = 128
-
 
         // The heap the JVM starts with, or its limit if that is smaller. A gigabyte made no
         // difference on a recent 64-bit phone, so this stays small enough to cost little memory

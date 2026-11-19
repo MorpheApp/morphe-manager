@@ -82,6 +82,7 @@ fun serveRun(
 ): Nothing {
     val code = try {
         HostEvents(FileOutputStream(eventsFile)).use { events ->
+            events.send(HostEvent.Started)
             // Patches print what they did, which on Android goes to /dev/null or at best logcat.
             // The log is the one place the user sees it
             System.setOut(events.printer())

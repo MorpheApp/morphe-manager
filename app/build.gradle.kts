@@ -358,11 +358,11 @@ android {
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
         buildConfigField("String", "GLIBC_LOADER_LIBRARY", "\"$glibcLoaderLibrary\"")
 
-        // The launcher is the only C++ of the app, so it takes in what it uses of the C++ runtime
+        // The launcher is plain C, which needs no C++ runtime
         @Suppress("UnstableApiUsage")
         externalNativeBuild {
             cmake {
-                arguments += "-DANDROID_STL=c++_static"
+                arguments += "-DANDROID_STL=none"
                 // Only an ABI the app ships a JVM for starts one
                 abiFilters += embeddedJvms.keys
             }

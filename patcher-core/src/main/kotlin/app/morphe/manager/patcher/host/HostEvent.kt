@@ -20,6 +20,46 @@ import kotlinx.serialization.json.Json
  */
 @Serializable
 sealed interface HostEvent {
+    /** The first event of a host, which tells a VM that started from one that ended on the way. */
+    @Serializable
+    @SerialName("started")
+    data object Started : HostEvent
+
+    /**
+     * The end of the process of an embedded JVM, which the service it runs for reports, as the
+     * host cannot report its own crash or kill.
+     *
+     * @param status The exit code, or 128 plus the signal that ended the process.
+     * @param output The last lines the JVM wrote to its standard streams, which the host only takes
+     *               over once it runs, so they tell why a JVM ended before that.
+     */
+    @Serializable
+    @SerialName("jvm_ended")
+    data class JvmEnded(val status: Int, val output: List<String>) : HostEvent {
+        /** The signal that ended the process, or null if it exited. */
+        val signal get() = (status - SIGNAL_EXIT_BASE).takeIf { status > SIGNAL_EXIT_BASE }
+
+        /** Whether the JVM crashed rather than exited or was killed, which disabling it may get past. */
+        val crashed get() = signal in CRASH_SIGNALS
+
+        fun describe() = when (val signal = signal) {
+            SIGSYS -> "made a system call Android blocks (signal $signal)"
+            null -> "exited with $status"
+            in CRASH_SIGNALS -> "crashed with signal $signal"
+            else -> "was killed by signal $signal"
+        }
+
+        companion object {
+            /** An exit status above this is 128 plus the signal that ended the process, as a shell reports it. */
+            const val SIGNAL_EXIT_BASE = 128
+
+            private const val SIGSYS = 31
+
+            // SIGILL, SIGABRT, SIGBUS, SIGFPE, SIGSEGV and SIGSYS
+            private val CRASH_SIGNALS = setOf(4, 6, 7, 8, 11, SIGSYS)
+        }
+    }
+
     @Serializable
     @SerialName("log")
     data class Log(val level: LogLevel, val message: String) : HostEvent

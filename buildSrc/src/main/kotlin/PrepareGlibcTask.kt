@@ -15,11 +15,10 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.tukaani.xz.XZInputStream
-import java.io.File
 
 /**
- * Takes the GNU C library a JVM built for Linux runs on from packages of it, Debian packages or
- * pacman ones, for a runtime that Android's own C library cannot load.
+ * Takes the GNU C library a JVM built for Linux runs on from pacman packages of it, for a runtime
+ * that Android's own C library cannot load.
  *
  * Android lets an app execute only the files it ships as native libraries, so the dynamic loader
  * goes into [nativeLibraries] under a library name, from where the app starts the JVM with it. The
@@ -33,7 +32,7 @@ abstract class PrepareGlibcTask : DefaultTask() {
     @get:Input
     abstract val packages: MapProperty<String, String>
 
-    /** The directory of the packages the libraries are in, such as lib/arm-linux-gnueabihf. */
+    /** The directory of the packages the libraries are in, such as data/data/com.termux/files/usr/glibc/lib. */
     @get:Input
     abstract val libraryDirectory: Property<String>
 
@@ -78,12 +77,15 @@ abstract class PrepareGlibcTask : DefaultTask() {
 
         val files = packages.get().map { (url, sha256) ->
             val archive = downloadPinned(url, sha256, downloadCache.get().asFile, logger)
-            val entries = packageFiles(archive)
-            // The notice a Debian package has, which the licenses of the libraries ask to go with them
-            entries.keys.firstOrNull { it.startsWith("usr/share/doc/") && it.endsWith("/copyright") }?.let { notice ->
-                runtime.resolve("legal/glibc/${notice.split('/')[3]}/copyright").apply {
+            val entries = XZInputStream(archive.inputStream().buffered()).use(::readTarEntries)
+            // The notices of the package, which the licenses of the libraries ask to go with them
+            entries.keys.forEach { path ->
+                val (name, file) = NOTICE.find(path)?.destructured ?: return@forEach
+                // Some link to the texts of the licenses termux ships apart, which the app's own licenses hold
+                val notice = runCatching { entries.resolve(path) }.getOrNull() ?: return@forEach
+                runtime.resolve("legal/glibc/$name/$file").apply {
                     parentFile.mkdirs()
-                    writeBytes(entries.resolve(notice))
+                    writeBytes(notice)
                 }
             }
             entries
@@ -107,18 +109,8 @@ abstract class PrepareGlibcTask : DefaultTask() {
         }
     }
 
-    // A Debian package is an ar archive around a tar of its files, a pacman one is that tar itself
-    private fun packageFiles(archive: File): Map<String, TarEntry> {
-        val isDeb = archive.inputStream().use { String(it.readNBytes(AR_MAGIC.length), Charsets.US_ASCII) } == AR_MAGIC
-        val tar = if (isDeb) {
-            readArMembers(archive)["data.tar.xz"] ?: throw GradleException("$archive holds no data.tar.xz")
-        } else {
-            archive.readBytes()
-        }
-        return XZInputStream(tar.inputStream()).use(::readTarEntries)
-    }
-
     private companion object {
-        const val AR_MAGIC = "!<arch>\n"
+        // Such as .../share/doc/glibc/copyright, under the name of the package
+        val NOTICE = Regex("share/doc/([^/]+)/(copyright[^/]*)$")
     }
 }
