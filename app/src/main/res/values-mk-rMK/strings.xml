@@ -1075,6 +1075,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режимот на закрпување е поставен на root mount. Оваа зачувана апликација не беше инсталирана со mount</string>
     <string name="mount_version_mismatch_message">Верзијата на инсталираната апликација (%2$s) не одговара на верзијата на закрпената апликација (%1$s). Монтирајте ја соодветната верзија на инсталираната апликација, а потоа обидете повторно.</string>
     <string name="mount_stock_restore_failed_message">Android го одби зачуваниот оригинален APK. Инсталирајте ја соодветната оригинална верзија, па потоа обидете се повторно со Монтирање</string>
+    <string name="mount_stock_mismatch_message">Инсталираната апликација не е оригиналната. Изберете го оригиналниот APK или реинсталирајте ја фабричката верзија, па потоа обидете се повторно со Mount</string>
     <string name="installer_status_shizuku_unsupported">Неподдржана верзија на Shizuku</string>
     <string name="installer_action_open_shizuku">Отвори Shizuku</string>
     <string name="installer_hint_generic">Инсталацијата не успеа. Обидете се повторно или префрлете се на друг инсталер</string>
@@ -1357,7 +1358,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Веб-страница</string>
     <string name="about_link_translations">Преводи</string>
     <string name="contributors">Придонесувачи</string>
-    <string name="contributors_description">Последните 12 месеци</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Цело време</string>
+    <string name="contributors_6_months">6 месеци</string>
+    <string name="contributors_3_months">3 месеци</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Поддржувачи</string>
     <string name="supporters_description">Поддржувачи на Open Collective</string>

@@ -1076,6 +1076,7 @@ Vipimo vya picha lazima viwe kama vifuatavyo:
     <string name="installer_mount_warning_install">Hali ya patch imewekwa kwenye root mount. Programu hii iliyohifadhiwa haikusanikishwa kwa kutumia mount</string>
     <string name="mount_version_mismatch_message">Toleo la programu ya awali (%2$s) halilingani na toleo la programu iliyorekebishwa (%1$s). Weka toleo la awali linalolingana, kisha jaribu tena</string>
     <string name="mount_stock_restore_failed_message">Android imekataa APK asili iliyohifadhiwa. Sakinisha toleo sahihi la stock, kisha jaribu Mount tena</string>
+    <string name="mount_stock_mismatch_message">App iliyosakinishwa si ya asili. Chagua APK ya asili au sakinisha tena toleo la stock, kisha jaribu Mount tena</string>
     <string name="installer_status_shizuku_unsupported">Toleo la Shizuku lililosakinishwa halitungwi</string>
     <string name="installer_action_open_shizuku">Fungua Shizuku</string>
     <string name="installer_hint_generic">Usakinishaji umefeli. Jaribu tena au badilisha kwenda kwa kisakinishi kingine</string>
@@ -1358,7 +1359,10 @@ Maelezo: %2$s"</string>
     <string name="about_link_website">Tovuti</string>
     <string name="about_link_translations">Tafsiri</string>
     <string name="contributors">Wachangia</string>
-    <string name="contributors_description">Miezi 12 ya mwisho</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Muda wote</string>
+    <string name="contributors_6_months">Miezi 6</string>
+    <string name="contributors_3_months">Miezi 3</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Wafadhili</string>
     <string name="supporters_description">Wafadhili kwenye Open Collective</string>

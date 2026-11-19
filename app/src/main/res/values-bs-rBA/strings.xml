@@ -1076,6 +1076,7 @@ Dimenzije slika moraju biti sljedeće:
     <string name="installer_mount_warning_install">Režim patchovanja je postavljen na root mount. Ova spremljena aplikacija nije instalirana pomoću mount-a</string>
     <string name="mount_version_mismatch_message">Verzija originalne aplikacije (%2$s) se ne podudara sa verzijom zakrpljene aplikacije (%1$s). Montirajte odgovarajuću originalnu verziju, a zatim pokušajte ponovo</string>
     <string name="mount_stock_restore_failed_message">Android je odbio sačuvani originalni APK. Instalirajte odgovarajuću originalnu verziju, zatim ponovo pokušajte montirati</string>
+    <string name="mount_stock_mismatch_message">Instalirana aplikacija nije originalna. Odaberite originalni APK ili ponovno instalirajte fabričku verziju, a zatim pokušajte ponovo Mount</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku-a nije podržana</string>
     <string name="installer_action_open_shizuku">Otvori Shizuku</string>
     <string name="installer_hint_generic">Instalacija nije uspjela. Pokušajte ponovo ili prebacite na drugi instalater</string>
@@ -1358,7 +1359,10 @@ Detalji: %2$s"</string>
     <string name="about_link_website">Web stranica</string>
     <string name="about_link_translations">Prevozi</string>
     <string name="contributors">Pridonositelji</string>
-    <string name="contributors_description">Posljednjih 12 mjeseci</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Svo vrijeme</string>
+    <string name="contributors_6_months">6 mjeseci</string>
+    <string name="contributors_3_months">3 mjeseca</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Podršivači</string>
     <string name="supporters_description">Podršivači na Open Collective</string>

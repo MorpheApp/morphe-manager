@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Ο τρόπος τροποποίησης είναι ορισμένος σε root mount. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε χρησιμοποιώντας mount</string>
     <string name="mount_version_mismatch_message">Η έκδοση της αρχικής ανεπεξέργαστης εφαρμογής (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Προσαρτήστε την αρχική ανεπεξέργαστη έκδοση της εφαρμογής, και μετά προσπαθήστε ξανά.</string>
     <string name="mount_stock_restore_failed_message">Το Android απέρριψε το αρχικό APK που αποθηκεύτηκε. Εγκαταστήστε την αντίστοιχη αρχική έκδοση, στη συνέχεια δοκιμάστε να προσαρτήσετε ξανά</string>
+    <string name="mount_stock_mismatch_message">Η εγκατεστημένη εφαρμογή δεν είναι η αρχική. Επιλέξτε το αρχικό APK ή επανεγκαταστήστε την έκδοση εργοστασίου και στη συνέχεια δοκιμάστε ξανά το Mount</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
     <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Ιστοσελίδα</string>
     <string name="about_link_translations">Μεταφράσεις</string>
     <string name="contributors">Συνεισφέροντες</string>
-    <string name="contributors_description">Τελευταί 12 μήνες</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Όλος ο χρόνος</string>
+    <string name="contributors_6_months">6 μήνες</string>
+    <string name="contributors_3_months">3 μήνες</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Υποστηρικτές</string>
     <string name="supporters_description">Χρηματοδότες στο Open Collective</string>

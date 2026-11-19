@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">প্যাচ মোড root mount-এ সেট করা আছে। এই সেভ করা অ্যাপটি mount ব্যবহার করে ইনস্টল করা হয়নি</string>
     <string name="mount_version_mismatch_message">স্টক অ্যাপের ভার্সন (%2$s) প্যাচ করা অ্যাপের ভার্সনের (%1$s) সাথে মেলে না। মিলে যাওয়া স্টক ভার্সনটি মাউন্ট করুন, তারপর আবার চেষ্টা করুন</string>
     <string name="mount_stock_restore_failed_message">অ্যান্ড্রয়েড সংরক্ষিত মূল APK প্রত্যাখ্যান করেছে। মিলে যাওয়া স্টক সংস্করণ ইনস্টল করুন, তারপর আবার মাউন্ট করার চেষ্টা করুন।</string>
+    <string name="mount_stock_mismatch_message">ইনস্টল করা অ্যাপটি মূল অ্যাপ নয়। মূল APK বেছে নিন অথবা স্টক সংস্করণটি পুনরায় ইনস্টল করুন, তারপর আবার Mount করার চেষ্টা করুন</string>
     <string name="installer_status_shizuku_unsupported">ইনস্টল করা Shizuku ভার্সন সমর্থিত নয়</string>
     <string name="installer_action_open_shizuku">Shizuku খুলুন</string>
     <string name="installer_hint_generic">ইনস্টলেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন বা ভিন্ন ইনস্টলার ব্যবহার করুন</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ওয়েবসাইট</string>
     <string name="about_link_translations">অনুবাদ</string>
     <string name="contributors">অবদানকারী</string>
-    <string name="contributors_description">গত ১২ মাস</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">সর্বকালীন</string>
+    <string name="contributors_6_months">৬ মাস</string>
+    <string name="contributors_3_months">৩ মাস</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">সমর্থক</string>
     <string name="supporters_description">Open Collective-এ ব্যাককাররা</string>

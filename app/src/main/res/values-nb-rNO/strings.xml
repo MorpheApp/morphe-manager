@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Patch-modus er satt til root-montering. Denne lagrede appen ble ikke installert ved bruk av montering</string>
     <string name="mount_version_mismatch_message">Standardversjonen (%2$s) stemmer ikke overens med den patchede appversjonen (%1$s). Monter den matchende standardversjonen, og prøv igjen</string>
     <string name="mount_stock_restore_failed_message">Android avviste den lagrede originale APK-en. Installer den matchende standardversjonen, og prøv å montere igjen.</string>
+    <string name="mount_stock_mismatch_message">Den installerte appen er ikke den originale. Velg den originale APK-filen eller installer fabrikkversjonen på nytt, og prøv Monter igjen</string>
     <string name="installer_status_shizuku_unsupported">Den installerte Shizuku-versjonen støttes ikke</string>
     <string name="installer_action_open_shizuku">Åpne Shizuku</string>
     <string name="installer_hint_generic">Installeringen mislyktes. Prøv igjen eller bytt til et annet installasjonsprogram</string>
@@ -1358,7 +1359,10 @@ Detaljer: %2$s"</string>
     <string name="about_link_website">Nettside</string>
     <string name="about_link_translations">Oversettelser</string>
     <string name="contributors">Bidragsytere</string>
-    <string name="contributors_description">Siste 12 måneder</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Hele tiden</string>
+    <string name="contributors_6_months">6 måneder</string>
+    <string name="contributors_3_months">3 måneder</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Støttespillere</string>
     <string name="supporters_description">Støttespillere på Open Collective</string>

@@ -1076,6 +1076,7 @@ Dimensi gambar harus sebagai berikut:
     <string name="installer_mount_warning_install">Mode tambalan diatur ke mount root. Aplikasi tersimpan ini tidak dipasang menggunakan mount</string>
     <string name="mount_version_mismatch_message">Versi aplikasi bawaan (%2$s) tidak cocok dengan versi aplikasi yang ditambal (%1$s). Pasang versi bawaan yang cocok, lalu coba lagi</string>
     <string name="mount_stock_restore_failed_message">Android menolak APK asli yang disimpan. Pasang versi bawaan yang sesuai, lalu coba Pasang lagi</string>
+    <string name="mount_stock_mismatch_message">Aplikasi yang terinstal bukan versi aslinya. Pilih APK asli atau instal ulang versi stok, lalu coba Mount kembali</string>
     <string name="installer_status_shizuku_unsupported">Versi Shizuku yang terpasang tidak didukung</string>
     <string name="installer_action_open_shizuku">Buka Shizuku</string>
     <string name="installer_hint_generic">Pemasangan gagal. Coba lagi atau ganti pemasang</string>
@@ -1358,7 +1359,10 @@ Rincian: %2$s"</string>
     <string name="about_link_website">Situs Web</string>
     <string name="about_link_translations">Terjemahan</string>
     <string name="contributors">Kontributor</string>
-    <string name="contributors_description">12 bulan terakhir</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Sepanjang waktu</string>
+    <string name="contributors_6_months">6 bulan</string>
+    <string name="contributors_3_months">3 bulan</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Pendukung</string>
     <string name="supporters_description">Pendukung di Open Collective</string>

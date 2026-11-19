@@ -1077,6 +1077,7 @@ As dimensións da imaxe deben ser as seguintes:
     <string name="installer_mount_warning_install">O modo de parcheo está configurado en montaxe root. Esta aplicación gardada non se instalou mediante montaxe</string>
     <string name="mount_version_mismatch_message">A versión da aplicación orixinal (%2$s) non coincide coa versión da aplicación parcheada (%1$s). Monta a versión orixinal correspondente e tenta de novo</string>
     <string name="mount_stock_restore_failed_message">Android rexeitou o APK orixinal gardado. Instala a versión de fábrica correspondente e intenta montar de novo</string>
+    <string name="mount_stock_mismatch_message">A aplicación instalada non é a orixinal. Escolla o APK orixinal ou reinstale a versión de fábrica, e logo intente montar de novo</string>
     <string name="installer_status_shizuku_unsupported">A versión de Shizuku instalada non é compatible</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">A instalación fallou. Tenta de novo ou cambia a un instalador diferente</string>
@@ -1359,7 +1360,10 @@ Detalles: %2$s"</string>
     <string name="about_link_website">Sitio web</string>
     <string name="about_link_translations">Traducións</string>
     <string name="contributors">Contribuidores</string>
-    <string name="contributors_description">Últimos 12 meses</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Todo o tempo</string>
+    <string name="contributors_6_months">6 meses</string>
+    <string name="contributors_3_months">3 meses</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Apoiadores</string>
     <string name="supporters_description">Apoiadores en Open Collective</string>

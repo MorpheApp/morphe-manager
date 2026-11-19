@@ -1077,6 +1077,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_mount_warning_install">Chế độ vá được đặt thành root mount. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="mount_version_mismatch_message">Phiên bản ứng dụng gốc (%2$s) không khớp với phiên bản ứng dụng đã sửa (%1$s). Mount phiên bản gốc khớp, sau đó thử lại</string>
     <string name="mount_stock_restore_failed_message">Android đã từ chối APK gốc đã lưu. Hãy cài đặt đúng phiên bản gốc tương ứng rồi thử gắn lại</string>
+    <string name="mount_stock_mismatch_message">Ứng dụng đã cài đặt không phải là bản gốc. Hãy chọn APK gốc hoặc cài đặt lại phiên bản stock, sau đó thử Mount lại</string>
     <string name="installer_status_shizuku_unsupported">Phiên bản Shizuku đã cài không được hỗ trợ</string>
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>
@@ -1361,7 +1362,10 @@ Chi tiết: %2$s"</string>
     <string name="about_link_website">Trang web</string>
     <string name="about_link_translations">Dịch thuật</string>
     <string name="contributors">Người đóng góp</string>
-    <string name="contributors_description">12 tháng qua</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Mọi thời điểm</string>
+    <string name="contributors_6_months">6 tháng</string>
+    <string name="contributors_3_months">3 tháng</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Người ủng hộ</string>
     <string name="supporters_description">Người hỗ trợ trên Open Collective</string>

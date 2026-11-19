@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="one">%s χρήστης</item>
+        <item quantity="other">%s χρήστες</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="one">%s τροποποίηση</item>
         <item quantity="other">%s τροποποιήσεις</item>

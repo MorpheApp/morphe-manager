@@ -565,12 +565,12 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="app_links_unverified_banner_description">Osclaítear na naisc ghréasáin a dtacaítear leo i do bhrabhsálaí faoi láthair, seachas san aip seo.</string>
     <string name="app_links_enable_auto">Cumasaigh go huathoibríoch</string>
     <string name="app_links_enable_auto_in_progress">Ag cumasú na naisc…</string>
-    <string name="app_links_disable_all_in_progress">Ag díchumasú na naisc…</string>
+    <string name="app_links_disable_all_in_progress">Naisc á ndíchumasú…</string>
     <string name="app_links_open_settings">Oscail socruithe naisc</string>
     <string name="app_links_repair_success">Cumasaíodh naisc aip go rathúil</string>
     <string name="app_links_repair_failed">Theip ar naisc aipeanna a chumasú go huathoibríoch</string>
-    <string name="app_links_disable_success">Naisce aipe díchumasaithe</string>
-    <string name="app_links_disable_failed">Theip ar naisce aipe a díchumasú</string>
+    <string name="app_links_disable_success">Nais aipe díchumasaithe</string>
+    <string name="app_links_disable_failed">Theip ar dhíchumasú na naisc aipe</string>
     <string name="app_links_change_failed">Theip ar athrú na naisc aipe</string>
     <string name="app_links_all_verified">Tá na naisc thacaithe go léir cumraithe le hoscailt san aip seo</string>
     <string name="app_links_fix">Deisigh naisc</string>
@@ -763,8 +763,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
     <string name="failed_to_unmount">Theip ar dhíshuiteáil: %s</string>
     <!-- Mini-games -->
-    <string name="mini_games">Mini-cluichí</string>
-    <string name="mini_games_description">Cluichí gasta chun nóiméad spare a chaitheamh</string>
+    <string name="mini_games">Mion-chluichí</string>
+    <string name="mini_games_description">Cluichí gasta chun nóiméad saor a chaitheamh</string>
     <string name="mini_game_score">Scór %s</string>
     <string name="mini_game_best">Is Fearr %s</string>
     <string name="mini_game_new_record">Taifead nua!</string>
@@ -777,10 +777,10 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="mini_game_score_label">Scór</string>
     <string name="mini_game_best_label">Is Fearr</string>
     <!-- Counts a game keeps besides its score, shown above the field -->
-    <string name="mini_game_level">Leor</string>
+    <string name="mini_game_level">Leibhéal</string>
     <string name="mini_game_lines">Línte</string>
-    <string name="mini_game_lives">Beathaí</string>
-    <string name="mini_game_flags">Bratnacháin</string>
+    <string name="mini_game_lives">Saolta</string>
+    <string name="mini_game_flags">Saolta</string>
     <string name="mini_game_2048_picker_subtitle">Sleamhnaigh tíleanna le cumasc</string>
     <string name="mini_game_flappy_picker_subtitle">Beartaigh chun eitilt trí phíopaí</string>
     <string name="mini_game_flappy_tap_to_start">Beartaigh le heitilt</string>
@@ -1074,6 +1074,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_mount_warning_install">Tá mód paiste socraithe ar fheistiú fréimhe. Níor suiteáladh an aip shábháilte seo trí úsáid a bhaint as feistiú.</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="mount_stock_restore_failed_message">Dhiúltaigh Android don APK bunaidh sábháilte. Suiteáil an leagan stoic comhoiriúnach, ansin déan iarracht an Suiteáil arís.</string>
+    <string name="mount_stock_mismatch_message">Ní é an app a suiteáiladh an ceann oriantáil. Roghnaigh an APK oriantáil nó suiteáil an leagan stoc arís, ansin déan iarracht Mount a úsáid arís</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>
@@ -1355,12 +1356,15 @@ Sonraí: %2$s"</string>
     <string name="about_link_donate">Tabhair Síntiús</string>
     <string name="about_link_website">Suíomh Gréasáin</string>
     <string name="about_link_translations">Aistriúcháin</string>
-    <string name="contributors">Cuirthaí le chéile</string>
-    <string name="contributors_description">12 mhí anuas</string>
+    <string name="contributors">Rannpháirtithe</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Gach am</string>
+    <string name="contributors_6_months">6 mhí</string>
+    <string name="contributors_3_months">3 mhí</string>
     <!-- People who donate to Morphe -->
-    <string name="supporters">Tacaithe</string>
-    <string name="supporters_description">Tacaíochtóirí ar Open Collective</string>
-    <string name="supporters_become">Éirigh ina thacaitheoir</string>
+    <string name="supporters">Tacadóirí</string>
+    <string name="supporters_description">Tacaitheoirí ar Open Collective</string>
+    <string name="supporters_become">Bí i do thacadóir</string>
     <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
     <string name="people_more">Agus %s eile</string>
     <string name="people_unavailable">Níorbh fhéidir an liosta a luchtú</string>

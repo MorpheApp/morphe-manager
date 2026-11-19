@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="one">%s کاربر</item>
+        <item quantity="other">%s کاربر</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="one">%s وصله</item>
         <item quantity="other">%s پچ</item>

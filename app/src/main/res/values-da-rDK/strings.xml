@@ -1076,6 +1076,7 @@ Størrelsesformatet skal være som følger:
     <string name="installer_mount_warning_install">Patch-tilstand er sat til root mount. Denne gemte app blev ikke installeret ved hjælp af mount</string>
     <string name="mount_version_mismatch_message">Stock-app-version (%2$s) matcher ikke patchet app-version (%1$s). Monter den matchende stock-version, og prøv igen</string>
     <string name="mount_stock_restore_failed_message">Android afviste den gemte originale APK. Installer den matchende standardversion, og prøv derefter at montere igen.</string>
+    <string name="mount_stock_mismatch_message">Den installerede app er ikke den originale. Vælg den originale APK eller geninstaller standardversionen, og prøv derefter Mount igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerede Shizuku-version er ikke understøttet</string>
     <string name="installer_action_open_shizuku">Åbn Shizuku</string>
     <string name="installer_hint_generic">Installationen mislykkedes. Prøv igen eller skift til en anden installer</string>
@@ -1358,7 +1359,10 @@ Detaljer: %2$s"</string>
     <string name="about_link_website">Hjemmeside</string>
     <string name="about_link_translations">Oversættelser</string>
     <string name="contributors">Bidragsydere</string>
-    <string name="contributors_description">Sidste 12 måneder</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Altid</string>
+    <string name="contributors_6_months">6 måneder</string>
+    <string name="contributors_3_months">3 måneder</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Støtter</string>
     <string name="supporters_description">Backere på Open Collective</string>

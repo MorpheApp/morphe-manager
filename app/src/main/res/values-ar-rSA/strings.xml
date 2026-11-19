@@ -1079,6 +1079,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_mount_warning_install">تم ضبط وضع التعديل على root mount. هذا التطبيق المحفوظ لم يتم تثبيته باستخدام mount</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
     <string name="mount_stock_restore_failed_message">رفض Android ملف APK الأصلي المحفوظ. قم بتثبيت الإصدار الأصلي المطابق، ثم حاول التركيب مرة أخرى</string>
+    <string name="mount_stock_mismatch_message">التطبيق المثبت ليس هو التطبيق الأصلي. اختر ملف APK الأصلي أو أعد تثبيت الإصدار الأصلي، ثم حاول عملية التثبيت Mount مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>
@@ -1362,7 +1363,10 @@ morphe_adaptive_monochrome_custom.xml
     <string name="about_link_website">الموقع الإلكتروني</string>
     <string name="about_link_translations">الترجمات</string>
     <string name="contributors">المساهمون</string>
-    <string name="contributors_description">آخر 12 شهرًا</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">كل الوقت</string>
+    <string name="contributors_6_months">6 أشهر</string>
+    <string name="contributors_3_months">3 أشهر</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">الداعمون</string>
     <string name="supporters_description">الداعمون على Open Collective</string>

@@ -1076,6 +1076,7 @@ Rasm o‘lchamlari quyidagicha bo‘lishi kerak:
     <string name="installer_mount_warning_install">Patch rejimi root mount rejimiga sozlangan. Ushbu saqlangan ilova mount orqali o\'rnatilmagan</string>
     <string name="mount_version_mismatch_message">Asl ilova versiyasi (%2$s) patchlangan ilova versiyasi (%1$s) bilan mos kelmaydi. Mos keladigan asl versiyani mount qiling, so‘ngra yana urinib ko‘ring</string>
     <string name="mount_stock_restore_failed_message">Android saqlangan original APK-ni rad etdi. Mos keladigan stock versiyasini oʻrnating, keyin yana Mount qilishga harakat qiling</string>
+    <string name="mount_stock_mismatch_message">O\'rnatilgan ilova original emas. Original APKni tanlang yoki zavod versiyasini qayta o\'rnating, so\'ngra Mountni qayta urinib ko\'ring</string>
     <string name="installer_status_shizuku_unsupported">O\'rnatilgan Shizuku versiyasi qo\'llab-quvvatlanmaydi</string>
     <string name="installer_action_open_shizuku">Shizuku ochish</string>
     <string name="installer_hint_generic">O\'rnatish muvaffaqiyatsiz yakunlandi. Yana urinib ko\'ring yoki boshqa o\'rnatuvchiga o\'ting</string>
@@ -1358,7 +1359,10 @@ Ma’lumotlar: %2$s"</string>
     <string name="about_link_website">Veb-sayt</string>
     <string name="about_link_translations">Tarjimalar</string>
     <string name="contributors">Hissa qo\'shganlar</string>
-    <string name="contributors_description">Oxirgi 12 oy</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Barcha vaqtlar</string>
+    <string name="contributors_6_months">6 oy</string>
+    <string name="contributors_3_months">3 oy</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Homiylar</string>
     <string name="supporters_description">Open Collective-dagi homiylar</string>

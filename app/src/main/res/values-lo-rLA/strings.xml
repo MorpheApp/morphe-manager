@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">ໂໝດການ Patch ຖືກຕັ້ງເປັນ root mount. ແອັບທີ່ບັນທຶກໄວ້ນີ້ບໍ່ໄດ້ຖືກຕິດຕັ້ງໂດຍໃຊ້ mount</string>
     <string name="mount_version_mismatch_message">ເວີຊັນແອັບຕົ້ນສະບັບ (%2$s) ບໍ່ກົງກັບເວີຊັນແອັບທີ່ແພດແລ້ວ (%1$s). ແນບເວີຊັນຕົ້ນສະບັບທີ່ກົງກັນ, ແລ້ວລອງໃໝ່</string>
     <string name="mount_stock_restore_failed_message">Android ປະຕິເສດ APK ຕົ້ນສະບັບທີ່ບັນທຶກໄວ້. ກະລຸນາຕິດຕັ້ງເວີຊັນດັ້ງເດີມທີ່ກົງກັນ, ຈາກນັ້ນລອງ Mount ອີກຄັ້ງ</string>
+    <string name="mount_stock_mismatch_message">ແອັບທີ່ຕິດຕັ້ງບໍ່ແມ່ນແອັບຕົ້ນສະບັບ. ກະລຸນາເລືອກ APK ຕົ້ນສະບັບ ຫຼື ຕິດຕັ້ງເວີຊັນດັ້ງເດີມຄືນໃໝ່, ແລ້ວລອງ Mount ອີກຄັ້ງ</string>
     <string name="installer_status_shizuku_unsupported">ເວີຊັນ Shizuku ທີ່ຕິດຕັ້ງໄວ້ບໍ່ຮອງຮັບ</string>
     <string name="installer_action_open_shizuku">ເປີດ Shizuku</string>
     <string name="installer_hint_generic">ການຕິດຕັ້ງລົ້ມເຫຼວ. ລອງໃໝ່ ຫຼືປ່ຽນໄປໃຊ້ຕົວຕິດຕັ້ງອື່ນ</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ເວັບໄຊ</string>
     <string name="about_link_translations">ການແປພາສາ</string>
     <string name="contributors">ຜູ້ປະກອບສ່ວນ</string>
-    <string name="contributors_description">12 ເດືອນຜ່ານມາ</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">ຕະຫຼອດເວລາ</string>
+    <string name="contributors_6_months">6 ເດືອນ</string>
+    <string name="contributors_3_months">3 ເດືອນ</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">ຜູ້ສະໜັບສະໜູນ</string>
     <string name="supporters_description">ຜູ້ສະໜັບສະໜູນໃນ Open Collective</string>

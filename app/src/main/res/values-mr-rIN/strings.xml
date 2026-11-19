@@ -1075,6 +1075,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">पॅच मोड रूट माउंटवर सेट केला आहे. हे सेव्ह केलेले अॅप माउंट वापरून इंस्टॉल केले नव्हते</string>
     <string name="mount_version_mismatch_message">स्टॉक ॲप आवृत्ती (%2$s) पॅच केलेल्या ॲप आवृत्तीशी जुळत नाही (%1$s). जुळणारी स्टॉक आवृत्ती माउंट करा, नंतर पुन्हा प्रयत्न करा</string>
     <string name="mount_stock_restore_failed_message">Android ने जतन केलेले मूळ APK नाकारले. संबंधित स्टॉक आवृत्ती स्थापित करा, नंतर पुन्हा माउंट करण्याचा प्रयत्न करा.</string>
+    <string name="mount_stock_mismatch_message">इन्स्टॉल केलेले ॲप मूळ नाही. मूळ APK निवडा किंवा स्टॉक व्हर्जन पुन्हा इन्स्टॉल करा, त्यानंतर पुन्हा Mount करण्याचा प्रयत्न करा</string>
     <string name="installer_status_shizuku_unsupported">स्थापित Shizuku आवृत्ती समर्थित नाही</string>
     <string name="installer_action_open_shizuku">Shizuku उघडा</string>
     <string name="installer_hint_generic">स्थापना अयशस्वी झाली. पुन्हा प्रयत्न करा किंवा दुसरा इंस्टॉलर स्विच करा</string>
@@ -1357,7 +1358,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">वेबसाइट</string>
     <string name="about_link_translations">भाषांतर</string>
     <string name="contributors">योगदानकर्ते</string>
-    <string name="contributors_description">गेल्या १२ महिन्यांत</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">सर्व काळ</string>
+    <string name="contributors_6_months">६ महिने</string>
+    <string name="contributors_3_months">३ महिने</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">समर्थक</string>
     <string name="supporters_description">Open Collective वरील बॅकर्स</string>

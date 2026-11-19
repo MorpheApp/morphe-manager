@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">পেচ মোড root mount-লৈ ছেট কৰা হৈছে। এই সংৰক্ষিত এপটো mount ব্যৱহাৰ কৰি ইনষ্টল কৰা হোৱা নাছিল</string>
     <string name="mount_version_mismatch_message">ষ্টক এপ সংস্কৰণ (%2$s) পেচড এপ সংস্কৰণৰ (%1$s) সৈতে মিলা নাই। মিল থকা ষ্টক সংস্কৰণটো মাউণ্ট কৰক, তাৰ পিছত পুনৰ চেষ্টা কৰক</string>
     <string name="mount_stock_restore_failed_message">Android-এ সংৰক্ষিত মূল APKটো প্ৰত্যাখ্যান কৰিছে। মিল থকা ষ্টক সংস্কৰণটো সংস্থাপন কৰক, তাৰ পিছত পুনৰ Mount কৰিবলৈ চেষ্টা কৰক</string>
+    <string name="mount_stock_mismatch_message">ইনষ্টল কৰা এপটো মূলটো নহয়। মূল APKটো বাছনি কৰক বা ষ্টক সংস্কৰণটো পুনৰ ইনষ্টল কৰক, তাৰ পিছত পুনৰ Mount কৰিবলৈ চেষ্টা কৰক</string>
     <string name="installer_status_shizuku_unsupported">ইনষ্টল কৰা Shizuku সংস্কৰণটো সমৰ্থিত নহয়</string>
     <string name="installer_action_open_shizuku">Shizuku খোলক</string>
     <string name="installer_hint_generic">ইনষ্টলেচন বিফল হৈছে। পুনৰ চেষ্টা কৰক বা অন্য ইনষ্টলাৰত পৰিৱৰ্তন কৰক</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ৱেবছাইট</string>
     <string name="about_link_translations">অনুবাদ</string>
     <string name="contributors">অৱদানকাৰী</string>
-    <string name="contributors_description">যোৱা ১২ মাহ</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">সৰ্বকালিন</string>
+    <string name="contributors_6_months">৬ মাহ</string>
+    <string name="contributors_3_months">৩ মাহ</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">সমৰ্থক</string>
     <string name="supporters_description">Open Collective ৰ সমৰ্থক</string>

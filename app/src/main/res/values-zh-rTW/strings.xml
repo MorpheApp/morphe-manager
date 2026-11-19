@@ -2,7 +2,7 @@
 <resources>
     <!-- Home Screen -->
     <string name="home_other_apps">其他應用程式</string>
-    <string name="home_other_apps_action">選擇其他應用程式</string>
+    <string name="home_other_apps_action">選取其他應用程式</string>
     <string name="home_not_patched_yet">尚未修補</string>
     <string name="home_unpatched_version_installed">已安裝未修補版本</string>
     <string name="home_app_status_newer_version">更新至 %s</string>
@@ -263,7 +263,7 @@
     <string name="home_apk_availability_unpatched_label">未修補</string>
     <string name="home_apk_availability_incompatible_label">不相容</string>
     <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
-    <string name="home_apk_availability_newer_original">此裝置上的原始 %1$s 版本為 %2$s，比補丁支援的版本更新</string>
+    <string name="home_apk_availability_newer_original">此裝置上的原始 %1$s 版本為 %2$s，比修補檔支援的版本更新</string>
     <string name="home_apk_availability_find">是的，幫我找一下</string>
     <string name="home_apk_availability_have">否，我已經有了</string>
     <string name="home_apk_helper_download">使用輔助應用程式</string>
@@ -323,7 +323,7 @@
     <string name="home_download_instructions_link_copied">已複製連結</string>
     <!-- Home Screen - Dialog 3: File Picker Prompt -->
     <!-- %s is the name of the app whose APK was just downloaded -->
-    <string name="home_file_picker_prompt_app_title">選擇 %s APK</string>
+    <string name="home_file_picker_prompt_app_title">選取 %s APK</string>
     <string name="home_file_picker_prompt_where">瀏覽器通常將其儲存在 Download 資料夾中</string>
     <string name="home_file_picker_prompt_open_apk">開啟 APK 檔案</string>
     <string name="home_recommended_version">推薦版本</string>
@@ -351,7 +351,7 @@
     <string name="expert_mode_universal_all_warning_message">通用修補程式未經過共同測試。同時啟用所有修補程式可能導致衝突、修補失敗或當機</string>
     <string name="expert_mode_recommended">推薦的修補程式</string>
     <string name="expert_mode_reset_to_default_done">已套用推薦的修補程式</string>
-    <string name="expert_mode_selected_count">已選擇 %1$s / %2$s</string>
+    <string name="expert_mode_selected_count">已選取 %1$s / %2$s</string>
     <string name="expert_mode_saved_selection">已儲存的選取項目</string>
     <string name="expert_mode_restore_saved_done">已儲存的選取已還原</string>
     <string name="expert_mode_copy_from_bundle_no_patches">此套件中沒有相符的修補程式</string>
@@ -962,7 +962,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">啟用專家模式？</string>
     <string name="settings_advanced_expert_mode_dialog_message">專家模式可以更精細地控制修補程式的套用方式，但在專家模式下設定錯誤可能會導致應用程式無法運作</string>
     <string name="settings_advanced_strip_unused_libs">針對裝置架構最佳化</string>
-    <string name="settings_advanced_strip_unused_libs_description">從已補丁的應用程式和儲存的原始檔中移除未使用的原生函式庫和 APK 分割檔</string>
+    <string name="settings_advanced_strip_unused_libs_description">從已修補的應用程式和儲存的原始檔中移除未使用的原生程式庫和 APK 分割檔</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">解鎖拉取請求來源與私有存放庫</string>
     <string name="settings_advanced_github_pat_description">適用於拉取請求來源、私有存放庫以及較高的 GitHub 速率限制</string>
@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">修補模式已設定為 Root 掛載。此儲存的應用程式並非使用掛載安裝</string>
     <string name="mount_version_mismatch_message">原廠應用程式版本 (%2$s) 與修補後的應用程式版本 (%1$s) 不符。掛載相符的原廠版本，然後重試</string>
     <string name="mount_stock_restore_failed_message">Android 拒絕了儲存的原始 APK。請安裝相符的原始版本，然後再次嘗試掛載。</string>
+    <string name="mount_stock_mismatch_message">已安裝的應用程式並非原版。請選擇原版 APK 或重新安裝原廠版本，然後再次嘗試掛載</string>
     <string name="installer_status_shizuku_unsupported">安裝的 Shizuku 版本不受支援</string>
     <string name="installer_action_open_shizuku">開啟 Shizuku</string>
     <string name="installer_hint_generic">安裝失敗。請重試或切換至其他安裝程式</string>
@@ -1320,7 +1321,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_apk_download_helper_open_directly">立即開啟助手</string>
     <string name="settings_system_apk_download_helper_open_directly_description">跳過下載說明並開啟信任的助手</string>
     <string name="settings_system_apk_download_helper_auto_batch">自動批次下載 APK</string>
-    <string name="settings_system_apk_download_helper_auto_batch_description">檢查每個排隊中的應用程式是否有其補丁支援的最新版本，並在缺失或版本較舊時，使用第一個受信任的助手進行下載</string>
+    <string name="settings_system_apk_download_helper_auto_batch_description">檢查每個排隊中的應用程式是否有其修補檔支援的最新版本，並在缺失或版本較舊時，使用第一個受信任的助手進行下載</string>
     <!-- File Picker -->
     <string name="file_picker_no_files">這裡沒有檔案</string>
     <string name="file_picker_read_error">無法讀取此目錄</string>
@@ -1356,7 +1357,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">網站</string>
     <string name="about_link_translations">翻譯</string>
     <string name="contributors">貢獻者</string>
-    <string name="contributors_description">過去 12 個月</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">所有時間</string>
+    <string name="contributors_6_months">6 個月</string>
+    <string name="contributors_3_months">3 個月</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">支持者</string>
     <string name="supporters_description">Open Collective 的支持者</string>
@@ -1378,7 +1382,7 @@ morphe_header_custom_dark.png
     <string name="easter_egg_pill_red_toast_again">回到雨中</string>
     <string name="easter_egg_pill_blue_toast_again">已拔除。回去的路一直在原處。</string>
     <!-- Shared strings -->
-    <string name="select_file">選擇檔案</string>
+    <string name="select_file">選取檔案</string>
     <string name="select_files">選取檔案</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="select_folder">選取資料夾</string>
@@ -1590,7 +1594,7 @@ morphe_header_custom_dark.png
     <string name="onboarding_expert_mode_desc">啟用專家模式以解鎖修補選擇、自訂選項和其他進階功能</string>
     <!-- Translate "System" the same way as the System settings tab -->
     <string name="onboarding_system_installer_desc">選擇修補應用程式的安裝方式：標準、root mount 或 Shizuku</string>
-    <string name="onboarding_system_file_picker_desc">啟用此選項可在選擇 APK 或金鑰庫時使用內建檔案瀏覽器，而不是系統挑選器</string>
+    <string name="onboarding_system_file_picker_desc">啟用此選項可在選取 APK 或金鑰庫時使用內建檔案瀏覽器，而不是系統挑選器</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
     <string name="tour_prompt_title">快速功能導覽</string>
     <string name="tour_prompt_desc">想要快速導覽 Morphe 的主要功能嗎？</string>

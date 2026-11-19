@@ -1076,6 +1076,7 @@ Vaizdų matmenys turi būti tokie:
     <string name="installer_mount_warning_install">Pataisų režimas nustatytas į root montavimą. Ši išsaugota programėlė nebuvo įdiegta naudojant montavimą</string>
     <string name="mount_version_mismatch_message">Originalios programos versija (%2$s) neatitinka pataisytos programos versijos (%1$s). Prijunkite atitinkančią originalią versiją ir bandykite dar kartą</string>
     <string name="mount_stock_restore_failed_message">„Android“ atmetė išsaugotą originalų APK. Įdiekite atitinkančią originalią versiją ir bandykite prijungti dar kartą</string>
+    <string name="mount_stock_mismatch_message">Įdiegta programėlė nėra originali. Pasirinkite originalų APK arba pakartotinai įdiekite gamyklinę versiją ir dar kartą pabandykite prijungti (Mount)</string>
     <string name="installer_status_shizuku_unsupported">Įdiegta „Shizuku“ versija nepalaikoma</string>
     <string name="installer_action_open_shizuku">Atidaryti „Shizuku“</string>
     <string name="installer_hint_generic">Diegimas nepavyko. Bandykite dar kartą arba pasirinkite kitą diegimo įrankį</string>
@@ -1358,7 +1359,10 @@ Išsami informacija: %2$s"</string>
     <string name="about_link_website">Svetainė</string>
     <string name="about_link_translations">Vertimai</string>
     <string name="contributors">Kūryboi</string>
-    <string name="contributors_description">Pastarieji 12 mėnesiai</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Visą laiką</string>
+    <string name="contributors_6_months">6 mėnesiai</string>
+    <string name="contributors_3_months">3 mėnesiai</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Rėmėjai</string>
     <string name="supporters_description">Rėmėjai platformoje Open Collective</string>

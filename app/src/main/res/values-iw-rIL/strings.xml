@@ -1086,6 +1086,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="installer_mount_warning_install">מצב תיקון מוגדר כ-root mount. אפליקציה שמורה זו לא הותקנה באמצעות mount</string>
     <string name="mount_version_mismatch_message">גרסת האפליקציה המקורית (%2$s) אינה תואמת לגרסת האפליקציה המתוקנת (%1$s). התקן את הגרסה המקורית התואמת, ואז נסה שוב</string>
     <string name="mount_stock_restore_failed_message">Android דחה את קובץ ה-APK המקורי השמור. התקן את הגרסה המקורית התואמת, ואז נסה לעגן שוב</string>
+    <string name="mount_stock_mismatch_message">האפליקציה המותקנת אינה המקורית. בחר את ה-APK המקורי או התקן מחדש את גרסת המלאי, ואז נסה לבצע Mount שוב</string>
     <string name="installer_status_shizuku_unsupported">גרסת שיזוקה המותקנת אינה נתמכת</string>
     <string name="installer_action_open_shizuku">פתח את Shizuku</string>
     <string name="installer_hint_generic">ההתקנה נכשלה. נסה שוב או בחר מתקין אחר</string>
@@ -1368,7 +1369,10 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="about_link_website">אתר אינטרנט</string>
     <string name="about_link_translations">תרגומים</string>
     <string name="contributors">תורמים</string>
-    <string name="contributors_description">12 החודשים האחרונים</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">כל הזמן</string>
+    <string name="contributors_6_months">6 חודשים</string>
+    <string name="contributors_3_months">3 חודשים</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">תומכים</string>
     <string name="supporters_description">תומכים ב-Open Collective</string>

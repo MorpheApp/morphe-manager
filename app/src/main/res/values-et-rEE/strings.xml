@@ -1076,6 +1076,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="installer_mount_warning_install">Paigandusrežiimiks on määratud root-haage. Seda salvestatud rakendust ei installitud haakimise meetodiga</string>
     <string name="mount_version_mismatch_message">Algse rakenduse versioon (%2$s) ei ühti paigutatud versiooniga (%1$s). Kinnita vastav algne versioon ja proovi uuesti</string>
     <string name="mount_stock_restore_failed_message">Android lükkas salvestatud algse APK tagasi. Paigalda sobiv algversioon ja proovi seejärel uuesti haakida</string>
+    <string name="mount_stock_mismatch_message">Paigaldatud rakendus ei ole originaal. Vali originaal APK või installi uuesti tehaseversioon ja proovi Mounti uuesti</string>
     <string name="installer_status_shizuku_unsupported">Paigaldatud Shizuku versioon ei ole toetatud</string>
     <string name="installer_action_open_shizuku">Ava Shizuku</string>
     <string name="installer_hint_generic">Installimine ebaõnnestus. Proovi uuesti või vali teine installija</string>
@@ -1358,7 +1359,10 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="about_link_website">Veebisait</string>
     <string name="about_link_translations">Tõlked</string>
     <string name="contributors">Kaastöötajad</string>
-    <string name="contributors_description">Viimased 12 kuud</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Kõigi aegade</string>
+    <string name="contributors_6_months">6 kuud</string>
+    <string name="contributors_3_months">3 kuud</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Toetajad</string>
     <string name="supporters_description">Toetajad Open Collectives</string>
@@ -1570,7 +1574,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="update_download_missing">Allalaaditud uuendus ei ole enam saadaval. Laadi see uuesti alla</string>
     <string name="failed_to_check_updates">Uuenduste kontrollimine nurjus: %s</string>
     <string name="failed_to_download_update">Uuenduse allalaadimine nurjus: %s</string>
-    <string name="download_confirmation_metered">"Kasutate praegu tasulise mahuga internetiühendust ja teenusepakkuja võib rakendada andmesidetasusid.
+    <string name="download_confirmation_metered">"Kasutad praegu mahupõhist internetiühendust ja teenusepakkuja võib rakendada andmesidetasusid.
 
 Kas soovid siiski jätkata?"</string>
     <string name="download_update_confirmation">Kas laadida uuendus alla?</string>
@@ -1578,15 +1582,15 @@ Kas soovid siiski jätkata?"</string>
     <!-- %1$s = current step number, %2$s = total number of steps (e.g. "3 of 13") -->
     <string name="onboarding_step_of">%1$s / %2$s</string>
     <string name="onboarding_sources_desc">Halda oma paikade allikaid. Iga allikas pakub paiku, mida saab rakendada sinu rakendustele</string>
-    <string name="onboarding_other_apps_desc">Patchi rakendust, mida pole loendis, APK-failist või seadmesse installitud rakendust</string>
-    <string name="onboarding_add_source_desc">Lisa plaastri allikas lingi või plaastipaketi faili kaudu</string>
-    <string name="onboarding_signing_key_desc">Tee koopia allkirjavõtmest, millega allkirjastatakse sinu paigutatud rakendused. Ilma selleta saab neid uuendada alles pärast eemaldamist</string>
-    <string name="onboarding_swipe_title">Libistusžestid</string>
-    <string name="onboarding_swipe_desc">Libista rakenduse kaardi puhul paremale, et näha sellele saadaval olevaid paiku. Libista vasemale, et peita kaart avaleekraanilt</string>
+    <string name="onboarding_other_apps_desc">Paika rakendust, mida pole loendis, APK-failist või seadmesse installitud rakendust</string>
+    <string name="onboarding_add_source_desc">Lisa paigaallikas lingi või paigapaketi faili kaudu</string>
+    <string name="onboarding_signing_key_desc">Varunda võti, millega sinu paigatud rakendused allkirjastatakse. Ilma selleta saab neid uuendada alles pärast nende eemaldamist</string>
+    <string name="onboarding_swipe_title">Viipežestid</string>
+    <string name="onboarding_swipe_desc">Saadaolevate paikade vaatamiseks nipsa rakenduse kaardil paremale. Kaardi avakuvalt peitmiseks nipsa vasakule</string>
     <string name="onboarding_settings_desc">Kohanda Morphe\'i: välimus, täpsemad seaded ja süsteemitööriistad</string>
     <string name="onboarding_sources_patches_desc">Puuduta, et näha kõiki sellest allikast saadaval olevaid paiku</string>
-    <string name="onboarding_sources_version_desc">Puuduta versiooni, et näha selle allika täielikku muudatuslooggi</string>
-    <string name="onboarding_sources_apps_desc">Puuduta, et näha rakendusi, mida see allikas plaastib, ja vali, millele see plaastreid pakub</string>
+    <string name="onboarding_sources_version_desc">Puuduta versiooni, et näha selle allika täielikku muudatuste logi</string>
+    <string name="onboarding_sources_apps_desc">Puuduta, et näha rakendusi, mida see allikas paikab, ja valida, millistele neist see paiku pakub</string>
     <string name="onboarding_sources_prerelease_desc">Lülita sisse, et saada sellest allikast paikade eelversioone</string>
     <string name="onboarding_appearance_tab_desc">Kohanda rakenduse välimust: teema, aktsentvärv ja taust</string>
     <string name="onboarding_expert_mode_desc">Lülita sisse eksperdi režiim, et avada paikamisvalikud, kohandatud valikud ja teised täpsemad funktsioonid</string>
@@ -1594,7 +1598,7 @@ Kas soovid siiski jätkata?"</string>
     <string name="onboarding_system_installer_desc">Vali, kuidas paigatud rakendused installitakse: standardne, root-mount või Shizuku</string>
     <string name="onboarding_system_file_picker_desc">Lülita sisse, et kasutada APK-de või võtmehoidlate valimisel sisseehitatud failihaldurit süsteemi valija asemel</string>
     <!-- Tour prompt dialog shown after first successful patch install -->
-    <string name="tour_prompt_title">Kiirtutvustus funktsioonidega</string>
+    <string name="tour_prompt_title">Funktsioonide kiirtutvustus</string>
     <string name="tour_prompt_desc">Kas soovid Morphe\'i peamiste funktsioonide kiirtutvustust?</string>
     <!-- Label of a footer button beside "Skip". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="tour_prompt_confirm">Näita mulle</string>

@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режим закрпљивања је подешен на root mount. Ова сачувана апликација није инсталирана помоћу mount-а</string>
     <string name="mount_version_mismatch_message">Верзија оригиналне апликације (%2$s) не одговара верзији патчене апликације (%1$s). Монтирајте одговарајућу оригиналну верзију, а затим покушајте поново.</string>
     <string name="mount_stock_restore_failed_message">Андроид је одбио сачувани оригинални APK. Инсталирајте одговарајућу оригиналну верзију, па покушајте да поново монтирате.</string>
+    <string name="mount_stock_mismatch_message">Инсталирана апликација није оригинална. Изаберите оригинални APK или поново инсталирајте фабричку верзију, а затим поново покушајте Mount</string>
     <string name="installer_status_shizuku_unsupported">Верзија Шизуку која је инсталирана није подржана.</string>
     <string name="installer_action_open_shizuku">Отвори Схизуку</string>
     <string name="installer_hint_generic">Инсталација је неуспела. Покушајте поново или пребаците на други инсталатор.</string>
@@ -1358,12 +1359,16 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Вебсајт</string>
     <string name="about_link_translations">Преводи</string>
     <string name="contributors">Контрибутори</string>
-    <string name="contributors_description">Последњих 12 месеци</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Све време</string>
+    <string name="contributors_6_months">6 месеца</string>
+    <string name="contributors_3_months">3 месеца</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Подржњачи</string>
     <string name="supporters_description">Подржњачи на Open Collective</string>
     <string name="supporters_become">Постаните подржњач</string>
     <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">И још %s</string>
     <string name="people_unavailable">Листу није могуће учитати</string>
     <string name="opensource_licenses">Лиценце отвореног кода</string>
     <string name="opensource_licenses_description">Библиотеке на којима је изграђен Морфе</string>

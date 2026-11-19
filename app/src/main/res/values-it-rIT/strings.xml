@@ -1076,6 +1076,7 @@ Le dimensioni delle immagini devono essere le seguenti:
     <string name="installer_mount_warning_install">La modalità patch è impostata su mount root. Questa app salvata non è stata installata tramite mount</string>
     <string name="mount_version_mismatch_message">La versione dell\'app di sistema (%2$s) non corrisponde alla versione dell\'app patchata (%1$s). Monta la versione di sistema corrispondente, quindi riprova</string>
     <string name="mount_stock_restore_failed_message">Android ha rifiutato l\'APK originale salvato. Installa la versione stock corrispondente, quindi riprova a montare.</string>
+    <string name="mount_stock_mismatch_message">L\'app installata non è quella originale. Scegli l\'APK originale o reinstalla la versione stock, quindi prova a montare di nuovo</string>
     <string name="installer_status_shizuku_unsupported">La versione di Shizuku installata non è supportata</string>
     <string name="installer_action_open_shizuku">Apri Shizuku</string>
     <string name="installer_hint_generic">L\'installazione è fallita. Riprova o passa a un installer diverso.</string>
@@ -1358,7 +1359,10 @@ Dettagli: %2$s"</string>
     <string name="about_link_website">Sito web</string>
     <string name="about_link_translations">Traduzioni</string>
     <string name="contributors">Collaboratori</string>
-    <string name="contributors_description">Ultimi 12 mesi</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Di sempre</string>
+    <string name="contributors_6_months">6 mesi</string>
+    <string name="contributors_3_months">3 mesi</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Sostenitori</string>
     <string name="supporters_description">Sostenitori su Open Collective</string>

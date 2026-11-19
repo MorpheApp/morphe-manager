@@ -1077,6 +1077,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Рэжым патчынгу ўсталяваны на root mount. Гэтая захаваная праграма была ўсталявана не праз mount</string>
     <string name="mount_version_mismatch_message">Версія стандартнай праграмы (%2$s) не супадае з версіяй патчанай праграмы (%1$s). Мантуйце адпаведную стандартную версію, а затым паспрабуйце зноў</string>
     <string name="mount_stock_restore_failed_message">Android адхіліў захаваны арыгінальны APK. Усталюйце адпаведную стандартную версію, а затым паспрабуйце мантаваць зноў</string>
+    <string name="mount_stock_mismatch_message">Усталяванае праграма не з\'яўляецца арыгінальнай. Выберыце арыгінальны APK або пераўсталюйце штатную версію, а затым паспрабуйце Mount зноў</string>
     <string name="installer_status_shizuku_unsupported">Усталяваная версія Shizuku не падтрымліваецца</string>
     <string name="installer_action_open_shizuku">Адкрыць Shizuku</string>
     <string name="installer_hint_generic">Усталёўка скончылася няўдачай. Паспрабуйце зноў або пераключыцеся на іншы інсталятар</string>
@@ -1359,7 +1360,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Вэбсайт</string>
     <string name="about_link_translations">Пераклады</string>
     <string name="contributors">Удзельнікі</string>
-    <string name="contributors_description">За апошнія 12 месяцаў</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">За ўвесь час</string>
+    <string name="contributors_6_months">6 месяцаў</string>
+    <string name="contributors_3_months">3 месяцы</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Падтрымліваючыя</string>
     <string name="supporters_description">Спонсары на Open Collective</string>

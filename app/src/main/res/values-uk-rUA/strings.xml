@@ -763,7 +763,7 @@
     <string name="failed_to_mount">Не вдалося змонтувати: %s</string>
     <string name="failed_to_unmount">Не вдалося демонтувати: %s</string>
     <!-- Mini-games -->
-    <string name="mini_games">Міні-ігри</string>
+    <string name="mini_games">Міні ігри</string>
     <string name="mini_games_description">Швидкі ігри, щоб скоротити вільну хвилину</string>
     <string name="mini_game_score">Рахунок %s</string>
     <string name="mini_game_best">Найкращий %s</string>
@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режим патчингу встановлено на root-монтування. Цей збережений застосунок було встановлено не через монтування</string>
     <string name="mount_version_mismatch_message">Версія стокового застосунку (%2$s) не відповідає версії патченого (%1$s). Змонтуйте відповідну стокову версію, а потім спробуйте знову</string>
     <string name="mount_stock_restore_failed_message">Android відхилив збережений оригінальний APK. Встановіть відповідну оригінальну версію, потім спробуйте змонтувати знову</string>
+    <string name="mount_stock_mismatch_message">Встановлений застосунок не є оригінальним. Виберіть оригінальний APK або перевстановіть стокову версію, потім спробуйте змонтувати знову</string>
     <string name="installer_status_shizuku_unsupported">Версія встановленого Shizuku не підтримується</string>
     <string name="installer_action_open_shizuku">Відкрити Shizuku</string>
     <string name="installer_hint_generic">Не вдалося встановити. Спробуйте ще раз або перейдіть на інший інсталятор</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Вебсайт</string>
     <string name="about_link_translations">Переклади</string>
     <string name="contributors">Учасники</string>
-    <string name="contributors_description">Останні 12 місяців</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">За весь час</string>
+    <string name="contributors_6_months">6 місяців</string>
+    <string name="contributors_3_months">3 місяці</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Підтримувачі</string>
     <string name="supporters_description">Спонсори в Open Collective</string>

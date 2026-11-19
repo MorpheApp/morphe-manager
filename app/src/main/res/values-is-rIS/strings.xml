@@ -1075,6 +1075,7 @@ Stærð myndanna verður að vera sem hér segir:
     <string name="installer_mount_warning_install">Plástrunarhamur er stilltur á root-tengingu. Þetta vistaða app var ekki sett upp með tengingu</string>
     <string name="mount_version_mismatch_message">Upprunaleg útgáfa appsins (%2$s) passar ekki við breytta útgáfu appsins (%1$s). Settu upp samsvarandi upprunalega útgáfu og reyndu aftur</string>
     <string name="mount_stock_restore_failed_message">Android hafnaði vistaðri upprunalegri APK. Settu upp samsvarandi upprunalega útgáfu, prófaðu síðan Tengja aftur</string>
+    <string name="mount_stock_mismatch_message">Uppsett forritið er ekki upprunalega útgáfan. Veldu upprunalega APK skrána eða settu upp upprunalega útgáfuna aftur og reyndu að festa Mount aftur</string>
     <string name="installer_status_shizuku_unsupported">Uppsett útgáfa Shizuku er ekki studd</string>
     <string name="installer_action_open_shizuku">Opna Shizuku</string>
     <string name="installer_hint_generic">Uppsetningin mistókst. Reyndu aftur eða skiptu yfir í annað uppsetningarforrit</string>
@@ -1357,7 +1358,10 @@ Nánari upplýsingar: %2$s"</string>
     <string name="about_link_website">Vefsíða</string>
     <string name="about_link_translations">Þýðingar</string>
     <string name="contributors">Samstarfsmenn</string>
-    <string name="contributors_description">Síðustu 12 mánuði</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Alltaf</string>
+    <string name="contributors_6_months">6 mánuðir</string>
+    <string name="contributors_3_months">3 mánuðir</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Stuðningsmenn</string>
     <string name="supporters_description">Stuðningsmenn á Open Collective</string>

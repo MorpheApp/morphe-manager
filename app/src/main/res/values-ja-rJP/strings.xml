@@ -913,7 +913,7 @@ APK ファイルの取得元を選択してください"</string>
 パッチには影響しません。プレリリース版のパッチを有効にするには、パッチソース一覧から各自有効にしてください"</string>
     <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
     <string name="settings_auto_updates">自動更新</string>
-    <string name="settings_auto_updates_description">Morphe 起動時の更新に関する設定です。プルして更新すると常にチェックされます</string>
+    <string name="settings_auto_updates_description">Morphe 起動時の更新に関する設定です。引っ張ってから離して更新すると、常にチェックが行われます</string>
     <string name="settings_auto_updates_download">自動的にダウンロード</string>
     <string name="settings_auto_updates_download_description">Morphe 起動時に更新を確認し、ネットワークの種類に関わらずパッチをダウンロードします</string>
     <string name="settings_auto_updates_wifi_only">Wi-Fi 接続時のみダウンロード</string>
@@ -921,7 +921,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="settings_auto_updates_check_only">確認のみ</string>
     <string name="settings_auto_updates_check_only_description">利用可能な更新を表示し、タップした時にダウンロードします</string>
     <string name="settings_auto_updates_off">確認しない</string>
-    <string name="settings_auto_updates_off_description">引っ張って更新した時にのみ確認を行います</string>
+    <string name="settings_auto_updates_off_description">引っ張ってから離して更新した時にのみ確認を行います</string>
     <string name="settings_advanced_updates_background_notifications">バックグラウンドでの更新通知</string>
     <string name="settings_advanced_updates_background_notifications_description">バックグラウンドで定期的に更新を確認し、利用可能な場合に通知します</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">アプリを閉じていても、新しいリリースの通知をすぐに受け取れます</string>
@@ -1077,6 +1077,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">パッチモードが root マウントに設定されています。この保存済みアプリはマウント方式でインストールされていません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
     <string name="mount_stock_restore_failed_message">Android が保存済みのオリジナルの APK を拒否しました。対応する純正バージョンをインストールしてから、再度マウントしてください</string>
+    <string name="mount_stock_mismatch_message">インストールされているアプリはオリジナルではありません。オリジナルのAPKを選択するか、ストックバージョンを再インストールしてから、もう一度マウントを試してください</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
@@ -1359,7 +1360,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ウェブサイト</string>
     <string name="about_link_translations">翻訳</string>
     <string name="contributors">貢献者</string>
-    <string name="contributors_description">過去 12 ヶ月</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">全期間</string>
+    <string name="contributors_6_months">6ヶ月</string>
+    <string name="contributors_3_months">3ヶ月</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">サポーター</string>
     <string name="supporters_description">Open Collective の支援者</string>

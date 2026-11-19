@@ -1076,6 +1076,7 @@ Ubukhulu bemiyalo yemifanekiso kumele kube kanje:
     <string name="installer_mount_warning_install">Imode yokulungisa ibekwe ku-root mount. Le app egcinwe ayizange ifakwe kusetshenziswa i-mount</string>
     <string name="mount_version_mismatch_message">Inguqulo yohlelo lwasemqoka (%2$s) ayihambisani nenguqulo yohlelo olulungisiwe (%1$s). Gibela (mount) inguqulo yasemqoka efanele, bese uzama futhi</string>
     <string name="mount_stock_restore_failed_message">I-Android yenqabe i-APK yokuqala egcinwe. Faka inguqulo efanele ye-stock, bese uzama i-Mount futhi</string>
+    <string name="mount_stock_mismatch_message">I-app efakwe ayiyona eyokuqala. Khetha i-APK yokuqala noma ufake kabusha uhlobo lwe-stock, bese uzama uku-Mount futhi</string>
     <string name="installer_status_shizuku_unsupported">Inguqulo yeShizuku efakiwe ayisekelwa</string>
     <string name="installer_action_open_shizuku">Vula i-Shizuku</string>
     <string name="installer_hint_generic">Ukufaka kuhleleke. Zama futhi noma ushintshe uye kokunye ufaka-ohlelo</string>
@@ -1358,7 +1359,10 @@ Imininingwane: %2$s"</string>
     <string name="about_link_website">Iwebhusayithi</string>
     <string name="about_link_translations">Ukuhumusha</string>
     <string name="contributors">Abahambisana</string>
-    <string name="contributors_description">Izinyanga ezingu-12 zokugcina</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Sonke isikhathi</string>
+    <string name="contributors_6_months">Izinyanga ezingu-6</string>
+    <string name="contributors_3_months">Izinyanga ezingu-3</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Abasekela</string>
     <string name="supporters_description">Abaxhasi ku-Open Collective</string>

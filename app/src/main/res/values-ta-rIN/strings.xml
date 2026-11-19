@@ -204,6 +204,7 @@
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer_root_description">ரூட் மூலம் அமைதியாக நிறுவுகிறது</string>
     <string name="installer_mount_warning_install">பேட்ச் பயன்முறை ரூட் மவுண்டிற்கு அமைக்கப்பட்டுள்ளது. இந்த சேமிக்கப்பட்ட ஆப் மவுண்ட் மூலம் நிறுவப்படவில்லை</string>
+    <string name="mount_stock_mismatch_message">நிறுவப்பட்ட ஆப் அசல் ஆப் இல்லை. அசல் APK-வை தேர்வு செய்யவும் அல்லது ஸ்டாக் பதிப்பை மீண்டும் நிறுவவும், பிறகு மீண்டும் Mount செய்ய முயற்சிக்கவும்</string>
     <string name="settings_section_patch_mode">பேட்ச் பயன்முறை</string>
     <string name="settings_patch_mode_ask">ஒவ்வொரு முறையும் கேட்கவும்</string>
     <string name="settings_patch_mode_ask_description">ஒவ்வொரு ஆப்பையும் பேட்ச் செய்வதற்கு முன்னால், அதை ரூட் மவுண்ட் அல்லது நிலையான நிறுவலுக்கு பேட்ச் செய்ய வேண்டுமா என்று கேட்கும்</string>
@@ -265,7 +266,10 @@
     <string name="about_link_website">இணையதளம்</string>
     <string name="about_link_translations">மொழிபெயர்ப்புகள்</string>
     <string name="contributors">பங்களிப்பாளர்கள்</string>
-    <string name="contributors_description">கடந்த 12 மாதங்கள்</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">எல்லா நேரமும்</string>
+    <string name="contributors_6_months">6 மாதங்கள்</string>
+    <string name="contributors_3_months">3 மாதங்கள்</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">ஆதரவாளர்கள்</string>
     <string name="supporters_description">Open Collective-இல் ஆதரவாளர்கள்</string>

@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">حالت پچ روی مانت روت تنظیم شده است. این برنامهٔ ذخیره‌شده با استفاده از مانت نصب نشده است</string>
     <string name="mount_version_mismatch_message">نسخهٔ برنامهٔ سیستمی (%2$s) با نسخهٔ برنامهٔ پچ‌شده (%1$s) مطابقت ندارد. نسخهٔ سیستمی منطبق را مانت کنید و سپس دوباره تلاش کنید</string>
     <string name="mount_stock_restore_failed_message">Android APK اصلی ذخیره‌شده را رد کرد. نسخهٔ سیستمی منطبق را نصب کنید و سپس دوباره مانت را بزنید</string>
+    <string name="mount_stock_mismatch_message">برنامه‌ی نصب شده، نسخه‌ی اصلی نیست. APK اصلی را انتخاب کنید یا نسخه‌ی استوک را مجدداً نصب نمایید و سپس دوباره برای Mount تلاش کنید</string>
     <string name="installer_status_shizuku_unsupported">نسخهٔ نصب‌شدهٔ Shizuku پشتیبانی نمی‌شود</string>
     <string name="installer_action_open_shizuku">باز کردن Shizuku</string>
     <string name="installer_hint_generic">نصب ناموفق بود. دوباره تلاش کنید یا نصب‌کنندهٔ دیگری انتخاب کنید</string>
@@ -1360,7 +1361,10 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="about_link_website">وب‌سایت</string>
     <string name="about_link_translations">ترجمه‌ها</string>
     <string name="contributors">مشارکت‌کنندگان</string>
-    <string name="contributors_description">۱۲ ماه گذشته</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">در تمام زمان‌ها</string>
+    <string name="contributors_6_months">۶ ماه</string>
+    <string name="contributors_3_months">۳ ماه</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">حامیان</string>
     <string name="supporters_description">حامیان در Open Collective</string>

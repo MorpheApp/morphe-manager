@@ -1076,6 +1076,7 @@ Les dimensions de la imatge han de ser les següents:
     <string name="installer_mount_warning_install">El mode de patxat està configurat com a muntatge root. Aquesta aplicació desada no s\'ha instal·lat mitjançant muntatge</string>
     <string name="mount_version_mismatch_message">La versió de l\'aplicació original (%2$s) no coincideix amb la versió de l\'aplicació modificada (%1$s). Munta la versió original corresponent i torna-ho a intentar</string>
     <string name="mount_stock_restore_failed_message">Android ha rebutjat l\'APK original desat. Instal·la la versió stock corresponent i torna a provar el muntatge</string>
+    <string name="mount_stock_mismatch_message">L\'aplicació instal·lada no és l\'original. Tria l\'APK original o reinstal·la la versió de stock i torna a intentar el Muntatge</string>
     <string name="installer_status_shizuku_unsupported">La versió de Shizuku instal·lada no és compatible</string>
     <string name="installer_action_open_shizuku">Obre Shizuku</string>
     <string name="installer_hint_generic">La instal·lació ha fallat. Torna-ho a intentar o canvia a un instal·lador diferent</string>
@@ -1358,7 +1359,10 @@ Detalls: %2$s"</string>
     <string name="about_link_website">Web</string>
     <string name="about_link_translations">Traduccions</string>
     <string name="contributors">Col·laboradors</string>
-    <string name="contributors_description">Els últims 12 mesos</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Tots els temps</string>
+    <string name="contributors_6_months">6 mesos</string>
+    <string name="contributors_3_months">3 mesos</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Supports</string>
     <string name="supporters_description">Patrocinadors a Open Collective</string>

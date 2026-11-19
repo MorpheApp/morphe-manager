@@ -1076,6 +1076,7 @@ Irudien dimentsioak hauek izan behar dira:
     <string name="installer_mount_warning_install">Gordetako aplikazio hau ez da mount erabiliz instalatu</string>
     <string name="mount_version_mismatch_message">Stock aplikazioaren bertsioa (%2$s) ez dator bat patched aplikazioaren bertsioarekin (%1$s). Muntatu bat datorren stock bertsioa, eta saiatu berriro</string>
     <string name="mount_stock_restore_failed_message">Android-ek uste du gorde zen APK originala. Instalatu bertsio stock dagokiona, eta saiatu Mount berriro</string>
+    <string name="mount_stock_mismatch_message">Instalatu den aplikazioa ez da jatorrizkoa. Aukeratu APK jatorrizkoa edo instalatu berriz jatorrizko bertsioa, eta saiatu berriz Mount egiteko</string>
     <string name="installer_status_shizuku_unsupported">Instalatutako Shizuku bertsioa ez da onartzen</string>
     <string name="installer_action_open_shizuku">Ireki Shizuku</string>
     <string name="installer_hint_generic">Instalazioak huts egin du. Saiatu berriro edo aldatu beste instalatzaile batera</string>
@@ -1358,7 +1359,10 @@ Xehetasunak: %2$s"</string>
     <string name="about_link_website">Webgunea</string>
     <string name="about_link_translations">Itzulpenak</string>
     <string name="contributors">Collaboratzaileak</string>
-    <string name="contributors_description">Azken 12 hilabeteetan</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Denbora guztian</string>
+    <string name="contributors_6_months">6 hilabete</string>
+    <string name="contributors_3_months">3 hilabete</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Sarea</string>
     <string name="supporters_description">Open Collective-ko babesleak</string>

@@ -1357,7 +1357,10 @@ Təfərrüatlar: %2$s"</string>
     <string name="about_link_website">Veb-sayt</string>
     <string name="about_link_translations">Tərcümələr</string>
     <string name="contributors">Töhfəçilər</string>
-    <string name="contributors_description">Son 12 ay</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Bütün vaxt</string>
+    <string name="contributors_6_months">6 ay</string>
+    <string name="contributors_3_months">3 ay</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Dəstəkçilər</string>
     <string name="supporters_description">Open Collective-də Dəstəkçilər</string>

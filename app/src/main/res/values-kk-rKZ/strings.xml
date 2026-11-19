@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Патч режимі root mount параметріне қойылған. Бұл сақталған қосымша mount арқылы орнатылмаған</string>
     <string name="mount_version_mismatch_message">Стоктық қолданба нұсқасы (%2$s) патчтелген қолданба нұсқасына (%1$s) сәйкес келмейді. Сәйкес келетін стоктық нұсқаны монтаждап, қайта көріңіз</string>
     <string name="mount_stock_restore_failed_message">Android сақталған түпнұсқа APK-ны қабылдамады. Сәйкес келетін зауыттық нұсқаны орнатып, содан кейін Монтажты қайта көріңіз</string>
+    <string name="mount_stock_mismatch_message">Орнатылған қолданба түпнұсқа емес. Түпнұсқа APK-ны таңдаңыз немесе зауыттық нұсқасын қайта орнатып, содан кейін Mount әрекетін қайталаңыз</string>
     <string name="installer_status_shizuku_unsupported">Орнатылған Shizuku нұсқасы қолдау көрсетілмейді</string>
     <string name="installer_action_open_shizuku">Shizuku-ны ашу</string>
     <string name="installer_hint_generic">Орнату сәтсіз аяқталды. Қайта көріңіз немесе басқа орнатушыға ауысыңыз</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Веб-сайт</string>
     <string name="about_link_translations">Аудармалар</string>
     <string name="contributors">Үлес қосқандар</string>
-    <string name="contributors_description">Соңғы 12 ай</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Барлық уақыт</string>
+    <string name="contributors_6_months">6 ай</string>
+    <string name="contributors_3_months">3 ай</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Қолдаушылар</string>
     <string name="supporters_description">Open Collective платформасындағы қолдаушылар</string>

@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Patch-ის რეჟიმი არის root mount. ეს შენახული აპლიკაცია არ დაინსტალირებულა mount-ის გამოყენებით</string>
     <string name="mount_version_mismatch_message">სტოკ აპლიკაციის ვერსია (%2$s) არ შეესაბამება პატჩირებული აპლიკაციის ვერსიას (%1$s). მოაწყვეტინეთ შესაბამისი სტოკ ვერსია და სცადეთ ხელახლა</string>
     <string name="mount_stock_restore_failed_message">Android-მა უარყო შენახული ორიგინალი APK. დააინსტალირეთ შესაბამისი სტოკ ვერსია და შემდეგ სცადეთ Mount ხელახლა</string>
+    <string name="mount_stock_mismatch_message">ინსტალირებული აპლიკაცია არ არის ორიგინალი. აირჩიეთ ორიგინალი APK ან ხელახლა დააინსტალირეთ სტოკ ვერსია, შემდეგ კი სცადეთ Mount-ის ხელახლა გაშვება</string>
     <string name="installer_status_shizuku_unsupported">დაინსტალირებული Shizuku-ს ვერსია არ არის მხარდაჭერილი</string>
     <string name="installer_action_open_shizuku">გახსენით Shizuku</string>
     <string name="installer_hint_generic">ინსტალაცია ჩაიშალა. სცადეთ ხელახლა ან გამოიყენეთ სხვა ინსტალატორი</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ვებგვერდი</string>
     <string name="about_link_translations">თარგმანები</string>
     <string name="contributors">კონტრიბუტორები</string>
-    <string name="contributors_description">ბოლო 12 თვე</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">მთელი პერიოდი</string>
+    <string name="contributors_6_months">6 თვე</string>
+    <string name="contributors_3_months">3 თვე</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">მხარდამჭერები</string>
     <string name="supporters_description">მხარდამჭერები Open Collective-ზე</string>

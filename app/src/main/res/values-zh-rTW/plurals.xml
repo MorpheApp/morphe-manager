@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="other">%s 位使用者</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="other">%s 個修補程式</item>
     </plurals>
@@ -26,7 +30,7 @@
         <item quantity="other">適用於 %s 個應用程式的修補程式來源</item>
     </plurals>
     <plurals name="home_apk_availability_hidden_sources">
-        <item quantity="other">此應用程式隱藏了 %s 個來源。在「應用程式」索引標籤上選擇該應用程式，並開啟「修補程式來源」以將其找回</item>
+        <item quantity="other">此應用程式隱藏了 %s 個來源。在「應用程式」索引標籤上選取該應用程式，並開啟「修補程式來源」以將其找回</item>
     </plurals>
     <plurals name="expert_mode_hidden_sources_notice">
         <item quantity="other">已隱藏 %s 個來源。輕觸即可顯示</item>

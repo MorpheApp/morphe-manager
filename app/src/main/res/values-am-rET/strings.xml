@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">የፓች ሞዱ root mount ላይ ተጥሏል። ይህ የተቀመጠ መተግበሪያ በmount ስላልተጫነ</string>
     <string name="mount_version_mismatch_message">የመጀመሪያው የመተግበሪያ ስሪት (%2$s) ከተስተካከለው የመተግበሪያ ስሪት (%1$s) ጋር አይዛመድም። ተዛማጅ የሆነውን የመጀመሪያ ስሪት mount ያድርጉ፣ ከዚያ እንደገና ይሞክሩ</string>
     <string name="mount_stock_restore_failed_message">አንድሮይድ የተቀመጠውን ኦሪጅናል APK ውድቅ አድርጓል። የሚዛመደውን stock ስሪት ይጫኑ፣ ከዚያም Mountን እንደገና ይሞክሩ</string>
+    <string name="mount_stock_mismatch_message">የተጫነው መተግበሪያ ዋናው አይደለም። ዋናውን APK ይምረጡ ወይም የፋብሪካውን ስሪት እንደገና ይጫኑ፣ ከዚያ Mount እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_unsupported">የተጫነው የ Shizuku ስሪት ተቀባይነት የለውም</string>
     <string name="installer_action_open_shizuku">Shizukuን ክፈት</string>
     <string name="installer_hint_generic">መጫኑ አልተሳካም። እንደገና ይሞክሩ ወይም ወደ ሌላ ጫኝ ይቀይሩ</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">ድረ-ገጽ</string>
     <string name="about_link_translations">ትርጉሞች</string>
     <string name="contributors">አስተዋጽኦ አድራጊዎች</string>
-    <string name="contributors_description">ላለፉት 12 ወራት</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">ሁልጊዜ</string>
+    <string name="contributors_6_months">6 ወራት</string>
+    <string name="contributors_3_months">3 ወራት</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">ደጋፊዎች</string>
     <string name="supporters_description">በ Open Collective ላይ ደጋፊዎች</string>

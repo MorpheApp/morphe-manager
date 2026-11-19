@@ -1076,6 +1076,7 @@ Bildernas mått ska vara följande:
     <string name="installer_mount_warning_install">Modifieringsläget är inställt på root-montering. Den här sparade appen installerades inte med montering</string>
     <string name="mount_version_mismatch_message">Den ursprungliga appens version (%2$s) matchar inte den modifierade appens version (%1$s). Montera den matchande ursprungliga versionen och försök igen</string>
     <string name="mount_stock_restore_failed_message">Android avvisade den sparade ursprungliga APK-filen. Installera den matchande ursprungliga versionen och försök sedan montera igen</string>
+    <string name="mount_stock_mismatch_message">Den installerade appen är inte originalversionen. Välj original-APK:n eller installera om fabriksversionen, och försök sedan att montera igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
@@ -1358,7 +1359,10 @@ Information: %2$s"</string>
     <string name="about_link_website">Webbplats</string>
     <string name="about_link_translations">Översättningar</string>
     <string name="contributors">Bidragsgivare</string>
-    <string name="contributors_description">Senaste 12 månaderna</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Hela tiden</string>
+    <string name="contributors_6_months">6 månader</string>
+    <string name="contributors_3_months">3 månader</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Supportrar</string>
     <string name="supporters_description">Backers på Open Collective</string>

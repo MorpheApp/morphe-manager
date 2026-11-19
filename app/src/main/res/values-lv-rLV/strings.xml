@@ -351,6 +351,7 @@ Izvēlieties, no kurienes ņemt tās APK"</string>
     <string name="expert_mode_universal_all_warning_message">Universālie labojumi nav testēti kopā. Aktivizējot visus vienlaikus, var rasties konflikti, labošanas kļūme vai avārijas</string>
     <string name="expert_mode_recommended">Ieteiktie patchi</string>
     <string name="expert_mode_reset_to_default_done">Ieteiktie labojumi piemēroti</string>
+    <string name="expert_mode_selected_count">Izvēlēts %1$s no %2$s</string>
     <string name="expert_mode_saved_selection">Saglabāta atlase</string>
     <string name="expert_mode_restore_saved_done">Saglabātā atlase atjaunota</string>
     <string name="expert_mode_copy_from_bundle_no_patches">Šajā pakotnē nav atbilstošu labojumu</string>
@@ -1075,6 +1076,7 @@ Attēlu izmēriem jābūt šādiem:
     <string name="installer_mount_warning_install">Patchēšanas režīms ir iestatīts uz root mount. Šī saglabātā lietotne netika instalēta, izmantojot mount</string>
     <string name="mount_version_mismatch_message">Oriģinālās lietotnes versija (%2$s) nesakrīt ar patched lietotnes versiju (%1$s). Veiciet mount atbilstošajai oriģinālajai versijai un pēc tam mēģiniet vēlreiz</string>
     <string name="mount_stock_restore_failed_message">Android noraidīja saglabāto oriģinālo APK. Instalējiet atbilstošo stock versiju, pēc tam mēģiniet montēt vēlreiz</string>
+    <string name="mount_stock_mismatch_message">Instalētā lietotne nav oriģinālā. Izvēlieties oriģinālo APK vai atkārtoti instalējiet rūpnīcas versiju, pēc tam mēģiniet veikt Mount vēlreiz</string>
     <string name="installer_status_shizuku_unsupported">Instalētā Shizuku versija netiek atbalstīta</string>
     <string name="installer_action_open_shizuku">Atvērt Shizuku</string>
     <string name="installer_hint_generic">Instalēšana neizdevās. Mēģiniet vēlreiz vai pārslēdzieties uz citu instalatoru</string>
@@ -1357,7 +1359,10 @@ Sīkāk: %2$s"</string>
     <string name="about_link_website">Tīmekļa vietne</string>
     <string name="about_link_translations">Tulkojumi</string>
     <string name="contributors">Ieg contributed</string>
-    <string name="contributors_description">Pēdējie 12 mēneši</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Visu laiku</string>
+    <string name="contributors_6_months">6 mēneši</string>
+    <string name="contributors_3_months">3 mēneši</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Atbalstītāji</string>
     <string name="supporters_description">Atbalstītāji Open Collective</string>

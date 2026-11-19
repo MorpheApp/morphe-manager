@@ -1079,6 +1079,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Това запазено приложение не е било инсталирано чрез mount</string>
     <string name="mount_version_mismatch_message">Версията на оригиналното приложение (%2$s) не съвпада с версията на пачнатото приложение (%1$s). Монтирайте съответстващата версия на оригиналното приложение, след което опитайте отново</string>
     <string name="mount_stock_restore_failed_message">Android отхвърли запазения оригинален APK. Инсталирайте съответстващата стокова версия, след това опитайте да монтирате отново.</string>
+    <string name="mount_stock_mismatch_message">Инсталираното приложение не е оригиналното. Изберете оригиналния APK или преинсталирайте фабричната версия, след което опитайте Mount отново</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
     <string name="installer_action_open_shizuku">Отваряне на Shizuku</string>
     <string name="installer_hint_generic">Инсталирането се провали. Опитайте отново или превключете на различен инсталатор.</string>
@@ -1361,7 +1362,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Уебсайт</string>
     <string name="about_link_translations">Преводи</string>
     <string name="contributors">Приносители</string>
-    <string name="contributors_description">Последните 12 месеца</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Цяло време</string>
+    <string name="contributors_6_months">6 месеца</string>
+    <string name="contributors_3_months">3 месеца</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Поддръжници</string>
     <string name="supporters_description">Спонсори в Open Collective</string>

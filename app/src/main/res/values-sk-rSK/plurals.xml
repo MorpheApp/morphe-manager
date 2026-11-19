@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="one">%s používateľ</item>
+        <item quantity="few">%s používateľov</item>
+        <item quantity="many">%s používateľov</item>
+        <item quantity="other">%s používateľov</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="one">%s záplata</item>
         <item quantity="few">%s záplaty</item>

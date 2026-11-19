@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">โหมดแพตช์ถูกตั้งค่าเป็นการเมานต์แบบ root แอปที่บันทึกไว้นี้ไม่ได้ถูกติดตั้งด้วยการเมานต์</string>
     <string name="mount_version_mismatch_message">เวอร์ชันแอปสต็อก (%2$s) ไม่ตรงกับเวอร์ชันแอปที่แพตช์แล้ว (%1$s) เมานต์เวอร์ชันสต็อกที่ตรงกันแล้วลองอีกครั้ง</string>
     <string name="mount_stock_restore_failed_message">Android ปฏิเสธ APK ดั้งเดิมที่บันทึกไว้ ติดตั้งเวอร์ชันสต็อกที่ตรงกัน จากนั้นลองเมานต์อีกครั้ง</string>
+    <string name="mount_stock_mismatch_message">แอปที่ติดตั้งไม่ใช่แอปต้นฉบับ โปรดเลือก APK ต้นฉบับหรือติดตั้งเวอร์ชันเดิมใหม่อีกครั้ง แล้วลอง Mount ใหม่อีกครั้ง</string>
     <string name="installer_status_shizuku_unsupported">รุ่น Shizuku ที่ติดตั้งไม่ได้รับการรองรับ</string>
     <string name="installer_action_open_shizuku">เปิด Shizuku</string>
     <string name="installer_hint_generic">การติดตั้งล้มเหลว ลองอีกครั้งหรือเปลี่ยนไปใช้ตัวติดตั้งอื่น</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">เว็บไซต์</string>
     <string name="about_link_translations">การแปล</string>
     <string name="contributors">ผู้สนับสนุน</string>
-    <string name="contributors_description">12 เดือนที่ผ่านมา</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">ตลอดกาล</string>
+    <string name="contributors_6_months">6 เดือน</string>
+    <string name="contributors_3_months">3 เดือน</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">ผู้ให้การสนับสนุน</string>
     <string name="supporters_description">ผู้สนับสนุนบน Open Collective</string>

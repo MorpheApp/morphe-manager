@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="one">%s úsáideoir</item>
+        <item quantity="two">%s úsáideoir</item>
+        <item quantity="few">%s úsáideoir</item>
+        <item quantity="many">%s úsáideoir</item>
+        <item quantity="other">%s úsáideoir</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="one">%s paiste</item>
         <item quantity="two">%s paistí</item>

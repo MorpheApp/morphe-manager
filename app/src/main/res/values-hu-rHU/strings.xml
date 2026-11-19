@@ -1076,6 +1076,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_mount_warning_install">A patch mód root mountra van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve</string>
     <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a módosított alkalmazás verziójával (%1$s). Csatold a megfelelő alapverziót, majd próbáld újra</string>
     <string name="mount_stock_restore_failed_message">Az Android elutasította a mentett eredeti APK-t. Telepítsd a megfelelő gyári verziót, majd próbáld meg újra a csatolást.</string>
+    <string name="mount_stock_mismatch_message">A telepített alkalmazás nem az eredeti. Válassza ki az eredeti APK-t, vagy telepítse újra a gyári verziót, majd próbálja meg újra a csatolást</string>
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott</string>
     <string name="installer_action_open_shizuku">Shizuku megnyitása</string>
     <string name="installer_hint_generic">A telepítés sikertelen volt. Próbáld újra, vagy válts egy másik telepítőre</string>
@@ -1358,7 +1359,10 @@ Részletek: %2$s"</string>
     <string name="about_link_website">Weboldal</string>
     <string name="about_link_translations">Fordítások</string>
     <string name="contributors">Hozzálisoulók</string>
-    <string name="contributors_description">Az elmúlt 12 hónap</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Mindig</string>
+    <string name="contributors_6_months">6 hónap</string>
+    <string name="contributors_3_months">3 hónap</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Támogatók</string>
     <string name="supporters_description">Támogatók az Open Collective-en</string>

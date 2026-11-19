@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Պատչի ռեժիմը սահմանված է root mount-ի վրա: Այս պահպանված հավելվածը չի տեղադրվել mount-ի միջոցով</string>
     <string name="mount_version_mismatch_message">Stock հավելվածի տարբերակը (%2$s) չի համընկնում փոփոխված հավելվածի տարբերակի հետ (%1$s): Mount արեք համապատասխան stock տարբերակը, ապա փորձեք նորից</string>
     <string name="mount_stock_restore_failed_message">Android-ը մերժեց պահպանված բնօրինակ APK-ն: Տեղադրեք համապատասխան ստանդարտ տարբերակը, ապա կրկին փորձեք Mount-ը</string>
+    <string name="mount_stock_mismatch_message">Տեղադրված հավելվածը բնօրինակը չէ: Ընտրեք բնօրինակ APK-ն կամ վերատեղադրեք գործարանային տարբերակը, այնուհետև փորձեք նորից Mount անել</string>
     <string name="installer_status_shizuku_unsupported">Տեղադրված Shizuku-ի տարբերակը չի աջակցվի</string>
     <string name="installer_action_open_shizuku">Բացել Shizuku-ն</string>
     <string name="installer_hint_generic">Տեղադրումը ձախողվեց: Փորձեք նորից կամ անցեք այլ տեղադրողի</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Վեբկայք</string>
     <string name="about_link_translations">Թարգմանություններ</string>
     <string name="contributors">Համագործակիցներ</string>
-    <string name="contributors_description">Վերջին 12 ամիսների ընթացքում</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Ամբողջ ժամանակահատվածում</string>
+    <string name="contributors_6_months">6 ամիս</string>
+    <string name="contributors_3_months">3 ամիս</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Աջակիցներ</string>
     <string name="supporters_description">Աջակիցներ Open Collective-ում</string>

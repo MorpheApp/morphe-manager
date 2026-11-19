@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">패치 모드가 루트 마운트로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
     <string name="mount_stock_restore_failed_message">Android에서 저장된 원본 APK를 거부하였습니다. 해당 버전과 일치하는 순정 앱을 설치한 후에 다시 마운트를 시도하세요</string>
+    <string name="mount_stock_mismatch_message">설치된 앱이 원본이 아닙니다. 원본 APK를 선택하거나 순정 버전을 재설치한 후 다시 마운트를 시도하세요</string>
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">웹사이트</string>
     <string name="about_link_translations">번역에 도움주기</string>
     <string name="contributors">도움을 주신 분들</string>
-    <string name="contributors_description">최근 12개월</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">전체 기간</string>
+    <string name="contributors_6_months">6개월</string>
+    <string name="contributors_3_months">3개월</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">후원자</string>
     <string name="supporters_description">Open Collective 후원자</string>

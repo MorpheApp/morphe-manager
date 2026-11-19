@@ -1076,6 +1076,7 @@ As dimensões das imagens devem ser as seguintes:
     <string name="installer_mount_warning_install">O modo de modificação está definido para montagem root. Esta aplicação guardada não foi instalada com montagem</string>
     <string name="mount_version_mismatch_message">A versão da aplicação original (%2$s) não corresponde à versão da aplicação modificada (%1$s). Monta a versão original correspondente, e tenta de novo</string>
     <string name="mount_stock_restore_failed_message">O Android rejeitou o APK original guardado. Instale a versão original correspondente e tente montar novamente.</string>
+    <string name="mount_stock_mismatch_message">O app instalado não é o original. Escolha o APK original ou reinstale a versão de fábrica e, em seguida, tente montar novamente</string>
     <string name="installer_status_shizuku_unsupported">A versão do Shizuku instalada não é suportada</string>
     <string name="installer_action_open_shizuku">Abrir Shizuku</string>
     <string name="installer_hint_generic">A instalação falhou. Tenta de novo ou muda para um instalador diferente</string>
@@ -1358,7 +1359,10 @@ Detalhes: %2$s"</string>
     <string name="about_link_website">Website</string>
     <string name="about_link_translations">Traduções</string>
     <string name="contributors">Contribuidores</string>
-    <string name="contributors_description">Últimos 12 meses</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Todo o período</string>
+    <string name="contributors_6_months">6 meses</string>
+    <string name="contributors_3_months">3 meses</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Apoiadores</string>
     <string name="supporters_description">Apoiadores no Open Collective</string>

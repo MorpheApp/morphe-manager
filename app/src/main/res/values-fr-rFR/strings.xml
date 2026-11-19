@@ -364,7 +364,7 @@ Choisissez d'où provient son APK"</string>
     <string name="expert_mode_options_customized">Personnalisées</string>
     <string name="expert_mode_patch_required_by_installer">Nécessaire pour la cible d\'installation sélectionnée</string>
     <string name="expert_mode_patch_unavailable_for_installer">Indisponible pour la cible d\'installation sélectionnée</string>
-    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sélectionnées</string>
+    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sont sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_conflict">Les patchs provenant de différentes sources ne sont pas conçus pour fonctionner ensemble et peuvent entrer en conflit ou rendre l\'application inutilisable</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">APK non vérifié</string>
@@ -1079,6 +1079,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_mount_warning_install">Le mode de patch est défini sur le montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
     <string name="mount_stock_restore_failed_message">Android a rejeté l\'APK d\'origine enregistré. Installez la version d\'origine correspondante, puis essayez de monter à nouveau</string>
+    <string name="mount_stock_mismatch_message">L\'application installée n\'est pas l\'originale. Choisissez l\'APK original ou réinstallez la version d\'origine, puis tentez à nouveau le montage</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
     <string name="installer_hint_generic">L\'installation a échoué. Réessayez ou choisissez un installateur différent</string>
@@ -1362,7 +1363,10 @@ Détails : %2$s"</string>
     <string name="about_link_website">Site Web</string>
     <string name="about_link_translations">Traductions</string>
     <string name="contributors">Contributeurs</string>
-    <string name="contributors_description">Les 12 derniers mois</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Depuis toujours</string>
+    <string name="contributors_6_months">6 mois</string>
+    <string name="contributors_3_months">3 mois</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Donateurs</string>
     <string name="supporters_description">Contributeurs sur Open Collective</string>

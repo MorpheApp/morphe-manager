@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режим патчинга установлен на root-монтирование. Это сохраненное приложение было установлено не через монтирование</string>
     <string name="mount_version_mismatch_message">Версия оригинального приложения (%2$s) не совпадает с версией пропатченного приложения (%1$s). Смонтируйте подходящую оригинальную версию, затем повторите попытку</string>
     <string name="mount_stock_restore_failed_message">Android отклонил сохраненный оригинальный APK. Установите соответствующую версию приложения, затем попробуйте смонтировать снова</string>
+    <string name="mount_stock_mismatch_message">Установленное приложение не является оригинальным. Выберите оригинальный APK или переустановите стоковую версию, затем попробуйте выполнить Mount снова</string>
     <string name="installer_status_shizuku_unsupported">Версия установленного Shizuku не поддерживается</string>
     <string name="installer_action_open_shizuku">Открыть Shizuku</string>
     <string name="installer_hint_generic">Установка не удалась. Повторите попытку или переключитесь на другой установщик</string>
@@ -1358,12 +1359,16 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Сайт</string>
     <string name="about_link_translations">Переводы</string>
     <string name="contributors">Контрибьюторы</string>
-    <string name="contributors_description">За последние 12 месяцев</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">За все время</string>
+    <string name="contributors_6_months">6 месяцев</string>
+    <string name="contributors_3_months">3 месяца</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Спонсоры</string>
     <string name="supporters_description">Бекеры на Open Collective</string>
     <string name="supporters_become">Стать спонсором</string>
     <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">И %s более</string>
     <string name="people_unavailable">Не удалось загрузить список</string>
     <string name="opensource_licenses">Лицензии открытого кода</string>
     <string name="opensource_licenses_description">Библиотеки, на которых построен Morphe</string>

@@ -1077,6 +1077,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">شێوازی پاتچکردن لەسەر root mount ڕێکخراوە. ئەم ئەپڵیکەیشنە پاشکەوتکراوە بە بەکارهێنانی mount دابەمەزرێنراوە</string>
     <string name="mount_version_mismatch_message">وەشانى ئەپی ڕەسەن (%2$s) لەگەڵ وەشانى ئەپی دەستکاریکراو (%1$s) ناگونجێت. وەشانی ڕەسەنی گونجاو mount بکە، پاشان دووبارە هەوڵ بدەرەوە</string>
     <string name="mount_stock_restore_failed_message">ئەندرۆید APK-ی ڕەسەنی پاشەکەوتکراوی ڕەتکردەوە. وەشانی ڕەسەنی گونجاو دامەزرێنە، پاشان دووبارە هەوڵی بەستن بدەرەوە</string>
+    <string name="mount_stock_mismatch_message">ئەپڵیکەیشنی دامەزراوەوە ئەسڵى نییە. APK ئەسڵى هەڵبژێرە یان وەشانە ستۆکەکە دووبارە دامەزراوە، پاشان دووبارە هەوڵی Mount بدەرەوە</string>
     <string name="installer_status_shizuku_unsupported">وەشانی دامەزراندنی Shizuku پشتگیری ناکرێت</string>
     <string name="installer_action_open_shizuku">کردنەوەی Shizuku</string>
     <string name="installer_hint_generic">دامەزراندنەکە سەرکەوتوو نەبوو. دووبارە هەوڵ بدەرەوە یان بگۆڕە بۆ دامەزراندنێکی تر</string>
@@ -1359,7 +1360,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">وێب سایت</string>
     <string name="about_link_translations">وەرگێڕانەکان</string>
     <string name="contributors">بەشداریکاران</string>
-    <string name="contributors_description">١٢ مانگی ڕابردوو</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">هەموو کاتەکان</string>
+    <string name="contributors_6_months">٦ مانگ</string>
+    <string name="contributors_3_months">٣ مانگ</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">پشتیوەران</string>
     <string name="supporters_description">پشتیوەران لە Open Collective</string>

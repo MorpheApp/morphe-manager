@@ -141,6 +141,7 @@
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
     <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
     <!-- People who donate to Morphe -->
     <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
     <!-- Easter egg offered after seven taps on the version in the About dialog -->

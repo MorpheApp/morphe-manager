@@ -1076,6 +1076,7 @@ Kuvien mittojen on oltava seuraavat:
     <string name="installer_mount_warning_install">Paikkaustila on asetettu root-asennukseksi. Tätä tallennettua sovellusta ei asennettu mount-menetelmällä</string>
     <string name="mount_version_mismatch_message">Perusversio (%2$s) ei vastaa paikattua sovellusta (%1$s). Liitä vastaava perusversio ja yritä sitten uudelleen.</string>
     <string name="mount_stock_restore_failed_message">Android hylkäsi tallennetun alkuperäisen APK-tiedoston. Asenna vastaava virallinen versio ja yritä sitten Liitä uudelleen.</string>
+    <string name="mount_stock_mismatch_message">Asennettu sovellus ei ole alkuperäinen. Valitse alkuperäinen APK tai asenna tehdasversio uudelleen ja yritä Mount-toimintoa uudelleen</string>
     <string name="installer_status_shizuku_unsupported">Asennettu Shizuku-versio ei ole tuettu.</string>
     <string name="installer_action_open_shizuku">Avaa Shizuku</string>
     <string name="installer_hint_generic">Asennus epäonnistui. Yritä uudelleen tai vaihda toiseen asennukseen.</string>
@@ -1358,7 +1359,10 @@ Yksityiskohdat: %2$s"</string>
     <string name="about_link_website">Verkkosivusto</string>
     <string name="about_link_translations">Käännökset</string>
     <string name="contributors">Avustajat</string>
-    <string name="contributors_description">Viimeiset 12 kuukautta</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Koko ajan</string>
+    <string name="contributors_6_months">6 kuukautta</string>
+    <string name="contributors_3_months">3 kuukautta</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Tukijat</string>
     <string name="supporters_description">Tukijat Open Collectivessa</string>

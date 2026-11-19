@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Under the title of the contributors, how many are listed for the period picked -->
+    <plurals name="contributor_count">
+        <item quantity="zero">%s lietotājs</item>
+        <item quantity="one">%s lietotājs</item>
+        <item quantity="other">%s lietotāji</item>
+    </plurals>
     <plurals name="patch_count">
         <item quantity="zero">%s labojums</item>
         <item quantity="one">%s labojums</item>
@@ -54,6 +60,11 @@
         <item quantity="one">%s avots</item>
         <item quantity="other">%s avoti</item>
     </plurals>
+    <plurals name="selection_set_count">
+        <item quantity="zero">%s kopumi</item>
+        <item quantity="one">%s kopums</item>
+        <item quantity="other">%s kopumi</item>
+    </plurals>
     <plurals name="package_count">
         <item quantity="zero">%s pakaujas</item>
         <item quantity="one">%s pakauja</item>
@@ -68,6 +79,31 @@
         <item quantity="zero">%s APK faili</item>
         <item quantity="one">%s APK fails</item>
         <item quantity="other">%s APK faili</item>
+    </plurals>
+    <plurals name="batch_install_summary">
+        <item quantity="zero">Instalētas %s lietotnes</item>
+        <item quantity="one">Instalēta %s lietotne</item>
+        <item quantity="other">Instalētas %s lietotnes</item>
+    </plurals>
+    <plurals name="batch_mount_summary">
+        <item quantity="zero">Pieliktas %s lietotnes</item>
+        <item quantity="one">Pielāgota %s lietotne</item>
+        <item quantity="other">Pielāgotas %s lietotnes</item>
+    </plurals>
+    <plurals name="batch_reinstall_summary">
+        <item quantity="zero">Reinstalētas %s lietotnes</item>
+        <item quantity="one">Atinstalēta %s lietotne</item>
+        <item quantity="other">Atinstalētas %s lietotnes</item>
+    </plurals>
+    <plurals name="batch_uninstall_summary">
+        <item quantity="zero">Deinstalētas %s lietotnes</item>
+        <item quantity="one">Dzēsta %s lietotne</item>
+        <item quantity="other">Dzēstas %s lietotnes</item>
+    </plurals>
+    <plurals name="batch_uninstall_confirm_title">
+        <item quantity="zero">Deinstalēt %s lietotnes?</item>
+        <item quantity="one">Dzēst %s lietotni?</item>
+        <item quantity="other">Dzēst %s lietotnes?</item>
     </plurals>
     <plurals name="batch_patch_ready_count">
         <item quantity="zero">%s lietotnes gatavas patchošanai</item>
@@ -134,6 +170,11 @@
         <item quantity="one">Atlasīts %s</item>
         <item quantity="other">Atlasīti %s</item>
     </plurals>
+    <plurals name="expert_mode_copy_from_bundle_done">
+        <item quantity="zero">Kopēts %s patchi no izvēlētā pakaujumā</item>
+        <item quantity="one">Kopēts %s patchis no izvēlētā pakaujumā</item>
+        <item quantity="other">Kopēti %s patchi no izvēlētā pakaujumā</item>
+    </plurals>
     <plurals name="core_count">
         <item quantity="zero">%s kodoli</item>
         <item quantity="one">%s kodols</item>
@@ -169,6 +210,11 @@
         <item quantity="zero">%s jauni izlaidumi</item>
         <item quantity="one">%s jauns izlaidums</item>
         <item quantity="other">%s jauni izlaidumi</item>
+    </plurals>
+    <plurals name="app_links_count_enabled">
+        <item quantity="zero">%d saites iespējotas</item>
+        <item quantity="one">%d saite iespējota</item>
+        <item quantity="other">%d saites iespējotas</item>
     </plurals>
     <plurals name="app_links_count_unverified">
         <item quantity="zero">%d neapstiprinātas saites</item>

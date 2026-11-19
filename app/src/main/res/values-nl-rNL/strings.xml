@@ -1076,6 +1076,7 @@ De afbeeldingsafmetingen moeten als volgt zijn:
     <string name="installer_mount_warning_install">Patchmodus is ingesteld op root mount. Deze opgeslagen app is niet geïnstalleerd met behulp van mount</string>
     <string name="mount_version_mismatch_message">Originele app-versie (%2$s) komt niet overeen met gepatchte app-versie (%1$s). Mount de overeenkomende originele versie, dan probeer het opnieuw</string>
     <string name="mount_stock_restore_failed_message">Android heeft de opgeslagen originele APK geweigerd. Installeer de bijpassende stock-versie en probeer Mount dan opnieuw</string>
+    <string name="mount_stock_mismatch_message">De geïnstalleerde app is niet de originele. Kies de originele APK of installeer de stockversie opnieuw en probeer Mount opnieuw</string>
     <string name="installer_status_shizuku_unsupported">De geïnstalleerde Shizuku-versie wordt niet ondersteund</string>
     <string name="installer_action_open_shizuku">Shizuku openen</string>
     <string name="installer_hint_generic">De installatie is mislukt. Probeer het opnieuw of schakel over naar een ander installatieprogramma</string>
@@ -1358,7 +1359,10 @@ Details: %2$s"</string>
     <string name="about_link_website">Website</string>
     <string name="about_link_translations">Vertalingen</string>
     <string name="contributors">Bijdragers</string>
-    <string name="contributors_description">Afgelopen 12 maanden</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Alle tijden</string>
+    <string name="contributors_6_months">6 maanden</string>
+    <string name="contributors_3_months">3 maanden</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Supporters</string>
     <string name="supporters_description">Backers op Open Collective</string>

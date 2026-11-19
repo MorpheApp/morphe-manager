@@ -1076,6 +1076,7 @@ Dimensiunile imaginilor trebuie să fie următoarele:
     <string name="installer_mount_warning_install">Modul de patch este setat pe mount root. Această aplicație salvată nu a fost instalată folosind mount</string>
     <string name="mount_version_mismatch_message">Versiunea aplicației de bază (%2$s) nu se potrivește cu versiunea aplicației patch-uite (%1$s). Montați versiunea de bază potrivită, apoi reîncercați</string>
     <string name="mount_stock_restore_failed_message">Android a respins APK-ul original salvat. Instalați versiunea originală corespunzătoare, apoi încercați din nou Montarea</string>
+    <string name="mount_stock_mismatch_message">Aplicația instalată nu este cea originală. Alegeți APK-ul original sau reinstalați versiunea stock, apoi încercați din nou Mount</string>
     <string name="installer_status_shizuku_unsupported">Versiunea Shizuku instalată nu este suportată</string>
     <string name="installer_action_open_shizuku">Deschide Shizuku</string>
     <string name="installer_hint_generic">Instalarea a eșuat. Reîncercați sau schimbați la un instalator diferit</string>
@@ -1358,7 +1359,10 @@ Detalii: %2$s"</string>
     <string name="about_link_website">Site web</string>
     <string name="about_link_translations">Traduceri</string>
     <string name="contributors">Contribuitori</string>
-    <string name="contributors_description">Ultimele 12 luni</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Tot timpul</string>
+    <string name="contributors_6_months">6 luni</string>
+    <string name="contributors_3_months">3 luni</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Susținători</string>
     <string name="supporters_description">Susținători pe Open Collective</string>

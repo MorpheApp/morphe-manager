@@ -1076,6 +1076,7 @@ Dapat ang mga sumusunod na sukat ng larawan ay:
     <string name="installer_mount_warning_install">Nakatakda ang patch mode sa root mount. Ang na-save na app na ito ay hindi na-install gamit ang mount</string>
     <string name="mount_version_mismatch_message">Hindi tumutugma sa na-patch na bersyon ng aplikasyon (%1$s) ang stock na bersyon ng aplikasyon (%2$s). I-mount ang tumutugmang stock na bersyon, at subukan muli</string>
     <string name="mount_stock_restore_failed_message">Tinanggihan ng Android ang na-save na orihinal na APK. I-install ang katumbas na stock na bersyon, pagkatapos ay subukang Mount muli.</string>
+    <string name="mount_stock_mismatch_message">Ang nakainstall na app ay hindi ang original. Piliin ang original na APK o i-reinstall ang stock version, pagkatapos ay subukang i-Mount muli</string>
     <string name="installer_status_shizuku_unsupported">Hindi suportado ang naka-install na bersyon ng Shizuku</string>
     <string name="installer_action_open_shizuku">Buksan ang Shizuku</string>
     <string name="installer_hint_generic">Nabigo ang pag-install. Subukan muli o lumipat sa ibang installer</string>
@@ -1358,7 +1359,10 @@ Mga Detalye: %2$s"</string>
     <string name="about_link_website">Website</string>
     <string name="about_link_translations">Mga Pagsasalin</string>
     <string name="contributors">Mga Contributor</string>
-    <string name="contributors_description">Huling 12 buwan</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Habang-buhay</string>
+    <string name="contributors_6_months">6 na buwan</string>
+    <string name="contributors_3_months">3 na buwan</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Mga Supporter</string>
     <string name="supporters_description">Mga Backer sa Open Collective</string>

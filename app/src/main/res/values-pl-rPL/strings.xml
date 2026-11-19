@@ -764,8 +764,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="failed_to_mount">Nie udało się zamontować: %s</string>
     <string name="failed_to_unmount">Nie udało się odmontować: %s</string>
     <!-- Mini-games -->
-    <string name="mini_games">Mini-gry</string>
-    <string name="mini_games_description">Szybkie gry, aby zająć wolną chwilę</string>
+    <string name="mini_games">Minigry</string>
+    <string name="mini_games_description">Szybkie gry na wolną chwilę</string>
     <string name="mini_game_score">Wynik %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nowy rekord!</string>
@@ -774,7 +774,7 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="mini_game_paused">Pauza</string>
     <string name="mini_game_resume">Kontynuuj</string>
     <string name="mini_game_restart">Zacznij od nowa</string>
-    <string name="mini_game_pause">Wstrzymaj</string>
+    <string name="mini_game_pause">Pauza</string>
     <string name="mini_game_score_label">Wynik</string>
     <string name="mini_game_best_label">Rekord</string>
     <!-- Counts a game keeps besides its score, shown above the field -->
@@ -1077,6 +1077,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_mount_warning_install">Tryb modyfikacji jest ustawiony na montowanie z rootem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
     <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie jest zgodna z wersją zmodyfikowanej aplikacji (%1$s). Zamontuj zgodną wersję oryginalną, a następnie spróbuj ponownie</string>
     <string name="mount_stock_restore_failed_message">Android odrzucił zapisany, oryginalny plik APK. Zainstaluj odpowiednią, oryginalną wersję, a następnie spróbuj zamontować ponownie</string>
+    <string name="mount_stock_mismatch_message">Zainstalowana aplikacja nie jest oryginalna. Wybierz oryginalny plik APK lub zainstaluj wersję fabryczną, a następnie spróbuj ponownie zamontować</string>
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest obsługiwana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>
@@ -1087,7 +1088,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_external_timeout">Brak potwierdzenia instalacji ze strony %s. Sprawdź drugą aplikację i spróbuj ponownie</string>
     <string name="installer_external_success">Instalacja przez %s zakończona pomyślnie</string>
     <string name="installer_unavailable_title">%s niedostępny</string>
-    <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i spróbować ponownie lub po prostu użyć standardowego instalatora</string>
+    <string name="installer_unavailable_message">Twój preferowany instalator (%s) jest obecnie niedostępny. Możesz naprawić problem i ponowić lub po prostu użyć standardowego instalatora</string>
     <string name="installer_unavailable_shizuku_hint">Upewnij się, że Shizuku jest uruchomione, a tej aplikacji przyznano odpowiednie uprawnienia</string>
     <string name="installer_choose_another">Wybierz inny instalator</string>
     <string name="installer_play_store_warning_title">Oznaczyć jako instalację ze Sklepu Play?</string>
@@ -1359,7 +1360,10 @@ Wymagane są następujące wymiary obrazów:
     <string name="about_link_website">Strona internetowa</string>
     <string name="about_link_translations">Tłumaczenia</string>
     <string name="contributors">Współtwórcy</string>
-    <string name="contributors_description">Ostatnie 12 miesięcy</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Cały okres</string>
+    <string name="contributors_6_months">6 miesięcy</string>
+    <string name="contributors_3_months">3 miesiące</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Wspierający</string>
     <string name="supporters_description">Darczyńcy na Open Collective</string>
@@ -1417,7 +1421,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="failed">Nie powiodło się</string>
     <string name="canceled">Anulowano</string>
     <string name="ready">Gotowe</string>
-    <string name="retry">Spróbuj ponownie</string>
+    <string name="retry">Ponów</string>
     <string name="refresh">Odśwież</string>
     <string name="add">Dodaj</string>
     <string name="create">Utwórz</string>

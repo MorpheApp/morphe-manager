@@ -1076,6 +1076,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_mount_warning_install">Yama modu root bağlama olarak ayarlanmış. Bu kaydedilmiş uygulama bağlama kullanılarak kurulmadı</string>
     <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s), yamalanmış uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümü bağlayın, sonra tekrar deneyin</string>
     <string name="mount_stock_restore_failed_message">Android, kaydedilen orijinal APK\'yı reddetti. Eşleşen stok sürümünü yükleyin, ardından tekrar Bağla\'yı deneyin</string>
+    <string name="mount_stock_mismatch_message">Yüklü uygulama orijinal olan değil. Orijinal APK\'yı seçin veya stok sürümü yeniden yükleyin, ardından Mount işlemini tekrar deneyin</string>
     <string name="installer_status_shizuku_unsupported">Yüklü Shizuku sürümü desteklenmiyor</string>
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>
@@ -1358,7 +1359,10 @@ Ayrıntılar: %2$s"</string>
     <string name="about_link_website">Web Sitesi</string>
     <string name="about_link_translations">Çeviriler</string>
     <string name="contributors">Katkıda Bulunanlar</string>
-    <string name="contributors_description">Son 12 ay</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Tüm zamanlar</string>
+    <string name="contributors_6_months">6 ay</string>
+    <string name="contributors_3_months">3 ay</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Destekçiler</string>
     <string name="supporters_description">Open Collective üzerindeki destekçiler</string>

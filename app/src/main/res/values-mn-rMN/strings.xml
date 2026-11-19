@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Патчлах горим root mount болгож тохируулагдсан байна. Хадгалагдсан энэ аппликейшн mount ашиглан суулгагдаагүй байна</string>
     <string name="mount_version_mismatch_message">Үндсэн апп-ны хувилбар (%2$s) нь патч хийсэн апп-ны хувилбартай (%1$s) тохирохгүй байна. Тохирох үндсэн хувилбарыг mount хийгээд дахин оролдоно уу</string>
     <string name="mount_stock_restore_failed_message">Android хадгалсан эх APK-г татгалзлаа. Тохирох стандарт хувилбарыг суулгаад, Mount-ийг дахин оролдоно уу</string>
+    <string name="mount_stock_mismatch_message">Суурилуулсан аппликейшн нь эх хувилбар биш байна. Эх APK-г сонгох эсвэл үйлдвэрийн хувилбарыг дахин суулгаад Mount-ийг дахин оролдоно уу</string>
     <string name="installer_status_shizuku_unsupported">Суулгасан Shizuku хувилбар дэмжигдэхгүй байна</string>
     <string name="installer_action_open_shizuku">Shizuku-г нээх</string>
     <string name="installer_hint_generic">Суурилуулалт амжилтгүй боллоо. Дахин оролдох эсвэл өөр суурилуулагч сонгоно уу</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">Вэбсайт</string>
     <string name="about_link_translations">Орчуулга</string>
     <string name="contributors">Зуравдлагчид</string>
-    <string name="contributors_description">Сүүлийн 12 сарын хугацаанд</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Бүх цаг хугацаа</string>
+    <string name="contributors_6_months">6 сар</string>
+    <string name="contributors_3_months">3 сар</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Дэмжигчид</string>
     <string name="supporters_description">Open Collective-ийн дэмжигчид</string>

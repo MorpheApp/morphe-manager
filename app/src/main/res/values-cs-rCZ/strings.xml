@@ -1076,6 +1076,7 @@ Rozměry obrázků musí být následující:
     <string name="installer_mount_warning_install">Režim záplat je nastaven na root mount. Tato uložená aplikace nebyla instalována pomocí mount</string>
     <string name="mount_version_mismatch_message">Verze původní aplikace (%2$s) se neshoduje s verzí upravené aplikace (%1$s). Připojte odpovídající původní verzi, pak zkuste to znovu</string>
     <string name="mount_stock_restore_failed_message">Android odmítl uložený původní APK. Nainstalujte odpovídající verzi původní aplikace a poté zkuste znovu připojit</string>
+    <string name="mount_stock_mismatch_message">Instalovaná aplikace není původní. Vyberte původní APK nebo reinstalujte základní verzi a poté zkuste Mount znovu</string>
     <string name="installer_status_shizuku_unsupported">Použitá verze Shizuku není podporována</string>
     <string name="installer_action_open_shizuku">Otevřít Shizuku</string>
     <string name="installer_hint_generic">Instalace selhala. Zkuste to znovu nebo přepněte na jiný instalátor</string>
@@ -1358,7 +1359,10 @@ Podrobnosti: %2$s"</string>
     <string name="about_link_website">Webové stránky</string>
     <string name="about_link_translations">Překlady</string>
     <string name="contributors">Přispěvatelé</string>
-    <string name="contributors_description">Posledních 12 měsíců</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Za celou dobu</string>
+    <string name="contributors_6_months">6 měsíců</string>
+    <string name="contributors_3_months">3 měsíce</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Podporovatelé</string>
     <string name="supporters_description">Podporovatelé na Open Collective</string>

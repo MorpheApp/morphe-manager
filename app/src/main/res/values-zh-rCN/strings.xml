@@ -1076,6 +1076,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">修补模式已设置为 root 挂载。此保存的应用并非使用挂载方式安装</string>
     <string name="mount_version_mismatch_message">原始应用版本（%2$s）与修补后的应用版本（%1$s）不匹配。挂载匹配的原始版本，然后重试</string>
     <string name="mount_stock_restore_failed_message">Android 拒绝了保存的原始 APK。请安装匹配的系统版本，然后重试挂载。</string>
+    <string name="mount_stock_mismatch_message">已安装的应用程序不是原版。请选择原版 APK 或重新安装原厂版本，然后再次尝试挂载</string>
     <string name="installer_status_shizuku_unsupported">已安装的 Shizuku 版本不受支持</string>
     <string name="installer_action_open_shizuku">打开 Shizuku</string>
     <string name="installer_hint_generic">安装失败。请重试或切换到其他安装程序</string>
@@ -1358,7 +1359,10 @@ morphe_header_custom_dark.png
     <string name="about_link_website">网站</string>
     <string name="about_link_translations">翻译</string>
     <string name="contributors">贡献者</string>
-    <string name="contributors_description">过去 12 个月</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">所有时间</string>
+    <string name="contributors_6_months">6个月</string>
+    <string name="contributors_3_months">3个月</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">支持者</string>
     <string name="supporters_description">Open Collective 上的赞助者</string>

@@ -1076,6 +1076,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_mount_warning_install">Moda patchkirinê li ser root mount hatiye belgekirin. Ev appa hatî parastin bi mount nehatiye sazkirin</string>
     <string name="mount_version_mismatch_message">Guhertoya sepana orîjînal (%2$s) bi guhertoya sepana patchkirî (%1$s) li hev nayê. Guhertoya orîjînal a hevgirtî saz bike, paşê dîsa biceribîne</string>
     <string name="mount_stock_restore_failed_message">Android APKya orîjînal a tomarkirî qebûl nekir. Versiyona stock a hevgirtî saz bike, paşê dîsa Mount biceribîne</string>
+    <string name="mount_stock_mismatch_message">Appê hatî sazkirin ne yê orjînal e. APKya orjînal hilbijêre an jî versiyona stok dubare sazbike, piştre dubare Mount bicerxe</string>
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Shizuku veke</string>
     <string name="installer_hint_generic">Sazkirin bi ser neket. Dîsa biceribîne an sazkerek din hilbijêre</string>
@@ -1358,7 +1359,10 @@ Detay: %2$s"</string>
     <string name="about_link_website">Malper</string>
     <string name="about_link_translations">Wergera</string>
     <string name="contributors">Hevkariyên</string>
-    <string name="contributors_description">12 mehên dawî</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Hemû deman</string>
+    <string name="contributors_6_months">6 mehan</string>
+    <string name="contributors_3_months">3 mehan</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Piştgir</string>
     <string name="supporters_description">Piştgirên li ser Open Collective</string>

@@ -1076,6 +1076,7 @@ Die beeldafmetings moet soos volg wees:
     <string name="installer_mount_warning_install">Patch-modus is op root-mount gestel. Hierdie gestoorde app is nie met mount geïnstalleer nie</string>
     <string name="mount_version_mismatch_message">Die standaard-app se weergawe (%2$s) stem nie ooreen met die gepleisterde app se weergawe (%1$s). Monteer die ooreenstemmende standaardweergawe, en probeer weer</string>
     <string name="mount_stock_restore_failed_message">Android het die gestoorde oorspronklike APK verwerp. Installeer die ooreenstemmende standaardweergawe, en probeer dan weer monteer.</string>
+    <string name="mount_stock_mismatch_message">Die geïnstalleerde toepassing is nie die oorspronklike een nie. Kies die oorspronklike APK of herinstalleer die standaardweergawe, en probeer dan weer om te Mount</string>
     <string name="installer_status_shizuku_unsupported">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
     <string name="installer_action_open_shizuku">Maak Shizuku oop</string>
     <string name="installer_hint_generic">Die installasie het misluk. Probeer weer of skakel oor na \'n ander installer</string>
@@ -1358,7 +1359,10 @@ Besonderhede: %2$s"</string>
     <string name="about_link_website">Webwerf</string>
     <string name="about_link_translations">Vertalings</string>
     <string name="contributors">Bydraers</string>
-    <string name="contributors_description">Laaste 12 maande</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Alle tye</string>
+    <string name="contributors_6_months">6 maande</string>
+    <string name="contributors_3_months">3 maande</string>
     <!-- People who donate to Morphe -->
     <string name="supporters">Ondersteuners</string>
     <string name="supporters_description">Ondersteuners op Open Collective</string>
