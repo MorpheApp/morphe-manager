@@ -39,6 +39,7 @@ import app.morphe.manager.ui.screen.shared.MainPagerScaffold
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.screen.shared.rememberInstallQueue
 import app.morphe.manager.ui.screen.shared.turnTo
+import app.morphe.manager.ui.screen.sources.LocalNetworkSourceAccess
 import app.morphe.manager.ui.screen.sources.SourcesPage
 import app.morphe.manager.ui.screen.sources.rememberSourcesPageState
 import app.morphe.manager.ui.theme.SeasonalEvent
@@ -250,6 +251,9 @@ fun HomeScreen(
             onAppInfoTriggerHandled()
         }
     }
+
+    // Sources on a home server are out of reach on Android 17 until the local network is allowed
+    LocalNetworkSourceAccess(homeViewModel.patchBundleRepository)
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()

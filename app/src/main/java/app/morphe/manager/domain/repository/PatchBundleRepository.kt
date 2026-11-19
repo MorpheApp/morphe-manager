@@ -1584,6 +1584,16 @@ class PatchBundleRepository(
     }
 
     /**
+     * Updates [sources] as their update action does. A source that failed to load may hold a broken
+     * jar of the current version, which a plain version check would keep, so it is downloaded again.
+     */
+    suspend fun updateOrRepair(sources: List<RemotePatchBundle>, showMessage: Boolean = false) {
+        val (failed, loaded) = sources.partition { it.state is PatchBundleSource.State.Failed }
+        if (failed.isNotEmpty()) update(*failed.toTypedArray(), force = true, showMessage = showMessage)
+        if (loaded.isNotEmpty()) update(*loaded.toTypedArray(), showMessage = showMessage)
+    }
+
+    /**
      * Trusts the key the latest bundle of [source] is signed with, after an update refused it for
      * not being signed by the key the source trusted, and updates the source again.
      */

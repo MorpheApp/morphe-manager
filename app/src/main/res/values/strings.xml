@@ -250,6 +250,8 @@
     <string name="sources_download_fail">Failed to download sources: %s</string>
     <string name="sources_download_fail_named">\'%s\' could not be updated. Check your internet connection and try again</string>
     <string name="sources_download_endpoint_not_found">\'%s\': patch metadata not found</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Sources on your local network can\'t be updated without the Nearby devices permission</string>
     <string name="sources_signing_key_changed_named">\'%s\' was not updated because its latest release is not signed by the key it used before</string>
     <string name="sources_signing_key_changed_local">The file is not signed by the key this source used before. To trust it, delete the source and add the file again</string>
     <string name="sources_signing_key_trust_title">Trust the new key?</string>
