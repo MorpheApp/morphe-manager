@@ -271,7 +271,8 @@ class RootInstaller(
      * matching what was recorded about it.
      *
      * [stockAPK], an APK or a split archive, is only installed when the matching stock app is
-     * missing. The stock copy the module mounts at boot always comes from the installed APK.
+     * missing. The stock copy the module mounts at boot always comes from the installed APK, and
+     * [repairStock] supplies an original to install again when that APK does not read as stock.
      */
     suspend fun install(
         patchedAPK: File,
@@ -279,6 +280,7 @@ class RootInstaller(
         packageName: String,
         version: String,
         label: String,
+        repairStock: suspend () -> File? = { null },
         onStage: (MountStage) -> Unit = {},
         onStaged: suspend () -> Unit = {}
     ) = withContext(Dispatchers.IO) {
@@ -292,32 +294,97 @@ class RootInstaller(
         removeOtherRootInstalls(packageName)
 
         var installedStockInfo = pm.getPackageInfo(packageName)
+        var stockRestored = false
 
-        stockAPK?.let { stockApp ->
+        suspend fun restoreStock(stockApp: File, force: Boolean) {
             val stockInfo = readStockInfo(stockApp)
                 ?: error("Failed to get package info for stock app")
             if (stockInfo.packageName != packageName) {
                 error("Stock APK package (${stockInfo.packageName}) does not match $packageName")
             }
 
-            if (installedStockInfo?.isBuildOf(stockInfo) != true) {
+            if (force || installedStockInfo?.isBuildOf(stockInfo) != true) {
                 onStage(MountStage.RESTORING_STOCK)
-                installStockApp(stockApp, packageName) { it.isBuildOf(stockInfo) }
+                // The same build installed again settles only at a new path, or a failed install
+                // would pass for one that landed
+                val previousPath = installedStockInfo?.applicationInfo?.sourceDir.takeIf { force }
+                installStockApp(stockApp, packageName) {
+                    it.isBuildOf(stockInfo) && it.applicationInfo?.sourceDir != previousPath
+                }
+                stockRestored = true
             }
 
             installedStockInfo = pm.getPackageInfo(packageName)
         }
 
+        stockAPK?.let { restoreStock(it, force = false) }
+
         onStage(MountStage.COPYING)
+        var stockSnapshot = installedStockInfo?.applicationInfo?.sourceDir
+            ?.takeIf { it.isNotBlank() }
+            ?.let { snapshotInstalledStock(packageName, it) }
+        if (stockSnapshot == null && installedStockInfo != null) {
+            // Installed again only once, a stock app that still fails would fail the same way at boot
+            val original = (if (stockRestored) null else stockAPK ?: repairStock())
+                ?: throw StockApkMismatchException()
+            restoreStock(original, force = true)
+            onStage(MountStage.COPYING)
+            stockSnapshot = installedStockInfo?.applicationInfo?.sourceDir
+                ?.let { snapshotInstalledStock(packageName, it) }
+                ?: throw StockApkMismatchException()
+        }
+
+        try {
+            stageModule(patchedAPK, packageName, version, label, modulePath, installedStockInfo, stockSnapshot, onStaged)
+        } finally {
+            stockSnapshot?.delete()
+        }
+    }
+
+    /**
+     * Copies the installed stock APK at [path] into the cache as root reads it, or null when it is
+     * not signed like the app PackageManager recorded. A patched APK still mounted there in root's
+     * namespace would otherwise become the stock copy, and mounting that one at boot fails
+     * PackageManager's certificate check, which removes the app.
+     */
+    private suspend fun snapshotInstalledStock(packageName: String, path: String): File? = withContext(Dispatchers.IO) {
+        val expected = pm.getSignature(packageName) ?: return@withContext null
+        // Created by the app and only filled by root, so the app can still read it
+        val copy = File.createTempFile("stock-", ".apk", app.cacheDir)
+        var genuine = false
+        try {
+            // A copy cut short, by a full disk say, says nothing about the APK, so it fails the
+            // install rather than reinstalling the stock app
+            execute("cat ${path.shellQuote()} > ${copy.absolutePath.shellQuote()}")
+                .assertSuccess("Failed to copy the stock APK")
+            genuine = pm.getArchiveSignature(copy) == expected
+        } finally {
+            if (!genuine) copy.delete()
+        }
+        copy.takeIf { genuine }
+    }
+
+    /** Stages and switches in the module of [install], keeping [stockSnapshot] as its stock APK. */
+    private suspend fun stageModule(
+        patchedAPK: File,
+        packageName: String,
+        version: String,
+        label: String,
+        modulePath: String,
+        installedStockInfo: PackageInfo?,
+        stockSnapshot: File?,
+        onStaged: suspend () -> Unit
+    ) {
         val installedStockPath = installedStockInfo?.applicationInfo?.sourceDir
         val stockMountPaths = collectStockMountPaths(packageName, installedStockPath)
         val stockModuleApk = "$modulePath/$packageName-stock.apk"
         // post-fs-data mounts this copy over the installed APK at boot, where one that differs fails
         // PackageManager's certificate check and the app is removed
-        val stockModuleApkWritten = !installedStockPath.isNullOrBlank() && stockMountPaths.isNotEmpty()
+        val stockCopy = stockSnapshot?.takeIf { stockMountPaths.isNotEmpty() }
+        val stockModuleApkWritten = stockCopy != null
         // Kept for restoreFromModule alone, as the stock app installed again needs its splits too
         val stockSplitApks = if (stockModuleApkWritten) {
-            installedStockInfo.applicationInfo?.splitSourceDirs.orEmpty()
+            installedStockInfo?.applicationInfo?.splitSourceDirs.orEmpty()
                 .associateWith { "$modulePath/$packageName$STOCK_SPLIT_INFIX${File(it).name}" }
         } else {
             emptyMap()
@@ -326,7 +393,7 @@ class RootInstaller(
         val placeholders = mapOf(
             "__PKG_NAME__" to packageName,
             "__MANAGER_PKG__" to app.packageName,
-            "__MODULE_ID__" to moduleId,
+            "__MODULE_ID__" to moduleId(packageName),
             "__VERSION__" to version,
             "__LABEL__" to label
         )
@@ -349,9 +416,7 @@ class RootInstaller(
         stageModuleFiles(modulePath, textFiles)
 
         val patchedModuleApk = "$modulePath/$packageName.apk"
-        if (stockModuleApkWritten) {
-            stageCopy(installedStockPath, stockModuleApk, "Stock APK doesn't exist")
-        }
+        stockCopy?.let { stageCopy(it.absolutePath, stockModuleApk, "Stock APK doesn't exist") }
         stockSplitApks.forEach { (source, target) -> stageCopy(source, target, "Stock split APK doesn't exist") }
         stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
 
@@ -510,7 +575,7 @@ class RootInstaller(
                     val name = File(path).name.shellQuote()
                     $$"""pm install-write -S "$(stat -c %s $$copy)" "$session" $$name $$copy"""
                 }
-                $$"""session="$(pm install-create -r -d | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
+                $$"""session="$(pm install-create -r -d --user $$appUserId | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
             }
         )
 
@@ -589,7 +654,7 @@ class RootInstaller(
         ) { it.versionName == version }
 
         val label = pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } } ?: packageName
-        install(File("$modulePath/$packageName.apk"), null, packageName, version, label, onStage)
+        install(File("$modulePath/$packageName.apk"), null, packageName, version, label, onStage = onStage)
     }
 
     private suspend fun collectStockMountPaths(
@@ -831,6 +896,9 @@ enum class MountStage {
 class StockAppInstallException(detail: String) : Exception(
     if (detail.isBlank()) "Failed to install stock app" else "Failed to install stock app: $detail"
 )
+
+/** The installed APK root reads is not signed like the installed app, with no original to install again. */
+class StockApkMismatchException : Exception("The installed APK is not the original app")
 
 private fun Shell.Result.hasRootUid() = isSuccess && out.any { line ->
     line.contains("uid=0")
