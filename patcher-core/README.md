@@ -3,8 +3,8 @@
 Everything about a patching run that does not need Android. The app runs it in the `:patcher`
 process of `PatcherService`, started by `PatcherProcesses` for every run, on one of two VMs:
 
-- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, at most
-  1 GB in a 32-bit process), which starts at 512 MB. BellSoft's Liberica 25 for Linux on every
+- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, half of it
+  within 1-1.5 GB in a 32-bit process), which starts at 512 MB. BellSoft's Liberica 25 for Linux on every
   ABI, which runs as a child process of `:patcher`.
 - ART, the runtime of the process itself, within the heap Android gives the app. Used when the
   setting is off, on 32-bit x86, and when the JVM fails to start.
@@ -140,7 +140,7 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
   collections once the 450-650M kept alive fills the old space. A 32-bit process still gets
   SerialGC, the collector with the fewest threads and the least to go wrong on that port.
-- **AOT cache**: a 64-bit process keeps a JDK 25 AOT cache in `cache/jvm-aot`, named after the
+- **AOT cache**: the JVM keeps a JDK 25 AOT cache in `cache/jvm-aot`, named after the
   runtime and the host jar. The first run records with `-XX:AOTMode=record`. Once it ends, the app
   waits for its JVM to write the configuration as it exits, then makes the cache in a JVM of its
   own with `-XX:AOTMode=create`. Later runs start with `-XX:AOTCache`. Each failed attempt
@@ -150,8 +150,7 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   The runtime and the host jar stay in `no_backup/jvm`: the cache is only valid for the files it
   was made with, so unpacking them again would void it anyway.
 - **JIT**: without an AOT cache, the app passes `-XX:TieredStopAtLevel=1` in a 64-bit process, so
-  only C1 compiles. A 32-bit process keeps C2, whose long runs gain the most from it, and has no
-  AOT cache.
+  only C1 compiles. A 32-bit process keeps C2, whose long runs gain the most from it.
 - **Object headers**: the app passes `-XX:+UseCompactObjectHeaders` in a 64-bit process (a
   32-bit JVM does not have the flag), which shrinks every object header from
   12 to 8 bytes. Runs of a split YouTube bundle were about 4% faster with it, mostly in compiling
