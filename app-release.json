@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-18T10:05:06",
-  "description": "## [2.7.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.4...v2.7.0-dev.5) (2026-11-18)\n\n### Bug Fixes\n\n* Keep the launch source check quiet unless it brings something ([a1c95cb](https://github.com/MorpheApp/morphe-manager/commit/a1c95cbf43daed4dc215eac358a87cd69972280c))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.0-dev.5/morphe-manager-2.7.0-dev.5.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.0-dev.5/morphe-manager-2.7.0-dev.5.apk.asc",
-  "version": "2.7.0-dev.5"
+  "created_at": "2026-11-19T14:22:20",
+  "description": "## [2.7.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.5...v2.7.0-dev.6) (2026-11-19)\n\n### Features\n\n* List contributors for all time, 6 months, 3 months  ([#1473](https://github.com/MorpheApp/morphe-manager/issues/1473)) ([9b7aaf6](https://github.com/MorpheApp/morphe-manager/commit/9b7aaf6bc54eff7e4454478700b1193547a59061))\n\n### Performance Improvements\n\n* Run the patcher JVM as Liberica 25 on glibc for every ABI ([#1474](https://github.com/MorpheApp/morphe-manager/issues/1474)) ([d5bdb2b](https://github.com/MorpheApp/morphe-manager/commit/d5bdb2bfa609030de7bf567d5a04fa0832b3efb5))\n\n### Bug Fixes\n\n* Keep only a stock APK signed like the installed app ([49ecfc3](https://github.com/MorpheApp/morphe-manager/commit/49ecfc3bcf41928293f13e841b406f1f7f6ff91d))\n* Keep the previous module when a mount fails before replacing it ([7e9cca8](https://github.com/MorpheApp/morphe-manager/commit/7e9cca800b90a849ba0e89db4b5c8941f6b2036e))\n* Keep the side margins the window has after a rotation ([00a6460](https://github.com/MorpheApp/morphe-manager/commit/00a6460cf63c14f1ba26b3bf0b2097f96526d884))\n* Keep the signing block of a saved original stripped of unused native libraries ([94079ac](https://github.com/MorpheApp/morphe-manager/commit/94079ac8583f55ce4e0a9cbeb6f86a736280ae52))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.0-dev.6/morphe-manager-2.7.0-dev.6.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.0-dev.6/morphe-manager-2.7.0-dev.6.apk.asc",
+  "version": "2.7.0-dev.6"
 }
