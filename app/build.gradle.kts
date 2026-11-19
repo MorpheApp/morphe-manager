@@ -159,7 +159,7 @@ val libericaFeature = libericaVersion.substringBefore('.').toInt()
  * The release of MorpheApp/morphe-jvm the packages of the GNU C library come from: termux-pacman's
  * recipes with what Android needs on top, and the packages of termux-pacman kept as they built them.
  */
-val glibcRelease = "gpkg-1"
+val glibcRelease = "gpkg-2"
 
 /**
  * The JVM the app embeds for one ABI: Liberica for Linux, pinned by [sha256], which runs on the
@@ -206,7 +206,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-aarch64",
         termuxArch = "aarch64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "736b29e9d9615645be81c79667aad079741fd6482329cec5424a0a225cf6e53c",
+            "glibc-2.44-0" to "d724753a7bc5374972b95b6c720bca64922d54701d07d5758ad338c24ad015bc",
             "zlib-glibc-1.3.2-0" to "823322a4dfaccf77ead5935941320c53cf25f73d113253c53382ac6f42d7868b",
             "gcc-libs-glibc-14.2.1-1" to "9316728ceeb23c320756aa0bb03460f9767b6efdc44a478c86f7fcc44c6e11ec"
         ),
@@ -218,7 +218,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-arm",
         termuxArch = "arm",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "120bed98e3b7be1e2751fef091c3e17c295179b222aa18c6f7fc5ee781884a12",
+            "glibc-2.44-0" to "f28c0682b8b15333180a47bc551245183c16f7ced24dd8bda09ba5a9394507d9",
             "zlib-glibc-1.3.2-0" to "f0489608b9ae7249c72df983b8ed5ee61d9ef0052e5d3398eca139275d1485a0",
             "gcc-libs-glibc-14.2.1-1" to "5b253b412651218f7478de4b747d8f851dc9609e1f218246d841e44caa81613a"
         ),
@@ -230,7 +230,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-amd64",
         termuxArch = "x86_64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "9e8171f946aa4a7d00f740b56924c38e2bdfeec8c57b8555b78366c8d5941c8c",
+            "glibc-2.44-0" to "71b57bdf1fb9dc13701bea732303dac5499ed0542c6d70a28d59b7f6645f2f0e",
             "zlib-glibc-1.3.2-0" to "aea6ba84be3801808bd5bd06fddf6e304ceaea75a5e73d5248bf99406b0b88bb",
             "gcc-libs-glibc-14.2.1-1" to "5f7fd3600a4ac83357c91cd30641eae488c9afc1e2549e62429cafa4d0badf5a"
         ),
