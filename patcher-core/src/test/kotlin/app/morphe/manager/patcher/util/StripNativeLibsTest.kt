@@ -139,6 +139,17 @@ class StripNativeLibsTest {
         assertNull(signingBlockOf(output))
     }
 
+    @Test
+    fun `a signing block is found only in an APK that has one`() {
+        val unsigned = apk("classes.dex")
+        val signed = withSigningBlock(unsigned, mapOf(FIRST_UNKNOWN_ID to "certificate chain".toByteArray()))
+        val notAnArchive = File(workspace, "notes.txt").apply { writeText("not an archive") }
+
+        assertTrue(NativeLibs.hasSigningBlock(signed))
+        assertFalse(NativeLibs.hasSigningBlock(unsigned))
+        assertFalse(NativeLibs.hasSigningBlock(notAnArchive))
+    }
+
     private companion object {
         const val END_OF_CENTRAL_DIRECTORY_SIGNATURE = 0x06054b50
         const val CENTRAL_DIRECTORY_OFFSET_FIELD = 16

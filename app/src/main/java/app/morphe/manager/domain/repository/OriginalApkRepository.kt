@@ -90,6 +90,17 @@ internal fun retainOriginalApk(source: File, target: File, moveSource: Boolean) 
     }
 }
 
+/**
+ * Whether [saved] already stands for [supplied]. A split archive still replaces a merged APK,
+ * which a mount cannot restore the stock app from. A signed APK still replaces a copy saved
+ * without its signing block, which patches that read the signing certificate cannot use.
+ */
+internal fun savedOriginalStandsFor(saved: File, supplied: File): Boolean = when {
+    SplitApkPreparer.isSplitArchive(saved) -> true
+    SplitApkPreparer.isSplitArchive(supplied) -> false
+    else -> NativeLibs.hasSigningBlock(saved) || !NativeLibs.hasSigningBlock(supplied)
+}
+
 class OriginalApkRepository(
     db: AppDatabase,
     fs: Filesystem,
@@ -104,13 +115,13 @@ class OriginalApkRepository(
     suspend fun get(packageName: String) = dao.get(packageName)
 
     /**
-     * Whether the saved original of [packageName] already stands for [file] of [version]. A split
-     * archive still replaces a merged APK, which a mount cannot restore the stock app from.
+     * Whether the saved original of [packageName] already stands for [file] of [version], see
+     * [savedOriginalStandsFor].
      */
     suspend fun hasOriginal(packageName: String, version: String, file: File): Boolean {
         val existing = get(packageName)?.takeIf { it.version == version } ?: return false
         val saved = File(existing.filePath).takeIf { it.exists() } ?: return false
-        return SplitApkPreparer.isSplitArchive(saved) || !SplitApkPreparer.isSplitArchive(file)
+        return savedOriginalStandsFor(saved, file)
     }
 
     /**
