@@ -793,6 +793,9 @@ class InstallViewModel(
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             var recordCreated = false
+            // Until the new module is staged, a failure leaves the one already there untouched
+            val hadModule = runCatching { rootInstaller.hasModuleCopies(packageName) }.getOrDefault(false)
+            var moduleStaged = false
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
@@ -875,6 +878,7 @@ class InstallViewModel(
                         val hadRecord = installedAppRepository.get(packageName) != null
                         onPersistApp(packageInfo.packageName, InstallType.MOUNT)
                         recordCreated = !hadRecord
+                        moduleStaged = true
                     }
                 )
 
@@ -893,10 +897,13 @@ class InstallViewModel(
                 Log.e(TAG, "Mount install failed", e)
                 handleInstallError(mountFailureMessage(e))
 
-                // Cleanup on failure
-                try {
-                    rootInstaller.uninstall(packageName)
-                } catch (_: Exception) {}
+                // The previous module still mounts its own build at the next boot, or stays unmounted
+                // when the installed app no longer matches it
+                if (moduleStaged || !hadModule) {
+                    try {
+                        rootInstaller.uninstall(packageName)
+                    } catch (_: Exception) {}
+                }
 
                 // The module is gone, so a record this attempt created would describe nothing,
                 // while one that was already there keeps the saved build to install again

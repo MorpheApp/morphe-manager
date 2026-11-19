@@ -18,6 +18,7 @@ import app.morphe.manager.util.PM
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -267,8 +268,8 @@ class RootInstaller(
      * Writes the module that mounts [patchedAPK] over [packageName] at every boot.
      *
      * The module is staged beside the files it replaces and only switched in after [onStaged].
-     * A process killed during the slow copies leaves the previous module in place, still
-     * matching what was recorded about it.
+     * A failure or a process killed during the slow copies leaves the previous module in place,
+     * still matching what was recorded about it.
      *
      * [stockAPK], an APK or a split archive, is only installed when the matching stock app is
      * missing. The stock copy the module mounts at boot always comes from the installed APK, and
@@ -413,21 +414,26 @@ class RootInstaller(
         }
         val noMountFile = NO_MOUNT_MARKER to noMountMarker(prefs.noMountOnly.get())
         val textFiles = (moduleFiles + stockPathsFile + noMountFile).mapKeys { (name, _) -> "$modulePath/$name" }
-        stageModuleFiles(modulePath, textFiles)
-
         val patchedModuleApk = "$modulePath/$packageName.apk"
-        stockCopy?.let { stageCopy(it.absolutePath, stockModuleApk, "Stock APK doesn't exist") }
-        stockSplitApks.forEach { (source, target) -> stageCopy(source, target, "Stock split APK doesn't exist") }
-        stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
-
         val apkPaths = listOfNotNull(patchedModuleApk, stockModuleApk.takeIf { stockModuleApkWritten }) +
                 stockSplitApks.values
-        setStagedFilePermissions(
-            apkPaths = apkPaths,
-            scriptPaths = MODULE_SCRIPTS.map { "$modulePath/$it" }
-        )
 
-        onStaged()
+        try {
+            stageModuleFiles(modulePath, textFiles)
+            stockCopy?.let { stageCopy(it.absolutePath, stockModuleApk, "Stock APK doesn't exist") }
+            stockSplitApks.forEach { (source, target) -> stageCopy(source, target, "Stock split APK doesn't exist") }
+            stageCopy(patchedAPK.absolutePath, patchedModuleApk, "File doesn't exist")
+            setStagedFilePermissions(
+                apkPaths = apkPaths,
+                scriptPaths = MODULE_SCRIPTS.map { "$modulePath/$it" }
+            )
+
+            onStaged()
+        } catch (e: Throwable) {
+            // Nothing is switched in yet, so the previous module stays as it was without the staged copies
+            withContext(NonCancellable) { execute("rm -f ${modulePath.shellQuote()}/*.tmp") }
+            throw e
+        }
         commitStaged(textFiles.keys + apkPaths)
 
         // Splits of the version staged before would not install beside this one
