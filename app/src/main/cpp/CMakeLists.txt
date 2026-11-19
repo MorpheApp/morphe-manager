@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project("morphe")
+project("morphe" C)
 
-# Starts the JVM that patches inside the process of the patcher service
+# Starts the JVM that patches as a process of the patcher service
 add_library(jvm_launcher SHARED
-        jvm_launcher.cpp)
-
-target_link_libraries(jvm_launcher
-        log)
+        jvm_launcher.c)

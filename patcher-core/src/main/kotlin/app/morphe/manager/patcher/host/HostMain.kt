@@ -44,7 +44,7 @@ import kotlin.time.TimeSource
  */
 fun main(args: Array<String>) {
     // Patches tell Android from a desktop host by java.vendor, which ART sets to this and the
-    // embedded OpenJDK build leaves as N/A
+    // embedded JVM, a build for Linux, to its own vendor
     System.setProperty("java.vendor", "The Android Project")
     val (commandsFile, eventsFile) = args
     val collectors = ManagementFactory.getGarbageCollectorMXBeans().toTypedArray()
@@ -82,6 +82,7 @@ fun serveRun(
 ): Nothing {
     val code = try {
         HostEvents(FileOutputStream(eventsFile)).use { events ->
+            events.send(HostEvent.Started)
             // Patches print what they did, which on Android goes to /dev/null or at best logcat.
             // The log is the one place the user sees it
             System.setOut(events.printer())

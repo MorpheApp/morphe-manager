@@ -12,6 +12,10 @@
       "name": "Bouncy Castle Licence",
       "url": "https://www.bouncycastle.org/licence.html"
     },
+    "GCC-exception-3.1": {
+      "name": "GCC Runtime Library exception 3.1",
+      "url": "https://spdx.org/licenses/GCC-exception-3.1.html"
+    },
     "GPL-2.0-with-classpath-exception": {
       "name": "GNU General Public License v2.0 with Classpath Exception",
       "url": "https://openjdk.org/legal/gplv2+ce.html"
@@ -20,9 +24,21 @@
       "name": "GNU General Public License v3.0 only",
       "url": "https://spdx.org/licenses/GPL-3.0-only.html"
     },
+    "GPL-3.0-or-later": {
+      "name": "GNU General Public License v3.0 or later",
+      "url": "https://spdx.org/licenses/GPL-3.0-or-later.html"
+    },
+    "LGPL-2.1-or-later": {
+      "name": "GNU Lesser General Public License v2.1 or later",
+      "url": "https://spdx.org/licenses/LGPL-2.1-or-later.html"
+    },
     "MIT": {
       "name": "MIT License",
       "url": "https://spdx.org/licenses/MIT.html"
+    },
+    "Zlib": {
+      "name": "zlib License",
+      "url": "https://spdx.org/licenses/Zlib.html"
     }
   },
   "libraries": [
@@ -34,9 +50,27 @@
     },
     {
       "name": "OpenJDK",
-      "description": "The Java runtime that patching runs in, built for Android by AngelAuraMC. Its source is at https://github.com/AngelAuraMC/angelauramc-openjdk-build, https://github.com/openjdk/jdk17u and https://github.com/openjdk/jdk25u",
+      "description": "The Java runtime that patching runs in, built for Linux by BellSoft (Liberica). Its source is at https://github.com/openjdk/jdk25u and https://github.com/bell-sw/Liberica",
       "website": "https://openjdk.org",
       "licenses": ["GPL-2.0-with-classpath-exception"]
+    },
+    {
+      "name": "GNU C Library",
+      "description": "The C library the Java runtime runs on, as termux-pacman builds it for Android. Its source is at https://sourceware.org/glibc and https://github.com/termux-pacman/glibc-packages",
+      "website": "https://www.gnu.org/software/libc",
+      "licenses": ["LGPL-2.1-or-later"]
+    },
+    {
+      "name": "zlib",
+      "description": "The compression library the Java runtime links against, as termux-pacman builds it. Its source is at https://github.com/termux-pacman/glibc-packages",
+      "website": "https://zlib.net",
+      "licenses": ["Zlib"]
+    },
+    {
+      "name": "GCC runtime library",
+      "description": "libgcc_s, which that zlib links against, as termux-pacman builds it. Its source is at https://gcc.gnu.org and https://github.com/termux-pacman/glibc-packages",
+      "website": "https://gcc.gnu.org",
+      "licenses": ["GPL-3.0-or-later", "GCC-exception-3.1"]
     },
     {
       "name": "ARSCLib",

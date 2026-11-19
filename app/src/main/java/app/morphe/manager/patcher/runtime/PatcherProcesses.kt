@@ -117,20 +117,21 @@ class PatcherProcesses(
         }
     }
 
-    /**
-     * The heap a JVM is started with: a third of the RAM within bounds, or a fixed one in a 32-bit
-     * process, which may find room for less, see [PatcherService].
-     */
+    /** The heap a JVM is started with: a third of the RAM within bounds, or half of it in a 32-bit process. */
     private val jvmHeapLimitMb by lazy {
+        val memoryInfo = ActivityManager.MemoryInfo()
+        app.getSystemService(ActivityManager::class.java).getMemoryInfo(memoryInfo)
+        val ramMb = bytesToMebibytes(memoryInfo.totalMem).toInt()
         if (Process.is64Bit()) {
-            val memoryInfo = ActivityManager.MemoryInfo()
-            app.getSystemService(ActivityManager::class.java).getMemoryInfo(memoryInfo)
-            (bytesToMebibytes(memoryInfo.totalMem) / 3).toInt()
-                .coerceIn(HEAP_LIMIT_MINIMUM_MB, HEAP_LIMIT_MAXIMUM_MB)
+            (ramMb / 3).coerceIn(HEAP_LIMIT_MINIMUM_MB, HEAP_LIMIT_MAXIMUM_MB)
         } else {
-            HEAP_LIMIT_32_BIT_MB
+            (ramMb / 2).coerceIn(HEAP_LIMIT_32_BIT_MINIMUM_MB, HEAP_LIMIT_32_BIT_MAXIMUM_MB)
         }
     }
+
+    /** The heap a JVM that found no room for [jvmHeapLimitMb] is started with again. */
+    private val jvmMinimumHeapLimitMb
+        get() = if (Process.is64Bit()) HEAP_LIMIT_MINIMUM_MB else HEAP_LIMIT_32_BIT_MINIMUM_MB
 
     /** The heap a run on [vm] gets. ART gives the process of the run what it gives the app's. */
     fun heapLimitMb(vm: PatcherVm) = when (vm) {
@@ -153,7 +154,7 @@ class PatcherProcesses(
         val vm = preferredVm()
         lock.withLock {
             if (ahead?.let { it.vm == vm && it.isAlive } == true) return@withLock
-            ahead?.close()
+            ahead?.closeAndAwaitGone()
             ahead = null
 
             ahead = try {
@@ -200,7 +201,7 @@ class PatcherProcesses(
         val started = ahead
         ahead = null
         if (started != null && started.vm == vm && started.isAlive) return@withLock started
-        started?.close()
+        started?.closeAndAwaitGone()
         start(bundles, vm)
     }
 
@@ -209,32 +210,47 @@ class PatcherProcesses(
         return patchBundleRepository.bundles.first().filterKeys { it in enabled }.values.map { it.patchesJar }
     }
 
-    private suspend fun start(bundles: List<String>, vm: PatcherVm): PatcherProcess {
-        val process = try {
-            startHost(vm)
-        } catch (e: Exception) {
-            // What the run falls back to ART on
-            throw if (vm == PatcherVm.JVM && (e is IllegalStateException || e is RemoteException)) {
-                JvmUnavailableException(e.message ?: "The patcher JVM did not start", e)
-            } else {
-                e
-            }
+    private suspend fun start(bundles: List<String>, vm: PatcherVm): PatcherProcess = try {
+        try {
+            startAndAwait(bundles, vm, jvmHeapLimitMb)
+        } catch (e: HostNotStartedException) {
+            // The address space of a 32-bit process may have no room for the heap in one piece. The
+            // smallest one still patches large apps, which ART, the next resort, does not
+            if (vm != PatcherVm.JVM || !e.heapNotReserved || jvmHeapLimitMb <= jvmMinimumHeapLimitMb) throw e
+            Log.w(LOG_TAG, "No room for a ${jvmHeapLimitMb}MB heap, starting the patcher JVM with ${jvmMinimumHeapLimitMb}MB")
+            startAndAwait(bundles, vm, jvmMinimumHeapLimitMb)
         }
-
-        return process.apply {
-            try {
-                send(HostCommand.Preload(bundles))
-            } catch (_: IOException) {
-                // Gone already, which isAlive tells whoever takes it
-            }
+    } catch (e: Exception) {
+        // What the run falls back to ART on, which a canceled start is not, an IllegalStateException as well
+        throw if (vm == PatcherVm.JVM && e !is CancellationException && (e is IllegalStateException || e is RemoteException)) {
+            JvmUnavailableException(e.message ?: "The patcher JVM did not start", e)
+        } else {
+            e
         }
     }
 
-    private suspend fun startHost(vm: PatcherVm): PatcherProcess {
+    /** Starts a host on [vm], with a heap of [heapLimitMb] in the JVM, that loads [bundles], and waits for it to run. */
+    private suspend fun startAndAwait(bundles: List<String>, vm: PatcherVm, heapLimitMb: Int): PatcherProcess {
+        val process = startHost(vm, heapLimitMb)
+        try {
+            try {
+                process.send(HostCommand.Preload(bundles))
+            } catch (_: IOException) {
+                // Gone already, which awaitStarted tells
+            }
+            process.awaitStarted()
+            return process
+        } catch (e: Exception) {
+            if (e is CancellationException) process.close() else process.closeAndAwaitGone()
+            throw e
+        }
+    }
+
+    private suspend fun startHost(vm: PatcherVm, heapLimitMb: Int): PatcherProcess {
         val installed = if (vm == PatcherVm.JVM) installation.install() else null
         val aot = installed?.let { aotUse(it) } ?: AotUse.NONE
         val tuning = installed?.let { jvmTuning(aot.options(it)) }.orEmpty()
-        val launch = installed?.let { jvmLaunch(it, tuning) }
+        val launch = installed?.let { jvmLaunch(it, tuning, heapLimitMb) }
         val aotRecord = installed.takeIf { aot == AotUse.RECORD }
         try {
             val connection = PatcherConnection.connect(app)
@@ -251,6 +267,13 @@ class PatcherProcesses(
             throw e
         }
     }
+
+    /**
+     * A host that ended before it ran or did not start in time, see [PatcherProcess.awaitStarted].
+     *
+     * @param heapNotReserved Whether the JVM found no room for its heap in the address space.
+     */
+    private class HostNotStartedException(message: String, val heapNotReserved: Boolean) : IllegalStateException(message)
 
     /** A host just started, with the ends of its pipes the app keeps, see [startIn]. */
     private class StartedHost(
@@ -286,12 +309,11 @@ class PatcherProcesses(
         return StartedHost(started, commandsSink, events)
     }
 
-    private fun jvmLaunch(installed: JvmInstallation.Installed, tuning: List<String>) = JvmLaunch(
-        libjvm = installed.libjvm.path,
-        preload = installed.preload,
+    private fun jvmLaunch(installed: JvmInstallation.Installed, tuning: List<String>, heapLimitMb: Int = jvmHeapLimitMb) = JvmLaunch(
+        command = installed.command,
         options = jvmOptions(installed) + tuning,
         mainClass = HOST_MAIN_CLASS,
-        heapLimitMb = jvmHeapLimitMb
+        heapLimitMb = heapLimitMb
     )
 
     /**
@@ -299,8 +321,6 @@ class PatcherProcesses(
      * time, and none while the cache is being made from what one recorded.
      */
     private fun aotUse(installed: JvmInstallation.Installed) = when {
-        // JDK 17, which a 32-bit process runs, has no AOT cache
-        !Process.is64Bit() -> AotUse.NONE
         installed.aotCache.isFile -> AotUse.USE
         aotFailures(installed) >= AOT_ATTEMPTS -> AotUse.NONE
         aotRecording.compareAndSet(false, true) -> AotUse.RECORD
@@ -343,15 +363,11 @@ class PatcherProcesses(
                 )
             )
             PatcherConnection.connect(app).use { connection ->
-                val host = try {
-                    startIn(connection, launch)
-                } catch (_: RemoteException) {
-                    // The JVM exits once it wrote the cache, and its process with it
-                    null
-                }
-                if (host != null) {
-                    host.close()
-                    throw IllegalStateException("The JVM to make the AOT cache started the host instead of exiting")
+                // The JVM exits once it wrote the cache, and its process with it
+                startIn(connection, launch).use {
+                    withTimeoutOrNull(AOT_RECORD_EXIT_TIMEOUT) {
+                        while (connection.service.asBinder().isBinderAlive) delay(EXIT_RECORD_POLL)
+                    } ?: throw IllegalStateException("The JVM to make the AOT cache did not exit")
                 }
             }
 
@@ -375,15 +391,13 @@ class PatcherProcesses(
         }
     }
 
-    /** The options any JVM needs to run inside an app, the same on every device. */
+    /** The options any JVM needs to run for an app, the same on every device. */
     private fun jvmOptions(installed: JvmInstallation.Installed) = listOf(
         "-Djava.class.path=${installed.hostJar}",
         // The JVM falls back to /tmp, which an app cannot write to
         "-Djava.io.tmpdir=${fs.tempDir}",
         // Patches that ship a JNI library load it from an unnamed module
         "--enable-native-access=ALL-UNNAMED",
-        // Leaves the signals ART relies on to ART, such as the one that dumps its threads
-        "-Xrs",
         // Nothing reads the performance counters, which would otherwise be kept in a file of their own
         "-XX:-UsePerfData",
         // The working directory of an app is not writable, which is where the report would go
@@ -392,8 +406,8 @@ class PatcherProcesses(
 
     /**
      * The options that tune the JVM to the process, then [aot], the options of the AOT cache, and
-     * last those of a debug build, so a debug build can override any flag by giving it again. A
-     * 64-bit process runs JDK 25 and a 32-bit one JDK 17, see embeddedJvms of the app.
+     * last those of a debug build, so a debug build can override any flag by giving it again.
+     * Every process runs JDK 25, see embeddedJvms of the app.
      */
     private suspend fun jvmTuning(aot: List<String>) = (if (Process.is64Bit()) listOfNotNull(
         // C1 only for a run that neither starts from an AOT cache nor records for one. Most runs
@@ -406,11 +420,11 @@ class PatcherProcesses(
         // smaller ones leave the heap and the collector less to do. The AOT cache only works with
         // the headers it was made with
         "-XX:+UseCompactObjectHeaders"
-    ) + aot else listOf(
-        // The simplest collector, with no threads of its own, on a port that runs few others. A
-        // 32-bit JVM is the client VM, which only has C1 to begin with
+    ) else listOf(
+        // The simplest collector, with no threads of its own, on a port that runs few others. C2
+        // stays on, as the runs that take long on 32-bit phones gain the most from it
         "-XX:+UseSerialGC"
-    )) + debugOptions()
+    )) + aot + debugOptions()
 
     /** Where the JVM in process [pid] reports a crash, %p standing for the pid of whichever does. */
     private fun errorFile(pid: Any) = fs.tempDir.resolve("patcher-jvm-error-$pid.log")
@@ -463,7 +477,43 @@ class PatcherProcesses(
         // Set once a run that records for the AOT cache succeeded, to make the cache from
         private var recorded = false
 
+        // How the process of the JVM ended, as its service reports it
+        private var jvmEnded: HostEvent.JvmEnded? = null
+
         val isAlive get() = connection.service.asBinder().isBinderAlive
+
+        /**
+         * Waits for the host to report that it runs. A JVM that could not start, for an option, a
+         * library or a heap the device has no room for, ends before that, which the service of the
+         * process reports with what the JVM wrote.
+         *
+         * @throws HostNotStartedException If the process ended first or did not start in time.
+         */
+        suspend fun awaitStarted() {
+            val logged = mutableListOf<String>()
+            val started = withTimeoutOrNull(HOST_START_TIMEOUT) {
+                for (event in events) when (event) {
+                    HostEvent.Started -> return@withTimeoutOrNull true
+                    is HostEvent.JvmEnded -> jvmEnded = event
+                    is HostEvent.Log -> logged += event.message
+                    // Nothing else comes before the host runs
+                    else -> Unit
+                }
+                false
+            }
+            if (started == true) return
+
+            if (started == false) ended = true
+            val cause = when {
+                started == null -> "did not start within $HOST_START_TIMEOUT"
+                else -> jvmEnded?.let { "ended before it started, its process ${it.describe()}" } ?: "ended before it started"
+            }
+            val details = logged + jvmEnded?.output.orEmpty()
+            throw HostNotStartedException(
+                "The patcher $vm $cause" + if (details.isNotEmpty()) ":\n${details.joinToString("\n")}" else "",
+                heapNotReserved = details.any { HEAP_NOT_RESERVED in it }
+            )
+        }
 
         @Synchronized
         fun send(command: HostCommand) {
@@ -484,11 +534,16 @@ class PatcherProcesses(
             val finished = relay(logger, listener)
             ended = true
             if (finished == null) {
-                val killed = killedException()
-                val errorFile = errorFile(started.pid)
+                // The system records the end of the service, which outlives a JVM that crashed or was killed
+                val end = jvmEnded
+                val killed = end?.let { PatcherKilledException("the JVM ${it.describe()}", it.crashed) } ?: killedException()
+                val errorFile = errorFile(started.jvmPid)
                 if (errorFile.exists()) {
                     logger.error("Patcher JVM error report:\n${errorFile.readText()}")
                     errorFile.delete()
+                } else if (end != null && end.output.isNotEmpty()) {
+                    // The report opens with what a crashing JVM prints, which is all there is without one
+                    logger.error("Patcher JVM output:\n${end.output.joinToString("\n")}")
                 }
                 throw killed
             }
@@ -536,9 +591,7 @@ class PatcherProcesses(
                 "Patcher process: pid=${started.pid} vm=$vm heap=${started.heapLimitMb}MB bits=$bits " +
                         "abis=${Build.SUPPORTED_ABIS.joinToString(",")} age=${age}s"
             )
-            launch?.let {
-                logger.info("Patcher JVM: libjvm=${it.libjvm.substringAfter("/lib/")} options=${tuning.joinToString(" ")}")
-            }
+            if (launch != null) logger.info("Patcher JVM: pid=${started.jvmPid} options=${tuning.joinToString(" ")}")
         }
 
         /**
@@ -550,6 +603,9 @@ class PatcherProcesses(
             val runningPatch = RunningPatchWatch(this, logger)
             try {
                 for (event in events) when (event) {
+                    // Taken by awaitStarted already
+                    HostEvent.Started -> Unit
+                    is HostEvent.JvmEnded -> jvmEnded = event
                     is HostEvent.Log -> logger.log(event.level, event.message)
                     HostEvent.StepCompleted -> listener.stepCompleted()
                     is HostEvent.SplitPreparation -> listener.splitPreparation(event.event)
@@ -614,6 +670,18 @@ class PatcherProcesses(
                     aotRecording.set(false)
                 }
             }
+        }
+
+        /**
+         * [close], then waits for the system to be done with the process. The service bound again
+         * before then is bound to the process on its way out, and never connects.
+         */
+        suspend fun closeAndAwaitGone() {
+            close()
+            val activityManager = app.getSystemService(ActivityManager::class.java)
+            withTimeoutOrNull(PROCESS_GONE_TIMEOUT) {
+                while (activityManager.runningAppProcesses.orEmpty().any { it.pid == started.pid }) delay(PROCESS_GONE_POLL)
+            } ?: Log.w(LOG_TAG, "The patcher process ${started.pid} did not go in time")
         }
 
         /**
@@ -734,7 +802,7 @@ class PatcherProcesses(
     }
 
     private companion object {
-        const val HOST_MAIN_CLASS = "app/morphe/manager/patcher/host/HostMainKt"
+        const val HOST_MAIN_CLASS = "app.morphe.manager.patcher.host.HostMainKt"
         const val DEBUG_OPTIONS_FILE = "jvm-options.txt"
         const val NO_EXIT_RECORD = "no exit record"
 
@@ -744,15 +812,26 @@ class PatcherProcesses(
         const val HEAP_LIMIT_MINIMUM_MB = 2048
         const val HEAP_LIMIT_MAXIMUM_MB = 3072
 
-        // The heap is reserved in one piece, which a 32 bit process seldom finds much more of in
-        // its address space
-        const val HEAP_LIMIT_32_BIT_MB = 1024
+        // TikTok with Hushfeed peaks at about 950MB on 32-bit ARM. The JVM starts in a process of its
+        // own, whose address space still has room for the heap in one piece at the maximum
+        const val HEAP_LIMIT_32_BIT_MINIMUM_MB = 1024
+        const val HEAP_LIMIT_32_BIT_MAXIMUM_MB = 1536
 
         // Generous because a slow device on a cold start can take many seconds to start a process
         val CONNECT_TIMEOUT = 30.seconds
 
+        // A JVM starts in well under a second on a recent phone, and in a few on a slow one
+        val HOST_START_TIMEOUT = 1.minutes
+
+        // What HotSpot reports for a heap it found no room for, such as "Could not reserve enough space for 1433600KB object heap"
+        const val HEAP_NOT_RESERVED = "Could not reserve enough space"
+
         val EXIT_RECORD_TIMEOUT = 2.seconds
         val EXIT_RECORD_POLL = 200.milliseconds
+
+        // A process ends within a second of being killed or exiting
+        val PROCESS_GONE_TIMEOUT = 5.seconds
+        val PROCESS_GONE_POLL = 50.milliseconds
 
         // Writing the recording took about 2 seconds on a recent phone and can take many times
         // that on a slow one. Giving up cuts the recording short, and that device gets no cache

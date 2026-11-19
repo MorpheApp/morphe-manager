@@ -6,8 +6,8 @@
 package app.morphe.manager.patcher.runtime.jvm
 
 /**
- * A HotSpot JVM started inside the calling process. HotSpot cannot be started twice in one process,
- * so the JVM stays until the process ends.
+ * Starts the HotSpot JVM that patches as a process of its own, as it is built for the GNU C library,
+ * which Android's cannot load into the calling process.
  */
 internal object EmbeddedJvm {
     init {
@@ -15,32 +15,17 @@ internal object EmbeddedJvm {
     }
 
     /**
-     * Starts the JVM [launch] describes and calls its main class with [args] on a thread of its
-     * own, returning once main is called.
+     * Starts [command] as a process of its own. It keeps [keepFds] open under the same numbers,
+     * writes its standard output and error to [outputFd], and is killed once the calling thread
+     * ends, so that thread waits for it with [waitProcess].
      *
-     * @return 0, or why the JVM did not start: a JNI_CreateJavaVM error, 1 for a library of the
-     *         runtime that did not load, 2 for a main method that is missing and 3 for memory tag
-     *         checks that could not be turned off.
+     * @return Its pid, or a negative errno.
      */
-    fun start(launch: JvmLaunch, options: List<String>, args: List<String>) = startJvm(
-        launch.libjvm,
-        launch.preload.toTypedArray(),
-        options.toTypedArray(),
-        launch.mainClass,
-        args.toTypedArray()
-    )
+    fun spawn(command: List<String>, keepFds: IntArray, outputFd: Int) =
+        spawnProcess(command.toTypedArray(), keepFds, outputFd)
 
-    /**
-     * The largest block of address space up to [limitMb] that one reservation gets right now, in
-     * megabytes, or 0. HotSpot reserves its heap in one piece.
-     */
-    external fun largestReservationMb(limitMb: Int): Int
+    /** Waits for the process [pid] that [spawn] started, returning its exit code, or 128 plus the signal that ended it. */
+    external fun waitProcess(pid: Int): Int
 
-    private external fun startJvm(
-        libjvm: String,
-        preload: Array<String>,
-        options: Array<String>,
-        mainClass: String,
-        args: Array<String>
-    ): Int
+    private external fun spawnProcess(command: Array<String>, keepFds: IntArray, outputFd: Int): Int
 }
