@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo
 import android.graphics.Matrix
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -18,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.endEdgeX
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startEdgeX
@@ -50,6 +53,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.zhanghai.android.appiconloader.iconloaderlib.IconNormalizer
 import org.koin.compose.koinInject
+import java.net.URL
 import android.graphics.Path as AndroidPath
 
 /**
@@ -89,6 +93,8 @@ fun AppIcon(
             contentDescription = contentDescription,
             modifier = modifier
         )
+        // Not on the device, so ask the Play Store API for it
+        !resolving && packageName != null -> PlayStoreIcon(packageName, contentDescription, modifier)
         // Same placeholder while resolving and when nothing was found
         placeholderGradientColors != null -> GlassPlaceholderIcon(
             gradientColors = placeholderGradientColors,
@@ -192,6 +198,38 @@ private fun DrawableAppIcon(
         contentDescription = contentDescription,
         modifier = modifier
     )
+}
+
+/**
+ * Icon of an app that is not on the device, from the app data of play.rajkumaar.co.in. Looked up
+ * again every time it is shown, and the Android icon until then or when there is none.
+ */
+@Composable
+private fun PlayStoreIcon(packageName: String, contentDescription: String?, modifier: Modifier) {
+    val iconUrl by produceState<String?>(null, packageName) {
+        value = withContext(Dispatchers.IO) {
+            try {
+                val json = URL("https://play.rajkumaar.co.in/json?id=$packageName").readText()
+                Regex(""""logo"\s*:\s*"([^"]+)"""").find(json)?.groupValues?.get(1)
+            } catch (e: Exception) {
+                Log.w(LOG_TAG, "Play Store icon lookup failed for $packageName", e)
+                null
+            }
+        }
+    }
+
+    val url = iconUrl
+    if (url == null) {
+        FallbackIcon(contentDescription = contentDescription, modifier = modifier)
+    } else {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            AsyncImage(
+                model = "$url=s128-rw",
+                contentDescription = contentDescription,
+                modifier = Modifier.fillMaxSize(AppIconContentFraction).clip(AppIconShape)
+            )
+        }
+    }
 }
 
 /**
