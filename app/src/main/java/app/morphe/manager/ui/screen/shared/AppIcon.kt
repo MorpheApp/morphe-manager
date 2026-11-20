@@ -11,7 +11,6 @@ import android.graphics.Bitmap
 import android.graphics.Color as AndroidColor
 import android.graphics.Matrix
 import android.graphics.drawable.AdaptiveIconDrawable
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Process
@@ -92,6 +91,20 @@ fun AppIcon(
     val resolving = packageInfo == null && packageName != null && resolved == null
     val shownInfo = packageInfo ?: resolved?.packageInfo
     val shownDrawable = resolved?.drawable ?: icon
+    // Same placeholder while loading and when nothing was found, where the caller gives one
+    val placeholder: @Composable (loading: Boolean) -> Unit = { loading ->
+        when {
+            placeholderGradientColors != null -> GlassPlaceholderIcon(
+                gradientColors = placeholderGradientColors,
+                modifier = Modifier.fillMaxSize()
+            )
+            loading -> AppIconShimmer()
+            else -> FallbackIcon(
+                contentDescription = contentDescription,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
 
     when {
         shownInfo != null -> SimpleAppIcon(
@@ -105,46 +118,14 @@ fun AppIcon(
             contentDescription = contentDescription,
             modifier = modifier
         )
-        // Same placeholder while resolving and when nothing was found
-        placeholderGradientColors != null && resolving -> GlassPlaceholderIcon(
-            gradientColors = placeholderGradientColors,
-            modifier = modifier
-        )
-        resolving -> Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            ShimmerBox(
-                modifier = Modifier.fillMaxSize(AppIconContentFraction),
-                shape = AppIconShape
-            )
-        }
         // Nothing on the device has an icon for it
-        storePackageName != null -> PlayStoreIcon(
+        !resolving && storePackageName != null -> PlayStoreIcon(
             packageName = storePackageName,
             contentDescription = contentDescription,
-            modifier = modifier
-        ) { loading ->
-            when {
-                placeholderGradientColors != null -> GlassPlaceholderIcon(
-                    gradientColors = placeholderGradientColors,
-                    modifier = Modifier.fillMaxSize()
-                )
-                loading -> ShimmerBox(
-                    modifier = Modifier.fillMaxSize(AppIconContentFraction),
-                    shape = AppIconShape
-                )
-                else -> FallbackIcon(
-                    contentDescription = contentDescription,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-        }
-        placeholderGradientColors != null -> GlassPlaceholderIcon(
-            gradientColors = placeholderGradientColors,
-            modifier = modifier
+            modifier = modifier,
+            fallback = placeholder
         )
-        else -> FallbackIcon(
-            contentDescription = contentDescription,
-            modifier = modifier
-        )
+        else -> Box(modifier = modifier, contentAlignment = Alignment.Center) { placeholder(resolving) }
     }
 }
 
@@ -168,6 +149,18 @@ private fun rememberResolvedIcon(packageName: String?, preferredSource: AppDataS
             )
         }
     }.value
+}
+
+/**
+ * Placeholder of an icon still loading. Adaptive icons only paint their inner square, so one
+ * filling the whole slot reads as the larger of the two while a fast scroll waits for the real one.
+ */
+@Composable
+private fun AppIconShimmer() {
+    ShimmerBox(
+        modifier = Modifier.fillMaxSize(AppIconContentFraction),
+        shape = AppIconShape
+    )
 }
 
 /**
@@ -200,14 +193,7 @@ private fun SimpleAppIcon(
     val state = painter.state
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        if (state is AsyncImagePainter.State.Loading && state.painter == null) {
-            // Adaptive icons only paint their inner square, so a placeholder filling the whole
-            // slot reads as the larger of the two while a fast scroll waits for the real one
-            ShimmerBox(
-                modifier = Modifier.fillMaxSize(AppIconContentFraction),
-                shape = AppIconShape
-            )
-        }
+        if (state is AsyncImagePainter.State.Loading && state.painter == null) AppIconShimmer()
 
         Image(
             painter = painter,
@@ -260,7 +246,7 @@ private fun PlayStoreIcon(
             // Kept on disk by PlayStoreIcons, and drawn icons in Coil's memory cache for the run
             .data(PlayStoreIconData(packageName))
             // Small enough to keep whole, and loads before the painter is first drawn
-            .size(coil.size.Size.ORIGINAL)
+            .size(CoilSize.ORIGINAL)
             .transformations(InstalledIconLook(context.applicationContext))
             .build()
     }
@@ -292,7 +278,7 @@ private class InstalledIconLook(private val context: Context) : Transformation {
         // The Play Store icon is the part of an adaptive icon a launcher shows, which is the middle
         // two thirds of the layer, a sixth in from each side
         val layer = InsetDrawable(input.toDrawable(resources), 1f / 6)
-        val icon = AdaptiveIconDrawable(layer, ColorDrawable(AndroidColor.TRANSPARENT))
+        val icon = AdaptiveIconDrawable(layer, AndroidColor.TRANSPARENT.toDrawable())
         return BaseIconFactory(context, resources.configuration.densityDpi, AppIconPixels).use { factory ->
             factory.disableColorExtraction()
             factory.createBadgedIconBitmap(icon, Process.myUserHandle(), false, false, FloatArray(1)).icon
