@@ -6,10 +6,16 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Color as AndroidColor
 import android.graphics.Matrix
 import android.graphics.drawable.AdaptiveIconDrawable
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
+import android.graphics.drawable.InsetDrawable
+import android.os.Process
+import android.os.SystemClock
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -19,7 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -38,29 +43,35 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.drawable.toDrawable
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.LOG_TAG
+import app.morphe.manager.util.FailedUrlCache
+import app.morphe.manager.util.MORPHE_USER_AGENT
+import app.morphe.manager.util.PLAY_STORE_ICON_URL
 import app.morphe.manager.util.endEdgeX
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startEdgeX
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.transform.Transformation
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.roundedfilled.*
+import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import me.zhanghai.android.appiconloader.iconloaderlib.BaseIconFactory
 import me.zhanghai.android.appiconloader.iconloaderlib.IconNormalizer
 import org.koin.compose.koinInject
-import java.net.URL
 import android.graphics.Path as AndroidPath
+import coil.size.Size as CoilSize
 
 /**
  * Universal app icon component.
  *
  * Automatically resolves icon from available sources:
- * installed app → original APK → patched APK → constants → fallback
+ * installed app → original APK → patched APK → Play Store → fallback
  *
  * A handed in [packageInfo] and one resolved from [packageName] share one code path, so the icon
  * stays on screen when a card gets its info later. [icon] stands in where no source has one.
@@ -93,10 +104,8 @@ fun AppIcon(
             contentDescription = contentDescription,
             modifier = modifier
         )
-        // Not on the device, so ask the Play Store API for it
-        !resolving && packageName != null -> PlayStoreIcon(packageName, contentDescription, modifier)
         // Same placeholder while resolving and when nothing was found
-        placeholderGradientColors != null -> GlassPlaceholderIcon(
+        placeholderGradientColors != null && resolving -> GlassPlaceholderIcon(
             gradientColors = placeholderGradientColors,
             modifier = modifier
         )
@@ -106,6 +115,31 @@ fun AppIcon(
                 shape = AppIconShape
             )
         }
+        // Nothing on the device has an icon for it
+        packageName != null -> PlayStoreIcon(
+            packageName = packageName,
+            contentDescription = contentDescription,
+            modifier = modifier
+        ) { loading ->
+            when {
+                placeholderGradientColors != null -> GlassPlaceholderIcon(
+                    gradientColors = placeholderGradientColors,
+                    modifier = Modifier.fillMaxSize()
+                )
+                loading -> ShimmerBox(
+                    modifier = Modifier.fillMaxSize(AppIconContentFraction),
+                    shape = AppIconShape
+                )
+                else -> FallbackIcon(
+                    contentDescription = contentDescription,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        }
+        placeholderGradientColors != null -> GlassPlaceholderIcon(
+            gradientColors = placeholderGradientColors,
+            modifier = modifier
+        )
         else -> FallbackIcon(
             contentDescription = contentDescription,
             modifier = modifier
@@ -201,33 +235,78 @@ private fun DrawableAppIcon(
 }
 
 /**
- * Icon of an app that is not on the device, from the app data of play.rajkumaar.co.in. Looked up
- * again every time it is shown, and the Android icon until then or when there is none.
+ * Packages whose Play Store icon failed to load lately, so a list scrolling the same rows back
+ * does not ask again each time. Missing apps are also kept by the HTTP cache for a day, this
+ * covers the answers it does not keep, such as being offline or rate limited.
+ */
+private val failedPlayStoreIcons = FailedUrlCache(
+    retryAfterMillis = 10 * 60_000L,
+    clock = SystemClock::elapsedRealtime
+)
+
+/**
+ * Icon of [packageName] from the Play Store, for an app with no icon on the device. Drawn by
+ * [InstalledIconLook] like the icon of an installed app, so an app looks the same whether it is
+ * installed or not. [fallback] shows while it loads (loading true) and where the Play Store has
+ * no icon or cannot be reached (loading false).
  */
 @Composable
-private fun PlayStoreIcon(packageName: String, contentDescription: String?, modifier: Modifier) {
-    val iconUrl by produceState<String?>(null, packageName) {
-        value = withContext(Dispatchers.IO) {
-            try {
-                val json = URL("https://play.rajkumaar.co.in/json?id=$packageName").readText()
-                Regex(""""logo"\s*:\s*"([^"]+)"""").find(json)?.groupValues?.get(1)
-            } catch (e: Exception) {
-                Log.w(LOG_TAG, "Play Store icon lookup failed for $packageName", e)
-                null
-            }
-        }
+private fun PlayStoreIcon(
+    packageName: String,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    fallback: @Composable (loading: Boolean) -> Unit
+) {
+    if (failedPlayStoreIcons.isRecent(packageName)) {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) { fallback(false) }
+        return
     }
 
-    val url = iconUrl
-    if (url == null) {
-        FallbackIcon(contentDescription = contentDescription, modifier = modifier)
-    } else {
-        Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            AsyncImage(
-                model = "$url=s128-rw",
-                contentDescription = contentDescription,
-                modifier = Modifier.fillMaxSize(AppIconContentFraction).clip(AppIconShape)
-            )
+    val context = LocalContext.current
+    val request = remember(packageName) {
+        coil.request.ImageRequest.Builder(context)
+            .data("$PLAY_STORE_ICON_URL/$packageName")
+            .addHeader(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+            // Small enough to keep whole, and loads before the painter is first drawn
+            .size(coil.size.Size.ORIGINAL)
+            .transformations(InstalledIconLook(context.applicationContext))
+            .build()
+    }
+    val painter = rememberAsyncImagePainter(
+        request,
+        onError = { failedPlayStoreIcons.add(packageName) }
+    )
+    val state = painter.state
+
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        if (state !is AsyncImagePainter.State.Success) {
+            fallback(state !is AsyncImagePainter.State.Error)
+        }
+        Image(
+            painter = painter,
+            contentDescription = contentDescription.takeIf { state is AsyncImagePainter.State.Success },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+/**
+ * Draws a Play Store icon the way the app icon loader draws the icon of an installed app: in the
+ * system mask, at the size it gives adaptive icons and with the same shadow, in a square of
+ * [AppIconPixels].
+ */
+private class InstalledIconLook(private val context: Context) : Transformation {
+    override val cacheKey: String = "installed_icon_look_$AppIconPixels"
+
+    override suspend fun transform(input: Bitmap, size: CoilSize): Bitmap {
+        val resources = context.resources
+        // The Play Store icon is the part of an adaptive icon a launcher shows, which is the middle
+        // two thirds of the layer, a sixth in from each side
+        val layer = InsetDrawable(input.toDrawable(resources), 1f / 6)
+        val icon = AdaptiveIconDrawable(layer, ColorDrawable(AndroidColor.TRANSPARENT))
+        return BaseIconFactory(context, resources.configuration.densityDpi, AppIconPixels).use { factory ->
+            factory.disableColorExtraction()
+            factory.createBadgedIconBitmap(icon, Process.myUserHandle(), false, false, FloatArray(1)).icon
         }
     }
 }

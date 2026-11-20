@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
+import okhttp3.OkHttpClient
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -95,6 +96,7 @@ class ManagerApplication : Application() {
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val autoBackup: AutoBackup by inject()
+    private val okHttpClient: OkHttpClient by inject()
 
     /** Locales the app's own strings resolve in, null until [observeLanguage] first reads them. */
     private val stringLocales = MutableStateFlow<LocaleList?>(null)
@@ -134,6 +136,11 @@ class ManagerApplication : Application() {
                     add(AppIconKeyer())
                     add(AppIconFetcher.Factory(AppIconPixels, shrinkNonAdaptiveIcons, this@ManagerApplication))
                 }
+                // The only network images are Play Store icons of apps with none on the device.
+                // The shared client keeps them in its HTTP cache for as long as the answers say,
+                // so a second disk cache of Coil's own is not needed
+                .okHttpClient { okHttpClient }
+                .diskCache(null)
                 .build()
         )
 

@@ -74,6 +74,12 @@ const val COMMUNITY_PATCHES_URL = "https://morphe-patches.software"
 /** Sent on every request to [MORPHE_API_URL]. */
 const val MORPHE_USER_AGENT = "Morphe-Manager/${BuildConfig.VERSION_CODE}"
 
+/**
+ * Redirects /<package name> to the Play Store icon of the app, for apps with no icon on the
+ * device. Found icons say to keep the redirect for 30 days and missing apps for a day.
+ */
+const val PLAY_STORE_ICON_URL = "https://publicmetadata.co.uk"
+
 /** Website page behind add-source links: ?github|gitlab=owner/repo(&name=...). */
 const val ADD_SOURCE_PATH = "/add-source"
 
