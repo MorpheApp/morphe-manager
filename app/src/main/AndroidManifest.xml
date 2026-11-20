@@ -12,6 +12,8 @@
     <!-- Network -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Android 17 drops connections to the local network without it, as to a self-hosted source -->
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
 
     <!-- Installation & Updates -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"

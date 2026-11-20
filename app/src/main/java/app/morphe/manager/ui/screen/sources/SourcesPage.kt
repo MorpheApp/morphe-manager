@@ -149,13 +149,8 @@ fun SourcesPage(
                 homeViewModel.localBundleUpdateUid = local.uid
                 openLocalBundleUpdatePicker()
             } else {
-                // A source that failed to load may hold a broken jar of the current version,
-                // which a plain version check would keep
-                val (failed, loaded) = bundles.filterIsInstance<RemotePatchBundle>()
-                    .partition { it.state is PatchBundleSource.State.Failed }
                 scope.launch {
-                    if (failed.isNotEmpty()) repository.update(*failed.toTypedArray(), force = true, showMessage = true)
-                    if (loaded.isNotEmpty()) repository.update(*loaded.toTypedArray(), showMessage = true)
+                    repository.updateOrRepair(bundles.filterIsInstance<RemotePatchBundle>(), showMessage = true)
                 }
             }
         },
