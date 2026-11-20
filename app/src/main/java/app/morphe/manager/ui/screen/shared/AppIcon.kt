@@ -6,9 +6,16 @@
 package app.morphe.manager.ui.screen.shared
 
 import android.content.pm.PackageInfo
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Color as AndroidColor
 import android.graphics.Matrix
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.InsetDrawable
+import android.os.Process
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -19,6 +26,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -36,36 +44,47 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.drawable.toDrawable
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
+import app.morphe.manager.util.PlayStoreIconData
+import app.morphe.manager.util.PlayStoreIcons
 import app.morphe.manager.util.endEdgeX
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startEdgeX
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.decode.DataSource
+import coil.transform.Transformation
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.roundedfilled.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import me.zhanghai.android.appiconloader.iconloaderlib.BaseIconFactory
 import me.zhanghai.android.appiconloader.iconloaderlib.IconNormalizer
 import org.koin.compose.koinInject
 import android.graphics.Path as AndroidPath
+import coil.size.Size as CoilSize
 
 /**
  * Universal app icon component.
  *
  * Automatically resolves icon from available sources:
- * installed app → original APK → patched APK → constants → fallback
+ * installed app → original APK → patched APK → Play Store → fallback
  *
  * A handed in [packageInfo] and one resolved from [packageName] share one code path, so the icon
  * stays on screen when a card gets its info later. [icon] stands in where no source has one.
+ *
+ * @param storePackageName The name the Play Store knows the app by, where it is not [packageName],
+ *   as for a patched app renamed on the way or a clone. Null shows no Play Store icon.
  */
 @Composable
 fun AppIcon(
     modifier: Modifier = Modifier,
     packageInfo: PackageInfo? = null,
     packageName: String? = null,
+    storePackageName: String? = packageName,
     contentDescription: String?,
     icon: Drawable? = null,
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
@@ -76,6 +95,20 @@ fun AppIcon(
     val resolving = packageInfo == null && packageName != null && resolved == null
     val shownInfo = packageInfo ?: resolved?.packageInfo
     val shownDrawable = resolved?.drawable ?: icon
+    // Same placeholder while loading and when nothing was found, where the caller gives one
+    val placeholder: @Composable (loading: Boolean) -> Unit = { loading ->
+        when {
+            placeholderGradientColors != null -> GlassPlaceholderIcon(
+                gradientColors = placeholderGradientColors,
+                modifier = Modifier.fillMaxSize()
+            )
+            loading -> AppIconShimmer()
+            else -> FallbackIcon(
+                contentDescription = contentDescription,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
 
     when {
         shownInfo != null -> SimpleAppIcon(
@@ -89,21 +122,14 @@ fun AppIcon(
             contentDescription = contentDescription,
             modifier = modifier
         )
-        // Same placeholder while resolving and when nothing was found
-        placeholderGradientColors != null -> GlassPlaceholderIcon(
-            gradientColors = placeholderGradientColors,
-            modifier = modifier
-        )
-        resolving -> Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            ShimmerBox(
-                modifier = Modifier.fillMaxSize(AppIconContentFraction),
-                shape = AppIconShape
-            )
-        }
-        else -> FallbackIcon(
+        // Nothing on the device has an icon for it
+        !resolving && storePackageName != null -> PlayStoreIcon(
+            packageName = storePackageName,
             contentDescription = contentDescription,
-            modifier = modifier
+            modifier = modifier,
+            fallback = placeholder
         )
+        else -> Box(modifier = modifier, contentAlignment = Alignment.Center) { placeholder(resolving) }
     }
 }
 
@@ -127,6 +153,18 @@ private fun rememberResolvedIcon(packageName: String?, preferredSource: AppDataS
             )
         }
     }.value
+}
+
+/**
+ * Placeholder of an icon still loading. Adaptive icons only paint their inner square, so one
+ * filling the whole slot reads as the larger of the two while a fast scroll waits for the real one.
+ */
+@Composable
+private fun AppIconShimmer() {
+    ShimmerBox(
+        modifier = Modifier.fillMaxSize(AppIconContentFraction),
+        shape = AppIconShape
+    )
 }
 
 /**
@@ -157,21 +195,19 @@ private fun SimpleAppIcon(
     // list of icons pays for it on every measure pass. The loading state is cheap to overlay here
     val painter = rememberAsyncImagePainter(request, onSuccess = { shownKey = cacheKey })
     val state = painter.state
+    val fadeIn = rememberIconFadeIn(painter)
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        if (state is AsyncImagePainter.State.Loading && state.painter == null) {
-            // Adaptive icons only paint their inner square, so a placeholder filling the whole
-            // slot reads as the larger of the two while a fast scroll waits for the real one
-            ShimmerBox(
-                modifier = Modifier.fillMaxSize(AppIconContentFraction),
-                shape = AppIconShape
-            )
+        if (state is AsyncImagePainter.State.Loading && state.painter == null || fadeIn.isFading) {
+            AppIconShimmer()
         }
 
         Image(
             painter = painter,
             contentDescription = contentDescription,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = fadeIn.alpha }
         )
     }
 }
@@ -192,6 +228,121 @@ private fun DrawableAppIcon(
         contentDescription = contentDescription,
         modifier = modifier
     )
+}
+
+/**
+ * Icon of [packageName] from the Play Store, for an app with no icon on the device. Drawn by
+ * [InstalledIconLook] like the icon of an installed app, so an app looks the same whether it is
+ * installed or not. [fallback] shows while it loads (loading true) and where the Play Store has
+ * no icon or cannot be reached (loading false).
+ */
+@Composable
+private fun PlayStoreIcon(
+    packageName: String,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    fallback: @Composable (loading: Boolean) -> Unit
+) {
+    // Known without a request, so a row scrolled back in does not flash the loading state
+    if (PlayStoreIcons.isUnavailable(packageName)) {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) { fallback(false) }
+        return
+    }
+
+    val context = LocalContext.current
+    val request = remember(packageName) {
+        coil.request.ImageRequest.Builder(context)
+            // Kept on disk by PlayStoreIcons, and drawn icons in Coil's memory cache for the run
+            .data(PlayStoreIconData(packageName))
+            // Small enough to keep whole, and loads before the painter is first drawn
+            .size(CoilSize.ORIGINAL)
+            .transformations(InstalledIconLook(context.applicationContext))
+            .build()
+    }
+    val painter = rememberAsyncImagePainter(request)
+    val state = painter.state
+    val fadeIn = rememberIconFadeIn(painter, packageName)
+
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        if (state !is AsyncImagePainter.State.Success || fadeIn.isFading) {
+            fallback(state !is AsyncImagePainter.State.Error)
+        }
+        Image(
+            painter = painter,
+            contentDescription = contentDescription.takeIf { state is AsyncImagePainter.State.Success },
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = fadeIn.alpha }
+        )
+    }
+}
+
+/**
+ * Fades an icon in once [painter] has loaded it, over what stands in for it, as
+ * [app.morphe.manager.util.RemoteAvatar] fades in an avatar. An icon Coil had in memory shows at
+ * once, and so does one taking the place of an icon the slot already shows. Started over for each
+ * [key].
+ */
+@Composable
+private fun rememberIconFadeIn(painter: AsyncImagePainter, key: Any? = null): IconFadeIn {
+    val fadeIn = remember(painter, key) { IconFadeIn(painter) }
+    LaunchedEffect(fadeIn) { fadeIn.run() }
+    return fadeIn
+}
+
+@Stable
+private class IconFadeIn(private val painter: AsyncImagePainter) {
+    // Stays at 1 once reached, so later icons in the slot swap rather than fade
+    private val progress = Animatable(0f)
+
+    /**
+     * Opacity to draw the icon at. Read while drawing, where an icon Coil had in memory is already
+     * loaded, so it never misses a frame.
+     */
+    val alpha: Float
+        get() {
+            val state = painter.state
+            val loaded = state is AsyncImagePainter.State.Success &&
+                    state.result.dataSource != DataSource.MEMORY_CACHE
+            return if (loaded) progress.value else 1f
+        }
+
+    /** Whether the icon is still fading in, so what stands in for it stays under it. */
+    val isFading: Boolean by derivedStateOf { alpha < 1f }
+
+    suspend fun run() {
+        snapshotFlow { painter.state }.collect { state ->
+            when {
+                // Coil draws the icon shown before while the next one loads
+                state is AsyncImagePainter.State.Loading && state.painter != null -> progress.snapTo(1f)
+                state is AsyncImagePainter.State.Success -> {
+                    if (state.result.dataSource == DataSource.MEMORY_CACHE) progress.snapTo(1f)
+                    else progress.animateTo(1f, tween(Defaults.ANIMATION_DURATION))
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Draws a Play Store icon the way the app icon loader draws the icon of an installed app: in the
+ * system mask, at the size it gives adaptive icons and with the same shadow, in a square of
+ * [AppIconPixels].
+ */
+private class InstalledIconLook(private val context: Context) : Transformation {
+    override val cacheKey: String = "installed_icon_look_$AppIconPixels"
+
+    override suspend fun transform(input: Bitmap, size: CoilSize): Bitmap {
+        val resources = context.resources
+        // The Play Store icon is the part of an adaptive icon a launcher shows, which is the middle
+        // two thirds of the layer, a sixth in from each side
+        val layer = InsetDrawable(input.toDrawable(resources), 1f / 6)
+        val icon = AdaptiveIconDrawable(layer, AndroidColor.TRANSPARENT.toDrawable())
+        return BaseIconFactory(context, resources.configuration.densityDpi, AppIconPixels).use { factory ->
+            factory.disableColorExtraction()
+            factory.createBadgedIconBitmap(icon, Process.myUserHandle(), false, false, FloatArray(1)).icon
+        }
+    }
 }
 
 /**

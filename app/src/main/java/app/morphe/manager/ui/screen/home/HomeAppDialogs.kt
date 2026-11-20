@@ -167,6 +167,7 @@ internal fun DialogHostScope.HideAppDialog(
         ) {
             AppCardContent(
                 packageName = item.id,
+                storePackageName = item.packageName,
                 packageInfo = item.packageInfo,
                 displayName = item.displayName,
                 subtitle = AppCardLine(stringResource(R.string.home_app_will_be_hidden))
@@ -367,6 +368,7 @@ internal fun DialogHostScope.HiddenAppsDialog(
                         ) {
                             AppCardContent(
                                 packageName = item.id,
+                                storePackageName = item.packageName,
                                 packageInfo = item.packageInfo,
                                 displayName = item.displayName,
                                 subtitle = if (isMultiSelectMode.value) null

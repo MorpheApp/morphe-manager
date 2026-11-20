@@ -38,6 +38,7 @@ import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.patcher.util.NativeLibs
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.theme.ThemeTraitsDefaults
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -1015,13 +1016,7 @@ private fun ApkItemCard(
                     horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // App icon
-                    AppIcon(
-                        packageInfo = data.packageInfo,
-                        packageName = data.packageName,
-                        contentDescription = null,
-                        modifier = Modifier.size(48.dp)
-                    )
+                    ApkAppIcon(data = data, modifier = Modifier.size(48.dp))
 
                     // App info
                     Column(
@@ -1152,14 +1147,26 @@ private fun DialogHostScope.ApkDeleteConfirmDialog(
 /** Head of a confirmation about one APK: the app's icon over its name. */
 @Composable
 private fun ApkConfirmSubject(data: ApkItemData) {
-    ConfirmSubject(name = data.displayName) { modifier ->
-        AppIcon(
-            packageInfo = data.packageInfo,
-            packageName = data.packageName,
-            contentDescription = null,
-            modifier = modifier
-        )
-    }
+    ConfirmSubject(name = data.displayName) { modifier -> ApkAppIcon(data = data, modifier = modifier) }
+}
+
+/**
+ * Icon of the app behind [data]. An app gone from the device and from the Play Store gets the
+ * placeholder in its own color, as its info dialog shows it.
+ */
+@Composable
+private fun ApkAppIcon(data: ApkItemData, modifier: Modifier = Modifier) {
+    val accentColor = ThemeTraitsDefaults.accentColor(
+        rememberAppColor(data.originalPackageName) ?: AppCardColorDefaults.defaultDownloadColor
+    )
+    AppIcon(
+        packageInfo = data.packageInfo,
+        packageName = data.packageName,
+        storePackageName = data.originalPackageName,
+        contentDescription = null,
+        placeholderGradientColors = listOf(accentColor),
+        modifier = modifier
+    )
 }
 
 /** How many APKs an action removes and how much room that frees, as the one line of its confirmation. */

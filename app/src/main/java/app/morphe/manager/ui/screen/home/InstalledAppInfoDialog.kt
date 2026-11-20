@@ -317,6 +317,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
             AppIcon(
                 packageInfo = viewModel.appInfo,
                 packageName = packageName,
+                storePackageName = catalogPackageName,
                 contentDescription = null,
                 placeholderGradientColors = listOf(infoAccentColor),
                 modifier = modifier
@@ -757,6 +758,7 @@ private fun InstalledAppHeader(
             AppIcon(
                 packageInfo = appInfo,
                 packageName = packageName,
+                storePackageName = installedApp.originalPackageName,
                 contentDescription = null,
                 placeholderGradientColors = listOf(accentColor),
                 modifier = iconModifier.clip(RoundedCornerShape(DialogHeaderDefaults.IconCornerRadius))

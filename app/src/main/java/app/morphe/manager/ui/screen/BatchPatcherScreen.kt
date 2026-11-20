@@ -868,6 +868,7 @@ private fun BatchItemCard(
             ) {
                 AppIcon(
                     packageName = item.id,
+                    storePackageName = item.packageName,
                     contentDescription = null,
                     modifier = Modifier.size(48.dp)
                 )

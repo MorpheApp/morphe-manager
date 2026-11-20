@@ -51,6 +51,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import me.zhanghai.android.appiconloader.coil.AppIconFetcher
 import me.zhanghai.android.appiconloader.coil.AppIconKeyer
+import okhttp3.OkHttpClient
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -95,6 +96,7 @@ class ManagerApplication : Application() {
     private val fs: Filesystem by inject()
     private val installedAppRepository: InstalledAppRepository by inject()
     private val autoBackup: AutoBackup by inject()
+    private val okHttpClient: OkHttpClient by inject()
 
     /** Locales the app's own strings resolve in, null until [observeLanguage] first reads them. */
     private val stringLocales = MutableStateFlow<LocaleList?>(null)
@@ -123,6 +125,8 @@ class ManagerApplication : Application() {
 
         // Set before anything can ask for an avatar, so the first one read already comes from disk
         AvatarCache.useDiskCache(fs.avatarCacheDir)
+        // The same for Play Store icons, which share the client so its HTTP cache decides when to ask again
+        PlayStoreIcons.init(fs.playStoreIconCacheDir, okHttpClient)
 
         // App icon loader (Coil)
         // Non-adaptive icons are drawn as they are rather than shrunk onto a white plate: icon
@@ -133,6 +137,9 @@ class ManagerApplication : Application() {
                 .components {
                     add(AppIconKeyer())
                     add(AppIconFetcher.Factory(AppIconPixels, shrinkNonAdaptiveIcons, this@ManagerApplication))
+                    // Apps with no icon on the device show theirs from the Play Store
+                    add(PlayStoreIconKeyer())
+                    add(PlayStoreIconFetcher.Factory())
                 }
                 .build()
         )
