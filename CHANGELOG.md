@@ -1,3 +1,11 @@
+## [2.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.6...v2.7.0-dev.7) (2026-11-20)
+
+### Bug Fixes
+
+* Ask for the local network permission for sources hosted there ([#1485](https://github.com/MorpheApp/morphe-manager/issues/1485)) ([8d2dd06](https://github.com/MorpheApp/morphe-manager/commit/8d2dd06da71eb1d4b947bd4299edcb36d33ef8b9))
+* Keep each source update result up for its full time ([e27e40f](https://github.com/MorpheApp/morphe-manager/commit/e27e40fc0ca2db1a3e8ab759e6a2d3f73bcd89c6))
+* Show uninstalled app icons using third-party fair use metadata service ([#1487](https://github.com/MorpheApp/morphe-manager/issues/1487)) ([e73871d](https://github.com/MorpheApp/morphe-manager/commit/e73871d4db8126312f0a8f267068d0cd9eeb9d54))
+
 ## [2.7.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.5...v2.7.0-dev.6) (2026-11-19)
 
 ### Features
