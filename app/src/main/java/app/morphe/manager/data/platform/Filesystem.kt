@@ -76,6 +76,9 @@ class Filesystem(
     /** Avatars of patch sources, kept apart for the same reason as [homeCardCacheDir]. */
     val avatarCacheDir: File = app.cacheDir.resolve("avatars")
 
+    /** Play Store icons of apps with no icon on the device, kept apart for the same reason. */
+    val playStoreIconCacheDir: File = app.cacheDir.resolve("store-icons")
+
     /** The people behind Morphe as last fetched, shown again while the network has no answer. */
     val peopleCacheFile: File = app.cacheDir.resolve("people.json")
 

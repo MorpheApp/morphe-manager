@@ -173,6 +173,7 @@ class StorageStatsRepository(
                 entry.name != InstallerFileProvider.SHARE_DIR &&
                 entry != filesystem.homeCardCacheDir &&
                 entry != filesystem.avatarCacheDir &&
+                entry != filesystem.playStoreIconCacheDir &&
                 entry != filesystem.peopleCacheFile
         } ?: emptyList()
     }

@@ -1019,6 +1019,7 @@ private fun ApkItemCard(
                     AppIcon(
                         packageInfo = data.packageInfo,
                         packageName = data.packageName,
+                        storePackageName = data.originalPackageName,
                         contentDescription = null,
                         modifier = Modifier.size(48.dp)
                     )
@@ -1156,6 +1157,7 @@ private fun ApkConfirmSubject(data: ApkItemData) {
         AppIcon(
             packageInfo = data.packageInfo,
             packageName = data.packageName,
+            storePackageName = data.originalPackageName,
             contentDescription = null,
             modifier = modifier
         )

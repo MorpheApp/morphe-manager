@@ -8,6 +8,7 @@ package app.morphe.manager.util
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.documentfile.provider.DocumentFile
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -82,6 +83,19 @@ fun File.totalBytes(): Long =
 fun File.wipeContents() {
     if (!exists()) return
     listFiles()?.forEach { it.deleteRecursively() }
+}
+
+/**
+ * Deletes the files in this directory last modified more than [unusedMillis] ago, for a cache
+ * that dates each file by when it was last used.
+ */
+fun File.deleteFilesUnusedFor(unusedMillis: Long) {
+    val oldest = System.currentTimeMillis() - unusedMillis
+    listFiles()?.forEach { file ->
+        if (file.isFile && file.lastModified() < oldest && !file.delete()) {
+            Log.w(LOG_TAG, "Could not delete the unused cache file $file")
+        }
+    }
 }
 
 /**

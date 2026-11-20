@@ -15,7 +15,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Process
-import android.os.SystemClock
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -46,9 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toDrawable
 import app.morphe.manager.util.AppDataResolver
 import app.morphe.manager.util.AppDataSource
-import app.morphe.manager.util.FailedUrlCache
-import app.morphe.manager.util.MORPHE_USER_AGENT
-import app.morphe.manager.util.PLAY_STORE_ICON_URL
+import app.morphe.manager.util.PlayStoreIconData
+import app.morphe.manager.util.PlayStoreIcons
 import app.morphe.manager.util.endEdgeX
 import app.morphe.manager.util.isRtl
 import app.morphe.manager.util.startEdgeX
@@ -58,7 +56,6 @@ import coil.compose.rememberAsyncImagePainter
 import coil.transform.Transformation
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.roundedfilled.*
-import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.zhanghai.android.appiconloader.iconloaderlib.BaseIconFactory
@@ -75,12 +72,16 @@ import coil.size.Size as CoilSize
  *
  * A handed in [packageInfo] and one resolved from [packageName] share one code path, so the icon
  * stays on screen when a card gets its info later. [icon] stands in where no source has one.
+ *
+ * @param storePackageName The name the Play Store knows the app by, where it is not [packageName],
+ *   as for a patched app renamed on the way or a clone. Null shows no Play Store icon.
  */
 @Composable
 fun AppIcon(
     modifier: Modifier = Modifier,
     packageInfo: PackageInfo? = null,
     packageName: String? = null,
+    storePackageName: String? = packageName,
     contentDescription: String?,
     icon: Drawable? = null,
     preferredSource: AppDataSource = AppDataSource.INSTALLED,
@@ -116,8 +117,8 @@ fun AppIcon(
             )
         }
         // Nothing on the device has an icon for it
-        packageName != null -> PlayStoreIcon(
-            packageName = packageName,
+        storePackageName != null -> PlayStoreIcon(
+            packageName = storePackageName,
             contentDescription = contentDescription,
             modifier = modifier
         ) { loading ->
@@ -235,16 +236,6 @@ private fun DrawableAppIcon(
 }
 
 /**
- * Packages whose Play Store icon failed to load lately, so a list scrolling the same rows back
- * does not ask again each time. Missing apps are also kept by the HTTP cache for a day, this
- * covers the answers it does not keep, such as being offline or rate limited.
- */
-private val failedPlayStoreIcons = FailedUrlCache(
-    retryAfterMillis = 10 * 60_000L,
-    clock = SystemClock::elapsedRealtime
-)
-
-/**
  * Icon of [packageName] from the Play Store, for an app with no icon on the device. Drawn by
  * [InstalledIconLook] like the icon of an installed app, so an app looks the same whether it is
  * installed or not. [fallback] shows while it loads (loading true) and where the Play Store has
@@ -257,7 +248,8 @@ private fun PlayStoreIcon(
     modifier: Modifier = Modifier,
     fallback: @Composable (loading: Boolean) -> Unit
 ) {
-    if (failedPlayStoreIcons.isRecent(packageName)) {
+    // Known without a request, so a row scrolled back in does not flash the loading state
+    if (PlayStoreIcons.isUnavailable(packageName)) {
         Box(modifier = modifier, contentAlignment = Alignment.Center) { fallback(false) }
         return
     }
@@ -265,17 +257,14 @@ private fun PlayStoreIcon(
     val context = LocalContext.current
     val request = remember(packageName) {
         coil.request.ImageRequest.Builder(context)
-            .data("$PLAY_STORE_ICON_URL/$packageName")
-            .addHeader(HttpHeaders.UserAgent, MORPHE_USER_AGENT)
+            // Kept on disk by PlayStoreIcons, and drawn icons in Coil's memory cache for the run
+            .data(PlayStoreIconData(packageName))
             // Small enough to keep whole, and loads before the painter is first drawn
             .size(coil.size.Size.ORIGINAL)
             .transformations(InstalledIconLook(context.applicationContext))
             .build()
     }
-    val painter = rememberAsyncImagePainter(
-        request,
-        onError = { failedPlayStoreIcons.add(packageName) }
-    )
+    val painter = rememberAsyncImagePainter(request)
     val state = painter.state
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {

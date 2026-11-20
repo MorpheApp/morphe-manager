@@ -81,7 +81,7 @@ object AvatarCache {
      */
     fun useDiskCache(dir: File) {
         diskDir = dir
-        avatarScope.launch { dir.pruneUnusedAvatars() }
+        avatarScope.launch { dir.deleteFilesUnusedFor(AVATAR_UNUSED_MILLIS) }
     }
 
     /** Where the avatar at [url] is kept on disk, or null while no directory is set. */
@@ -104,14 +104,6 @@ private const val AVATAR_TIMEOUT_MILLIS = 5000
 
 /** How long an avatar nothing has shown stays on disk, long enough to outlast a break from the app. */
 private const val AVATAR_UNUSED_MILLIS = 30L * 24 * 60 * 60 * 1000
-
-/** Deletes the avatars kept here that were last shown more than [AVATAR_UNUSED_MILLIS] ago. */
-private fun File.pruneUnusedAvatars() {
-    val oldest = System.currentTimeMillis() - AVATAR_UNUSED_MILLIS
-    listFiles()?.forEach { file ->
-        if (file.isFile && file.lastModified() < oldest) runCatching { file.delete() }
-    }
-}
 
 /**
  * How an avatar is kept on disk. Lossy WebP keeps a photo a fraction of its lossless size with
@@ -166,7 +158,7 @@ private fun loadUncachedAvatar(url: String): Bitmap? {
     val kept = file?.takeIf { it.isFile }?.let { runCatching { it.readBytes() }.getOrNull() }
     if (kept != null) {
         // Dated by its last use rather than its download, which is what decides when it goes,
-        // see pruneUnusedAvatars. A check that finds the network away would leave it undated
+        // see AvatarCache.useDiskCache. A check that finds the network away would leave it undated
         file.setLastModified(System.currentTimeMillis())
         // Shown as kept, and checked once a run in case the author has changed it since
         revalidateAvatar(url, file)

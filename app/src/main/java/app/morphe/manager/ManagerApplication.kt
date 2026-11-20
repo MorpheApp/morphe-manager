@@ -125,6 +125,8 @@ class ManagerApplication : Application() {
 
         // Set before anything can ask for an avatar, so the first one read already comes from disk
         AvatarCache.useDiskCache(fs.avatarCacheDir)
+        // The same for Play Store icons, which share the client so its HTTP cache decides when to ask again
+        PlayStoreIcons.init(fs.playStoreIconCacheDir, okHttpClient)
 
         // App icon loader (Coil)
         // Non-adaptive icons are drawn as they are rather than shrunk onto a white plate: icon
@@ -135,12 +137,10 @@ class ManagerApplication : Application() {
                 .components {
                     add(AppIconKeyer())
                     add(AppIconFetcher.Factory(AppIconPixels, shrinkNonAdaptiveIcons, this@ManagerApplication))
+                    // Apps with no icon on the device show theirs from the Play Store
+                    add(PlayStoreIconKeyer())
+                    add(PlayStoreIconFetcher.Factory())
                 }
-                // The only network images are Play Store icons of apps with none on the device.
-                // The shared client keeps them in its HTTP cache for as long as the answers say,
-                // so a second disk cache of Coil's own is not needed
-                .okHttpClient { okHttpClient }
-                .diskCache(null)
                 .build()
         )
 
