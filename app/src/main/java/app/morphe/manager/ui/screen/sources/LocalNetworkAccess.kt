@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
+import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.MessageAction
@@ -34,7 +35,7 @@ import org.koin.compose.koinInject
 /**
  * Asks for the local network permission once a remote source is hosted on the local network, such
  * as on a home server, which Android 17 keeps Morphe from reaching without it, see [LocalNetwork].
- * Once granted, those sources are updated again, as what they fetched until then timed out.
+ * Once granted, those of them whose update already timed out are updated again.
  *
  * Each source is asked about once while Morphe runs, so a refusal is not asked again until another
  * such source is added. A refusal says what it costs and leads to the app settings to change it.
@@ -49,25 +50,23 @@ fun LocalNetworkSourceAccess(repository: PatchBundleRepository) {
     val sources by repository.sources.collectAsStateWithLifecycle()
     // Keyed by the links alone, so the lookups are not run again whenever a source changes state.
     // A disabled source is not updated, so it is asked about once it is turned back on
-    val endpoints = remember(sources) {
-        sources.filterIsInstance<RemotePatchBundle>().filter { it.enabled }.mapTo(mutableSetOf()) { it.endpoint }
-    }
+    val endpoints = remember(sources) { sources.enabledRemotes().mapTo(mutableSetOf()) { it.endpoint } }
 
     var askedEndpoints by rememberSaveable { mutableStateOf(emptyList<String>()) }
-    var waitingUids by rememberSaveable { mutableStateOf(emptyList<Int>()) }
+    var waitingEndpoints by rememberSaveable { mutableStateOf(emptyList<String>()) }
 
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        val uids = waitingUids
-        waitingUids = emptyList()
+        val waiting = waitingEndpoints
+        waitingEndpoints = emptyList()
         if (granted) {
-            scope.launch {
-                val waiting = repository.sources.value
-                    .filterIsInstance<RemotePatchBundle>()
-                    .filter { it.uid in uids }
-                repository.updateOrRepair(waiting, showMessage = true)
-            }
+            // A connection still waiting goes through once the permission is granted, so only the
+            // sources whose update already gave up are updated again
+            val updating = repository.activeUpdateUidsFlow.value
+            val failed = repository.sources.value.enabledRemotes()
+                .filter { it.endpoint in waiting && it.uid !in updating }
+            scope.launch { repository.updateOrRepair(failed, showMessage = true) }
         } else {
             messages.show(
                 R.string.sources_local_network_denied,
@@ -86,10 +85,10 @@ fun LocalNetworkSourceAccess(repository: PatchBundleRepository) {
         askedEndpoints = askedEndpoints + unasked
         if (local.isEmpty()) return@LaunchedEffect
 
-        waitingUids = repository.sources.value
-            .filterIsInstance<RemotePatchBundle>()
-            .filter { it.enabled && it.endpoint in local }
-            .map { it.uid }
+        waitingEndpoints = local
         permissionLauncher.launch(Manifest.permission.ACCESS_LOCAL_NETWORK)
     }
 }
+
+private fun Collection<PatchBundleSource>.enabledRemotes() =
+    filterIsInstance<RemotePatchBundle>().filter { it.enabled }
