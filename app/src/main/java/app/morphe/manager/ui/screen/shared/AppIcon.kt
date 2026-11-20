@@ -14,6 +14,8 @@ import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Process
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -24,6 +26,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -52,6 +55,7 @@ import app.morphe.manager.util.startEdgeX
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import coil.decode.DataSource
 import coil.transform.Transformation
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.roundedfilled.*
@@ -191,14 +195,19 @@ private fun SimpleAppIcon(
     // list of icons pays for it on every measure pass. The loading state is cheap to overlay here
     val painter = rememberAsyncImagePainter(request, onSuccess = { shownKey = cacheKey })
     val state = painter.state
+    val fadeIn = rememberIconFadeIn(painter)
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        if (state is AsyncImagePainter.State.Loading && state.painter == null) AppIconShimmer()
+        if (state is AsyncImagePainter.State.Loading && state.painter == null || fadeIn.isFading) {
+            AppIconShimmer()
+        }
 
         Image(
             painter = painter,
             contentDescription = contentDescription,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = fadeIn.alpha }
         )
     }
 }
@@ -252,16 +261,66 @@ private fun PlayStoreIcon(
     }
     val painter = rememberAsyncImagePainter(request)
     val state = painter.state
+    val fadeIn = rememberIconFadeIn(painter, packageName)
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        if (state !is AsyncImagePainter.State.Success) {
+        if (state !is AsyncImagePainter.State.Success || fadeIn.isFading) {
             fallback(state !is AsyncImagePainter.State.Error)
         }
         Image(
             painter = painter,
             contentDescription = contentDescription.takeIf { state is AsyncImagePainter.State.Success },
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = fadeIn.alpha }
         )
+    }
+}
+
+/**
+ * Fades an icon in once [painter] has loaded it, over what stands in for it, as
+ * [app.morphe.manager.util.RemoteAvatar] fades in an avatar. An icon Coil had in memory shows at
+ * once, and so does one taking the place of an icon the slot already shows. Started over for each
+ * [key].
+ */
+@Composable
+private fun rememberIconFadeIn(painter: AsyncImagePainter, key: Any? = null): IconFadeIn {
+    val fadeIn = remember(painter, key) { IconFadeIn(painter) }
+    LaunchedEffect(fadeIn) { fadeIn.run() }
+    return fadeIn
+}
+
+@Stable
+private class IconFadeIn(private val painter: AsyncImagePainter) {
+    // Stays at 1 once reached, so later icons in the slot swap rather than fade
+    private val progress = Animatable(0f)
+
+    /**
+     * Opacity to draw the icon at. Read while drawing, where an icon Coil had in memory is already
+     * loaded, so it never misses a frame.
+     */
+    val alpha: Float
+        get() {
+            val state = painter.state
+            val loaded = state is AsyncImagePainter.State.Success &&
+                    state.result.dataSource != DataSource.MEMORY_CACHE
+            return if (loaded) progress.value else 1f
+        }
+
+    /** Whether the icon is still fading in, so what stands in for it stays under it. */
+    val isFading: Boolean by derivedStateOf { alpha < 1f }
+
+    suspend fun run() {
+        snapshotFlow { painter.state }.collect { state ->
+            when {
+                // Coil draws the icon shown before while the next one loads
+                state is AsyncImagePainter.State.Loading && state.painter != null -> progress.snapTo(1f)
+                state is AsyncImagePainter.State.Success -> {
+                    if (state.result.dataSource == DataSource.MEMORY_CACHE) progress.snapTo(1f)
+                    else progress.animateTo(1f, tween(Defaults.ANIMATION_DURATION))
+                }
+            }
+        }
     }
 }
 
