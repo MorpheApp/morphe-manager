@@ -140,8 +140,18 @@ module.exports = async ({ github, context, core }) => {
     core.info(`#${issueNumber} is closed, only the title and type label are changed`);
   }
 
+  let decision = null;
+  if (process.env.DECISION) {
+    try {
+      decision = JSON.parse(process.env.DECISION);
+    } catch (error) {
+      // Fails the run, but an issue with version problems is still closed below.
+      core.setFailed(`Could not parse the triage decision: ${error.message}`);
+    }
+  }
+
   // Without a decision, such as when the analyze job failed, an issue with version problems is still closed.
-  if (!process.env.DECISION) {
+  if (!decision) {
     if (!open || versionProblems.length === 0) {
       core.info('No triage decision, nothing to do');
       return;
@@ -152,14 +162,6 @@ module.exports = async ({ github, context, core }) => {
       .addList(['No triage decision. Close for its version'])
       .write();
     if (live) await commentVersionProblems(github, owner, repo, issueNumber, versionProblems, true);
-    return;
-  }
-
-  let decision;
-  try {
-    decision = JSON.parse(process.env.DECISION);
-  } catch (error) {
-    core.setFailed(`Could not parse the triage decision: ${error.message}`);
     return;
   }
 
