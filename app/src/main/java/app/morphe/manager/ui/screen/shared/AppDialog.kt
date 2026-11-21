@@ -215,7 +215,7 @@ private fun DialogSurface(
             exit = Animations.dialogExit,
             modifier = Modifier.fillMaxSize()
         ) {
-            val textColor = if (isDarkTheme) Color.White else Color.Black
+            val textColor = MaterialTheme.colorScheme.onSurface
             CompositionLocalProvider(
                 // Over the page rather than part of it, so it neither blurs what the page does nor
                 // joins the page's search and groups
