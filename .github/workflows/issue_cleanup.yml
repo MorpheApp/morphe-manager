@@ -1,0 +1,42 @@
+name: Issue cleanup
+
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  cleanup:
+    name: Clean up issues
+    if: github.repository_owner == 'MorpheApp'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github/scripts/issue-triage
+          sparse-checkout-cone-mode: false
+
+      - name: Delete comments rejected by a maintainer
+        uses: actions/github-script@v9
+        env:
+          # Changes are only applied when this repository variable is "live".
+          TRIAGE_MODE: ${{ vars.ISSUE_TRIAGE_MODE }}
+        with:
+          script: |
+            const run = require('./.github/scripts/issue-triage/delete-rejected-comments.js');
+            await run({ github, context, core });
+
+      - name: Close issues without a reply
+        uses: actions/github-script@v9
+        env:
+          TRIAGE_MODE: ${{ vars.ISSUE_TRIAGE_MODE }}
+        with:
+          script: |
+            const run = require('./.github/scripts/issue-triage/close-unanswered.js');
+            await run({ github, context, core });
