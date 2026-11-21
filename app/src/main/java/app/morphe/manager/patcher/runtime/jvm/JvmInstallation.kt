@@ -68,7 +68,7 @@ class JvmInstallation(private val app: Application) {
                 val hostJar = root.resolve("host-${BuildConfig.VERSION_CODE}-${BuildConfig.BUILD_ID}.jar")
                 if (!hostJar.isFile) unpackHost(hostJar)
 
-                val installed = Installed(home, hostJar, aotDir, nativeLibrary(BuildConfig.GLIBC_LOADER_LIBRARY))
+                val installed = Installed(home, hostJar, aotDir, glibcLoader())
                 // Whatever an earlier version of the app unpacked or recorded is of no use to this one
                 val keep = setOf(home, hostJar)
                 root.listFiles()?.filter { it !in keep }?.forEach { it.deleteRecursively() }
@@ -84,11 +84,11 @@ class JvmInstallation(private val app: Application) {
     }
 
     /**
-     * A native library of the app, which the system unpacked with the app, the only files Android
-     * lets an app execute.
+     * The loader of the GNU C library, a native library of the app, which the system unpacked with
+     * the app, the only files Android lets an app execute.
      */
-    private fun nativeLibrary(name: String) = File(app.applicationInfo.nativeLibraryDir, name).takeIf { it.isFile }
-        ?: throw IOException("The app ships no $name")
+    private fun glibcLoader() = File(app.applicationInfo.nativeLibraryDir, BuildConfig.GLIBC_LOADER_LIBRARY)
+        .takeIf { it.isFile } ?: throw IOException("The app ships no ${BuildConfig.GLIBC_LOADER_LIBRARY}")
 
     // Unpacked beside the destination and renamed into place, so a half unpacked runtime left by
     // a process that died midway is never taken for a complete one
@@ -200,6 +200,18 @@ class JvmInstallation(private val app: Application) {
             }
 
         /**
+         * The environment the JVM starts with: the app's own, with UTF-8 as the character set of
+         * the C library. In the C locale an app is left in, glibc reports ASCII, which the JVM then
+         * names files in, so no path with any other character can be found. Only the character
+         * set is taken from the locale the runtime ships, numbers and dates stay as C has them.
+         */
+        val environment: Map<String, String>
+            get() = System.getenv() - LOCALE_OVERRIDE + mapOf(
+                "LOCPATH" to home.resolve(LOCALE_DIR).path,
+                "LC_CTYPE" to BuildConfig.GLIBC_LOCALE
+            )
+
+        /**
          * The AOT cache of this runtime and host: the classes of a run loaded and linked, and its
          * profiles, so later runs start where it left off. It only fits the runtime and class path
          * it was made with, so it is named after both.
@@ -234,6 +246,10 @@ class JvmInstallation(private val app: Application) {
         const val FRAMEWORKS_DIR = "frameworks/"
         const val GLIBC_DIR = "glibc"
         const val LAUNCHER_PATH = "bin/java"
+        const val LOCALE_DIR = "$GLIBC_DIR/locale"
+
+        // Takes the place of every other locale variable, LC_CTYPE included
+        const val LOCALE_OVERRIDE = "LC_ALL"
 
         val ABIS_BY_INSTRUCTION_SET = mapOf(
             "arm64" to "arm64-v8a",

@@ -53,20 +53,26 @@ static bool contains(const jint *values, jsize count, int value) {
     return false;
 }
 
-// Starts argv as a process of its own. The process keeps keepFds open under the same numbers,
-// writes its standard output and error to outputFd, and is killed once the thread that called this
-// ends, so it does not outlive the service. Returns its pid, or a negative errno
+// Starts argv as a process of its own with the environment envp. The process keeps keepFds open
+// under the same numbers, writes its standard output and error to outputFd, and is killed once the
+// thread that called this ends, so it does not outlive the service. Returns its pid, or a negative errno
 JNIEXPORT jint JNICALL
 Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_spawnProcess(
-        JNIEnv *env, jobject thiz, jobjectArray argv, jintArray keepFds, jint outputFd) {
+        JNIEnv *env, jobject thiz, jobjectArray argv, jobjectArray envp, jintArray keepFds, jint outputFd) {
     (void) thiz;
     // Everything the child needs is made here, as it may only make async-signal-safe calls until exec
     char **args = copyStrings(env, argv);
     if (args == NULL) return -ENOMEM;
+    char **environment = copyStrings(env, envp);
+    if (environment == NULL) {
+        freeStrings(args);
+        return -ENOMEM;
+    }
     const jsize keepCount = (*env)->GetArrayLength(env, keepFds);
     jint *keep = malloc(sizeof(jint) * ((size_t) keepCount + 1));
     if (keep == NULL) {
         freeStrings(args);
+        freeStrings(environment);
         return -ENOMEM;
     }
     (*env)->GetIntArrayRegion(env, keepFds, 0, keepCount, keep);
@@ -80,6 +86,7 @@ Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_spawnProcess(
     if (pid != 0) {
         const int forkError = errno;
         freeStrings(args);
+        freeStrings(environment);
         free(keep);
         return pid > 0 ? pid : -forkError;
     }
@@ -105,7 +112,7 @@ Java_app_morphe_manager_patcher_runtime_jvm_EmbeddedJvm_spawnProcess(
     }
     for (jsize i = 0; i < keepCount; i++) fcntl(keep[i], F_SETFD, 0);
 
-    execv(args[0], args);
+    execve(args[0], args, environment);
     _exit(CHILD_FAILED);
 }
 

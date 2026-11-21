@@ -24,11 +24,11 @@ import org.tukaani.xz.XZInputStream
  * goes into [nativeLibraries] under a library name, from where the app starts the JVM with it. The
  * loader maps the JVM and the rest of the C library from the app's storage, which Android allows,
  * so those go into [runtimeFiles], which joins the runtime, together with the copyright notices of
- * the packages.
+ * the packages and the compiled locales of [localeFiles].
  */
 @CacheableTask
 abstract class PrepareGlibcTask : DefaultTask() {
-    /** The packages to take the files from, by URL, each pinned by its SHA-256. */
+    /** The packages and archives of compiled locales to take the files from, by URL, each pinned by its SHA-256. */
     @get:Input
     abstract val packages: MapProperty<String, String>
 
@@ -39,6 +39,13 @@ abstract class PrepareGlibcTask : DefaultTask() {
     /** The libraries the runtime links against, by file name. */
     @get:Input
     abstract val libraries: ListProperty<String>
+
+    /**
+     * Files of compiled locales as an archive of [packages] lays them out, such as C.UTF-8/LC_CTYPE,
+     * which go under glibc/locale/, where the app points glibc to them.
+     */
+    @get:Input
+    abstract val localeFiles: ListProperty<String>
 
     /** The dynamic loader among the files of [libraryDirectory], such as ld-linux-armhf.so.3. */
     @get:Input
@@ -56,7 +63,7 @@ abstract class PrepareGlibcTask : DefaultTask() {
     @get:Internal
     abstract val downloadCache: DirectoryProperty
 
-    /** The libraries under glibc/ and the notices under legal/glibc/, laid out as the runtime has them. */
+    /** The libraries and locales under glibc/ and the notices under legal/glibc/, laid out as the runtime has them. */
     @get:OutputDirectory
     abstract val runtimeFiles: DirectoryProperty
 
@@ -91,16 +98,21 @@ abstract class PrepareGlibcTask : DefaultTask() {
             entries
         }
 
-        fun library(name: String): ByteArray {
-            val path = "${libraryDirectory.get()}/$name"
-            return files.firstOrNull { it.containsKey(path) }?.resolve(path)
-                ?: throw GradleException("No package has $path")
-        }
+        fun file(path: String): ByteArray = files.firstOrNull { it.containsKey(path) }?.resolve(path)
+            ?: throw GradleException("No package has $path")
+
+        fun library(name: String) = file("${libraryDirectory.get()}/$name")
 
         libraries.get().forEach { name ->
             runtime.resolve("glibc/$name").apply {
                 parentFile.mkdirs()
                 writeBytes(library(name))
+            }
+        }
+        localeFiles.get().forEach { path ->
+            runtime.resolve("glibc/locale/$path").apply {
+                parentFile.mkdirs()
+                writeBytes(file(path))
             }
         }
         native.resolve("${abi.get()}/${loaderLibraryName.get()}").apply {

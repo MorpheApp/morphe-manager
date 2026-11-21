@@ -311,6 +311,7 @@ class PatcherProcesses(
 
     private fun jvmLaunch(installed: JvmInstallation.Installed, tuning: List<String>, heapLimitMb: Int = jvmHeapLimitMb) = JvmLaunch(
         command = installed.command,
+        environment = installed.environment,
         options = jvmOptions(installed) + tuning,
         mainClass = HOST_MAIN_CLASS,
         heapLimitMb = heapLimitMb
