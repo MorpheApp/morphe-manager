@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Error al descargar las fuentes: %s</string>
     <string name="sources_download_fail_named">\"%s\" no se pudo actualizar. Comprueba tu conexión a internet e inténtalo de nuevo</string>
     <string name="sources_download_endpoint_not_found">\"%s\": no se encontraron los metadatos del parche</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Las fuentes de tu red local no se pueden actualizar sin el permiso de Dispositivos cercanos</string>
     <string name="sources_signing_key_changed_named">\'%s\' no se actualizó porque su última versión no está firmada con la clave que utilizaba anteriormente</string>
     <string name="sources_signing_key_changed_local">El archivo no está firmado con la clave que esta fuente utilizaba anteriormente. Para confiar en él, elimina la fuente y añade el archivo de nuevo</string>
     <string name="sources_signing_key_trust_title">¿Confiar en la nueva clave?</string>

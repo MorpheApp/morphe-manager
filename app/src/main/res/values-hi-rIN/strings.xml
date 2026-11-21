@@ -245,6 +245,8 @@
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
     <string name="sources_download_fail_named">\'%s\' को अपडेट नहीं किया जा सका। अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
     <string name="sources_download_endpoint_not_found">\'%s\': पैच मेटाडेटा नहीं मिला।</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Nearby devices अनुमति के बिना आपके स्थानीय नेटवर्क पर मौजूद सोर्स को अपडेट नहीं किया जा सकता</string>
     <string name="sources_signing_key_changed_named">\'%s\' को अपडेट नहीं किया गया क्योंकि इसकी नवीनतम रिलीज़ उस कुंजी से हस्ताक्षरित नहीं है जिसका इसने पहले उपयोग किया था</string>
     <string name="sources_signing_key_changed_local">फ़ाइल उस कुंजी द्वारा हस्ताक्षरित नहीं है जिसे इस स्रोत ने पहले उपयोग किया था। इस पर भरोसा करने के लिए, स्रोत को हटा दें और फ़ाइल को फिर से जोड़ें</string>
     <string name="sources_signing_key_trust_title">क्या आप नई कुंजी पर भरोसा करते हैं?</string>

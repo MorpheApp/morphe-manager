@@ -245,6 +245,8 @@
     <string name="sources_download_fail">شکستس هێنا لە داگرتنی سەرچاوە: %s</string>
     <string name="sources_download_fail_named">\'%s\' نەتوانرا نوێبکرێتەوە. گرێدانی تۆڕەکەت بپشکنە و دووبارە هەوڵدەوە</string>
     <string name="sources_download_endpoint_not_found">مێتاداتای پینەی \'%s\' نەدۆزرایەوە</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">سەرچاوەکانی تۆڕی ناوخۆییت ناتوانرێت نوێ بکرێنەوە بەبێ مۆڵەتی ئامێرەکانی نزیک</string>
     <string name="sources_signing_key_changed_named">\'%s\' نوێ نەکراوەوە چونکە دەرچوونی نوێترینی بەو کلیلە واژۆ نەکراوە کە پێشتر بەکارهێنابووە</string>
     <string name="sources_signing_key_changed_local">فایلەکە بەو کلیلە واژۆ نەکراوە کە ئەم سەرچاوەیە پێشتر بەکارهێنابووە. بۆ متمانەپێکردنی، سەرچاوەکە بسڕەوە و دووبارە فایلەکە زیاد بکە</string>
     <string name="sources_signing_key_trust_title">متمانە بە کلیلی نوێیەکە بکەین؟</string>

@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не удалось загрузить источники: %s</string>
     <string name="sources_download_fail_named">Не удалось обновить \"%s\". Проверьте подключение к Интернету и повторите попытку</string>
     <string name="sources_download_endpoint_not_found">В \"%s\" не найдены метаданные патча</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Источники в вашей локальной сети не могут быть обновлены без разрешения на поиск устройств поблизости</string>
     <string name="sources_signing_key_changed_named">\'%s\' не был обновлен, так как его последний релиз подписан не тем ключом, который использовался ранее</string>
     <string name="sources_signing_key_changed_local">Файл подписан не тем ключом, который использовался этим источником ранее. Чтобы довериться ему, удалите источник и добавьте файл снова</string>
     <string name="sources_signing_key_trust_title">Доверять новому ключу?</string>

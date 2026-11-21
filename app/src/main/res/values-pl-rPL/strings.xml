@@ -246,6 +246,8 @@
     <string name="sources_download_fail">Nie udało się pobrać źródeł: %s</string>
     <string name="sources_download_fail_named">Nie udało się zaktualizować \"%s\". Sprawdź połączenie z internetem i spróbuj ponownie</string>
     <string name="sources_download_endpoint_not_found">\"%s\": nie znaleziono metadanych modyfikacji</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Nie można zaktualizować źródeł w sieci lokalnej bez uprawnienia \"Urządzenia w pobliżu\"</string>
     <string name="sources_signing_key_changed_named">Nie zaktualizowano źródła \"%s\", ponieważ jego najnowsze wydanie nie zostało podpisane używanym wcześniej kluczem</string>
     <string name="sources_signing_key_changed_local">Plik nie jest podpisany kluczem używanym wcześniej przez to źródło. Aby mu zaufać, usuń to źródło i dodaj plik ponownie</string>
     <string name="sources_signing_key_trust_title">Zaufać nowemu kluczowi?</string>
@@ -1077,7 +1079,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="installer_mount_warning_install">Tryb modyfikacji jest ustawiony na montowanie z rootem. Ta zapisana aplikacja nie została zainstalowana przy użyciu montowania</string>
     <string name="mount_version_mismatch_message">Wersja oryginalnej aplikacji (%2$s) nie jest zgodna z wersją zmodyfikowanej aplikacji (%1$s). Zamontuj zgodną wersję oryginalną, a następnie spróbuj ponownie</string>
     <string name="mount_stock_restore_failed_message">Android odrzucił zapisany, oryginalny plik APK. Zainstaluj odpowiednią, oryginalną wersję, a następnie spróbuj zamontować ponownie</string>
-    <string name="mount_stock_mismatch_message">Zainstalowana aplikacja nie jest oryginalna. Wybierz oryginalny plik APK lub zainstaluj wersję fabryczną, a następnie spróbuj ponownie zamontować</string>
+    <string name="mount_stock_mismatch_message">Zainstalowana aplikacja nie jest oryginalna. Wybierz oryginalny plik APK lub zainstaluj ponownie wersję fabryczną, a następnie spróbuj ponownie użyć opcji \"Zamontuj\"</string>
     <string name="installer_status_shizuku_unsupported">Zainstalowana wersja Shizuku nie jest obsługiwana</string>
     <string name="installer_action_open_shizuku">Otwórz Shizuku</string>
     <string name="installer_hint_generic">Instalacja nie powiodła się. Spróbuj ponownie lub wybierz inny instalator</string>

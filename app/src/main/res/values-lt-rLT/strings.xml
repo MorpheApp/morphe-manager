@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Nepavyko atsisiųsti šaltinio: %s</string>
     <string name="sources_download_fail_named">\'%s\' neįmanoma atnaujinti. Patikrinkite savo interneto ryšį ir bandykite dar kartą</string>
     <string name="sources_download_endpoint_not_found">\'%s\': trūkst meta duomenų apie pataisą</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Šaltinių jūsų vietiniame tinkle neįmanoma atnaujinti be leidimo naudoti aplinkinius įrenginius</string>
     <string name="sources_signing_key_changed_named">\"%s\" nebuvo atnaujinta, nes naujausia versija nėra pasirašyta raktu, kurio ji naudojo anksčiau</string>
     <string name="sources_signing_key_changed_local">Failas nėra pasirašytas raktu, kurio šis šaltinis naudojo anksčiau. Norėdami jį patikėti, ištrinkite šaltinį ir pridėkite failą iš naujo</string>
     <string name="sources_signing_key_trust_title">Pasitikėti nauju raktu?</string>

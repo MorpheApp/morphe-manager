@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Napaka pri prenosu virov: %s</string>
     <string name="sources_download_fail_named">\"%s\" ni bilo mogoče posodobiti. Preverite internetno povezavo in poskusite znova</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metapodatki popravka niso bili najdeni</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Virov na vašem lokalnem omrežju ni mogoče posodobiti brez dovoljenja za bližnje naprave</string>
     <string name="sources_signing_key_changed_named">\'%s\' ni bilo posodobljeno, ker najnovejša različica ni podpisana s ključem, ki ga je uporabljal prej</string>
     <string name="sources_signing_key_changed_local">Datoteka ni podpisana s ključem, ki ga je ta vir uporabljal prej. Če ji želite zaupati, izbrišite vir in datoteko dodajte ponovno</string>
     <string name="sources_signing_key_trust_title">Zaupate novemu ključu?</string>

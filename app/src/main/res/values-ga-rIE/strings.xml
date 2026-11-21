@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Theip ar íoslódáil na bhfoinsí: %s</string>
     <string name="sources_download_fail_named">Níorbh fhéidir \'%s\' a nuashonrú. Seiceáil do nasc idirlín agus déan iarracht eile.</string>
     <string name="sources_download_endpoint_not_found">\'%s\': meiteashonraí paiste gan aimsiú</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Ní féidir foinsreacha ar do líonra áitiúil a nuashonrú gan cead Glantrála Glanta</string>
     <string name="sources_signing_key_changed_named">Níor nuashonraíodh \'%s\' toisc nach bhfuil an eisiúint is déanaí sínithe leis an eochair a d\'úsáid sé roimhe seo</string>
     <string name="sources_signing_key_changed_local">Níl an comhad sínithe leis an eochair a d\'úsáid an fhoinse seo roimhe seo. Chun muinín a bheith agat as, scrios an fhoinse agus cuir an comhad leis arís.</string>
     <string name="sources_signing_key_trust_title">Muinín a chur sa eochair nua?</string>
@@ -1074,7 +1076,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_mount_warning_install">Tá mód paiste socraithe ar fheistiú fréimhe. Níor suiteáladh an aip shábháilte seo trí úsáid a bhaint as feistiú.</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="mount_stock_restore_failed_message">Dhiúltaigh Android don APK bunaidh sábháilte. Suiteáil an leagan stoic comhoiriúnach, ansin déan iarracht an Suiteáil arís.</string>
-    <string name="mount_stock_mismatch_message">Ní é an app a suiteáiladh an ceann oriantáil. Roghnaigh an APK oriantáil nó suiteáil an leagan stoc arís, ansin déan iarracht Mount a úsáid arís</string>
+    <string name="mount_stock_mismatch_message">Ní hé an bunleagan an aip atá suiteáilte. Roghnaigh an bun-APK nó athshuiteáil an leagan bunaidh, agus ansin déan iarracht \'Mount\' a dhéanamh arís.</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>

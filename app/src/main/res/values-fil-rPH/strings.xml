@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Nabigong mag-download ang mga mapagkukunan: %s</string>
     <string name="sources_download_fail_named">\"%s\" ay hindi na-update. Suriin ang iyong koneksyon sa internet at subukan muli</string>
     <string name="sources_download_endpoint_not_found">\"%s\": hindi natagpuan ang metadata ng patch</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Hindi ma-a-update ang mga source sa iyong local network nang walang Nearby devices permission</string>
     <string name="sources_signing_key_changed_named">Hindi na-update ang \'%s\' dahil ang pinakabagong release nito ay hindi nilagdaan ng key na ginamit nito noon</string>
     <string name="sources_signing_key_changed_local">Ang file ay hindi nilagdaan ng key na ginamit ng source na ito noon. Para pagkatiwalaan ito, burahin ang source at idagdag muli ang file</string>
     <string name="sources_signing_key_trust_title">Pagkakatiwalaan ang bagong key?</string>

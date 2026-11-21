@@ -245,6 +245,8 @@
     <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
     <string name="sources_download_fail_named">\'%s\'를 업데이트할 수 없습니다. 인터넷 연결 상태를 확인하고 다시 시도하세요</string>
     <string name="sources_download_endpoint_not_found">\'%s\': 패치 메타데이터를 찾을 수 없습니다</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">근처 기기 권한이 없으면 로컬 네트워크의 소스를 업데이트할 수 없습니다</string>
     <string name="sources_signing_key_changed_named">\'%s\' 앱은 최신 릴리스가 이전에 사용하던 키로 서명되지 않아 업데이트되지 않았습니다</string>
     <string name="sources_signing_key_changed_local">이 파일은 이 소스에서 이전에 사용하던 키로 서명되지 않았습니다. 이 파일을 신뢰하려면 해당 소스를 삭제한 다음 파일을 다시 추가하세요</string>
     <string name="sources_signing_key_trust_title">새 키를 신뢰하시겠습니까?</string>

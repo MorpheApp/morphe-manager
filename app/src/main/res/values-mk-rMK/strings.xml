@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не успеа да се преземат извори: %s</string>
     <string name="sources_download_fail_named">„%s“ не можеше да се ажурира. Проверете ја вашата интернет врска и обидете се повторно</string>
     <string name="sources_download_endpoint_not_found">„%s“: метаподатоци за закрпи не се пронајдени</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Изворите на вашата локална мрежа не можат да се ажурираат без дозвола за уреди во близина</string>
     <string name="sources_signing_key_changed_named">\'%s\' не беше ажурирано бидејќи најновото издание не е потпишано со клучот што го користеше претходно</string>
     <string name="sources_signing_key_changed_local">Датотеката не е потпишана со клучот што овој извор го користеше претходно. За да и се довериме, избришете го изворот и додадете ја датотеката повторно</string>
     <string name="sources_signing_key_trust_title">Да се довериме на новиот клуч?</string>

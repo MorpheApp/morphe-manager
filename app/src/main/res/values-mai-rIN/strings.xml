@@ -43,6 +43,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->

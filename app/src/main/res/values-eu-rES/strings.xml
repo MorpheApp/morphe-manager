@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Iturriak deskargatzeak huts egin du: %s</string>
     <string name="sources_download_fail_named">\'%s\' ezin izan da eguneratu. Egiaztatu interneteko konexioa eta saiatu berriro</string>
     <string name="sources_download_endpoint_not_found">\'%s\': patch metadata ez da aurkitu</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Zure sare lokalko iturriak ezin dira eguneratu Hurbilko gailuen baimenik gabe</string>
     <string name="sources_signing_key_changed_named">\'%s\' ez da eguneratzen, azken bertsioa lehenago erabili zuen gakoarekin ez dagoelako sinatuta</string>
     <string name="sources_signing_key_changed_local">Fitxategia ez dago iturri honek lehenago erabili zuen gakoarekin sinatuta. Fidagarritzat hartzeko, ezabatu iturria eta gehitu berriro fitxategia</string>
     <string name="sources_signing_key_trust_title">Gako berriak konfiantza eman?</string>

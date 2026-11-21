@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Preuzimanje izvora nije uspjelo: %s</string>
     <string name="sources_download_fail_named">\"%s\" se nije mogao ažurirati. Provjerite internetsku vezu i pokušajte ponovno</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metapodaci patcha nisu pronađeni</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Izvori na vašoj lokalnoj mreži ne mogu se ažurirati bez dopuštenja za uređaje u blizini</string>
     <string name="sources_signing_key_changed_named">\'%s\' nije ažuriran jer njegovo najnovije izdanje nije potpisano ključem koji je ranije koristio</string>
     <string name="sources_signing_key_changed_local">Datoteka nije potpisana ključem koji je ovaj izvor prethodno koristio. Da biste joj vjerovali, izbrišite izvor i ponovno dodajte datoteku</string>
     <string name="sources_signing_key_trust_title">Vjerujete li novom ključu?</string>

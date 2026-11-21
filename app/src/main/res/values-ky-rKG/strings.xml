@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Булактарды жүктөө мүмкүн болбоду: %s</string>
     <string name="sources_download_fail_named">\'%s\' жаңыртылган жок. Интернет байланышыңызды текшерип, кайра аракет кылыңыз</string>
     <string name="sources_download_endpoint_not_found">\'%s\': патч метамаалыматтары табылган жок</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Жакынкы түзүлүштөр уруксаты жок жерде жергиликтүү тармактарыңыздагы булактарды жаңырто албайсыз</string>
     <string name="sources_signing_key_changed_named">\'%s\' жаңыланган жок, анткени анын акыркы версиясы мурда колдонулган ачкыч менен кол коюлган эмес</string>
     <string name="sources_signing_key_changed_local">Файл бул булак мурда колдонгон ачкыч менен кол коюлган эмес. Ага ишенүү үчүн, булакты өчүрүп, файлды кайра кошуңуз</string>
     <string name="sources_signing_key_trust_title">Жаңы ачкычка ишенсеңизби?</string>

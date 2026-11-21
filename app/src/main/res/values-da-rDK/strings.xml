@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kunne ikke hente patchkilder: %s</string>
     <string name="sources_download_fail_named">’%s’ kunne ikke opdateres. Tjek din internetforbindelse og prøv igen</string>
     <string name="sources_download_endpoint_not_found">’%s’: metadata for patch ikke fundet</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Kilder på dit lokale netværk kan ikke opdateres uden tilladelse til enheder i nærheden</string>
     <string name="sources_signing_key_changed_named">\'%s\' blev ikke opdateret, fordi den seneste udgivelse ikke er underskrevet med den nøgle, den brugte før</string>
     <string name="sources_signing_key_changed_local">Filen er ikke underskrevet med den nøgle, denne kilde brugte før. For at stole på den skal du slette kilden og tilføje filen igen</string>
     <string name="sources_signing_key_trust_title">Stol på den nye nøgle?</string>

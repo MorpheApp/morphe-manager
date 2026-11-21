@@ -245,6 +245,8 @@
     <string name="sources_download_fail">ምንጮችን ለማውረድ አልተቻለም: %s</string>
     <string name="sources_download_fail_named">\'%s\' ሊዘመንም አልቻለም። የኢንተርኔት ግንኙነታችሁን አረጋግጠው እንደገና ይሞክሩ</string>
     <string name="sources_download_endpoint_not_found">\'%s\': የፓች ሜታዳታ አልተገኘም</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">በአቅራቢያ ያሉ መሳሪያዎች ፈቃድ ሳይኖር በየአካባቢው መረብ ላይ ያሉ ምንጮችን ማዘመን አይቻልም</string>
     <string name="sources_signing_key_changed_named">\'%s\' የቅርብ ጊዜ ስሪቱ ቀደም ሲል በተጠቀመው ቁልፍ ስላልተፈረመ አልተዘመናም</string>
     <string name="sources_signing_key_changed_local">ፋይሉ ይህ ምንጭ ቀደም ሲል የተጠቀመው ቁልፍ አልተፈረመበትም። ለማመን፣ ምንጩን ያጥፉ እና ፋይሉን እንደገና ያክሉ</string>
     <string name="sources_signing_key_trust_title">አዲሱን ቁልፍ ያምኑ?</string>

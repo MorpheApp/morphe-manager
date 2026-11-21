@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Gagal mengunduh sumber: %s</string>
     <string name="sources_download_fail_named">\'%s\' tidak dapat diperbarui. Periksa internet Anda dan coba lagi</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metadata tidak ditemukan</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Sumber di jaringan lokal Anda tidak dapat diperbarui tanpa izin Perangkat di sekitar</string>
     <string name="sources_signing_key_changed_named">\'%s\' tidak diperbarui karena rilis terbarunya tidak ditandatangani oleh kunci yang digunakan sebelumnya</string>
     <string name="sources_signing_key_changed_local">Berkas tidak ditandatangani oleh kunci yang digunakan sumber ini sebelumnya. Untuk mempercayainya, hapus sumber dan tambahkan berkas kembali</string>
     <string name="sources_signing_key_trust_title">Percayai kunci baru?</string>

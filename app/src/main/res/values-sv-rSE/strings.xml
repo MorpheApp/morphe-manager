@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <string name="sources_download_fail_named">Det gick inte att uppdatera %s. Kontrollera internetanslutningen och försök igen</string>
     <string name="sources_download_endpoint_not_found">%s: metadata för tillägg hittades inte</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Källor på ditt lokala nätverk kan inte uppdateras utan behörighet för enheter i närheten</string>
     <string name="sources_signing_key_changed_named">\'%s\' uppdaterades inte eftersom dess senaste version inte är signerad med den nyckel som användes tidigare</string>
     <string name="sources_signing_key_changed_local">Filen är inte signerad med den nyckel som den här källan använde tidigare. För att lita på den, ta bort källan och lägg till filen igen</string>
     <string name="sources_signing_key_trust_title">Lita på den nya nyckeln?</string>

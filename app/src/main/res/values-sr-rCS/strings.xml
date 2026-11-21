@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Neuspešno preuzimanje izvora: %s</string>
     <string name="sources_download_fail_named">\'%s\' nije mogao da se ažurira. Proverite vašu internet konekciju i pokušajte ponovo</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metad podaci o zakrpi nisu pronađeni</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Izvori na vašoj lokalnoj mreži ne mogu se ažurirati bez dozvole za uređaje u blizini</string>
     <string name="sources_signing_key_changed_named">\'%s\' nije ažuriran jer njegovo najnovije izdanje nije potpisano ključem koji je ranije koristio</string>
     <string name="sources_signing_key_changed_local">Datoteka nije potpisana ključem koji je ovaj izvor ranije koristio. Da biste joj verovali, obrišite izvor i ponovo dodajte datoteku</string>
     <string name="sources_signing_key_trust_title">Verujete li novom ključu?</string>

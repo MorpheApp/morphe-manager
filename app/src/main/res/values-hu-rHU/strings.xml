@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
     <string name="sources_download_fail_named">A(z) \'%s\' nem frissíthető. Ellenőrizd az internetkapcsolatot, és próbáld újra.</string>
     <string name="sources_download_endpoint_not_found">A(z) \'%s\' nem található meg a patch metaadata.</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">A helyi hálóján található források nem frissíthetők a „Környezetbeli eszközök” engedély nélkül</string>
     <string name="sources_signing_key_changed_named">\'%s\' nem frissült, mert a legújabb kiadása nem azzal a kulccsal van aláírva, amelyet korábban használt</string>
     <string name="sources_signing_key_changed_local">A fájlt nem olyan kulccsal írták alá, mint amilyet ez a forrás korábban használt. Ha megbízik benne, törölje a forrást, majd adja hozzá újra a fájlt</string>
     <string name="sources_signing_key_trust_title">Bízni szeretne az új kulcsban?</string>

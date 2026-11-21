@@ -245,6 +245,8 @@
     <string name="sources_download_fail"> मुळ डाउनलोड होऊ शकली नाहीत: %s</string>
     <string name="sources_download_fail_named">\'%s\' अपडेट करता आले नाही. तुमचे इंटरनेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा</string>
     <string name="sources_download_endpoint_not_found">\'%s\': पॅच मेटाडेटा सापडला नाही</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">जवळपासची उपकरणे परवानगीशिवाय तुमच्या स्थानिक नेटवर्कवरील स्त्रोत अपडेट केले जाऊ शकत नाहीत</string>
     <string name="sources_signing_key_changed_named">\'%s\' अपडेट केले नाही कारण त्याची नवीनतम रिलीज त्याच्या आधी वापरलेल्या की ने स्वाक्षरी केलेली नाही</string>
     <string name="sources_signing_key_changed_local">ही फाईल या स्त्रोताने पूर्वी वापरलेल्या की ने स्वाक्षरित केलेली नाही. यावर विश्वास ठेवण्यासाठी, स्त्रोत हटवा आणि फाईल पुन्हा जोडा</string>
     <string name="sources_signing_key_trust_title">नवीन की वर विश्वास ठेवायचा आहे का?</string>

@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Imeshindwa kupakua vyanzo: %s</string>
     <string name="sources_download_fail_named">\'%s\' haikuweza kusasishwa. Kagua muunganisho wako wa internet na ujaribu tena</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metadata ya patch haijapatikana</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Vyanzo kwenye mtandao wako wa ndani haviwezi kuhuishwa bila ruhusa ya Vifaa vya karibu</string>
     <string name="sources_signing_key_changed_named">\'%s\' haikusasishwa kwa sababu toleo lake la hivi karibuni halijasainiwa na ufunguo uliotumika hapo awali</string>
     <string name="sources_signing_key_changed_local">Faili halijasainiwa na ufunguo ambao chanzo hiki kilitumia hapo awali. Ili kuliamini, futa chanzo na uongeze faili hili tena</string>
     <string name="sources_signing_key_trust_title">Uamini ufunguo mpya?</string>

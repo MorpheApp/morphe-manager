@@ -65,6 +65,8 @@
     <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">அருகிலுள்ள சாதனங்கள் அனுமதி இல்லாமல் உங்கள் உள்ளூர் நெட்வொர்க்கில் உள்ள ஆதாரங்களை மேம்படுத்த முடியாது</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <string name="sources_patch_expert_badge_tooltip">இந்த பேட்ச்-ஐ கைமுறையாகச் சேர்க்க %1$s-ஐ ஆன் செய்யவும்</string>
     <!-- Home Screen - Dialog 1: APK Availability -->

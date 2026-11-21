@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не вдалося завантажити джерела: %s</string>
     <string name="sources_download_fail_named">\"%s\" не вдалося оновити. Перевірте підключення до Інтернету та спробуйте ще раз</string>
     <string name="sources_download_endpoint_not_found">\"%s\": не знайдено метадані патчу</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Джерела у вашій локальній мережі неможливо оновити без дозволу на доступ до пристроїв поблизу</string>
     <string name="sources_signing_key_changed_named">\"%s\" не оновлено, оскільки його останній реліз не підписано ключем, який він використовував раніше</string>
     <string name="sources_signing_key_changed_local">Файл не підписано ключем, який це джерело використовувало раніше. Щоб довіряти йому, видаліть джерело та додайте файл знову</string>
     <string name="sources_signing_key_trust_title">Довіряти новому ключу?</string>

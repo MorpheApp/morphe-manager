@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Չհաջողվեց ներբեռնել աղբյուրները՝ %s</string>
     <string name="sources_download_fail_named">«%s»-ը հնարավոր չեղավ թարմացնել: Ստուգեք ինտերնետ կապը և փորձեք նորից</string>
     <string name="sources_download_endpoint_not_found">\'%s\'. թարմացման մետատվյալները չեն գտնվել</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Ձեր տեղային ցանցի աղբյուրները չեն կարող թարմացվել առանց «Մոտակա սարքեր» թույլտվության</string>
     <string name="sources_signing_key_changed_named">\'%s\'-ը չի թարմացվել, քանի որ դրա վերջին թողարկումը ստորագրված չէ նախկինում օգտագործված բանալիով</string>
     <string name="sources_signing_key_changed_local">Ֆայլը ստորագրված չէ այն բանալիով, որն այս աղբյուրն օգտագործում էր նախկինում: Վստահելու համար ջնջեք աղբյուրը և կրկին ավելացրեք ֆայլը</string>
     <string name="sources_signing_key_trust_title">Վստահե՞լ նոր բանալին։</string>

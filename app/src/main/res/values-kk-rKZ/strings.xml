@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Дереккөздерді жүктеу мүмкін болмады: %s</string>
     <string name="sources_download_fail_named">\'%s\' қолданбасын жаңарту мүмкін болмады. Интернет байланысын тексеріп, қайтадан көріңіз</string>
     <string name="sources_download_endpoint_not_found">\'%s\': патч метадеректері табылмады</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Жергілікті желідегі дереккөздерді \"Жақындағы құрылғылар\" рұқсатысыз жаңарту мүмкін емес</string>
     <string name="sources_signing_key_changed_named">\'%s\' жаңартылмады, өйткені оның соңғы нұсқасы бұрын қолданылған кілтпен қол қойылмаған</string>
     <string name="sources_signing_key_changed_local">Файлға бұл дереккөз бұрын қолданған кілтпен қол қойылмаған. Оған сену үшін дереккөзді өшіріп, файлды қайта қосыңыз</string>
     <string name="sources_signing_key_trust_title">Жаңа кілтке сену керек пе?</string>

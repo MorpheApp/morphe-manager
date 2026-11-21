@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Eroare la descărcarea surselor: %s</string>
     <string name="sources_download_fail_named">\"%s\" nu a putut fi actualizat. Verificați conexiunea la internet și încercați din nou</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metadatele patch-ului nu au fost găsite</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Sursele din rețeaua locală nu pot fi actualizate fără permisiunea pentru Dispozitive din apropiere</string>
     <string name="sources_signing_key_changed_named">\"%s\" nu a fost actualizat deoarece cea mai recentă versiune nu este semnată cu cheia folosită anterior</string>
     <string name="sources_signing_key_changed_local">Fișierul nu este semnat cu cheia pe care această sursă a folosit-o anterior. Pentru a avea încredere în el, ștergeți sursa și adăugați fișierul din nou</string>
     <string name="sources_signing_key_trust_title">Aveți încredere în noua cheie?</string>

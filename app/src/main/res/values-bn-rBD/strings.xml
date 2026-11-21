@@ -245,6 +245,8 @@
     <string name="sources_download_fail">সোর্স ডাউনলোড করতে ব্যর্থ হয়েছে: %s</string>
     <string name="sources_download_fail_named">\'%s\' আপডেট করা যায়নি। আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন</string>
     <string name="sources_download_endpoint_not_found">\'%s\': প্যাচ মেটাডেটা পাওয়া যায়নি</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Nearby devices অনুমতি ছাড়া আপনার লোকাল নেটওয়ার্কের সোর্সগুলো আপডেট করা যাবে না</string>
     <string name="sources_signing_key_changed_named">\'%s\' আপডেট করা হয়নি কারণ এর সর্বশেষ রিলিজটি আগে ব্যবহৃত কী দ্বারা স্বাক্ষরিত নয়</string>
     <string name="sources_signing_key_changed_local">ফাইলটি এই সোর্স আগে যে কী ব্যবহার করেছিল তা দিয়ে সাইন করা হয়নি। এটিকে বিশ্বাস করতে, সোর্সটি মুছে ফেলুন এবং ফাইলটি আবার যোগ করুন</string>
     <string name="sources_signing_key_trust_title">নতুন কী-টি কি বিশ্বাস করবেন?</string>

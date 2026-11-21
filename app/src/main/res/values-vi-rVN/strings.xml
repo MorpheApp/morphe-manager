@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <string name="sources_download_fail_named">Không thể cập nhật \"%s\". Vui lòng kiểm tra kết nối mạng và thử lại</string>
     <string name="sources_download_endpoint_not_found">\'%s\': không tìm thấy metadata của bản vá</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Các nguồn trên mạng cục bộ của bạn không thể được cập nhật nếu không có quyền Thiết bị ở gần</string>
     <string name="sources_signing_key_changed_named">\'%s\' không được cập nhật vì bản phát hành mới nhất của nó không được ký bằng khóa đã sử dụng trước đó</string>
     <string name="sources_signing_key_changed_local">Tệp không được ký bằng khóa mà nguồn này đã sử dụng trước đó. Để tin cậy tệp này, hãy xóa nguồn và thêm tệp một lần nữa</string>
     <string name="sources_signing_key_trust_title">Tin cậy khóa mới?</string>

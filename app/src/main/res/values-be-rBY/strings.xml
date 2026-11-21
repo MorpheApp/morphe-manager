@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не ўдалася спампоўка крыніц: %s</string>
     <string name="sources_download_fail_named">\'%s\' не можа быць абноўлены. Праверце злучэнне з інтэрнэтам і паспрабуйце зноў</string>
     <string name="sources_download_endpoint_not_found">У \"%s\" не знойдзена метаданых патча</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Крыніцы ў вашай лакальнай сетцы не могуць быць абноўлены без дазволу на доступ да прылад побач</string>
     <string name="sources_signing_key_changed_named">\'%s\' не была абноўлена, бо яе апошні рэліз не падпісаны ключом, якім яна выкарыстоўвалася раней</string>
     <string name="sources_signing_key_changed_local">Файл не падпісаны ключом, які гэтая крыніца выкарыстоўвала раней. Каб давяраць яму, выдаліце крыніцу і дадайце файл зноў</string>
     <string name="sources_signing_key_trust_title">Давяраць новаму ключу?</string>

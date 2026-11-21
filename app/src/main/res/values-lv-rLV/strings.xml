@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Neizdevās lejupielādēt avotus: %s</string>
     <string name="sources_download_fail_named">\'%s\' neizdevās atjaunināt. Pārbaudiet interneta savienojumu un mēģiniet vēlreiz</string>
     <string name="sources_download_endpoint_not_found">\'%s\': labojumu metadati netika atrasti</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Avotusēktiesi jūsu vietējā tīklā nevar tikt atjaunināti bez atļaujas piekļūt tuvē esošajām ierīcēm</string>
     <string name="sources_signing_key_changed_named">\'%s\' netika atjaunināts, jo tā jaunākā versija nav parakstīta ar iepriekš izmantoto atslēgu</string>
     <string name="sources_signing_key_changed_local">Fails nav parakstīts ar atslēgu, ko šis avots izmantoja iepriekš. Lai uzticētos tam, dzēsiet avotu un pievienojiet failu vēlreiz</string>
     <string name="sources_signing_key_trust_title">Uzticēties jaunajai atslēgai?</string>

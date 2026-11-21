@@ -245,6 +245,8 @@
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s</string>
     <string name="sources_download_fail_named">\"%s\" تعذر تحديثه. تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
     <string name="sources_download_endpoint_not_found">\"%s\": لم يتم العثور على بيانات تعريف التعديل</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">لا يمكن تحديث المصادر الموجودة على شبكتك المحلية بدون إذن \'الأجهزة القريبة\'</string>
     <string name="sources_signing_key_changed_named">لم يتم تحديث \'%s\' لأن إصداره الأخير غير موقّع بالمفتاح الذي استخدمه سابقًا</string>
     <string name="sources_signing_key_changed_local">الملف غير موقّع بواسطة المفتاح الذي استخدمه هذا المصدر من قبل. للثقة به، احذف المصدر وأضف الملف مرة أخرى</string>
     <string name="sources_signing_key_trust_title">هل تثق بالمفتاح الجديد؟</string>

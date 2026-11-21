@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Lähteiden lataaminen epäonnistui: %s</string>
     <string name="sources_download_fail_named">Lähdettä \"%s\" ei voitu päivittää. Tarkista internetyhteys ja yritä uudelleen</string>
     <string name="sources_download_endpoint_not_found">\"%s\": lisäosien metatietoja ei löytynyt</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Paikallisen verkkosi lähteitä ei voida päivittää ilman Lähellä olevat laitteet -lupaa</string>
     <string name="sources_signing_key_changed_named">\'%s\'-lähdettä ei päivitetty, koska sen uusin julkaisu ei ole allekirjoitettu avaimella, jota se käytti aiemmin</string>
     <string name="sources_signing_key_changed_local">Tiedostoa ei ole allekirjoitettu avaimella, jota tämä lähde käytti aiemmin. Luottaaksesi siihen, poista lähde ja lisää tiedosto uudelleen</string>
     <string name="sources_signing_key_trust_title">Luotatko uuteen avaimeen?</string>

@@ -245,6 +245,8 @@
     <string name="sources_download_fail">წყაროების ჩამოტვირთვა ვერ მოხერხდა: %s</string>
     <string name="sources_download_fail_named">\'%s\'-ის განახლება ვერ მოხერხდა. შეამოწმეთ ინტერნეტკავშირი და სცადეთ თავიდან</string>
     <string name="sources_download_endpoint_not_found">\'%s\': პატჩის მეტამონაცემები ვერ მოიძებნა</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">თქვენი локаლური ქსელის წყაროების განახლება შეუძლებელია \"ახლოს მდებარე მოწყობილებების\" ნებართვის გარეშე</string>
     <string name="sources_signing_key_changed_named">\'%s\' არ განახლდა, რადგან მისი ბოლო რელიზი არ არის ხელმოწერილი იმ გასაღებით, რომელიც მანამდე გამოიყენებოდა</string>
     <string name="sources_signing_key_changed_local">ფაილი არ არის ხელმოწერილი იმ გასაღებით, რომელსაც ეს წყარო მანამდე იყენებდა. მის გასენდობად, წაშალეთ წყარო და დაამატეთ ფაილი თავიდან</string>
     <string name="sources_signing_key_trust_title">გსურთ ახალი გასაღების დანდობა?</string>

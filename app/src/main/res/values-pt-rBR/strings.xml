@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Falha ao baixar as origens: %s</string>
     <string name="sources_download_fail_named">\"%s\" não pôde ser atualizado. Verifique sua conexão com a internet e tente novamente</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metadados de patches não encontrados</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Fontes na sua rede local não podem ser atualizadas sem a permissão de Dispositivos próximos</string>
     <string name="sources_signing_key_changed_named">\'%s\' não foi atualizado porque sua versão mais recente não foi assinada pela chave que utilizava anteriormente</string>
     <string name="sources_signing_key_changed_local">O arquivo não está assinado pela chave que esta fonte usou anteriormente. Para confiá-lo, exclua a fonte e adicione o arquivo novamente</string>
     <string name="sources_signing_key_trust_title">Confiar na nova chave?</string>

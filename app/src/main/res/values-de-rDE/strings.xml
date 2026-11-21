@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Fehler beim Herunterladen der Quellen: %s</string>
     <string name="sources_download_fail_named">\'%s\' konnte nicht aktualisiert werden. Überprüfe deine Internetverbindung und versuche es erneut</string>
     <string name="sources_download_endpoint_not_found">\'%s\': Patch-Metadaten nicht gefunden</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Quellen in Ihrem lokalen Netzwerk können ohne die Berechtigung für Geräte in der Nähe nicht aktualisiert werden</string>
     <string name="sources_signing_key_changed_named">\'%s\' wurde nicht aktualisiert, da die neueste Version nicht mit dem zuvor verwendeten Schlüssel signiert ist</string>
     <string name="sources_signing_key_changed_local">Die Datei ist nicht mit dem Schlüssel signiert, den diese Quelle zuvor verwendet hat. Um ihr zu vertrauen, lösche die Quelle und füge die Datei erneut hinzu</string>
     <string name="sources_signing_key_trust_title">Dem neuen Schlüssel vertrauen?</string>

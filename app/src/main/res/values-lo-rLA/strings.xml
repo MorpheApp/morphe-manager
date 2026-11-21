@@ -245,6 +245,8 @@
     <string name="sources_download_fail">ດາວໂຫຼດແຫຼ່ງຂໍ້ມູນລົ້ມເຫຼວ: %s</string>
     <string name="sources_download_fail_named">ບໍ່ສາມາດອັບເດດ \'%s\' ໄດ້. ກວດເບິ່ງການເຊື່ອມຕໍ່ອິນເຕີເນັດຂອງທ່ານແລ້ວລອງໃໝ່</string>
     <string name="sources_download_endpoint_not_found">\'%s\': ບໍ່ພົບຂໍ້ມູນກຳກັບຊຸດແພດ</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">ແຫຼ່ງຂໍ້ມູນໃນເຄືອຂ່າຍທ້ອງຖິ່ນຂອງທ່ານບໍ່ສາມາດອັບເດດໄດ້ ຫາກບໍ່ມີການອະນຸຍາດໃຫ້ເຂົ້າເຖິງອຸປະກອນທີ່ຢູ່ໃກ້ຄຽງ</string>
     <string name="sources_signing_key_changed_named">\'%s\' ບໍ່ໄດ້ຖືກອັບເດດ ເນື່ອງຈາກເວີຊັນຫຼ້າສຸດຂອງມັນບໍ່ໄດ້ຖືກລົງນາມດ້ວຍຄີທີ່ມັນເຄີຍໃຊ້ມາກ່ອນ</string>
     <string name="sources_signing_key_changed_local">ໄຟລ໌ບໍ່ໄດ້ຖືກລົງນາມດ້ວຍຄີທີ່ແຫຼ່ງນີ້ເຄີຍໃຊ້ມາກ່ອນ. ເພື່ອໃຫ້ຄວາມໄວ້ວາງໃຈມັນ, ໃຫ້ລຶບແຫຼ່ງອອກ ແລະ ເພີ່ມໄຟລ໌ອີກຄັ້ງ</string>
     <string name="sources_signing_key_trust_title">ເຊື່ອໝັ້ນຄີໃໝ່ຫຼືບໍ່?</string>

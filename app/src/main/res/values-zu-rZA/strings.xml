@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kwehlulekile ukulanda imithombo: %s</string>
     <string name="sources_download_fail_named">\'%s\' ngeke yakwazi ukubuyiselwa. Hlola uxhumano lwakho lwe-internet bese uzama futhi</string>
     <string name="sources_download_endpoint_not_found">\'%s\': imininingwane ye-patch ayitholakali</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Imithombo onetwork yakho yasendaweni ayikwazi ukubuyiselwa kalusha ngaphandle kwemvume yezinto eziseduze</string>
     <string name="sources_signing_key_changed_named">\'%s\' ayizange ibuyekezwe ngoba ukukhishwa kwayo kwamanje akusayinwa ngekey eyayisebenzisa ngaphambilini</string>
     <string name="sources_signing_key_changed_local">Ifayela alusayinwa ngokhiye walo mthombo owawusetshenziswa ngaphambilini. Ukuze ulithembe, susa umthombo bese wengeza ifayela futhi</string>
     <string name="sources_signing_key_trust_title">Uthemba ikey entsha?</string>

@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Error en descarregar les fonts: %s</string>
     <string name="sources_download_fail_named">No s\'ha pogut actualitzar \'%s\'. Comproveu la connexió a la xarxa i proveu-ho de nou</string>
     <string name="sources_download_endpoint_not_found">\'%s\': no s\'han trobat les metadades del patch</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Les fonts de la vostra xarxa local no es poden actualitzar sense el permís de dispositius propers</string>
     <string name="sources_signing_key_changed_named">\'%s\' no s\'ha actualitzat perquè la seva última versió no està signada per la clau que utilitzava anteriorment</string>
     <string name="sources_signing_key_changed_local">El fitxer no està signat per la clau que aquesta font utilitzava anteriorment. Per confiar-hi, elimina la font i torna a afegir el fitxer</string>
     <string name="sources_signing_key_trust_title">Confies en la nova clau?</string>

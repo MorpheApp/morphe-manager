@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kunne ikke laste ned kilder: %s</string>
     <string name="sources_download_fail_named">\'%s\' kunne ikke oppdateres. Sjekk internettforbindelsen og prøv igjen</string>
     <string name="sources_download_endpoint_not_found">\'%s\': patch-metadata ikke funnet</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Kilder på det lokale nettverket ditt kan ikke oppdateres uten tillatelse for enheter i nærheten</string>
     <string name="sources_signing_key_changed_named">\'%s\' ble ikke oppdatert fordi den nyeste utgivelsen ikke er signert med nøkkelen den brukte tidligere</string>
     <string name="sources_signing_key_changed_local">Filen er ikke signert med nøkkelen denne kilden brukte tidligere. For å stole på den, slett kilden og legg til filen på nytt</string>
     <string name="sources_signing_key_trust_title">Stol på den nye nøkkelen?</string>

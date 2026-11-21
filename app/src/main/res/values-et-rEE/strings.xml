@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Allikate allalaadimine ebaõnnestus: %s</string>
     <string name="sources_download_fail_named">\'%s\' ei õnnestunud uuendada. Kontrolli internetiühendust ja proovi uuesti</string>
     <string name="sources_download_endpoint_not_found">\'%s\': paiga metaandmeid ei leitud</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Allikaid teie kohalikus võrgus ei saa uuendada ilma lähedaste seadmete loaga</string>
     <string name="sources_signing_key_changed_named">\'%s\' ei uuendatud, sest selle uusim versioon ei ole allkirjastatud võtmega, mida see varem kasutas</string>
     <string name="sources_signing_key_changed_local">Fail ei ole allkirjastatud võtmega, mida see allikas varem kasutas. Selle usaldamiseks kustuta allikas ja lisa fail uuesti</string>
     <string name="sources_signing_key_trust_title">Kas usaldada uut võtit?</string>
@@ -1076,7 +1078,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="installer_mount_warning_install">Paigandusrežiimiks on määratud root-haage. Seda salvestatud rakendust ei installitud haakimise meetodiga</string>
     <string name="mount_version_mismatch_message">Algse rakenduse versioon (%2$s) ei ühti paigutatud versiooniga (%1$s). Kinnita vastav algne versioon ja proovi uuesti</string>
     <string name="mount_stock_restore_failed_message">Android lükkas salvestatud algse APK tagasi. Paigalda sobiv algversioon ja proovi seejärel uuesti haakida</string>
-    <string name="mount_stock_mismatch_message">Paigaldatud rakendus ei ole originaal. Vali originaal APK või installi uuesti tehaseversioon ja proovi Mounti uuesti</string>
+    <string name="mount_stock_mismatch_message">Paigaldatud rakendus ei ole originaal. Vali originaal APK või installi uuesti tehaseversioon ja proovi monteerimist uuesti</string>
     <string name="installer_status_shizuku_unsupported">Paigaldatud Shizuku versioon ei ole toetatud</string>
     <string name="installer_action_open_shizuku">Ava Shizuku</string>
     <string name="installer_hint_generic">Installimine ebaõnnestus. Proovi uuesti või vali teine installija</string>

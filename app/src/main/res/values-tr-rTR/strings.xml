@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <string name="sources_download_fail_named">\'%s\' güncellenemedi. İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="sources_download_endpoint_not_found">\'%s\': yama metadatası bulunamadı</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Yerel ağınızdaki kaynaklar, Yakındaki cihazlar izni olmadan güncellenemez</string>
     <string name="sources_signing_key_changed_named">\'%s\' güncellenmedi, çünkü son sürümü önceden kullandığı anahtar ile imzalanmamış</string>
     <string name="sources_signing_key_changed_local">Bu dosya, bu kaynağın önceden kullandığı anahtar ile imzalanmamış. Güvenmek için, kaynağı silin ve dosyayı yeniden ekleyin</string>
     <string name="sources_signing_key_trust_title">Yeni anahtara güvenilsin mi?</string>

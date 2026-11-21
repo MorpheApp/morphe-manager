@@ -245,6 +245,8 @@
     <string name="sources_download_fail">下载补丁失败：%s</string>
     <string name="sources_download_fail_named">无法更新“%s”。请检查您的互联网连接并重试。</string>
     <string name="sources_download_endpoint_not_found">找不到“%s”的补丁元数据。</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">如果没有“附近设备”权限，则无法更新本地网络上的来源</string>
     <string name="sources_signing_key_changed_named">\'%s\' 未更新，因为其最新版本未由之前使用的密钥签名</string>
     <string name="sources_signing_key_changed_local">该文件未由该源之前使用的密钥签名。要信任它，请删除该源并重新添加文件</string>
     <string name="sources_signing_key_trust_title">信任新密钥？</string>

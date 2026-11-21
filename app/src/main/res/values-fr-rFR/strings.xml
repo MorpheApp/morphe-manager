@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
     <string name="sources_download_fail_named">\'%s\' n\'a pas pu être mis à jour. Vérifiez votre connexion internet et réessayez</string>
     <string name="sources_download_endpoint_not_found">\'%s\' : métadonnées de patchs introuvables</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Les sources sur votre réseau local ne peuvent pas être mises à jour sans l\'autorisation \'Appareils à proximité\'</string>
     <string name="sources_signing_key_changed_named">\'%s\' n\'a pas été mis à jour car sa dernière version n\'est pas signée avec la clé utilisée précédemment</string>
     <string name="sources_signing_key_changed_local">Le fichier n\'est pas signé avec la clé utilisée précédemment par cette source. Pour lui faire confiance, supprimez la source puis ajoutez à nouveau le fichier</string>
     <string name="sources_signing_key_trust_title">Faire confiance à la nouvelle clé ?</string>
@@ -1079,7 +1081,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_mount_warning_install">Le mode de patch est défini sur le montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
     <string name="mount_stock_restore_failed_message">Android a rejeté l\'APK d\'origine enregistré. Installez la version d\'origine correspondante, puis essayez de monter à nouveau</string>
-    <string name="mount_stock_mismatch_message">L\'application installée n\'est pas l\'originale. Choisissez l\'APK original ou réinstallez la version d\'origine, puis tentez à nouveau le montage</string>
+    <string name="mount_stock_mismatch_message">L\'application installée n\'est pas la version d\'origine. Choisissez l\'APK d\'origine ou réinstallez la version d\'origine, puis réessayez le \'Montage\' à nouveau</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
     <string name="installer_hint_generic">L\'installation a échoué. Réessayez ou choisissez un installateur différent</string>

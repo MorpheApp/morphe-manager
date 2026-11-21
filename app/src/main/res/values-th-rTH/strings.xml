@@ -245,6 +245,8 @@
     <string name="sources_download_fail">ไม่สามารถดาวน์โหลดแหล่งที่มาได้: %s</string>
     <string name="sources_download_fail_named">ไม่สามารถอัปเดต \'%s\' ได้ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณและลองอีกครั้ง</string>
     <string name="sources_download_endpoint_not_found">ไม่พบข้อมูลเมตาแพตช์สำหรับ \'%s\'</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">ไม่สามารถอัปเดตแหล่งที่มาในเครือข่ายท้องถิ่นของคุณได้หากไม่มีการอนุญาตให้เข้าถึงอุปกรณ์ที่อยู่ใกล้เคียง</string>
     <string name="sources_signing_key_changed_named">\'%s\' ไม่ได้รับการอัปเดตเนื่องจากเวอร์ชันล่าสุดไม่ได้ลงนามด้วยคีย์ที่เคยใช้ก่อนหน้านี้</string>
     <string name="sources_signing_key_changed_local">ไฟล์นี้ไม่ได้ลงนามด้วยคีย์ที่แหล่งที่มานี้เคยใช้ก่อนหน้านี้ หากต้องการเชื่อถือไฟล์นี้ ให้ลบแหล่งที่มาแล้วเพิ่มไฟล์อีกครั้ง</string>
     <string name="sources_signing_key_trust_title">เชื่อถือคีย์ใหม่หรือไม่?</string>

@@ -245,6 +245,8 @@
     <string name="sources_download_fail">উত্‍সসমূহ ডাউনলোড কৰাত ব্যৰ্থ হৈছে: %s</string>
     <string name="sources_download_fail_named">\'%s\' আপডেট কৰিব পৰা নগ\'ল। আপোনাৰ ইণ্টাৰনেট সংযোগ পৰীক্ষা কৰক আৰু পুনৰ চেষ্টা কৰক</string>
     <string name="sources_download_endpoint_not_found">\'%s\': পেচ মেটাডেটা পোৱা নগ\'ল</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Nearby devices অনুমতি অবিহনে আপোনাৰ স্থানীয় নেটৱৰ্কৰ উৎসসমূহ আপডেট কৰিব নোৱাৰিব</string>
     <string name="sources_signing_key_changed_named">\'%s\' আপডেট কৰা হোৱা নাই কাৰণ ইয়াৰ শেহতীয়া ৰিলিজটো ই আগতে ব্যৱহাৰ কৰা কিৰ দ্বাৰা স্বাক্ষৰ কৰা হোৱা নাই</string>
     <string name="sources_signing_key_changed_local">ফাইলটো এই উৎসটোৱে আগতে ব্যৱহাৰ কৰা কিৰ দ্বাৰা স্বাক্ষৰ কৰা হোৱা নাই। ইয়াক বিশ্বাস কৰিবলৈ, উৎসটো মচি পেলাওক আৰু ফাইলটো পুনৰ যোগ কৰক</string>
     <string name="sources_signing_key_trust_title">নতুন কিটো বিশ্বাস কৰিবনে?</string>

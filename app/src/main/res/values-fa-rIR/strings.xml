@@ -245,6 +245,8 @@
     <string name="sources_download_fail">دانلود منابع شکست خورد: %s</string>
     <string name="sources_download_fail_named">به‌روزرسانی «%s» ممکن نشد. اتصال اینترنت را بررسی و دوباره تلاش کنید</string>
     <string name="sources_download_endpoint_not_found">«%s»: فرادادهٔ پچ پیدا نشد</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">منابع موجود در شبکه محلی شما بدون مجوز دستگاه‌های نزدیک قابل به‌روزرسانی نیستند</string>
     <string name="sources_signing_key_changed_named">\'%s\' به‌روزرسانی نشد زیرا آخرین نسخه آن توسط کلیدی که قبلاً استفاده می‌کرد امضا نشده است</string>
     <string name="sources_signing_key_changed_local">این فایل با کلیدی که این منبع قبلاً استفاده می‌کرد، امضا نشده است. برای اعتماد به آن، منبع را حذف کرده و فایل را دوباره اضافه کنید</string>
     <string name="sources_signing_key_trust_title">به کلید جدید اعتماد کنید؟</string>

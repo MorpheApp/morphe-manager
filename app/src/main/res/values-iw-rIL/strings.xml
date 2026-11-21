@@ -245,6 +245,8 @@
     <string name="sources_download_fail">נכשלה הורדת המקורות: %s</string>
     <string name="sources_download_fail_named">\'\"%s\"\' לא ניתן לעדכון. בדוק את חיבור האינטרנט שלך ונסה שוב</string>
     <string name="sources_download_endpoint_not_found">\'\"%s\"\': מטא-נתוני תיקון לא נמצאו</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">לא ניתן לעדכן מקורות ברשת המקומית שלך ללא הרשאת \"מכשירים בקרבת מקום\"</string>
     <string name="sources_signing_key_changed_named">\'%s\' לא עודכן מכיוון שהגרסה האחרונה שלו לא נחתמה באמצעות המפתח שבו הוא השתמש בעבר</string>
     <string name="sources_signing_key_changed_local">הקובץ אינו חתום על ידי המפתח שבו השתמש מקור זה בעבר. כדי לסמוך עליו, מחק את המקור והוסף את הקובץ שוב</string>
     <string name="sources_signing_key_trust_title">סמוך על המפתח החדש?</string>

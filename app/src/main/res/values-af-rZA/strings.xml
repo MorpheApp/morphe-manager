@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kon nie oorspronge aflaai nie: %s</string>
     <string name="sources_download_fail_named">\'%s\' kon nie opgedateer word nie. Gaan jou internetverbinding na en probeer weer</string>
     <string name="sources_download_endpoint_not_found">\'%s\': geen patch-metadata gevind nie</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Bronne op jou plaaslike netwerk kan nie opgedateer word sonder die \"Nabygeleë toestelle\"-toestemming nie</string>
     <string name="sources_signing_key_changed_named">\'%s\' is nie opgedateer nie omdat die nuutste vrystelling nie geteken is deur die sleutel wat dit voorheen gebruik het nie</string>
     <string name="sources_signing_key_changed_local">Die lêer is nie deur die sleutel onderteken wat hierdie bron voorheen gebruik het nie. Om dit te vertrou, verwyder die bron en voeg die lêer weer by</string>
     <string name="sources_signing_key_trust_title">Vertrou die nuwe sleutel?</string>

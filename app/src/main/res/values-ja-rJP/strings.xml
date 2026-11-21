@@ -245,6 +245,8 @@
     <string name="sources_download_fail">ソースのダウンロードに失敗しました: %s</string>
     <string name="sources_download_fail_named">「%s」を更新できませんでした。インターネット接続を確認して、もう一度お試しください</string>
     <string name="sources_download_endpoint_not_found">\'%s\': パッチメタデータが見つかりませんでした。</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">ローカル ネットワーク上のソースは、「付近のデバイス」権限がないと更新できません</string>
     <string name="sources_signing_key_changed_named">「%s」の最新リリースは、以前に使用されていた署名キーで署名されていないため、更新されませんでした</string>
     <string name="sources_signing_key_changed_local">このファイルは、このソースで以前使用されていた署名キーで署名されていません。信頼するには、ソースを削除してからファイルを再度追加してください</string>
     <string name="sources_signing_key_trust_title">新しい署名キーを信頼しますか？</string>
@@ -908,9 +910,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="settings_advanced_updates_manager_prereleases_description">新しいバージョンの Morphe をいち早く試すことができます</string>
     <string name="settings_advanced_updates_prerelease_warning_title">プレリリース版の更新を有効にしますか？</string>
     <!-- Shown before pre-release updates are turned on for the app itself. Patches have their own toggle in each patch source -->
-    <string name="settings_advanced_updates_prerelease_warning_message">"Morpheのプレリリース版は開発中のため、不安定な場合があります。
+    <string name="settings_advanced_updates_prerelease_warning_message">"Morphe のプレリリース版は開発中のため、不安定な場合があります。
 
-パッチには影響しません。プレリリース版のパッチを有効にするには、パッチソース一覧から各自有効にしてください"</string>
+パッチには影響しません。プレリリース版のパッチを有効にするには、パッチソースの一覧から各自有効にしてください"</string>
     <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
     <string name="settings_auto_updates">自動更新</string>
     <string name="settings_auto_updates_description">Morphe 起動時の更新に関する設定です。引っ張ってから離して更新すると、常にチェックが行われます</string>
@@ -1077,7 +1079,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">パッチモードが root マウントに設定されています。この保存済みアプリはマウント方式でインストールされていません</string>
     <string name="mount_version_mismatch_message">オリジナルのアプリのバージョン (%2$s) がパッチ適用済みアプリのバージョン (%1$s) と一致しません。対応するオリジナルのアプリをマウントしてから、再度お試しください</string>
     <string name="mount_stock_restore_failed_message">Android が保存済みのオリジナルの APK を拒否しました。対応する純正バージョンをインストールしてから、再度マウントしてください</string>
-    <string name="mount_stock_mismatch_message">インストールされているアプリはオリジナルではありません。オリジナルのAPKを選択するか、ストックバージョンを再インストールしてから、もう一度マウントを試してください</string>
+    <string name="mount_stock_mismatch_message">インストールされているアプリはオリジナル版ではありません。オリジナルの APK を選択するか、純正バージョンを再インストールしてから、再度マウントしてください</string>
     <string name="installer_status_shizuku_unsupported">インストールされている Shizuku のバージョンはサポートされていません</string>
     <string name="installer_action_open_shizuku">Shizuku を開く</string>
     <string name="installer_hint_generic">インストールに失敗しました。もう一度試すか、別のインストーラーを使用してください</string>
@@ -1555,7 +1557,7 @@ morphe_header_custom_dark.png
     <string name="changelog_badge_latest">最新</string>
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
     <string name="changelog_badge_downloaded">ダウンロード済み</string>
-    <string name="changelog_badge_prerelease">プレリリース</string>
+    <string name="changelog_badge_prerelease">プレリリース版</string>
     <!-- "%s" is the number of changes in the section -->
     <string name="changelog_show_all">すべて表示 (%s)</string>
     <string name="changelog_show_less">表示を減らす</string>

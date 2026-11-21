@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Impossibile scaricare le fonti: %s</string>
     <string name="sources_download_fail_named">\"%s\" non è stato possibile aggiornarlo. Controlla la tua connessione internet e riprova</string>
     <string name="sources_download_endpoint_not_found">\"%s\": metadati modifiche non trovati</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Le sorgenti sulla tua rete locale non possono essere aggiornate senza l\'autorizzazione per i dispositivi nelle vicinanze</string>
     <string name="sources_signing_key_changed_named">\'%s\' non è stato aggiornato perché l\'ultima release non è firmata con la chiave utilizzata in precedenza</string>
     <string name="sources_signing_key_changed_local">Il file non è firmato con la chiave utilizzata in precedenza da questa sorgente. Per fidarti, elimina la sorgente e aggiungi di nuovo il file</string>
     <string name="sources_signing_key_trust_title">Ti fidi della nuova chiave?</string>

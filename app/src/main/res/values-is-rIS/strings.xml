@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Ekki tókst að sækja heimildir: %s</string>
     <string name="sources_download_fail_named">Ekki tókst að uppfæra \"%s\". Athugaðu nettenginguna og reyndu aftur</string>
     <string name="sources_download_endpoint_not_found">\"%s\": lýsigögn breytistillinga fundust ekki</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Upplýsingagjafar á staðbundnu netinu þínu geta ekki verið uppfærðar án leyfis fyrir tæki í nágrenni</string>
     <string name="sources_signing_key_changed_named">\'%s\' var ekki uppfært því nýjasta útgáfan er ekki undirrituð með lykilnum sem hún notaði áður</string>
     <string name="sources_signing_key_changed_local">Skráin er ekki undirrituð með lyklinum sem þessi uppspretta notaði áður. Til að treysta henni, eyddu uppsprettunni og bættu skránni aftur við</string>
     <string name="sources_signing_key_trust_title">Treysta nýjum lykli?</string>

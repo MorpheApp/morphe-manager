@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Daxistina çavkaniyan têk çû: %s</string>
     <string name="sources_download_fail_named">\'%s\' nehat nûvekirin. Girêdana înternetê kontrol bike û dîsa biceribîne.</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metadata ya pelê nehat dîtin.</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Çavkaniyên li ser tora we ya herêmî bêyî destûra amirên nêzîk nanishin</string>
     <string name="sources_signing_key_changed_named">\'%s\' nehat nûkirin ji ber ku îsdara wê ya herî dawî bi kîlîya ku wê berê bikar anî nehatî îmzekirin</string>
     <string name="sources_signing_key_changed_local">Pel bi kîlîya ku vê çavkaniyê berê bikar anî nehatî îmzekirin. Ji bo baweriyê pê bînî, çavkaniyê jêbide û pelê dîsa zêde bike</string>
     <string name="sources_signing_key_trust_title">Bawerî bi kîlîya nû bike?</string>

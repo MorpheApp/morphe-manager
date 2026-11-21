@@ -246,6 +246,8 @@
     <string name="sources_download_fail">Неуспешно изтегляне на източниците: %s</string>
     <string name="sources_download_fail_named">\'%s\' не може да бъде актуализиран. Проверете връзката си с интернет и опитайте отново</string>
     <string name="sources_download_endpoint_not_found">\'%s\': метаданни за пакета не са намерени</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Източниците във вашата локална мрежа не могат да бъдат актуализирани без разрешение за „Съседни устройства“</string>
     <string name="sources_signing_key_changed_named">\'%s\' не беше актуализиран, защото последната му версия не е подписана с ключа, който е използван преди</string>
     <string name="sources_signing_key_changed_local">Файлът не е подписан с ключа, който този източник е използвал преди. За да му се доверите, изтрийте източника и добавете файла отново</string>
     <string name="sources_signing_key_trust_title">Да се доверите ли на новия ключ?</string>

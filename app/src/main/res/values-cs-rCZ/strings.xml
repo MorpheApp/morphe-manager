@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Selhalo stahování zdrojů: %s</string>
     <string name="sources_download_fail_named">\'%s\' nelze aktualizovat. Zkontrolujte připojení k internetu a zkuste to znovu</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metadata záplat nebyla nalezena</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Zdroje ve vaší lokální síti nelze aktualizovat bez oprávnění k přístupu k zařízením v blízkosti</string>
     <string name="sources_signing_key_changed_named">\'%s\' nebyla aktualizována, protože její nejnovější verze není podepsána klíčem, který byl použit dříve</string>
     <string name="sources_signing_key_changed_local">Soubor není podepsán klíčem, který tento zdroj používal dříve. Chcete-li mu důvěřovat, smažte zdroj a znovu přidejte soubor</string>
     <string name="sources_signing_key_trust_title">Důvěřovat novému klíči?</string>

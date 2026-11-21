@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Mənbələri yükləmək olmadı: %s</string>
     <string name="sources_download_fail_named">\'%s\' yenilənə bilmədi. İnternet bağlantınızı yoxlayın və təkrar cəhd edin</string>
     <string name="sources_download_endpoint_not_found">\'%s\': yamaq üst məlumatı tapılmadı</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Yaxınlıqdakı cihazlar icazəsi olmadan yerli şəbəkənizdəki mənbələr yenilənə bilməz</string>
     <string name="sources_signing_key_changed_named">\'%s\' yenilənmədi, çünki onun son buraxılışı əvvəllər istifadə edilən açarla imzalanmadı</string>
     <string name="sources_signing_key_changed_local">Fayl bu mənbənin əvvəlki açarı ilə imzalanmayıb. Ona etibar etmək üçün mənbəni sil və faylı təkrar əlavə et</string>
     <string name="sources_signing_key_trust_title">Yeni açara etibar edilsin?</string>
@@ -1075,6 +1077,7 @@ morphe_header_custom_light.png morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Yamaq rejimi root montajlama olaraq təyin edilib. Saxlanılan bu tətbiq montajlama istifadə edilərək quraşdırılmayıb</string>
     <string name="mount_version_mismatch_message">Əsas tətbiq versiyası (%2$s) yamaqlanan tətbiq versiyasına (%1$s) uyğun deyil. Uyuşan əsas versiyanı montajla, sonra təkrar sına</string>
     <string name="mount_stock_restore_failed_message">Android saxlanılan orijinal APK-nı qəbul etmədi. Uyğun əsas versiyanı quraşdır, sonra təkrar montaj etməyə çalış</string>
+    <string name="mount_stock_mismatch_message">Quraşdırılmış tətbiq orijinal deyil. Orijinal APK-nı seçin və ya əsas versiyanı yenidən quraşdırın, sonra təkrar montajlamağa çalışın</string>
     <string name="installer_status_shizuku_unsupported">Quraşdırılan Shizuku versiyası dəstəklənmir</string>
     <string name="installer_action_open_shizuku">Shizuku-nu Aç</string>
     <string name="installer_hint_generic">Quraşdırma uğursuz oldu. Təkrar sına yaxud fərqli quraşdırıcıya keç</string>
