@@ -1,3 +1,40 @@
+## [2.7.0](https://github.com/MorpheApp/morphe-manager/compare/v2.6.0...v2.7.0) (2026-11-21)
+
+### Features
+
+* Disable all web links of an app at once ([ec0359b](https://github.com/MorpheApp/morphe-manager/commit/ec0359b7bbc90a1291ff5b4ca78162eb2a03ba5f))
+* List contributors for all time, 6 months, 3 months  ([#1473](https://github.com/MorpheApp/morphe-manager/issues/1473)) ([9b7aaf6](https://github.com/MorpheApp/morphe-manager/commit/9b7aaf6bc54eff7e4454478700b1193547a59061))
+* Mark cloned apps in exported APK names ([17f4775](https://github.com/MorpheApp/morphe-manager/commit/17f47754b594d66b9fc9c9f9b4a8daa8fb380078))
+* Move the mini-games to Help & info ([28f7a06](https://github.com/MorpheApp/morphe-manager/commit/28f7a06fe938c28ab2fb50f20df932d1690db8c9))
+* Redesign of the About dialog ([beedd3f](https://github.com/MorpheApp/morphe-manager/commit/beedd3fd9697abc61f8c040835f2f5be4d2b1615))
+* Search the options of a patch ([884ad7c](https://github.com/MorpheApp/morphe-manager/commit/884ad7c9558fd645dcb949643fb042e5d0b9f66a))
+
+### Performance Improvements
+
+* Download large files from a shared chunk queue ([0b1538a](https://github.com/MorpheApp/morphe-manager/commit/0b1538a55787b68b6950816a74cb45178ce62a81))
+* Run the patcher JVM as Liberica 25 on glibc for every ABI ([#1474](https://github.com/MorpheApp/morphe-manager/issues/1474)) ([d5bdb2b](https://github.com/MorpheApp/morphe-manager/commit/d5bdb2bfa609030de7bf567d5a04fa0832b3efb5))
+
+### Bug Fixes
+
+* Ask for the local network permission for sources hosted there ([#1485](https://github.com/MorpheApp/morphe-manager/issues/1485)) ([8d2dd06](https://github.com/MorpheApp/morphe-manager/commit/8d2dd06da71eb1d4b947bd4299edcb36d33ef8b9))
+* Find the pull request build among all workflow runs of its commit ([cb32a70](https://github.com/MorpheApp/morphe-manager/commit/cb32a70a18e6e37e1a37a7da36062c9aceab2308))
+* Fit long subtitles on the mini-game cards ([532b6d9](https://github.com/MorpheApp/morphe-manager/commit/532b6d9d6821908ce5fdcb39b4cb76ec7d1f4ce8))
+* Fold and unfold dialog headers with the scrollbar ([3d9d202](https://github.com/MorpheApp/morphe-manager/commit/3d9d202aa0bf847795d5392188379b107db52a75))
+* Group the choices of patch mode, category and patch source dialogs ([1cc5bf0](https://github.com/MorpheApp/morphe-manager/commit/1cc5bf0bf7708e3060537db9423ca04b6db7979e))
+* Keep each source update result up for its full time ([e27e40f](https://github.com/MorpheApp/morphe-manager/commit/e27e40fc0ca2db1a3e8ab759e6a2d3f73bcd89c6))
+* Keep only a stock APK signed like the installed app ([49ecfc3](https://github.com/MorpheApp/morphe-manager/commit/49ecfc3bcf41928293f13e841b406f1f7f6ff91d))
+* Keep swiped re-patch and queue alerts behind the bell across launches ([e0074e1](https://github.com/MorpheApp/morphe-manager/commit/e0074e10e946e05eaa13294ba46ed7c8dd5d4c19))
+* Keep the expert patching step name in place while counters grow ([51cbfc4](https://github.com/MorpheApp/morphe-manager/commit/51cbfc44259b08183be7b689f9bbb233269b73fb))
+* Keep the launch source check quiet unless it brings something ([a1c95cb](https://github.com/MorpheApp/morphe-manager/commit/a1c95cbf43daed4dc215eac358a87cd69972280c))
+* Keep the previous module when a mount fails before replacing it ([7e9cca8](https://github.com/MorpheApp/morphe-manager/commit/7e9cca800b90a849ba0e89db4b5c8941f6b2036e))
+* Keep the side margins the window has after a rotation ([00a6460](https://github.com/MorpheApp/morphe-manager/commit/00a6460cf63c14f1ba26b3bf0b2097f96526d884))
+* Keep the signing block of a saved original stripped of unused native libraries ([94079ac](https://github.com/MorpheApp/morphe-manager/commit/94079ac8583f55ce4e0a9cbeb6f86a736280ae52))
+* Open the keyboard with the search when animations are off ([996eadc](https://github.com/MorpheApp/morphe-manager/commit/996eadcb5c338bf0786f2010d0b618227b074cd9))
+* Show the install queue counter as text on the overlay ([56ef9d2](https://github.com/MorpheApp/morphe-manager/commit/56ef9d27dc8eb292ff01b1d3f7b5e7ab16f7101e))
+* Show the Morphe logo on every source from the Morphe repositories ([284137e](https://github.com/MorpheApp/morphe-manager/commit/284137ec0fcb77ea7ee8e38f27b8e3bba1361ec8))
+* Show uninstalled app icons using third-party fair use metadata service ([#1487](https://github.com/MorpheApp/morphe-manager/issues/1487)) ([e73871d](https://github.com/MorpheApp/morphe-manager/commit/e73871d4db8126312f0a8f267068d0cd9eeb9d54))
+* Stop crashing when the system denies network access ([96ff910](https://github.com/MorpheApp/morphe-manager/commit/96ff910c5c7bf2b0f96c8454777d6acdd102c33d))
+
 ## [2.7.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0-dev.6...v2.7.0-dev.7) (2026-11-20)
 
 ### Bug Fixes
