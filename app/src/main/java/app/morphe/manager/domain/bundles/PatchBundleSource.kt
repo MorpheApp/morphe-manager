@@ -13,6 +13,11 @@ package app.morphe.manager.domain.bundles
 import androidx.compose.runtime.Stable
 import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
+import app.morphe.manager.util.CodeHost
+import app.morphe.manager.util.GITHUB_HOST
+import app.morphe.manager.util.JSON_EXTENSION
+import app.morphe.manager.util.MORPHE_GITHUB_ORG
+import app.morphe.manager.util.SourceUrl
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
 import app.morphe.patcher.patch.PatchBundleSignature
@@ -207,7 +212,6 @@ sealed class PatchBundleSource(
         private const val MIN_PATCH_BUNDLE_BYTES = 8L
         private const val STAGING_FILE_NAME = "patches.jar.tmp"
         private const val SIGNING_KEY_FILE_NAME = "signing.key"
-        private const val JSON_EXTENSION = ".json"
         val PatchBundleSource.isDefault inline get() = uid == 0
 
         /** Header the API counts web search requests by, per source the app is patched from. */
@@ -303,6 +307,14 @@ sealed class PatchBundleSource(
             )
         }
 
+        /**
+         * Whether the source comes from Morphe itself, the preinstalled one or another repository
+         * or pull request of the project, which all wear the logo rather than the owner's avatar.
+         */
+        val PatchBundleSource.isMorpheSource: Boolean get() =
+            isDefault || (this as? RemotePatchBundle)?.let { ownerOn(it.endpoint, CodeHost.GITHUB) }
+                .equals(MORPHE_GITHUB_ORG, ignoreCase = true)
+
         /** Get custom bundle avatar URL, see [bundleAvatarUrl]. */
         val PatchBundleSource.bundleAvatarUrl: String? get() =
             (this as? RemotePatchBundle)?.let { bundleAvatarUrl(it.endpoint) }
@@ -313,9 +325,10 @@ sealed class PatchBundleSource(
          */
         fun bundleAvatarUrl(endpoint: String): String? {
             val path = endpoint.substringBefore('?').substringBefore('#')
-            if (!path.endsWith(JSON_EXTENSION, ignoreCase = true)) return null
+            val extension = ".$JSON_EXTENSION"
+            if (!path.endsWith(extension, ignoreCase = true)) return null
             // Keep the query and fragment, they can carry the credentials of a private host
-            return path.dropLast(JSON_EXTENSION.length) + ".png" + endpoint.substring(path.length)
+            return path.dropLast(extension.length) + ".png" + endpoint.substring(path.length)
         }
 
         /**
@@ -323,64 +336,28 @@ sealed class PatchBundleSource(
          * Returns null for GitLab bundles (use [gitlabAvatarUrl] instead).
          */
         val PatchBundleSource.githubAvatarUrl: String? get() =
-            (this as? RemotePatchBundle)?.let { extractGitHubOwner(it.endpoint) }?.let(::githubAvatar)
+            (this as? RemotePatchBundle)?.let { ownerOn(it.endpoint, CodeHost.GITHUB) }?.let(::githubAvatar)
 
         /**
          * Get GitLab avatar URL via unavatar.io if this bundle is from a GitLab repository.
          */
         val PatchBundleSource.gitlabAvatarUrl: String? get() =
-            (this as? RemotePatchBundle)?.let { extractGitLabOwner(it.endpoint) }?.let(::gitlabAvatar)
+            (this as? RemotePatchBundle)?.let { ownerOn(it.endpoint, CodeHost.GITLAB) }?.let(::gitlabAvatar)
 
         /**
          * Avatar of whoever owns the GitHub or GitLab repository [url] points at, for a source
          * that is not added yet. Null for any other host.
          */
         fun ownerAvatarUrl(url: String): String? =
-            extractGitHubOwner(url)?.let(::githubAvatar) ?: extractGitLabOwner(url)?.let(::gitlabAvatar)
+            ownerOn(url, CodeHost.GITHUB)?.let(::githubAvatar) ?: ownerOn(url, CodeHost.GITLAB)?.let(::gitlabAvatar)
 
-        private fun githubAvatar(owner: String) = "https://github.com/$owner.png"
+        private fun githubAvatar(owner: String) = "https://$GITHUB_HOST/$owner.png"
 
         private fun gitlabAvatar(owner: String) = "https://unavatar.io/gitlab/$owner"
 
-        /**
-         * Extract GitHub owner/organization name from endpoint URL.
-         */
-        private fun extractGitHubOwner(endpoint: String): String? {
-            return try {
-                val uri = java.net.URI(endpoint)
-                val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
-                val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
-
-                when (host) {
-                    // raw.githubusercontent.com/owner/repo/...
-                    "raw.githubusercontent.com" if segments.isNotEmpty() -> segments[0]
-
-                    // github.com/owner/repo/...
-                    "github.com" if segments.isNotEmpty() -> segments[0]
-                    else -> null
-                }
-            } catch (_: Exception) {
-                null
-            }
-        }
-
-        /**
-         * Extract GitLab owner/namespace from endpoint URL.
-         * Supports:
-         * - gitlab.com/owner/repo/-/raw/branch/file
-         * - gitlab.com/owner/repo (short form)
-         */
-        private fun extractGitLabOwner(endpoint: String): String? {
-            return try {
-                val uri = java.net.URI(endpoint)
-                val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
-                if (host != "gitlab.com") return null
-                val segments = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
-                segments.firstOrNull()
-            } catch (_: Exception) {
-                null
-            }
-        }
+        /** Owner of the repository [url] points at on [host], or null for any other host. */
+        private fun ownerOn(url: String, host: CodeHost): String? =
+            SourceUrl.parse(url)?.takeIf { it.codeHost == host }?.owner
     }
 }
 

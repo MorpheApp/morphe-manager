@@ -173,12 +173,7 @@ private fun ScrollToTopButtonImpl(
     extraBottomPadding: Dp = 0.dp
 ) {
     val scope = rememberCoroutineScope()
-    // A scroll made in code bypasses the header, so it is unfolded alongside
-    val headerCollapse = LocalDialogHeaderCollapse.current
-    val onClick: () -> Unit = {
-        scope.launch { scrollToTop() }
-        if (headerCollapse != null) scope.launch { headerCollapse.unfold() }
-    }
+    val onClick: () -> Unit = { scope.launch { scrollToTop() } }
     val a11y = rememberAccessibilityEnabled()
     val label = stringResource(R.string.accessibility_scroll_to_top)
 

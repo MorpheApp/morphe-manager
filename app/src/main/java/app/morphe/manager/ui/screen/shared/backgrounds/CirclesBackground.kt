@@ -12,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalContext
 import kotlin.math.PI
 import kotlin.math.sin
 
@@ -32,12 +31,10 @@ fun CirclesBackground(
     val primaryColor   = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
-    val context        = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.3f,
-        context = context
+        sensitivity = 0.3f
     )
 
     val time = rememberAnimatedTime(speedMultiplier)

@@ -15,7 +15,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.platform.LocalContext
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -39,12 +38,10 @@ fun MeshBackground(
     val primaryColor   = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
-    val context        = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.4f,
-        context = context
+        sensitivity = 0.4f
     )
 
     // Generate mesh grid - random offsets and Z amplitudes per node

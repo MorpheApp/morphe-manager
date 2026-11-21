@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Ekki tókst að sækja heimildir: %s</string>
     <string name="sources_download_fail_named">Ekki tókst að uppfæra \"%s\". Athugaðu nettenginguna og reyndu aftur</string>
     <string name="sources_download_endpoint_not_found">\"%s\": lýsigögn breytistillinga fundust ekki</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Upplýsingagjafar á staðbundnu netinu þínu geta ekki verið uppfærðar án leyfis fyrir tæki í nágrenni</string>
     <string name="sources_signing_key_changed_named">\'%s\' var ekki uppfært því nýjasta útgáfan er ekki undirrituð með lykilnum sem hún notaði áður</string>
     <string name="sources_signing_key_changed_local">Skráin er ekki undirrituð með lyklinum sem þessi uppspretta notaði áður. Til að treysta henni, eyddu uppsprettunni og bættu skránni aftur við</string>
     <string name="sources_signing_key_trust_title">Treysta nýjum lykli?</string>
@@ -346,8 +348,6 @@ Veldu hvaðan á að sækja APK-skrána"</string>
     <string name="home_external_apk_expert_mode_required">Þessi eiginleiki er eingöngu fáanlegur í sérfræðiham</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Leita breytistillinga</string>
-    <string name="expert_mode_disable_all">Gerðu allt óvirkt</string>
-    <string name="expert_mode_enable_all">Gerðu allt virkt</string>
     <string name="expert_mode_enable_all_universal_pending">Ýttu aftur til að velja alhliða plástra</string>
     <string name="expert_mode_universal_all_warning_title">Virkja alla alhliða plástra?</string>
     <string name="expert_mode_universal_all_warning_message">Alhliða plástrar eru ekki prófaðir saman. Að virkja alla í einu getur valdið árekstrum, mistekinni plástrun eða hruni.</string>
@@ -566,9 +566,12 @@ Til að ná bestum árangri mælir þetta app með því að breyta &lt;b&gt;hei
     <string name="app_links_unverified_banner_description">Studdir veftenglar opnast nú í vafranum þínum í staðinn fyrir þetta forrit</string>
     <string name="app_links_enable_auto">Virkja sjálfkrafa</string>
     <string name="app_links_enable_auto_in_progress">Virkja tengla…</string>
+    <string name="app_links_disable_all_in_progress">Að óvirkja tengla…</string>
     <string name="app_links_open_settings">Opna tenglastillingar</string>
     <string name="app_links_repair_success">Tenglar appsins virkjaðir</string>
     <string name="app_links_repair_failed">Mistókst að virkja app-tengla sjálfkrafa</string>
+    <string name="app_links_disable_success">Tenglar appa óvirkir</string>
+    <string name="app_links_disable_failed">Misvistik við að óvirkja tengla appa</string>
     <string name="app_links_change_failed">Mislaðistst við að breyta tenglum forritsins</string>
     <string name="app_links_all_verified">Allir studdir tenglar eru stilltir til að opnast í þessu appi</string>
     <string name="app_links_fix">Laga tengla</string>
@@ -627,8 +630,6 @@ Til að ná bestum árangri mælir þetta app með því að breyta &lt;b&gt;hei
     <string name="patcher_field_value_stripped">fjarlægð</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">varðveitt</string>
-    <string name="patcher_tab_logs">Breytingarloggar</string>
-    <string name="patcher_tab_game">Leikir</string>
     <string name="patcher_logs_waiting">Bíð eftir úttaki logga…</string>
     <string name="patcher_logs_lost">Úttak logga er ekki vistað milli endurræsinga appsins</string>
     <string name="patcher_long_step_warning">Þessi skref gætu tekið ákveðinn tíma. Vinsamlegast bíðu…</string>
@@ -658,7 +659,6 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="patcher_install_error_subtitle">Reyndu að afinstallera og setja upp aftur</string>
     <string name="patcher_ready_to_mount_subtitle">Ýttu á hnappinn hér að neðan til að festa</string>
     <string name="patcher_patches_excluded_for_installer">Ekki í boði fyrir þessa uppsetningaraðferð og útilokuð: %s</string>
-    <string name="patcher_back_to_game_hint">Ýttu á %1$s til að fara aftur í leikinn</string>
     <string name="patcher_storage_permission_dialog_title">Ekki er hægt að fá aðgang að geymsluslóð</string>
     <string name="patcher_incompatible_patcher_title">Uppfærsla nauðsynleg</string>
     <string name="patcher_incompatible_patcher_description">Uppsprettan &lt;b&gt;%1$s&lt;/b&gt; krefst plástrara &lt;b&gt;%2$s&lt;/b&gt; eða nýrri. Uppfærðu Morphe til að nota hana</string>
@@ -763,7 +763,9 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="package_name">Pakkannafn</string>
     <string name="failed_to_mount">Ekki tókst að festa: %s</string>
     <string name="failed_to_unmount">Ekki tókst að aftengja: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Hnýbilsleikir</string>
+    <string name="mini_games_description">Hröðir leikir til að fylla ónýttan tíma</string>
     <string name="mini_game_score">Stig %s</string>
     <string name="mini_game_best">Besta: %s</string>
     <string name="mini_game_new_record">Nýtt met!</string>
@@ -772,7 +774,14 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="mini_game_paused">Í bið</string>
     <string name="mini_game_resume">Halda áfram</string>
     <string name="mini_game_restart">Byrja upp á nýtt</string>
-    <string name="mini_game_change">Veldu annan leik</string>
+    <string name="mini_game_pause">Stöðva</string>
+    <string name="mini_game_score_label">Stuð</string>
+    <string name="mini_game_best_label">Besta</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Stig</string>
+    <string name="mini_game_lines">Línur</string>
+    <string name="mini_game_lives">Líf</string>
+    <string name="mini_game_flags">Fánar</string>
     <string name="mini_game_2048_picker_subtitle">Renndu flísum til að sameina</string>
     <string name="mini_game_flappy_picker_subtitle">Smelltu til að fljúga í gegnum rör</string>
     <string name="mini_game_flappy_tap_to_start">Smelltu til að fljúga</string>
@@ -1068,6 +1077,7 @@ Stærð myndanna verður að vera sem hér segir:
     <string name="installer_mount_warning_install">Plástrunarhamur er stilltur á root-tengingu. Þetta vistaða app var ekki sett upp með tengingu</string>
     <string name="mount_version_mismatch_message">Upprunaleg útgáfa appsins (%2$s) passar ekki við breytta útgáfu appsins (%1$s). Settu upp samsvarandi upprunalega útgáfu og reyndu aftur</string>
     <string name="mount_stock_restore_failed_message">Android hafnaði vistaðri upprunalegri APK. Settu upp samsvarandi upprunalega útgáfu, prófaðu síðan Tengja aftur</string>
+    <string name="mount_stock_mismatch_message">Uppsett forritið er ekki upprunalega útgáfan. Veldu upprunalega APK skrána eða settu upp upprunalega útgáfuna aftur og reyndu að festa Mount aftur</string>
     <string name="installer_status_shizuku_unsupported">Uppsett útgáfa Shizuku er ekki studd</string>
     <string name="installer_action_open_shizuku">Opna Shizuku</string>
     <string name="installer_hint_generic">Uppsetningin mistókst. Reyndu aftur eða skiptu yfir í annað uppsetningarforrit</string>
@@ -1338,13 +1348,29 @@ Nánari upplýsingar: %2$s"</string>
     <string name="file_picker_new_folder_failed">Tókst ekki að búa til möppuna</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Um</string>
-    <string name="settings_system_manager_description">Opið verkefni fyrir nútímalega og straumlínulagaða breytingu á vinsælum Android-öppum, knúið áfram af endurgjöf og framlögum samfélagsins</string>
-    <string name="credits">Viðurkenningar</string>
-    <string name="credits_description">Fólkið á bak við Morphe</string>
     <string name="settings_about_section_project">Verkefni</string>
     <string name="settings_about_section_help">Aðstoð</string>
-    <string name="credits_current_development">Núverandi þróun</string>
     <string name="credits_prior_development">Fyrri þróun</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Stjórnandi</string>
+    <string name="about_update_available">Uppfærsla tiltæk: %s</string>
+    <string name="about_up_to_date">Uppfært</string>
+    <string name="about_links">Opinberir tenglar</string>
+    <string name="about_link_donate">Styrkja</string>
+    <string name="about_link_website">Vefsíða</string>
+    <string name="about_link_translations">Þýðingar</string>
+    <string name="contributors">Samstarfsmenn</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Alltaf</string>
+    <string name="contributors_6_months">6 mánuðir</string>
+    <string name="contributors_3_months">3 mánuðir</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Stuðningsmenn</string>
+    <string name="supporters_description">Stuðningsmenn á Open Collective</string>
+    <string name="supporters_become">Verðu stuðningsmaður</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Og %s fleiri</string>
+    <string name="people_unavailable">Gat ekki hlaðið listanum</string>
     <string name="opensource_licenses">Leyfi opins hugbúnaðar</string>
     <string name="opensource_licenses_description">Bókasafnin sem Morphe er byggt á</string>
     <string name="opensource_licenses_search">Leita í bókasöfnum og leyfum</string>
@@ -1414,6 +1440,8 @@ Nánari upplýsingar: %2$s"</string>
     <string name="include">Taka með</string>
     <string name="disable">Gerðu óvirkt</string>
     <string name="enable">Gerðu virkt</string>
+    <string name="enable_all">Virkja öll</string>
+    <string name="disable_all">Slökkva á öllu</string>
     <string name="trust">Treysta</string>
     <string name="loading">Hlaða…</string>
     <string name="creating">Búa til…</string>

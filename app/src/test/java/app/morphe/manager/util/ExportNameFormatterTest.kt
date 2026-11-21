@@ -5,6 +5,9 @@
 
 package app.morphe.manager.util
 
+import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.data.room.apps.installed.InstalledApp
+import app.morphe.manager.data.room.apps.installed.SelectionPayload
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,13 +17,14 @@ import kotlin.test.assertEquals
  * to stay paired with the version it patched with.
  */
 class ExportNameFormatterTest {
-    private fun name(vararg sources: PatchSourceRef, appName: String? = "YouTube Morphe") =
+    private fun name(vararg sources: PatchSourceRef, appName: String? = "YouTube Morphe", isClone: Boolean = false) =
         ExportNameFormatter.format(
-            PatchedAppExportData(
+            ApkExportData(
                 appName = appName,
                 packageName = "app.morphe.android.youtube",
                 appVersion = "21.16.256",
-                sources = sources.toList()
+                sources = sources.toList(),
+                isClone = isClone
             )
         )
 
@@ -61,6 +65,34 @@ class ExportNameFormatterTest {
     @Test
     fun `leaves sources out when there are none`() {
         assertEquals("YouTube_Morphe-v21.16.256.apk", name())
+    }
+
+    @Test
+    fun `marks a clone apart from the app it was built from`() {
+        assertEquals(
+            "YouTube_Morphe-clone-v21.16.256-Morphe_Patches-v1.48.0.apk",
+            name(PatchSourceRef("Morphe Patches", "1.48.0"), isClone = true)
+        )
+    }
+
+    @Test
+    fun `names a saved build after the sources it was patched with`() {
+        val app = InstalledApp(
+            currentPackageName = "app.morphe.android.youtube.clone",
+            originalPackageName = "com.google.android.youtube",
+            version = "21.16.256",
+            installType = InstallType.SAVED,
+            selectionPayload = SelectionPayload(
+                listOf(
+                    SelectionPayload.BundleSelection(1, listOf("A"), bundleName = "Morphe Patches", bundleVersion = "1.48.0"),
+                    // Recorded before sources were, so there is nothing to name it by
+                    SelectionPayload.BundleSelection(2, listOf("B"))
+                )
+            ),
+            appLabel = "YouTube Morphe",
+            isClone = true
+        )
+        assertEquals("YouTube_Morphe-clone-v21.16.256-Morphe_Patches-v1.48.0.apk", app.exportFileName())
     }
 
     @Test

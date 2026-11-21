@@ -6,7 +6,7 @@
     <string name="home_not_patched_yet">Δεν τροποποιήθηκε ακόμη</string>
     <string name="home_unpatched_version_installed">Εγκαταστάθηκε η μη τροποποιημένη έκδοση</string>
     <string name="home_app_status_newer_version">Ενημέρωση σε %s</string>
-    <string name="home_app_status_newer_patches">Νέα διορθώματα</string>
+    <string name="home_app_status_newer_patches">Νέες τροποποιήσεις</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Τηλεόραση</string>
     <string name="form_factor_automotive">Αυτοκίνητο</string>
@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Αποτυχία λήψης πηγών: %s</string>
     <string name="sources_download_fail_named">Το \'%s\' δεν μπόρεσε να ενημερωθεί. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και προσπαθήστε ξανά</string>
     <string name="sources_download_endpoint_not_found">\'%s\': δεν βρέθηκαν μεταδεδομένα ενημέρωσης</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Οι πηγές στο τοπικό σας δίκτυο δεν μπορούν να ενημερωθούν χωρίς την άδεια για Συσκευές πλησίον</string>
     <string name="sources_signing_key_changed_named">Το \'%s\' δεν ενημερώθηκε επειδή η τελευταία του έκδοση δεν είναι υπογεγραμμένη με το κλειδί που χρησιμοποιούσε προηγουμένως</string>
     <string name="sources_signing_key_changed_local">Το αρχείο δεν είναι υπογεγραμμένο με το κλειδί που χρησιμοποιούσε αυτή η πηγή προηγουμένως. Για να το εμπιστευτείτε, διαγράψτε την πηγή και προσθέστε ξανά το αρχείο</string>
     <string name="sources_signing_key_trust_title">Να εμπιστευτείτε το νέο κλειδί;</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">Αυτή η λειτουργία είναι διαθέσιμη μόνο στην Εξειδικευμένη λειτουργία</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Αναζήτηση τροποποιήσεων</string>
-    <string name="expert_mode_disable_all">Απενεργοποίηση όλων</string>
-    <string name="expert_mode_enable_all">Ενεργοποίηση όλων</string>
     <string name="expert_mode_enable_all_universal_pending">Πατήστε ξανά για καθολικά patches</string>
     <string name="expert_mode_universal_all_warning_title">Ενεργοποίηση όλων των καθολικών επιδιορθώσεων;</string>
     <string name="expert_mode_universal_all_warning_message">Οι καθολικές επιδιορθώσεις δεν δοκιμάζονται μαζί. Η ενεργοποίηση όλων ταυτόχρονα μπορεί να προκαλέσει συγκρούσεις, αποτυχία επιδιόρθωσης ή σφάλματα</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">Οι υποστηριζόμενοι σύνδεσμοι ιστού ανοίγουν αυτήν τη στιγμή στο πρόγραμμα περιήγησής σας αντί για αυτήν την εφαρμογή</string>
     <string name="app_links_enable_auto">Αυτόματη ενεργοποίηση</string>
     <string name="app_links_enable_auto_in_progress">Ενεργοποίηση συνδέσμων…</string>
+    <string name="app_links_disable_all_in_progress">Απενεργοποίηση συνδέσμων…</string>
     <string name="app_links_open_settings">Άνοιγμα ρυθμίσεων συνδέσμων</string>
     <string name="app_links_repair_success">Οι σύνδεσμοι εφαρμογής ενεργοποιήθηκαν με επιτυχία</string>
     <string name="app_links_repair_failed">Αποτυχία αυτόματης ενεργοποίησης των συνδέσμων εφαρμογής</string>
+    <string name="app_links_disable_success">Οι σύνδεσμοι εφαρμογής απενεργοποιήθηκαν</string>
+    <string name="app_links_disable_failed">Απέτυχε η απενεργοποίηση των συνδέσμων εφαρμογής</string>
     <string name="app_links_change_failed">Αποτυχία αλλαγής συνδέσμων εφαρμογής</string>
     <string name="app_links_all_verified">Όλοι οι υποστηριζόμενοι σύνδεσμοι έχουν ρυθμιστεί να ανοίγουν σε αυτήν την εφαρμογή</string>
     <string name="app_links_fix">Διόρθωση συνδέσμων</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">αφαιρέθηκαν</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">διατηρήθηκαν</string>
-    <string name="patcher_tab_logs">Καταγραφές Patcher</string>
-    <string name="patcher_tab_game">Παιχνίδια</string>
     <string name="patcher_logs_waiting">Αναμονή για έξοδο καταγραφής…</string>
     <string name="patcher_logs_lost">Η έξοδος καταγραφής δεν διατηρείται κατά την επανεκκίνηση της εφαρμογής</string>
     <string name="patcher_long_step_warning">Αυτό το βήμα μπορεί να διαρκέσει λίγο. Παρακαλώ περιμένετε…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">Δοκιμάστε να απεγκαταστήσετε και να εγκαταστήσετε ξανά</string>
     <string name="patcher_ready_to_mount_subtitle">Πατήστε το παρακάτω κουμπί για προσάρτηση</string>
     <string name="patcher_patches_excluded_for_installer">Δεν είναι διαθέσιμο για αυτήν τη μέθοδο εγκατάστασης και εξαιρέθηκε: %s</string>
-    <string name="patcher_back_to_game_hint">Πάτα %1$s για να επιστρέψεις στο παιχνίδι σου</string>
     <string name="patcher_storage_permission_dialog_title">Δεν είναι δυνατή η πρόσβαση στη διαδρομή αποθηκευτικού χώρου</string>
     <string name="patcher_incompatible_patcher_title">Απαιτείται ενημέρωση</string>
     <string name="patcher_incompatible_patcher_description">Η πηγή &lt;b&gt;%1$s&lt;/b&gt; απαιτεί τον patcher &lt;b&gt;%2$s&lt;/b&gt; ή νεότερο. Ενημερώστε το Morphe για να τον χρησιμοποιήσει</string>
@@ -764,7 +764,9 @@
     <string name="package_name">Όνομα πακέτου</string>
     <string name="failed_to_mount">Αδυναμία προσάρτησης: %s</string>
     <string name="failed_to_unmount">Αποτυχία αποπροσάρτησης: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Μίνι παιχνίδια</string>
+    <string name="mini_games_description">Γρήγορα παιχνίδια για να περάσετε το χρόνο</string>
     <string name="mini_game_score">Βαθμολογία %s</string>
     <string name="mini_game_best">Καλύτερη %s</string>
     <string name="mini_game_new_record">Νέο ρεκόρ!</string>
@@ -773,7 +775,14 @@
     <string name="mini_game_paused">Σε παύση</string>
     <string name="mini_game_resume">Συνέχεια</string>
     <string name="mini_game_restart">Ξεκινήστε από την αρχή</string>
-    <string name="mini_game_change">Επιλέξτε άλλο παιχνίδι</string>
+    <string name="mini_game_pause">Παύση</string>
+    <string name="mini_game_score_label">Σκορ</string>
+    <string name="mini_game_best_label">Καλύτερο</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Επίπεδο</string>
+    <string name="mini_game_lines">Γραμμές</string>
+    <string name="mini_game_lives">Ζωές</string>
+    <string name="mini_game_flags">Σημαίες</string>
     <string name="mini_game_2048_picker_subtitle">Σύρετε τα πλακίδια για να τα συγχωνεύσετε</string>
     <string name="mini_game_flappy_picker_subtitle">Πατήστε για να πετάξετε ανάμεσα από τους σωλήνες</string>
     <string name="mini_game_flappy_tap_to_start">Πατήστε για να πετάξετε</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Ο τρόπος τροποποίησης είναι ορισμένος σε root mount. Αυτή η αποθηκευμένη εφαρμογή δεν εγκαταστάθηκε χρησιμοποιώντας mount</string>
     <string name="mount_version_mismatch_message">Η έκδοση της αρχικής ανεπεξέργαστης εφαρμογής (%2$s) δεν ταιριάζει με την έκδοση της τροποποιημένης εφαρμογής (%1$s). Προσαρτήστε την αρχική ανεπεξέργαστη έκδοση της εφαρμογής, και μετά προσπαθήστε ξανά.</string>
     <string name="mount_stock_restore_failed_message">Το Android απέρριψε το αρχικό APK που αποθηκεύτηκε. Εγκαταστήστε την αντίστοιχη αρχική έκδοση, στη συνέχεια δοκιμάστε να προσαρτήσετε ξανά</string>
+    <string name="mount_stock_mismatch_message">Η εγκατεστημένη εφαρμογή δεν είναι η αρχική. Επιλέξτε το αρχικό APK ή επανεγκαταστήστε την έκδοση εργοστασίου και στη συνέχεια δοκιμάστε ξανά το Mount</string>
     <string name="installer_status_shizuku_unsupported">Η εγκατεστημένη έκδοση του Shizuku δεν υποστηρίζεται.</string>
     <string name="installer_action_open_shizuku">Άνοιγμα Shizuku</string>
     <string name="installer_hint_generic">Η εγκατάσταση απέτυχε. Προσπαθήστε ξανά ή χρησιμοποιήστε διαφορετικό εγκαταστάτη.</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Δεν ήταν δυνατή η δημιουργία του φακέλου</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Πληροφορίες</string>
-    <string name="settings_system_manager_description">Ένα έργο ανοικτού κώδικα για σύγχρονο, αποτελεσματικό patching δημοφιλών εφαρμογών Android, με γνώμονα τα σχόλια και τις συνεισφορές της κοινότητας</string>
-    <string name="credits">Εύσημα</string>
-    <string name="credits_description">Τα πρόσωπα πίσω από το Morphe</string>
     <string name="settings_about_section_project">Έργο</string>
     <string name="settings_about_section_help">Βοήθεια</string>
-    <string name="credits_current_development">Τρέχουσα ανάπτυξη</string>
     <string name="credits_prior_development">Προηγούμενη ανάπτυξη</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Διαχειριστής</string>
+    <string name="about_update_available">Διαθέσιμη ενημέρωση: %s</string>
+    <string name="about_up_to_date">Ενημερωμένο</string>
+    <string name="about_links">Επίσημοι σύνδεσμοι</string>
+    <string name="about_link_donate">Δωρεά</string>
+    <string name="about_link_website">Ιστοσελίδα</string>
+    <string name="about_link_translations">Μεταφράσεις</string>
+    <string name="contributors">Συνεισφέροντες</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Όλος ο χρόνος</string>
+    <string name="contributors_6_months">6 μήνες</string>
+    <string name="contributors_3_months">3 μήνες</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Υποστηρικτές</string>
+    <string name="supporters_description">Χρηματοδότες στο Open Collective</string>
+    <string name="supporters_become">Γίνετε υποστηρικτής</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Και άλλοι %s</string>
+    <string name="people_unavailable">Δεν ήταν δυνατή η φόρτωση της λίστας</string>
     <string name="opensource_licenses">Άδειες ανοικτού κώδικα</string>
     <string name="opensource_licenses_description">Βιβλιοθήκες στις οποίες βασίζεται το Morphe</string>
     <string name="opensource_licenses_search">Αναζήτηση βιβλιοθηκών και αδειών</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">Συμπερίληψη</string>
     <string name="disable">Απενεργοποίηση</string>
     <string name="enable">Ενεργοποίηση</string>
+    <string name="enable_all">Ενεργοποίηση όλων</string>
+    <string name="disable_all">Απενεργοποίηση όλων</string>
     <string name="trust">Εμπιστοσύνη</string>
     <string name="loading">Φόρτωση…</string>
     <string name="creating">Δημιουργία…</string>

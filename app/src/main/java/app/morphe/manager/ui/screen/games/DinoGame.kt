@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -65,24 +65,14 @@ data class DinoCloud(
 class DinoGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     var dinoJump by mutableFloatStateOf(0f)  // upward offset from ground, fraction of canvas height
         private set
     var velocity by mutableFloatStateOf(0f)
         private set
     var obstacles by mutableStateOf<List<DinoObstacle>>(emptyList())
         private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
     var legPhase by mutableIntStateOf(0)
-        private set
-    override var isPaused by mutableStateOf(false)
         private set
     var seagulls by mutableStateOf<List<DinoSeagull>>(emptyList())
         private set
@@ -185,10 +175,7 @@ class DinoGameState(
         dinoJump = 0f
         velocity = 0f
         obstacles = emptyList()
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
         lastTickMs = 0L
         lastObstacleMs = 0L
         distanceTraveled = 0f
@@ -203,10 +190,10 @@ class DinoGameState(
         lastCloudMs = 0L
     }
 
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false; lastTickMs = 0L }
+    override fun resume() {
+        super.resume()
+        lastTickMs = 0L
+    }
 }
 
 @Composable

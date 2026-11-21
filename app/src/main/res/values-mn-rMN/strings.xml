@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Эх сурвалжийг татаж авахад алдаа гарлаа: %s</string>
     <string name="sources_download_fail_named">\'%s\'-ийг шинэчилж чадсангүй. Интернетийн холболтоо шалгаад дахин оролдоно уу</string>
     <string name="sources_download_endpoint_not_found">\'%s\': патчийн мета өгөгдөл олдсонгүй</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Ойр тутмын төхөөрөмжийн зөвшөөрөлгүйгээр таны дотоод сүлжээн дэх эх сурвалжуудыг шинэчлэх боломжгүй</string>
     <string name="sources_signing_key_changed_named">\'%s\'-ийн хамгийн сүүлийн хувилбар нь өмнө нь ашиглаж байсан түлхүүрээр гарын үсэг зураагүй тул шинэчлэгдээгүй байна</string>
     <string name="sources_signing_key_changed_local">Файл нь энэ эх сурвалжийн өмнө нь ашиглаж байсан түлхүүрээр гарын үсэг зураагүй байна. Үүнийг итгэх бол эх сурвалжийг устгаад файлыг дахин нэмнэ үү</string>
     <string name="sources_signing_key_trust_title">Шинэ түлхүүрийг итгэх үү?</string>
@@ -346,8 +348,6 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_external_apk_expert_mode_required">Энэхүү функц нь зөвхөн Эксперт горимд боломжтой</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Патч хайх</string>
-    <string name="expert_mode_disable_all">Бүгдийг идэвхгүй болгох</string>
-    <string name="expert_mode_enable_all">Бүгдийг идэвхжүүлэх</string>
     <string name="expert_mode_enable_all_universal_pending">Универсал патчуудыг идэвхжүүлэхийн тулд дахин дарна уу</string>
     <string name="expert_mode_universal_all_warning_title">Бүх универсал патчуудыг идэвхжүүлэх үү?</string>
     <string name="expert_mode_universal_all_warning_message">Түгээмэл патчуудыг хамтдаа туршиж үзээгүй. Бүгдийг нь нэгэн зэрэг идэвхжүүлбэл зөрчил үүсэх, патчлах үйлдэл амжилтгүй болох эсвэл апп гацаж магадгүй</string>
@@ -567,9 +567,12 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="app_links_unverified_banner_description">Дэмжигдсэн веб холбоосууд одоогоор энэ аппликейшний оронд таны хөтөч дээр нээгдэж байна</string>
     <string name="app_links_enable_auto">Автоматаар идэвхжүүлэх</string>
     <string name="app_links_enable_auto_in_progress">Холбоосуудыг идэвхжүүлж байна…</string>
+    <string name="app_links_disable_all_in_progress">Холбоосыг идэвхгүй болгож байна…</string>
     <string name="app_links_open_settings">Холбоосыг нээх тохиргоо</string>
     <string name="app_links_repair_success">Апп-ын холбоосууд амжилттай идэвхжлээ</string>
     <string name="app_links_repair_failed">Апп-ын холбоосуудыг автоматаар идэвхжүүлж чадсангүй</string>
+    <string name="app_links_disable_success">Аппликейшны холбоосыг идэвхгүй болголоо</string>
+    <string name="app_links_disable_failed">Аппликейшны холбоосыг идэвхгүй болгож чадсангүй</string>
     <string name="app_links_change_failed">Апп холбоосыг өөрчлөхөд алдаа гарлаа</string>
     <string name="app_links_all_verified">Дэмжигдсэн бүх холбоосууд энэ аппликейшн дээр нээгдэхээр тохируулагдсан байна</string>
     <string name="app_links_fix">Холбоосуудыг засах</string>
@@ -628,8 +631,6 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patcher_field_value_stripped">хассан</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">үлдсэн</string>
-    <string name="patcher_tab_logs">Патчерийн лог</string>
-    <string name="patcher_tab_game">Тоглоомууд</string>
     <string name="patcher_logs_waiting">Лог гаралтыг хүлээж байна…</string>
     <string name="patcher_logs_lost">Лог бүртгэлийг аппликейшн дахин ачааллахад хадгалахгүй</string>
     <string name="patcher_long_step_warning">Энэ алхамд хэсэг хугацаа шаардлагатай байж магадгүй. Түр хүлээнэ үү…</string>
@@ -659,7 +660,6 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patcher_install_error_subtitle">Устгаад дахин суурилуулахыг оролдоно уу</string>
     <string name="patcher_ready_to_mount_subtitle">Mount хийхийн тулд доорх товчийг дарна уу</string>
     <string name="patcher_patches_excluded_for_installer">Суулгах энэ аргад боломжгүй бөгөөд хасагдсан: %s</string>
-    <string name="patcher_back_to_game_hint">Тоглоомоо руу буцахын тулд %1$s дээр товшино уу</string>
     <string name="patcher_storage_permission_dialog_title">Хадгалах сангийн замад хандах боломжгүй байна</string>
     <string name="patcher_incompatible_patcher_title">Шинэчлэл шаардлагатай</string>
     <string name="patcher_incompatible_patcher_description">Эх сурвалж &lt;b&gt;%1$s&lt;/b&gt; нь &lt;b&gt;%2$s&lt;/b&gt; эсвэл түүнээс шинэхэн патчер шаардана. Үүнийг ашиглахын тулд Morphe-ийг шинэчлээрэй</string>
@@ -764,7 +764,9 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="package_name">Багцын нэр</string>
     <string name="failed_to_mount">Холбоход алдаа гарлаа: %s</string>
     <string name="failed_to_unmount">Салгахад алдаа гарлаа: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Мини-тоглоомууд</string>
+    <string name="mini_games_description">Чөлөөт цагаа өнгөрүүлэх хурдан тоглоомууд</string>
     <string name="mini_game_score">Оноо %s</string>
     <string name="mini_game_best">Шилдэг %s</string>
     <string name="mini_game_new_record">Шинэ дээд амжилт!</string>
@@ -773,7 +775,14 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="mini_game_paused">Түр зогсолтод орлоо</string>
     <string name="mini_game_resume">Үргэлжлүүлэх</string>
     <string name="mini_game_restart">Эхнээсээ эхлэх</string>
-    <string name="mini_game_change">Өөр тоглоом сонгох</string>
+    <string name="mini_game_pause">Түр зогсоох</string>
+    <string name="mini_game_score_label">Оноо</string>
+    <string name="mini_game_best_label">Шилдэг</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Түвшин</string>
+    <string name="mini_game_lines">Мөр</string>
+    <string name="mini_game_lives">Ами</string>
+    <string name="mini_game_flags">Тулга</string>
     <string name="mini_game_2048_picker_subtitle">Нэгтгэхийн тулд хавтаснуудыг гүйлгэ</string>
     <string name="mini_game_flappy_picker_subtitle">Хоолойгоор нисэхийн тулд товшо</string>
     <string name="mini_game_flappy_tap_to_start">Нисэхийн тулд товшо</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Патчлах горим root mount болгож тохируулагдсан байна. Хадгалагдсан энэ аппликейшн mount ашиглан суулгагдаагүй байна</string>
     <string name="mount_version_mismatch_message">Үндсэн апп-ны хувилбар (%2$s) нь патч хийсэн апп-ны хувилбартай (%1$s) тохирохгүй байна. Тохирох үндсэн хувилбарыг mount хийгээд дахин оролдоно уу</string>
     <string name="mount_stock_restore_failed_message">Android хадгалсан эх APK-г татгалзлаа. Тохирох стандарт хувилбарыг суулгаад, Mount-ийг дахин оролдоно уу</string>
+    <string name="mount_stock_mismatch_message">Суурилуулсан аппликейшн нь эх хувилбар биш байна. Эх APK-г сонгох эсвэл үйлдвэрийн хувилбарыг дахин суулгаад Mount-ийг дахин оролдоно уу</string>
     <string name="installer_status_shizuku_unsupported">Суулгасан Shizuku хувилбар дэмжигдэхгүй байна</string>
     <string name="installer_action_open_shizuku">Shizuku-г нээх</string>
     <string name="installer_hint_generic">Суурилуулалт амжилтгүй боллоо. Дахин оролдох эсвэл өөр суурилуулагч сонгоно уу</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Хавтсыг үүсгэж чадсангүй</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Тухай</string>
-    <string name="settings_system_manager_description">Нийгэмлэгийн санал хүсэлт, хувь нэмэр дээр суурилсан, Android-ын түгээмэл аппликейшнуудыг орчин үеийн, оновчтой аргаар патчлах нээлттэй эх сурвалж бүхий төсөл</string>
-    <string name="credits">Зохиогчид</string>
-    <string name="credits_description">Morphe-ийг бүтээгчид</string>
     <string name="settings_about_section_project">Төсөл</string>
     <string name="settings_about_section_help">Тусламж</string>
-    <string name="credits_current_development">Одоогийн хөгжүүлэлт</string>
     <string name="credits_prior_development">Өмнөх хөгжүүлэлт</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Менежер</string>
+    <string name="about_update_available">Шинэчлэл бэлэн: %s</string>
+    <string name="about_up_to_date">Шинэчлэгдсэн</string>
+    <string name="about_links">Албан ёсны холбоосууд</string>
+    <string name="about_link_donate">Хандивлах</string>
+    <string name="about_link_website">Вэбсайт</string>
+    <string name="about_link_translations">Орчуулга</string>
+    <string name="contributors">Зуравдлагчид</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Бүх цаг хугацаа</string>
+    <string name="contributors_6_months">6 сар</string>
+    <string name="contributors_3_months">3 сар</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Дэмжигчид</string>
+    <string name="supporters_description">Open Collective-ийн дэмжигчид</string>
+    <string name="supporters_become">Дэмжигч болох</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Ба бусад %s хүн</string>
+    <string name="people_unavailable">Жагсаалтыг ачаалж чадсангүй</string>
     <string name="opensource_licenses">Нээлттэй эх сурвалжийн лицензүүд</string>
     <string name="opensource_licenses_description">Morphe-ийн суурь болсон сангууд</string>
     <string name="opensource_licenses_search">Сангууд болон лицензүүдийг хайх</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">Оруулах</string>
     <string name="disable">Идэвхгүй болгох</string>
     <string name="enable">Идэвхжүүлэх</string>
+    <string name="enable_all">Бүгдийг идэвхжүүлэх</string>
+    <string name="disable_all">Бүгдийг идэвхгүй болгох</string>
     <string name="trust">Итгэх</string>
     <string name="loading">Уншиж байна…</string>
     <string name="creating">Үүсгэж байна…</string>

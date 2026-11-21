@@ -168,11 +168,7 @@ class SessionInstaller(private val app: Application) {
                                 override fun onReceive(context: Context, intent: Intent) {
                                     if (intent.getIntExtra(EXTRA_SESSION_ID, -1) != sessionId) return
 
-                                    val status = intent.getIntExtra(
-                                        PackageInstaller.EXTRA_STATUS,
-                                        PackageInstaller.STATUS_FAILURE
-                                    )
-                                    val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                                    val (status, message) = InstallerStatus.from(intent)
                                     Log.d(TAG, "Session $sessionId status=$status message=$message")
 
                                     when (status) {
@@ -399,11 +395,7 @@ class SessionInstaller(private val app: Application) {
             override fun onReceive(context: Context, intent: Intent) {
                 if (intent.getIntExtra(EXTRA_UNINSTALL_REQUEST_ID, -1) != requestId) return
 
-                val status = intent.getIntExtra(
-                    PackageInstaller.EXTRA_STATUS,
-                    PackageInstaller.STATUS_FAILURE
-                )
-                val message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE)
+                val (status, message) = InstallerStatus.from(intent)
                 Log.d(TAG, "Uninstall $packageName status=$status message=$message")
 
                 when (status) {

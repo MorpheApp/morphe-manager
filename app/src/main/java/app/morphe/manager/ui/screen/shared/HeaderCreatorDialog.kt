@@ -12,7 +12,6 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -282,21 +281,16 @@ private fun HeaderEditor(
     val selectImage = stringResource(R.string.adaptive_icon_select_image)
     val shape = RoundedCornerShape(Defaults.CornerMedium)
 
-    val input = if (picture != null) {
-        Modifier.imageTransformGestures(
-            transform = transform,
-            scaleRange = MIN_SCALE..MAX_SCALE,
-            onTransformChange = onTransformChange,
-            onGestureChange = { isGesturing.value = it }
-        )
-    } else {
-        Modifier.clickable(
-            interactionSource = null,
-            indication = shapedIndication(shape),
-            onClickLabel = selectImage,
-            onClick = onSelectImage
-        )
-    }
+    val input = Modifier.imageEditorInput(
+        hasImage = picture != null,
+        transform = transform,
+        scaleRange = MIN_SCALE..MAX_SCALE,
+        shape = shape,
+        selectLabel = selectImage,
+        onTransformChange = onTransformChange,
+        onGestureChange = { isGesturing.value = it },
+        onSelectImage = onSelectImage
+    )
 
     Box(
         modifier = Modifier
@@ -449,7 +443,7 @@ private suspend fun createHeaderFiles(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        Log.e(tag, "Failed to create header images", e)
+        Log.e(LOG_TAG, "Failed to create header images", e)
         null
     }
 }

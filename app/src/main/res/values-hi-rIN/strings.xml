@@ -245,6 +245,8 @@
     <string name="sources_download_fail">स्रोत डाउनलोड करने में विफल हो गया: %s</string>
     <string name="sources_download_fail_named">\'%s\' को अपडेट नहीं किया जा सका। अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें।</string>
     <string name="sources_download_endpoint_not_found">\'%s\': पैच मेटाडेटा नहीं मिला।</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Nearby devices अनुमति के बिना आपके स्थानीय नेटवर्क पर मौजूद सोर्स को अपडेट नहीं किया जा सकता</string>
     <string name="sources_signing_key_changed_named">\'%s\' को अपडेट नहीं किया गया क्योंकि इसकी नवीनतम रिलीज़ उस कुंजी से हस्ताक्षरित नहीं है जिसका इसने पहले उपयोग किया था</string>
     <string name="sources_signing_key_changed_local">फ़ाइल उस कुंजी द्वारा हस्ताक्षरित नहीं है जिसे इस स्रोत ने पहले उपयोग किया था। इस पर भरोसा करने के लिए, स्रोत को हटा दें और फ़ाइल को फिर से जोड़ें</string>
     <string name="sources_signing_key_trust_title">क्या आप नई कुंजी पर भरोसा करते हैं?</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">यह सुविधा केवल विशेषज्ञ मोड में उपलब्ध है</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">पैच खोजें</string>
-    <string name="expert_mode_disable_all">सभी को असक्षम करें</string>
-    <string name="expert_mode_enable_all">सभी को सक्षम करें</string>
     <string name="expert_mode_enable_all_universal_pending">यूनिवर्सल पैच के लिए फिर से टैप करें</string>
     <string name="expert_mode_universal_all_warning_title">क्या सभी यूनिवर्सल पैच सक्षम करें?</string>
     <string name="expert_mode_universal_all_warning_message">यूनिवर्सल पैच एक साथ परीक्षण नहीं किए गए हैं। उन सभी को एक साथ सक्षम करने से टकराव, विफल पैचिंग या क्रैश हो सकते हैं</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">समर्थित वेब लिंक वर्तमान में इस ऐप के बजाय आपके ब्राउज़र में खुलते हैं</string>
     <string name="app_links_enable_auto">अपने आप चालू करें</string>
     <string name="app_links_enable_auto_in_progress">लिंक चालू किए जा रहे हैं…</string>
+    <string name="app_links_disable_all_in_progress">लिंक अक्षम किए जा रहे हैं…</string>
     <string name="app_links_open_settings">लिंक सेटिंग खोलें</string>
     <string name="app_links_repair_success">ऐप लिंक सफलतापूर्वक चालू हो गए</string>
     <string name="app_links_repair_failed">ऐप लिंक अपने आप चालू नहीं हो सके</string>
+    <string name="app_links_disable_success">ऐप लिंक अक्षम कर दिए गए</string>
+    <string name="app_links_disable_failed">ऐप लिंक अक्षम करने में विफल</string>
     <string name="app_links_change_failed">ऐप लिंक बदलने में विफल</string>
     <string name="app_links_all_verified">सभी सपोर्टेड लिंक इस ऐप में खुलने के लिए सेट हैं</string>
     <string name="app_links_fix">लिंक ठीक करें</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">हटाई गईं</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">रखी गईं</string>
-    <string name="patcher_tab_logs">पैचर लॉग</string>
-    <string name="patcher_tab_game">खेल</string>
     <string name="patcher_logs_waiting">लॉग आउटपुट की प्रतीक्षा की जा रही है…</string>
     <string name="patcher_logs_lost">ऐप रीस्टार्ट होने पर लॉग आउटपुट सहेजा नहीं जाता है</string>
     <string name="patcher_long_step_warning">यह चरण कुछ समय ले सकता है। कृपया प्रतीक्षा करें…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">अनइंस्टॉल करके फिर से इंस्टॉल करने का प्रयास करें</string>
     <string name="patcher_ready_to_mount_subtitle">माउंट करने के लिए नीचे दिया बटन दबाएँ</string>
     <string name="patcher_patches_excluded_for_installer">यह इंस्टॉलेशन विधि के लिए उपलब्ध नहीं है और इसे बाहर रखा गया है: %s</string>
-    <string name="patcher_back_to_game_hint">अपने गेम पर वापस जाने के लिए %1$s टैप करें</string>
     <string name="patcher_storage_permission_dialog_title">स्टोरेज पथ तक पहुँच नहीं हो सकती</string>
     <string name="patcher_incompatible_patcher_title">अपडेट आवश्यक है</string>
     <string name="patcher_incompatible_patcher_description">सोर्स &lt;b&gt;%1$s&lt;/b&gt; के लिए पैचर &lt;b&gt;%2$s&lt;/b&gt; या उससे नया वर्शन चाहिए। इसका इस्तेमाल करने के लिए Morphe को अपडेट करें।</string>
@@ -764,7 +764,9 @@
     <string name="package_name">पैकेज नाम</string>
     <string name="failed_to_mount">%s को माउंट करने में विफल</string>
     <string name="failed_to_unmount">%s को अनमाउंट करने में विफल।</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">मिनी-गेम्स</string>
+    <string name="mini_games_description">खाली समय बिताने के लिए त्वरित गेम</string>
     <string name="mini_game_score">स्कोर %s</string>
     <string name="mini_game_best">सर्वश्रेष्ठ %s</string>
     <string name="mini_game_new_record">नया रिकॉर्ड!</string>
@@ -773,7 +775,14 @@
     <string name="mini_game_paused">विराम</string>
     <string name="mini_game_resume">जारी रखें</string>
     <string name="mini_game_restart">शुरू से खेलें</string>
-    <string name="mini_game_change">कोई दूसरा गेम चुनें</string>
+    <string name="mini_game_pause">रोकें</string>
+    <string name="mini_game_score_label">स्कोर</string>
+    <string name="mini_game_best_label">सर्वश्रेष्ठ</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">लेवल</string>
+    <string name="mini_game_lines">लाइन्स</string>
+    <string name="mini_game_lives">जीवन</string>
+    <string name="mini_game_flags">झंडे</string>
     <string name="mini_game_2048_picker_subtitle">टाइल्स को मर्ज करने के लिए स्लाइड करें</string>
     <string name="mini_game_flappy_picker_subtitle">पाइपों के बीच से उड़ने के लिए टैप करें</string>
     <string name="mini_game_flappy_tap_to_start">उड़ने के लिए टैप करें</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">पैच मोड को रूट माउंट पर सेट किया गया है। यह सेव किया गया ऐप माउंट का उपयोग करके इंस्टॉल नहीं किया गया था</string>
     <string name="mount_version_mismatch_message">स्टॉक ऐप संस्करण (%2$s) पैच किए गए ऐप संस्करण (%1$s) से मेल नहीं खाता। मेल खाने वाला स्टॉक संस्करण माउंट करें, फिर से प्रयास करें।</string>
     <string name="mount_stock_restore_failed_message">Android ने सहेजे गए मूल APK को अस्वीकार कर दिया है। मिलान करने वाले स्टॉक संस्करण को इंस्टॉल करें, फिर माउंट करने का प्रयास करें।</string>
+    <string name="mount_stock_mismatch_message">इंस्टॉल किया गया ऐप मूल नहीं है। मूल APK चुनें या स्टॉक वर्ज़न को फिर से इंस्टॉल करें, और फिर दोबारा Mount करने का प्रयास करें</string>
     <string name="installer_status_shizuku_unsupported">इंस्टॉल किया गया शिज़ुकू वर्जन समर्थित नहीं है</string>
     <string name="installer_action_open_shizuku">Shizuku खोलें</string>
     <string name="installer_hint_generic">इंस्टॉलेशन विफल रही. पुन: प्रयास करें या अलग इंस्टॉलर का उपयोग करें।</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">फ़ोल्डर नहीं बनाया जा सका</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Morphe के बारे में</string>
-    <string name="settings_system_manager_description">यह एक ओपन-सोर्स परियोजना है जो लोकप्रिय एंड्रॉइड ऐप्स के आधुनिक, सुव्यवस्थित पैचिंग के लिए है, जो सामुदायिक प्रतिक्रिया और योगदान से प्रेरित है</string>
-    <string name="credits">क्रेडिट</string>
-    <string name="credits_description">Morphe के पीछे के लोग</string>
     <string name="settings_about_section_project">परियोजना</string>
     <string name="settings_about_section_help">सहायता</string>
-    <string name="credits_current_development">वर्तमान विकास</string>
     <string name="credits_prior_development">पिछला विकास</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">मैनेजर</string>
+    <string name="about_update_available">अपडेट उपलब्ध है: %s</string>
+    <string name="about_up_to_date">अप टू डेट</string>
+    <string name="about_links">आधिकारिक लिंक</string>
+    <string name="about_link_donate">दान करें</string>
+    <string name="about_link_website">वेबसाइट</string>
+    <string name="about_link_translations">अनुवाद</string>
+    <string name="contributors">योगदानकर्ता</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">हर समय</string>
+    <string name="contributors_6_months">6 महीने</string>
+    <string name="contributors_3_months">3 महीने</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">समर्थक</string>
+    <string name="supporters_description">Open Collective पर बैकर्स</string>
+    <string name="supporters_become">एक समर्थक बनें</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">और %s और</string>
+    <string name="people_unavailable">सूची लोड नहीं की जा सकी</string>
     <string name="opensource_licenses">ओपन-सोर्स लाइसेंस</string>
     <string name="opensource_licenses_description">जिन लाइब्रेरी पर Morphe बना है</string>
     <string name="opensource_licenses_search">लाइब्रेरी और लाइसेंस खोजें</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">शामिल करें</string>
     <string name="disable">अक्षम करें</string>
     <string name="enable">सक्षम करें</string>
+    <string name="enable_all">सभी चालू करें</string>
+    <string name="disable_all">सभी अक्षम करें</string>
     <string name="trust">भरोसा करें</string>
     <string name="loading">लोड हो रहा है…</string>
     <string name="creating">बनाया जा रहा है…</string>

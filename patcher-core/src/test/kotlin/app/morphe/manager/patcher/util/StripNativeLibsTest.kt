@@ -5,7 +5,10 @@
 
 package app.morphe.manager.patcher.util
 
+import com.reandroid.archive.ArchiveFile
 import java.io.File
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
@@ -43,6 +46,64 @@ class StripNativeLibsTest {
 
     private fun entriesOf(file: File) = ZipFile(file).use { zip -> zip.entries().asSequence().map { it.name }.toList() }
 
+    /**
+     * Puts an APK signing block holding a single [BLOCK_ID] pair before the central directory of
+     * [file], as a signer lays it out, and points the end record at the moved directory.
+     */
+    private fun addSigningBlock(file: File) {
+        val value = "certificates".toByteArray()
+        val zip = file.readBytes()
+        val endRecord = (zip.size - 22 downTo 0).first {
+            ByteBuffer.wrap(zip, it, 4).order(ByteOrder.LITTLE_ENDIAN).int == 0x06054b50
+        }
+        val directoryOffset = ByteBuffer.wrap(zip, endRecord + 16, 4).order(ByteOrder.LITTLE_ENDIAN).int
+
+        val pairLength = 4 + value.size
+        val blockSize = 8L + pairLength + 8 + 16
+        val block = ByteBuffer.allocate((8 + blockSize).toInt()).order(ByteOrder.LITTLE_ENDIAN)
+            .putLong(blockSize)
+            .putLong(pairLength.toLong()).putInt(BLOCK_ID).put(value)
+            .putLong(blockSize)
+            .put("APK Sig Block 42".toByteArray())
+            .array()
+
+        val signed = zip.copyOfRange(0, directoryOffset) + block + zip.copyOfRange(directoryOffset, zip.size)
+        ByteBuffer.wrap(signed, endRecord + block.size + 16, 4).order(ByteOrder.LITTLE_ENDIAN)
+            .putInt(directoryOffset + block.size)
+        file.writeBytes(signed)
+    }
+
+    private fun signingBlockIds(file: File) = ArchiveFile(file).use { archive ->
+        archive.apkSignatureBlock?.map { it.idValue }.orEmpty()
+    }
+
+    @Test
+    fun `the signing block survives, for the certificates patches read from it`() {
+        val input = apk("classes.dex", "lib/arm64-v8a/libapp.so", "lib/x86_64/libapp.so")
+        addSigningBlock(input)
+
+        assertTrue(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
+        assertTrue(BLOCK_ID in signingBlockIds(output))
+    }
+
+    @Test
+    fun `an unsigned APK stays unsigned`() {
+        val input = apk("classes.dex", "lib/arm64-v8a/libapp.so", "lib/x86_64/libapp.so")
+
+        assertTrue(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
+        assertTrue(signingBlockIds(output).isEmpty())
+        assertFalse(NativeLibs.hasSigningBlock(output))
+    }
+
+    @Test
+    fun `a signing block is told apart from none`() {
+        val input = apk("classes.dex")
+        assertFalse(NativeLibs.hasSigningBlock(input))
+
+        addSigningBlock(input)
+        assertTrue(NativeLibs.hasSigningBlock(input))
+    }
+
     @Test
     fun `only the libraries of the ABI the device prefers are kept`() {
         val input = apk(
@@ -75,5 +136,10 @@ class StripNativeLibsTest {
 
         assertFalse(NativeLibs.writeStripped(input, output, listOf("arm64-v8a")))
         assertFalse(output.exists())
+    }
+
+    private companion object {
+        // An ID no scheme uses, so the block is carried over as it is rather than parsed
+        const val BLOCK_ID = 0x5EED0001
     }
 }

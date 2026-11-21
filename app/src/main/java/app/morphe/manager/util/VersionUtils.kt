@@ -134,4 +134,4 @@ fun releasePageUrl(repoUrl: String, version: String): String {
 }
 
 /** Whether [url] points at GitLab, whose pages follow a layout of their own. */
-fun isGitLabUrl(url: String): Boolean = url.contains("gitlab.com", ignoreCase = true)
+fun isGitLabUrl(url: String): Boolean = url.contains(GITLAB_HOST, ignoreCase = true)

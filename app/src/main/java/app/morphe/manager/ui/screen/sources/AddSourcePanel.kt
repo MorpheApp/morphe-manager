@@ -38,6 +38,9 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteUrlCheck
 import app.morphe.manager.ui.model.NewSourceOptions
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel.PickedBundle
+import app.morphe.manager.util.GITHUB_HOST
+import app.morphe.manager.util.GITHUB_RAW_HOST
+import app.morphe.manager.util.GITLAB_HOST
 import app.morphe.manager.util.REMOTE_URL_PLACEHOLDER
 import app.morphe.manager.util.toFilePath
 import com.composables.icons.fontawesome.FontAwesome
@@ -188,9 +191,13 @@ internal fun NewSourceOptionsGroup(
     }
 }
 
-/** Links in pasted text however they came: one per line, in a list, or inside prose or markdown. */
+/**
+ * Links in pasted text however they came: one per line, in a list, or inside prose or markdown.
+ * With its scheme a link may name any host, such as an address or a name on the local network,
+ * without one only a domain or an IPv4 address reads as a link rather than as a word.
+ */
 private val LINK_PATTERN = Regex(
-    """(?:https?://)?(?:[\w-]+\.)+[a-z]{2,}(?::\d+)?(?:/[^\s,;<>()\[\]"'`]*)?""",
+    """(?:https?://(?:\[[0-9a-f:.]+]|(?:[\w-]+\.)*[\w-]+)|(?:[\w-]+\.)+[a-z]{2,}|\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?(?:/[^\s,;<>()\[\]"'`]*)?""",
     RegexOption.IGNORE_CASE
 )
 
@@ -297,9 +304,9 @@ private val RemoteSourceRejection.hintRes: Int
 /** Hosts whose links name a repository, by the icon they show. Any other host serves a bundle file. */
 private val REPOSITORY_HOST_ICONS: Map<String, ImageVector> by lazy {
     mapOf(
-        "github.com" to FontAwesome.Brands.Github,
-        "raw.githubusercontent.com" to FontAwesome.Brands.Github,
-        "gitlab.com" to FontAwesome.Brands.Gitlab
+        GITHUB_HOST to FontAwesome.Brands.Github,
+        GITHUB_RAW_HOST to FontAwesome.Brands.Github,
+        GITLAB_HOST to FontAwesome.Brands.Gitlab
     )
 }
 

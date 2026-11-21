@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.util.ChangelogEntry
+import app.morphe.manager.util.GITHUB_HOST
 import app.morphe.manager.util.isGitLabUrl
 import app.morphe.manager.util.isPrerelease
 import app.morphe.manager.util.normalizeVersion
@@ -204,7 +205,7 @@ private enum class ReleaseHost(@param:StringRes val label: Int?, val icon: Image
 
     companion object {
         fun of(url: String): ReleaseHost = when {
-            url.contains("github.com", ignoreCase = true) -> GITHUB
+            url.contains(GITHUB_HOST, ignoreCase = true) -> GITHUB
             isGitLabUrl(url) -> GITLAB
             else -> OTHER
         }

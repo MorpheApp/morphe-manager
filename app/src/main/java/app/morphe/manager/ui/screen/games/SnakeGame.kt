@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -42,23 +42,13 @@ private const val SNAKE_GRID = 20
 class SnakeGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     var snake by mutableStateOf(listOf(10 to 10, 9 to 10, 8 to 10))
         private set
     var food by mutableStateOf(15 to 10)
         private set
     private var direction = SnakeDir.RIGHT
     private var pendingDir = SnakeDir.RIGHT
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
-    override var isPaused by mutableStateOf(false)
-        private set
 
     val tickMs: Long get() = max(80L, 180L - score * 5L)
 
@@ -93,16 +83,8 @@ class SnakeGameState(
         food = 15 to 10
         direction = SnakeDir.RIGHT
         pendingDir = SnakeDir.RIGHT
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
     }
-
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false }
 
     private fun spawnFood() {
         val occupied = snake.toHashSet()

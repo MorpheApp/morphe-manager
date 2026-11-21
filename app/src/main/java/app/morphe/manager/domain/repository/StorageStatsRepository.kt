@@ -6,7 +6,6 @@
 package app.morphe.manager.domain.repository
 
 import android.app.Application
-import android.content.Context
 import android.os.StatFs
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.installer.InstallerFileProvider
@@ -86,7 +85,7 @@ class StorageStatsRepository(
 
     /** Deletes the OkHttp on-disk cache. Safe: the client rebuilds it on demand. */
     suspend fun clearHttpCache(): Long = withContext(Dispatchers.IO) {
-        val dir = File(app.cacheDir, HTTP_CACHE_DIR)
+        val dir = filesystem.httpCacheDir
         val freed = dir.totalBytes()
         dir.wipeContents()
         refresh()
@@ -133,12 +132,11 @@ class StorageStatsRepository(
     private suspend fun computeStats(): StorageStats = withContext(Dispatchers.IO) {
         StorageStats(
             originalApksBytes = filesystem.originalApksDir.totalBytes(),
-            patchedApksBytes = app.getDir(PATCHED_APPS_DIR, Context.MODE_PRIVATE).totalBytes(),
-            patchBundlesBytes = app.getDir(PATCH_BUNDLES_DIR, Context.MODE_PRIVATE).totalBytes(),
-            keystoreBytes = app.getDir(SIGNING_DIR, Context.MODE_PRIVATE)
-                .resolve(KEYSTORE_FILE).length().coerceAtLeast(0),
+            patchedApksBytes = filesystem.patchedAppsDir.totalBytes(),
+            patchBundlesBytes = filesystem.patchBundlesDir.totalBytes(),
+            keystoreBytes = filesystem.keystoreFile.length().coerceAtLeast(0),
             appDataBytes = readAppDataBytes(),
-            httpCacheBytes = File(app.cacheDir, HTTP_CACHE_DIR).totalBytes(),
+            httpCacheBytes = filesystem.httpCacheDir.totalBytes(),
             installerShareBytes = File(app.cacheDir, InstallerFileProvider.SHARE_DIR).totalBytes(),
             patcherWorkspaceBytes = collectPatcherWorkspaceEntries().sumOf { it.totalBytes() },
             temporaryBytes = filesystem.tempDir.totalBytes() + filesystem.uiTempDir.totalBytes(),
@@ -164,25 +162,19 @@ class StorageStatsRepository(
 
     /**
      * Entries under [Application.getCacheDir] that belong to the patcher workspace:
-     * everything except the buckets accounted for by other stats fields ([HTTP_CACHE_DIR] and
-     * [InstallerFileProvider.SHARE_DIR]).
+     * everything except the buckets accounted for by other stats fields
+     * ([Filesystem.httpCacheDir] and [InstallerFileProvider.SHARE_DIR]).
      */
     private fun collectPatcherWorkspaceEntries(): List<File> {
         val cacheDir = app.cacheDir
         if (!cacheDir.exists()) return emptyList()
         return cacheDir.listFiles()?.filter { entry ->
-            entry.name != HTTP_CACHE_DIR &&
+            entry != filesystem.httpCacheDir &&
                 entry.name != InstallerFileProvider.SHARE_DIR &&
                 entry != filesystem.homeCardCacheDir &&
-                entry != filesystem.avatarCacheDir
+                entry != filesystem.avatarCacheDir &&
+                entry != filesystem.playStoreIconCacheDir &&
+                entry != filesystem.peopleCacheFile
         } ?: emptyList()
-    }
-
-    companion object {
-        const val HTTP_CACHE_DIR = "cache"
-        private const val PATCHED_APPS_DIR = "patched-apps"
-        private const val PATCH_BUNDLES_DIR = "patch_bundles"
-        private const val SIGNING_DIR = "signing"
-        private const val KEYSTORE_FILE = "morphe.keystore"
     }
 }

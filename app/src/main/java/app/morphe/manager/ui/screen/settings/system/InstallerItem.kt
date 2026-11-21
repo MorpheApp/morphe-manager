@@ -753,9 +753,10 @@ fun DialogHostScope.PrePatchInstallerDialog(
         title = stringResource(R.string.root_pre_patch_installer_title),
         description = stringResource(R.string.root_pre_patch_installer_description),
         footer = {
-            AppDialogButtonRow(
-                primaryText = stringResource(android.R.string.cancel),
-                onPrimaryClick = onDismiss
+            AppDialogOutlinedButton(
+                text = stringResource(android.R.string.cancel),
+                onClick = onDismiss,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     ) {
@@ -763,25 +764,22 @@ fun DialogHostScope.PrePatchInstallerDialog(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge)
         ) {
-            // Root Mount option
-            SettingsItem(
-                onClick = onSelectMount,
-                icon = MaterialSymbols.Rounded.Link,
-                title = stringResource(R.string.root_pre_patch_installer_mount_title),
-                subtitle = stringResource(R.string.root_pre_patch_installer_mount_description),
-                showBorder = true
-            )
+            SettingsGroup {
+                SettingsItem(
+                    onClick = onSelectMount,
+                    icon = MaterialSymbols.Rounded.Link,
+                    title = stringResource(R.string.root_pre_patch_installer_mount_title),
+                    subtitle = stringResource(R.string.root_pre_patch_installer_mount_description)
+                )
+                SettingsItem(
+                    onClick = onSelectStandard,
+                    icon = MaterialSymbols.Rounded.Install_mobile,
+                    title = stringResource(R.string.root_pre_patch_installer_standard_title),
+                    subtitle = stringResource(R.string.root_pre_patch_installer_standard_description)
+                )
+            }
 
             ModuleUnmountNotice()
-
-            // Standard Install option
-            SettingsItem(
-                onClick = onSelectStandard,
-                icon = MaterialSymbols.Rounded.Install_mobile,
-                title = stringResource(R.string.root_pre_patch_installer_standard_title),
-                subtitle = stringResource(R.string.root_pre_patch_installer_standard_description),
-                showBorder = true
-            )
 
             // Info hint
             if (showPromptHint) {

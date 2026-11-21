@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не ўдалася спампоўка крыніц: %s</string>
     <string name="sources_download_fail_named">\'%s\' не можа быць абноўлены. Праверце злучэнне з інтэрнэтам і паспрабуйце зноў</string>
     <string name="sources_download_endpoint_not_found">У \"%s\" не знойдзена метаданых патча</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Крыніцы ў вашай лакальнай сетцы не могуць быць абноўлены без дазволу на доступ да прылад побач</string>
     <string name="sources_signing_key_changed_named">\'%s\' не была абноўлена, бо яе апошні рэліз не падпісаны ключом, якім яна выкарыстоўвалася раней</string>
     <string name="sources_signing_key_changed_local">Файл не падпісаны ключом, які гэтая крыніца выкарыстоўвала раней. Каб давяраць яму, выдаліце крыніцу і дадайце файл зноў</string>
     <string name="sources_signing_key_trust_title">Давяраць новаму ключу?</string>
@@ -347,8 +349,6 @@
     <string name="home_external_apk_expert_mode_required">Гэтая функцыя даступная толькі ў экспертным рэжыме</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Пошук патчаў</string>
-    <string name="expert_mode_disable_all">Адключыць усё</string>
-    <string name="expert_mode_enable_all">Уключыць усё</string>
     <string name="expert_mode_enable_all_universal_pending">Націсніце яшчэ раз для універсальных патчаў</string>
     <string name="expert_mode_universal_all_warning_title">Уключыць усе універсальныя патчы?</string>
     <string name="expert_mode_universal_all_warning_message">Універсальныя патчы не тэсціраваліся разам. Уключэнне іх усіх адначасова можа прывесці да канфліктаў, памылак пры патчынгу або збояў</string>
@@ -568,9 +568,12 @@
     <string name="app_links_unverified_banner_description">Падтрыманыя вэб-спасылкі зараз адкрываюцца ў браўзеры замест гэтай праграмы</string>
     <string name="app_links_enable_auto">Уключыць аўтаматычна</string>
     <string name="app_links_enable_auto_in_progress">Уключэнне спасылак…</string>
+    <string name="app_links_disable_all_in_progress">Адключаэнне спасылак…</string>
     <string name="app_links_open_settings">Адкрыць налады спасылак</string>
     <string name="app_links_repair_success">Спасылкі праграмы паспяхова ўключаны</string>
     <string name="app_links_repair_failed">Не ўдалося аўтаматычна ўключыць спасылкі праграмы</string>
+    <string name="app_links_disable_success">Спасылкі праграмы адключаны</string>
+    <string name="app_links_disable_failed">Не удалось адключыць спасылкі праграмы</string>
     <string name="app_links_change_failed">Не ўдалося змяніць спасылкі праграмы</string>
     <string name="app_links_all_verified">Усе падтрыманыя спасылкі наладжаны на адкрыццё ў гэтай праграме</string>
     <string name="app_links_fix">Выправіць спасылкі</string>
@@ -629,8 +632,6 @@
     <string name="patcher_field_value_stripped">выдаленыя</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">захаваныя</string>
-    <string name="patcher_tab_logs">Логі патчера</string>
-    <string name="patcher_tab_game">Гульні</string>
     <string name="patcher_logs_waiting">Чаканне вываду журнала…</string>
     <string name="patcher_logs_lost">Вывад журнала не захоўваецца пасля перазапуску праграмы</string>
     <string name="patcher_long_step_warning">Гэты крок можа заняць некаторы час. Калі ласка, пачакайце…</string>
@@ -660,7 +661,6 @@
     <string name="patcher_install_error_subtitle">Спрабуйце выдаліць і ўсталяваць зноў</string>
     <string name="patcher_ready_to_mount_subtitle">Націсніце кнопку ніжэй, каб замантаваць</string>
     <string name="patcher_patches_excluded_for_installer">Недаступна для гэтага спосабу ўсталёўкі і выключана: %s</string>
-    <string name="patcher_back_to_game_hint">Націсніце %1$s, каб вярнуцца ў гульню</string>
     <string name="patcher_storage_permission_dialog_title">Няма доступу да шляху сховішча</string>
     <string name="patcher_incompatible_patcher_title">Патрабуецца абнаўленне</string>
     <string name="patcher_incompatible_patcher_description">Крыніца &lt;b&gt;%1$s&lt;/b&gt; патрабуе патчера &lt;b&gt;%2$s&lt;/b&gt; або больш новай версіі. Абнавіце Morphe, каб выкарыстаць яе</string>
@@ -765,7 +765,9 @@
     <string name="package_name">Назва пакета</string>
     <string name="failed_to_mount">Не ўдалося мантаваць: %s</string>
     <string name="failed_to_unmount">Не ўдалося размантаваць: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Міні-гульні</string>
+    <string name="mini_games_description">Хуткі гульні, каб забіць вольную хвілінку</string>
     <string name="mini_game_score">Лік %s</string>
     <string name="mini_game_best">Найлепшы вынік: %s</string>
     <string name="mini_game_new_record">Новы рэкорд!</string>
@@ -774,7 +776,14 @@
     <string name="mini_game_paused">Прыпынена</string>
     <string name="mini_game_resume">Працягнуць</string>
     <string name="mini_game_restart">Пачаць занава</string>
-    <string name="mini_game_change">Выбраць іншую гульню</string>
+    <string name="mini_game_pause">Паўза</string>
+    <string name="mini_game_score_label">Лік</string>
+    <string name="mini_game_best_label">Найлепшы вынік</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Узровень</string>
+    <string name="mini_game_lines">Лініі</string>
+    <string name="mini_game_lives">Жыцці</string>
+    <string name="mini_game_flags">Сцягі</string>
     <string name="mini_game_2048_picker_subtitle">Перамяшчайце пліткі, каб аб\'яднаць іх</string>
     <string name="mini_game_flappy_picker_subtitle">Націскайце, каб праляцець праз трубы</string>
     <string name="mini_game_flappy_tap_to_start">Націсніце, каб паляцець</string>
@@ -1070,6 +1079,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Рэжым патчынгу ўсталяваны на root mount. Гэтая захаваная праграма была ўсталявана не праз mount</string>
     <string name="mount_version_mismatch_message">Версія стандартнай праграмы (%2$s) не супадае з версіяй патчанай праграмы (%1$s). Мантуйце адпаведную стандартную версію, а затым паспрабуйце зноў</string>
     <string name="mount_stock_restore_failed_message">Android адхіліў захаваны арыгінальны APK. Усталюйце адпаведную стандартную версію, а затым паспрабуйце мантаваць зноў</string>
+    <string name="mount_stock_mismatch_message">Усталяванае праграма не з\'яўляецца арыгінальнай. Выберыце арыгінальны APK або пераўсталюйце штатную версію, а затым паспрабуйце Mount зноў</string>
     <string name="installer_status_shizuku_unsupported">Усталяваная версія Shizuku не падтрымліваецца</string>
     <string name="installer_action_open_shizuku">Адкрыць Shizuku</string>
     <string name="installer_hint_generic">Усталёўка скончылася няўдачай. Паспрабуйце зноў або пераключыцеся на іншы інсталятар</string>
@@ -1340,13 +1350,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Не ўдалося стварыць папку</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Пра праграму</string>
-    <string name="settings_system_manager_description">Праект з адкрытым кодам для сучаснага і аптымізаванага патчынга папулярных Android-прыкладанняў, які развіваецца дзякуючы водгукам і ўнёскам супольнасці</string>
-    <string name="credits">Аўтары</string>
-    <string name="credits_description">Людзі, якія стаяць за Morphe</string>
     <string name="settings_about_section_project">Праект</string>
     <string name="settings_about_section_help">Дапамога</string>
-    <string name="credits_current_development">Бягучая распрацоўка</string>
     <string name="credits_prior_development">Папярэдняя распрацоўка</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Менеджар</string>
+    <string name="about_update_available">Даступна абнаўленне: %s</string>
+    <string name="about_up_to_date">Абнаўлена</string>
+    <string name="about_links">Афіцыйныя спасылкі</string>
+    <string name="about_link_donate">Ахвяраваць</string>
+    <string name="about_link_website">Вэбсайт</string>
+    <string name="about_link_translations">Пераклады</string>
+    <string name="contributors">Удзельнікі</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">За ўвесь час</string>
+    <string name="contributors_6_months">6 месяцаў</string>
+    <string name="contributors_3_months">3 месяцы</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Падтрымліваючыя</string>
+    <string name="supporters_description">Спонсары на Open Collective</string>
+    <string name="supporters_become">Стаць падтрымліваючым</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">І яшчэ %s чалавек</string>
+    <string name="people_unavailable">Не ўдалося загрузіць спіс</string>
     <string name="opensource_licenses">Ліцэнзіі адкрытага кода</string>
     <string name="opensource_licenses_description">Бібліятэкі, на якіх пабудавана Morphe</string>
     <string name="opensource_licenses_search">Пошук бібліятэк і ліцэнзій</string>
@@ -1416,6 +1442,8 @@ morphe_header_custom_dark.png
     <string name="include">Уключыць</string>
     <string name="disable">Адключыць</string>
     <string name="enable">Уключыць</string>
+    <string name="enable_all">Уключыць усё</string>
+    <string name="disable_all">Адключаць усё</string>
     <string name="trust">Давяраць</string>
     <string name="loading">Загрузка…</string>
     <string name="creating">Стварэнне…</string>

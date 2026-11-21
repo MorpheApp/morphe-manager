@@ -9,7 +9,7 @@ import android.app.Application
 import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import java.io.File
 
 /**
@@ -68,7 +68,7 @@ class PatchBundleLoadGuard(
 
         val marker = inFlightFileFor(uid)
         runCatching { marker.writeText(stamp) }
-            .onFailure { Log.e(tag, "Could not mark bundle $uid as loading", it) }
+            .onFailure { Log.e(LOG_TAG, "Could not mark bundle $uid as loading", it) }
 
         try {
             return load().also {
@@ -106,14 +106,14 @@ class PatchBundleLoadGuard(
             val oat = entry.resolve(DEX_CACHE_DIR)
             if (!oat.isDirectory) return@forEach
             if (oat.deleteRecursively()) {
-                Log.d(tag, "Dropped the stale dex cache of bundle ${entry.name}")
+                Log.d(LOG_TAG, "Dropped the stale dex cache of bundle ${entry.name}")
             } else {
-                Log.w(tag, "Could not drop the stale dex cache of bundle ${entry.name}")
+                Log.w(LOG_TAG, "Could not drop the stale dex cache of bundle ${entry.name}")
             }
         }
 
         runCatching { dexCacheStamp.writeText(identity) }
-            .onFailure { Log.e(tag, "Could not record the dex cache identity", it) }
+            .onFailure { Log.e(LOG_TAG, "Could not record the dex cache identity", it) }
     }
 
     /**
@@ -134,7 +134,7 @@ class PatchBundleLoadGuard(
             // A process can also die mid-read because the user swiped it away or the system
             // reclaimed it, so one interrupted read is not yet a verdict on the bundle
             Log.w(
-                tag,
+                LOG_TAG,
                 "Bundle $uid was being read when the previous process died ($count of $HELD_BACK_AFTER)"
             )
         }
@@ -165,7 +165,7 @@ class PatchBundleLoadGuard(
                     "$uid|${strike.count}|${strike.stamp}"
                 }
             )
-        }.onFailure { Log.e(tag, "Could not record bundle read failures", it) }
+        }.onFailure { Log.e(LOG_TAG, "Could not record bundle read failures", it) }
     }
 
     private fun inFlightFileFor(uid: Int) = bundlesDir.resolve("$IN_FLIGHT_PREFIX$uid")

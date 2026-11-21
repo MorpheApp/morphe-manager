@@ -254,8 +254,7 @@ class InstallViewModel(
             try {
                 // APK metadata reads parse the archive on disk; keep them off the main thread
                 val (packageInfo, existingInfo) = withContext(Dispatchers.IO) {
-                    val pi = pm.getPackageInfo(outputFile)
-                        ?: throw Exception("Failed to load application info")
+                    val pi = pm.requirePackageInfo(outputFile)
                     pi to pm.getPackageInfo(pi.packageName)
                 }
 
@@ -456,7 +455,7 @@ class InstallViewModel(
             }
             is InstallResult.Conflict -> handleConflict(targetPackageName, result.message)
             is InstallResult.Failure -> handleInstallError(
-                app.getString(R.string.install_app_fail, result.message ?: "Unknown error")
+                app.getString(R.string.install_app_fail, result.message ?: app.getString(R.string.patcher_unknown_error))
             )
         }
     }
@@ -515,7 +514,7 @@ class InstallViewModel(
 
     /** Package name [apk] installs as. */
     private suspend fun readPackageName(apk: File): String = withContext(Dispatchers.IO) {
-        pm.getPackageInfo(apk)?.packageName ?: throw Exception("Failed to load application info")
+        pm.requirePackageInfo(apk).packageName
     }
 
     /** Lifts a root mount over [packageName], which would otherwise keep showing the build being replaced. */
@@ -794,11 +793,13 @@ class InstallViewModel(
             currentInstallType = InstallType.MOUNT
             installState = InstallState.Installing()
             var recordCreated = false
+            // Until the new module is staged, a failure leaves the one already there untouched
+            val hadModule = runCatching { rootInstaller.hasModuleCopies(packageName) }.getOrDefault(false)
+            var moduleStaged = false
 
             try {
                 val inputs = withContext(Dispatchers.IO) {
-                    val patchedInfo = pm.getPackageInfo(outputFile)
-                        ?: throw Exception("Failed to load application info")
+                    val patchedInfo = pm.requirePackageInfo(outputFile)
                     val savedOriginal = originalApkRepository.get(packageName)?.filePath?.let(::File)
 
                     MountInstallInputs(
@@ -819,19 +820,20 @@ class InstallViewModel(
                             versionName == patchedVersion
 
                 // Either file can be a split archive, read through its base module, so they are
-                // only read when the installed app does not already match
-                val restorableStock = if (stockInfo?.matchesPatched() == true) null else withContext(Dispatchers.IO) {
+                // only read when the installed app does not already match or does not read as stock
+                suspend fun findRestorableStock() = withContext(Dispatchers.IO) {
                     inputs.stockFiles.firstNotNullOfOrNull { file ->
                         rootInstaller.readStockInfo(file)
                             ?.takeIf { it.matchesPatched() }
                             ?.let { MountStockCandidate(file, it) }
                     }
                 }
+                val restorableStock = if (stockInfo?.matchesPatched() == true) null else findRestorableStock()
 
                 // Only worth waiting for when nothing here can restore the stock app, since the
                 // install below reinstalls a matching one and waits for it on its own
                 if (waitForStockInstall && restorableStock == null && stockInfo != null && !stockInfo.matchesPatched()) {
-                    stockInfo = waitForMatchingInstalledStock(
+                    stockInfo = waitForInstalledStockVersion(
                         packageName = packageName,
                         versionName = patchedVersion
                     ) ?: stockInfo
@@ -870,11 +872,13 @@ class InstallViewModel(
                     packageName,
                     patchedVersion,
                     label,
+                    repairStock = { findRestorableStock()?.file },
                     onStage = { installState = InstallState.Installing(it) },
                     onStaged = {
                         val hadRecord = installedAppRepository.get(packageName) != null
                         onPersistApp(packageInfo.packageName, InstallType.MOUNT)
                         recordCreated = !hadRecord
+                        moduleStaged = true
                     }
                 )
 
@@ -893,10 +897,13 @@ class InstallViewModel(
                 Log.e(TAG, "Mount install failed", e)
                 handleInstallError(mountFailureMessage(e))
 
-                // Cleanup on failure
-                try {
-                    rootInstaller.uninstall(packageName)
-                } catch (_: Exception) {}
+                // The previous module still mounts its own build at the next boot, or stays unmounted
+                // when the installed app no longer matches it
+                if (moduleStaged || !hadModule) {
+                    try {
+                        rootInstaller.uninstall(packageName)
+                    } catch (_: Exception) {}
+                }
 
                 // The module is gone, so a record this attempt created would describe nothing,
                 // while one that was already there keeps the saved build to install again
@@ -911,9 +918,6 @@ class InstallViewModel(
         }
     }
 
-    /**
-     * Mount a saved patched APK, restoring the matching original APK first when Morphe has it.
-     */
     /**
      * Puts a mount another version replaced back from the copies its root module keeps, for an app
      * whose saved builds are gone, see [RootInstaller.restoreFromModule].
@@ -938,12 +942,11 @@ class InstallViewModel(
         }
     }
 
-    private fun mountFailureMessage(e: Exception): String =
-        if (e is StockAppInstallException) {
-            app.getString(R.string.mount_stock_restore_failed_message)
-        } else {
-            app.getString(R.string.install_app_fail, e.simpleMessage() ?: e.javaClass.simpleName)
-        }
+    private fun mountFailureMessage(e: Exception): String = when (e) {
+        is StockAppInstallException -> app.getString(R.string.mount_stock_restore_failed_message)
+        is StockApkMismatchException -> app.getString(R.string.mount_stock_mismatch_message)
+        else -> app.getString(R.string.install_app_fail, e.simpleMessage() ?: e.javaClass.simpleName)
+    }
 
     fun installSavedMount(
         outputFile: File,
@@ -962,80 +965,66 @@ class InstallViewModel(
      * Mount app (for root installer).
      */
     fun mount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = getInstalledStockVersion(packageName, version)
-        if (stockVersion != null && stockVersion != version) {
-            handleInstallError(
-                app.getString(
-                    R.string.mount_version_mismatch_message,
-                    version,
-                    stockVersion
-                )
-            )
-            return@launch
-        }
-
-        try {
-            mountOperation = MountOperation.MOUNTING
-            messages.show(R.string.mounting_ellipsis)
-            rootInstaller.mount(packageName)
-            messages.show(R.string.mounted)
-        } catch (e: Exception) {
-            messages.show(R.string.failed_to_mount, e.simpleMessage())
-            Log.e(TAG, "Failed to mount", e)
-        } finally {
-            mountOperation = null
-        }
+        if (!stockMatchesMount(packageName, version)) return@launch
+        runMountOperation(R.string.failed_to_mount, "Failed to mount") { mountStep(packageName) }
     }
 
     /**
      * Unmount app (for root installer).
      */
     fun unmount(packageName: String) = viewModelScope.launch {
-        try {
-            mountOperation = MountOperation.UNMOUNTING
-            messages.show(R.string.unmounting_ellipsis)
-            rootInstaller.unmount(packageName)
-            messages.show(R.string.unmounted)
-        } catch (e: Exception) {
-            messages.show(R.string.failed_to_unmount, e.simpleMessage())
-            Log.e(TAG, "Failed to unmount", e)
-        } finally {
-            mountOperation = null
-        }
+        runMountOperation(R.string.failed_to_unmount, "Failed to unmount") { unmountStep(packageName) }
     }
 
     /**
      * Remount app (unmount then mount).
      */
     fun remount(packageName: String, version: String) = viewModelScope.launch {
-        val stockVersion = getInstalledStockVersion(packageName, version)
-        if (stockVersion != null && stockVersion != version) {
-            handleInstallError(
-                app.getString(
-                    R.string.mount_version_mismatch_message,
-                    version,
-                    stockVersion
-                )
-            )
-            return@launch
+        if (!stockMatchesMount(packageName, version)) return@launch
+        runMountOperation(R.string.failed_to_mount, "Failed to remount") {
+            unmountStep(packageName)
+            mountStep(packageName)
         }
+    }
 
+    /**
+     * Whether the installed stock app is the [version] a mount was built for, reporting the
+     * mismatch otherwise, as a mount over another version would not run.
+     */
+    private suspend fun stockMatchesMount(packageName: String, version: String): Boolean {
+        val stockVersion = getInstalledStockVersion(packageName, version)
+        if (stockVersion == null || stockVersion == version) return true
+        handleInstallError(app.getString(R.string.mount_version_mismatch_message, version, stockVersion))
+        return false
+    }
+
+    private suspend fun runMountOperation(
+        @StringRes failureMessage: Int,
+        logMessage: String,
+        steps: suspend () -> Unit
+    ) {
         try {
-            mountOperation = MountOperation.UNMOUNTING
-            messages.show(R.string.unmounting_ellipsis)
-            rootInstaller.unmount(packageName)
-            messages.show(R.string.unmounted)
-
-            mountOperation = MountOperation.MOUNTING
-            messages.show(R.string.mounting_ellipsis)
-            rootInstaller.mount(packageName)
-            messages.show(R.string.mounted)
+            steps()
         } catch (e: Exception) {
-            messages.show(R.string.failed_to_mount, e.simpleMessage())
-            Log.e(TAG, "Failed to remount", e)
+            messages.show(failureMessage, e.simpleMessage())
+            Log.e(TAG, logMessage, e)
         } finally {
             mountOperation = null
         }
+    }
+
+    private suspend fun mountStep(packageName: String) {
+        mountOperation = MountOperation.MOUNTING
+        messages.show(R.string.mounting_ellipsis)
+        rootInstaller.mount(packageName)
+        messages.show(R.string.mounted)
+    }
+
+    private suspend fun unmountStep(packageName: String) {
+        mountOperation = MountOperation.UNMOUNTING
+        messages.show(R.string.unmounting_ellipsis)
+        rootInstaller.unmount(packageName)
+        messages.show(R.string.unmounted)
     }
 
     /**
@@ -1067,14 +1056,7 @@ class InstallViewModel(
      */
     fun retryWithPreferredInstaller() {
         installerUnavailableDialog = null
-
-        val file = pendingInstallFile ?: return
-        val originalPkg = pendingOriginalPackageName ?: return
-        val callback = pendingPersistCallback ?: return
-        val autoUninstallOnConflict = pendingAutoUninstallOnConflict
-        val allowSignatureMismatch = pendingAllowSignatureMismatch
-
-        install(file, originalPkg, callback, autoUninstallOnConflict, allowSignatureMismatch)
+        retryPendingInstall()
     }
 
     /**
@@ -1101,14 +1083,7 @@ class InstallViewModel(
     fun proceedWithSelectedInstaller(token: InstallerManager.Token) {
         oneTimeInstallerToken = token
         showInstallerSelectionDialog = false
-
-        val file = pendingInstallFile ?: return
-        val originalPkg = pendingOriginalPackageName ?: return
-        val callback = pendingPersistCallback ?: return
-        val autoUninstallOnConflict = pendingAutoUninstallOnConflict
-        val allowSignatureMismatch = pendingAllowSignatureMismatch
-
-        install(file, originalPkg, callback, autoUninstallOnConflict, allowSignatureMismatch)
+        retryPendingInstall()
     }
 
     /**
@@ -1121,15 +1096,8 @@ class InstallViewModel(
             try {
                 uninstallForPendingInstall(packageName, installAfterUninstall)
                 if (installAfterUninstall) {
-                    val file = pendingInstallFile
-                    val originalPkg = pendingOriginalPackageName
-                    val callback = pendingPersistCallback
-                    if (file != null && originalPkg != null && callback != null) {
-                        val autoUninstallOnConflict = pendingAutoUninstallOnConflict
-                        pendingInstallToken?.let { oneTimeInstallerToken = it }
-                        installState = InstallState.Ready
-                        install(file, originalPkg, callback, autoUninstallOnConflict)
-                    } else {
+                    // The app is gone, so its signature has nothing left to conflict with
+                    if (!retryPendingInstall(allowSignatureMismatch = false, afterConflict = true)) {
                         Log.w(TAG, "Cannot restart install after uninstall: pending install data missing")
                         installState = InstallState.Ready
                     }
@@ -1151,20 +1119,31 @@ class InstallViewModel(
      * verification; anywhere else the platform rejects the install and the conflict comes back.
      */
     fun installIgnoringSignatureMismatch() {
-        val file = pendingInstallFile ?: return
         val originalPkg = pendingOriginalPackageName ?: return
-        val callback = pendingPersistCallback ?: return
-
         Log.i(TAG, "Retrying install of $originalPkg with the signature check skipped")
-        pendingInstallToken?.let { oneTimeInstallerToken = it }
-        installState = InstallState.Ready
-        install(
-            outputFile = file,
-            originalPackageName = originalPkg,
-            onPersistApp = callback,
-            autoUninstallOnConflict = pendingAutoUninstallOnConflict,
-            allowSignatureMismatch = true
-        )
+        retryPendingInstall(allowSignatureMismatch = true, afterConflict = true)
+    }
+
+    /**
+     * Starts the install the pending fields hold once more, or returns false when none is held.
+     *
+     * @param afterConflict Leaves the conflict the install stopped at and puts back the installer
+     * it was started with.
+     */
+    private fun retryPendingInstall(
+        allowSignatureMismatch: Boolean = pendingAllowSignatureMismatch,
+        afterConflict: Boolean = false
+    ): Boolean {
+        val file = pendingInstallFile ?: return false
+        val originalPkg = pendingOriginalPackageName ?: return false
+        val callback = pendingPersistCallback ?: return false
+
+        if (afterConflict) {
+            pendingInstallToken?.let { oneTimeInstallerToken = it }
+            installState = InstallState.Ready
+        }
+        install(file, originalPkg, callback, pendingAutoUninstallOnConflict, allowSignatureMismatch)
+        return true
     }
 
     private suspend fun uninstallForPendingInstall(
@@ -1294,27 +1273,6 @@ class InstallViewModel(
         return matchingInfo
     }
 
-    private suspend fun waitForMatchingInstalledStock(
-        packageName: String,
-        versionName: String
-    ): PackageInfo? {
-        var matchingInfo: PackageInfo? = null
-        withTimeoutOrNull(STOCK_INSTALL_SETTLE_TIMEOUT) {
-            while (matchingInfo == null) {
-                val info = withContext(Dispatchers.IO) { pm.getPackageInfo(packageName) }
-                if (info != null &&
-                    info.packageName == packageName &&
-                    info.versionName == versionName
-                ) {
-                    matchingInfo = info
-                } else {
-                    delay(STOCK_INSTALL_SETTLE_POLL)
-                }
-            }
-        }
-        return matchingInfo
-    }
-
     private fun handleInstallSuccess(packageName: String) {
         externalInstallTimeoutJob?.cancel()
         selectedInstallerToken = null
@@ -1351,7 +1309,7 @@ class InstallViewModel(
                     "failed_user" in lower ||
                     "profile" in lower ->
                 app.getString(R.string.installer_shizuku_error_user_profile)
-            else -> raw ?: "Unknown error"
+            else -> raw ?: app.getString(R.string.patcher_unknown_error)
         }
 
         return if (raw != null && raw != summary) {
@@ -1367,7 +1325,7 @@ class InstallViewModel(
             installState = signatureConflictState(targetPackageName)
         } else {
             // Target not installed - not a real signature conflict (e.g. renamed package)
-            handleInstallError(app.getString(R.string.install_app_fail, conflictMessage ?: "Unknown error"))
+            handleInstallError(app.getString(R.string.install_app_fail, conflictMessage ?: app.getString(R.string.patcher_unknown_error)))
         }
     }
 

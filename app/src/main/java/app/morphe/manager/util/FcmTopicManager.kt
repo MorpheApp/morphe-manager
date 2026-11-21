@@ -11,6 +11,8 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.messaging.FirebaseMessaging
 
+private const val TAG = "Morphe FcmTopicSync"
+
 /** Whether Google Play services can deliver FCM here, which otherwise leaves update checks to WorkManager. */
 fun Context.hasGooglePlayServices(): Boolean =
     GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
@@ -67,7 +69,7 @@ fun syncFcmTopics(
     if (!notificationsEnabled) {
         FcmTopics.all.forEach { topic ->
             messaging.unsubscribeFromTopic(topic)
-                .addOnCompleteListener { Log.d("FcmTopicSync", "Unsubscribed from $topic") }
+                .addOnCompleteListener { Log.d(TAG, "Unsubscribed from $topic") }
         }
         return
     }
@@ -84,14 +86,13 @@ fun syncFcmTopics(
  * Subscribes to or unsubscribes from a single FCM topic and logs the result.
  */
 private fun FirebaseMessaging.syncTopic(topic: String, subscribe: Boolean) {
-    val tag = "Morphe FcmTopicSync"
     if (subscribe) {
         subscribeToTopic(topic).addOnCompleteListener { task ->
-            Log.d(tag, if (task.isSuccessful) "Subscribed to $topic" else "Failed to subscribe to $topic")
+            Log.d(TAG, if (task.isSuccessful) "Subscribed to $topic" else "Failed to subscribe to $topic")
         }
     } else {
         unsubscribeFromTopic(topic).addOnCompleteListener {
-            Log.d(tag, "Unsubscribed from $topic")
+            Log.d(TAG, "Unsubscribed from $topic")
         }
     }
 }

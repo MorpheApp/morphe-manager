@@ -245,6 +245,8 @@
     <string name="sources_download_fail">فشل تنزيل مصادر التعديل: %s</string>
     <string name="sources_download_fail_named">\"%s\" تعذر تحديثه. تحقق من اتصالك بالإنترنت وحاول مرة أخرى</string>
     <string name="sources_download_endpoint_not_found">\"%s\": لم يتم العثور على بيانات تعريف التعديل</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">لا يمكن تحديث المصادر الموجودة على شبكتك المحلية بدون إذن \'الأجهزة القريبة\'</string>
     <string name="sources_signing_key_changed_named">لم يتم تحديث \'%s\' لأن إصداره الأخير غير موقّع بالمفتاح الذي استخدمه سابقًا</string>
     <string name="sources_signing_key_changed_local">الملف غير موقّع بواسطة المفتاح الذي استخدمه هذا المصدر من قبل. للثقة به، احذف المصدر وأضف الملف مرة أخرى</string>
     <string name="sources_signing_key_trust_title">هل تثق بالمفتاح الجديد؟</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">هذه الميزة متاحة فقط في وضع الخبير</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">البحث عن التعديلات</string>
-    <string name="expert_mode_disable_all">تعطيل الكل</string>
-    <string name="expert_mode_enable_all">تمكين الكل</string>
     <string name="expert_mode_enable_all_universal_pending">انقر مرة أخرى لتطبيق التعديلات الشاملة</string>
     <string name="expert_mode_universal_all_warning_title">تمكين كل التعديلات الشاملة؟</string>
     <string name="expert_mode_universal_all_warning_message">التعديلات الشاملة لم تُختبر معًا. قد يؤدي تمكين جميعها مرةً واحدة إلى حدوث تعارضات، فشل في تطبيق التعديل، أو أعطال</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">تُفتح روابط الويب المدعومة حاليًا في متصفحك بدلًا من هذا التطبيق</string>
     <string name="app_links_enable_auto">تمكين تلقائيًا</string>
     <string name="app_links_enable_auto_in_progress">جارٍ تمكين الروابط…</string>
+    <string name="app_links_disable_all_in_progress">جارٍ تعطيل الروابط…</string>
     <string name="app_links_open_settings">فتح إعدادات الروابط</string>
     <string name="app_links_repair_success">تم تمكين روابط التطبيق بنجاح</string>
     <string name="app_links_repair_failed">تعذّر تمكين روابط التطبيقات تلقائيًا</string>
+    <string name="app_links_disable_success">تم تعطيل روابط التطبيق</string>
+    <string name="app_links_disable_failed">فشل تعطيل روابط التطبيق</string>
     <string name="app_links_change_failed">فشل تغيير روابط التطبيق</string>
     <string name="app_links_all_verified">تم تكوين جميع الروابط المدعومة لتُفتح في هذا التطبيق</string>
     <string name="app_links_fix">إصلاح الروابط</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">مستبعدة</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">محتفظ بها</string>
-    <string name="patcher_tab_logs">سجلات أداة التعديل</string>
-    <string name="patcher_tab_game">ألعاب</string>
     <string name="patcher_logs_waiting">في انتظار مخرجات السجل…</string>
     <string name="patcher_logs_lost">لا يتم الاحتفاظ بمخرجات السجل بعد إعادة تشغيل التطبيق</string>
     <string name="patcher_long_step_warning">قد تستغرق هذه الخطوة بعض الوقت. يرجى الانتظار…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">جرب إلغاء التثبيت والتثبيت مرة أخرى</string>
     <string name="patcher_ready_to_mount_subtitle">اضغط على الزر أدناه للتركيب</string>
     <string name="patcher_patches_excluded_for_installer">غير متاح لطريقة التثبيت هذه وتم استبعاده: %s</string>
-    <string name="patcher_back_to_game_hint">انقر على %1$s للعودة إلى لعبتك</string>
     <string name="patcher_storage_permission_dialog_title">لا يمكن الوصول إلى مسار التخزين</string>
     <string name="patcher_incompatible_patcher_title">التحديث مطلوب</string>
     <string name="patcher_incompatible_patcher_description">المصدر &lt;b&gt;%1$s&lt;/b&gt; يتطلب أداة التعديل &lt;b&gt;%2$s&lt;/b&gt; أو إصدارًا أحدث. حدِّث Morphe لاستخدامها</string>
@@ -767,7 +767,9 @@
     <string name="package_name">اسم الحزمة</string>
     <string name="failed_to_mount">فشل تركيب: %s</string>
     <string name="failed_to_unmount">فشل فك تركيب: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">ألعاب مصغّرة</string>
+    <string name="mini_games_description">ألعاب سريعة لقضاء وقت الفراغ</string>
     <string name="mini_game_score">النتيجة %s</string>
     <string name="mini_game_best">الأفضل %s</string>
     <string name="mini_game_new_record">رقم قياسي جديد!</string>
@@ -776,7 +778,14 @@
     <string name="mini_game_paused">متوقفة مؤقتًا</string>
     <string name="mini_game_resume">متابعة</string>
     <string name="mini_game_restart">البدء من جديد</string>
-    <string name="mini_game_change">اختر لعبة أخرى</string>
+    <string name="mini_game_pause">إيقاف مؤقت</string>
+    <string name="mini_game_score_label">النتيجة</string>
+    <string name="mini_game_best_label">الأفضل</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">المستوى</string>
+    <string name="mini_game_lines">الخطوط</string>
+    <string name="mini_game_lives">الأرواح</string>
+    <string name="mini_game_flags">الأعلام</string>
     <string name="mini_game_2048_picker_subtitle">حرك البلاطات لدمجها</string>
     <string name="mini_game_flappy_picker_subtitle">انقر للطيران عبر الأنابيب</string>
     <string name="mini_game_flappy_tap_to_start">انقر للطيران</string>
@@ -1072,6 +1081,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="installer_mount_warning_install">تم ضبط وضع التعديل على root mount. هذا التطبيق المحفوظ لم يتم تثبيته باستخدام mount</string>
     <string name="mount_version_mismatch_message">إصدار التطبيق الأصلي (%2$s) لا يتطابق مع إصدار التطبيق المعدل (%1$s). قم بتركيب الإصدار الأصلي المطابق، ثم حاول مرة أخرى</string>
     <string name="mount_stock_restore_failed_message">رفض Android ملف APK الأصلي المحفوظ. قم بتثبيت الإصدار الأصلي المطابق، ثم حاول التركيب مرة أخرى</string>
+    <string name="mount_stock_mismatch_message">التطبيق المثبت ليس هو التطبيق الأصلي. اختر ملف APK الأصلي أو أعد تثبيت الإصدار الأصلي، ثم حاول عملية التثبيت Mount مرة أخرى</string>
     <string name="installer_status_shizuku_unsupported">إصدار Shizuku المثبت غير مدعوم</string>
     <string name="installer_action_open_shizuku">فتح Shizuku</string>
     <string name="installer_hint_generic">فشل التثبيت. حاول مرة أخرى أو قم بالتبديل إلى أداة تثبيت أخرى</string>
@@ -1343,13 +1353,29 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_new_folder_failed">تعذر إنشاء المجلد</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">لمحة</string>
-    <string name="settings_system_manager_description">مشروع مفتوح المصدر يهدف إلى توفير طريقة حديثة ومبسطة لتعديل تطبيقات Android الشهيرة، مستندًا إلى ملاحظات المستخدمين ومساهمات المجتمع</string>
-    <string name="credits">شكر وتقدير</string>
-    <string name="credits_description">الأشخاص الذين يقفون خلف Morphe</string>
     <string name="settings_about_section_project">المشروع</string>
     <string name="settings_about_section_help">مساعدة</string>
-    <string name="credits_current_development">التطوير الحالي</string>
     <string name="credits_prior_development">التطوير السابق</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">المدير</string>
+    <string name="about_update_available">تحديث متاح: %s</string>
+    <string name="about_up_to_date">محدَّث</string>
+    <string name="about_links">الروابط الرسمية</string>
+    <string name="about_link_donate">تبرع</string>
+    <string name="about_link_website">الموقع الإلكتروني</string>
+    <string name="about_link_translations">الترجمات</string>
+    <string name="contributors">المساهمون</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">كل الوقت</string>
+    <string name="contributors_6_months">6 أشهر</string>
+    <string name="contributors_3_months">3 أشهر</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">الداعمون</string>
+    <string name="supporters_description">الداعمون على Open Collective</string>
+    <string name="supporters_become">كن داعمًا</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more"> و %s أخرى</string>
+    <string name="people_unavailable">تعذر تحميل القائمة</string>
     <string name="opensource_licenses">تراخيص مفتوحة المصدر</string>
     <string name="opensource_licenses_description">المكتبات التي بُني عليها Morphe</string>
     <string name="opensource_licenses_search">البحث في المكتبات والتراخيص</string>
@@ -1419,6 +1445,8 @@ morphe_adaptive_monochrome_custom.xml
     <string name="include">إدراج</string>
     <string name="disable">تعطيل</string>
     <string name="enable">تمكين</string>
+    <string name="enable_all">تمكين الكل</string>
+    <string name="disable_all">تعطيل الكل</string>
     <string name="trust">موثوق</string>
     <string name="loading">جارٍ التحميل…</string>
     <string name="creating">جارٍ الإنشاء…</string>

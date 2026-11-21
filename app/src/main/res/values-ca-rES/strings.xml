@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Error en descarregar les fonts: %s</string>
     <string name="sources_download_fail_named">No s\'ha pogut actualitzar \'%s\'. Comproveu la connexió a la xarxa i proveu-ho de nou</string>
     <string name="sources_download_endpoint_not_found">\'%s\': no s\'han trobat les metadades del patch</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Les fonts de la vostra xarxa local no es poden actualitzar sense el permís de dispositius propers</string>
     <string name="sources_signing_key_changed_named">\'%s\' no s\'ha actualitzat perquè la seva última versió no està signada per la clau que utilitzava anteriorment</string>
     <string name="sources_signing_key_changed_local">El fitxer no està signat per la clau que aquesta font utilitzava anteriorment. Per confiar-hi, elimina la font i torna a afegir el fitxer</string>
     <string name="sources_signing_key_trust_title">Confies en la nova clau?</string>
@@ -346,8 +348,6 @@ Tria d'on vols obtenir l'APK"</string>
     <string name="home_external_apk_expert_mode_required">Aquesta funció només està disponible en mode Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Cerca pegats</string>
-    <string name="expert_mode_disable_all">Desactivar tot</string>
-    <string name="expert_mode_enable_all">Activar tot</string>
     <string name="expert_mode_enable_all_universal_pending">Toca de nou per als patxes universals</string>
     <string name="expert_mode_universal_all_warning_title">Activar tots els pegats universals?</string>
     <string name="expert_mode_universal_all_warning_message">Els pegats universals no estan provats conjuntament. Activar-los tots a la vegada pot causar conflictes, falls en el pegat o tancaments inesperats</string>
@@ -567,9 +567,12 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="app_links_unverified_banner_description">Els enllaços web compatibles s\'obrin actualment al navegador en lloc d\'aquesta aplicació</string>
     <string name="app_links_enable_auto">Activa automàticament</string>
     <string name="app_links_enable_auto_in_progress">Activant enllaços…</string>
+    <string name="app_links_disable_all_in_progress">Desactivant enllaços…</string>
     <string name="app_links_open_settings">Obre la configuració d\'enllaços</string>
     <string name="app_links_repair_success">S\'han activat els enllaços de l\'aplicació correctament</string>
     <string name="app_links_repair_failed">No s\'han pogut activar els enllaços de l\'aplicació automàticament</string>
+    <string name="app_links_disable_success">Enllaços de l\'app desactivats</string>
+    <string name="app_links_disable_failed">Error en desactivar els enllaços de l\'app</string>
     <string name="app_links_change_failed">Error en canviar els enllaços de l\'aplicació</string>
     <string name="app_links_all_verified">Tots els enllaços compatibles estan configurats per obrir-se en aquesta aplicació</string>
     <string name="app_links_fix">Corregir enllaços</string>
@@ -628,8 +631,6 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="patcher_field_value_stripped">eliminades</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">conservades</string>
-    <string name="patcher_tab_logs">Registres del Patcher</string>
-    <string name="patcher_tab_game">Jocs</string>
     <string name="patcher_logs_waiting">Esperant la sortida del registre…</string>
     <string name="patcher_logs_lost">La sortida del registre no es manté després de reiniciar l\'aplicació</string>
     <string name="patcher_long_step_warning">Aquest pas pot trigar una mica. Si us plau, espereu…</string>
@@ -659,7 +660,6 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="patcher_install_error_subtitle">Intenta desinstal·lar i tornar a instal·lar</string>
     <string name="patcher_ready_to_mount_subtitle">Premeu el botó de sota per muntar</string>
     <string name="patcher_patches_excluded_for_installer">No disponible per a aquest mètode d\'instal·lació i exclòs: %s</string>
-    <string name="patcher_back_to_game_hint">Toca %1$s per tornar al teu joc</string>
     <string name="patcher_storage_permission_dialog_title">No es pot accedir a la ruta d\'emmagatzematge</string>
     <string name="patcher_incompatible_patcher_title">Actualització requerida</string>
     <string name="patcher_incompatible_patcher_description">La font &lt;b&gt;%1$s&lt;/b&gt; requereix el patcher &lt;b&gt;%2$s&lt;/b&gt; o una versió més recent. Actualitza Morphe per utilitzar-lo</string>
@@ -764,7 +764,9 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="package_name">Nom del paquet</string>
     <string name="failed_to_mount">Error en muntar: %s</string>
     <string name="failed_to_unmount">Error en desmuntar: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minijocs</string>
+    <string name="mini_games_description">Jocs ràpids per passar un minut lliure</string>
     <string name="mini_game_score">Puntuació %s</string>
     <string name="mini_game_best">Millor %s</string>
     <string name="mini_game_new_record">Nou rècord!</string>
@@ -773,7 +775,14 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="mini_game_paused">Pausat</string>
     <string name="mini_game_resume">Continua</string>
     <string name="mini_game_restart">Començar de nou</string>
-    <string name="mini_game_change">Tria un altre joc</string>
+    <string name="mini_game_pause">Pausa</string>
+    <string name="mini_game_score_label">Puntuació</string>
+    <string name="mini_game_best_label">Millor</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Nivell</string>
+    <string name="mini_game_lines">Línies</string>
+    <string name="mini_game_lives">Vides</string>
+    <string name="mini_game_flags">Banderes</string>
     <string name="mini_game_2048_picker_subtitle">Desllisa els mosaics per fusionar-los</string>
     <string name="mini_game_flappy_picker_subtitle">Toca per volar a través dels tubs</string>
     <string name="mini_game_flappy_tap_to_start">Toca per volar</string>
@@ -1069,6 +1078,7 @@ Les dimensions de la imatge han de ser les següents:
     <string name="installer_mount_warning_install">El mode de patxat està configurat com a muntatge root. Aquesta aplicació desada no s\'ha instal·lat mitjançant muntatge</string>
     <string name="mount_version_mismatch_message">La versió de l\'aplicació original (%2$s) no coincideix amb la versió de l\'aplicació modificada (%1$s). Munta la versió original corresponent i torna-ho a intentar</string>
     <string name="mount_stock_restore_failed_message">Android ha rebutjat l\'APK original desat. Instal·la la versió stock corresponent i torna a provar el muntatge</string>
+    <string name="mount_stock_mismatch_message">L\'aplicació instal·lada no és l\'original. Tria l\'APK original o reinstal·la la versió de stock i torna a intentar el Muntatge</string>
     <string name="installer_status_shizuku_unsupported">La versió de Shizuku instal·lada no és compatible</string>
     <string name="installer_action_open_shizuku">Obre Shizuku</string>
     <string name="installer_hint_generic">La instal·lació ha fallat. Torna-ho a intentar o canvia a un instal·lador diferent</string>
@@ -1339,13 +1349,29 @@ Detalls: %2$s"</string>
     <string name="file_picker_new_folder_failed">No s\'ha pogut crear la carpeta</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Quant a</string>
-    <string name="settings_system_manager_description">Un projecte de codi obert per a un pegat modern i optimitzat d\'aplicacions populars d\'Android, impulsat pels comentaris i contribucions de la comunitat</string>
-    <string name="credits">Crèdits</string>
-    <string name="credits_description">Les persones darrere de Morphe</string>
     <string name="settings_about_section_project">Projecte</string>
     <string name="settings_about_section_help">Ajuda</string>
-    <string name="credits_current_development">Desenvolupament actual</string>
     <string name="credits_prior_development">Desenvolupament previ</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Gestor তোর</string>
+    <string name="about_update_available">Actualització disponible: %s</string>
+    <string name="about_up_to_date">Actualitzat</string>
+    <string name="about_links">Enllaços oficials</string>
+    <string name="about_link_donate">Donació</string>
+    <string name="about_link_website">Web</string>
+    <string name="about_link_translations">Traduccions</string>
+    <string name="contributors">Col·laboradors</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Tots els temps</string>
+    <string name="contributors_6_months">6 mesos</string>
+    <string name="contributors_3_months">3 mesos</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Supports</string>
+    <string name="supporters_description">Patrocinadors a Open Collective</string>
+    <string name="supporters_become">Convertiu-vos en un suport</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">I %s més</string>
+    <string name="people_unavailable">No s\'ha pogut carregar la llista</string>
     <string name="opensource_licenses">Llicències de codi obert</string>
     <string name="opensource_licenses_description">Les llibreries sobre les quals es construeix Morphe</string>
     <string name="opensource_licenses_search">Cerca biblioteques i llicències</string>
@@ -1415,6 +1441,8 @@ Detalls: %2$s"</string>
     <string name="include">Incloure</string>
     <string name="disable">Desactivar</string>
     <string name="enable">Activar</string>
+    <string name="enable_all">Activar tot</string>
+    <string name="disable_all">Desactivar tot</string>
     <string name="trust">Confia</string>
     <string name="loading">Carregant…</string>
     <string name="creating">Creant…</string>

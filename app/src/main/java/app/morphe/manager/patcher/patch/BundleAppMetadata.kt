@@ -6,6 +6,7 @@
 package app.morphe.manager.patcher.patch
 
 import androidx.compose.ui.graphics.Color
+import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.KnownApps
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.FormFactor
@@ -42,7 +43,7 @@ data class BundleAppMetadata(
 ) {
     /** Derived gradient color list for home screen buttons. Null means use fallback. */
     val gradientColors: List<Color>? = appIconColor?.let { rgb ->
-        listOf(appIconColorOf(rgb), KnownApps.GRADIENT_MID, KnownApps.GRADIENT_END)
+        AppCardColorDefaults.brandGradient(appIconColorOf(rgb))
     }
 
     /** Derived download button color. Null means use fallback. */

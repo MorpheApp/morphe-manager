@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Не успеа да се преземат извори: %s</string>
     <string name="sources_download_fail_named">„%s“ не можеше да се ажурира. Проверете ја вашата интернет врска и обидете се повторно</string>
     <string name="sources_download_endpoint_not_found">„%s“: метаподатоци за закрпи не се пронајдени</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Изворите на вашата локална мрежа не можат да се ажурираат без дозвола за уреди во близина</string>
     <string name="sources_signing_key_changed_named">\'%s\' не беше ажурирано бидејќи најновото издание не е потпишано со клучот што го користеше претходно</string>
     <string name="sources_signing_key_changed_local">Датотеката не е потпишана со клучот што овој извор го користеше претходно. За да и се довериме, избришете го изворот и додадете ја датотеката повторно</string>
     <string name="sources_signing_key_trust_title">Да се довериме на новиот клуч?</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">Оваа функција е достапна само во експертски режим</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Пребарувај поправки</string>
-    <string name="expert_mode_disable_all">Исклучи ги сите</string>
-    <string name="expert_mode_enable_all">Вклучи ги сите</string>
     <string name="expert_mode_enable_all_universal_pending">Допрете повторно за универзалните закрпи</string>
     <string name="expert_mode_universal_all_warning_title">Да се овозможат сите универзални закрпи?</string>
     <string name="expert_mode_universal_all_warning_message">Универзалните закрпи не се тестирани заедно. Овозможувањето на сите одеднаш може да предизвика конфликти, неуспешно закрпување или падови на апликацијата</string>
@@ -566,9 +566,12 @@
     <string name="app_links_unverified_banner_description">Поддржаните веб-линкови моментално се отвораат во вашиот прелистувач наместо во оваа апликација</string>
     <string name="app_links_enable_auto">Овозможи автоматски</string>
     <string name="app_links_enable_auto_in_progress">Овозможување на врските…</string>
+    <string name="app_links_disable_all_in_progress">Оневозможување на врските…</string>
     <string name="app_links_open_settings">Отвори ги поставките за врски</string>
     <string name="app_links_repair_success">Врските на апликацијата се овозможени успешно</string>
     <string name="app_links_repair_failed">Не успеа автоматското овозможување на врските на апликацијата</string>
+    <string name="app_links_disable_success">Врските на апликацијата се оневозможени</string>
+    <string name="app_links_disable_failed">Не успеа оневозможувањето на врските на апликацијата</string>
     <string name="app_links_change_failed">Неуспешно менување на врските до апликацијата</string>
     <string name="app_links_all_verified">Сите поддржани врски се конфигурирани да се отвораат во оваа апликација</string>
     <string name="app_links_fix">Поправете ги врските</string>
@@ -627,8 +630,6 @@
     <string name="patcher_field_value_stripped">отстранети</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">зачувани</string>
-    <string name="patcher_tab_logs">Дневници на закрпувачот</string>
-    <string name="patcher_tab_game">Игри</string>
     <string name="patcher_logs_waiting">Чекање на излез од дневникот…</string>
     <string name="patcher_logs_lost">Излезот од дневникот не се зачувува при рестартирање на апликацијата</string>
     <string name="patcher_long_step_warning">Овој чекор може да потрае некое време. Ве молам, почекајте…</string>
@@ -658,7 +659,6 @@
     <string name="patcher_install_error_subtitle">Обидете се да ја деинсталирате и повторно инсталирате</string>
     <string name="patcher_ready_to_mount_subtitle">Притиснете го копчето подолу за да монтирате</string>
     <string name="patcher_patches_excluded_for_installer">Не е достапно за овој метод на инсталација и е исклучено: %s</string>
-    <string name="patcher_back_to_game_hint">Допрете %1$s за да се вратите во вашата игра</string>
     <string name="patcher_storage_permission_dialog_title">Не може да пристапи до патеката за складиште</string>
     <string name="patcher_incompatible_patcher_title">Бара ажурирање</string>
     <string name="patcher_incompatible_patcher_description">Изворот &lt;b&gt;%1$s&lt;/b&gt; бара закрпувач &lt;b&gt;%2$s&lt;/b&gt; или понов. Ажурирајте го Morphe за да го користите</string>
@@ -763,7 +763,9 @@
     <string name="package_name">Име на пакет</string>
     <string name="failed_to_mount">Не успеа да се монтира: %s</string>
     <string name="failed_to_unmount">Не успеа да се размонтира: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Мини-игры</string>
+    <string name="mini_games_description">Брзи игри за да поминате неколку слободни минути</string>
     <string name="mini_game_score">Поени %s</string>
     <string name="mini_game_best">Најдобар %s</string>
     <string name="mini_game_new_record">Нов рекорд!</string>
@@ -772,7 +774,14 @@
     <string name="mini_game_paused">Пауза</string>
     <string name="mini_game_resume">Продолжи</string>
     <string name="mini_game_restart">Почни одново</string>
-    <string name="mini_game_change">Избери друга игра</string>
+    <string name="mini_game_pause">Пауза</string>
+    <string name="mini_game_score_label">Поени</string>
+    <string name="mini_game_best_label">Најдобар</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Ниво</string>
+    <string name="mini_game_lines">Линии</string>
+    <string name="mini_game_lives">Животи</string>
+    <string name="mini_game_flags">Знами</string>
     <string name="mini_game_2048_picker_subtitle">Лизгајте плочки за да ги спојите</string>
     <string name="mini_game_flappy_picker_subtitle">Допрете за да летате низ цевки</string>
     <string name="mini_game_flappy_tap_to_start">Кликнете за да летате</string>
@@ -1068,6 +1077,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режимот на закрпување е поставен на root mount. Оваа зачувана апликација не беше инсталирана со mount</string>
     <string name="mount_version_mismatch_message">Верзијата на инсталираната апликација (%2$s) не одговара на верзијата на закрпената апликација (%1$s). Монтирајте ја соодветната верзија на инсталираната апликација, а потоа обидете повторно.</string>
     <string name="mount_stock_restore_failed_message">Android го одби зачуваниот оригинален APK. Инсталирајте ја соодветната оригинална верзија, па потоа обидете се повторно со Монтирање</string>
+    <string name="mount_stock_mismatch_message">Инсталираната апликација не е оригиналната. Изберете го оригиналниот APK или реинсталирајте ја фабричката верзија, па потоа обидете се повторно со Mount</string>
     <string name="installer_status_shizuku_unsupported">Неподдржана верзија на Shizuku</string>
     <string name="installer_action_open_shizuku">Отвори Shizuku</string>
     <string name="installer_hint_generic">Инсталацијата не успеа. Обидете се повторно или префрлете се на друг инсталер</string>
@@ -1338,13 +1348,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Не успеа да се креира папката</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">За</string>
-    <string name="settings_system_manager_description">Проект со отворен код за модерно, поедноставено закрпување на популарни апликации за Android, поттикнато од повратни информации и придонеси од заедницата</string>
-    <string name="credits">Заслуги</string>
-    <string name="credits_description">Луѓето зад Morphe</string>
     <string name="settings_about_section_project">Проект</string>
     <string name="settings_about_section_help">Помош</string>
-    <string name="credits_current_development">Тековен развој</string>
     <string name="credits_prior_development">Претходен развој</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Менаџер</string>
+    <string name="about_update_available">Достапно ажурирање: %s</string>
+    <string name="about_up_to_date">Најнова верзија</string>
+    <string name="about_links">Официјални линкови</string>
+    <string name="about_link_donate">Донација</string>
+    <string name="about_link_website">Веб-страница</string>
+    <string name="about_link_translations">Преводи</string>
+    <string name="contributors">Придонесувачи</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Цело време</string>
+    <string name="contributors_6_months">6 месеци</string>
+    <string name="contributors_3_months">3 месеци</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Поддржувачи</string>
+    <string name="supporters_description">Поддржувачи на Open Collective</string>
+    <string name="supporters_become">Станете поддржувач</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">И уште %s</string>
+    <string name="people_unavailable">Не може да се вчита листата</string>
     <string name="opensource_licenses">Лиценци со отворен код</string>
     <string name="opensource_licenses_description">Библиотеките на кои се заснова Morphe</string>
     <string name="opensource_licenses_search">Пребарај библиотеки и лиценци</string>
@@ -1414,6 +1440,8 @@ morphe_header_custom_dark.png
     <string name="include">Вклучи</string>
     <string name="disable">Исклучи</string>
     <string name="enable">Вклучи</string>
+    <string name="enable_all">Овозможи ги сите</string>
+    <string name="disable_all">Оневозможи ги сите</string>
     <string name="trust">Доверба</string>
     <string name="loading">Вчитување…</string>
     <string name="creating">Креирање…</string>

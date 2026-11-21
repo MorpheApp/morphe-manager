@@ -10,10 +10,9 @@
 
 package app.morphe.manager.domain.manager
 
-import android.app.Application
-import android.content.Context
 import android.os.Build
 import android.util.Log
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.domain.apk.apkFileStampOrNull
 import app.morphe.manager.util.JksKeyStoreParser
 import app.morphe.manager.util.sha256Fingerprint
@@ -50,7 +49,7 @@ data class SigningKeyInfo(
     val createdAt: Long?
 )
 
-class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
+class KeystoreManager(fs: Filesystem, private val prefs: PreferencesManager) {
     companion object Constants {
         /** Default alias and password for the keystore. */
         const val DEFAULT = "Morphe"
@@ -58,8 +57,7 @@ class KeystoreManager(app: Application, private val prefs: PreferencesManager) {
         private const val TAG = "Morphe Keystore"
     }
 
-    private val keystorePath =
-        app.getDir("signing", Context.MODE_PRIVATE).resolve("morphe.keystore")
+    private val keystorePath = fs.keystoreFile
 
     // Reading the keystore goes through BouncyCastle, so the fingerprints are kept until the
     // file itself changes rather than re-read for every app a home refresh inspects

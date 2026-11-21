@@ -482,23 +482,42 @@ class PatchFlow(
             return
         }
 
+        launchApkSelection(
+            logMessage = "Failed to prepare installed APK",
+            failureMessage = R.string.home_invalid_apk_io_error,
+            prepare = { copyInstalledApk(packageName, installedInfo) },
+            // Skip signature check: the installed APK may already be patched with our key
+            proceed = { processSelectedAppIgnoringSignature(it) }
+        )
+    }
+
+    /**
+     * Prepares the APK a source hands over off the main thread, with the selection showing as
+     * busy meanwhile, and passes it to [proceed]. One that cannot be prepared ends the run, with
+     * [failureMessage] unless [prepare] already told the user why.
+     */
+    private fun launchApkSelection(
+        logMessage: String,
+        @StringRes failureMessage: Int?,
+        prepare: suspend () -> SelectedApp.Local?,
+        proceed: suspend (SelectedApp.Local) -> Unit
+    ) {
         scope.launch {
             processingApkSelection = true
             try {
                 val selectedApp = withContext(Dispatchers.IO) {
                     try {
-                        copyInstalledApk(packageName, installedInfo)
+                        prepare()
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to prepare installed APK", e)
+                        Log.e(LOG_TAG, logMessage, e)
                         null
                     }
                 }
 
                 if (selectedApp != null) {
-                    // Skip signature check: the installed APK may already be patched with our key
-                    processSelectedAppIgnoringSignature(selectedApp)
+                    proceed(selectedApp)
                 } else {
-                    messages.show(R.string.home_invalid_apk_io_error)
+                    failureMessage?.let { messages.show(it) }
                     endRun()
                 }
             } finally {
@@ -637,7 +656,7 @@ class PatchFlow(
                             .filterNot { it.packageName in patched }
                             .sortedBy { it.label.lowercase() }
                     } catch (e: Exception) {
-                        Log.e(tag, "Failed to load installed apps for picker", e)
+                        Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
                         emptyList()
                     }
                 }
@@ -654,29 +673,14 @@ class PatchFlow(
      */
     fun handleInstalledAppPickerSelection(item: InstalledAppPickerItem) {
         session = session?.copy(appName = item.label)
-        scope.launch {
-            processingApkSelection = true
-            try {
-                val selectedApp = withContext(Dispatchers.IO) {
-                    try {
-                        copyInstalledApk(item.packageName, item.info)
-                    } catch (e: Exception) {
-                        Log.e(tag, "Failed to prepare APK from picker", e)
-                        null
-                    }
-                }
-                if (selectedApp != null) {
-                    // The picker only offers unpatched installs - skip split and signature checks.
-                    // Version/versionCode check still runs via processSelectedApp.
-                    processSelectedApp(selectedApp, skipSplitCheck = true)
-                } else {
-                    messages.show(R.string.home_invalid_apk_io_error)
-                    endRun()
-                }
-            } finally {
-                processingApkSelection = false
-            }
-        }
+        launchApkSelection(
+            logMessage = "Failed to prepare APK from picker",
+            failureMessage = R.string.home_invalid_apk_io_error,
+            prepare = { copyInstalledApk(item.packageName, item.info) },
+            // The picker only offers unpatched installs - skip split and signature checks.
+            // Version/versionCode check still runs via processSelectedApp.
+            proceed = { processSelectedApp(it, skipSplitCheck = true) }
+        )
     }
 
     /**
@@ -734,45 +738,31 @@ class PatchFlow(
             return
         }
 
-        scope.launch {
-            processingApkSelection = true
-            try {
-                // Create SelectedApp from saved APK file
-                val selectedApp = withContext(Dispatchers.IO) {
-                    try {
-                        val file = File(savedInfo.filePath)
-                        if (!file.exists()) {
-                            messages.show(R.string.home_app_info_repatch_no_original_apk)
-                            return@withContext null
-                        }
-
-                        // Mark as used
-                        originalApkRepository.markUsed(packageName)
-
-                        SelectedApp.Local(
-                            packageName = packageName,
-                            version = savedInfo.version,
-                            versionCode = savedInfo.versionCode,
-                            file = file,
-                            temporary = false // Don't delete saved APK files
-                        )
-                    } catch (e: Exception) {
-                        Log.e(tag, "Failed to load saved APK", e)
-                        null
-                    }
+        launchApkSelection(
+            logMessage = "Failed to load saved APK",
+            failureMessage = null,
+            prepare = prepare@{
+                val file = File(savedInfo.filePath)
+                if (!file.exists()) {
+                    messages.show(R.string.home_app_info_repatch_no_original_apk)
+                    return@prepare null
                 }
 
-                if (selectedApp != null) {
-                    // Saved file may be signed with our keystore - skip signature check.
-                    // Version/versionCode check still runs via processSelectedApp.
-                    processSelectedApp(selectedApp, skipSplitCheck = true)
-                } else {
-                    endRun()
-                }
-            } finally {
-                processingApkSelection = false
-            }
-        }
+                // Mark as used
+                originalApkRepository.markUsed(packageName)
+
+                SelectedApp.Local(
+                    packageName = packageName,
+                    version = savedInfo.version,
+                    versionCode = savedInfo.versionCode,
+                    file = file,
+                    temporary = false // Don't delete saved APK files
+                )
+            },
+            // Saved file may be signed with our keystore - skip signature check.
+            // Version/versionCode check still runs via processSelectedApp.
+            proceed = { processSelectedApp(it, skipSplitCheck = true) }
+        )
     }
 
     /**
@@ -1573,7 +1563,7 @@ class PatchFlow(
         if (handOff(urlToOpen)) {
             dialogs.open(HomeDialog.FilePickerPrompt)
         } else {
-            Log.w(tag, "Failed to open URL")
+            Log.w(LOG_TAG, "Failed to open URL")
             messages.show(R.string.sources_management_failed_to_open_url)
             endRun()
         }
@@ -1658,12 +1648,12 @@ class PatchFlow(
             }
 
             if (result == ApkLoadResult.NotAnApk) {
-                Log.w(tag, "Picked file ${tempFile.name} could not be parsed as an APK")
+                Log.w(LOG_TAG, "Picked file ${tempFile.name} could not be parsed as an APK")
             }
             if (result !is ApkLoadResult.Success) tempFile.delete()
             result
         } catch (e: Exception) {
-            Log.e(tag, "Failed to load APK", e)
+            Log.e(LOG_TAG, "Failed to load APK", e)
             ApkLoadResult.IoError
         }
     }

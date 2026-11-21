@@ -245,6 +245,8 @@
     <string name="sources_download_fail">소스를 다운로드할 수 없습니다: %s</string>
     <string name="sources_download_fail_named">\'%s\'를 업데이트할 수 없습니다. 인터넷 연결 상태를 확인하고 다시 시도하세요</string>
     <string name="sources_download_endpoint_not_found">\'%s\': 패치 메타데이터를 찾을 수 없습니다</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">근처 기기 권한이 없으면 로컬 네트워크의 소스를 업데이트할 수 없습니다</string>
     <string name="sources_signing_key_changed_named">\'%s\' 앱은 최신 릴리스가 이전에 사용하던 키로 서명되지 않아 업데이트되지 않았습니다</string>
     <string name="sources_signing_key_changed_local">이 파일은 이 소스에서 이전에 사용하던 키로 서명되지 않았습니다. 이 파일을 신뢰하려면 해당 소스를 삭제한 다음 파일을 다시 추가하세요</string>
     <string name="sources_signing_key_trust_title">새 키를 신뢰하시겠습니까?</string>
@@ -346,8 +348,6 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_external_apk_expert_mode_required">이 기능은 전문가 모드에서만 사용할 수 있습니다</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">패치 검색</string>
-    <string name="expert_mode_disable_all">모두 비활성화</string>
-    <string name="expert_mode_enable_all">모두 활성화</string>
     <string name="expert_mode_enable_all_universal_pending">유니버설 패치를 위해 다시 탭하세요</string>
     <string name="expert_mode_universal_all_warning_title">모든 유니버설 패치 활성화</string>
     <string name="expert_mode_universal_all_warning_message">유니버설 패치는 함께 테스트되지 않았습니다. 모든 패치를 한 번에 활성화하면 패치 충돌, 패치 실패 또는 앱 충돌이 발생할 수 있습니다</string>
@@ -567,9 +567,12 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="app_links_unverified_banner_description">지원되는 웹 링크가 현재 이 앱 대신 브라우저에서 열립니다</string>
     <string name="app_links_enable_auto">자동으로 활성화</string>
     <string name="app_links_enable_auto_in_progress">링크를 활성화하는 중…</string>
+    <string name="app_links_disable_all_in_progress">링크를 비활성화하는 중…</string>
     <string name="app_links_open_settings">링크 설정 열기</string>
     <string name="app_links_repair_success">앱 링크 활성화 성공</string>
     <string name="app_links_repair_failed">앱 링크 자동 활성화 실패</string>
+    <string name="app_links_disable_success">앱 링크 비활성화됨</string>
+    <string name="app_links_disable_failed">앱 링크 비활성화 실패</string>
     <string name="app_links_change_failed">앱 링크를 변경하지 못하였습니다</string>
     <string name="app_links_all_verified">지원되는 모든 링크가 이 앱에서 열리도록 설정되었습니다</string>
     <string name="app_links_fix">링크 수정</string>
@@ -628,8 +631,6 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="patcher_field_value_stripped">제거됨</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">유지됨</string>
-    <string name="patcher_tab_logs">패처 로그</string>
-    <string name="patcher_tab_game">게임</string>
     <string name="patcher_logs_waiting">로그 출력을 기다리는 중…</string>
     <string name="patcher_logs_lost">로그 출력은 앱을 다시 시작하면 유지되지 않습니다</string>
     <string name="patcher_long_step_warning">이 단계는 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요…</string>
@@ -659,7 +660,6 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="patcher_install_error_subtitle">앱을 제거한 후에 다시 설치하세요</string>
     <string name="patcher_ready_to_mount_subtitle">마운트하려면 아래 버튼을 탭하세요</string>
     <string name="patcher_patches_excluded_for_installer">이 설치 방법에는 사용할 수 없으며 제외됩니다: %s</string>
-    <string name="patcher_back_to_game_hint">게임으로 돌아가려면 \'%1$s\'를 탭하세요</string>
     <string name="patcher_storage_permission_dialog_title">저장소 경로에 접근할 수 없음</string>
     <string name="patcher_incompatible_patcher_title">업데이트 필요</string>
     <string name="patcher_incompatible_patcher_description">소스 &lt;b&gt;%1$s&lt;/b&gt;를 사용하려면 &lt;b&gt;%2$s&lt;/b&gt;이상의 패처가 필요합니다. 해당 패처를 사용하려면 Morphe를 업데이트하세요</string>
@@ -764,7 +764,9 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="package_name">앱 패키지명</string>
     <string name="failed_to_mount">마운트할 수 없습니다: %s</string>
     <string name="failed_to_unmount">마운트를 해제할 수 없습니다: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">미니 게임</string>
+    <string name="mini_games_description">자투리 시간에 즐길 수 있는 간단한 게임</string>
     <string name="mini_game_score">점수 %s</string>
     <string name="mini_game_best">최고 %s</string>
     <string name="mini_game_new_record">신기록!</string>
@@ -773,7 +775,14 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="mini_game_paused">일시 중지</string>
     <string name="mini_game_resume">계속 진행</string>
     <string name="mini_game_restart">다시 시작</string>
-    <string name="mini_game_change">다른 게임 선택</string>
+    <string name="mini_game_pause">일시 정지</string>
+    <string name="mini_game_score_label">점수</string>
+    <string name="mini_game_best_label">최고</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">레벨</string>
+    <string name="mini_game_lines">라인</string>
+    <string name="mini_game_lives">생명</string>
+    <string name="mini_game_flags">깃발</string>
     <string name="mini_game_2048_picker_subtitle">타일 밀어서 합치기</string>
     <string name="mini_game_flappy_picker_subtitle">탭하여 파이프 사이 날아가기</string>
     <string name="mini_game_flappy_tap_to_start">날아보려면 탭하세요</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">패치 모드가 루트 마운트로 설정되어 있습니다. 이 저장된 앱은 마운트를 사용하여 설치되지 않았습니다</string>
     <string name="mount_version_mismatch_message">순정 앱 버전(%2$s)이 패치된 앱 버전(%1$s)과 일치하지 않습니다. 일치하는 순정 버전을 마운트한 다음에 다시 시도하세요</string>
     <string name="mount_stock_restore_failed_message">Android에서 저장된 원본 APK를 거부하였습니다. 해당 버전과 일치하는 순정 앱을 설치한 후에 다시 마운트를 시도하세요</string>
+    <string name="mount_stock_mismatch_message">설치된 앱이 원본이 아닙니다. 원본 APK를 선택하거나 순정 버전을 재설치한 후 다시 마운트를 시도하세요</string>
     <string name="installer_status_shizuku_unsupported">설치된 Shizuku 버전은 지원되지 않습니다</string>
     <string name="installer_action_open_shizuku">Shizuku 열기</string>
     <string name="installer_hint_generic">설치할 수 없습니다. 다시 시도하거나 다른 설치 프로그램으로 변경하세요</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">폴더를 생성할 수 없습니다</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">정보</string>
-    <string name="settings_system_manager_description">커뮤니티 피드백과 기여를 기반으로 인기 있는 Android 앱을 현대적이고 간소화된 방식으로 패치하기 위한 오픈소스 프로젝트입니다</string>
-    <string name="credits">크레딧</string>
-    <string name="credits_description">Morphe 개발자</string>
     <string name="settings_about_section_project">프로젝트</string>
     <string name="settings_about_section_help">도움말</string>
-    <string name="credits_current_development">현재 개발</string>
     <string name="credits_prior_development">이전 개발</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">매니저</string>
+    <string name="about_update_available">업데이트 가능: %s</string>
+    <string name="about_up_to_date">최신 버전</string>
+    <string name="about_links">공식 링크</string>
+    <string name="about_link_donate">후원하기</string>
+    <string name="about_link_website">웹사이트</string>
+    <string name="about_link_translations">번역에 도움주기</string>
+    <string name="contributors">도움을 주신 분들</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">전체 기간</string>
+    <string name="contributors_6_months">6개월</string>
+    <string name="contributors_3_months">3개월</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">후원자</string>
+    <string name="supporters_description">Open Collective 후원자</string>
+    <string name="supporters_become">후원자가 되세요</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">그 외 %s명 더</string>
+    <string name="people_unavailable">목록을 불러올 수 없습니다</string>
     <string name="opensource_licenses">오픈 소스 라이선스</string>
     <string name="opensource_licenses_description">Morphe 기반 라이브러리</string>
     <string name="opensource_licenses_search">라이브러리 및 라이선스 검색</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">포함</string>
     <string name="disable">비활성화</string>
     <string name="enable">활성화</string>
+    <string name="enable_all">모두 활성화</string>
+    <string name="disable_all">모두 비활성화</string>
     <string name="trust">신뢰</string>
     <string name="loading">불러오는 중…</string>
     <string name="creating">생성하는 중…</string>

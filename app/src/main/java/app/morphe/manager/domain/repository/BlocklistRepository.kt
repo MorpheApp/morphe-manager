@@ -8,7 +8,7 @@ package app.morphe.manager.domain.repository
 import android.util.Log
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.util.BLOCKED_SOURCES_URL
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -40,7 +40,7 @@ class BlocklistRepository(
         val response: BlocklistResponse = try {
             http.get(BLOCKED_SOURCES_URL).body()
         } catch (e: Exception) {
-            Log.w(tag, "Failed to refresh source blocklist", e)
+            Log.w(LOG_TAG, "Failed to refresh source blocklist", e)
             return
         }
         val fresh = response.blocked
@@ -61,7 +61,7 @@ class BlocklistRepository(
                 .filter { it.provider.isNotBlank() && it.repo.isNotBlank() }
                 .associateBy { key(it.provider, it.repo) }
         } catch (e: Exception) {
-            Log.w(tag, "Failed to decode cached blocklist", e)
+            Log.w(LOG_TAG, "Failed to decode cached blocklist", e)
             emptyMap()
         }
     }

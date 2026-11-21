@@ -43,6 +43,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <!-- Home Screen - Dialog 1: APK Availability -->
     <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
@@ -98,7 +99,8 @@
     <!-- Patcher Screen - Other hidden strings -->
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <!-- Counts a game keeps besides its score, shown above the field -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
@@ -139,6 +141,10 @@
     <!-- Settings - System Tab - APK download helper -->
     <!-- File Picker -->
     <!-- Settings - System Tab - About Section -->
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <!-- People who donate to Morphe -->
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->

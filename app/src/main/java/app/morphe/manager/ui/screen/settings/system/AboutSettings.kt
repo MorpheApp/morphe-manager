@@ -28,7 +28,7 @@ import org.koin.androidx.compose.koinViewModel
 
 /**
  * The manager itself, closing the settings page as a section of its own: its version, which opens
- * [AboutDialog], over the row opening its changelog, credits and help, see [AboutSettings].
+ * [AboutDialog], over the row opening its changelog, licenses and help, see [AboutSettings].
  */
 @Composable
 fun AboutGroup(onOpenSubpage: (SettingsSubpage) -> Unit) {
@@ -66,29 +66,26 @@ fun AboutGroup(onOpenSubpage: (SettingsSubpage) -> Unit) {
 
 /**
  * What there is to know about the manager past its version, and help with it, on a page of its
- * own, see [SettingsSubpage.ABOUT]: its changelog, credits and licenses, the logs a bug report
- * asks for and the tour.
+ * own, see [SettingsSubpage.ABOUT]: its changelog and licenses, the logs a bug report
+ * asks for, the tour and the mini-games.
  *
  * @param onOpenLicenses Opens the open-source licenses the manager is built on.
+ * @param onOpenMiniGames Opens the mini-games.
  * @param onStartTour Restarts the onboarding tour, when no tour is running.
  */
 @Composable
 fun AboutSettings(
     onOpenLicenses: () -> Unit,
+    onOpenMiniGames: () -> Unit,
     onStartTour: (() -> Unit)?,
     importExportViewModel: ImportExportViewModel = koinViewModel()
 ) {
     var showChangelogDialog by remember { mutableStateOf(false) }
-    var showCreditsDialog by rememberSaveable { mutableStateOf(false) }
 
     val exportDebugLogs = rememberDocumentSaver(TEXT_MIMETYPE, importExportViewModel::exportDebugLogs)
 
     DialogHost(visible = showChangelogDialog) {
         ManagerChangelogDialog(onDismiss = { showChangelogDialog = false })
-    }
-
-    DialogHost(visible = showCreditsDialog) {
-        CreditsDialog(onDismiss = { showCreditsDialog = false })
     }
 
     SettingsColumn {
@@ -102,12 +99,6 @@ fun AboutSettings(
                     title = stringResource(R.string.changelog),
                     subtitle = stringResource(R.string.changelog_description),
                     onClick = { showChangelogDialog = true }
-                )
-                SettingsItem(
-                    icon = MaterialSymbols.Rounded.Group,
-                    title = stringResource(R.string.credits),
-                    subtitle = stringResource(R.string.credits_description),
-                    onClick = { showCreditsDialog = true }
                 )
                 SettingsItem(
                     icon = MaterialSymbols.Rounded.Gavel,
@@ -140,6 +131,12 @@ fun AboutSettings(
                         onClick = onStartTour
                     )
                 }
+                SettingsItem(
+                    icon = MaterialSymbols.Rounded.Sports_esports,
+                    title = stringResource(R.string.mini_games),
+                    subtitle = stringResource(R.string.mini_games_description),
+                    onClick = onOpenMiniGames
+                )
             }
         }
     }

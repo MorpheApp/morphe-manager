@@ -25,10 +25,15 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollDispatcher
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import app.morphe.manager.util.isRtl
@@ -112,6 +117,9 @@ private data class ScrollbarSeekTarget(
     val label: String? = null
 )
 
+/** Takes no part in the scrolls it is handed, the scrollbar only reports the ones it makes. */
+private val ReportOnlyConnection = object : NestedScrollConnection {}
+
 /** Runs seek scrolls one at a time, dropping the in-flight one when the thumb moves again. */
 private class ScrollbarSeekController(private val scope: CoroutineScope) {
     private var job: Job? = null
@@ -119,6 +127,15 @@ private class ScrollbarSeekController(private val scope: CoroutineScope) {
     fun seek(block: suspend () -> Unit) {
         job?.cancel()
         job = scope.launch { block() }
+    }
+
+    /** Runs [block] once the last seek has landed, unless the thumb is grabbed again first. */
+    fun afterSeek(block: suspend () -> Unit) {
+        val last = job
+        job = scope.launch {
+            last?.join()
+            block()
+        }
     }
 }
 
@@ -171,6 +188,7 @@ fun BoxScope.ListScrollbar(
                 listState.seekTarget(fraction, sizeCache, metrics.value)
             }
         },
+        scrollOffset = { metrics.value.scrollOffset },
         scrollTo = { target -> listState.scrollToItem(target.index, target.offset) }
     )
 }
@@ -202,6 +220,7 @@ fun BoxScope.ListScrollbar(
         resolveSeek = { fraction ->
             ScrollbarSeekTarget(index = (fraction * scrollState.maxValue).roundToInt())
         },
+        scrollOffset = { scrollState.value.toFloat() },
         scrollTo = { target -> scrollState.scrollTo(target.index) }
     )
 }
@@ -209,6 +228,11 @@ fun BoxScope.ListScrollbar(
 /**
  * Shared track, thumb and callout. [resolveSeek] turns a dragged position, as a 0..1 fraction, into
  * the row to jump to; [scrollTo] is then called only when that row changes.
+ *
+ * A seek jumps the list in code, which nothing following the list's scroll would see, so every jump
+ * is reported up the nested scroll chain by how far [scrollOffset] moved, and letting go as a fling
+ * that ended. Whatever follows the list, such as a header folding away, then follows the thumb the
+ * way it follows a finger.
  *
  * [progress] and [thumbFraction] are lambdas rather than values so the track is repainted from the
  * draw phase. Read during composition instead, they would recompose this whole overlay on every
@@ -223,6 +247,7 @@ private fun BoxScope.ScrollbarOverlay(
     isScrolling: Boolean,
     alphabetEnabled: Boolean,
     resolveSeek: (fraction: Float) -> ScrollbarSeekTarget,
+    scrollOffset: () -> Float,
     scrollTo: suspend (target: ScrollbarSeekTarget) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -230,9 +255,11 @@ private fun BoxScope.ScrollbarOverlay(
     // leading edge in RTL without being flipped here. Only the raw draw coordinates below need it
     val rtl = isRtl()
     val currentResolveSeek by rememberUpdatedState(resolveSeek)
+    val currentScrollOffset by rememberUpdatedState(scrollOffset)
     val currentScrollTo by rememberUpdatedState(scrollTo)
     val scope = rememberCoroutineScope()
     val seekController = remember(scope) { ScrollbarSeekController(scope) }
+    val nestedScroll = remember { NestedScrollDispatcher() }
     val colors = MaterialTheme.colorScheme
     val trackColor = colors.outlineVariant.copy(alpha = 0.34f)
     val activeTrackColor = colors.primary.copy(alpha = 0.24f)
@@ -294,6 +321,7 @@ private fun BoxScope.ScrollbarOverlay(
 
     Box(
         modifier = modifier
+            .nestedScroll(ReportOnlyConnection, nestedScroll)
             .align(Alignment.CenterEnd)
             .fillMaxHeight()
             .width(ScrollbarOverlayWidth)
@@ -377,7 +405,15 @@ private fun BoxScope.ScrollbarOverlay(
                             // the jump for each of them cancels a scroll that has not settled yet
                             if (target != seekedTarget) {
                                 seekedTarget = target
-                                seekController.seek { currentScrollTo(target) }
+                                seekController.seek {
+                                    val before = currentScrollOffset()
+                                    currentScrollTo(target)
+                                    nestedScroll.dispatchPostScroll(
+                                        consumed = Offset(0f, before - currentScrollOffset()),
+                                        available = Offset.Zero,
+                                        source = NestedScrollSource.UserInput
+                                    )
+                                }
                             }
                             change.consume()
                         }
@@ -385,6 +421,9 @@ private fun BoxScope.ScrollbarOverlay(
                             releasedFrom = dragFraction
                             dragging = false
                             activeLabel = null
+                            seekController.afterSeek {
+                                nestedScroll.dispatchPostFling(consumed = Velocity.Zero, available = Velocity.Zero)
+                            }
                         }
                     }
                 }
@@ -456,6 +495,8 @@ private fun AlphabetScrollCallout(
 private data class ScrollbarMetrics(
     val progress: Float,
     val thumbFraction: Float,
+    /** Pixels scrolled from the top, estimated where rows above were never measured. */
+    val scrollOffset: Float = 0f,
     /** Carried so a drag can be mapped back onto pixels without estimating the content twice. */
     val averageItemSize: Float = 0f,
     val maxScrollOffset: Float = 1f
@@ -494,6 +535,7 @@ private fun LazyListState.scrollbarMetrics(sizeCache: MutableMap<Int, Int>): Scr
     return ScrollbarMetrics(
         progress = (scrollOffset / maxScrollOffset).coerceIn(0f, 1f),
         thumbFraction = (viewportSize / contentSize).coerceIn(MinThumbFraction, 1f),
+        scrollOffset = scrollOffset,
         averageItemSize = averageItemSize,
         maxScrollOffset = maxScrollOffset
     )

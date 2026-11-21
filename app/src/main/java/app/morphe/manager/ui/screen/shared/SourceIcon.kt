@@ -30,7 +30,7 @@ import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.BundleSourceType
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.avatarUrls
-import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isDefault
+import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.isMorpheSource
 import app.morphe.manager.util.RemoteAvatar
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
@@ -81,6 +81,7 @@ fun BundleIcon(
     metadataFetchError: Throwable? = null
 ) {
     val avatarUrls = bundle.avatarUrls
+    val isMorpheSource = bundle.isMorpheSource
     val hasMetadataError = metadataFetchError != null
     val hasBundleError = bundle.state is PatchBundleSource.State.Failed
     val isMissing = bundle.state is PatchBundleSource.State.Missing
@@ -88,7 +89,7 @@ fun BundleIcon(
     // Kept apart from the card under it, which a source's problem fills with the same container
     val animatedColor by animateColorAsState(
         targetValue = when {
-            bundle.isDefault -> Color.White
+            isMorpheSource -> Color.White
             hasBundleError -> MaterialTheme.colorScheme.errorContainer.distinctFromCard()
             // Matches the icon below, which a missing source wears as well
             hasMetadataError || isMissing -> SemanticTone.Warning.container.distinctFromCard()
@@ -116,7 +117,7 @@ fun BundleIcon(
         color = animatedColor
     ) {
         when {
-            bundle.isDefault -> MorpheLauncherLogo(modifier = Modifier.fillMaxSize())
+            isMorpheSource -> MorpheLauncherLogo(modifier = Modifier.fillMaxSize())
 
             hasBundleError -> {
                 Icon(

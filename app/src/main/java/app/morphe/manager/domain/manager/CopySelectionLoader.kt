@@ -11,6 +11,7 @@ import app.morphe.manager.domain.repository.SelectionSetRepository
 import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.util.AppDataResolver
+import app.morphe.manager.util.SourceUrl
 import kotlinx.coroutines.flow.first
 import java.util.Locale
 
@@ -105,6 +106,6 @@ private fun normalizedEndpointKey(
     bundleUid: Int
 ): String? {
     val endpoint = patchBundleRepository.getEndpointForUid(bundleUid) ?: return null
-    return runCatching { patchBundleRepository.normalizeRemoteBundleUrl(endpoint) }
+    return runCatching { SourceUrl.normalizeBundleUrl(endpoint) }
         .getOrElse { endpoint.lowercase(Locale.US) }
 }

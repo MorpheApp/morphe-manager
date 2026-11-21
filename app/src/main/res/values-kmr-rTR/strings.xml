@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Daxistina çavkaniyan têk çû: %s</string>
     <string name="sources_download_fail_named">\'%s\' nehat nûvekirin. Girêdana înternetê kontrol bike û dîsa biceribîne.</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metadata ya pelê nehat dîtin.</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Çavkaniyên li ser tora we ya herêmî bêyî destûra amirên nêzîk nanishin</string>
     <string name="sources_signing_key_changed_named">\'%s\' nehat nûkirin ji ber ku îsdara wê ya herî dawî bi kîlîya ku wê berê bikar anî nehatî îmzekirin</string>
     <string name="sources_signing_key_changed_local">Pel bi kîlîya ku vê çavkaniyê berê bikar anî nehatî îmzekirin. Ji bo baweriyê pê bînî, çavkaniyê jêbide û pelê dîsa zêde bike</string>
     <string name="sources_signing_key_trust_title">Bawerî bi kîlîya nû bike?</string>
@@ -346,8 +348,6 @@ Hilbijêre ku APK ya wê ji ku derê bê"</string>
     <string name="home_external_apk_expert_mode_required">Ev taybetmendî tenê di Moda Pispor de heye</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Patchan bigere</string>
-    <string name="expert_mode_disable_all">Hemûyan neçalak bike</string>
-    <string name="expert_mode_enable_all">Hemûyan çalak bike</string>
     <string name="expert_mode_enable_all_universal_pending">Dîsa bitikîne ji bo patchên universal</string>
     <string name="expert_mode_universal_all_warning_title">Hemû patchên gerdûnî çalak bike?</string>
     <string name="expert_mode_universal_all_warning_message">Patchên gerdûnî bi hev re nehatine ceribandin. Çalakkirina hemûyan bi carekê dikare bibe sedema nakokî, patchkirina têkçûyî, an jî hilweşînan.</string>
@@ -567,9 +567,12 @@ Ji bo encamên çêtir, ev app pêşniyar dike ku APKya &lt;b&gt;tam&lt;/b&gt; w
     <string name="app_links_unverified_banner_description">Girêdanên webê yên piştgirîkirî niha li şûna vê sepanê di geroka te de vedibin.</string>
     <string name="app_links_enable_auto">Bi otomatîkî çalak bike</string>
     <string name="app_links_enable_auto_in_progress">Girêdan têne çalakkirin…</string>
+    <string name="app_links_disable_all_in_progress">Betalkirina girêdanan…</string>
     <string name="app_links_open_settings">Mîhengên girêdanê veke</string>
     <string name="app_links_repair_success">Girêdanên sepanê bi serfirazî hatin çalakkirin.</string>
     <string name="app_links_repair_failed">Çalakkirina otomatîkî ya girêdanên sepanê têk çû.</string>
+    <string name="app_links_disable_success">Girêdanên sepê hatin betalkirin</string>
+    <string name="app_links_disable_failed">Betalkirina girêdanên sepê têk çû</string>
     <string name="app_links_change_failed">Guherandina girêdanên sepanê bi ser neket</string>
     <string name="app_links_all_verified">Hemû girêdanên piştgirîkirî hatine mîhengkirin ku di vê sepanê de vebin.</string>
     <string name="app_links_fix">Girêdanan rast bike</string>
@@ -628,8 +631,6 @@ Ji bo encamên çêtir, ev app pêşniyar dike ku APKya &lt;b&gt;tam&lt;/b&gt; w
     <string name="patcher_field_value_stripped">jêbirî</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">hatine hilanîn</string>
-    <string name="patcher_tab_logs">Logên patcherê</string>
-    <string name="patcher_tab_game">Lîstik</string>
     <string name="patcher_logs_waiting">Li benda derketina logê…</string>
     <string name="patcher_logs_lost">Derketina logê dema appê ji nû ve tê destpêkirin winda dibe</string>
     <string name="patcher_long_step_warning">Ev gav dikare hinekî dem bigire. Ji kerema xwe li benda bimîne…</string>
@@ -659,7 +660,6 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="patcher_install_error_subtitle">Heke hewce bike, saz bike û dîsa saz bike</string>
     <string name="patcher_ready_to_mount_subtitle">Ji bo mountkirinê li jêr bikirtînin</string>
     <string name="patcher_patches_excluded_for_installer">Ji bo vê rêbaza sazkirinê peyda nabe û hatiye derxistin: %s</string>
-    <string name="patcher_back_to_game_hint">Bitikîne %1$s da ku vegerî lîstika xwe</string>
     <string name="patcher_storage_permission_dialog_title">Riya depoyê nayê gihîştin</string>
     <string name="patcher_incompatible_patcher_title">Nûvekirin hewce ye</string>
     <string name="patcher_incompatible_patcher_description">Çavkanî &lt;b&gt;%1$s&lt;/b&gt; hewceyî patchker &lt;b&gt;%2$s&lt;/b&gt; an jî nûtir e. Ji bo ku bikar bîne, Morphe nûve bike.</string>
@@ -764,7 +764,9 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="package_name">Navê pakêtê</string>
     <string name="failed_to_mount">Serketina çêkirinê: %s</string>
     <string name="failed_to_unmount">Serketina nebûyîna çêkirinê: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Yariyari-lîstik</string>
+    <string name="mini_games_description">Lîstikên bilez ji bo xaltekî wextê vala</string>
     <string name="mini_game_score">Puan %s</string>
     <string name="mini_game_best">Ya herî baş %s</string>
     <string name="mini_game_new_record">Rekora nû!</string>
@@ -773,7 +775,14 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="mini_game_paused">Sekinî</string>
     <string name="mini_game_resume">Berdewam bike</string>
     <string name="mini_game_restart">Ji nû ve dest pê bike</string>
-    <string name="mini_game_change">Lîstikeke din hilbijêre</string>
+    <string name="mini_game_pause">Sekine</string>
+    <string name="mini_game_score_label">Xal</string>
+    <string name="mini_game_best_label">Ya herî baş</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Asta</string>
+    <string name="mini_game_lines">Hêl</string>
+    <string name="mini_game_lives">Jiyan</string>
+    <string name="mini_game_flags">Alay</string>
     <string name="mini_game_2048_picker_subtitle">Tile\'an bilivîne da ku bigihîjin hev</string>
     <string name="mini_game_flappy_picker_subtitle">Bitikîne da ku di nav borûyan re biherike</string>
     <string name="mini_game_flappy_tap_to_start">Bitikîne da ku bifire</string>
@@ -1069,6 +1078,7 @@ Qasîyên wêneyan divê wiha bin:
     <string name="installer_mount_warning_install">Moda patchkirinê li ser root mount hatiye belgekirin. Ev appa hatî parastin bi mount nehatiye sazkirin</string>
     <string name="mount_version_mismatch_message">Guhertoya sepana orîjînal (%2$s) bi guhertoya sepana patchkirî (%1$s) li hev nayê. Guhertoya orîjînal a hevgirtî saz bike, paşê dîsa biceribîne</string>
     <string name="mount_stock_restore_failed_message">Android APKya orîjînal a tomarkirî qebûl nekir. Versiyona stock a hevgirtî saz bike, paşê dîsa Mount biceribîne</string>
+    <string name="mount_stock_mismatch_message">Appê hatî sazkirin ne yê orjînal e. APKya orjînal hilbijêre an jî versiyona stok dubare sazbike, piştre dubare Mount bicerxe</string>
     <string name="installer_status_shizuku_unsupported">Versiyona sazkirî ya Şizuku piştgirî nadê</string>
     <string name="installer_action_open_shizuku">Shizuku veke</string>
     <string name="installer_hint_generic">Sazkirin bi ser neket. Dîsa biceribîne an sazkerek din hilbijêre</string>
@@ -1339,13 +1349,29 @@ Detay: %2$s"</string>
     <string name="file_picker_new_folder_failed">Peldanka nehat afirandin</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Derbarê</string>
-    <string name="settings_system_manager_description">Projeyeke çavkaniya vekirî ji bo patchkirina nûjen û hêsan a appên populer ên Android, ku bi hişmendiya civakê û tevkariyan ve tê rêvebirin</string>
-    <string name="credits">Spasdarî</string>
-    <string name="credits_description">Kesên li pişt Morphe</string>
     <string name="settings_about_section_project">Proje</string>
     <string name="settings_about_section_help">Alîkarî</string>
-    <string name="credits_current_development">Pêşdebirina niha</string>
     <string name="credits_prior_development">Pêşdebirina berê</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Rêvebir</string>
+    <string name="about_update_available">Nûvekirin heye: %s</string>
+    <string name="about_up_to_date">Heta roja îro nûye</string>
+    <string name="about_links">Girêdanên fermî</string>
+    <string name="about_link_donate">Bexşîn</string>
+    <string name="about_link_website">Malper</string>
+    <string name="about_link_translations">Wergera</string>
+    <string name="contributors">Hevkariyên</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Hemû deman</string>
+    <string name="contributors_6_months">6 mehan</string>
+    <string name="contributors_3_months">3 mehan</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Piştgir</string>
+    <string name="supporters_description">Piştgirên li ser Open Collective</string>
+    <string name="supporters_become">Bibe piştgir</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Û %s din</string>
+    <string name="people_unavailable">Lîste nehat barkirin</string>
     <string name="opensource_licenses">Lîsansên çavkaniyê vekirî</string>
     <string name="opensource_licenses_description">Kutubxaneyên ku Morphe li ser hatiye avakirin</string>
     <string name="opensource_licenses_search">Pirtûkxane û lisansan bigere</string>
@@ -1415,6 +1441,8 @@ Detay: %2$s"</string>
     <string name="include">Tevlî bike</string>
     <string name="disable">Neçalak bike</string>
     <string name="enable">Çalak bike</string>
+    <string name="enable_all">Hemûyan çalak bike</string>
+    <string name="disable_all">Hemûyan neçalak bike</string>
     <string name="trust">Bawer bike</string>
     <string name="loading">Bar kirin…</string>
     <string name="creating">Çêkirin…</string>

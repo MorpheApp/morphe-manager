@@ -65,6 +65,8 @@
     <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">அருகிலுள்ள சாதனங்கள் அனுமதி இல்லாமல் உங்கள் உள்ளூர் நெட்வொர்க்கில் உள்ள ஆதாரங்களை மேம்படுத்த முடியாது</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
     <string name="sources_patch_expert_badge_tooltip">இந்த பேட்ச்-ஐ கைமுறையாகச் சேர்க்க %1$s-ஐ ஆன் செய்யவும்</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
@@ -111,6 +113,9 @@
     <string name="batch_queue_keep">தக்கவை</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_install_type_root">ரூட் நிறுவல்</string>
+    <string name="app_links_disable_all_in_progress">இணைப்புகளை முடக்குகிறது…</string>
+    <string name="app_links_disable_success">செயலி இணைப்புகள் முடக்கப்பட்டது</string>
+    <string name="app_links_disable_failed">செயலி இணைப்புகளை முடக்க முடியவில்லை</string>
     <string name="app_links_change_failed">ஆப் இணைப்புகளை மாற்ற முடியவில்லை</string>
     <!-- Home Screen - Root Mode -->
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
@@ -149,7 +154,17 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">பேட்சர் முடிவடைவதற்கு முன்பே செயலிழந்தது. இது மீண்டும் நடந்தால், %1$s-ஐ ஆஃப் செய்து லாக் உடன் பிரச்சனையைப் புகாரளிக்கவும்</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">மினி-கேம்கள்</string>
+    <string name="mini_games_description">உறக்க நேரத்தை கழிக்க விரைவான விளையாட்டுகள்</string>
+    <string name="mini_game_pause">நிறுத்து</string>
+    <string name="mini_game_score_label">மதிப்பெண்</string>
+    <string name="mini_game_best_label">சிறந்தது</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">நிலை</string>
+    <string name="mini_game_lines">வரிகள்</string>
+    <string name="mini_game_lives">உயிர்கள்</string>
+    <string name="mini_game_flags">கொடிகள்</string>
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->
     <!-- %1$s is a holiday background name, such as Halloween. %2$s is a date, such as November 1 -->
@@ -191,6 +206,7 @@
     <!-- Settings - System Tab - Installer Section -->
     <string name="installer_root_description">ரூட் மூலம் அமைதியாக நிறுவுகிறது</string>
     <string name="installer_mount_warning_install">பேட்ச் பயன்முறை ரூட் மவுண்டிற்கு அமைக்கப்பட்டுள்ளது. இந்த சேமிக்கப்பட்ட ஆப் மவுண்ட் மூலம் நிறுவப்படவில்லை</string>
+    <string name="mount_stock_mismatch_message">நிறுவப்பட்ட ஆப் அசல் ஆப் இல்லை. அசல் APK-வை தேர்வு செய்யவும் அல்லது ஸ்டாக் பதிப்பை மீண்டும் நிறுவவும், பிறகு மீண்டும் Mount செய்ய முயற்சிக்கவும்</string>
     <string name="settings_section_patch_mode">பேட்ச் பயன்முறை</string>
     <string name="settings_patch_mode_ask">ஒவ்வொரு முறையும் கேட்கவும்</string>
     <string name="settings_patch_mode_ask_description">ஒவ்வொரு ஆப்பையும் பேட்ச் செய்வதற்கு முன்னால், அதை ரூட் மவுண்ட் அல்லது நிலையான நிறுவலுக்கு பேட்ச் செய்ய வேண்டுமா என்று கேட்கும்</string>
@@ -243,6 +259,26 @@
     <string name="file_picker_folder_name_invalid">கோப்புறை பெயரில் \" * / : &lt; &gt; ? \\ | இருக்கக்கூடாது</string>
     <string name="file_picker_new_folder_failed">கோப்புறையை உருவாக்க முடியவில்லை</string>
     <!-- Settings - System Tab - About Section -->
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">மேலாளர்</string>
+    <string name="about_update_available">புதுப்பிப்பு கிடைக்கிறது: %s</string>
+    <string name="about_up_to_date">புதுப்பிக்கப்பட்டது</string>
+    <string name="about_links">அதிகாரப்பூர்வ இணைப்புகள்</string>
+    <string name="about_link_donate">நன்கொடை அளிக்கவும்</string>
+    <string name="about_link_website">இணையதளம்</string>
+    <string name="about_link_translations">மொழிபெயர்ப்புகள்</string>
+    <string name="contributors">பங்களிப்பாளர்கள்</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">எல்லா நேரமும்</string>
+    <string name="contributors_6_months">6 மாதங்கள்</string>
+    <string name="contributors_3_months">3 மாதங்கள்</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">ஆதரவாளர்கள்</string>
+    <string name="supporters_description">Open Collective-இல் ஆதரவாளர்கள்</string>
+    <string name="supporters_become">ஆதரவாளராகுங்கள்</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">மற்றும் மேலும் %s பேர்</string>
+    <string name="people_unavailable">பட்டியலை ஏற்ற முடியவில்லை</string>
     <string name="opensource_licenses_search">நூலகங்கள் மற்றும் உரிமங்களைத் தேடுங்கள்</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <!-- Shared strings -->
@@ -250,6 +286,8 @@
     <!-- Sections the settings page lists, each opening a page of its own. A summary names what the section holds -->
     <string name="settings_section_import_export">இறக்குமதி மற்றும் ஏற்றுமதி</string>
     <string name="create">உருவாக்கு</string>
+    <string name="enable_all">அனைத்தையும் இயக்கு</string>
+    <string name="disable_all">அனைத்தையும் முடக்கவும்</string>
     <!-- Who made a patch source, as a field label -->
     <!-- A file a patch source is added from, as a field label -->
     <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->

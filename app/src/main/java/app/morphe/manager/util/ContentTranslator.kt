@@ -109,7 +109,7 @@ class ContentTranslator(
         } catch (e: Exception) {
             store.fail(texts, e)
             if (e is CancellationException) throw e
-            Log.e(tag, "Failed to translate into ${store.language}", e)
+            Log.e(LOG_TAG, "Failed to translate into ${store.language}", e)
         }
     }
 
@@ -135,7 +135,7 @@ class ContentTranslator(
                 if (e is APIError && e.statusCode == HttpStatusCode.TooManyRequests) {
                     restingUntil[endpoint] = SystemClock.elapsedRealtime() + ENDPOINT_REST.inWholeMilliseconds
                 }
-                Log.w(tag, "Translation endpoint $endpoint failed", e)
+                Log.w(LOG_TAG, "Translation endpoint $endpoint failed", e)
                 lastError = e
             }
         }
@@ -235,7 +235,7 @@ class ContentTranslator(
                 val snapshot = synchronized(this@Store) { translations.toMap() }
                 runCatching {
                     file.writeTextAtomically(http.json.encodeToString(snapshot))
-                }.onFailure { Log.w(tag, "Failed to save translations into $language", it) }
+                }.onFailure { Log.w(LOG_TAG, "Failed to save translations into $language", it) }
             }
         }
     }

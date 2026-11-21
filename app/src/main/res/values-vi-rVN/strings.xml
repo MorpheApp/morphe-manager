@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Không thể tải nguồn vá: %s</string>
     <string name="sources_download_fail_named">Không thể cập nhật \"%s\". Vui lòng kiểm tra kết nối mạng và thử lại</string>
     <string name="sources_download_endpoint_not_found">\'%s\': không tìm thấy metadata của bản vá</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Các nguồn trên mạng cục bộ của bạn không thể được cập nhật nếu không có quyền Thiết bị ở gần</string>
     <string name="sources_signing_key_changed_named">\'%s\' không được cập nhật vì bản phát hành mới nhất của nó không được ký bằng khóa đã sử dụng trước đó</string>
     <string name="sources_signing_key_changed_local">Tệp không được ký bằng khóa mà nguồn này đã sử dụng trước đó. Để tin cậy tệp này, hãy xóa nguồn và thêm tệp một lần nữa</string>
     <string name="sources_signing_key_trust_title">Tin cậy khóa mới?</string>
@@ -346,8 +348,6 @@ Chọn nơi lấy tệp APK của nó"</string>
     <string name="home_external_apk_expert_mode_required">Tính năng này chỉ có ở chế độ Chuyên gia</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Tìm kiếm</string>
-    <string name="expert_mode_disable_all">Tắt tất cả</string>
-    <string name="expert_mode_enable_all">Bật tất cả</string>
     <string name="expert_mode_enable_all_universal_pending">Chạm lần nữa để dùng bản vá phổ quát</string>
     <string name="expert_mode_universal_all_warning_title">Bật tất cả các bản vá phổ quát?</string>
     <string name="expert_mode_universal_all_warning_message">Các bản vá phổ quát không được kiểm tra cùng nhau. Bật tất cả chúng cùng lúc có thể gây ra xung đột, vá thất bại hoặc treo máy</string>
@@ -567,9 +567,12 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="app_links_unverified_banner_description">Các liên kết web được hỗ trợ hiện đang mở trong trình duyệt của bạn thay vì trong ứng dụng này</string>
     <string name="app_links_enable_auto">Bật tự động</string>
     <string name="app_links_enable_auto_in_progress">Đang bật liên kết…</string>
+    <string name="app_links_disable_all_in_progress">Đang tắt các liên kết…</string>
     <string name="app_links_open_settings">Mở cài đặt liên kết</string>
     <string name="app_links_repair_success">Đã bật liên kết ứng dụng thành công</string>
     <string name="app_links_repair_failed">Không thể tự động bật liên kết ứng dụng</string>
+    <string name="app_links_disable_success">Đã tắt các liên kết ứng dụng</string>
+    <string name="app_links_disable_failed">Không thể tắt các liên kết ứng dụng</string>
     <string name="app_links_change_failed">Thay đổi liên kết ứng dụng thất bại</string>
     <string name="app_links_all_verified">Tất cả các liên kết được hỗ trợ đều được cấu hình để mở trong ứng dụng này</string>
     <string name="app_links_fix">Sửa liên kết</string>
@@ -628,8 +631,6 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="patcher_field_value_stripped">đã loại bỏ</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">giữ lại</string>
-    <string name="patcher_tab_logs">Nhật ký trình vá</string>
-    <string name="patcher_tab_game">Trò chơi</string>
     <string name="patcher_logs_waiting">Đang chờ nhật ký đầu ra…</string>
     <string name="patcher_logs_lost">Nhật ký đầu ra sẽ không được giữ lại sau khi khởi động lại ứng dụng</string>
     <string name="patcher_long_step_warning">Bước này có thể hơi lâu một chút. Vui lòng chờ…</string>
@@ -659,7 +660,6 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patcher_install_error_subtitle">Hãy thử gỡ và cài đặt lại</string>
     <string name="patcher_ready_to_mount_subtitle">Bấm nút bên dưới để gắn kết</string>
     <string name="patcher_patches_excluded_for_installer">Không khả dụng với phương thức cài đặt này và đã bị loại trừ: %s</string>
-    <string name="patcher_back_to_game_hint">Chạm vào %1$s để quay lại trò chơi của bạn</string>
     <string name="patcher_storage_permission_dialog_title">Không thể truy cập đường dẫn bộ nhớ</string>
     <string name="patcher_incompatible_patcher_title">Cần phải cập nhật</string>
     <string name="patcher_incompatible_patcher_description">Nguồn &lt;b&gt;%1$s&lt;/b&gt; yêu cầu patcher &lt;b&gt;%2$s&lt;/b&gt; trở lên. Cập nhật Morphe để sử dụng nó</string>
@@ -764,7 +764,9 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="package_name">Tên gói</string>
     <string name="failed_to_mount">Không thể gắn: %s</string>
     <string name="failed_to_unmount">Không thể gỡ gắn: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-game</string>
+    <string name="mini_games_description">Các trò chơi nhanh để giải trí trong lúc rảnh rỗi</string>
     <string name="mini_game_score">Điểm %s</string>
     <string name="mini_game_best">Cao nhất %s</string>
     <string name="mini_game_new_record">Kỷ lục mới!</string>
@@ -773,7 +775,14 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="mini_game_paused">Tạm dừng</string>
     <string name="mini_game_resume">Tiếp tục</string>
     <string name="mini_game_restart">Bắt đầu lại</string>
-    <string name="mini_game_change">Chọn một trò chơi khác</string>
+    <string name="mini_game_pause">Tạm dừng</string>
+    <string name="mini_game_score_label">Điểm</string>
+    <string name="mini_game_best_label">Cao nhất</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Cấp độ</string>
+    <string name="mini_game_lines">Hàng</string>
+    <string name="mini_game_lives">Mạng</string>
+    <string name="mini_game_flags">Cờ</string>
     <string name="mini_game_2048_picker_subtitle">Vuốt để ghép các ô lại với nhau</string>
     <string name="mini_game_flappy_picker_subtitle">Chạm để bay lách qua các ống</string>
     <string name="mini_game_flappy_tap_to_start">Chạm để bay</string>
@@ -1070,6 +1079,7 @@ Kích thước hình ảnh yêu cầu:
     <string name="installer_mount_warning_install">Chế độ vá được đặt thành root mount. Ứng dụng đã lưu này không được cài đặt bằng mount</string>
     <string name="mount_version_mismatch_message">Phiên bản ứng dụng gốc (%2$s) không khớp với phiên bản ứng dụng đã sửa (%1$s). Mount phiên bản gốc khớp, sau đó thử lại</string>
     <string name="mount_stock_restore_failed_message">Android đã từ chối APK gốc đã lưu. Hãy cài đặt đúng phiên bản gốc tương ứng rồi thử gắn lại</string>
+    <string name="mount_stock_mismatch_message">Ứng dụng đã cài đặt không phải là bản gốc. Hãy chọn APK gốc hoặc cài đặt lại phiên bản stock, sau đó thử Mount lại</string>
     <string name="installer_status_shizuku_unsupported">Phiên bản Shizuku đã cài không được hỗ trợ</string>
     <string name="installer_action_open_shizuku">Mở Shizuku</string>
     <string name="installer_hint_generic">Không thể cài đặt. Thử lại hoặc đổi sang trình cài đặt khác</string>
@@ -1342,13 +1352,29 @@ Chi tiết: %2$s"</string>
     <string name="file_picker_new_folder_failed">Không thể tạo thư mục</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Giới thiệu</string>
-    <string name="settings_system_manager_description">Một dự án mã nguồn mở, mang đến trải nghiệm vá ứng dụng Android hiệu quả với giao diện hiện đại, được phát triển dựa trên phản hồi và đóng góp từ cộng đồng</string>
-    <string name="credits">Đóng góp</string>
-    <string name="credits_description">Những người đứng sau Morphe</string>
     <string name="settings_about_section_project">Dự án</string>
     <string name="settings_about_section_help">Trợ giúp</string>
-    <string name="credits_current_development">Hiện tại</string>
     <string name="credits_prior_development">Trước đây</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Trình quản lý</string>
+    <string name="about_update_available">Đã có bản cập nhật: %s</string>
+    <string name="about_up_to_date">Đã cập nhật</string>
+    <string name="about_links">Liên kết chính chủ</string>
+    <string name="about_link_donate">Ủng hộ</string>
+    <string name="about_link_website">Trang web</string>
+    <string name="about_link_translations">Dịch thuật</string>
+    <string name="contributors">Người đóng góp</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Mọi thời điểm</string>
+    <string name="contributors_6_months">6 tháng</string>
+    <string name="contributors_3_months">3 tháng</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Người ủng hộ</string>
+    <string name="supporters_description">Người hỗ trợ trên Open Collective</string>
+    <string name="supporters_become">Trở thành người ủng hộ</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Và %s người khác</string>
+    <string name="people_unavailable">Không thể tải danh sách</string>
     <string name="opensource_licenses">Giấy phép mã nguồn mở</string>
     <string name="opensource_licenses_description">Các thư viện mà Morphe xây dựng trên đó</string>
     <string name="opensource_licenses_search">Tìm kiếm thư viện và giấy phép</string>
@@ -1418,6 +1444,8 @@ Chi tiết: %2$s"</string>
     <string name="include">Bao gồm</string>
     <string name="disable">Tắt</string>
     <string name="enable">Không sợ</string>
+    <string name="enable_all">Bật tất cả</string>
+    <string name="disable_all">Tắt tất cả</string>
     <string name="trust">Tin cậy</string>
     <string name="loading">Đang tải…</string>
     <string name="creating">Đang tạo…</string>

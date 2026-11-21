@@ -245,6 +245,8 @@
     <string name="sources_download_fail">ምንጮችን ለማውረድ አልተቻለም: %s</string>
     <string name="sources_download_fail_named">\'%s\' ሊዘመንም አልቻለም። የኢንተርኔት ግንኙነታችሁን አረጋግጠው እንደገና ይሞክሩ</string>
     <string name="sources_download_endpoint_not_found">\'%s\': የፓች ሜታዳታ አልተገኘም</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">በአቅራቢያ ያሉ መሳሪያዎች ፈቃድ ሳይኖር በየአካባቢው መረብ ላይ ያሉ ምንጮችን ማዘመን አይቻልም</string>
     <string name="sources_signing_key_changed_named">\'%s\' የቅርብ ጊዜ ስሪቱ ቀደም ሲል በተጠቀመው ቁልፍ ስላልተፈረመ አልተዘመናም</string>
     <string name="sources_signing_key_changed_local">ፋይሉ ይህ ምንጭ ቀደም ሲል የተጠቀመው ቁልፍ አልተፈረመበትም። ለማመን፣ ምንጩን ያጥፉ እና ፋይሉን እንደገና ያክሉ</string>
     <string name="sources_signing_key_trust_title">አዲሱን ቁልፍ ያምኑ?</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">ይህ ባህሪ የሚገኘው በኤክስፐርት ሁነታ ላይ ብቻ ነው</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">ፓቾችን ፈልግ</string>
-    <string name="expert_mode_disable_all">ሁሉንም አጥፋ</string>
-    <string name="expert_mode_enable_all">ሁሉንም አብራ</string>
     <string name="expert_mode_enable_all_universal_pending">ለዩኒቨርሳል ፓቾች እንደገና ይጫኑ</string>
     <string name="expert_mode_universal_all_warning_title">ሁሉንም ዩኒቨርሳል ፓቾች ማብራት?</string>
     <string name="expert_mode_universal_all_warning_message">ዩኒቨርሳል ፓቾች አብረው አልተሞከሩም። ሁሉንም በአንድ ጊዜ ማብራት ግጭቶችን፣ የፓች ውድቀትን ወይም መተግበሪያው እንዲዘጋ ሊያደርግ ይችላል</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">የሚደገፉ የድረ-ገጽ ሊንኮች በአሁኑ ጊዜ ከዚህ መተግበሪያ ይልቅ በብሮውዘርዎ ውስጥ ይከፈታሉ</string>
     <string name="app_links_enable_auto">በራስ-ሰር አግብር</string>
     <string name="app_links_enable_auto_in_progress">ሊንኮች እየነቁ ነው…</string>
+    <string name="app_links_disable_all_in_progress">ሊንኮች እየተጠፉ ነው…</string>
     <string name="app_links_open_settings">የሊንክ ቅንብሮችን ክፈት</string>
     <string name="app_links_repair_success">የመተግበሪያ ሊንኮች በተሳካ ሁኔታ ነቅተዋል</string>
     <string name="app_links_repair_failed">የመተግበሪያ ሊንኮችን በራስ-ሰር ማንቃት አልተቻለም</string>
+    <string name="app_links_disable_success">የመተግበሪያ ሊንኮች ተጠፍተዋል</string>
+    <string name="app_links_disable_failed">የመተግበሪያ ሊንኮችን ለማጥፋት አልተቻለም</string>
     <string name="app_links_change_failed">የመተግበሪያ ሊንኮችን ለመለወጥ አልተቻለም</string>
     <string name="app_links_all_verified">ሁሉም የሚደገፉ ሊንኮች በዚህ መተግበሪያ ውስጥ እንዲከፈቱ ተዋቅረዋል</string>
     <string name="app_links_fix">ሊንኮችን አስተካክል</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">የተቀነሱ</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">የቀሩ</string>
-    <string name="patcher_tab_logs">የፓቸር መዝገቦች</string>
-    <string name="patcher_tab_game">ጨዋታዎች</string>
     <string name="patcher_logs_waiting">የሎግ ውጤት እየተጠባበቀ ነው…</string>
     <string name="patcher_logs_lost">የሎግ ውጤት መተግበሪያው እንደገና ሲነሳ አይቀመጥም</string>
     <string name="patcher_long_step_warning">ይህ ደረጃ የተወሰነ ጊዜ ሊወስድ ይችላል። እባክዎ ይጠብቁ…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">አጥፍተው እንደገና ለመጫን ይሞክሩ</string>
     <string name="patcher_ready_to_mount_subtitle">ለመጫን ከታች ያለውን ቁልፍ ይጫኑ</string>
     <string name="patcher_patches_excluded_for_installer">ለዚህ የጫኚ ዘዴ አይገኝም እና ተገልሏል: %s</string>
-    <string name="patcher_back_to_game_hint">ወደ ጨዋታዎ ለመመለስ %1$sን ይጫኑ</string>
     <string name="patcher_storage_permission_dialog_title">የማከማቻ መንገድን ማግኘት አልተቻለም</string>
     <string name="patcher_incompatible_patcher_title">ማዘመኛ ያስፈልጋል</string>
     <string name="patcher_incompatible_patcher_description">ምንጩ &lt;b&gt;%1$s&lt;/b&gt; ፓቸር &lt;b&gt;%2$s&lt;/b&gt; ወይም ከዚያ በላይ ይፈልጋል። ለመጠቀም Morpheን ያዘምኑ</string>
@@ -764,7 +764,9 @@
     <string name="package_name">የጥቅል ስም</string>
     <string name="failed_to_mount">ለመጫን አልተቻለም: %s</string>
     <string name="failed_to_unmount">ለመንቀል አልተቻለም: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">አጫጭር ጨዋታዎች</string>
+    <string name="mini_games_description">ትርፍ ደቂቃን ለማሳለፍ የሚረዱ ፈጣን ጨዋታዎች</string>
     <string name="mini_game_score">ውጤት %s</string>
     <string name="mini_game_best">ምርጥ %s</string>
     <string name="mini_game_new_record">አዲስ ክብረ ወሰን!</string>
@@ -773,7 +775,14 @@
     <string name="mini_game_paused">ተቋርጧል</string>
     <string name="mini_game_resume">ቀጥል</string>
     <string name="mini_game_restart">ከመጀመሪያው ጀምር</string>
-    <string name="mini_game_change">ሌላ ጨዋታ ይምረጡ</string>
+    <string name="mini_game_pause">አቁም</string>
+    <string name="mini_game_score_label">ውጤት</string>
+    <string name="mini_game_best_label">ምርጥ</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">ደረጃ</string>
+    <string name="mini_game_lines">መስመሮች</string>
+    <string name="mini_game_lives">ህይወቶች</string>
+    <string name="mini_game_flags">ባንዲራዎች</string>
     <string name="mini_game_2048_picker_subtitle">ለማዋሃድ ታይሎችን ያንሸራትቱ</string>
     <string name="mini_game_flappy_picker_subtitle">በቧንቧዎች መካከል ለመብረር ይጫኑ</string>
     <string name="mini_game_flappy_tap_to_start">ለመብረር ይጫኑ</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">የፓች ሞዱ root mount ላይ ተጥሏል። ይህ የተቀመጠ መተግበሪያ በmount ስላልተጫነ</string>
     <string name="mount_version_mismatch_message">የመጀመሪያው የመተግበሪያ ስሪት (%2$s) ከተስተካከለው የመተግበሪያ ስሪት (%1$s) ጋር አይዛመድም። ተዛማጅ የሆነውን የመጀመሪያ ስሪት mount ያድርጉ፣ ከዚያ እንደገና ይሞክሩ</string>
     <string name="mount_stock_restore_failed_message">አንድሮይድ የተቀመጠውን ኦሪጅናል APK ውድቅ አድርጓል። የሚዛመደውን stock ስሪት ይጫኑ፣ ከዚያም Mountን እንደገና ይሞክሩ</string>
+    <string name="mount_stock_mismatch_message">የተጫነው መተግበሪያ ዋናው አይደለም። ዋናውን APK ይምረጡ ወይም የፋብሪካውን ስሪት እንደገና ይጫኑ፣ ከዚያ Mount እንደገና ይሞክሩ</string>
     <string name="installer_status_shizuku_unsupported">የተጫነው የ Shizuku ስሪት ተቀባይነት የለውም</string>
     <string name="installer_action_open_shizuku">Shizukuን ክፈት</string>
     <string name="installer_hint_generic">መጫኑ አልተሳካም። እንደገና ይሞክሩ ወይም ወደ ሌላ ጫኝ ይቀይሩ</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">ፎልደሩን መፍጠር አልተቻለም</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">ስለ</string>
-    <string name="settings_system_manager_description">በማህበረሰቡ አስተያየት እና አስተዋጽኦ የሚመራ፣ የታወቁ የAndroid መተግበሪያዎችን ዘመናዊ እና ቀልጣፋ በሆነ መንገድ ለመጠገን የሚያገለግል ክፍት የሶፍትዌር ፕሮጀክት</string>
-    <string name="credits">ክሬዲቶች</string>
-    <string name="credits_description">ከ Morphe በስተጀርባ ያሉት ሰዎች</string>
     <string name="settings_about_section_project">ፕሮጀክት</string>
     <string name="settings_about_section_help">እርዳታ</string>
-    <string name="credits_current_development">የአሁኑ ልማት</string>
     <string name="credits_prior_development">የቀድሞ ልማት</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">አስተዳዳሪ</string>
+    <string name="about_update_available">ማዘመኛ ይገኛል: %s</string>
+    <string name="about_up_to_date">ወቅታዊ ነው</string>
+    <string name="about_links">ይፋዊ ሊንኮች</string>
+    <string name="about_link_donate">ልግስና ያድርጉ</string>
+    <string name="about_link_website">ድረ-ገጽ</string>
+    <string name="about_link_translations">ትርጉሞች</string>
+    <string name="contributors">አስተዋጽኦ አድራጊዎች</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">ሁልጊዜ</string>
+    <string name="contributors_6_months">6 ወራት</string>
+    <string name="contributors_3_months">3 ወራት</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">ደጋፊዎች</string>
+    <string name="supporters_description">በ Open Collective ላይ ደጋፊዎች</string>
+    <string name="supporters_become">ደጋፊ ይሁኑ</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">እና %s ተጨማሪ</string>
+    <string name="people_unavailable">ዝርዝሩን መጫን አልተቻለም</string>
     <string name="opensource_licenses">የክፍት-ምንጭ ፈቃዶች</string>
     <string name="opensource_licenses_description">Morphe የተገነባባቸው ላይብረሪዎች</string>
     <string name="opensource_licenses_search">ቤተ-መጻሕፍትን እና ፈቃዶችን ፈልግ</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">አካተት</string>
     <string name="disable">አግድ</string>
     <string name="enable">አብራ</string>
+    <string name="enable_all">ሁሉንም አግብር</string>
+    <string name="disable_all">ሁሉንም አግድ</string>
     <string name="trust">እመን</string>
     <string name="loading">በመጫን ላይ…</string>
     <string name="creating">በመፍጠር ላይ…</string>

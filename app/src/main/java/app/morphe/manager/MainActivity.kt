@@ -53,6 +53,7 @@ import app.morphe.manager.ui.model.navigation.*
 import app.morphe.manager.ui.screen.BatchPatcherScreen
 import app.morphe.manager.ui.screen.HomeScreen
 import app.morphe.manager.ui.screen.PatcherScreen
+import app.morphe.manager.ui.screen.games.MiniGamesPage
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.settings.SettingsNavigation
 import app.morphe.manager.ui.screen.settings.SettingsSubpage
@@ -209,7 +210,7 @@ class MainActivity : ComponentActivity() {
         val shortcutId = intent?.getStringExtra(EXTRA_SHORTCUT_ID) ?: return
         intent.removeExtra(EXTRA_SHORTCUT_ID)
         runCatching { ShortcutManagerCompat.reportShortcutUsed(this, shortcutId) }
-            .onFailure { Log.w(tag, "Failed to report shortcut usage", it) }
+            .onFailure { Log.w(LOG_TAG, "Failed to report shortcut usage", it) }
     }
 
     /**
@@ -306,15 +307,16 @@ class MainActivity : ComponentActivity() {
         }
 
         val isAddSource = data.scheme == "https" &&
-                data.host == "morphe.software" &&
+                data.host == MORPHE_WEBSITE_HOST &&
                 data.path?.startsWith(ADD_SOURCE_PATH) == true
         if (!isAddSource) return
 
         fun param(key: String) = data.getQueryParameter(key)?.takeIf { it.isNotBlank() }
 
-        val url = param("github")?.let { "https://github.com/$it" }
-            ?: param("gitlab")?.let { "https://gitlab.com/$it" }
-            ?: return
+        // The website names the host by the same key the manager builds these links with
+        val url = CodeHost.entries.firstNotNullOfOrNull { host ->
+            param(host.key)?.let { "https://${host.host}/$it" }
+        } ?: return
         vm.pendingDeepLinkSource = MainViewModel.DeepLinkSource(
             url = url,
             name = param("name"),
@@ -678,6 +680,10 @@ private fun MorpheManager(vm: MainViewModel) {
             screen<Licenses> {
                 LicensesPage(onBack = { navController.popBackStack() })
             }
+
+            screen<MiniGames> {
+                MiniGamesPage(onBack = { navController.popBackStack() })
+            }
         }
 
         if (showOnboarding) {
@@ -705,6 +711,7 @@ private fun NavController.settingsNavigation(startTour: (() -> Unit)?) = Setting
     openSubpage = { subpage -> navigate(SettingsDetail(subpage.name)) { launchSingleTop = true } },
     openPatchSelections = { navigate(PatchSelections) { launchSingleTop = true } },
     openLicenses = { navigate(Licenses) { launchSingleTop = true } },
+    openMiniGames = { navigate(MiniGames) { launchSingleTop = true } },
     startTour = startTour
 )
 

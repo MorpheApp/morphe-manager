@@ -242,12 +242,6 @@ sealed class RemotePatchBundle(
     }
 
     companion object {
-        const val BRANCH_STABLE = "main"
-        const val BRANCH_DEV = "dev"
-
-        /** Bundle file a repository-only link resolves to. */
-        private const val DEFAULT_BUNDLE_FILE = "patches-bundle.json"
-
         internal const val CHANGELOG_CACHE_TTL = 10 * 60 * 1000L
         private val releaseInfoCache = TimedCache<String, ReleaseAsset>(CHANGELOG_CACHE_TTL)
         private val entriesCache = TimedCache<String, List<ChangelogEntry>>(CHANGELOG_CACHE_TTL)
@@ -259,17 +253,8 @@ sealed class RemotePatchBundle(
          * Infer the repository page URL from various endpoint formats.
          * Returns null for hosts other than GitHub and GitLab, whose repository layout is unknown.
          */
-        fun inferPageUrlFromEndpoint(endpoint: String): String? {
-            val (host, segments) = endpointParts(endpoint) ?: return null
-            if (segments.size < 2) return null
-
-            return when (host) {
-                "raw.githubusercontent.com", "github.com" -> "https://github.com/${segments[0]}/${segments[1]}"
-                // gitlab.com/owner/repo/-/raw/branch/... or gitlab.com/owner/repo
-                "gitlab.com" -> "https://gitlab.com/${segments[0]}/${segments[1]}"
-                else -> null
-            }
-        }
+        fun inferPageUrlFromEndpoint(endpoint: String): String? =
+            SourceUrl.parse(endpoint)?.repositoryUrl
 
         /**
          * Add-source link for [endpoint], or null when it would add a different source. The link
@@ -277,15 +262,16 @@ sealed class RemotePatchBundle(
          * the stable or dev branch qualifies.
          */
         fun addSourceLinkForEndpoint(endpoint: String, name: String?): String? {
-            val (host, segments) = endpointParts(endpoint) ?: return null
+            val source = SourceUrl.parse(endpoint) ?: return null
+            val segments = source.segments
             val branches = setOf(BRANCH_STABLE, BRANCH_DEV)
 
-            val provider = when (host) {
-                "raw.githubusercontent.com" -> "github".takeIf {
+            val provider = when (source.host) {
+                GITHUB_RAW_HOST -> CodeHost.GITHUB.key.takeIf {
                     segments.size == 4 && segments[2] in branches && segments[3] == DEFAULT_BUNDLE_FILE
                 }
 
-                "gitlab.com" -> "gitlab".takeIf {
+                GITLAB_HOST -> CodeHost.GITLAB.key.takeIf {
                     segments.size == 6 && segments[2] == "-" && segments[3] == "raw" &&
                             segments[4] in branches && segments[5] == DEFAULT_BUNDLE_FILE
                 }
@@ -307,27 +293,12 @@ sealed class RemotePatchBundle(
          * query and user info are left out, as they can hold a token.
          */
         fun patchSourceEntryForEndpoint(endpoint: String): String {
-            val (host, segments) = endpointParts(endpoint) ?: return "url=unknown"
-            val entry = when {
-                segments.size >= 2 && (host == "raw.githubusercontent.com" || host == "github.com") ->
-                    "github=${segments[0]}/${segments[1]}"
-
-                segments.size >= 2 && host == "gitlab.com" -> "gitlab=${segments[0]}/${segments[1]}"
-                else -> "url=" + (listOf(host) + segments).joinToString("/")
-            }
+            val source = SourceUrl.parse(endpoint) ?: return "url=unknown"
+            val entry = source.repositoryKey
+                ?: ("url=" + (listOf(source.host) + source.segments).joinToString("/"))
             // Commas separate entries, and the API takes printable ASCII only
             return entry.replace(",", "%2C").filter { it in '!'..'~' }
                 .take(MAX_PATCH_SOURCE_ENTRY_LENGTH)
-        }
-
-        /** Lowercased host and path segments of [endpoint], or null when it is not a valid URL. */
-        private fun endpointParts(endpoint: String): Pair<String, List<String>>? = try {
-            val uri = java.net.URI(endpoint)
-            uri.host?.lowercase(java.util.Locale.US)?.let { host ->
-                host to uri.path.orEmpty().trim('/').split('/').filter { it.isNotBlank() }
-            }
-        } catch (_: Exception) {
-            null
         }
 
         /**
@@ -339,8 +310,8 @@ sealed class RemotePatchBundle(
 
         /** Appends the host's issues path to an already resolved repository URL. */
         fun issuesUrlForRepoUrl(repoUrl: String): String? = when {
-            repoUrl.startsWith("https://github.com/") -> "$repoUrl/issues"
-            repoUrl.startsWith("https://gitlab.com/") -> "$repoUrl/-/issues"
+            repoUrl.startsWith("https://$GITHUB_HOST/") -> "$repoUrl/issues"
+            repoUrl.startsWith("https://$GITLAB_HOST/") -> "$repoUrl/-/issues"
             else -> null
         }
     }
@@ -367,7 +338,7 @@ class JsonPatchBundle(
      * The branch the endpoint URL currently points to.
      * Returns null if the URL uses refs/heads/... or is not a recognized format.
      */
-    val endpointBranch: String? get() = extractBranch(endpoint)
+    val endpointBranch: String? get() = SourceUrl.parse(endpoint)?.branch
 
     /**
      * Returns [url] with its branch segment replaced by [targetBranch].
@@ -381,42 +352,15 @@ class JsonPatchBundle(
      * or when parsing fails.
      */
     private fun switchBranchInUrl(url: String, targetBranch: String): String {
-        return try {
-            val uri = java.net.URI(url)
-            val host = uri.host?.lowercase(java.util.Locale.US)
-            when (host) {
-                "raw.githubusercontent.com" -> {
-                    val parts = uri.path.trim('/').split('/')
-                    if (parts.size < 3) return url
-                    // Don't modify refs/heads/... - it's a direct immutable link
-                    if (parts[2] == "refs") return url
-                    val newPath = "/${parts[0]}/${parts[1]}/$targetBranch/${parts.drop(3).joinToString("/")}"
-                    "https://raw.githubusercontent.com$newPath"
-                }
-                "github.com" -> {
-                    // Parse: /owner/repo/tree|blob/branch/path/to/file.json
-                    val pathParts = uri.path?.trim('/')?.split('/') ?: return url
-                    if (pathParts.size < 5) return url // Need at least: owner, repo, tree/blob, branch, file
-                    val type = pathParts[2] // "tree" or "blob"
-                    if (type !in listOf("tree", "blob")) return url
-                    val owner = pathParts[0]
-                    val repo = pathParts[1]
-                    val filePath = pathParts.drop(4).joinToString("/")
-                    "https://raw.githubusercontent.com/$owner/$repo/$targetBranch/$filePath"
-                }
-                "gitlab.com" -> {
-                    // Format: owner/repo/-/raw/BRANCH/path/file.json
-                    val parts = uri.path.trim('/').split('/').toMutableList()
-                    val rawIndex = parts.indexOf("raw")
-                    if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
-                        parts[rawIndex + 1] = targetBranch
-                        "https://gitlab.com/${parts.joinToString("/")}"
-                    } else url
-                }
-                else -> url // Unknown host, return as-is
-            }
-        } catch (_: Exception) {
-            url // If parsing fails, return original URL
+        val source = SourceUrl.parse(url) ?: return url
+        val index = source.branchIndex ?: return url
+        val segments = source.segments.toMutableList().apply { set(index, targetBranch) }
+        return when (source.host) {
+            // A tree or blob page names a file, which raw.githubusercontent.com serves
+            GITHUB_HOST -> segments.takeIf { it.size >= 5 }
+                ?.let { "https://$GITHUB_RAW_HOST/" + (it.take(2) + it.drop(3)).joinToString("/") }
+                ?: url
+            else -> "https://${source.host}/" + segments.joinToString("/")
         }
     }
 
@@ -527,44 +471,7 @@ class JsonPatchBundle(
          * explicitly points to the `BRANCH_STABLE` or `BRANCH_DEV` branch can.
          */
         fun supportsPrerelease(endpoint: String): Boolean =
-            extractBranch(endpoint).let { it == BRANCH_STABLE || it == BRANCH_DEV }
-
-        /**
-         * Extracts the branch name from a GitHub or GitLab URL.
-         *
-         * Supported formats:
-         * - raw.githubusercontent.com/owner/repo/BRANCH/path  (returns null for refs/heads/...)
-         * - github.com/owner/repo/tree|blob/BRANCH/path
-         * - gitlab.com/owner/repo/-/raw/BRANCH/path
-         */
-        internal fun extractBranch(url: String): String? {
-            return try {
-                val uri = java.net.URI(url)
-                val host = uri.host?.lowercase(java.util.Locale.US)
-                val parts = uri.path.trim('/').split('/')
-                when (host) {
-                    "raw.githubusercontent.com" -> {
-                        // Format: owner/repo/BRANCH/path...
-                        // But refs/heads/BRANCH is a direct file link - not switchable
-                        val branch = parts.getOrNull(2) ?: return null
-                        if (branch == "refs") null else branch
-                    }
-                    "github.com" -> {
-                        if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else null
-                    }
-                    "gitlab.com" -> {
-                        // Format: owner/repo/-/raw/BRANCH/path...
-                        val rawIndex = parts.indexOf("raw")
-                        if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-")
-                            parts.getOrNull(rawIndex + 1)
-                        else null
-                    }
-                    else -> null
-                }
-            } catch (_: Exception) {
-                null
-            }
-        }
+            SourceUrl.parse(endpoint)?.branch.let { it == BRANCH_STABLE || it == BRANCH_DEV }
     }
 }
 
@@ -678,30 +585,20 @@ class GitHubPullRequestBundle(
                             ZipInputStream(httpResponse.bodyAsChannel().toInputStream()).use { zis ->
                                 // Use larger buffer for faster I/O (512 KB)
                                 val buffer = ByteArray(512 * 1024)
-                                var copiedBytes = 0L
-                                var lastReportedBytes = 0L
-                                var lastReportedAt = 0L
+                                val progress = ThrottledDownloadProgress(onProgress)
                                 var extractedTotal: Long? = null
 
                                 var entry = zis.nextEntry
                                 while (entry != null) {
-                                    if (!entry.isDirectory && entry.name.endsWith(".mpp")) {
+                                    if (!entry.isDirectory && entry.name.endsWith(".$MPP_EXTENSION")) {
                                         extractedTotal = entry.size.takeIf { it > 0 }
 
                                         while (true) {
                                             val read = zis.read(buffer)
                                             if (read == -1) break
                                             patchOutput.write(buffer, 0, read)
-                                            copiedBytes += read.toLong()
-                                            val now = System.currentTimeMillis()
-                                            // Report progress less frequently: every 256KB or 500ms
-                                            if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
-                                                lastReportedBytes = copiedBytes
-                                                lastReportedAt = now
-                                                // Update total size if we now have extracted size
-                                                val currentTotal = extractedTotal ?: archiveSize
-                                                onProgress?.invoke(copiedBytes, currentTotal)
-                                            }
+                                            // The extracted size, once known, is the real total
+                                            progress.copied(read, extractedTotal ?: archiveSize)
                                         }
                                         break
                                     }
@@ -709,40 +606,28 @@ class GitHubPullRequestBundle(
                                     entry = zis.nextEntry
                                 }
 
-                                if (copiedBytes <= 0L) {
+                                if (progress.bytes <= 0L) {
                                     throw IOException("No .mpp file found in the PR artifact")
                                 }
-                                // Final progress - use actual copied bytes as total if we don't have size
-                                val finalTotal = extractedTotal ?: archiveSize ?: copiedBytes
-                                onProgress?.invoke(copiedBytes, finalTotal)
+                                progress.finished(extractedTotal ?: archiveSize)
                             }
                         } else {
                             // Raw .mpp artifact - stream directly without unzipping
                             val buffer = ByteArray(512 * 1024)
                             val channel = httpResponse.bodyAsChannel()
-                            var copiedBytes = 0L
-                            var lastReportedBytes = 0L
-                            var lastReportedAt = 0L
+                            val progress = ThrottledDownloadProgress(onProgress)
 
                             while (!channel.isClosedForRead) {
                                 val read = channel.readAvailable(buffer)
                                 if (read <= 0) continue
                                 patchOutput.write(buffer, 0, read)
-                                copiedBytes += read.toLong()
-                                val now = System.currentTimeMillis()
-                                // Report progress less frequently: every 256KB or 500ms
-                                if (copiedBytes - lastReportedBytes >= 256 * 1024 || now - lastReportedAt >= 500) {
-                                    lastReportedBytes = copiedBytes
-                                    lastReportedAt = now
-                                    // Update total size if we now have extracted size
-                                    onProgress?.invoke(copiedBytes, archiveSize)
-                                }
+                                progress.copied(read, archiveSize)
                             }
 
-                            if (copiedBytes <= 0L) {
+                            if (progress.bytes <= 0L) {
                                 throw IOException("Empty .mpp artifact received from PR")
                             }
-                            onProgress?.invoke(copiedBytes, archiveSize ?: copiedBytes)
+                            progress.finished(archiveSize)
                         }
                     }
                 }
@@ -775,4 +660,30 @@ class GitHubPullRequestBundle(
         enabled,
         services
     )
+}
+
+/**
+ * Bytes copied by a download, reported at most every 256 KB or 500 ms so a fast link does not
+ * flood the UI, and once more when the copy ends.
+ */
+private class ThrottledDownloadProgress(private val onProgress: PatchBundleDownloadProgress?) {
+    var bytes = 0L
+        private set
+    private var reportedBytes = 0L
+    private var reportedAt = 0L
+
+    fun copied(read: Int, total: Long?) {
+        bytes += read
+        val now = System.currentTimeMillis()
+        if (bytes - reportedBytes >= 256 * 1024 || now - reportedAt >= 500) {
+            reportedBytes = bytes
+            reportedAt = now
+            onProgress?.invoke(bytes, total)
+        }
+    }
+
+    /** The final report, which falls back to the bytes copied when the size was never known. */
+    fun finished(total: Long?) {
+        onProgress?.invoke(bytes, total ?: bytes)
+    }
 }

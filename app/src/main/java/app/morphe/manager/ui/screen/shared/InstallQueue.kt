@@ -205,7 +205,7 @@ fun rememberInstallQueue(
                 caption = stringResource(caption),
                 // The last app stays named while the overlay fades out after the queue drains
                 subtitle = rememberLatest(active?.appName),
-                badge = if (total > 1) {
+                counter = if (total > 1) {
                     stringResource(R.string.progress_count, position.toString(), total.toString())
                 } else null
             )

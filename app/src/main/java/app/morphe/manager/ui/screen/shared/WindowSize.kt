@@ -7,6 +7,7 @@ package app.morphe.manager.ui.screen.shared
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.content.res.Resources
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
@@ -14,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -65,18 +65,20 @@ data class WindowSize(
 @SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 fun windowSizeDp(): DpSize {
-    // Measured off the window rather than Configuration, whose dp counts ignore the interface
-    // scale the activity context applies on top of the display density. The configuration still
-    // covers the first frame, before the window has been measured
+    // The configuration counts its dp at the display density, ignoring the interface scale the
+    // activity context applies on top of it, so they are turned into pixels at that density first.
+    // Not LocalWindowInfo.containerSize, which Compose measures when the configuration changes and
+    // keeps the size from before a rotation where the window is resized only afterward
     val density = LocalDensity.current
     val configuration = LocalConfiguration.current
-    val containerSize = LocalWindowInfo.current.containerSize
+    val pixelsPerDp = Resources.getSystem().displayMetrics.density
 
-    val widthDp = with(density) { containerSize.width.toDp() }
-        .takeIf { it > 0.dp } ?: configuration.screenWidthDp.dp
-    val heightDp = with(density) { containerSize.height.toDp() }
-        .takeIf { it > 0.dp } ?: configuration.screenHeightDp.dp
-    return DpSize(widthDp, heightDp)
+    return with(density) {
+        DpSize(
+            (configuration.screenWidthDp * pixelsPerDp).toDp(),
+            (configuration.screenHeightDp * pixelsPerDp).toDp()
+        )
+    }
 }
 
 /**

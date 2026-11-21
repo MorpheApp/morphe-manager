@@ -22,6 +22,7 @@ import app.morphe.manager.patcher.runtime.ResourceMonitor.LOG_USAGE_PREFIX_CURRE
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.screen.patcher.LogItem
 import app.morphe.manager.ui.screen.patcher.LogItemAccumulator
+import app.morphe.manager.util.PATCHER_LOG_TAG
 import app.morphe.patcher.PatcherTask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -33,7 +34,6 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.time.Duration.Companion.milliseconds
 
-private const val TAG = "Morphe Patcher"
 
 /** One storage throughput sample of the patcher run, in kilobytes per second. */
 data class IoSample(val readKbPerSec: Int, val writeKbPerSec: Int) {
@@ -461,10 +461,10 @@ class PatchRunProgress(
         const val DISPLAYED_LOG_ITEMS_LIMIT = 2000
 
         fun LogLevel.androidLog(msg: String) = when (this) {
-            LogLevel.TRACE -> Log.v(TAG, msg)
-            LogLevel.INFO -> Log.i(TAG, msg)
-            LogLevel.WARN -> Log.w(TAG, msg)
-            LogLevel.ERROR -> Log.e(TAG, msg)
+            LogLevel.TRACE -> Log.v(PATCHER_LOG_TAG, msg)
+            LogLevel.INFO -> Log.i(PATCHER_LOG_TAG, msg)
+            LogLevel.WARN -> Log.w(PATCHER_LOG_TAG, msg)
+            LogLevel.ERROR -> Log.e(PATCHER_LOG_TAG, msg)
         }
     }
 }

@@ -75,7 +75,24 @@ class Filesystem(
 
     /** Avatars of patch sources, kept apart for the same reason as [homeCardCacheDir]. */
     val avatarCacheDir: File = app.cacheDir.resolve("avatars")
-    private val patchedAppsDir: File = app.getDir("patched-apps", Context.MODE_PRIVATE).apply { mkdirs() }
+
+    /** Play Store icons of apps with no icon on the device, kept apart for the same reason. */
+    val playStoreIconCacheDir: File = app.cacheDir.resolve("store-icons")
+
+    /** The people behind Morphe as last fetched, shown again while the network has no answer. */
+    val peopleCacheFile: File = app.cacheDir.resolve("people.json")
+
+    /** OkHttp's response cache, which the client rebuilds on demand. */
+    val httpCacheDir: File = app.cacheDir.resolve("cache")
+
+    /** Patched APKs kept for installing again, named by package and version. */
+    val patchedAppsDir: File = app.getDir("patched-apps", Context.MODE_PRIVATE).apply { mkdirs() }
+
+    /** Every patch source's files, a folder per source uid. */
+    val patchBundlesDir: File = app.getDir("patch_bundles", Context.MODE_PRIVATE)
+
+    /** The keystore patched apps are signed with. */
+    val keystoreFile: File = app.getDir("signing", Context.MODE_PRIVATE).resolve("morphe.keystore")
 
     /**
      * Permanent directory for storing original APK files for repatching.

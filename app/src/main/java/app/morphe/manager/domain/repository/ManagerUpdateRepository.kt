@@ -6,6 +6,7 @@
 package app.morphe.manager.domain.repository
 
 import app.morphe.manager.network.api.ReleaseAPI
+import app.morphe.manager.network.dto.AppUpdateCheck
 import app.morphe.manager.network.dto.ReleaseAsset
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,14 @@ class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
     /** The most recently resolved update, or null while none is known to be available. */
     val availableUpdate: StateFlow<ReleaseAsset?> = _availableUpdate.asStateFlow()
 
+    private val _lastCheck = MutableStateFlow<AppUpdateCheck?>(null)
+
+    /**
+     * What the last check came back with, or null before the first one. Unlike [availableUpdate]
+     * it tells a manager that is up to date from one whose check failed.
+     */
+    val lastCheck: StateFlow<AppUpdateCheck?> = _lastCheck.asStateFlow()
+
     // Outlives the caller that started a check, so callers sharing it are not left waiting on
     // a request canceled by whichever of them went away first
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -41,9 +50,9 @@ class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
     /**
      * Re-checks for an update and publishes the result.
      *
-     * Returns null both when the app is up to date and when the check failed, mirroring
-     * [ReleaseAPI.getAppUpdate], and clears the cached asset so the next reader resolves the
-     * state from scratch instead of acting on a stale release.
+     * Returns null both when the app is up to date and when the check failed, which
+     * [ReleaseAPI.checkAppUpdate] tells apart. Clears the cached asset, so the next reader
+     * resolves the state from scratch instead of acting on a stale release.
      */
     suspend fun refresh(): ReleaseAsset? = awaitFetch()
 
@@ -72,11 +81,14 @@ class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
         return pending.await()
     }
 
-    private suspend fun fetch(): ReleaseAsset? =
-        releaseAPI.getAppUpdate().also {
-            _availableUpdate.value = it
-            lastResolvedAt = System.currentTimeMillis()
-        }
+    private suspend fun fetch(): ReleaseAsset? {
+        val check = releaseAPI.checkAppUpdate()
+        val update = (check as? AppUpdateCheck.Available)?.asset
+        _lastCheck.value = check
+        _availableUpdate.value = update
+        lastResolvedAt = System.currentTimeMillis()
+        return update
+    }
 
     private companion object {
         // Long enough to cover the checks a single app launch fans out, short enough that a

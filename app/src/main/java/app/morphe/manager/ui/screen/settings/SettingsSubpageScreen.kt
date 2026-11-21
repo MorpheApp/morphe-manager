@@ -57,6 +57,7 @@ internal fun SettingsSubpageContent(
         SettingsSubpage.APK_DOWNLOAD_HELPERS -> ApkDownloadHelpersSettings()
         SettingsSubpage.ABOUT -> AboutSettings(
             onOpenLicenses = navigation.openLicenses,
+            onOpenMiniGames = navigation.openMiniGames,
             onStartTour = navigation.startTour
         )
     }

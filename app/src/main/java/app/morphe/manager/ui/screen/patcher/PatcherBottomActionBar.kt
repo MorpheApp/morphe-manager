@@ -8,10 +8,8 @@ package app.morphe.manager.ui.screen.patcher
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,13 +19,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
@@ -262,91 +257,6 @@ internal fun PatcherActionButton(
     )
 }
 
-private val TailWidth = 14.dp
-private val TailHeight = 7.dp
-
-/**
- * Callout that sits above a [PatcherBottomActionBar] and points down at the button at [slot].
- *
- * The tail is placed by a row shaped like the bar itself, so it lands on the button whatever
- * width the bar works out to.
- */
-@Composable
-internal fun PatcherActionCallout(
-    text: String,
-    slot: Int,
-    slots: Int,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
-    contentColor: Color = MaterialTheme.colorScheme.onSecondaryContainer,
-    horizontalPadding: Dp = Defaults.SpaceLarge
-) {
-    BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
-        val barWidth = maxWidth.coerceAtMost(Defaults.ContentMaxWidth)
-
-        Column(
-            modifier = Modifier
-                .width(barWidth)
-                .align(Alignment.Center)
-                .padding(horizontal = horizontalPadding)
-        ) {
-            Surface(
-                shape = RoundedCornerShape(Defaults.CornerMedium),
-                color = containerColor,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = Defaults.SpaceMedium, vertical = Defaults.SpaceSmall),
-                    horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall, Alignment.CenterHorizontally),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (icon != null) {
-                        Icon(
-                            imageVector = icon,
-                            contentDescription = null,
-                            tint = contentColor,
-                            modifier = Modifier.size(Defaults.IconSizeSmall)
-                        )
-                    }
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = contentColor,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
-            ) {
-                repeat(slots) { index ->
-                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopCenter) {
-                        if (index == slot) CalloutTail(color = containerColor)
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CalloutTail(color: Color) {
-    Canvas(modifier = Modifier.size(width = TailWidth, height = TailHeight)) {
-        drawPath(
-            path = Path().apply {
-                moveTo(0f, 0f)
-                lineTo(size.width, 0f)
-                lineTo(size.width / 2f, size.height)
-                close()
-            },
-            color = color
-        )
-    }
-}
-
 /**
  * The bar's way back to the result screen, named by where the run stands there so it never offers
  * an action the result screen has moved past. It only leads there, the actions stay on that screen.
@@ -356,9 +266,4 @@ class ResultButton(
     val icon: ImageVector,
     val tone: BottomActionTone = BottomActionTone.Accent,
     val busy: Boolean = false
-) {
-    companion object {
-        /** For a result screen that has yet to install anything. */
-        val Install = ResultButton(R.string.install, MaterialSymbols.Rounded.Install_mobile)
-    }
-}
+)

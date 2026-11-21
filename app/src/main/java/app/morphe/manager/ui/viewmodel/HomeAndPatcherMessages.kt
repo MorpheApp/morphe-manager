@@ -9,7 +9,7 @@ import android.content.Context
 import android.util.Log
 import app.morphe.manager.R
 import app.morphe.manager.ui.theme.SeasonalEvent
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -53,7 +53,7 @@ object HomeAndPatcherMessages {
         if (updateSeed) {
             seed = Random.nextInt().toLong()
             messageSeed.save(context, seed)
-            Log.d(tag, "Updated message seed: $messageSeed")
+            Log.d(LOG_TAG, "Updated message seed: $messageSeed")
         }
 
         val shuffledMessages = listOf(messages.first()) + messages.drop(1).shuffled(Random(seed))

@@ -312,6 +312,12 @@ data class Option<T>(
     @Suppress("UNCHECKED_CAST")
     fun accepts(value: Any?): Boolean =
         runCatching { validator(coerceOptionValue(type, value) as T?) }.getOrDefault(false)
+
+    /** Whether the option answers to a search query, as [PatchInfo.matchesQuery] does for a patch. */
+    fun matchesQuery(query: String): Boolean =
+        query.isBlank() ||
+                title.contains(query, ignoreCase = true) ||
+                description.contains(query, ignoreCase = true)
 }
 
 private fun extractExplicitKind(option: PatchOption<*>): ExplicitOptionKind? = when (option) {

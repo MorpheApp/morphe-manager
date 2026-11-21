@@ -161,6 +161,31 @@ fun PrefetchTranslations(texts: Collection<String>) {
     }
 }
 
+/**
+ * Matches [items] against a search query by [matchesOriginal] and, while translation is on, by the
+ * translated [translatable] text, translated in the background so a search finds it unscrolled to.
+ */
+@Composable
+fun <T> rememberTranslatedMatcher(
+    query: String,
+    items: List<T>,
+    translatable: (T) -> String?,
+    matchesOriginal: (item: T, query: String) -> Boolean
+): (T) -> Boolean {
+    val translation: ContentTranslation = koinInject()
+    val texts = remember(items) { items.mapNotNull(translatable).distinct() }
+    PrefetchTranslations(texts)
+
+    // Read only while searching, so translations landing in the background leave the list alone
+    val revision = if (query.isBlank()) 0 else translation.revision
+    return remember(query, translation.isEnabled, revision) {
+        { item ->
+            query.isBlank() || matchesOriginal(item, query) ||
+                    translatable(item)?.let(translation::cached)?.contains(query, ignoreCase = true) == true
+        }
+    }
+}
+
 /** Footer action switching translation on and off, or null where there is nothing to translate into. */
 @Composable
 fun translateAction(): DialogAction? {

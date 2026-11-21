@@ -90,6 +90,7 @@ internal data class AppCardLine(
  * [packageInfo] is at hand.
  *
  * @param packageName Package the icon is looked up by, null for the glass placeholder alone.
+ * @param storePackageName See [AppIcon].
  * @param preferredSource Where the icon is looked for first.
  * @param tags See the [AppCardContent] taking an icon of its own.
  */
@@ -99,6 +100,7 @@ internal fun AppCardScope.AppCardContent(
     packageInfo: PackageInfo?,
     displayName: String,
     subtitle: AppCardLine?,
+    storePackageName: String? = packageName,
     preferredSource: AppDataSource = AppDataSource.PATCHED_APK,
     tags: @Composable RowScope.() -> Unit = {}
 ) {
@@ -106,6 +108,7 @@ internal fun AppCardScope.AppCardContent(
         AppIcon(
             packageInfo = packageInfo,
             packageName = packageName,
+            storePackageName = storePackageName,
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             preferredSource = preferredSource,
@@ -302,6 +305,8 @@ internal fun HomeAppCard(
             // Named after the package the record was installed under: a clone carries an icon of
             // its own, which is regularly the whole point of keeping several copies of an app apart
             packageName = installedApp?.currentPackageName ?: item.packageName,
+            // Where none of its copies has an icon, the Play Store only knows the app itself
+            storePackageName = item.packageName,
             packageInfo = item.packageInfo,
             displayName = item.displayName,
             subtitle = status.line(),

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Home Screen -->
-    <string name="home_other_apps">Egyéb alkalmazások</string>
-    <string name="home_other_apps_action">Más alkalmazás kiválasztása</string>
+    <string name="home_other_apps">További alkalmazások</string>
+    <string name="home_other_apps_action">További alkalmazások kiválasztása</string>
     <string name="home_not_patched_yet">Még nincs módosítva</string>
-    <string name="home_unpatched_version_installed">A telepített verzió módosítatlan</string>
+    <string name="home_unpatched_version_installed">Nem módosított verzió van telepítve</string>
     <string name="home_app_status_newer_version">Frissítés a(z) %s verzióra</string>
-    <string name="home_app_status_newer_patches">Új javítások</string>
+    <string name="home_app_status_newer_patches">Új módosítások</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
-    <string name="form_factor_automotive">Autóipari</string>
+    <string name="form_factor_automotive">Autó</string>
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
-    <string name="home_app_hide_title">Elrejti az alkalmazást?</string>
+    <string name="home_app_hide_title">Elrejted az alkalmazást?</string>
     <string name="home_more_apps_title">További alkalmazások</string>
     <string name="home_more_apps_hide_title">Elrejtsük ezt a kártyát?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
-    <string name="home_more_apps_hide_message">Bármikor visszahozhatod a(z) %1$s menüpontban</string>
+    <string name="home_more_apps_hide_message">Bármikor visszaállíthatod a(z) %1$s menüpontban</string>
     <string name="home_app_hide_message">Az alkalmazás el lesz rejtve a főképernyőről. Később visszaállíthatod a lista alján található gomb segítségével.</string>
     <string name="home_app_will_be_hidden">Az alkalmazás nem lesz látható</string>
-    <string name="home_app_hidden_named">%s rejtett</string>
-    <string name="home_app_shown_named">%s megjelenített</string>
+    <string name="home_app_hidden_named">%s elrejtve</string>
+    <string name="home_app_shown_named">%s megjelenítve</string>
     <string name="home_app_no_hidden">Nincs rejtett alkalmazás</string>
     <string name="home_app_hidden_apps_title">Rejtett alkalmazások</string>
     <string name="home_app_hidden_apps_hint">Koppints a megjelenítéshez</string>
     <string name="home_apps_unhide_message">A nem rejtett alkalmazások visszatérnek a kezdőképernyőre</string>
-    <string name="home_app_patch_sources_description">A bejelöletlenül hagyott források nincsenek felajánlva, amikor ezeket az alkalmazásokat javítják, és a javításaik soha nem kerülnek be maguktól egy kiválasztásba. Minden másik alkalmazásnál minden forrás bekapcsolva marad.</string>
+    <string name="home_app_patch_sources_description">A nem kijelölt források nem lesznek felajánlva az alkalmazások módosításakor, és a módosításaik önmaguktól soha nem adódnak hozzá a kiválasztáshoz. Minden más appnál az adott forrás aktív marad.</string>
     <string name="home_app_patch_sources_mixed">Felajánlva: %1$s a %2$s közül</string>
-    <string name="home_app_patch_sources_covers">%2$s forrásból %1$s tartalmaz javításokat</string>
-    <string name="home_app_patch_sources_last">Minden alkalmazáshoz maradnia kell legalább egy forrásnak, amelyből javítani lehet.</string>
+    <string name="home_app_patch_sources_covers">%2$s forrásból %1$s tartalmaz módosításokat</string>
+    <string name="home_app_patch_sources_last">Alkalmazásonként legalább egy forrásnak meg kell maradnia a módosításhoz</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
     <string name="deep_link_add_source_title">Forrás hozzáadása</string>
@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
     <string name="sources_download_fail_named">A(z) \'%s\' nem frissíthető. Ellenőrizd az internetkapcsolatot, és próbáld újra.</string>
     <string name="sources_download_endpoint_not_found">A(z) \'%s\' nem található meg a patch metaadata.</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">A helyi hálóján található források nem frissíthetők a „Környezetbeli eszközök” engedély nélkül</string>
     <string name="sources_signing_key_changed_named">\'%s\' nem frissült, mert a legújabb kiadása nem azzal a kulccsal van aláírva, amelyet korábban használt</string>
     <string name="sources_signing_key_changed_local">A fájlt nem olyan kulccsal írták alá, mint amilyet ez a forrás korábban használt. Ha megbízik benne, törölje a forrást, majd adja hozzá újra a fájlt</string>
     <string name="sources_signing_key_trust_title">Bízni szeretne az új kulcsban?</string>
@@ -346,8 +348,6 @@ Válaszd ki, honnan szerezd be az APK-t"</string>
     <string name="home_external_apk_expert_mode_required">Ez a funkció csak szakértői módban érhető el</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Módosítások keresése</string>
-    <string name="expert_mode_disable_all">Minden módosítás letiltása</string>
-    <string name="expert_mode_enable_all">Minden módosítás engedélyezése</string>
     <string name="expert_mode_enable_all_universal_pending">Koppintson újra az univerzális javításokhoz.</string>
     <string name="expert_mode_universal_all_warning_title">Az összes univerzális javítás engedélyezése?</string>
     <string name="expert_mode_universal_all_warning_message">Az univerzális javítások nincsenek együtt tesztelve. Ha egyszerre engedélyezed mindet, az ütközéseket, sikertelen javítást vagy összeomlást okozhat.</string>
@@ -567,9 +567,12 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="app_links_unverified_banner_description">A támogatott webes hivatkozások jelenleg a böngésződben nyílnak meg az alkalmazás helyett</string>
     <string name="app_links_enable_auto">Automatikus engedélyezés</string>
     <string name="app_links_enable_auto_in_progress">Hivatkozások engedélyezése…</string>
+    <string name="app_links_disable_all_in_progress">Linkek tiltsása…</string>
     <string name="app_links_open_settings">Hivatkozásbeállítások megnyitása</string>
     <string name="app_links_repair_success">Alkalmazáshivatkozások sikeresen engedélyezve</string>
     <string name="app_links_repair_failed">Nem sikerült automatikusan engedélyezni az alkalmazáshivatkozásokat</string>
+    <string name="app_links_disable_success">Alkalmazáslinkek tiltsítva</string>
+    <string name="app_links_disable_failed">Nem sikerült tiltani az alkalmazáslinkeket</string>
     <string name="app_links_change_failed">Sikertetlen alkalmazáslinkek módosítása</string>
     <string name="app_links_all_verified">Minden támogatott hivatkozás úgy van beállítva, hogy ebben az alkalmazásban nyíljon meg</string>
     <string name="app_links_fix">Hivatkozások javítása</string>
@@ -628,8 +631,6 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="patcher_field_value_stripped">eltávolítva</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">megtartva</string>
-    <string name="patcher_tab_logs">Javító naplók</string>
-    <string name="patcher_tab_game">Játékok</string>
     <string name="patcher_logs_waiting">Várja a napló kimenetét…</string>
     <string name="patcher_logs_lost">A napló kimenet nem kerül megőrzésre az alkalmazás újraindításakor</string>
     <string name="patcher_long_step_warning">Ez a lépés eltarthat egy ideig. Kérjük várj…</string>
@@ -659,7 +660,6 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patcher_install_error_subtitle">Próbáld meg eltávolítani és újratelepíteni</string>
     <string name="patcher_ready_to_mount_subtitle">Nyomd meg az alábbi gombot a csatoláshoz</string>
     <string name="patcher_patches_excluded_for_installer">Nem érhető el a telepítési módszerhez és kizárt: %s</string>
-    <string name="patcher_back_to_game_hint">Koppints a(z) %1$s elemre a játékhoz való visszatéréshez</string>
     <string name="patcher_storage_permission_dialog_title">Az elérési útvonal nem hozzáférhető</string>
     <string name="patcher_incompatible_patcher_title">Frissítés szükséges</string>
     <string name="patcher_incompatible_patcher_description">A &lt;b&gt;%1$s&lt;/b&gt; forrás a &lt;b&gt;%2$s&lt;/b&gt; vagy újabb patchert igényel. A használatához frissítse a Morphe-ot</string>
@@ -764,7 +764,9 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="package_name">Csomagnév</string>
     <string name="failed_to_mount">Nem sikerült csatlakoztatni: %s</string>
     <string name="failed_to_unmount">Nem sikerült leválasztani: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minijátékok</string>
+    <string name="mini_games_description">Gyors játékok a szabad percben</string>
     <string name="mini_game_score">Értékelés: %s</string>
     <string name="mini_game_best">Legjobb %s</string>
     <string name="mini_game_new_record">Új rekord!</string>
@@ -773,7 +775,14 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="mini_game_paused">Szüneteltetve</string>
     <string name="mini_game_resume">Folytatás</string>
     <string name="mini_game_restart">Újrakezdés</string>
-    <string name="mini_game_change">Válassz másik játékot</string>
+    <string name="mini_game_pause">Szünet</string>
+    <string name="mini_game_score_label">Pontszám</string>
+    <string name="mini_game_best_label">Legjobb</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Szint</string>
+    <string name="mini_game_lines">Sorok</string>
+    <string name="mini_game_lives">Élet</string>
+    <string name="mini_game_flags">Zászlók</string>
     <string name="mini_game_2048_picker_subtitle">Húzd a lapkákat összevonáshoz</string>
     <string name="mini_game_flappy_picker_subtitle">Érintsd meg, hogy átrepülj a csővázakon</string>
     <string name="mini_game_flappy_tap_to_start">Érintsd meg a repüléshez</string>
@@ -1069,6 +1078,7 @@ A képek méreteinek a következőknek kell lennie:
     <string name="installer_mount_warning_install">A patch mód root mountra van állítva. Ez a mentett alkalmazás nem csatolással lett telepítve</string>
     <string name="mount_version_mismatch_message">A telepített alapverzió (%2$s) nem egyezik a módosított alkalmazás verziójával (%1$s). Csatold a megfelelő alapverziót, majd próbáld újra</string>
     <string name="mount_stock_restore_failed_message">Az Android elutasította a mentett eredeti APK-t. Telepítsd a megfelelő gyári verziót, majd próbáld meg újra a csatolást.</string>
+    <string name="mount_stock_mismatch_message">A telepített alkalmazás nem az eredeti. Válassza ki az eredeti APK-t, vagy telepítse újra a gyári verziót, majd próbálja meg újra a csatolást</string>
     <string name="installer_status_shizuku_unsupported">A telepített Shizuku verzió nem támogatott</string>
     <string name="installer_action_open_shizuku">Shizuku megnyitása</string>
     <string name="installer_hint_generic">A telepítés sikertelen volt. Próbáld újra, vagy válts egy másik telepítőre</string>
@@ -1339,13 +1349,29 @@ Részletek: %2$s"</string>
     <string name="file_picker_new_folder_failed">A mappa nem oluşturható</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Névjegy</string>
-    <string name="settings_system_manager_description">Egy nyílt forráskódú projekt népszerű Android-alkalmazások modern, hatékony módosításához, amelyet a közösség visszajelzései és hozzájárulásai hajtanak</string>
-    <string name="credits">Közreműködők</string>
-    <string name="credits_description">A Morphe mögötti emberek</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Súgó</string>
-    <string name="credits_current_development">Jelenlegi fejlesztők</string>
     <string name="credits_prior_development">Korábbi fejlesztők</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Kezelő</string>
+    <string name="about_update_available">Frissítés elérhető: %s</string>
+    <string name="about_up_to_date">Naprakész</string>
+    <string name="about_links">Hivatalos linkek</string>
+    <string name="about_link_donate">Adományozás</string>
+    <string name="about_link_website">Weboldal</string>
+    <string name="about_link_translations">Fordítások</string>
+    <string name="contributors">Hozzálisoulók</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Mindig</string>
+    <string name="contributors_6_months">6 hónap</string>
+    <string name="contributors_3_months">3 hónap</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Támogatók</string>
+    <string name="supporters_description">Támogatók az Open Collective-en</string>
+    <string name="supporters_become">Legyél te is támogató</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">És további %s</string>
+    <string name="people_unavailable">A lista nem tölthető be</string>
     <string name="opensource_licenses">Nyílt forráskódú licencek</string>
     <string name="opensource_licenses_description">A Morphe által használt könyvtárak</string>
     <string name="opensource_licenses_search">Keresés könyvtárak és licencek között</string>
@@ -1415,6 +1441,8 @@ Részletek: %2$s"</string>
     <string name="include">Bevés</string>
     <string name="disable">Letiltás</string>
     <string name="enable">Engedélyezés</string>
+    <string name="enable_all">Minden módosítás engedélyezése</string>
+    <string name="disable_all">Minden módosítás letiltása</string>
     <string name="trust">Bízás</string>
     <string name="loading">Betöltés…</string>
     <string name="creating">Létrehozás…</string>

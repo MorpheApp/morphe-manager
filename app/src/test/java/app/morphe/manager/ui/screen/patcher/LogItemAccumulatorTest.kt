@@ -34,7 +34,7 @@ class LogItemAccumulatorTest {
     @Test
     fun `incremental parsing matches full pass conversion`() {
         val stream = sampleLogStream()
-        val batchResult = stream.toLogItems()
+        val batchResult = LogItemAccumulator().appendAll(stream).toList()
 
         val accumulator = LogItemAccumulator()
         for ((level, message) in stream) {

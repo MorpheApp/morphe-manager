@@ -16,7 +16,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlinx.coroutines.delay
 import kotlin.math.cos
@@ -47,13 +46,11 @@ fun SpaceBackground(
         listOf(Color(0xFF1A2530), Color(0xFF213A6B), Color(0xFF5C4223))
     }
     val starColor = starTints[0]
-    val context = LocalContext.current
 
     // Parallax tilt from accelerometer
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.3f,
-        context = context
+        sensitivity = 0.3f
     )
 
     val stars = remember(isDarkTheme) {

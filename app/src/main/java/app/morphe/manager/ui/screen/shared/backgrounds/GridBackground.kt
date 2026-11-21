@@ -11,7 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.platform.LocalContext
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.roundToInt
@@ -35,12 +34,10 @@ fun GridBackground(
     val primaryColor   = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
-    val context        = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.15f,
-        context = context
+        sensitivity = 0.15f
     )
 
     val time = rememberAnimatedTime(speedMultiplier)

@@ -11,7 +11,7 @@
 package app.morphe.manager.patcher.split
 
 import android.util.Log
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
@@ -44,7 +44,7 @@ object SplitApkInspector {
                 ZipFile(source).use { zip ->
                     val entry = selectBestEntry(zip)
                         ?: throw IOException("Split archive does not contain any APK entries.")
-                    Log.d(tag, "Reading ${source.name} through its module ${entry.name}")
+                    Log.d(LOG_TAG, "Reading ${source.name} through its module ${entry.name}")
                     zip.getInputStream(entry).use { input ->
                         Files.newOutputStream(temp.toPath()).use { output ->
                             input.copyTo(output)

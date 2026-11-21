@@ -250,6 +250,8 @@
     <string name="sources_download_fail">Failed to download sources: %s</string>
     <string name="sources_download_fail_named">\'%s\' could not be updated. Check your internet connection and try again</string>
     <string name="sources_download_endpoint_not_found">\'%s\': patch metadata not found</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Sources on your local network can\'t be updated without the Nearby devices permission</string>
     <string name="sources_signing_key_changed_named">\'%s\' was not updated because its latest release is not signed by the key it used before</string>
     <string name="sources_signing_key_changed_local">The file is not signed by the key this source used before. To trust it, delete the source and add the file again</string>
     <string name="sources_signing_key_trust_title">Trust the new key?</string>
@@ -355,8 +357,6 @@ Choose where to take its APK from"</string>
 
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Search patches</string>
-    <string name="expert_mode_disable_all">Disable all</string>
-    <string name="expert_mode_enable_all">Enable all</string>
     <string name="expert_mode_enable_all_universal_pending">Tap again for universal patches</string>
     <string name="expert_mode_universal_all_warning_title">Enable all universal patches?</string>
     <string name="expert_mode_universal_all_warning_message">Universal patches are not tested together. Enabling all of them at once can cause conflicts, failed patching, or crashes</string>
@@ -584,9 +584,12 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="app_links_unverified_banner_description">Supported web links currently open in your browser instead of this app</string>
     <string name="app_links_enable_auto">Enable automatically</string>
     <string name="app_links_enable_auto_in_progress">Enabling links…</string>
+    <string name="app_links_disable_all_in_progress">Disabling links…</string>
     <string name="app_links_open_settings">Open link settings</string>
     <string name="app_links_repair_success">App links enabled successfully</string>
     <string name="app_links_repair_failed">Failed to enable app links automatically</string>
+    <string name="app_links_disable_success">App links disabled</string>
+    <string name="app_links_disable_failed">Failed to disable app links</string>
     <string name="app_links_change_failed">Failed to change app links</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
@@ -649,8 +652,6 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_field_value_kept">kept</string>
     <string name="patcher_patches_progress_format" translatable="false">%1$s / %2$s</string>
     <string name="patcher_percentage" translatable="false">%s%%</string>
-    <string name="patcher_tab_logs">Patcher logs</string>
-    <string name="patcher_tab_game">Games</string>
     <string name="patcher_logs_waiting">Waiting for log output…</string>
     <string name="patcher_logs_lost">Log output is not kept across app restarts</string>
     <string name="patcher_long_step_warning">This step may take a while. Please wait…</string>
@@ -680,7 +681,6 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patcher_install_error_subtitle">Try uninstalling and installing again</string>
     <string name="patcher_ready_to_mount_subtitle">Press the button below to mount</string>
     <string name="patcher_patches_excluded_for_installer">Not available for this install method and excluded: %s</string>
-    <string name="patcher_back_to_game_hint">Tap %1$s to go back to your game</string>
     <string name="patcher_storage_permission_dialog_title">Cannot access storage path</string>
     <string name="patcher_incompatible_patcher_title">Update required</string>
     <string name="patcher_incompatible_patcher_description">The source &lt;b&gt;%1$s&lt;/b&gt; requires patcher &lt;b&gt;%2$s&lt;/b&gt; or newer. Update Morphe to use it</string>
@@ -795,7 +795,9 @@ Uninstalling will permanently erase all app data"</string>
     <string name="failed_to_mount">Failed to mount: %s</string>
     <string name="failed_to_unmount">Failed to unmount: %s</string>
 
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-games</string>
+    <string name="mini_games_description">Quick games to pass a spare minute</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Best %s</string>
     <string name="mini_game_new_record">New record!</string>
@@ -804,7 +806,15 @@ Uninstalling will permanently erase all app data"</string>
     <string name="mini_game_paused">Paused</string>
     <string name="mini_game_resume">Continue</string>
     <string name="mini_game_restart">Start over</string>
-    <string name="mini_game_change">Choose another game</string>
+    <string name="mini_game_pause">Pause</string>
+    <string name="mini_game_score_label">Score</string>
+    <string name="mini_game_best_label">Best</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Level</string>
+    <string name="mini_game_lines">Lines</string>
+    <string name="mini_game_lives">Lives</string>
+    <string name="mini_game_flags">Flags</string>
+    <string name="mini_game_stat_of" translatable="false">%1$s/%2$s</string>
 
     <string name="mini_game_2048" translatable="false">2048</string>
     <string name="mini_game_2048_picker_subtitle">Slide tiles to merge</string>
@@ -832,7 +842,6 @@ Uninstalling will permanently erase all app data"</string>
 
     <string name="mini_game_miner" translatable="false">Miner</string>
     <string name="mini_game_miner_picker_subtitle">Tap to open, hold to flag</string>
-    <string name="mini_game_miner_flags" translatable="false">%1$s/%2$s</string>
 
     <string name="mini_game_pairs" translatable="false">Pairs</string>
     <string name="mini_game_pairs_picker_subtitle">Flip cards, find the match</string>
@@ -1139,6 +1148,7 @@ The image dimensions must be as follows:
     <string name="installer_mount_warning_install">Patch mode is set to root mount. This saved app was not installed using mount</string>
     <string name="mount_version_mismatch_message">Stock app version (%2$s) does not match patched app version (%1$s). Mount the matching stock version, then try again</string>
     <string name="mount_stock_restore_failed_message">Android rejected the saved original APK. Install the matching stock version, then try Mount again</string>
+    <string name="mount_stock_mismatch_message">The installed app is not the original one. Choose the original APK or reinstall the stock version, then try Mount again</string>
     <string name="installer_status_shizuku_unsupported">The installed Shizuku version is not supported</string>
     <string name="installer_action_open_shizuku">Open Shizuku</string>
     <string name="installer_hint_generic">The installation failed. Try again or switch to a different installer</string>
@@ -1424,13 +1434,31 @@ Details: %2$s"</string>
 
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">About</string>
-    <string name="settings_system_manager_description">An open-source project for modern, streamlined patching of popular Android apps, driven by community feedback and contributions</string>
-    <string name="credits">Credits</string>
-    <string name="credits_description">The people behind Morphe</string>
     <string name="settings_about_section_project">Project</string>
     <string name="settings_about_section_help">Help</string>
-    <string name="credits_current_development">Current development</string>
     <string name="credits_prior_development">Prior development</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manager</string>
+    <string name="about_update_available">Update available: %s</string>
+    <string name="about_up_to_date">Up to date</string>
+    <string name="about_links">Official links</string>
+    <string name="about_link_donate">Donate</string>
+    <string name="about_link_website">Website</string>
+    <string name="about_link_github" translatable="false">GitHub</string>
+    <string name="about_link_reddit" translatable="false">Reddit</string>
+    <string name="about_link_translations">Translations</string>
+    <string name="contributors">Contributors</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">All time</string>
+    <string name="contributors_6_months">6 months</string>
+    <string name="contributors_3_months">3 months</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Supporters</string>
+    <string name="supporters_description">Backers on Open Collective</string>
+    <string name="supporters_become">Become a supporter</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">And %s more</string>
+    <string name="people_unavailable">Could not load the list</string>
     <string name="opensource_licenses">Open-source licenses</string>
     <string name="opensource_licenses_description">The libraries Morphe is built on</string>
     <string name="opensource_licenses_search">Search libraries and licenses</string>
@@ -1504,6 +1532,8 @@ Details: %2$s"</string>
     <string name="include">Include</string>
     <string name="disable">Disable</string>
     <string name="enable">Enable</string>
+    <string name="enable_all">Enable all</string>
+    <string name="disable_all">Disable all</string>
     <string name="trust">Trust</string>
     <string name="loading">Loading…</string>
     <string name="creating">Creating…</string>

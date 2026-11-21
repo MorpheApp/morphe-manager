@@ -99,7 +99,7 @@ class PatcherViewModel(
 
     private val saveOriginalApkMutex = Mutex()
 
-    var exportMetadata by mutableStateOf<PatchedAppExportData?>(null)
+    var exportMetadata by mutableStateOf<ApkExportData?>(null)
         private set
 
     /**
@@ -111,7 +111,7 @@ class PatcherViewModel(
 
     /** Formatted export file name derived from [exportMetadata]. */
     val exportFileName: String by derivedStateOf {
-        val data = exportMetadata ?: PatchedAppExportData(
+        val data = exportMetadata ?: ApkExportData(
             appName = packageName,
             packageName = packageName,
             appVersion = version ?: "unspecified"
@@ -153,29 +153,11 @@ class PatcherViewModel(
     var showSuccessScreen: Boolean by mutableStateOf(false)
         private set
 
-    // A finished run that arrived while the user was playing, waiting for them to be done
-    private var successScreenHeldBack = false
-    private var successScreenDeferred = false
-
     fun showSuccess() {
-        successScreenHeldBack = false
         showSuccessScreen = true
     }
 
     fun hideSuccessScreen() { showSuccessScreen = false }
-
-    /**
-     * Holds the automatic switch to the success screen back while the user is busy with something
-     * the run has no right to interrupt, currently a mini-game, and releases it again afterward.
-     *
-     * A run that finishes meanwhile is not lost: the progress screen turns its own action bar into
-     * an install button, and the screen appears on its own once [defer] goes back to false,
-     * bringing along whatever an auto-install that ran meanwhile has to ask.
-     */
-    fun deferSuccessScreen(defer: Boolean) {
-        successScreenDeferred = defer
-        if (!defer && successScreenHeldBack) showSuccess()
-    }
 
     var isPatching: Boolean by mutableStateOf(true)
         private set
@@ -199,10 +181,7 @@ class PatcherViewModel(
 
         // Patches rename an app for reasons of their own, and a build the user never asked to
         // clone is still the app's only install however it ended up named
-        val bundles = scopedBundles()
-        if (!producedClone(result, sanitizeSelection(appliedSelection, bundles), bundles)) {
-            return@withContext null
-        }
+        if (!producedClone(result)) return@withContext null
 
         RenameWarning(
             targetPackageName = target,
@@ -237,6 +216,12 @@ class PatcherViewModel(
             bundles[bundleUid]?.patches?.firstOrNull { it.name == patchName }?.declaresPackageName == true
         }
     )
+
+    /** [producedClone] with the selection this run was built with. */
+    private suspend fun producedClone(resultPackageName: String): Boolean {
+        val bundles = scopedBundles()
+        return producedClone(resultPackageName, sanitizeSelection(appliedSelection, bundles), bundles)
+    }
 
     /**
      * Non-null when the saved selection names patches no enabled source offers anymore, which
@@ -383,15 +368,13 @@ class PatcherViewModel(
     }
 
     // Parsing the patched APK stalls a frame, and export reaches here from the main thread
-    private suspend fun buildExportMetadata(packageInfo: PackageInfo?): PatchedAppExportData? = withContext(Dispatchers.IO) {
+    private suspend fun buildExportMetadata(packageInfo: PackageInfo?): ApkExportData? = withContext(Dispatchers.IO) {
         val info = packageInfo ?: patchedApp() ?: return@withContext null
-        val label = runCatching { with(pm) { info.label() } }.getOrNull()
-        val versionName = info.versionName?.takeUnless { it.isBlank() } ?: version ?: "unspecified"
-        PatchedAppExportData(
-            appName = label,
-            packageName = info.packageName,
-            appVersion = versionName,
-            sources = collectSelectedBundleMetadata()
+        pm.exportData(
+            built = info,
+            sources = collectSelectedBundleMetadata(),
+            isClone = producedClone(info.packageName),
+            fallbackVersion = version
         )
     }
 
@@ -703,7 +686,7 @@ class PatcherViewModel(
             }
 
             if (fileToSave == null || !fileToSave.exists()) {
-                Log.w(TAG, "File to save doesn't exist, skipping original APK save")
+                Log.w(PATCHER_LOG_TAG, "File to save doesn't exist, skipping original APK save")
                 return@withLock
             }
 
@@ -715,7 +698,7 @@ class PatcherViewModel(
 
             // Does original already exist in repository?
             if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave)) {
-                Log.d(TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
+                Log.d(PATCHER_LOG_TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
                 return@withLock
             }
 
@@ -733,11 +716,11 @@ class PatcherViewModel(
                 if (moveSource && !fileToSave.exists()) {
                     inputFile = null
                 }
-                Log.i(TAG, "Original APK/archive saved: ${savedFile.name}")
+                Log.i(PATCHER_LOG_TAG, "Original APK/archive saved: ${savedFile.name}")
             }
         } catch (e: Exception) {
             // Don't fail patching if save fails
-            Log.w(TAG, "Failed to save original APK", e)
+            Log.w(PATCHER_LOG_TAG, "Failed to save original APK", e)
         }
     }
 
@@ -749,7 +732,7 @@ class PatcherViewModel(
         // canceled mid-way, so the DB row never diverges from the installed APK
         val packageInfo = patchedApp() ?: currentPackageName?.let(pm::getPackageInfo)
         if (packageInfo == null) {
-            Log.e(TAG, "Failed to resolve package info for patched APK")
+            Log.e(PATCHER_LOG_TAG, "Failed to resolve package info for patched APK")
             return@withContext false
         }
 
@@ -782,10 +765,10 @@ class PatcherViewModel(
                 copyThroughStaging(outputFile, savedCopy)
             } catch (error: IOException) {
                 if (installType == InstallType.SAVED) {
-                    Log.e(TAG, "Failed to copy patched APK for later", error)
+                    Log.e(PATCHER_LOG_TAG, "Failed to copy patched APK for later", error)
                     return@withContext false
                 } else {
-                    Log.w(TAG, "Failed to update saved copy for $finalPackageName", error)
+                    Log.w(PATCHER_LOG_TAG, "Failed to update saved copy for $finalPackageName", error)
                 }
             }
         }
@@ -1052,7 +1035,7 @@ class PatcherViewModel(
 
     private fun scheduleSuccessScreen() = viewModelScope.launch {
         delay(successScreenDelay)
-        if (successScreenDeferred) successScreenHeldBack = true else showSuccess()
+        showSuccess()
     }
 
     // An install outlives this screen and reads output.apk until it is done
@@ -1172,8 +1155,6 @@ class PatcherViewModel(
     }
 
     private companion object {
-        private const val TAG = "Morphe Patcher"
-
         private const val KEY_PROGRESS = "patch_progress"
         private const val KEY_STEPS = "steps"
         private const val KEY_COMPLETED_PATCHES = "completed_patches"

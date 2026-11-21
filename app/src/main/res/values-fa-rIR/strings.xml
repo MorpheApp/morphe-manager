@@ -245,6 +245,8 @@
     <string name="sources_download_fail">دانلود منابع شکست خورد: %s</string>
     <string name="sources_download_fail_named">به‌روزرسانی «%s» ممکن نشد. اتصال اینترنت را بررسی و دوباره تلاش کنید</string>
     <string name="sources_download_endpoint_not_found">«%s»: فرادادهٔ پچ پیدا نشد</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">منابع موجود در شبکه محلی شما بدون مجوز دستگاه‌های نزدیک قابل به‌روزرسانی نیستند</string>
     <string name="sources_signing_key_changed_named">\'%s\' به‌روزرسانی نشد زیرا آخرین نسخه آن توسط کلیدی که قبلاً استفاده می‌کرد امضا نشده است</string>
     <string name="sources_signing_key_changed_local">این فایل با کلیدی که این منبع قبلاً استفاده می‌کرد، امضا نشده است. برای اعتماد به آن، منبع را حذف کرده و فایل را دوباره اضافه کنید</string>
     <string name="sources_signing_key_trust_title">به کلید جدید اعتماد کنید؟</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">این ویژگی فقط در حالت حرفه‌ای در دسترس است</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">جستجوی پچ ها</string>
-    <string name="expert_mode_disable_all">غیرفعال کردن همه</string>
-    <string name="expert_mode_enable_all">فعال کردن همه</string>
     <string name="expert_mode_enable_all_universal_pending">برای پچ‌های همگانی دوباره ضربه بزنید</string>
     <string name="expert_mode_universal_all_warning_title">همهٔ پچ‌های همگانی فعال شوند؟</string>
     <string name="expert_mode_universal_all_warning_message">پچ‌های همگانی در کنار یکدیگر آزمایش نشده‌اند. فعال‌کردن همهٔ آن‌ها به‌صورت هم‌زمان ممکن است باعث تداخل، شکست پچ‌کردن یا از کار افتادن برنامه شود</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">پیوندهای وب پشتیبانی‌شده در حال حاضر به‌جای این برنامه در مرورگر شما باز می‌شوند</string>
     <string name="app_links_enable_auto">فعال‌سازی خودکار</string>
     <string name="app_links_enable_auto_in_progress">در حال فعال‌سازی پیوندها…</string>
+    <string name="app_links_disable_all_in_progress">غیرفعال کردن لینک‌ها…</string>
     <string name="app_links_open_settings">باز کردن تنظیمات پیوندها</string>
     <string name="app_links_repair_success">پیوندهای برنامه با موفقیت فعال شدند</string>
     <string name="app_links_repair_failed">فعال‌سازی خودکار پیوندهای برنامه ناموفق بود</string>
+    <string name="app_links_disable_success">لینک‌های برنامه غیرفعال شدند</string>
+    <string name="app_links_disable_failed">غیرفعال کردن لینک‌های برنامه ناموفق بود</string>
     <string name="app_links_change_failed">تغییر لینک‌های اپلیکیشن ناموفق بود</string>
     <string name="app_links_all_verified">همه پیوندهای پشتیبانی‌شده برای باز شدن در این برنامه تنظیم شده‌اند</string>
     <string name="app_links_fix">اصلاح پیوندها</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">حذف‌شده</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">نگه‌داشته‌شده</string>
-    <string name="patcher_tab_logs">گزارش‌های پچر</string>
-    <string name="patcher_tab_game">بازی‌ها</string>
     <string name="patcher_logs_waiting">در انتظار خروجی گزارش…</string>
     <string name="patcher_logs_lost">خروجی گزارش پس از راه‌اندازی دوبارهٔ برنامه حفظ نمی‌شود</string>
     <string name="patcher_long_step_warning">این مرحله ممکن است کمی طول بکشد. لطفاً منتظر بمانید…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">برنامه را حذف و دوباره نصب کنید</string>
     <string name="patcher_ready_to_mount_subtitle">برای مانت، دکمهٔ زیر را بزنید</string>
     <string name="patcher_patches_excluded_for_installer">برای این روش نصب در دسترس نیست و کنار گذاشته شد: %s</string>
-    <string name="patcher_back_to_game_hint">برای بازگشت به بازی، %1$s را بزنید</string>
     <string name="patcher_storage_permission_dialog_title">دسترسی به مسیر ذخیره‌سازی ممکن نیست</string>
     <string name="patcher_incompatible_patcher_title">به‌روزرسانی لازم است</string>
     <string name="patcher_incompatible_patcher_description">منبع &lt;b&gt;%1$s&lt;/b&gt; به ابزار پچ نسخهٔ &lt;b&gt;%2$s&lt;/b&gt; یا جدیدتر نیاز دارد. برای استفاده از آن، Morphe را به‌روزرسانی کنید</string>
@@ -764,7 +764,9 @@
     <string name="package_name">نام بسته</string>
     <string name="failed_to_mount">مانت ناموفق بود: %s</string>
     <string name="failed_to_unmount">لغو مانت ناموفق بود: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">مینی‌گیم‌ها</string>
+    <string name="mini_games_description">بازی‌های سریع برای پر کردن زمان‌های کوتاه</string>
     <string name="mini_game_score">امتیاز %s</string>
     <string name="mini_game_best">بهترین %s</string>
     <string name="mini_game_new_record">رکورد جدید!</string>
@@ -773,7 +775,14 @@
     <string name="mini_game_paused">متوقف‌شده</string>
     <string name="mini_game_resume">ادامه</string>
     <string name="mini_game_restart">شروع دوباره</string>
-    <string name="mini_game_change">انتخاب بازی دیگر</string>
+    <string name="mini_game_pause">مکث</string>
+    <string name="mini_game_score_label">امتیاز</string>
+    <string name="mini_game_best_label">بهترین</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">مرحله</string>
+    <string name="mini_game_lines">خطوط</string>
+    <string name="mini_game_lives">جان‌ها</string>
+    <string name="mini_game_flags">پرچم‌ها</string>
     <string name="mini_game_2048_picker_subtitle">مهره‌ها را بلغزانید تا ادغام شوند</string>
     <string name="mini_game_flappy_picker_subtitle">برای پرواز از میان لوله‌ها ضربه بزنید</string>
     <string name="mini_game_flappy_tap_to_start">برای پرواز ضربه بزنید</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">حالت پچ روی مانت روت تنظیم شده است. این برنامهٔ ذخیره‌شده با استفاده از مانت نصب نشده است</string>
     <string name="mount_version_mismatch_message">نسخهٔ برنامهٔ سیستمی (%2$s) با نسخهٔ برنامهٔ پچ‌شده (%1$s) مطابقت ندارد. نسخهٔ سیستمی منطبق را مانت کنید و سپس دوباره تلاش کنید</string>
     <string name="mount_stock_restore_failed_message">Android APK اصلی ذخیره‌شده را رد کرد. نسخهٔ سیستمی منطبق را نصب کنید و سپس دوباره مانت را بزنید</string>
+    <string name="mount_stock_mismatch_message">برنامه‌ی نصب شده، نسخه‌ی اصلی نیست. APK اصلی را انتخاب کنید یا نسخه‌ی استوک را مجدداً نصب نمایید و سپس دوباره برای Mount تلاش کنید</string>
     <string name="installer_status_shizuku_unsupported">نسخهٔ نصب‌شدهٔ Shizuku پشتیبانی نمی‌شود</string>
     <string name="installer_action_open_shizuku">باز کردن Shizuku</string>
     <string name="installer_hint_generic">نصب ناموفق بود. دوباره تلاش کنید یا نصب‌کنندهٔ دیگری انتخاب کنید</string>
@@ -1341,13 +1351,29 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="file_picker_new_folder_failed">پوشه ایجاد نشد</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">درباره</string>
-    <string name="settings_system_manager_description">پروژه‌ای متن‌باز برای پچ‌کردن مدرن و سادهٔ برنامه‌های محبوب Android که با بازخورد و مشارکت جامعه پیش می‌رود</string>
-    <string name="credits">دست‌اندرکاران</string>
-    <string name="credits_description">افرادی که پشت Morphe هستند</string>
     <string name="settings_about_section_project">پروژه</string>
     <string name="settings_about_section_help">راهنما</string>
-    <string name="credits_current_development">توسعهٔ کنونی</string>
     <string name="credits_prior_development">توسعهٔ پیشین</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">مدیر</string>
+    <string name="about_update_available">به‌روزرسانی موجود است: %s</string>
+    <string name="about_up_to_date">به‌روز است</string>
+    <string name="about_links">پیوندهای رسمی</string>
+    <string name="about_link_donate">کمک مالی</string>
+    <string name="about_link_website">وب‌سایت</string>
+    <string name="about_link_translations">ترجمه‌ها</string>
+    <string name="contributors">مشارکت‌کنندگان</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">در تمام زمان‌ها</string>
+    <string name="contributors_6_months">۶ ماه</string>
+    <string name="contributors_3_months">۳ ماه</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">حامیان</string>
+    <string name="supporters_description">حامیان در Open Collective</string>
+    <string name="supporters_become">حامی ما شوید</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">و %s نفر دیگر</string>
+    <string name="people_unavailable">بارگذاری لیست امکان‌پذیر نبود</string>
     <string name="opensource_licenses">مجوزهای متن‌باز</string>
     <string name="opensource_licenses_description">کتابخانه‌هایی که مورفه بر آن‌ها ساخته شده است</string>
     <string name="opensource_licenses_search">جستجوی کتابخانه‌ها و مجوزها</string>
@@ -1417,6 +1443,8 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="include">گنجاندن</string>
     <string name="disable">غیرفعال‌کردن</string>
     <string name="enable">فعال‌کردن</string>
+    <string name="enable_all">فعال کردن همه</string>
+    <string name="disable_all">غیرفعال کردن همه</string>
     <string name="trust">اعتماد</string>
     <string name="loading">در حال بارگذاری…</string>
     <string name="creating">در حال ساخت…</string>

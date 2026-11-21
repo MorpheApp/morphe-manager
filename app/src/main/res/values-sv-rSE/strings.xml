@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Det gick inte att ladda ned källor: %s</string>
     <string name="sources_download_fail_named">Det gick inte att uppdatera %s. Kontrollera internetanslutningen och försök igen</string>
     <string name="sources_download_endpoint_not_found">%s: metadata för tillägg hittades inte</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Källor på ditt lokala nätverk kan inte uppdateras utan behörighet för enheter i närheten</string>
     <string name="sources_signing_key_changed_named">\'%s\' uppdaterades inte eftersom dess senaste version inte är signerad med den nyckel som användes tidigare</string>
     <string name="sources_signing_key_changed_local">Filen är inte signerad med den nyckel som den här källan använde tidigare. För att lita på den, ta bort källan och lägg till filen igen</string>
     <string name="sources_signing_key_trust_title">Lita på den nya nyckeln?</string>
@@ -346,8 +348,6 @@ Välj var dess APK ska hämtas ifrån"</string>
     <string name="home_external_apk_expert_mode_required">Den här funktionen är endast tillgänglig i expertläget</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Sök efter tillägg</string>
-    <string name="expert_mode_disable_all">Inaktivera alla</string>
-    <string name="expert_mode_enable_all">Aktivera alla</string>
     <string name="expert_mode_enable_all_universal_pending">Tryck igen för universella tillägg</string>
     <string name="expert_mode_universal_all_warning_title">Aktivera alla universella tillägg?</string>
     <string name="expert_mode_universal_all_warning_message">Universella tillägg testas inte tillsammans. Om du aktiverar alla på en gång kan det orsaka konflikter, misslyckad modifiering eller krascher</string>
@@ -567,9 +567,12 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="app_links_unverified_banner_description">Webblänkar som stöds öppnas för närvarande i din webbläsare istället för i den här appen</string>
     <string name="app_links_enable_auto">Aktivera automatiskt</string>
     <string name="app_links_enable_auto_in_progress">Aktiverar länkar …</string>
+    <string name="app_links_disable_all_in_progress">Inaktiverar länkar…</string>
     <string name="app_links_open_settings">Öppna länkinställningar</string>
     <string name="app_links_repair_success">Applänkar har aktiverats</string>
     <string name="app_links_repair_failed">Det gick inte att aktivera applänkar automatiskt</string>
+    <string name="app_links_disable_success">App-länkar inaktiverade</string>
+    <string name="app_links_disable_failed">Misslyckades med att inaktivera app-länkar</string>
     <string name="app_links_change_failed">Misslyckades med att ändra applänkar</string>
     <string name="app_links_all_verified">Alla stödda länkar är konfigurerade för att öppnas i den här appen</string>
     <string name="app_links_fix">Åtgärda länkar</string>
@@ -628,8 +631,6 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="patcher_field_value_stripped">borttagna</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behållna</string>
-    <string name="patcher_tab_logs">Modifieringsloggar</string>
-    <string name="patcher_tab_game">Spel</string>
     <string name="patcher_logs_waiting">Väntar på loggutdata …</string>
     <string name="patcher_logs_lost">Loggutdata sparas inte när appen startas om</string>
     <string name="patcher_long_step_warning">Det här steget kan ta en stund. Vänta …</string>
@@ -659,7 +660,6 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patcher_install_error_subtitle">Försök att avinstallera och installera igen</string>
     <string name="patcher_ready_to_mount_subtitle">Tryck på knappen nedan för att montera</string>
     <string name="patcher_patches_excluded_for_installer">Inte tillgänglig för denna installationsmetod och utesluten: %s</string>
-    <string name="patcher_back_to_game_hint">Tryck på %1$s för att gå tillbaka till spelet</string>
     <string name="patcher_storage_permission_dialog_title">Det går inte att komma åt lagringssökväg</string>
     <string name="patcher_incompatible_patcher_title">Uppdatering krävs</string>
     <string name="patcher_incompatible_patcher_description">Källan &lt;b&gt;%1$s&lt;/b&gt; kräver modifieringsverktyg &lt;b&gt;%2$s&lt;/b&gt; eller nyare. Uppdatera Morphe för att använda den</string>
@@ -764,7 +764,9 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="package_name">Paketnamn</string>
     <string name="failed_to_mount">Det gick inte att montera: %s</string>
     <string name="failed_to_unmount">Det gick inte att avmontera: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Minispel</string>
+    <string name="mini_games_description">Snabba spel för att fördriva tiden</string>
     <string name="mini_game_score">Poäng %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nytt rekord!</string>
@@ -773,7 +775,14 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="mini_game_paused">Pausat</string>
     <string name="mini_game_resume">Fortsätt</string>
     <string name="mini_game_restart">Starta om</string>
-    <string name="mini_game_change">Välj ett annat spel</string>
+    <string name="mini_game_pause">Paus</string>
+    <string name="mini_game_score_label">Poäng</string>
+    <string name="mini_game_best_label">Rekord</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Nivå</string>
+    <string name="mini_game_lines">Linjer</string>
+    <string name="mini_game_lives">Liv</string>
+    <string name="mini_game_flags">Flaggor</string>
     <string name="mini_game_2048_picker_subtitle">Flytta brickorna och slå ihop dem</string>
     <string name="mini_game_flappy_picker_subtitle">Tryck för att flyga mellan rören</string>
     <string name="mini_game_flappy_tap_to_start">Tryck för att flyga</string>
@@ -1069,6 +1078,7 @@ Bildernas mått ska vara följande:
     <string name="installer_mount_warning_install">Modifieringsläget är inställt på root-montering. Den här sparade appen installerades inte med montering</string>
     <string name="mount_version_mismatch_message">Den ursprungliga appens version (%2$s) matchar inte den modifierade appens version (%1$s). Montera den matchande ursprungliga versionen och försök igen</string>
     <string name="mount_stock_restore_failed_message">Android avvisade den sparade ursprungliga APK-filen. Installera den matchande ursprungliga versionen och försök sedan montera igen</string>
+    <string name="mount_stock_mismatch_message">Den installerade appen är inte originalversionen. Välj original-APK:n eller installera om fabriksversionen, och försök sedan att montera igen</string>
     <string name="installer_status_shizuku_unsupported">Den installerade Shizuku-versionen stöds inte</string>
     <string name="installer_action_open_shizuku">Öppna Shizuku</string>
     <string name="installer_hint_generic">Installationen misslyckades. Försök igen eller byt till en annan installerare</string>
@@ -1339,13 +1349,29 @@ Information: %2$s"</string>
     <string name="file_picker_new_folder_failed">Kunde inte skapa mappen</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Om</string>
-    <string name="settings_system_manager_description">Ett projekt med öppen källkod för modern och smidig modifiering av populära Android-appar som drivs av feedback och bidrag från communityn</string>
-    <string name="credits">Medverkande</string>
-    <string name="credits_description">De som ligger bakom Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Hjälp</string>
-    <string name="credits_current_development">Nuvarande utveckling</string>
     <string name="credits_prior_development">Tidigare utveckling</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Manager</string>
+    <string name="about_update_available">Uppdatering tillgänglig: %s</string>
+    <string name="about_up_to_date">Uppdaterat</string>
+    <string name="about_links">Officiella länkar</string>
+    <string name="about_link_donate">Donera</string>
+    <string name="about_link_website">Webbplats</string>
+    <string name="about_link_translations">Översättningar</string>
+    <string name="contributors">Bidragsgivare</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Hela tiden</string>
+    <string name="contributors_6_months">6 månader</string>
+    <string name="contributors_3_months">3 månader</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Supportrar</string>
+    <string name="supporters_description">Backers på Open Collective</string>
+    <string name="supporters_become">Bli en supportrare</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Och %s till</string>
+    <string name="people_unavailable">Kunde inte ladda listan</string>
     <string name="opensource_licenses">Licenser för öppen källkod</string>
     <string name="opensource_licenses_description">De bibliotek som Morphe bygger på</string>
     <string name="opensource_licenses_search">Sök efter bibliotek och licenser</string>
@@ -1415,6 +1441,8 @@ Information: %2$s"</string>
     <string name="include">Inkludera</string>
     <string name="disable">Inaktivera</string>
     <string name="enable">Aktivera</string>
+    <string name="enable_all">Aktivera alla</string>
+    <string name="disable_all">Inaktivera alla</string>
     <string name="trust">Lita på</string>
     <string name="loading">Läser in …</string>
     <string name="creating">Skapar …</string>

@@ -53,7 +53,6 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchInfo
-import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.screen.sources.*
@@ -188,7 +187,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // source, a disabled one included, so the app keeps its color with nothing left to patch it.
     // originalPackageName needed because metadata is keyed by original pkg, not patched.
     val appAccentColor = rememberAppColor(viewModel.installedApp?.originalPackageName ?: packageName)
-        ?: KnownApps.DEFAULT_DOWNLOAD_COLOR
+        ?: AppCardColorDefaults.defaultDownloadColor
     val infoAccentColor = ThemeTraitsDefaults.accentColor(appAccentColor)
 
     // Dialog states
@@ -244,15 +243,8 @@ fun DialogHostScope.InstalledAppInfoDialog(
             ?: KnownApps.getAppName(packageName)
     }
 
-    // Export file name
-    val exportFileName = remember(installedApp?.currentPackageName, appInfo?.versionName, appliedBundles, appLabel) {
-        val app = installedApp ?: return@remember "morphe_export.apk"
-        ExportNameFormatter.format(PatchedAppExportData(
-            appName = appLabel,
-            packageName = app.currentPackageName,
-            appVersion = appInfo?.versionName ?: app.version,
-            sources = appliedBundles.map { PatchSourceRef(it.title, it.version) }
-        ))
+    val exportFileName = remember(installedApp, appLabel) {
+        installedApp?.exportFileName(appLabel) ?: "morphe_export.apk"
     }
 
     // Offered under the name an export would suggest, so the file lands the same either way
@@ -325,6 +317,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
             AppIcon(
                 packageInfo = viewModel.appInfo,
                 packageName = packageName,
+                storePackageName = catalogPackageName,
                 contentDescription = null,
                 placeholderGradientColors = listOf(infoAccentColor),
                 modifier = modifier
@@ -765,6 +758,7 @@ private fun InstalledAppHeader(
             AppIcon(
                 packageInfo = appInfo,
                 packageName = packageName,
+                storePackageName = installedApp.originalPackageName,
                 contentDescription = null,
                 placeholderGradientColors = listOf(accentColor),
                 modifier = iconModifier.clip(RoundedCornerShape(DialogHeaderDefaults.IconCornerRadius))

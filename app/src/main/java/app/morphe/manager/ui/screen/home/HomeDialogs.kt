@@ -287,7 +287,7 @@ private fun DialogHostScope.PatchFlowDialog(
                 requestedVersion = session.requestedVersion,
                 usingMountInstall = flow.usingMountInstall,
                 stockAppInstalled = session.stockAppInstalled == true,
-                downloadColor = metadata?.downloadColor ?: KnownApps.DEFAULT_DOWNLOAD_COLOR,
+                downloadColor = metadata?.downloadColor ?: AppCardColorDefaults.defaultDownloadColor,
                 // File type the patch bundle asks for, so the site buttons are labeled as the sites label them
                 apkFileType = metadata?.apkFileType,
                 onDismiss = flow::backFromApkSource,
@@ -416,7 +416,7 @@ private fun DialogHostScope.PatchFlowDialog(
                     ),
                     hasMultipleBundles = selection.hasMultipleBundles,
                     patchActions = ExpertPatchActions(
-                        onPatchToggle = selection::toggle,
+                        onPatchToggle = selection::togglePatch,
                         onSelectAll = selection::selectAll,
                         onDeselectAll = selection::deselectAll,
                         onOptionChange = selection::updateOption,
@@ -753,8 +753,7 @@ fun DialogHostScope.DeepLinkAddSourceDialog(
     val bringsAppBack = scope is SourceScope.App && isAdded
     // Links reach here for a repository only, which reads as owner/repo
     val repository = remoteLinkTitle(url)
-    val patchBundleRepository: PatchBundleRepository = koinInject()
-    val endpoint = remember(url) { runCatching { patchBundleRepository.normalizeRemoteBundleUrl(url) }.getOrNull() }
+    val endpoint = remember(url) { runCatching { SourceUrl.normalizeBundleUrl(url) }.getOrNull() }
     // The picture a source ships beside its bundle, as an added source shows it
     val bundlePicture = endpoint?.let(::bundleAvatarUrl)
 

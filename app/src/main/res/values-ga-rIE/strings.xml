@@ -5,11 +5,11 @@
     <string name="home_other_apps_action">Roghnaigh aipeanna eile</string>
     <string name="home_not_patched_yet">Gan paisteáil fós</string>
     <string name="home_unpatched_version_installed">Leagan neamhpháitithe suiteáilte</string>
-    <string name="home_app_status_newer_version">Nuashonraigh go %s</string>
+    <string name="home_app_status_newer_version">Nuashonrú go %s</string>
     <string name="home_app_status_newer_patches">Paistí nua</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
-    <string name="form_factor_tv">TV</string>
-    <string name="form_factor_automotive">Gluaisteán</string>
+    <string name="form_factor_tv">Teilifís</string>
+    <string name="form_factor_automotive">Feithicleach</string>
     <string name="home_no_patches_available">Níl aon phaistí ar fáil</string>
     <string name="home_app_hide_title">Folaigh an aip seo?</string>
     <string name="home_more_apps_title">Tuilleadh aipeanna</string>
@@ -71,7 +71,7 @@
     <string name="list_sort_name_asc">Ainm (A–Z)</string>
     <string name="list_sort_name_desc">Ainm (Z–A)</string>
     <string name="home_app_filter_all">Gach</string>
-    <string name="home_app_filter_not_patched">Gan paisteáil</string>
+    <string name="home_app_filter_not_patched">Gan paiste</string>
     <string name="home_app_filter_clones">Clóin</string>
     <string name="home_app_grouping_none">Dada</string>
     <string name="home_app_sort_manual_hint">Brúigh fada ar aip, ansin tapáil an cnaipe athordaithe</string>
@@ -92,7 +92,7 @@
     <string name="home_category_new_title">Catagóir nua</string>
     <string name="home_category_rename_title">Athainmnigh an chatagóir</string>
     <string name="home_category_name">Ainm na catagóire</string>
-    <string name="home_category_name_description">Cruaíonn an scáileán baile a chuid apps faoi ainm seo</string>
+    <string name="home_category_name_description">Grúpálann an scáileán baile a chuid aipeanna faoin ainm seo</string>
     <string name="home_category_move_to">Bog go catagóir</string>
     <string name="home_category_move_selected_title">Bog na haipeanna roghnaithe</string>
     <!-- %s is the name of the category -->
@@ -174,7 +174,7 @@
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_apps">Aipeanna</string>
-    <string name="sources_apps_description">Tagann aipanna ticthe ón bhfoinse seo. Tapáil aip chun í a thabhairt amach nó chun í a thabhairt ar ais, sleamair í chun a phaistí a fheiceáil. Fágann aip an scáileán baile nuair nach bhfuil aon foinse á thabhairt, mura bhfuil sé paistithe agat</string>
+    <string name="sources_apps_description">Tagann aipeanna atá marcáilte ón bhfoinse seo. Beartaigh ar aip chun í a fhágáil ar lár nó chun í a thabhairt ar ais; sleamhnaigh í chun a paistí a fheiceáil. Má bhaintear foinse, imeoidh na haipeanna a tháinig ón bhfoinse sin ón scáileán baile, mura rud é gur chuir tú paiste i bhfeidhm orthu.</string>
     <string name="sources_apps_brought">Arna thabhairt ag an bhfoinse seo</string>
     <string name="sources_apps_left_out">Fágtha ar lár ón bhfoinse seo</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Theip ar íoslódáil na bhfoinsí: %s</string>
     <string name="sources_download_fail_named">Níorbh fhéidir \'%s\' a nuashonrú. Seiceáil do nasc idirlín agus déan iarracht eile.</string>
     <string name="sources_download_endpoint_not_found">\'%s\': meiteashonraí paiste gan aimsiú</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Ní féidir foinsreacha ar do líonra áitiúil a nuashonrú gan cead Glantrála Glanta</string>
     <string name="sources_signing_key_changed_named">Níor nuashonraíodh \'%s\' toisc nach bhfuil an eisiúint is déanaí sínithe leis an eochair a d\'úsáid sé roimhe seo</string>
     <string name="sources_signing_key_changed_local">Níl an comhad sínithe leis an eochair a d\'úsáid an fhoinse seo roimhe seo. Chun muinín a bheith agat as, scrios an fhoinse agus cuir an comhad leis arís.</string>
     <string name="sources_signing_key_trust_title">Muinín a chur sa eochair nua?</string>
@@ -346,8 +348,6 @@ Roghnaigh cá as a bhfaighfear an APK"</string>
     <string name="home_external_apk_expert_mode_required">Níl an ghné seo ar fáil ach amháin i mód Saineolaí</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Paistí cuardaigh</string>
-    <string name="expert_mode_disable_all">Díchumasaigh gach rud</string>
-    <string name="expert_mode_enable_all">Cumasaigh gach rud</string>
     <string name="expert_mode_enable_all_universal_pending">Tapáil arís le haghaidh paistí uilíocha</string>
     <string name="expert_mode_universal_all_warning_title">Cumasaigh na paistí uilíocha go léir?</string>
     <string name="expert_mode_universal_all_warning_message">Ní dhéantar paistí uilíocha a thástáil le chéile. Má chuirtear ar chumas iad go léir ag an am céanna, d’fhéadfadh coimhlintí, paistí teipthe, nó tuairteanna a bheith mar thoradh orthu.</string>
@@ -567,10 +567,13 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="app_links_unverified_banner_description">Osclaítear na naisc ghréasáin a dtacaítear leo i do bhrabhsálaí faoi láthair, seachas san aip seo.</string>
     <string name="app_links_enable_auto">Cumasaigh go huathoibríoch</string>
     <string name="app_links_enable_auto_in_progress">Ag cumasú na naisc…</string>
+    <string name="app_links_disable_all_in_progress">Naisc á ndíchumasú…</string>
     <string name="app_links_open_settings">Oscail socruithe naisc</string>
     <string name="app_links_repair_success">Cumasaíodh naisc aip go rathúil</string>
     <string name="app_links_repair_failed">Theip ar naisc aipeanna a chumasú go huathoibríoch</string>
-    <string name="app_links_change_failed">Theip ar nascanna app a athrú</string>
+    <string name="app_links_disable_success">Nais aipe díchumasaithe</string>
+    <string name="app_links_disable_failed">Theip ar dhíchumasú na naisc aipe</string>
+    <string name="app_links_change_failed">Theip ar athrú na naisc aipe</string>
     <string name="app_links_all_verified">Tá na naisc thacaithe go léir cumraithe le hoscailt san aip seo</string>
     <string name="app_links_fix">Deisigh naisc</string>
     <string name="configure">Cumraigh</string>
@@ -628,8 +631,6 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="patcher_field_value_stripped">stróicthe</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">coimeádta</string>
-    <string name="patcher_tab_logs">Logaí paisteora</string>
-    <string name="patcher_tab_game">Cluichí</string>
     <string name="patcher_logs_waiting">Ag fanacht le haschur loga…</string>
     <string name="patcher_logs_lost">Ní choimeádtar aschur loga tar éis atosú aipeanna</string>
     <string name="patcher_long_step_warning">D’fhéadfadh sé go dtógfadh an chéim seo tamall. Fan le do thoil…</string>
@@ -659,7 +660,6 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patcher_install_error_subtitle">Déan iarracht é a dhíshuiteáil agus a shuiteáil arís</string>
     <string name="patcher_ready_to_mount_subtitle">Brúigh an cnaipe thíos chun é a ghléasadh</string>
     <string name="patcher_patches_excluded_for_installer">Ní féidir é a shuiteáil agus níl sé ar fáil: %s</string>
-    <string name="patcher_back_to_game_hint">Tapáil %1$s chun filleadh ar do chluiche</string>
     <string name="patcher_storage_permission_dialog_title">Ní féidir rochtain a fháil ar an gcosán stórála</string>
     <string name="patcher_incompatible_patcher_title">Nuashonrú ag teastáil</string>
     <string name="patcher_incompatible_patcher_description">Éilíonn an fhoinse &lt;b&gt;%1$s&lt;/b&gt; paitseálaí &lt;b&gt;%2$s&lt;/b&gt; nó níos nuaí. Nuashonraigh Morphe chun é a úsáid</string>
@@ -764,7 +764,9 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="package_name">Ainm an phacáiste</string>
     <string name="failed_to_mount">Theip ar fheistiú: %s</string>
     <string name="failed_to_unmount">Theip ar dhíshuiteáil: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mion-chluichí</string>
+    <string name="mini_games_description">Cluichí gasta chun nóiméad saor a chaitheamh</string>
     <string name="mini_game_score">Scór %s</string>
     <string name="mini_game_best">Is Fearr %s</string>
     <string name="mini_game_new_record">Taifead nua!</string>
@@ -773,7 +775,14 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="mini_game_paused">Sosaithe</string>
     <string name="mini_game_resume">Lean ar aghaidh</string>
     <string name="mini_game_restart">Tosaigh arís</string>
-    <string name="mini_game_change">Roghnaigh cluiche eile</string>
+    <string name="mini_game_pause">Sos</string>
+    <string name="mini_game_score_label">Scór</string>
+    <string name="mini_game_best_label">Is Fearr</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Leibhéal</string>
+    <string name="mini_game_lines">Línte</string>
+    <string name="mini_game_lives">Saolta</string>
+    <string name="mini_game_flags">Saolta</string>
     <string name="mini_game_2048_picker_subtitle">Sleamhnaigh tíleanna le cumasc</string>
     <string name="mini_game_flappy_picker_subtitle">Beartaigh chun eitilt trí phíopaí</string>
     <string name="mini_game_flappy_tap_to_start">Beartaigh le heitilt</string>
@@ -1067,6 +1076,7 @@ Ní mór toisí na híomhá a bheith mar seo a leanas:
     <string name="installer_mount_warning_install">Tá mód paiste socraithe ar fheistiú fréimhe. Níor suiteáladh an aip shábháilte seo trí úsáid a bhaint as feistiú.</string>
     <string name="mount_version_mismatch_message">Ní hionann leagan stoic an aip (%2$s) agus an leagan paisteáilte den aip (%1$s). Suiteáil an leagan stoic comhoiriúnach, agus déan iarracht arís</string>
     <string name="mount_stock_restore_failed_message">Dhiúltaigh Android don APK bunaidh sábháilte. Suiteáil an leagan stoic comhoiriúnach, ansin déan iarracht an Suiteáil arís.</string>
+    <string name="mount_stock_mismatch_message">Ní hé an bunleagan an aip atá suiteáilte. Roghnaigh an bun-APK nó athshuiteáil an leagan bunaidh, agus ansin déan iarracht \'Mount\' a dhéanamh arís.</string>
     <string name="installer_status_shizuku_unsupported">Ní thacaítear leis an leagan Shizuku atá suiteáilte</string>
     <string name="installer_action_open_shizuku">Oscail Shizuku</string>
     <string name="installer_hint_generic">Theip ar an suiteáil. Bain triail eile as nó aistrigh go suiteálaí eile</string>
@@ -1186,14 +1196,14 @@ Sonraí: %2$s"</string>
     <string name="settings_system_auto_backup_description">Sábhálann sé do chuid socruithe Morphe i bhfillteán a roghnaíonn tú</string>
     <string name="settings_system_auto_backup_last">An cúltaca deireanach: %s</string>
     <string name="settings_system_auto_backup_folder">Fillteán</string>
-    <string name="settings_system_auto_backup_folder_name">Tátálaí Morphe</string>
+    <string name="settings_system_auto_backup_folder_name">Cúltacaí Morphe</string>
     <string name="settings_system_auto_backup_folder_failed">Níorbh fhéidir an fillteán seo a úsáid: %s</string>
     <string name="settings_system_auto_backup_interval">Minicíocht cúltaca</string>
     <string name="settings_system_auto_backup_signing_key">Cuir eochair shíniúcháin san áireamh</string>
     <string name="settings_system_auto_backup_signing_key_description">Sábhálann sé an eochair a shíníonn aipeanna paistithe, in aice leis na socruithe</string>
     <string name="settings_system_auto_backup_signing_key_warning_title">Cúltaca a dhéanamh den eochair shíniúcháin?</string>
     <string name="settings_system_auto_backup_signing_key_warning_message">Is féidir le duine ar bith a fhaigheann an comhad seo nuashonruithe a shíniú a shuiteáiltear thar na feidhmchláir atá paisteáilte agat. Coinnigh an fillteán príobháideach agus ná roinn é ach le do ghléasanna féin</string>
-    <string name="settings_system_auto_backup_footer">Sábháiltear cóip nuair a fhágann tú Morphe tar éis duit rud éigin a athrú. Coinnítear an %s is déanaí.</string>
+    <string name="settings_system_auto_backup_footer">Sábháiltear cóip nuair a fhágann tú Morphe tar éis duit rud éigin a athrú. Coinnítear na %s is déanaí</string>
     <string name="settings_system_auto_backup_failed">Níorbh fhéidir an cúltaca deireanach a shábháil. Roghnaigh an fillteán arís</string>
     <string name="settings_system_import_manager_settings_fail">Theip ar shocruithe Morphe a iompórtáil: %s</string>
     <string name="settings_system_import_manager_settings_success">Socruithe Morphe allmhairithe</string>
@@ -1294,7 +1304,7 @@ Sonraí: %2$s"</string>
     <string name="selection_set_deleted">Scriosadh %s</string>
     <string name="selection_set_renamed">Athainmnithe go %s</string>
     <string name="selection_set_rename_title">Athainmnigh an tacar</string>
-    <string name="selection_set_rename_description">Má thagairtear ainm eile go sócmhain, beithidh an t-ainm sin in áit an chreidimhC</string>
+    <string name="selection_set_rename_description">Má ghlactar ainm tacair eile, cuirtear an tacar sin ina áit</string>
     <string name="selection_set_delete_title">Scrios an tacar?</string>
     <string name="selection_set_delete_message">Scriosann sé seo an tacar %s go buan</string>
     <string name="copy_selection_empty">Níl aon roghanna sábháilte eile le cóipeáil uathu</string>
@@ -1333,17 +1343,33 @@ Sonraí: %2$s"</string>
     <string name="file_picker_folder_name">Ainm fillteáin</string>
     <string name="file_picker_new_folder_description">Cruthaithe i %1$s agus oscailte láithreach</string>
     <string name="file_picker_folder_name_taken">Tá rud éigin leis an ainm seo anseo cheana féin</string>
-    <string name="file_picker_folder_name_invalid">Ní féidir le ainm fillteáin \" * / : &lt; &gt; ? \\ | a chomhfhreagairt</string>
+    <string name="file_picker_folder_name_invalid">Ní féidir na carachtair seo a leanas a bheith i nainm fillteáin: \" * / : &lt; &gt; ? \\ |</string>
     <string name="file_picker_new_folder_failed">Níorbh fhéidir an fillteán a chruthú</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Maidir</string>
-    <string name="settings_system_manager_description">Tionscadal foinse oscailte le haghaidh paisteáil nua-aimseartha, sruthlínithe ar aipeanna coitianta Android, á thiomáint ag aiseolas agus ranníocaíochtaí ón bpobal.</string>
-    <string name="credits">Creidmheasanna</string>
-    <string name="credits_description">Na daoine taobh thiar de Morphe</string>
     <string name="settings_about_section_project">Tionscadal</string>
     <string name="settings_about_section_help">Cabhair</string>
-    <string name="credits_current_development">Forbairt reatha</string>
     <string name="credits_prior_development">Forbairt roimhe seo</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Bainisteoir</string>
+    <string name="about_update_available">Nuashonrú ar fáil: %s</string>
+    <string name="about_up_to_date">Suas chun dáta</string>
+    <string name="about_links">Naisc oifigiúla</string>
+    <string name="about_link_donate">Tabhair Síntiús</string>
+    <string name="about_link_website">Suíomh Gréasáin</string>
+    <string name="about_link_translations">Aistriúcháin</string>
+    <string name="contributors">Rannpháirtithe</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Gach am</string>
+    <string name="contributors_6_months">6 mhí</string>
+    <string name="contributors_3_months">3 mhí</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Tacadóirí</string>
+    <string name="supporters_description">Tacaitheoirí ar Open Collective</string>
+    <string name="supporters_become">Bí i do thacadóir</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Agus %s eile</string>
+    <string name="people_unavailable">Níorbh fhéidir an liosta a luchtú</string>
     <string name="opensource_licenses">Ceadúnais foinse oscailte</string>
     <string name="opensource_licenses_description">Na leabharlanna ar a bhfuil Morphe tógtha</string>
     <string name="opensource_licenses_search">Cuardaigh leabharlanna agus ceadúnais</string>
@@ -1413,6 +1439,8 @@ Sonraí: %2$s"</string>
     <string name="include">Cuir san áireamh</string>
     <string name="disable">Díchumasaigh</string>
     <string name="enable">Cumasaigh</string>
+    <string name="enable_all">Cumasaigh gach rud</string>
+    <string name="disable_all">Díchumasaigh gach rud</string>
     <string name="trust">Muinín</string>
     <string name="loading">Ag lódáil…</string>
     <string name="creating">Ag cruthú…</string>

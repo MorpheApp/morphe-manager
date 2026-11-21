@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kon nie oorspronge aflaai nie: %s</string>
     <string name="sources_download_fail_named">\'%s\' kon nie opgedateer word nie. Gaan jou internetverbinding na en probeer weer</string>
     <string name="sources_download_endpoint_not_found">\'%s\': geen patch-metadata gevind nie</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Bronne op jou plaaslike netwerk kan nie opgedateer word sonder die \"Nabygeleë toestelle\"-toestemming nie</string>
     <string name="sources_signing_key_changed_named">\'%s\' is nie opgedateer nie omdat die nuutste vrystelling nie geteken is deur die sleutel wat dit voorheen gebruik het nie</string>
     <string name="sources_signing_key_changed_local">Die lêer is nie deur die sleutel onderteken wat hierdie bron voorheen gebruik het nie. Om dit te vertrou, verwyder die bron en voeg die lêer weer by</string>
     <string name="sources_signing_key_trust_title">Vertrou die nuwe sleutel?</string>
@@ -346,8 +348,6 @@ Kies waar om die APK vandaan te kry"</string>
     <string name="home_external_apk_expert_mode_required">Hierdie funksie is slegs beskikbaar in Kenner-modus</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Soek veranderinge</string>
-    <string name="expert_mode_disable_all">Deaktiveer alles</string>
-    <string name="expert_mode_enable_all">Aktiveer alles</string>
     <string name="expert_mode_enable_all_universal_pending">Tik weer vir universele patches</string>
     <string name="expert_mode_universal_all_warning_title">Aktiveer alle universele patches?</string>
     <string name="expert_mode_universal_all_warning_message">Universele patches word nie saam getoets nie. Om almal gelyktydig te aktiveer kan konflikte, mislukte pleistering of crashes veroorsaak.</string>
@@ -567,9 +567,12 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="app_links_unverified_banner_description">Ondersteunde webskakels open tans in jou blaaier in plaas van hierdie toepassing</string>
     <string name="app_links_enable_auto">Aktiveer outomaties</string>
     <string name="app_links_enable_auto_in_progress">Skakels word geaktiveer…</string>
+    <string name="app_links_disable_all_in_progress">Deaktiveer skakels…</string>
     <string name="app_links_open_settings">Maak skakelinstellings oop</string>
     <string name="app_links_repair_success">Toepskakels is suksesvol geaktiveer</string>
     <string name="app_links_repair_failed">Kon nie toepskakels outomaties aktiveer nie</string>
+    <string name="app_links_disable_success">Toepassingskakels gedeaktiveer</string>
+    <string name="app_links_disable_failed">Kon nie toepassingskakels deaktiveer nie</string>
     <string name="app_links_change_failed">Dit was nie moontlik om toepassing-skakels te verander nie</string>
     <string name="app_links_all_verified">Alle ondersteunde skakels is ingestel om in hierdie toepassing oop te maak</string>
     <string name="app_links_fix">Herstel skakels</string>
@@ -628,8 +631,6 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="patcher_field_value_stripped">gestroop</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">behou</string>
-    <string name="patcher_tab_logs">Patcher-logboeke</string>
-    <string name="patcher_tab_game">Speletjies</string>
     <string name="patcher_logs_waiting">Wag vir log-uitvoer…</string>
     <string name="patcher_logs_lost">Log-uitvoer word nie tussen app-herstarte gehou nie</string>
     <string name="patcher_long_step_warning">Hierdie stap kan \'n rukkie neem. Wag asseblief…</string>
@@ -659,7 +660,6 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patcher_install_error_subtitle">Probeer deïnstalleer en weer installeer</string>
     <string name="patcher_ready_to_mount_subtitle">Druk op die knoppie hieronder om te monteer</string>
     <string name="patcher_patches_excluded_for_installer">Nie beskikbaar vir hierdie installasiemethode en uitgesluit: %s</string>
-    <string name="patcher_back_to_game_hint">Tik op %1$s om terug te gaan na jou speletjie</string>
     <string name="patcher_storage_permission_dialog_title">Kan nie toegang tot stoorpad verkry nie</string>
     <string name="patcher_incompatible_patcher_title">Opdatering vereis</string>
     <string name="patcher_incompatible_patcher_description">Die bron &lt;b&gt;%1$s&lt;/b&gt; vereis patcher &lt;b&gt;%2$s&lt;/b&gt; of nuwer. Dateer Morphe op om dit te gebruik</string>
@@ -764,7 +764,9 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="package_name">Pakketnaam</string>
     <string name="failed_to_mount">Kon nie monteer nie: %s</string>
     <string name="failed_to_unmount">Kon nie ontmonteer nie: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-speletjies</string>
+    <string name="mini_games_description">Vinnige speletjies om \'n vrye minuut mee te vul</string>
     <string name="mini_game_score">Punt %s</string>
     <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Nuwe rekord!</string>
@@ -773,7 +775,14 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="mini_game_paused">Pauze</string>
     <string name="mini_game_resume">Gaan voort</string>
     <string name="mini_game_restart">Begin oor</string>
-    <string name="mini_game_change">Kies \'n ander speletjie</string>
+    <string name="mini_game_pause">Pouse</string>
+    <string name="mini_game_score_label">Tellings</string>
+    <string name="mini_game_best_label">Beste</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Vlak</string>
+    <string name="mini_game_lines">Lyne</string>
+    <string name="mini_game_lives">Lewens</string>
+    <string name="mini_game_flags">Vlae</string>
     <string name="mini_game_2048_picker_subtitle">Skuif teëls om te saamsmelt</string>
     <string name="mini_game_flappy_picker_subtitle">Tik om deur die pype te vlieg</string>
     <string name="mini_game_flappy_tap_to_start">Tik om te vlieg</string>
@@ -1069,6 +1078,7 @@ Die beeldafmetings moet soos volg wees:
     <string name="installer_mount_warning_install">Patch-modus is op root-mount gestel. Hierdie gestoorde app is nie met mount geïnstalleer nie</string>
     <string name="mount_version_mismatch_message">Die standaard-app se weergawe (%2$s) stem nie ooreen met die gepleisterde app se weergawe (%1$s). Monteer die ooreenstemmende standaardweergawe, en probeer weer</string>
     <string name="mount_stock_restore_failed_message">Android het die gestoorde oorspronklike APK verwerp. Installeer die ooreenstemmende standaardweergawe, en probeer dan weer monteer.</string>
+    <string name="mount_stock_mismatch_message">Die geïnstalleerde toepassing is nie die oorspronklike een nie. Kies die oorspronklike APK of herinstalleer die standaardweergawe, en probeer dan weer om te Mount</string>
     <string name="installer_status_shizuku_unsupported">Die geïnstalleerde Shizuku weergawe is nie ondersteun nie</string>
     <string name="installer_action_open_shizuku">Maak Shizuku oop</string>
     <string name="installer_hint_generic">Die installasie het misluk. Probeer weer of skakel oor na \'n ander installer</string>
@@ -1339,13 +1349,29 @@ Besonderhede: %2$s"</string>
     <string name="file_picker_new_folder_failed">Kon nie die vouer skep nie</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Oor</string>
-    <string name="settings_system_manager_description">\'n Openbron-projek vir moderne, gestroomlijnde pleistering van gewilde Android-toepassings, gedryf deur gemeenskapsterugvoer en bydraes</string>
-    <string name="credits">Krediete</string>
-    <string name="credits_description">Die mense agter Morphe</string>
     <string name="settings_about_section_project">Projek</string>
     <string name="settings_about_section_help">Hulp</string>
-    <string name="credits_current_development">Huidige ontwikkeling</string>
     <string name="credits_prior_development">Vorige ontwikkeling</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Bestuurder</string>
+    <string name="about_update_available">Opdatering beskikbaar: %s</string>
+    <string name="about_up_to_date">Op datum</string>
+    <string name="about_links">Amptelike skakels</string>
+    <string name="about_link_donate">Skenk</string>
+    <string name="about_link_website">Webwerf</string>
+    <string name="about_link_translations">Vertalings</string>
+    <string name="contributors">Bydraers</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Alle tye</string>
+    <string name="contributors_6_months">6 maande</string>
+    <string name="contributors_3_months">3 maande</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Ondersteuners</string>
+    <string name="supporters_description">Ondersteuners op Open Collective</string>
+    <string name="supporters_become">Word \'n ondersteuner</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">En nog %s</string>
+    <string name="people_unavailable">Kon nie die lys laai nie</string>
     <string name="opensource_licenses">Open-source lisensies</string>
     <string name="opensource_licenses_description">Die biblioteke waarop Morphe gebou is</string>
     <string name="opensource_licenses_search">Soek biblioteke en lisensies</string>
@@ -1415,6 +1441,8 @@ Besonderhede: %2$s"</string>
     <string name="include">Insluit</string>
     <string name="disable">Deaktiveer</string>
     <string name="enable">Aktiveer</string>
+    <string name="enable_all">Aktiveer alles</string>
+    <string name="disable_all">Skakel alles uit</string>
     <string name="trust">Vertrou</string>
     <string name="loading">Laai…</string>
     <string name="creating">Word geskep…</string>

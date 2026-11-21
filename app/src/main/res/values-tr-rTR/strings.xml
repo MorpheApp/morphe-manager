@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Kaynaklar indirilemedi: %s</string>
     <string name="sources_download_fail_named">\'%s\' güncellenemedi. İnternet bağlantınızı kontrol edin ve tekrar deneyin</string>
     <string name="sources_download_endpoint_not_found">\'%s\': yama metadatası bulunamadı</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Yerel ağınızdaki kaynaklar, Yakındaki cihazlar izni olmadan güncellenemez</string>
     <string name="sources_signing_key_changed_named">\'%s\' güncellenmedi, çünkü son sürümü önceden kullandığı anahtar ile imzalanmamış</string>
     <string name="sources_signing_key_changed_local">Bu dosya, bu kaynağın önceden kullandığı anahtar ile imzalanmamış. Güvenmek için, kaynağı silin ve dosyayı yeniden ekleyin</string>
     <string name="sources_signing_key_trust_title">Yeni anahtara güvenilsin mi?</string>
@@ -346,8 +348,6 @@ APK'nin nereden alınacağını seçin"</string>
     <string name="home_external_apk_expert_mode_required">Bu özellik yalnızca Uzman modunda kullanılabilir</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Yamaları ara</string>
-    <string name="expert_mode_disable_all">Hepsini devre dışı bırak</string>
-    <string name="expert_mode_enable_all">Hepsini etkinleştir</string>
     <string name="expert_mode_enable_all_universal_pending">Evrensel yamalar için tekrar dokunun</string>
     <string name="expert_mode_universal_all_warning_title">Tüm evrensel yamaları etkinleştir?</string>
     <string name="expert_mode_universal_all_warning_message">Evrensel yamalar birlikte test edilmemiştir. Hepsini aynı anda etkinleştirmek çakışmalara, başarısız yamalara veya çökmelere neden olabilir.</string>
@@ -567,9 +567,12 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="app_links_unverified_banner_description">Desteklenen web bağlantıları şu anda bu uygulama yerine tarayıcınızda açılıyor.</string>
     <string name="app_links_enable_auto">Otomatik olarak etkinleştir</string>
     <string name="app_links_enable_auto_in_progress">Bağlantılar etkinleştiriliyor…</string>
+    <string name="app_links_disable_all_in_progress">Bağlantılar devre dışı bırakılıyor…</string>
     <string name="app_links_open_settings">Bağlantı ayarlarını aç</string>
     <string name="app_links_repair_success">Uygulama bağlantıları başarıyla etkinleştirildi</string>
     <string name="app_links_repair_failed">Uygulama bağlantıları otomatik olarak etkinleştirilemedi</string>
+    <string name="app_links_disable_success">Uygulama bağlantıları devre dışı bırakıldı</string>
+    <string name="app_links_disable_failed">Uygulama bağlantıları devre dışı bırakılamadı</string>
     <string name="app_links_change_failed">Uygulama bağlantıları değiştirilemedi</string>
     <string name="app_links_all_verified">Desteklenen tüm bağlantılar, bu uygulamada açılacak şekilde yapılandırılmıştır.</string>
     <string name="app_links_fix">Bağlantıları düzelt</string>
@@ -628,8 +631,6 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="patcher_field_value_stripped">kaldırıldı</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">korundu</string>
-    <string name="patcher_tab_logs">Patcher günlükleri</string>
-    <string name="patcher_tab_game">Oyunlar</string>
     <string name="patcher_logs_waiting">Log çıktısı bekleniyor…</string>
     <string name="patcher_logs_lost">Log çıktısı uygulama yeniden başlatıldığında korunmaz</string>
     <string name="patcher_long_step_warning">Bu adım biraz zaman alabilir. Lütfen bekleyin…</string>
@@ -659,7 +660,6 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patcher_install_error_subtitle">Kaldırıp tekrar yüklemeyi deneyin</string>
     <string name="patcher_ready_to_mount_subtitle">Bağlamak için aşağıdaki düğmeye basın</string>
     <string name="patcher_patches_excluded_for_installer">Bu kurulum yöntemi için kullanılamıyor ve hariç tutuldu: %s</string>
-    <string name="patcher_back_to_game_hint">Geri dönmek için %1$s\'e dokunun</string>
     <string name="patcher_storage_permission_dialog_title">Depolama yoluna erişilemiyor</string>
     <string name="patcher_incompatible_patcher_title">Güncelleme gerekiyor</string>
     <string name="patcher_incompatible_patcher_description">&lt;b&gt;%1$s&lt;/b&gt; kaynağı, &lt;b&gt;%2$s&lt;/b&gt; veya daha yeni bir yamalayıcı sürümü gerektiriyor. Bu kaynağı kullanmak için Morphe’yi güncelleyin.</string>
@@ -764,7 +764,9 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="package_name">Paket adı</string>
     <string name="failed_to_mount">Bağlanamadı: %s</string>
     <string name="failed_to_unmount">Bağlama kaldırılamadı: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini oyunlar</string>
+    <string name="mini_games_description">Boş vakitleri değerlendirmek için hızlı oyunlar</string>
     <string name="mini_game_score">Puan %s</string>
     <string name="mini_game_best">En İyi %s</string>
     <string name="mini_game_new_record">Yeni rekor!</string>
@@ -773,7 +775,14 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="mini_game_paused">Duraklatıldı</string>
     <string name="mini_game_resume">Devam et</string>
     <string name="mini_game_restart">Yeniden başla</string>
-    <string name="mini_game_change">Başka bir oyun seç</string>
+    <string name="mini_game_pause">Duraklat</string>
+    <string name="mini_game_score_label">Skor</string>
+    <string name="mini_game_best_label">En İyi</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Seviye</string>
+    <string name="mini_game_lines">Satırlar</string>
+    <string name="mini_game_lives">Canlar</string>
+    <string name="mini_game_flags">Bayraklar</string>
     <string name="mini_game_2048_picker_subtitle">Karoları birleştirmek için kaydır</string>
     <string name="mini_game_flappy_picker_subtitle">Borulardan uçmak için dokun</string>
     <string name="mini_game_flappy_tap_to_start">Uçmak için dokunun</string>
@@ -1069,6 +1078,7 @@ Resim boyutları şu şekilde olmalıdır:
     <string name="installer_mount_warning_install">Yama modu root bağlama olarak ayarlanmış. Bu kaydedilmiş uygulama bağlama kullanılarak kurulmadı</string>
     <string name="mount_version_mismatch_message">Stok uygulama sürümü (%2$s), yamalanmış uygulama sürümü (%1$s) ile eşleşmiyor. Eşleşen stok sürümü bağlayın, sonra tekrar deneyin</string>
     <string name="mount_stock_restore_failed_message">Android, kaydedilen orijinal APK\'yı reddetti. Eşleşen stok sürümünü yükleyin, ardından tekrar Bağla\'yı deneyin</string>
+    <string name="mount_stock_mismatch_message">Yüklü uygulama orijinal olan değil. Orijinal APK\'yı seçin veya stok sürümü yeniden yükleyin, ardından Mount işlemini tekrar deneyin</string>
     <string name="installer_status_shizuku_unsupported">Yüklü Shizuku sürümü desteklenmiyor</string>
     <string name="installer_action_open_shizuku">Shizuku\'yu Aç</string>
     <string name="installer_hint_generic">Yükleme başarısız oldu. Tekrar deneyin veya farklı bir yükleyiciye geçin</string>
@@ -1339,13 +1349,29 @@ Ayrıntılar: %2$s"</string>
     <string name="file_picker_new_folder_failed">Klasör oluşturulamadı</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Hakkında</string>
-    <string name="settings_system_manager_description">Popüler Android uygulamalarının modern ve verimli şekilde yamalanmasını sağlayan, topluluk geri bildirimleri ve katkılarıyla geliştirilen açık kaynaklı bir proje</string>
-    <string name="credits">Katkıda bulunanlar</string>
-    <string name="credits_description">Morphe\'nin arkasındaki insanlar</string>
     <string name="settings_about_section_project">Proje</string>
     <string name="settings_about_section_help">Yardım</string>
-    <string name="credits_current_development">Mevcut geliştirme</string>
     <string name="credits_prior_development">Önceki geliştirme</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Yönetici</string>
+    <string name="about_update_available">Güncelleme mevcut: %s</string>
+    <string name="about_up_to_date">Güncel</string>
+    <string name="about_links">Resmî bağlantılar</string>
+    <string name="about_link_donate">Bağış Yap</string>
+    <string name="about_link_website">Web Sitesi</string>
+    <string name="about_link_translations">Çeviriler</string>
+    <string name="contributors">Katkıda Bulunanlar</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Tüm zamanlar</string>
+    <string name="contributors_6_months">6 ay</string>
+    <string name="contributors_3_months">3 ay</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Destekçiler</string>
+    <string name="supporters_description">Open Collective üzerindeki destekçiler</string>
+    <string name="supporters_become">Destekçi olun</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Ve %s kişi daha</string>
+    <string name="people_unavailable">Liste yüklenemedi</string>
     <string name="opensource_licenses">Açık kaynak lisansları</string>
     <string name="opensource_licenses_description">Morphe tarafından kullanılan kütüphaneler</string>
     <string name="opensource_licenses_search">Kütüphane ve lisans ara</string>
@@ -1415,6 +1441,8 @@ Ayrıntılar: %2$s"</string>
     <string name="include">Dahil Et</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="enable">Etkinleştir</string>
+    <string name="enable_all">Tümünü etkinleştir</string>
+    <string name="disable_all">Hepsini devre dışı bırak</string>
     <string name="trust">Güven</string>
     <string name="loading">Yükleniyor…</string>
     <string name="creating">Oluşturuluyor…</string>
@@ -1464,7 +1492,7 @@ Ayrıntılar: %2$s"</string>
     <!-- A file a patch source is added from, as a field label -->
     <string name="file">Dosya</string>
     <!-- Chip marking an install as a copy of an app kept alongside it, a noun rather than an action -->
-    <string name="clone">Klonla</string>
+    <string name="clone">Kopya</string>
     <!-- Button that starts patching the selected app. A verb, as in "patch this app" -->
     <string name="patch">Yamala</string>
     <string name="patching">Yamalanıyor</string>

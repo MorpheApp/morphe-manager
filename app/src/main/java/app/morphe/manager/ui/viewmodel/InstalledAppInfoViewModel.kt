@@ -159,7 +159,7 @@ class InstalledAppInfoViewModel(
                     }
                 } catch (e: Exception) {
                     if (e is CancellationException) throw e
-                    Log.e(tag, "Failed to read the state of ${app.currentPackageName}", e)
+                    Log.e(LOG_TAG, "Failed to read the state of ${app.currentPackageName}", e)
                 }
 
                 // Mark as loaded

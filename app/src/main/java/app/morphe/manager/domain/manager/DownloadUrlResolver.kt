@@ -11,8 +11,8 @@ import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.PatchSourceHeaders
 import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.util.KnownApps
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.MORPHE_API_URL
-import app.morphe.manager.util.tag
 import app.morphe.patcher.patch.FormFactor
 import app.morphe.patcher.patch.SupportedAbi
 import io.ktor.http.encodeURLPath
@@ -47,7 +47,7 @@ class DownloadUrlResolver(private val releaseAPI: ReleaseAPI) {
     ): String =
         // The instructions wait on this, so a host that never answers has to end the wait itself
         withTimeoutOrNull(RESOLVE_TIMEOUT) { follow(packageName, version, patchSources, target) } ?: run {
-            Log.w(tag, "Timed out resolving the download page")
+            Log.w(LOG_TAG, "Timed out resolving the download page")
             webSearchUrl(packageName, version)
         }
 
@@ -58,21 +58,21 @@ class DownloadUrlResolver(private val releaseAPI: ReleaseAPI) {
         target: BundledAppTarget?
     ): String {
         val searchUrl = apiSearchUrl(packageName, version, target)
-        Log.d(tag, "Using search url: $searchUrl")
+        Log.d(LOG_TAG, "Using search url: $searchUrl")
 
         var resolved = releaseAPI.resolveRedirect(searchUrl, patchSources) ?: run {
-            Log.w(tag, "No redirect location for: $searchUrl")
+            Log.w(LOG_TAG, "No redirect location for: $searchUrl")
             return webSearchUrl(packageName, version)
         }
 
         repeat(MAX_REDIRECTS) {
             // A URL that redirects nowhere is the end of the chain
             val next = releaseAPI.resolveRedirect(resolved, patchSources) ?: return finalUrl(resolved, packageName, version)
-            Log.i(tag, "Following redirect to: $next")
+            Log.i(LOG_TAG, "Following redirect to: $next")
             resolved = next
         }
 
-        Log.w(tag, "Gave up after $MAX_REDIRECTS redirects")
+        Log.w(LOG_TAG, "Gave up after $MAX_REDIRECTS redirects")
         return webSearchUrl(packageName, version)
     }
 
@@ -103,7 +103,7 @@ class DownloadUrlResolver(private val releaseAPI: ReleaseAPI) {
         }
         val versionPart = version?.let { "\"$it\"" } ?: ""
         val query = "\"$packageName\" $versionPart $architecture $SEARCH_SITES"
-        Log.d(tag, "Using search query: $query")
+        Log.d(LOG_TAG, "Using search query: $query")
         return "https://google.com/search?q=${URLEncoder.encode(query, "UTF-8")}&udm=14"
     }
 
@@ -114,7 +114,7 @@ class DownloadUrlResolver(private val releaseAPI: ReleaseAPI) {
         val uri = runCatching { URI(url) }.getOrNull() ?: return url
         val onUptodown = uri.host?.lowercase()?.endsWith("uptodown.com") == true
         if (onUptodown && !uri.path.orEmpty().trimEnd('/').endsWith("-x")) {
-            Log.w(tag, "Uptodown link lost its build, searching instead: $url")
+            Log.w(LOG_TAG, "Uptodown link lost its build, searching instead: $url")
             return webSearchUrl(packageName, version)
         }
         return url

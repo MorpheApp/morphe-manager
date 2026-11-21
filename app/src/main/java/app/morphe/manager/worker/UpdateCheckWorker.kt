@@ -13,8 +13,8 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.notification.UpdateNotifications
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.normalizeVersion
-import app.morphe.manager.util.tag
 import kotlinx.coroutines.flow.first
 import java.util.concurrent.TimeUnit
 
@@ -38,19 +38,19 @@ class UpdateCheckWorker(
     override suspend fun doWork(): Result {
         // Skip if background update notifications are disabled by user
         if (!prefs.backgroundUpdateNotifications.get()) {
-            Log.d(tag, "UpdateCheckWorker: background notifications disabled, skipping")
+            Log.d(LOG_TAG, "UpdateCheckWorker: background notifications disabled, skipping")
             return Result.success()
         }
 
-        Log.d(tag, "UpdateCheckWorker: starting background update check")
+        Log.d(LOG_TAG, "UpdateCheckWorker: starting background update check")
 
         return try {
             checkForManagerUpdate()
             checkForBundleUpdate()
-            Log.d(tag, "UpdateCheckWorker: background update check completed")
+            Log.d(LOG_TAG, "UpdateCheckWorker: background update check completed")
             Result.success()
         } catch (e: Exception) {
-            Log.e(tag, "UpdateCheckWorker: failed to check for updates", e)
+            Log.e(LOG_TAG, "UpdateCheckWorker: failed to check for updates", e)
             // Retry later; avoids spamming logs on persistent failures (e.g. no internet)
             Result.retry()
         }
@@ -67,7 +67,7 @@ class UpdateCheckWorker(
         }.getOrNull() ?: return
 
         val newVersion = update.version.normalizeVersion()
-        Log.d(tag, "UpdateCheckWorker: manager update available (${BuildConfig.VERSION_NAME} -> $newVersion)")
+        Log.d(LOG_TAG, "UpdateCheckWorker: manager update available (${BuildConfig.VERSION_NAME} -> $newVersion)")
         notificationManager.showManagerUpdateNotification(newVersion)
     }
 
@@ -83,10 +83,10 @@ class UpdateCheckWorker(
         val update = patchBundleRepository.checkForBundleUpdatesQuiet()
 
         if (update != null) {
-            Log.d(tag, "UpdateCheckWorker: patch bundle update available (${update.version})")
+            Log.d(LOG_TAG, "UpdateCheckWorker: patch bundle update available (${update.version})")
             notificationManager.showBundleUpdateNotification(update.version, update.bundleUid)
         } else {
-            Log.d(tag, "UpdateCheckWorker: patch bundles are up to date")
+            Log.d(LOG_TAG, "UpdateCheckWorker: patch bundles are up to date")
         }
     }
 
@@ -117,7 +117,7 @@ class UpdateCheckWorker(
                 request
             )
 
-            Log.d("UpdateCheckWorker", "Periodic update check scheduled (every ${interval.minutes}m / ${interval.name})")
+            Log.d(LOG_TAG, "UpdateCheckWorker: periodic update check scheduled (every ${interval.minutes}m / ${interval.name})")
         }
 
         /**
@@ -125,7 +125,7 @@ class UpdateCheckWorker(
          */
         fun cancel(context: Context) {
             WorkManager.getInstance(context).cancelUniqueWork(WORK_NAME)
-            Log.d("UpdateCheckWorker", "Periodic update check cancelled")
+            Log.d(LOG_TAG, "UpdateCheckWorker: periodic update check cancelled")
         }
     }
 }

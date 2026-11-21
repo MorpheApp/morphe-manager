@@ -53,7 +53,8 @@ private val NEW_SOURCE_LOAD_TIMEOUT = 10.minutes
 enum class BundleUpdateStatus {
     Updating, // Update in progress
     Success,  // Update completed successfully
-    Error     // Error occurred (including no internet)
+    Offline,  // Could not run without internet
+    Error     // Error occurred
 }
 
 /**
@@ -216,7 +217,7 @@ class HomeViewModel(
     fun pickBundles(uris: List<Uri>) {
         val fresh = uris.distinct().filter { uri -> pickedBundles.none { it.uri == uri } }.map { uri ->
             val name = uri.displayName(contentResolver) ?: uri.toString()
-            val isBundle = name.endsWith(".mpp", ignoreCase = true)
+            val isBundle = name.endsWith(".$MPP_EXTENSION", ignoreCase = true)
             PickedBundle(uri, name, bundleName = null, check = if (isBundle) null else LocalFileCheck.NotBundle)
         }
         pickedBundles = pickedBundles + fresh
@@ -385,14 +386,18 @@ class HomeViewModel(
     private fun observeSnackbarState() {
         viewModelScope.launch {
             combine(patchBundleRepository.bundleUpdateProgress, _isRefreshing, ::Pair).collect { (progress, refreshing) ->
-                // A pull spins its own indicator while the check runs, so the alert only tells how it ended.
+                // A pull spins its own indicator while the check runs, so the alert only tells how it ended,
+                // and a quiet check shows nothing until something is downloading.
                 // Updates left to download stay on their own alert, which outlasts this one
+                val checkingQuietly = progress?.quiet == true &&
+                        progress.phase == PatchBundleRepository.BundleUpdatePhase.Checking
                 val status = when (progress?.result) {
                     null, PatchBundleRepository.BundleUpdateResult.UpdatesAvailable -> null
-                    PatchBundleRepository.BundleUpdateResult.None -> BundleUpdateStatus.Updating.takeUnless { refreshing }
+                    PatchBundleRepository.BundleUpdateResult.None ->
+                        BundleUpdateStatus.Updating.takeUnless { refreshing || checkingQuietly }
                     PatchBundleRepository.BundleUpdateResult.Success,
                     PatchBundleRepository.BundleUpdateResult.NoUpdates -> BundleUpdateStatus.Success
-                    PatchBundleRepository.BundleUpdateResult.NoInternet,
+                    PatchBundleRepository.BundleUpdateResult.NoInternet -> BundleUpdateStatus.Offline
                     PatchBundleRepository.BundleUpdateResult.Error -> BundleUpdateStatus.Error
                 }
                 showBundleUpdateSnackbar = status != null

@@ -10,11 +10,11 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.patcher.runtime.JvmUnavailableException
-import app.morphe.manager.util.tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import app.morphe.manager.util.LOG_TAG
 import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
@@ -27,7 +27,7 @@ import java.util.zip.ZipOutputStream
 
 /**
  * The JVM the app ships in its assets for patching, unpacked to storage the first time a run
- * needs it, since the JVM can only be loaded from files.
+ * needs it, since the JVM can only run from files.
  *
  * The runtime is unpacked once per runtime the app ships. The patcher host is part of the app's
  * own code and is unpacked once per install of the app. Both ship compressed with xz, which
@@ -38,7 +38,7 @@ class JvmInstallation(private val app: Application) {
     /**
      * The ABI of the runtime this device gets, null where the app ships none for it. Matched to
      * the process rather than the device, as a 64 bit device can run the app as a 32 bit one and
-     * an x86 device can run ARM code through translation, which the JVM cannot be loaded into.
+     * an x86 device can run ARM code through translation, which the JVM cannot run under.
      * The process runs the native libraries of the folder Android named after its instruction set.
      */
     val abi: String? = ABIS_BY_INSTRUCTION_SET[File(app.applicationInfo.nativeLibraryDir).name]
@@ -68,7 +68,7 @@ class JvmInstallation(private val app: Application) {
                 val hostJar = root.resolve("host-${BuildConfig.VERSION_CODE}-${BuildConfig.BUILD_ID}.jar")
                 if (!hostJar.isFile) unpackHost(hostJar)
 
-                val installed = Installed(home, hostJar, aotDir)
+                val installed = Installed(home, hostJar, aotDir, nativeLibrary(BuildConfig.GLIBC_LOADER_LIBRARY))
                 // Whatever an earlier version of the app unpacked or recorded is of no use to this one
                 val keep = setOf(home, hostJar)
                 root.listFiles()?.filter { it !in keep }?.forEach { it.deleteRecursively() }
@@ -82,6 +82,13 @@ class JvmInstallation(private val app: Application) {
             }
         }
     }
+
+    /**
+     * A native library of the app, which the system unpacked with the app, the only files Android
+     * lets an app execute.
+     */
+    private fun nativeLibrary(name: String) = File(app.applicationInfo.nativeLibraryDir, name).takeIf { it.isFile }
+        ?: throw IOException("The app ships no $name")
 
     // Unpacked beside the destination and renamed into place, so a half unpacked runtime left by
     // a process that died midway is never taken for a complete one
@@ -107,7 +114,7 @@ class JvmInstallation(private val app: Application) {
         unpackImage(abi, staging.resolve(IMAGE_PATH))
 
         if (!staging.renameTo(home)) throw IOException("Could not move the runtime into $home")
-        Log.i(tag, "Unpacked the patcher JVM for $abi")
+        Log.i(LOG_TAG, "Unpacked the patcher JVM for $abi")
     }
 
     // The app ships one image for all ABIs, and for each whose image differs the delta to it
@@ -172,15 +179,25 @@ class JvmInstallation(private val app: Application) {
         closeEntry()
     }
 
-    /** @param aotDir Where the files of the AOT cache are kept, see [aotCache]. */
-    class Installed(val home: File, val hostJar: File, val aotDir: File) {
-        /** The VM the runtime ships, the server one where there is one, the client one otherwise. */
-        val libjvm
-            get() = VMS.map { home.resolve("lib/$it/libjvm.so") }.firstOrNull { it.isFile }
-                ?: throw JvmUnavailableException("The patcher JVM ships no VM")
-
-        /** The libraries of the runtime that others of it link against, dependencies first. */
-        val preload get() = PRELOAD.map { home.resolve("lib/$it").path }
+    /**
+     * @param aotDir Where the files of the AOT cache are kept, see [aotCache].
+     * @param glibcLoader The loader of the GNU C library the runtime is built for, see [command].
+     */
+    class Installed(
+        val home: File,
+        val hostJar: File,
+        val aotDir: File,
+        private val glibcLoader: File
+    ) {
+        /**
+         * The command that starts the JVM as a process of its own: the launcher of the runtime,
+         * run by the loader of the GNU C library it is built for, which finds the libraries of both.
+         */
+        val command: List<String>
+            get() {
+                val libraries = listOf(GLIBC_DIR, "lib", "lib/server").joinToString(":") { home.resolve(it).path }
+                return listOf(glibcLoader.path, "--library-path", libraries, home.resolve(LAUNCHER_PATH).path)
+            }
 
         /**
          * The AOT cache of this runtime and host: the classes of a run loaded and linked, and its
@@ -215,6 +232,8 @@ class JvmInstallation(private val app: Application) {
         const val IMAGE_PATH = "lib/modules"
         const val BASE_SUFFIX = ".base"
         const val FRAMEWORKS_DIR = "frameworks/"
+        const val GLIBC_DIR = "glibc"
+        const val LAUNCHER_PATH = "bin/java"
 
         val ABIS_BY_INSTRUCTION_SET = mapOf(
             "arm64" to "arm64-v8a",
@@ -223,10 +242,5 @@ class JvmInstallation(private val app: Application) {
             "x86" to "x86"
         )
 
-        val VMS = listOf("server", "client")
-
-        // The app's linker namespace does not search the runtime's directory, so a library naming
-        // one of these would not find it unless it is already loaded
-        val PRELOAD = listOf("libjava.so", "libnet.so", "libnio.so", "libzip.so")
     }
 }

@@ -31,6 +31,9 @@ import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
 import app.morphe.manager.ui.viewmodel.ImportExportViewModel
 import app.morphe.manager.ui.viewmodel.SettingsViewModel
+import app.morphe.manager.util.KEYSTORE_MIMETYPE
+import app.morphe.manager.util.KEYSTORE_MIME_TYPES
+import app.morphe.manager.util.WILDCARD_MIMETYPE
 import app.morphe.manager.util.isAndroidTv
 import app.morphe.manager.util.rememberAdaptiveFilePicker
 import app.morphe.manager.util.rememberDocumentSaver
@@ -62,16 +65,12 @@ fun FilesSection(
     val wrongCredentialsText = stringResource(R.string.settings_system_import_keystore_wrong_credentials)
 
     val importKeystoreLauncher = rememberAdaptiveFilePicker(
-        mimeTypes = arrayOf("*/*"),
-        customPickerMimeTypes = arrayOf(
-            "application/x-pkcs12",
-            "application/x-java-keystore",
-            "application/vnd.morphe.keystore",
-        ),
+        mimeTypes = arrayOf(WILDCARD_MIMETYPE),
+        customPickerMimeTypes = KEYSTORE_MIME_TYPES,
         onResult = { uri -> uri?.let { importExportViewModel.startKeystoreImport(it) } }
     )
 
-    val exportKeystore = rememberDocumentSaver("application/x-pkcs12", importExportViewModel::exportKeystore)
+    val exportKeystore = rememberDocumentSaver(KEYSTORE_MIMETYPE, importExportViewModel::exportKeystore)
 
     DialogHost(visible = importExportViewModel.showCredentialsDialog) {
         KeystoreCredentialsDialog(

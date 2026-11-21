@@ -378,7 +378,10 @@ fun Overlay(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background.copy(alpha = backgroundAlpha))
-                    .blocksPointerInputBelow(),
+                    .blocksPointerInputBelow()
+                    // The scrim covers the whole screen, its content keeps clear of the bars and edges
+                    .safeDrawingPadding()
+                    .padding(horizontal = Defaults.SpaceLarge),
                 contentAlignment = Alignment.Center,
                 content = content
             )

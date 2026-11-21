@@ -26,12 +26,14 @@ import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.model.SelectedApp
+import app.morphe.manager.util.ApkExportData
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.CompletionSound
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
+import app.morphe.manager.util.exportData
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.serialization.json.Json
@@ -510,7 +512,7 @@ class BatchPatchCoordinator(
             if (item.installOutcome == BatchInstallOutcome.INSTALLED) continue
             // A mount build is only of use mounted over its app, which the summary does
             if (item.useMount) continue
-            val file = item.patchedFile?.takeIf { it.exists() } ?: continue
+            val file = item.patchedBuild?.file?.takeIf { it.exists() } ?: continue
             val info = pm.getPackageInfo(file)
             val targetPackage = info?.packageName ?: item.packageName
 
@@ -676,7 +678,7 @@ class BatchPatchCoordinator(
                     }
                     succeeded = true
                     updateItem(index) {
-                        it.copy(state = BatchItemState.SUCCEEDED, patchedFile = retained, message = null)
+                        it.copy(state = BatchItemState.SUCCEEDED, patchedBuild = retained, message = null)
                     }
                 }
 
@@ -771,14 +773,14 @@ class BatchPatchCoordinator(
      * install it and the app shows up on the home screen exactly like a single-app run.
      *
      * @param mergedApkKept whether the worker already kept the APK merged from a split archive.
-     * @return the file the summary installs from, or null when the patched APK is gone.
+     * @return the build the summary installs from, or null when the patched APK is gone.
      */
     private suspend fun finishSuccessfulItem(
         item: BatchPatchItem,
         selectedApp: SelectedApp,
         outputFile: File,
         mergedApkKept: Boolean
-    ): File? = withContext(Dispatchers.IO) {
+    ): PatchedBuild? = withContext(Dispatchers.IO) {
         if (!outputFile.exists()) return@withContext null
 
         val patchedInfo = pm.getPackageInfo(outputFile)
@@ -793,6 +795,10 @@ class BatchPatchCoordinator(
         // A configuration belongs to the card it was built from, which is the app itself unless
         // the run produced a copy, whatever package name the patches settled on
         val configurationKey = if (isClone) currentPackageName else item.configurationKey
+
+        // Only an APK that cannot be read leaves the build to be named after the queued app
+        val exportData = patchedInfo?.let { pm.exportData(it, item.patchSources, isClone, item.version) }
+            ?: ApkExportData(item.appName, currentPackageName, version, item.patchSources, isClone)
 
         // What the user chose to patch with is recorded whether the APK is kept: the
         // two are separate settings, and the summary can still install from the workspace
@@ -824,7 +830,7 @@ class BatchPatchCoordinator(
         if (!prefs.savePatchedApks.get()) {
             // Retention is off, so the patched APK only lives long enough for the summary
             // to install it and is dropped together with the workspace
-            return@withContext outputFile
+            return@withContext PatchedBuild(outputFile, exportData)
         }
 
         val retained = fs.getPatchedAppFile(currentPackageName, version)
@@ -850,7 +856,7 @@ class BatchPatchCoordinator(
             selectionPayload
         )
 
-        stored
+        PatchedBuild(stored, exportData)
     }
 
     /**

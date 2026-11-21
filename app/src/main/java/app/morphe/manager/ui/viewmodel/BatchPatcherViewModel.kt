@@ -46,15 +46,9 @@ import app.morphe.manager.ui.screen.shared.CopySelectionCandidate
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
-import app.morphe.manager.util.PatchSelectionUtils.bulkEnableHoldsUniversal
-import app.morphe.manager.util.PatchSelectionUtils.bulkEnablePatches
 import app.morphe.manager.util.PatchSelectionUtils.listedWith
 import app.morphe.manager.util.PatchSelectionUtils.mergeBundleOptions
-import app.morphe.manager.util.PatchSelectionUtils.resetOptionsForPatch
 import app.morphe.manager.util.PatchSelectionUtils.spansMultipleBundles
-import app.morphe.manager.util.PatchSelectionUtils.togglePatch
-import app.morphe.manager.util.PatchSelectionUtils.updateOption
-import app.morphe.manager.util.PatchSelectionUtils.withBundle
 import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.InstallerType
@@ -75,7 +69,7 @@ import java.io.File
  * applied, which keeps a canceled edit from touching the plan.
  */
 class BatchPatchEdit(
-    private val scope: CoroutineScope,
+    scope: CoroutineScope,
     override val panel: SelectionPanelController,
     val itemId: String,
     /** Key this item saves its patches and options under, and the one a copy excludes itself by. */
@@ -93,16 +87,10 @@ class BatchPatchEdit(
     // Whether the queue reaches patches that declare other app versions, so bulk actions offer
     // the same set the plan was resolved from
     private val allowIncompatible: Boolean
-) : SelectionPanelHost {
-    var selection by mutableStateOf(savedSelection)
-        private set
-
-    var options by mutableStateOf(initialOptions)
-        private set
-
-    // Bundle and selection left behind by the last "Enable all". Universal patches are applied
-    // only while this still matches the live selection, so any other edit disarms them again
-    private var universalArmedFor by mutableStateOf<Pair<Int, Set<String>>?>(null)
+) : PatchSelectionEditor(scope) {
+    init {
+        start(savedSelection, initialOptions)
+    }
 
     val allPatchesInfo: List<Pair<PatchBundleInfo.Scoped, List<Pair<PatchInfo, Boolean>>>>
         get() = bundles.listedWith(selection, openedWith = savedSelection)
@@ -113,90 +101,29 @@ class BatchPatchEdit(
 
     private val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
 
-    /**
-     * Lock state of [patch] for the install target this app is patched for.
-     *
-     * A REQUIRED patch only locks while the item draws its patches from one bundle, see
-     * [PatchSelectionUtils.applyAvailability].
-     */
-    fun lockStateOf(patch: PatchInfo) =
+    override fun lockState(patch: PatchInfo) =
         patch.lockState(installerType, apkArchitecture, !hasMultipleBundles)
 
-    fun togglePatch(bundleUid: Int, patchName: String) {
-        // Locked patches are toggled only through availability rules; no-op here
-        val patch = bundles.firstOrNull { it.uid == bundleUid }
-            ?.patches
-            ?.firstOrNull { it.name == patchName }
-        val selected = patchName in selection[bundleUid].orEmpty()
-        if (patch != null && lockStateOf(patch).blocksToggle(selected)) return
+    /** Availability rules of the install target, so an edit lands on the plan already settled. */
+    override fun settle(selection: PatchSelection) =
+        selection.applyAvailability(installerType, apkArchitecture, patchesByName)
 
-        selection = selection.togglePatch(bundleUid, patchName).applyItemAvailability()
-    }
+    override fun patchOf(bundleUid: Int, patchName: String) = patchesOf(bundleUid)[patchName]
 
-    /**
-     * Select all patches shown for a bundle, staging universal patches behind the regular ones
-     * exactly like the single-app flow does, see [PatchSelectionUtils.bulkEnablePatches].
-     */
-    fun selectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val selected = selection[bundleUid].orEmpty()
-        val updated = bulkEnablePatches(patches, selected, universalArmed(bundleUid, selected), ::lockStateOf)
-
-        replaceBundle(bundleUid, updated)
-        // Armed against what the availability rules left behind, so the next tap sees the
-        // selection it is compared to
-        universalArmedFor = bundleUid to selection[bundleUid].orEmpty()
-    }
-
-    /** True when the next [selectAll] holds universal patches back for another tap. */
-    fun selectAllHoldsUniversal(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>): Boolean {
-        val selected = selection[bundleUid].orEmpty()
-        return bulkEnableHoldsUniversal(patches, universalArmed(bundleUid, selected), ::lockStateOf)
-    }
-
-    private fun universalArmed(bundleUid: Int, selected: Set<String>) =
-        universalArmedFor == (bundleUid to selected)
-
-    fun deselectAll(bundleUid: Int, patches: List<Pair<PatchInfo, Boolean>>) {
-        val removed = patches
-            .filterNot { (patch, _) -> lockStateOf(patch) == PatchLockState.LOCKED_ON }
-            .mapTo(mutableSetOf()) { (patch, _) -> patch.name }
-        replaceBundle(bundleUid, selection[bundleUid].orEmpty() - removed)
-    }
-
-    /**
-     * Reset a bundle's selection to what the plan would have resolved on its own.
-     *
-     * Defaults are read from the bundle instead of the dialog's list: the list also carries the
-     * patches declaring other app versions so they can be enabled by hand, and those belong to
-     * the defaults only where the run itself reaches them.
-     */
-    override fun resetToDefault(bundleUid: Int) {
-        val bundle = bundles.firstOrNull { it.uid == bundleUid } ?: return
-        replaceBundle(
-            bundleUid,
-            bundle.patchSequence(allowIncompatible)
-                .filter { it.defaultSelected(installerType, apkArchitecture) }
-                .mapTo(mutableSetOf()) { it.name }
-        )
-        panel.defaultsApplied()
-    }
+    /** What the plan would have resolved on its own. */
+    override fun defaultsOf(bundleUid: Int) = bundles.firstOrNull { it.uid == bundleUid }
+        ?.patchSequence(allowIncompatible)
+        ?.filter { it.defaultSelected(installerType, apkArchitecture) }
+        ?.mapTo(mutableSetOf()) { it.name }
 
     override val setsPackageName get() = packageName
 
     override val hasSavedSelection get() = savedSelection.values.any { it.isNotEmpty() }
 
     override fun restoreSaved() {
-        selection = savedSelection.applyItemAvailability()
+        update(savedSelection)
         options = initialOptions
         panel.restored()
-    }
-
-    fun updateOption(bundleUid: Int, patchName: String, optionKey: String, value: Any?) {
-        options = options.updateOption(bundleUid, patchName, optionKey, value)
-    }
-
-    fun resetOptions(bundleUid: Int, patchName: String) {
-        options = options.resetOptionsForPatch(bundleUid, patchName)
     }
 
     /** Patch schema of [bundleUid], which a copied selection is filtered against. */
@@ -234,7 +161,7 @@ class BatchPatchEdit(
     override fun applySet(set: SelectionSetSummary) {
         scope.launch {
             val snapshot = panel.resolveSet(set, bundles)
-            selection = snapshot.patches.applyItemAvailability()
+            update(snapshot.patches)
             options = snapshot.options
             panel.applied(set)
         }
@@ -243,22 +170,6 @@ class BatchPatchEdit(
     override fun saveSet(name: String) {
         panel.saveSet(scope, packageName, name, selection, options)
     }
-
-    override fun deleteSet(set: SelectionSetSummary) {
-        panel.deleteSet(scope, set)
-    }
-
-    override fun renameSet(set: SelectionSetSummary, name: String) {
-        panel.renameSet(scope, set, name)
-    }
-
-    private fun replaceBundle(bundleUid: Int, patches: Set<String>) {
-        selection = selection.withBundle(bundleUid, patches).applyItemAvailability()
-    }
-
-    /** Availability rules of the install target, so an edit lands on the plan already settled. */
-    private fun PatchSelection.applyItemAvailability() =
-        applyAvailability(installerType, apkArchitecture, patchesByName)
 }
 
 /**
@@ -683,10 +594,10 @@ class BatchPatcherViewModel(
     }
 
     /**
-     * Waits for [itemId] to be resolved against the APK just given to it, and then opens the
-     * editor when none of its patches is selected, as the single-app flow opens the selection
-     * after the APK, so the app is not left for the user to find the editor for. The APK question
-     * is closed otherwise, having waited for the answer.
+     * Waits for [itemId] to be resolved against the APK just given to it. When none of its
+     * patches is selected, the editor opens next, as the single-app flow opens the selection after
+     * the APK, so the app is not left for the user to find the editor for. Otherwise, the APK
+     * question is closed, having waited for the answer.
      */
     private suspend fun settleGivenApk(itemId: String, resolution: Job?) = whileProcessingApk {
         resolution?.join()
@@ -917,8 +828,8 @@ class BatchPatcherViewModel(
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
         val selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
-        val version = item.patchedFile
-            ?.let { pm.getPackageInfo(it)?.versionName?.takeUnless { name -> name.isBlank() } }
+        val version = item.patchedBuild
+            ?.let { pm.getPackageInfo(it.file)?.versionName?.takeUnless { name -> name.isBlank() } }
             ?: item.version
             ?: return@withContext false
 
@@ -976,7 +887,7 @@ class BatchPatcherViewModel(
     private fun copyToWorkspace(uri: Uri): File? = try {
         uri.copyApkInto(fs.uiTempDir, "batch_input", app.contentResolver)
     } catch (e: Exception) {
-        Log.e(tag, "Failed to copy attached APK", e)
+        Log.e(LOG_TAG, "Failed to copy attached APK", e)
         null
     }
 }

@@ -5,54 +5,95 @@
 
 package app.morphe.manager.ui.viewmodel
 
+import androidx.annotation.StringRes
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
-import app.morphe.manager.ui.screen.shared.autoMirrored
+import androidx.lifecycle.viewModelScope
+import app.morphe.manager.R
+import app.morphe.manager.domain.repository.ManagerUpdateRepository
+import app.morphe.manager.domain.repository.PeopleRepository
+import app.morphe.manager.domain.manager.PreferencesManager
+import app.morphe.manager.network.dto.AppUpdateCheck
+import app.morphe.manager.util.MORPHE_GITHUB_URL
 import app.morphe.manager.util.MORPHE_WEBSITE_URL
-import com.composables.icons.fontawesome.FontAwesome
-import com.composables.icons.fontawesome.brands.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-data class SocialLink(
-    val name: String,
+/** One of the project's own pages, as the About dialog links to it. */
+data class AboutLink(
+    @StringRes val title: Int,
+    val icon: ImageVector,
     val url: String,
-    val preferred: Boolean = false,
 )
 
-class AboutViewModel : ViewModel() {
+class AboutViewModel(
+    private val peopleRepository: PeopleRepository,
+    private val managerUpdateRepository: ManagerUpdateRepository,
+    private val prefs: PreferencesManager
+) : ViewModel() {
+    /** What the last check for a newer manager came back with, or null before the first one. */
+    val updateCheck: StateFlow<AppUpdateCheck?> = managerUpdateRepository.lastCheck
+
+    /**
+     * Checks for a newer manager, so the About dialog can say the installed one is up to date.
+     * Left to the checks the user starts themselves where they turned the automatic ones off.
+     */
+    fun checkForUpdate() {
+        viewModelScope.launch {
+            if (prefs.autoUpdates.get().checksOnLaunch) managerUpdateRepository.refresh()
+        }
+    }
+
+    val people: StateFlow<PeopleRepository.People?> = peopleRepository.people
+
+    /** Whether the lists could neither be fetched nor read back from an earlier fetch. */
+    var peopleUnavailable by mutableStateOf(false)
+        private set
+
+    fun loadPeople() {
+        viewModelScope.launch {
+            peopleUnavailable = !peopleRepository.refresh()
+        }
+    }
+
     companion object {
-        val socials: List<SocialLink> = listOf(
-            SocialLink(
-                name = "Website",
-                url = MORPHE_WEBSITE_URL,
-                preferred = true
+        val donateLink = AboutLink(
+            title = R.string.about_link_donate,
+            icon = MaterialSymbols.Rounded.Favorite,
+            url = "$MORPHE_WEBSITE_URL/donate"
+        )
+
+        // Glyphs for what each page is rather than the marks of the services hosting them, which
+        // the patched apps cannot ship and the two dialogs are meant to share
+        val links: List<AboutLink> = listOf(
+            AboutLink(
+                title = R.string.about_link_website,
+                icon = MaterialSymbols.Rounded.Public,
+                url = MORPHE_WEBSITE_URL
             ),
-            SocialLink(
-                name = "Changelog",
-                url = "$MORPHE_WEBSITE_URL/changelog"
+            AboutLink(
+                title = R.string.about_link_github,
+                icon = MaterialSymbols.Rounded.Code,
+                url = MORPHE_GITHUB_URL
             ),
-            SocialLink(
-                name = "GitHub",
-                url = "https://github.com/MorpheApp"
-            ),
-            SocialLink(
-                name = "Reddit",
+            AboutLink(
+                title = R.string.about_link_reddit,
+                icon = MaterialSymbols.Rounded.Forum,
                 url = "https://reddit.com/r/MorpheApp"
             ),
-            SocialLink(
-                name = "Crowdin",
+            AboutLink(
+                title = R.string.about_link_translations,
+                icon = MaterialSymbols.Rounded.Translate,
                 url = "$MORPHE_WEBSITE_URL/translate"
             )
         )
 
-        private val socialIcons = mapOf(
-            "Website" to MaterialSymbols.Rounded.Public,
-            "GitHub" to FontAwesome.Brands.Github,
-            "Changelog" to MaterialSymbols.Rounded.Article.autoMirrored,
-            "Reddit" to FontAwesome.Brands.Reddit,
-            "Crowdin" to MaterialSymbols.Rounded.Translate,
-        )
-
-        fun getSocialIcon(name: String) = socialIcons[name] ?: MaterialSymbols.Rounded.Language
+        /** Where the supporters past the ones listed are, and every anonymous one. */
+        const val SUPPORTERS_URL = "https://opencollective.com/morpheapp"
     }
 }

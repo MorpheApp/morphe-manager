@@ -33,6 +33,7 @@ val repositoryModule = module {
     singleOf(::PatchOptionsRepository)
     singleOf(::SelectionSetRepository)
     singleOf(::BlocklistRepository)
+    singleOf(::PeopleRepository)
     singleOf(::RemoteBundleServices)
     singleOf(::PatchBundleRepository)
     singleOf(::WorkerRepository)

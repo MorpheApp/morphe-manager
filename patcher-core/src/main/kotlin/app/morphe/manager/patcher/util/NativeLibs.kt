@@ -105,10 +105,18 @@ object NativeLibs {
         )
 
     /**
+     * Whether [apkFile] carries an APK signing block. A copy without one gives patches no
+     * certificates to read, so a signed copy of the same build is worth keeping in its place.
+     */
+    fun hasSigningBlock(apkFile: File): Boolean =
+        runCatching { ArchiveFile(apkFile).use { it.apkSignatureBlock != null } }.getOrDefault(false)
+
+    /**
      * Writes [apkFile] to [output] without the native libraries the patcher strips from it, see
      * [keptArchitectures], copying every other entry as it is stored. False, writing nothing, when
-     * there is nothing to strip. The signature does not survive, so the result is an input to
-     * patch rather than an APK to install.
+     * there is nothing to strip. The signing block is carried over for the certificates patches
+     * read from it, but no longer matches the contents, so the result is an input to patch rather
+     * than an APK to install.
      */
     fun writeStripped(apkFile: File, output: File, supportedAbis: List<String>): Boolean {
         val kept = keptArchitectures(apkFile, supportedAbis).singleOrNull()?.arch ?: return false
@@ -119,7 +127,9 @@ object NativeLibs {
                 entry.isFile && extractAbiFromEntry(entry.name).let { it == null || it == kept }
             }
             // Closes the file itself once written
-            ApkFileWriter(output, sources).write()
+            ApkFileWriter(output, sources).apply {
+                apkSignatureBlock = archive.apkSignatureBlock
+            }.write()
         }
         return true
     }

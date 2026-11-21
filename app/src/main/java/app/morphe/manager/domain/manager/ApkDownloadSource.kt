@@ -5,6 +5,8 @@
 
 package app.morphe.manager.domain.manager
 
+import app.morphe.manager.util.APK_EXTENSIONS
+import app.morphe.manager.util.GITHUB_HOST
 import app.morphe.manager.util.MORPHE_API_URL
 import java.net.URI
 
@@ -51,8 +53,6 @@ sealed class ApkDownloadSource(val label: String?) {
     data object Unresolved : ApkDownloadSource(null)
 
     companion object {
-        private val DOWNLOADABLE_EXTENSIONS = setOf("apk", "apkm", "apks", "xapk")
-
         /**
          * Works out where [url] leads.
          *
@@ -68,11 +68,11 @@ sealed class ApkDownloadSource(val label: String?) {
             val extension = path.substringAfterLast('/').substringAfterLast('.', "").lowercase()
 
             return when {
-                extension in DOWNLOADABLE_EXTENSIONS -> DirectFile(host)
+                extension in APK_EXTENSIONS -> DirectFile(host)
                 host.endsWith("apkmirror.com") ->
                     ApkMirror(onDownloadPage = path.endsWith("-android-apk-download"))
                 host.endsWith("uptodown.com") -> Uptodown
-                host == "github.com" && RELEASES_SEGMENT in path.split('/') -> GitHub(releaseTag(uri))
+                host == GITHUB_HOST && RELEASES_SEGMENT in path.split('/') -> GitHub(releaseTag(uri))
                 host == "apkcube.com" || host.endsWith(".apkcube.com") ->
                     ApkCube(versionPinned = path.endsWith("/download") && hasQueryValue(uri, "version"))
                 host.endsWith("google.com") -> WebSearch

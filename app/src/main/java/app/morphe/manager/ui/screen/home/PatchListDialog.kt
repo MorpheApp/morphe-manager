@@ -204,11 +204,7 @@ internal fun DialogHostScope.PatchListDialog(
             val listState = rememberLazyListState()
             // The list otherwise holds on to whichever row led it, which another block leaves
             // somewhere in the middle, so picking one starts the list over from its top
-            val headerCollapse = LocalDialogHeaderCollapse.current
-            LaunchedEffect(selected) {
-                listState.scrollToItem(0)
-                headerCollapse?.unfold()
-            }
+            LaunchedEffect(selected) { listState.scrollToItem(0) }
             DialogLazyList(
                 modifier = Modifier.fillMaxSize(),
                 state = listState,

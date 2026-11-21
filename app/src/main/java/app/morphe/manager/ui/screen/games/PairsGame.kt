@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.ui.screen.patcher.game
+package app.morphe.manager.ui.screen.games
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -48,7 +48,7 @@ private val PAIRS_PEEK = 800.milliseconds
 class PairsGameState(
     initialHighScore: Int = 0,
     onHighScoreUpdated: (Int) -> Unit = {}
-) : MiniGameStateBase {
+) : RoundGameState(initialHighScore, onHighScoreUpdated) {
     var cards by mutableStateOf(deal())
         private set
     var matched by mutableStateOf(BooleanArray(PAIRS_GRID * PAIRS_GRID))
@@ -58,16 +58,6 @@ class PairsGameState(
     var secondPick by mutableStateOf<Int?>(null)
         private set
     var strikes by mutableIntStateOf(PAIRS_STRIKES)
-        private set
-    private val points = GameScore(initialHighScore, onHighScoreUpdated)
-    override val haptics = GameHaptics()
-    override val score get() = points.value
-    override val highScore get() = points.high
-    override var isGameOver by mutableStateOf(false)
-        private set
-    var isStarted by mutableStateOf(false)
-        private set
-    override var isPaused by mutableStateOf(false)
         private set
 
     /** True once two cards are face up and the pair is waiting to be judged. */
@@ -111,16 +101,8 @@ class PairsGameState(
         firstPick = null
         secondPick = null
         strikes = PAIRS_STRIKES
-        points.reset()
-        isGameOver = false
-        isStarted = false
-        isPaused = false
+        resetRound()
     }
-
-    override val isPlaying get() = isStarted && !isGameOver && !isPaused
-
-    override fun pause() { if (isStarted && !isGameOver) isPaused = true }
-    override fun resume() { isPaused = false }
 
     // A cleared board deals the next one instead of ending the round, so the score keeps
     // running for as long as the strikes hold out

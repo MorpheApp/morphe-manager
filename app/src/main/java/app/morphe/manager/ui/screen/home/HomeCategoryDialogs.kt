@@ -5,10 +5,7 @@
 
 package app.morphe.manager.ui.screen.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -86,39 +83,26 @@ internal fun DialogHostScope.MoveToCategoryDialog(
             )
         }
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = Defaults.SpaceLarge),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
-        ) {
-            SettingsItemCard(onClick = { showCreateDialog = true }, showBorder = true) {
-                IconTextRow(
-                    modifier = Modifier.padding(Defaults.SpaceLarge),
-                    leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Add) },
-                    title = stringResource(R.string.home_category_add),
-                    trailingContent = null
-                )
-            }
-
-            SettingsItemCard(onClick = { onSelect(null) }, showBorder = true) {
-                IconTextRow(
-                    modifier = Modifier.padding(Defaults.SpaceLarge),
-                    leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Folder_off) },
-                    title = stringResource(R.string.home_category_uncategorized),
-                    trailingContent = null
-                )
-            }
-
+        SettingsGroup {
+            SettingsItem(
+                onClick = { showCreateDialog = true },
+                icon = MaterialSymbols.Rounded.Add,
+                title = stringResource(R.string.home_category_add),
+                trailingContent = null
+            )
+            SettingsItem(
+                onClick = { onSelect(null) },
+                icon = MaterialSymbols.Rounded.Folder_off,
+                title = stringResource(R.string.home_category_uncategorized),
+                trailingContent = null
+            )
             categories.forEach { category ->
-                SettingsItemCard(onClick = { onSelect(category.id) }, showBorder = true) {
-                    IconTextRow(
-                        modifier = Modifier.padding(Defaults.SpaceLarge),
-                        leadingContent = { ThemedIcon(icon = MaterialSymbols.Rounded.Folder) },
-                        title = category.name,
-                        trailingContent = null
-                    )
-                }
+                SettingsItem(
+                    onClick = { onSelect(category.id) },
+                    icon = MaterialSymbols.Rounded.Folder,
+                    title = category.name,
+                    trailingContent = null
+                )
             }
         }
     }

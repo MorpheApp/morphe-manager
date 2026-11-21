@@ -10,7 +10,7 @@
 
 package app.morphe.manager.di
 
-import android.content.Context
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.util.MORPHE_USER_AGENT
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
@@ -21,26 +21,39 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import okhttp3.Cache
 import okhttp3.Dns
+import okhttp3.OkHttpClient
 import okhttp3.Protocol
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.net.Inet4Address
+import java.net.UnknownHostException
 
 val httpModule = module {
-    fun provideHttpClient(context: Context, json: Json) = HttpClient(OkHttp) {
+    // The connections, DNS and cache every HTTP client of the app shares
+    fun provideOkHttpClient(fs: Filesystem) = OkHttpClient.Builder()
+        .dns { hostname ->
+            val addresses = try {
+                Dns.SYSTEM.lookup(hostname)
+            } catch (e: SecurityException) {
+                // A firewall or a revoked network permission fails the lookup with EPERM,
+                // which OkHttp would rethrow on its dispatcher thread instead of failing
+                // the call
+                throw UnknownHostException(hostname).apply { initCause(e) }
+            }
+            val ipv4Addresses = addresses.filterIsInstance<Inet4Address>()
+            // Force IPv4 if available, fallback to IPv6 only if no IPv4 addresses are found
+            ipv4Addresses.ifEmpty { addresses }
+        }
+        // Force HTTP/1.1 to avoid intermittent HTTP/2 PROTOCOL_ERROR stream resets when
+        // downloading patch bundles from GitHub-backed endpoints.
+        .protocols(listOf(Protocol.HTTP_1_1))
+        .cache(Cache(fs.httpCacheDir.also { it.mkdirs() }, 1024 * 1024 * 100))
+        .build()
+
+    fun provideHttpClient(okHttpClient: OkHttpClient, json: Json) = HttpClient(OkHttp) {
         engine {
+            preconfigured = okHttpClient
             config {
-                dns { hostname ->
-                    val addresses = Dns.SYSTEM.lookup(hostname)
-                    val ipv4Addresses = addresses.filterIsInstance<Inet4Address>()
-                    // Force IPv4 if available, fallback to IPv6 only if no IPv4 addresses are found
-                    ipv4Addresses.ifEmpty { addresses }
-                }
-                // Force HTTP/1.1 to avoid intermittent HTTP/2 PROTOCOL_ERROR stream resets when
-                // downloading patch bundles from GitHub-backed endpoints.
-                protocols(listOf(Protocol.HTTP_1_1))
-                cache(Cache(context.cacheDir.resolve("cache").also { it.mkdirs() }, 1024 * 1024 * 100))
                 followRedirects(true)
                 followSslRedirects(true)
             }
@@ -64,8 +77,7 @@ val httpModule = module {
         ignoreUnknownKeys = true
     }
 
-    single {
-        provideHttpClient(androidContext(), get())
-    }
+    singleOf(::provideOkHttpClient)
+    singleOf(::provideHttpClient)
     singleOf(::provideJson)
 }

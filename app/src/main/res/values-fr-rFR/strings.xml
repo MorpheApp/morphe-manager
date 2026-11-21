@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Échec du téléchargement des sources : %s</string>
     <string name="sources_download_fail_named">\'%s\' n\'a pas pu être mis à jour. Vérifiez votre connexion internet et réessayez</string>
     <string name="sources_download_endpoint_not_found">\'%s\' : métadonnées de patchs introuvables</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Les sources sur votre réseau local ne peuvent pas être mises à jour sans l\'autorisation \'Appareils à proximité\'</string>
     <string name="sources_signing_key_changed_named">\'%s\' n\'a pas été mis à jour car sa dernière version n\'est pas signée avec la clé utilisée précédemment</string>
     <string name="sources_signing_key_changed_local">Le fichier n\'est pas signé avec la clé utilisée précédemment par cette source. Pour lui faire confiance, supprimez la source puis ajoutez à nouveau le fichier</string>
     <string name="sources_signing_key_trust_title">Faire confiance à la nouvelle clé ?</string>
@@ -346,8 +348,6 @@ Choisissez d'où provient son APK"</string>
     <string name="home_external_apk_expert_mode_required">Cette fonctionnalité est uniquement disponible en mode Expert</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Rechercher des patchs</string>
-    <string name="expert_mode_disable_all">Tout désactiver</string>
-    <string name="expert_mode_enable_all">Tout activer</string>
     <string name="expert_mode_enable_all_universal_pending">Appuyez à nouveau pour les patchs universels</string>
     <string name="expert_mode_universal_all_warning_title">Activer tous les patchs universels ?</string>
     <string name="expert_mode_universal_all_warning_message">Les patchs universels ne sont pas testés ensemble. Les activer tous en même temps peut entraîner des conflits, un échec du patching ou des plantages</string>
@@ -366,7 +366,7 @@ Choisissez d'où provient son APK"</string>
     <string name="expert_mode_options_customized">Personnalisées</string>
     <string name="expert_mode_patch_required_by_installer">Nécessaire pour la cible d\'installation sélectionnée</string>
     <string name="expert_mode_patch_unavailable_for_installer">Indisponible pour la cible d\'installation sélectionnée</string>
-    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sélectionnées</string>
+    <string name="expert_mode_multiple_sources_warning_title">Plusieurs sources de patchs sont sélectionnées</string>
     <string name="expert_mode_multiple_sources_warning_conflict">Les patchs provenant de différentes sources ne sont pas conçus pour fonctionner ensemble et peuvent entrer en conflit ou rendre l\'application inutilisable</string>
     <!-- Home Screen - Home Sub-Dialogs -->
     <string name="home_invalid_signature_title">APK non vérifié</string>
@@ -568,9 +568,12 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="app_links_unverified_banner_description">Les liens web pris en charge s\'ouvrent actuellement dans votre navigateur au lieu de cette application</string>
     <string name="app_links_enable_auto">Activer automatiquement</string>
     <string name="app_links_enable_auto_in_progress">Activation des liens…</string>
+    <string name="app_links_disable_all_in_progress">Désactivation des liens…</string>
     <string name="app_links_open_settings">Ouvrir les paramètres des liens</string>
     <string name="app_links_repair_success">Liens d\'application activés avec succès</string>
     <string name="app_links_repair_failed">Échec de l\'activation automatique des liens d\'application</string>
+    <string name="app_links_disable_success">Liens de l\'application désactivés</string>
+    <string name="app_links_disable_failed">Échec de la désactivation des liens de l\'application</string>
     <string name="app_links_change_failed">Échec du changement des liens de l\'application</string>
     <string name="app_links_all_verified">Tous les liens pris en charge sont configurés pour s\'ouvrir dans cette application</string>
     <string name="app_links_fix">Corriger les liens</string>
@@ -629,8 +632,6 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="patcher_field_value_stripped">supprimées</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">conservées</string>
-    <string name="patcher_tab_logs">Journaux du patcheur</string>
-    <string name="patcher_tab_game">Jeux</string>
     <string name="patcher_logs_waiting">En attente de la sortie du journal…</string>
     <string name="patcher_logs_lost">La sortie du journal n\'est pas conservée entre les redémarrages de l\'application</string>
     <string name="patcher_long_step_warning">Cette étape peut prendre un certain temps. Veuillez patienter…</string>
@@ -660,7 +661,6 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patcher_install_error_subtitle">Essayez de désinstaller puis de réinstaller</string>
     <string name="patcher_ready_to_mount_subtitle">Appuyez sur le bouton ci-dessous pour monter</string>
     <string name="patcher_patches_excluded_for_installer">Indisponible pour cette méthode d\'installation et exclu : %s</string>
-    <string name="patcher_back_to_game_hint">Appuyez sur %1$s pour revenir à votre jeu</string>
     <string name="patcher_storage_permission_dialog_title">Impossible d\'accéder au chemin de stockage</string>
     <string name="patcher_incompatible_patcher_title">Mise à jour nécessaire</string>
     <string name="patcher_incompatible_patcher_description">La source &lt;b&gt;%1$s&lt;/b&gt; nécessite le patcheur &lt;b&gt;%2$s&lt;/b&gt; ou une version plus récente. Mettez à jour Morphe pour pouvoir l\'utiliser</string>
@@ -765,7 +765,9 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="package_name">Nom de paquet</string>
     <string name="failed_to_mount">Échec du montage : %s</string>
     <string name="failed_to_unmount">Échec du démontage : %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-jeux</string>
+    <string name="mini_games_description">Des jeux rapides pour passer quelques minutes</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Meilleur %s</string>
     <string name="mini_game_new_record">Nouveau record !</string>
@@ -774,7 +776,14 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="mini_game_paused">En pause</string>
     <string name="mini_game_resume">Continuer</string>
     <string name="mini_game_restart">Recommencer</string>
-    <string name="mini_game_change">Choisir un autre jeu</string>
+    <string name="mini_game_pause">Pause</string>
+    <string name="mini_game_score_label">Score</string>
+    <string name="mini_game_best_label">Meilleur</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Niveau</string>
+    <string name="mini_game_lines">Lignes</string>
+    <string name="mini_game_lives">Vies</string>
+    <string name="mini_game_flags">Drapeaux</string>
     <string name="mini_game_2048_picker_subtitle">Glissez les tuiles pour les fusionner</string>
     <string name="mini_game_flappy_picker_subtitle">Touchez pour voler entre les tuyaux</string>
     <string name="mini_game_flappy_tap_to_start">Touchez pour voler</string>
@@ -1072,6 +1081,7 @@ Les dimensions des images doivent respecter les valeurs suivantes :
     <string name="installer_mount_warning_install">Le mode de patch est défini sur le montage root. Cette application enregistrée n\'a pas été installée à l\'aide du montage</string>
     <string name="mount_version_mismatch_message">La version de l\'application système (%2$s) ne correspond pas à la version de l\'application patchée (%1$s). Montez la version système correspondante, puis réessayez</string>
     <string name="mount_stock_restore_failed_message">Android a rejeté l\'APK d\'origine enregistré. Installez la version d\'origine correspondante, puis essayez de monter à nouveau</string>
+    <string name="mount_stock_mismatch_message">L\'application installée n\'est pas la version d\'origine. Choisissez l\'APK d\'origine ou réinstallez la version d\'origine, puis réessayez le \'Montage\' à nouveau</string>
     <string name="installer_status_shizuku_unsupported">La version de Shizuku installée n\'est pas prise en charge</string>
     <string name="installer_action_open_shizuku">Ouvrir Shizuku</string>
     <string name="installer_hint_generic">L\'installation a échoué. Réessayez ou choisissez un installateur différent</string>
@@ -1343,13 +1353,29 @@ Détails : %2$s"</string>
     <string name="file_picker_new_folder_failed">Impossible de créer le dossier</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">À propos</string>
-    <string name="settings_system_manager_description">Un projet open source expérimental pour le patching moderne et simplifié des applications Android populaires, guidé par les retours et les contributions de la communauté</string>
-    <string name="credits">Crédits</string>
-    <string name="credits_description">Les personnes derrière Morphe</string>
     <string name="settings_about_section_project">Projet</string>
     <string name="settings_about_section_help">Aide</string>
-    <string name="credits_current_development">Développement en cours</string>
     <string name="credits_prior_development">Développements antérieurs</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Gestionnaire</string>
+    <string name="about_update_available">Mise à jour disponible : %s</string>
+    <string name="about_up_to_date">À jour</string>
+    <string name="about_links">Liens officiels</string>
+    <string name="about_link_donate">Faire un don</string>
+    <string name="about_link_website">Site Web</string>
+    <string name="about_link_translations">Traductions</string>
+    <string name="contributors">Contributeurs</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Depuis toujours</string>
+    <string name="contributors_6_months">6 mois</string>
+    <string name="contributors_3_months">3 mois</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Donateurs</string>
+    <string name="supporters_description">Contributeurs sur Open Collective</string>
+    <string name="supporters_become">Devenir un donateur</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Et %s autres</string>
+    <string name="people_unavailable">Impossible de charger la liste</string>
     <string name="opensource_licenses">Licences open-source</string>
     <string name="opensource_licenses_description">Les bibliothèques sur lesquelles Morphe est basé</string>
     <string name="opensource_licenses_search">Rechercher des bibliothèques et des licences</string>
@@ -1419,6 +1445,8 @@ Détails : %2$s"</string>
     <string name="include">Inclure</string>
     <string name="disable">Désactiver</string>
     <string name="enable">Activer</string>
+    <string name="enable_all">Tout activer</string>
+    <string name="disable_all">Tout désactiver</string>
     <string name="trust">Faire confiance</string>
     <string name="loading">Chargement…</string>
     <string name="creating">Création…</string>

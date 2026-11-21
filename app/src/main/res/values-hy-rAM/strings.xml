@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Չհաջողվեց ներբեռնել աղբյուրները՝ %s</string>
     <string name="sources_download_fail_named">«%s»-ը հնարավոր չեղավ թարմացնել: Ստուգեք ինտերնետ կապը և փորձեք նորից</string>
     <string name="sources_download_endpoint_not_found">\'%s\'. թարմացման մետատվյալները չեն գտնվել</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Ձեր տեղային ցանցի աղբյուրները չեն կարող թարմացվել առանց «Մոտակա սարքեր» թույլտվության</string>
     <string name="sources_signing_key_changed_named">\'%s\'-ը չի թարմացվել, քանի որ դրա վերջին թողարկումը ստորագրված չէ նախկինում օգտագործված բանալիով</string>
     <string name="sources_signing_key_changed_local">Ֆայլը ստորագրված չէ այն բանալիով, որն այս աղբյուրն օգտագործում էր նախկինում: Վստահելու համար ջնջեք աղբյուրը և կրկին ավելացրեք ֆայլը</string>
     <string name="sources_signing_key_trust_title">Վստահե՞լ նոր բանալին։</string>
@@ -346,8 +348,6 @@
     <string name="home_external_apk_expert_mode_required">Այս հնարավորությունը հասանելի է միայն Փորձագետի ռեժիմում</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Փնտրել փաթեթներ</string>
-    <string name="expert_mode_disable_all">Անջատել բոլորը</string>
-    <string name="expert_mode_enable_all">Միացնել բոլորը</string>
     <string name="expert_mode_enable_all_universal_pending">Հպեք նորից՝ համապարփակ փոփոխությունների համար</string>
     <string name="expert_mode_universal_all_warning_title">Ակտիվացնել բոլոր համընդհանուր պատչերը՞</string>
     <string name="expert_mode_universal_all_warning_message">Համընդհանուր պատչերը միասին չեն թեստավորվել: Բոլորը միաժամանակ ակտիվացնելը կարող է առաջացնել կոնֆլիկտներ, պատչավորման ձախողում կամ հավելվածի անկումներ</string>
@@ -567,9 +567,12 @@
     <string name="app_links_unverified_banner_description">Աջակցվող վեբ հղումներն այժմ բացվում են ձեր բրաուզերում, այլ ոչ թե այս հավելվածում</string>
     <string name="app_links_enable_auto">Միացնել ավտոմատ կերպով</string>
     <string name="app_links_enable_auto_in_progress">Հղումների միացումն ընթացքի մեջ է...</string>
+    <string name="app_links_disable_all_in_progress">Հղումների անջատում...</string>
     <string name="app_links_open_settings">Բացել հղումների կարգավորումները</string>
     <string name="app_links_repair_success">Հավելվածի հղումները հաջողությամբ միացվեցին</string>
     <string name="app_links_repair_failed">Հավելվածի հղումները ավտոմատ կերպով միացնելը ձախողվեց</string>
+    <string name="app_links_disable_success">Հավելվածի հղումները անջատված են</string>
+    <string name="app_links_disable_failed">Հավելվածի հղումների անջատումը ձախողվեց</string>
     <string name="app_links_change_failed">Չհաջողվեց փոխել հավելվածի հղումները</string>
     <string name="app_links_all_verified">Բոլոր աջակցվող հղումները կարգավորված են բացվել այս հավելվածում</string>
     <string name="app_links_fix">Ուղղել հղումները</string>
@@ -628,8 +631,6 @@
     <string name="patcher_field_value_stripped">հեռացված</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">պահպանված</string>
-    <string name="patcher_tab_logs">Պատչերի մատյաններ</string>
-    <string name="patcher_tab_game">Խաղեր</string>
     <string name="patcher_logs_waiting">Սպասում ենք մատուցվող մատյաններին…</string>
     <string name="patcher_logs_lost">Մատյանների տվյալները չեն պահպանվում հավելվածի վերագործարկումից հետո</string>
     <string name="patcher_long_step_warning">Այս քայլը կարող է որոշ ժամանակ խլել: Խնդրում ենք սպասել…</string>
@@ -659,7 +660,6 @@
     <string name="patcher_install_error_subtitle">Փորձեք հեռացնել և նորից տեղադրել</string>
     <string name="patcher_ready_to_mount_subtitle">Սեղմեք ստորև գտնվող կոճակը՝ տեղադրելու համար</string>
     <string name="patcher_patches_excluded_for_installer">Հասանելի չէ տեղակայման այս մեթոդի համար և բացառված է՝ %s</string>
-    <string name="patcher_back_to_game_hint">Հպեք %1$s-ին՝ ձեր խաղին վերադառնալու համար</string>
     <string name="patcher_storage_permission_dialog_title">Հնարավոր չէ մուտք գործել պահեստի ուղուն</string>
     <string name="patcher_incompatible_patcher_title">Թարմացումը պարտադիր է</string>
     <string name="patcher_incompatible_patcher_description">Աղբյուրը &lt;b&gt;%1$s&lt;/b&gt;-ը պահանջում է patcher &lt;b&gt;%2$s&lt;/b&gt; կամ ավելի նոր տարբերակ: Թարմացրեք Morphe-ը՝ այն օգտագործելու համար</string>
@@ -764,7 +764,9 @@
     <string name="package_name">Փաթեթի անվանում</string>
     <string name="failed_to_mount">Չհաջողվեց մոնտաժել. %s</string>
     <string name="failed_to_unmount">Չհաջողվեց ապամոնտաժել. %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Մինի-խաղեր</string>
+    <string name="mini_games_description">Արագ խաղեր՝ ազատ րոպեները լրացնելու համար</string>
     <string name="mini_game_score">Միավոր %s</string>
     <string name="mini_game_best">Լավագույն %s</string>
     <string name="mini_game_new_record">Նոր ռեկորդ։</string>
@@ -773,7 +775,14 @@
     <string name="mini_game_paused">Դադարեցված է</string>
     <string name="mini_game_resume">Շարունակել</string>
     <string name="mini_game_restart">Սկսել նորից</string>
-    <string name="mini_game_change">Ընտրել մեկ այլ խաղ</string>
+    <string name="mini_game_pause">Դադար</string>
+    <string name="mini_game_score_label">Միավորներ</string>
+    <string name="mini_game_best_label">Լավագույնը</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Մակարդակ</string>
+    <string name="mini_game_lines">Գծեր</string>
+    <string name="mini_game_lives">Կյանքեր</string>
+    <string name="mini_game_flags">Դրոշակներ</string>
     <string name="mini_game_2048_picker_subtitle">Սահեցրեք սալիկները՝ միացնելու համար</string>
     <string name="mini_game_flappy_picker_subtitle">Հպեք՝ խողովակների միջով թռչելու համար</string>
     <string name="mini_game_flappy_tap_to_start">Հպեք՝ թռչելու համար</string>
@@ -1069,6 +1078,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Պատչի ռեժիմը սահմանված է root mount-ի վրա: Այս պահպանված հավելվածը չի տեղադրվել mount-ի միջոցով</string>
     <string name="mount_version_mismatch_message">Stock հավելվածի տարբերակը (%2$s) չի համընկնում փոփոխված հավելվածի տարբերակի հետ (%1$s): Mount արեք համապատասխան stock տարբերակը, ապա փորձեք նորից</string>
     <string name="mount_stock_restore_failed_message">Android-ը մերժեց պահպանված բնօրինակ APK-ն: Տեղադրեք համապատասխան ստանդարտ տարբերակը, ապա կրկին փորձեք Mount-ը</string>
+    <string name="mount_stock_mismatch_message">Տեղադրված հավելվածը բնօրինակը չէ: Ընտրեք բնօրինակ APK-ն կամ վերատեղադրեք գործարանային տարբերակը, այնուհետև փորձեք նորից Mount անել</string>
     <string name="installer_status_shizuku_unsupported">Տեղադրված Shizuku-ի տարբերակը չի աջակցվի</string>
     <string name="installer_action_open_shizuku">Բացել Shizuku-ն</string>
     <string name="installer_hint_generic">Տեղադրումը ձախողվեց: Փորձեք նորից կամ անցեք այլ տեղադրողի</string>
@@ -1339,13 +1349,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Չհաջողվեց ստեղծել թղթապանակը</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Մասին</string>
-    <string name="settings_system_manager_description">Բաց կոդով նախագիծ հայտնի Android հավելվածների ժամանակակից, օպտիմալացված փոփոխման համար, որը զարգացվում է համայնքի արձագանքների և ներդրումների հիման վրա</string>
-    <string name="credits">Հեղինակներ</string>
-    <string name="credits_description">Մարդիկ, ովքեր կանգնած են Morphe-ի հետևում</string>
     <string name="settings_about_section_project">Նախագիծ</string>
     <string name="settings_about_section_help">Օգնություն</string>
-    <string name="credits_current_development">Ընթացիկ մշակում</string>
     <string name="credits_prior_development">Նախկին մշակում</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Կառավարիչ</string>
+    <string name="about_update_available">Հասանելի է թարմացում՝ %s</string>
+    <string name="about_up_to_date">Թարմացված է</string>
+    <string name="about_links">Պաշտոնական հղումներ</string>
+    <string name="about_link_donate">Նվիրաբերություն</string>
+    <string name="about_link_website">Վեբկայք</string>
+    <string name="about_link_translations">Թարգմանություններ</string>
+    <string name="contributors">Համագործակիցներ</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Ամբողջ ժամանակահատվածում</string>
+    <string name="contributors_6_months">6 ամիս</string>
+    <string name="contributors_3_months">3 ամիս</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Աջակիցներ</string>
+    <string name="supporters_description">Աջակիցներ Open Collective-ում</string>
+    <string name="supporters_become">Դարձիր աջակից</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">Եվ ևս %s</string>
+    <string name="people_unavailable">Չհաջողվեց բեռնել ցուցակը</string>
     <string name="opensource_licenses">Բաց կոդի լիցենզիաներ</string>
     <string name="opensource_licenses_description">Գրադարանները, որոնց վրա կառուցված է Morphe-ը</string>
     <string name="opensource_licenses_search">Որոնել գրադարանները և լիցենզիաները</string>
@@ -1415,6 +1441,8 @@ morphe_header_custom_dark.png
     <string name="include">Ներառել</string>
     <string name="disable">Անջատել</string>
     <string name="enable">Միացնել</string>
+    <string name="enable_all">Միացնել բոլորը</string>
+    <string name="disable_all">Անջատել բոլորը</string>
     <string name="trust">Վստահել</string>
     <string name="loading">Բեռնվում է…</string>
     <string name="creating">Ստեղծվում է…</string>

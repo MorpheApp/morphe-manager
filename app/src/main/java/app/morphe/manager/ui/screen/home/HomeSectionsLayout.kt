@@ -322,7 +322,7 @@ internal fun MainAppsSection(
     }
 
     // Placeholder gradients for cold-start shimmer
-    val placeholderGradients = remember { KnownApps.DEFAULT_SHIMMER_GRADIENTS }
+    val placeholderGradients = remember { KnownApps.defaultShimmerGradients }
 
     // Resolved outside the LazyColumn DSL scope since @Composable calls aren't allowed there
     val messages = koinInject<UserMessages>()

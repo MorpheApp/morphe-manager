@@ -245,6 +245,8 @@
     <string name="sources_download_fail">Preuzimanje izvora nije uspjelo: %s</string>
     <string name="sources_download_fail_named">\'%s\' nije mogao biti ažuriran. Provjerite svoju internet vezu i pokušajte ponovo</string>
     <string name="sources_download_endpoint_not_found">\'%s\': metapodaci zakrpe nisu pronađeni</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Izvori na vašoj lokalnoj mreži ne mogu se ažurirati bez dozvole za uređaje u blizini</string>
     <string name="sources_signing_key_changed_named">\'%s\' nije ažuriran jer najnovije izdanje nije potpisano ključem koji je prethodno koristio</string>
     <string name="sources_signing_key_changed_local">Datoteka nije potpisana ključem koji je ovaj izvor prethodno koristio. Da biste joj vjerovali, izbrišite izvor i ponovo dodajte datoteku</string>
     <string name="sources_signing_key_trust_title">Vjerujete li novom ključu?</string>
@@ -346,8 +348,6 @@ Izaberite odakle preuzeti njen APK"</string>
     <string name="home_external_apk_expert_mode_required">Ova funkcija je dostupna samo u ekspertskom načinu rada</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Pretraži zakrpe</string>
-    <string name="expert_mode_disable_all">Onemogući sve</string>
-    <string name="expert_mode_enable_all">Omogući sve</string>
     <string name="expert_mode_enable_all_universal_pending">Dodirnite ponovo za univerzalne zakrpe</string>
     <string name="expert_mode_universal_all_warning_title">Omogući sve univerzalne zakrpe?</string>
     <string name="expert_mode_universal_all_warning_message">Univerzalne zakrpe nisu testirane zajedno. Omogućavanje svih odjednom može uzrokovati konflikte, neuspješno zakrpljivanje ili rušenje aplikacije</string>
@@ -567,9 +567,12 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;punog 
     <string name="app_links_unverified_banner_description">Podržane web veze trenutno se otvaraju u vašem pretraživaču umjesto u ovoj aplikaciji</string>
     <string name="app_links_enable_auto">Omogući automatski</string>
     <string name="app_links_enable_auto_in_progress">Omogućavanje veza…</string>
+    <string name="app_links_disable_all_in_progress">Onemogućavanje poveznica…</string>
     <string name="app_links_open_settings">Otvori postavke poveznica</string>
     <string name="app_links_repair_success">Poveznice aplikacije su uspješno omogućene</string>
     <string name="app_links_repair_failed">Neuspjelo automatsko omogućavanje poveznica aplikacije</string>
+    <string name="app_links_disable_success">Poveznice aplikacije su onemogućene</string>
+    <string name="app_links_disable_failed">Neuspjelo onemogućavanje poveznica aplikacije</string>
     <string name="app_links_change_failed">Neuspješna promjena poveznica aplikacije</string>
     <string name="app_links_all_verified">Sve podržane poveznice su konfigurirane da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
@@ -628,8 +631,6 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;punog 
     <string name="patcher_field_value_stripped">uklonjeno</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">zadržano</string>
-    <string name="patcher_tab_logs">Logovi zakrpljivača</string>
-    <string name="patcher_tab_game">Igre</string>
     <string name="patcher_logs_waiting">Čekanje izlaza dnevnika…</string>
     <string name="patcher_logs_lost">Izlaz dnevnika se ne čuva nakon ponovnog pokretanja aplikacije</string>
     <string name="patcher_long_step_warning">Ovaj korak može potrajati. Molimo pričekajte…</string>
@@ -659,7 +660,6 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patcher_install_error_subtitle">Pokušajte deinstalirati i ponovno instalirati</string>
     <string name="patcher_ready_to_mount_subtitle">Pritisnite dugme ispod za montiranje</string>
     <string name="patcher_patches_excluded_for_installer">Nije dostupno za ovaj metod instalacije i isključeno: %s</string>
-    <string name="patcher_back_to_game_hint">Dodirnite %1$s da se vratite u svoju igru</string>
     <string name="patcher_storage_permission_dialog_title">Nije moguće pristupiti putanji pohrane</string>
     <string name="patcher_incompatible_patcher_title">Ažuriranje je potrebno</string>
     <string name="patcher_incompatible_patcher_description">Izvor &lt;b&gt;%1$s&lt;/b&gt; zahtijeva patcher &lt;b&gt;%2$s&lt;/b&gt; ili noviji. Ažurirajte Morphe da biste ga koristili</string>
@@ -764,7 +764,9 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="package_name">Naziv paketa</string>
     <string name="failed_to_mount">Neuspjelo montiranje: %s</string>
     <string name="failed_to_unmount">Neuspjelo demontiranje: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Mini-igre</string>
+    <string name="mini_games_description">Brze igre za popunjavanje slobodnog vremena</string>
     <string name="mini_game_score">Rezultat %s</string>
     <string name="mini_game_best">Najbolji %s</string>
     <string name="mini_game_new_record">Novi rekord!</string>
@@ -773,7 +775,14 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="mini_game_paused">Pauzirano</string>
     <string name="mini_game_resume">Nastavi</string>
     <string name="mini_game_restart">Kreni ispočetka</string>
-    <string name="mini_game_change">Odaberi drugu igru</string>
+    <string name="mini_game_pause">Pauza</string>
+    <string name="mini_game_score_label">Rezultat</string>
+    <string name="mini_game_best_label">Najbolji</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Nivo</string>
+    <string name="mini_game_lines">Linije</string>
+    <string name="mini_game_lives">Životi</string>
+    <string name="mini_game_flags">Zastavice</string>
     <string name="mini_game_2048_picker_subtitle">Pomjerajte pločice da biste ih spojili</string>
     <string name="mini_game_flappy_picker_subtitle">Dodirnite da letite kroz cijevi</string>
     <string name="mini_game_flappy_tap_to_start">Dodirnite za let</string>
@@ -1069,6 +1078,7 @@ Dimenzije slika moraju biti sljedeće:
     <string name="installer_mount_warning_install">Režim patchovanja je postavljen na root mount. Ova spremljena aplikacija nije instalirana pomoću mount-a</string>
     <string name="mount_version_mismatch_message">Verzija originalne aplikacije (%2$s) se ne podudara sa verzijom zakrpljene aplikacije (%1$s). Montirajte odgovarajuću originalnu verziju, a zatim pokušajte ponovo</string>
     <string name="mount_stock_restore_failed_message">Android je odbio sačuvani originalni APK. Instalirajte odgovarajuću originalnu verziju, zatim ponovo pokušajte montirati</string>
+    <string name="mount_stock_mismatch_message">Instalirana aplikacija nije originalna. Odaberite originalni APK ili ponovno instalirajte fabričku verziju, a zatim pokušajte ponovo Mount</string>
     <string name="installer_status_shizuku_unsupported">Instalirana verzija Shizuku-a nije podržana</string>
     <string name="installer_action_open_shizuku">Otvori Shizuku</string>
     <string name="installer_hint_generic">Instalacija nije uspjela. Pokušajte ponovo ili prebacite na drugi instalater</string>
@@ -1339,13 +1349,29 @@ Detalji: %2$s"</string>
     <string name="file_picker_new_folder_failed">Mapa nije mogla biti kreirana</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">O Morphe</string>
-    <string name="settings_system_manager_description">Projekt otvorenog koda za moderno, optimizovano zakrpljivanje popularnih Android aplikacija, vođen povratnim informacijama i doprinosima zajednice</string>
-    <string name="credits">Zahvalnice</string>
-    <string name="credits_description">Ljudi koji stoje iza Morphe</string>
     <string name="settings_about_section_project">Projekt</string>
     <string name="settings_about_section_help">Pomoć</string>
-    <string name="credits_current_development">Trenutni razvoj</string>
     <string name="credits_prior_development">Prethodni razvoj</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Menadžer</string>
+    <string name="about_update_available">Dostupno ažuriranje: %s</string>
+    <string name="about_up_to_date">Ažurirano</string>
+    <string name="about_links">Službeni linkovi</string>
+    <string name="about_link_donate">Doniraj</string>
+    <string name="about_link_website">Web stranica</string>
+    <string name="about_link_translations">Prevozi</string>
+    <string name="contributors">Pridonositelji</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Svo vrijeme</string>
+    <string name="contributors_6_months">6 mjeseci</string>
+    <string name="contributors_3_months">3 mjeseca</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Podršivači</string>
+    <string name="supporters_description">Podršivači na Open Collective</string>
+    <string name="supporters_become">Postani podržavač</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">I još %s</string>
+    <string name="people_unavailable">Lista nije mogla biti učitana</string>
     <string name="opensource_licenses">Licence otvorenog koda</string>
     <string name="opensource_licenses_description">Biblioteke na kojima je Morphe izgrađen</string>
     <string name="opensource_licenses_search">Pretražite biblioteke i licence</string>
@@ -1415,6 +1441,8 @@ Detalji: %2$s"</string>
     <string name="include">Uključi</string>
     <string name="disable">Onemogući</string>
     <string name="enable">Omogući</string>
+    <string name="enable_all">Omogući sve</string>
+    <string name="disable_all">Onemogući sve</string>
     <string name="trust">Vjeruj</string>
     <string name="loading">Učitavanje…</string>
     <string name="creating">Kreiranje…</string>

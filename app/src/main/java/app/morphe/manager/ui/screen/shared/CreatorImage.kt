@@ -9,6 +9,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculatePan
@@ -27,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -41,6 +43,7 @@ import androidx.compose.ui.unit.toSize
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.scale
 import androidx.documentfile.provider.DocumentFile
+import app.morphe.manager.util.BIN_MIMETYPE
 import app.morphe.manager.util.getOrCreateFile
 import app.morphe.manager.util.rememberImagePicker
 import kotlinx.coroutines.Dispatchers
@@ -156,6 +159,31 @@ fun Modifier.imageTransformGestures(
     }
 }
 
+/**
+ * What an image editor answers to: [imageTransformGestures] once it holds an image, and before
+ * that a tap within [shape] that picks one, announced as [selectLabel].
+ */
+@Composable
+fun Modifier.imageEditorInput(
+    hasImage: Boolean,
+    transform: ImageTransform,
+    scaleRange: ClosedFloatingPointRange<Float>,
+    shape: Shape,
+    selectLabel: String,
+    onTransformChange: (ImageTransform) -> Unit,
+    onGestureChange: (Boolean) -> Unit,
+    onSelectImage: () -> Unit
+): Modifier = if (hasImage) {
+    imageTransformGestures(transform, scaleRange, onTransformChange, onGestureChange)
+} else {
+    clickable(
+        interactionSource = null,
+        indication = shapedIndication(shape),
+        onClickLabel = selectLabel,
+        onClick = onSelectImage
+    )
+}
+
 /** Stroke of the dashed guides drawn over a creator's editor. */
 fun Density.dashedGuideStroke() = Stroke(
     width = 1.5.dp.toPx(),
@@ -195,7 +223,7 @@ fun DocumentFile.requireDir(name: String): DocumentFile =
  */
 fun DocumentFile.brandingFolder(): DocumentFile? {
     val folder = if (name == BRANDING_FOLDER_NAME) this else getOrCreateDir(BRANDING_FOLDER_NAME)
-    folder?.getOrCreateFile("application/octet-stream", ".nomedia")
+    folder?.getOrCreateFile(BIN_MIMETYPE, ".nomedia")
     return folder
 }
 

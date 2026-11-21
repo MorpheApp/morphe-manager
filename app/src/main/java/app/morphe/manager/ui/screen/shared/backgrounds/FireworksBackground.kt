@@ -15,7 +15,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.PI
 import kotlin.math.cos
@@ -60,12 +59,10 @@ fun FireworksBackground(
         listOf(Color(0xFFE0A000), Color(0xFFD32F2F), Color(0xFF00897B), Color(0xFF7B1FA2), Color(0xFF1E63D6), Color(0xFF455A64))
     }
     val rocketColor = if (isDarkTheme) Color(0xFFFFF3D6) else Color(0xFF6D4C41)
-    val context = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.2f,
-        context = context
+        sensitivity = 0.2f
     )
 
     val finale = rememberCompletionPulse(patchingCompleted, riseMillis = 300, fallMillis = 2500)

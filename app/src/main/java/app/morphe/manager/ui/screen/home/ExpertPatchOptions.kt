@@ -232,6 +232,14 @@ internal fun DialogHostScope.PatchOptionsDialog(
     fun valueOf(option: Option<*>): Any? =
         if (values == null || option.key !in values) option.default else values[option.key]
     val anyChanged = options.any { !optionValueEquals(valueOf(it), it.default) }
+    val search = rememberSearchFieldState(searchable = options.size >= 2)
+    val matchesOption = rememberTranslatedMatcher(
+        query = search.query,
+        items = options,
+        translatable = { it.description.takeIf(String::isNotBlank) },
+        matchesOriginal = Option<*>::matchesQuery
+    )
+    val shownOptions = remember(options, matchesOption) { options.filter(matchesOption) }
 
     val showColorPicker = remember { mutableStateOf<Pair<String, String>?>(null) }
     ListDialog(
@@ -247,6 +255,7 @@ internal fun DialogHostScope.PatchOptionsDialog(
                     appName,
                     pluralStringResource(R.plurals.option_count, options.size, options.size.toString())
                 ).joinToString(" · "),
+                search = search,
                 alwaysShowBand = true
             ) {
                 TitleAction(
@@ -267,6 +276,8 @@ internal fun DialogHostScope.PatchOptionsDialog(
         },
         hideFooterWhileTyping = true
     ) {
+        SearchFieldBackHandler(search)
+
         DialogScrollColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -274,8 +285,8 @@ internal fun DialogHostScope.PatchOptionsDialog(
             // Spaced as the patch list the dialog opens from
             verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
         ) {
-            // What the patch does leads into its options
-            if (!patch.description.isNullOrBlank()) {
+            // What the patch does leads into its options, and a search looks for an option instead
+            if (!search.isFiltering && !patch.description.isNullOrBlank()) {
                 Text(
                     text = rememberTranslated(patch.description),
                     style = MaterialTheme.typography.bodyMedium,
@@ -306,7 +317,13 @@ internal fun DialogHostScope.PatchOptionsDialog(
             }
             // Switches stand together as one segmented group, as the settings keep theirs, while
             // every other option keeps a card of its own
-            options.runsBy { resolveOptionKind(it, valueOf(it)) == OptionKind.BooleanToggle }.forEach { (toggles, run) ->
+            if (shownOptions.isEmpty()) {
+                EmptyState(
+                    message = stringResource(R.string.search_no_results),
+                    icon = MaterialSymbols.Rounded.Search_off
+                )
+            }
+            shownOptions.runsBy { resolveOptionKind(it, valueOf(it)) == OptionKind.BooleanToggle }.forEach { (toggles, run) ->
                 if (toggles && run.size > 1) {
                     SettingsGroup { run.forEach { editor(it) } }
                 } else {

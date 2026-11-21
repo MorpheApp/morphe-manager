@@ -29,7 +29,7 @@ import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.ui.viewmodel.RandomInterval
 import app.morphe.manager.util.ApkDownloadHelperContract
 import app.morphe.manager.util.AppCardColorMode
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.worker.ScheduleInterval
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -259,9 +259,6 @@ class PreferencesManager(
     val miniGameMinerHighScore  = intPreference("mini_game_miner_high_score", 0)
     val miniGamePairsHighScore  = intPreference("mini_game_pairs_high_score", 0)
 
-    /** Set once the user has found the way back to a mini-game, which retires the hint for it. */
-    val backToGameHintSeen = booleanPreference("back_to_game_hint_seen", false)
-
     /**  Hidden preference to track if prerelease was auto-enabled. */
     private val prereleaseAutoEnabled = booleanPreference("prerelease_auto_enabled", false)
 
@@ -271,7 +268,7 @@ class PreferencesManager(
             if (freshInstall) {
                 val now = System.currentTimeMillis()
                 installationTime.update(now)
-                Log.d(tag, "Installation time set to $now")
+                Log.d(LOG_TAG, "Installation time set to $now")
             }
 
             // Existing installs stored their Material You preference in `dynamic_color`;
@@ -306,7 +303,7 @@ class PreferencesManager(
 
             // Auto-enable prereleases for dev versions
             if (isDevVersion() && !prereleaseAutoEnabled.get()) {
-                Log.d(tag, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
+                Log.d(LOG_TAG, "Dev version detected (${BuildConfig.VERSION_NAME}), auto-enabling prereleases")
                 edit {
                     useManagerPrereleases.value = true
                     bundlePrereleasesEnabled += DEFAULT_SOURCE_UID.toString()

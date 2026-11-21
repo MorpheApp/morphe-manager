@@ -11,7 +11,7 @@
 package app.morphe.manager.data.redux
 
 import android.util.Log
-import app.morphe.manager.util.tag
+import app.morphe.manager.util.LOG_TAG
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
@@ -46,7 +46,7 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
 
     /** Enqueues [action] and starts the runner coroutine if it is not already running. */
     suspend fun dispatch(action: Action<S>) {
-        Log.d(tag, "Dispatching $action")
+        Log.d(LOG_TAG, "Dispatching $action")
         // Sent before taking the lock: a full queue may suspend here, and the runner needs the
         // lock to decide whether to stop, so holding it while suspended could stall both
         queueChannel.send(action)
@@ -79,7 +79,7 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
         while (true) {
             val action = withTimeoutOrNull(200L.milliseconds) { queueChannel.receive() }
             if (action == null) {
-                Log.d(tag, "Stopping action runner")
+                Log.d(LOG_TAG, "Stopping action runner")
                 lock.withLock {
                     // A new dispatch may have arrived during the 200 ms timeout window
                     isRunningActions = !queueChannel.isEmpty
@@ -88,7 +88,7 @@ class Store<S>(private val coroutineScope: CoroutineScope, initialState: S) : Ac
                 continue
             }
 
-            Log.d(tag, "Running $action")
+            Log.d(LOG_TAG, "Running $action")
             try {
                 _state.value = with(action) { this@Store.execute(_state.value) }
             } catch (c: CancellationException) {
@@ -125,6 +125,6 @@ interface ActionContext
 interface Action<S> {
     suspend fun ActionContext.execute(current: S): S
     suspend fun catch(exception: Exception) {
-        Log.e(tag, "Got exception while executing $this", exception)
+        Log.e(LOG_TAG, "Got exception while executing $this", exception)
     }
 }

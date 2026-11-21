@@ -11,7 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.platform.LocalContext
 import kotlin.math.abs
 import kotlin.math.sqrt
 import kotlin.random.Random
@@ -33,12 +32,10 @@ fun ParticlesBackground(
     val primaryColor   = MaterialTheme.colorScheme.primary
     val secondaryColor = MaterialTheme.colorScheme.secondary
     val tertiaryColor  = MaterialTheme.colorScheme.tertiary
-    val context        = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.2f,
-        context = context
+        sensitivity = 0.2f
     )
 
     // Particles are moved in place by the physics step, which bumps step once per pass so the

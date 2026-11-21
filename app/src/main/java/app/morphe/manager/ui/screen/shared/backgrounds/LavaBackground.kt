@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.platform.LocalContext
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.PI
 import kotlin.math.abs
@@ -77,12 +76,10 @@ fun LavaBackground(
         MaterialTheme.colorScheme.tertiary
     )
     val waxAlpha = if (isDarkTheme()) 0.14f else 0.11f
-    val context = LocalContext.current
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
-        sensitivity = 0.3f,
-        context = context
+        sensitivity = 0.3f
     )
 
     val time = rememberAnimatedTime(speedMultiplier)

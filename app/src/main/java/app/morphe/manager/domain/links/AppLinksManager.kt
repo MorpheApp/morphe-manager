@@ -33,6 +33,9 @@ data class AppLinksStatus(
     val domains: List<String>,
     val unhandledDomains: List<String>
 ) {
+    /** The declared domains that open in the app. */
+    val handledDomains: List<String> get() = domains - unhandledDomains.toSet()
+
     val hasSupportedLinks: Boolean get() = domains.isNotEmpty()
     val isFullyConfigured: Boolean get() = hasSupportedLinks && unhandledDomains.isEmpty()
     val needsAttention: Boolean get() = hasSupportedLinks && unhandledDomains.isNotEmpty()
@@ -96,12 +99,9 @@ class AppLinksManager(
         )
     }
 
-    /**
-     * Selects every declared domain of [packageName] and turns its link handling on. Returns true
-     * only when both took effect.
-     */
-    suspend fun selectAllDomains(packageName: String): Boolean =
-        setDomainsSelected(packageName, listOf(ALL_DOMAINS), selected = true)
+    /** Selects or deselects every declared domain of [packageName], as [setDomainsSelected] does. */
+    suspend fun setAllDomainsSelected(packageName: String, selected: Boolean): Boolean =
+        setDomainsSelected(packageName, listOf(ALL_DOMAINS), selected)
 
     /**
      * Selects or deselects [domains] of [packageName]. Selecting also turns its link handling on,

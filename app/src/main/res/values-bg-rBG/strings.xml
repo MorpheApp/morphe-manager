@@ -246,6 +246,8 @@
     <string name="sources_download_fail">Неуспешно изтегляне на източниците: %s</string>
     <string name="sources_download_fail_named">\'%s\' не може да бъде актуализиран. Проверете връзката си с интернет и опитайте отново</string>
     <string name="sources_download_endpoint_not_found">\'%s\': метаданни за пакета не са намерени</string>
+    <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
+    <string name="sources_local_network_denied">Източниците във вашата локална мрежа не могат да бъдат актуализирани без разрешение за „Съседни устройства“</string>
     <string name="sources_signing_key_changed_named">\'%s\' не беше актуализиран, защото последната му версия не е подписана с ключа, който е използван преди</string>
     <string name="sources_signing_key_changed_local">Файлът не е подписан с ключа, който този източник е използвал преди. За да му се доверите, изтрийте източника и добавете файла отново</string>
     <string name="sources_signing_key_trust_title">Да се доверите ли на новия ключ?</string>
@@ -349,8 +351,6 @@
     <string name="home_external_apk_expert_mode_required">Тази функция е достъпна само в експертен режим</string>
     <!-- Home Screen - Dialog 4: Expert Mode Dialog -->
     <string name="expert_mode_search">Търсене на пачове</string>
-    <string name="expert_mode_disable_all">Изключи всички</string>
-    <string name="expert_mode_enable_all">Включи всички</string>
     <string name="expert_mode_enable_all_universal_pending">Докоснете отново за универсални кръпки</string>
     <string name="expert_mode_universal_all_warning_title">Активиране на всички универсални пачове ли?</string>
     <string name="expert_mode_universal_all_warning_message">Универсалните пачове не са тествани заедно. Активирането на всички наведнъж може да причини конфликти, неуспешно пачване или сривове.</string>
@@ -570,9 +570,12 @@
     <string name="app_links_unverified_banner_description">Поддържаните уеб връзки в момента се отварят в браузъра вместо в това приложение</string>
     <string name="app_links_enable_auto">Автоматично активиране</string>
     <string name="app_links_enable_auto_in_progress">Активиране на връзките…</string>
+    <string name="app_links_disable_all_in_progress">Деактивиране на връзките…</string>
     <string name="app_links_open_settings">Отваряне на настройките за връзки</string>
     <string name="app_links_repair_success">Връзките към приложението са активирани успешно</string>
     <string name="app_links_repair_failed">Неуспешно автоматично активиране на връзките на приложението</string>
+    <string name="app_links_disable_success">Връзките на приложението са деактивирани</string>
+    <string name="app_links_disable_failed">Неуспешно деактивиране на връзките на приложението</string>
     <string name="app_links_change_failed">Неуспешна промяна на връзките на приложението</string>
     <string name="app_links_all_verified">Всички поддържани връзки са конфигурирани да се отварят в това приложение</string>
     <string name="app_links_fix">Поправи връзките</string>
@@ -631,8 +634,6 @@
     <string name="patcher_field_value_stripped">премахнати</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
     <string name="patcher_field_value_kept">запазени</string>
-    <string name="patcher_tab_logs">Дневници на пачера</string>
-    <string name="patcher_tab_game">Игри</string>
     <string name="patcher_logs_waiting">Изчаквам изход от логовете…</string>
     <string name="patcher_logs_lost">Изходите от логовете не се запазват при рестартиране на приложението</string>
     <string name="patcher_long_step_warning">Тази стъпка може да отнеме време. Моля, изчакайте…</string>
@@ -662,7 +663,6 @@
     <string name="patcher_install_error_subtitle">Опитайте да деинсталирате и инсталирате отново</string>
     <string name="patcher_ready_to_mount_subtitle">Натиснете бутона по-долу за монтиране</string>
     <string name="patcher_patches_excluded_for_installer">Не е налично за този метод на инсталиране и е изключено: %s</string>
-    <string name="patcher_back_to_game_hint">Докоснете %1$s, за да се върнете към играта си</string>
     <string name="patcher_storage_permission_dialog_title">Няма достъп до пътя за съхранение</string>
     <string name="patcher_incompatible_patcher_title">Необходима е актуализация</string>
     <string name="patcher_incompatible_patcher_description">Източникът &lt;b&gt;%1$s&lt;/b&gt; изисква пачер &lt;b&gt;%2$s&lt;/b&gt; или по-нова версия. Обновете Morphe, за да го използвате</string>
@@ -767,7 +767,9 @@
     <string name="package_name">Име на пакета</string>
     <string name="failed_to_mount">Неуспешно монтиране: %s</string>
     <string name="failed_to_unmount">Неуспешно демонтиране: %s</string>
-    <!-- Patcher Screen - Mini-games -->
+    <!-- Mini-games -->
+    <string name="mini_games">Мини-игри</string>
+    <string name="mini_games_description">Бързи игри за запълване на свободното време</string>
     <string name="mini_game_score">Резултат %s</string>
     <string name="mini_game_best">Най-добър %s</string>
     <string name="mini_game_new_record">Нов рекорд!</string>
@@ -776,7 +778,14 @@
     <string name="mini_game_paused">Пауза</string>
     <string name="mini_game_resume">Продължи</string>
     <string name="mini_game_restart">Започни отначало</string>
-    <string name="mini_game_change">Избери друга игра</string>
+    <string name="mini_game_pause">Пауза</string>
+    <string name="mini_game_score_label">Резултат</string>
+    <string name="mini_game_best_label">Най-добър</string>
+    <!-- Counts a game keeps besides its score, shown above the field -->
+    <string name="mini_game_level">Ниво</string>
+    <string name="mini_game_lines">Редове</string>
+    <string name="mini_game_lives">Животи</string>
+    <string name="mini_game_flags">Флагове</string>
     <string name="mini_game_2048_picker_subtitle">Плъзнете плочките, за да ги обедините</string>
     <string name="mini_game_flappy_picker_subtitle">Докоснете, за да прелетите през тръбите</string>
     <string name="mini_game_flappy_tap_to_start">Докоснете, за да летите</string>
@@ -909,7 +918,7 @@
     <!-- How far Morphe keeps itself and its patch sources up to date when it opens. A pull to refresh always checks -->
     <string name="settings_auto_updates">Автоматични актуализации</string>
     <string name="settings_auto_updates_description">Какво прави Morphe относно актуализациите при отваряне. „Дръпни за опресняване“ винаги проверява</string>
-    <string name="settings_auto_updates_download">Изтегляне автоматично</string>
+    <string name="settings_auto_updates_download">Автоматично изтегляне </string>
     <string name="settings_auto_updates_download_description">Проверява за актуализации, когато Morphe се отваря, и изтегля актуализации на пачовете във всяка мрежа</string>
     <string name="settings_auto_updates_wifi_only">Изтегляне само през Wi-Fi</string>
     <string name="settings_auto_updates_wifi_only_description">При мобилни данни се проверява и показва само какво е налично</string>
@@ -1072,6 +1081,7 @@ morphe_header_custom_dark.png
     <string name="installer_mount_warning_install">Режимът на пачване е настроен на root mount. Това запазено приложение не е било инсталирано чрез mount</string>
     <string name="mount_version_mismatch_message">Версията на оригиналното приложение (%2$s) не съвпада с версията на пачнатото приложение (%1$s). Монтирайте съответстващата версия на оригиналното приложение, след което опитайте отново</string>
     <string name="mount_stock_restore_failed_message">Android отхвърли запазения оригинален APK. Инсталирайте съответстващата стокова версия, след това опитайте да монтирате отново.</string>
+    <string name="mount_stock_mismatch_message">Инсталираното приложение не е оригиналното. Изберете оригиналния APK или преинсталирайте фабричната версия, след което опитайте Mount отново</string>
     <string name="installer_status_shizuku_unsupported">Версията на инсталирания Shizuku не е поддържана.</string>
     <string name="installer_action_open_shizuku">Отваряне на Shizuku</string>
     <string name="installer_hint_generic">Инсталирането се провали. Опитайте отново или превключете на различен инсталатор.</string>
@@ -1342,13 +1352,29 @@ morphe_header_custom_dark.png
     <string name="file_picker_new_folder_failed">Папката не можа да бъде създадена</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Относно</string>
-    <string name="settings_system_manager_description">Отворен проект с изходен код за модерен, оптимизиран процес на пачване на популярни Android приложения, поддържан от обратна връзка и приноси от общността</string>
-    <string name="credits">Кредити</string>
-    <string name="credits_description">Хората зад Morphe</string>
     <string name="settings_about_section_project">Проект</string>
     <string name="settings_about_section_help">Помощ</string>
-    <string name="credits_current_development">Текущо развитие</string>
     <string name="credits_prior_development">Предишно развитие</string>
+    <!-- Names which part of Morphe the About dialog is about, under the name "Morphe". The patched apps say "Patches" in the same place -->
+    <string name="about_component">Мениджър</string>
+    <string name="about_update_available">Достигна достъпно обновление: %s</string>
+    <string name="about_up_to_date">Актуализирано</string>
+    <string name="about_links">Официални линкове</string>
+    <string name="about_link_donate">Дарение</string>
+    <string name="about_link_website">Уебсайт</string>
+    <string name="about_link_translations">Преводи</string>
+    <string name="contributors">Приносители</string>
+    <!-- Periods the contributors are listed for, picked from a menu in the header -->
+    <string name="contributors_all_time">Цяло време</string>
+    <string name="contributors_6_months">6 месеца</string>
+    <string name="contributors_3_months">3 месеца</string>
+    <!-- People who donate to Morphe -->
+    <string name="supporters">Поддръжници</string>
+    <string name="supporters_description">Спонсори в Open Collective</string>
+    <string name="supporters_become">Станете поддръжник</string>
+    <!-- Row under a list of people, leading to the rest of them. %s is how many more there are -->
+    <string name="people_more">И още %s</string>
+    <string name="people_unavailable">Списъкът не можа да бъде зареден</string>
     <string name="opensource_licenses">Лицензи с отворен код</string>
     <string name="opensource_licenses_description">Библиотеките, върху които е изградена Morphe</string>
     <string name="opensource_licenses_search">Търсене на библиотеки и лицензи</string>
@@ -1418,6 +1444,8 @@ morphe_header_custom_dark.png
     <string name="include">Включване</string>
     <string name="disable">Деактивирай</string>
     <string name="enable">Активирай</string>
+    <string name="enable_all">Активиране на всички</string>
+    <string name="disable_all">Изключи всички</string>
     <string name="trust">Доверям се</string>
     <string name="loading">Зареждане…</string>
     <string name="creating">Създаване…</string>

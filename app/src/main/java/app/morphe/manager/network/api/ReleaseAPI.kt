@@ -34,9 +34,11 @@ import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
-private const val GITHUB_DOWNLOAD_PREFIX = "https://github.com/"
+private const val GITHUB_URL_PREFIX = "https://$GITHUB_HOST/"
 
-private const val GITHUB_RAW_HOST = "raw.githubusercontent.com"
+private const val GITHUB_API_PREFIX = "https://$GITHUB_API_HOST/"
+
+private const val CHANGELOG_FILE = "CHANGELOG.md"
 
 /** Whether [url] is a file served from a repository by raw.githubusercontent.com. */
 internal fun isRawGitHubUrl(url: String): Boolean = runCatching {
@@ -75,9 +77,9 @@ internal data class ReleaseAssetRef(
  * keeps callers from turning unrelated URLs into API lookups.
  */
 internal fun parseReleaseAssetUrl(downloadUrl: String): ReleaseAssetRef? {
-    if (!downloadUrl.startsWith(GITHUB_DOWNLOAD_PREFIX)) return null
+    if (!downloadUrl.startsWith(GITHUB_URL_PREFIX)) return null
 
-    val parts = downloadUrl.removePrefix(GITHUB_DOWNLOAD_PREFIX)
+    val parts = downloadUrl.removePrefix(GITHUB_URL_PREFIX)
         .substringBefore('?')
         .split("/")
     if (parts.size < 6 || parts[2] != "releases" || parts[3] != "download") return null
@@ -120,7 +122,7 @@ internal fun parseTimestamp(timestamp: String): LocalDateTime {
  *  - Fetching and parsing CHANGELOG.md files from repositories
  *  - Resolving GitHub pull request build artifacts
  *
- * All methods return [APIResponse] or nullable results — no exceptions propagate to callers
+ * All methods return [APIResponse] or nullable results, no exceptions propagate to callers
  * except [getAssetFromPullRequest], which throws on hard failure.
  */
 class ReleaseAPI(
@@ -128,18 +130,18 @@ class ReleaseAPI(
     private val prefs: PreferencesManager
 ) {
     /**
-     * Parsed GitHub repository coordinates, derived from a github.com or api.github.com URL.
-     * Used to build API and raw file URLs without repetition.
+     * GitHub repository coordinates, the one place its web, API and raw file URLs are built from.
      */
-    private data class RepoConfig(
-        val owner: String,
-        val name: String,
-        val apiBase: String,
+    private data class RepoConfig(val owner: String, val name: String) {
+        val apiBase: String
+            get() = "${GITHUB_API_PREFIX}repos/$owner/$name"
+
         val htmlUrl: String
-    ) {
+            get() = "$GITHUB_URL_PREFIX$owner/$name"
+
         /** Returns a raw.githubusercontent.com URL for a file at a specific [branch] and [path]. */
         fun rawFileUrl(branch: String, path: String): String =
-            "https://raw.githubusercontent.com/$owner/$name/$branch/$path"
+            "https://$GITHUB_RAW_HOST/$owner/$name/$branch/$path"
     }
 
     private val rejected = MutableStateFlow<String?>(null)
@@ -153,7 +155,7 @@ class ReleaseAPI(
      */
     val rejectedPat: StateFlow<String?> = rejected.asStateFlow()
 
-    // Lazy so URL parsing doesn't happen on construction — only when first needed
+    // Lazy so URL parsing doesn't happen on construction, only when first needed
     private val managerConfig: RepoConfig by lazy { parseRepoUrl(MANAGER_REPO_URL) }
     private val patchesConfig: RepoConfig by lazy { parseRepoUrl(SOURCE_REPO_URL) }
 
@@ -164,29 +166,23 @@ class ReleaseAPI(
     private fun parseRepoUrl(repoUrl: String): RepoConfig {
         val trimmed = repoUrl.removeSuffix("/")
         return when {
-            trimmed.startsWith("https://github.com/") -> parseGitHubUrl(trimmed, repoUrl)
-            trimmed.startsWith("https://api.github.com/") -> parseGitHubApiUrl(trimmed, repoUrl)
+            trimmed.startsWith(GITHUB_URL_PREFIX) -> parseGitHubUrl(trimmed, repoUrl)
+            trimmed.startsWith(GITHUB_API_PREFIX) -> parseGitHubApiUrl(trimmed, repoUrl)
             else -> throw IllegalArgumentException("Unsupported repository URL: $repoUrl")
         }
     }
 
     private fun parseGitHubUrl(url: String, originalUrl: String): RepoConfig {
-        val parts = url.removePrefix("https://github.com/")
+        val parts = url.removePrefix(GITHUB_URL_PREFIX)
             .removeSuffix(".git")
             .split("/")
             .filter { it.isNotBlank() }
         require(parts.size >= 2) { "Invalid GitHub URL: $originalUrl" }
-        val (owner, name) = parts
-        return RepoConfig(
-            owner = owner,
-            name = name,
-            apiBase = "https://api.github.com/repos/$owner/$name",
-            htmlUrl = "https://github.com/$owner/$name"
-        )
+        return RepoConfig(owner = parts[0], name = parts[1])
     }
 
     private fun parseGitHubApiUrl(url: String, originalUrl: String): RepoConfig {
-        val parts = url.removePrefix("https://api.github.com/")
+        val parts = url.removePrefix(GITHUB_API_PREFIX)
             .trim('/')
             .removeSuffix(".git")
             .split("/")
@@ -196,12 +192,7 @@ class ReleaseAPI(
             ?: throw IllegalArgumentException("Invalid GitHub API URL: $originalUrl")
         val name = parts.getOrNull(idx + 2)
             ?: throw IllegalArgumentException("Invalid GitHub API URL: $originalUrl")
-        return RepoConfig(
-            owner = owner,
-            name = name,
-            apiBase = "https://api.github.com/repos/$owner/$name",
-            htmlUrl = "https://github.com/$owner/$name"
-        )
+        return RepoConfig(owner = owner, name = name)
     }
 
     /**
@@ -227,7 +218,7 @@ class ReleaseAPI(
         if (!response.isUnauthorized()) return response
 
         rejected.value = pat
-        Log.w(tag, "GitHub rejected the configured PAT, retrying $path anonymously")
+        Log.w(LOG_TAG, "GitHub rejected the configured PAT, retrying $path anonymously")
         return client.request { url(url) }
     }
 
@@ -238,7 +229,7 @@ class ReleaseAPI(
     suspend fun checkGitHubPat(pat: String): GitHubPatCheck {
         val response = client.request<GitHubUser>(retryOn429 = false) {
             header(HttpHeaders.Authorization, "Bearer $pat")
-            url("https://api.github.com/user")
+            url("${GITHUB_API_PREFIX}user")
         }
         return when {
             response is APIResponse.Success -> {
@@ -296,8 +287,8 @@ class ReleaseAPI(
         config: RepoConfig,
         branch: String
     ): APIResponse<T> {
-        val url = cacheBusted(config.rawFileUrl(branch, "patches-bundle.json"))
-        Log.d(tag, "rawPatchesBundleRequest: $url")
+        val url = cacheBusted(config.rawFileUrl(branch, DEFAULT_BUNDLE_FILE))
+        Log.d(LOG_TAG, "rawPatchesBundleRequest: $url")
         return client.request { url(url) }
     }
 
@@ -314,9 +305,7 @@ class ReleaseAPI(
      */
     suspend fun releaseAssetApiUrl(downloadUrl: String): String? {
         val ref = parseReleaseAssetUrl(downloadUrl) ?: return null
-        val config = runCatching {
-            parseRepoUrl("$GITHUB_DOWNLOAD_PREFIX${ref.owner}/${ref.repo}")
-        }.getOrNull() ?: return null
+        val config = RepoConfig(owner = ref.owner, name = ref.repo)
 
         val release = githubRequest<GitHubRelease>(config, "releases/tags/${ref.tag}").getOrNull()
             ?: return null
@@ -324,7 +313,7 @@ class ReleaseAPI(
         return release.assets
             .firstOrNull { it.name == ref.fileName || it.name == ref.decodedFileName }
             ?.url
-            .also { Log.d(tag, "releaseAssetApiUrl: $downloadUrl -> $it") }
+            .also { Log.d(LOG_TAG, "releaseAssetApiUrl: $downloadUrl -> $it") }
     }
 
     /**
@@ -412,19 +401,19 @@ class ReleaseAPI(
      * The request is cache busted because the raw CDN serves stale copies of freshly pushed files.
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<ReleaseAsset> {
-        val url = cacheBusted(if (branch == "dev") MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
+        val url = cacheBusted(if (branch == BRANCH_DEV) MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
         return when (val response = client.request<ManagerReleaseInfo> {
             url(url)
             header("Cache-Control", "no-cache")
         }) {
             is APIResponse.Success -> runCatching {
                 mapManagerJsonToAsset(managerConfig, response.data).also {
-                    Log.d(tag, "Manager JSON ($branch): ${it.version} → ${it.downloadUrl}")
+                    Log.d(LOG_TAG, "Manager JSON ($branch): ${it.version} → ${it.downloadUrl}")
                 }
             }.fold(
                 onSuccess = { APIResponse.Success(it) },
                 onFailure = {
-                    Log.w(tag, "Failed to map manager JSON ($branch)", it)
+                    Log.w(LOG_TAG, "Failed to map manager JSON ($branch)", it)
                     APIResponse.Failure(APIFailure(it, null))
                 }
             )
@@ -435,7 +424,7 @@ class ReleaseAPI(
     }
 
     /**
-     * Returns a newer [ReleaseAsset] if one is available, or null if the app is up to date.
+     * Checks whether a newer version of the manager is out.
      *
      * Channel selection logic (mirrors FCM subscription matrix in [app.morphe.manager.util.syncFcmTopics]):
      *  - `usePrereleases == true` OR current build is dev → use `dev` branch / prerelease channel
@@ -448,35 +437,35 @@ class ReleaseAPI(
      * A newer version is reported only once its APK is downloadable, so a release that is
      * already announced but still uploading is treated as if it did not exist yet.
      */
-    suspend fun getAppUpdate(): ReleaseAsset? {
+    suspend fun checkAppUpdate(): AppUpdateCheck {
         val usePrereleases = prefs.useManagerPrereleases.get()
-        val branch = if (usePrereleases) "dev" else "main"
+        val branch = if (usePrereleases) BRANCH_DEV else BRANCH_STABLE
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {
-                Log.w(tag, "Manager JSON unavailable, falling back to GitHub API")
+                Log.w(LOG_TAG, "Manager JSON unavailable, falling back to GitHub API")
                 getManagerFromGitHub()
             }
         } else {
             getManagerFromGitHub()
-        }.getOrNull()
+        }.getOrNull() ?: return AppUpdateCheck.Failed
 
         // Return only if the remote version is strictly newer than what's installed. The stable
         // channel offers stable builds alone: merging dev into main carries the dev release file
         // along, and it stays there until the stable release replaces it
-        val update = candidate?.takeIf {
+        val update = candidate.takeIf {
             (usePrereleases || !it.version.contains('-')) &&
                     isNewerVersion(BuildConfig.VERSION_NAME, it.version)
-        } ?: return null
+        } ?: return AppUpdateCheck.UpToDate
 
         // Only a definitive "not there" hides the update: a check that could not run at all
         // must not keep a real release from being offered
         if (client.isReachable(update.downloadUrl) == false) {
-            Log.d(tag, "Manager update ${update.version} is announced but its APK is not downloadable yet")
-            return null
+            Log.d(LOG_TAG, "Manager update ${update.version} is announced but its APK is not downloadable yet")
+            return AppUpdateCheck.UpToDate
         }
 
-        return update
+        return AppUpdateCheck.Available(update)
     }
 
     /**
@@ -493,16 +482,16 @@ class ReleaseAPI(
      * Uses the `dev` branch for pre-releases, `main` for stable.
      */
     private suspend fun getPatchesFromJson(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
-        val branch = if (usePrerelease) "dev" else "main"
+        val branch = if (usePrerelease) BRANCH_DEV else BRANCH_STABLE
         return when (val r = rawPatchesBundleRequest<PatchesReleaseInfo>(patchesConfig, branch)) {
             is APIResponse.Success -> runCatching {
                 mapPatchesJsonToAsset(patchesConfig, r.data).also {
-                    Log.d(tag, "Patches JSON ($branch): ${it.version} → ${it.downloadUrl}")
+                    Log.d(LOG_TAG, "Patches JSON ($branch): ${it.version} → ${it.downloadUrl}")
                 }
             }.fold(
                 onSuccess = { APIResponse.Success(it) },
                 onFailure = {
-                    Log.w(tag, "Failed to map patches JSON ($branch)", it)
+                    Log.w(LOG_TAG, "Failed to map patches JSON ($branch)", it)
                     APIResponse.Failure(APIFailure(it, null))
                 }
             )
@@ -523,7 +512,7 @@ class ReleaseAPI(
     suspend fun getPatchesUpdate(usePrerelease: Boolean): APIResponse<ReleaseAsset> {
         return if (USE_PATCHES_DIRECT_JSON) {
             getPatchesFromJson(usePrerelease).fallbackTo {
-                Log.w(tag, "Patches JSON unavailable, falling back to Morphe API")
+                Log.w(LOG_TAG, "Patches JSON unavailable, falling back to Morphe API")
                 getPatchesFromApi(usePrerelease)
             }
         } else {
@@ -563,12 +552,12 @@ class ReleaseAPI(
 
     /** Fetches and parses the manager's CHANGELOG.md from the appropriate branch. */
     suspend fun fetchManagerChangelog(forDevBranch: Boolean = isDevBuild): List<ChangelogEntry> {
-        val branch = if (forDevBranch) "dev" else "main"
-        return fetchChangelogFromRepo(managerConfig, branch, "CHANGELOG.md")
+        val branch = if (forDevBranch) BRANCH_DEV else BRANCH_STABLE
+        return fetchChangelogFromRepo(managerConfig, branch, CHANGELOG_FILE)
     }
 
     /** Fetches and parses CHANGELOG.md from the first-party patches repository. */
-    suspend fun fetchPatchesChangelog(branch: String = "main", stopAfterFirstStable: Boolean = false): List<ChangelogEntry> =
+    suspend fun fetchPatchesChangelog(branch: String = BRANCH_STABLE, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> =
         fetchChangelogFromRepo(patchesConfig, branch, stopAfterFirstStable = stopAfterFirstStable)
 
     /**
@@ -576,18 +565,18 @@ class ReleaseAPI(
      * Used for third-party bundles that follow the Morphe changelog format.
      */
     suspend fun fetchChangelogFromUrl(changelogUrl: String, stopAfterFirstStable: Boolean = false): List<ChangelogEntry> {
-        Log.d(tag, "fetchChangelogFromUrl: $changelogUrl")
+        Log.d(LOG_TAG, "fetchChangelogFromUrl: $changelogUrl")
         return parseChangelog(rawFileRequest<String>(changelogUrl), stopAfterFirstStable, changelogUrl)
     }
 
     private suspend fun fetchChangelogFromRepo(
         config: RepoConfig,
         branch: String,
-        path: String = "CHANGELOG.md",
+        path: String = CHANGELOG_FILE,
         stopAfterFirstStable: Boolean = false
     ): List<ChangelogEntry> {
         val url = cacheBusted(config.rawFileUrl(branch, path))
-        Log.d(tag, "fetchChangelog: $url")
+        Log.d(LOG_TAG, "fetchChangelog: $url")
         val response = client.request<String> {
             url(url)
             header("Cache-Control", "no-cache")
@@ -608,11 +597,11 @@ class ReleaseAPI(
             ChangelogParser.parse(response.data, stopAfterFirstStable)
         }
         is APIResponse.Error -> {
-            Log.w(tag, "Failed to fetch changelog from $source: ${response.error.statusCode}")
+            Log.w(LOG_TAG, "Failed to fetch changelog from $source: ${response.error.statusCode}")
             if (response.error.statusCode == HttpStatusCode.NotFound) emptyList() else throw response.error
         }
         is APIResponse.Failure -> {
-            Log.w(tag, "Failed to fetch changelog from $source", response.error)
+            Log.w(LOG_TAG, "Failed to fetch changelog from $source", response.error)
             throw response.error
         }
     }
@@ -629,43 +618,18 @@ class ReleaseAPI(
      * → https://raw.githubusercontent.com/MorpheApp/morphe-patches/main/CHANGELOG.md
      * ```
      *
-     * Returns null for unrecognized URL formats.
+     * A link that names no branch, or pins one through refs/heads, reads the [BRANCH_STABLE]
+     * changelog. Returns null for unrecognized URL formats.
      */
     fun changelogUrlFromBundleEndpoint(endpoint: String): String? {
-        return try {
-            val uri = java.net.URI(endpoint)
-            val host = uri.host?.lowercase(java.util.Locale.US) ?: return null
-            val parts = uri.path?.trim('/')?.split('/')?.filter { it.isNotBlank() } ?: return null
-
-            when (host) {
-                "raw.githubusercontent.com" -> {
-                    // path: owner/repo/branch/...
-                    if (parts.size < 3) return null
-                    val base = parts.take(3).joinToString("/")
-                    "https://raw.githubusercontent.com/$base/CHANGELOG.md"
-                }
-
-                "github.com" -> {
-                    // path: owner/repo  or  owner/repo/tree/branch/...
-                    if (parts.size < 2) return null
-                    val branch = if (parts.size >= 4 && parts[2] in listOf("tree", "blob")) parts[3] else "main"
-                    "https://raw.githubusercontent.com/${parts[0]}/${parts[1]}/$branch/CHANGELOG.md"
-                }
-
-                "gitlab.com" -> {
-                    // path: owner/repo/-/raw/branch/...
-                    if (parts.size < 2) return null
-                    val rawIndex = parts.indexOf("raw")
-                    val branch = if (rawIndex >= 0 && parts.getOrNull(rawIndex - 1) == "-") {
-                        parts.getOrNull(rawIndex + 1) ?: "main"
-                    } else "main"
-                    "https://gitlab.com/${parts[0]}/${parts[1]}/-/raw/$branch/CHANGELOG.md"
-                }
-
-                else -> null
-            }
-        } catch (_: Exception) {
-            null
+        val source = SourceUrl.parse(endpoint) ?: return null
+        val owner = source.owner ?: return null
+        val repo = source.repo ?: return null
+        val branch = source.branch ?: BRANCH_STABLE
+        return when (source.codeHost) {
+            CodeHost.GITHUB -> RepoConfig(owner, repo).rawFileUrl(branch, CHANGELOG_FILE)
+            CodeHost.GITLAB -> "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$CHANGELOG_FILE"
+            null -> null
         }
     }
 
@@ -674,8 +638,9 @@ class ReleaseAPI(
      *
      * Steps:
      * 1. Resolve the PR's HEAD commit SHA.
-     * 2. Find the workflow run that matches that SHA (paginates through runs if needed).
-     * 3. Return the first artifact from that run.
+     * 2. List the workflow runs of that SHA.
+     * 3. Return the first artifact of the first run that left one. A commit usually starts several
+     *    workflows, and only the build among them uploads anything.
      *
      * @throws Exception if the PR, matching run, or artifact cannot be found.
      */
@@ -684,67 +649,43 @@ class ReleaseAPI(
         repo: String,
         pullRequestNumber: String
     ): ReleaseAsset {
-        val config = RepoConfig(
-            owner = owner,
-            name = repo,
-            apiBase = "https://api.github.com/repos/$owner/$repo",
-            htmlUrl = "https://github.com/$owner/$repo"
-        )
-        val run = getPullRequestRun(config, pullRequestNumber)
-        val artifact = getRunArtifact(config, run.id, pullRequestNumber)
+        val config = RepoConfig(owner = owner, name = repo)
+        val pull = githubRequest<GitHubPullRequest>(config, "pulls/$pullRequestNumber")
+            .successOrThrow("PR #$pullRequestNumber")
+        val targetSha = pull.head.sha
+
+        val runs = githubRequest<GitHubActionRuns>(
+            config,
+            "actions/runs?head_sha=$targetSha&per_page=100"
+        ).successOrThrow("Workflow runs for PR #$pullRequestNumber").workflowRuns
+        if (runs.isEmpty()) {
+            throw Exception("No GitHub Actions run found for PR #$pullRequestNumber (SHA: $targetSha)")
+        }
+
+        val (run, artifact) = runs.firstNotNullOfOrNull { run ->
+            getRunArtifact(config, run.id, pullRequestNumber)?.let { run to it }
+        } ?: throw Exception("No artifacts found for PR #$pullRequestNumber, did the GitHub Action run successfully?")
         return ReleaseAsset(
             downloadUrl = artifact.archiveDownloadUrl,
             createdAt = parseTimestamp(artifact.createdAt),
             pageUrl = "${config.htmlUrl}/pull/$pullRequestNumber",
             description = run.displayTitle,
-            version = run.headSha
+            version = targetSha
         )
     }
 
-    /**
-     * Finds the GitHub Actions workflow run for a given PR by matching the PR's HEAD SHA.
-     *
-     * Paginates through runs 100 at a time. Stops when a match is found or the list is empty.
-     */
-    private suspend fun getPullRequestRun(
-        config: RepoConfig,
-        pullRequestNumber: String
-    ): GitHubActionRun {
-        val pull = githubRequest<GitHubPullRequest>(config, "pulls/$pullRequestNumber")
-            .successOrThrow("PR #$pullRequestNumber")
-
-        val targetSha = pull.head.sha
-        var page = 1
-
-        while (true) {
-            val runs = githubRequest<GitHubActionRuns>(
-                config,
-                "actions/runs?per_page=100&page=$page"
-            ).successOrThrow("Workflow runs for PR #$pullRequestNumber (page $page)")
-
-            runs.workflowRuns.firstOrNull { it.headSha == targetSha }?.let { return it }
-
-            if (runs.workflowRuns.isEmpty()) {
-                throw Exception("No GitHub Actions run found for PR #$pullRequestNumber (SHA: $targetSha)")
-            }
-
-            page++
-        }
-    }
-
+    /** The first artifact of the run that can still be downloaded, or null when it left none. */
     private suspend fun getRunArtifact(
         config: RepoConfig,
         runId: String,
         pullRequestNumber: String
-    ): GitHubActionArtifact {
-        val artifacts = githubRequest<GitHubActionRunArtifacts>(
+    ): GitHubActionArtifact? =
+        githubRequest<GitHubActionRunArtifacts>(
             config,
             "actions/runs/$runId/artifacts"
         ).successOrThrow("Artifacts for PR #$pullRequestNumber (run $runId)")
-
-        return artifacts.artifacts.firstOrNull()
-            ?: throw Exception("No artifacts found for PR #$pullRequestNumber — did the GitHub Action run successfully?")
-    }
+            .artifacts
+            .firstOrNull { !it.expired }
 
     /**
      * Resolves a redirect URL by delegating a HEAD request to [HttpService.headRedirect].

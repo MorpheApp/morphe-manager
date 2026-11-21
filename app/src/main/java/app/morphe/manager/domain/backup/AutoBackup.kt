@@ -19,10 +19,11 @@ import app.morphe.manager.domain.manager.SettingsSection
 import app.morphe.manager.ui.viewmodel.ManagerSettingsExportFile
 import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.JSON_MIMETYPE
+import app.morphe.manager.util.KEYSTORE_MIMETYPE
+import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.getOrCreateFile
 import app.morphe.manager.util.pickedFolder
 import app.morphe.manager.util.sha256Fingerprint
-import app.morphe.manager.util.tag
 import app.morphe.manager.worker.AutoBackupWorker
 import app.morphe.manager.worker.ScheduleInterval
 import kotlinx.coroutines.CancellationException
@@ -53,7 +54,7 @@ class AutoBackup(
     /**
      * Starts backing up into [folder], just picked by the user, and makes the first copy at once,
      * which shows the folder works. Holds on to the grant of a folder from the system picker and
-     * lets go of the one held before. False when the first copy could not be written.
+     * releases the one held before. False when the first copy could not be written.
      */
     suspend fun enable(folder: Uri): Boolean {
         if (folder.scheme == ContentResolver.SCHEME_CONTENT) {
@@ -75,7 +76,7 @@ class AutoBackup(
      */
     suspend fun backUpNow(): Boolean = withContext(NonCancellable) { backUp(force = true) }
 
-    /** Stops backing up and lets go of the folder. The copies already made stay in it. */
+    /** Stops backing up and releases the folder. The copies already made stay in it. */
     suspend fun disable() {
         // First, so a copy being written cannot record itself after the rest is cleared
         AutoBackupWorker.cancel(app)
@@ -130,7 +131,7 @@ class AutoBackup(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            Log.e(tag, "Automatic backup failed", e)
+            Log.e(LOG_TAG, "Automatic backup failed", e)
             false
         }
         prefs.autoBackupFailed.update(!succeeded)
@@ -188,7 +189,7 @@ class AutoBackup(
         }
     }
 
-    /** Lets go of the grant to [folder], held only for one the system picker gave. */
+    /** Releases the grant to [folder], held only for one the system picker gave. */
     private fun releaseGrant(folder: String) {
         val uri = folder.ifEmpty { return }.toUri()
         if (uri.scheme != ContentResolver.SCHEME_CONTENT) return
@@ -208,7 +209,6 @@ class AutoBackup(
         private const val SETTINGS_FILE_PREFIX = "morphe_settings_backup-"
 
         private const val SIGNING_KEY_FILE_PREFIX = "morphe_signing_key-"
-        private const val KEYSTORE_MIMETYPE = "application/x-pkcs12"
         private const val FOLDER_ACCESS = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
     }
 }
