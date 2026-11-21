@@ -1,5 +1,5 @@
 // Checks the Morphe version of a bug report.
-// Bug reports for an outdated Morphe version are closed with a comment.
+// Bug reports for an outdated Morphe version are closed with a comment by apply.js, after the duplicate check.
 // The version field is free text that also has the version of the app being patched, so every version
 // in it is compared with the Morphe releases. Reports where no Morphe release version is found are left
 // open, and the analyze job can ask for the version.
@@ -68,41 +68,27 @@ function versionStatus(text, versions) {
 }
 
 /**
- * Closes the issue if its Morphe version is outdated.
- * Returns true if the issue was closed.
+ * Returns the problems found with the Morphe version of the issue, as comment lines.
+ * The list is empty if the version is supported or not known, or if the issue is not a bug report.
  */
 async function checkVersions({ github, core, owner, repo, issue }) {
   const fields = parseForm(issue.body);
   // Only bug reports have a version field.
-  if (!(VERSION_FIELD in fields)) return false;
+  if (!(VERSION_FIELD in fields)) return [];
 
   const releases = (await github.rest.repos.listReleases({ owner, repo, per_page: 50 })).data;
   const status = versionStatus(fields[VERSION_FIELD], acceptedVersions(releases, Date.now()));
   if (status !== 'outdated') {
     core.info(`#${issue.number} Morphe version: ${status}`);
-    return false;
+    return [];
   }
 
   core.info(`#${issue.number} is for an outdated Morphe version`);
-  await github.rest.issues.createComment({
-    owner,
-    repo,
-    issue_number: issue.number,
-    body: [
-      'You are using an outdated version of Morphe.',
-      '',
-      `Please update to the latest version from https://github.com/${owner}/${repo}/releases ` +
-        'and open a new issue if the bug still happens.',
-    ].join('\n'),
-  });
-  await github.rest.issues.update({
-    owner,
-    repo,
-    issue_number: issue.number,
-    state: 'closed',
-    state_reason: 'not_planned',
-  });
-  return true;
+  return [
+    'You are using an outdated version of Morphe.',
+    `Please update to the latest version from https://github.com/${owner}/${repo}/releases ` +
+      'and open a new issue if the bug still happens.',
+  ];
 }
 
 module.exports = {

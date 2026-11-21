@@ -95,25 +95,72 @@ function missingInfoComment(missing) {
   ].join('\n');
 }
 
+/**
+ * Version problems found by check-template.js. They are built only from fixed text.
+ */
+function parseVersionProblems(json) {
+  const problems = JSON.parse(json || '[]');
+  if (!Array.isArray(problems) || !problems.every((problem) => typeof problem === 'string')) {
+    throw new Error(`Invalid version problems: ${json}`);
+  }
+  return problems;
+}
+
+/**
+ * Comments the version problems, and closes the issue as not planned unless closeIssue is false.
+ */
+async function commentVersionProblems(github, owner, repo, issueNumber, versionProblems, closeIssue) {
+  await github.rest.issues.createComment({
+    owner,
+    repo,
+    issue_number: issueNumber,
+    body: versionProblems.join('\n\n'),
+  });
+  if (!closeIssue) return;
+  await github.rest.issues.update({
+    owner,
+    repo,
+    issue_number: issueNumber,
+    state: 'closed',
+    state_reason: 'not_planned',
+  });
+}
+
 module.exports = async ({ github, context, core }) => {
   const { owner, repo } = context.repo;
   const issueNumber = Number(process.env.ISSUE_NUMBER);
   const live = process.env.TRIAGE_MODE === 'live';
-
-  let decision;
-  try {
-    decision = JSON.parse(process.env.DECISION || '');
-  } catch (error) {
-    core.setFailed(`Could not parse the triage decision: ${error.message}`);
-    return;
-  }
+  const versionProblems = parseVersionProblems(process.env.VERSION_PROBLEMS);
 
   const { data: issue } = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
-  // An issue that is closed, such as for its versions, still gets its title cleaned up and its type label,
+  // An issue that is closed still gets its title cleaned up and its type label,
   // but no comments, deletion or duplicate changes.
   const open = issue.state === 'open';
   if (!open) {
     core.info(`#${issueNumber} is closed, only the title and type label are changed`);
+  }
+
+  // Without a decision, such as when the analyze job failed, an issue with version problems is still closed.
+  if (!process.env.DECISION) {
+    if (!open || versionProblems.length === 0) {
+      core.info('No triage decision, nothing to do');
+      return;
+    }
+    core.warning(`No triage decision, only closing #${issueNumber} for its version`);
+    await core.summary
+      .addHeading(`Triage of #${issueNumber}${live ? '' : ' (dry run)'}`, 3)
+      .addList(['No triage decision. Close for its version'])
+      .write();
+    if (live) await commentVersionProblems(github, owner, repo, issueNumber, versionProblems, true);
+    return;
+  }
+
+  let decision;
+  try {
+    decision = JSON.parse(process.env.DECISION);
+  } catch (error) {
+    core.setFailed(`Could not parse the triage decision: ${error.message}`);
+    return;
   }
 
   // Issues about the patches are closed with a link to the patches repository, nothing else is done.
@@ -209,11 +256,18 @@ module.exports = async ({ github, context, core }) => {
     });
   }
 
-  // Missing information. Only for bugs that are not duplicates.
+  // Missing information. Only for bugs that are not duplicates and are not closed for their version.
   const missing = Array.isArray(decision.missing_info)
     ? [...new Set(decision.missing_info.filter((key) => key in MISSING_INFO_TEXT))]
     : [];
-  if (open && decision.type === 'bug' && !duplicateOf && possibleDuplicates.length === 0 && missing.length > 0) {
+  if (
+    open &&
+    decision.type === 'bug' &&
+    !duplicateOf &&
+    possibleDuplicates.length === 0 &&
+    versionProblems.length === 0 &&
+    missing.length > 0
+  ) {
     actions.push({
       description: `Ask for: ${missing.join(', ')}`,
       run: async () => {
@@ -230,6 +284,15 @@ module.exports = async ({ github, context, core }) => {
           labels: [LABEL_WAITING_ON_AUTHOR],
         });
       },
+    });
+  }
+
+  // Version problems are commented after the possible duplicates, so the author sees both.
+  // A sure duplicate is closed as a duplicate instead of as not planned.
+  if (open && versionProblems.length > 0) {
+    actions.push({
+      description: `${duplicateOf ? 'Comment' : 'Close for'} version problems: ${versionProblems.join(' ')}`,
+      run: () => commentVersionProblems(github, owner, repo, issueNumber, versionProblems, !duplicateOf),
     });
   }
 
