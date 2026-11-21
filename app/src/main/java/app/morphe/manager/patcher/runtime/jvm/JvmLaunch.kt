@@ -13,12 +13,14 @@ import kotlinx.parcelize.Parcelize
  * the service only has to carry it out.
  *
  * @param command What starts the JVM as a process of its own, followed by its options.
+ * @param environment The environment the JVM process starts with.
  * @param mainClass The class whose main runs, such as `a.b.MainKt`.
  * @param heapLimitMb The heap to give the JVM.
  */
 @Parcelize
 data class JvmLaunch(
     val command: List<String>,
+    val environment: Map<String, String>,
     val options: List<String>,
     val mainClass: String,
     val heapLimitMb: Int

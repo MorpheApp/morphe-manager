@@ -263,6 +263,21 @@ val embeddedJvmModules = listOf(
 /** The name the dynamic loader of the GNU C library ships under, as a native library of the app. */
 val glibcLoaderLibrary = "libglibc_loader.so"
 
+/**
+ * The locale the JVM takes its character set from, as glibc reports ASCII in the C locale, in which
+ * the JVM cannot open a path with any other character. Only its LC_CTYPE goes into the runtime.
+ */
+val glibcLocale = "C.UTF-8"
+
+/**
+ * The locales the glibc of [glibcRelease] compiled, pinned by its SHA-256, one archive for every
+ * ABI. termux-pacman's package leaves compiling them to the device, so morphe-jvm releases them.
+ */
+val glibcLocales = mapOf(
+    "https://github.com/MorpheApp/morphe-jvm/releases/download/$glibcRelease/glibc-2.44-0-locales.tar.xz" to
+            "f06cefef77dd85daafe300d0ed36051393311b9810afe0e6d9a4b21750081774"
+)
+
 /** Where downloaded builds are kept between builds, as they rarely change. */
 val embeddedJvmDownloads = File(gradle.gradleUserHomeDir, "caches/morphe-embedded-jvm")
 
@@ -279,10 +294,11 @@ val prepareGlibcTasks = embeddedJvms.mapValues { (abi, build) ->
     tasks.register<PrepareGlibcTask>("prepareGlibc${abiTaskName(abi)}") {
         group = "build"
         description = "Takes the GNU C library the embedded JVM for $abi runs on."
-        packages.set(build.glibcUrls)
+        packages.set(build.glibcUrls + glibcLocales)
         libraryDirectory.set("data/data/com.termux/files/usr/glibc/lib")
         // What the linked modules and the launcher link against, and libgcc_s, which that zlib does
         libraries.set(listOf("libc.so.6", "libm.so.6", "libdl.so.2", "libpthread.so.0", "librt.so.1", "libz.so.1", "libgcc_s.so.1"))
+        localeFiles.set(listOf("$glibcLocale/LC_CTYPE"))
         loader.set(build.loader)
         this.abi.set(abi)
         loaderLibraryName.set(glibcLoaderLibrary)
@@ -315,7 +331,7 @@ val embeddedJvmAbis = embeddedJvms.keys.joinToString(prefix = "{", postfix = "}"
 
 /** Changes with whatever goes into the runtime, which the app then unpacks again. */
 val embeddedJvmId = (embeddedJvms.values.flatMap { build -> listOf(build.sha256) + build.glibcPackages.values } +
-        embeddedJvmFiles + embeddedJvmModules).hashCode().toUInt().toString(16)
+        glibcLocales.values + embeddedJvmFiles + embeddedJvmModules).hashCode().toUInt().toString(16)
 
 /** Assets the embedded JVM runs from, read by JvmInstallation. */
 val embeddedJvmAssets = tasks.register<EmbeddedJvmAssetsTask>("embeddedJvmAssets") {
@@ -357,6 +373,7 @@ android {
         buildConfigField("String[]", "EMBEDDED_JVM_ABIS", embeddedJvmAbis)
         buildConfigField("String", "EMBEDDED_JVM_ID", "\"$embeddedJvmId\"")
         buildConfigField("String", "GLIBC_LOADER_LIBRARY", "\"$glibcLoaderLibrary\"")
+        buildConfigField("String", "GLIBC_LOCALE", "\"$glibcLocale\"")
 
         // The launcher is plain C, which needs no C++ runtime
         @Suppress("UnstableApiUsage")

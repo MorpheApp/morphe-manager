@@ -61,7 +61,7 @@ class PatcherService : Service() {
                 "-XX:ReservedCodeCacheSize=${CODE_CACHE_32_BIT_MB}m".takeUnless { Process.is64Bit() }
             ) + launch.options // Last, so a flag the app gives again wins
 
-            val jvmPid = startProcess(launch.command + options + launch.mainClass, commands, events)
+            val jvmPid = startProcess(launch.command + options + launch.mainClass, launch.environment, commands, events)
             return HostStarted(Process.myPid(), heapLimitMb, jvmPid)
         }
 
@@ -87,14 +87,19 @@ class PatcherService : Service() {
         listOf(commands, events).map { "/proc/self/fd/${it.detachFd()}" }
 
     /**
-     * Starts the JVM as a process of its own with [command], handing it the pipes of the run under
-     * the numbers it is told, and returns its pid. Its output goes to the log, and this process
-     * ends with it, see [endWith].
+     * Starts the JVM as a process of its own with [command] and [environment], handing it the pipes
+     * of the run under the numbers it is told, and returns its pid. Its output goes to the log, and
+     * this process ends with it, see [endWith].
      *
      * The process is started and waited for on a thread of its own, which lives as long as it
      * does, as the process is killed once the thread that started it ends.
      */
-    private fun startProcess(command: List<String>, commands: ParcelFileDescriptor, events: ParcelFileDescriptor): Int {
+    private fun startProcess(
+        command: List<String>,
+        environment: Map<String, String>,
+        commands: ParcelFileDescriptor,
+        events: ParcelFileDescriptor
+    ): Int {
         // Kept to write the end to, as the app only learns of it once every copy of the pipe is closed
         val endReport = events.dup()
         val (output, outputSink) = ParcelFileDescriptor.createPipe()
@@ -105,7 +110,7 @@ class PatcherService : Service() {
 
         thread(name = "PatcherJvm") {
             val started = try {
-                EmbeddedJvm.spawn(args, fds, outputSink.fd)
+                EmbeddedJvm.spawn(args, environment, fds, outputSink.fd)
             } catch (e: Throwable) {
                 endReport.close()
                 pid.completeExceptionally(e)
