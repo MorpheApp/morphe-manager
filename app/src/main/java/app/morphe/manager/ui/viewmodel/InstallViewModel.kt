@@ -238,7 +238,7 @@ class InstallViewModel(
         pendingInstallFile = outputFile
         pendingOriginalPackageName = originalPackageName
         pendingPersistCallback = onPersistApp
-        pendingInstallToken = oneTimeInstallerToken ?: installerManager.getPrimaryToken()
+        pendingInstallToken = oneTimeInstallerToken ?: installerManager.getPreferredToken()
         pendingAutoUninstallOnConflict = autoUninstallOnConflict
         pendingAllowSignatureMismatch = allowSignatureMismatch
 
@@ -293,15 +293,15 @@ class InstallViewModel(
                         outputFile,
                         targetPackageName,
                         null,
-                        primaryTokenOverride = selectedInstallerToken
+                        tokenOverride = selectedInstallerToken
                     )
                 }
 
                 Log.d(TAG, "Resolved plan: ${resolved.plan::class.java.simpleName}")
 
                 // Check if installer is unavailable
-                if (resolved.primaryUnavailable) {
-                    val actualToken = selectedInstallerToken ?: resolved.primaryToken
+                if (resolved.preferredUnavailable) {
+                    val actualToken = selectedInstallerToken ?: resolved.preferredToken
                     when (actualToken) {
                         InstallerManager.Token.Shizuku,
                         InstallerManager.Token.ShizukuPlayStore -> {
@@ -1230,7 +1230,7 @@ class InstallViewModel(
         val token = pendingInstallToken
             ?: oneTimeInstallerToken
             ?: selectedInstallerToken
-            ?: installerManager.getPrimaryToken()
+            ?: installerManager.getPreferredToken()
 
         val isShizukuInstall = token == InstallerManager.Token.Shizuku ||
                 token == InstallerManager.Token.ShizukuPlayStore
@@ -1252,14 +1252,12 @@ class InstallViewModel(
         installedPackageName?.let { pm.launch(it) }
     }
 
-    fun getPrimaryInstallerToken(): InstallerManager.Token =
-        installerManager.getPrimaryToken()
+    fun getPreferredInstallerToken(): InstallerManager.Token =
+        installerManager.getPreferredToken()
 
     /** Installer entries for the one-time selection dialog shown during install. */
-    fun getInstallerOptions(): List<InstallerManager.Entry> {
-        val raw = installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, includeNone = false)
-        return installerManager.ensureValidEntries(raw, getPrimaryInstallerToken(), InstallerManager.InstallTarget.PATCHER)
-    }
+    fun getInstallerOptions(): List<InstallerManager.Entry> =
+        installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, getPreferredInstallerToken())
 
     fun mountsByDefault(): Boolean = installerManager.mountsByDefault()
 

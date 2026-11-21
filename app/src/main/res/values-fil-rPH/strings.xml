@@ -570,6 +570,7 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="app_links_open_settings">Buksan ang mga setting ng link</string>
     <string name="app_links_repair_success">Matagumpay na na-enable ang mga link ng app</string>
     <string name="app_links_repair_failed">Hindi nagawang paganahin ang mga link ng app nang awtomatiko</string>
+    <string name="app_links_change_failed">Nabigong baguhin ang mga app link</string>
     <string name="app_links_all_verified">Lahat ng suportadong link ay naka-configure upang buksan sa app na ito</string>
     <string name="app_links_fix">Ayusin ang mga link</string>
     <string name="configure">I-configure</string>

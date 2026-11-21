@@ -49,14 +49,14 @@ data class AppLinksStatus(
 }
 
 /** The privileged channel able to change the link selection on the user's behalf. */
-enum class RepairCapability {
+enum class LinkSelectionAccess {
     SHIZUKU,
     ROOT,
     NONE
 }
 
 /**
- * Reads and restores the web link selection of installed apps. A re-signed app loses the domain
+ * Reads and changes the web link selection of installed apps. A re-signed app loses the domain
  * verification of its original publisher on Android 12+, so its links open in the browser until
  * the user selects the domains for it.
  */
@@ -64,12 +64,15 @@ class AppLinksManager(
     private val app: Application,
     private val rootInstaller: RootInstaller
 ) {
-    /** Returns the channel [repairAppLinks] would use. Probes root, so never call it on the main thread. */
-    suspend fun getRepairCapability(): RepairCapability = withContext(Dispatchers.IO) {
+    /**
+     * Returns the channel a change of the selection would go through. Probes root, so never call it
+     * on the main thread.
+     */
+    suspend fun getSelectionAccess(): LinkSelectionAccess = withContext(Dispatchers.IO) {
         when {
-            isShizukuGranted() -> RepairCapability.SHIZUKU
-            rootInstaller.hasRootAccess() -> RepairCapability.ROOT
-            else -> RepairCapability.NONE
+            isShizukuGranted() -> LinkSelectionAccess.SHIZUKU
+            rootInstaller.hasRootAccess() -> LinkSelectionAccess.ROOT
+            else -> LinkSelectionAccess.NONE
         }
     }
 
@@ -97,23 +100,36 @@ class AppLinksManager(
      * Selects every declared domain of [packageName] and turns its link handling on. Returns true
      * only when both took effect.
      */
-    suspend fun repairAppLinks(packageName: String): Boolean = withContext(Dispatchers.IO) {
-        val commands = listOf(
-            listOf("set-app-links-user-selection", "--user", "cur", "--package", packageName, "true", "all"),
-            listOf("set-app-links-allowed", "--user", "cur", "--package", packageName, "true")
-        )
-        when (getRepairCapability()) {
-            RepairCapability.SHIZUKU -> runCatching { commands.all(::runShizukuPackageCommand) }
-                .onFailure { Log.e(TAG, "Could not repair app links of $packageName through Shizuku", it) }
+    suspend fun selectAllDomains(packageName: String): Boolean =
+        setDomainsSelected(packageName, listOf(ALL_DOMAINS), selected = true)
+
+    /**
+     * Selects or deselects [domains] of [packageName]. Selecting also turns its link handling on,
+     * without which no selected domain opens in the app. Returns true only when every step took effect.
+     */
+    suspend fun setDomainsSelected(
+        packageName: String,
+        domains: Collection<String>,
+        selected: Boolean
+    ): Boolean = withContext(Dispatchers.IO) {
+        val user = listOf("--user", "cur", "--package", packageName)
+        val commands = buildList {
+            add(listOf("set-app-links-user-selection") + user + selected.toString() + domains)
+            if (selected) add(listOf("set-app-links-allowed") + user + "true")
+        }
+        when (getSelectionAccess()) {
+            LinkSelectionAccess.SHIZUKU -> runCatching { commands.all(::runShizukuPackageCommand) }
+                .onFailure { Log.e(TAG, "Could not change app links of $packageName through Shizuku", it) }
                 .getOrDefault(false)
-            RepairCapability.ROOT -> {
+            LinkSelectionAccess.ROOT -> {
+                // Quoted, as a declared domain can be a wildcard the shell would expand
                 val result = rootInstaller.execute(
-                    commands.joinToString(" && ") { "pm " + it.joinToString(" ") }
+                    commands.joinToString(" && ") { command -> "pm " + command.joinToString(" ") { "'$it'" } }
                 )
-                if (!result.isSuccess) Log.e(TAG, "Could not repair app links of $packageName as root: ${result.err}")
+                if (!result.isSuccess) Log.e(TAG, "Could not change app links of $packageName as root: ${result.err}")
                 result.isSuccess
             }
-            RepairCapability.NONE -> false
+            LinkSelectionAccess.NONE -> false
         }
     }
 
@@ -174,6 +190,9 @@ class AppLinksManager(
 
     private companion object {
         const val TAG = "Morphe AppLinksManager"
+
+        /** What `pm set-app-links-user-selection` takes for every domain the app declares. */
+        const val ALL_DOMAINS = "all"
 
         /** `IBinder.SHELL_COMMAND_TRANSACTION`, hidden from the SDK. */
         const val SHELL_COMMAND_TRANSACTION =

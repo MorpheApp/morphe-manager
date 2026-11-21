@@ -573,6 +573,7 @@
     <string name="app_links_open_settings">Отваряне на настройките за връзки</string>
     <string name="app_links_repair_success">Връзките към приложението са активирани успешно</string>
     <string name="app_links_repair_failed">Неуспешно автоматично активиране на връзките на приложението</string>
+    <string name="app_links_change_failed">Неуспешна промяна на връзките на приложението</string>
     <string name="app_links_all_verified">Всички поддържани връзки са конфигурирани да се отварят в това приложение</string>
     <string name="app_links_fix">Поправи връзките</string>
     <string name="configure">Конфигурирай</string>

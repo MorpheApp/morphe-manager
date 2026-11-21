@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">باز کردن تنظیمات پیوندها</string>
     <string name="app_links_repair_success">پیوندهای برنامه با موفقیت فعال شدند</string>
     <string name="app_links_repair_failed">فعال‌سازی خودکار پیوندهای برنامه ناموفق بود</string>
+    <string name="app_links_change_failed">تغییر لینک‌های اپلیکیشن ناموفق بود</string>
     <string name="app_links_all_verified">همه پیوندهای پشتیبانی‌شده برای باز شدن در این برنامه تنظیم شده‌اند</string>
     <string name="app_links_fix">اصلاح پیوندها</string>
     <string name="configure">پیکربندی</string>

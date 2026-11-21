@@ -570,6 +570,7 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="app_links_open_settings">Deschideți setările pentru linkuri</string>
     <string name="app_links_repair_success">Linkurile aplicației au fost activate cu succes</string>
     <string name="app_links_repair_failed">Nu s-a reușit activarea automată a linkurilor aplicației</string>
+    <string name="app_links_change_failed">Eșec la modificarea linkurilor aplicației</string>
     <string name="app_links_all_verified">Toate linkurile acceptate sunt configurate să se deschidă în această aplicație</string>
     <string name="app_links_fix">Repară linkurile</string>
     <string name="configure">Configurează</string>

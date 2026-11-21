@@ -570,6 +570,7 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="app_links_open_settings">Åbn linkindstillinger</string>
     <string name="app_links_repair_success">App-links blev aktiveret med succes</string>
     <string name="app_links_repair_failed">Kunne ikke aktivere app-links automatisk</string>
+    <string name="app_links_change_failed">Kunne ikke ændre app-links</string>
     <string name="app_links_all_verified">Alle understøttede links er konfigureret til at åbne i denne app</string>
     <string name="app_links_fix">Reparer links</string>
     <string name="configure">Konfigurér</string>

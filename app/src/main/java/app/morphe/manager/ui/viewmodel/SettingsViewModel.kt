@@ -299,7 +299,7 @@ class SettingsViewModel(
     fun confirmInstallerSelection(token: InstallerManager.Token) =
         viewModelScope.launch(Dispatchers.IO) {
             if (token.usesRoot) runCatching { rootInstaller.hasRootAccess() }
-            installerManager.updatePrimaryToken(token)
+            installerManager.updatePreferredToken(token)
         }
 
     /** Asks for root access when [mode] can mount, then saves it. */
@@ -308,17 +308,11 @@ class SettingsViewModel(
         prefs.rootPatchMode.update(mode)
     }
 
-    /**
-     * Returns a deduplicated, validated list of installer entries for [installTarget],
-     * ensuring the currently-preferred [token] is always present in the list.
-     */
+    /** The installers to pick from for [installTarget], the preferred [token] always among them. */
     fun getInstallerEntries(
         installTarget: InstallerManager.InstallTarget,
         token: InstallerManager.Token,
-    ): List<InstallerManager.Entry> {
-        val raw = installerManager.listEntries(installTarget, includeNone = false)
-        return installerManager.ensureValidEntries(raw, token, installTarget)
-    }
+    ): List<InstallerManager.Entry> = installerManager.listEntries(installTarget, token)
 
     fun parseInstallerToken(preference: String): InstallerManager.Token =
         installerManager.parseToken(preference)
@@ -326,7 +320,7 @@ class SettingsViewModel(
     fun describeInstallerEntry(
         token: InstallerManager.Token,
         installTarget: InstallerManager.InstallTarget,
-    ): InstallerManager.Entry? = installerManager.describeEntry(token, installTarget)
+    ): InstallerManager.Entry = installerManager.describeEntry(token, installTarget)
 
     fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
 

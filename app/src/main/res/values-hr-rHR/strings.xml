@@ -573,6 +573,7 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="app_links_open_settings">Otvori postavke poveznica</string>
     <string name="app_links_repair_success">Poveznice aplikacije uspješno su omogućene</string>
     <string name="app_links_repair_failed">Nije uspjelo automatsko omogućavanje aplikacijskih poveznica</string>
+    <string name="app_links_change_failed">Promjena poveznica aplikacije nije uspjela</string>
     <string name="app_links_all_verified">Sve podržane poveznice konfigurirane su za otvaranje u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
     <string name="configure">Konfiguriraj</string>

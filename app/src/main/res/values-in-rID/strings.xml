@@ -570,6 +570,7 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="app_links_open_settings">Buka pengaturan tautan</string>
     <string name="app_links_repair_success">Tautan aplikasi berhasil diaktifkan</string>
     <string name="app_links_repair_failed">Gagal mengaktifkan tautan aplikasi secara otomatis</string>
+    <string name="app_links_change_failed">Gagal mengubah tautan aplikasi</string>
     <string name="app_links_all_verified">Semua tautan yang didukung dikonfigurasi untuk dibuka di aplikasi ini</string>
     <string name="app_links_fix">Perbaiki tautan</string>
     <string name="configure">Konfigurasi</string>

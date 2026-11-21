@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">የሊንክ ቅንብሮችን ክፈት</string>
     <string name="app_links_repair_success">የመተግበሪያ ሊንኮች በተሳካ ሁኔታ ነቅተዋል</string>
     <string name="app_links_repair_failed">የመተግበሪያ ሊንኮችን በራስ-ሰር ማንቃት አልተቻለም</string>
+    <string name="app_links_change_failed">የመተግበሪያ ሊንኮችን ለመለወጥ አልተቻለም</string>
     <string name="app_links_all_verified">ሁሉም የሚደገፉ ሊንኮች በዚህ መተግበሪያ ውስጥ እንዲከፈቱ ተዋቅረዋል</string>
     <string name="app_links_fix">ሊንኮችን አስተካክል</string>
     <string name="configure">ያዋቅሩ</string>

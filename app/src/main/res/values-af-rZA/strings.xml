@@ -570,6 +570,7 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="app_links_open_settings">Maak skakelinstellings oop</string>
     <string name="app_links_repair_success">Toepskakels is suksesvol geaktiveer</string>
     <string name="app_links_repair_failed">Kon nie toepskakels outomaties aktiveer nie</string>
+    <string name="app_links_change_failed">Dit was nie moontlik om toepassing-skakels te verander nie</string>
     <string name="app_links_all_verified">Alle ondersteunde skakels is ingestel om in hierdie toepassing oop te maak</string>
     <string name="app_links_fix">Herstel skakels</string>
     <string name="configure">Stel in</string>

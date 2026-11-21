@@ -6,10 +6,10 @@
     <string name="home_not_patched_yet">Jeszcze niezmodyfikowana</string>
     <string name="home_unpatched_version_installed">Zainstalowano niezmodyfikowaną wersję</string>
     <string name="home_app_status_newer_version">Zaktualizuj do %s</string>
-    <string name="home_app_status_newer_patches">Nowe poprawki</string>
+    <string name="home_app_status_newer_patches">Nowe modyfikacje</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">Telewizor</string>
-    <string name="form_factor_automotive">Samochodowy</string>
+    <string name="form_factor_automotive">Samochód</string>
     <string name="home_no_patches_available">Brak dostępnych modyfikacji</string>
     <string name="home_app_hide_title">Ukryć tę aplikację?</string>
     <string name="home_more_apps_title">Więcej aplikacji</string>
@@ -67,11 +67,11 @@
     <string name="list_options_title">Sortuj i filtruj</string>
     <string name="list_options_state_description">Posortowane według %1$s, filtrowane według %2$s</string>
     <!-- Orders every sortable list offers -->
-    <string name="list_sort_manual">Ręczny</string>
+    <string name="list_sort_manual">Ręcznie</string>
     <string name="list_sort_name_asc">Nazwa (A - Z)</string>
     <string name="list_sort_name_desc">Nazwa (Z - A)</string>
     <string name="home_app_filter_all">Wszystkie</string>
-    <string name="home_app_filter_not_patched">Nie zmodyfikowano</string>
+    <string name="home_app_filter_not_patched">Niezmodyfikowane</string>
     <string name="home_app_filter_clones">Klony</string>
     <string name="home_app_grouping_none">Brak</string>
     <string name="home_app_sort_manual_hint">Przytrzymaj aplikację, a następnie dotknij przycisku zmiany kolejności</string>
@@ -92,7 +92,7 @@
     <string name="home_category_new_title">Nowa kategoria</string>
     <string name="home_category_rename_title">Zmień nazwę kategorii</string>
     <string name="home_category_name">Nazwa kategorii</string>
-    <string name="home_category_name_description">Ekran główny grupuje aplikacje pod tą nazwą</string>
+    <string name="home_category_name_description">Ekran główny grupuje swoje aplikacje pod tą nazwą</string>
     <string name="home_category_move_to">Przenieś do kategorii</string>
     <string name="home_category_move_selected_title">Przenieś wybrane aplikacje</string>
     <!-- %s is the name of the category -->
@@ -174,7 +174,7 @@
     <string name="sources_management_report_issue">Zgłoś problem</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_apps">Aplikacje</string>
-    <string name="sources_apps_description">Zaznaczone aplikacje pochodzą z tego źródła. Dotknij aplikacji, aby ją pominąć lub przywrócić, przesuń ją, aby zobaczyć jej poprawki. Aplikacja, której nie dostarcza żadne źródło, znika z ekranu głównego, chyba że została przez Ciebie zmodyfikowana</string>
+    <string name="sources_apps_description">Zaznaczone aplikacje pochodzą z tego źródła. Dotknij aplikacji, aby ją pominąć lub przywrócić, albo przesuń ją palcem, aby zobaczyć jej modyfikacje. Aplikacja, której nie dostarcza żadne źródło, znika z ekranu głównego, chyba że została przez Ciebie zmodyfikowana</string>
     <string name="sources_apps_brought">Uwzględnione w tym źródle</string>
     <string name="sources_apps_left_out">Wykluczone z tego źródła</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -571,6 +571,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="app_links_open_settings">Otwórz ustawienia linków</string>
     <string name="app_links_repair_success">Pomyślnie włączono linki aplikacji</string>
     <string name="app_links_repair_failed">Nie udało się automatycznie włączyć linków aplikacji</string>
+    <string name="app_links_change_failed">Nie udało się zmienić linków aplikacji</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
     <string name="configure">Konfiguruj</string>
@@ -1296,7 +1297,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="selection_set_deleted">Usunięto zestaw %s</string>
     <string name="selection_set_renamed">Zmieniono nazwę na %s</string>
     <string name="selection_set_rename_title">Zmień nazwę zestawu</string>
-    <string name="selection_set_rename_description">Nadanie nazwy innego zestawu zastąpi ten zestaw</string>
+    <string name="selection_set_rename_description">Użycie nazwy innego zestawu spowoduje jego zastąpienie</string>
     <string name="selection_set_delete_title">Usunąć zestaw?</string>
     <string name="selection_set_delete_message">Spowoduje to trwałe usunięcie zestawu %s</string>
     <string name="copy_selection_empty">Brak innych zapisanych wyborów do skopiowania</string>
@@ -1333,9 +1334,9 @@ Wymagane są następujące wymiary obrazów:
     <string name="file_picker_show_hidden_files">Pokaż ukryte pliki</string>
     <string name="file_picker_new_folder">Nowy folder</string>
     <string name="file_picker_folder_name">Nazwa folderu</string>
-    <string name="file_picker_new_folder_description">Utworzony w %1$s i otwarty od razu</string>
-    <string name="file_picker_folder_name_taken">Coś o tej nazwie znajduje się już tutaj</string>
-    <string name="file_picker_folder_name_invalid">Nazwa folderu nie może zawierać znaków \" * / : &lt; &gt; ? \\ |</string>
+    <string name="file_picker_new_folder_description">Zostanie utworzony w %1$s i od razu otwarty</string>
+    <string name="file_picker_folder_name_taken">Element o tej nazwie już tu istnieje</string>
+    <string name="file_picker_folder_name_invalid">Nazwa folderu nie może zawierać znaków: \" * / : &lt; &gt; ? \\ |</string>
     <string name="file_picker_new_folder_failed">Nie udało się utworzyć folderu</string>
     <!-- Settings - System Tab - About Section -->
     <string name="settings_system_about">Informacje</string>

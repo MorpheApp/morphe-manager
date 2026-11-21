@@ -570,6 +570,7 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="app_links_open_settings">Otevřít nastavení odkazů</string>
     <string name="app_links_repair_success">Odkazy aplikací byly úspěšně povoleny</string>
     <string name="app_links_repair_failed">Nepodařilo se automaticky povolit odkazy aplikací</string>
+    <string name="app_links_change_failed">Nepodařilo se změnit odkazy aplikace</string>
     <string name="app_links_all_verified">Všechny podporované odkazy jsou nastaveny tak, aby se otevíraly v této aplikaci</string>
     <string name="app_links_fix">Opravit odkazy</string>
     <string name="configure">Nastavit</string>

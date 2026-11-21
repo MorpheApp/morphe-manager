@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">लिंक सेटिंग खोलें</string>
     <string name="app_links_repair_success">ऐप लिंक सफलतापूर्वक चालू हो गए</string>
     <string name="app_links_repair_failed">ऐप लिंक अपने आप चालू नहीं हो सके</string>
+    <string name="app_links_change_failed">ऐप लिंक बदलने में विफल</string>
     <string name="app_links_all_verified">सभी सपोर्टेड लिंक इस ऐप में खुलने के लिए सेट हैं</string>
     <string name="app_links_fix">लिंक ठीक करें</string>
     <string name="configure">सेट करें</string>

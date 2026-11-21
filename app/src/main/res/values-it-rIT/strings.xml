@@ -570,6 +570,7 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="app_links_open_settings">Apri le impostazioni dei collegamenti</string>
     <string name="app_links_repair_success">Collegamenti all\'app abilitati correttamente</string>
     <string name="app_links_repair_failed">Non è stato possibile abilitare automaticamente i collegamenti all\'app</string>
+    <string name="app_links_change_failed">Impossibile modificare i collegamenti all\'app</string>
     <string name="app_links_all_verified">Tutti i collegamenti supportati sono configurati per aprirsi in questa app</string>
     <string name="app_links_fix">Correggi i collegamenti</string>
     <string name="configure">Configura</string>

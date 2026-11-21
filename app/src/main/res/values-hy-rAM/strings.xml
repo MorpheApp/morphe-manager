@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">Բացել հղումների կարգավորումները</string>
     <string name="app_links_repair_success">Հավելվածի հղումները հաջողությամբ միացվեցին</string>
     <string name="app_links_repair_failed">Հավելվածի հղումները ավտոմատ կերպով միացնելը ձախողվեց</string>
+    <string name="app_links_change_failed">Չհաջողվեց փոխել հավելվածի հղումները</string>
     <string name="app_links_all_verified">Բոլոր աջակցվող հղումները կարգավորված են բացվել այս հավելվածում</string>
     <string name="app_links_fix">Ուղղել հղումները</string>
     <string name="configure">Կարգավորել</string>

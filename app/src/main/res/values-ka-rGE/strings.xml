@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">ბმულების პარამეტრების გახსნა</string>
     <string name="app_links_repair_success">აპლიკაციის ბმულები წარმატებით გააქტიურდა</string>
     <string name="app_links_repair_failed">აპლიკაციის ბმულების ავტომატური გააქტიურება ვერ მოხერხდა</string>
+    <string name="app_links_change_failed">აპლიკაციის ბმულების შეცვლამ ვერ იმუშავა</string>
     <string name="app_links_all_verified">ყველა მხარდაჭერი ბმული კონფიგურირებულია ამ აპლიკაციაში გასახსნელად</string>
     <string name="app_links_fix">ბმულების გასწორება</string>
     <string name="configure">კონფიგურაცია</string>

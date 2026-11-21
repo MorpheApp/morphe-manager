@@ -499,10 +499,10 @@ class BatchPatchCoordinator(
      * installs it through the interactive installer.
      */
     private suspend fun installPatchedUnattended(items: List<BatchPatchItem>) {
-        val token = installerManager.getPrimaryToken()
+        val token = installerManager.getPreferredToken()
         val asPlayStore = token == InstallerManager.Token.ShizukuPlayStore
         if (token != InstallerManager.Token.Shizuku && !asPlayStore) {
-            Log.d(TAG, "Primary installer cannot install unattended")
+            Log.d(TAG, "Preferred installer cannot install unattended")
             return
         }
 

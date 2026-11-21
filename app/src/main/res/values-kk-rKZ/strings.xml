@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">Сілтеме параметрлерін ашу</string>
     <string name="app_links_repair_success">Қолданба сілтемелері сәтті қосылды</string>
     <string name="app_links_repair_failed">Қолданба сілтемелерін автоматты түрде қосу сәтсіз аяқталды</string>
+    <string name="app_links_change_failed">Қолданба сілтемелерін өзгерту сәтсіз аяқталды</string>
     <string name="app_links_all_verified">Барлық қолдау көрсетілетін сілтемелер осы қолданбада ашуға бапталған</string>
     <string name="app_links_fix">Сілтемелерді түзету</string>
     <string name="configure">Баптау</string>

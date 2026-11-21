@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">打开链接设置</string>
     <string name="app_links_repair_success">应用链接已成功启用</string>
     <string name="app_links_repair_failed">自动启用应用链接失败</string>
+    <string name="app_links_change_failed">更改应用链接失败</string>
     <string name="app_links_all_verified">所有受支持的链接均已配置为在此应用中打开</string>
     <string name="app_links_fix">修复链接</string>
     <string name="configure">配置</string>

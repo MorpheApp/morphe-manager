@@ -570,6 +570,7 @@ Emaitza onenak lortzeko, aplikazio honek &lt;b&gt;APK osoa&lt;/b&gt; patchatzea 
     <string name="app_links_open_settings">Ireki esteken konfigurazioa</string>
     <string name="app_links_repair_success">Aplikazio-estekak arrakastaz gaitu dira</string>
     <string name="app_links_repair_failed">Aplikazio-estekak automatikoki gaitzea huts egin du</string>
+    <string name="app_links_change_failed">App-estekak aldatzea huts egin da</string>
     <string name="app_links_all_verified">Onartutako esteka guztiak aplikazio honetan irekitzeko konfiguratuta daude</string>
     <string name="app_links_fix">Konpondu estekak</string>
     <string name="configure">Konfiguratu</string>

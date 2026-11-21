@@ -570,6 +570,7 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="app_links_open_settings">Vula izilungiselelo zezixhumanisi</string>
     <string name="app_links_repair_success">Izixhumanisi zehlelo zivunyelwe ngempumelelo</string>
     <string name="app_links_repair_failed">Kuhlulekile ukuvumela izixhumanisi zehlelo ngokuzenzakalelayo</string>
+    <string name="app_links_change_failed">Kuhleleke ukushintsha ama-app links</string>
     <string name="app_links_all_verified">Zonke izixhumanisi ezisekelwe zilungiselelwe ukuvulwa kulolu hlelo</string>
     <string name="app_links_fix">Lungisa izixhumanisi</string>
     <string name="configure">lungisa</string>

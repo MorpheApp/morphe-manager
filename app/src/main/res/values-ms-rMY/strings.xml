@@ -571,6 +571,7 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="app_links_open_settings">Buka tetapan pautan</string>
     <string name="app_links_repair_success">Pautan aplikasi berjaya diaktifkan</string>
     <string name="app_links_repair_failed">Gagal mengaktifkan pautan aplikasi secara automatik</string>
+    <string name="app_links_change_failed">Gagal mengubah pautan aplikasi</string>
     <string name="app_links_all_verified">Semua pautan disokong dikonfigurasikan untuk dibuka dalam aplikasi ini</string>
     <string name="app_links_fix">Baiki pautan</string>
     <string name="configure">Konfigurasi</string>

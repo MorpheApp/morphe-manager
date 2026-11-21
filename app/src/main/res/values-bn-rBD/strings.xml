@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">লিঙ্ক সেটিংস খুলুন</string>
     <string name="app_links_repair_success">অ্যাপ লিঙ্ক সফলভাবে সক্রিয় করা হয়েছে</string>
     <string name="app_links_repair_failed">অ্যাপ লিংক স্বয়ংক্রিয়ভাবে সক্রিয় করা যায়নি</string>
+    <string name="app_links_change_failed">অ্যাপ লিঙ্ক পরিবর্তন করতে ব্যর্থ হয়েছে</string>
     <string name="app_links_all_verified">সকল সমর্থিত লিংক এই অ্যাপে খোলার জন্য কনফিগার করা হয়েছে</string>
     <string name="app_links_fix">লিংক ঠিক করুন</string>
     <string name="configure">কনফিগার করুন</string>

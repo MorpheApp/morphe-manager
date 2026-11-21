@@ -570,6 +570,7 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="app_links_open_settings">Linkinstellingen openen</string>
     <string name="app_links_repair_success">App-links succesvol ingeschakeld</string>
     <string name="app_links_repair_failed">Het is niet gelukt om app-links automatisch in te schakelen</string>
+    <string name="app_links_change_failed">Het wijzigen van app-links is mislukt</string>
     <string name="app_links_all_verified">Alle ondersteunde links zijn geconfigureerd om in deze app te worden geopend</string>
     <string name="app_links_fix">Links herstellen</string>
     <string name="configure">Configureren</string>

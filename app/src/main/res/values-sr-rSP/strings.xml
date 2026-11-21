@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">Отвори подешавања линкова</string>
     <string name="app_links_repair_success">Апликациони линкови су успешно омогућени</string>
     <string name="app_links_repair_failed">Аутоматско омогућавање апликационих линкова није успело</string>
+    <string name="app_links_change_failed">Неуспешна промена везе апликација</string>
     <string name="app_links_all_verified">Сви подржани линкови су подешени да се отварају у овој апликацији</string>
     <string name="app_links_fix">Поправи линкове</string>
     <string name="configure">Подеси</string>

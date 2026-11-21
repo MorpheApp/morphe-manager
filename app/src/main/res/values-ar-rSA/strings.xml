@@ -8,7 +8,7 @@
     <string name="home_app_status_newer_version">تحديث إلى %s</string>
     <string name="home_app_status_newer_patches">تعديلات جديدة</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
-    <string name="form_factor_tv">تلفزيون</string>
+    <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">لا توجد تعديلات متاحة</string>
     <string name="home_app_hide_title">إخفاء هذا التطبيق؟</string>
@@ -76,7 +76,7 @@
     <string name="home_app_grouping_none">بدون</string>
     <string name="home_app_sort_manual_hint">اضغط مطولًا على تطبيق، ثم انقر على زر إعادة الترتيب</string>
     <string name="home_app_sort_recommended">موصّى به</string>
-    <string name="home_app_sort_updates_first">التحديثات أولاً</string>
+    <string name="home_app_sort_updates_first">التحديثات أولًا</string>
     <string name="home_app_sort_recently_patched">تم تعديلها مؤخرًا</string>
     <string name="home_no_apps_title">لا توجد تطبيقات متاحة</string>
     <string name="home_no_apps_subtitle">أضِف مصدرًا للتعديل أو قم بتمكين مصدر موجود في %s</string>
@@ -570,6 +570,7 @@
     <string name="app_links_open_settings">فتح إعدادات الروابط</string>
     <string name="app_links_repair_success">تم تمكين روابط التطبيق بنجاح</string>
     <string name="app_links_repair_failed">تعذّر تمكين روابط التطبيقات تلقائيًا</string>
+    <string name="app_links_change_failed">فشل تغيير روابط التطبيق</string>
     <string name="app_links_all_verified">تم تكوين جميع الروابط المدعومة لتُفتح في هذا التطبيق</string>
     <string name="app_links_fix">إصلاح الروابط</string>
     <string name="configure">تكوين</string>
@@ -1191,7 +1192,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="settings_system_auto_backup_description">يحفظ إعدادات Morphe في مجلد تختاره</string>
     <string name="settings_system_auto_backup_last">آخر نسخة احتياطية: %s</string>
     <string name="settings_system_auto_backup_folder">المجلد</string>
-    <string name="settings_system_auto_backup_folder_name">نسخ Morphe الاحتياطية</string>
+    <string name="settings_system_auto_backup_folder_name">نُسخ Morphe الاحتياطية</string>
     <string name="settings_system_auto_backup_folder_failed">تعذر استخدام هذا المجلد: %s</string>
     <string name="settings_system_auto_backup_interval">تكرار النسخ الاحتياطي</string>
     <string name="settings_system_auto_backup_signing_key">تضمين مفتاح التوقيع</string>
@@ -1336,7 +1337,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="file_picker_show_hidden_files">إظهار الملفات المخفية</string>
     <string name="file_picker_new_folder">مجلد جديد</string>
     <string name="file_picker_folder_name">اسم المجلد</string>
-    <string name="file_picker_new_folder_description">تم الإنشاء في %1$s والفتح على الفور</string>
+    <string name="file_picker_new_folder_description">تم إنشاؤه في %1$s وتم فتحه على الفور</string>
     <string name="file_picker_folder_name_taken">يوجد شيء بهذا الاسم هنا بالفعل</string>
     <string name="file_picker_folder_name_invalid">لا يمكن أن يحتوي اسم المجلد على \" * / : &lt; &gt; ? \\ |</string>
     <string name="file_picker_new_folder_failed">تعذر إنشاء المجلد</string>

@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.home
 
 import android.content.pm.PackageInfo
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,7 +26,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import app.morphe.manager.R
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
-import app.morphe.manager.domain.links.RepairCapability
+import app.morphe.manager.domain.links.LinkSelectionAccess
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.util.openAppOpenByDefaultSettings
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -35,8 +36,8 @@ import org.koin.compose.koinInject
 
 /**
  * Lists the web links [packageName] declares and where each one opens. [onRefresh] reads the
- * status again, which happens on every return to the app since the system screen is where the
- * user changes it.
+ * status again, which also happens on every return to the app, since the system screen is where
+ * the user changes it without the manager's help.
  */
 @Composable
 fun DialogHostScope.AppLinksDialog(
@@ -51,6 +52,7 @@ fun DialogHostScope.AppLinksDialog(
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onRefresh()
     }
+    val controls = rememberAppLinksControls(packageName, status, onRefresh)
 
     DetailsDialog(
         onDismissRequest = onDismiss,
@@ -60,60 +62,83 @@ fun DialogHostScope.AppLinksDialog(
         title = appLabel,
         subtitle = stringResource(R.string.app_links_title),
         accentColor = accentColor,
-        actions = rememberAppLinksActions(packageName, status, onRefresh)
+        actions = controls.actions
     ) {
-        AppLinksContent(status = status, accentColor = accentColor)
+        AppLinksContent(status = status, controls = controls, accentColor = accentColor)
     }
 }
 
 /**
- * What can be done about [packageName]'s web links: turning them on where the device lets the
- * manager do it, and opening the system screen where the user picks them.
+ * What can be done about an app's web links from the manager: [actions] for all of them at once,
+ * and [onToggleDomain] for one, null where the device does not let the manager change them.
+ * [pendingDomains] are the ones whose change is still being applied.
+ */
+@Immutable
+class AppLinksControls(
+    val actions: List<DialogAction>,
+    val onToggleDomain: ((domain: String, selected: Boolean) -> Unit)?,
+    val pendingDomains: Set<String>
+)
+
+/**
+ * The [AppLinksControls] of [packageName]: selecting every link or one at a time where Shizuku or
+ * root lets the manager do it, and opening the system screen where the user picks them either way.
  */
 @Composable
-fun rememberAppLinksActions(
+fun rememberAppLinksControls(
     packageName: String,
     status: AppLinksStatus,
     onRefresh: () -> Unit
-): List<DialogAction> {
+): AppLinksControls {
     val context = LocalContext.current
     val messages = koinInject<UserMessages>()
     val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val appLinksManager: AppLinksManager = koinInject()
-    val repairCapability by produceState(RepairCapability.NONE) {
-        value = appLinksManager.getRepairCapability()
+    val canChange by produceState(false) {
+        value = appLinksManager.getSelectionAccess() != LinkSelectionAccess.NONE
     }
-    var isRepairing by remember { mutableStateOf(false) }
+    var pendingDomains by remember { mutableStateOf(emptySet<String>()) }
 
-    return buildList {
-        if (repairCapability != RepairCapability.NONE && status.needsAttention) {
+    // Marked before launching, so a second tap in the same frame starts nothing. The rows show the
+    // status read once the change lands rather than what was asked for
+    fun change(
+        domains: Set<String>,
+        @StringRes successMessage: Int?,
+        @StringRes failureMessage: Int,
+        apply: suspend () -> Boolean
+    ) {
+        if (domains.isEmpty() || domains.any { it in pendingDomains }) return
+        pendingDomains += domains
+        scope.launch {
+            val success = apply()
+            pendingDomains -= domains
+            onRefresh()
+            (if (success) successMessage else failureMessage)?.let { messages.show(resources.getString(it)) }
+        }
+    }
+
+    val actions = buildList {
+        if (canChange && status.needsAttention) {
+            // Every link left to the browser is what selecting them all changes
+            val selectingAll = pendingDomains.containsAll(status.unhandledDomains)
             add(
                 DialogAction(
                     text = stringResource(
-                        if (isRepairing) R.string.app_links_enable_auto_in_progress
+                        if (selectingAll) R.string.app_links_enable_auto_in_progress
                         else R.string.app_links_enable_auto
                     ),
                     icon = MaterialSymbols.Rounded.Auto_fix_high,
                     onClick = {
-                        // Set before launching, so a second tap in the same frame starts nothing
-                        if (!isRepairing) {
-                            isRepairing = true
-                            scope.launch {
-                                val success = appLinksManager.repairAppLinks(packageName)
-                                isRepairing = false
-                                onRefresh()
-                                messages.show(
-                                    resources.getString(
-                                        if (success) R.string.app_links_repair_success
-                                        else R.string.app_links_repair_failed
-                                    )
-                                )
-                            }
-                        }
+                        change(
+                            domains = status.unhandledDomains.toSet(),
+                            successMessage = R.string.app_links_repair_success,
+                            failureMessage = R.string.app_links_repair_failed
+                        ) { appLinksManager.selectAllDomains(packageName) }
                     },
-                    enabled = !isRepairing,
-                    emphasis = DialogActionEmphasis.Filled
+                    enabled = pendingDomains.isEmpty(),
+                    // Pressed for only while no link reaches the app, as a few left out can be on purpose
+                    emphasis = if (status.opensInBrowser) DialogActionEmphasis.Filled else DialogActionEmphasis.Outlined
                 )
             )
         }
@@ -125,25 +150,26 @@ fun rememberAppLinksActions(
             )
         )
     }
+
+    return AppLinksControls(
+        actions = actions,
+        onToggleDomain = if (canChange) {
+            { domain, selected ->
+                change(domains = setOf(domain), successMessage = null, failureMessage = R.string.app_links_change_failed) {
+                    appLinksManager.setDomainsSelected(packageName, listOf(domain), selected)
+                }
+            }
+        } else null,
+        pendingDomains = pendingDomains
+    )
 }
 
-/** Whether the app's web links open in it, then each link and whether it does. */
+/** Each link the app declares and whether it opens in the app, then what that adds up to. */
 @Composable
-fun AppLinksContent(status: AppLinksStatus, accentColor: Color?) {
-    if (status.needsAttention) {
-        Notice(
-            text = stringResource(R.string.app_links_description),
-            tone = SemanticTone.Warning,
-            icon = MaterialSymbols.Rounded.Link_off
-        )
-    } else {
-        Notice(
-            text = stringResource(R.string.app_links_all_verified),
-            tone = SemanticTone.Success,
-            icon = MaterialSymbols.Rounded.Check_circle
-        )
-    }
-
+fun AppLinksContent(status: AppLinksStatus, controls: AppLinksControls, accentColor: Color?) {
+    // Looked up once per status rather than per row, as an app can declare hundreds of domains
+    val unhandled = remember(status) { status.unhandledDomains.toSet() }
+    val onToggleDomain = controls.onToggleDomain
     SurfaceCard(
         cornerRadius = Defaults.CornerLarge,
         showBorder = true,
@@ -154,9 +180,44 @@ fun AppLinksContent(status: AppLinksStatus, accentColor: Color?) {
         Column {
             status.domains.forEachIndexed { index, domain ->
                 if (index > 0) SettingsDivider()
-                DomainRow(domain = domain, isEnabled = domain !in status.unhandledDomains)
+                val opensInApp = domain !in unhandled
+                if (onToggleDomain != null) {
+                    val pending = domain in controls.pendingDomains
+                    ToggleRow(
+                        title = domain,
+                        checked = opensInApp,
+                        onCheckedChange = { onToggleDomain(domain, it) },
+                        enabled = !pending,
+                        isLoading = pending,
+                        showDivider = false,
+                        accentColor = accentColor,
+                        // With the row's own inset, level with the domains of a row that cannot be changed
+                        modifier = Modifier.padding(horizontal = Defaults.SpaceMedium)
+                    )
+                } else {
+                    DomainRow(domain = domain, isEnabled = opensInApp)
+                }
             }
         }
+    }
+
+    when {
+        status.isFullyConfigured -> Footnote(
+            text = stringResource(R.string.app_links_all_verified),
+            tone = SemanticTone.Success,
+            icon = MaterialSymbols.Rounded.Check_circle
+        )
+        status.opensInBrowser -> Footnote(
+            text = stringResource(R.string.app_links_description),
+            tone = SemanticTone.Warning,
+            icon = MaterialSymbols.Rounded.Link_off
+        )
+        // Apps declare service domains next to their own, so some left to the browser is a choice
+        // the user makes rather than something to fix
+        else -> Footnote(
+            text = stringResource(R.string.app_links_description),
+            icon = MaterialSymbols.Rounded.Link
+        )
     }
 }
 

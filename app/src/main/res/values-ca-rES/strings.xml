@@ -570,6 +570,7 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="app_links_open_settings">Obre la configuració d\'enllaços</string>
     <string name="app_links_repair_success">S\'han activat els enllaços de l\'aplicació correctament</string>
     <string name="app_links_repair_failed">No s\'han pogut activar els enllaços de l\'aplicació automàticament</string>
+    <string name="app_links_change_failed">Error en canviar els enllaços de l\'aplicació</string>
     <string name="app_links_all_verified">Tots els enllaços compatibles estan configurats per obrir-se en aquesta aplicació</string>
     <string name="app_links_fix">Corregir enllaços</string>
     <string name="configure">Configurar</string>

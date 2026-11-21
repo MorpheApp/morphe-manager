@@ -180,7 +180,7 @@
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <string name="sources_apps_stays_patched">Saglabāts kā patchēts</string>
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
-    <string name="sources_apps_new">Jauns</string>
+    <string name="sources_apps_new">Jauna</string>
     <string name="sources_apps_new_apps">Atnest jaunas lietotnes</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="sources_apps_new_apps_description">Vēlāk pievienotās lietotnes parādīsies sākuma ekrānā</string>
@@ -361,7 +361,7 @@ Izvēlieties, no kurienes ņemt tās APK"</string>
     <string name="expert_mode_selected_only_on">Rāda tikai atlasītos labojumus</string>
     <string name="expert_mode_selected_only_off">Rāda visus labojumus</string>
     <string name="expert_mode_universal_patches">Universālie labojumi</string>
-    <string name="expert_mode_new_patches">Jauns</string>
+    <string name="expert_mode_new_patches">Jauni</string>
     <string name="expert_mode_options_customized">Pielāgots</string>
     <string name="expert_mode_patch_required_by_installer">Nepieciešams izvēlētajam instalācijas mērķim</string>
     <string name="expert_mode_patch_unavailable_for_installer">Nav pieejams izvēlētajam instalācijas mērķim</string>
@@ -411,7 +411,7 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <!-- Color picker -->
     <string name="custom_color">Pielāgota krāsa</string>
     <string name="color_picker_shade">Piesātinājums un spilgtums</string>
-    <string name="color_picker_hue">Krāsa</string>
+    <string name="color_picker_hue">Krāsas tonis</string>
     <!-- Patch Options -->
     <string name="patch_option_instructions">Instrukcijas</string>
     <string name="patch_option_enter_value">Ievadīt vērtību</string>
@@ -520,7 +520,7 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <string name="batch_queue_clear_description">Visas lietotnes tiks noņemtas no rindas</string>
     <string name="batch_queue_keep_title">Saglabāt rindu?</string>
     <string name="batch_queue_keep_description">Rindā esošās lietotnes paliks uz sākuma ekrāna, lai tās vēlāk varētu palaist</string>
-    <string name="batch_queue_keep">Saglabāt</string>
+    <string name="batch_queue_keep">Atstāt</string>
     <string name="shortcut_repatch_short">Atjaunot patch</string>
     <string name="shortcut_repatch_long">Atjaunot novecojušās lietotnes</string>
     <string name="shortcut_check_updates_short">Pārbaudīt atjauninājumus</string>
@@ -569,6 +569,7 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <string name="app_links_open_settings">Atvērt saites iestatījumus</string>
     <string name="app_links_repair_success">Lietotnes saites veiksmīgi iespējotas</string>
     <string name="app_links_repair_failed">Neizdevās automātiski iespējot lietotnes saites</string>
+    <string name="app_links_change_failed">Neizdevās mainīt lietotnes saites</string>
     <string name="app_links_all_verified">Visas atbalstītās saites ir konfigurētas atvēršanai šajā lietotnē</string>
     <string name="app_links_fix">Labot saites</string>
     <string name="configure">Konfigurēt</string>
@@ -615,7 +616,7 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <!-- Size of the patched APK, once patching finished -->
     <string name="patcher_field_output_size">Izvades izmērs</string>
     <!-- How long patching took -->
-    <string name="patcher_field_time">Laiks</string>
+    <string name="patcher_field_time">Izpildes ilgums</string>
     <!-- Average and peak heap the patcher held while it ran -->
     <string name="patcher_field_memory_average">Vidējā atmiņa</string>
     <string name="patcher_field_memory_max">Maksimālā atmiņa</string>
@@ -625,7 +626,7 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <!-- Value of "Libraries": the libraries this device cannot use were dropped from the patched APK -->
     <string name="patcher_field_value_stripped">noņemts</string>
     <!-- Value of "Libraries": every library was left in the patched APK -->
-    <string name="patcher_field_value_kept">saglabāts</string>
+    <string name="patcher_field_value_kept">atstātas</string>
     <string name="patcher_tab_logs">Labotāja žurnāli</string>
     <string name="patcher_tab_game">Spēles</string>
     <string name="patcher_logs_waiting">Gaida žurnāla izvadi…</string>
@@ -793,7 +794,7 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="settings_appearance_background_description">Animācija, kas atskaņojas aiz lietotnes ekrāniem</string>
     <string name="settings_appearance_background_circles">Apļi</string>
     <string name="settings_appearance_background_rings">Ringi</string>
-    <string name="settings_appearance_background_mesh">Tīkls</string>
+    <string name="settings_appearance_background_mesh">Režģis</string>
     <string name="settings_appearance_background_space">Kosmoss</string>
     <string name="settings_appearance_background_shapes">Figūras</string>
     <string name="settings_appearance_background_snow">Sniegs</string>
@@ -879,7 +880,7 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="settings_appearance_app_icon_dark_4">Pusnakts</string>
     <string name="settings_appearance_app_icon_dark_5">Šīfers</string>
     <string name="settings_appearance_app_icon_accent_1">Aurora</string>
-    <string name="settings_appearance_app_icon_accent_2">Tinta</string>
+    <string name="settings_appearance_app_icon_accent_2">Tinte</string>
     <string name="settings_appearance_app_icon_accent_3">Papīrs</string>
     <string name="settings_appearance_app_icon_accent_4">Krēsla</string>
     <string name="settings_appearance_app_icon_background">Fons</string>

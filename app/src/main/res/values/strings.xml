@@ -587,6 +587,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="app_links_open_settings">Open link settings</string>
     <string name="app_links_repair_success">App links enabled successfully</string>
     <string name="app_links_repair_failed">Failed to enable app links automatically</string>
+    <string name="app_links_change_failed">Failed to change app links</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
     <string name="configure">Configure</string>

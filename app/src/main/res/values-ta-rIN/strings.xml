@@ -111,6 +111,7 @@
     <string name="batch_queue_keep">தக்கவை</string>
     <!-- Home Screen - App Info Screen -->
     <string name="home_app_info_install_type_root">ரூட் நிறுவல்</string>
+    <string name="app_links_change_failed">ஆப் இணைப்புகளை மாற்ற முடியவில்லை</string>
     <!-- Home Screen - Root Mode -->
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">%1$s ஆனது %2$s என அமைக்கப்பட்டிருக்கும் போது கேட்கப்பட்டது. பேட்ச் செய்த பிறகு பேட்ச் பயன்முறையை மாற்ற முடியாது</string>

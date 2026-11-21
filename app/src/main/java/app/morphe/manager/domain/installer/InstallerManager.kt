@@ -20,7 +20,6 @@ import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.util.Log
@@ -56,56 +55,47 @@ class InstallerManager(
             .map { it.packageName }
             .toSet()
 
-    fun listEntries(target: InstallTarget, includeNone: Boolean): List<Entry> {
+    /**
+     * The installers to pick from for [target], [selected] among them even once the device no
+     * longer offers it, so a choice made earlier never drops out of the list.
+     */
+    fun listEntries(target: InstallTarget, selected: Token): List<Entry> {
         val hiddenPackages = hiddenInstallerPackages
-        val entries = mutableListOf<Entry>()
+        val entries = listOf(
+            Token.Internal,
+            Token.PlayStore,
+            Token.Root,
+            Token.RootPlayStore,
+            Token.Shizuku,
+            Token.ShizukuPlayStore
+        ).mapTo(mutableListOf()) { entryFor(it, target) }
 
-        entryFor(Token.Internal, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.PlayStore, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.Root, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.RootPlayStore, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.Shizuku, target, checkRoot = false)?.let(entries::add)
-        entryFor(Token.ShizukuPlayStore, target, checkRoot = false)?.let(entries::add)
-
-        val activityEntries = queryInstallerActivities()
+        entries += queryInstallerActivities()
+            .asSequence()
             .filter(::isInstallerCandidate)
             .distinctBy { it.activityInfo.packageName }
-            .mapNotNull { info ->
-                val component = ComponentName(info.activityInfo.packageName, info.activityInfo.name)
-                if (isDefaultComponent(component)) return@mapNotNull null
-                if (component.packageName in hiddenPackages) return@mapNotNull null
-                if (isExcludedDuplicate(component.packageName, info.loadLabel(packageManager).toString())) {
-                    return@mapNotNull null
-                }
-                entryFor(Token.Component(component), target, checkRoot = false)
+            .map { ComponentName(it.activityInfo.packageName, it.activityInfo.name) }
+            .filterNot { component ->
+                isDefaultComponent(component) ||
+                        component.packageName in hiddenPackages ||
+                        isExcludedDuplicate(component)
             }
+            .map { entryFor(Token.Component(it), target) }
             .sortedBy { it.label.lowercase() }
 
-        entries += activityEntries
-
-        val customEntries = readCustomInstallerTokens()
-            .mapNotNull { token ->
-                entryFor(token, target, checkRoot = false)
+        entries += readCustomInstallerTokens()
+            .filterNot { token ->
+                token.componentName.packageName in hiddenPackages || entries.any { it.token == token }
             }
-            .filterNot { entry ->
-                val componentToken = entry.token as? Token.Component ?: return@filterNot false
-                componentToken.componentName.packageName in hiddenPackages
-            }
-            .filterNot { customEntry ->
-                entries.any { tokensEqual(it.token, customEntry.token) }
-            }
+            .map { entryFor(it, target) }
             .sortedBy { it.label.lowercase() }
 
-        entries += customEntries
-
-        if (includeNone) {
-            entryFor(Token.None, target, checkRoot = false)?.let(entries::add)
-        }
+        if (entries.none { it.token == selected }) entries += entryFor(selected, target)
 
         return entries
     }
 
-    fun describeEntry(token: Token, target: InstallTarget): Entry? = entryFor(token, target)
+    fun describeEntry(token: Token, target: InstallTarget): Entry = entryFor(token, target)
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
@@ -136,7 +126,7 @@ class InstallerManager(
         is Token.Component -> token.componentName.flattenToString()
     }
 
-    fun getPrimaryToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
+    fun getPreferredToken(): Token = parseToken(prefs.installerPrimary.getBlocking())
 
     /** Whether apps are patched for root mount without asking first. */
     fun mountsByDefault(): Boolean =
@@ -164,8 +154,8 @@ class InstallerManager(
         }
     }
 
-    suspend fun updatePrimaryToken(token: Token) {
-        Log.d(TAG, "updatePrimaryToken -> ${token.describe()}")
+    suspend fun updatePreferredToken(token: Token) {
+        Log.d(TAG, "updatePreferredToken -> ${token.describe()}")
         prefs.installerPrimary.update(tokenToPreference(token))
     }
 
@@ -175,10 +165,10 @@ class InstallerManager(
             return
         }
 
-        when (val primaryToken = getPrimaryToken()) {
+        when (val preferredToken = getPreferredToken()) {
             Token.Shizuku,
             Token.ShizukuPlayStore -> {
-                if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                if (availabilityFor(preferredToken, InstallTarget.PATCHER, checkRoot = true).available) {
                     when (val result = sessionInstaller.uninstallShizuku(packageName)) {
                         UninstallResult.Success -> return
                         is UninstallResult.Failure -> throw Exception(
@@ -191,7 +181,7 @@ class InstallerManager(
 
             Token.Root,
             Token.RootPlayStore -> {
-                if (availabilityFor(primaryToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                if (availabilityFor(preferredToken, InstallTarget.PATCHER, checkRoot = true).available) {
                     rootInstaller.uninstallPackage(packageName)
                 } else {
                     sessionInstaller.uninstall(packageName)
@@ -205,43 +195,43 @@ class InstallerManager(
     /**
      * Resolves the installation plan based on user's preferred installer.
      * Returns a [ResolvedPlan] which includes the plan and information about
-     * whether the primary installer was unavailable.
+     * whether the preferred installer was unavailable.
      */
     fun resolvePlanWithStatus(
         target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
         sourceLabel: String?,
-        primaryTokenOverride: Token? = null
+        tokenOverride: Token? = null
     ): ResolvedPlan {
-        val primaryToken = primaryTokenOverride ?: getPrimaryToken()
-        val primaryAvailability = availabilityFor(primaryToken, target, checkRoot = true)
+        val preferredToken = tokenOverride ?: getPreferredToken()
+        val preferredAvailability = availabilityFor(preferredToken, target, checkRoot = true)
 
-        // If primary is available, use it
-        if (primaryAvailability.available) {
-            val plan = createPlan(primaryToken, target, sourceFile, expectedPackage, sourceLabel)
+        // If the preferred installer is available, use it
+        if (preferredAvailability.available) {
+            val plan = createPlan(preferredToken, target, sourceFile, expectedPackage, sourceLabel)
             if (plan != null) {
                 return ResolvedPlan(
                     plan = plan,
-                    primaryUnavailable = false,
-                    primaryToken = primaryToken,
+                    preferredUnavailable = false,
+                    preferredToken = preferredToken,
                     unavailabilityReason = null
                 )
             }
         }
 
-        // Primary is unavailable - check if it's Shizuku or root (special cases)
-        val isSpecialInstaller = primaryToken == Token.Shizuku ||
-                primaryToken == Token.ShizukuPlayStore ||
-                primaryToken.usesRoot
+        // The preferred installer is unavailable - check if it's Shizuku or root (special cases)
+        val isSpecialInstaller = preferredToken == Token.Shizuku ||
+                preferredToken == Token.ShizukuPlayStore ||
+                preferredToken.usesRoot
 
         if (isSpecialInstaller) {
             // Return info about unavailability so UI can show appropriate dialog
             return ResolvedPlan(
                 plan = InstallPlan.Internal(target), // Fallback
-                primaryUnavailable = true,
-                primaryToken = primaryToken,
-                unavailabilityReason = primaryAvailability.reason
+                preferredUnavailable = true,
+                preferredToken = preferredToken,
+                unavailabilityReason = preferredAvailability.reason
             )
         }
 
@@ -251,9 +241,9 @@ class InstallerManager(
             createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { plan ->
                 return ResolvedPlan(
                     plan = plan,
-                    primaryUnavailable = primaryToken != token,
-                    primaryToken = primaryToken,
-                    unavailabilityReason = if (primaryToken != token) primaryAvailability.reason else null
+                    preferredUnavailable = preferredToken != token,
+                    preferredToken = preferredToken,
+                    unavailabilityReason = if (preferredToken != token) preferredAvailability.reason else null
                 )
             }
         }
@@ -261,9 +251,9 @@ class InstallerManager(
         // Fallback to internal install
         return ResolvedPlan(
             plan = InstallPlan.Internal(target),
-            primaryUnavailable = primaryToken != Token.Internal,
-            primaryToken = primaryToken,
-            unavailabilityReason = primaryAvailability.reason
+            preferredUnavailable = preferredToken != Token.Internal,
+            preferredToken = preferredToken,
+            unavailabilityReason = preferredAvailability.reason
         )
     }
 
@@ -333,90 +323,53 @@ class InstallerManager(
         }
     }
 
-    private fun tokensEqual(a: Token, b: Token): Boolean = when {
-        a === b -> true
-        a is Token.Component && b is Token.Component -> a.componentName == b.componentName
-        else -> false
-    }
-
     private fun resolveLabel(componentName: ComponentName): String =
         runCatching {
             val activityInfo: ActivityInfo = packageManager.getActivityInfo(componentName, 0)
             activityInfo.loadLabel(packageManager).toString()
         }.getOrDefault(componentName.packageName)
 
-    private fun entryFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Entry? = when (token) {
-        Token.Internal -> Entry(
-            token = Token.Internal,
-            label = app.getString(R.string.home_app_info_install_type_system_installer),
-            description = app.getString(R.string.installer_internal_description),
-            availability = Availability(true),
-            icon = loadInstallerIcon(defaultInstallerPackage)
-        )
-
-        Token.None -> Entry(
-            token = Token.None,
-            label = app.getString(R.string.installer_option_none),
-            description = app.getString(R.string.installer_none_description),
-            availability = Availability(true),
-            icon = null
-        )
-
-        Token.PlayStore -> Entry(
-            token = Token.PlayStore,
-            label = app.getString(R.string.home_app_info_install_type_play_store),
-            description = app.getString(R.string.installer_play_store_description),
-            availability = availabilityFor(Token.PlayStore, target, checkRoot),
-            icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
-        )
-
-        Token.Root -> Entry(
-            token = Token.Root,
-            label = app.getString(R.string.home_app_info_install_type_root),
-            description = app.getString(R.string.installer_root_description),
-            availability = availabilityFor(Token.Root, target, checkRoot),
-            icon = null
-        )
-
-        Token.RootPlayStore -> Entry(
-            token = Token.RootPlayStore,
-            label = app.getString(R.string.home_app_info_install_type_root_play_store),
-            description = app.getString(R.string.installer_root_play_store_description),
-            availability = availabilityFor(Token.RootPlayStore, target, checkRoot),
-            icon = loadInstallerIcon(PLAY_STORE_INSTALLER_PACKAGE)
-        )
-
-        Token.Shizuku -> Entry(
-            token = Token.Shizuku,
-            label = app.getString(R.string.home_app_info_install_type_shizuku),
-            description = app.getString(R.string.installer_shizuku_description),
-            availability = availabilityFor(Token.Shizuku, target, checkRoot),
-            icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
-        )
-
-        Token.ShizukuPlayStore -> Entry(
-            token = Token.ShizukuPlayStore,
-            label = app.getString(R.string.home_app_info_install_type_shizuku_play_store),
-            description = app.getString(R.string.installer_shizuku_play_store_description),
-            availability = availabilityFor(Token.ShizukuPlayStore, target, checkRoot),
-            icon = sessionInstaller.shizukuPackageName()?.let { loadInstallerIcon(it) }
-        )
-
-        is Token.Component -> {
-            val availability = availabilityFor(token, target, checkRoot)
-            Entry(
+    /**
+     * How [token] is offered for [target]. Availability is only what can be told without asking for
+     * root, since entries are read again and again while an installer choice is on screen.
+     */
+    private fun entryFor(token: Token, target: InstallTarget): Entry {
+        val (label, description) = when (token) {
+            Token.Internal ->
+                R.string.home_app_info_install_type_system_installer to R.string.installer_internal_description
+            Token.None -> R.string.installer_option_none to R.string.installer_none_description
+            Token.PlayStore ->
+                R.string.home_app_info_install_type_play_store to R.string.installer_play_store_description
+            Token.Root -> R.string.home_app_info_install_type_root to R.string.installer_root_description
+            Token.RootPlayStore ->
+                R.string.home_app_info_install_type_root_play_store to R.string.installer_root_play_store_description
+            Token.Shizuku -> R.string.home_app_info_install_type_shizuku to R.string.installer_shizuku_description
+            Token.ShizukuPlayStore ->
+                R.string.home_app_info_install_type_shizuku_play_store to R.string.installer_shizuku_play_store_description
+            is Token.Component -> return Entry(
                 token = token,
                 label = resolveLabel(token.componentName),
                 description = token.componentName.packageName,
-                availability = availability,
-                icon = loadInstallerIcon(token.componentName)
+                availability = availabilityFor(token, target, checkRoot = false),
+                iconPackageName = token.componentName.packageName
             )
         }
+        return Entry(
+            token = token,
+            label = app.getString(label),
+            description = app.getString(description),
+            availability = availabilityFor(token, target, checkRoot = false),
+            iconPackageName = when (token) {
+                Token.PlayStore, Token.RootPlayStore -> PLAY_STORE_INSTALLER_PACKAGE
+                Token.Shizuku, Token.ShizukuPlayStore -> sessionInstaller.shizukuPackageName()
+                else -> null
+            }
+        )
     }
 
     private fun buildSequence(target: InstallTarget): List<Token> {
         val tokens = mutableListOf<Token>()
-        val primary = getPrimaryToken()
+        val preferred = getPreferredToken()
 
         fun add(token: Token) {
             if (token == Token.None) return
@@ -426,7 +379,7 @@ class InstallerManager(
             tokens += token
         }
 
-        add(primary)
+        add(preferred)
 
         if (Token.Internal !in tokens) add(Token.Internal)
 
@@ -535,15 +488,9 @@ class InstallerManager(
     private fun isDefaultComponent(componentName: ComponentName): Boolean =
         defaultInstallerPackage == componentName.packageName
 
-    private fun loadInstallerIcon(componentName: ComponentName): Drawable? =
-        loadInstallerIcon(componentName.packageName)
-
-    private fun loadInstallerIcon(packageName: String?): Drawable? =
-        packageName?.let { runCatching { packageManager.getApplicationIcon(it) }.getOrNull() }
-
-    private fun isExcludedDuplicate(packageName: String, label: String): Boolean =
-        packageName == AOSP_INSTALLER_PACKAGE &&
-                label.equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
+    private fun isExcludedDuplicate(component: ComponentName): Boolean =
+        component.packageName == AOSP_INSTALLER_PACKAGE &&
+                resolveLabel(component).equals(AOSP_INSTALLER_LABEL, ignoreCase = true)
 
     private fun isInstallerCandidate(info: ResolveInfo): Boolean {
         if (!info.activityInfo.exported) return false
@@ -560,12 +507,18 @@ class InstallerManager(
         }
     }
 
+    /**
+     * An installer as it is offered. Holds no drawable, so two reads that found the same compare
+     * equal and polling them recomposes nothing until something changes.
+     *
+     * @param iconPackageName The app whose icon stands for the installer, null for a generic one.
+     */
     data class Entry(
         val token: Token,
         val label: String,
         val description: String?,
         val availability: Availability,
-        val icon: Drawable?
+        val iconPackageName: String?
     )
 
     data class Availability(
@@ -579,8 +532,8 @@ class InstallerManager(
      */
     data class ResolvedPlan(
         val plan: InstallPlan,
-        val primaryUnavailable: Boolean,
-        val primaryToken: Token,
+        val preferredUnavailable: Boolean,
+        val preferredToken: Token,
         @param:StringRes val unavailabilityReason: Int?
     )
 
@@ -640,34 +593,6 @@ class InstallerManager(
     fun shizukuStatus(): SessionInstaller.ShizukuStatus = sessionInstaller.shizukuStatus()
 
     fun requestShizukuPermission(): Boolean = sessionInstaller.requestShizukuPermission()
-
-    /**
-     * Returns a deduplicated list of entries for [target], ensuring [token] is always present
-     * even if it's not in the raw list (e.g. a previously selected external installer).
-     */
-    fun ensureValidEntries(
-        entries: List<Entry>,
-        token: Token,
-        target: InstallTarget
-    ): List<Entry> {
-        val normalized = buildList {
-            val seen = mutableSetOf<Any>()
-            entries.forEach { entry ->
-                val key = when (val t = entry.token) {
-                    is Token.Component -> t.componentName
-                    else -> t
-                }
-                if (seen.add(key)) add(entry)
-            }
-        }
-        val tokenExists = token == Token.Internal ||
-                token == Token.PlayStore ||
-                token.usesRoot ||
-                token == Token.ShizukuPlayStore ||
-                normalized.any { tokensEqual(it.token, token) }
-        return if (tokenExists) normalized
-        else describeEntry(token, target)?.let { normalized + it } ?: normalized
-    }
 }
 
 private fun InstallerManager.Token.describe(): String = when (this) {

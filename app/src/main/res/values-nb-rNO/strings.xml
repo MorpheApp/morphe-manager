@@ -570,6 +570,7 @@ For de beste resultatene anbefaler denne appen å patche en &lt;b&gt;full APK-fi
     <string name="app_links_open_settings">Åpne lenkeinnstillinger</string>
     <string name="app_links_repair_success">App-lenker ble aktivert</string>
     <string name="app_links_repair_failed">Kunne ikke aktivere app-lenker automatisk</string>
+    <string name="app_links_change_failed">Kunne ikke endre app-lenker</string>
     <string name="app_links_all_verified">Alle støttede lenker er konfigurert til å åpnes i denne appen</string>
     <string name="app_links_fix">Reparer lenker</string>
     <string name="configure">Konfigurer</string>

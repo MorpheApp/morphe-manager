@@ -570,6 +570,7 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="app_links_open_settings">Холбоосыг нээх тохиргоо</string>
     <string name="app_links_repair_success">Апп-ын холбоосууд амжилттай идэвхжлээ</string>
     <string name="app_links_repair_failed">Апп-ын холбоосуудыг автоматаар идэвхжүүлж чадсангүй</string>
+    <string name="app_links_change_failed">Апп холбоосыг өөрчлөхөд алдаа гарлаа</string>
     <string name="app_links_all_verified">Дэмжигдсэн бүх холбоосууд энэ аппликейшн дээр нээгдэхээр тохируулагдсан байна</string>
     <string name="app_links_fix">Холбоосуудыг засах</string>
     <string name="configure">Тохируулах</string>

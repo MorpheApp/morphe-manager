@@ -570,6 +570,7 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="app_links_open_settings">Abrir definições de links</string>
     <string name="app_links_repair_success">Links do app ativados com sucesso</string>
     <string name="app_links_repair_failed">Falha ao ativar os links da aplicação automaticamente</string>
+    <string name="app_links_change_failed">Falha ao alterar os links do app</string>
     <string name="app_links_all_verified">Todos os links compatíveis estão configurados para abrir nesta aplicação</string>
     <string name="app_links_fix">Corrigir links</string>
     <string name="configure">Configurar</string>

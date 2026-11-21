@@ -571,6 +571,7 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="app_links_open_settings">Ouvrir les paramètres des liens</string>
     <string name="app_links_repair_success">Liens d\'application activés avec succès</string>
     <string name="app_links_repair_failed">Échec de l\'activation automatique des liens d\'application</string>
+    <string name="app_links_change_failed">Échec du changement des liens de l\'application</string>
     <string name="app_links_all_verified">Tous les liens pris en charge sont configurés pour s\'ouvrir dans cette application</string>
     <string name="app_links_fix">Corriger les liens</string>
     <string name="configure">Configurer</string>

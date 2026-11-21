@@ -570,6 +570,7 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="app_links_open_settings">Fungua mipangilio ya kiungo</string>
     <string name="app_links_repair_success">Viungo vya programu vimewashwa kwa mafanikio</string>
     <string name="app_links_repair_failed">Imeshindwa kuwasha viungo vya programu kiotomatiki</string>
+    <string name="app_links_change_failed">Imeshindwa kubadilisha viunganishi vya programu</string>
     <string name="app_links_all_verified">Viungo vyote vinavyokubalika vimepangwa kufunguka katika programu hii</string>
     <string name="app_links_fix">Rekebisha viungo</string>
     <string name="configure">Sanidi</string>

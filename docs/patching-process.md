@@ -46,7 +46,7 @@ embedded VM** decides what runs the patcher inside that process.
 </p>
 
 - **On** (the default) - Morphe patches in a Java VM it carries itself. It can use far more
-  memory than Android gives an app: about a third of the device RAM, between 1 GB and 3 GB,
+  memory than Android gives an app: about a third of the device RAM, between 2 GB and 3 GB,
   and up to 1 GB on 32-bit devices.
 - **Off** - Morphe patches with the runtime of Android, which gets the same memory an app
   does. Worth trying only if the embedded VM causes problems on your device.
