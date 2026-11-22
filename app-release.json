@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-21T17:09:19",
-  "description": "## [2.7.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0...v2.7.1-dev.1) (2026-11-21)\n\n### Bug Fixes\n\n* Open files with non-ASCII characters in their path during patching ([e002389](https://github.com/MorpheApp/morphe-manager/commit/e0023891374c34ea81b1a1190546e6a5188347e2))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.1-dev.1/morphe-manager-2.7.1-dev.1.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.1-dev.1/morphe-manager-2.7.1-dev.1.apk.asc",
-  "version": "2.7.1-dev.1"
+  "created_at": "2026-11-22T13:45:42",
+  "description": "## [2.7.1](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0...v2.7.1) (2026-11-22)\n\n### Bug Fixes\n\n* Open files with non-ASCII characters in their path during patching ([e002389](https://github.com/MorpheApp/morphe-manager/commit/e0023891374c34ea81b1a1190546e6a5188347e2))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.1/morphe-manager-2.7.1.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.7.1/morphe-manager-2.7.1.apk.asc",
+  "version": "2.7.1"
 }
