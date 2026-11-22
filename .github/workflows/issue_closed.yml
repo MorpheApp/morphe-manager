@@ -1,0 +1,32 @@
+name: Issue closed
+
+on:
+  issues:
+    types: [closed]
+
+permissions: {}
+
+jobs:
+  remove-duplicate-label:
+    name: Remove possible duplicate label
+    if: github.repository_owner == 'MorpheApp' && github.event.issue.state_reason == 'duplicate'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github/scripts/issue-triage
+          sparse-checkout-cone-mode: false
+
+      - name: Remove possible duplicate label
+        uses: actions/github-script@v9
+        env:
+          # Changes are only applied when this repository variable is "live".
+          TRIAGE_MODE: ${{ vars.ISSUE_TRIAGE_MODE }}
+        with:
+          script: |
+            const run = require('./.github/scripts/issue-triage/remove-duplicate-label.js');
+            await run({ github, context, core });
