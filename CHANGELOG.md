@@ -1,3 +1,9 @@
+## [2.7.1](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0...v2.7.1) (2026-11-22)
+
+### Bug Fixes
+
+* Open files with non-ASCII characters in their path during patching ([e002389](https://github.com/MorpheApp/morphe-manager/commit/e0023891374c34ea81b1a1190546e6a5188347e2))
+
 ## [2.7.1-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.7.0...v2.7.1-dev.1) (2026-11-21)
 
 ### Bug Fixes
