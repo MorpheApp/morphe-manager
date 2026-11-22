@@ -1,4 +1,4 @@
-// Wraps screenshots in an issue body in a collapsed <details> block, so long screenshots
+// Wraps screenshots in an issue or comment body in a collapsed <details> block, so long screenshots
 // do not fill the page. Each group of screenshot lines, which may be separated by blank lines,
 // gets its own block. Screenshots that are already in a <details> block or in a code block,
 // and images in a line with other text, are left as they are.
