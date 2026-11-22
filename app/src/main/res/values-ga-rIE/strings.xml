@@ -246,7 +246,7 @@
     <string name="sources_download_fail_named">Níorbh fhéidir \'%s\' a nuashonrú. Seiceáil do nasc idirlín agus déan iarracht eile.</string>
     <string name="sources_download_endpoint_not_found">\'%s\': meiteashonraí paiste gan aimsiú</string>
     <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
-    <string name="sources_local_network_denied">Ní féidir foinsreacha ar do líonra áitiúil a nuashonrú gan cead Glantrála Glanta</string>
+    <string name="sources_local_network_denied">Ní féidir foinsí ar do líonra áitiúil a nuashonrú gan an cead do ghléasanna in aice láimhe.</string>
     <string name="sources_signing_key_changed_named">Níor nuashonraíodh \'%s\' toisc nach bhfuil an eisiúint is déanaí sínithe leis an eochair a d\'úsáid sé roimhe seo</string>
     <string name="sources_signing_key_changed_local">Níl an comhad sínithe leis an eochair a d\'úsáid an fhoinse seo roimhe seo. Chun muinín a bheith agat as, scrios an fhoinse agus cuir an comhad leis arís.</string>
     <string name="sources_signing_key_trust_title">Muinín a chur sa eochair nua?</string>
