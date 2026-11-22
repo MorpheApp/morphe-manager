@@ -25,7 +25,7 @@ jobs:
       issues: write
     outputs:
       triage: ${{ steps.check.outputs.triage }}
-      closed: ${{ steps.check.outputs.closed }}
+      version_problems: ${{ steps.check.outputs.version_problems }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -93,7 +93,7 @@ jobs:
             - `gh issue view <number> --repo ${{ github.repository }} --json number,title,body,state,stateReason,labels,createdAt` to read an issue
             - `gh search issues "<keywords>" --repo ${{ github.repository }} --limit 20 --json number,title,state,createdAt` to search open and closed issues
 
-            ${{ needs.check-template.outputs.closed == 'true' && 'This issue was already closed because of its Morphe version. Only do steps 1 to 3 and 7. Set patches_issue to false, duplicate_of to 0, and possible_duplicates and missing_info to empty lists.' || '' }}
+            ${{ needs.check-template.outputs.version_problems != '[]' && needs.check-template.outputs.version_problems != '' && 'This issue will be closed because of its Morphe version, but still look for duplicates so the author can be told about them. Set missing_info to an empty list.' || '' }}
 
             Steps:
 
@@ -160,8 +160,9 @@ jobs:
 
   apply:
     name: Apply triage
-    needs: analyze
-    if: needs.analyze.outputs.decision != ''
+    needs: [check-template, analyze]
+    # Also runs if the analyze job failed, so issues with version problems are still closed.
+    if: always() && needs.check-template.outputs.triage == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -177,6 +178,7 @@ jobs:
         uses: actions/github-script@v9
         env:
           DECISION: ${{ needs.analyze.outputs.decision }}
+          VERSION_PROBLEMS: ${{ needs.check-template.outputs.version_problems }}
           ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number }}
           # Changes are only applied when this repository variable is "live".
           # Otherwise, the planned changes are only written to the job summary.

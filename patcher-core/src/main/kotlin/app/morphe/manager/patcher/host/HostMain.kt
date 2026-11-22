@@ -119,6 +119,11 @@ private fun run(
     events: HostEvents
 ) {
     events.logger.info(vmDescription())
+    // The character set the VM names files in, which leaves a path with any other character unreadable
+    val fileNames = System.getProperty(FILE_NAME_ENCODING)
+    if (fileNames != null && !fileNames.equals(Charsets.UTF_8.name(), ignoreCase = true)) {
+        events.logger.warn("File names are read as $fileNames, files with other characters in their path cannot be opened")
+    }
     events.watchForStalls()
     gcClock?.let(events::watchForGcOverhead)
 
@@ -139,8 +144,12 @@ private fun run(
 private fun vmDescription(): String {
     fun property(name: String) = System.getProperty(name) ?: "?"
     return "Host VM: ${property("java.vm.name")} ${property("java.vm.version")} (${property("java.vm.info")}) " +
-            "arch=${property("os.arch")} cores=${Runtime.getRuntime().availableProcessors()}"
+            "arch=${property("os.arch")} cores=${Runtime.getRuntime().availableProcessors()} " +
+            "filenames=${property(FILE_NAME_ENCODING)}"
 }
+
+/** The system property of the character set the VM names files in. */
+private const val FILE_NAME_ENCODING = "sun.jnu.encoding"
 
 private fun loadLogged(file: File, loadPatches: (File) -> Collection<Patch>, logger: Logger): Collection<Patch> {
     val started = TimeSource.Monotonic.markNow()

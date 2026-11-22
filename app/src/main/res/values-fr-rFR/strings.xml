@@ -923,7 +923,7 @@ Les patchs ne sont pas affectés : activez les patchs en préversion pour chaque
     <string name="settings_auto_updates_check_only">Vérifier uniquement</string>
     <string name="settings_auto_updates_check_only_description">Affiche les mises à jour disponibles et les télécharge dès que vous appuyez dessus</string>
     <string name="settings_auto_updates_off">Ne pas vérifier</string>
-    <string name="settings_auto_updates_off_description">Vérifie uniquement lorsque vous effectuez un balayage vers le bas pour actualiser</string>
+    <string name="settings_auto_updates_off_description">Vérifie uniquement lorsque vous tirez vers le bas pour actualiser</string>
     <string name="settings_advanced_updates_background_notifications">Notifications de mise à jour en arrière-plan</string>
     <string name="settings_advanced_updates_background_notifications_description">Vérifier périodiquement les mises à jour en arrière-plan et notifier lorsqu\'elles sont disponibles</string>
     <string name="settings_advanced_updates_background_notifications_description_fcm">Reçoit des notifications push instantanées pour les nouvelles versions, même lorsque l\'application est fermée</string>

@@ -15,17 +15,22 @@ internal object EmbeddedJvm {
     }
 
     /**
-     * Starts [command] as a process of its own. It keeps [keepFds] open under the same numbers,
-     * writes its standard output and error to [outputFd], and is killed once the calling thread
-     * ends, so that thread waits for it with [waitProcess].
+     * Starts [command] as a process of its own with [environment]. It keeps [keepFds] open under
+     * the same numbers, writes its standard output and error to [outputFd], and is killed once the
+     * calling thread ends, so that thread waits for it with [waitProcess].
      *
      * @return Its pid, or a negative errno.
      */
-    fun spawn(command: List<String>, keepFds: IntArray, outputFd: Int) =
-        spawnProcess(command.toTypedArray(), keepFds, outputFd)
+    fun spawn(command: List<String>, environment: Map<String, String>, keepFds: IntArray, outputFd: Int) =
+        spawnProcess(
+            command.toTypedArray(),
+            environment.map { (name, value) -> "$name=$value" }.toTypedArray(),
+            keepFds,
+            outputFd
+        )
 
     /** Waits for the process [pid] that [spawn] started, returning its exit code, or 128 plus the signal that ended it. */
     external fun waitProcess(pid: Int): Int
 
-    private external fun spawnProcess(command: Array<String>, keepFds: IntArray, outputFd: Int): Int
+    private external fun spawnProcess(command: Array<String>, environment: Array<String>, keepFds: IntArray, outputFd: Int): Int
 }
