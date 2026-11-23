@@ -13,6 +13,9 @@ const LABEL_COLORS = {
 // Starts the comment that asks for missing details, so close-unanswered.js can find it.
 const MISSING_INFO_MARKER = '<!-- morphe-triage:missing-info -->';
 
+// Starts the comment of an issue closed for its version, so reopen-edited.js can reopen it after the author edits it.
+const VERSION_CLOSE_MARKER = '<!-- morphe-triage:version-close -->';
+
 // Start of the comment that lists possible duplicates, so delete-rejected-comments.js can remove the label with it.
 const POSSIBLE_DUPLICATE_PREFIX = 'This issue may be a duplicate of';
 
@@ -153,6 +156,7 @@ module.exports = {
   LABEL_BUG,
   LABEL_FEATURE,
   MISSING_INFO_MARKER,
+  VERSION_CLOSE_MARKER,
   POSSIBLE_DUPLICATE_PREFIX,
   parseForm,
   isFromTemplate,

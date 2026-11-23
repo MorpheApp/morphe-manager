@@ -1,5 +1,6 @@
 // Checks the Morphe version of a bug report.
-// Bug reports for an outdated Morphe version are closed with a comment by apply.js, after the duplicate check.
+// Bug reports for an outdated Morphe version are closed with a comment by apply.js, after the duplicate check,
+// and reopened by reopen-edited.js after the author edits them with a supported version.
 // The version field is free text that also has the version of the app being patched, so every version
 // in it is compared with the Morphe releases. Reports where no Morphe release version is found are left
 // open, and the analyze job can ask for the version.
@@ -68,13 +69,20 @@ function versionStatus(text, versions) {
 }
 
 /**
+ * Returns true if the issue body is a bug report with a version field.
+ */
+function hasVersionField(body) {
+  return VERSION_FIELD in parseForm(body);
+}
+
+/**
  * Returns the problems found with the Morphe version of the issue, as comment lines.
  * The list is empty if the version is supported or not known, or if the issue is not a bug report.
  */
 async function checkVersions({ github, core, owner, repo, issue }) {
-  const fields = parseForm(issue.body);
   // Only bug reports have a version field.
-  if (!(VERSION_FIELD in fields)) return [];
+  if (!hasVersionField(issue.body)) return [];
+  const fields = parseForm(issue.body);
 
   const releases = (await github.rest.repos.listReleases({ owner, repo, per_page: 50 })).data;
   const status = versionStatus(fields[VERSION_FIELD], acceptedVersions(releases, Date.now()));
@@ -87,12 +95,13 @@ async function checkVersions({ github, core, owner, repo, issue }) {
   return [
     'You are using an outdated version of Morphe.',
     `Please update to the latest version from https://github.com/${owner}/${repo}/releases ` +
-      'and open a new issue if the bug still happens.',
+      'and check if the bug still happens.',
   ];
 }
 
 module.exports = {
   checkVersions,
+  hasVersionField,
   versionStatus,
   acceptedVersions,
   parseVersions,

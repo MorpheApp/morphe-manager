@@ -1,0 +1,36 @@
+name: Issue edited
+
+on:
+  issues:
+    types: [edited]
+
+permissions: {}
+
+jobs:
+  reopen:
+    name: Reopen issue closed for its version
+    if: >-
+      github.repository_owner == 'MorpheApp' &&
+      github.event.issue.state == 'closed' &&
+      github.event.issue.state_reason == 'not_planned' &&
+      github.event.sender.login == github.event.issue.user.login
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github/scripts/issue-triage
+          sparse-checkout-cone-mode: false
+
+      - name: Reopen issue
+        uses: actions/github-script@v9
+        env:
+          # Changes are only applied when this repository variable is "live".
+          TRIAGE_MODE: ${{ vars.ISSUE_TRIAGE_MODE }}
+        with:
+          script: |
+            const run = require('./.github/scripts/issue-triage/reopen-edited.js');
+            await run({ github, context, core });
