@@ -576,6 +576,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="app_links_change_failed">Thay đổi liên kết ứng dụng thất bại</string>
     <string name="app_links_all_verified">Tất cả các liên kết được hỗ trợ đều được cấu hình để mở trong ứng dụng này</string>
     <string name="app_links_fix">Sửa liên kết</string>
+    <string name="app_links_allow_shizuku">Cho phép Shizuku truy cập</string>
+    <string name="app_links_shizuku_permission_hint">Cho phép Morphe sử dụng Shizuku để bật các liên kết này cho bạn</string>
+    <string name="app_links_shizuku_not_running_hint">Khởi động Shizuku để Morphe có thể bật các liên kết này cho bạn</string>
     <string name="configure">Cấu hình</string>
     <string name="patcher_rename_title">Cài đặt như bản sao</string>
     <string name="patcher_rename_description">Các bản vá sẽ dựng ứng dụng với một tên gói khác, vì vậy khi cài đặt sẽ có thêm một ứng dụng khác cùng với &lt;b&gt;%s&lt;/b&gt; thay vì cập nhật lên</string>
@@ -745,6 +748,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
     <string name="patcher_process_killed_message">Hệ thống đã dừng trình vá trước khi hoàn tất, thường là để giải phóng bộ nhớ. Đóng các ứng dụng khác và thử lại</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe đã bị đóng trước khi hoàn tất vá lỗi, vì vậy không có nội dung nào được vá. Hãy thử lại</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Trình vá đã bị sự cố trước khi hoàn tất. Nếu điều này xảy ra lần nữa, hãy tắt %1$s và báo cáo sự cố cùng với nhật ký</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

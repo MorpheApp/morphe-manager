@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">የመተግበሪያ ሊንኮችን ለመለወጥ አልተቻለም</string>
     <string name="app_links_all_verified">ሁሉም የሚደገፉ ሊንኮች በዚህ መተግበሪያ ውስጥ እንዲከፈቱ ተዋቅረዋል</string>
     <string name="app_links_fix">ሊንኮችን አስተካክል</string>
+    <string name="app_links_allow_shizuku">ለ Shizuku መዳረሻ ይፍቀዱ</string>
+    <string name="app_links_shizuku_permission_hint">Morphe እነዚህን ሊንኮች እንዲያነቃቸው Shizukuን እንዲጠቀም ይፍቀዱ</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe እነዚህን ሊንኮች እንዲያነቃቸው Shizukuን ያስጀምሩ</string>
     <string name="configure">ያዋቅሩ</string>
     <string name="patcher_rename_title">ይህ ቅጂን ይጭናል</string>
     <string name="patcher_rename_description">ፓቾቹ ይህንን መተግበሪያ በራሳቸው የፓኬጅ ስም ሰርተዋል፣ ስለዚህ እሱን መጫን &lt;b&gt;%s&lt;/b&gt;ን ከማዘመን ይልቅ ጎን ለጎን ሌላ ቅጂ ይጨምራል</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">የተፓች አፑን ለማስቀመጥ አልተሳካም</string>
     <string name="plugin_activity_dialog_body">በዚህ ፕለጊን ለመቀጠል የተጠቃሚ መስተጋብር ያስፈልጋል</string>
     <string name="patcher_process_killed_message">ሲስተሙ ፓቸሩን ሳይጨርስ አቋርጦታል፣ አብዛኛውን ጊዜ ይህ የሚሆነው ሜሞሪን ነፃ ለማድረግ ነው። ሌሎች አፕሊኬሽኖችን ይዝጉ እና እንደገና ይሞክሩ</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ፓቺንግ ከመጠናቀቁ በፊት ተዘግቷል፣ ስለዚህ ምንም ነገር አልተስተካከለም። እባክዎ እንደገና ይሞክሩ</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ፓቸሩ ከመጠናቀቁ በፊት ተቋርጧል። ይህ እንደገና ከተከሰተ፣ %1$s ያጥፉ እና ችግሩን በሎግ ሪፖርት ያድርጉ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

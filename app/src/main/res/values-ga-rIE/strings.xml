@@ -55,7 +55,7 @@
     <string name="home_held_back_title">Thuar foinse paiste Morphe</string>
     <string name="home_held_back_subtitle">Léiríodh é ionas go bhféadfaí an aip a thosú. Tapáil chun athbhreithniú a dhéanamh</string>
     <string name="home_source_updates_title">Nuashonruithe paiste ar fáil</string>
-    <string name="home_source_updates_subtitle">Beartaigh orthu chun iad a íoslódáil</string>
+    <string name="home_source_updates_subtitle">Tapáil chun iad a íoslódáil</string>
     <string name="home_repatch_available_subtitle">Tapáil chun iad uile a chur i scuaine</string>
     <string name="home_update_error">Theip ar nuashonrú</string>
     <string name="home_update_error_subtitle">Tharla fadhb agus foinsí á nuashonrú</string>
@@ -174,7 +174,7 @@
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_apps">Aipeanna</string>
-    <string name="sources_apps_description">Tagann aipeanna atá marcáilte ón bhfoinse seo. Beartaigh ar aip chun í a fhágáil ar lár nó chun í a thabhairt ar ais; sleamhnaigh í chun a paistí a fheiceáil. Má bhaintear foinse, imeoidh na haipeanna a tháinig ón bhfoinse sin ón scáileán baile, mura rud é gur chuir tú paiste i bhfeidhm orthu.</string>
+    <string name="sources_apps_description">Tagann aipeanna atá marcáilte ón bhfoinse seo. Tapáil aip chun í a fhágáil ar lár nó chun í a thabhairt ar ais; sleamhnaigh í chun a paistí a fheiceáil. Má bhaintear foinse, imeoidh na haipeanna a tháinig ón bhfoinse sin ón scáileán baile, mura rud é gur chuir tú paiste i bhfeidhm orthu.</string>
     <string name="sources_apps_brought">Arna thabhairt ag an bhfoinse seo</string>
     <string name="sources_apps_left_out">Fágtha ar lár ón bhfoinse seo</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -576,6 +576,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="app_links_change_failed">Theip ar athrú na naisc aipe</string>
     <string name="app_links_all_verified">Tá na naisc thacaithe go léir cumraithe le hoscailt san aip seo</string>
     <string name="app_links_fix">Deisigh naisc</string>
+    <string name="app_links_allow_shizuku">Ceadaigh rochtain Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Ceadaigh do Morphe Shizuku a úsáid chun na nascanna seo a chur ar siúl duit</string>
+    <string name="app_links_shizuku_not_running_hint">Tosaigh Shizuku chun cead a thabhairt do Morphe na nascanna seo a chur ar siúl duit</string>
     <string name="configure">Cumraigh</string>
     <string name="patcher_rename_title">Déanfaidh sé seo clón a shuiteáil</string>
     <string name="patcher_rename_description">Thóg na paistí an aip seo faoina n-ainm pacáiste féin, mar sin má shuiteáiltear é cuirfear clón leis taobh le &lt;b&gt;%s&lt;/b&gt; in ionad é a nuashonrú</string>
@@ -745,6 +748,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="patched_app_save_failed_toast">Theip ar aip chomhfhiosach a shábháil</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
     <string name="patcher_process_killed_message">Chuir an córas stop leis an gclár paisteála sular chríochnaigh sé, de ghnáth chun cuimhne a shaoradh. Dún aipeanna eile agus bain triail as arís.</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Dúnadh Morphe sula d\'éirigh an patrú críochnaithe, mar sin ní cuireadh patrú ar aon rud. Déan iarracht arís</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Thit an uirlis paistithe as a chéile sular chríochnaigh sí. Má tharlaíonn sé arís, múch %1$s agus tuairiscigh an fhadhb, ag cur an logchomhaid san áireamh.</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -784,8 +789,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="mini_game_lives">Saolta</string>
     <string name="mini_game_flags">Saolta</string>
     <string name="mini_game_2048_picker_subtitle">Sleamhnaigh tíleanna le cumasc</string>
-    <string name="mini_game_flappy_picker_subtitle">Beartaigh chun eitilt trí phíopaí</string>
-    <string name="mini_game_flappy_tap_to_start">Beartaigh le heitilt</string>
+    <string name="mini_game_flappy_picker_subtitle">Tapáil chun eitilt trí phíopaí</string>
+    <string name="mini_game_flappy_tap_to_start">Tapáil chun eitilt</string>
     <string name="mini_game_snake_picker_subtitle">Ith bia, ná buail tú féin</string>
     <string name="mini_game_snake_swipe_to_start">Svaidhpeáil le tosú</string>
     <string name="mini_game_dino_picker_subtitle">Tapáil chun léim thar cacti</string>
@@ -1589,8 +1594,8 @@ Ar mhaith leat leanúint ar aghaidh fós?"</string>
     <string name="onboarding_swipe_desc">Svaidhpeáil ar dheis ar chárta aipe chun na paistí atá ar fáil a fheiceáil. Svaidhpeáil ar chlé chun an cárta a cheilt ón scáileán baile.</string>
     <string name="onboarding_settings_desc">Saincheap Morphe: cuma, roghanna ardleibhéil, agus uirlisí córais</string>
     <string name="onboarding_sources_patches_desc">Tapáil chun na paistí uile atá ar fáil ón bhfoinse seo a fheiceáil</string>
-    <string name="onboarding_sources_version_desc">Beartaigh an leagan chun an loga athraithe iomlán don fhoinse seo a fheiceáil</string>
-    <string name="onboarding_sources_apps_desc">Beartaigh chun na haipeanna a fheictear a bhfuil paistí á dtairiscint ag an bhfoinse seo a fheiceáil agus roghnaigh cé acu acu a thairgeann sé paistí dóibh</string>
+    <string name="onboarding_sources_version_desc">Tapáil an leagan chun an loga athruithe iomlán don fhoinse seo a fheiceáil</string>
+    <string name="onboarding_sources_apps_desc">Tapáil chun na haipeanna a fheictear a bhfuil paistí á dtairiscint ag an bhfoinse seo a fheiceáil agus roghnaigh cé acu acu a thairgeann sé paistí dóibh</string>
     <string name="onboarding_sources_prerelease_desc">Cumasaigh seo chun leaganacha paiste réamh-eisiúna a fháil ón bhfoinse seo</string>
     <string name="onboarding_appearance_tab_desc">Saincheap cuma an aip: téama, dath béime, agus cúlra</string>
     <string name="onboarding_expert_mode_desc">Cumasaigh Mód Saineolaí chun roghnú paiste, roghanna saincheaptha agus gnéithe ardleibhéil eile a dhíghlasáil</string>

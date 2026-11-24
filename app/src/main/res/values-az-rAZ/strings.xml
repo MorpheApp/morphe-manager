@@ -745,6 +745,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patched_app_save_failed_toast">Yamaqlanan tətbiqi saxlamaq olmadı</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
     <string name="patcher_process_killed_message">Sistem yamaqlayıcını işini bitirmədən dayandırdı, bu adətən yaddaşı boşaltmaq üçün olur. Digər tətbiqləri bağla və təkrar cəhd et</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Yamaqlayıcı bitmədən çökdü. Bu hal təkrarlanarsa, %1$s -i qapat və log qeydi ilə birlikdə problemi bildir</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

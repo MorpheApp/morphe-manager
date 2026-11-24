@@ -576,6 +576,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="app_links_change_failed">アプリリンクの変更に失敗しました</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
+    <string name="app_links_allow_shizuku">Shizukuへのアクセスを許可</string>
+    <string name="app_links_shizuku_permission_hint">MorpheがShizukuを使用してこれらのリンクを有効にするのを許可してください</string>
+    <string name="app_links_shizuku_not_running_hint">Morpheがこれらのリンクを有効にできるように、Shizukuを起動してください</string>
     <string name="configure">設定</string>
     <string name="patcher_rename_title">クローンをインストールします</string>
     <string name="patcher_rename_description">このパッチでは独自のパッケージ名でアプリがビルドされるため、インストールすると &lt;b&gt;%s&lt;/b&gt; が更新されるのではなく、クローンアプリとして追加されます</string>
@@ -745,6 +748,8 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patched_app_save_failed_toast">パッチ適用済みアプリの保存に失敗しました</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
     <string name="patcher_process_killed_message">メモリを解放するためなどの理由で、システムがパッチ処理を完了前に停止しました。他のアプリを閉じて、もう一度お試しください</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">パッチ適用が完了する前にMorpheが終了したため、何も適用されませんでした。もう一度お試しください</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">パッチ処理が完了する前にクラッシュしました。再発する場合は、%1$s をオフにしてログとともに問題を報告してください</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

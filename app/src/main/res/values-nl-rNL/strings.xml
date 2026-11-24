@@ -576,6 +576,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="app_links_change_failed">Het wijzigen van app-links is mislukt</string>
     <string name="app_links_all_verified">Alle ondersteunde links zijn geconfigureerd om in deze app te worden geopend</string>
     <string name="app_links_fix">Links herstellen</string>
+    <string name="app_links_allow_shizuku">Sta toegang tot Shizuku toe</string>
+    <string name="app_links_shizuku_permission_hint">Sta Morphe toe om Shizuku te gebruiken om deze links voor je in te schakelen</string>
+    <string name="app_links_shizuku_not_running_hint">Start Shizuku zodat Morphe deze links voor je kan inschakelen</string>
     <string name="configure">Configureren</string>
     <string name="patcher_rename_title">Dit zal een kloon installeren</string>
     <string name="patcher_rename_description">De patches hebben deze app gebouwd onder een eigen pakketnaam, dus het installeren voegt een kloon toe naast &lt;b&gt;%s&lt;/b&gt; in plaats van het bij te werken</string>
@@ -745,6 +748,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
     <string name="patcher_process_killed_message">Het systeem heeft de patcher gestopt voordat deze klaar was, meestal om geheugen vrij te maken. Sluit andere apps en probeer opnieuw</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe werd gesloten voordat het patchen was voltooid, dus er is niets gepatcht. Probeer het opnieuw</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">De patcher is gecrasht voordat deze klaar was. Als dit opnieuw gebeurt, schakel %1$s uit en rapporteer het probleem met het logboek</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

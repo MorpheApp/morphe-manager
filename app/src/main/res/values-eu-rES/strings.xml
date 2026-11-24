@@ -576,6 +576,9 @@ Emaitza onenak lortzeko, aplikazio honek &lt;b&gt;APK osoa&lt;/b&gt; patchatzea 
     <string name="app_links_change_failed">App-estekak aldatzea huts egin da</string>
     <string name="app_links_all_verified">Onartutako esteka guztiak aplikazio honetan irekitzeko konfiguratuta daude</string>
     <string name="app_links_fix">Konpondu estekak</string>
+    <string name="app_links_allow_shizuku">Baimenu Shizuku sarrerari</string>
+    <string name="app_links_shizuku_permission_hint">Baimenu Morphe-ri Shizuku erabiltzeko esteka hauek aktibatzeko</string>
+    <string name="app_links_shizuku_not_running_hint">Hasi Shizuku Morphe-k esteka hauek aktiba ditzan zure behazaz</string>
     <string name="configure">Konfiguratu</string>
     <string name="patcher_rename_title">Honek klon bat instalatu egingo du</string>
     <string name="patcher_rename_description">Patch-ek aplikazio hau bere package-izen propioarekin eraiki dute, beraz instalatzeak &lt;b&gt;%s&lt;/b&gt;-ren ondoan klon bat gehitzen du, eguneratzearen ordez</string>
@@ -745,6 +748,8 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="patched_app_save_failed_toast">Patch-atutako aplikazioa gordetzeak huts egin du</string>
     <string name="plugin_activity_dialog_body">Plugin hau aurrera eramateko erabiltzailearen parte-hartzea behar da</string>
     <string name="patcher_process_killed_message">Sistemak patchera utzi du amaitu aurretik, normalean memoria askatzeko. Itxi beste aplikazioak eta saiatu berriz</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe itxi zen patching prozesua amaitu aurretik, beraz, ezer ez zen patchatu. Saiatu berriz</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher-ak huts egin du amaitu aurretik. Berriz gertatzen bada, desaktibatu %1$s eta jakinarazi arazoa logarekin</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -575,6 +575,9 @@ Til að ná bestum árangri mælir þetta app með því að breyta &lt;b&gt;hei
     <string name="app_links_change_failed">Mislaðistst við að breyta tenglum forritsins</string>
     <string name="app_links_all_verified">Allir studdir tenglar eru stilltir til að opnast í þessu appi</string>
     <string name="app_links_fix">Laga tengla</string>
+    <string name="app_links_allow_shizuku">Leyfa Shizuku aðgangi</string>
+    <string name="app_links_shizuku_permission_hint">Leyfðu Morphe að nota Shizuku til að virkja þessar tengla fyrir þig</string>
+    <string name="app_links_shizuku_not_running_hint">Ræstu Shizuku svo Morphe geti virkað þessar tengla fyrir þig</string>
     <string name="configure">Stilla</string>
     <string name="patcher_rename_title">Þetta mun setja upp klón</string>
     <string name="patcher_rename_description">Plástrarnir smíðuðu þetta app undir eigin pakkaheiti, svo uppsetning bætir við klóni við hlið &lt;b&gt;%s&lt;/b&gt; í stað þess að uppfæra það</string>
@@ -744,6 +747,8 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="patched_app_save_failed_toast">Ekki tókst að vista breytt app</string>
     <string name="plugin_activity_dialog_body">Krefst samskipta við notanda til að halda áfram með þessa viðbót</string>
     <string name="patcher_process_killed_message">Kerfið stöðvaði plástrarann áður en hann lauk, yfirleitt til að losa minni. Lokaðu öðrum öppum og reyndu aftur</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe var lokað áður en uppfærsla var lokið, svo var ekkert uppfært. Reyndu aftur</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Plástrarinn hrundi áður en hann lauk. Ef þetta gerist aftur skaltu slökkva á %1$s og tilkynna vandamálið með loggnum</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

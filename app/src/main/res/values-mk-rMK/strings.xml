@@ -575,6 +575,9 @@
     <string name="app_links_change_failed">Неуспешно менување на врските до апликацијата</string>
     <string name="app_links_all_verified">Сите поддржани врски се конфигурирани да се отвораат во оваа апликација</string>
     <string name="app_links_fix">Поправете ги врските</string>
+    <string name="app_links_allow_shizuku">Дозволи пристап до Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Дозволи на Morphe да користи Shizuku за да ги вклучи овие врски за вас</string>
+    <string name="app_links_shizuku_not_running_hint">Започни Shizuku за да дозволиш на Morphe да ги вклучи овие врски за вас</string>
     <string name="configure">Конфигурирај</string>
     <string name="patcher_rename_title">Ова ќе инсталира клон</string>
     <string name="patcher_rename_description">Заплатите ја изградија оваа апликација под сопствено име на пакет, па инсталирањето додава клон заедно со &lt;b&gt;%s&lt;/b&gt; наместо да ја ажурира</string>
@@ -744,6 +747,8 @@
     <string name="patched_app_save_failed_toast">Не успеа да се зачува поправената апликација</string>
     <string name="plugin_activity_dialog_body">За да продолжите со овој приклучок, потребна е корисничка интеракција.</string>
     <string name="patcher_process_killed_message">Системот го прекина пачерот пред да заврши, обично за да ослободи меморија. Затворете ги другите апликации и обидете се повторно</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe беше затворена пред да заврши закрпувањето, па ништо не беше закрпено. Обидете се повторно</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Закрпувачот се сруши пред да заврши. Ако се случи повторно, исклучете го %1$s и пријавете го проблемот со дневникот</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@ Pentru cele mai bune rezultate, această aplicație recomandă patch-uirea unui 
     <string name="app_links_change_failed">Eșec la modificarea linkurilor aplicației</string>
     <string name="app_links_all_verified">Toate linkurile acceptate sunt configurate să se deschidă în această aplicație</string>
     <string name="app_links_fix">Repară linkurile</string>
+    <string name="app_links_allow_shizuku">Permite accesul Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permite aplicației Morphe să utilizeze Shizuku pentru a activa aceste linkuri pentru tine</string>
+    <string name="app_links_shizuku_not_running_hint">Pornește Shizuku pentru a permite aplicației Morphe să activeze aceste linkuri pentru tine</string>
     <string name="configure">Configurează</string>
     <string name="patcher_rename_title">Aceasta va instala o clonă</string>
     <string name="patcher_rename_description">Patch-urile au construit această aplicație sub un nume de pachet propriu, așa că instalarea acesteia adaugă o clonă alături de &lt;b&gt;%s&lt;/b&gt; în loc să o actualizeze.</string>
@@ -745,6 +748,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="patched_app_save_failed_toast">Eroare la salvarea aplicației modificate</string>
     <string name="plugin_activity_dialog_body">Este necesară interacțiunea utilizatorului pentru a continua cu acest plugin</string>
     <string name="patcher_process_killed_message">Sistemul a oprit patcher-ul înainte ca acesta să se încheie, de obicei pentru a elibera memorie. Închideți alte aplicații și încercați din nou</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe a fost închis înainte ca patch-ul să se finalizeze, deci nimic nu a fost patch-uit. Încearcă din nou</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher-ul a crash-uit înainte de a termina. Dacă se întâmplă din nou, dezactivați %1$s și raportați problema împreună cu log-ul</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

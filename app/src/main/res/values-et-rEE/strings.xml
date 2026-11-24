@@ -576,6 +576,9 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="app_links_change_failed">Rakenduse linkide muutmine ebaõnnestus</string>
     <string name="app_links_all_verified">Kõik toetatud lingid on seadistatud avanema selles rakenduses</string>
     <string name="app_links_fix">Paranda lingid</string>
+    <string name="app_links_allow_shizuku">Luba Shizuku juurdepääs</string>
+    <string name="app_links_shizuku_permission_hint">Luba Morphel kasutada Shizukut, et need lingid sinu jaoks sisse lülitada</string>
+    <string name="app_links_shizuku_not_running_hint">Käivita Shizuku, et Morphe saaks need lingid sinu jaoks sisse lülitada</string>
     <string name="configure">Seadista</string>
     <string name="patcher_rename_title">See installib klooni</string>
     <string name="patcher_rename_description">Paigad ehitasid selle rakenduse oma paketinimega, seega selle installimine lisab klooni &lt;b&gt;%s&lt;/b&gt; kõrvale, mitte ei uuenda seda</string>
@@ -745,6 +748,8 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <string name="patched_app_save_failed_toast">Paiatud rakenduse salvestamine ebaõnnestus</string>
     <string name="plugin_activity_dialog_body">Selle lisamooduliga jätkamiseks on vaja kasutaja sekkumist</string>
     <string name="patcher_process_killed_message">Süsteem katkestas paikamise enne lõppemist, tavaliselt mälu vabastamiseks. Sulge teised rakendused ja proovi uuesti</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe suletage enne paikuletamise lõpust, seega ei paigutatud midagi. Proovige uuesti</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Paikaja jooksis enne lõpetamist kokku. Kui see kordub, lülita %1$s välja ja teata veast koos logifailiga</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

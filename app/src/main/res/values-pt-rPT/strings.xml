@@ -576,6 +576,9 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="app_links_change_failed">Falha ao alterar os links do app</string>
     <string name="app_links_all_verified">Todos os links compatíveis estão configurados para abrir nesta aplicação</string>
     <string name="app_links_fix">Corrigir links</string>
+    <string name="app_links_allow_shizuku">Permitir acesso ao Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permita que o Morphe use o Shizuku para ativar esses links para você</string>
+    <string name="app_links_shizuku_not_running_hint">Inicie o Shizuku para permitir que o Morphe ative esses links para você</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Isto irá instalar uma cópia</string>
     <string name="patcher_rename_description">Os patches compilaram esta aplicação com um nome de pacote próprio, por isso, instalá-la adiciona uma cópia ao lado de &lt;b&gt;%s&lt;/b&gt; em vez de a atualizar</string>
@@ -745,6 +748,8 @@ Desinstalar vai apagar permanentemente todos os dados da aplicação."</string>
     <string name="patched_app_save_failed_toast">Erro ao guardar a aplicação modificada</string>
     <string name="plugin_activity_dialog_body">Uma interação do utilizador é necessária para continuar com este plugin</string>
     <string name="patcher_process_killed_message">O sistema interrompeu o patcher antes de concluir, geralmente para libertar memória. Feche outras aplicações e tente novamente</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">O Morphe foi fechado antes da conclusão da atualização, portanto, nada foi atualizado. Tente novamente</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">O modificador falhou antes de terminar. Se acontecer novamente, desativa %1$s e reporta o problema com o log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

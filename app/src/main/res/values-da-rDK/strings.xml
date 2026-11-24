@@ -576,6 +576,9 @@ For de bedste resultater anbefaler denne app at patche en &lt;b&gt;fuld APK&lt;/
     <string name="app_links_change_failed">Kunne ikke ændre app-links</string>
     <string name="app_links_all_verified">Alle understøttede links er konfigureret til at åbne i denne app</string>
     <string name="app_links_fix">Reparer links</string>
+    <string name="app_links_allow_shizuku">Giv Shizuku adgang</string>
+    <string name="app_links_shizuku_permission_hint">Tillad Morphe at bruge Shizuku til at aktivere disse links for dig</string>
+    <string name="app_links_shizuku_not_running_hint">Start Shizuku for at lade Morphe aktivere disse links for dig</string>
     <string name="configure">Konfigurér</string>
     <string name="patcher_rename_title">Dette vil installere en klon</string>
     <string name="patcher_rename_description">Patch\'ene byggede denne app under et eget pakkenavn, så installation tilføjer en klon ved siden af &lt;b&gt;%s&lt;/b&gt; i stedet for at opdatere den</string>
@@ -745,6 +748,8 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="patched_app_save_failed_toast">Kunne ikke gemme patchet app</string>
     <string name="plugin_activity_dialog_body">Brugerinteraktion er nødvendig for at fortsætte med dette plugin</string>
     <string name="patcher_process_killed_message">Systemet stoppede patcheren, før den var færdig, typisk for at frigøre hukommelse. Luk andre apps, og prøv igen</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe blev lukket, før patchningen var færdig, så intet blev patchet. Prøv igen</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcheren gik ned, før den blev færdig. Hvis det sker igen, skal du slå %1$s fra og rapportere problemet med loggen</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

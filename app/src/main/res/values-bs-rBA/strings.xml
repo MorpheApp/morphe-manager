@@ -576,6 +576,9 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;punog 
     <string name="app_links_change_failed">Neuspješna promjena poveznica aplikacije</string>
     <string name="app_links_all_verified">Sve podržane poveznice su konfigurirane da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
+    <string name="app_links_allow_shizuku">Dozvoli pristup Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dozvoli Morphe-u da koristi Shizuku kako bi uključio ove poveznice za vas</string>
+    <string name="app_links_shizuku_not_running_hint">Pokrenite Shizuku kako biste omogućili Morphe-u da uključi ove poveznice za vas</string>
     <string name="configure">Konfiguriši</string>
     <string name="patcher_rename_title">Ovim će biti instaliran klon</string>
     <string name="patcher_rename_description">Zakrpe su izgradile ovu aplikaciju pod vlastitim imenom paketa, tako da njena instalacija dodaje klon pored &lt;b&gt;%s&lt;/b&gt; umjesto njenog ažuriranja</string>
@@ -745,6 +748,8 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Neuspjelo spremanje zakrpljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Potrebna je interakcija korisnika kako bi se nastavilo sa ovim dodatakom</string>
     <string name="patcher_process_killed_message">Sistem je zaustavio patcher prije nego što je završio, obično kako bi oslobodio memoriju. Zatvorite ostale aplikacije i pokušajte ponovo</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je zatvoren prije nego što je zakrpa završila, tako da ništa nije zakrpljeno. Pokušajte ponovo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Program za zakrpljivanje se srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem uz dnevnik</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

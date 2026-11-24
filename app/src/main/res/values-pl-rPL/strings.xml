@@ -391,7 +391,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Obsługiwane wersje:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nieobsługiwana</string>
-    <string name="home_version_copy">Kopiuj wersję</string>
+    <string name="home_version_copy">Skopiuj wersję</string>
     <string name="home_version_copied">Skopiowano wersję</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Kompilacja %s</string>
@@ -577,6 +577,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="app_links_change_failed">Nie udało się zmienić linków aplikacji</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
+    <string name="app_links_allow_shizuku">Zezwól na dostęp do Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Zezwól aplikacji Morphe na korzystanie z Shizuku, aby włączyć te linki za Ciebie</string>
+    <string name="app_links_shizuku_not_running_hint">Uruchom Shizuku, aby aplikacja Morphe mogła włączyć te linki za Ciebie</string>
     <string name="configure">Konfiguruj</string>
     <string name="patcher_rename_title">To zainstaluje klona</string>
     <string name="patcher_rename_description">Modyfikacje zbudowały tę aplikację pod własną nazwą pakietu, więc jej instalacja doda klona obok &lt;b&gt;%s&lt;/b&gt; zamiast ją aktualizować</string>
@@ -746,6 +749,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
     <string name="patcher_process_killed_message">System zatrzymał proces modyfikowania przed jego zakończeniem, zazwyczaj w celu zwolnienia pamięci. Zamknij inne aplikacje i spróbuj ponownie</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe została zamknięta przed zakończeniem aktualizacji, więc nic nie zostało zaktualizowane. Spróbuj ponownie</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Proces modyfikowania uległ awarii przed zakończeniem pracy. Jeśli sytuacja się powtórzy, wyłącz opcję %1$s i zgłoś problem, dołączając dziennik zdarzeń</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -1226,7 +1231,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_apks_size">Całkowity rozmiar: %s</string>
+    <string name="settings_system_apks_size">Łączny rozmiar: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Spowoduje to trwałe usunięcie zapisanych plików APK</string>
     <string name="settings_system_apks_delete_selected_title">Usunąć wybrane pliki APK?</string>
     <string name="settings_system_apks_delete_selected_confirm">Spowoduje to trwałe usunięcie wybranych plików APK</string>
@@ -1478,7 +1483,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="more_options">Więcej opcji</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
-    <string name="copy">Kopiuj</string>
+    <string name="copy">Skopiuj</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>

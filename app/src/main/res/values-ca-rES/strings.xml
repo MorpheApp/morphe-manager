@@ -576,6 +576,9 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="app_links_change_failed">Error en canviar els enllaços de l\'aplicació</string>
     <string name="app_links_all_verified">Tots els enllaços compatibles estan configurats per obrir-se en aquesta aplicació</string>
     <string name="app_links_fix">Corregir enllaços</string>
+    <string name="app_links_allow_shizuku">Permet l\'accés a Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permet que Morphe utilitzi Shizuku per activar aquests enllaços per a tu</string>
+    <string name="app_links_shizuku_not_running_hint">Inicia Shizuku per permetre que Morphe activi aquests enllaços per a tu</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Això instal·larà un clon</string>
     <string name="patcher_rename_description">Els patxes han creat aquesta aplicació sota un nom de paquet propi, per la qual cosa instal·lar-la afegeix un clon al costat de &lt;b&gt;%s&lt;/b&gt; en lloc d\'actualitzar-la</string>
@@ -745,6 +748,8 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="patched_app_save_failed_toast">Error en desar l\'aplicació amb el pegat</string>
     <string name="plugin_activity_dialog_body">Es requereix la interacció de l\'usuari per procedir amb aquest plugin</string>
     <string name="patcher_process_killed_message">El sistema ha aturat el patxador abans que acabés, normalment per alliberar memòria. Tanca altres aplicacions i torna-ho a intentar</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe s\'ha tancat abans que s\'acabés el procés de patch, per la qual cosa no s\'ha patchat res. Torna-ho a intentar</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">El patxador ha fallat abans de finalitzar. Si torna a passar, desactiva %1$s i informa del problema amb el registre</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

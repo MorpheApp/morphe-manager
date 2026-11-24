@@ -576,6 +576,9 @@ Lai iegūtu labākos rezultātus, šī lietotne iesaka labot &lt;b&gt;pilnu APK&
     <string name="app_links_change_failed">Neizdevās mainīt lietotnes saites</string>
     <string name="app_links_all_verified">Visas atbalstītās saites ir konfigurētas atvēršanai šajā lietotnē</string>
     <string name="app_links_fix">Labot saites</string>
+    <string name="app_links_allow_shizuku">Atļaut Shizuku piekļuvi</string>
+    <string name="app_links_shizuku_permission_hint">Atļaujiet Morphe izmantot Shizuku, lai iespējotu šīs saites jūsu vietā</string>
+    <string name="app_links_shizuku_not_running_hint">Kustiniet Shizuku, lai Morphe varētu iespējot šīs saites jūsu vietā</string>
     <string name="configure">Konfigurēt</string>
     <string name="patcher_rename_title">Tiek instalēts klons</string>
     <string name="patcher_rename_description">Labojumi šo lietotni izveidoja ar savu pakotnes nosaukumu, tāpēc tās instalēšana pievieno klonu blakus &lt;b&gt;%s&lt;/b&gt;, nevis atjaunina to</string>
@@ -745,6 +748,8 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="patched_app_save_failed_toast">Neizdevās saglabāt lāpīto lietotni</string>
     <string name="plugin_activity_dialog_body">Lai turpinātu ar šo papildinājumu, nepieciešama lietotāja mijiedarbība</string>
     <string name="patcher_process_killed_message">Sistēma aptura patcheru, pirms tas pabeidza darbu, parasti, lai atbrīvotu atmiņu. Aizveriet citas lietotnes un mēģiniet vēlreiz</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe tika aizvērts pirms patchinga pabeigšanas, tāpēc nekas netika patchedts. Mēģiniet vēlreiz</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher programma avarēja, pirms tā pabeidza darbu. Ja tas atkārtojas, izslēdziet %1$s un ziņojiet par problēmu, pievienojot logfailu</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

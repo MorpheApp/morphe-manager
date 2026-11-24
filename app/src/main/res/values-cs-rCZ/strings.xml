@@ -576,6 +576,9 @@ Pro nejlepší výsledky doporučujeme záplatovat &lt;b&gt;úplný APK&lt;/b&gt
     <string name="app_links_change_failed">Nepodařilo se změnit odkazy aplikace</string>
     <string name="app_links_all_verified">Všechny podporované odkazy jsou nastaveny tak, aby se otevíraly v této aplikaci</string>
     <string name="app_links_fix">Opravit odkazy</string>
+    <string name="app_links_allow_shizuku">Povolit přístup pro Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Povolte aplikaci Morphe použití Shizuku, aby za vás mohla tyto odkazy zapnout</string>
+    <string name="app_links_shizuku_not_running_hint">Spusťte Shizuku, aby Morphe mohl tyto odkazy zapnout za vás</string>
     <string name="configure">Nastavit</string>
     <string name="patcher_rename_title">Toto nainstaluje klon</string>
     <string name="patcher_rename_description">Záplaty vytvořily tuto aplikaci pod vlastním názvem balíčku, takže instalace přidá klon vedle &lt;b&gt;%s&lt;/b&gt; místo aktualizace.</string>
@@ -745,6 +748,8 @@ Odinstalace trvale smaže všechna data aplikace"</string>
     <string name="patched_app_save_failed_toast">Chyba při ukládání záplatované aplikace</string>
     <string name="plugin_activity_dialog_body">Pro pokračování s tímto pluginem je vyžadována interakce uživatele</string>
     <string name="patcher_process_killed_message">Systém ukončil patcher před dokončením, obvykle kvůli uvolnění paměti. Zavřete jiné aplikace a zkuste to znovu</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe byla zavřena před dokončením aktualizace, takže nebylo nic aktualizováno. Zkuste to znovu</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Záplatovač spadl před dokončením. Pokud se to opakuje, vypněte %1$s a nahlaste problém společně s logem</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

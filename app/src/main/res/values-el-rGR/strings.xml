@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Αποτυχία αλλαγής συνδέσμων εφαρμογής</string>
     <string name="app_links_all_verified">Όλοι οι υποστηριζόμενοι σύνδεσμοι έχουν ρυθμιστεί να ανοίγουν σε αυτήν την εφαρμογή</string>
     <string name="app_links_fix">Διόρθωση συνδέσμων</string>
+    <string name="app_links_allow_shizuku">Επιτρέψτε την πρόσβαση στο Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Επιτρέψτε στο Morphe να χρησιμοποιήσει το Shizuku για να ενεργοποιήσει αυτούς τους συνδέσμους για εσάς</string>
+    <string name="app_links_shizuku_not_running_hint">Ξεκινήστε το Shizuku για να επιτρέψετε στο Morphe να ενεργοποιήσει αυτούς τους συνδέσμους για εσάς</string>
     <string name="configure">Διαμόρφωση</string>
     <string name="patcher_rename_title">Αυτό θα εγκαταστήσει έναν κλώνο</string>
     <string name="patcher_rename_description">Οι τροποποιήσεις δημιούργησαν αυτήν την εφαρμογή με δικό τους όνομα πακέτου, οπότε η εγκατάστασή της προσθέτει ένα κλώνο δίπλα στο <b>%s</b> αντί να την ενημερώσει</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Αποτυχία αποθήκευσης της τροποποιημένης εφαρμογής</string>
     <string name="plugin_activity_dialog_body">Απαιτείται αλληλεπίδραση χρήστη για να συνεχίσετε με αυτό το πρόσθετο.</string>
     <string name="patcher_process_killed_message">Το σύστημα σταμάτησε τον patcher πριν ολοκληρωθεί, συνήθως για να ελευθερώσει μνήμη. Κλείστε άλλες εφαρμογές και δοκιμάστε ξανά</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Το Morphe έκλεισε πριν ολοκληρωθεί η εφαρμογή των διορθώσεων, επομένως δεν εφαρμόστηκε τίποτα. Δοκιμάστε ξανά</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Ο τροποποιητής κατέρρευσε πριν ολοκληρωθεί. Εάν συμβεί ξανά, απενεργοποιήστε το %1$s και αναφέρετε το πρόβλημα με το αρχείο καταγραφής</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

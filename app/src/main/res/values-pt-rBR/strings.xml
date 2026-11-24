@@ -11,19 +11,19 @@
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Automóveis</string>
     <string name="home_no_patches_available">No patches available</string>
-    <string name="home_app_hide_title">Hide this app?</string>
+    <string name="home_app_hide_title">Ocultar este aplicativo?</string>
     <string name="home_more_apps_title">Mais apps</string>
     <string name="home_more_apps_hide_title">Quer ocultar este cartão?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_more_apps_hide_message">Você pode recuperá-lo a qualquer momento em %1$s</string>
-    <string name="home_app_hide_message">This app will be hidden from the home screen. You can restore it later from the hidden apps using the button at the bottom of the list</string>
-    <string name="home_app_will_be_hidden">This app will be hidden</string>
-    <string name="home_app_hidden_named">%s hidden</string>
+    <string name="home_app_hide_message">Este aplicativo ficará oculto na tela inicial. Você poderá restaurá-lo posteriormente na lista de aplicativos ocultos, usando o botão na parte inferior da lista</string>
+    <string name="home_app_will_be_hidden">Este aplicativo ficará oculto</string>
+    <string name="home_app_hidden_named">%s ocultar</string>
     <string name="home_app_shown_named">%s shown</string>
-    <string name="home_app_no_hidden">No hidden apps</string>
-    <string name="home_app_hidden_apps_title">Hidden apps</string>
+    <string name="home_app_no_hidden">Sem aplicativos ocultos</string>
+    <string name="home_app_hidden_apps_title">Aplicativos Ocultos</string>
     <string name="home_app_hidden_apps_hint">Toque para mostrar</string>
-    <string name="home_apps_unhide_message">Unhidden apps return to the home screen</string>
+    <string name="home_apps_unhide_message">Os aplicativos que não estão ocultos retornam à tela inicial</string>
     <string name="home_app_patch_sources_description">Sources left unticked are not offered when these apps are patched, and their patches never join a selection on their own. Each source stays on for every other app</string>
     <string name="home_app_patch_sources_mixed">Offered to %1$s of %2$s</string>
     <string name="home_app_patch_sources_covers">Has patches for %1$s of %2$s</string>
@@ -574,6 +574,9 @@ Para obter os melhores resultados, este aplicativo recomenda corrigir um &lt;b&g
     <string name="app_links_change_failed">Falha ao alterar links do app</string>
     <string name="app_links_all_verified">Todos os links suportados estão configurados para abrir neste aplicativo</string>
     <string name="app_links_fix">Corrigir links</string>
+    <string name="app_links_allow_shizuku">Permitir acesso ao Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permite que o Morphe use o Shizuku para ativar esses links para você</string>
+    <string name="app_links_shizuku_not_running_hint">Inicie o Shizuku para permitir que o Morphe ative esses links para você</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Isso instalará um clone</string>
     <string name="patcher_rename_description">Os patches criaram este aplicativo com um nome de pacote próprio, então instalá-lo adiciona um clone ao lado de &lt;b&gt;%s&lt;/b&gt; em vez de atualizá-lo</string>
@@ -744,6 +747,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <string name="patched_app_save_failed_toast">Falha ao salvar o aplicaitvo patcheado</string>
     <string name="plugin_activity_dialog_body">Interação do usuário é necessária para prosseguir com este plugin</string>
     <string name="patcher_process_killed_message">O sistema interrompeu o patcher antes que ele terminasse, geralmente para liberar memória. Feche outros aplicativos e tente novamente</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">O Morphe foi fechado antes da conclusão da aplicação do patch, portanto, nada foi corrigido. Tente novamente</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">O patcher travou antes de terminar. Se isso acontecer novamente, desative %1$s e relate o problema com o log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

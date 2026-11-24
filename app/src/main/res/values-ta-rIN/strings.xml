@@ -117,6 +117,9 @@
     <string name="app_links_disable_success">செயலி இணைப்புகள் முடக்கப்பட்டது</string>
     <string name="app_links_disable_failed">செயலி இணைப்புகளை முடக்க முடியவில்லை</string>
     <string name="app_links_change_failed">ஆப் இணைப்புகளை மாற்ற முடியவில்லை</string>
+    <string name="app_links_allow_shizuku">Shizuku அணுகலை அனுமதிக்கவும்</string>
+    <string name="app_links_shizuku_permission_hint">இந்த இணைப்புகளை உங்களுக்காக இயக்க Shizuku-வை பயன்படுத்த Morphe-ஐ அனுமதிக்கவும்</string>
+    <string name="app_links_shizuku_not_running_hint">இந்த இணைப்புகளை உங்களுக்காக இயக்க Morphe-க்கு அனுமதி வழங்க Shizuku-வைத் தொடங்கவும்</string>
     <!-- Home Screen - Root Mode -->
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">%1$s ஆனது %2$s என அமைக்கப்பட்டிருக்கும் போது கேட்கப்பட்டது. பேட்ச் செய்த பிறகு பேட்ச் பயன்முறையை மாற்ற முடியாது</string>
@@ -151,6 +154,8 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">பேட்ச் செய்தல் முடிவதற்கு முன்பே Morphe மூடப்பட்டது, எனவே எதுவும் பேட்ச் செய்யப்படவில்லை. மீண்டும் முயற்சிக்கவும்</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">பேட்சர் முடிவடைவதற்கு முன்பே செயலிழந்தது. இது மீண்டும் நடந்தால், %1$s-ஐ ஆஃப் செய்து லாக் உடன் பிரச்சனையைப் புகாரளிக்கவும்</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@ Für optimale Ergebnisse empfiehlt diese App, eine &lt;b&gt;vollständige APK&lt
     <string name="app_links_change_failed">App-Links konnten nicht geändert werden</string>
     <string name="app_links_all_verified">Alle unterstützten Links sind so konfiguriert, dass sie in dieser App geöffnet werden</string>
     <string name="app_links_fix">Links reparieren</string>
+    <string name="app_links_allow_shizuku">Shizuku-Zugriff erlauben</string>
+    <string name="app_links_shizuku_permission_hint">Erlaube Morphe, Shizuku zu verwenden, um diese Links für dich zu aktivieren</string>
+    <string name="app_links_shizuku_not_running_hint">Starte Shizuku, damit Morphe diese Links für dich aktivieren kann</string>
     <string name="configure">Konfigurieren</string>
     <string name="patcher_rename_title">Dies installiert einen Klon</string>
     <string name="patcher_rename_description">Die Patches haben diese App unter einem eigenen Paketnamen erstellt, daher fügt die Installation einen Klon neben &lt;b&gt;%s&lt;/b&gt; hinzu, anstatt es zu aktualisieren</string>
@@ -746,6 +749,8 @@ Durch die Deinstallation werden alle App-Daten dauerhaft gelöscht"</string>
     <string name="patched_app_save_failed_toast">Speichern der gepatchten App fehlgeschlagen</string>
     <string name="plugin_activity_dialog_body">Benutzerinteraktion ist erforderlich, um dieses Plugin fortzusetzen</string>
     <string name="patcher_process_killed_message">Das System hat den Patcher gestoppt, bevor er fertig war, in der Regel um Speicher freizugeben. Schließe andere Apps und versuche es erneut</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe wurde geschlossen, bevor das Patchen abgeschlossen war, daher wurde nichts gepatcht. Versuchen Sie es erneut</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Der Patcher ist abgestürzt, bevor er fertig war. Falls dies erneut passiert, schalte %1$s aus und melde das Problem mit dem Log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -183,7 +183,7 @@
     <string name="sources_apps_new">Nouvelle</string>
     <string name="sources_apps_new_apps">Ajouter les nouvelles applications</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
-    <string name="sources_apps_new_apps_description">Les applications qu\'elle ajoute ultérieurement apparaîtront sur l\'écran d’accueil</string>
+    <string name="sources_apps_new_apps_description">Les applications qu\'elle ajoute ultérieurement apparaîtront sur l\'écran d\'accueil</string>
     <string name="sources_management_prerelease_toggle">Patchs en préversion</string>
     <string name="sources_management_prerelease_toggle_description">Reçoit un accès anticipé aux nouvelles versions expérimentales des patchs</string>
     <string name="sources_prerelease_warning_title">Activer les patchs en préversion ?</string>
@@ -280,7 +280,7 @@
     <string name="home_apk_helper_no_result">L\'application d\'assistance n\'a pas renvoyé de fichier APK</string>
     <string name="home_apk_helper_no_access">L\'application d\'assistance n\'a pas accordé l\'accès à l\'APK qu\'elle a renvoyé</string>
     <string name="home_apk_helper_no_package">L\'application d\'assistance n\'a pas indiqué quelle application installée utiliser</string>
-    <string name="home_apk_helper_wrong_package">L\'application d\'assistance a renvoyé une application différente de celle en train d’être patchée</string>
+    <string name="home_apk_helper_wrong_package">L\'application d\'assistance a renvoyé une application différente de celle en train d\'être patchée</string>
     <string name="home_apk_helper_installed_unavailable">Morphe n\'a pas pu utiliser l\'application installée</string>
     <string name="home_apk_helper_installed_incompatible">La version installée ne peut pas être patchée</string>
     <string name="home_apk_use_saved_copy">Utiliser la copie enregistrée</string>
@@ -577,6 +577,9 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="app_links_change_failed">Échec du changement des liens de l\'application</string>
     <string name="app_links_all_verified">Tous les liens pris en charge sont configurés pour s\'ouvrir dans cette application</string>
     <string name="app_links_fix">Corriger les liens</string>
+    <string name="app_links_allow_shizuku">Autoriser l\'accès à Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Autorisez Morphe à utiliser Shizuku pour activer ces liens pour vous</string>
+    <string name="app_links_shizuku_not_running_hint">Lancez Shizuku pour permettre à Morphe d\'activer ces liens pour vous</string>
     <string name="configure">Configurer</string>
     <string name="patcher_rename_title">Cela installera un clone</string>
     <string name="patcher_rename_description">Les patchs ont compilé cette application sous leur propre nom de paquet, son installation ajoute donc un clone à côté de &lt;b&gt;%s&lt;/b&gt; au lieu de le mettre à jour</string>
@@ -746,6 +749,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="patched_app_save_failed_toast">Échec de l\'enregistrement de l\'application patchée</string>
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
     <string name="patcher_process_killed_message">Le système a arrêté le patcheur avant qu\'il ait terminé, généralement pour libérer de la mémoire. Fermez les autres applications et réessayez</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe a été fermé avant la fin du correctif, donc rien n\'a été patché. Réessayez</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez %1$s et signalez le problème en joignant le journal</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

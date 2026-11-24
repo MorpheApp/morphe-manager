@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">এপ লিংকসমূহ সলনি কৰাত ব্যৰ্থ হৈছে</string>
     <string name="app_links_all_verified">সমৰ্থিত সকলো লিংক এই এপটোত খোলাৰ বাবে কনফিগাৰ কৰা হৈছে</string>
     <string name="app_links_fix">লিংকসমূহ ঠিক কৰক</string>
+    <string name="app_links_allow_shizuku">Shizuku-ক এক্সেছ অনুমতি দিয়ক</string>
+    <string name="app_links_shizuku_permission_hint">আপোনাৰ বাবে এই লিংকবোৰ অন কৰিবলৈ Morphe-ক Shizuku ব্যৱহাৰ কৰিবলৈ অনুমতি দিয়ক</string>
+    <string name="app_links_shizuku_not_running_hint">আপোনাৰ বাবে এই লিংকবোৰ অন কৰিবলৈ Morphe-ক অনুমতি দিবলৈ Shizuku আৰম্ভ কৰক</string>
     <string name="configure">কনফিগাৰ কৰক</string>
     <string name="patcher_rename_title">এয়া এটা ক্লোন ইনষ্টল কৰিব</string>
     <string name="patcher_rename_description">পেচবোৰে এই এপটো তেওঁলোকৰ নিজৰ পেকেজ নামেৰে নিৰ্মাণ কৰিছে, গতিকে ইয়াৰ ইনষ্টলেশনৰ ফলত &lt;b&gt;%s&lt;/b&gt; আপডেট হোৱাৰ পৰিৱৰ্তে ইয়াৰ কাষত এটা ক্লোন যোগ কৰিব</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">প্যাচ কৰা এপটো সংৰক্ষণ কৰাত ব্যৰ্থ হৈছে</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইনটোৰ সৈতে আগবাঢ়িবলৈ ব্যৱহাৰকাৰীৰ অন্তৰ্ক্ৰিয়াৰ প্ৰয়োজন</string>
     <string name="patcher_process_killed_message">চিষ্টেমটোৱে প্যাচাৰটো সম্পূৰ্ণ হোৱাৰ আগতেই বন্ধ কৰি দিছে, সাধাৰণতে মেমৰী খালী কৰিবলৈ। আন এপৰিকেচনবোৰ বন্ধ কৰি পুনৰ চেষ্টা কৰক</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">প্যাচিং শেষ হোৱাৰ আগতেই Morphe বন্ধ কৰা হৈছিল, সেয়ে একোৱেই প্যাচ কৰা হোৱা নাই। পুনৰ চেষ্টা কৰক</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">পেচাৰটো সম্পূৰ্ণ হোৱাৰ আগতেই ক্ৰাশ কৰিছে। যদি ই পুনৰ ঘটে, তেন্তে %1$s অফ কৰক আৰু লগৰ সৈতে সমস্যাটোৰ ৰিপৰ্ট কৰক</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

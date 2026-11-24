@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Не вдалося змінити посилання застосунку</string>
     <string name="app_links_all_verified">Усі підтримувані посилання налаштовано на відкриття в цьому застосунку</string>
     <string name="app_links_fix">Виправити посилання</string>
+    <string name="app_links_allow_shizuku">Дозволити доступ до Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Дозвольте Morphe використати Shizuku, щоб увімкнути ці посилання за вас</string>
+    <string name="app_links_shizuku_not_running_hint">Запустіть Shizuku, щоб Morphe міг увімкнути ці посилання за вас</string>
     <string name="configure">Налаштувати</string>
     <string name="patcher_rename_title">Це встановить клон</string>
     <string name="patcher_rename_description">Патчі створили цей застосунок під власною назвою пакета, тому встановлення додає клон поруч із &lt;b&gt;%s&lt;/b&gt; замість оновлення</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Не вдалося зберегти патчений застосунок</string>
     <string name="plugin_activity_dialog_body">Для продовження потрібна взаємодія користувача з цим плагіном</string>
     <string name="patcher_process_killed_message">Систему зупинила патчер до завершення роботи, зазвичай щоб звільнити пам\'ять. Закрийте інші застосунки та спробуйте ще раз</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe закрився до завершення патчингу, тому нічого не пропатчено. Спробуйте ще раз</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчер аварійно завершив роботу, не закінчивши. Якщо це повториться, вимкніть %1$s і повідомте про проблему, додавши журнал</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

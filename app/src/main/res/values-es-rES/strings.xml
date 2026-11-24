@@ -576,6 +576,9 @@ Para un mejor resultado, esta aplicación te recomienda parchear un &lt;b&gt;APK
     <string name="app_links_change_failed">Error al cambiar los enlaces de la aplicación</string>
     <string name="app_links_all_verified">Todos los enlaces compatibles están configurados para abrirse en esta aplicación</string>
     <string name="app_links_fix">Corregir enlaces</string>
+    <string name="app_links_allow_shizuku">Permitir acceso a Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permite que Morphe use Shizuku para activar estos enlaces por ti</string>
+    <string name="app_links_shizuku_not_running_hint">Inicia Shizuku para que Morphe pueda activar estos enlaces por ti</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Esto instalará un clon</string>
     <string name="patcher_rename_description">Los parches han compilado esta aplicación con un nombre de paquete propio, por lo que al instalarla se añade un clon junto a &lt;b&gt;%s&lt;/b&gt; en lugar de actualizarla</string>
@@ -745,6 +748,8 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="patched_app_save_failed_toast">Error al guardar la aplicación parcheada</string>
     <string name="plugin_activity_dialog_body">Es necesaria la interacción del usuario para continuar con este complemento</string>
     <string name="patcher_process_killed_message">El sistema detuvo el parcheador antes de que terminara, normalmente para liberar memoria. Cierra otras aplicaciones e inténtalo de nuevo</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe se cerró antes de que terminara el parcheo, por lo que no se aplicó ningún parche. Inténtalo de nuevo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">El parcheador se cerró inesperadamente antes de terminar. Si ocurre de nuevo, desactiva %1$s e informa del problema con el registro</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

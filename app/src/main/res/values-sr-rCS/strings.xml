@@ -576,6 +576,9 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;celog 
     <string name="app_links_change_failed">Neuspešna promena aplikacionih linkova</string>
     <string name="app_links_all_verified">Svi podržani linkovi su konfigurisani da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravite linkove</string>
+    <string name="app_links_allow_shizuku">Dozvoli pristup Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dozvoli Morphe-u da koristi Shizuku kako bi aktivirao ove linkove za tebe</string>
+    <string name="app_links_shizuku_not_running_hint">Pokreni Shizuku kako bi Morphe mogao aktivirati ove linkove za tebe</string>
     <string name="configure">Konfigurišite</string>
     <string name="patcher_rename_title">Ovo će instalirati klon</string>
     <string name="patcher_rename_description">Zakrpe su napravile ovu aplikaciju pod sopstvenim imenom paketa, tako da njeno instaliranje dodaje klon pored &lt;b&gt;%s&lt;/b&gt; umesto da je ažurira.</string>
@@ -745,6 +748,8 @@ Deinstalacija će trajno obrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Došlo je do greške pri čuvanju zakrpljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Potrebna je interakcija korisnika da bi se nastavilo sa ovim dodatkom</string>
     <string name="patcher_process_killed_message">Sistem je prekinuo patcher pre nego što je završio, obično da oslobodi memoriju. Zatvorite druge aplikacije i pokušajte ponovo</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je zatvoren pre nego što je zakrpljivanje završeno, tako da ništa nije zakrpljeno. Pokušajte ponovo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Zakrpljivač se srušio pre završetka. Ako se to ponovi, isključite %1$s i prijavite problem uz log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

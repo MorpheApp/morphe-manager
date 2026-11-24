@@ -576,6 +576,9 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="app_links_change_failed">Misslyckades med att ändra applänkar</string>
     <string name="app_links_all_verified">Alla stödda länkar är konfigurerade för att öppnas i den här appen</string>
     <string name="app_links_fix">Åtgärda länkar</string>
+    <string name="app_links_allow_shizuku">Tillåt åtkomst för Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Tillåt Morphe att använda Shizuku för att aktivera dessa länkar åt dig</string>
+    <string name="app_links_shizuku_not_running_hint">Starta Shizuku så att Morphe kan aktivera dessa länkar åt dig</string>
     <string name="configure">Konfigurera</string>
     <string name="patcher_rename_title">Detta installerar en klon</string>
     <string name="patcher_rename_description">Tilläggen byggde den här appen under ett eget paketnamn, så om den installeras läggs en klon till bredvid &lt;b&gt;%s&lt;/b&gt; istället för att uppdatera den</string>
@@ -745,6 +748,8 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den modifierade appen</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med den här insticksmodulen</string>
     <string name="patcher_process_killed_message">Systemet stoppade modifieringsverktyget innan det var klart, oftast för att frigöra minne. Stäng andra appar och försök igen</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe stängdes innan patchningen var klar, så inget patchades. Försök igen</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Modifieringsverktyget kraschade innan det var klart. Om det händer igen, inaktivera %1$s och rapportera problemet med loggen</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

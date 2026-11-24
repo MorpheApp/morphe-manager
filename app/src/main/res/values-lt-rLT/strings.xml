@@ -576,6 +576,9 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="app_links_change_failed">Nepavyko pakeisti programėlės nuorodų</string>
     <string name="app_links_all_verified">Visos palaikomos nuorodos sukonfigūruotos atidaryti šioje programėlėje</string>
     <string name="app_links_fix">Ištaisyti nuorodas</string>
+    <string name="app_links_allow_shizuku">Leisti prieigą prie \"Shizuku\"</string>
+    <string name="app_links_shizuku_permission_hint">Leiskite \"Morphe\" naudoti \"Shizuku\", kad nuorodos būtų įjungtos už jus</string>
+    <string name="app_links_shizuku_not_running_hint">Paleiskite \"Shizuku\", kad \"Morphe\" galėtų įjungti šias nuorodas už jus</string>
     <string name="configure">Konfigūruoti</string>
     <string name="patcher_rename_title">Tai įdiegs kloną</string>
     <string name="patcher_rename_description">Pataisos sukūrė šią programą su savo paketo pavadinimu, todėl ją įdiegus šalia &lt;b&gt;%s&lt;/b&gt; atsiras klonas, o ne atnaujinimas</string>
@@ -745,6 +748,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patched_app_save_failed_toast">Nepavyko išsaugoti pataisytos programos</string>
     <string name="plugin_activity_dialog_body">Reikia vartotojo sąveikos, kad tęsti su šiuo įskiepiu</string>
     <string name="patcher_process_killed_message">Sistema sustabdė pataisymo įrankį, kol jis dar nebaigė veikti, paprastai dėl atminties išlaisvinimo. Uždarykite kitas programas ir bandykite dar kartą</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe buvo uždaryta prieš baigiant atnaujinimą, todėl nieko nebuvo atnaujinta. Pabandykite dar kartą</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Pataisymo įrankis sugriuvo prieš baigdamas. Jei tai pasikartos, išjunkite %1$s ir praneškite apie problemą kartu su žurnalu</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="app_links_change_failed">Ilova havolalarini o\'zgartirish imkonsiz bo\'ldi</string>
     <string name="app_links_all_verified">Barcha qo‘llab-quvvatlanadigan havolalar ushbu ilovada ochiladigan qilib sozlangan</string>
     <string name="app_links_fix">Havolalarni tuzatish</string>
+    <string name="app_links_allow_shizuku">Shizuku kirishiga ruxsat berish</string>
+    <string name="app_links_shizuku_permission_hint">Ushbu havolalarni yoqish uchun Morphe’ga Shizuku dan foydalanishga ruxsat bering</string>
+    <string name="app_links_shizuku_not_running_hint">Ushbu havolalarni yoqish uchun Shizuku ni ishga tushiring</string>
     <string name="configure">Sozlash</string>
     <string name="patcher_rename_title">Bu klonni o\'rnatadi</string>
     <string name="patcher_rename_description">Patchlar bu ilovani o\'z paket nomi ostida qurgan, shuning uchun uni o\'rnatish &lt;b&gt;%s&lt;/b&gt; yoniga klon qo\'shadi, yangilash o\'rniga</string>
@@ -745,6 +748,8 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="patched_app_save_failed_toast">Patchlangan ilovni saqlashda xatolik</string>
     <string name="plugin_activity_dialog_body">Ushbu plagin bilan davom etish uchun foydalanuvchi aralashuvi kerak</string>
     <string name="patcher_process_killed_message">Tizim patcherni tugashidan oldin to\'xtatdi, odatda xotirani bo\'shatish uchun. Boshqa ilovalarni yoping va qayta urinib ko\'ring.</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Patch jarayoni yakunlanmasdan Morphe yopildi, shuning uchun hech narsa yangilanmadi. Qayta urinib ko\"ring</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher yakunlanmasdan oldin ishdan chiqdi. Agar bu yana takrorlansa, %1$s ni o\'chiring va muammoni log fayli bilan birga xabar qiling</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

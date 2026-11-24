@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">অ্যাপ লিঙ্ক পরিবর্তন করতে ব্যর্থ হয়েছে</string>
     <string name="app_links_all_verified">সকল সমর্থিত লিংক এই অ্যাপে খোলার জন্য কনফিগার করা হয়েছে</string>
     <string name="app_links_fix">লিংক ঠিক করুন</string>
+    <string name="app_links_allow_shizuku">Shizuku-এর অ্যাক্সেসের অনুমতি দিন</string>
+    <string name="app_links_shizuku_permission_hint">আপনার জন্য এই লিঙ্কগুলো চালু করতে Morphe-কে Shizuku ব্যবহার করার অনুমতি দিন</string>
+    <string name="app_links_shizuku_not_running_hint">আপনার জন্য এই লিঙ্কগুলো চালু করতে Morphe-কে অনুমতি দিতে Shizuku শুরু করুন</string>
     <string name="configure">কনফিগার করুন</string>
     <string name="patcher_rename_title">এটি একটি ক্লোন ইনস্টল করবে</string>
     <string name="patcher_rename_description">প্যাচগুলো এই অ্যাপটি তাদের নিজস্ব প্যাকেজ নামে তৈরি করেছে, তাই এটি ইনস্টল করলে &lt;b&gt;%s&lt;/b&gt;-এর পাশাপাশি একটি ক্লোন যুক্ত হবে, এটি আপডেট করার পরিবর্তে।</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে ব্যবহারকারীর ইন্টারঅ্যাকশন প্রয়োজন</string>
     <string name="patcher_process_killed_message">সিস্টেমটি প্যাচারকে সম্পন্ন করার আগেই বন্ধ করে দিয়েছে, সাধারণত মেমোরি খালি করতে। অন্য অ্যাপগুলো বন্ধ করুন এবং আবার চেষ্টা করুন</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">প্যাচিং শেষ হওয়ার আগেই Morphe বন্ধ করা হয়েছিল, তাই কিছুই প্যাচ করা হয়নি। আবার চেষ্টা করুন</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">প্যাচার শেষ হওয়ার আগেই ক্র্যাশ করেছে। যদি এটি আবার ঘটে, তবে %1$s বন্ধ করুন এবং লগ সহ সমস্যাটি রিপোর্ট করুন</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">ການປ່ຽນແປງລິ້ງແອັບຫຼົ້ມເຫຼວ</string>
     <string name="app_links_all_verified">ລິ້ງທີ່ຮອງຮັບທັງໝົດຖືກຕັ້ງຄ່າໃຫ້ເປີດໃນແອັບນີ້</string>
     <string name="app_links_fix">ແກ້ໄຂລິ້ງ</string>
+    <string name="app_links_allow_shizuku">ອະນຸຍາດໃຫ້ Shizuku ເຂົ້າເຖິງ</string>
+    <string name="app_links_shizuku_permission_hint">ອະນຸຍາດໃຫ້ Morphe ໃຊ້ Shizuku ເພື່ອເປີດລິງເຫຼົ່ານີ້ໃຫ້ທ່ານ</string>
+    <string name="app_links_shizuku_not_running_hint">ເລີ່ມຕົ້ນ Shizuku ເພື່ອໃຫ້ Morphe ເປີດລິງເຫຼົ່ານີ້ໃຫ້ທ່ານ</string>
     <string name="configure">ຕັ້ງຄ່າ</string>
     <string name="patcher_rename_title">ສິ່ງນີ້ຈະຕິດຕັ້ງຕົວຈຳລອງ</string>
     <string name="patcher_rename_description">Patch ໄດ້ສ້າງແອັບນີ້ພາຍໃຕ້ຊື່ package ຂອງພວກເຂົາເອງ, ດັ່ງນັ້ນການຕິດຕັ້ງມັນຈະເປັນການເພີ່ມຕົວໂຄລນຄວບຄູ່ໄປກັບ &lt;b&gt;%s&lt;/b&gt; ແທນທີ່ຈະເປັນການອັບເດດ</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">ບັນທຶກແອັບທີ່ແພດແລ້ວລົ້ມເຫຼວ</string>
     <string name="plugin_activity_dialog_body">ຕ້ອງມີການໂຕ້ຕອບຈາກຜູ້ໃຊ້ເພື່ອດຳເນີນການກັບປລັກອິນນີ້</string>
     <string name="patcher_process_killed_message">ລະບົບໄດ້ຢຸດ patcher ກ່ອນທີ່ມັນຈະສຳເລັດ, ປົກກະຕິແມ່ນເພື່ອຄືນໜ່ວຍຄວາມຈຳ. ກະລຸນາປິດແອັບອື່ນໆ ແລະ ລອງໃໝ່</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ຖືກປິດກ່ອນທີ່ການແປັດຊ໌ຈະສຳເລັດ, ດັ່ງນັ້ນຈຶ່ງບໍ່ມີສິ່ງໃດຖືກແປັດຊ໌. ກະລຸນາລອງໃໝ່</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ຕົວແພັດຢຸດເຮັດວຽກກ່ອນທີ່ຈະສຳເລັດ. ຖ້າຫາກເກີດຂຶ້ນອີກ, ໃຫ້ປິດ %1$s ແລະ ລາຍງານບັນຫານີ້ພ້ອມກັບບົດບັນທຶກ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

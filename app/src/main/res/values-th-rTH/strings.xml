@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">เปลี่ยนลิงก์แอปไม่สำเร็จ</string>
     <string name="app_links_all_verified">ลิงก์ที่รองรับทั้งหมดได้รับการกำหนดค่าให้เปิดในแอปนี้แล้ว</string>
     <string name="app_links_fix">แก้ไขลิงก์</string>
+    <string name="app_links_allow_shizuku">อนุญาตการเข้าถึง Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">อนุญาตให้ Morphe ใช้ Shizuku เพื่อเปิดลิงก์เหล่านี้ให้คุณ</string>
+    <string name="app_links_shizuku_not_running_hint">เริ่มการทำงานของ Shizuku เพื่อให้ Morphe เปิดลิงก์เหล่านี้ให้คุณ</string>
     <string name="configure">กำหนดค่า</string>
     <string name="patcher_rename_title">การดำเนินการนี้จะติดตั้งโคลน</string>
     <string name="patcher_rename_description">แพตช์ได้สร้างแอปนี้ภายใต้ชื่อแพ็คเกจของตนเอง ดังนั้นการติดตั้งจะเพิ่มโคลนควบคู่ไปกับ &lt;b&gt;%s&lt;/b&gt; แทนที่จะอัปเดต</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์แล้วได้</string>
     <string name="plugin_activity_dialog_body">ปลั๊กอินนี้ต้องการการโต้ตอบจากผู้ใช้เพื่อดำเนินการต่อ</string>
     <string name="patcher_process_killed_message">ระบบหยุดการทำงานของตัวแพตช์ก่อนที่จะเสร็จสิ้น โดยปกติแล้วเพื่อเพิ่มพื้นที่ว่างในหน่วยความจำ โปรดปิดแอปอื่นๆ แล้วลองใหม่อีกครั้ง</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ถูกปิดก่อนที่การแพตช์จะเสร็จสิ้น ดังนั้นจึงไม่มีการแพตช์สิ่งใด โปรดลองอีกครั้ง</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ตัวแพตช์หยุดทำงานก่อนที่จะเสร็จสิ้น หากเกิดขึ้นอีก ให้ปิด %1$s และรายงานปัญหาพร้อมบันทึก</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="app_links_change_failed">Imeshindwa kubadilisha viunganishi vya programu</string>
     <string name="app_links_all_verified">Viungo vyote vinavyokubalika vimepangwa kufunguka katika programu hii</string>
     <string name="app_links_fix">Rekebisha viungo</string>
+    <string name="app_links_allow_shizuku">Ruhusu ufikiaji wa Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Ruhusu Morphe kutumia Shizuku kuwasha viunganishi hivi kwa ajili yako</string>
+    <string name="app_links_shizuku_not_running_hint">Anzisha Shizuku ili kuruhusu Morphe kuwasha viunganishi hivi kwa ajili yako</string>
     <string name="configure">Sanidi</string>
     <string name="patcher_rename_title">Hii itasakinisha nakala</string>
     <string name="patcher_rename_description">Patch hizi zimeunda programu hii chini ya jina la kifurushi chao wenyewe, hivyo kuisakinisha kunaongeza nakala kando ya &lt;b&gt;%s&lt;/b&gt; badala ya kuisasisha</string>
@@ -745,6 +748,8 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <string name="patched_app_save_failed_toast">Imeshindwa kuhifadhi programu iliyorekebishwa</string>
     <string name="plugin_activity_dialog_body">Mwingiliano wa mtumiaji unahitajika ili kuendelea na plugin hii</string>
     <string name="patcher_process_killed_message">Mfumo ulisimamisha patcher kabla haijamaliza, kwa kawaida ili kuachilia kumbukumbu. Funga programu zingine na ujaribu tena</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ilifungwa kabla ya kumaliza kusasisha, hivyo hakuna kilichosasishwa. Jaribu tena</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Kipatcha kiliacha kufanya kazi kabla hakijamaliza. Ikitokea tena, zima %1$s na uripoti tatizo pamoja na logi</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

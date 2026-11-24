@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">აპლიკაციის ბმულების შეცვლამ ვერ იმუშავა</string>
     <string name="app_links_all_verified">ყველა მხარდაჭერი ბმული კონფიგურირებულია ამ აპლიკაციაში გასახსნელად</string>
     <string name="app_links_fix">ბმულების გასწორება</string>
+    <string name="app_links_allow_shizuku">ნებადართეთ Shizuku-ს წვდომა</string>
+    <string name="app_links_shizuku_permission_hint">ნებადართეთ Morphe-ს Shizuku-ს გამოყენება ამ ბმულების ჩასართავად</string>
+    <string name="app_links_shizuku_not_running_hint">ჩართეთ Shizuku, რათა Morphe-მ შეძლოს ამ ბმულების ჩართვა თქვენთვის</string>
     <string name="configure">კონფიგურაცია</string>
     <string name="patcher_rename_title">ეს დააინსტალირებს კლონს</string>
     <string name="patcher_rename_description">პატჩებმა ეს აპლიკაცია შექმნეს საკუთარი პაკეტის სახელით, ამიტომ მისი ინსტალაცია დაამატებს კლონს &lt;b&gt;%s&lt;/b&gt;-ის გვერდით, ნაცვლად მისი განახლებისა</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">ვერ მოხერხდა პატჩირებული აპლიკაციის შენახვა</string>
     <string name="plugin_activity_dialog_body">ამ პლაგინის გამოსაყენებლად საჭიროა მომხმარებლის ინტერაქცია</string>
     <string name="patcher_process_killed_message">სისტემამ შეაჩერა პატჩერის მუშაობა დასრულებამდე, როგორც წესი, მეხსიერების გასათავისუფლებლად. დახურეთ სხვა აპლიკაციები და სცადეთ ხელახლა</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe დაიხურა პატჩინგის დასრულებამდე, ამიტომ არაფერი განახლდა. სცადეთ ხელახლა</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher გაითიშა დასრულებამდე. თუ ეს კვლავ მოხდება, გამორთეთ %1$s და შეგვატყობინეთ პრობლემის შესახებ ლოგის თანხლებით</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

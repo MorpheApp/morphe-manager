@@ -576,6 +576,9 @@ Vir die beste resultate beveel hierdie app aan om 'n &lt;b&gt;volle APK&lt;/b&gt
     <string name="app_links_change_failed">Dit was nie moontlik om toepassing-skakels te verander nie</string>
     <string name="app_links_all_verified">Alle ondersteunde skakels is ingestel om in hierdie toepassing oop te maak</string>
     <string name="app_links_fix">Herstel skakels</string>
+    <string name="app_links_allow_shizuku">Laat Shizuku-toegang toe</string>
+    <string name="app_links_shizuku_permission_hint">Laat Morphe toe om Shizuku te gebruik om hierdie skakels vir jou aan te skakel</string>
+    <string name="app_links_shizuku_not_running_hint">Begin Shizuku om Morphe toe te laat om hierdie skakels vir jou aan te skakel</string>
     <string name="configure">Stel in</string>
     <string name="patcher_rename_title">Dit sal \'n kloon installeer</string>
     <string name="patcher_rename_description">Die patches het hierdie app onder \'n eie pakketnaam gebou, so die installering daarvan voeg \'n kloon langs &lt;b&gt;%s&lt;/b&gt; by in plaas daarvan om dit op te dateer</string>
@@ -745,6 +748,8 @@ Deïnstallering sal alle toepassingsdata permanent uitwis."</string>
     <string name="patched_app_save_failed_toast">Kon nie gepleisterde app stoor nie</string>
     <string name="plugin_activity_dialog_body">Gebruikers interaksie is vereis om met hierdie inprop voort te gaan</string>
     <string name="patcher_process_killed_message">Die stelsel het die patcher gestop voordat dit voltooi is, gewoonlik om geheue vry te stel. Maak ander programme toe en probeer weer</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe is toegemaak voordat die kollewerk voltooi is, so niks is gepatch nie. Probeer weer</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Die patcher het omgeval voordat dit klaar was. As dit weer gebeur, skakel %1$s af en rapporteer die probleem met die log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

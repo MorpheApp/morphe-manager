@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">فشل تغيير روابط التطبيق</string>
     <string name="app_links_all_verified">تم تكوين جميع الروابط المدعومة لتُفتح في هذا التطبيق</string>
     <string name="app_links_fix">إصلاح الروابط</string>
+    <string name="app_links_allow_shizuku">السماح لوصول Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">اسمح لـ Morphe باستخدام Shizuku لتمكين هذه الروابط لك</string>
+    <string name="app_links_shizuku_not_running_hint">قم بتشغيل Shizuku للسماح لـ Morphe بتمكين هذه الروابط من لك</string>
     <string name="configure">تكوين</string>
     <string name="patcher_rename_title">سيؤدي هذا إلى تثبيت نسخة مستنسخة</string>
     <string name="patcher_rename_description">تم إنشاء هذا التطبيق باستخدام اسم حزمة مختلف بسبب التعديلات، لذا فإن تثبيته سيضيف نسخة مستنسخة إلى جانب &lt;b&gt;%s&lt;/b&gt; بدلًا من تحديثه</string>
@@ -746,6 +749,8 @@
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
     <string name="patcher_process_killed_message">أوقف النظام أداة التعديل قبل إتمام عملها، وعادةً ما يحدث ذلك لتوفير مساحة في الذاكرة. أغلق التطبيقات الأخرى وحاول مجددًا</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">تم إغلاق Morphe قبل انتهاء عملية التعديل، لذا لم يتم تعديل أي شيء. حاول مرة أخرى</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">تعطلت أداة التعديل قبل أن تنتهي. إذا تكرر ذلك، قم بإيقاف تشغيل %1$s وأبلغ عن المشكلة مع إرفاق السجل</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

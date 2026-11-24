@@ -576,6 +576,9 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="app_links_change_failed">Gagal mengubah tautan aplikasi</string>
     <string name="app_links_all_verified">Semua tautan yang didukung dikonfigurasi untuk dibuka di aplikasi ini</string>
     <string name="app_links_fix">Perbaiki tautan</string>
+    <string name="app_links_allow_shizuku">Izinkan akses Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Izinkan Morphe menggunakan Shizuku untuk mengaktifkan tautan ini untuk Anda</string>
+    <string name="app_links_shizuku_not_running_hint">Jalankan Shizuku agar Morphe dapat mengaktifkan tautan ini untuk Anda</string>
     <string name="configure">Konfigurasi</string>
     <string name="patcher_rename_title">Ini akan memasang klon</string>
     <string name="patcher_rename_description">Penambalan membuat aplikasi ini dengan nama paket tersendiri, sehingga pemasangan ini menambahkan klon di samping &lt;b&gt;%s&lt;/b&gt; alih-alih memperbaruinya</string>
@@ -745,6 +748,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
     <string name="patcher_process_killed_message">Sistem menghentikan patcher sebelum selesai, biasanya untuk membebaskan memori. Tutup aplikasi lain dan coba lagi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ditutup sebelum proses patching selesai, sehingga tidak ada yang dipatch. Coba lagi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Penambal mengalami kerusakan sebelum selesai. Jika hal ini terjadi lagi, nonaktifkan %1$s dan laporkan masalah ini beserta log-nya</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -1377,7 +1382,7 @@ Rincian: %2$s"</string>
     <string name="opensource_licenses_search">Cari pustaka dan lisensi</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Sebuah pilihan</string>
-    <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya. Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
+    <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya, atau Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
     <string name="easter_egg_pill_red">Pil merah</string>
     <string name="easter_egg_pill_blue">Pil biru</string>
     <string name="easter_egg_pill_red_toast">Latar belakang Matrix terbuka</string>

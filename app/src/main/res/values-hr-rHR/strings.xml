@@ -579,6 +579,9 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="app_links_change_failed">Promjena poveznica aplikacije nije uspjela</string>
     <string name="app_links_all_verified">Sve podržane poveznice konfigurirane su za otvaranje u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
+    <string name="app_links_allow_shizuku">Dopusti pristup aplikaciji Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dopusti aplikaciji Morphe da koristi Shizuku kako bi aktivirala ove poveznice za vas</string>
+    <string name="app_links_shizuku_not_running_hint">Pokrenite Shizuku kako biste dopustili aplikaciji Morphe da aktivira ove poveznice za vas</string>
     <string name="configure">Konfiguriraj</string>
     <string name="patcher_rename_title">Ovo će instalirati klon</string>
     <string name="patcher_rename_description">Patchevi grade ovu aplikaciju pod vlastitim nazivom paketa, pa se instaliranjem dodaje klon &lt;b&gt;%s&lt;/b&gt; umjesto ažuriranja</string>
@@ -748,6 +751,8 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Spremanje patchane aplikacije nije uspjelo</string>
     <string name="plugin_activity_dialog_body">Za nastavak rada s ovim dodatkom potrebna je interakcija korisnika</string>
     <string name="patcher_process_killed_message">Sustav je prekinuo patcher prije nego što je završio, obično kako bi oslobodio memoriju. Zatvorite druge aplikacije i pokušajte ponovno</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je zatvoren prije završetka zakrpljivanja, stoga ništa nije zakrpljeno. Pokušajte ponovno</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher je srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem s logom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

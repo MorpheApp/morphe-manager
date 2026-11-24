@@ -576,6 +576,9 @@ Per ottenere i risultati migliori, questa app raccomanda di applicare una patch 
     <string name="app_links_change_failed">Impossibile modificare i collegamenti all\'app</string>
     <string name="app_links_all_verified">Tutti i collegamenti supportati sono configurati per aprirsi in questa app</string>
     <string name="app_links_fix">Correggi i collegamenti</string>
+    <string name="app_links_allow_shizuku">Consenti l\'accesso a Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Consenti a Morphe di usare Shizuku per attivare questi link per te</string>
+    <string name="app_links_shizuku_not_running_hint">Avvia Shizuku per consentire a Morphe di attivare questi link per te</string>
     <string name="configure">Configura</string>
     <string name="patcher_rename_title">Questo installerà un clone</string>
     <string name="patcher_rename_description">Le patch hanno compilato questa app con un nome del pacchetto proprio, quindi installarla aggiunge un clone accanto a &lt;b&gt;%s&lt;/b&gt; invece di aggiornarla</string>
@@ -745,6 +748,8 @@ La disinstallazione cancellerà definitivamente tutti i dati dell'app."</string>
     <string name="patched_app_save_failed_toast">Impossibile salvare l\'app modificata</string>
     <string name="plugin_activity_dialog_body">È richiesta l\'interazione dell\'utente per procedere con questo plugin</string>
     <string name="patcher_process_killed_message">Il sistema ha interrotto il patcher prima del termine, solitamente per liberare memoria. Chiudi altre app e riprova</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe è stata chiusa prima del completamento del patching, quindi nulla è stato aggiornato. Riprova</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Il patcher è crashato prima di terminare. Se accade di nuovo, disattiva %1$s e segnala il problema includendo il log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

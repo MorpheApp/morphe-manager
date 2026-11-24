@@ -577,6 +577,9 @@
     <string name="app_links_change_failed">گۆڕینی لینکەکانی ئەپەکە سەرکەوتوو نەبوو</string>
     <string name="app_links_all_verified">هەموو ئەو لینکانەی پشتگیرییان لێکراوە ڕێکخراون بۆ ئەوەی لەم ئەپەدا بکرێنەوە</string>
     <string name="app_links_fix">چاککردنی لینکەکان</string>
+    <string name="app_links_allow_shizuku">ڕێگە بدە Shizuku دەسترسی هەبێت</string>
+    <string name="app_links_shizuku_permission_hint">ڕێگە بدە Morphe Shizuku بەکاربهێنێت بۆ ئەوەی ئەم لینکانە بۆت چالاک بکات</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku دەستپێبکە بۆ ئەوەی Morphe ڕێگەی بدات ئەم لینکانە بۆت چالاک بکات</string>
     <string name="configure">ڕێکخستن</string>
     <string name="patcher_rename_title">ئەمە دوانەیەک دامەزرێنێت</string>
     <string name="patcher_rename_description">پاتچەکان ئەم ئەپەیان لەژێر ناوێکی پاکێجی تایبەت بە خۆیان دروست کردووە، بۆیە دامەزراندنی کلۆنێک لە تەنیشت &lt;b&gt;%s&lt;/b&gt; زیاد دەکات لەجیاتی نوێکردنەوەی</string>
@@ -746,6 +749,8 @@
     <string name="patched_app_save_failed_toast">شکستی هێنا لە پاشەکەوت کردنی ئەپی پینەکراو</string>
     <string name="plugin_activity_dialog_body">کارلێکردنی بەکارهێنەر پێویستە بۆ ئەوەی بەردەوام بیت لەگەڵ ئەم پێوەکراوە</string>
     <string name="patcher_process_killed_message">سیستەمەکە پاتچەرەکەی ڕاگرت پێش ئەوەی تەواو ببێت، بەزۆری بۆ بەتاڵکردنی میمۆری. ئەپەکانی تر دابخە و دووبارە هەوڵ بدەوە</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe پێش کۆتاییهاتنی پاتچەکە داخرا، بۆیە هیچ شتێک پاتچ نەکرا. دووبارە هەوڵ بدەرەوە</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">پاتچەرەکە پێش تەواوبوون ڕاوەستا. ئەگەر دووبارە ڕوویدا، %1$s کوژێنەرەوە و کێشەکە لەگەڵ لۆگەکە ڕاپۆرت بکە</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

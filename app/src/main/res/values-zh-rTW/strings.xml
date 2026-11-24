@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">變更應用程式連結失敗</string>
     <string name="app_links_all_verified">所有受支援的連結都已設定為在此應用程式中開啟</string>
     <string name="app_links_fix">修正連結</string>
+    <string name="app_links_allow_shizuku">允許 Shizuku 存取</string>
+    <string name="app_links_shizuku_permission_hint">允許 Morphe 使用 Shizuku 為您開啟這些連結</string>
+    <string name="app_links_shizuku_not_running_hint">啟動 Shizuku 以讓 Morphe 為您開啟這些連結</string>
     <string name="configure">設定</string>
     <string name="patcher_rename_title">這將安裝一個克隆應用程式</string>
     <string name="patcher_rename_description">這些修補程式是以它們自己的套件名稱來建置此應用程式，因此安裝它會在&lt;b&gt;%s&lt;/b&gt;旁新增一個克隆，而不是更新它</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="plugin_activity_dialog_body">需要使用者互動才能繼續使用此外掛程式</string>
     <string name="patcher_process_killed_message">系統在還未完成修補時就停止了，通常是為了釋放記憶體。請關閉其他應用程式後再試一次。</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe 在更新完成前已關閉，因此沒有任何內容被更新。請再試一次</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請關閉 %1$s 並附上日誌回報問題</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

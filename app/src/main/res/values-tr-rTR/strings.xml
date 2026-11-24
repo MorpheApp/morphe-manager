@@ -576,6 +576,9 @@ En iyi sonuçlar için bu uygulama, &lt;b&gt;tam APK&lt;/b&gt; dosyasını yamal
     <string name="app_links_change_failed">Uygulama bağlantıları değiştirilemedi</string>
     <string name="app_links_all_verified">Desteklenen tüm bağlantılar, bu uygulamada açılacak şekilde yapılandırılmıştır.</string>
     <string name="app_links_fix">Bağlantıları düzelt</string>
+    <string name="app_links_allow_shizuku">Shizuku erişimine izin ver</string>
+    <string name="app_links_shizuku_permission_hint">Bu bağlantıları sizin için açması için Morphe\'nin Shizuku\'yu kullanmasına izin verin</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe\'nin bu bağlantıları sizin için açabilmesi için Shizuku\'yu başlatın</string>
     <string name="configure">Yapılandır</string>
     <string name="patcher_rename_title">Bu bir klon yükleyecek</string>
     <string name="patcher_rename_description">Yamalar bu uygulamayı kendi paket adlarıyla oluşturdu, bu yüzden yüklemek, onu güncellemek yerine &lt;b&gt;%s&lt;/b&gt; yanına bir klon ekler</string>
@@ -745,6 +748,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="patched_app_save_failed_toast">Yamalanmış uygulama kaydedilemedi</string>
     <string name="plugin_activity_dialog_body">Bu eklentinin çalışmaya devam edebilmesi için kullanıcı etkileşimi gereklidir</string>
     <string name="patcher_process_killed_message">Sistem, genellikle bellek açmak için, yama işlemini tamamlanmadan durdurdu. Diğer uygulamaları kapatın ve tekrar deneyin</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe, yamalama işlemi tamamlanmadan kapatıldı, bu nedenle hiçbir şey yamalanmadı. Tekrar deneyin</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Yamalayıcı tamamlanmadan çöktü. Tekrar ederse, %1$s seçeneğini kapatın ve sorunu günlükle birlikte bildirin</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

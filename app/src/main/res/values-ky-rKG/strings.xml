@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Тиркеме шилтемелерин өзгөртүү мүмкүн болгон жок</string>
     <string name="app_links_all_verified">Бардык колдоого алынган шилтемелер ушул колдонмодо ачылуучу болуп жөндөлдү</string>
     <string name="app_links_fix">Шилтемелерди оңдоо</string>
+    <string name="app_links_allow_shizuku">Shizukuга кирүүгө уруксат берүү</string>
+    <string name="app_links_shizuku_permission_hint">Бул шилтемелерди күйгүзүү үчүн Morphe колдонмосуна Shizukuну колдонууга уруксат бериңиз</string>
+    <string name="app_links_shizuku_not_running_hint">Бул шилтемелерди күйгүзүү үчүн Shizukuну иштетиңиз</string>
     <string name="configure">Жөндөө</string>
     <string name="patcher_rename_title">Бул клонду орнотот</string>
     <string name="patcher_rename_description">Патчтар бул тиркемени өзүнчө пакеттик ат менен түзгөн, ошондуктан аны орнотуу &lt;b&gt;%s&lt;/b&gt; тиркемесин жаңыртуунун ордуна, анын жанына клонду кошот</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Патчталган колдонмону сактоо мүмкүн болгон жок</string>
     <string name="plugin_activity_dialog_body">Бул плагин менен улантуу үчүн колдонуучунун өз ара аракеттенүүсү талап кылынат</string>
     <string name="patcher_process_killed_message">Система патчерди бүтөрүнө чейин токтотту, адатта бул эс тутумду бошотуу үчүн жасалат. Башка колдонмолорду жаап, кайра аракет кылып көрүңүз</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe патч жасоо аяктаганга чейин жабылып калган, ошондуктан эч нерсе патчталган жок. Кайра аракет кылып көрүңүз</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчер бүтө электе ката берип жабылды. Эгер бул кайрадан болсо, %1$s бөлүмүн өчүрүңүз жана лог менен бирге маселе жөнүндө билдириңиз</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

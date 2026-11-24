@@ -576,6 +576,9 @@ Parhaan tuloksen saavuttamiseksi sovellus suosittelee &lt;b&gt;kokonaisen APK:n&
     <string name="app_links_change_failed">Sovelluslinkkien muuttaminen epäonnistui</string>
     <string name="app_links_all_verified">Kaikki tuetut linkit on määritetty avautumaan tässä sovelluksessa</string>
     <string name="app_links_fix">Korjaa linkit</string>
+    <string name="app_links_allow_shizuku">Salli Shizukun käyttö</string>
+    <string name="app_links_shizuku_permission_hint">Salli Morphen käyttää Shizukua näiden linkkien ottamiseen käyttöön puolestasi</string>
+    <string name="app_links_shizuku_not_running_hint">Käynnistä Shizuku, jotta Morphe voi ottaa nämä linkit käyttöön puolestasi</string>
     <string name="configure">Määritä</string>
     <string name="patcher_rename_title">Tämä asentaa kloonin</string>
     <string name="patcher_rename_description">Paikkaukset rakensivat tämän sovelluksen omalla pakettinimellään, joten sen asentaminen lisää kloonin &lt;b&gt;%s&lt;/b&gt; rinnalle päivittämisen sijaan</string>
@@ -745,6 +748,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="patched_app_save_failed_toast">Muokatun sovelluksen tallennus epäonnistui</string>
     <string name="plugin_activity_dialog_body">Tämän liitännäisen käyttöönoton jatkamiseksi tarvitaan käyttäjän toimia.</string>
     <string name="patcher_process_killed_message">Järjestelmä pysäytti paikkaajan ennen sen valmistumista, yleensä muistin vapauttamiseksi. Sulje muut sovellukset ja yritä uudelleen</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe suljettiin ennen päivityksen valmistumista, joten mitään ei päivitetty. Yritä uudelleen</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Paikkausohjelma kaatui ennen valmistumista. Jos näin käy uudelleen, kytke %1$s pois päältä ja raportoi ongelma lokitiedostojen kanssa</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

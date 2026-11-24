@@ -576,6 +576,9 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="app_links_change_failed">Kuhleleke ukushintsha ama-app links</string>
     <string name="app_links_all_verified">Zonke izixhumanisi ezisekelwe zilungiselelwe ukuvulwa kulolu hlelo</string>
     <string name="app_links_fix">Lungisa izixhumanisi</string>
+    <string name="app_links_allow_shizuku">Vumela ukufinyeleleka kwe-Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Vumela u-Morphe ukusebenzisa i-Shizuku ukuze uvule lezi zixhumanisi kuwe</string>
+    <string name="app_links_shizuku_not_running_hint">Qala i-Shizuku ukuze uvumele u-Morphe uvule lezi zixhumanisi kuwe</string>
     <string name="configure">lungisa</string>
     <string name="patcher_rename_title">Lokhu kuzofaka i-clone</string>
     <string name="patcher_rename_description">Ama-patches akhe le app ngaphansi kwigama le-package lawo, ngakho ukuyifaka kwengeza i-clone eceleni kwe-&lt;b&gt;%s&lt;/b&gt; esikhundleni sokuyivuselela</string>
@@ -745,6 +748,8 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patched_app_save_failed_toast">Kuhleleke ukulonda i-app e-patched</string>
     <string name="plugin_activity_dialog_body">Kudingeka ukuhlanganyela komsebenzisi ukuze kuqhubekwe nalolu plugin</string>
     <string name="patcher_process_killed_message">Uhlelo lusimise i-patcher ngaphambi kokuba iqedele, imvamisa ukuze kukhululwe inkumbulo. Vala ezinye izinhlelo uzame futhi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">uMorphe uvaliwe ngaphambi kokuba uku-patchi kuqedele, ngakho akukho okulungisiwe. Zama futhi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">I-patcher iye yahluleka ngaphambi kokuba iqedele. Uma kwenzeka futhi, vala u-%1$s bese ubika inkinga ngokusebenzisa i-log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

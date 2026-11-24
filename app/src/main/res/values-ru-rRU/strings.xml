@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Не удалось изменить ссылки приложения</string>
     <string name="app_links_all_verified">Все поддерживаемые ссылки настроены на открытие в этом приложении</string>
     <string name="app_links_fix">Исправить ссылки</string>
+    <string name="app_links_allow_shizuku">Разрешить доступ Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Разрешите Morphe использовать Shizuku, чтобы включить эти ссылки за вас</string>
+    <string name="app_links_shizuku_not_running_hint">Запустите Shizuku, чтобы Morphe мог включить эти ссылки за вас</string>
     <string name="configure">Настроить</string>
     <string name="patcher_rename_title">Это установит клон</string>
     <string name="patcher_rename_description">Патчи собрали это приложение под собственным именем пакета, поэтому его установка добавит клон рядом с &lt;b&gt;%s&lt;/b&gt; вместо обновления</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить пропатченное приложение</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
     <string name="patcher_process_killed_message">Система остановила патчер до его завершения, обычно для освобождения памяти. Закройте другие приложения и попробуйте ещё раз</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe было закрыто до завершения установки патчей, поэтому ничего не было обновлено. Попробуйте снова</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчер завершился с ошибкой до окончания работы. Если это повторится, выключите %1$s и сообщите о проблеме, приложив лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

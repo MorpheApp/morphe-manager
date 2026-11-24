@@ -577,6 +577,9 @@ Elixe outro APK</string>
     <string name="app_links_change_failed">Fallou ao cambiar os ligazóns da aplicación</string>
     <string name="app_links_all_verified">Todas as ligazóns compatibles están configuradas para abrirse nesta aplicación</string>
     <string name="app_links_fix">Correxir ligazóns</string>
+    <string name="app_links_allow_shizuku">Permitir o acceso a Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permite que Morphe use Shizuku para activar estes enlaces por ti</string>
+    <string name="app_links_shizuku_not_running_hint">Inicia Shizuku para que Morphe active estes enlaces por ti</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Isto instalará un clon</string>
     <string name="patcher_rename_description">Os parches construíron esta aplicación baixo un nome de paquete propio, polo que a súa instalación engade un clon xunto a &lt;b&gt;%s&lt;/b&gt; en lugar de actualizala</string>
@@ -746,6 +749,8 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="patched_app_save_failed_toast">Non se puido gardar a aplicación parcheada</string>
     <string name="plugin_activity_dialog_body">É necesaria a interacción do usuario para continuar con este complemento</string>
     <string name="patcher_process_killed_message">O sistema detivo o patcher antes de rematar, normalmente para liberar memoria. Pecha outras aplicacións e tenta de novo</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe pechouse antes de que rematase o parcheo, polo que non se parcheou nada. Inténtao de novo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">O parcheador fallou antes de rematar. Se volve suceder, desactiva %1$s e informa do problema co rexistro</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

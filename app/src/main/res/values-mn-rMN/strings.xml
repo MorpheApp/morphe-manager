@@ -576,6 +576,9 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="app_links_change_failed">Апп холбоосыг өөрчлөхөд алдаа гарлаа</string>
     <string name="app_links_all_verified">Дэмжигдсэн бүх холбоосууд энэ аппликейшн дээр нээгдэхээр тохируулагдсан байна</string>
     <string name="app_links_fix">Холбоосуудыг засах</string>
+    <string name="app_links_allow_shizuku">Shizuku-д хандах эрх олгох</string>
+    <string name="app_links_shizuku_permission_hint">Эдгээр холбоосыг идэвхжүүлэхийн тулд Morphe-д Shizuku-г ашиглах эрх олгоно уу</string>
+    <string name="app_links_shizuku_not_running_hint">Эдгээр холбоосыг идэвхжүүлэхийн тулд Shizuku-г эхлүүлнэ үү</string>
     <string name="configure">Тохируулах</string>
     <string name="patcher_rename_title">Энэ нь хуулбарыг суулгах болно</string>
     <string name="patcher_rename_description">Патчууд энэ аппликейшнийг өөрсдийн багцын нэрээр үүсгэсэн тул үүнийг суулгаснаар &lt;b&gt;%s&lt;/b&gt;-ийг шинэчлэх eikä харин хажууд нь хуулбарыг нэмж суулгана</string>
@@ -745,6 +748,8 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="patched_app_save_failed_toast">Зассан аппликейшнийг хадгалах үед алдаа гарлаа</string>
     <string name="plugin_activity_dialog_body">Энэхүү нэмэлт програмыг ашиглахын тулд хэрэглэгчийн үйлдэл шаардлагатай</string>
     <string name="patcher_process_killed_message">Систем патчерыг дуусахаас нь өмнө зогсоолоо, энэ нь ихэвчлэн санах ойг чөлөөлөх зорилготой байдаг. Бусад апп-уудыг хааж дахин оролдоно уу</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe-г патчинг дуусахаас өмнө хаасан тул юу ч патчлагдаагүй байна. Дахин оролдоно уу</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Пачер дуусахаас өмнө гацав. Хэрэв дахин ийм зүйл гарвал %1$s-ийг унтрааж, логтой хамт алдаагаа мэдээлнэ үү</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

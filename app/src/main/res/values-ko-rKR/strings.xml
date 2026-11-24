@@ -576,6 +576,9 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="app_links_change_failed">앱 링크를 변경하지 못하였습니다</string>
     <string name="app_links_all_verified">지원되는 모든 링크가 이 앱에서 열리도록 설정되었습니다</string>
     <string name="app_links_fix">링크 수정</string>
+    <string name="app_links_allow_shizuku">Shizuku 액세스 허용</string>
+    <string name="app_links_shizuku_permission_hint">Morphe가 Shizuku를 사용하여 이 링크들을 활성화할 수 있도록 허용하십시오</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe가 이 링크들을 활성화할 수 있도록 Shizuku를 시작하십시오</string>
     <string name="configure">설정</string>
     <string name="patcher_rename_title">복제본이 설치됩니다</string>
     <string name="patcher_rename_description">이 패치는 이 앱을 사용자가 설정한 자체 패키지명으로 빌드하므로, 설치하면 &lt;b&gt;%s&lt;/b&gt;를 업데이트하는 것이 아니라 그 옆에 복제본이 추가됩니다</string>
@@ -745,6 +748,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="patched_app_save_failed_toast">패치된 앱을 저장할 수 없습니다</string>
     <string name="plugin_activity_dialog_body">이 플러그인을 사용하려면 사용자 상호작용이 필요합니다</string>
     <string name="patcher_process_killed_message">시스템이 메모리를 확보하기 위해 패처가 작업을 완료하기 전에 중단하였습니다. 다른 앱을 종료한 후 다시 시도하세요</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">패치가 완료되기 전에 Morphe가 종료되어 패치된 내용이 없습니다. 다시 시도하십시오</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">패치 작업이 완료되기 전에 패처가 충돌하여 종료되었습니다. 문제가 반복되면 %1$s를 비활성화하고 로그와 함께 문제를 보고해 주세요</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

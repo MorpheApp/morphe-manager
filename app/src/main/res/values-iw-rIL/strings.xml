@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">שינוי קישורי האפליקציה נכשל</string>
     <string name="app_links_all_verified">כל הקישורים הנתמכים מוגדרים להיפתח באפליקציה זו</string>
     <string name="app_links_fix">תקן קישורים</string>
+    <string name="app_links_allow_shizuku">אפשר גישה ל-Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">אפשר ל-Morphe להשתמש ב-Shizuku כדי להפעיל את הקישורים האלה עבורך</string>
+    <string name="app_links_shizuku_not_running_hint">הפעל את Shizuku כדי לאפשר ל-Morphe להפעיל את הקישורים האלה עבורך</string>
     <string name="configure">הגדר</string>
     <string name="patcher_rename_title">זה יתקין שיבוט</string>
     <string name="patcher_rename_description">התיקונים בנו את האפליקציה תחת שם חבילה משלהם, ולכן התקנתה תוסיף שיבוט לצד &lt;b&gt;%s&lt;/b&gt; במקום לעדכן אותה</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">נכשל לשמור אפליקציה מתוקנת</string>
     <string name="plugin_activity_dialog_body">נדרש אינטראקציה של המשתמש כדי להמשיך עם תוסף זה</string>
     <string name="patcher_process_killed_message">המערכת עצרה את המתקן לפני השלמתו, בדרך כלל כדי לשחרר זיכרון. סגור אפליקציות אחרות ונסה שוב</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe נסגרה לפני שההטרייה הסתיימה, לכן שום דבר לא הוטריא. נסה שוב</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">המתקן קרס לפני שסיים. אם זה קורה שוב, כבה את %1$s ודווח על הבעיה עם הלוג</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

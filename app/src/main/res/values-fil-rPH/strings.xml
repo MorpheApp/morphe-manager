@@ -576,6 +576,9 @@ Para sa pinakamahusay na resulta, nirerekomenda ng app na ito na i-patch ang isa
     <string name="app_links_change_failed">Nabigong baguhin ang mga app link</string>
     <string name="app_links_all_verified">Lahat ng suportadong link ay naka-configure upang buksan sa app na ito</string>
     <string name="app_links_fix">Ayusin ang mga link</string>
+    <string name="app_links_allow_shizuku">Payagan ang access ng Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Payagan ang Morphe na gamitin ang Shizuku upang i-on ang mga link na ito para sa iyo</string>
+    <string name="app_links_shizuku_not_running_hint">Simulan ang Shizuku upang hayaan ang Morphe na i-on ang mga link na ito para sa iyo</string>
     <string name="configure">I-configure</string>
     <string name="patcher_rename_title">Ito ay mag-i-install ng clone</string>
     <string name="patcher_rename_description">Ang mga patch ay nagbuo ng app na ito sa ilalim ng kanilang sariling package name, kaya ang pag-install nito ay nagdaragdag ng clone sa tabi ng &lt;b&gt;%s&lt;/b&gt; sa halip na i-update ito</string>
@@ -745,6 +748,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="patched_app_save_failed_toast">Nabigong ma-save ang na-patch na aplikasyon</string>
     <string name="plugin_activity_dialog_body">Kinakailangan ng pakikipag-ugnayan sa tagagamit upang magpatuloy sa plugin na ito</string>
     <string name="patcher_process_killed_message">Itinigil ng system ang patcher bago ito matapos, upang magkaroon ng sapat na memory. Isara ang ibang apps at subukan ulit</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Naisara ang Morphe bago matapos ang patching, kaya walang na-patch. Subukan muli</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Nag-crash ang patcher bago ito natapos. Kung mangyari itong muli, i-off ang %1$s at i-report ang isyu kasama ang log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">تغییر لینک‌های اپلیکیشن ناموفق بود</string>
     <string name="app_links_all_verified">همه پیوندهای پشتیبانی‌شده برای باز شدن در این برنامه تنظیم شده‌اند</string>
     <string name="app_links_fix">اصلاح پیوندها</string>
+    <string name="app_links_allow_shizuku">اجازه دسترسی به Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">به Morphe اجازه دهید تا با استفاده از Shizuku، این لینک‌ها را برای شما فعال کند</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku را اجرا کنید تا Morphe بتواند این لینک‌ها را برای شما فعال کند</string>
     <string name="configure">پیکربندی</string>
     <string name="patcher_rename_title">یک نسخهٔ کلون نصب می‌شود</string>
     <string name="patcher_rename_description">پچ‌ها این برنامه را با نام بستهٔ مخصوص خود ساخته‌اند؛ بنابراین نصب آن، نسخه‌ای کلون را در کنار &lt;b&gt;%s&lt;/b&gt; اضافه می‌کند، نه اینکه آن را به‌روزرسانی کند</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">ذخیرهٔ برنامهٔ پچ‌شده ناموفق بود</string>
     <string name="plugin_activity_dialog_body">برای ادامهٔ کار این افزونه، تعامل کاربر لازم است</string>
     <string name="patcher_process_killed_message">سیستم قبل از اتمام فرایند پچر آن را متوقف کرد، معمولاً برای آزادسازی حافظه. برنامه‌های دیگر را ببندید و دوباره تلاش کنید</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe قبل از اتمام وصله کردن بسته شد، بنابراین هیچ چیزی وصله نشد. دوباره تلاش کنید</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">پچر پیش از اتمام کرش کرد. اگر دوباره اتفاق افتاد، %1$s را خاموش کرده و مشکل را همراه با لاگ گزارش دهید</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

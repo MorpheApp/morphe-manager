@@ -576,6 +576,9 @@ Za najboljše rezultate ta aplikacija priporoča popravljanje &lt;b&gt;polnega A
     <string name="app_links_change_failed">Ni uspelo spremeniti povezav aplikacije</string>
     <string name="app_links_all_verified">Vse podprte povezave so nastavljene tako, da se odpirajo v tej aplikaciji</string>
     <string name="app_links_fix">Popravite povezave</string>
+    <string name="app_links_allow_shizuku">Dovoli dostop do Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dovoli aplikaciji Morphe uporabo Shizuku, da te povezave vklopi namesto tebe</string>
+    <string name="app_links_shizuku_not_running_hint">Zaženi Shizuku, da aplikacija Morphe vklopi te povezave namesto tebe</string>
     <string name="configure">Nastavite</string>
     <string name="patcher_rename_title">To bo namestilo klon</string>
     <string name="patcher_rename_description">Popravki so to aplikacijo zgradili pod lastnim imenom paketa, zato njena namestitev doda klon poleg &lt;b&gt;%s&lt;/b&gt; namesto da bi jo posodobila</string>
@@ -745,6 +748,8 @@ Odstranitev bo trajno izbrisala vse podatke aplikacije."</string>
     <string name="patched_app_save_failed_toast">Ni uspelo shraniti popravljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Za nadaljevanje s tem dodatkom je potrebna uporabniško sodelovanje.</string>
     <string name="patcher_process_killed_message">Sistem je ustavil popravnik preden je končal, običajno da sprostili pomnilnik. Zaprite druge aplikacije in poskusite znova</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je bilo zaprto pred koncem posodabljanja, zato nič ni bilo posodobljeno. Poskusite znova</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Popravljalnik se je sesul, preden je končal. Če se to ponovi, izklopite %1$s in prijavite težavo z dnevnikom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

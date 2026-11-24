@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Неуспешна промена везе апликација</string>
     <string name="app_links_all_verified">Сви подржани линкови су подешени да се отварају у овој апликацији</string>
     <string name="app_links_fix">Поправи линкове</string>
+    <string name="app_links_allow_shizuku">Дозволи приступ Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Дозволи Morphe-у да користи Shizuku како би укључио ове везе за тебе</string>
+    <string name="app_links_shizuku_not_running_hint">Покрени Shizuku како би Morphe могао да укључи ове везе за тебе</string>
     <string name="configure">Подеси</string>
     <string name="patcher_rename_title">Ово ће инсталирати клон</string>
     <string name="patcher_rename_description">Закрпе су направиле ову апликацију под сопственим именом пакета, тако да инсталација додаје клон поред &lt;b&gt;%s&lt;/b&gt; уместо да је ажурира</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Није успело чување закрпљене и потписане апликације</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
     <string name="patcher_process_killed_message">Систем је прекинуо патчер пре него што је завршио, обично да ослободи меморију. Затворите друге апликације и покушајте поново</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe је затворен пре него што је patching завршен, тако да ништа није patched. Покушајте поново</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Закрпљивач је пао пре него што је завршио. Ако се то понови, искључите %1$s и пријавите проблем уз лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

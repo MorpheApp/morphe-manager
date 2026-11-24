@@ -576,6 +576,9 @@ Ji bo encamên çêtir, ev app pêşniyar dike ku APKya &lt;b&gt;tam&lt;/b&gt; w
     <string name="app_links_change_failed">Guherandina girêdanên sepanê bi ser neket</string>
     <string name="app_links_all_verified">Hemû girêdanên piştgirîkirî hatine mîhengkirin ku di vê sepanê de vebin.</string>
     <string name="app_links_fix">Girêdanan rast bike</string>
+    <string name="app_links_allow_shizuku">Destengava Shizuku bidîne</string>
+    <string name="app_links_shizuku_permission_hint">Destûr bidê Morphe ku Shizuku bikar bîne da ku van girêdanan ji bo te veke</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku destpê bike da ku Morphe van girêdanan ji bo te veke</string>
     <string name="configure">Mîheng bike</string>
     <string name="patcher_rename_title">Ev ê klonek saz bike</string>
     <string name="patcher_rename_description">Pêvajoya pêçanê ev sepan bi navê pakêta xwe çêkir, ji ber vê yekê sazkirina wê klonek li kêleka &lt;b&gt;%s&lt;/b&gt; zêde dike, li şûna ku wê nûve bike.</string>
@@ -745,6 +748,8 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="patched_app_save_failed_toast">Tomarkirina sepana patchkirî têk çû</string>
     <string name="plugin_activity_dialog_body">Ji bo domandina vê pluginê bikarhêner pêdivî bi çalakiyê ye</string>
     <string name="patcher_process_killed_message">Sîstemê patcher\'î berî ku biqedîne rawestand, bi gelemperî ji bo azadkirina bîrê. Appên din bigire û dîsa biceribîne</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe berî ku patching bi dawî bibe hat girtin, lewma tiştek nehat patchkirin. Careke din biceribîne</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher berî ku biqediye crash bûye. Ger dîsa bibe, %1$s veguherîne off û bi log-ê re pirsgirêkê rapor bike</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

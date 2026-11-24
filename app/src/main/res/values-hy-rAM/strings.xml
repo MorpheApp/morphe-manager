@@ -576,6 +576,9 @@
     <string name="app_links_change_failed">Չհաջողվեց փոխել հավելվածի հղումները</string>
     <string name="app_links_all_verified">Բոլոր աջակցվող հղումները կարգավորված են բացվել այս հավելվածում</string>
     <string name="app_links_fix">Ուղղել հղումները</string>
+    <string name="app_links_allow_shizuku">Թույլ տվեք Shizuku-ի հասանելիությունը</string>
+    <string name="app_links_shizuku_permission_hint">Թույլ տվեք Morphe-ին օգտագործել Shizuku-ն՝ այս հղումները ձեզ համար միացնելու համար</string>
+    <string name="app_links_shizuku_not_running_hint">Միացրեք Shizuku-ն, որպեսզի Morphe-ը կարողանա այս հղումները միացնել ձեզ համար</string>
     <string name="configure">Կարգավորել</string>
     <string name="patcher_rename_title">Սա կտեղադրի կլոն</string>
     <string name="patcher_rename_description">Փաթեթները կառուցել են այս հավելվածը իրենց սեփական փաթեթի անվան տակ, ուստի դրա տեղադրումը ավելացնում է կլոն &lt;b&gt;%s&lt;/b&gt;-ի կողքին՝ այն թարմացնելու փոխարեն</string>
@@ -745,6 +748,8 @@
     <string name="patched_app_save_failed_toast">Չհաջողվեց պահպանել փոփոխված հավելվածը</string>
     <string name="plugin_activity_dialog_body">Այս պլագինի հետ շարունակելու համար անհրաժեշտ է օգտատիրոջ միջամտությունը</string>
     <string name="patcher_process_killed_message">Համակարգը կանգնեցրեց փաթեթավորողը նախքան դրա ավարտը, սովորաբար հիշողությունը ազատելու համար: Փակեք մյուս հավելվածները և փորձեք նորից</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe-ը փակվել է նախքան թարմացման ավարտը, ուստի ոչինչ չի թարմացվել: Փորձեք նորից</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Փաթեթավորողը խափանվեց նախքան ավարտելը: Եթե դա կրկնվի, անջատեք %1$s-ը և հայտեք խնդրի մասին՝ կցելով լոգը</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

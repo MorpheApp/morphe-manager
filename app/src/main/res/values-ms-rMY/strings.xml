@@ -577,6 +577,9 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="app_links_change_failed">Gagal mengubah pautan aplikasi</string>
     <string name="app_links_all_verified">Semua pautan disokong dikonfigurasikan untuk dibuka dalam aplikasi ini</string>
     <string name="app_links_fix">Baiki pautan</string>
+    <string name="app_links_allow_shizuku">Benarkan akses Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Benarkan Morphe menggunakan Shizuku untuk mengaktifkan pautan ini untuk anda</string>
+    <string name="app_links_shizuku_not_running_hint">Mulakan Shizuku untuk membiarkan Morphe mengaktifkan pautan ini untuk anda</string>
     <string name="configure">Konfigurasi</string>
     <string name="patcher_rename_title">Ini akan memasang klon</string>
     <string name="patcher_rename_description">Tampalan membina aplikasi ini di bawah nama pakej sendiri, jadi memasangnya menambah klon di samping &lt;b&gt;%s&lt;/b&gt; dan bukannya mengemas kininya</string>
@@ -746,6 +749,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
     <string name="patcher_process_killed_message">Sistem menghentikan patcher sebelum ia selesai, biasanya untuk mengosongkan memori. Tutup aplikasi lain dan cuba lagi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe telah ditutup sebelum penampalan selesai, jadi tiada apa yang ditampal. Cuba lagi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Penampal terhenti secara tiba-tiba sebelum selesai. Jika ini berlaku lagi, matikan %1$s dan laporkan isu tersebut bersama log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
