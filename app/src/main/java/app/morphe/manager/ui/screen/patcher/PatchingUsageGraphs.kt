@@ -7,9 +7,6 @@ package app.morphe.manager.ui.screen.patcher
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -309,13 +305,8 @@ private fun IoUsagePanel(
     modifier: Modifier = Modifier
 ) {
     // Storage has no limit to plot against, so the busiest sample on screen sets the scale.
-    // That peak eventually scrolls out of the history, and rescaling every bar in one frame
-    // looks like a burst of activity that never happened, so the scale itself is what moves.
-    val peak by animateFloatAsState(
-        targetValue = (samples.maxOfOrNull { it.totalKbPerSec } ?: 0).toFloat(),
-        animationSpec = tween(600, easing = FastOutSlowInEasing),
-        label = "io_scale"
-    )
+    // It changes with the samples rather than easing, as frames drawn while patching slow it down
+    val peak = (samples.maxOfOrNull { it.totalKbPerSec } ?: 0).toFloat()
     val fractions = samples.map {
         if (peak > 0f) (it.totalKbPerSec / peak).coerceIn(0f, 1f) else 0f
     }
@@ -519,16 +510,8 @@ private fun CoreLoadBars(
 ) {
     // Cores keep their own slot rather than being ranked by load: the clusters of a big.LITTLE
     // machine are laid out by index, and which of them the run is riding is what the row shows
-    val fractions = loads.mapIndexed { core, load ->
-        // Polling is slow enough that stepping straight to each sample reads as noise
-        key(core) {
-            animateFloatAsState(
-                targetValue = (load / 100f).coerceIn(0f, 1f),
-                animationSpec = tween(600, easing = FastOutSlowInEasing),
-                label = "cpu_core_load"
-            ).value
-        }
-    }
+    // Bars step to each sample rather than easing to it, as frames drawn while patching slow it down
+    val fractions = loads.map { load -> (load / 100f).coerceIn(0f, 1f) }
 
     UsageBars(
         fractions = fractions,

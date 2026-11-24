@@ -104,9 +104,11 @@ fun SpaceBackground(
     // Meteor spawner - occasional shooting star every 40–60 seconds
     var meteor by remember { mutableStateOf<MeteorState?>(null) }
     val meteorProgress = remember { Animatable(0f) }
+    val currentSpeedMultiplier by rememberUpdatedState(speedMultiplier)
     LaunchedEffect(Unit) {
         while (true) {
             delay(Random.nextLong(40000, 60000).milliseconds)
+            if (currentSpeedMultiplier == 0f) continue
             val direction = Random.nextInt(2)
             val angle = when (direction) {
                 0    -> 130f + Random.nextFloat() * 20f // Right to left
