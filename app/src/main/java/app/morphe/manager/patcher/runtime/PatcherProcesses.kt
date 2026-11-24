@@ -118,13 +118,17 @@ class PatcherProcesses(
         }
     }
 
-    /** The heap a JVM is started with: a third of the RAM within bounds, or half of it in a 32-bit process. */
+    /**
+     * The heap a JVM is started with: a third of the RAM within bounds, or half of it in a 32-bit
+     * process. The lower bound never takes more than [HEAP_LIMIT_MAXIMUM_RAM_PERCENT] of the RAM.
+     */
     private val jvmHeapLimitMb by lazy {
         val memoryInfo = ActivityManager.MemoryInfo()
         app.getSystemService(ActivityManager::class.java).getMemoryInfo(memoryInfo)
         val ramMb = bytesToMebibytes(memoryInfo.totalMem).toInt()
         if (Process.is64Bit()) {
-            (ramMb / 3).coerceIn(HEAP_LIMIT_MINIMUM_MB, HEAP_LIMIT_MAXIMUM_MB)
+            val minimum = minOf(HEAP_LIMIT_MINIMUM_MB, ramMb * HEAP_LIMIT_MAXIMUM_RAM_PERCENT / 100)
+            (ramMb / 3).coerceIn(minimum, HEAP_LIMIT_MAXIMUM_MB)
         } else {
             (ramMb / 2).coerceIn(HEAP_LIMIT_32_BIT_MINIMUM_MB, HEAP_LIMIT_32_BIT_MAXIMUM_MB)
         }
@@ -813,6 +817,11 @@ class PatcherProcesses(
         // keeps a runaway patch from taking the device
         const val HEAP_LIMIT_MINIMUM_MB = 2048
         const val HEAP_LIMIT_MAXIMUM_MB = 3072
+
+        // The system does not know of the JVM, a child of the patcher process, and frees the memory it
+        // takes by killing the app on screen. On 3 GB TikTok got it killed at 2048MB, and patched at 1280MB
+        const val HEAP_LIMIT_MAXIMUM_RAM_PERCENT = 40
+
 
         // TikTok with Hushfeed peaks at about 950MB on 32-bit ARM. The JVM starts in a process of its
         // own, whose address space still has room for the heap in one piece at the maximum

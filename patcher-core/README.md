@@ -3,7 +3,7 @@
 Everything about a patching run that does not need Android. The app runs it in the `:patcher`
 process of `PatcherService`, started by `PatcherProcesses` for every run, on one of two VMs:
 
-- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, half of it
+- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, at most 40% of it below 5 GB; half of it
   within 1-1.5 GB in a 32-bit process), which starts at 512 MB. BellSoft's Liberica 25 for Linux on every
   ABI, which runs as a child process of `:patcher`.
 - ART, the runtime of the process itself, within the heap Android gives the app. Used when the
@@ -41,8 +41,9 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
 - **One JVM per process**: HotSpot cannot be stopped or started again. The process ends with the
   run, and every run gets a fresh one, started ahead while the user picks what to patch.
 - **A process of its own**: a large run, such as TikTok, can take more memory than a weak device
-  spares, and the system then ends the process that holds it. Apart from the app, that is the
-  run alone, and the app reports it with the reason the system recorded. On ART the heap of the
+  spares. The system does not know of the JVM, a child of `:patcher`, so it frees memory by ending
+  `:patcher` and, while on screen, the app first. The heap is kept to a share of the RAM for that,
+  and a run that the end of the app cut short is reported once the app is back. On ART the heap of the
   run would otherwise be the app's, and running out of it would throw on the UI thread as well.
   A crash of the JVM or `System.exit` in a patch ends only that process too, and the JVM's report
   (`patcher-jvm-error-<pid>.log` in the app's temporary files) goes into the log of the run.
