@@ -11,7 +11,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.*
@@ -1027,10 +1029,10 @@ private fun StatusDisc(icon: ImageVector, tone: SemanticTone) {
  */
 @Composable
 private fun ProgressRing(progress: Float?, content: @Composable () -> Unit) {
-    // Eased, since the share arrives in steps as the download reports back
+    // Eased, since the share arrives in steps. A spring keeps pace where a tween restarts slow
     val animated by animateFloatAsState(
         targetValue = progress ?: 0f,
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow, visibilityThreshold = 0.001f),
         label = "statusRingProgress"
     )
 

@@ -11,7 +11,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -411,9 +410,10 @@ private fun DownloadProgress(
 ) {
     val hasKnownSize = totalSize > 0L
     val isStreaming = !hasKnownSize && downloadedSize > 0L
+    // A spring keeps pace with every chunk, where a tween restarts slow and falls behind
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow, visibilityThreshold = 0.001f),
         label = "downloadProgress"
     )
 
