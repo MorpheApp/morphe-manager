@@ -843,8 +843,6 @@ class RootInstaller(
 
         internal fun isValidPackageName(packageName: String) = PACKAGE_NAME.matches(packageName)
 
-        private fun String.shellQuote() = "'${replace("'", "'\"'\"'")}'"
-
         private fun String.singleLine() = replace(Regex("[\r\n]+"), " ")
 
         private fun staged(path: String) = "$path.tmp"

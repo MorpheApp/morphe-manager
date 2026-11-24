@@ -24,6 +24,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.RemoteException
 import app.morphe.manager.util.SHELL_INSTALLER_PACKAGE
+import moe.shizuku.server.IShizukuService
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -123,6 +124,22 @@ class ShizukuInstaller(private val app: Application) {
 
         packageInstallerWrapper.uninstall(packageName, operation.intentSender)
         withTimeout(UNINSTALL_RESULT_TIMEOUT) { operation.result.await() }.requireSuccess()
+    }
+
+    /**
+     * Runs [command] in a shell of the Shizuku service, as shell or root, and waits for it to
+     * return. The service ends the shell once Morphe dies, so a command meant to outlive it detaches.
+     */
+    suspend fun runShell(command: String): Unit = withContext(Dispatchers.IO) {
+        val binder = Shizuku.getBinder() ?: throw IOException("Shizuku is not running")
+        // Called on the service itself, as the client API keeps it private
+        val process = IShizukuService.Stub.asInterface(binder)
+            .newProcess(arrayOf("sh", "-c", command), null, null)
+        try {
+            process.waitFor()
+        } finally {
+            runCatching { process.destroy() }
+        }
     }
 
     /** Returns this result, or throws [InstallerOperationException] when the operation failed. */

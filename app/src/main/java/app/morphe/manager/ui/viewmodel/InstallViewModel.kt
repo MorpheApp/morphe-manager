@@ -288,7 +288,6 @@ class InstallViewModel(
                     selectedInstallerToken = oneTimeInstallerToken
                     oneTimeInstallerToken = null
                     installerManager.resolvePlanWithStatus(
-                        InstallerManager.InstallTarget.PATCHER,
                         outputFile,
                         targetPackageName,
                         null,
@@ -360,32 +359,32 @@ class InstallViewModel(
         pendingInstallToken = plan.installerToken()
 
         when (plan) {
-            is InstallerManager.InstallPlan.Internal -> {
+            InstallerManager.InstallPlan.Internal -> {
                 Log.d(TAG, "Using internal (standard) installer")
                 performStandardInstall(outputFile, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.PlayStore -> {
+            InstallerManager.InstallPlan.PlayStore -> {
                 Log.d(TAG, "Using Play Store installer")
                 performPlayStoreInstall(outputFile, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.Root -> {
+            InstallerManager.InstallPlan.Root -> {
                 Log.d(TAG, "Using root installer")
                 performRootInstall(outputFile, asPlayStore = false, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.RootPlayStore -> {
+            InstallerManager.InstallPlan.RootPlayStore -> {
                 Log.d(TAG, "Using root Play Store installer")
                 performRootInstall(outputFile, asPlayStore = true, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.Shizuku -> {
+            InstallerManager.InstallPlan.Shizuku -> {
                 Log.d(TAG, "Using Shizuku installer")
                 performShizukuInstall(outputFile, asPlayStore = false, onPersistApp)
             }
 
-            is InstallerManager.InstallPlan.ShizukuPlayStore -> {
+            InstallerManager.InstallPlan.ShizukuPlayStore -> {
                 Log.d(TAG, "Using Shizuku Play Store installer")
                 performShizukuInstall(outputFile, asPlayStore = true, onPersistApp)
             }
@@ -398,22 +397,22 @@ class InstallViewModel(
     }
 
     private fun InstallerManager.InstallPlan.installerToken(): InstallerManager.Token = when (this) {
-        is InstallerManager.InstallPlan.Internal -> InstallerManager.Token.Internal
-        is InstallerManager.InstallPlan.PlayStore -> InstallerManager.Token.PlayStore
-        is InstallerManager.InstallPlan.Root -> InstallerManager.Token.Root
-        is InstallerManager.InstallPlan.RootPlayStore -> InstallerManager.Token.RootPlayStore
-        is InstallerManager.InstallPlan.Shizuku -> InstallerManager.Token.Shizuku
-        is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallerManager.Token.ShizukuPlayStore
+        InstallerManager.InstallPlan.Internal -> InstallerManager.Token.Internal
+        InstallerManager.InstallPlan.PlayStore -> InstallerManager.Token.PlayStore
+        InstallerManager.InstallPlan.Root -> InstallerManager.Token.Root
+        InstallerManager.InstallPlan.RootPlayStore -> InstallerManager.Token.RootPlayStore
+        InstallerManager.InstallPlan.Shizuku -> InstallerManager.Token.Shizuku
+        InstallerManager.InstallPlan.ShizukuPlayStore -> InstallerManager.Token.ShizukuPlayStore
         is InstallerManager.InstallPlan.External -> token
     }
 
     private fun InstallerManager.InstallPlan.installType(): InstallType = when (this) {
-        is InstallerManager.InstallPlan.Internal -> InstallType.DEFAULT
-        is InstallerManager.InstallPlan.PlayStore -> InstallType.PLAY_STORE
-        is InstallerManager.InstallPlan.Root -> InstallType.ROOT
-        is InstallerManager.InstallPlan.RootPlayStore -> InstallType.ROOT_PLAY_STORE
-        is InstallerManager.InstallPlan.Shizuku -> InstallType.SHIZUKU
-        is InstallerManager.InstallPlan.ShizukuPlayStore -> InstallType.SHIZUKU_PLAY_STORE
+        InstallerManager.InstallPlan.Internal -> InstallType.DEFAULT
+        InstallerManager.InstallPlan.PlayStore -> InstallType.PLAY_STORE
+        InstallerManager.InstallPlan.Root -> InstallType.ROOT
+        InstallerManager.InstallPlan.RootPlayStore -> InstallType.ROOT_PLAY_STORE
+        InstallerManager.InstallPlan.Shizuku -> InstallType.SHIZUKU
+        InstallerManager.InstallPlan.ShizukuPlayStore -> InstallType.SHIZUKU_PLAY_STORE
         is InstallerManager.InstallPlan.External ->
             if (token is InstallerManager.Token.Component) InstallType.CUSTOM else InstallType.DEFAULT
     }
@@ -1236,7 +1235,7 @@ class InstallViewModel(
 
     /** Installer entries for the one-time selection dialog shown during install. */
     fun getInstallerOptions(): List<InstallerManager.Entry> =
-        installerManager.listEntries(InstallerManager.InstallTarget.PATCHER, getPreferredInstallerToken())
+        installerManager.listEntries(getPreferredInstallerToken())
 
     fun mountsByDefault(): Boolean = installerManager.mountsByDefault()
 

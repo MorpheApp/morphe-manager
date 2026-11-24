@@ -327,6 +327,9 @@ class SessionInstaller(private val app: Application) {
         return installShizukuWithInstallerPackage(apkFile, expectedPackage, null)
     }
 
+    /** Runs [command] in a privileged shell of Shizuku, see [ShizukuInstaller.runShell]. */
+    suspend fun runShizukuShell(command: String) = shizukuInstaller.runShell(command)
+
     suspend fun installShizukuAsPlayStore(apkFile: File, expectedPackage: String): InstallResult {
         requireApkPresent(apkFile)
         Log.d(TAG, "installShizukuAsPlayStore: ${apkFile.name} (${apkFile.length()} bytes)")
