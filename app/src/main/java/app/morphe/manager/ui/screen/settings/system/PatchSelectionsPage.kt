@@ -33,7 +33,6 @@ import app.morphe.manager.ui.viewmodel.SettingsViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 /** Snapshot of package/bundle selection counts. */
@@ -84,7 +83,6 @@ fun PatchSelectionsPage(
     settingsViewModel: SettingsViewModel = koinViewModel(),
     importExportViewModel: ImportExportViewModel = koinViewModel()
 ) {
-    val scope = rememberCoroutineScope()
     val showResetAllConfirmation = remember { mutableStateOf(false) }
     val showResetSelectedConfirmation = remember { mutableStateOf(false) }
     val resetTarget = remember { mutableStateOf<ResetTarget?>(null) }
@@ -210,11 +208,9 @@ fun PatchSelectionsPage(
             packageCount = selectedKeys.size,
             totalPatches = selectedTotalPatches,
             onConfirm = {
-                scope.launch {
-                    selectedKeys.forEach { settingsViewModel.resetSelectionsForPackage(it) }
-                    exitSelection()
-                    showResetSelectedConfirmation.value = false
-                }
+                settingsViewModel.resetSelectionsForPackages(selectedKeys)
+                exitSelection()
+                showResetSelectedConfirmation.value = false
             },
             onDismiss = { showResetSelectedConfirmation.value = false }
         )
@@ -240,10 +236,8 @@ fun PatchSelectionsPage(
             packageCount = selections.size,
             settingsViewModel = settingsViewModel,
             onConfirm = {
-                scope.launch {
-                    settingsViewModel.resetAllSelections()
-                    showResetAllConfirmation.value = false
-                }
+                settingsViewModel.resetAllSelections()
+                showResetAllConfirmation.value = false
             },
             onDismiss = { showResetAllConfirmation.value = false }
         )
@@ -258,10 +252,8 @@ fun PatchSelectionsPage(
             patchCount = selections[target.packageName]?.get(target.bundleUid) ?: 0,
             settingsViewModel = settingsViewModel,
             onConfirm = {
-                scope.launch {
-                    settingsViewModel.resetSelectionsForPackageBundle(target.packageName, target.bundleUid)
-                    resetTarget.value = null
-                }
+                settingsViewModel.resetSelectionsForPackageBundle(target.packageName, target.bundleUid)
+                resetTarget.value = null
             },
             onDismiss = { resetTarget.value = null }
         )

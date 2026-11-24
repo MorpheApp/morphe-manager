@@ -25,15 +25,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.domain.repository.appsToKeepFrom
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.appColorFor
 import app.morphe.manager.ui.model.HomeAppItem
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.SourceAppsViewModel
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.util.Locale
 
@@ -392,11 +392,10 @@ internal fun DialogHostScope.HiddenAppsDialog(
 @Composable
 fun DialogHostScope.AppPatchSourcesDialog(
     packages: Set<String>,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    viewModel: SourceAppsViewModel = koinViewModel()
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
-    val sourceMuteRepository: SourceMuteRepository = koinInject()
-    val scope = rememberCoroutineScope()
 
     val messages = koinInject<UserMessages>()
     val lastSourceMessage = stringResource(R.string.home_app_patch_sources_last)
@@ -404,7 +403,7 @@ fun DialogHostScope.AppPatchSourcesDialog(
     val bundleInfo by patchBundleRepository.bundleInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val sourcesByUid = rememberSourcesByUid()
     // Keyed by app, the way every rule below asks the question
-    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
+    val keptFrom by viewModel.keptFrom.collectAsStateWithLifecycle(emptyMap())
 
     // Which sources have anything to offer each app. A universal patch names no app, so the source
     // carrying it reaches every one of them
@@ -464,20 +463,18 @@ fun DialogHostScope.AppPatchSourcesDialog(
                 RadioSelectionCard(
                     selected = state == ToggleableState.On,
                     onSelect = {
-                        scope.launch {
-                            // Anything but "offered to all of them" is answered by offering it to
-                            // all of them, so one tap always has a result the row can show
-                            if (state == ToggleableState.On) {
-                                val reached = appsToKeepFrom(uid, packages, coveredBy, keptFrom)
-                                // Refusing to leave an app with nothing to patch from would
-                                // otherwise read as a checkbox that does nothing
-                                if (reached.isEmpty()) {
-                                    messages.show(lastSourceMessage)
-                                }
-                                reached.forEach { sourceMuteRepository.mute(it, uid) }
-                            } else {
-                                packages.forEach { sourceMuteRepository.unmute(it, uid) }
+                        // Anything but "offered to all of them" is answered by offering it to all
+                        // of them, so one tap always has a result the row can show
+                        if (state == ToggleableState.On) {
+                            val reached = appsToKeepFrom(uid, packages, coveredBy, keptFrom)
+                            // Refusing to leave an app with nothing to patch from would otherwise
+                            // read as a checkbox that does nothing
+                            if (reached.isEmpty()) {
+                                messages.show(lastSourceMessage)
                             }
+                            viewModel.setOffered(uid, reached, offered = false)
+                        } else {
+                            viewModel.setOffered(uid, packages, offered = true)
                         }
                     },
                     role = Role.Checkbox,

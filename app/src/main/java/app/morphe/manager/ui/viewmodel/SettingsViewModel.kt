@@ -383,10 +383,12 @@ class SettingsViewModel(
         sourceMuteRepository.reset()
     }
 
-    fun resetSelectionsForPackage(packageName: String) = viewModelScope.launch(Dispatchers.IO) {
-        selectionRepository.resetSelectionForPackage(packageName)
-        optionsRepository.resetOptionsForPackage(packageName)
-        sourceMuteRepository.unmuteAll(packageName)
+    fun resetSelectionsForPackages(packageNames: Collection<String>) = viewModelScope.launch(Dispatchers.IO) {
+        packageNames.forEach { packageName ->
+            selectionRepository.resetSelectionForPackage(packageName)
+            optionsRepository.resetOptionsForPackage(packageName)
+            sourceMuteRepository.unmuteAll(packageName)
+        }
     }
 
     fun resetSelectionsForPackageBundle(packageName: String, bundleUid: Int) =
