@@ -649,14 +649,36 @@ class HomeViewModel(
     }
 
     /**
+     * Names [bundleToRename] [displayName], or gives it back its own name when that is blank. The
+     * dialog stays up on a name another source already has, for the user to pick another.
+     */
+    fun renameBundle(displayName: String) {
+        val bundle = bundleToRename ?: return
+        viewModelScope.launch {
+            when (patchBundleRepository.setDisplayName(bundle.uid, displayName.trim().ifEmpty { null })) {
+                PatchBundleRepository.DisplayNameUpdateResult.SUCCESS,
+                PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> dismissRenameBundle()
+                PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE ->
+                    messages.show(R.string.sources_dialog_duplicate_name_error)
+                PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND ->
+                    messages.show(R.string.sources_dialog_missing_error)
+            }
+        }
+    }
+
+    fun dismissRenameBundle() {
+        showRenameBundleDialog = false
+        bundleToRename = null
+    }
+
+    /**
      * Closes every open dialog and sheet so an incoming source confirmation is not stacked behind
      * one, and so the flow the user resumes afterward is rebuilt from the new set of sources.
      */
     private fun dismissOpenDialogs() {
         patchFlow.cancel()
         showAndroid11Dialog = false
-        showRenameBundleDialog = false
-        bundleToRename = null
+        dismissRenameBundle()
         sourceAppsQueue = emptyList()
     }
 
