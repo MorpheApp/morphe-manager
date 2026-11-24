@@ -77,6 +77,7 @@ import app.morphe.manager.ui.screen.sources.BundleChangelogHost
 import app.morphe.manager.ui.screen.sources.BundleChangelogRequest
 import app.morphe.manager.ui.theme.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel
+import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.MainViewModel
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
 import app.morphe.manager.util.*
@@ -637,7 +638,10 @@ private fun MorpheManager(vm: MainViewModel) {
 
             screen<Patcher> { entry ->
                 val params = entry.getComplexArg<Patcher.ViewModelParams>() ?: return@screen
-                val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params) }
+                // One installer for the run and its screen, so an install the run starts on its
+                // own reports where the user looks
+                val installViewModel: InstallViewModel = koinViewModel()
+                val patcherViewModel: PatcherViewModel = koinViewModel { parametersOf(params, installViewModel) }
                 val leavePatcher: () -> Unit = {
                     patcherViewModel.stopCompletionSound()
                     patcherBackgroundSpeed.floatValue = 1f
@@ -647,6 +651,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 PatcherScreen(
                     onBackClick = leavePatcher,
                     patcherViewModel = patcherViewModel,
+                    installViewModel = installViewModel,
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true },
                     onStartTour = startOnboardingTour,

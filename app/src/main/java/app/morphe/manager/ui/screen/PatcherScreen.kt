@@ -28,7 +28,6 @@ import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.patch.installerTypeFor
-import app.morphe.manager.ui.model.RenameWarning
 import app.morphe.manager.ui.screen.home.AppLinksDialog
 import app.morphe.manager.ui.screen.patcher.*
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
@@ -41,15 +40,8 @@ import app.morphe.manager.util.rememberDocumentSaver
 import app.morphe.manager.util.shareApks
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import kotlin.time.Duration.Companion.milliseconds
-
-/** An install held back until the user accepts that it lands beside the app rather than on it. */
-private data class HeldInstall(
-    val warning: RenameWarning,
-    val start: () -> Unit
-)
 
 /**
  * Patcher screen with progress tracking.
@@ -59,7 +51,7 @@ private data class HeldInstall(
 fun PatcherScreen(
     onBackClick: () -> Unit,
     patcherViewModel: PatcherViewModel,
-    installViewModel: InstallViewModel = koinViewModel(),
+    installViewModel: InstallViewModel,
     prefs: PreferencesManager = koinInject(),
     onBackgroundSpeedChange: (Float) -> Unit = {},
     onPatchingCompleted: () -> Unit = {},
@@ -145,64 +137,6 @@ private fun PatcherScreenContent(
                 completionFelt = true
                 view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             }
-        }
-    }
-
-    // Get output file from viewModel
-    val outputFile = patcherViewModel.outputFile
-
-    // A build that answers to a package name of its own installs beside the app instead of
-    // updating it, so every install path waits here until the user has been told once
-    var renameConfirmed by rememberSaveable { mutableStateOf(false) }
-    var renameDeclined by remember { mutableStateOf(false) }
-    var heldInstall by remember { mutableStateOf<HeldInstall?>(null) }
-
-    suspend fun startInstall(install: () -> Unit) {
-        // A fresh attempt supersedes whatever the user answered to the previous one
-        renameDeclined = false
-        val warning = if (renameConfirmed) null else patcherViewModel.renameWarning()
-        if (warning == null) {
-            install()
-        } else {
-            heldInstall = HeldInstall(warning, install)
-        }
-    }
-
-    // A mount, or an install that checks for a rename first. Started on its own after patching,
-    // an install clears a conflict by itself, since nobody is there to answer for it
-    suspend fun installPatchedApp(automatic: Boolean) {
-        patcherViewModel.onInstallStarted()
-        if (usingMountInstall) {
-            installViewModel.installMount(
-                outputFile = outputFile,
-                inputFile = patcherViewModel.inputFile,
-                inputIsTemporary = patcherViewModel.inputFileIsDisposable,
-                packageName = patcherViewModel.packageName,
-                onPersistApp = patcherViewModel::persistPatchedApp
-            )
-        } else {
-            startInstall {
-                installViewModel.install(
-                    outputFile = outputFile,
-                    originalPackageName = patcherViewModel.packageName,
-                    onPersistApp = patcherViewModel::persistPatchedApp,
-                    autoUninstallOnConflict = automatic
-                )
-            }
-        }
-    }
-
-    // Auto-install: driven by ViewModel so it fires in the background even if the app is not
-    // in the foreground when patching completes. UI-only guards checked here.
-    LaunchedEffect(Unit) {
-        patcherViewModel.autoInstallEvent.collect {
-            // An install the user already started takes its place
-            if (installViewModel.installState is InstallViewModel.InstallState.Ready) {
-                installPatchedApp(automatic = true)
-            }
-            // The installer owns the state from here, and an attempt that ends in nothing must
-            // not leave the screen claiming an install forever
-            patcherViewModel.autoInstallHandedOff()
         }
     }
 
@@ -403,19 +337,14 @@ private fun PatcherScreenContent(
         )
     }
 
-    // Where the finished APK will actually install, when that is not what the run was aimed at
-    DialogHost(target = heldInstall?.takeIf { installPromptsShown }) { held ->
+    // Where the finished APK will actually install, when that is not what the run was aimed at.
+    // A build that answers to a package name of its own installs beside the app instead of
+    // updating it, so every install path waits on this until the user has been told once
+    DialogHost(target = patcherViewModel.heldInstallWarning?.takeIf { installPromptsShown }) { warning ->
         RenameWarningDialog(
-            warning = held.warning,
-            onContinue = {
-                renameConfirmed = true
-                heldInstall = null
-                held.start()
-            },
-            onDismiss = {
-                renameDeclined = true
-                heldInstall = null
-            }
+            warning = warning,
+            onContinue = patcherViewModel::confirmRename,
+            onDismiss = patcherViewModel::declineRename
         )
     }
 
@@ -458,7 +387,7 @@ private fun PatcherScreenContent(
             installState is InstallViewModel.InstallState.Ready &&
             // Auto-install stops at the rename warning, so the screen must
             // not go on claiming install the user has yet to allow
-            heldInstall == null && !renameDeclined
+            patcherViewModel.heldInstallWarning == null && !patcherViewModel.renameDeclined
     // The state the result screen and the way back to it are drawn from answers two things the
     // installer's own does not: an auto-install is under way before it is reported, and a
     // conflict this run resolves by dialog is not a screen state at all
@@ -520,7 +449,7 @@ private fun PatcherScreenContent(
                         installedPackageName = installedPackageName,
                         usingMountInstall = usingMountInstall,
                         installActions = InstallResultActions(
-                            onInstall = { scope.launch { installPatchedApp(automatic = false) } },
+                            onInstall = patcherViewModel::installPatchedApp,
                             onUninstall = { packageName ->
                                 installViewModel.requestUninstall(packageName, installAfterUninstall = true)
                             },
@@ -548,7 +477,7 @@ private fun PatcherScreenContent(
                             scope.launch {
                                 // Shared under the name a save would give it, not the working one
                                 val name = patcherViewModel.resolvedExportFileName()
-                                context.shareApks(listOf(outputFile)) { name }
+                                context.shareApks(listOf(patcherViewModel.outputFile)) { name }
                             }
                         },
                         isSaving = isSaving,

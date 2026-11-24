@@ -77,9 +77,14 @@ private val SummarisedLogPrefixes = listOf(
     PatcherWorker.LOG_WORKER_PREFIX_SOURCE
 )
 
+/**
+ * @param installer The installer of the screen showing this run. The patched APK goes through it
+ *   whether the user or the run itself starts the install, so both report on the same screen.
+ */
 @OptIn(SavedStateHandleSaveableApi::class)
 class PatcherViewModel(
     private val input: Patcher.ViewModelParams,
+    private val installer: InstallViewModel,
     private val app: Application,
     private val messages: UserMessages,
     private val fs: Filesystem,
@@ -132,15 +137,12 @@ class PatcherViewModel(
     private val launchActivityChannel = Channel<Intent>()
     val launchActivityFlow = launchActivityChannel.receiveAsFlow()
 
-    private val _autoInstallChannel = Channel<Unit>(Channel.CONFLATED)
-    val autoInstallEvent: Flow<Unit> = _autoInstallChannel.receiveAsFlow()
-
     private val _patchingFailedChannel = Channel<Unit>(Channel.CONFLATED)
 
     /** Fires once a run fails, for the screen to open the error dialog on. A recreated screen does not hear it again. */
     val patchingFailedEvent: Flow<Unit> = _patchingFailedChannel.receiveAsFlow()
 
-    /** Whether this run installs on its own, set before the event so the screen shows it coming. */
+    /** Whether this run installs on its own, set before the install starts so the screen shows it coming. */
     var autoInstallPending by mutableStateOf(false)
         private set
 
@@ -174,7 +176,7 @@ class PatcherViewModel(
      * on that install after all. The name a patch builds under exists only once it has run, so
      * the output is the only place it can be read.
      */
-    suspend fun renameWarning(): RenameWarning? = withContext(Dispatchers.IO) {
+    private suspend fun renameWarning(): RenameWarning? = withContext(Dispatchers.IO) {
         val target = input.targetPackageName ?: packageName
         val result = patchedApp()?.packageName ?: return@withContext null
         if (result == target) return@withContext null
@@ -1041,15 +1043,71 @@ class PatcherViewModel(
     // An install outlives this screen and reads output.apk until it is done
     private var installStarted = false
 
-    /** Called as an install of the patched APK starts, which keeps it on disk past this screen. */
-    fun onInstallStarted() {
-        installStarted = true
+    /** An install held back until the user accepts that it lands beside the app rather than on it. */
+    private class HeldInstall(val warning: RenameWarning, val start: () -> Unit)
+
+    private var heldInstall by mutableStateOf<HeldInstall?>(null)
+
+    /** What the install waiting on the user would do to the app, null while none is waiting. */
+    val heldInstallWarning: RenameWarning? get() = heldInstall?.warning
+
+    // Asked once per run, so a retry after a failed install goes ahead without asking again
+    private var renameConfirmed by savedStateHandle.saveable(
+        key = "renameConfirmed",
+        stateSaver = autoSaver()
+    ) {
+        mutableStateOf(false)
     }
 
-    /** Called once the installer has taken the auto-install over. */
-    fun autoInstallHandedOff() {
-        autoInstallPending = false
-        releaseForeground()
+    /** Whether the user turned the held install down, which leaves the build uninstalled. */
+    var renameDeclined by mutableStateOf(false)
+        private set
+
+    /** Installs the patched APK, or mounts it, as this run is set up to. */
+    fun installPatchedApp() {
+        viewModelScope.launch { startInstall(automatic = false) }
+    }
+
+    /** Lets the held install go ahead, the rename accepted for the rest of the run. */
+    fun confirmRename() {
+        val held = heldInstall ?: return
+        renameConfirmed = true
+        heldInstall = null
+        held.start()
+    }
+
+    /** Drops the held install, leaving the app as it is. */
+    fun declineRename() {
+        renameDeclined = true
+        heldInstall = null
+    }
+
+    // Started by the run itself, an install clears a conflict by itself, since nobody is there
+    // to answer for it
+    private suspend fun startInstall(automatic: Boolean) {
+        installStarted = true
+        if (usingMountInstall) {
+            installer.installMount(
+                outputFile = outputFile,
+                inputFile = inputFile,
+                inputIsTemporary = inputFileIsDisposable,
+                packageName = packageName,
+                onPersistApp = ::persistPatchedApp
+            )
+            return
+        }
+        val install = {
+            installer.install(
+                outputFile = outputFile,
+                originalPackageName = packageName,
+                onPersistApp = ::persistPatchedApp,
+                autoUninstallOnConflict = automatic
+            )
+        }
+        // A fresh attempt supersedes whatever the user answered to the previous one
+        renameDeclined = false
+        val warning = if (renameConfirmed) null else renameWarning()
+        if (warning == null) install() else heldInstall = HeldInstall(warning, install)
     }
 
     private fun scheduleAutoInstallIfNeeded() = viewModelScope.launch {
@@ -1060,9 +1118,14 @@ class PatcherViewModel(
             return@launch
         }
         autoInstallPending = true
-        // Allowed only where no system dialog comes up, so it starts right away, a round in play
-        // included. What it may still have to ask waits on the screen for the success screen
-        _autoInstallChannel.trySend(Unit)
+        // Allowed only where no system dialog comes up, so it starts right away, whatever is on
+        // screen. What it may still have to ask waits for the success screen. An install the
+        // user already started takes its place
+        if (installer.installState is InstallViewModel.InstallState.Ready) startInstall(automatic = true)
+        // The installer owns the state from here, and an attempt that ends in nothing must not
+        // leave the screen claiming an install forever
+        autoInstallPending = false
+        releaseForeground()
     }
 
     private fun initialSplitRequirement(selectedApp: SelectedApp): Boolean =
