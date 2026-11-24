@@ -279,15 +279,17 @@ class MiniGameState(
         MiniGame.PAIRS -> pairs
     }
 
-    /** Restarts and selects [game], replacing any currently active game. */
+    /** Selects [game], carrying on with a round it was left in, or starting one. */
     fun selectGame(game: MiniGame) {
-        stateOf(game).restart()
+        val state = stateOf(game)
+        // Only a round left unfinished waits paused, an ended or unstarted one starts afresh
+        if (!state.isPaused) state.restart()
         selectedGame = game
     }
 
-    /** Leaves the game on screen for the picker, keeping the record its round set. */
+    /** Leaves the game on screen for the picker, its round paused for when it is picked again. */
     fun closeGame() {
-        saveRecord()
+        pauseActiveGame()
         selectedGame = null
     }
 
