@@ -49,7 +49,8 @@ fun SimplePatchingInProgress(
     packageName: String? = null,
     showLongStepWarning: Boolean = false,
     queueHeader: (@Composable () -> Unit)? = null,
-    onCancelClick: () -> Unit
+    onCancelClick: () -> Unit,
+    onGamesClick: (() -> Unit)? = null
 ) {
     val windowSize = rememberWindowSize()
     val (completed, total) = patchesProgress
@@ -93,7 +94,8 @@ fun SimplePatchingInProgress(
                 showLongStepWarning = showLongStepWarning,
                 patchProgress = patchProgress,
                 queueHeader = queueHeader,
-                onCancelClick = onCancelClick
+                onCancelClick = onCancelClick,
+                onGamesClick = onGamesClick
             )
         }
 
@@ -101,7 +103,8 @@ fun SimplePatchingInProgress(
         if (!isLandscape()) {
             PatcherBottomActionBar(
                 showHomeButton = false,
-                onCancelClick = onCancelClick
+                onCancelClick = onCancelClick,
+                onGamesClick = onGamesClick
             )
         }
     }
@@ -121,7 +124,8 @@ private fun AdaptiveProgressContent(
     showLongStepWarning: Boolean,
     patchProgress: PatchProgressSource,
     queueHeader: (@Composable () -> Unit)? = null,
-    onCancelClick: () -> Unit
+    onCancelClick: () -> Unit,
+    onGamesClick: (() -> Unit)?
 ) {
     val contentPadding = windowSize.contentPadding
     val itemSpacing = windowSize.itemSpacing
@@ -163,7 +167,8 @@ private fun AdaptiveProgressContent(
                 PatcherBottomActionBar(
                     horizontalPadding = 0.dp,
                     showHomeButton = false,
-                    onCancelClick = onCancelClick
+                    onCancelClick = onCancelClick,
+                    onGamesClick = onGamesClick
                 )
             }
 

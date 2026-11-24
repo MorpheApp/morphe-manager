@@ -630,7 +630,8 @@ private fun MorpheManager(vm: MainViewModel) {
                     onDeclineTour = declineOnboardingTour,
                     onAppStateChanged = homeViewModel.apps::notifyAppStateChanged,
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
-                    onPatchingCompleted = { patchingCompleted.value = true }
+                    onPatchingCompleted = { patchingCompleted.value = true },
+                    onOpenGames = navController::openMiniGames
                 )
             }
 
@@ -653,7 +654,8 @@ private fun MorpheManager(vm: MainViewModel) {
                     onChangePatches = {
                         leavePatcher()
                         homeViewModel.patchFlow.reopenPatchSelection(params)
-                    }
+                    },
+                    onOpenGames = navController::openMiniGames
                 )
             }
 
@@ -711,9 +713,12 @@ private fun NavController.settingsNavigation(startTour: (() -> Unit)?) = Setting
     openSubpage = { subpage -> navigate(SettingsDetail(subpage.name)) { launchSingleTop = true } },
     openPatchSelections = { navigate(PatchSelections) { launchSingleTop = true } },
     openLicenses = { navigate(Licenses) { launchSingleTop = true } },
-    openMiniGames = { navigate(MiniGames) { launchSingleTop = true } },
+    openMiniGames = this::openMiniGames,
     startTour = startTour
 )
+
+/** Stacked on whatever is open, so a patcher left for a game carries on and is there on the way back. */
+private fun NavController.openMiniGames() = navigate(MiniGames) { launchSingleTop = true }
 
 // Androidx Navigation does not support storing complex types in route objects, so we have
 // to store them inside the saved state handle of the back stack entry instead

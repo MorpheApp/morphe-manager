@@ -381,7 +381,8 @@ fun ExpertPatchingInProgress(
     queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
     resultButton: ResultButton? = null,
-    onResultClick: () -> Unit = {}
+    onResultClick: () -> Unit = {},
+    onGamesClick: (() -> Unit)? = null
 ) {
     val (completed, total) = patchesProgress
     val rawLogs = patchProgress.logs
@@ -429,6 +430,8 @@ fun ExpertPatchingInProgress(
             showCopyLogsButton = true,
             onCancelClick = onCancelClick,
             onResultClick = onResultClick,
+            // A run that is over has its way on in the result button instead
+            onGamesClick = onGamesClick?.takeIf { patcherSucceeded == null },
             onCopyLogsClick = {
                 copyToClipboard(buildLogsText())
             }

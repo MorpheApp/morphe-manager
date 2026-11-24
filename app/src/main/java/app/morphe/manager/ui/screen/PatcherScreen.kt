@@ -65,7 +65,8 @@ fun PatcherScreen(
     onPatchingCompleted: () -> Unit = {},
     onStartTour: () -> Unit = {},
     onDeclineTour: () -> Unit = {},
-    onChangePatches: () -> Unit = {}
+    onChangePatches: () -> Unit = {},
+    onOpenGames: () -> Unit = {}
 ) {
     // Worn by everything the screen shows, its dialogs included, down to the install button
     ProvideAccent(rememberAppColor(patcherViewModel.packageName)) {
@@ -78,7 +79,8 @@ fun PatcherScreen(
             onPatchingCompleted = onPatchingCompleted,
             onStartTour = onStartTour,
             onDeclineTour = onDeclineTour,
-            onChangePatches = onChangePatches
+            onChangePatches = onChangePatches,
+            onOpenGames = onOpenGames
         )
     }
 }
@@ -93,7 +95,8 @@ private fun PatcherScreenContent(
     onPatchingCompleted: () -> Unit,
     onStartTour: () -> Unit,
     onDeclineTour: () -> Unit,
-    onChangePatches: () -> Unit
+    onChangePatches: () -> Unit,
+    onOpenGames: () -> Unit
 ) {
     val view = LocalView.current
     val context = LocalContext.current
@@ -487,7 +490,8 @@ private fun PatcherScreenContent(
                             patcherSucceeded = patcherSucceeded,
                             onCancelClick = { showCancelDialog = true },
                             resultButton = resultButton(shownInstallState, installedPackageName, usingMountInstall),
-                            onResultClick = { patcherViewModel.showSuccess() }
+                            onResultClick = { patcherViewModel.showSuccess() },
+                            onGamesClick = onOpenGames
                         )
                     } else {
                         SimplePatchingInProgress(
@@ -496,7 +500,8 @@ private fun PatcherScreenContent(
                             patchProgress = patcherViewModel.patchRun,
                             packageName = patcherViewModel.packageName,
                             showLongStepWarning = showLongStepWarning,
-                            onCancelClick = { showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true },
+                            onGamesClick = onOpenGames
                         )
                     }
                 }

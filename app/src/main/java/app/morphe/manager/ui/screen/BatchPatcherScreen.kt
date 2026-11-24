@@ -78,7 +78,8 @@ fun BatchPatcherScreen(
     patchBundleRepository: PatchBundleRepository = koinInject(),
     onAppStateChanged: (String) -> Unit = {},
     onBackgroundSpeedChange: (Float) -> Unit = {},
-    onPatchingCompleted: () -> Unit = {}
+    onPatchingCompleted: () -> Unit = {},
+    onOpenGames: () -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
@@ -506,7 +507,8 @@ fun BatchPatcherScreen(
                             patchProgress = shownRun,
                             packageName = shownPackageName,
                             queueHeader = { BatchRunHeader(state = current) },
-                            onCancelClick = { showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true },
+                            onGamesClick = onOpenGames
                         )
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
@@ -517,7 +519,8 @@ fun BatchPatcherScreen(
                             packageName = shownPackageName,
                             showLongStepWarning = longStepWarning,
                             queueHeader = { BatchRunHeader(state = current) },
-                            onCancelClick = { showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true },
+                            onGamesClick = onOpenGames
                         )
                     }
                 }
