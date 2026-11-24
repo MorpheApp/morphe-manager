@@ -11,7 +11,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -411,11 +410,6 @@ private fun DownloadProgress(
 ) {
     val hasKnownSize = totalSize > 0L
     val isStreaming = !hasKnownSize && downloadedSize > 0L
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress,
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
-        label = "downloadProgress"
-    )
 
     // The ring grows in from a little smaller, so the switch from the changelog reads as a start
     val scale by rememberEntranceScale(
@@ -431,7 +425,7 @@ private fun DownloadProgress(
         contentAlignment = Alignment.Center
     ) {
         WavyProgressRing(
-            progress = if (isStreaming) null else ({ animatedProgress }),
+            progress = if (isStreaming) null else ({ progress }),
             wavelength = ProgressRingWavelength,
             accentColor = accentColor,
             modifier = Modifier.fillMaxSize()
