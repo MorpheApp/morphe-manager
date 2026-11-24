@@ -200,12 +200,8 @@ class PatcherWorker(
     }
 
     override suspend fun doWork(): Result {
-        if (runAttemptCount > 0) {
-            Log.d(LOG_TAG, "Android requested retrying but retrying is disabled.".logFmt())
-            reportInterruptedRun()
-            return Result.failure()
-        }
-
+        // Also on a retry: the system brings WorkManager's foreground service back with the dead
+        // process's ongoing notification, and WorkManager only takes it down for work it moved there
         try {
             // This does not always show up for some reason
             setForeground(getForegroundInfo())
@@ -213,6 +209,12 @@ class PatcherWorker(
             // Foreground promotion can fail on some devices or when notification permission is
             // denied. Log it but continue - patching still works, just with less OS protection
             Log.w(LOG_TAG, "Failed to promote worker to foreground service:".logFmt(), e)
+        }
+
+        if (runAttemptCount > 0) {
+            Log.d(LOG_TAG, "Android requested retrying but retrying is disabled.".logFmt())
+            reportInterruptedRun()
+            return Result.failure()
         }
 
         val wakeLock: PowerManager.WakeLock =
