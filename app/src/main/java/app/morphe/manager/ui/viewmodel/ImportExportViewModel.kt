@@ -630,8 +630,10 @@ class ImportExportViewModel(
 
         writer.write("\n=== Logcat ===\n\n")
 
-        // Filter logs by current process UID to include only Morphe Manager logs
-        val logcat = ProcessBuilder("logcat", "-d", "--uid=${app.applicationInfo.uid}")
+        // Filter logs by current process UID to include only Morphe Manager logs. Logcat before
+        // Android 11 has no such filter and refuses the whole call, but shows an app only its own logs anyway
+        val uidFilter = "--uid=${app.applicationInfo.uid}".takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.R }
+        val logcat = ProcessBuilder(listOfNotNull("logcat", "-d", uidFilter))
             .redirectErrorStream(true)
             .start()
         logcat.inputStream.bufferedReader().useLines { lines -> lines.forEach { writer.write("$it\n") } }
