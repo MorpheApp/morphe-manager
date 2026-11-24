@@ -6,6 +6,7 @@
 package app.morphe.manager.ui.screen.settings.system
 
 import android.content.pm.PackageInfo
+import android.net.Uri
 import android.view.HapticFeedbackConstants
 import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
@@ -39,9 +40,7 @@ import app.morphe.manager.ui.viewmodel.SavedApksViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.io.File
@@ -118,6 +117,8 @@ data class ApkListMeta(
     val count: Int,
     val totalSize: Long,
     val isLoading: Boolean,
+    /** Whether a ZIP of the list is being written, which the list waits out before it closes. */
+    val isExporting: Boolean,
     val isEmpty: Boolean,
     val emptyMessage: String,
     val deleteAllTitle: String?,
@@ -133,7 +134,9 @@ class ApkListActions(
     val onUninstallSelected: ((List<ApkItemData>) -> Unit)?,
     val onDelete: (ApkItemData) -> Unit,
     val onDeleteSelectedConfirm: (List<ApkItemData>) -> Unit,
-    val onDeleteAllConfirm: (() -> Unit)?
+    val onDeleteAllConfirm: (() -> Unit)?,
+    /** Writes the files into one ZIP at the place picked, calling back once it is whole. */
+    val onExportZip: (uri: Uri, files: Map<File, String>, onExported: () -> Unit) -> Unit
 )
 
 /**
@@ -218,6 +221,7 @@ private fun DialogHostScope.SavedApksContent(
             count = items.size,
             totalSize = totalSize,
             isLoading = isLoading,
+            isExporting = viewModel.isExporting,
             isEmpty = items.isEmpty() && !isLoading,
             emptyMessage = emptyMessage,
             deleteAllTitle = deleteAllTitle,
@@ -237,7 +241,8 @@ private fun DialogHostScope.SavedApksContent(
             onUninstallSelected = viewModel::uninstall,
             onDelete = { item -> pendingDelete = item },
             onDeleteSelectedConfirm = viewModel::delete,
-            onDeleteAllConfirm = { viewModel.delete(items) }
+            onDeleteAllConfirm = { viewModel.delete(items) },
+            onExportZip = viewModel::exportZip
         ),
         items = items,
         onDismiss = onDismiss
@@ -267,14 +272,13 @@ private fun DialogHostScope.ApkManagementDialogContent(
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
-    val messages = koinInject<UserMessages>()
     val scope = rememberCoroutineScope()
     var showDeleteAllConfirmation by remember { mutableStateOf(false) }
     var showDeleteSelectedConfirmation by remember { mutableStateOf(false) }
     var showUninstallSelectedConfirmation by remember { mutableStateOf(false) }
     var itemToUninstallConfirm by remember { mutableStateOf<ApkItemData?>(null) }
     var isMultiSelectMode by remember { mutableStateOf(false) }
-    var isExporting by remember { mutableStateOf(false) }
+    val isExporting = meta.isExporting
     val selection = rememberSelectionState<String>()
     val prefs = koinInject<PreferencesManager>()
     val sortMode by prefs.apkManagementSortMode.getAsState()
@@ -302,8 +306,6 @@ private fun DialogHostScope.ApkManagementDialogContent(
     val canDeleteAll = selectedItems.isEmpty() && items.isNotEmpty() &&
             actions.onDeleteAllConfirm != null
     val selectedTotalSize = selectedItems.sumOf { it.fileSize }
-    val zipExportSuccessText = stringResource(R.string.settings_system_apks_export_zip_success)
-    val zipExportFailedText = stringResource(R.string.settings_system_apks_export_zip_failed)
     var zipExports by remember { mutableStateOf<Map<File, String>>(emptyMap()) }
 
     LaunchedEffect(items) {
@@ -320,18 +322,7 @@ private fun DialogHostScope.ApkManagementDialogContent(
     val exportZip = rememberDocumentSaver("application/zip") { uri ->
         val exports = zipExports
         zipExports = emptyMap()
-        scope.launch {
-            isExporting = true
-            try {
-                val exported = withContext(Dispatchers.IO) {
-                    ZipUtils.zip(context, uri, exports.keys.toList(), exports::getValue)
-                }
-                messages.show(if (exported) zipExportSuccessText else zipExportFailedText)
-                if (exported) selection.clear()
-            } finally {
-                isExporting = false
-            }
-        }
+        actions.onExportZip(uri, exports) { selection.clear() }
     }
 
     ListDialog(

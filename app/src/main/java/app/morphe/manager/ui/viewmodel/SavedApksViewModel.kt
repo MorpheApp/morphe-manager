@@ -5,7 +5,12 @@
 
 package app.morphe.manager.ui.viewmodel
 
+import android.app.Application
+import android.net.Uri
 import androidx.annotation.StringRes
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
@@ -44,6 +49,7 @@ data class OriginalApkRow(override val data: ApkItemData, val apk: OriginalApk) 
  * otherwise cut a batch off halfway, with some files deleted and some apps removed.
  */
 abstract class SavedApksViewModel<T : SavedApkRow>(
+    private val app: Application,
     private val messages: UserMessages,
     private val batchUninstaller: BatchUninstaller
 ) : ViewModel() {
@@ -93,6 +99,29 @@ abstract class SavedApksViewModel<T : SavedApkRow>(
         }
     }
 
+    /** Whether a ZIP of saved APKs is being written, which the list waits out before it closes. */
+    var isExporting by mutableStateOf(false)
+        private set
+
+    /** Writes [files] into one ZIP at [uri], each under its name, calling [onExported] once it is whole. */
+    fun exportZip(uri: Uri, files: Map<File, String>, onExported: () -> Unit) {
+        isExporting = true
+        viewModelScope.launch {
+            try {
+                val exported = withContext(Dispatchers.IO) {
+                    ZipUtils.zip(app, uri, files.keys.toList(), files::getValue)
+                }
+                messages.show(
+                    if (exported) R.string.settings_system_apks_export_zip_success
+                    else R.string.settings_system_apks_export_zip_failed
+                )
+                if (exported) onExported()
+            } finally {
+                isExporting = false
+            }
+        }
+    }
+
     fun delete(items: List<ApkItemData>) = delete(items, R.string.settings_system_apks_deleted_all)
 
     /** Deletes the one APK of [item], confirmed on its own. */
@@ -134,6 +163,7 @@ abstract class SavedApksViewModel<T : SavedApkRow>(
 
 /** The patched APKs kept after patching, each standing for the record of the app it built. */
 class PatchedApksViewModel(
+    app: Application,
     messages: UserMessages,
     batchUninstaller: BatchUninstaller,
     private val installedAppRepository: InstalledAppRepository,
@@ -141,7 +171,7 @@ class PatchedApksViewModel(
     private val appDataResolver: AppDataResolver,
     private val pm: PM,
     private val localApkSources: LocalApkSources
-) : SavedApksViewModel<PatchedApkRow>(messages, batchUninstaller) {
+) : SavedApksViewModel<PatchedApkRow>(app, messages, batchUninstaller) {
     override val deletedOneMessage = R.string.settings_system_patched_apks_deleted
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -216,13 +246,14 @@ class PatchedApksViewModel(
 
 /** The original APKs kept for patching again, which belong to no record of their own. */
 class OriginalApksViewModel(
+    app: Application,
     messages: UserMessages,
     batchUninstaller: BatchUninstaller,
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
     private val appDataResolver: AppDataResolver,
     private val pm: PM
-) : SavedApksViewModel<OriginalApkRow>(messages, batchUninstaller) {
+) : SavedApksViewModel<OriginalApkRow>(app, messages, batchUninstaller) {
     override val deletedOneMessage = R.string.settings_system_original_apks_deleted
 
     @OptIn(ExperimentalCoroutinesApi::class)
