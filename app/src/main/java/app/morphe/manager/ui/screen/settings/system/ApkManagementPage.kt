@@ -39,6 +39,7 @@ import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.patcher.util.NativeLibs
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.theme.ThemeTraitsDefaults
+import app.morphe.manager.ui.viewmodel.InstallQueueRequest
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols

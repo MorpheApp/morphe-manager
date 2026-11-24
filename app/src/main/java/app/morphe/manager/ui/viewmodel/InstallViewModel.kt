@@ -124,6 +124,9 @@ class InstallViewModel(
     var showInstallerSelectionDialog by mutableStateOf(false)
         private set
 
+    /** Installs one after another through this installer, see [InstallQueue]. */
+    val installQueue = InstallQueue(this, viewModelScope, app, messages)
+
     private var oneTimeInstallerToken: InstallerManager.Token? = null
     private var selectedInstallerToken: InstallerManager.Token? = null
     private var pendingInstallToken: InstallerManager.Token? = null
