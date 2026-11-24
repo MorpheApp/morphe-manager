@@ -14,7 +14,11 @@ jobs:
       github.repository_owner == 'MorpheApp' &&
       !github.event.issue.pull_request &&
       github.event.comment.user.type != 'Bot' &&
-      (contains(github.event.comment.body, '<img') || contains(github.event.comment.body, ']('))
+      (contains(github.event.comment.body, '<img') ||
+       contains(github.event.comment.body, '](') ||
+       contains(github.event.comment.body, '<video') ||
+       contains(github.event.comment.body, 'https://github.com/user-attachments/assets/') ||
+       contains(github.event.comment.body, 'https://user-images.githubusercontent.com/'))
     runs-on: ubuntu-latest
     permissions:
       contents: read

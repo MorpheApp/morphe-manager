@@ -1,5 +1,5 @@
 // Deletes new issues that were not created with an issue form, after a comment that tells the author why.
-// Wraps screenshots in new issues in a collapsed block.
+// Wraps screenshots and screen recordings in new issues in a collapsed block.
 // Checks the Morphe version of bug reports. Reports for an outdated version are closed by apply.js,
 // after the duplicate check, so the author also learns about an existing issue.
 // Sets the "triage" output to "true" if the issue should go on to the analyze job,
@@ -34,11 +34,11 @@ module.exports = async ({ github, getOctokit, context, core }) => {
 
     const body = wrapScreenshots(issue.body);
     if (body !== issue.body) {
-      core.info(`Wrapping the screenshots of #${issueNumber}`);
+      core.info(`Wrapping the screenshots and recordings of #${issueNumber}`);
       try {
         await github.rest.issues.update({ owner, repo, issue_number: issueNumber, body });
       } catch (error) {
-        core.warning(`Could not wrap the screenshots of #${issueNumber}: ${error.message}`);
+        core.warning(`Could not wrap the screenshots and recordings of #${issueNumber}: ${error.message}`);
       }
     }
 

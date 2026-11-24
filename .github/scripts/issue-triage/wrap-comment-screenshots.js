@@ -1,4 +1,4 @@
-// Wraps screenshots in a new issue comment in a collapsed block, like the screenshots of new issues.
+// Wraps screenshots and screen recordings in a new issue comment in a collapsed block, like those of new issues.
 // Comments by bots and by users with write access to the repository are left as they are.
 
 const { wrapScreenshots } = require('./wrap-screenshots.js');
@@ -17,7 +17,7 @@ module.exports = async ({ github, context, core }) => {
 
   const body = wrapScreenshots(comment.body);
   if (body === comment.body) {
-    core.info(`Comment ${comment.html_url} has no screenshots to wrap`);
+    core.info(`Comment ${comment.html_url} has nothing to wrap`);
     return;
   }
 
@@ -37,7 +37,7 @@ module.exports = async ({ github, context, core }) => {
     return;
   }
 
-  core.info(`Wrapping the screenshots of the comment on #${issue.number}: ${comment.html_url}`);
+  core.info(`Wrapping the screenshots and recordings of the comment on #${issue.number}: ${comment.html_url}`);
   if (!live) return;
   await github.rest.issues.updateComment({ owner, repo, comment_id: comment.id, body });
 };
