@@ -27,6 +27,7 @@ import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.runtime.jvm.JvmInstallation
 import app.morphe.manager.service.ForegroundHoldService
 import app.morphe.manager.service.ForegroundWork
+import app.morphe.manager.ui.screen.games.MiniGameState
 import app.morphe.manager.ui.screen.shared.ContentTranslation
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.AppCoroutineScope
@@ -61,5 +62,6 @@ val managerModule = module {
     singleOf(::UserMessages)
     singleOf(::JvmInstallation)
     singleOf(::PatcherProcesses)
+    singleOf(::MiniGameState)
     single { ForegroundWork(ForegroundHoldService.Host(androidContext())) }
 }

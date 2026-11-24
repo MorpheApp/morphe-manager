@@ -66,7 +66,7 @@ fun PatcherScreen(
     onStartTour: () -> Unit = {},
     onDeclineTour: () -> Unit = {},
     onChangePatches: () -> Unit = {},
-    onOpenGames: () -> Unit = {}
+    onOpenGames: (() -> Unit)? = null
 ) {
     // Worn by everything the screen shows, its dialogs included, down to the install button
     ProvideAccent(rememberAppColor(patcherViewModel.packageName)) {
@@ -96,7 +96,7 @@ private fun PatcherScreenContent(
     onStartTour: () -> Unit,
     onDeclineTour: () -> Unit,
     onChangePatches: () -> Unit,
-    onOpenGames: () -> Unit
+    onOpenGames: (() -> Unit)?
 ) {
     val view = LocalView.current
     val context = LocalContext.current
@@ -131,13 +131,20 @@ private fun PatcherScreenContent(
         onSpeedChange = onBackgroundSpeedChange
     )
 
+    // The buzz marks the moment the run ends, so a screen composed again after it, by a rotation
+    // or on the way back from the games, stays quiet while the completion effect is restored
+    var completionFelt by rememberSaveable { mutableStateOf(false) }
+
     // Patching finished - the speed resets first, then the completion effect fires
     LaunchedEffect(patcherSucceeded) {
         if (patcherSucceeded == true && patcherViewModel.patchingCompletedInForeground) {
             delay(300.milliseconds) // small pause so speed resets before effect fires
             onPatchingCompleted()
             // Haptic feedback
-            view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            if (!completionFelt) {
+                completionFelt = true
+                view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
+            }
         }
     }
 
@@ -544,7 +551,8 @@ private fun PatcherScreenContent(
                                 context.shareApks(listOf(outputFile)) { name }
                             }
                         },
-                        isSaving = isSaving
+                        isSaving = isSaving,
+                        onGamesClick = onOpenGames
                     )
                 }
 
@@ -556,7 +564,8 @@ private fun PatcherScreenContent(
                         onHomeClick = onBackClick,
                         onErrorClick = { shownFailure = PatcherFailure.PATCHING },
                         // Simple mode keeps no selection of its own to return to
-                        onChangePatchesClick = onChangePatches.takeIf { useExpertMode }
+                        onChangePatchesClick = onChangePatches.takeIf { useExpertMode },
+                        onGamesClick = onOpenGames
                     )
                 }
             }

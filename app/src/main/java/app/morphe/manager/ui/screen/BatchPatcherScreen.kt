@@ -79,7 +79,7 @@ fun BatchPatcherScreen(
     onAppStateChanged: (String) -> Unit = {},
     onBackgroundSpeedChange: (Float) -> Unit = {},
     onPatchingCompleted: () -> Unit = {},
-    onOpenGames: () -> Unit = {}
+    onOpenGames: (() -> Unit)? = null
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()

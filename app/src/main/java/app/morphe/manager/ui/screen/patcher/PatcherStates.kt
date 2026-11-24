@@ -237,7 +237,8 @@ fun PatchingSuccess(
     onLogsClick: () -> Unit,
     onSaveClick: () -> Unit,
     onShareClick: () -> Unit,
-    isSaving: Boolean
+    isSaving: Boolean,
+    onGamesClick: (() -> Unit)? = null
 ) {
     val status = installStatus(installState, installedPackageName, usingMountInstall)
 
@@ -288,7 +289,8 @@ fun PatchingSuccess(
                 showCancelButton = false,
                 showLogsButton = isExpertMode,
                 onLogsClick = onLogsClick,
-                onHomeClick = onHomeClick
+                onHomeClick = onHomeClick,
+                onGamesClick = onGamesClick
             )
         }
     )
@@ -305,7 +307,8 @@ fun PatchingFailed(
     failedPatch: String?,
     onHomeClick: () -> Unit,
     onErrorClick: () -> Unit,
-    onChangePatchesClick: (() -> Unit)? = null
+    onChangePatchesClick: (() -> Unit)? = null,
+    onGamesClick: (() -> Unit)? = null
 ) {
     ResultScreen(
         status = PatchingFailedStatus,
@@ -341,7 +344,8 @@ fun PatchingFailed(
             PatcherBottomActionBar(
                 horizontalPadding = horizontalPadding,
                 showCancelButton = false,
-                onHomeClick = onHomeClick
+                onHomeClick = onHomeClick,
+                onGamesClick = onGamesClick
             )
         }
     )

@@ -10,7 +10,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +52,7 @@ private const val EnterMillis = 200
  * two insets do not stack and the buttons keep the edges of the content above them.
  *
  * A non-null [resultButton] leads back to the result screen in place of Cancel, and a non-null
- * [onGamesClick] adds a way to the mini-games while the run goes on.
+ * [onGamesClick] adds a way to the mini-games.
  */
 @Composable
 fun PatcherBottomActionBar(
