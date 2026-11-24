@@ -1,3 +1,18 @@
+## [2.8.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.1...v2.8.0-dev.2) (2026-11-24)
+
+### Features
+
+* Keep a mini-game round paused for the next visit ([28f11d0](https://github.com/MorpheApp/morphe-manager/commit/28f11d0757e406c5a51cbf58ee17307e19d6078a))
+
+### Bug Fixes
+
+* Auto-install a finished run while the mini-games are open ([ac33474](https://github.com/MorpheApp/morphe-manager/commit/ac334744fbc2f2cab3fc2e3b82d46e45d002d770))
+* Carry on with a paused mini-game round when it is picked again ([831a69a](https://github.com/MorpheApp/morphe-manager/commit/831a69ab71d23078441eb34b943bba32d8aebcb6))
+* Finish changing an app's web links after the page closes ([5324705](https://github.com/MorpheApp/morphe-manager/commit/53247054caa30cce0601729318fd97a1c88ee7a3))
+* Finish deleting and uninstalling saved APKs after the list closes ([31b1992](https://github.com/MorpheApp/morphe-manager/commit/31b1992db48751c825fea2b2e9130d8c2bd4d04f))
+* Finish saving source choices after their dialog closes ([2c2ce2e](https://github.com/MorpheApp/morphe-manager/commit/2c2ce2edf39f66a39de40a57781b302e8ad33100))
+* Keep an install queue going while other screens are open ([75b559d](https://github.com/MorpheApp/morphe-manager/commit/75b559d137a2a0ccb1ef4904ce442f299e55e2ed))
+
 ## [2.8.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.7.1...v2.8.0-dev.1) (2026-11-24)
 
 ### Features
