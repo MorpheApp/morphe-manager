@@ -56,7 +56,9 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.io.path.deleteExisting
@@ -615,6 +617,17 @@ class ImportExportViewModel(
         // Read without asking, as su would raise the root prompt and wait for it unanswered
         writer.write("Root access: ${Shell.isAppGrantedRoot() ?: "not checked"}\n")
 
+        // A process the system killed logs nothing of its own end, so the system's record is the only trace
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            writer.write("\n--- Process exits ---\n")
+            val exits = app.processExits(DEBUG_LOG_PROCESS_EXITS)
+            if (exits.isEmpty()) writer.write("None recorded\n")
+            exits.forEach { exit ->
+                val time = Instant.ofEpochMilli(exit.timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                writer.write("$time ${exit.processName} (pid ${exit.pid}): ${exit.describe()}\n")
+            }
+        }
+
         writer.write("\n=== Logcat ===\n\n")
 
         // Filter logs by current process UID to include only Morphe Manager logs
@@ -654,5 +667,8 @@ class ImportExportViewModel(
     companion object {
         private val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
         private val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
+
+        // Enough for the end of a run and the restart that followed it, with the run before for comparison
+        private const val DEBUG_LOG_PROCESS_EXITS = 6
     }
 }
