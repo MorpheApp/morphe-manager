@@ -23,9 +23,9 @@ import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.bundles.*
+import app.morphe.manager.domain.installer.BatchUninstaller
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
@@ -88,6 +88,7 @@ class HomeViewModel(
     // Past the parameters viewModelOf takes
     private val patcherProcesses: PatcherProcesses by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
+    private val batchUninstaller: BatchUninstaller by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -741,17 +742,7 @@ class HomeViewModel(
         packageName: String,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
-        val appliedPatches = installedAppRepository.getAppliedPatches(app.currentPackageName)
-        installedAppRepository.addOrUpdate(
-            currentPackageName = packageName,
-            originalPackageName = app.originalPackageName,
-            isClone = app.isClone,
-            version = app.version,
-            installType = installType,
-            patchSelection = appliedPatches,
-            selectionPayload = app.selectionPayload,
-            patchedAt = app.patchedAt
-        )
+        installedAppRepository.recordReinstall(app, packageName, installType)
         apps.notifyAppStateChanged(packageName)
         if (packageName != app.currentPackageName) apps.notifyAppStateChanged(app.currentPackageName)
         true
@@ -762,45 +753,9 @@ class HomeViewModel(
         if (installs.isEmpty()) return
 
         viewModelScope.launch {
-            var completed = 0
-            var skipped = 0
-            var unverified = 0
-            for (installed in installs) {
-                runCatching {
-                    when (installed.installType) {
-                        // Unmounting only removes the bind mount and the module files, so it is
-                        // safe even when the underlying package can no longer be identified
-                        InstallType.MOUNT -> {
-                            installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
-                            installedAppRepository.delete(installed)
-                        }
-                        else -> {
-                            if (localApkSources.trackedPatchState(installed) != InstalledPatchState.Patched) {
-                                unverified++
-                                return@runCatching false
-                            }
-                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
-                                installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
-                                true
-                            } == true
-                            if (!removed) error(app.getString(R.string.uninstall_timeout))
-                        }
-                    }
-                    true
-                }.onSuccess { removed ->
-                    if (removed) completed++ else skipped++
-                    apps.notifyAppStateChanged(installed.currentPackageName)
-                }.onFailure { error ->
-                    skipped++
-                    if (error !is UninstallCancelledException) {
-                        messages.show(R.string.uninstall_app_fail, error.simpleMessage())
-                    }
-                }
-            }
-
-            if (unverified > 0) messages.show(R.string.uninstall_app_unverified)
-            app.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
-                ?.let { messages.show(it) }
+            batchUninstaller.uninstall(
+                installs.map { BatchUninstaller.Target(it.currentPackageName, it.installType, tracked = it) }
+            ) { target -> apps.notifyAppStateChanged(target.packageName) }
         }
     }
 

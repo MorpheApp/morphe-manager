@@ -17,6 +17,7 @@ import app.morphe.manager.domain.backup.SettingsExporter
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchPlanResolver
 import app.morphe.manager.domain.bundles.AppVersionCatalog
+import app.morphe.manager.domain.installer.BatchUninstaller
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
@@ -46,6 +47,7 @@ val managerModule = module {
     singleOf(::RootInstaller)
     singleOf(::SessionInstaller)
     singleOf(::InstallerManager)
+    singleOf(::BatchUninstaller)
     singleOf(::PatchOptionsPreferencesManager)
     singleOf(::AppIconManager)
     singleOf(::UpdateNotifications)
