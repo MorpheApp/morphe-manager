@@ -1027,19 +1027,12 @@ private fun StatusDisc(icon: ImageVector, tone: SemanticTone) {
  */
 @Composable
 private fun ProgressRing(progress: Float?, content: @Composable () -> Unit) {
-    // Eased, since the share arrives in steps as the download reports back
-    val animated by animateFloatAsState(
-        targetValue = progress ?: 0f,
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
-        label = "statusRingProgress"
-    )
-
     Box(
         modifier = Modifier.size(StatusLeadingSize),
         contentAlignment = Alignment.Center
     ) {
         WavyProgressRing(
-            progress = progress?.let { { animated } },
+            progress = progress?.let { share -> { share } },
             wavelength = 10.dp,
             accentColor = null,
             strokeWidth = 3.5.dp,
