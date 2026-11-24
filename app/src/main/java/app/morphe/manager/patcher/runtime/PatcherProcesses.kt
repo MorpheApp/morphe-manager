@@ -34,6 +34,7 @@ import app.morphe.manager.patcher.runtime.jvm.JvmLaunch
 import app.morphe.manager.util.AppCoroutineScope
 import app.morphe.manager.util.LOG_TAG
 import app.morphe.manager.util.bytesToMebibytes
+import app.morphe.manager.util.processAbi
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineStart
@@ -590,7 +591,7 @@ class PatcherProcesses(
             val age = (System.currentTimeMillis() - startedAt) / 1000
             logger.info(
                 "Patcher process: pid=${started.pid} vm=$vm heap=${started.heapLimitMb}MB bits=$bits " +
-                        "abis=${Build.SUPPORTED_ABIS.joinToString(",")} age=${age}s"
+                        "abi=${app.processAbi()} abis=${Build.SUPPORTED_ABIS.joinToString(",")} age=${age}s"
             )
             if (launch != null) logger.info("Patcher JVM: pid=${started.jvmPid} options=${tuning.joinToString(" ")}")
         }

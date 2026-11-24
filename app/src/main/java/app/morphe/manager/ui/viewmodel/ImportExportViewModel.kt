@@ -13,6 +13,7 @@ package app.morphe.manager.ui.viewmodel
 import android.app.Application
 import android.net.Uri
 import android.os.Build
+import android.os.Process
 import android.util.Log
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -576,6 +577,7 @@ class ImportExportViewModel(
         writer.write("=== Morphe Manager Debug Log ===\n")
         writer.write("Date       : ${LocalDateTime.now()}\n")
         writer.write("Version    : ${BuildConfig.VERSION_NAME}\n")
+        writer.write("App mode   : ${if (Process.is64Bit()) "64-bit" else "32-bit"} (${app.processAbi() ?: "unknown ABI"})\n")
 
         writer.write("\n--- Device ---\n")
         writer.write("Model      : ${Build.MANUFACTURER} ${Build.MODEL}\n")
