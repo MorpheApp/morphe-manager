@@ -593,6 +593,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="app_links_change_failed">Failed to change app links</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
+    <string name="app_links_allow_shizuku">Allow Shizuku access</string>
+    <string name="app_links_shizuku_permission_hint">Allow Morphe to use Shizuku to turn these links on for you</string>
+    <string name="app_links_shizuku_not_running_hint">Start Shizuku to let Morphe turn these links on for you</string>
     <string name="configure">Configure</string>
     <string name="patcher_rename_title">This will install a clone</string>
     <string name="patcher_rename_description">The patches built this app under a package name of their own, so installing it adds a clone alongside &lt;b&gt;%s&lt;/b&gt; instead of updating it</string>
