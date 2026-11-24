@@ -13,9 +13,10 @@ import app.morphe.manager.ui.model.PatchRunProgress
 import app.morphe.manager.ui.screen.shared.rememberAccessibilityEnabled
 import app.morphe.manager.util.isSlowPatchingDevice
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlin.time.Duration.Companion.milliseconds
 
-/** How long the shown progress of a run in progress stands still at least. */
+/** How long a slow device shows the progress of a run before it takes over the next. */
 private val SHOWN_PROGRESS_INTERVAL = 500.milliseconds
 
 /** Progress of a patcher run as the screen shows it, from [rememberDisplayedPatchProgress]. */
@@ -32,13 +33,13 @@ class DisplayedPatchProgress internal constructor(
 }
 
 /**
- * Progress of a patcher run as the screen shows it: the progress the run reports, taken over at most
- * twice a second while it runs. Easing toward each report would repaint the screen on every frame,
- * which takes CPU time from the patcher.
+ * Progress of a patcher run as the screen shows it: the progress the run reports, eased toward
+ * each new value rather than jumping to it. Easing keeps the screen busy on every frame, so a slow
+ * device takes the progress over twice a second at most while the run goes, see [isSlowPatchingDevice].
  *
  * @param run The run to follow. A queue that moves on to the next app starts over from its progress.
  * @param succeeded Outcome of the run, null while it is still going. Success fills the progress,
- * which eases toward it, as nothing runs beside it anymore.
+ * which every device eases toward, as nothing runs beside it anymore.
  */
 @Composable
 fun rememberDisplayedPatchProgress(
@@ -55,14 +56,21 @@ fun rememberDisplayedPatchProgress(
     // serve accessibility events instead
     val reduceMotion = rememberAccessibilityEnabled()
     LaunchedEffect(shown, target, reduceMotion) {
-        if (succeeded != null && !reduceMotion) {
-            shown.animateTo(target.value, spring(stiffness = Spring.StiffnessVeryLow))
-            return@LaunchedEffect
+        if (isSlowPatchingDevice && succeeded == null) {
+            // Reports that arrive during the delay are left out but for the last of them
+            snapshotFlow { target.value }.collect {
+                shown.snapTo(it)
+                delay(SHOWN_PROGRESS_INTERVAL)
+            }
         }
-        // Reports that arrive during the delay are left out but for the last of them
-        snapshotFlow { target.value }.collect {
-            shown.snapTo(it)
-            delay(SHOWN_PROGRESS_INTERVAL)
+        // A spring keeps its velocity when the target moves again, so the progress follows the
+        // frequent small steps smoothly instead of restarting its easing on each of them
+        snapshotFlow { target.value }.collectLatest {
+            if (reduceMotion) {
+                shown.snapTo(it)
+            } else {
+                shown.animateTo(it, spring(stiffness = Spring.StiffnessVeryLow))
+            }
         }
     }
     return remember(target, shown) { DisplayedPatchProgress(target, shown.asState()) }

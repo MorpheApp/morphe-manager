@@ -410,8 +410,8 @@ fun ExpertPatchingInProgress(
                         delay(50.milliseconds)
                     }
                     val targetIndex = (patchProgress.logItems.size - 1).coerceAtLeast(0)
-                    // Animating would draw frames that take CPU time from the patcher
-                    if (patcherSucceeded == null) {
+                    // A slow device has no CPU time to spare for scrolling there while patching
+                    if (patcherSucceeded == null && isSlowPatchingDevice) {
                         listState.scrollToItem(targetIndex)
                     } else {
                         listState.animateScrollToItem(targetIndex)
@@ -633,9 +633,8 @@ private fun ExpertProgressHeader(
                 }
             }
 
-            // The simple mode's wave laid flat, so both modes show progress alike. [progress]
-            // arrives already paced by [rememberDisplayedPatchProgress], so it is drawn as is
-            WavyProgressBar(
+            // The simple mode's ring laid flat, so both modes show progress alike
+            PatchingProgressBar(
                 progress = progress,
                 accentColor = accentColor,
                 modifier = Modifier.fillMaxWidth()

@@ -7,6 +7,9 @@ package app.morphe.manager.ui.screen.patcher
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -55,6 +59,7 @@ import app.morphe.manager.util.MemoryUnit
 import app.morphe.manager.util.formatKibibytesPerSecond
 import app.morphe.manager.util.formatMebibyteCount
 import app.morphe.manager.util.formatMebibytes
+import app.morphe.manager.util.isSlowPatchingDevice
 
 /** Slots a history graph spans, which fixes the time axis so readings scroll in from the right. */
 private const val HISTORY_SLOTS = 60
@@ -305,8 +310,9 @@ private fun IoUsagePanel(
     modifier: Modifier = Modifier
 ) {
     // Storage has no limit to plot against, so the busiest sample on screen sets the scale.
-    // It changes with the samples rather than easing, as frames drawn while patching slow it down
-    val peak = (samples.maxOfOrNull { it.totalKbPerSec } ?: 0).toFloat()
+    // That peak eventually scrolls out of the history, and rescaling every bar in one frame
+    // looks like a burst of activity that never happened, so the scale itself is what moves.
+    val peak = easedSample((samples.maxOfOrNull { it.totalKbPerSec } ?: 0).toFloat(), label = "io_scale")
     val fractions = samples.map {
         if (peak > 0f) (it.totalKbPerSec / peak).coerceIn(0f, 1f) else 0f
     }
@@ -497,6 +503,22 @@ private fun UsageHistoryBars(
 }
 
 /**
+ * [value] eased toward from one sample to the next. A slow device steps to it instead, as frames
+ * drawn while patching take CPU time from the patcher.
+ */
+@Composable
+private fun easedSample(value: Float, label: String): Float {
+    if (isSlowPatchingDevice) return value
+
+    val eased by animateFloatAsState(
+        targetValue = value,
+        animationSpec = tween(600, easing = FastOutSlowInEasing),
+        label = label
+    )
+    return eased
+}
+
+/**
  * Current load of every core as its own bar. Cores keep their slot across samples, so one that
  * stays pinned while the others idle is visible as such.
  */
@@ -510,8 +532,10 @@ private fun CoreLoadBars(
 ) {
     // Cores keep their own slot rather than being ranked by load: the clusters of a big.LITTLE
     // machine are laid out by index, and which of them the run is riding is what the row shows
-    // Bars step to each sample rather than easing to it, as frames drawn while patching slow it down
-    val fractions = loads.map { load -> (load / 100f).coerceIn(0f, 1f) }
+    val fractions = loads.mapIndexed { core, load ->
+        // Polling is slow enough that stepping straight to each sample reads as noise
+        key(core) { easedSample((load / 100f).coerceIn(0f, 1f), label = "cpu_core_load") }
+    }
 
     UsageBars(
         fractions = fractions,
