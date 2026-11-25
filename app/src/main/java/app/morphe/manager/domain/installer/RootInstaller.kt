@@ -205,7 +205,8 @@ class RootInstaller(
                 execute(
                     moduleStatusCommand(packageName, "Redirected the patched APK in Morphe with NoMount") + "; " +
                             forceStop + "; " +
-                            detachCommand(packageName)
+                            detachCommand(packageName) + "; " +
+                            recompileCommand(packageName)
                 )
             } else if (noMountOnly) {
                 // Whatever a bind mount left behind is lifted, so the app is left on the stock APK
@@ -237,7 +238,8 @@ class RootInstaller(
                             frameworkWatcherCommand(packageName, "watch") + "; " +
                             moduleStatusCommand(packageName, "Mounted the patched APK in Morphe") + "; " +
                             forceStop + "; " +
-                            detachCommand(packageName)
+                            detachCommand(packageName) + "; " +
+                            recompileCommand(packageName)
                 )
             }
 
@@ -245,7 +247,13 @@ class RootInstaller(
         }
     }
 
-    suspend fun unmount(packageName: String) {
+    /**
+     * Lifts the mount over [packageName].
+     *
+     * @param recompile Whether to compile the stock app again, see [recompileCommand]. Not worth it when
+     *   the app is mounted or installed again right after, which compiles it once more.
+     */
+    suspend fun unmount(packageName: String, recompile: Boolean = true) {
         withContext(Dispatchers.IO) {
             val stockAPK = pm.getPackageInfo(packageName)?.applicationInfo?.sourceDir
                 ?: return@withContext
@@ -260,6 +268,7 @@ class RootInstaller(
                         moduleStatusCommand(packageName, "Unmounted in Morphe until the next boot") + "; " +
                         "am force-stop ${packageName.shellQuote()}"
             ).assertSuccess("Failed to unmount APK")
+            if (recompile) execute(recompileCommand(packageName))
             _mountChanges.emit(packageName)
         }
     }
@@ -455,16 +464,34 @@ class RootInstaller(
     /**
      * Installs [apkFile] with root, recording Google Play Store as its install source when [asPlayStore].
      * Kept to the user Morphe runs in, see [appUserId], as root would otherwise install for every user.
+     *
+     * The dex metadata of the APK goes along in the same session, see [dexMetadataOf], unless the
+     * system rejects it, in which case the APK is installed alone.
      */
     suspend fun installPackage(apkFile: File, asPlayStore: Boolean) = withContext(Dispatchers.IO) {
         if (!apkFile.exists()) throw Exception("File doesn't exist")
 
-        val source = if (asPlayStore) "-i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()} " else ""
-        execute(
-            withSystemReadableCopies(INSTALL_TEMP_DIR, listOf(apkFile.absolutePath)) { (apk) ->
-                "pm install -t --user $appUserId $source-r $apk"
+        val source = if (asPlayStore) " -i ${PLAY_STORE_INSTALLER_PACKAGE.shellQuote()}" else ""
+        // A session, as pm install takes no dex metadata, which the session pairs with base.apk by name
+        suspend fun install(): Shell.Result {
+            val metadata = dexMetadataOf(apkFile)?.let { bytes ->
+                app.cacheDir.resolve(DEX_METADATA_NAME).apply { writeBytes(bytes) }
             }
-        ).assertSuccess("Failed to install APK")
+            try {
+                val paths = listOfNotNull(apkFile.absolutePath, metadata?.absolutePath)
+                return execute(
+                    withSystemReadableCopies(INSTALL_TEMP_DIR, paths) { copies ->
+                        sessionInstallCommand("-t -r --user $appUserId$source", listOf("base.apk", DEX_METADATA_NAME).zip(copies))
+                    }
+                )
+            } finally {
+                metadata?.delete()
+            }
+        }
+
+        val result = install()
+        val installed = if (!result.isSuccess && isDexMetadataRejection(result.failureDetail())) install() else result
+        installed.assertSuccess("Failed to install APK")
     }
 
     /** Uninstalls [packageName] for the user Morphe runs in, the one [installPackage] installs for. */
@@ -577,11 +604,7 @@ class RootInstaller(
         // A module that fails to write abandons the session, so nothing half installed is left
         val result = execute(
             withSystemReadableCopies("/data/local/tmp/morphe-stock-$packageName", apkPaths) { copies ->
-                val writes = apkPaths.zip(copies).joinToString(" && ") { (path, copy) ->
-                    val name = File(path).name.shellQuote()
-                    $$"""pm install-write -S "$(stat -c %s $$copy)" "$session" $$name $$copy"""
-                }
-                $$"""session="$(pm install-create -r -d --user $$appUserId | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
+                sessionInstallCommand("-r -d --user $appUserId", apkPaths.map { File(it).name }.zip(copies))
             }
         )
 
@@ -592,6 +615,19 @@ class RootInstaller(
             if (!result.isSuccess) throw StockAppInstallException(result.failureDetail())
             throw StockAppInstallException("Stock app install did not settle")
         }
+    }
+
+    /**
+     * A single-line command that installs files in one PackageManager session created with [options], and
+     * abandons the session if a file fails to write, so nothing half installed is left.
+     *
+     * @param files The name each file gets in the session, with its quoted path.
+     */
+    private fun sessionInstallCommand(options: String, files: List<Pair<String, String>>): String {
+        val writes = files.joinToString(" && ") { (name, path) ->
+            $$"""pm install-write -S "$(stat -c %s $$path)" "$session" $${name.shellQuote()} $$path"""
+        }
+        return $$"""session="$(pm install-create $$options | sed -n 's/.*\[\([0-9]*\)\].*/\1/p')" && [ -n "$session" ] && { $$writes && pm install-commit "$session" || { pm install-abandon "$session"; false; }; }"""
     }
 
     /**
@@ -795,6 +831,15 @@ class RootInstaller(
         mountTable = $$"\"/proc/$pid/mountinfo\"",
         umount = $$"nsenter -t \"$pid\" -m -- umount -l $$targetPath"
     )
+
+    /**
+     * Compiles [packageName] again as a fresh install would, in the background, as it takes a while. Code
+     * compiled for the APK that was under the stock path before no longer matches it, so ART would run
+     * the app uncompiled until the device next compiles apps while idle. The patched APK brings its own
+     * baseline profile, which ART reads from it on Android 15 and up.
+     */
+    private fun recompileCommand(packageName: String) =
+        "(pm compile --reset ${packageName.shellQuote()} </dev/null >/dev/null 2>&1 &)"
 
     /**
      * Hides the app from Play Store updates, which would replace the stock APK under the mount, when

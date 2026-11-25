@@ -82,7 +82,12 @@ class SessionInstaller(private val app: Application) {
         val silentUpdate = !silentUpdatesRefused
         Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes), silentUpdate=$silentUpdate")
         return try {
-            awaitSession(apkFile, silentUpdate)
+            val result = awaitSession(apkFile, silentUpdate)
+            if (result is InstallResult.Failure && isDexMetadataRejection(result.message)) {
+                awaitSession(apkFile, !silentUpdatesRefused)
+            } else {
+                result
+            }
         } finally {
             // However it ended, a confirmation nobody answered must not outlive the session
             ManagerApplication.onReturnToForeground = null
@@ -139,6 +144,8 @@ class SessionInstaller(private val app: Application) {
                         apkFile.inputStream().use { it.copyTo(out) }
                         session.fsync(out)
                     }
+                    // Has the app compiled with its baseline profile at install, as a store installs it
+                    dexMetadataOf(apkFile)?.let(session::writeDexMetadata)
                 }
             }
         } catch (e: Throwable) {

@@ -324,7 +324,7 @@ class PatcherWorker(
             if (args.input is SelectedApp.Installed &&
                 installedAppRepository.get(args.packageName)?.installType == InstallType.MOUNT
             ) {
-                rootInstaller.unmount(args.packageName)
+                rootInstaller.unmount(args.packageName, recompile = false)
                 unmounted = true
             }
 
