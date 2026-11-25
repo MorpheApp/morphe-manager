@@ -1,3 +1,10 @@
+## [2.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.5...v2.8.0-dev.6) (2026-11-25)
+
+### Features
+
+* Export patches from the source card and confirm renames ([0f23abd](https://github.com/MorpheApp/morphe-manager/commit/0f23abd51bfe003798d2695bb65c37c250b3dcd6))
+* Install patched apps compiled with their baseline profile ([#1523](https://github.com/MorpheApp/morphe-manager/issues/1523)) ([e436a28](https://github.com/MorpheApp/morphe-manager/commit/e436a28b8f70664baa639d3d91e669c6aa4e6ec9))
+
 ## [2.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.4...v2.8.0-dev.5) (2026-11-25)
 
 ### Features
