@@ -923,7 +923,8 @@ private fun BundleManagementCard(
 
     val isBlocked = info.blockedInfo != null
     val isEnabled = bundle.enabled && !isBlocked
-    val isUnavailable = info.metadataFetchError != null || bundle.state is PatchBundleSource.State.Missing
+    val isMissing = bundle.state is PatchBundleSource.State.Missing
+    val isUnavailable = info.metadataFetchError != null || isMissing
     val signingKeyChanged = info.metadataFetchError is PatchBundleSignerChangedException
 
     val problem = sourceProblem(bundle, isBlocked, signingKeyChanged, isUnavailable)
@@ -1089,11 +1090,11 @@ private fun BundleManagementCard(
                                     text = stringResource(
                                         when {
                                             actions.onChangeLink != null -> R.string.sources_management_metadata_unavailable_hint_missing_editable
-                                            bundle.state is PatchBundleSource.State.Missing -> R.string.sources_management_metadata_unavailable_hint_missing
+                                            isMissing -> R.string.sources_management_metadata_unavailable_hint_missing
                                             else -> R.string.sources_management_metadata_unavailable_hint
                                         }
                                     ),
-                                    icon = SourceProblem.Unavailable.icon,
+                                    icon = if (isMissing) SourceProblem.Missing.icon else SourceProblem.Unavailable.icon,
                                     onClick = actions.onChangeLink
                                 )
 
@@ -1524,6 +1525,11 @@ private enum class SourceProblem(@StringRes val label: Int, val tone: SemanticTo
         SemanticTone.Warning,
         MaterialSymbols.Rounded.Gpp_bad
     ),
+    Missing(
+        R.string.sources_management_bundle_missing_badge,
+        SemanticTone.Warning,
+        MaterialSymbols.Rounded.Link_off
+    ),
     Unavailable(
         R.string.sources_management_metadata_unavailable,
         SemanticTone.Warning,
@@ -1546,6 +1552,7 @@ private fun sourceProblem(
     blocked -> SourceProblem.Blocked
     bundle.isHeldBack -> SourceProblem.HeldBack
     signingKeyChanged -> SourceProblem.SigningKeyChanged
+    bundle.state is PatchBundleSource.State.Missing -> SourceProblem.Missing
     unavailable -> SourceProblem.Unavailable
     bundle.requiresManagerUpdate -> SourceProblem.OutdatedManager
     else -> null
