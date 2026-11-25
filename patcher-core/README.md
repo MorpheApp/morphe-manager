@@ -139,8 +139,11 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   `-Xlog:gc*:file=/data/user/0/app.morphe.manager.debug/files/gc.log`.
 - **GC**: `-Xlog:gc+init` shows the collector the VM chose. G1 (the default) paused for about 3%
   of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
-  collections once the 450-650M kept alive fills the old space. A 32-bit process still gets
-  SerialGC, the collector with the fewest threads and the least to go wrong on that port.
+  collections once the 450-650M kept alive fills the old space. A 32-bit process is told to use G1
+  as well, as a small device could get SerialGC. On a computer, TikTok, which keeps 750M alive,
+  patched within 900M on G1, while ParallelGC ran out of heap at 940M and SerialGC went through 15
+  full collections there. With the marking threshold and pause goal the app passes, it took about
+  293s on a Galaxy J6 Prime (4x A53, 1410M), 328s with the pause goal alone and 312s on SerialGC.
 - **AOT cache**: the JVM keeps a JDK 25 AOT cache in `cache/jvm-aot`, named after the
   runtime and the host jar. The first run records with `-XX:AOTMode=record`. Once it ends, the app
   waits for its JVM to write the configuration as it exits, then makes the cache in a JVM of its
