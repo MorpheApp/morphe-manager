@@ -48,6 +48,17 @@ class AddSourceLinkTest {
     }
 
     @Test
+    fun `codeberg root bundle is shared`() {
+        assertEquals(
+            "https://morphe.software/add-source?codeberg=owner/repo",
+            addSourceLinkForEndpoint(
+                "https://codeberg.org/owner/repo/raw/branch/dev/patches-bundle.json",
+                name = null
+            )
+        )
+    }
+
+    @Test
     fun `name is encoded as a query value`() {
         assertEquals(
             "https://morphe.software/add-source?github=owner/repo&name=Piko%20%26%20Co",

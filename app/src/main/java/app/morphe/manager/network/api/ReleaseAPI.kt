@@ -141,7 +141,7 @@ class ReleaseAPI(
 
         /** Returns a raw.githubusercontent.com URL for a file at a specific [branch] and [path]. */
         fun rawFileUrl(branch: String, path: String): String =
-            "https://$GITHUB_RAW_HOST/$owner/$name/$branch/$path"
+            CodeHost.GITHUB.rawFileUrl(owner, name, branch, path)
     }
 
     private val rejected = MutableStateFlow<String?>(null)
@@ -623,14 +623,7 @@ class ReleaseAPI(
      */
     fun changelogUrlFromBundleEndpoint(endpoint: String): String? {
         val source = SourceUrl.parse(endpoint) ?: return null
-        val owner = source.owner ?: return null
-        val repo = source.repo ?: return null
-        val branch = source.branch ?: BRANCH_STABLE
-        return when (source.codeHost) {
-            CodeHost.GITHUB -> RepoConfig(owner, repo).rawFileUrl(branch, CHANGELOG_FILE)
-            CodeHost.GITLAB -> "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$CHANGELOG_FILE"
-            null -> null
-        }
+        return source.rawFileUrl(source.branch ?: BRANCH_STABLE, CHANGELOG_FILE)
     }
 
     /**

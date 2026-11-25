@@ -454,11 +454,11 @@ class PatchBundleRepository(
             }
         }
 
-        // Fallbacks for common GitHub URL patterns.
+        // Fallbacks for code host URL patterns.
         if (segments.isEmpty()) return host
-        return when (host) {
-            GITHUB_HOST -> source.repo ?: host
-            GITHUB_API_HOST if segments.size >= 3 && segments[0] == "repos" -> segments[2]
+        return when {
+            source.codeHost != null -> source.repo ?: host
+            host == GITHUB_API_HOST && segments.size >= 3 && segments[0] == "repos" -> segments[2]
             else -> host
         }
     }
@@ -1527,7 +1527,7 @@ class PatchBundleRepository(
     private suspend fun awaitReady(): BundleState.Ready =
         bundleState.filterIsInstance<BundleState.Ready>().first()
 
-    /** Returns the blocklist key for a normalized bundle URL, or null for non-GitHub/GitLab hosts. */
+    /** Returns the blocklist key for a normalized bundle URL, or null for hosts other than a [CodeHost]. */
     private fun toBlocklistKey(normalizedUrl: String): String? =
         SourceUrl.parse(normalizedUrl)?.repositoryKey?.lowercase(Locale.US)
 

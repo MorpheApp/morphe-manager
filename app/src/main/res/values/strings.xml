@@ -237,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Updates %s</string>
     <string name="sources_dialog_url_valid">Valid repository or JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL must point to a GitHub/GitLab repo or .json file</string>
+    <string name="sources_dialog_url_invalid">URL must point to a GitHub, GitLab or Codeberg repo or .json file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
     <string name="sources_dialog_community">Community patches</string>
     <string name="sources_dialog_choose_apps">Choose apps</string>
@@ -1643,8 +1643,6 @@ Details: %2$s"</string>
     <string name="changelog_older_failed">Couldn\'t load older releases</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="changelog_release_page">Release page</string>
-    <string name="changelog_host_github" translatable="false">GitHub</string>
-    <string name="changelog_host_gitlab" translatable="false">GitLab</string>
     <string name="content_translate">Translate</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">Original</string>

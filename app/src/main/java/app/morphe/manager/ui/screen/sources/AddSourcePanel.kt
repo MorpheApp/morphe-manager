@@ -38,13 +38,9 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteUrlCheck
 import app.morphe.manager.ui.model.NewSourceOptions
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeViewModel.PickedBundle
-import app.morphe.manager.util.GITHUB_HOST
-import app.morphe.manager.util.GITHUB_RAW_HOST
-import app.morphe.manager.util.GITLAB_HOST
+import app.morphe.manager.util.CodeHost
 import app.morphe.manager.util.REMOTE_URL_PLACEHOLDER
 import app.morphe.manager.util.toFilePath
-import com.composables.icons.fontawesome.FontAwesome
-import com.composables.icons.fontawesome.brands.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.launch
@@ -301,28 +297,22 @@ private val RemoteSourceRejection.hintRes: Int
         else -> messageRes
     }
 
-/** Hosts whose links name a repository, by the icon they show. Any other host serves a bundle file. */
-private val REPOSITORY_HOST_ICONS: Map<String, ImageVector> by lazy {
-    mapOf(
-        GITHUB_HOST to FontAwesome.Brands.Github,
-        GITHUB_RAW_HOST to FontAwesome.Brands.Github,
-        GITLAB_HOST to FontAwesome.Brands.Gitlab
-    )
-}
-
 /** The link without its scheme, the way it reads in the address bar. */
 internal fun String.bareLink() = substringAfter("://").removePrefix("www.")
 
 private fun String.linkHost() = bareLink().substringBefore('/').lowercase(Locale.US)
 
+/** The code host whose links name a repository. Links to any other host serve a bundle file. */
+private fun String.codeHost() = CodeHost.of(linkHost())
+
 /** A repository as owner/repo, anything else as its bare link. */
 internal fun remoteLinkTitle(link: String): String {
     val bare = link.bareLink()
     val segments = bare.substringAfter('/', "").split('/').filter { it.isNotBlank() }
-    return if (link.linkHost() in REPOSITORY_HOST_ICONS && segments.size >= 2) "${segments[0]}/${segments[1]}" else bare
+    return if (link.codeHost() != null && segments.size >= 2) "${segments[0]}/${segments[1]}" else bare
 }
 
-internal fun remoteLinkIcon(link: String): ImageVector = REPOSITORY_HOST_ICONS[link.linkHost()] ?: MaterialSymbols.Rounded.Link
+internal fun remoteLinkIcon(link: String): ImageVector = link.codeHost()?.icon ?: MaterialSymbols.Rounded.Link
 
 @Composable
 private fun LinkField(state: RemoteLinksState, showHint: Boolean) {

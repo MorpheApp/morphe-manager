@@ -61,6 +61,23 @@ class SourceUrlTest {
     }
 
     @Test
+    fun `codeberg raw and source links name their repository and branch`() {
+        val source = parse("https://codeberg.org/owner/repo/raw/branch/dev/patches-bundle.json")
+        assertEquals(CodeHost.CODEBERG, source.codeHost)
+        assertEquals("https://codeberg.org/owner/repo", source.repositoryUrl)
+        assertEquals("codeberg=owner/repo", source.repositoryKey)
+        assertEquals("dev", source.branch)
+        assertEquals("main", parse("https://codeberg.org/owner/repo/src/branch/main/bundle").branch)
+    }
+
+    @Test
+    fun `codeberg link on a tag or without a branch names no branch`() {
+        assertNull(parse("https://codeberg.org/owner/repo/raw/tag/v1.0.0/patches-bundle.json").branch)
+        assertNull(parse("https://codeberg.org/owner/repo/raw/branch").branch)
+        assertNull(parse("https://codeberg.org/owner/repo").branch)
+    }
+
+    @Test
     fun `owner is known before the repository is typed`() {
         val source = parse("https://github.com/owner")
         assertEquals("owner", source.owner)
@@ -132,6 +149,26 @@ class SourceUrlTest {
         assertEquals(
             "https://gitlab.com/owner/repo/-/raw/dev/bundle.json?inline=false",
             normalize("https://gitlab.com/owner/repo/-/raw/dev/bundle.json?inline=false")
+        )
+    }
+
+    @Test
+    fun `codeberg pages resolve to their raw file`() {
+        assertEquals(
+            "https://codeberg.org/owner/repo/raw/branch/main/patches-bundle.json",
+            normalize("codeberg.org/owner/repo")
+        )
+        assertEquals(
+            "https://codeberg.org/owner/repo/raw/branch/dev/patches-bundle.json",
+            normalize("https://codeberg.org/owner/repo/src/branch/dev")
+        )
+        assertEquals(
+            "https://codeberg.org/owner/repo/raw/branch/dev/bundles/custom.json",
+            normalize("https://codeberg.org/owner/repo/src/branch/dev/bundles/custom.json")
+        )
+        assertEquals(
+            "https://codeberg.org/owner/repo/raw/tag/v1.0.0/patches-bundle.json",
+            normalize("https://codeberg.org/owner/repo/raw/tag/v1.0.0/patches-bundle.json")
         )
     }
 

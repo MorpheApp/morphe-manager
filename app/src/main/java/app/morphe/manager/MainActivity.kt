@@ -216,8 +216,8 @@ class MainActivity : ComponentActivity() {
 
     /**
      * Handles add-source deep links from an explicit-package `intent://` fired by the website.
-     * Format: https://morphe.software/add-source?<github|gitlab>=owner/repo(&name=…)(&app=package&appName=…)
-     * Only GitHub and GitLab URLs are accepted.
+     * Format: https://morphe.software/add-source?<host>=owner/repo(&name=…)(&app=package&appName=…),
+     * where the host is the [CodeHost.key] of the repository's host. Other hosts are not accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
         reportShortcutUsage(intent)

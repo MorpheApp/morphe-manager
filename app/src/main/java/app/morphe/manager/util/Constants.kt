@@ -21,6 +21,7 @@ const val GITHUB_HOST = "github.com"
 const val GITHUB_RAW_HOST = "raw.githubusercontent.com"
 const val GITHUB_API_HOST = "api.github.com"
 const val GITLAB_HOST = "gitlab.com"
+const val CODEBERG_HOST = "codeberg.org"
 
 /** What a source link looks like, shown in a field waiting for one. */
 const val REMOTE_URL_PLACEHOLDER = "$GITHUB_HOST/owner/repo"
@@ -80,7 +81,7 @@ const val MORPHE_USER_AGENT = "Morphe-Manager/${BuildConfig.VERSION_CODE}"
  */
 const val PLAY_STORE_ICON_URL = "https://publicmetadata.co.uk"
 
-/** Website page behind add-source links: ?github|gitlab=owner/repo(&name=...). */
+/** Website page behind add-source links: ?<host>=owner/repo(&name=...), the host by its [CodeHost.key]. */
 const val ADD_SOURCE_PATH = "/add-source"
 
 const val BLOCKED_SOURCES_URL = "$MORPHE_API_URL/v2/blocked-sources"

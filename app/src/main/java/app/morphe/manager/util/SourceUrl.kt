@@ -10,10 +10,98 @@ import io.ktor.http.hostWithPortIfSpecified
 import java.net.URI
 import java.util.Locale
 
-/** Code host whose repository layout a source link can be read by. */
-enum class CodeHost(val key: String, val host: String) {
-    GITHUB("github", GITHUB_HOST),
-    GITLAB("gitlab", GITLAB_HOST)
+/**
+ * Code host whose repository layout a source link can be read by. Everything that differs from
+ * one host to another, the raw file, issues and release paths and the owner's avatar, is here.
+ *
+ * @param key Name of the host in add-source links, the Morphe API and the blocklist.
+ * @param host Host of the repository pages.
+ * @param label Name of the host as the user knows it.
+ * @param rawHost Host serving the raw files of a repository.
+ */
+enum class CodeHost(
+    val key: String,
+    val host: String,
+    val label: String,
+    val rawHost: String = host
+) {
+    GITHUB("github", GITHUB_HOST, "GitHub", rawHost = GITHUB_RAW_HOST) {
+        override val issuesPath = "issues"
+        override fun releasePath(tag: String) = "releases/tag/$tag"
+        override fun rawFileUrl(owner: String, repo: String, branch: String, path: String) =
+            "https://$GITHUB_RAW_HOST/$owner/$repo/$branch/$path"
+        override fun avatarUrl(owner: String) = "https://$GITHUB_HOST/$owner.png"
+
+        override fun isRawFile(host: String, segments: List<String>) = host == GITHUB_RAW_HOST
+
+        // raw.githubusercontent.com/owner/repo/BRANCH/path, unless pinned through refs/heads,
+        // or github.com/owner/repo/tree|blob/BRANCH/path
+        override fun branchIndex(host: String, segments: List<String>): Int? =
+            if (host == GITHUB_RAW_HOST) 2.takeIf { segments.size > 2 && segments[2] != "refs" }
+            else 3.takeIf { segments.size > 3 && segments[2] in BRANCH_VIEWS }
+    },
+
+    GITLAB("gitlab", GITLAB_HOST, "GitLab") {
+        override val issuesPath = "-/issues"
+        override fun releasePath(tag: String) = "-/releases/$tag"
+        override fun rawFileUrl(owner: String, repo: String, branch: String, path: String) =
+            "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$path"
+        // GitLab serves no avatar by username
+        override fun avatarUrl(owner: String) = "https://unavatar.io/gitlab/$owner"
+
+        override fun isRawFile(host: String, segments: List<String>) = viewIndex(segments, RAW_VIEW) != null
+
+        // gitlab.com/owner/repo/-/raw|tree|blob/BRANCH/path, GitLab puts its own pages after the dash
+        override fun branchIndex(host: String, segments: List<String>): Int? =
+            GITLAB_VIEWS.firstNotNullOfOrNull { viewIndex(segments, it) }
+                ?.plus(1)?.takeIf { it < segments.size }
+
+        private fun viewIndex(segments: List<String>, view: String) =
+            segments.indexOf(view).takeIf { it >= 3 && segments[it - 1] == "-" }
+    },
+
+    CODEBERG("codeberg", CODEBERG_HOST, "Codeberg") {
+        override val issuesPath = "issues"
+        override fun releasePath(tag: String) = "releases/tag/$tag"
+        override fun rawFileUrl(owner: String, repo: String, branch: String, path: String) =
+            "https://$CODEBERG_HOST/$owner/$repo/raw/branch/$branch/$path"
+        override fun avatarUrl(owner: String) = "https://$CODEBERG_HOST/$owner.png"
+
+        override fun isRawFile(host: String, segments: List<String>) = segments.getOrNull(2) == RAW_VIEW
+
+        // codeberg.org/owner/repo/raw|src/branch/BRANCH/path. A raw link may also name a tag or
+        // a commit, or the branch right after raw, and a source on those does not follow a channel
+        override fun branchIndex(host: String, segments: List<String>): Int? =
+            4.takeIf { segments.size > 4 && segments[2] in CODEBERG_VIEWS && segments[3] == "branch" }
+    };
+
+    /** Path of the issues page under the repository page. */
+    abstract val issuesPath: String
+
+    /** Path of the page of the release tagged [tag] under the repository page. */
+    abstract fun releasePath(tag: String): String
+
+    /** The file at [path] on [branch] of the repository, as the host serves it raw. */
+    abstract fun rawFileUrl(owner: String, repo: String, branch: String, path: String): String
+
+    /** Picture of the user or organization [owner]. */
+    abstract fun avatarUrl(owner: String): String
+
+    /** Whether a link on [host] with path [segments] already points at a raw file. */
+    abstract fun isRawFile(host: String, segments: List<String>): Boolean
+
+    /** Where in [segments] the branch a link on [host] points at sits, or null when it names none. */
+    abstract fun branchIndex(host: String, segments: List<String>): Int?
+
+    companion object {
+        private const val RAW_VIEW = "raw"
+        private val BRANCH_VIEWS = setOf("tree", "blob")
+        private val GITLAB_VIEWS = BRANCH_VIEWS + RAW_VIEW
+        private val CODEBERG_VIEWS = setOf(RAW_VIEW, "src")
+
+        /** The code host serving pages or raw files on the lowercased [host], or null for any other. */
+        fun of(host: String): CodeHost? = entries.firstOrNull { host == it.host || host == it.rawHost }
+    }
 }
 
 /**
@@ -22,11 +110,7 @@ enum class CodeHost(val key: String, val host: String) {
  */
 class SourceUrl private constructor(val host: String, val segments: List<String>) {
     /** The code host whose layout the link follows, or null for any other host. */
-    val codeHost: CodeHost? = when (host) {
-        GITHUB_HOST, GITHUB_RAW_HOST -> CodeHost.GITHUB
-        GITLAB_HOST -> CodeHost.GITLAB
-        else -> null
-    }
+    val codeHost: CodeHost? = CodeHost.of(host)
 
     /** Owner of the repository on a known code host, present as soon as the link names one. */
     val owner: String? get() = segments.firstOrNull()?.takeIf { codeHost != null }
@@ -42,28 +126,36 @@ class SourceUrl private constructor(val host: String, val segments: List<String>
     val repositoryKey: String?
         get() = repo?.let { "${codeHost!!.key}=$owner/$it" }
 
-    /**
-     * Where in [segments] the branch the link points at sits, or null when it names none:
-     * - raw.githubusercontent.com/owner/repo/BRANCH/path, unless pinned through refs/heads
-     * - github.com/owner/repo/tree|blob/BRANCH/path
-     * - gitlab.com/owner/repo/-/raw/BRANCH/path
-     */
-    val branchIndex: Int?
-        get() = when (host) {
-            GITHUB_RAW_HOST -> 2.takeIf { segments.size > 2 && segments[2] != "refs" }
-            GITHUB_HOST -> 3.takeIf { segments.size > 3 && segments[2] in GITHUB_BRANCH_VIEWS }
-            GITLAB_HOST -> segments.indexOf("raw")
-                .takeIf { it >= 1 && segments[it - 1] == "-" && it + 1 < segments.size }
-                ?.plus(1)
-            else -> null
-        }
+    /** Issues page of the repository. */
+    val issuesUrl: String?
+        get() = repositoryUrl?.let { "$it/${codeHost!!.issuesPath}" }
+
+    /** Picture of the repository owner, see [CodeHost.avatarUrl]. */
+    val ownerAvatarUrl: String?
+        get() = owner?.let { codeHost!!.avatarUrl(it) }
+
+    /** Where in [segments] the branch the link points at sits, see [CodeHost.branchIndex]. */
+    private val branchIndex: Int?
+        get() = repo?.let { codeHost!!.branchIndex(host, segments) }
 
     /** The branch the link points at, see [branchIndex]. */
     val branch: String? get() = branchIndex?.let(segments::get)
 
-    companion object {
-        private val GITHUB_BRANCH_VIEWS = setOf("tree", "blob")
+    /** Path of the file the link points at within its branch, or null when it names no branch. */
+    private val filePath: String?
+        get() = branchIndex?.let { segments.drop(it + 1).joinToString("/") }
 
+    /**
+     * The raw file at [path] on [branch] of the repository, or null for a link to no repository.
+     * [path] defaults to the file the link itself points at, and a link to no file gives null.
+     */
+    fun rawFileUrl(branch: String, path: String? = filePath): String? {
+        val repo = repo ?: return null
+        val file = path?.takeIf { it.isNotEmpty() } ?: return null
+        return codeHost!!.rawFileUrl(owner!!, repo, branch, file)
+    }
+
+    companion object {
         /** Takes [url] apart, or returns null when it is not a URL with a host. */
         fun parse(url: String): SourceUrl? = try {
             val uri = URI(url)
@@ -77,9 +169,9 @@ class SourceUrl private constructor(val host: String, val segments: List<String>
         /**
          * Turns a link to a source as the user pastes it into the bundle URL the source is read
          * from, so the same source added through different links resolves to one endpoint:
-         * - a GitHub repository or tree/blob page becomes its raw.githubusercontent.com file,
-         *   a pull request link is kept as is
-         * - a GitLab repository or tree/blob page becomes its `/-/raw/` file
+         * - a repository or branch page on a [CodeHost] becomes its raw file, the default bundle
+         *   on the stable branch unless the page names others
+         * - a GitHub pull request link is kept as is
          * - a raw or any other link must point at a JSON file and is kept with its query
          *
          * @throws IllegalArgumentException when [input] cannot name a bundle.
@@ -93,71 +185,35 @@ class SourceUrl private constructor(val host: String, val segments: List<String>
                 throw IllegalArgumentException("Invalid bundle URL: ${e.message ?: trimmed}")
             }
 
-            val host = parsed.host
+            val host = parsed.host.lowercase(Locale.US)
             val segments = parsed.encodedPath.trim('/').split('/').filter { it.isNotBlank() }
             val path = "/" + segments.joinToString("/")
             val query = parsed.encodedQuery.takeIf { it.isNotEmpty() }?.let { "?$it" }.orEmpty()
-
-            return when {
-                host.equals(GITHUB_HOST, ignoreCase = true) -> {
-                    require(segments.size >= 2) { "Invalid GitHub repository URL" }
-                    if (segments.getOrNull(2) == "pull") {
-                        val scheme = if (parsed.protocol.name.equals("https", ignoreCase = true)) "https" else "http"
-                        "$scheme://$host$path$query"
-                    } else {
-                        githubRawBundleUrl(segments)
-                    }
-                }
-
-                host.equals(GITLAB_HOST, ignoreCase = true) -> {
-                    require(segments.size >= 2) { "Invalid GitLab repository URL" }
-                    // owner/repo/-/VIEW/..., where GitLab puts its own pages after the dash
-                    fun viewIndex(view: String) =
-                        segments.indexOf(view).takeIf { it >= 2 && segments[it - 1] == "-" }
-
-                    if (viewIndex("raw") != null) {
-                        "https://$GITLAB_HOST${requireJsonPath(path)}$query"
-                    } else {
-                        val branch = (viewIndex("tree") ?: viewIndex("blob"))
-                            ?.let { segments.getOrNull(it + 1) }
-                            ?: BRANCH_STABLE
-                        "https://$GITLAB_HOST/${segments[0]}/${segments[1]}/-/raw/$branch/$DEFAULT_BUNDLE_FILE"
-                    }
-                }
-
-                host.equals(GITHUB_RAW_HOST, ignoreCase = true) -> {
-                    require(segments.size >= 3) { "Invalid raw GitHub URL" }
-                    "https://$host${requireJsonPath(path)}$query"
-                }
-
+            val codeHost = CodeHost.of(host)
                 // Rebuilt from the host and port rather than the host alone, so that a bundle served on a
                 // custom port is not silently requested on the protocol default one
-                else -> "https://${parsed.hostWithPortIfSpecified}${requireJsonPath(path)}$query"
-            }
-        }
+                ?: return "https://${parsed.hostWithPortIfSpecified}${requireJsonPath(path)}$query"
 
-        /**
-         * The raw file a github.com repository page points at. A page without a file points at the
-         * default bundle, a branch it does not name is the stable one.
-         */
-        private fun githubRawBundleUrl(segments: List<String>): String {
-            val (owner, repo) = segments
-            val (branch, file) = when {
-                segments.size >= 4 && segments[2] == "tree" -> {
-                    // A tree branch can span segments, such as refs/heads/main
-                    val branchSegments = segments.drop(3).takeWhile { !it.endsWith(".$JSON_EXTENSION") }
-                    branchSegments.joinToString("/") to segments.drop(3 + branchSegments.size)
-                }
-                segments.size >= 4 && segments[2] == "blob" -> segments[3] to segments.drop(4)
-                else -> BRANCH_STABLE to segments.drop(2)
+            if (codeHost.isRawFile(host, segments)) {
+                require(segments.size >= 3) { "Invalid raw ${codeHost.label} URL" }
+                return "https://$host${requireJsonPath(path)}$query"
             }
-            val filePath = file.joinToString("/")
 
-            return buildString {
-                append("https://$GITHUB_RAW_HOST/$owner/$repo/$branch")
-                if (filePath.isNotEmpty()) append("/$filePath")
-                if (!filePath.endsWith(".$JSON_EXTENSION", ignoreCase = true)) append("/$DEFAULT_BUNDLE_FILE")
+            require(segments.size >= 2) { "Invalid ${codeHost.label} repository URL" }
+            if (codeHost == CodeHost.GITHUB && segments.getOrNull(2) == "pull") {
+                return "https://$host$path$query"
             }
+
+            val branchIndex = codeHost.branchIndex(host, segments)
+            val branch = branchIndex?.let(segments::get) ?: BRANCH_STABLE
+            // A page names a folder or a file, and the bundle of a folder is the default one in it
+            val file = branchIndex?.let { segments.drop(it + 1).joinToString("/") }.orEmpty()
+            val bundleFile = when {
+                file.endsWith(".$JSON_EXTENSION", ignoreCase = true) -> file
+                file.isEmpty() -> DEFAULT_BUNDLE_FILE
+                else -> "$file/$DEFAULT_BUNDLE_FILE"
+            }
+            return codeHost.rawFileUrl(segments[0], segments[1], branch, bundleFile)
         }
 
         private fun requireJsonPath(path: String): String {
