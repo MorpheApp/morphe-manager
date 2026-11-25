@@ -10,10 +10,12 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.view.Surface
 import androidx.compose.animation.core.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -29,6 +31,10 @@ import kotlinx.coroutines.launch
 
 // Tilt shifts the artwork by about a dozen pixels at full range, so smaller steps land under a pixel
 private const val TILT_TARGET_THRESHOLD = 0.02f
+
+// How far from its calibrated pose the device can lean before the artwork stops following, in m/s²
+// of gravity (about 18 degrees). A bounded shift lets a background overscan just enough to hide its edges
+private const val MAX_TILT_ACCELERATION = 3f
 
 // Backgrounds drift slowly enough that a 60 Hz step is indistinguishable from a 120 Hz one,
 // and every skipped step is a full-screen repaint the GPU does not have to make.
@@ -170,11 +176,13 @@ fun rememberCompletionPulse(
 }
 
 /**
- * Parallax sensor state holder
+ * Parallax sensor state holder. [tiltX] and [tiltY] follow the screen's own axes and never leave
+ * the range of plus or minus [maxTilt].
  */
 data class ParallaxState(
     val tiltX: State<Float>,
-    val tiltY: State<Float>
+    val tiltY: State<Float>,
+    val maxTilt: Float
 )
 
 /**
@@ -242,18 +250,26 @@ fun rememberParallaxState(
             // Calibration belongs to one registration, so the baseline resets with the listener itself
             var baselineX = 0f
             var baselineY = 0f
-            var isCalibrated = false
+            var calibratedRotation = -1
+            val display = ContextCompat.getDisplayOrDefault(context)
 
             val listener = object : SensorEventListener {
                 override fun onSensorChanged(event: SensorEvent) {
-                    if (!isCalibrated) {
-                        baselineX = event.values[0]
-                        baselineY = event.values[1]
-                        isCalibrated = true
+                    val rotation = display.rotation
+                    val (screenX, screenY) = event.toScreenAxes(rotation)
+
+                    // The activity handles rotation itself, so the listener survives it. A pose
+                    // calibrated for the old orientation would read as a steep tilt in the new one
+                    if (rotation != calibratedRotation) {
+                        baselineX = screenX
+                        baselineY = screenY
+                        calibratedRotation = rotation
                     }
 
-                    val rawTiltX = event.values[0] - baselineX
-                    val rawTiltY = -(event.values[1] - baselineY)
+                    val rawTiltX = (screenX - baselineX)
+                        .coerceIn(-MAX_TILT_ACCELERATION, MAX_TILT_ACCELERATION)
+                    val rawTiltY = -(screenY - baselineY)
+                        .coerceIn(-MAX_TILT_ACCELERATION, MAX_TILT_ACCELERATION)
                     val target = Offset(rawTiltX * sensitivity, rawTiltY * sensitivity)
 
                     // Sensor noise alone would retarget the springs forever, keeping the frame clock
@@ -283,6 +299,22 @@ fun rememberParallaxState(
     // Return State objects directly
     return ParallaxState(
         tiltX = smoothTiltX.asState(),
-        tiltY = smoothTiltY.asState()
+        tiltY = smoothTiltY.asState(),
+        maxTilt = MAX_TILT_ACCELERATION * sensitivity
     )
+}
+
+/**
+ * The accelerometer reading along the screen's x and y axes for a display at [rotation]. The sensor
+ * reports in the device's natural orientation, whichever way the screen is turned.
+ */
+private fun SensorEvent.toScreenAxes(rotation: Int): Pair<Float, Float> {
+    val x = values[0]
+    val y = values[1]
+    return when (rotation) {
+        Surface.ROTATION_90  -> -y to x
+        Surface.ROTATION_180 -> -x to -y
+        Surface.ROTATION_270 -> y to -x
+        else                 -> x to y
+    }
 }
