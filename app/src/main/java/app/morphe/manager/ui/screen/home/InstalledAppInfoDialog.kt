@@ -39,6 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -218,7 +219,7 @@ fun DialogHostScope.InstalledAppInfoDialog(
         { scope.launch { changelogRequest.value = homeViewModel.apps.changelogRequest(changelog) } }
     }
     // The rebuild banner reads out the notes of the update it offers, so the info row leaves them to it
-    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appChangelog?.update != null }
+    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appChangelog.update != null }
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 
@@ -978,17 +979,22 @@ private fun VersionTransition(
     modifier: Modifier = Modifier
 ) {
     val (from, to) = versions
+    val rtl = isRtl()
     // Points the way the language runs, so the move reads forwards in Arabic and Hebrew too
-    val arrow = if (isRtl()) "←" else "→"
+    val arrow = if (rtl) "←" else "→"
     val readOut = stringResource(readOutRes, from, to)
 
     Text(
+        // Each version is isolated and the line runs the layout's way, since a line opening with a
+        // Latin version would otherwise be laid out left to right with the versions in LTR order
         text = buildAnnotatedString {
-            withStyle(SpanStyle(color = contentColor.copy(alpha = 0.75f))) { append(from) }
+            withStyle(SpanStyle(color = contentColor.copy(alpha = 0.75f))) { append(from.isolateLtr()) }
             withStyle(SpanStyle(color = contentColor.copy(alpha = 0.5f))) { append("  $arrow  ") }
-            withStyle(SpanStyle(color = contentColor, fontWeight = FontWeight.Medium)) { append(to) }
+            withStyle(SpanStyle(color = contentColor, fontWeight = FontWeight.Medium)) { append(to.isolateLtr()) }
         },
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyMedium.copy(
+            textDirection = if (rtl) TextDirection.Rtl else TextDirection.Ltr
+        ),
         textAlign = TextAlign.Center,
         modifier = modifier.semantics { contentDescription = readOut }
     )

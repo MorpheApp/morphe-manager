@@ -114,6 +114,7 @@ class MainActivity : ComponentActivity() {
         attachedLanguage = AppLocale.selected.value
         val overrides = Configuration().apply {
             AppLocale.applyTo(this)
+            AppLocale.restoreLayoutDirection(newBase.resources.configuration, this)
             applyUiScale(newBase.resources.configuration.densityDpi, scale)
         }
 
