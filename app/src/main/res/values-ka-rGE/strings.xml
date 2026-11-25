@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">განახლებები %s</string>
     <string name="sources_dialog_url_valid">რეპოზიტორიუმის ან JSON-ის ვალიდური URL</string>
-    <string name="sources_dialog_url_invalid">URL უნდა მიუთითებდეს GitHub/GitLab რეპოზიტორზე ან .json ფაილზე</string>
+    <string name="sources_dialog_url_invalid">URL უნდა მიუთითებდეს GitHub-ის, GitLab-ის ან Codeberg-ის რეპოზიტორზე ან .json ფაილზე</string>
     <string name="sources_dialog_preinstalled">წინასწარ დაინსტალირებული</string>
     <string name="sources_dialog_community">საზოგადოების პატჩები</string>
     <string name="sources_dialog_choose_apps">აირჩიეთ აპლიკაციები</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">მინი-თამაშები</string>
     <string name="mini_games_description">სწრაფი თამაშები თავისუფალი წუთების გასატარებლად</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">თამაშები</string>
     <string name="mini_game_score">ქულა %s</string>
     <string name="mini_game_best">საუკეთესო %s</string>
     <string name="mini_game_new_record">ახალი რეკორდი!</string>

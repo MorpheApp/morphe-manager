@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Жаңартулар %s</string>
     <string name="sources_dialog_url_valid">Жарамды репозиторий немесе JSON URL-мекенжайы</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab репозиторийіне немесе .json файлына сілтелуі керек</string>
+    <string name="sources_dialog_url_invalid">URL GitHub, GitLab немесе Codeberg репозиторийіне немесе .json файлына сілтелуі керек</string>
     <string name="sources_dialog_preinstalled">Алдын ала орнатылған</string>
     <string name="sources_dialog_community">Қауымдастық патчтары</string>
     <string name="sources_dialog_choose_apps">Қолданбаларды таңдау</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Шағын ойындар</string>
     <string name="mini_games_description">Бос уақытта ойнауға арналған жылдам ойындар</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Ойындар</string>
     <string name="mini_game_score">Ұпай %s</string>
     <string name="mini_game_best">Ең жақсы %s</string>
     <string name="mini_game_new_record">Жаңа рекорд!</string>

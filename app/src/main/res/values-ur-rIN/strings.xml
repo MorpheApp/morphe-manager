@@ -101,6 +101,7 @@
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <!-- Mini-games -->
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
     <!-- Counts a game keeps besides its score, shown above the field -->
     <!-- Settings -->
     <!-- Settings - Appearance Tab - Background animation -->

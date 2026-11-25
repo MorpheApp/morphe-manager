@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Թարմացումներ %s</string>
     <string name="sources_dialog_url_valid">Վավեր ռեպոզիտորիումի կամ JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL-ն պետք է հղվի GitHub/GitLab ռեպոզիտորիային կամ .json ֆայլին</string>
+    <string name="sources_dialog_url_invalid">URL-ը պետք է հղվի GitHub, GitLab կամ Codeberg ռեպոզիտորիին կամ .json ֆայլին</string>
     <string name="sources_dialog_preinstalled">Նախատեղադրված</string>
     <string name="sources_dialog_community">Համայնքային փաթեթներ</string>
     <string name="sources_dialog_choose_apps">Ընտրել հավելվածները</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Մինի-խաղեր</string>
     <string name="mini_games_description">Արագ խաղեր՝ ազատ րոպեները լրացնելու համար</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Խաղեր</string>
     <string name="mini_game_score">Միավոր %s</string>
     <string name="mini_game_best">Լավագույն %s</string>
     <string name="mini_game_new_record">Նոր ռեկորդ։</string>

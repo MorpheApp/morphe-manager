@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">อัปเดต %s</string>
     <string name="sources_dialog_url_valid">ที่อยู่ URL หรือ JSON ที่ถูกต้อง</string>
-    <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub/GitLab repo หรือไฟล์ .json</string>
+    <string name="sources_dialog_url_invalid">URL ต้องระบุไปยัง repo ของ GitHub, GitLab หรือ Codeberg หรือไฟล์ .json</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_dialog_community">แพตช์ชุมชน</string>
     <string name="sources_dialog_choose_apps">เลือกแอป</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">มินิเกม</string>
     <string name="mini_games_description">เกมสั้นๆ สำหรับใช้เวลาว่าง</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">เกม</string>
     <string name="mini_game_score">คะแนน %s</string>
     <string name="mini_game_best">ดีที่สุด %s</string>
     <string name="mini_game_new_record">บันทึกใหม่!</string>

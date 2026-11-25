@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Actualitzacions de %s</string>
     <string name="sources_dialog_url_valid">URL de repositori o JSON vàlida</string>
-    <string name="sources_dialog_url_invalid">La URL ha d\'apuntar a un repo de GitHub/GitLab o a un fitxer .json</string>
+    <string name="sources_dialog_url_invalid">La URL ha d\'apuntar a un repo de GitHub, GitLab o Codeberg o a un fitxer .json</string>
     <string name="sources_dialog_preinstalled">Preinstal·lada</string>
     <string name="sources_dialog_community">Pegats de la comunitat</string>
     <string name="sources_dialog_choose_apps">Tria aplicacions</string>
@@ -772,6 +772,8 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <!-- Mini-games -->
     <string name="mini_games">Minijocs</string>
     <string name="mini_games_description">Jocs ràpids per passar un minut lliure</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jocs</string>
     <string name="mini_game_score">Puntuació %s</string>
     <string name="mini_game_best">Millor %s</string>
     <string name="mini_game_new_record">Nou rècord!</string>

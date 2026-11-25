@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uppfærslur: %s</string>
     <string name="sources_dialog_url_valid">Gild geymsla eða JSON-vefslóð</string>
-    <string name="sources_dialog_url_invalid">Vefslóð verður að vísa á GitHub/GitLab geymslu eða .json skrá</string>
+    <string name="sources_dialog_url_invalid">Vefslóð verður að vísa á GitHub, GitLab eða Codeberg geymslu eða .json skrá</string>
     <string name="sources_dialog_preinstalled">Foruppsett</string>
     <string name="sources_dialog_community">Samfélagsplástrar</string>
     <string name="sources_dialog_choose_apps">Veldu öpp</string>
@@ -771,6 +771,8 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <!-- Mini-games -->
     <string name="mini_games">Hnýbilsleikir</string>
     <string name="mini_games_description">Hröðir leikir til að fylla ónýttan tíma</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Leikir</string>
     <string name="mini_game_score">Stig %s</string>
     <string name="mini_game_best">Besta: %s</string>
     <string name="mini_game_new_record">Nýtt met!</string>

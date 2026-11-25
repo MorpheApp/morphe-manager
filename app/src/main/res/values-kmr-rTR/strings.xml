@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s nûve dike</string>
     <string name="sources_dialog_url_valid">Depo an URL-a JSON-ê yê derbasdar</string>
-    <string name="sources_dialog_url_invalid">URL divê depoyeke GitHub/GitLab an pelê .json nîşan bide</string>
+    <string name="sources_dialog_url_invalid">URL divê depoyeke GitHub, GitLab an Codeberg an pelê .json nîşan bide</string>
     <string name="sources_dialog_preinstalled">Bi saz hatî</string>
     <string name="sources_dialog_community">Patchên civakê</string>
     <string name="sources_dialog_choose_apps">Appan hilbijêre</string>
@@ -772,6 +772,8 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <!-- Mini-games -->
     <string name="mini_games">Yariyari-lîstik</string>
     <string name="mini_games_description">Lîstikên bilez ji bo xaltekî wextê vala</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Yarî</string>
     <string name="mini_game_score">Puan %s</string>
     <string name="mini_game_best">Ya herî baş %s</string>
     <string name="mini_game_new_record">Rekora nû!</string>

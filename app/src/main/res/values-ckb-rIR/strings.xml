@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">نوێکردنەوەکانی %s</string>
     <string name="sources_dialog_url_valid">عەمباری دروست یان URL JSON</string>
-    <string name="sources_dialog_url_invalid">بەستەرەکە دەبێت ئاماژە بە ڕیپۆیەکی GitHub/GitLab یان پەڕگەیەکی .json بکات</string>
+    <string name="sources_dialog_url_invalid">بەستەرەکە دەبێت ئاماژە بە ڕیپۆیەکی GitHub، GitLab یان Codeberg یان پەڕگەیەکی .json بکات</string>
     <string name="sources_dialog_preinstalled">پێشوەختە دامەزراو</string>
     <string name="sources_dialog_community">پاتچەکانی کۆمەڵگەی بەکارهێنەران</string>
     <string name="sources_dialog_choose_apps">ئەپەکان هەڵبژێرە</string>
@@ -773,6 +773,8 @@
     <!-- Mini-games -->
     <string name="mini_games">کێڵە-یارییەکان</string>
     <string name="mini_games_description">یارییە خێراکان بۆ بەسەربردنی خشتەیەک لە کاتی بەتاڵیدا</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">یارییەکان</string>
     <string name="mini_game_score">نمرە %s</string>
     <string name="mini_game_best">باشترین %s</string>
     <string name="mini_game_new_record">تۆمارێکی نوێ!</string>

@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ажурира %s</string>
     <string name="sources_dialog_url_valid">Важећи репозиторијум или JSON URL</string>
-    <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
+    <string name="sources_dialog_url_invalid">URL мора быть веза за GitHub, GitLab или Codeberg репозиторијум или .json датотеку</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
     <string name="sources_dialog_community">Закрпе заједнице</string>
     <string name="sources_dialog_choose_apps">Изаберите апликације</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Мини-игре</string>
     <string name="mini_games_description">Брзе игре за убијање времена</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Игре</string>
     <string name="mini_game_score">Резултат %s</string>
     <string name="mini_game_best">Најбољи %s</string>
     <string name="mini_game_new_record">Нови рекорд!</string>

@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Aktualizuje %s</string>
     <string name="sources_dialog_url_valid">Platný repozitár alebo URL adresa JSON</string>
-    <string name="sources_dialog_url_invalid">URL musí odkazovať na repozitár GitHub/GitLab alebo na súbor .json</string>
+    <string name="sources_dialog_url_invalid">URL musí odkazovať na repo GitHub, GitLab alebo Codeberg, prípadne na súbor .json</string>
     <string name="sources_dialog_preinstalled">Predinštalované</string>
     <string name="sources_dialog_community">Komunitné záplaty</string>
     <string name="sources_dialog_choose_apps">Vybrať aplikácie</string>
@@ -772,6 +772,8 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini hry</string>
     <string name="mini_games_description">Rýchle hry na zaplnenie voľnej minútky</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Hry</string>
     <string name="mini_game_score">Skóre %s</string>
     <string name="mini_game_best">Najlepšie %s</string>
     <string name="mini_game_new_record">Nový rekord!</string>

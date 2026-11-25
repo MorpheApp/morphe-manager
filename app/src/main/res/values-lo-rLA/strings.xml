@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">ອັບເດດ %s</string>
     <string name="sources_dialog_url_valid">ຣີໂພຊິໂທຣີ ຫຼື URL JSON ທີ່ຖືກຕ້ອງ</string>
-    <string name="sources_dialog_url_invalid">URL ຕ້ອງຊີ້ໄປທີ່ຣີໂພ GitHub/GitLab ຫຼືໄຟລ໌ .json</string>
+    <string name="sources_dialog_url_invalid">URL ຕ້ອງຊີ້ໄປທີ່ repo ຂອງ GitHub, GitLab ຫຼື Codeberg ຫຼື ໄຟລ໌ .json</string>
     <string name="sources_dialog_preinstalled">ຕິດຕັ້ງມາກ່ອນແລ້ວ</string>
     <string name="sources_dialog_community">Patch ຈາກຊຸມຊົນ</string>
     <string name="sources_dialog_choose_apps">ເລືອກແອັບ</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">ເກມນ້ອຍໆ</string>
     <string name="mini_games_description">ເກມທີ່ຫຼິ້ນໄດ້ໄວໆເພື່ອຜ່ອນຄາຍໃນເວລາຫວ່າງ</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ເກມ</string>
     <string name="mini_game_score">ຄະແນນ %s</string>
     <string name="mini_game_best">ດີທີ່ສຸດ %s</string>
     <string name="mini_game_new_record">ສະຖິຕິໃໝ່!</string>

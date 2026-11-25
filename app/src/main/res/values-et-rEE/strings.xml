@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uuendused %s</string>
     <string name="sources_dialog_url_valid">Kehtiv hoidla või JSON-URL</string>
-    <string name="sources_dialog_url_invalid">URL peab viitama GitHubi/GitLabi hoidlale või .json failile</string>
+    <string name="sources_dialog_url_invalid">URL peab viima GitHubi, GitLabi või Codebergi hoidlale või .json failile</string>
     <string name="sources_dialog_preinstalled">Eelpaigaldatud</string>
     <string name="sources_dialog_community">Kogukonna paigad</string>
     <string name="sources_dialog_choose_apps">Vali rakendused</string>
@@ -772,6 +772,8 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <!-- Mini-games -->
     <string name="mini_games">Minimängud</string>
     <string name="mini_games_description">Kiired mängud vaba minuti möödastamiseks</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Mängud</string>
     <string name="mini_game_score">Tulemus %s</string>
     <string name="mini_game_best">Parim %s</string>
     <string name="mini_game_new_record">Uus rekord!</string>

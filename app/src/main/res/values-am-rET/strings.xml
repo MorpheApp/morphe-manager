@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s ያዘምናል</string>
     <string name="sources_dialog_url_valid">ትክክለኛ የሪፖዚቶሪ ወይም የJSON URL</string>
-    <string name="sources_dialog_url_invalid">URL ወደ GitHub/GitLab repo ወይም .json ፋይል የሚያመለክት መሆን አለበት</string>
+    <string name="sources_dialog_url_invalid">URL-ው ወደ GitHub፣ GitLab ወይም Codeberg repo ወይም ወደ .json ፋይል የሚያመለክት መሆን አለበት</string>
     <string name="sources_dialog_preinstalled">ቀድሞ የተጫነ</string>
     <string name="sources_dialog_community">የማህበረሰብ ፓቾች</string>
     <string name="sources_dialog_choose_apps">መተግበሪያዎችን ይምረጡ</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">አጫጭር ጨዋታዎች</string>
     <string name="mini_games_description">ትርፍ ደቂቃን ለማሳለፍ የሚረዱ ፈጣን ጨዋታዎች</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ጨዋታዎች</string>
     <string name="mini_game_score">ውጤት %s</string>
     <string name="mini_game_best">ምርጥ %s</string>
     <string name="mini_game_new_record">አዲስ ክብረ ወሰን!</string>

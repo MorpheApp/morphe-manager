@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Atualiza %s</string>
     <string name="sources_dialog_url_valid">Repositório ou URL JSON válidos</string>
-    <string name="sources_dialog_url_invalid">A URL deve apontar para um repositório GitHub/GitLab ou arquivo .json</string>
+    <string name="sources_dialog_url_invalid">A URL deve apontar para um repositório GitHub, GitLab ou Codeberg ou para um arquivo .json</string>
     <string name="sources_dialog_preinstalled">Pré-instalado</string>
     <string name="sources_dialog_community">Patches da comunidade</string>
     <string name="sources_dialog_choose_apps">Escolha os apps</string>
@@ -771,6 +771,8 @@ A desinstalação apagará permanentemente todos os dados do aplicativo"</string
     <!-- Mini-games -->
     <string name="mini_games">Mini jogos</string>
     <string name="mini_games_description">Jogos rápidos para passar o tempo</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jogos</string>
     <string name="mini_game_score">Pontuação %s</string>
     <string name="mini_game_best">Melhor %s</string>
     <string name="mini_game_new_record">Novo recorde!</string>

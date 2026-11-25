@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ina-update ang %s</string>
     <string name="sources_dialog_url_valid">Valid na repository o JSON URL</string>
-    <string name="sources_dialog_url_invalid">Dapat tumuro ang URL sa isang GitHub/GitLab repo o .json file</string>
+    <string name="sources_dialog_url_invalid">Ang URL ay dapat tumuro sa isang GitHub, GitLab o Codeberg repo o .json file</string>
     <string name="sources_dialog_preinstalled">Naka-install</string>
     <string name="sources_dialog_community">Mga patch ng komunidad</string>
     <string name="sources_dialog_choose_apps">Pumili ng mga app</string>
@@ -772,6 +772,8 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mga mini-game</string>
     <string name="mini_games_description">Mga mabilis na laro para pampalipas-oras</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Mga Laro</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Pinakamahusay %s</string>
     <string name="mini_game_new_record">Bagong rekord!</string>

@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Eguneratzeak %s</string>
     <string name="sources_dialog_url_valid">URL baliozko biltegi edo JSON bat</string>
-    <string name="sources_dialog_url_invalid">URL-ak GitHub/GitLab biltegi bat edo .json fitxategi bat adierazi behar du</string>
+    <string name="sources_dialog_url_invalid">URL-ak GitHub, GitLab edo Codeberg biltegi bat edo .json fitxategi bat adierazi behar du</string>
     <string name="sources_dialog_preinstalled">Aurrez instalatua</string>
     <string name="sources_dialog_community">Komunitateko patch-ak</string>
     <string name="sources_dialog_choose_apps">Aukeratu aplikazioak</string>
@@ -772,6 +772,8 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-jokoak</string>
     <string name="mini_games_description">Minuturik lotan pasatzeko joko azkarrak</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jokoak</string>
     <string name="mini_game_score">Puntuazioa %s</string>
     <string name="mini_game_best">Onena %s</string>
     <string name="mini_game_new_record">Errekor berria!</string>

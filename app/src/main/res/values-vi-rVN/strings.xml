@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Cập nhật %s</string>
     <string name="sources_dialog_url_valid">URL repo hoặc JSON hợp lệ</string>
-    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub/GitLab hoặc tệp .json</string>
+    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub, GitLab hoặc Codeberg hoặc tệp .json</string>
     <string name="sources_dialog_preinstalled">Được cài đặt sẵn</string>
     <string name="sources_dialog_community">Các bản vá cộng đồng</string>
     <string name="sources_dialog_choose_apps">Chọn ứng dụng</string>
@@ -772,6 +772,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <!-- Mini-games -->
     <string name="mini_games">Mini-game</string>
     <string name="mini_games_description">Các trò chơi nhanh để giải trí trong lúc rảnh rỗi</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Trò chơi</string>
     <string name="mini_game_score">Điểm %s</string>
     <string name="mini_game_best">Cao nhất %s</string>
     <string name="mini_game_new_record">Kỷ lục mới!</string>

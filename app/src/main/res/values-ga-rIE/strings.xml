@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Nuashonruithe do %s</string>
     <string name="sources_dialog_url_valid">URL bailí stórais nó JSON</string>
-    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub/GitLab nó comhad .json</string>
+    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub, GitLab nó Codeberg nó comhad .json</string>
     <string name="sources_dialog_preinstalled">Réamhshuiteáilte</string>
     <string name="sources_dialog_community">Paistí pobail</string>
     <string name="sources_dialog_choose_apps">Roghnaigh aipeanna</string>
@@ -772,6 +772,8 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mion-chluichí</string>
     <string name="mini_games_description">Cluichí gasta chun nóiméad saor a chaitheamh</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Cluichí</string>
     <string name="mini_game_score">Scór %s</string>
     <string name="mini_game_best">Is Fearr %s</string>
     <string name="mini_game_new_record">Taifead nua!</string>

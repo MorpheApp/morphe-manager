@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ažurira %s</string>
     <string name="sources_dialog_url_valid">Valjani repozitorij ili URL JSON</string>
-    <string name="sources_dialog_url_invalid">Poveznica mora voditi na GitHub/GitLab repo ili .json datoteku</string>
+    <string name="sources_dialog_url_invalid">URL mora voditi na GitHub, GitLab ili Codeberg repo ili .json datoteku</string>
     <string name="sources_dialog_preinstalled">Unaprijed instalirano</string>
     <string name="sources_dialog_community">Patchevi zajednice</string>
     <string name="sources_dialog_choose_apps">Odaberite aplikacije</string>
@@ -775,6 +775,8 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-igre</string>
     <string name="mini_games_description">Brze igre za popunjavanje slobodnog vremena</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Igre</string>
     <string name="mini_game_score">Rezultat %s</string>
     <string name="mini_game_best">Najbolje %s</string>
     <string name="mini_game_new_record">Novi rekord!</string>

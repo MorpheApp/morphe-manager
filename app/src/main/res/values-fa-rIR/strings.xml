@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">به‌روزرسانی %s</string>
     <string name="sources_dialog_url_valid">نشانی اینترنتی معتبر مخزن یا JSON</string>
-    <string name="sources_dialog_url_invalid">نشانی اینترنتی باید به یک مخزن GitHub/GitLab یا فایل .json اشاره کند</string>
+    <string name="sources_dialog_url_invalid">نشانی اینترنتی باید به یک مخزن GitHub، GitLab یا Codeberg یا یک فایل .json اشاره کند</string>
     <string name="sources_dialog_preinstalled">پیش نصب شده</string>
     <string name="sources_dialog_community">پچ‌های جامعه</string>
     <string name="sources_dialog_choose_apps">انتخاب اپلیکیشن‌ها</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">مینی‌گیم‌ها</string>
     <string name="mini_games_description">بازی‌های سریع برای پر کردن زمان‌های کوتاه</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">بازی‌ها</string>
     <string name="mini_game_score">امتیاز %s</string>
     <string name="mini_game_best">بهترین %s</string>
     <string name="mini_game_new_record">رکورد جدید!</string>

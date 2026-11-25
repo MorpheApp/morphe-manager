@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Обновляет %s</string>
     <string name="sources_dialog_url_valid">Корректный URL репозитория или JSON</string>
-    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub/GitLab или на файл .json</string>
+    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub, GitLab или Codeberg либо на .json файл</string>
     <string name="sources_dialog_preinstalled">Предварительно установлено</string>
     <string name="sources_dialog_community">Патчи сообщества</string>
     <string name="sources_dialog_choose_apps">Выбрать приложения</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Мини-игры</string>
     <string name="mini_games_description">Быстрые игры, чтобы скоротать свободную минуту</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Игры</string>
     <string name="mini_game_score">Счет %s</string>
     <string name="mini_game_best">Лучший результат: %s</string>
     <string name="mini_game_new_record">Новый рекорд!</string>
@@ -969,7 +971,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">Включить режим эксперта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизация для архитектуры устройства</string>
-    <string name="settings_advanced_strip_unused_libs_description">Удаляет неиспользуемые нативные библиотеки и APK-сплиты из пропатченных приложений и сохраненных оригиналов</string>
+    <string name="settings_advanced_strip_unused_libs_description">Удаляет неиспользуемые нативные библиотеки и APK splits из пропатченных приложений и сохраненных оригиналов</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Разблокирует источники из pull request и частные репозитории</string>
     <string name="settings_advanced_github_pat_description">Для источников из pull request, частных репозиториев и повышенного лимита запросов GitHub</string>
@@ -1148,7 +1150,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization">Оптимизация батареи</string>
     <string name="settings_system_battery_optimization_description">Поддерживает работу патчера при минимизации приложения</string>
     <string name="settings_system_process_runtime">Среда выполнения патчера</string>
-    <string name="settings_system_jvm_runtime_enable">Использовать встроенную ВМ</string>
+    <string name="settings_system_jvm_runtime_enable">Использовать встроенную VM</string>
     <string name="settings_system_jvm_runtime_description">Патчи в собственной Java VM Morphe, которая может потреблять больше памяти. Отключите, чтобы использовать среду выполнения Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Требуется ARM или 64-bit x86 устройство</string>
     <string name="settings_system_patcher_completion_sound">Звук завершения</string>

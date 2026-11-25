@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s を更新</string>
     <string name="sources_dialog_url_valid">有効なリポジトリまたは JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL は GitHub または GitLab のリポジトリ、もしくは .json ファイルを指している必要があります</string>
+    <string name="sources_dialog_url_invalid">URL は GitHub、GitLab、または Codeberg のリポジトリ、もしくは .json ファイルを指している必要があります</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_dialog_community">コミュニティ製パッチ</string>
     <string name="sources_dialog_choose_apps">アプリを選択</string>
@@ -773,6 +773,8 @@ APK ファイルの取得元を選択してください"</string>
     <!-- Mini-games -->
     <string name="mini_games">ミニゲーム</string>
     <string name="mini_games_description">ちょっとした空き時間に楽しめるクイックゲーム</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ゲーム</string>
     <string name="mini_game_score">スコア %s</string>
     <string name="mini_game_best">最高記録 %s</string>
     <string name="mini_game_new_record">新記録！</string>

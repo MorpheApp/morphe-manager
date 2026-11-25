@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Vervangt %s</string>
     <string name="sources_dialog_url_valid">Geldige repository of JSON-URL</string>
-    <string name="sources_dialog_url_invalid">De URL moet verwijzen naar een GitHub/GitLab-repo of een .json-bestand</string>
+    <string name="sources_dialog_url_invalid">URL moet verwijzen naar een GitHub-, GitLab- of Codeberg-repo of .json-bestand</string>
     <string name="sources_dialog_preinstalled">Voorgeïnstalleerd</string>
     <string name="sources_dialog_community">Community-patches</string>
     <string name="sources_dialog_choose_apps">Kies apps</string>
@@ -772,6 +772,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-games</string>
     <string name="mini_games_description">Korte spelletjes om een verloren minuutje mee te vullen</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Games</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Nieuw record!</string>

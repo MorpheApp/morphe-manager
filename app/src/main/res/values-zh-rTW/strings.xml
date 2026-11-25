@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">更新 %s</string>
     <string name="sources_dialog_url_valid">有效的存放庫或 JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub/GitLab 存放庫或 .json 檔案</string>
+    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub、GitLab 或 Codeberg 存放庫或 .json 檔案</string>
     <string name="sources_dialog_preinstalled">預先安裝</string>
     <string name="sources_dialog_community">社群修補程式</string>
     <string name="sources_dialog_choose_apps">選擇應用程式</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">小遊戲</string>
     <string name="mini_games_description">適合利用碎片時間遊玩的快速遊戲</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">遊戲</string>
     <string name="mini_game_score">分數 %s</string>
     <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新紀錄！</string>

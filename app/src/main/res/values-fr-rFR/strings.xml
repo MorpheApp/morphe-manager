@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Met à jour %s</string>
     <string name="sources_dialog_url_valid">URL JSON ou dépôt valide</string>
-    <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub/GitLab ou un fichier .json</string>
+    <string name="sources_dialog_url_invalid">L\'URL doit pointer vers un dépôt GitHub, GitLab ou Codeberg ou un fichier .json</string>
     <string name="sources_dialog_preinstalled">Préinstallée</string>
     <string name="sources_dialog_community">Patchs communautaires</string>
     <string name="sources_dialog_choose_apps">Choisir des applications</string>
@@ -579,7 +579,7 @@ Restaurer remet la version patchée. Désactive les mises à jour automatiques p
     <string name="app_links_fix">Corriger les liens</string>
     <string name="app_links_allow_shizuku">Autoriser l\'accès à Shizuku</string>
     <string name="app_links_shizuku_permission_hint">Autorisez Morphe à utiliser Shizuku pour activer ces liens pour vous</string>
-    <string name="app_links_shizuku_not_running_hint">Lancez Shizuku pour permettre à Morphe d\'activer ces liens pour vous</string>
+    <string name="app_links_shizuku_not_running_hint">Démarrez Shizuku pour permettre à Morphe d\'activer ces liens pour vous</string>
     <string name="configure">Configurer</string>
     <string name="patcher_rename_title">Cela installera un clone</string>
     <string name="patcher_rename_description">Les patchs ont compilé cette application sous leur propre nom de paquet, son installation ajoute donc un clone à côté de &lt;b&gt;%s&lt;/b&gt; au lieu de le mettre à jour</string>
@@ -750,7 +750,7 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="plugin_activity_dialog_body">Une interaction de l\'utilisateur est nécessaire pour pouvoir poursuivre avec ce plugin</string>
     <string name="patcher_process_killed_message">Le système a arrêté le patcheur avant qu\'il ait terminé, généralement pour libérer de la mémoire. Fermez les autres applications et réessayez</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">Morphe a été fermé avant la fin du correctif, donc rien n\'a été patché. Réessayez</string>
+    <string name="patcher_interrupted_message">Morphe a été fermé avant la fin du patching, donc rien n\'a été patché. Réessayez</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Le patcheur a planté avant d\'avoir terminé. Si cela se reproduit, désactivez %1$s et signalez le problème en joignant le journal</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -773,6 +773,8 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <!-- Mini-games -->
     <string name="mini_games">Mini-jeux</string>
     <string name="mini_games_description">Des jeux rapides pour passer quelques minutes</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jeux</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Meilleur %s</string>
     <string name="mini_game_new_record">Nouveau record !</string>

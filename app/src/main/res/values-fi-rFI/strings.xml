@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Päivitykset: %s</string>
     <string name="sources_dialog_url_valid">Kelvollinen datasäilö tai JSON-osoite</string>
-    <string name="sources_dialog_url_invalid">URL-osoitteen on osoitettava GitHub-/GitLab-datasäilöön tai .json-tiedostoon</string>
+    <string name="sources_dialog_url_invalid">URL-osoitteen on osoitettava GitHub-, GitLab- tai Codeberg-datasäilöön tai .json-tiedostoon</string>
     <string name="sources_dialog_preinstalled">Esiasennettu</string>
     <string name="sources_dialog_community">Yhteisön korjaukset</string>
     <string name="sources_dialog_choose_apps">Valitse sovellukset</string>
@@ -772,6 +772,8 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <!-- Mini-games -->
     <string name="mini_games">Minipelit</string>
     <string name="mini_games_description">Nopeita pelejä vapaan hetken viettoon</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Pelit</string>
     <string name="mini_game_score">Pisteet %s</string>
     <string name="mini_game_best">Paras %s</string>
     <string name="mini_game_new_record">Uusi ennätys!</string>

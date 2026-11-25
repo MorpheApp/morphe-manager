@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Atnaujina %s</string>
     <string name="sources_dialog_url_valid">Validus repozitorium arba JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub/GitLab repo arba .json failą</string>
+    <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub, GitLab arba Codeberg repozitorijų arba .json failą</string>
     <string name="sources_dialog_preinstalled">iš anksto įdiegta</string>
     <string name="sources_dialog_community">Bendruomenės pataisos</string>
     <string name="sources_dialog_choose_apps">Pasirinkite programėles</string>
@@ -772,6 +772,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini žaidimai</string>
     <string name="mini_games_description">Greiti žaidimai, kuo galima užpildyti laisvą minutę</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Žaidimai</string>
     <string name="mini_game_score">Rezultatas %s</string>
     <string name="mini_game_best">Geriausias %s</string>
     <string name="mini_game_new_record">Naujas rekordas!</string>

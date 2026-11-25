@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s अपडेट करते</string>
     <string name="sources_dialog_url_valid">वैध रिपॉजिटरी किंवा JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab रेपॉ किंवा .json फाइलकडे निर्देशित करणे आवश्यक आहे</string>
+    <string name="sources_dialog_url_invalid">URL GitHub, GitLab किंवा Codeberg रेपो किंवा .json फाईलकडे निर्देशित असणे आवश्यक आहे</string>
     <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
     <string name="sources_dialog_community">समुदाय पॅचेस</string>
     <string name="sources_dialog_choose_apps">ॲप्स निवडा</string>
@@ -771,6 +771,8 @@
     <!-- Mini-games -->
     <string name="mini_games">मिनी-गेम्स</string>
     <string name="mini_games_description">रिकाम्या वेळात खेळण्यासाठी झटपट गेम्स</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">गेम्स</string>
     <string name="mini_game_score">स्कोअर %s</string>
     <string name="mini_game_best">सर्वोत्तम %s</string>
     <string name="mini_game_new_record">नवीन रेकॉर्ड!</string>

@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Yeniləmələr %s</string>
     <string name="sources_dialog_url_valid">Etibarlı depo və ya JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab depo və ya .json faylın göstərməlidir</string>
+    <string name="sources_dialog_url_invalid">URL GitHub, GitLab və ya Codeberg depo yaxud .json faylın göstərməlidir</string>
     <string name="sources_dialog_preinstalled">İlkin quraşdırılan</string>
     <string name="sources_dialog_community">İcma yamaqları</string>
     <string name="sources_dialog_choose_apps">Tətbiqləri seç</string>
@@ -576,6 +576,9 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="app_links_change_failed">Tətbiq linklərini dəyişdirmək olmadı</string>
     <string name="app_links_all_verified">Bütün dəstəklənən keçidlər bu tətbiqdə açılmaq üçün tənzimlənib</string>
     <string name="app_links_fix">Linkləri düzəlt</string>
+    <string name="app_links_allow_shizuku">Shizuku girişinə icazə ver</string>
+    <string name="app_links_shizuku_permission_hint">Morphe-yə bu linkləri sizin üçün açması məqsədilə Shizuku istifadə etməyə icazə ver</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe-nin bu linkləri sizin üçün aktivləşdirməsinə icazə vermək məqsədilə Shizuku-nu başlat</string>
     <string name="configure">Tənzimlə</string>
     <string name="patcher_rename_title">Bu dublikatı quraşdıracaq</string>
     <string name="patcher_rename_description">Yamaqlar bu tətbiqi öz paket adı altında qurdu, bu səbəbdən quraşdırmaq onu yeniləmək əvəzinə &lt;b&gt;%s&lt;/b&gt; ilə birlikdə dublikatını əlavə edir</string>
@@ -746,6 +749,7 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
     <string name="patcher_process_killed_message">Sistem yamaqlayıcını işini bitirmədən dayandırdı, bu adətən yaddaşı boşaltmaq üçün olur. Digər tətbiqləri bağla və təkrar cəhd et</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe yamaqlama bitmədən bağlanmışdı, ona görə də heç nə yamaqlanmadı. Yenidən cəhd et</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Yamaqlayıcı bitmədən çökdü. Bu hal təkrarlanarsa, %1$s -i qapat və log qeydi ilə birlikdə problemi bildir</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +772,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini oyunlar</string>
     <string name="mini_games_description">Boş vaxtı keçirmək üçün sürətli oyunlar</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Oyunlar</string>
     <string name="mini_game_score">Hesab %s</string>
     <string name="mini_game_best">Ən yaxşı %s</string>
     <string name="mini_game_new_record">Yeni rekord!</string>

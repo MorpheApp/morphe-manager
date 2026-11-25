@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s 업데이트</string>
     <string name="sources_dialog_url_valid">유효한 리포지토리 또는 JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL은 GitHub/GitLab 리포지토리 또는 .json 파일을 가리켜야 합니다</string>
+    <string name="sources_dialog_url_invalid">URL은 GitHub, GitLab 또는 Codeberg 리포지토리 또는 .json 파일을 가리켜야 합니다</string>
     <string name="sources_dialog_preinstalled">미리 설치됨</string>
     <string name="sources_dialog_community">커뮤니티 패치</string>
     <string name="sources_dialog_choose_apps">앱 선택</string>
@@ -772,6 +772,8 @@ APK를 가져올 위치를 선택하세요"</string>
     <!-- Mini-games -->
     <string name="mini_games">미니 게임</string>
     <string name="mini_games_description">자투리 시간에 즐길 수 있는 간단한 게임</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">게임</string>
     <string name="mini_game_score">점수 %s</string>
     <string name="mini_game_best">최고 %s</string>
     <string name="mini_game_new_record">신기록!</string>

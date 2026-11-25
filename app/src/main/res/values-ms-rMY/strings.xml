@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Mengemas kini %s</string>
     <string name="sources_dialog_url_valid">Repositori atau URL JSON yang sah</string>
-    <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub/GitLab atau fail .json</string>
+    <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub, GitLab atau Codeberg atau fail .json</string>
     <string name="sources_dialog_preinstalled">Prapasang</string>
     <string name="sources_dialog_community">Tampalan komuniti</string>
     <string name="sources_dialog_choose_apps">Pilih aplikasi</string>
@@ -773,6 +773,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <!-- Mini-games -->
     <string name="mini_games">Permainan mini</string>
     <string name="mini_games_description">Permainan pantas untuk mengisi masa lapang</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Permainan</string>
     <string name="mini_game_score">Markah %s</string>
     <string name="mini_game_best">Terbaik %s</string>
     <string name="mini_game_new_record">Rekod baharu!</string>

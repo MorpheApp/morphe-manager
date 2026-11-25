@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uppdaterar %s</string>
     <string name="sources_dialog_url_valid">Giltig lagringsplats eller JSON-adress</string>
-    <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-/GitLab-lagringsplats eller .json-fil</string>
+    <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-, GitLab- eller Codeberg-lagringsplats eller .json-fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_dialog_community">Tillägg från communityn</string>
     <string name="sources_dialog_choose_apps">Välj appar</string>
@@ -772,6 +772,8 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <!-- Mini-games -->
     <string name="mini_games">Minispel</string>
     <string name="mini_games_description">Snabba spel för att fördriva tiden</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Spel</string>
     <string name="mini_game_score">Poäng %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nytt rekord!</string>

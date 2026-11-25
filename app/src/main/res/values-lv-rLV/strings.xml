@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Atjauninājumi %s</string>
     <string name="sources_dialog_url_valid">Derīgs repozitorija vai JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL adresem jānorāda uz GitHub/GitLab repozitoriju vai .json failu</string>
+    <string name="sources_dialog_url_invalid">URL tam jānorāda uz GitHub, GitLab vai Codeberg repozitoriju vai .json failu</string>
     <string name="sources_dialog_preinstalled">Iepriekš instalēts</string>
     <string name="sources_dialog_community">Kopienas labojumi</string>
     <string name="sources_dialog_choose_apps">Izvēlieties lietotnes</string>
@@ -772,6 +772,8 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini spēles</string>
     <string name="mini_games_description">Ātras spēles, lai aizpildītu brīvu minūti</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Spēles</string>
     <string name="mini_game_score">Rezultāts %s</string>
     <string name="mini_game_best">Labākais %s</string>
     <string name="mini_game_new_record">Jauns rekords!</string>

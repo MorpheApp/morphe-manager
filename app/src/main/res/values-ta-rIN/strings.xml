@@ -64,6 +64,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
+    <string name="sources_dialog_url_invalid">URL ஆனது GitHub, GitLab அல்லது Codeberg ரெப்போ அல்லது .json கோப்பைக் குறிக்க வேண்டும்</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
     <string name="sources_local_network_denied">அருகிலுள்ள சாதனங்கள் அனுமதி இல்லாமல் உங்கள் உள்ளூர் நெட்வொர்க்கில் உள்ள ஆதாரங்களை மேம்படுத்த முடியாது</string>
@@ -162,6 +163,8 @@
     <!-- Mini-games -->
     <string name="mini_games">மினி-கேம்கள்</string>
     <string name="mini_games_description">உறக்க நேரத்தை கழிக்க விரைவான விளையாட்டுகள்</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">விளையாட்டுகள்</string>
     <string name="mini_game_pause">நிறுத்து</string>
     <string name="mini_game_score_label">மதிப்பெண்</string>
     <string name="mini_game_best_label">சிறந்தது</string>

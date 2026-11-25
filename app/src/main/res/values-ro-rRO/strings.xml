@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Actualizează %s</string>
     <string name="sources_dialog_url_valid">URL valid al depozitului sau JSON</string>
-    <string name="sources_dialog_url_invalid">URL-ul trebuie să indice un depozit GitHub/GitLab sau un fișier .json</string>
+    <string name="sources_dialog_url_invalid">URL-ul trebuie să indice către un repo GitHub, GitLab sau Codeberg sau către un fișier .json</string>
     <string name="sources_dialog_preinstalled">Preinstalate</string>
     <string name="sources_dialog_community">Patch-uri comunitare</string>
     <string name="sources_dialog_choose_apps">Alege aplicațiile</string>
@@ -772,6 +772,8 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-jocuri</string>
     <string name="mini_games_description">Jocuri rapide pentru a petrece un minut liber</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jocuri</string>
     <string name="mini_game_score">Scor %s</string>
     <string name="mini_game_best">Cel mai bun %s</string>
     <string name="mini_game_new_record">Record nou!</string>

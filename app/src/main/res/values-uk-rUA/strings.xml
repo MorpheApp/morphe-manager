@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Оновлює %s</string>
     <string name="sources_dialog_url_valid">Дійсне посилання на репозиторій або JSON-файл</string>
-    <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub/GitLab або .json файл</string>
+    <string name="sources_dialog_url_invalid">URL має вказувати на репозиторій GitHub, GitLab або Codeberg чи на файл .json</string>
     <string name="sources_dialog_preinstalled">Вбудоване</string>
     <string name="sources_dialog_community">Патчі спільноти</string>
     <string name="sources_dialog_choose_apps">Виберіть застосунки</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Міні ігри</string>
     <string name="mini_games_description">Швидкі ігри, щоб скоротити вільну хвилину</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Ігри</string>
     <string name="mini_game_score">Рахунок %s</string>
     <string name="mini_game_best">Найкращий %s</string>
     <string name="mini_game_new_record">Новий рекорд!</string>

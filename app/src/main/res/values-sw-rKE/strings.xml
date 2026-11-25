@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Masasisho ya %s</string>
     <string name="sources_dialog_url_valid">Repository sahihi au URL ya JSON</string>
-    <string name="sources_dialog_url_invalid">URL lazima ielekeze kwenye repo ya GitHub/GitLab au faili ya .json</string>
+    <string name="sources_dialog_url_invalid">URL lazima iashirie repo ya GitHub, GitLab au Codeberg au faili ya .json</string>
     <string name="sources_dialog_preinstalled">Iliyosakinishwa awali</string>
     <string name="sources_dialog_community">Patch za jumuiya</string>
     <string name="sources_dialog_choose_apps">Chagua programu</string>
@@ -772,6 +772,8 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <!-- Mini-games -->
     <string name="mini_games">Michezo midogo</string>
     <string name="mini_games_description">Michezo ya haraka ya kupitisha dakika chache</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Michezo</string>
     <string name="mini_game_score">Alama %s</string>
     <string name="mini_game_best">Bora %s</string>
     <string name="mini_game_new_record">Rekodi mpya!</string>

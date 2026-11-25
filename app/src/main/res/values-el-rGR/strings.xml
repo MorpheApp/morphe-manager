@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ενημερώσεις %s</string>
     <string name="sources_dialog_url_valid">Έγκυρο αποθετήριο ή διεύθυνση URL JSON</string>
-    <string name="sources_dialog_url_invalid">Η διεύθυνση URL πρέπει να δείχνει σε ένα αποθετήριο GitHub/GitLab ή σε ένα αρχείο .json</string>
+    <string name="sources_dialog_url_invalid">Το URL πρέπει να οδηγεί σε ένα αποθετήριο GitHub, GitLab ή Codeberg ή σε ένα αρχείο .json</string>
     <string name="sources_dialog_preinstalled">Προεγκατεστημένες</string>
     <string name="sources_dialog_community">Κοινοτικά patches</string>
     <string name="sources_dialog_choose_apps">Επιλογή εφαρμογών</string>
@@ -772,6 +772,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Μίνι παιχνίδια</string>
     <string name="mini_games_description">Γρήγορα παιχνίδια για να περάσετε το χρόνο</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Παιχνίδια</string>
     <string name="mini_game_score">Βαθμολογία %s</string>
     <string name="mini_game_best">Καλύτερη %s</string>
     <string name="mini_game_new_record">Νέο ρεκόρ!</string>

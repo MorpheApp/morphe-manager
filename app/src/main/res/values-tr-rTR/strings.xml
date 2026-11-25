@@ -232,7 +232,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Güncelleme: %s</string>
     <string name="sources_dialog_url_valid">Geçerli depo veya JSON URL\'si</string>
-    <string name="sources_dialog_url_invalid">URL, bir GitHub/GitLab deposuna veya .json dosyasına işaret etmelidir</string>
+    <string name="sources_dialog_url_invalid">URL, bir GitHub, GitLab veya Codeberg deposuna ya da .json dosyasına işaret etmelidir</string>
     <string name="sources_dialog_preinstalled">Ön yüklü</string>
     <string name="sources_dialog_community">Topluluk yamaları</string>
     <string name="sources_dialog_choose_apps">Uygulamaları seçin</string>
@@ -772,6 +772,8 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini oyunlar</string>
     <string name="mini_games_description">Boş vakitleri değerlendirmek için hızlı oyunlar</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Oyunlar</string>
     <string name="mini_game_score">Puan %s</string>
     <string name="mini_game_best">En İyi %s</string>
     <string name="mini_game_new_record">Yeni rekor!</string>
