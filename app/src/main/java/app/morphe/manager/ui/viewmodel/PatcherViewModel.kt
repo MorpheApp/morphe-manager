@@ -867,7 +867,7 @@ class PatcherViewModel(
             _isSaving.value = true
             try {
                 ensureExportMetadata()
-                finishExport(app.exportApkTo(outputFile, targetUri))
+                finishExport(app.exportFileTo(outputFile, targetUri))
             } finally {
                 _isSaving.value = false
             }

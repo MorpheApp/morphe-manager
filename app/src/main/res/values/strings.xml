@@ -176,6 +176,9 @@
     <string name="sources_patches_source_disabled_hint">This source is disabled. Its patches are listed for reference and are not applied</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_report_issue">Report an issue</string>
+    <string name="sources_management_export_patches">Export patches file</string>
+    <string name="sources_management_export_patches_success">Patches file saved</string>
+    <string name="sources_management_export_patches_failed">Failed to export patches file</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Ticked apps come from this source. Tap an app to leave it out or bring it back, swipe it to see its patches. An app no source brings leaves the home screen, unless you patched it</string>
@@ -223,6 +226,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
     <string name="sources_dialog_rename">Rename patch source</string>
+    <string name="sources_dialog_renamed">Renamed to %s</string>
     <string name="sources_dialog_change_url">Change where the patch source downloads from</string>
     <string name="sources_dialog_duplicate_name_error">A patch source with this name already exists</string>
     <string name="sources_dialog_missing_error">Could not update this patch source</string>

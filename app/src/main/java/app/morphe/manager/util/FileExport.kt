@@ -13,14 +13,15 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 
-private const val TAG = "Morphe ApkExport"
+private const val TAG = "Morphe FileExport"
 
 /**
- * Copies a patched APK to a location the user picked through the system document picker.
+ * Copies a file the app keeps, such as a patched APK, to a location the user picked through the
+ * system document picker.
  *
  * @return true when the file was written in full.
  */
-suspend fun Context.exportApkTo(file: File, uri: Uri): Boolean = withContext(Dispatchers.IO) {
+suspend fun Context.exportFileTo(file: File, uri: Uri): Boolean = withContext(Dispatchers.IO) {
     runCatching {
         contentResolver.openOutputStream(uri)
             ?.use { stream -> file.inputStream().use { it.copyTo(stream) } }

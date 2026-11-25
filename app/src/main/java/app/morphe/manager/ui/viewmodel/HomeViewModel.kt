@@ -661,9 +661,13 @@ class HomeViewModel(
      */
     fun renameBundle(displayName: String) {
         val bundle = bundleToRename ?: return
+        val newName = displayName.trim().ifEmpty { null }
         viewModelScope.launch {
-            when (patchBundleRepository.setDisplayName(bundle.uid, displayName.trim().ifEmpty { null })) {
-                PatchBundleRepository.DisplayNameUpdateResult.SUCCESS,
+            when (patchBundleRepository.setDisplayName(bundle.uid, newName)) {
+                PatchBundleRepository.DisplayNameUpdateResult.SUCCESS -> {
+                    dismissRenameBundle()
+                    messages.show(R.string.sources_dialog_renamed, newName ?: bundle.name)
+                }
                 PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> dismissRenameBundle()
                 PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE ->
                     messages.show(R.string.sources_dialog_duplicate_name_error)

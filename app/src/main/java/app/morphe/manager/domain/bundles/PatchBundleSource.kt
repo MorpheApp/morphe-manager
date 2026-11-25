@@ -14,8 +14,10 @@ import androidx.compose.runtime.Stable
 import app.morphe.manager.domain.repository.PatchBundleHeldBackException
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.util.CodeHost
+import app.morphe.manager.util.FilenameUtils
 import app.morphe.manager.util.JSON_EXTENSION
 import app.morphe.manager.util.MORPHE_GITHUB_ORG
+import app.morphe.manager.util.MPP_EXTENSION
 import app.morphe.manager.util.SourceUrl
 import app.morphe.manager.util.hasZipHeader
 import app.morphe.manager.util.isPatcherOutdated
@@ -83,6 +85,19 @@ sealed class PatchBundleSource(
     val isNameOutOfDate get() = manifestAttributes?.name?.let { it != name } == true
     val error get() = (state as? State.Failed)?.throwable
     val displayTitle get() = displayName?.takeUnless { it.isBlank() } ?: name
+
+    /**
+     * The installed patches.jar, null while none is. It is also there for a source whose patches
+     * fail to load, so those can still be saved before the repository behind them is gone.
+     */
+    val installedPatchesFile: File? by lazy { patchesFile.takeIf(File::exists) }
+
+    /** Name [installedPatchesFile] is offered under when saved, the title and version as a .mpp. */
+    val exportFileName: String
+        get() = listOfNotNull(
+            FilenameUtils.sanitize(displayTitle, keepScripts = true).ifEmpty { "patches" },
+            version?.let(FilenameUtils::sanitize)?.takeIf { it.isNotEmpty() }
+        ).joinToString("-") + ".$MPP_EXTENSION"
 
     /**
      * When the installed release came out, kept in [createdAt] by each update. A source whose
