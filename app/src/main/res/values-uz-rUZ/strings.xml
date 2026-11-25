@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ushbu patch manbasi bloklangan va qo‘shib bo‘lmaydi</string>
     <string name="sources_management_source_blocked_badge">Bloklangan</string>
     <string name="sources_management_metadata_unavailable">Metadata mavjud emas</string>
+    <string name="sources_management_bundle_missing_badge">Yuklab olinmagan</string>
     <string name="sources_management_metadata_unavailable_hint">Masofaviy metadata fayli mavjud emas. O‘rnatilgan to‘plam bilan patchlash ishlaydi, lekin ushbu manba uchun avtomatik yangilash o‘chirilgan</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch to‘plamini yuklab olish imkoniyati yo‘q. Manba URL noto‘g‘ri yoki fayl mavjud emas</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch paketi yuklab olunamadi. Manba URL manzili noto\"g\'ri bo\'lishi mumkin yoki fayl mavjud emas. Uni o\'zgartirish uchun bosing</string>
@@ -1568,6 +1569,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="changelog_show_all">Barchasini ko‘rsatish (%s)</string>
     <string name="changelog_show_less">Kamroq ko‘rsatish</string>
     <string name="no_network_toast">Internetga ulanish mavjud emas</string>
+    <string name="download_waiting_for_network">Tarmoq kutilmoqda</string>
     <string name="update_available">Yangilanish mavjud</string>
     <string name="ready_to_install_update">Yangilanishni o‘rnatishga tayyor</string>
     <string name="update_completed">Yangilanish o‘rnatildi</string>

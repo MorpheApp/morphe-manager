@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Patch-iturri hau blokeatuta dago eta ezin da gehitu</string>
     <string name="sources_management_source_blocked_badge">Blokeatuta</string>
     <string name="sources_management_metadata_unavailable">Metadatuak ez daude eskuragarri</string>
+    <string name="sources_management_bundle_missing_badge">Ez da deskargatu</string>
     <string name="sources_management_metadata_unavailable_hint">Urruneko metadatuen fitxategia ez dago eskuragarri. Instalatutako bundle-arekin patchatzeak funtzionatzen jarraitzen du, baina automatikoki eguneratzea desaktibatuta dago iturri honentzat</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch-bundle-a ezin izan da deskargatu. Iturri-URLa okerra izan daiteke edo fitxategia ez dago</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch-bundlea ezin da deskargatu. Iturriaren URLa okerra izan daiteke edo fitxategia ez da existitzen. Sakatu aldatzeko</string>
@@ -1568,6 +1569,7 @@ Xehetasunak: %2$s"</string>
     <string name="changelog_show_all">Denak erakutsi (%s)</string>
     <string name="changelog_show_less">Gutxiago erakutsi</string>
     <string name="no_network_toast">Ez dago interneteko konexiorik</string>
+    <string name="download_waiting_for_network">Sarearen zain</string>
     <string name="update_available">Eguneratze bat dago eskuragarri</string>
     <string name="ready_to_install_update">Eguneratzea instalatzeko prest</string>
     <string name="update_completed">Eguneratzea instalatuta</string>

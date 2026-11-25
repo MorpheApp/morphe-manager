@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
     <string name="sources_management_source_blocked_badge">ถูกบล็อก</string>
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
+    <string name="sources_management_bundle_missing_badge">ยังไม่ได้ดาวน์โหลด</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแพตช์ด้วยชุดที่ติดตั้งยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่ แตะเพื่อเปลี่ยน</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">แสดงทั้งหมด (%s)</string>
     <string name="changelog_show_less">แสดงน้อยลง</string>
     <string name="no_network_toast">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
+    <string name="download_waiting_for_network">กำลังรอเครือข่าย</string>
     <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
     <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>
     <string name="update_completed">ติดตั้งอัปเดตแล้ว</string>

@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Không thể thêm nguồn vá này vì nó bị chặn</string>
     <string name="sources_management_source_blocked_badge">Bị chặn</string>
     <string name="sources_management_metadata_unavailable">Không có metadata</string>
+    <string name="sources_management_bundle_missing_badge">Chưa tải xuống</string>
     <string name="sources_management_metadata_unavailable_hint">Không thể truy cập tệp metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại. Nhấn để thay đổi</string>
@@ -1571,6 +1572,7 @@ Chi tiết: %2$s"</string>
     <string name="changelog_show_all">Hiện tất cả (%s)</string>
     <string name="changelog_show_less">Thu</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
+    <string name="download_waiting_for_network">Đang chờ kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>
     <string name="update_completed">Đã cài đặt bản cập nhật</string>

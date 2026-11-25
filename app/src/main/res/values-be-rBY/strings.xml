@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Гэтая крыніца патча заблакавана і не можа быць дададзена.</string>
     <string name="sources_management_source_blocked_badge">Заблакавана</string>
     <string name="sources_management_metadata_unavailable">Метаданыя недаступны</string>
+    <string name="sources_management_bundle_missing_badge">Не спампавана</string>
     <string name="sources_management_metadata_unavailable_hint">Знешні файл метаданых недаступны. Патчынг з усталяваным пакетам яшчэ працуе, але аўтаматычныя абнаўленні для гэтай крыніцы адключаны</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не ўдалося спампаваць пакет патчаў. Магчыма, URL-адрас крыніцы няправільны або файл не існуе</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Не ўдалося спампаваць пакет патчаў. Магчыма, URL крыніцы няправільны або файл не існуе. Націсніце, каб змяніць яго</string>
@@ -1569,6 +1570,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Паказаць усё (%s)</string>
     <string name="changelog_show_less">Паказаць менш</string>
     <string name="no_network_toast">Інтэрнэт-злучэнне недаступна</string>
+    <string name="download_waiting_for_network">Чаканне сеткі</string>
     <string name="update_available">Даступна абнаўленне</string>
     <string name="ready_to_install_update">Гатова да ўсталёўкі абнаўлення</string>
     <string name="update_completed">Абнаўленне ўсталявана</string>

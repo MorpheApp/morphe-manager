@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">हा पॅच स्रोत अवरोधित आहे आणि तो जोडता येणार नाही</string>
     <string name="sources_management_source_blocked_badge">अवरोधित</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नाही</string>
+    <string name="sources_management_bundle_missing_badge">डाउनलोड केलेले नाही</string>
     <string name="sources_management_metadata_unavailable_hint">दूरस्थ मेटाडेटा फाइल उपलब्ध नाही. स्थापित बंडलसह पॅचिंग अजूनही कार्य करते, परंतु या स्रोतासाठी स्वयंचलित अद्यतन अक्षम केले आहे</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">पॅच बंडल डाउनलोड करता आले नाही. स्रोत URL चुकीचा असू शकतो किंवा फाइल अस्तित्वात नाही. ते बदलण्यासाठी टॅप करा</string>
@@ -1567,6 +1568,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">सर्व दाखवा (%s)</string>
     <string name="changelog_show_less">कमी दाखवा</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नाही</string>
+    <string name="download_waiting_for_network">नेटवर्कची प्रतीक्षा करत आहे</string>
     <string name="update_available">अपडेट उपलब्ध आहे</string>
     <string name="ready_to_install_update">अपडेट इंस्टॉल करण्यासाठी तयार</string>
     <string name="update_completed">अपडेट स्थापित झाले</string>

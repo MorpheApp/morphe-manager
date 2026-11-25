@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">이 패치 소스는 차단되어 추가할 수 없습니다</string>
     <string name="sources_management_source_blocked_badge">차단됨</string>
     <string name="sources_management_metadata_unavailable">메타데이터 없음</string>
+    <string name="sources_management_bundle_missing_badge">다운로드되지 않음</string>
     <string name="sources_management_metadata_unavailable_hint">원격 메타데이터 파일을 사용할 수 없습니다. 설치된 번들로 패치는 계속 가능하지만, 이 소스에 대한 자동 업데이트는 비활성화됩니다</string>
     <string name="sources_management_metadata_unavailable_hint_missing">패치 번들을 다운로드할 수 없습니다. 소스 URL이 올바르지 않거나 파일이 존재하지 않을 수 있습니다</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">패치 번들을 다운로드할 수 없습니다. 소스 URL이 잘못되었거나 파일이 존재하지 않을 수 있습니다. 변경하려면 탭하세요</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">모두 표시 (%s)</string>
     <string name="changelog_show_less">간단히 보기</string>
     <string name="no_network_toast">인터넷에 연결할 수 없습니다</string>
+    <string name="download_waiting_for_network">네트워크 대기 중</string>
     <string name="update_available">업데이트 사용 가능</string>
     <string name="ready_to_install_update">업데이트 설치 준비 완료</string>
     <string name="update_completed">업데이트를 설치했습니다</string>

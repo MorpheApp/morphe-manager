@@ -1567,6 +1567,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="changelog_show_all">Hamısını göstər (%s)</string>
     <string name="changelog_show_less">Daha az göstər</string>
     <string name="no_network_toast">İnternet bağlantısı əlçatan deyil</string>
+    <string name="download_waiting_for_network">Şəbəkə gözlənilir</string>
     <string name="update_available">Yenilənmə mövcuddur</string>
     <string name="ready_to_install_update">Yenilənmə quraşdırılmağa hazırdır</string>
     <string name="update_completed">Yenilənmə quraşdırıldı</string>

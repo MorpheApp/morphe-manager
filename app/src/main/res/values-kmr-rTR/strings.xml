@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ev çavkaniya patchê astengkirî ye û nayê zêdekirin</string>
     <string name="sources_management_source_blocked_badge">Astengkirî</string>
     <string name="sources_management_metadata_unavailable">Metadata tune ye</string>
+    <string name="sources_management_bundle_missing_badge">Nehatî daxistin</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta patchê nehat daxistin. URL-ya çavkaniyê dibe ku ne rast be an pel tune be</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paketa patchê nehat daxistin. URL-ya çavkaniyê dibe ku ne rast be an pel tune be. Ji bo guherandinê bitikîne</string>
@@ -1568,6 +1569,7 @@ Detay: %2$s"</string>
     <string name="changelog_show_all">Hemûyan nîşan bide (%s)</string>
     <string name="changelog_show_less">Kêmtir nîşan bide</string>
     <string name="no_network_toast">Girêdana înternetê tune</string>
+    <string name="download_waiting_for_network">Li benda torê</string>
     <string name="update_available">Nûvekirin heye</string>
     <string name="ready_to_install_update">Amade ye ku nûvekirin saz bike</string>
     <string name="update_completed">Nûvekirin hate sazkirin</string>

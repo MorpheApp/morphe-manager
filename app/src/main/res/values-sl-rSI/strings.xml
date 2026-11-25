@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ta vir popravkov je blokiran in ga ni mogoče dodati</string>
     <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Ni metapodatkov</string>
+    <string name="sources_management_bundle_missing_badge">Ni preneseno</string>
     <string name="sources_management_metadata_unavailable_hint">Dostop do datoteke z metapodatki na daljavo ni možen. Uporaba popravka z nameščenim paketom še vedno deluje, vendar je samodejno posodabljanje za ta vir onemogočeno.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paketa s popravki ni bilo mogoče prenesti. Izvorni URL naslov je lahko napačen ali pa datoteka ne obstaja.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paketa s popravki ni bilo mogoče prenesti. Izvorni URL naslov je lahko napačen ali pa datoteka ne obstaja. Dotaknite se za spremembo</string>
@@ -1568,6 +1569,7 @@ Podrobnosti: %2$s"</string>
     <string name="changelog_show_all">Prikaži vse (%s)</string>
     <string name="changelog_show_less">Prikaži manj</string>
     <string name="no_network_toast">Internetna povezava ni na voljo</string>
+    <string name="download_waiting_for_network">Čakanje na omrežje</string>
     <string name="update_available">Na voljo je posodobitev</string>
     <string name="ready_to_install_update">Pripravljen na namestitev posodobitve</string>
     <string name="update_completed">Posodobitev je bila uspešno nameščena</string>

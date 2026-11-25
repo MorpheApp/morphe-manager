@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Այս փաթեթի աղբյուրը արգելված է և չի կարող ավելացվել</string>
     <string name="sources_management_source_blocked_badge">Արգելված է</string>
     <string name="sources_management_metadata_unavailable">Մետատվյալները հասանելի չեն</string>
+    <string name="sources_management_bundle_missing_badge">Չի ներբեռնվել</string>
     <string name="sources_management_metadata_unavailable_hint">Հեռակա մետատվյալների ֆայլը հասանելի չէ: Տեղադրված փաթեթի միջոցով փոփոխությունների կիրառումը դեռ աշխատում է, սակայն այս աղբյուրի համար ավտոմատ թարմացումը անջատված է</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Փոփոխությունների փաթեթը հնարավոր չեղավ ներբեռնել: Աղբյուրի URL-ը կարող է լինել սխալ, կամ ֆայլը գոյություն չունի</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Թարմացման փաթեթը հնարավոր չեղավ ներբեռնել: Աղբյուրի URL-ը կարող է լինել սխալ, կամ ֆայլը գոյություն չունի: Պատկերեք փոփոխելու համար</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Ցուցադրել բոլորը (%s)</string>
     <string name="changelog_show_less">Ցուցադրել ավելի քիչ</string>
     <string name="no_network_toast">Ինտերնետ կապ չկա</string>
+    <string name="download_waiting_for_network">Սպասում ենք ցանցին</string>
     <string name="update_available">Հասանելի է թարմացում</string>
     <string name="ready_to_install_update">Պատրաստ է թարմացման տեղադրմանը</string>
     <string name="update_completed">Թարմացումը տեղադրված է</string>

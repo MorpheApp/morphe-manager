@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">このパッチソースはブロックされており、追加できません</string>
     <string name="sources_management_source_blocked_badge">ブロック済み</string>
     <string name="sources_management_metadata_unavailable">メタデータがありません</string>
+    <string name="sources_management_bundle_missing_badge">未ダウンロード</string>
     <string name="sources_management_metadata_unavailable_hint">接続先のメタデータファイルを取得できません。インストール済みのバンドルでのパッチ適用は引き続き可能ですが、このソースの自動更新は無効になります</string>
     <string name="sources_management_metadata_unavailable_hint_missing">パッチバンドルをダウンロードできませんでした。ソース URL が正しくないか、ファイルが存在しない可能性があります</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">パッチバンドルをダウンロードできませんでした。ソース URL が正しくないか、ファイルが存在しない可能性があります。タップして変更してください</string>
@@ -576,9 +577,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="app_links_change_failed">アプリリンクの変更に失敗しました</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
-    <string name="app_links_allow_shizuku">Shizukuへのアクセスを許可</string>
-    <string name="app_links_shizuku_permission_hint">MorpheがShizukuを使用してこれらのリンクを有効にするのを許可してください</string>
-    <string name="app_links_shizuku_not_running_hint">Morpheがこれらのリンクを有効にできるように、Shizukuを起動してください</string>
+    <string name="app_links_allow_shizuku">Shizuku へのアクセスを許可</string>
+    <string name="app_links_shizuku_permission_hint">Morphe が Shizuku を使用して、これらのリンクを有効にすることを許可してください</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku を起動して、Morphe がこれらのリンクを有効にするようにしてください</string>
     <string name="configure">設定</string>
     <string name="patcher_rename_title">クローンをインストールします</string>
     <string name="patcher_rename_description">このパッチでは独自のパッケージ名でアプリがビルドされるため、インストールすると &lt;b&gt;%s&lt;/b&gt; が更新されるのではなく、クローンアプリとして追加されます</string>
@@ -749,7 +750,7 @@ APK ファイルの取得元を選択してください"</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
     <string name="patcher_process_killed_message">メモリを解放するためなどの理由で、システムがパッチ処理を完了前に停止しました。他のアプリを閉じて、もう一度お試しください</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">パッチ適用が完了する前にMorpheが終了したため、何も適用されませんでした。もう一度お試しください</string>
+    <string name="patcher_interrupted_message">パッチ適用が完了する前に Morphe が終了したため、何もパッチが適用されませんでした。もう一度お試しください</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">パッチ処理が完了する前にクラッシュしました。再発する場合は、%1$s をオフにしてログとともに問題を報告してください</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -1569,6 +1570,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">すべて表示 (%s)</string>
     <string name="changelog_show_less">表示を減らす</string>
     <string name="no_network_toast">インターネットに接続されていません</string>
+    <string name="download_waiting_for_network">ネットワーク待機中</string>
     <string name="update_available">アップデートが利用可能です</string>
     <string name="ready_to_install_update">アップデートをインストールする準備ができました</string>
     <string name="update_completed">アップデートがインストールされました</string>

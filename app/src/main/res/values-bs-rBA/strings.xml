@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ovaj izvor zakrpa je blokiran i ne može biti dodan</string>
     <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metapodaci nisu dostupni</string>
+    <string name="sources_management_bundle_missing_badge">Nije preuzeto</string>
     <string name="sources_management_metadata_unavailable_hint">Udaljeni fajl metapodataka nije dostupan. Zakrpljivanje sa instaliranim paketom i dalje radi, ali je automatsko ažuriranje onemogućeno za ovaj izvor</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije mogao biti preuzet. URL izvora je možda neispravan ili fajl ne postoji</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket zakrpa nije mogao biti preuzet. Izvorni URL je možda neispravan ili datoteka ne postoji. Dodirnite da ga promijenite</string>
@@ -1568,6 +1569,7 @@ Detalji: %2$s"</string>
     <string name="changelog_show_all">Prikaži sve (%s)</string>
     <string name="changelog_show_less">Prikaži manje</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
+    <string name="download_waiting_for_network">Čekanje na mrežu</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spreman za instalaciju ažuriranja</string>
     <string name="update_completed">Ažuriranje je instalirano</string>

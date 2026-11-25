@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ovaj izvor patcha je blokiran i ne može se dodati</string>
     <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metapodaci N/A</string>
+    <string name="sources_management_bundle_missing_badge">Nije preuzeto</string>
     <string name="sources_management_metadata_unavailable_hint">Datoteka udaljenih metapodataka nije dostupna. Patchanje s instaliranim paketom i dalje radi, ali automatsko ažuriranje je onemogućeno za ovaj izvor</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket patcheva nije moguće preuzeti. Izvorna poveznica možda nije ispravna ili datoteka ne postoji.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket patcheva nije bilo moguće preuzeti. Izvorna poveznica je možda netočna ili datoteka ne postoji. Dodirnite za promjenu.</string>
@@ -1571,6 +1572,7 @@ Detalji: %2$s"</string>
     <string name="changelog_show_all">Prikaži sve (%s)</string>
     <string name="changelog_show_less">Prikaži manje</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
+    <string name="download_waiting_for_network">Čekanje mreže</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spremno za instalaciju ažuriranja</string>
     <string name="update_completed">Ažuriranje instalirano</string>

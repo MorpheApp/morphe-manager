@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">מקור הטלאים הזה חסום ולא ניתן להוסיף אותו</string>
     <string name="sources_management_source_blocked_badge">חסום</string>
     <string name="sources_management_metadata_unavailable">מטא-נתונים לא זמינים</string>
+    <string name="sources_management_bundle_missing_badge">לא הורד</string>
     <string name="sources_management_metadata_unavailable_hint">קובץ המטא-נתונים המרוחק לא זמין. תיקון באמצעות החבילה המותקנת עדיין עובד, אך עדכון אוטומטי מושבת עבור מקור זה</string>
     <string name="sources_management_metadata_unavailable_hint_missing">לא ניתן להוריד את חבילת התיקון. כתובת ה-URL של המקור עשויה להיות שגויה או שהקובץ אינו קיים</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">לא ניתן היה להוריד את חבילת התיקונים. ייתכן שכתובת ה-URL של המקור אינה נכונה או שהקובץ אינו קיים. לחץ כדי לשנות אותה</string>
@@ -1578,6 +1579,7 @@ drawable-xxhdpi: 387x144 פיקסלים
     <string name="changelog_show_all">הצג הכול (%s)</string>
     <string name="changelog_show_less">הצג פחות</string>
     <string name="no_network_toast">אין חיבור אינטרנט זמין</string>
+    <string name="download_waiting_for_network">המתנה לרשת</string>
     <string name="update_available">עדכון זמין</string>
     <string name="ready_to_install_update">מוכן להתקנת עדכון</string>
     <string name="update_completed">העדכון הותקן</string>

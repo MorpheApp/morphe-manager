@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Энэхүү нөхөх эх сурвалж хаагдсан тул нэмэх боломжгүй</string>
     <string name="sources_management_source_blocked_badge">Хаагдсан</string>
     <string name="sources_management_metadata_unavailable">Мета өгөгдөл олдохгүй байна</string>
+    <string name="sources_management_bundle_missing_badge">Татаж аваагүй</string>
     <string name="sources_management_metadata_unavailable_hint">Алсын мета өгөгдлийн файл олдохгүй байна. Суурилуулсан багцаар патчлах боломжтой хэвээр байгаа ч энэ эх сурвалжийн автоматаар шинэчлэх функцийг идэвхгүй болголоо</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патчийн багцыг татаж авж чадсангүй. Эх сурвалжийн URL буруу эсвэл файл байхгүй байж болзошгүй</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Патчийн багцыг татаж авч чадсангүй. Эх сурвалжийн URL буруу байх эсвэл файл байхгүй байж болзошгүй. Өөрчлөхийн тулд товшино уу</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Бүгдийг харах (%s)</string>
     <string name="changelog_show_less">Цаашруулах</string>
     <string name="no_network_toast">Интернэт холболтгүй байна</string>
+    <string name="download_waiting_for_network">Сүлжээг хүлээж байна</string>
     <string name="update_available">Шинэчлэл бэлэн боллоо</string>
     <string name="ready_to_install_update">Шинэчлэлийг суулгахад бэлэн</string>
     <string name="update_completed">Шинэчлэл суулгагдлаа</string>

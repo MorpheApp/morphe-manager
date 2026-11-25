@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">ეს პატჩის წყარო დაბლოკილია და მისი დამატება შეუძლებელია</string>
     <string name="sources_management_source_blocked_badge">დაბლოკილი</string>
     <string name="sources_management_metadata_unavailable">მეტამონაცემები მიუწვდომელია</string>
+    <string name="sources_management_bundle_missing_badge">არ არის ჩამოტვირთული</string>
     <string name="sources_management_metadata_unavailable_hint">დისტანციური მეტამონაცემთა ფაილი მიუწვდომელია. დაპატჩვა დაინსტალირებული პაკეტით კვლავ მუშაობს, თუმცა ამ წყაროსთვის ავტო-განახლება გამორთულია</string>
     <string name="sources_management_metadata_unavailable_hint_missing">პატჩის პაკეტის ჩამოტვირთვა ვერ მოხერხდა. შესაძლოა წყაროს URL არასწორია ან ფაილი არ არსებობს</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">პატჩების პაკეტის ჩამოტვირთვა ვერ მოხერხდა. შესაძლოა წყაროს URL არასწორია ან ფაილი არ არსებობს. შეცვლისთვის დააჭირეთ</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">ყველას ჩვენება (%s)</string>
     <string name="changelog_show_less">ნაკლების ჩვენება</string>
     <string name="no_network_toast">ინტერნეტთან კავშირი არ არის ხელმისაწვდომი</string>
+    <string name="download_waiting_for_network">ქსელის მოლოდინი</string>
     <string name="update_available">ხელმისაწვდომია განახლება</string>
     <string name="ready_to_install_update">მზადაა განახლების დასაინსტალირებლად</string>
     <string name="update_completed">განახლება დაინსტალირებულია</string>

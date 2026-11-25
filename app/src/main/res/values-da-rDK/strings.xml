@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Denne patchkilde er blokeret og kan ikke tilføjes</string>
     <string name="sources_management_source_blocked_badge">Blokeret</string>
     <string name="sources_management_metadata_unavailable">Metadata ikke tilgængelig</string>
+    <string name="sources_management_bundle_missing_badge">Ikke downloadet</string>
     <string name="sources_management_metadata_unavailable_hint">Den eksterne metadatafil er ikke tilgængelig. Opdatering med den installerede pakke fungerer stadig, men automatisk opdatering er deaktiveret for denne kilde</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Opdateringspakken kunne ikke hentes. Kilde-URL\'en kan være forkert, eller filen findes ikke</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch-pakken kunne ikke downloades. Kilde-URL\'en er muligvis forkert, eller filen findes ikke. Tryk for at ændre den</string>
@@ -1568,6 +1569,7 @@ Detaljer: %2$s"</string>
     <string name="changelog_show_all">Vis alle (%s)</string>
     <string name="changelog_show_less">Vis mindre</string>
     <string name="no_network_toast">Ingen internetforbindelse tilgængelig</string>
+    <string name="download_waiting_for_network">Venter på netværk</string>
     <string name="update_available">En opdatering er tilgængelig</string>
     <string name="ready_to_install_update">Klar til at installere opdatering</string>
     <string name="update_completed">Opdatering installeret</string>

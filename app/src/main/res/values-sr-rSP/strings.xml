@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Овај извор закрпа је блокиран и не може бити додат</string>
     <string name="sources_management_source_blocked_badge">Блокиран</string>
     <string name="sources_management_metadata_unavailable">Метаподаци нису доступни</string>
+    <string name="sources_management_bundle_missing_badge">Није преузето</string>
     <string name="sources_management_metadata_unavailable_hint">Датотека метаподатка са удаљеног извора није доступна. Поправка са инсталираним пакетом и даље функционише, али аутоматска ажурирања су искључена за овај извор</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Пакет закрпа није могао да се преузме. УРЛ адреса извора може бити неисправна или датотека не постоји</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Пакет за закрпљивање није могао да се преузме. URL извора може бити нетачан или датотека не постоји. Додирните да га промените</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Прикажи све (%s)</string>
     <string name="changelog_show_less">Прикажи мање</string>
     <string name="no_network_toast">Нема доступне интернет везе</string>
+    <string name="download_waiting_for_network">Чекање мреже</string>
     <string name="update_available">Ажурирање је доступно</string>
     <string name="ready_to_install_update">Спреман за инсталирање ажурирања</string>
     <string name="update_completed">Ажурирање инсталирано</string>

@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Tämä päivityslähde on estetty, eikä sitä voi lisätä</string>
     <string name="sources_management_source_blocked_badge">Estetty</string>
     <string name="sources_management_metadata_unavailable">Metatietoja ei ole saatavilla</string>
+    <string name="sources_management_bundle_missing_badge">Ei ladattu</string>
     <string name="sources_management_metadata_unavailable_hint">Etämetatietotiedosto ei ole saatavilla. Muokkaaminen asennetulla lisäosapaketilla onnistuu edelleen, mutta automaattinen päivitys on poistettu käytöstä tässä lähteessä</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Lisäosapaketin lataaminen epäonnistui. Lähteen URL-osoite saattaa olla virheellinen tai tiedostoa ei ole olemassa</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Lisäosapaketin lataaminen epäonnistui. Lähteen URL-osoite saattaa olla virheellinen tai tiedostoa ei ole olemassa. Napauta muuttaaksesi sitä</string>
@@ -1568,6 +1569,7 @@ Yksityiskohdat: %2$s"</string>
     <string name="changelog_show_all">Näytä kaikki (%s)</string>
     <string name="changelog_show_less">Näytä vähemmän</string>
     <string name="no_network_toast">Ei internetyhteyttä</string>
+    <string name="download_waiting_for_network">Odotetaan verkkoa</string>
     <string name="update_available">Päivitys on saatavilla</string>
     <string name="ready_to_install_update">Valmis asentamaan päivityksen</string>
     <string name="update_completed">Päivitys asennettu</string>

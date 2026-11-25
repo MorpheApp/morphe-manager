@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Tento zdroj záplat je zablokovaný a nie je možné ho pridať</string>
     <string name="sources_management_source_blocked_badge">Zablokované</string>
     <string name="sources_management_metadata_unavailable">Metadáta N/A</string>
+    <string name="sources_management_bundle_missing_badge">Nestiahnuté</string>
     <string name="sources_management_metadata_unavailable_hint">Diaľkový metaúdajový súbor nie je dostupný. Oprava pomocou nainštalovaného balíka stále funguje, ale automatická aktualizácia je pre tento zdroj zakázaná</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Balík opráv sa nepodarilo stiahnuť. URL adresa zdroja môže byť nesprávna alebo súbor neexistuje</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Balík záplat sa nepodarilo stiahnuť. Zdrojová URL môže byť nesprávna alebo súbor neexistuje. Klepnutím ju zmeňte</string>
@@ -1568,6 +1569,7 @@ Podrobnosti: %2$s"</string>
     <string name="changelog_show_all">Zobraziť všetky (%s)</string>
     <string name="changelog_show_less">Zobraziť menej</string>
     <string name="no_network_toast">Žiadne internetové pripojenie</string>
+    <string name="download_waiting_for_network">Čakanie na sieť</string>
     <string name="update_available">Je dostupná aktualizácia</string>
     <string name="ready_to_install_update">Inštalácia aktualizácie je pripravená.</string>
     <string name="update_completed">Aktualizácia nainštalovaná</string>

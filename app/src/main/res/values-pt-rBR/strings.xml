@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Esta fonte de atualização está bloqueada e não pode ser adicionada</string>
     <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadados N/A</string>
+    <string name="sources_management_bundle_missing_badge">Não baixado</string>
     <string name="sources_management_metadata_unavailable_hint">O arquivo de metadados remoto não está disponível. A aplicação de patches com o pacote instalado ainda funciona, mas a atualização automática está desativada para esta fonte.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">O pacote de patches não pôde ser baixado. A URL de origem pode estar incorreta ou o arquivo não existir. Toque para alterá-la</string>
@@ -1567,6 +1568,7 @@ Detalhes: %2$s"</string>
     <string name="changelog_show_all">Mostrar tudo (%s)</string>
     <string name="changelog_show_less">Mostrar Menos</string>
     <string name="no_network_toast">Não há conexão com a internet disponível</string>
+    <string name="download_waiting_for_network">Aguardando rede</string>
     <string name="update_available">Uma atualização está disponível</string>
     <string name="ready_to_install_update">Pronto para instalar a atualização</string>
     <string name="update_completed">Atualização instalada</string>

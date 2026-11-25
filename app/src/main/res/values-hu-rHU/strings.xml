@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Ez a módosításforrás blokkolva van, ezért nem adható hozzá</string>
     <string name="sources_management_source_blocked_badge">Blokkolt</string>
     <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre</string>
+    <string name="sources_management_bundle_missing_badge">Nem lett letöltve</string>
     <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő javítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">A javítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">A patch csomag nem tölthető le. A forrás URL-címe helytelen lehet, vagy a fájl nem létezik. Koppintson a módosításhoz</string>
@@ -1568,6 +1569,7 @@ Részletek: %2$s"</string>
     <string name="changelog_show_all">Összes megjelenítése (%s)</string>
     <string name="changelog_show_less">Mutass kevesebbet</string>
     <string name="no_network_toast">Nincs elérhető internetkapcsolat</string>
+    <string name="download_waiting_for_network">Hálózatra várva</string>
     <string name="update_available">Egy frissítés érhető el</string>
     <string name="ready_to_install_update">A frissítés telepítésre kész</string>
     <string name="update_completed">A frissítés telepítve</string>

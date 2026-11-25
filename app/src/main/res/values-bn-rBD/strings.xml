@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">এই প্যাচ উৎসটি ব্লক করা হয়েছে এবং এটি যোগ করা যাবে না</string>
     <string name="sources_management_source_blocked_badge">ব্লক করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
+    <string name="sources_management_bundle_missing_badge">ডাউনলোড করা হয়নি</string>
     <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">প্যাচ বান্ডিলটি ডাউনলোড করা যায়নি। সোর্স URL-টি ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই। এটি পরিবর্তন করতে ট্যাপ করুন</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">সব দেখুন (%s)</string>
     <string name="changelog_show_less">কম দেখুন</string>
     <string name="no_network_toast">ইন্টারনেট সংযোগ উপলব্ধ নয়</string>
+    <string name="download_waiting_for_network">নেটওয়ার্কের জন্য অপেক্ষা করা হচ্ছে</string>
     <string name="update_available">একটি আপডেট উপলব্ধ</string>
     <string name="ready_to_install_update">আপডেট ইনস্টল করার জন্য প্রস্তুত</string>
     <string name="update_completed">আপডেট ইনস্টল করা হয়েছে</string>

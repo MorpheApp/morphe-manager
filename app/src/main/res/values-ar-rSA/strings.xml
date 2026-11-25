@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">تم حظر مصدر التعديل هذا ولا يمكن إضافته</string>
     <string name="sources_management_source_blocked_badge">محظور</string>
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
+    <string name="sources_management_bundle_missing_badge">لم يتم التنزيل</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود. انقر لتغييره</string>
@@ -1572,6 +1573,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog_show_all">عرض الكل (%s)</string>
     <string name="changelog_show_less">عرض أقل</string>
     <string name="no_network_toast">لا يوجد اتصال بالإنترنت متاح</string>
+    <string name="download_waiting_for_network">بانتظار الشبكة</string>
     <string name="update_available">يتوفر تحديث</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>
     <string name="update_completed">تم تثبيت التحديث</string>

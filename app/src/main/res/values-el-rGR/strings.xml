@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Η πηγή ενημερώσεων είναι αποκλεισμένη και δεν μπορεί να προστεθεί</string>
     <string name="sources_management_source_blocked_badge">Αποκλεισμένο</string>
     <string name="sources_management_metadata_unavailable">Μεταδεδομένα μη διαθέσιμα</string>
+    <string name="sources_management_bundle_missing_badge">Δεν έχει ληφθεί</string>
     <string name="sources_management_metadata_unavailable_hint">Το απομακρυσμένο αρχείο μεταδεδομένων δεν είναι διαθέσιμο. Η επιδιόρθωση με το εγκατεστημένο πακέτο εξακολουθεί να λειτουργεί, αλλά η αυτόματη ενημέρωση είναι απενεργοποιημένη για αυτήν την πηγή</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Το πακέτο επιδιόρθωσης δεν κατέβηκε. Η διεύθυνση URL της πηγής ενδέχεται να είναι λανθασμένη ή το αρχείο να μην υπάρχει</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Το πακέτο διορθώσεων δεν μπορούσε να ληφθεί. Η διεύθυνση URL της πηγής ενδέχεται να είναι λανθασμένη ή το αρχείο δεν υπάρχει. Πατήστε για να την αλλάξετε</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Εμφάνιση όλων (%s)</string>
     <string name="changelog_show_less">Εμφάνιση λιγότερων</string>
     <string name="no_network_toast">Δεν υπάρχει διαθέσιμη σύνδεση στο διαδίκτυο</string>
+    <string name="download_waiting_for_network">Αναμονή για δίκτυο</string>
     <string name="update_available">Μία ενημέρωση είναι διαθέσιμη</string>
     <string name="ready_to_install_update">Έτοιμο για εγκατάσταση ενημέρωσης</string>
     <string name="update_completed">Η ενημέρωση εγκαταστάθηκε</string>

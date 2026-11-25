@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Chanzo hiki cha patch kimezuiwa na hakiwezi kuongezwa</string>
     <string name="sources_management_source_blocked_badge">Imezuiwa</string>
     <string name="sources_management_metadata_unavailable">Metadata haipatikani</string>
+    <string name="sources_management_bundle_missing_badge">Haijapakiwa</string>
     <string name="sources_management_metadata_unavailable_hint">Faili ya metadata ya mbali haipatikani. Kufanya patching kwa bundle iliyosakinishwa bado inafanya kazi, lakini sasisho la kiotomatiki limezimwa kwa chanzo hiki</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundle ya patch haikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Kifurushi cha patch hakikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo. Gusa ili kuibadilisha</string>
@@ -1568,6 +1569,7 @@ Maelezo: %2$s"</string>
     <string name="changelog_show_all">Onyesha zote (%s)</string>
     <string name="changelog_show_less">Onyesha kidogo</string>
     <string name="no_network_toast">Hakuna muunganisho wa intaneti unaopatikana</string>
+    <string name="download_waiting_for_network">Inasubiri mtandao</string>
     <string name="update_available">Sasisho lipo</string>
     <string name="ready_to_install_update">Tayari kusakinisha sasisho</string>
     <string name="update_completed">Sasisho limesakinishwa</string>

@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">此修補程式來源已封鎖，無法新增</string>
     <string name="sources_management_source_blocked_badge">封鎖</string>
     <string name="sources_management_metadata_unavailable">中繼資料無法使用</string>
+    <string name="sources_management_bundle_missing_badge">尚未下載</string>
     <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。您仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">無法下載修補套件。來源 URL 可能不正確，或檔案不存在。點擊以變更</string>
@@ -1566,6 +1567,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">顯示全部（%s）</string>
     <string name="changelog_show_less">顯示較少</string>
     <string name="no_network_toast">沒有可用的網際網路連線</string>
+    <string name="download_waiting_for_network">等待網路</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
     <string name="update_completed">更新已安裝</string>

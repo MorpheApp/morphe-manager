@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">To źródło modyfikacji jest zablokowane i nie może zostać dodane</string>
     <string name="sources_management_source_blocked_badge">Zablokowane</string>
     <string name="sources_management_metadata_unavailable">Brak metadanych</string>
+    <string name="sources_management_bundle_missing_badge">Niepobrano</string>
     <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje. Dotknij, aby go zmienić</string>
@@ -1569,6 +1570,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="changelog_show_all">Pokaż wszystkie (%s)</string>
     <string name="changelog_show_less">Pokaż mniej</string>
     <string name="no_network_toast">Brak połączenia z internetem</string>
+    <string name="download_waiting_for_network">Oczekiwanie na sieć</string>
     <string name="update_available">Dostępna jest aktualizacja</string>
     <string name="ready_to_install_update">Gotowy do zainstalowania aktualizacji</string>
     <string name="update_completed">Zainstalowano aktualizację</string>

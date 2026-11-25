@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Questa sorgente di patch è bloccata e non può essere aggiunta</string>
     <string name="sources_management_source_blocked_badge">Bloccata</string>
     <string name="sources_management_metadata_unavailable">Metadati non disponibili</string>
+    <string name="sources_management_bundle_missing_badge">Non scaricato</string>
     <string name="sources_management_metadata_unavailable_hint">Il file dei metadati remoti non è disponibile. L\'applicazione della patch con il bundle installato funziona ancora, ma l\'aggiornamento automatico è disabilitato per questa sorgente</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file inesistente </string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Impossibile scaricare il bundle di patch. L\'URL di origine potrebbe essere errato oppure il file non esiste. Tocca per modificarlo</string>
@@ -1568,6 +1569,7 @@ Dettagli: %2$s"</string>
     <string name="changelog_show_all">Mostra tutto (%s)</string>
     <string name="changelog_show_less">Mostra meno</string>
     <string name="no_network_toast">Connessione internet non disponibile</string>
+    <string name="download_waiting_for_network">In attesa della rete</string>
     <string name="update_available">È disponibile un aggiornamento</string>
     <string name="ready_to_install_update">Aggiornamento pronto per l\'installazione</string>
     <string name="update_completed">Aggiornamento installato</string>

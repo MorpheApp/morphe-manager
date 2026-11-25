@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">यह पैच स्रोत अवरुद्ध है और इसे नहीं जोड़ा जा सकता</string>
     <string name="sources_management_source_blocked_badge">अवरुद्ध</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
+    <string name="sources_management_bundle_missing_badge">डाउनलोड नहीं किया गया</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है। इसे बदलने के लिए टैप करें</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">सभी दिखाएँ (%s)</string>
     <string name="changelog_show_less">कम दिखाएँ</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नहीं है</string>
+    <string name="download_waiting_for_network">नेटवर्क का इंतज़ार है</string>
     <string name="update_available">एक अपडेट उपलब्ध है</string>
     <string name="ready_to_install_update">अपडेट इंस्टॉल करने के लिए तैयार</string>
     <string name="update_completed">अपडेट इंस्टॉल हो गया</string>

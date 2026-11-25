@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">此补丁源被阻止，无法添加</string>
     <string name="sources_management_source_blocked_badge">已阻止</string>
     <string name="sources_management_metadata_unavailable">元数据不可用</string>
+    <string name="sources_management_bundle_missing_badge">未下载</string>
     <string name="sources_management_metadata_unavailable_hint">远程元数据文件不可用。使用已安装的程序包进行修补仍然有效，但此源的自动更新已禁用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">无法下载补丁包。源URL可能不正确或文件不存在</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">无法下载补丁包。源 URL 可能不正确或文件不存在。点击以更改</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">显示全部（%s）</string>
     <string name="changelog_show_less">显示更少</string>
     <string name="no_network_toast">无可用网络连接</string>
+    <string name="download_waiting_for_network">等待网络</string>
     <string name="update_available">有可用更新</string>
     <string name="ready_to_install_update">准备安装更新</string>
     <string name="update_completed">更新已安装</string>

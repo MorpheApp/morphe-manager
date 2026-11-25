@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Бул патч булагы блоктолгон жана аны кошууга болбойт</string>
     <string name="sources_management_source_blocked_badge">Блоктолгон</string>
     <string name="sources_management_metadata_unavailable">Метамаалымат жок</string>
+    <string name="sources_management_bundle_missing_badge">Жүктөлгөн эмес</string>
     <string name="sources_management_metadata_unavailable_hint">Алыстагы метамаалымат файлы жеткиликсиз. Орнотулган пакет менен патч жасоо дагы деле иштейт, бирок бул булак үчүн авто-жаңыртуу өчүрүлгөн</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Патч пакетин жүктөө мүмкүн болгон жок. Булактын URL дареги ката болушу мүмкүн же файл жок</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Патч топтомун жүктөө мүмкүн болгон жок. Булак URL-дарегі туура эмес болушу мүмкүн же файл жок. Өзгөртүү үчүн басыңыз</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Баарын көрсөтүү (%s)</string>
     <string name="changelog_show_less">Азыраак көрсөтүү</string>
     <string name="no_network_toast">Интернет байланышы жок</string>
+    <string name="download_waiting_for_network">Тармак күтүлүүдө</string>
     <string name="update_available">Жаңыртуу бар</string>
     <string name="ready_to_install_update">Жаңыртууну орнотууга даяр</string>
     <string name="update_completed">Жаңыртуу орнотулду</string>

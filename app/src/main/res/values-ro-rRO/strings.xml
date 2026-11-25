@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Această sursă de patch este blocată și nu poate fi adăugată</string>
     <string name="sources_management_source_blocked_badge">Blocată</string>
     <string name="sources_management_metadata_unavailable">Metadate indisponibile</string>
+    <string name="sources_management_bundle_missing_badge">Nedescărcat</string>
     <string name="sources_management_metadata_unavailable_hint">Fișierul de metadate de la distanță nu este disponibil. Aplicarea pachetului instalat funcționează în continuare, dar actualizarea automată este dezactivată pentru această sursă</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pachetul de patch-uri nu a putut fi descărcat. URL-ul sursei poate fi incorect sau fișierul nu există</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Pachetul de patch-uri nu a putut fi descărcat. URL-ul sursei ar putea fi incorect sau fișierul nu există. Apasă pentru a-l schimba</string>
@@ -1568,6 +1569,7 @@ Detalii: %2$s"</string>
     <string name="changelog_show_all">Afișează toate (%s)</string>
     <string name="changelog_show_less">Afișează mai puține</string>
     <string name="no_network_toast">Nu există conexiune la internet</string>
+    <string name="download_waiting_for_network">Așteptare rețea</string>
     <string name="update_available">Este disponibilă o actualizare</string>
     <string name="ready_to_install_update">Actualizare pregătită pentru instalare</string>
     <string name="update_completed">Actualizare instalată</string>

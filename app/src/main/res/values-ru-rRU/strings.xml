@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Этот источник патчей заблокирован и не может быть добавлен</string>
     <string name="sources_management_source_blocked_badge">Заблокировано</string>
     <string name="sources_management_metadata_unavailable">Метаданные недоступны</string>
+    <string name="sources_management_bundle_missing_badge">Не скачано</string>
     <string name="sources_management_metadata_unavailable_hint">Удаленный файл метаданных недоступен. Применение патча к установленному пакету по-прежнему работает, но автоматическое обновление для этого источника отключено</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не удалось загрузить пакет патчей. URL-адрес источника может быть указан неверно или файл не существует</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Не удалось загрузить пакет патчей. Возможно, URL источника неверен или файл не существует. Нажмите, чтобы изменить это</string>
@@ -1568,6 +1569,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Показать все (%s)</string>
     <string name="changelog_show_less">Показать меньше</string>
     <string name="no_network_toast">Нет подключения к Интернету</string>
+    <string name="download_waiting_for_network">Ожидание сети</string>
     <string name="update_available">Доступно обновление</string>
     <string name="ready_to_install_update">Готово к установке обновления</string>
     <string name="update_completed">Обновление установлено</string>

@@ -201,6 +201,7 @@
     <string name="sources_management_blocked">Den här tilläggskällan är blockerad och kan inte läggas till</string>
     <string name="sources_management_source_blocked_badge">Blockerad</string>
     <string name="sources_management_metadata_unavailable">Metadata är inte tillgängliga</string>
+    <string name="sources_management_bundle_missing_badge">Ej nedladdad</string>
     <string name="sources_management_metadata_unavailable_hint">Fjärrfilen för metadata är inte tillgänglig. Modifiering med det installerade arkivet fungerar fortfarande, men automatisk uppdatering är inaktiverad för den här källan</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen. Tryck för att ändra den</string>
@@ -1568,6 +1569,7 @@ Information: %2$s"</string>
     <string name="changelog_show_all">Visa alla (%s)</string>
     <string name="changelog_show_less">Visa mindre</string>
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
+    <string name="download_waiting_for_network">Väntar på nätverk</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
     <string name="ready_to_install_update">Redo att installera uppdateringen</string>
     <string name="update_completed">Uppdatering installerades</string>
