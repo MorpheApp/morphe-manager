@@ -491,7 +491,7 @@ fun BatchPatcherScreen(
                         )
                     }
                 } else {
-                    // Eased toward what the run reports, as a single run is
+                    // Paced as that of a single run is
                     val displayProgress = rememberDisplayedPatchProgress(run = shownRun, succeeded = null)
                     // Each app ramps the background up from rest
                     PatchingBackgroundSpeedEffect(

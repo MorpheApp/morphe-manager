@@ -25,15 +25,11 @@ import app.morphe.manager.ui.model.PatchProgressSource
 import app.morphe.manager.ui.model.State
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.HomeAndPatcherMessages
+import app.morphe.manager.util.isSlowPatchingDevice
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
-
-private val ProgressRingWavelength = 40.dp
-
-/** The ring runs for minutes here, so its wave stays low enough not to tire the eye. */
-private const val PROGRESS_RING_AMPLITUDE = 0.6f
 
 /**
  * Simple mode patching screen.
@@ -269,7 +265,7 @@ private fun ProgressDetailsSection(
 }
 
 /**
- * Animated message with fade transitions.
+ * Animated message with fade transitions, which a slow device goes without.
  */
 @Composable
 private fun AnimatedMessage(messageResId: Int) {
@@ -283,12 +279,13 @@ private fun AnimatedMessage(messageResId: Int) {
         maxLines = 4,
         overflow = TextOverflow.Ellipsis,
         modifier = Modifier.fillMaxWidth(),
-        label = "message_animation"
+        label = "message_animation",
+        animated = !isSlowPatchingDevice
     )
 }
 
 /**
- * Wavy circular progress indicator with percentage and patch count.
+ * Progress ring with percentage and patch count.
  */
 @Composable
 private fun CircularProgressWithStats(
@@ -298,19 +295,17 @@ private fun CircularProgressWithStats(
     accentColor: Color?,
     modifier: Modifier = Modifier
 ) {
-    // The eased progress moves every frame, so only the whole percent is read while composing
+    // Only the whole percent is read while composing, which changes less often than the progress
     val percent by remember(progress) { derivedStateOf { (progress() * 100).toInt() } }
 
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
-        WavyProgressRing(
+        PatchingProgressRing(
             progress = progress,
-            wavelength = ProgressRingWavelength,
             accentColor = accentColor,
             modifier = Modifier.fillMaxSize(),
-            amplitude = PROGRESS_RING_AMPLITUDE,
             trackColor = MaterialTheme.colorScheme.surfaceVariant
         )
 
@@ -377,6 +372,7 @@ fun CurrentStepIndicator(
         color = stepColor,
         textAlign = TextAlign.Center,
         modifier = Modifier.fillMaxWidth(),
-        label = "step_animation"
+        label = "step_animation",
+        animated = !isSlowPatchingDevice
     )
 }

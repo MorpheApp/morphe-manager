@@ -24,6 +24,7 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 // Tilt shifts the artwork by about a dozen pixels at full range, so smaller steps land under a pixel
@@ -56,6 +57,9 @@ fun AnimationFrameEffect(frameLoop: suspend CoroutineScope.() -> Unit) {
     }
 }
 
+// A background eased down to this share of its speed stands still to the eye
+private const val STOPPED_SPEED = 0.01f
+
 // How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
 // a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
 // It is a whole number of the cycles backgrounds wrap their own motion at, so those stay seamless
@@ -65,7 +69,8 @@ private const val ANIMATED_TIME_WRAP_MS = 3_600_000f
  * Steps a background once per [BACKGROUND_STEP_INTERVAL_MS], handing [onStep] the milliseconds of
  * animation since the previous step: real time scaled by a speed that eases toward
  * [speedMultiplier] instead of jumping to it, along with that eased speed itself. Shared by the
- * clock most backgrounds read and by the ones that integrate their own physics.
+ * clock most backgrounds read and by the ones that integrate their own physics. At a speed of 0 it
+ * eases to a stop and takes no more frames until the speed changes.
  * Named with uppercase as required by Compose convention for Unit-returning Composables.
  *
  * @param boost How much further than [speedMultiplier] this background leans into a speed-up,
@@ -85,7 +90,10 @@ fun BackgroundStepEffect(
     val currentOnStep by rememberUpdatedState(onStep)
 
     AnimationFrameEffect {
-        fun boostedTarget() = 1f + (targetSpeed.floatValue - 1f) * boost
+        fun boostedTarget(): Float {
+            val target = targetSpeed.floatValue
+            return if (target == 0f) 0f else 1f + (target - 1f) * boost
+        }
 
         var lastFrameMs = withInfiniteAnimationFrameMillis { it }
         var currentSpeed = boostedTarget()
@@ -94,6 +102,11 @@ fun BackgroundStepEffect(
         var elapsedMs = 0f
         var pendingMs = 0f
         while (true) {
+            if (targetSpeed.floatValue == 0f && currentSpeed < STOPPED_SPEED) {
+                currentSpeed = 0f
+                snapshotFlow { targetSpeed.floatValue }.first { it != 0f }
+                lastFrameMs = withInfiniteAnimationFrameMillis { it }
+            }
             withInfiniteAnimationFrameMillis { frameMs ->
                 val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
                 lastFrameMs = frameMs
@@ -185,8 +198,8 @@ fun rememberParallaxState(
     LaunchedEffect(enableParallax) {
         if (!enableParallax) {
             tiltTarget.value = Offset.Zero
-            smoothTiltX.snapTo(0f)
-            smoothTiltY.snapTo(0f)
+            launch { smoothTiltX.animateTo(0f, spring(stiffness = Spring.StiffnessLow)) }
+            launch { smoothTiltY.animateTo(0f, spring(stiffness = Spring.StiffnessLow)) }
             return@LaunchedEffect
         }
 

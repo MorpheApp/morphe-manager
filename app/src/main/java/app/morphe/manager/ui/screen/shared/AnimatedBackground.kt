@@ -64,6 +64,8 @@ enum class BackgroundType(val displayNameResId: Int) {
  * When [type] is [BackgroundType.RANDOM], [resolvedType] must be provided —
  * it holds the already-resolved random type from the ViewModel so the choice
  * stays stable for the current session/interval.
+ *
+ * @param speedMultiplier How fast the background moves, where 1 is its normal speed and 0 stops it.
  */
 @Composable
 @SuppressLint("ModifierParameter")
@@ -81,6 +83,8 @@ fun AnimatedBackground(
     }
 
     val resolvedSpeed = speedMultiplier()
+    // A background that stands still does not follow the tilt of the device either
+    val parallax = enableParallax && resolvedSpeed != 0f
     val resolvedPatchingCompleted = patchingCompleted()
 
     // No background blends across its own layers, so clipping alone is enough. Compositing offscreen
@@ -93,73 +97,73 @@ fun AnimatedBackground(
         when (effectiveType) {
             BackgroundType.CIRCLES -> CirclesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.RINGS -> RingsBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.MESH -> MeshBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SPACE -> SpaceBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SHAPES -> ShapesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.SNOW -> SnowBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.GRID -> GridBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.PARTICLES -> ParticlesBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.LAVA -> LavaBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.MATRIX -> MatrixBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.HALLOWEEN -> HalloweenBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )
             BackgroundType.FIREWORKS -> FireworksBackground(
                 modifier = Modifier.fillMaxSize(),
-                enableParallax = enableParallax,
+                enableParallax = parallax,
                 speedMultiplier = resolvedSpeed,
                 patchingCompleted = resolvedPatchingCompleted
             )

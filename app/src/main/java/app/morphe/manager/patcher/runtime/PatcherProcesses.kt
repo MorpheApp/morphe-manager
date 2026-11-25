@@ -428,9 +428,16 @@ class PatcherProcesses(
         // the headers it was made with
         "-XX:+UseCompactObjectHeaders"
     ) else listOf(
-        // The simplest collector, with no threads of its own, on a port that runs few others. C2
-        // stays on, as the runs that take long on 32-bit phones gain the most from it
-        "-XX:+UseSerialGC"
+        // The JVM picks SerialGC on a device with little RAM or a single core. A large app fills most of the
+        // heap a 32-bit process gets, and collectors with generations of a fixed size then collect all of
+        // it over and over. C2 stays on, as the runs that take long on 32-bit phones gain the most from it
+        "-XX:+UseG1GC",
+        // What patching keeps alive soon takes more than the default threshold of 45%, and from then on
+        // marking would keep a core busy to find little to free, as it would with an adaptive threshold
+        "-XX:InitiatingHeapOccupancyPercent=80",
+        "-XX:-G1UseAdaptiveIHOP",
+        // Nothing waits on a pause, and fewer but longer ones copy less of what stays alive
+        "-XX:MaxGCPauseMillis=2000"
     )) + aot + debugOptions()
 
     /** Where the JVM in process [pid] reports a crash, %p standing for the pid of whichever does. */
