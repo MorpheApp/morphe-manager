@@ -1,3 +1,14 @@
+## [2.8.0-dev.5](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.4...v2.8.0-dev.5) (2026-11-25)
+
+### Features
+
+* Tell sources that failed to download apart from missing metadata ([3d01459](https://github.com/MorpheApp/morphe-manager/commit/3d014593b86203894c6bfbb0635b0204f45d9217))
+
+### Bug Fixes
+
+* Keep animated backgrounds seamless and density independent ([072083d](https://github.com/MorpheApp/morphe-manager/commit/072083d0e05b137a3cb7c68b5a0fc33c5ddfc450))
+* Keep the mesh background edge out of view after rotation ([f93e5ee](https://github.com/MorpheApp/morphe-manager/commit/f93e5eeb67ceabf6077b4c57dd6f238403ded5d0))
+
 ## [2.8.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.3...v2.8.0-dev.4) (2026-11-25)
 
 ### Features
