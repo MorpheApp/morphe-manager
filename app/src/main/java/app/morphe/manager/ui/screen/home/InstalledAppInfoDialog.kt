@@ -49,7 +49,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.*
 import app.morphe.manager.domain.bundles.AppVersionStatus
-import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -213,23 +212,13 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // Bundle data
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
-    // Only a remote source has a changelog. The one carrying a pending update is read from the
-    // version the app was patched with, any other from its current release
-    val changelogUids = appliedBundles.map { it.uid }.filter { uid -> sources.any { it.uid == uid && it is RemotePatchBundle } }
-    val changelogUid = appUpdate?.bundleUid?.takeIf { it in changelogUids } ?: changelogUids.firstOrNull()
-    val onShowChangelog: (() -> Unit)? = changelogUid?.let { uid ->
-        {
-            scope.launch {
-                changelogRequest.value = BundleChangelogRequest(
-                    bundleUid = uid,
-                    sinceVersion = appUpdate?.takeIf { it.bundleUid == uid }?.patchedWithVersion,
-                    subject = installedApp?.let { homeViewModel.apps.changelogSubject(it, uid) }
-                )
-            }
-        }
+    val appChangelogs by homeViewModel.apps.appChangelogs.collectAsStateWithLifecycle()
+    val appChangelog = appChangelogs[packageName]
+    val onShowChangelog: (() -> Unit)? = appChangelog?.let { changelog ->
+        { scope.launch { changelogRequest.value = homeViewModel.apps.changelogRequest(changelog) } }
     }
     // The rebuild banner reads out the notes of the update it offers, so the info row leaves them to it
-    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appUpdate?.bundleUid == changelogUid }
+    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appChangelog?.update != null }
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 

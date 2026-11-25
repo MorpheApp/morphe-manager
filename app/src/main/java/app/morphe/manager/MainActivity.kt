@@ -627,6 +627,7 @@ private fun MorpheManager(vm: MainViewModel) {
                         patchingCompleted.value = false
                         navController.popBackStack()
                     },
+                    homeApps = homeViewModel.apps,
                     onStartTour = startOnboardingTour,
                     onDeclineTour = declineOnboardingTour,
                     onAppStateChanged = homeViewModel.apps::notifyAppStateChanged,
