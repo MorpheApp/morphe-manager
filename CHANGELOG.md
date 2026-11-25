@@ -1,3 +1,14 @@
+## [2.8.0-dev.4](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.3...v2.8.0-dev.4) (2026-11-25)
+
+### Features
+
+* Show what's new for queued apps in batch patching ([adde0f2](https://github.com/MorpheApp/morphe-manager/commit/adde0f2b0e4a3bff07edaac50e7a8189b2174929))
+* Wait for the network instead of restarting interrupted downloads ([357a9f6](https://github.com/MorpheApp/morphe-manager/commit/357a9f654d02ad394499d4adce900e4be2732c61))
+
+### Bug Fixes
+
+* Mirror version changes and layout direction in RTL languages ([cee8e3e](https://github.com/MorpheApp/morphe-manager/commit/cee8e3eb912a0cd3681fe92fb273e443571ea4cb))
+
 ## [2.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.2...v2.8.0-dev.3) (2026-11-25)
 
 ### Features
