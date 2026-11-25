@@ -67,11 +67,22 @@ class ShizukuInstaller(private val app: Application) {
      * @param installerPackageNameOverride Optional package name to report as the installer.
      * @throws InstallerOperationException if the installation fails or is aborted.
      */
-    @SuppressLint("RequestInstallPackagesPolicy")
     suspend fun install(
         sourceFile: File,
         expectedPackage: String,
         installerPackageNameOverride: String? = null
+    ): InstallerStatus = try {
+        commitSession(sourceFile, expectedPackage, installerPackageNameOverride)
+    } catch (e: InstallerOperationException) {
+        if (!isDexMetadataRejection(e.message)) throw e
+        commitSession(sourceFile, expectedPackage, installerPackageNameOverride)
+    }
+
+    @SuppressLint("RequestInstallPackagesPolicy")
+    private suspend fun commitSession(
+        sourceFile: File,
+        expectedPackage: String,
+        installerPackageNameOverride: String?,
     ): InstallerStatus = withContext(Dispatchers.IO) {
         val packageInstaller = obtainPackageInstaller()
         val packageInstallerWrapper = packageInstaller.asPackageInstaller(installerPackageNameOverride)
@@ -98,6 +109,7 @@ class ShizukuInstaller(private val app: Application) {
                     session.fsync(output)
                 }
             }
+            dexMetadataOf(sourceFile)?.let(session::writeDexMetadata)
 
             val operation = PendingOperation()
             session.commit(operation.intentSender)

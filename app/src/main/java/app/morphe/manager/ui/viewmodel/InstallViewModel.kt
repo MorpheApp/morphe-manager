@@ -522,7 +522,7 @@ class InstallViewModel(
     /** Lifts a root mount over [packageName], which would otherwise keep showing the build being replaced. */
     private suspend fun unmountIfMounted(packageName: String) = withContext(Dispatchers.IO) {
         if (rootInstaller.hasRootAccess() && rootInstaller.isAppMounted(packageName)) {
-            rootInstaller.unmount(packageName)
+            rootInstaller.unmount(packageName, recompile = false)
         }
     }
 
