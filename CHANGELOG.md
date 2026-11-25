@@ -1,3 +1,14 @@
+## [2.8.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.2...v2.8.0-dev.3) (2026-11-25)
+
+### Features
+
+* Fall back to the Morphe API for manager updates ([afd5ecb](https://github.com/MorpheApp/morphe-manager/commit/afd5ecbec594d7afe795ac67edb665c20a4dd503))
+* Support patch sources hosted on Codeberg ([1bfb971](https://github.com/MorpheApp/morphe-manager/commit/1bfb9714ab1b6724b1555304414f9b0de7ba6f53))
+
+### Bug Fixes
+
+* Improve patching speed for budget devices with 32-bit roms or less than 8 cores ([#1516](https://github.com/MorpheApp/morphe-manager/issues/1516)) ([2affc52](https://github.com/MorpheApp/morphe-manager/commit/2affc52cca07c7ee22e9b7b4cb672491e9975bc3))
+
 ## [2.8.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.1...v2.8.0-dev.2) (2026-11-24)
 
 ### Features
