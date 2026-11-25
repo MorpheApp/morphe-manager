@@ -7,11 +7,11 @@ package app.morphe.manager.ui.screen.shared.backgrounds
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import kotlin.math.abs
+import kotlin.math.min
 import kotlin.math.sqrt
 import kotlin.random.Random
 
@@ -29,9 +29,7 @@ fun ParticlesBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val primaryColor   = MaterialTheme.colorScheme.primary
-    val secondaryColor = MaterialTheme.colorScheme.secondary
-    val tertiaryColor  = MaterialTheme.colorScheme.tertiary
+    val palette = themePalette()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -44,11 +42,11 @@ fun ParticlesBackground(
         ArrayList<Particle>(65).apply {
             repeat(65) {
 
-                // Create 3 particle size groups for more natural depth
+                // Create 3 particle size groups for more natural depth, in dp
                 val radius = when (Random.nextFloat()) {
-                    in 0f..0.6f -> 2.5f + Random.nextFloat() * 3f // small particles
-                    in 0.6f..0.9f -> 4f + Random.nextFloat() * 4f // medium particles
-                    else -> 7f + Random.nextFloat() * 5f // large particles
+                    in 0f..0.6f -> 0.8f + Random.nextFloat() * 1f // small particles
+                    in 0.6f..0.9f -> 1.3f + Random.nextFloat() * 1.3f // medium particles
+                    else -> 2.3f + Random.nextFloat() * 1.7f // large particles
                 }
 
                 add(
@@ -70,6 +68,10 @@ fun ParticlesBackground(
     val explodeProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 500, fallMillis = 800)
 
     val step = remember { mutableIntStateOf(0) }
+
+    // Screen positions of the current frame, reused rather than mapped into a new list every frame
+    val screenX = remember { FloatArray(particles.size) }
+    val screenY = remember { FloatArray(particles.size) }
 
     // Physics integrates the time it skipped, so a slower step moves particles the same
     // distance in fewer, larger increments
@@ -111,70 +113,60 @@ fun ParticlesBackground(
     Canvas(modifier = modifier.fillMaxSize()) {
         // Read so every physics step invalidates the draw
         step.intValue
-        val tiltX = parallaxState.tiltX.value
-        val tiltY = parallaxState.tiltY.value
+        val tiltX = parallaxState.tiltX.value * density
+        val tiltY = parallaxState.tiltY.value * density
         val ep    = explodeProgress.value
         val cx    = size.width  * 0.5f
         val cy    = size.height * 0.5f
 
-        val connectDist   = size.width * 0.22f
+        // Taken from the shorter side, so the web is as dense in landscape as it is in portrait
+        val connectDist   = min(size.width, size.height) * 0.22f
         val connectDistSq = connectDist * connectDist
+        val lineWidth     = 0.4f * density
 
         // Compute screen positions with parallax and explosion offset
-        val positions = particles.map { p ->
-            val parallaxStrength = 25f
+        val parallaxStrength = 8f
+        particles.forEachIndexed { i, p ->
             val baseX = p.x * size.width  + tiltX * parallaxStrength
             val baseY = p.y * size.height + tiltY * parallaxStrength
 
             // During explosion push outward from center - ep smoothly goes 0→1→0
             // so return is just the same offset shrinking back to zero (no snap)
-            if (ep > 0f) {
-                val dirX  = baseX - cx
-                val dirY  = baseY - cy
-                val eased = ep * ep
-                Offset(baseX + dirX * eased * 1.2f, baseY + dirY * eased * 1.2f)
-            } else {
-                Offset(baseX, baseY)
-            }
+            val push = ep * ep * 1.2f
+            screenX[i] = baseX + (baseX - cx) * push
+            screenY[i] = baseY + (baseY - cy) * push
         }
 
         // Draw connection lines
         for (i in particles.indices) {
             for (j in i + 1 until particles.size) {
-                val dx     = positions[i].x - positions[j].x
-                val dy     = positions[i].y - positions[j].y
+                val dx     = screenX[i] - screenX[j]
+                val dy     = screenY[i] - screenY[j]
                 val distSq = dx * dx + dy * dy
                 if (distSq < connectDistSq) {
                     val proximity = 1f - sqrt(distSq) / connectDist
                     val alpha = proximity * proximity * 0.10f + ep * 0.05f * proximity
-                    val color = when ((particles[i].colorIndex + particles[j].colorIndex) % 3) {
-                        0    -> primaryColor
-                        1    -> secondaryColor
-                        else -> tertiaryColor
-                    }
                     drawLine(
-                        color       = color.copy(alpha = alpha.coerceIn(0f, 0.18f)),
-                        start       = positions[i],
-                        end         = positions[j],
-                        strokeWidth = 1.2f
+                        color       = palette[particles[i].colorIndex + particles[j].colorIndex],
+                        start       = Offset(screenX[i], screenY[i]),
+                        end         = Offset(screenX[j], screenY[j]),
+                        strokeWidth = lineWidth,
+                        alpha       = alpha.coerceIn(0f, 0.18f)
                     )
                 }
             }
         }
 
         // Draw particles
+        val alpha       = 0.55f + ep * 0.3f
+        val radiusScale = density * (1f + ep * 0.8f)
         particles.forEachIndexed { index, p ->
-            val pos   = positions[index]
-            val color = when (p.colorIndex) {
-                0    -> primaryColor
-                1    -> secondaryColor
-                else -> tertiaryColor
-            }
-            val alpha  = 0.55f + ep * 0.3f
-            val radius = p.radius * (1f + ep * 0.8f)
+            val pos    = Offset(screenX[index], screenY[index])
+            val color  = palette[p.colorIndex]
+            val radius = p.radius * radiusScale
 
-            drawCircle(color = color.copy(alpha = alpha * 0.2f), radius = radius * 2f, center = pos)
-            drawCircle(color = color.copy(alpha = alpha),        radius = radius,      center = pos)
+            drawCircle(color = color, radius = radius * 2f, center = pos, alpha = alpha * 0.2f)
+            drawCircle(color = color, radius = radius,      center = pos, alpha = alpha)
         }
     }
 }
@@ -184,6 +176,6 @@ private class Particle(
     var y: Float,
     var vx: Float,
     var vy: Float,
-    val radius: Float,
+    val radius: Float, // In dp
     val colorIndex: Int
 )

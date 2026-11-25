@@ -12,11 +12,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import app.morphe.manager.ui.theme.isDarkTheme
-import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
@@ -70,6 +68,11 @@ fun FireworksBackground(
     // The show is moved in place by the step, which bumps step once per pass so the canvas
     // redraws once, rather than a snapshot write per spark
     val show = remember { FireworksShow(palette.size) }
+    // The flash of a burst is the same soft glow at every size, so one gradient per color is built
+    // once and only scaled and faded while it plays
+    val flashGlows = remember(palette) {
+        palette.map { unitRadialGlow(0f to it.copy(alpha = 0.35f), 1f to Color.Transparent) }
+    }
     val step = remember { mutableIntStateOf(0) }
 
     BackgroundStepEffect(speedMultiplier) { scaledMs, _ ->
@@ -82,13 +85,13 @@ fun FireworksBackground(
         step.intValue
         val width = size.width
         show.aspect = size.height / width
-        val tiltX = parallaxState.tiltX.value
-        val tiltY = parallaxState.tiltY.value
+        val tiltX = parallaxState.tiltX.value * density
+        val tiltY = parallaxState.tiltY.value * density
         val sparkRadius = 2.2f * density
 
         for (i in 0 until MAX_ROCKETS) {
             if (!show.rocketAlive[i]) continue
-            val parallax = show.rocketDepth[i] * 30f
+            val parallax = show.rocketDepth[i] * 10f
             val head = Offset(show.rocketX[i] * width + tiltX * parallax, show.rocketY[i] * width + tiltY * parallax)
             // A short exhaust trail hanging below the rocket, shrinking as it slows toward its peak
             val trail = (-show.rocketVy[i] * 0.06f).coerceAtLeast(0f) * width
@@ -107,18 +110,10 @@ fun FireworksBackground(
         for (i in 0 until MAX_ROCKETS) {
             val flash = show.flashLeft[i] / FLASH_DURATION
             if (flash <= 0f) continue
-            val parallax = show.flashDepth[i] * 30f
+            val parallax = show.flashDepth[i] * 10f
             val center = Offset(show.flashX[i] * width + tiltX * parallax, show.flashY[i] * width + tiltY * parallax)
             val radius = width * 0.14f * (1.4f - flash * 0.4f)
-            drawCircle(
-                brush = Brush.radialGradient(
-                    colors = listOf(palette[show.flashColor[i]].copy(alpha = 0.35f * flash), Color.Transparent),
-                    center = center,
-                    radius = radius
-                ),
-                radius = radius,
-                center = center
-            )
+            drawRadialGlow(flashGlows[show.flashColor[i]], center, radius, alpha = flash)
         }
 
         for (i in 0 until MAX_SPARKS) {
@@ -130,7 +125,7 @@ fun FireworksBackground(
             val alpha = (fade * crackle).coerceIn(0f, 1f)
             if (alpha < 0.02f) continue
 
-            val parallax = show.sparkDepth[i] * 30f
+            val parallax = show.sparkDepth[i] * 10f
             val x = show.sparkX[i] * width + tiltX * parallax
             val y = show.sparkY[i] * width + tiltY * parallax
             val color = palette[show.sparkColor[i]]
@@ -239,7 +234,7 @@ private class FireworksShow(private val colorCount: Int) {
         repeat(SPARKS_PER_BURST) { n ->
             val i = sparkCursor
             sparkCursor = (sparkCursor + 1) % MAX_SPARKS
-            val angle = (n + Random.nextFloat() * 0.6f) / SPARKS_PER_BURST * 2f * PI.toFloat()
+            val angle = (n + Random.nextFloat() * 0.6f) / SPARKS_PER_BURST * TWO_PI
             // Spread through the whole ball rather than along one ring, leaning toward its rim
             val sparkSpeed = speed * (0.3f + 0.75f * sqrt(Random.nextFloat()))
             sparkX[i] = x

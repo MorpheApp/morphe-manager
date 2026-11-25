@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.shared.backgrounds
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -40,9 +39,7 @@ fun MeshBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val primaryColor   = MaterialTheme.colorScheme.primary
-    val secondaryColor = MaterialTheme.colorScheme.secondary
-    val tertiaryColor  = MaterialTheme.colorScheme.tertiary
+    val palette = themePalette()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -71,7 +68,7 @@ fun MeshBackground(
             .drawWithCache {
                 // The grid is laid over the canvas grown by the farthest parallax shift on every
                 // side, so no lean of the device can pull its border into view
-                val layout = MeshLayout(size, parallaxState.maxTilt * MESH_PARALLAX_PX, seed)
+                val layout = MeshLayout(size, parallaxState.maxTilt * MESH_PARALLAX_DP * density, seed)
                 val trianglePath = Path()
                 onDrawBehind {
                     drawMesh(
@@ -79,11 +76,9 @@ fun MeshBackground(
                         trianglePath = trianglePath,
                         timeMs = time.value,
                         rippleProgress = rippleProgress.value,
-                        tiltX = parallaxState.tiltX.value,
-                        tiltY = parallaxState.tiltY.value,
-                        primary = primaryColor,
-                        secondary = secondaryColor,
-                        tertiary = tertiaryColor
+                        tiltX = parallaxState.tiltX.value * density,
+                        tiltY = parallaxState.tiltY.value * density,
+                        palette = palette
                     )
                 }
             }
@@ -97,9 +92,7 @@ private fun DrawScope.drawMesh(
     rippleProgress: Float,
     tiltX: Float,
     tiltY: Float,
-    primary: Color,
-    secondary: Color,
-    tertiary: Color
+    palette: ThemePalette
 ) {
     val nodes = layout.nodes
     val cols = layout.cols
@@ -118,7 +111,7 @@ private fun DrawScope.drawMesh(
         val xFreq  = 1.0f + node.u * 0.5f
         val yFreq  = 1.2f + node.v * 0.6f
         val zFreq  = 0.8f + (node.u + node.v) * 0.4f
-        val xPhase = node.u * 2f * PI.toFloat()
+        val xPhase = node.u * TWO_PI
         val yPhase = node.v * 3f * PI.toFloat()
         val zPhase = (node.u + node.v) * 1.5f * PI.toFloat()
 
@@ -145,7 +138,7 @@ private fun DrawScope.drawMesh(
         projected.wz[i] = rotatedZ
 
         // Parallax effect
-        val parallaxStrength = node.baseDepth * MESH_PARALLAX_PX
+        val parallaxStrength = node.baseDepth * MESH_PARALLAX_DP
 
         // Perspective projection
         val perspective = MESH_CAMERA_Z / (MESH_CAMERA_Z - rotatedZ)
@@ -163,7 +156,7 @@ private fun DrawScope.drawMesh(
         val row = index / cols
         val col = index % cols
         if (row >= rows - 1 || col >= cols - 1) return@forEachIndexed
-        val color = cellColor(row, col, primary, secondary, tertiary)
+        val color = palette[row + col]
         val alpha = 0.14f + node.baseDepth * 0.05f
         fillTriangle(trianglePath, projected, index, index + 1, index + cols, color, alpha)
         fillTriangle(trianglePath, projected, index + 1, index + cols + 1, index + cols, color, alpha)
@@ -176,7 +169,7 @@ private fun DrawScope.drawMesh(
         val col = index % cols
         val hasRight = col < cols - 1
         val hasBelow = row < rows - 1
-        val color = cellColor(row, col, primary, secondary, tertiary)
+        val color = palette[row + col]
             .copy(alpha = 0.14f + node.baseDepth * 0.05f)
         val from = Offset(sx[index], sy[index])
 
@@ -194,14 +187,6 @@ private fun DrawScope.drawMesh(
         }
     }
 }
-
-/** Color of the cell at [row], [col], cycling through the three theme colors across the grid. */
-private fun cellColor(row: Int, col: Int, primary: Color, secondary: Color, tertiary: Color) =
-    when ((row + col) % 3) {
-        0    -> primary
-        1    -> secondary
-        else -> tertiary
-    }
 
 // Faces turned toward this direction catch the most light: up and to the left on screen, and toward
 // the camera, which sits on +z
@@ -256,8 +241,8 @@ private val MESH_TILT_RADIANS = Math.toRadians(10.0).toFloat()
 private val MESH_COS_TILT = cos(MESH_TILT_RADIANS)
 private val MESH_SIN_TILT = sin(MESH_TILT_RADIANS)
 
-// How far the nodes nearest the corners follow a full tilt, in pixels
-private const val MESH_PARALLAX_PX = 60f
+// How far the nodes nearest the corners follow a full tilt
+private const val MESH_PARALLAX_DP = 20f
 
 // Side of one square cell in world units. The grid adds cells along whichever side is longer instead
 // of stretching them, so the mesh keeps its proportions in any orientation

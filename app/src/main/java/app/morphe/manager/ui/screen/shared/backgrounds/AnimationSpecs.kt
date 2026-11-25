@@ -12,8 +12,14 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.Surface
 import androidx.compose.animation.core.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -28,6 +34,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlin.math.PI
+import kotlin.math.floor
+import kotlin.math.roundToInt
 
 // Tilt shifts the artwork by about a dozen pixels at full range, so smaller steps land under a pixel
 private const val TILT_TARGET_THRESHOLD = 0.02f
@@ -66,10 +75,63 @@ fun AnimationFrameEffect(frameLoop: suspend CoroutineScope.() -> Unit) {
 // A background eased down to this share of its speed stands still to the eye
 private const val STOPPED_SPEED = 0.01f
 
-// How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
-// a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
-// It is a whole number of the cycles backgrounds wrap their own motion at, so those stay seamless
-private const val ANIMATED_TIME_WRAP_MS = 3_600_000f
+/**
+ * How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
+ * a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
+ * A motion that repeats a whole number of times in it, see [wholeLoops], carries on across the wrap
+ * without a seam.
+ */
+internal const val BACKGROUND_LOOP_MS = 3_600_000f
+
+internal const val TWO_PI = 2f * PI.toFloat()
+
+/** How many times a motion of about [periodMs] fits into [BACKGROUND_LOOP_MS], at least once. */
+internal fun wholeLoops(periodMs: Float): Int =
+    (BACKGROUND_LOOP_MS / periodMs).roundToInt().coerceAtLeast(1)
+
+internal fun fract(value: Float) = value - floor(value)
+
+/** The three theme colors most backgrounds paint with, picked by an index that may run past them. */
+@Immutable
+data class ThemePalette(private val primary: Color, private val secondary: Color, private val tertiary: Color) {
+    operator fun get(index: Int): Color = when (index % 3) {
+        0    -> primary
+        1    -> secondary
+        else -> tertiary
+    }
+}
+
+@Composable
+@ReadOnlyComposable
+fun themePalette() = ThemePalette(
+    MaterialTheme.colorScheme.primary,
+    MaterialTheme.colorScheme.secondary,
+    MaterialTheme.colorScheme.tertiary
+)
+
+/**
+ * Draws [glow], a radial gradient laid out on a circle of radius 1 around the origin, stretched to
+ * [radiusX] by [radiusY] around [center]. One brush built ahead serves every size and place, where
+ * a gradient built per frame would allocate a new shader each time.
+ */
+internal fun DrawScope.drawRadialGlow(
+    glow: Brush,
+    center: Offset,
+    radiusX: Float,
+    radiusY: Float = radiusX,
+    alpha: Float = 1f
+) {
+    if (radiusX <= 0f || radiusY <= 0f) return
+    translate(center.x, center.y) {
+        scale(radiusX, radiusY, pivot = Offset.Zero) {
+            drawCircle(glow, radius = 1f, center = Offset.Zero, alpha = alpha.coerceIn(0f, 1f))
+        }
+    }
+}
+
+/** A radial gradient through [stops] on a circle of radius 1 around the origin, for [drawRadialGlow]. */
+internal fun unitRadialGlow(vararg stops: Pair<Float, Color>): Brush =
+    Brush.radialGradient(colorStops = stops, center = Offset.Zero, radius = 1f)
 
 /**
  * Steps a background once per [BACKGROUND_STEP_INTERVAL_MS], handing [onStep] the milliseconds of
@@ -141,10 +203,20 @@ fun BackgroundStepEffect(
  * animations. The value wraps every hour of animation to keep its precision.
  */
 @Composable
-fun rememberAnimatedTime(speedMultiplier: Float): State<Float> {
+fun rememberAnimatedTime(speedMultiplier: Float): State<Float> = rememberAnimatedTime(speedMultiplier) {}
+
+/**
+ * The same clock, calling [onStep] with the new time just before it is published, so state a
+ * background moves along with the clock is ready by the time the frame that reads it draws.
+ */
+@Composable
+fun rememberAnimatedTime(speedMultiplier: Float, onStep: (timeMs: Float) -> Unit): State<Float> {
     val time = remember { mutableFloatStateOf(0f) }
+    val currentOnStep by rememberUpdatedState(onStep)
     BackgroundStepEffect(speedMultiplier) { scaledMs, _ ->
-        time.floatValue = (time.floatValue + scaledMs) % ANIMATED_TIME_WRAP_MS
+        val next = (time.floatValue + scaledMs) % BACKGROUND_LOOP_MS
+        currentOnStep(next)
+        time.floatValue = next
     }
     return time
 }

@@ -10,7 +10,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -20,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import app.morphe.manager.ui.theme.isDarkTheme
-import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
@@ -70,11 +68,7 @@ fun LavaBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val colors = listOf(
-        MaterialTheme.colorScheme.primary,
-        MaterialTheme.colorScheme.secondary,
-        MaterialTheme.colorScheme.tertiary
-    )
+    val palette = themePalette()
     val waxAlpha = if (isDarkTheme()) 0.14f else 0.11f
 
     val parallaxState = rememberParallaxState(
@@ -91,22 +85,26 @@ fun LavaBackground(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) LavaShader() else null
     }
     val blobs = remember { LavaBlobs() }
+    // Older versions draw each blob as a glow, one gradient per theme color built once
+    val softGlows = remember(palette) {
+        if (lava == null) List(3) { softGlowFor(palette[it]) } else null
+    }
 
     Canvas(modifier = modifier.fillMaxSize()) {
         blobs.update(
             t = time.value,
             size = size,
             density = density,
-            tiltX = parallaxState.tiltX.value,
-            tiltY = parallaxState.tiltY.value,
+            tiltX = parallaxState.tiltX.value * density,
+            tiltY = parallaxState.tiltY.value * density,
             heat = heat.value
         )
         val alpha = waxAlpha * (1f + heat.value * 0.8f)
 
         if (lava != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            drawRect(lava.brushFor(blobs, colors, alpha))
-        } else {
-            drawSoftBlobs(blobs, colors, alpha)
+            drawRect(lava.brushFor(blobs, palette, alpha))
+        } else if (softGlows != null) {
+            drawSoftBlobs(blobs, softGlows, alpha)
         }
     }
 }
@@ -122,14 +120,13 @@ private class LavaBlobs {
     val stretch = FloatArray(BLOB_COUNT)
 
     fun update(t: Float, size: Size, density: Float, tiltX: Float, tiltY: Float, heat: Float) {
-        val twoPi = 2f * PI.toFloat()
         LAVA_BLOBS.forEachIndexed { i, blob ->
             // Rising and sinking along a sine: fastest mid-lamp, slowing to a pause at either end
-            val climb = twoPi * t / blob.climbPeriod + blob.phase
-            val sway = sin(twoPi * t / blob.swayPeriod + blob.phase * 1.7f)
-            val breath = sin(twoPi * t / blob.breathPeriod + blob.phase * 0.6f)
+            val climb = TWO_PI * t / blob.climbPeriod + blob.phase
+            val sway = sin(TWO_PI * t / blob.swayPeriod + blob.phase * 1.7f)
+            val breath = sin(TWO_PI * t / blob.breathPeriod + blob.phase * 0.6f)
 
-            val parallax = blob.depth * 50f
+            val parallax = blob.depth * 17f
             x[i] = (blob.x + 0.05f * sway) * size.width + tiltX * parallax
             y[i] = (0.5f - blob.travel * sin(climb) - heat * 0.12f) * size.height + tiltY * parallax
             radius[i] = blob.radius * density * (1f + 0.09f * breath) * (1f + heat * 0.35f)
@@ -146,13 +143,13 @@ private class LavaShader {
     private val blobUniform = FloatArray(BLOB_COUNT * 4)
     private val colorUniform = FloatArray(BLOB_COUNT * 4)
 
-    fun brushFor(blobs: LavaBlobs, colors: List<Color>, alpha: Float): Brush {
+    fun brushFor(blobs: LavaBlobs, palette: ThemePalette, alpha: Float): Brush {
         for (i in 0 until BLOB_COUNT) {
             blobUniform[i * 4] = blobs.x[i]
             blobUniform[i * 4 + 1] = blobs.y[i]
             blobUniform[i * 4 + 2] = blobs.radius[i]
             blobUniform[i * 4 + 3] = blobs.stretch[i]
-            val color = colors[LAVA_BLOBS[i].colorIndex]
+            val color = palette[LAVA_BLOBS[i].colorIndex]
             colorUniform[i * 4] = color.red
             colorUniform[i * 4 + 1] = color.green
             colorUniform[i * 4 + 2] = color.blue
@@ -166,27 +163,24 @@ private class LavaShader {
 }
 
 /** The same lamp without a shader: soft stretched blobs that overlap instead of merging. */
-private fun DrawScope.drawSoftBlobs(blobs: LavaBlobs, colors: List<Color>, alpha: Float) {
+private fun DrawScope.drawSoftBlobs(blobs: LavaBlobs, glows: List<Brush>, alpha: Float) {
     for (i in 0 until BLOB_COUNT) {
-        val color = colors[LAVA_BLOBS[i].colorIndex]
         val radius = blobs.radius[i] * 1.3f
-        val height = radius * blobs.stretch[i]
-        val center = Offset(blobs.x[i], blobs.y[i])
-        drawOval(
-            brush = Brush.radialGradient(
-                colorStops = arrayOf(
-                    0f to color.copy(alpha = alpha),
-                    0.6f to color.copy(alpha = alpha * 0.8f),
-                    1f to Color.Transparent
-                ),
-                center = center,
-                radius = radius
-            ),
-            topLeft = Offset(center.x - radius, center.y - height),
-            size = Size(radius * 2f, height * 2f)
+        drawRadialGlow(
+            glow = glows[LAVA_BLOBS[i].colorIndex],
+            center = Offset(blobs.x[i], blobs.y[i]),
+            radiusX = radius,
+            radiusY = radius * blobs.stretch[i],
+            alpha = alpha
         )
     }
 }
+
+private fun softGlowFor(color: Color) = unitRadialGlow(
+    0f to color,
+    0.6f to color.copy(alpha = 0.8f),
+    1f to Color.Transparent
+)
 
 /**
  * One blob of wax.

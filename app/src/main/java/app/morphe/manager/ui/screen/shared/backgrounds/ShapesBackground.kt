@@ -7,7 +7,6 @@ package app.morphe.manager.ui.screen.shared.backgrounds
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -40,9 +39,7 @@ fun ShapesBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val primaryColor   = MaterialTheme.colorScheme.primary
-    val secondaryColor = MaterialTheme.colorScheme.secondary
-    val tertiaryColor  = MaterialTheme.colorScheme.tertiary
+    val palette = themePalette()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -85,66 +82,33 @@ fun ShapesBackground(
         )
     }
 
-    val time = rememberAnimatedTime(speedMultiplier)
-
     val scatterProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 1000, fallMillis = 600)
 
-    // Smoothed positions - lerped toward raw Lissajous targets each frame. Plain arrays rather than
-    // state: they are written while drawing, where a state write would only schedule another frame
+    // Smoothed positions - lerped toward raw Lissajous targets once per clock step. Plain arrays
+    // rather than state: the clock publishes right after them, and that alone redraws the frame
     val smoothedX = remember { FloatArray(configs.size) { configs[it].cx } }
     val smoothedY = remember { FloatArray(configs.size) { configs[it].cy } }
     val scratch = remember { SolidScratch() }
 
+    // Following the clock rather than the draw keeps the glide at one pace, even while tilting
+    // redraws the canvas at the full refresh rate of the display
+    val time = rememberAnimatedTime(speedMultiplier) { t ->
+        followTargets(configs, t, smoothedX, smoothedY)
+    }
+
     Canvas(modifier = modifier.fillMaxSize()) {
         val t        = time.value
-        val tiltX    = parallaxState.tiltX.value
-        val tiltY    = parallaxState.tiltY.value
-        val twoPi    = 2f * PI.toFloat()
+        val tiltX    = parallaxState.tiltX.value * density
+        val tiltY    = parallaxState.tiltY.value * density
         val sp       = scatterProgress.value
         val screenCx = size.width  * 0.5f
         val screenCy = size.height * 0.5f
-        val base     = 18000f
 
-        // Step 1: update smoothed positions
-        // Compute each solid's target and lerp in one pass - avoids allocating a
-        // temporary rawPositions list each frame.
-        configs.forEachIndexed { i, c ->
-            val px: Float
-            val py: Float
-            when (c.motion) {
-                SolidMotion.WANDER -> {
-                    px = c.cx + c.ampX * sin(t * twoPi * c.fx1 / base) +
-                            c.ampX * 0.25f * sin(t * twoPi * c.fx2 / base + 1.4f)
-                    py = c.cy + c.ampY * sin(t * twoPi * c.fy1 / base + 0.8f) +
-                            c.ampY * 0.20f * cos(t * twoPi * c.fy2 / base + 0.3f)
-                }
-                SolidMotion.ORBIT_CLOCKWISE, SolidMotion.ORBIT_COUNTERCLOCKWISE -> {
-                    val direction = if (c.motion == SolidMotion.ORBIT_CLOCKWISE) 1f else -1f
-                    val angle = direction * twoPi * t / c.motionPeriod + c.phase
-                    px = c.cx + c.ampX * 1.3f * cos(angle)
-                    py = c.cy + c.ampY * 1.6f * sin(angle)
-                }
-                SolidMotion.DRIFT_LEFT, SolidMotion.DRIFT_RIGHT -> {
-                    // Crosses the whole width and comes back round from the other edge, gently
-                    // bobbing on the way
-                    val direction = if (c.motion == SolidMotion.DRIFT_RIGHT) 1f else -1f
-                    val span = 1f + DRIFT_MARGIN * 2f
-                    val travel = c.cx + DRIFT_MARGIN + direction * t / c.motionPeriod * span
-                    px = travel - floor(travel / span) * span - DRIFT_MARGIN
-                    py = c.cy + c.ampY * sin(t * twoPi * c.fy1 / base + c.phase)
-                }
-            }
-            // Coming back round from the other edge is a jump, not a glide across the screen
-            if (abs(px - smoothedX[i]) > 0.5f) smoothedX[i] = px
-            smoothedX[i] += (px - smoothedX[i]) * 0.04f
-            smoothedY[i] += (py - smoothedY[i]) * 0.04f
-        }
-
-        // Step 2: draw each solid
+        // Draw each solid
         configs.forEachIndexed { index, config ->
             // Slowly comes closer and recedes: larger, brighter and moving more with tilt up close
-            val nearness = sin(twoPi * t / config.depthPeriod + config.phase)
-            val parallaxStrength = config.depth * 45f * (1f + 0.4f * nearness)
+            val nearness = sin(TWO_PI * t / config.depthPeriod + config.phase)
+            val parallaxStrength = config.depth * 15f * (1f + 0.4f * nearness)
             val baseCx = smoothedX[index] * size.width  + tiltX * parallaxStrength
             val baseCy = smoothedY[index] * size.height + tiltY * parallaxStrength
 
@@ -158,8 +122,8 @@ fun ShapesBackground(
             // Rotation angles - each axis at its own speed, which swells and ebbs over spinPeriod
             // between nearly still and almost twice as fast, never turning back
             val scatterBoost = sp * (4f + index * 0.3f)
-            val spinPhase = twoPi * t / config.spinPeriod + config.phase
-            val swell = 0.85f * config.spinPeriod / twoPi * sin(spinPhase)
+            val spinPhase = TWO_PI * t / config.spinPeriod + config.phase
+            val swell = 0.85f * config.spinPeriod / TWO_PI * sin(spinPhase)
             val rateX = config.rotSpeeds.x * 0.0004f
             val rateY = config.rotSpeeds.y * 0.0003f
             val rateZ = config.rotSpeeds.z * 0.0002f
@@ -169,11 +133,7 @@ fun ShapesBackground(
 
             val restingAlpha = 0.20f * (1f + 0.25f * nearness)
             val baseAlpha = if (sp > 0f) (1f - sp).coerceIn(0f, 1f) * restingAlpha else restingAlpha
-            val color = when (config.colorIdx) {
-                0    -> primaryColor
-                1    -> secondaryColor
-                else -> tertiaryColor
-            }
+            val color = palette[config.colorIdx]
 
             drawSolid(
                 scratch = scratch,
@@ -188,6 +148,47 @@ fun ShapesBackground(
                 alpha   = baseAlpha
             )
         }
+    }
+}
+
+// Lissajous frequencies are in cycles per this many milliseconds
+private const val WANDER_BASE_MS = 18000f
+
+/**
+ * Moves every solid's smoothed position a step toward where its motion puts it at [t]. Computes
+ * each target and lerps in one pass, so no temporary list of positions is allocated per step.
+ */
+private fun followTargets(configs: List<SolidConfig>, t: Float, smoothedX: FloatArray, smoothedY: FloatArray) {
+    configs.forEachIndexed { i, c ->
+        val px: Float
+        val py: Float
+        when (c.motion) {
+            SolidMotion.WANDER -> {
+                px = c.cx + c.ampX * sin(t * TWO_PI * c.fx1 / WANDER_BASE_MS) +
+                        c.ampX * 0.25f * sin(t * TWO_PI * c.fx2 / WANDER_BASE_MS + 1.4f)
+                py = c.cy + c.ampY * sin(t * TWO_PI * c.fy1 / WANDER_BASE_MS + 0.8f) +
+                        c.ampY * 0.20f * cos(t * TWO_PI * c.fy2 / WANDER_BASE_MS + 0.3f)
+            }
+            SolidMotion.ORBIT_CLOCKWISE, SolidMotion.ORBIT_COUNTERCLOCKWISE -> {
+                val direction = if (c.motion == SolidMotion.ORBIT_CLOCKWISE) 1f else -1f
+                val angle = direction * TWO_PI * t / c.motionPeriod + c.phase
+                px = c.cx + c.ampX * 1.3f * cos(angle)
+                py = c.cy + c.ampY * 1.6f * sin(angle)
+            }
+            SolidMotion.DRIFT_LEFT, SolidMotion.DRIFT_RIGHT -> {
+                // Crosses the whole width and comes back round from the other edge, gently
+                // bobbing on the way
+                val direction = if (c.motion == SolidMotion.DRIFT_RIGHT) 1f else -1f
+                val span = 1f + DRIFT_MARGIN * 2f
+                val travel = c.cx + DRIFT_MARGIN + direction * t / c.motionPeriod * span
+                px = travel - floor(travel / span) * span - DRIFT_MARGIN
+                py = c.cy + c.ampY * sin(t * TWO_PI * c.fy1 / WANDER_BASE_MS + c.phase)
+            }
+        }
+        // Coming back round from the other edge is a jump, not a glide across the screen
+        if (abs(px - smoothedX[i]) > 0.5f) smoothedX[i] = px
+        smoothedX[i] += (px - smoothedX[i]) * 0.04f
+        smoothedY[i] += (py - smoothedY[i]) * 0.04f
     }
 }
 
@@ -318,7 +319,7 @@ private fun DrawScope.drawSolid(
             color       = color.copy(alpha = edgeAlpha),
             start       = Offset(px[a], py[a]),
             end         = Offset(px[b], py[b]),
-            strokeWidth = 2.0f
+            strokeWidth = 0.7f * density
         )
     }
 }

@@ -82,10 +82,10 @@ fun AnimatedBackground(
         type
     }
 
-    val resolvedSpeed = speedMultiplier()
+    val speed = speedMultiplier()
     // A background that stands still does not follow the tilt of the device either
-    val parallax = enableParallax && resolvedSpeed != 0f
-    val resolvedPatchingCompleted = patchingCompleted()
+    val parallax = enableParallax && speed != 0f
+    val completed = patchingCompleted()
 
     // No background blends across its own layers, so clipping alone is enough. Compositing offscreen
     // would allocate a full-screen render target and re-composite it every frame for nothing
@@ -95,78 +95,18 @@ fun AnimatedBackground(
             .clipToBounds()
     ) {
         when (effectiveType) {
-            BackgroundType.CIRCLES -> CirclesBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.RINGS -> RingsBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.MESH -> MeshBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.SPACE -> SpaceBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.SHAPES -> ShapesBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.SNOW -> SnowBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.GRID -> GridBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.PARTICLES -> ParticlesBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.LAVA -> LavaBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.MATRIX -> MatrixBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.HALLOWEEN -> HalloweenBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
-            BackgroundType.FIREWORKS -> FireworksBackground(
-                modifier = Modifier.fillMaxSize(),
-                enableParallax = parallax,
-                speedMultiplier = resolvedSpeed,
-                patchingCompleted = resolvedPatchingCompleted
-            )
+            BackgroundType.CIRCLES -> CirclesBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.RINGS -> RingsBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.MESH -> MeshBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.SPACE -> SpaceBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.SHAPES -> ShapesBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.SNOW -> SnowBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.GRID -> GridBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.PARTICLES -> ParticlesBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.LAVA -> LavaBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.MATRIX -> MatrixBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.HALLOWEEN -> HalloweenBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
+            BackgroundType.FIREWORKS -> FireworksBackground(enableParallax = parallax, speedMultiplier = speed, patchingCompleted = completed)
             BackgroundType.NONE -> Unit
             // effectiveType is never RANDOM (resolved above), but the branch is required for exhaustiveness
             BackgroundType.RANDOM -> Unit
