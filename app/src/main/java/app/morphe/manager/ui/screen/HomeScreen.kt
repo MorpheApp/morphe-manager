@@ -149,6 +149,7 @@ fun HomeScreen(
     val homeAppSourceGroups = homeAppState?.sourceGroups ?: emptyList()
     val bundlePipelineLoading = homeAppState == null
     val batchRun by homeViewModel.batchRun.collectAsStateWithLifecycle()
+    val bundleDownloadWaiting by homeViewModel.bundleDownloadWaiting.collectAsStateWithLifecycle()
     val savedBatchQueue by homeViewModel.savedBatchQueue.collectAsStateWithLifecycle()
     // Read from the preferences rather than the built cards, so the options show a pick at once
     // while the cards are still being sorted by it
@@ -324,7 +325,8 @@ fun HomeScreen(
         bundleUpdate = BundleUpdateState(
             visible = homeViewModel.showBundleUpdateSnackbar,
             status = homeViewModel.snackbarStatus,
-            progress = bundleUpdateProgress
+            progress = bundleUpdateProgress,
+            waitingForNetwork = bundleDownloadWaiting
         )
     )
     val alerts = rememberHomeAlerts(notifications, prefs.snoozedAlerts)

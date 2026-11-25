@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.*
@@ -89,6 +90,7 @@ class HomeViewModel(
     private val patcherProcesses: PatcherProcesses by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val batchUninstaller: BatchUninstaller by inject()
+    private val networkInfo: NetworkInfo by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -110,6 +112,11 @@ class HomeViewModel(
 
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
+
+    /** Whether a source download is held up by the device being offline. */
+    val bundleDownloadWaiting: StateFlow<Boolean> = networkInfo
+        .offlineWhile(bundleUpdateProgress.map { it?.phase == PatchBundleRepository.BundleUpdatePhase.Downloading })
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
     private val contentResolver: ContentResolver = app.contentResolver
 
     /** Android 11 kills the app process after granting the "install apps" permission. */

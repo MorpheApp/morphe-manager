@@ -1661,6 +1661,7 @@ Details: %2$s"</string>
     <string name="changelog_show_all">Show all (%s)</string>
     <string name="changelog_show_less">Show less</string>
     <string name="no_network_toast">No internet connection available</string>
+    <string name="download_waiting_for_network">Waiting for network</string>
 
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>

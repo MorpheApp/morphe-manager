@@ -22,7 +22,9 @@ import java.net.InetSocketAddress
 import java.nio.file.Files
 import java.util.Collections
 import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.AtomicLong
 import kotlin.random.Random
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -30,6 +32,7 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
+import kotlin.time.Duration
 
 class RangeDownloadTest {
 
@@ -38,6 +41,10 @@ class RangeDownloadTest {
     private val target = tempDir.resolve("patches.jar.tmp")
     private val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
     private val client = HttpClient(OkHttp)
+    private val online = object : ConnectionWatcher {
+        override fun isOnline() = true
+        override suspend fun awaitOnline(timeout: Duration) = true
+    }
 
     @AfterTest
     fun tearDown() {
@@ -72,7 +79,7 @@ class RangeDownloadTest {
     }
 
     private suspend fun download(url: String) =
-        HttpService(Json, client, OkHttpClient()).downloadToFile(saveLocation = target, builder = { url(url) })
+        HttpService(Json, client, OkHttpClient(), online).downloadToFile(saveLocation = target, builder = { url(url) })
 
     @Test
     fun `a short range response is resumed instead of leaving a hole`() = runBlocking {
@@ -102,6 +109,51 @@ class RangeDownloadTest {
         download(url)
 
         assertContentEquals(payload, target.readBytes())
+    }
+
+    @Test
+    fun `a download outlasts the device going offline without fetching anything twice`() = runBlocking {
+        val offline = AtomicBoolean(false)
+        val rangeRequests = AtomicInteger(0)
+        val servedBytes = AtomicLong(0)
+        server.createContext("/patches.mpp") { exchange ->
+            exchange.responseHeaders.add("Accept-Ranges", "bytes")
+            if (exchange.requestMethod == "HEAD") {
+                exchange.responseHeaders.add("Content-Length", payload.size.toString())
+                exchange.sendResponseHeaders(200, -1)
+                exchange.close()
+                return@createContext
+            }
+            // The network goes away once part of the file is in, and every request then drops
+            if (rangeRequests.incrementAndGet() == 2) offline.set(true)
+            if (offline.get()) {
+                exchange.close()
+                return@createContext
+            }
+            val (start, end) = exchange.requestHeaders.getFirst("Range")!!
+                .removePrefix("bytes=").split('-').map(String::toInt)
+            exchange.responseHeaders.add("Content-Range", "bytes $start-$end/${payload.size}")
+            exchange.sendResponseHeaders(206, (end - start + 1).toLong())
+            exchange.responseBody.use { it.write(payload, start, end - start + 1) }
+            servedBytes.addAndGet((end - start + 1).toLong())
+        }
+        server.start()
+        // Comes back only once the download waits for it, which retries alone never outlast
+        val connection = object : ConnectionWatcher {
+            override fun isOnline() = !offline.get()
+            override suspend fun awaitOnline(timeout: Duration): Boolean {
+                offline.set(false)
+                return true
+            }
+        }
+
+        HttpService(Json, client, OkHttpClient(), connection).downloadToFile(
+            saveLocation = target,
+            builder = { url("http://127.0.0.1:${server.address.port}/patches.mpp") }
+        )
+
+        assertContentEquals(payload, target.readBytes())
+        assertEquals(payload.size.toLong(), servedBytes.get())
     }
 
     @Test
@@ -169,7 +221,7 @@ class RangeDownloadTest {
         val linkGets = AtomicInteger()
         val url = serveBehindLink(cdnAuthorizations, linkGets)
 
-        HttpService(Json, client, OkHttpClient()).downloadToFile(saveLocation = target, builder = {
+        HttpService(Json, client, OkHttpClient(), online).downloadToFile(saveLocation = target, builder = {
             url(url)
             header("Authorization", "Bearer secret")
         })
@@ -215,7 +267,7 @@ class RangeDownloadTest {
         }
         server.start()
         val url = "http://127.0.0.1:${server.address.port}/patches.mpp"
-        val http = HttpService(Json, client, OkHttpClient())
+        val http = HttpService(Json, client, OkHttpClient(), online)
 
         val targets = List(4) { tempDir.resolve("bundle$it.mpp") }
         coroutineScope {

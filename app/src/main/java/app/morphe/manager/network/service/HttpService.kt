@@ -56,6 +56,7 @@ import java.util.concurrent.atomic.AtomicReference
 import kotlin.math.abs
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 /**
@@ -69,7 +70,8 @@ import kotlin.time.Duration.Companion.seconds
 class HttpService(
     val json: Json,
     val http: HttpClient,
-    okHttpClient: OkHttpClient
+    okHttpClient: OkHttpClient,
+    private val connection: ConnectionWatcher
 ) {
     /**
      * Built on the same connections as [http], for the requests that read a redirect instead of
@@ -231,7 +233,7 @@ class HttpService(
         if (!probe.supportsRanges || totalSize == null || totalSize < MIN_MULTIPART_SIZE) {
             // The stream cannot be rewound, so each attempt reopens the file in truncating mode
             // rather than appending a second copy of the body to the partial one
-            runWithRetry("downloadToFile", host) {
+            runWithRetry("downloadToFile", host, outlastsOffline = true) {
                 downloadConnections.withPermit {
                     withContext(Dispatchers.IO) {
                         FileOutputStream(saveLocation, false).use { out ->
@@ -310,7 +312,7 @@ class HttpService(
                 // refetching bytes that are already on disk and counting them twice
                 var position = chunk.first
 
-                runWithRetry("downloadRange[$chunk]", host) {
+                runWithRetry("downloadRange[$chunk]", host, outlastsOffline = true) {
                     // A response that ends early is resumed from where it stopped right away: a
                     // host that caps how much one response carries serves a chunk this way, and a
                     // slow attempt is cut short the same way, so only a response that brings
@@ -543,7 +545,12 @@ class HttpService(
      *
      * [marksHost] is what a caller clears when its own failure should not speak for the host.
      * A range probe is the case that matters: it fails on requests a download then completes
-     * happily, so letting it trip the breaker would rob the download of its own retries.
+     * happily, so letting it trip the breaker would rob the download of its own retries. A
+     * failure while the device itself is offline never trips it either.
+     *
+     * With [outlastsOffline], a failure while the device is offline waits up to [OFFLINE_WAIT] for
+     * the network to come back, which gives every attempt back, so a download keeps what it
+     * fetched rather than failing and starting again from nothing.
      */
     @PublishedApi
     internal suspend fun <T> runWithRetry(
@@ -551,6 +558,7 @@ class HttpService(
         host: String? = null,
         attempts: Int = MAX_RETRY_ATTEMPTS,
         marksHost: Boolean = true,
+        outlastsOffline: Boolean = false,
         block: suspend () -> T
     ): T {
         val maxAttempts = if (failingHosts.isFailing(host)) 1 else attempts
@@ -563,8 +571,16 @@ class HttpService(
             } catch (t: Exception) {
                 if (t is CancellationException) throw t
                 if (!isTransientNetworkError(t)) throw t
+                val offline = !connection.isOnline()
+                if (offline && outlastsOffline) {
+                    Log.w(LOG_TAG, "$operationName failed while offline, waiting for the network")
+                    if (!connection.awaitOnline(OFFLINE_WAIT)) throw t
+                    attempt = 0
+                    currentDelay = INITIAL_RETRY_DELAY_MS
+                    continue
+                }
                 if (attempt >= maxAttempts) {
-                    if (marksHost) host?.let(failingHosts::markFailed)
+                    if (marksHost && !offline) host?.let(failingHosts::markFailed)
                     Log.e(LOG_TAG, "$operationName failed after $attempt attempts: ${t::class.simpleName}: ${t.message}")
                     throw t
                 }
@@ -692,6 +708,8 @@ class HttpService(
         private const val MAX_RETRY_ATTEMPTS = 3
         private const val INITIAL_RETRY_DELAY_MS = 1_000L
         private const val MAX_RETRY_DELAY_MS = 30_000L
+        /** How long a download waits for the device to get back online before it gives up. */
+        private val OFFLINE_WAIT = 5.minutes
         /** How long a host stays marked as failing before it is given a full retry cycle again. */
         private const val HOST_FAILURE_TTL_MS = 60_000L
         /**

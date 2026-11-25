@@ -37,6 +37,9 @@ import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import java.io.File
 import java.io.IOException
 
@@ -76,6 +79,11 @@ class UpdateViewModel(
     }
     var showInternetCheckDialog by mutableStateOf(false)
     var state by mutableStateOf(State.CAN_DOWNLOAD)
+
+    /** Whether the download is held up by the device being offline. */
+    val waitingForNetwork: StateFlow<Boolean> = networkInfo
+        .offlineWhile(snapshotFlow { state == State.DOWNLOADING })
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     var installError by mutableStateOf("")
 
