@@ -5,15 +5,19 @@
 
 package app.morphe.manager.domain.repository
 
+import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.network.dto.AppUpdateCheck
 import app.morphe.manager.network.dto.ReleaseAsset
+import app.morphe.manager.network.service.AssetDownloader
+import app.morphe.manager.util.requireCompleteZip
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.io.File
 
 /**
  * Single source of truth for the available Morphe Manager update.
@@ -21,7 +25,17 @@ import kotlinx.coroutines.sync.withLock
  * The home banner, the update dialog and the background worker resolve the same asset here,
  * so every surface announces and downloads exactly the release the others resolved.
  */
-class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
+class ManagerUpdateRepository(
+    private val releaseAPI: ReleaseAPI,
+    private val assetDownloader: AssetDownloader,
+    fs: Filesystem,
+) {
+    /**
+     * Where [download] stages the update for the installer. The directory is wiped on every
+     * process start, so the file does not outlive the process that downloaded it.
+     */
+    val downloadedApk: File = fs.tempDir.resolve("updater.apk")
+
     private val _availableUpdate = MutableStateFlow<ReleaseAsset?>(null)
 
     /** The most recently resolved update, or null while none is known to be available. */
@@ -89,6 +103,21 @@ class ManagerUpdateRepository(private val releaseAPI: ReleaseAPI) {
         lastResolvedAt = System.currentTimeMillis()
         return update
     }
+
+    /**
+     * Downloads [release] to [downloadedApk], which the installer is never handed as an error
+     * page or a cut short APK.
+     */
+    suspend fun download(release: ReleaseAsset, onProgress: (bytesRead: Long, contentLength: Long?) -> Unit) =
+        withContext(Dispatchers.IO) {
+            // Routed through AssetDownloader so the manager update survives a blocked GitHub the
+            // same way patch bundles do
+            assetDownloader.downloadToFile(release.downloadUrl, downloadedApk, onProgress)
+            downloadedApk.requireCompleteZip("Downloading manager update")
+        }
+
+    /** Whether [downloadedApk] is still on disk and holds anything worth installing. */
+    fun hasDownloadedApk() = downloadedApk.exists() && downloadedApk.length() > 0
 
     private companion object {
         // Long enough to cover the checks a single app launch fans out, short enough that a

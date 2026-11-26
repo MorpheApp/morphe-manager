@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallResult
@@ -33,7 +32,6 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.network.api.ReleaseAPI
 import app.morphe.manager.network.dto.ReleaseAsset
-import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
@@ -51,10 +49,8 @@ class UpdateViewModel(
     private val messages: UserMessages,
     private val releaseAPI: ReleaseAPI,
     private val managerUpdateRepository: ManagerUpdateRepository,
-    private val assetDownloader: AssetDownloader,
     private val sessionInstaller: SessionInstaller,
     private val networkInfo: NetworkInfo,
-    fs: Filesystem,
     private val prefs: PreferencesManager,
     private val installerManager: InstallerManager,
     private val rootInstaller: RootInstaller
@@ -122,7 +118,7 @@ class UpdateViewModel(
     // and the older-entries expander to avoid duplicate fetches inside one VM lifetime
     private val managerEntriesCache = mutableMapOf<Boolean, List<ChangelogEntry>>()
 
-    private val location = fs.tempDir.resolve("updater.apk")
+    private val location = managerUpdateRepository.downloadedApk
     private var job = resolveUpdate()
 
     /**
@@ -174,19 +170,9 @@ class UpdateViewModel(
             state = State.DOWNLOADING
 
             try {
-                withContext(Dispatchers.IO) {
-                    // Routed through AssetDownloader so the manager update survives a blocked
-                    // GitHub the same way patch bundles do
-                    assetDownloader.downloadToFile(
-                        downloadUrl = release.downloadUrl,
-                        saveLocation = location,
-                        onProgress = { bytesRead, contentLength ->
-                            downloadedSize = bytesRead
-                            totalSize = contentLength ?: totalSize
-                        }
-                    )
-                    // The installer is never handed an error page or a cut short APK
-                    location.requireCompleteZip("Downloading manager update")
+                managerUpdateRepository.download(release) { bytesRead, contentLength ->
+                    downloadedSize = bytesRead
+                    totalSize = contentLength ?: totalSize
                 }
                 installUpdate().join()
             } catch (error: Exception) {
@@ -206,7 +192,7 @@ class UpdateViewModel(
 
         // The download is staged in a directory that is wiped on every process start, so an
         // install started from a dialog that outlived it has nothing left to hand over
-        if (!hasDownloadedApk()) {
+        if (!managerUpdateRepository.hasDownloadedApk()) {
             resetToDownload()
             messages.show(R.string.update_download_missing)
             return@launch
@@ -312,9 +298,6 @@ class UpdateViewModel(
         state = State.CAN_DOWNLOAD
     }
 
-    /** Whether the staged update is still on disk and holds anything worth installing. */
-    private fun hasDownloadedApk() = location.exists() && location.length() > 0
-
     private fun handleInstallResult(result: InstallResult) {
         when (result) {
             InstallResult.Success -> {
@@ -416,7 +399,7 @@ class UpdateViewModel(
         // reset to CAN_INSTALL so user can try again
         if (state == State.INSTALLING && installHandedOff && pendingExternalInstall == null) {
             installHandedOff = false
-            if (hasDownloadedApk()) state = State.CAN_INSTALL else resetToDownload()
+            if (managerUpdateRepository.hasDownloadedApk()) state = State.CAN_INSTALL else resetToDownload()
         }
     }
 
