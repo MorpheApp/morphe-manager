@@ -7388,8 +7388,7 @@ HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->installPatchBundle(Lja
 HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->isNameOutOfDate()Z
 HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->pinSigningKey(Ljava/lang/String;)V
 HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->readSigningKey()Ljava/lang/String;
-HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->requireNonEmptyBundleFile(Ljava/io/File;Ljava/lang/String;)V
-HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->requireTrustedSigner(Ljava/io/File;Ljava/lang/String;)Ljava/lang/String;
+HSPLapp/morphe/manager/domain/bundles/PatchBundleSource;->requireTrustedSigner(Ljava/io/File;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 Lapp/morphe/manager/domain/bundles/RemoteBundleServices;
 HSPLapp/morphe/manager/domain/bundles/RemoteBundleServices;-><clinit>()V
 HSPLapp/morphe/manager/domain/bundles/RemoteBundleServices;-><init>(Lapp/morphe/manager/network/service/HttpService;Lapp/morphe/manager/network/api/ReleaseAPI;Lapp/morphe/manager/network/service/AssetDownloader;Lapp/morphe/manager/domain/manager/PreferencesManager;)V
@@ -11301,6 +11300,8 @@ HSPLapp/morphe/manager/util/AppLocale;->systemChoice(Landroid/content/Context;)L
 Lapp/morphe/manager/util/ArchiveUtilsKt;
 HSPLapp/morphe/manager/util/ArchiveUtilsKt;-><clinit>()V
 HSPLapp/morphe/manager/util/ArchiveUtilsKt;->hasZipHeader(Ljava/io/File;)Z
+HSPLapp/morphe/manager/util/ArchiveUtilsKt;->isCompleteZip(Ljava/io/File;)Z
+HSPLapp/morphe/manager/util/ArchiveUtilsKt;->requireCompleteZip(Ljava/io/File;Ljava/lang/String;)V
 Lapp/morphe/manager/util/AvatarCache$useDiskCache$1;
 HSPLapp/morphe/manager/util/AvatarCache$useDiskCache$1;-><init>(Ljava/io/File;Lkotlin/coroutines/Continuation;)V
 HSPLapp/morphe/manager/util/AvatarCache$useDiskCache$1;->create(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;

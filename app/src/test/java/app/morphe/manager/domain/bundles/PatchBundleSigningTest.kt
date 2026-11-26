@@ -8,6 +8,7 @@ package app.morphe.manager.domain.bundles
 import app.morphe.patcher.patch.PatchBundleSignature
 import kotlinx.coroutines.runBlocking
 import java.io.File
+import java.io.IOException
 import java.nio.file.Files
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -88,6 +89,15 @@ class PatchBundleSigningTest {
         val refused = assertFailsWith<PatchBundleSignerChangedException> { install(bundle(2)) }
 
         assertNull(refused.signer)
+    }
+
+    @Test
+    fun `bundle cut short is a failed download rather than an unsigned one`() {
+        install(bundle(1, KEY))
+        val bundle = bundle(2, KEY).apply { writeBytes(readBytes().copyOf(length().toInt() / 2)) }
+
+        assertFailsWith<IOException> { install(bundle) }
+        assertEquals(PUBLIC_KEY, source().signingKey)
     }
 
     @Test

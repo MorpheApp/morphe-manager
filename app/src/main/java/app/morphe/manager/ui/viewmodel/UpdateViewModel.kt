@@ -40,8 +40,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import java.io.File
-import java.io.IOException
 
 /**
  * Drives the manager self-update, from the release lookup down to handing the APK to an
@@ -187,27 +185,15 @@ class UpdateViewModel(
                             totalSize = contentLength ?: totalSize
                         }
                     )
+                    // The installer is never handed an error page or a cut short APK
+                    location.requireCompleteZip("Downloading manager update")
                 }
-                requireApkArchive(location)
                 installUpdate().join()
             } catch (error: Exception) {
                 resetToDownload()
                 throw error
             }
         }
-    }
-
-    /**
-     * Rejects a download that transferred cleanly but is not an APK, so the installer is never
-     * handed an error page or an API response that arrived in the file's place. The file is
-     * dropped as well, so nothing is left staged that a later install could pick up.
-     */
-    private suspend fun requireApkArchive(location: File) = withContext(Dispatchers.IO) {
-        if (location.hasZipHeader()) return@withContext
-
-        val size = runCatching { location.length() }.getOrDefault(0L)
-        runCatching { location.delete() }
-        throw IOException("The downloaded update is not an APK (size=$size)")
     }
 
     fun installUpdate() = viewModelScope.launch {

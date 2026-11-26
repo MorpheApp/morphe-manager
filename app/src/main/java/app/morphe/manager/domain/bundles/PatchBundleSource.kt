@@ -19,7 +19,7 @@ import app.morphe.manager.util.JSON_EXTENSION
 import app.morphe.manager.util.MORPHE_GITHUB_ORG
 import app.morphe.manager.util.MPP_EXTENSION
 import app.morphe.manager.util.SourceUrl
-import app.morphe.manager.util.hasZipHeader
+import app.morphe.manager.util.requireCompleteZip
 import app.morphe.manager.util.isPatcherOutdated
 import app.morphe.patcher.patch.PatchBundleSignature
 import java.io.File
@@ -152,8 +152,7 @@ sealed class PatchBundleSource(
             runCatching { staging.setWritable(true, true) }
             runCatching { staging.delete() }
             write(staging)
-            requireNonEmptyBundleFile(staging, context)
-            val signer = requireTrustedSigner(staging, publishedKey)
+            val signer = requireTrustedSigner(staging, context, publishedKey)
             staging.setReadOnly()
             // Replaces the installed bundle in a single step, so readers see either the old
             // file or the new one
@@ -168,30 +167,18 @@ sealed class PatchBundleSource(
         }
     }
 
-    protected fun requireNonEmptyBundleFile(file: File, context: String) {
-        val length = runCatching { file.length() }.getOrDefault(0L)
-        if (length < MIN_PATCH_BUNDLE_BYTES) {
-            runCatching { file.delete() }
-            throw IOException("$context produced an empty or truncated patch bundle (size=$length)")
-        }
-
-        // Patch bundles are zip archives whether they arrive as .mpp or .jar, so a response that
-        // transferred cleanly but is not one must not be installed
-        if (!file.hasZipHeader()) {
-            runCatching { file.delete() }
-            throw IOException("$context produced a file that is not a patch bundle archive")
-        }
-    }
-
     /**
-     * Checks that [file] is signed by [signingKey], or by [publishedKey] while the source has no
-     * key yet. A source with neither takes any bundle, signed nor not.
+     * Checks that [file] is a whole bundle signed by [signingKey], or by [publishedKey] while the
+     * source has no key yet. A source with neither takes any bundle, signed nor not.
      *
      * @return The key [file] is signed with, to pin with [pinSigningKey] once it is installed.
+     * @throws IOException If [file] is not a whole zip archive, which [context] names the source of.
      * @throws SecurityException If the signature does not match the content of [file].
      * @throws PatchBundleSignerChangedException If [file] is not signed by the expected key.
      */
-    protected fun requireTrustedSigner(file: File, publishedKey: String? = null): String? {
+    protected fun requireTrustedSigner(file: File, context: String, publishedKey: String? = null): String? {
+        // The signature sits at the very end, so a bundle cut short would read as an unsigned one
+        file.requireCompleteZip(context)
         val signer = PatchBundleSignature.verify(file)
         // Read again rather than from signingKey, which a key trusted since then does not change
         val expected = readSigningKey() ?: publishedKey
@@ -223,7 +210,6 @@ sealed class PatchBundleSource(
     }
 
     companion object Extensions {
-        private const val MIN_PATCH_BUNDLE_BYTES = 8L
         private const val STAGING_FILE_NAME = "patches.jar.tmp"
         private const val SIGNING_KEY_FILE_NAME = "signing.key"
         val PatchBundleSource.isDefault inline get() = uid == 0

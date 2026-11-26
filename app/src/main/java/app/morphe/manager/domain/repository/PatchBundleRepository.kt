@@ -1605,30 +1605,28 @@ class PatchBundleRepository(
     }
 
     /**
-     * Suspends until any currently active update job completes.
-     */
-    private suspend fun awaitCurrentUpdateJob() {
-        val job = updateJobMutex.withLock { updateJob }
-        job?.join()
-    }
-
-    /**
      * Same as [updateCheck] but suspends until the update job fully completes.
-     * Waits for any in-progress update to finish first, then runs its own update directly.
+     * Waits for any in-progress update to finish first, then runs its own one as [updateJob].
      *
      * @param reportUpToDate False for a check whose caller already shows it ran, which then ends
      *   without a progress result when nothing was new.
      */
     suspend fun updateCheckAndAwait(allowUnsafeNetwork: Boolean = false, reportUpToDate: Boolean = true) {
         awaitReady()
-        awaitCurrentUpdateJob()
-        performRemoteUpdateWithResult(
-            UpdateRequest(
-                target = UpdateTarget(allEnabled = true),
-                allowUnsafeNetwork = allowUnsafeNetwork,
-                reportUpToDate = reportUpToDate,
-            )
+        val request = UpdateRequest(
+            target = UpdateTarget(allEnabled = true),
+            allowUnsafeNetwork = allowUnsafeNetwork,
+            reportUpToDate = reportUpToDate,
         )
+        // Run as the one update job, since two updates of a source share its staging file
+        while (true) {
+            val (job, ours) = updateJobMutex.withLock {
+                updateJob?.takeIf { it.isActive }?.let { it to false }
+                    ?: (launchRemoteUpdateJob(request) to true)
+            }
+            job.join()
+            if (ours) return
+        }
     }
 
     /**
@@ -1749,26 +1747,34 @@ class PatchBundleRepository(
                 }
                 queued = true
             } else {
-                activeUpdateRequest = request
-                updateJob = scope.launch {
-                    try {
-                        performRemoteUpdateWithResult(request)
-                    } finally {
-                        updateJobMutex.withLock {
-                            updateJob = null
-                            activeUpdateRequest = null
-                        }
-                        val next = drainPendingUpdateRequests()
-                        if (next != null) {
-                            startRemoteUpdateJob(next)
-                        }
-                    }
-                }
+                launchRemoteUpdateJob(request)
             }
         }
         if (queued) {
             enqueueUpdateRequest(request)
         }
+    }
+
+    /**
+     * Starts [request] as [updateJob], which then takes up the requests queued meanwhile.
+     * Call it with [updateJobMutex] held and no job active.
+     */
+    private fun launchRemoteUpdateJob(request: UpdateRequest): Job {
+        activeUpdateRequest = request
+        return scope.launch {
+            try {
+                performRemoteUpdateWithResult(request)
+            } finally {
+                updateJobMutex.withLock {
+                    updateJob = null
+                    activeUpdateRequest = null
+                }
+                val next = drainPendingUpdateRequests()
+                if (next != null) {
+                    startRemoteUpdateJob(next)
+                }
+            }
+        }.also { updateJob = it }
     }
 
     private suspend fun performRemoteUpdateWithResult(request: UpdateRequest) = coroutineScope {
