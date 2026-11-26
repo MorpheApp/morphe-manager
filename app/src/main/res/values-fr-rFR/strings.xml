@@ -377,6 +377,11 @@ Choisissez d'où provient son APK"</string>
     <string name="home_invalid_signature_title">APK non vérifié</string>
     <string name="home_invalid_signature_message">L\'APK que vous avez sélectionné pour &lt;b&gt;%s&lt;/b&gt; ne correspond pas au certificat de signature attendu. Il peut avoir été modifié ou provenir d\'une source non fiable</string>
     <string name="home_invalid_signature_badge">Cet APK n\'est peut-être pas celui d\'origine</string>
+    <string name="home_invalid_signature_broken_message">L\'APK que vous avez sélectionnée pour &lt;b&gt;%s&lt;/b&gt; échoue à la vérification de sa signature. Elle est probablement endommagée ou n\'a pas été entièrement téléchargée, veuillez donc la télécharger à nouveau ou choisir un autre fichier</string>
+    <string name="home_invalid_signature_broken_badge">Cet APK peut être endommagé ou incomplet</string>
+    <string name="home_invalid_signature_expected">Certificat attendu</string>
+    <string name="home_invalid_signature_actual">Certificat de l\'APK</string>
+    <string name="home_invalid_signature_none">Aucune signature valide</string>
     <string name="home_split_apk_warning_title">APK fractionné détecté</string>
     <string name="home_split_apk_warning_message">"Ce fichier est un bundle APK (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 

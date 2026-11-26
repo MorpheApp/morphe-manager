@@ -377,6 +377,11 @@ Pumili kung saan kukunin ang APK nito"</string>
     <string name="home_invalid_signature_title">Hindi beripikadong APK</string>
     <string name="home_invalid_signature_message">Ang APK na pinili mo para sa &lt;b&gt;%s&lt;/b&gt; ay hindi tumutugma sa inaasahang certificate ng paglagda. Maaaring ito ay binago o mula sa hindi pinagkakatiwalaang pinagmulan</string>
     <string name="home_invalid_signature_badge">Maaaring hindi ang orihinal ang APK na ito</string>
+    <string name="home_invalid_signature_broken_message">Ang APK na pinili mo para sa &lt;b&gt;%s&lt;/b&gt; ay nabigong pumasa sa signature check. Maaaring sira ito o hindi pa lubos na na-download, kaya i-download itong muli o pumili ng ibang file</string>
+    <string name="home_invalid_signature_broken_badge">Maaaring sira o hindi kumpleto ang APK na ito</string>
+    <string name="home_invalid_signature_expected">Inaasahang sertipiko</string>
+    <string name="home_invalid_signature_actual">Sertipiko ng APK</string>
+    <string name="home_invalid_signature_none">Walang valid na lagda</string>
     <string name="home_split_apk_warning_title">Natuklasan ang nahati na APK</string>
     <string name="home_split_apk_warning_message">"Ang file na ito ay isang APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

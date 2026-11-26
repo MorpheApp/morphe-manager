@@ -377,6 +377,11 @@ Kies waar de APK vandaan moet worden gehaald"</string>
     <string name="home_invalid_signature_title">Onbevestigd APK</string>
     <string name="home_invalid_signature_message">Het APK-bestand dat u hebt geselecteerd voor &lt;b&gt;%s&lt;/b&gt; komt niet overeen met het verwachte ondertekeningscertificaat. Het kan gewijzigd zijn of afkomstig zijn van een onbetrouwbare bron</string>
     <string name="home_invalid_signature_badge">Dit APK-bestand is mogelijk niet het origineel</string>
+    <string name="home_invalid_signature_broken_message">De APK die u hebt geselecteerd voor &lt;b&gt;%s&lt;/b&gt; is niet geslaagd voor de handtekeningcontrole. Deze is waarschijnlijk beschadigd of nog niet volledig gedownload, download hem dus opnieuw of kies een ander bestand</string>
+    <string name="home_invalid_signature_broken_badge">Deze APK is mogelijk beschadigd of onvolledig</string>
+    <string name="home_invalid_signature_expected">Verwacht certificaat</string>
+    <string name="home_invalid_signature_actual">Certificaat van de APK</string>
+    <string name="home_invalid_signature_none">Geen geldige handtekening</string>
     <string name="home_split_apk_warning_title">Gesplitst APK gedetecteerd</string>
     <string name="home_split_apk_warning_message">"Dit bestand is een APK-bundel
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

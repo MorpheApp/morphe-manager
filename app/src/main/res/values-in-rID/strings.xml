@@ -377,6 +377,11 @@ Pilih dari mana Anda ingin mengambil APK-nya"</string>
     <string name="home_invalid_signature_title">APK Tidak Terverifikasi</string>
     <string name="home_invalid_signature_message">APK yang Anda pilih untuk &lt;b&gt;%s&lt;/b&gt; tidak sesuai dengan sertifikat yang diharapkan. Ini mungkin telah dimodifikasi atau berasal dari sumber yang tidak terpercaya</string>
     <string name="home_invalid_signature_badge">APK ini mungkin bukan versi aslinya</string>
+    <string name="home_invalid_signature_broken_message">APK yang Anda pilih untuk &lt;b&gt;%s&lt;/b&gt; gagal dalam pemeriksaan tanda tangannya. Kemungkinan rusak atau belum terunduh sepenuhnya, jadi unduh kembali atau pilih berkas lain</string>
+    <string name="home_invalid_signature_broken_badge">APK ini mungkin rusak atau tidak lengkap</string>
+    <string name="home_invalid_signature_expected">Sertifikat yang diharapkan</string>
+    <string name="home_invalid_signature_actual">Sertifikat APK</string>
+    <string name="home_invalid_signature_none">Tidak ada tanda tangan yang valid</string>
     <string name="home_split_apk_warning_title">APK terpisah terdeteksi</string>
     <string name="home_split_apk_warning_message">"Berkas ini adalah paket APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

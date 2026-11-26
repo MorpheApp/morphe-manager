@@ -377,6 +377,11 @@ Uning APK faylini qayerdan olishni tanlang"</string>
     <string name="home_invalid_signature_title">Tasdiqlanmagan APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; uchun tanlagan APK kutilgan imzo sertifikatiga mos kelmaydi. U o\'zgartirilgan yoki ishonchsiz manbadan bo\'lishi mumkin</string>
     <string name="home_invalid_signature_badge">Ushbu APK original bo\'lmasligi mumkin</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; uchun tanlagan APK faylingiz imzo tekshiruvidan o\'ta olmadi. U shikastlangan yoki hali to\'liq yuklab olinmagan bo\'lishi mumkin, shuning uchun uni qayta yuklab oling yoki boshqa faylni tanlang</string>
+    <string name="home_invalid_signature_broken_badge">Ushbu APK shikastlangan yoki tugallanmagan bo\'lishi mumkin</string>
+    <string name="home_invalid_signature_expected">Kutilgan sertifikat</string>
+    <string name="home_invalid_signature_actual">APK sertifikati</string>
+    <string name="home_invalid_signature_none">Yaroqli imzo yo\"q</string>
     <string name="home_split_apk_warning_title">Split APK aniqlandi</string>
     <string name="home_split_apk_warning_message">"Bu fayl APK to‘plami
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

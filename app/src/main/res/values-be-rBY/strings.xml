@@ -378,6 +378,11 @@
     <string name="home_invalid_signature_title">Неправераны APK</string>
     <string name="home_invalid_signature_message">APK, які вы выбралі для &lt;b&gt;%s&lt;/b&gt;, не адпавядае чаканаму сертыфікату падпіса. Ён мог быць зменены або паходзіць з ненадзейнай крыніцы</string>
     <string name="home_invalid_signature_badge">Гэты APK можа быць не арыгінальным</string>
+    <string name="home_invalid_signature_broken_message">Выбраны APK для &lt;b&gt;%s&lt;/b&gt; не прайшоў праверку подпісу. Ён, верагодна, пашкоджаны або быў спампоўваны не цалкам, таму спампруйце яго зноў або выберыце іншы файл</string>
+    <string name="home_invalid_signature_broken_badge">Гэты APK можа быць пашкоджаны або няпоўны</string>
+    <string name="home_invalid_signature_expected">Очаківаны сертыфікат</string>
+    <string name="home_invalid_signature_actual">Сертыфікат APK</string>
+    <string name="home_invalid_signature_none">Няма сапраўднага подпісу</string>
     <string name="home_split_apk_warning_title">Выяўлены Split APK</string>
     <string name="home_split_apk_warning_message">"Гэты файл з'яўляецца APK-пакетам
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

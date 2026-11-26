@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">APK לא מאומת</string>
     <string name="home_invalid_signature_message">ה-APK שבחרת עבור &lt;b&gt;%s&lt;/b&gt; אינו תואם לתעודת החתימה הצפויה. ייתכן שהוא שונה או ממקור לא מהימן</string>
     <string name="home_invalid_signature_badge">ייתכן שה-APK הזה אינו המקורי</string>
+    <string name="home_invalid_signature_broken_message">ה-APK שבחרת עבור &lt;b&gt;%s&lt;/b&gt; נכשל בבדיקת החתימה שלו. הוא כנראה פגום או שטרם ירד במלואו, לכן הורד אותו שוב או בחר קובץ אחר</string>
+    <string name="home_invalid_signature_broken_badge">ייתכן ש-APK זה פגום או אינו שלם</string>
+    <string name="home_invalid_signature_expected">אישור צפוי</string>
+    <string name="home_invalid_signature_actual">אישור של ה-APK</string>
+    <string name="home_invalid_signature_none">אין חתימה תקפה</string>
     <string name="home_split_apk_warning_title">APK מפולח זוהה</string>
     <string name="home_split_apk_warning_message">"קובץ זה הוא חבילת APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

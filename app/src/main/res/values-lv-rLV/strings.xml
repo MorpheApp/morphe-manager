@@ -377,6 +377,11 @@ Izvēlieties, no kurienes ņemt tās APK"</string>
     <string name="home_invalid_signature_title">Nenovērtēts APK</string>
     <string name="home_invalid_signature_message">APK, kuru izvēlējāties &lt;b&gt;%s&lt;/b&gt; lietotnei, neatbilst gaidītajam parakstīšanas sertifikātam. Tas var būt modificēts vai nākt no neuzticama avota</string>
     <string name="home_invalid_signature_badge">Šis APK var nebūt oriģināls</string>
+    <string name="home_invalid_signature_broken_message">APK, kuru izvēlējāties &lt;b&gt;%s&lt;/b&gt;, neiztur parakstura pārbaudi. Tas, iespējams, ir bojāts vai nav pilnībā lejupielādēts, tāpēc lejupielādējiet to vēlreiz vai izvēlieties citu failu</string>
+    <string name="home_invalid_signature_broken_badge">Šis APK var būt bojāts vai nepilnīgs</string>
+    <string name="home_invalid_signature_expected">Gaidāmais sertifikāts</string>
+    <string name="home_invalid_signature_actual">APK sertifikāts</string>
+    <string name="home_invalid_signature_none">Nav derīgas paraksta</string>
     <string name="home_split_apk_warning_title">Atklāts sadalīts APK</string>
     <string name="home_split_apk_warning_message">"Šis fails ir APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

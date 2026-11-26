@@ -10,10 +10,10 @@
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
     <string name="form_factor_automotive">Auto</string>
-    <string name="home_no_patches_available">Paiku ei ole saadaval</string>
-    <string name="home_app_hide_title">Kas peita see rakendus?</string>
+    <string name="home_no_patches_available">Parandused pole saadaval</string>
+    <string name="home_app_hide_title">Kas peidata see rakendus?</string>
     <string name="home_more_apps_title">Veel rakendusi</string>
-    <string name="home_more_apps_hide_title">Kas peita see kaart?</string>
+    <string name="home_more_apps_hide_title">Kas peidame selle kaardi?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_more_apps_hide_message">Selle saab igal ajal tagasi tuua jaotises %1$s</string>
     <string name="home_app_hide_message">See rakendus peidetakse avakuvalt. Saad selle hiljem taastada peidetud rakenduste alt, kasutades nimekirja all olevat nuppu</string>
@@ -36,13 +36,13 @@
     <!-- Shown under the app a link was opened for -->
     <string name="deep_link_add_source_only_app">Lisati ainult see rakendus. Teisi rakendusi saad lisada allika rakenduste loendist</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
-    <string name="deep_link_add_source_only_universal">Lisati ainult universaalsed paigad. Rakendusi saad lisada allika rakenduste loendist</string>
+    <string name="deep_link_add_source_only_universal">Lisati ainult universaalsed parandused. Rakendusi saad lisada allika rakenduste loendist</string>
     <!-- Asked when the link names an app of a source that is already added -->
-    <string name="deep_link_add_source_app_back">See allikas on juba lisatud. Kas lisads see rakendus olemasolevast allikast?</string>
+    <string name="deep_link_add_source_app_back">See allikas on juba lisatud. Kas lisate selle rakenduse olemasolevast allikast?</string>
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
     <string name="mpp_import_update_message">See on %s uus versioon. Kas soovid seda uuendada?</string>
     <string name="mpp_import_unreadable">Seda faili ei saa lugeda</string>
-    <string name="incoming_file_not_patch_source">See fail ei ole parandus allikas</string>
+    <string name="incoming_file_not_patch_source">See fail ei ole paranduse allikas</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe\'i uuendus on saadaval</string>
     <string name="home_update_available_subtitle">Uus versioon on paigaldamiseks valmis</string>
@@ -74,7 +74,7 @@
     <string name="home_app_filter_not_patched">Paikamata</string>
     <string name="home_app_filter_clones">Kloonid</string>
     <string name="home_app_grouping_none">Puudub</string>
-    <string name="home_app_sort_manual_hint">Vajuta rakendust pikalt ja siis nupule järjekorra muutmiseks</string>
+    <string name="home_app_sort_manual_hint">Vajutage pikalt rakendust ja seejärel puudutage ümberjärjestamise nuppu</string>
     <string name="home_app_sort_recommended">Soovitatud</string>
     <string name="home_app_sort_updates_first">Esmalt uuendused</string>
     <string name="home_app_sort_recently_patched">Viimati paigatud</string>
@@ -101,11 +101,11 @@
     <string name="home_category_delete_moves_apps">Selle rakendused liiguvad tagasi jaotisse &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="home_category_actions_unavailable">Tegevused ei ole selle kategooria puhul saadaval</string>
     <!-- Home Screen - Home Greetings -->
-    <string name="home_greeting_1">Millist rakendust soovid paigata?</string>
+    <string name="home_greeting_1">Millist rakendust soovid parenda?</string>
     <!-- Humorous hype message with light nostalgia -->
     <string name="home_greeting_2">Kas oled valmis muutma rakendused taas legendaarseks?</string>
     <!-- "Buckle up" referring to fastening your vehicle seat belt. A light-hearted joke to build excitement -->
-    <string name="home_greeting_3">Kinnita turvavöö, hakkame paikama</string>
+    <string name="home_greeting_3">Kinnita turvavöö, hakkame parendame</string>
     <!-- Sarcastic joke about blocking ads, intentionally over-the-top -->
     <string name="home_greeting_4">Uus päev, uus reklaamivaba meistriteos</string>
     <!-- "Watch ads" refers to watching video ads in unpatched apps -->
@@ -113,7 +113,7 @@
     <!-- Friendly, slightly mischievous joke about controlling app behavior -->
     <string name="home_greeting_6">Õpetame rakendustele kombeid</string>
     <!-- Whimsical forecast-style joke, not meant literally -->
-    <string name="home_greeting_7" formatted="false">Tänane prognoos: 100% tõenäosus paikamiseks</string>
+    <string name="home_greeting_7" formatted="false">Tänane prognoos: 100% tõenäosus parendaseks</string>
     <!-- From mediocrity to amazing -->
     <string name="home_greeting_8">Kas oled valmis muutma keskpärase suurepäraseks?</string>
     <!-- Playful exaggeration, making patching feel heroic -->
@@ -121,14 +121,14 @@
     <!-- Light sarcasm, casual and tech-savvy humor -->
     <string name="home_greeting_10">Edasi viivad kofeiin ja head parandused</string>
     <!-- Morning greetings (5:00–11:59) -->
-    <string name="home_greeting_morning_1">Tõuse ja paika</string>
-    <string name="home_greeting_morning_2">Tere hommikust! Rakendused ei paika ennast ise</string>
+    <string name="home_greeting_morning_1">Tõuse ja parandus</string>
+    <string name="home_greeting_morning_2">Tere hommikust! Rakendused ei parenda ennast ise</string>
     <!-- Afternoon greetings (12:00–16:59) -->
-    <string name="home_greeting_afternoon_1">Pärastlõunane väsimus? Paika midagi</string>
-    <string name="home_greeting_afternoon_2">Pärastlõunane paikamine mõjub teistmoodi</string>
-    <string name="home_greeting_afternoon_3">Pärastlõunane vahetus: paikade versioon</string>
+    <string name="home_greeting_afternoon_1">Pärastlõunane väsimus? Parenda midagi</string>
+    <string name="home_greeting_afternoon_2">Pärastlõunane parendamine mõjub teistmoodi</string>
+    <string name="home_greeting_afternoon_3">Pärastlõunane vahetus: paranduse versioon</string>
     <!-- Evening greetings (17:00–21:59) -->
-    <string name="home_greeting_evening_1">Tere õhtust! Õhtused paigad on kuidagi teistsugused</string>
+    <string name="home_greeting_evening_1">Tere õhtust! Õhtused parandused on kuidagi teistsugused</string>
     <string name="home_greeting_evening_2">Lõpetad päeva? Paika siis esmalt üks rakendus</string>
     <string name="home_greeting_evening_3">Lõpetad töö? Paika siis esmalt midagi</string>
     <!-- Late night greetings (22:00–23:59) -->
@@ -138,23 +138,23 @@
     <!-- Super late night greetings (0:00–4:59) -->
     <string name="home_greeting_super_late_1">Tipptunnid paikamiseks… väidetavalt</string>
     <string name="home_greeting_super_late_2">Ei saa und? Paika midagi</string>
-    <string name="home_greeting_super_late_3">Nüüd jää lihtsalt üles ja paika</string>
+    <string name="home_greeting_super_late_3">Nüüd jää lihtsalt üles ja parenda</string>
     <string name="home_greeting_super_late_4">Sina ja serverid, mõlemad ärkvel</string>
     <string name="home_greeting_super_late_5">Öine ja produktiivne</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Komm või paik?</string>
+    <string name="home_greeting_halloween_1">Komm või parenda?</string>
     <string name="home_greeting_halloween_2">Neis APK-des ei ole kummitusi, me kontrollisime</string>
-    <string name="home_greeting_halloween_3">Õudne hooaeg, värsked paigad</string>
+    <string name="home_greeting_halloween_3">Õudne hooaeg, värsked parendused</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Siin paigas on midagi kurja</string>
+    <string name="home_greeting_halloween_4">Midagi kurja siinpool parandused</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">Häid pühi, värsked paigad</string>
+    <string name="home_greeting_winter_1">Häid pühi, värsked parandused</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Las sajab lund, las ta paikab</string>
-    <string name="home_greeting_winter_3">Uus aasta, uued paigad</string>
+    <string name="home_greeting_winter_2">Las sajab lund, las sajab paranda</string>
+    <string name="home_greeting_winter_3">Uus aasta, uued parandused</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">Lumehanges paigates</string>
+    <string name="home_greeting_winter_4">Lumehanges parandates</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
     <string name="home_greeting_new_year_1">Head uut aastat!</string>
     <string name="home_greeting_new_year_2">Ootame uusi paiku</string>
@@ -172,9 +172,9 @@
     <string name="sources_patches_source_disabled_hint">See allikas on keelatud. Selle paigad on loetletud viiteks ega rakendu</string>
     <string name="sources_management_open_in_browser">Ava brauseris</string>
     <string name="sources_management_report_issue">Teata probleemist</string>
-    <string name="sources_management_export_patches">Eksporteeri paigade fail</string>
-    <string name="sources_management_export_patches_success">Paigade fail on salvestatud</string>
-    <string name="sources_management_export_patches_failed">Paigade faili eksportimine nurjus</string>
+    <string name="sources_management_export_patches">Eksporteeri paranduste fail</string>
+    <string name="sources_management_export_patches_success">Paranduste fail on salvestatud</string>
+    <string name="sources_management_export_patches_failed">Paranduste faili eksportimine nurjus</string>
     <string name="sources_management_failed_to_open_url">URL-i avamine ebaõnnestus</string>
     <string name="sources_apps">Rakendused</string>
     <string name="sources_apps_description">Märgitud rakendused tulevad sellest allikast. Puuduta rakendust, et see eemaldada või tagasi tuua, pühki seda, et näha selle paigandusi. Rakendus kaob avalehelt, kui ükski allikas seda ei paku, välja arvatud juhul, kui oled seda paiganud</string>
@@ -377,6 +377,11 @@ Vali, kust selle APK võtta"</string>
     <string name="home_invalid_signature_title">Kontrollimata APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; jaoks valitud APK ei vasta oodatavale allkirjastamise sertifikaadile. See võib olla muudetud või pärit ebausaldusväärsest allikast</string>
     <string name="home_invalid_signature_badge">See APK ei pruugi olla originaal</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; jaoks valitud APK ei läbi allkirjakontrolli. See on tõenäoliselt kahjustatud või pole veel täielikult alla laaditud, seega laadige see uuesti alla või valige mõni muu fail</string>
+    <string name="home_invalid_signature_broken_badge">See APK võib olla kahjustatud või mittäielik</string>
+    <string name="home_invalid_signature_expected">Oodatud sertifikaat</string>
+    <string name="home_invalid_signature_actual">APK sertifikaat</string>
+    <string name="home_invalid_signature_none">Puudub kehtiv allkiri</string>
     <string name="home_split_apk_warning_title">Tuvastatud Split APK</string>
     <string name="home_split_apk_warning_message">"See fail on APK-pakett
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

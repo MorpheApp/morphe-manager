@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Расталмаған APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; үшін таңдалған APK күтілетін қолтаңба сертификатына сәйкес келмейді. Ол өзгертілген болуы мүмкін немесе сенімсіз дереккөзден алынған</string>
     <string name="home_invalid_signature_badge">Бұл APK түпнұсқа емес болуы мүмкін</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; үшін таңдалған APK қолқолтаңбасынан өтпейді. Ол зақымданған болуы мүмкін немесе әлі толық жүктелмеген, сондықтан оны қайта жүктеңіз немесе басқа файлды таңдаңыз</string>
+    <string name="home_invalid_signature_broken_badge">Бұл APK зақымдануы немесе толық емес болуы мүмкін</string>
+    <string name="home_invalid_signature_expected">Күтілетін сертификат</string>
+    <string name="home_invalid_signature_actual">APK сертификаты</string>
+    <string name="home_invalid_signature_none">Жарамды қолтаңба жоқ</string>
     <string name="home_split_apk_warning_title">Бөлінген APK анықталды</string>
     <string name="home_split_apk_warning_message">"Бұл файл APK пакеті
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

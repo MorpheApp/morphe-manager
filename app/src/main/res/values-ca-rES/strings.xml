@@ -377,6 +377,11 @@ Tria d'on vols obtenir l'APK"</string>
     <string name="home_invalid_signature_title">APK no verificat</string>
     <string name="home_invalid_signature_message">L\'APK que heu seleccionat per a &lt;b&gt;%s&lt;/b&gt; no coincideix amb el certificat de signatura esperat. Pot haver estat modificat o provenir d\'una font no fiable</string>
     <string name="home_invalid_signature_badge">Aquest APK pot no ser l\'original</string>
+    <string name="home_invalid_signature_broken_message">L\'APK que heu seleccionat per a &lt;b&gt;%s&lt;/b&gt; no ha passat la comprovació de la signatura. Probablement estigui danyat o no s\'hagi descarregat completament; torneu-lo a descarregar o trieu un altre fitxer</string>
+    <string name="home_invalid_signature_broken_badge">Aquest APK pot estar danyat o incomplete</string>
+    <string name="home_invalid_signature_expected">Certificat esperat</string>
+    <string name="home_invalid_signature_actual">Certificat de l\'APK</string>
+    <string name="home_invalid_signature_none">No hi ha cap signatura vàlida</string>
     <string name="home_split_apk_warning_title">S\'ha detectat un APK dividit</string>
     <string name="home_split_apk_warning_message">"Aquest fitxer és un paquet APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

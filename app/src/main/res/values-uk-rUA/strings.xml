@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Непідтверджений APK</string>
     <string name="home_invalid_signature_message">Вибраний вами файл APK для &lt;b&gt;%s&lt;/b&gt; не відповідає очікуваному сертифікату підпису. Можливо, він змінений або походить з ненадійного джерела</string>
     <string name="home_invalid_signature_badge">Цей файл APK може бути неоригінальним</string>
+    <string name="home_invalid_signature_broken_message">Вибраний файл APK для &lt;b&gt;%s&lt;/b&gt; не пройшов перевірку підпису. Імовірно, він пошкоджений або ще не завантажився повністю, тому завантажте його знову або виберіть інший файл</string>
+    <string name="home_invalid_signature_broken_badge">Цей файл APK може бути пошкоджений або неповний</string>
+    <string name="home_invalid_signature_expected">Очікуваний сертифікат</string>
+    <string name="home_invalid_signature_actual">Сертифікат файлу APK</string>
+    <string name="home_invalid_signature_none">Немає дійсного підпису</string>
     <string name="home_split_apk_warning_title">Виявлено split APK</string>
     <string name="home_split_apk_warning_message">"Цей файл є пакетом APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

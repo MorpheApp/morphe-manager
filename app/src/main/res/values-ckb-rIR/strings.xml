@@ -378,6 +378,11 @@
     <string name="home_invalid_signature_title">APKی پشتڕاستنەکراو</string>
     <string name="home_invalid_signature_message">ئەو APK تۆ دیاریت کردووە بۆ &lt;b&gt;%s&lt;/b&gt; یەکناگرێتەوە لەگەڵ بڕوانامەی ئیمزاکردنی چاوەڕوانکراو. لەوانەیە دەستکاری کرابێت یان لە سەرچاوەیەکی باوەڕپێنەکراوەوە بێ</string>
     <string name="home_invalid_signature_badge">ئەم APK لەوانەیە ڕەسەن نەبێ</string>
+    <string name="home_invalid_signature_broken_message">ئەو APKی هەڵبژاردووتە بۆ &lt;b&gt;%s&lt;/b&gt; لە پشکنینی واژۆی خۆی دەرنابووە. پێدەچێت تێکچووبێت یان هێشتا بە تەواوی دابەزێنرابێت، بۆیە دووبارە دایبەزێنە یان فایلێکی تر هەڵبژێرە</string>
+    <string name="home_invalid_signature_broken_badge">ئەم APKە ڕەنگە تێکچووبێت یان ناتەواو بێت</string>
+    <string name="home_invalid_signature_expected">بڕوانامەی چاوەڕوانکراو</string>
+    <string name="home_invalid_signature_actual">بڕوانامەی APK</string>
+    <string name="home_invalid_signature_none">هیچ واژێرەیەکی دروست نییە</string>
     <string name="home_split_apk_warning_title">APKی دابەشکراو دۆزرایەوە</string>
     <string name="home_split_apk_warning_message">"ئەم پەڕگەیە باندڵێکی APK یە
  (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

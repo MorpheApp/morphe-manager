@@ -377,6 +377,11 @@ Aukeratu non hartu APK-a"</string>
     <string name="home_invalid_signature_title">Egiaztatu gabeko APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt;-rako hautatu duzun APKak ez du espero zen sinadura-ziurtagiriarekin bat egiten. Aldatua izan daiteke edo iturri ez-fidagarri batetik etorri</string>
     <string name="home_invalid_signature_badge">APK hau agian ez da originala</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; rakin aukeratutako APKaren sinatura egizakia huts egin du. Probabilmente kaltetuta dago edo oraindik ez da guztiz deskargatu, beraz, deskargatu berriro edo beste fitxamen bat aukeratu</string>
+    <string name="home_invalid_signature_broken_badge">APK hau kaltetuta edo incomplete egon daiteke</string>
+    <string name="home_invalid_signature_expected">Espero zen ziropatua</string>
+    <string name="home_invalid_signature_actual">APKren ziropatua</string>
+    <string name="home_invalid_signature_none">Ez dago sinatura baliagaririk</string>
     <string name="home_split_apk_warning_title">APK multzoa detektatuta</string>
     <string name="home_split_apk_warning_message">"Fitxategi hau APK bundle bat da
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

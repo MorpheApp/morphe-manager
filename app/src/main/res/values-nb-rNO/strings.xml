@@ -377,6 +377,11 @@ Velg hvor APK-filen skal hentes fra"</string>
     <string name="home_invalid_signature_title">Uverifisert APK-fil</string>
     <string name="home_invalid_signature_message">APK-filen du valgte for &lt;b&gt;%s&lt;/b&gt; samsvarer ikke med det forventede signatursertifikatet. Den kan være modifisert eller fra en upålitelig kilde</string>
     <string name="home_invalid_signature_badge">Denne APK-filen er kanskje ikke original</string>
+    <string name="home_invalid_signature_broken_message">APK-filen du valgte for &lt;b&gt;%s&lt;/b&gt; feiler signaturkontrollen. Den er sannsynligvis skadet eller ikke fullstendig nedlastet, så last den ned på nytt eller velg en annen fil</string>
+    <string name="home_invalid_signature_broken_badge">Denne APK-filen kan være skadet eller ufullstendig</string>
+    <string name="home_invalid_signature_expected">Forventet sertifikat</string>
+    <string name="home_invalid_signature_actual">APK-filens sertifikat</string>
+    <string name="home_invalid_signature_none">Ingen gyldig signatur</string>
     <string name="home_split_apk_warning_title">Splittet APK-fil oppdaget</string>
     <string name="home_split_apk_warning_message">"Denne filen er en APK-pakke
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

@@ -377,6 +377,11 @@ Valitse, mistä sen APK haetaan"</string>
     <string name="home_invalid_signature_title">Todentamaton APK</string>
     <string name="home_invalid_signature_message">Valitsemasi APK-tiedosto &lt;b&gt;%s&lt;/b&gt; ei vastaa odotettua allekirjoitussertifikaattia. Sitä on ehkä muokattu tai se on peräisin luotettamattomasta lähteestä</string>
     <string name="home_invalid_signature_badge">Tämä APK ei välttämättä ole alkuperäinen</string>
+    <string name="home_invalid_signature_broken_message">Valitsemasi APK-tiedosto kohteelle &lt;b&gt;%s&lt;/b&gt; ei läpäissyt allekirjoitustarkistusta. Se on todennäköisesti vioittunut tai lataus ei ole vielä valmistunut, joten lataa se uudelleen tai valitse toinen tiedosto</string>
+    <string name="home_invalid_signature_broken_badge">Tämä APK saattaa olla vioittunut tai puutteellinen</string>
+    <string name="home_invalid_signature_expected">Odotettu sertifikaatti</string>
+    <string name="home_invalid_signature_actual">APK:n sertifikaatti</string>
+    <string name="home_invalid_signature_none">Ei voimassa olevaa allekirjoitusta</string>
     <string name="home_split_apk_warning_title">Ositettu APK havaittu</string>
     <string name="home_split_apk_warning_message">"Tämä tiedosto on APK-paketti
 (&lt;b&gt;APKM/APKS/XAPK&lt;/b&gt;).

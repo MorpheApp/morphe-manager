@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">অনিৰীক্ষিত APK</string>
     <string name="home_invalid_signature_message">আপুনি &lt;b&gt;%s&lt;/b&gt; ৰ বাবে বাচনি কৰা APK টো প্ৰত্যাশিত ছাইনিং চাৰ্টিফিকেটৰ সৈতে মিল নাই। ইয়াক সলনি কৰা হৈ থাকিব পাৰে বা কোনো অবিশ্বাস্য উৎসৰ পৰা আহি থাকিব পাৰে</string>
     <string name="home_invalid_signature_badge">এই APK টো মূলটো নহ\'ব পাৰে</string>
+    <string name="home_invalid_signature_broken_message">আপুনি &lt;b&gt;%s&lt;/b&gt; ৰ বাবে নিৰ্বাচন কৰা APK টোৰ ছিগনেচাৰ চেক বিফল হৈছে। ই সম্ভৱত নষ্ট হৈছে বা এতিয়াও সম্পূৰ্ণৰূপে ডাউনলোড হোৱা নাই, গতিকে ইয়াক পুনৰ ডাউনলোড কৰক বা আন এটা ফাইল বাচুন কৰক</string>
+    <string name="home_invalid_signature_broken_badge">এই APK টো সম্ভৱত নষ্ট হৈছে বা অসম্পূৰ্ণ</string>
+    <string name="home_invalid_signature_expected">প্ৰত্যাশিত চাৰ্টিফিকেট</string>
+    <string name="home_invalid_signature_actual">APK ৰ চাৰ্টিফিকেট</string>
+    <string name="home_invalid_signature_none">কোনো বৈধ স্বাক্ষৰ নাই</string>
     <string name="home_split_apk_warning_title">Split APK ধৰা পৰিছে</string>
     <string name="home_split_apk_warning_message">"এই ফাইলটো এটা APK বান্ডেল
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)।

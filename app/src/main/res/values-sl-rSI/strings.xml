@@ -377,6 +377,11 @@ Izberite,  iz kje izbrati APK"</string>
     <string name="home_invalid_signature_title">Nepotrjen APK</string>
     <string name="home_invalid_signature_message">APK, ki ste ga izbrali za &lt;b&gt;%s&lt;/b&gt;, ne ustreza predvidenemu potrdilu. Morda je bil spremenjen ali pa izvira iz nezaupljivega vira</string>
     <string name="home_invalid_signature_badge">Ta APK morda ni originalen</string>
+    <string name="home_invalid_signature_broken_message">APK, ki ste izbrali za &lt;b&gt;%s&lt;/b&gt;, ni opravil preverjanja podpisa. Je verjetno poškodovan ali pa še ni bil v celoti prenesen, zato ga prenesite ponovno ali izberite drugo datoteko</string>
+    <string name="home_invalid_signature_broken_badge">Ta APK je morda poškodovan ali nepopoln</string>
+    <string name="home_invalid_signature_expected">Pričakovano potrdilo</string>
+    <string name="home_invalid_signature_actual">Potrdilo APK-ja</string>
+    <string name="home_invalid_signature_none">Ni veljavnega podpisa</string>
     <string name="home_split_apk_warning_title">Zaznan je deljen APK</string>
     <string name="home_split_apk_warning_message">"Ta datoteka je paket APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

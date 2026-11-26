@@ -221,7 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
-    <string name="sources_dialog_renamed">%sに名前を変更しました</string>
+    <string name="sources_dialog_renamed">名前を %s に変更しました</string>
     <string name="sources_dialog_change_url">パッチソースのダウンロード元を変更</string>
     <string name="sources_dialog_duplicate_name_error">同じ名前のパッチソースが既に存在します</string>
     <string name="sources_dialog_missing_error">このパッチソースを更新できませんでした</string>
@@ -377,6 +377,11 @@ APK ファイルの取得元を選択してください"</string>
     <string name="home_invalid_signature_title">未検証の APK</string>
     <string name="home_invalid_signature_message">選択した &lt;b&gt;%s&lt;/b&gt; の APK の署名証明書が想定と一致しません。改ざんされているか、信頼できないソースからのものである可能性があります</string>
     <string name="home_invalid_signature_badge">これはオリジナルの APK ではない可能性があります</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;に選択されたAPKの署名チェックに失敗しました。ファイルが破損しているか、ダウンロードが不完全な可能性があるため、再度ダウンロードするか別のファイルを選択してください</string>
+    <string name="home_invalid_signature_broken_badge">このAPKは破損しているか不完全である可能性があります</string>
+    <string name="home_invalid_signature_expected">期待される証明書</string>
+    <string name="home_invalid_signature_actual">APKの証明書</string>
+    <string name="home_invalid_signature_none">有効な署名がありません</string>
     <string name="home_split_apk_warning_title">分割 APK が検出されました</string>
     <string name="home_split_apk_warning_message">"このファイルは APK バンドルです
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)。

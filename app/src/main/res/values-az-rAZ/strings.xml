@@ -377,6 +377,11 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="home_invalid_signature_title">Təsdiqlənməyən APK</string>
     <string name="home_invalid_signature_message"> &lt;b&gt;%s&lt;/b&gt; üçün seçdiyiniz APK gözlənilən imza sertifikatına uyuşmur. O, dəyişdirilən və ya etibarsız mənbədən ola bilər.</string>
     <string name="home_invalid_signature_badge">Bu APK əsil olmaya bilər</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; üçün seçdiyiniz APK imza yoxlamasından keçə bilmir. Çox güman ki, zədələnib və ya hələ tam yüklənməyib, ona görə də yenidən yükləyin və ya başqa fayl seçin</string>
+    <string name="home_invalid_signature_broken_badge">Bu APK zədələnmiş və ya natamam ola bilər</string>
+    <string name="home_invalid_signature_expected">Gözlənilən sertifikat</string>
+    <string name="home_invalid_signature_actual">APK Sertifikatı</string>
+    <string name="home_invalid_signature_none">Etibarlı imza yoxdur</string>
     <string name="home_split_apk_warning_title">Bölünən APK aşkarlandı</string>
     <string name="home_split_apk_warning_message">"Bu fayl APK paketidir
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

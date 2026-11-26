@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">未驗證的 APK</string>
     <string name="home_invalid_signature_message">您為 &lt;b&gt;%s&lt;/b&gt; 選取的 APK 與預期的簽署憑證不符。APK 可能已遭修改，或來自不受信任的來源</string>
     <string name="home_invalid_signature_badge">此 APK 可能不是原始版本</string>
+    <string name="home_invalid_signature_broken_message">您為 &lt;b&gt;%s&lt;/b&gt; 選擇的 APK 簽名檢查失敗。該檔案可能已損壞或尚未完全下載，請重新下載或選擇另一個檔案</string>
+    <string name="home_invalid_signature_broken_badge">此 APK 可能已損壞或不完整</string>
+    <string name="home_invalid_signature_expected">預期的憑證</string>
+    <string name="home_invalid_signature_actual">APK 的憑證</string>
+    <string name="home_invalid_signature_none">無有效簽名</string>
     <string name="home_split_apk_warning_title">偵測到分割型 APK</string>
     <string name="home_split_apk_warning_message">"此檔案是 APK 套件組合
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)。

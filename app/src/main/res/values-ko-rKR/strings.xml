@@ -377,6 +377,11 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="home_invalid_signature_title">미검증된 APK</string>
     <string name="home_invalid_signature_message">선택된 &lt;b&gt;%s&lt;/b&gt;에 대한 APK는 예상된 서명 인증서와 일치하지 않습니다. 수정되었거나 신뢰할 수 없는 출처에서 가져온 파일일 수 있습니다</string>
     <string name="home_invalid_signature_badge">이 파일은 순정 APK가 아닐 수 있습니다</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;에 대해 선택한 APK의 서명 확인에 실패했습니다. 파일이 손상되었거나 아직 완전히 다운로드되지 않았을 가능성이 높으므로 다시 다운로드하거나 다른 파일을 선택하십시오</string>
+    <string name="home_invalid_signature_broken_badge">이 APK는 손상되었거나 불완전할 수 있습니다</string>
+    <string name="home_invalid_signature_expected">예상 인증서</string>
+    <string name="home_invalid_signature_actual">APK 인증서</string>
+    <string name="home_invalid_signature_none">유효한 서명이 없습니다</string>
     <string name="home_split_apk_warning_title">분할 APK가 감지되었습니다</string>
     <string name="home_split_apk_warning_message">"이 파일은 APK 번들입니다
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;)

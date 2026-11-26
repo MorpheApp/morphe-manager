@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title"> যাচাই করা হয়নি APK</string>
     <string name="home_invalid_signature_message">আপনি যে APK নির্বাচন করেছেন &lt;b&gt;%s&lt;/b&gt; তা প্রত্যাশিত সাইনিং সার্টিফিকেট-এর সাথে মেলে না। এটি পরিবর্তিত হতে পারে অথবা একটি অবিশ্বস্ত উৎস থেকে আসা হতে পারে</string>
     <string name="home_invalid_signature_badge">এই APK আসল নাও হতে পারে</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;-এর জন্য আপনার নির্বাচিত APK-টির সিগনেচার চেক ব্যর্থ হয়েছে। এটি সম্ভবত ক্ষতিগ্রস্ত হয়েছে অথবা এখনও সম্পূর্ণভাবে ডাউনলোড হয়নি, তাই এটি আবার ডাউনলোড করুন অথবা অন্য একটি ফাইল নির্বাচন করুন</string>
+    <string name="home_invalid_signature_broken_badge">এই APK-টি ক্ষতিগ্রস্ত বা অসম্পূর্ণ হতে পারে</string>
+    <string name="home_invalid_signature_expected">প্রত্যাশিত সার্টিফিকেট</string>
+    <string name="home_invalid_signature_actual">APK-টির সার্টিফিকেট</string>
+    <string name="home_invalid_signature_none">কোন বৈধ স্বাক্ষর নেই</string>
     <string name="home_split_apk_warning_title">স্প্লিট APK সনাক্ত করা হয়েছে</string>
     <string name="home_split_apk_warning_message">"এই ফাইলটি একটি APK বান্ডিল
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

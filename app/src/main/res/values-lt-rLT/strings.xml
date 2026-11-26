@@ -377,6 +377,11 @@ Pasirinkite, iš kur paimti jos APK"</string>
     <string name="home_invalid_signature_title">Nepatvirtintas APK</string>
     <string name="home_invalid_signature_message">Pasirinktas &lt;b&gt;%s&lt;/b&gt; APK nesutampa su numatytu pasirašymo sertifikatu. Jis gali būti modifikuotas arba gautas iš nepatikimo šaltinio</string>
     <string name="home_invalid_signature_badge">Šis APK galimai neoriginalus</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; pasirinktas APK nepražindo signature patikros. Tikima, kad jis yra sugadintas arba dar nebuvo visiškai atsisiųstas, todėl atsisiųskite jį dar kartą arba pasirinkite kitą failą</string>
+    <string name="home_invalid_signature_broken_badge">Šis APK gali būti sugadintas arba nepilnas</string>
+    <string name="home_invalid_signature_expected">Tikimas sertifikatas</string>
+    <string name="home_invalid_signature_actual">APK sertifikatas</string>
+    <string name="home_invalid_signature_none">Nėra galiojančio parašo</string>
     <string name="home_split_apk_warning_title">Dalinis APK aptiktas</string>
     <string name="home_split_apk_warning_message">"Šis failas yra APK paketas
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

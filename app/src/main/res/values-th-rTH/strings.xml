@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">APK ที่ยังไม่ได้รับการยืนยัน</string>
     <string name="home_invalid_signature_message">APK ที่คุณเลือกสำหรับ &lt;b&gt;%s&lt;/b&gt; ไม่ตรงกับใบรับรองการลงนามที่คาดหวัง อาจถูกแก้ไขหรือมาจากแหล่งที่ไม่น่าเชื่อถือ</string>
     <string name="home_invalid_signature_badge">APK นี้อาจไม่ใช่ไฟล์ต้นฉบับ</string>
+    <string name="home_invalid_signature_broken_message">APK ที่คุณเลือกสำหรับ &lt;b&gt;%s&lt;/b&gt; ตรวจสอบลายเซ็นไม่ผ่าน อาจเกิดจากไฟล์เสียหายหรือยังดาวน์โหลดไม่เสร็จสมบูรณ์ โปรดดาวน์โหลดอีกครั้งหรือเลือกไฟล์อื่น</string>
+    <string name="home_invalid_signature_broken_badge">APK นี้อาจเสียหายหรือไม่สมบูรณ์</string>
+    <string name="home_invalid_signature_expected">ใบรับรองที่คาดหวัง</string>
+    <string name="home_invalid_signature_actual">ใบรับรองของ APK</string>
+    <string name="home_invalid_signature_none">ไม่มีลายเซ็นที่ถูกต้อง</string>
     <string name="home_split_apk_warning_title">ตรวจพบ APK แบบแยกส่วน</string>
     <string name="home_split_apk_warning_message">"ไฟล์นี้เป็น APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

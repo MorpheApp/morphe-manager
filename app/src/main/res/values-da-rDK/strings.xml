@@ -377,6 +377,11 @@ Vælg, hvor dens APK skal hentes fra"</string>
     <string name="home_invalid_signature_title">Uverificeret APK</string>
     <string name="home_invalid_signature_message">Den APK du valgte for &lt;b&gt;%s&lt;/b&gt;, stemmer ikke overens med det forventede signeringscertifikat. Den kan være ændret eller fra en utroværdig kilde</string>
     <string name="home_invalid_signature_badge">Denne APK er muligvis ikke den originale</string>
+    <string name="home_invalid_signature_broken_message">Den APK, du valgte til &lt;b&gt;%s&lt;/b&gt;, fejler i sin signaturkontrol. Den er sandsynligvis beskadiget eller blev ikke downloadet fuldstændigt, så download den igen eller vælg en anden fil</string>
+    <string name="home_invalid_signature_broken_badge">Denne APK kan være beskadiget eller ufuldstændig</string>
+    <string name="home_invalid_signature_expected">Forventet certifikat</string>
+    <string name="home_invalid_signature_actual">APK\'ens certifikat</string>
+    <string name="home_invalid_signature_none">Ingen gyldig signatur</string>
     <string name="home_split_apk_warning_title">Opdelt APK opdaget</string>
     <string name="home_split_apk_warning_message">"Denne fil er en APK-pakke
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

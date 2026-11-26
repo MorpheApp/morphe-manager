@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">APK ທີ່ບໍ່ໄດ້ຢືນຢັນ</string>
     <string name="home_invalid_signature_message">APK ທີ່ທ່ານເລືອກສຳລັບ &lt;b&gt;%s&lt;/b&gt; ບໍ່ກົງກັບໃບຮັບຮອງການເຊັນທີ່ຄາດຫວັງ. ມັນອາດຖືກດັດແປງ ຫຼືມາຈາກແຫຼ່ງທີ່ບໍ່ໜ້າເຊື່ອຖື</string>
     <string name="home_invalid_signature_badge">APK ນີ້ອາດບໍ່ແມ່ນຕົ້ນສະບັບ</string>
+    <string name="home_invalid_signature_broken_message">APK ທີ່ທ່ານເລືອກສຳລັບ &lt;b&gt;%s&lt;/b&gt; ບໍ່ຜ່ານການກວດສອບລາຍເຊັນ. ມັນອາດຈະຖືກທຳລາຍ ຫຼື ຍັງດາວໂຫຼດບໍ່ສຳເລັດ, ດັ່ງນັ້ນ ໃຫ້ດາວໂຫຼດຄືນໃໝ່ ຫຼື ເລືອກໄຟລ໌ອື່ນ</string>
+    <string name="home_invalid_signature_broken_badge">APK ນີ້ອາດຈະຖືກທຳລາຍ ຫຼື ບໍ່ສົມບູນ</string>
+    <string name="home_invalid_signature_expected">ໃບຢັ້ງຢືນທີ່ຄາດໄວ້</string>
+    <string name="home_invalid_signature_actual">ໃບຢັ້ງຢືນຂອງ APK</string>
+    <string name="home_invalid_signature_none">ບໍ່ມີລາຍເຊັນທີ່ຖືກຕ້ອງ</string>
     <string name="home_split_apk_warning_title">ພົບ split APK</string>
     <string name="home_split_apk_warning_message">"ໄຟລ໌ນີ້ແມ່ນຊຸດ APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
