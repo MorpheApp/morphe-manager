@@ -44,6 +44,7 @@ import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
+import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.service.ForegroundWork
@@ -390,9 +391,12 @@ class PatcherViewModel(
         val label = withContext(Dispatchers.IO) {
             runCatching {
                 when (val selected = selectedApp) {
-                    is SelectedApp.Local -> pm.getPackageInfo(selected.file)
-                    else -> pm.getPackageInfo(packageName)
-                }?.let { with(pm) { it.label() } }
+                    // A split archive is read through its base module, which the label is read in
+                    is SelectedApp.Local -> SplitApkInspector.withRepresentativeApk(selected.file, fs.uiTempDir) {
+                        pm.getPackageInfo(it)?.let { info -> with(pm) { info.label() } }
+                    }
+                    else -> pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
+                }
             }.getOrNull()
         }
         val bundles = collectSelectedBundleMetadata()
