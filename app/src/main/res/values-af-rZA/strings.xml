@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Hierdie bron is gedeaktiveer. Sy pleisters word ter verwysing gelys en word nie toegepas nie</string>
     <string name="sources_management_open_in_browser">Maak oop in blaaier</string>
     <string name="sources_management_report_issue">Rapporteer \'n probleem</string>
+    <string name="sources_management_export_patches">Voer regstellingslêer uit</string>
+    <string name="sources_management_export_patches_success">Regstellingslêer gestoor</string>
+    <string name="sources_management_export_patches_failed">Kon nie regstellingslêer uitvoer nie</string>
     <string name="sources_management_failed_to_open_url">Mislukking om URL oop te maak</string>
     <string name="sources_apps">Toepassings</string>
     <string name="sources_apps_description">Aangetekende apps kom van hierdie bron. Tik op \'n app om dit uit te los of terug te bring, vee dit om sy patches te sien. \'n App verdwyn van die tuisskerm sodra geen bron dit bring nie, tensy jy dit gepatch het</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Vertoonnaam</string>
     <string name="sources_dialog_rename">Hernoem verandering oorsprong</string>
+    <string name="sources_dialog_renamed">Hernoem na %s</string>
     <string name="sources_dialog_change_url">Verander waar die patchbron vandaan afgelaai word</string>
     <string name="sources_dialog_duplicate_name_error">\'n Verandering oorsprong met hierdie naam bestaan reeds</string>
     <string name="sources_dialog_missing_error">Kon nie hierdie verandering oorsprong opdateer nie</string>

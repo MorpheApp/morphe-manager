@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Diese Quelle ist deaktiviert. Deren Patches werden als Referenz angeführt und nicht angewendet</string>
     <string name="sources_management_open_in_browser">Im Browser öffnen</string>
     <string name="sources_management_report_issue">Problem melden</string>
+    <string name="sources_management_export_patches">Patches-Datei exportieren</string>
+    <string name="sources_management_export_patches_success">Patches-Datei gespeichert</string>
+    <string name="sources_management_export_patches_failed">Export der Patches-Datei fehlgeschlagen</string>
     <string name="sources_management_failed_to_open_url">Fehler beim Öffnen der URL</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Ausgewählte Apps stammen aus dieser Quelle. Tippe eine App an, um sie ab- oder wieder anzuwählen, und wische für ihre Patches. Apps ohne aktive Quelle verschwinden vom Startbildschirm, sofern du sie nicht gepatcht hast</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Anzeigename</string>
     <string name="sources_dialog_rename">Patch-Quelle umbenennen</string>
+    <string name="sources_dialog_renamed">Umbenannt in %s</string>
     <string name="sources_dialog_change_url">Ändere den Download-Ort der Patch-Quelle</string>
     <string name="sources_dialog_duplicate_name_error">Eine Patch-Quelle mit diesem Namen existiert bereits</string>
     <string name="sources_dialog_missing_error">Fehler beim Aktualisieren dieser Patch-Quelle</string>

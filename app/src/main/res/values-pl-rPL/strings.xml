@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">To źródło jest wyłączone. Jego modyfikacje są wyświetlane w celach informacyjnych i nie są stosowane</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_report_issue">Zgłoś problem</string>
+    <string name="sources_management_export_patches">Eksportuj plik modyfikacji</string>
+    <string name="sources_management_export_patches_success">Zapisano plik modyfikacji</string>
+    <string name="sources_management_export_patches_failed">Nie udało się wyeksportować pliku modyfikacji</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_apps">Aplikacje</string>
     <string name="sources_apps_description">Zaznaczone aplikacje pochodzą z tego źródła. Dotknij aplikacji, aby ją pominąć lub przywrócić, albo przesuń ją palcem, aby zobaczyć jej modyfikacje. Aplikacja, której nie dostarcza żadne źródło, znika z ekranu głównego, chyba że została przez Ciebie zmodyfikowana</string>
@@ -201,7 +204,7 @@
     <string name="sources_management_blocked">To źródło modyfikacji jest zablokowane i nie może zostać dodane</string>
     <string name="sources_management_source_blocked_badge">Zablokowane</string>
     <string name="sources_management_metadata_unavailable">Brak metadanych</string>
-    <string name="sources_management_bundle_missing_badge">Niepobrano</string>
+    <string name="sources_management_bundle_missing_badge">Nie pobrano</string>
     <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje. Dotknij, aby go zmienić</string>
@@ -219,6 +222,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
+    <string name="sources_dialog_renamed">Zmieniono nazwę na %s</string>
     <string name="sources_dialog_change_url">Zmień adres pobierania źródła modyfikacji</string>
     <string name="sources_dialog_duplicate_name_error">Źródło modyfikacji o tej nazwie już istnieje</string>
     <string name="sources_dialog_missing_error">Nie można zaktualizować tego źródła modyfikacji</string>
@@ -234,7 +238,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Aktualizuje %s</string>
     <string name="sources_dialog_url_valid">Prawidłowy adres repozytorium lub pliku JSON</string>
-    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub, GitLab lub Codeberg lub plik .json</string>
+    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub, GitLab lub Codeberg albo plik .json</string>
     <string name="sources_dialog_preinstalled">Wbudowane</string>
     <string name="sources_dialog_community">Modyfikacje społeczności</string>
     <string name="sources_dialog_choose_apps">Wybierz aplikacje</string>
@@ -455,7 +459,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="adaptive_icon_guide_png_title">Użyj pliku PNG z przezroczystym tłem</string>
     <string name="adaptive_icon_guide_png_body">Najlepiej sprawdza się logo na przezroczystym tle, z kolorem tła wybranym poniżej. Obraz bez przezroczystości wypełni całą ikonę, a ikony z motywem i powiadomień zachowają wtedy logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpieczne strefy</string>
-    <string name="adaptive_icon_guide_safe_zones_body">Kontur pokazuje kształt ikony w Twoim launcherze, a wszystko poza nim jest odcinane. Inne launchery używają innych kształtów, dlatego zachowaj ważne szczegóły wewnątrz przerywanego okręgu, który mieści się w każdym z nich.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Kontur wyświetla kształt ikony w Twoim launcherze, a wszystko poza nim jest odcinane. Inne launchery używają innych kształtów, dlatego zachowaj ważne szczegóły wewnątrz przerywanego okręgu, który mieści się w każdym z nich.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona powiadomień</string>
     <string name="adaptive_icon_guide_notification_body">Wycinana z widocznej części obrazu i dopasowana rozmiarem do innych ikon paska stanu, niezależnie od marginesów w pliku. Dostosuj ją za pomocą suwaka pod podglądem. Android wyświetla ją w jednym kolorze.</string>
     <string name="adaptive_icon_guide_monochrome_title">Ikona z motywem</string>

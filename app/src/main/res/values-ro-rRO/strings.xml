@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Această sursă este dezactivată. Patch-urile sale sunt listate pentru referință și nu sunt aplicate</string>
     <string name="sources_management_open_in_browser">Deschide în browser</string>
     <string name="sources_management_report_issue">Raportează o problemă</string>
+    <string name="sources_management_export_patches">Exportă fișierul de patch-uri</string>
+    <string name="sources_management_export_patches_success">Fișierul de patch-uri a fost salvat</string>
+    <string name="sources_management_export_patches_failed">Exportarea fișierului de patch-uri a eșuat</string>
     <string name="sources_management_failed_to_open_url">Eroarea la deschiderea URL-ului</string>
     <string name="sources_apps">Aplicații</string>
     <string name="sources_apps_description">Aplicațiile bifate provin din această sursă. Apasă pe o aplicație pentru a o exclude sau a o readuce, gliseaz-o pentru a vedea patch-urile sale. O aplicație fără sursă părăsește ecranul principal, cu excepția cazului în care a fost patch-uită</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nume afișat</string>
     <string name="sources_dialog_rename">Redenumire surse de patch-uri</string>
+    <string name="sources_dialog_renamed">Redenumit în %s</string>
     <string name="sources_dialog_change_url">Schimbă locația de descărcare a sursei de patch-uri</string>
     <string name="sources_dialog_duplicate_name_error">Există deja o sursă de patch-uri cu acest nume</string>
     <string name="sources_dialog_missing_error">Nu s-a putut actualiza sursa aceasta de patch-uri</string>

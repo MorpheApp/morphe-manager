@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Bu kaynak devre dışı. Yamaları referans için listelenmiştir ve uygulanmaz</string>
     <string name="sources_management_open_in_browser">Tarayıcıda aç</string>
     <string name="sources_management_report_issue">Sorun bildir</string>
+    <string name="sources_management_export_patches">Yamalar dosyasını dışa aktar</string>
+    <string name="sources_management_export_patches_success">Yamalar dosyası kaydedildi</string>
+    <string name="sources_management_export_patches_failed">Yamalar dosyası dışa aktarılamadı</string>
     <string name="sources_management_failed_to_open_url">URL açılamadı</string>
     <string name="sources_apps">Uygulamalar</string>
     <string name="sources_apps_description">İşaretli uygulamalar bu kaynaktan gelir. Bir uygulamayı hariç tutmak veya geri getirmek için üzerine dokunun, yamalarını görmek için kaydırın. Yama uygulamadığınız sürece, hiçbir kaynak tarafından sağlanmayan bir uygulama ana ekrandan kaldırılır</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünen ad</string>
     <string name="sources_dialog_rename">Yama kaynağını yeniden adlandır</string>
+    <string name="sources_dialog_renamed">%s olarak yeniden adlandırıldı</string>
     <string name="sources_dialog_change_url">Yama kaynağının nereden indirildiğini değiştirin</string>
     <string name="sources_dialog_duplicate_name_error">Bu isme sahip bir yama kaynağı zaten mevcut</string>
     <string name="sources_dialog_missing_error">Bu yama kaynağı güncellenemedi</string>

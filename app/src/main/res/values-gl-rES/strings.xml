@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Este orixe está desactivado. Os seus parches móstranse como referencia e non se aplican</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
     <string name="sources_management_report_issue">Informar dun problema</string>
+    <string name="sources_management_export_patches">Exportar ficheiro de parches</string>
+    <string name="sources_management_export_patches_success">Ficheiro de parches gardado</string>
+    <string name="sources_management_export_patches_failed">Erro ao exportar o ficheiro de parches</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir o URL</string>
     <string name="sources_apps">Aplicacións</string>
     <string name="sources_apps_description">As aplicacións marcadas proveñen desta fonte. Toca unha aplicación para excluíla ou recuperala, deslízaa para ver os seus parches. Unha aplicación sen fonte desaparece da pantalla de inicio, a menos que a parcheses</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome a amosar</string>
     <string name="sources_dialog_rename">Renomear fonte do parche</string>
+    <string name="sources_dialog_renamed">Renomeado a %s</string>
     <string name="sources_dialog_change_url">Cambia a orixe de descarga do paquete de parches</string>
     <string name="sources_dialog_duplicate_name_error">Unha fonte de parches con este nome xa existe</string>
     <string name="sources_dialog_missing_error">Non se puido actualizar esta fonte de parches</string>

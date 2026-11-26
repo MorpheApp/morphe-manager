@@ -173,6 +173,9 @@
     <string name="sources_patches_source_disabled_hint">Този източник е деактивиран. Кръпките му са изброени за справка и не се прилагат.</string>
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
     <string name="sources_management_report_issue">Докладвай за проблем</string>
+    <string name="sources_management_export_patches">Експортиране на файл с пачове</string>
+    <string name="sources_management_export_patches_success">Файлът с пачове е запазен</string>
+    <string name="sources_management_export_patches_failed">Неуспешно експортиране на файл с пачове</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
     <string name="sources_apps">Приложения</string>
     <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете, плъзнете го, за да видите пачовете му. Приложението се премахва от началния екран, когато никой източник вече не го предоставя, освен ако не сте го пачнали</string>
@@ -219,6 +222,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Показвано име</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
+    <string name="sources_dialog_renamed">Преименувано на %s</string>
     <string name="sources_dialog_change_url">Променете откъде се изтегля източникът на пачове</string>
     <string name="sources_dialog_duplicate_name_error">Източник с това име вече съществува</string>
     <string name="sources_dialog_missing_error">Този източник на кръпки не може да бъде актуализиран</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Questa fonte è disabilitata. Le sue patch sono elencate come riferimento e non vengono applicate</string>
     <string name="sources_management_open_in_browser">Apri nel browser</string>
     <string name="sources_management_report_issue">Segnala un problema</string>
+    <string name="sources_management_export_patches">Esporta file patch</string>
+    <string name="sources_management_export_patches_success">File patch salvato</string>
+    <string name="sources_management_export_patches_failed">Impossibile esportare il file patch</string>
     <string name="sources_management_failed_to_open_url">Impossibile aprire l’URL</string>
     <string name="sources_apps">App</string>
     <string name="sources_apps_description">Le app selezionate provengono da questa sorgente. Tocca un\'app per escluderla o riaggiungerla, scorrila per vedere le sue patch. Un\'app senza sorgente lascia la schermata home, a meno che non sia stata patchata</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome visualizzato</string>
     <string name="sources_dialog_rename">Rinomina la fonte</string>
+    <string name="sources_dialog_renamed">Rinominato in %s</string>
     <string name="sources_dialog_change_url">Cambia l\'indirizzo di download della sorgente della patch</string>
     <string name="sources_dialog_duplicate_name_error">Esiste già una fonte delle patch con questo nome</string>
     <string name="sources_dialog_missing_error">Impossibile aggiornare questa fonte delle patch</string>

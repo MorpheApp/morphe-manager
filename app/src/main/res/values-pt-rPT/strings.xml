@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Esta fonte está desativada. Os seus patches são listados para referência e não são aplicados</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
     <string name="sources_management_report_issue">Comunicar um problema</string>
+    <string name="sources_management_export_patches">Exportar arquivo de patches</string>
+    <string name="sources_management_export_patches_success">Arquivo de patches salvo</string>
+    <string name="sources_management_export_patches_failed">Falha ao exportar arquivo de patches</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir URL</string>
     <string name="sources_apps">Aplicações</string>
     <string name="sources_apps_description">As aplicações marcadas vêm desta fonte. Toque numa aplicação para a deixar de fora ou a repor, deslize-a para ver os seus patches. Uma aplicação sem fonte sai do ecrã inicial, a menos que tenha aplicado um patch</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
     <string name="sources_dialog_rename">Mudar o nome da fonte de modificações</string>
+    <string name="sources_dialog_renamed">Renomeado para %s</string>
     <string name="sources_dialog_change_url">Alterar a origem da transferência do patch</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma fonte de modificações com este nome</string>
     <string name="sources_dialog_missing_error">Não foi possível atualizar esta fonte de modificações</string>

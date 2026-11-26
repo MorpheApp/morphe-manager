@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Esta fuente está desactivada. Sus parches se muestran a modo de referencia y no se aplican</string>
     <string name="sources_management_open_in_browser">Abrir en el navegador</string>
     <string name="sources_management_report_issue">Informar de un problema</string>
+    <string name="sources_management_export_patches">Exportar archivo de parches</string>
+    <string name="sources_management_export_patches_success">Archivo de parches guardado</string>
+    <string name="sources_management_export_patches_failed">Error al exportar el archivo de parches</string>
     <string name="sources_management_failed_to_open_url">Error al abrir la URL</string>
     <string name="sources_apps">Aplicaciones</string>
     <string name="sources_apps_description">Las aplicaciones marcadas proceden de esta fuente. Pulsa una aplicación para dejarla fuera o volver a incluirla, deslízala para ver sus parches. Una aplicación desaparece de la pantalla de inicio cuando ninguna fuente la proporciona, a menos que la hayas parcheado</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nombre a mostrar</string>
     <string name="sources_dialog_rename">Renombrar fuente de parches</string>
+    <string name="sources_dialog_renamed">Renombrado a %s</string>
     <string name="sources_dialog_change_url">Cambiar desde dónde se descarga la fuente del parche</string>
     <string name="sources_dialog_duplicate_name_error">Ya existe una fuente de parches con este nombre</string>
     <string name="sources_dialog_missing_error">No se pudo actualizar esta fuente de parches</string>

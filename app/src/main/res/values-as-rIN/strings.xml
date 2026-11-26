@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">এই উৎসটো নিষ্ক্ৰিয় কৰা হৈছে। ইয়াৰ পেচবোৰ কেৱল সহায়ৰ বাবে তালিকাভুক্ত কৰা হৈছে আৰু প্ৰয়োগ কৰা হোৱা নাই</string>
     <string name="sources_management_open_in_browser">ব্ৰাউজাৰত খোলক</string>
     <string name="sources_management_report_issue">এটা সমস্যাৰ ৰিপৰ্ট কৰক</string>
+    <string name="sources_management_export_patches">প্যাচেচ ফাইল এক্সপোর্ট কৰক</string>
+    <string name="sources_management_export_patches_success">প্যাচেচ ফাইল সংৰক্ষিত হৈছে</string>
+    <string name="sources_management_export_patches_failed">প্যাচেচ ফাইল এক্সপোর্ট কৰাত ব্যৰ্থ হৈছে</string>
     <string name="sources_management_failed_to_open_url">URL খোলিবলৈ ব্যৰ্থ হৈছে</string>
     <string name="sources_apps">এপ্‌ছ</string>
     <string name="sources_apps_description">চিহ্নিত এপবোৰ এই উৎসৰ পৰা আহে। কোনো এপক বাদ দিবলৈ বা পুনৰ ঘূৰাই আনিবলৈ ইয়াৰ ওপৰত টেপ কৰক, ইয়াৰ পেচবোৰ চাবলৈ সোয়াইপ কৰক। কোনো উৎস নথকা এপটোৱে হোম স্ক্ৰীনৰ পৰা আঁতৰি যায়, যদিহে আপুনি ইয়াক পেচ নকৰে</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্ৰদৰ্শন নাম</string>
     <string name="sources_dialog_rename">পেচ উত্‍সৰ নাম সলনি কৰক</string>
+    <string name="sources_dialog_renamed">%s লৈ নাম সলনি কৰা হৈছে</string>
     <string name="sources_dialog_change_url">পাচ উৎস ক’ৰ পৰা ডাউনলোড হ’ব সেয়া পৰিবৰ্তন কৰক</string>
     <string name="sources_dialog_duplicate_name_error">এই নামৰ এটা পেচ উত্‍স ইতিমধ্যে আছে</string>
     <string name="sources_dialog_missing_error">এই পেচৰ উৎসটো আপডেট কৰিব পৰা নগ\'ল</string>

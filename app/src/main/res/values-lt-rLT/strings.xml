@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Šis šaltinis išjungtas. Jo pataisos pateikiamos tik kaip nuoroda ir nėra taikomos</string>
     <string name="sources_management_open_in_browser">Atidaryti naršyklėje</string>
     <string name="sources_management_report_issue">Pranešti apie problemą</string>
+    <string name="sources_management_export_patches">Eksportuoti pataisų failą</string>
+    <string name="sources_management_export_patches_success">Pataisų failas išsaugotas</string>
+    <string name="sources_management_export_patches_failed">Nepavyko eksportuoti pataisų failo</string>
     <string name="sources_management_failed_to_open_url">Nepavyko atidaryti nuorodos</string>
     <string name="sources_apps">Programos</string>
     <string name="sources_apps_description">Pažymėtos programėlės yra iš šio šaltinio. Bakstelėkite programėlę, kad ją pašalintumėte arba grąžintumėte, braukite per ją, kad pamatytumėte pataisymus. Programėlė be šaltinio išnyksta iš pagrindinio ekrano, nebent ją pataisėte</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Rodomas vardas</string>
     <string name="sources_dialog_rename">Pervadinti pataisos šaltinį</string>
+    <string name="sources_dialog_renamed">Pervardyta į %s</string>
     <string name="sources_dialog_change_url">Pakeiskite vietą, iš kurios atsisiunčiamas pataisų šaltinis</string>
     <string name="sources_dialog_duplicate_name_error">Pataisų šaltinis su šiuo pavadinimu jau egzistuoja</string>
     <string name="sources_dialog_missing_error">Negalima atnaujinti šio pataisos šaltinio</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">See allikas on keelatud. Selle paigad on loetletud viiteks ega rakendu</string>
     <string name="sources_management_open_in_browser">Ava brauseris</string>
     <string name="sources_management_report_issue">Teata probleemist</string>
+    <string name="sources_management_export_patches">Eksporteeri paigade fail</string>
+    <string name="sources_management_export_patches_success">Paigade fail on salvestatud</string>
+    <string name="sources_management_export_patches_failed">Paigade faili eksportimine nurjus</string>
     <string name="sources_management_failed_to_open_url">URL-i avamine ebaõnnestus</string>
     <string name="sources_apps">Rakendused</string>
     <string name="sources_apps_description">Märgitud rakendused tulevad sellest allikast. Puuduta rakendust, et see eemaldada või tagasi tuua, pühki seda, et näha selle paigandusi. Rakendus kaob avalehelt, kui ükski allikas seda ei paku, välja arvatud juhul, kui oled seda paiganud</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Kuvatav nimi</string>
     <string name="sources_dialog_rename">Nimeks patchi allika ümbernimetamine</string>
+    <string name="sources_dialog_renamed">Nimetatud ümber nimeks %s</string>
     <string name="sources_dialog_change_url">Muuda paigaallika allalaadimiskohta</string>
     <string name="sources_dialog_duplicate_name_error">Selle nimega paigaallikas on juba olemas</string>
     <string name="sources_dialog_missing_error">Seda paigaallikat ei õnnestunud uuendada</string>
@@ -750,7 +754,7 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <string name="plugin_activity_dialog_body">Selle lisamooduliga jätkamiseks on vaja kasutaja sekkumist</string>
     <string name="patcher_process_killed_message">Süsteem katkestas paikamise enne lõppemist, tavaliselt mälu vabastamiseks. Sulge teised rakendused ja proovi uuesti</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">Morphe suletage enne paikuletamise lõpust, seega ei paigutatud midagi. Proovige uuesti</string>
+    <string name="patcher_interrupted_message">Morphe suletagi enne paikuletamise lõpust, seega ei paigutatud midagi. Proovige uuesti</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Paikaja jooksis enne lõpetamist kokku. Kui see kordub, lülita %1$s välja ja teata veast koos logifailiga</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

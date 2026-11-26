@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Bu mənbə qapadılıb. Onun yamaqları məlumat üçün siyahıya alınıb və tətbiq olunmur</string>
     <string name="sources_management_open_in_browser">Brauzerdə aç</string>
     <string name="sources_management_report_issue">Problemi bildir</string>
+    <string name="sources_management_export_patches">Yamaqlar faylını ixrac et</string>
+    <string name="sources_management_export_patches_success">Yamaqlar faylı saxlanıldı</string>
+    <string name="sources_management_export_patches_failed">Yamaqlar faylını ixrac etmək olmadı</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_apps">Tətbiqlər</string>
     <string name="sources_apps_description">İşarələnmiş tətbiqlər bu mənbədən gəlir. Tətbiqi çıxarmaq və ya geri qaytarmaq üçün toxun, yamaqlarını görmək üçün sürüşdür. Mənbəsiz tətbiq, yamaqlamadığınız təqdirdə, əsas səhifədən çıxır</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Bu yamaq mənbəyi bloklanıb və əlavə edilə bilməz</string>
     <string name="sources_management_source_blocked_badge">Bloklanıb</string>
     <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
+    <string name="sources_management_bundle_missing_badge">Yüklənilməyib</string>
     <string name="sources_management_metadata_unavailable_hint">Uzaq üst məlumatı faylı mövcud deyil. Quraşdırılan paketlə yamaqlanma hələ də işləyir, lakin bu mənbə üçün birbaşa yenilənmə qapadılıb</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil. Dəyişdirmək üçün toxun</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
+    <string name="sources_dialog_renamed">Adını %s kimi adlandırdı</string>
     <string name="sources_dialog_change_url">Yamaq mənbəyinin haradan yüklənildiyini dəyişdir</string>
     <string name="sources_dialog_duplicate_name_error">Bu adla yamaq mənbəsi artıq var</string>
     <string name="sources_dialog_missing_error">Bu yamaq mənbəsin yeniləmək mümkün olmadı</string>

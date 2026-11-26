@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">このソースは無効になっています。パッチは参照のために表示されるだけで、適用されません</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_report_issue">問題を報告</string>
+    <string name="sources_management_export_patches">パッチファイルをエクスポート</string>
+    <string name="sources_management_export_patches_success">パッチファイルを保存しました</string>
+    <string name="sources_management_export_patches_failed">パッチファイルのエクスポートに失敗しました</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
     <string name="sources_apps">アプリ</string>
     <string name="sources_apps_description">チェックマーク付きのアプリはこのソースから提供されています。アプリをタップすると、ホーム画面で非表示にしたり、再表示したりできます。スワイプするとパッチを確認できます。ソースが指定されていないアプリは、パッチを適用していない限りホーム画面から非表示になります</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
+    <string name="sources_dialog_renamed">%sに名前を変更しました</string>
     <string name="sources_dialog_change_url">パッチソースのダウンロード元を変更</string>
     <string name="sources_dialog_duplicate_name_error">同じ名前のパッチソースが既に存在します</string>
     <string name="sources_dialog_missing_error">このパッチソースを更新できませんでした</string>

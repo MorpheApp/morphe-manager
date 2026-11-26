@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Lo mthombo uvalwe. Amaphetshi alo abhalwe njengokubhekisisa futhi awasebenzi</string>
     <string name="sources_management_open_in_browser">Vula kubrowser</string>
     <string name="sources_management_report_issue">Bika inkinga</string>
+    <string name="sources_management_export_patches">Thumela ifayela le-patches</string>
+    <string name="sources_management_export_patches_success">Ifayela le-patches longekile</string>
+    <string name="sources_management_export_patches_failed">Kuhlulekile ukuthumela ifayela le-patches</string>
     <string name="sources_management_failed_to_open_url">Kwephuthelwa ukuvula i-URL</string>
     <string name="sources_apps">Izinhlelo</string>
     <string name="sources_apps_description">Izinhlelo ezikhethiwe zivela kuleli thuluzi. Thinta uhlelo ukuze ulukhiphe noma ulubuyisele, luswayize ukuze ubone ama-patches alo. Uhlelo olungenalo ithuluzi lushiya isikrini sasekhaya, ngaphandle kokuba ulupatche</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Igama elibonakalayo</string>
     <string name="sources_dialog_rename">Yishintshe igama lomthombo we-patch</string>
+    <string name="sources_dialog_renamed">Kuguqulelwe igama laba %s</string>
     <string name="sources_dialog_change_url">Shintsha lapho i-patch source ilandwa khona</string>
     <string name="sources_dialog_duplicate_name_error">Umthombo we-patch onesi gama sele ukhona</string>
     <string name="sources_dialog_missing_error">Kwenzeke ukungakwazi ukubuyekeza lo mthombo we-patch</string>

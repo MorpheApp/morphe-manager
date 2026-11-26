@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ev çavkanî neçalak e. Patchên wê ji bo referansê têne lîstekirin û nayên sepandin.</string>
     <string name="sources_management_open_in_browser">Di geroker de veke</string>
     <string name="sources_management_report_issue">Pirsgirêkek rapor bike</string>
+    <string name="sources_management_export_patches">Pela patchan export bike</string>
+    <string name="sources_management_export_patches_success">Pela patchan hate tomarkirin</string>
+    <string name="sources_management_export_patches_failed">Exportkirina pela patchan têk çû</string>
     <string name="sources_management_failed_to_open_url">Vekirina URL têk çû</string>
     <string name="sources_apps">Sepan</string>
     <string name="sources_apps_description">Aplîkasyonên nîşanî ji vê çavkaniyê tên. Ji bo derxistin an zivaran li aplikasyonê bisekinê, ji bo dîtina patchên wê wê bişike. Aplîkasyonek bê çavkanî ji ekrana sereke derdikeve, mêger te patch kiribe</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Navê nîşanê</string>
     <string name="sources_dialog_rename">Navê çavkaniya patchê biguherîne</string>
+    <string name="sources_dialog_renamed">Hate guhertin ji %s</string>
     <string name="sources_dialog_change_url">Diyar bike çavkaniya patchê ji kuderê were daxistin</string>
     <string name="sources_dialog_duplicate_name_error">Çavkaniyek bi vî navî jixwe heye</string>
     <string name="sources_dialog_missing_error">Ev çavkaniya patchê nehat nûvekirin</string>

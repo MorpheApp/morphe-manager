@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Deze bron is uitgeschakeld. De patches ervan worden ter referentie weergegeven en worden niet toegepast.</string>
     <string name="sources_management_open_in_browser">Openen in browser</string>
     <string name="sources_management_report_issue">Een probleem melden</string>
+    <string name="sources_management_export_patches">Exporteer patches-bestand</string>
+    <string name="sources_management_export_patches_success">Patches-bestand opgeslagen</string>
+    <string name="sources_management_export_patches_failed">Kan patches-bestand niet exporteren</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Aangevinkte apps komen uit deze bron. Tik op een app om deze weg te laten of terug te brengen, veeg over een app om de patches ervan te zien. Een app zonder bron verlaat het startscherm, tenzij je deze hebt gepatcht</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Weergavenaam</string>
     <string name="sources_dialog_rename">Patchbron hernoemen</string>
+    <string name="sources_dialog_renamed">Hernoemd naar %s</string>
     <string name="sources_dialog_change_url">Wijzig de locatie waar de patchbron wordt gedownload</string>
     <string name="sources_dialog_duplicate_name_error">Er bestaat al een patchbron met deze naam</string>
     <string name="sources_dialog_missing_error">Kon deze patchbron niet bijwerken.</string>

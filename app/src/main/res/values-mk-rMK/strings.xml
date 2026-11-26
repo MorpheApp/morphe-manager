@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Овој извор е оневозможен. Неговите закрпи се наведени за референца и не се применуваат</string>
     <string name="sources_management_open_in_browser">Отвори во прелистувач</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
+    <string name="sources_management_export_patches">Експортирај датотека со поправки</string>
+    <string name="sources_management_export_patches_success">Датотеката со поправки е зачувана</string>
+    <string name="sources_management_export_patches_failed">Не успеа извозот на датотеката со поправки</string>
     <string name="sources_management_failed_to_open_url">Не успеа да се отвори URL адреса</string>
     <string name="sources_apps">Апликации</string>
     <string name="sources_apps_description">Означените апликации доаѓаат од овој извор. Допрете апликација за да ја исклучите или вратите, прелистајте ја за да ги видите нејзините закрпи. Апликацијата ја напушта почетната страница кога ниту еден извор не ја носи, освен ако не сте ја закрпиле</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Прикажано име</string>
     <string name="sources_dialog_rename">Преименувај извор на поправки</string>
+    <string name="sources_dialog_renamed">Преименувано во %s</string>
     <string name="sources_dialog_change_url">Променете го местото од каде се преземаат закрпите</string>
     <string name="sources_dialog_duplicate_name_error">Веќе постои извор на поправки со ова име</string>
     <string name="sources_dialog_missing_error">Не може да се ажурира изворот на закрпување</string>

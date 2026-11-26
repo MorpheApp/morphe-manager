@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Овај извор је онемогућен. Његове закрпе су наведене ради увида и не примењују се.</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
+    <string name="sources_management_export_patches">Извези датотеку закрпа</string>
+    <string name="sources_management_export_patches_success">Датотека закрпа је сачувана</string>
+    <string name="sources_management_export_patches_failed">Није успео извоз датотеке закрпа</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_apps">Апликације</string>
     <string name="sources_apps_description">Означене апликације потичу из овог извора. Додирните апликацију да је искључите или вратите, превлачите је да видите њене патчеве. Апликација коју ниједан извор не доноси нестаје са почетног екрана, осим ако је нисте патчовали</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
     <string name="sources_dialog_rename">Преименујте изворни извор</string>
+    <string name="sources_dialog_renamed">Преименовано у %s</string>
     <string name="sources_dialog_change_url">Промените локацију са које се преузима извор закрпа</string>
     <string name="sources_dialog_duplicate_name_error">Извор за патчевање са овим именом већ постоји</string>
     <string name="sources_dialog_missing_error">Није могуће ажурирати овај извор закрпа</string>

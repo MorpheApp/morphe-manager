@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">מקור זה מושבת. התיקונים שלו מופיעים לעיון ואינם מיושמים</string>
     <string name="sources_management_open_in_browser">פתח בדפדפן</string>
     <string name="sources_management_report_issue">דווח על בעיה</string>
+    <string name="sources_management_export_patches">ייצוא קובץ תיקונים</string>
+    <string name="sources_management_export_patches_success">קובץ התיקונים נשמר</string>
+    <string name="sources_management_export_patches_failed">ייצוא קובץ התיקונים נכשל</string>
     <string name="sources_management_failed_to_open_url">כישלון בפתיחת כתובת אינטרנט</string>
     <string name="sources_apps">אפליקציות</string>
     <string name="sources_apps_description">אפליקציות מסומנות מגיעות ממקור זה. הקישו על אפליקציה כדי להוציא אותה או להחזירה, והחליקו אותה כדי לראות את התיקונים שלה. אפליקציה ללא מקור המביא אותה תעזוב את המסך הביתי, אלא אם תיקנתם אותה</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">הצג שם</string>
     <string name="sources_dialog_rename">שנה את שם מקור התיקונים</string>
+    <string name="sources_dialog_renamed">שונה ל-%s</string>
     <string name="sources_dialog_change_url">שנה את מקור ההורדה של התיקונים</string>
     <string name="sources_dialog_duplicate_name_error">יש כבר מקור תיקונים עם שם זה</string>
     <string name="sources_dialog_missing_error">עדכון מקור התיקונים הזה נכשל</string>

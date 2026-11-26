@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">이 소스는 비활성화되었습니다. 패치는 참조용으로 나열되며 적용되지 않습니다</string>
     <string name="sources_management_open_in_browser">브라우저에서 열기</string>
     <string name="sources_management_report_issue">문제 보고</string>
+    <string name="sources_management_export_patches">패치 파일 내보내기</string>
+    <string name="sources_management_export_patches_success">패치 파일이 저장되었습니다</string>
+    <string name="sources_management_export_patches_failed">패치 파일 내보내기 실패</string>
     <string name="sources_management_failed_to_open_url">URL을 열 수 없습니다</string>
     <string name="sources_apps">앱</string>
     <string name="sources_apps_description">체크된 앱은 이 소스에서 가져온 앱입니다. 앱을 탭하면 제외하거나 다시 추가할 수 있으며, 스와이프하여 패치 내용을 확인할 수 있습니다. 어떤 소스에서도 가져오지 않는 앱은 직접 패치한 앱이 아닌 한 홈 화면에서 사라집니다</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">표시 이름</string>
     <string name="sources_dialog_rename">패치 소스 이름 변경</string>
+    <string name="sources_dialog_renamed">\'%s\'로 이름 변경됨</string>
     <string name="sources_dialog_change_url">패치 소스 다운로드 경로 변경</string>
     <string name="sources_dialog_duplicate_name_error">이 이름의 패치 소스가 이미 존재합니다</string>
     <string name="sources_dialog_missing_error">이 패치 소스를 업데이트할 수 없습니다</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Tá an fhoinse seo díchumasaithe. Tá na paistí a bhaineann léi liostaithe mar thagairt agus níl siad curtha i bhfeidhm.</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
+    <string name="sources_management_export_patches">Easpórtáil comhad paisteáilteAsString</string>
+    <string name="sources_management_export_patches_success">Sábháilte comhad paisteáilteAsString</string>
+    <string name="sources_management_export_patches_failed">Theip ar comhad paisteáilte a easpórtáilAsString</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_apps">Aipeanna</string>
     <string name="sources_apps_description">Tagann aipeanna atá marcáilte ón bhfoinse seo. Tapáil aip chun í a fhágáil ar lár nó chun í a thabhairt ar ais; sleamhnaigh í chun a paistí a fheiceáil. Má bhaintear foinse, imeoidh na haipeanna a tháinig ón bhfoinse sin ón scáileán baile, mura rud é gur chuir tú paiste i bhfeidhm orthu.</string>
@@ -201,7 +204,7 @@
     <string name="sources_management_blocked">Tá an foinse paiste seo blocáilte agus ní féidir í a chur leis</string>
     <string name="sources_management_source_blocked_badge">Blocáilte</string>
     <string name="sources_management_metadata_unavailable">Meiteashonraí N/B</string>
-    <string name="sources_management_bundle_missing_badge">Ní híoslódáilte</string>
+    <string name="sources_management_bundle_missing_badge">Gan íoslódáil</string>
     <string name="sources_management_metadata_unavailable_hint">Níl an cianchomhad meiteashonraí ar fáil. Oibríonn paistí leis an mbeart suiteáilte fós, ach tá uath-nuashonrú díchumasaithe don fhoinse seo</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Níorbh fhéidir an pacáiste paiste a íoslódáil. B’fhéidir go bhfuil an URL foinse mícheart nó nach bhfuil an comhad ann.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Níorbh fhéidir an pacáiste paiste a íoslódáil. D’fhéadfadh sé go bhfuil an URL foinse mícheart, nó nach bhfuil an comhad ann. Beartaigh air chun é a athrú.</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ainm taispeána</string>
     <string name="sources_dialog_rename">Athainmnigh foinse an phaiste</string>
+    <string name="sources_dialog_renamed">Athainmnithe go %s</string>
     <string name="sources_dialog_change_url">Athraigh an áit a n-íoslódálann foinse an phaiste</string>
     <string name="sources_dialog_duplicate_name_error">Tá foinse paiste leis an ainm seo ann cheana</string>
     <string name="sources_dialog_missing_error">Níorbh fhéidir an pacáiste beartáin seo a nuashonrú</string>
@@ -233,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Nuashonruithe do %s</string>
     <string name="sources_dialog_url_valid">URL bailí stórais nó JSON</string>
-    <string name="sources_dialog_url_invalid">Ní mór don URL pointeáil chuig stór GitHub, GitLab nó Codeberg nó comhad .json</string>
+    <string name="sources_dialog_url_invalid">Caithfidh an URL a bheith ag díriú ar stórtha GitHub, GitLab nó Codeberg, nó ar chomhad .json</string>
     <string name="sources_dialog_preinstalled">Réamhshuiteáilte</string>
     <string name="sources_dialog_community">Paistí pobail</string>
     <string name="sources_dialog_choose_apps">Roghnaigh aipeanna</string>
@@ -577,9 +581,9 @@ Chun na torthaí is fearr a fháil, molann an aip seo paiste a chur ar &lt;b&gt;
     <string name="app_links_change_failed">Theip ar athrú na naisc aipe</string>
     <string name="app_links_all_verified">Tá na naisc thacaithe go léir cumraithe le hoscailt san aip seo</string>
     <string name="app_links_fix">Deisigh naisc</string>
-    <string name="app_links_allow_shizuku">Ceadaigh rochtain Shizuku</string>
-    <string name="app_links_shizuku_permission_hint">Ceadaigh do Morphe Shizuku a úsáid chun na nascanna seo a chur ar siúl duit</string>
-    <string name="app_links_shizuku_not_running_hint">Tosaigh Shizuku chun cead a thabhairt do Morphe na nascanna seo a chur ar siúl duit</string>
+    <string name="app_links_allow_shizuku">Tabhair rochtain do Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Lig do Morphe úsáid a bhaint as Shizuku chun na naisc seo a chur ar siúl duit</string>
+    <string name="app_links_shizuku_not_running_hint">Cuir Shizuku ar siúl chun ligean do Morphe na naisc seo a chumasú duit</string>
     <string name="configure">Cumraigh</string>
     <string name="patcher_rename_title">Déanfaidh sé seo clón a shuiteáil</string>
     <string name="patcher_rename_description">Thóg na paistí an aip seo faoina n-ainm pacáiste féin, mar sin má shuiteáiltear é cuirfear clón leis taobh le &lt;b&gt;%s&lt;/b&gt; in ionad é a nuashonrú</string>
@@ -750,7 +754,7 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="plugin_activity_dialog_body">Tá idirghníomhaíocht úsáideora ag teastáil chun dul ar aghaidh leis an mbreiseán seo</string>
     <string name="patcher_process_killed_message">Chuir an córas stop leis an gclár paisteála sular chríochnaigh sé, de ghnáth chun cuimhne a shaoradh. Dún aipeanna eile agus bain triail as arís.</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">Dúnadh Morphe sula d\'éirigh an patrú críochnaithe, mar sin ní cuireadh patrú ar aon rud. Déan iarracht arís</string>
+    <string name="patcher_interrupted_message">Dúnadh Morphe sular críochnaíodh an paisteáil, mar sin ní dhearnadh aon phaisteáil. Bain triail as arís</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Thit an uirlis paistithe as a chéile sular chríochnaigh sí. Má tharlaíonn sé arís, múch %1$s agus tuairiscigh an fhadhb, ag cur an logchomhaid san áireamh.</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -1567,7 +1571,7 @@ Sonraí: %2$s"</string>
     <string name="changelog_show_all">Taispeáin go léir (%s)</string>
     <string name="changelog_show_less">Taispeáin níos lú</string>
     <string name="no_network_toast">Níl aon nasc idirlín ar fáil</string>
-    <string name="download_waiting_for_network">Ag fanacht ar an líonra</string>
+    <string name="download_waiting_for_network">Ag fanacht leis an líonra</string>
     <string name="update_available">Tá nuashonrú ar fáil</string>
     <string name="ready_to_install_update">Réidh le nuashonrú a shuiteáil</string>
     <string name="update_completed">Nuashonrú suiteáilte</string>

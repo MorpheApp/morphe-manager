@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Þessi uppspretta er óvirk. Plástrar hennar eru skráðir til viðmiðunar og ekki notaðir</string>
     <string name="sources_management_open_in_browser">Opna í vafra</string>
     <string name="sources_management_report_issue">Tilkynna vandamál</string>
+    <string name="sources_management_export_patches">Flytja út spækruskrá</string>
+    <string name="sources_management_export_patches_success">Spækruskrá vistuð</string>
+    <string name="sources_management_export_patches_failed">Mistókst að flytja út spækruskrá</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
     <string name="sources_apps">Forrit</string>
     <string name="sources_apps_description">Öpp sem eru hakuð koma frá þessari uppsprettu. Ýttu á app til að sleppa því eða taka það aftur með, renndu yfir það til að sjá plástra þess. App hverfur af heimaskjánum ef engin uppspretta ber það, nema þú hafir plástrað það</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nafn</string>
     <string name="sources_dialog_rename">Endurnefna heimild breytistillinga</string>
+    <string name="sources_dialog_renamed">Endurnefnt í %s</string>
     <string name="sources_dialog_change_url">Breyttu staðsetningu sem plástruppspretta sækir af</string>
     <string name="sources_dialog_duplicate_name_error">Heimild breytistillinga með þessu nafni er þegar til</string>
     <string name="sources_dialog_missing_error">Ekki tókst að uppfæra þessa uppsprettu breytistillinga</string>

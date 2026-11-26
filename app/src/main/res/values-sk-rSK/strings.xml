@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Tento zdroj je vypnutý. Jeho záplaty sú uvedené len pre informáciu a neaplikujú sa</string>
     <string name="sources_management_open_in_browser">Otvoriť v prehliadači</string>
     <string name="sources_management_report_issue">Nahlásiť problém</string>
+    <string name="sources_management_export_patches">Exportovať súbor záplat</string>
+    <string name="sources_management_export_patches_success">Súbor záplat bol uložený</string>
+    <string name="sources_management_export_patches_failed">Nepodarilo sa exportovať súbor záplat</string>
     <string name="sources_management_failed_to_open_url">Nepodarilo sa otvoriť URL</string>
     <string name="sources_apps">Aplikácie</string>
     <string name="sources_apps_description">Zaškrtnuté aplikácie pochádzajú z tohto zdroja. Klepnutím na aplikáciu ju vynechajte alebo vráťte, potiahnutím zistíte jej patche. Aplikácia bez zdroja opustí domovskú obrazovku, pokiaľ ste ju nepatchovali</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazovaný názov</string>
     <string name="sources_dialog_rename">Premenovať zdroj záplaty</string>
+    <string name="sources_dialog_renamed">Premenované na %s</string>
     <string name="sources_dialog_change_url">Zmeňte miesto, z ktorého sa sťahujú zdroje záplat</string>
     <string name="sources_dialog_duplicate_name_error">Zdroj záplat s týmto názvom už existuje</string>
     <string name="sources_dialog_missing_error">Nebolo možné aktualizovať tento zdroj záplaty</string>

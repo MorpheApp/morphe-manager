@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Tämä lähde on poistettu käytöstä. Sen paikkaukset on lueteltu viitteeksi, eikä niitä sovelleta</string>
     <string name="sources_management_open_in_browser">Avaa selaimessa</string>
     <string name="sources_management_report_issue">Ilmoita ongelmasta</string>
+    <string name="sources_management_export_patches">Vie paikkaustiedosto</string>
+    <string name="sources_management_export_patches_success">Paikkaustiedosto tallennettu</string>
+    <string name="sources_management_export_patches_failed">Paikkaustiedoston vienti epäonnistui</string>
     <string name="sources_management_failed_to_open_url">URL-osoitteen avaaminen epäonnistui</string>
     <string name="sources_apps">Sovellukset</string>
     <string name="sources_apps_description">Valitut sovellukset tulevat tästä lähteestä. Napauta sovellusta jättääksesi sen pois tai palauttaaksesi sen, pyyhkäise nähdäksesi sen paikkaukset. Sovellus poistuu aloitusnäytöstä, kun mikään lähde ei tuo sitä, paitsi jos olet paikannut sen</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Näkyvä nimi</string>
     <string name="sources_dialog_rename">Nimeä lisäosien lähde uudelleen</string>
+    <string name="sources_dialog_renamed">Uusi nimi on %s</string>
     <string name="sources_dialog_change_url">Muuta osoite, josta lisäosan lähde ladataan</string>
     <string name="sources_dialog_duplicate_name_error">Tämän niminen lisäosien lähde on jo olemassa</string>
     <string name="sources_dialog_missing_error">Tämän lisäosien lähteen päivitys epäonnistui</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Этот источник отключен. Его патчи указаны для справки и не применяются.</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_report_issue">Сообщить о проблеме</string>
+    <string name="sources_management_export_patches">Экспортировать файл патчей</string>
+    <string name="sources_management_export_patches_success">Файл патчей сохранен</string>
+    <string name="sources_management_export_patches_failed">Не удалось экспортировать файл патчей</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
     <string name="sources_apps">Приложения</string>
     <string name="sources_apps_description">Отмеченные приложения поступают из этого источника. Нажмите на приложение, чтобы исключить его или вернуть обратно, смахните его, чтобы увидеть патчи. Приложение исчезает с главного экрана, если ни один источник его не добавляет, за исключением случаев, когда вы его патчили</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
+    <string name="sources_dialog_renamed">Переименовано в %s</string>
     <string name="sources_dialog_change_url">Изменение места загрузки исходного кода патча</string>
     <string name="sources_dialog_duplicate_name_error">Источник патча с таким названием уже существует</string>
     <string name="sources_dialog_missing_error">Не удалось обновить этот источник патча</string>

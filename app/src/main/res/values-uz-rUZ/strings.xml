@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Bu manba o‘chirilgan. Uning yamoqlari ma’lumot uchun ro‘yxatda ko‘rsatilgan va qo‘llanilmaydi</string>
     <string name="sources_management_open_in_browser">Brauzerda ochish</string>
     <string name="sources_management_report_issue">Muammo haqida xabar berish</string>
+    <string name="sources_management_export_patches">Patchlar faylini eksport qilish</string>
+    <string name="sources_management_export_patches_success">Patchlar fayli saqlandi</string>
+    <string name="sources_management_export_patches_failed">Patchlar faylini eksport qilishda xatolik</string>
     <string name="sources_management_failed_to_open_url">URL ochishda xatolik</string>
     <string name="sources_apps">Ilovalar</string>
     <string name="sources_apps_description">Belgilangan ilovalar ushbu manbadan keladi. Ilovani chiqarib tashlash yoki qaytarish uchun uni bosing, patchlarini ko\'rish uchun esa suring. Manbasiz ilova, agar siz uni patch qilmagan bo\'lsangiz, bosh sahifani tark etadi</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ko‘rinadigan nom</string>
     <string name="sources_dialog_rename">Tuzatish manbai nomini o\'zgartirish</string>
+    <string name="sources_dialog_renamed">%s deb qayta nomlandi</string>
     <string name="sources_dialog_change_url">Patch manbasi yuklanadigan joyni o\'zgartiring</string>
     <string name="sources_dialog_duplicate_name_error">Bunday nomdagi tuzatish manbai allaqachon mavjud</string>
     <string name="sources_dialog_missing_error">Ushbu patch manbasini yangilash mumkin emas</string>

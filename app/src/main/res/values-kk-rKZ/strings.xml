@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Бұл дереккөз өшірілген. Оның патчтары анықтама үшін көрсетілген және қолданылмайды</string>
     <string name="sources_management_open_in_browser">Браузерде ашу</string>
     <string name="sources_management_report_issue">Мәселені хабарлау</string>
+    <string name="sources_management_export_patches">Патчтар файлын экспорттау</string>
+    <string name="sources_management_export_patches_success">Патчтар файлы сақталды</string>
+    <string name="sources_management_export_patches_failed">Патчтар файлын экспорттау сәтсіз аяқталды</string>
     <string name="sources_management_failed_to_open_url">URL-ді ашу мүмкін болмады</string>
     <string name="sources_apps">Қосымшалар</string>
     <string name="sources_apps_description">Белгіленген қолданбалар осы дереккөзінен алынады. Қолданбаны алып тастау немесе қайта қосу үшін оны түртіңіз, патчтарын көру үшін сырғытыңыз. Дереккөзі жоқ қолданба, егер оған патч орнатылмаса, басты экраннан жойылады</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Көрінетін атауы</string>
     <string name="sources_dialog_rename">Патч дереккөзін қайта атау</string>
+    <string name="sources_dialog_renamed">%s деп қайта аталды</string>
     <string name="sources_dialog_change_url">Патч дереккөзі жүктелетін жерді өзгерту</string>
     <string name="sources_dialog_duplicate_name_error">Бұл атаулы патч дереккөзі бұрыннан бар</string>
     <string name="sources_dialog_missing_error">Бұл патч дереккөзін жаңарту мүмкін болмады</string>

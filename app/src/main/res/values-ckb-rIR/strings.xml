@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ئەم سەرچاوەیە ناچالاکە. پاتچەکانی تەنها بۆ ئاماژە لیست کراون و جێبەجێ ناکرێن</string>
     <string name="sources_management_open_in_browser">کردنەوە لە وێبگەڕ</string>
     <string name="sources_management_report_issue">ڕاپۆرتی کێشەیەک بکە</string>
+    <string name="sources_management_export_patches">هەناردەکردنی فایلی پینەکان</string>
+    <string name="sources_management_export_patches_success">فایلی پینەکان پاشکەوتکرا</string>
+    <string name="sources_management_export_patches_failed">هەناردەکردنی فایلی پینەکان سەرکەوتوو نەبوو</string>
     <string name="sources_management_failed_to_open_url">شکستی هێنا لەکردنەوەی بەستەر</string>
     <string name="sources_apps">بەرنامەکان</string>
     <string name="sources_apps_description">ئەپە نیشانەکراوەکان لەم سەرچاوەیە دێن. کلیک لەسەر ئەپێک بکە بۆ لادانی یان گەڕاندنەوەی، پێی بسکڕە بۆ بینینی پاتچەکانی. ئەپێک لە شاشەی سەرەکی نامێنێت ئەگەر هیچ سەرچاوەیەک نەهێنێت، مەگەر ئەوەی پاتچت کردبێت</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ناوی پیشاندان</string>
     <string name="sources_dialog_rename">ناونانەوەی سەرچاوەی پینەکردن</string>
+    <string name="sources_dialog_renamed">ناوەکەی گۆڕدرا بۆ %s</string>
     <string name="sources_dialog_change_url">گۆڕینی ئەو شوێنەی کە سەرچاوەی پینەکردن لێی دابەزێنرێت</string>
     <string name="sources_dialog_duplicate_name_error">سەرچاوەیەکی پینە بەم ناوە پێشتر بوونی هەیە</string>
     <string name="sources_dialog_missing_error">نەیتوانی سەرچاوەی ئەم پیینە نوێ بکاتەوە</string>

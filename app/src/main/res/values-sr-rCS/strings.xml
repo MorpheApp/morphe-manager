@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ovaj izvor je onemogućen. Njegove zakrpe su navedene radi uvida i ne primenjuju se.</string>
     <string name="sources_management_open_in_browser">Otvori u pregledaču</string>
     <string name="sources_management_report_issue">Prijavi problem</string>
+    <string name="sources_management_export_patches">Izvezi datoteku zakrpa</string>
+    <string name="sources_management_export_patches_success">Datoteka zakrpa je sačuvana</string>
+    <string name="sources_management_export_patches_failed">Izvoz datoteke zakrpa nije uspeo</string>
     <string name="sources_management_failed_to_open_url">Otvaranje URL-a nije uspelo</string>
     <string name="sources_apps">Aplikacije</string>
     <string name="sources_apps_description">Aplikacije sa oznakom potiču iz ovog izvora. Dodirnite aplikaciju da je isključite ili vratite, prevucite je da vidite njene zakrpe. Aplikacija se sklanja sa početnog ekrana čim je nijedan izvor ne donosi, osim ako ste je zakrpili</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži ime</string>
     <string name="sources_dialog_rename">Preimenuj izvor zakrpe</string>
+    <string name="sources_dialog_renamed">Preimenovano u %s</string>
     <string name="sources_dialog_change_url">Promenite mesto sa kojeg se preuzima izvor zakrpa</string>
     <string name="sources_dialog_duplicate_name_error">Izvor zakrpe sa ovim imenom već postoji</string>
     <string name="sources_dialog_missing_error">Nije moguće ažurirati ovaj izvor zakrpe </string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ang source na ito ay hindi pinagana. Ang mga patch nito ay nakalista para sa sanggunian at hindi inilalapat.</string>
     <string name="sources_management_open_in_browser">Buksan sa browser</string>
     <string name="sources_management_report_issue">Mag-ulat ng isyu</string>
+    <string name="sources_management_export_patches">I-export ang patches file</string>
+    <string name="sources_management_export_patches_success">Na-save ang patches file</string>
+    <string name="sources_management_export_patches_failed">Nabigong i-export ang patches file</string>
     <string name="sources_management_failed_to_open_url">Nabigong buksan ang URL</string>
     <string name="sources_apps">Mga app</string>
     <string name="sources_apps_description">Ang mga naka-check na app ay galing sa source na ito. I-tap ang app para alisin ito o ibalik, i-swipe ito para makita ang mga patch nito. Ang app na walang source ay aalis sa home screen, maliban kung ni-patch mo ito</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pangalan na ipapakita</string>
     <string name="sources_dialog_rename">Baguhin ang mapagkukunan ng patch</string>
+    <string name="sources_dialog_renamed">Nibanhanan sa %s</string>
     <string name="sources_dialog_change_url">Baguhin kung saan i-da-download ang patch source</string>
     <string name="sources_dialog_duplicate_name_error">Mayroon na isang mapagkukunan ng patch na may ganitong pangalan</string>
     <string name="sources_dialog_missing_error">Hindi ma-update ang mapagkukunang patch na ito</string>

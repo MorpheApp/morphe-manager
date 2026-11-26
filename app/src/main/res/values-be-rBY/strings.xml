@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Гэтая крыніца адключана. Яе патчы паказаны для даведкі і не прымяняюцца</string>
     <string name="sources_management_open_in_browser">Адкрыць у браўзеры</string>
     <string name="sources_management_report_issue">Паведаміць пра праблему</string>
+    <string name="sources_management_export_patches">Экспартаваць файл патчаў</string>
+    <string name="sources_management_export_patches_success">Файл патчаў захаваны</string>
+    <string name="sources_management_export_patches_failed">Не ўдалося экспартаваць файл патчаў</string>
     <string name="sources_management_failed_to_open_url">Не ўдалося адкрыць URL</string>
     <string name="sources_apps">Праграмы</string>
     <string name="sources_apps_description">Адзначаныя праграмы паходзяць з гэтай крыніцы. Націсніце на праграму, каб выключыць яе або вярнуць, або прагнайце яе, каб убачыць патчы. Праграма знікае з галоўнага экрана, калі яна больш не прадастаўляецца ніводнай крыніцай, за выключэннем выпадкаў, калі вы яе прапатчылі</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Адлюстраванае iмя</string>
     <string name="sources_dialog_rename">Перайменаваць крыніцу патча</string>
+    <string name="sources_dialog_renamed">Пераіменавана ў %s</string>
     <string name="sources_dialog_change_url">Змянiць адрас спампоўкі крыніцы патчаў</string>
     <string name="sources_dialog_duplicate_name_error">Крыніца патча з такой назвай ужо існуе</string>
     <string name="sources_dialog_missing_error">Не ўдалося абнавіць гэтую крыніцу патча</string>

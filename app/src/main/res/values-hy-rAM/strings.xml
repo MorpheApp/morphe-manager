@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Այս աղբյուրն անջատված է: Դրա թարմացումները նշված են միայն տեղեկատվության համար և չեն կիրառվի</string>
     <string name="sources_management_open_in_browser">Բացել բրաուզերում</string>
     <string name="sources_management_report_issue">Հայտնել խնդրի մասին</string>
+    <string name="sources_management_export_patches">Արտահանել փատչերի ֆայլը</string>
+    <string name="sources_management_export_patches_success">Փատչերի ֆայլը պահպանված է</string>
+    <string name="sources_management_export_patches_failed">Փատչերի ֆայլի արտահանումը ձախողվեց</string>
     <string name="sources_management_failed_to_open_url">Չհաջողվեց բացել URL-ը</string>
     <string name="sources_apps">Հավելվածներ</string>
     <string name="sources_apps_description">Նշված հավելվածները գալիս են այս աղբյուրից: Հպեք հավելվածին՝ այն հեռացնելու կամ վերադարձնելու համար, սլայդեք այն՝ նրա փեթչերը տեսնելու համար: Հավելվածը հեռանում է գլխավոր էկրանից, եթե ոչ մի աղբյուր չի բերում այն, եթե դուք այն չեք փեթչել</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ցուցադրվող անվանում</string>
     <string name="sources_dialog_rename">Վերանվանել պատչի աղբյուրը</string>
+    <string name="sources_dialog_renamed">Վերանվանվել է %s-ի</string>
     <string name="sources_dialog_change_url">Փոխեք թարմացման աղբյուրի ներբեռնման վայրը</string>
     <string name="sources_dialog_duplicate_name_error">Այս անվամբ պատչի աղբյուրն արդեն գոյություն ունի</string>
     <string name="sources_dialog_missing_error">Չհաջողվեց թարմացնել այս փաթեթի աղբյուրը</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ta vir je onemogočen. Njegovi popravki so navedeni samo za referenco in se ne uporabijo</string>
     <string name="sources_management_open_in_browser">Odpri v brskalniku</string>
     <string name="sources_management_report_issue">Prijavi težavo</string>
+    <string name="sources_management_export_patches">Izvozi datoteko s popravki</string>
+    <string name="sources_management_export_patches_success">Datoteka s popravki shranjena</string>
+    <string name="sources_management_export_patches_failed">Izvoz datoteke s popravki ni uspel</string>
     <string name="sources_management_failed_to_open_url">URL-ja ni bilo mogoče odpreti</string>
     <string name="sources_apps">Aplikacije</string>
     <string name="sources_apps_description">Aplikacije, označene kot aktivne, prihajajo iz tega vira. Pritisnite aplikacijo, da jo izključite ali ponovno vključite, ali pa jo potegnite, da vidite njene popravke. Aplikacija izgine z domačega zaslona, ko je noben vir ne prinaša več, razen če je bila popravljena</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikazano ime</string>
     <string name="sources_dialog_rename">Preimenuj vir popravka</string>
+    <string name="sources_dialog_renamed">Preimenovano v %s</string>
     <string name="sources_dialog_change_url">Spremenite lokacijo prenosa izvora popravkov</string>
     <string name="sources_dialog_duplicate_name_error">Vir s tem imenom že obstaja</string>
     <string name="sources_dialog_missing_error">Ni mogoče posodobiti tega vira popravkov.</string>

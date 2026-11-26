@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">हा स्रोत अक्षम आहे. त्याचे पॅच संदर्भासाठी सूचीबद्ध आहेत आणि लागू केले जात नाहीत</string>
     <string name="sources_management_open_in_browser">लिंक बाहेर नेटवर उघडा</string>
     <string name="sources_management_report_issue">समस्या नोंदवा</string>
+    <string name="sources_management_export_patches">पॅचेस फाईल एक्सपोर्ट करा</string>
+    <string name="sources_management_export_patches_success">पॅचेस फाईल सेव्ह झाली</string>
+    <string name="sources_management_export_patches_failed">पॅचेस फाईल एक्सपोर्ट करण्यात अयशस्वी</string>
     <string name="sources_management_failed_to_open_url">लिंक उघडता आली नाही</string>
     <string name="sources_apps">अॅप्स</string>
     <string name="sources_apps_description">टिक केलेले अॅप्स या स्त्रोताकडून येतात. एखादे अॅप वगळण्यासाठी किंवा पुन्हा समाविष्ट करण्यासाठी त्यावर टॅप करा, त्याचे पॅचेस पाहण्यासाठी ते स्वाइप करा. स्त्रोत नसलेले अॅप होम स्क्रीनवरून निघून जाते, जोपर्यंत तुम्ही त्याला पॅच केले नसेल</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">दिसणारे नाव</string>
     <string name="sources_dialog_rename">सुधारणांच्या मुळाचे नाव बदला</string>
+    <string name="sources_dialog_renamed">%s असे नाव बदलले</string>
     <string name="sources_dialog_change_url">पॅच स्रोत कोठून डाउनलोड होतो ते बदला</string>
     <string name="sources_dialog_duplicate_name_error">या नावाचे सुधारणा मूळ आधीपासून उपलब्ध आहे</string>
     <string name="sources_dialog_missing_error">हे सुधारणा मूळ अपडेट करता आले नाही</string>

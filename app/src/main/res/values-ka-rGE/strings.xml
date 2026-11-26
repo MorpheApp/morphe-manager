@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ეს წყარო გათიშულია. მისი პატჩები ჩამოთვლილია მხოლოდ საინფორმაციოდ და არ გამოიყენება</string>
     <string name="sources_management_open_in_browser">გახსენით ბრაუზერში</string>
     <string name="sources_management_report_issue">პრობლემის შეტყობინება</string>
+    <string name="sources_management_export_patches">პატჩების ფაილის ექსპორტი</string>
+    <string name="sources_management_export_patches_success">პატჩების ფაილი შენახულია</string>
+    <string name="sources_management_export_patches_failed">პატჩების ფაილის ექსპორტი ვერ მოხერხდა</string>
     <string name="sources_management_failed_to_open_url">URL-ის გახსნა ვერ მოხერხდა</string>
     <string name="sources_apps">აპლიკაციები</string>
     <string name="sources_apps_description">მონიშნული აპლიკაციები მოდის ამ წყაროდან. შეეხ impeding აპლიკაციას მის გამოსარიკვად ან დასაბრუნებლად, გადასვލეთ მის სანახავად პატჩების. აპლიკაცია, რომელსაც არ აქვს წყარო, ტოვებს მთავარ ეკრანს, თუ მას არ დააპატჩეთ</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ჩვენების სახელი</string>
     <string name="sources_dialog_rename">გადაარქვით სახელი პატჩის წყაროს</string>
+    <string name="sources_dialog_renamed">გადარქმევა %s-ად</string>
     <string name="sources_dialog_change_url">შეცვალეთ პატჩების წყაროს ჩამოტვირთვის მისამართი</string>
     <string name="sources_dialog_duplicate_name_error">ამ სახელის მქონე პატჩის წყარო უკვე არსებობს</string>
     <string name="sources_dialog_missing_error">ამ პატჩის წყაროს განახლება ვერ მოხერხდა</string>

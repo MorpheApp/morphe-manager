@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Це джерело вимкнено. Його патчі показані для довідки та не застосовуються</string>
     <string name="sources_management_open_in_browser">Відкрити в браузері</string>
     <string name="sources_management_report_issue">Повідомити про проблему</string>
+    <string name="sources_management_export_patches">Експортувати файл патчів</string>
+    <string name="sources_management_export_patches_success">Файл патчів збережено</string>
+    <string name="sources_management_export_patches_failed">Не вдалося експортувати файл патчів</string>
     <string name="sources_management_failed_to_open_url">Не вдалося відкрити URL</string>
     <string name="sources_apps">Застосунки</string>
     <string name="sources_apps_description">Позначені застосунки надходять із цього джерела. Натисніть на застосунок, щоб виключити його або повернути, проведіть по ньому, щоб переглянути його патчі. Застосунок, якого не надає жодне джерело, зникає з головного екрана, якщо ви його не пропатчили</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назва</string>
     <string name="sources_dialog_rename">Перейменувати джерело патчів</string>
+    <string name="sources_dialog_renamed">Перейменовано на %s</string>
     <string name="sources_dialog_change_url">Змінити, звідки джерело патчів завантажує дані</string>
     <string name="sources_dialog_duplicate_name_error">Джерело з такою назвою вже існує</string>
     <string name="sources_dialog_missing_error">Не вдалося оновити це джерело патчів</string>

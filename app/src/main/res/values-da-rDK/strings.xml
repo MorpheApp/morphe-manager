@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Denne kilde er deaktiveret. Dens patches er opført til reference og anvendes ikke.</string>
     <string name="sources_management_open_in_browser">Åbn i browser</string>
     <string name="sources_management_report_issue">Rapportér et problem</string>
+    <string name="sources_management_export_patches">Eksporter patches-fil</string>
+    <string name="sources_management_export_patches_success">Patches-fil gemt</string>
+    <string name="sources_management_export_patches_failed">Kunne ikke eksportere patches-fil</string>
     <string name="sources_management_failed_to_open_url">Kunne ikke åbne URL</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Markerede apps kommer fra denne kilde. Tryk på en app for at udelade den eller bringe den tilbage, swipe den for at se dens patches. En app uden kilde forlader hjemmeskærmen, medmindre du har patchet den</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnavn</string>
     <string name="sources_dialog_rename">Omdøb navnet på patchkilde</string>
+    <string name="sources_dialog_renamed">Omdøbt til %s</string>
     <string name="sources_dialog_change_url">Skift, hvor patch-kilden downloades fra</string>
     <string name="sources_dialog_duplicate_name_error">En patchkilde med dette navn findes allerede</string>
     <string name="sources_dialog_missing_error">Kunne ikke opdatere denne patchkilde</string>

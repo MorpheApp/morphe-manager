@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Cette source est désactivée. Ses patchs sont listés à titre de référence et ne sont pas appliqués</string>
     <string name="sources_management_open_in_browser">Ouvrir dans le navigateur</string>
     <string name="sources_management_report_issue">Signaler un problème</string>
+    <string name="sources_management_export_patches">Exporter le fichier de patchs</string>
+    <string name="sources_management_export_patches_success">Fichier de patchs enregistré</string>
+    <string name="sources_management_export_patches_failed">Échec de l\'exportation du fichier de patchs</string>
     <string name="sources_management_failed_to_open_url">Échec de l\'ouverture de l\'URL</string>
     <string name="sources_apps">Applications</string>
     <string name="sources_apps_description">Les applications cochées proviennent de cette source. Appuyez sur une application pour l\'exclure ou la réaffichées, balayer pour voir ses patchs. Une application qu\'aucune source ne propose quitte l\'écran d\'accueil, sauf si vous l\'avez patchée</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom d\'affichage</string>
     <string name="sources_dialog_rename">Renommer la source de patchs</string>
+    <string name="sources_dialog_renamed">Renommé en %s</string>
     <string name="sources_dialog_change_url">Modifier l\'emplacement depuis lequel la source de patchs est téléchargée</string>
     <string name="sources_dialog_duplicate_name_error">Une source de patchs portant ce nom existe déjà</string>
     <string name="sources_dialog_missing_error">Impossible de mettre à jour cette source de patchs</string>

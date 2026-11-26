@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Sumber ini dinonaktifkan. Tambalannya tercantum untuk referensi dan tidak diterapkan.</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_report_issue">Laporkan masalah</string>
+    <string name="sources_management_export_patches">Ekspor berkas tambalan</string>
+    <string name="sources_management_export_patches_success">Berkas tambalan disimpan</string>
+    <string name="sources_management_export_patches_failed">Gagal mengekspor berkas tambalan</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
     <string name="sources_apps_description">Aplikasi yang dicentang berasal dari sumber ini. Ketuk aplikasi untuk mengeluarkannya atau mengembalikannya, geser untuk melihat patch-nya. Aplikasi tanpa sumber akan meninggalkan layar utama, kecuali jika Anda telah melakukan patch padanya</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama tampilan</string>
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
+    <string name="sources_dialog_renamed">Diubah namanya menjadi %s</string>
     <string name="sources_dialog_change_url">Ubah lokasi pengunduhan sumber tambalan</string>
     <string name="sources_dialog_duplicate_name_error">Sumber tambalan dengan nama ini sudah ada</string>
     <string name="sources_dialog_missing_error">Tidak dapat memperbarui sumber tambalan ini</string>

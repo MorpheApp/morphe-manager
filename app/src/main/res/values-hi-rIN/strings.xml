@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">यह स्रोत अक्षम है। इसके पैच केवल संदर्भ के लिए सूचीबद्ध हैं और लागू नहीं किए गए हैं।</string>
     <string name="sources_management_open_in_browser">ब्राउज़र में खोलें</string>
     <string name="sources_management_report_issue">समस्या की रिपोर्ट करें</string>
+    <string name="sources_management_export_patches">पैचेस फ़ाइल एक्सपोर्ट करें</string>
+    <string name="sources_management_export_patches_success">पैचेस फ़ाइल सहेजी गई</string>
+    <string name="sources_management_export_patches_failed">पैचेस फ़ाइल एक्सपोर्ट करने में विफल</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_apps">ऐप्स</string>
     <string name="sources_apps_description">निशान लगे ऐप्स इस स्रोत से आते हैं। किसी ऐप को बाहर रखने या वापस लाने के लिए उस पर टैप करें, उसके पैच देखने के लिए उसे स्वाइप करें। जिस ऐप को कोई स्रोत नहीं लाता वह होम स्क्रीन से हट जाता है, जब तक कि आपने उसे पैच न किया हो</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">प्रदर्शित नाम</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
+    <string name="sources_dialog_renamed">%s के रूप में नाम बदला गया</string>
     <string name="sources_dialog_change_url">वह स्थान बदलें जहाँ से पैच स्रोत डाउनलोड होता है</string>
     <string name="sources_dialog_duplicate_name_error">इस नाम के साथ पहले से एक पैच स्रोत मौजूद है</string>
     <string name="sources_dialog_missing_error">यह पैच स्रोत अपडेट नहीं हो सका</string>

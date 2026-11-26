@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Nguồn này đã bị tắt. Các bản vá của nó được liệt kê để tham khảo và không được áp dụng</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
+    <string name="sources_management_export_patches">Xuất tệp vá</string>
+    <string name="sources_management_export_patches_success">Đã lưu tệp vá</string>
+    <string name="sources_management_export_patches_failed">Không thể xuất tệp vá</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_apps">Ứng dụng</string>
     <string name="sources_apps_description">Các ứng dụng được đánh dấu đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc đưa nó trở lại, vuốt ứng dụng đó để xem các bản vá của nó. Một ứng dụng không có nguồn sẽ rời khỏi màn hình chính, trừ khi bạn đã vá nó</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
+    <string name="sources_dialog_renamed">Đã đổi tên thành %s</string>
     <string name="sources_dialog_change_url">Thay đổi nơi tải xuống nguồn gói vá</string>
     <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này rồi</string>
     <string name="sources_dialog_missing_error">Không thể cập nhật nguồn vá này</string>

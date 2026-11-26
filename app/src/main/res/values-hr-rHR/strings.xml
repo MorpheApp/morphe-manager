@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ovaj izvor je onemogućen. Njegovi patchevi su navedeni za referencu i ne primjenjuju se.</string>
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
     <string name="sources_management_report_issue">Prijavite problem</string>
+    <string name="sources_management_export_patches">Izvezi datoteku s patchevima</string>
+    <string name="sources_management_export_patches_success">Datoteka s patchevima je spremljena</string>
+    <string name="sources_management_export_patches_failed">Izvoz datoteke s patchevima nije uspio</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_apps">Aplikacije</string>
     <string name="sources_apps_description">Označene aplikacije dolaze iz ovog izvora. Dodirnite aplikaciju kako biste je uklonili ili vratili, prevucite je kako biste vidjeli njezine patchove. Aplikacija nestaje s početnog zaslona kada je više ne nudi nijedan izvor, osim ako je niste patchali</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži naziv</string>
     <string name="sources_dialog_rename">Preimenuj izvor patcha</string>
+    <string name="sources_dialog_renamed">Preimenovano u %s</string>
     <string name="sources_dialog_change_url">Promijenite odakle se preuzima izvorni kod patcha</string>
     <string name="sources_dialog_duplicate_name_error">Izvor patcha s ovim nazivom već postoji</string>
     <string name="sources_dialog_missing_error">Nije moguće ažurirati ovaj izvor patcha</string>

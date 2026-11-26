@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">هذا المصدر معطل. تُدرج تعديلاته كمرجع فقط ولا يتم تطبيقها</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_report_issue">الإبلاغ عن مشكلة</string>
+    <string name="sources_management_export_patches">تصدير ملف التعديلات</string>
+    <string name="sources_management_export_patches_success">تم حفظ ملف التعديلات</string>
+    <string name="sources_management_export_patches_failed">فشل تصدير ملف التعديلات</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_apps">التطبيقات</string>
     <string name="sources_apps_description">التطبيقات المحددة تأتي من هذا المصدر. انقر على تطبيق لاستبعاده أو إعادته، ومرره لرؤية تعديلاته. يغادر التطبيق الشاشة الرئيسية بمجرد توقف أي مصدر عن تقديمه، ما لم تكن قد قمت بتعديله</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
+    <string name="sources_dialog_renamed">تم تغيير الاسم إلى %s</string>
     <string name="sources_dialog_change_url">تغيير الموقع الذي يتم منه تنزيل مصدر التعديل</string>
     <string name="sources_dialog_duplicate_name_error">يوجد مصدر تعديل بهذا الاسم بالفعل</string>
     <string name="sources_dialog_missing_error">تعذر تحديث مصدر التعديل هذا</string>

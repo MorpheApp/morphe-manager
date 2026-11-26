@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Chanzo hiki kimezimwa. Viraka vyake vimeorodheshwa kwa rejea na havijatumika</string>
     <string name="sources_management_open_in_browser">Fungua kwenye kivinjari</string>
     <string name="sources_management_report_issue">Ripoti tatizo</string>
+    <string name="sources_management_export_patches">Exporti faili ya viraka</string>
+    <string name="sources_management_export_patches_success">Faili ya viraka imehifadhiwa</string>
+    <string name="sources_management_export_patches_failed">Imeshindwa kutoa faili ya viraka</string>
     <string name="sources_management_failed_to_open_url">Imeshindwa kufungua URL</string>
     <string name="sources_apps">Programu</string>
     <string name="sources_apps_description">Programu zilizochaguliwa zinatoka kwenye chanzo hiki. Gusa programu ili kuiondoa au kuirudisha, ishie kuisogeza ili kuona viraka vyake. Programu isiyo na chanzo huondoka kwenye skrini ya kuanzia, isipokuwa kama uliiraka</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Jina la kuonyesha</string>
     <string name="sources_dialog_rename">Badilisha jina la chanzo cha patch</string>
+    <string name="sources_dialog_renamed">Imebadilishwa jina kuwa %s</string>
     <string name="sources_dialog_change_url">Badilisha mahali ambapo chanzo cha patch kinapakuliwa</string>
     <string name="sources_dialog_duplicate_name_error">Chanzo cha patch chenye jina hili tayari kipo</string>
     <string name="sources_dialog_missing_error">Hakuweza kusasisha chanzo hiki cha patch</string>

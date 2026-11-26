@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Энэ эх сурвалж идэвхгүй байна. Түүний патчууд зөвхөн лавлах зорилгоор жагсаасан бөгөөд хэрэглэгдээгүй</string>
     <string name="sources_management_open_in_browser">Хөтөч дээр нээх</string>
     <string name="sources_management_report_issue">Асуудлыг мэдээлэх</string>
+    <string name="sources_management_export_patches">Патчуудын файлыг экспортлох</string>
+    <string name="sources_management_export_patches_success">Патчуудын файл хадгалагдлаа</string>
+    <string name="sources_management_export_patches_failed">Патчуудын файлыг экспортлох үйлдэл амжилтгүй боллоо</string>
     <string name="sources_management_failed_to_open_url">URL нээхэд алдаа гарлаа</string>
     <string name="sources_apps">Аппликейшнүүд</string>
     <string name="sources_apps_description">Тэмдэглэгдсэн аппликейшнүүд энэ эх сурвалжаас ирсэн байна. Аппликейшн дээр дарж хасах эсвэл буцаан нэмэх, хасах чиглэлд гүйлгэж патч-уудыг нь харна уу. Хэрэв аппликейшн эх сурвалжгүй болвол, патч хийгдээгүй тохиолдолд нүүр дэлгэцээс алга болно</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Харуулах нэр</string>
     <string name="sources_dialog_rename">Патчийн эх сурвалжийг дахин нэрлэх</string>
+    <string name="sources_dialog_renamed">%s болгон нэрлэгдлээ</string>
     <string name="sources_dialog_change_url">Патчийн эх сурвалж татаж авах хаягийг өөрчлөх</string>
     <string name="sources_dialog_duplicate_name_error">Энэхүү нэртэй патчийн эх сурвалж аль хэдийн байна</string>
     <string name="sources_dialog_missing_error">Энэхүү патчийн эх сурвалжийг шинэчилж чадсангүй</string>

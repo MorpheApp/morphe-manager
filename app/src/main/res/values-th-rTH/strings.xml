@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">แหล่งที่มานี้ถูกปิดใช้งาน แพตช์ของมันถูกแสดงเพื่อการอ้างอิงและจะไม่ถูกนำไปใช้</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_report_issue">รายงานปัญหา</string>
+    <string name="sources_management_export_patches">ส่งออกไฟล์แพตช์</string>
+    <string name="sources_management_export_patches_success">บันทึกไฟล์แพตช์แล้ว</string>
+    <string name="sources_management_export_patches_failed">ไม่สามารถส่งออกไฟล์แพตช์ได้</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_apps">แอป</string>
     <string name="sources_apps_description">แอปที่ถูกเลือกมาจากแหล่งที่มานี้ แตะที่แอปเพื่อนำออกหรือนำกลับมา และปัดเพื่อดูแพตช์ของแอปนั้น แอปที่ไม่มีแหล่งที่มาจะถูกนำออกจากหน้าจอหลัก เว้นแต่คุณจะทำการแพตช์แอปนั้นไว้</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งที่มา</string>
+    <string name="sources_dialog_renamed">เปลี่ยนชื่อเป็น %s แล้ว</string>
     <string name="sources_dialog_change_url">เปลี่ยนตำแหน่งที่ดาวน์โหลดแหล่งที่มาของแพตช์</string>
     <string name="sources_dialog_duplicate_name_error">มีแหล่งที่มาที่ชื่อนี้อยู่แล้ว</string>
     <string name="sources_dialog_missing_error">ไม่สามารถอัปเดตแหล่งที่มานี้</string>

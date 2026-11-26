@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">此源已禁用。其补丁仅列出供参考，不会被应用。</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_report_issue">报告问题</string>
+    <string name="sources_management_export_patches">导出补丁文件</string>
+    <string name="sources_management_export_patches_success">补丁文件已保存</string>
+    <string name="sources_management_export_patches_failed">导出补丁文件失败</string>
     <string name="sources_management_failed_to_open_url">无法打开URL</string>
     <string name="sources_apps">应用</string>
     <string name="sources_apps_description">勾选的应用来自此来源。点击应用以将其移除或恢复，滑动应用以查看其补丁。没有来源的应用将离开主屏幕，除非您对其进行了补丁处理</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">显示名称</string>
     <string name="sources_dialog_rename">重命名补丁配置文件</string>
+    <string name="sources_dialog_renamed">已重命名为 %s</string>
     <string name="sources_dialog_change_url">更改补丁源的下载地址</string>
     <string name="sources_dialog_duplicate_name_error">已存在同名的补丁包</string>
     <string name="sources_dialog_missing_error">无法更新此补丁源。</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Αυτή η πηγή είναι απενεργοποιημένη. Τα patches της παρατίθενται για αναφορά και δεν εφαρμόζονται.</string>
     <string name="sources_management_open_in_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="sources_management_report_issue">Αναφορά προβλήματος</string>
+    <string name="sources_management_export_patches">Εξαγωγή αρχείου τροποποιήσεων</string>
+    <string name="sources_management_export_patches_success">Το αρχείο τροποποιήσεων αποθηκεύτηκε</string>
+    <string name="sources_management_export_patches_failed">Απέτυχε η εξαγωγή του αρχείου τροποποιήσεων</string>
     <string name="sources_management_failed_to_open_url">Απέτυχε το άνοιγμα της διεύθυνσης URL</string>
     <string name="sources_apps">Εφαρμογές</string>
     <string name="sources_apps_description">Οι επιλεγμένες εφαρμογές προέρχονται από αυτή την πηγή. Πατήστε μια εφαρμογή για να την εξαιρέσετε ή να την επαναφέρετε, σύρετε για να δείτε τα patches της. Μια εφαρμογή χωρίς πηγή απομακρύνεται από την αρχική οθόνη, εκτός εάν την έχετε κάνει patch</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Εμφανιζόμενο όνομα</string>
     <string name="sources_dialog_rename">Αλλαγή ονόματος πηγής τροποποίησης</string>
+    <string name="sources_dialog_renamed">Μετονομάστηκε σε %s</string>
     <string name="sources_dialog_change_url">Αλλαγή της πηγής λήψης των διορθώσεων</string>
     <string name="sources_dialog_duplicate_name_error">Μια πηγή τροποποίησης με το ίδιο όνομα υπάρχει ήδη</string>
     <string name="sources_dialog_missing_error">Ανεπιτυχής ενημέρωση της πηγής τροποποίησης</string>

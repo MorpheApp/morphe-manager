@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">此來源已停用。其修補程式僅供參考，不會套用。</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_report_issue">回報問題</string>
+    <string name="sources_management_export_patches">匯出修補程式檔案</string>
+    <string name="sources_management_export_patches_success">修補程式檔案已儲存</string>
+    <string name="sources_management_export_patches_failed">匯出修補程式檔案失敗</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
     <string name="sources_apps">應用程式</string>
     <string name="sources_apps_description">勾選的應用程式來自此來源。輕按應用程式可將其排除或恢復，向其滑動可查看其修補項目。一旦沒有來源提供給該應用程式，它就會退出主畫面，除非你已對它做過修補</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
+    <string name="sources_dialog_renamed">已重新命名為 %s</string>
     <string name="sources_dialog_change_url">變更修補程式來源的下載路徑</string>
     <string name="sources_dialog_duplicate_name_error">已存在同名的修補程式來源</string>
     <string name="sources_dialog_missing_error">無法更新此修補來源</string>

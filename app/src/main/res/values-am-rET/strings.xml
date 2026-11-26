@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ይህ ምንጭ ተሰናክሏል። ፓቾቹ ለማጣቀሻ ተዘርዝረዋል ነገር ግን አልተተገበሩም</string>
     <string name="sources_management_open_in_browser">በብራውዘር ይክፈቱ</string>
     <string name="sources_management_report_issue">ችግርን ሪፖርት ያድርጉ</string>
+    <string name="sources_management_export_patches">የፓட்ச ፋይሎችን ላክ</string>
+    <string name="sources_management_export_patches_success">የፓட்ச ፋይል ተቀምጧል</string>
+    <string name="sources_management_export_patches_failed">የፓட்ச ፋይሎችን ለመላክ አልተቻለም</string>
     <string name="sources_management_failed_to_open_url">URL-ን ለመክፈት አልተቻለም</string>
     <string name="sources_apps">መተግበሪያዎች</string>
     <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት፣ ፓቾቹን ለማየት ደግሞ ወደ ጎን ይሳቡት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ እርስዎ ካስተካከሉት ግን ይቀራል</string>
@@ -218,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">የሚታይ ስም</string>
     <string name="sources_dialog_rename">የፓች ምንጭን ስም ቀይር</string>
+    <string name="sources_dialog_renamed">ወደ %s ተቀይሯል</string>
     <string name="sources_dialog_change_url">የፓች ምንጭ የሚወርድበትን ቦታ ይቀይሩ</string>
     <string name="sources_dialog_duplicate_name_error">በዚህ ስም የተሰየመ የፓች ምንጭ ቀድሞውኑ አለ</string>
     <string name="sources_dialog_missing_error">ይህንን የፓች ምንጭ ማዘመን አልተቻለም</string>
