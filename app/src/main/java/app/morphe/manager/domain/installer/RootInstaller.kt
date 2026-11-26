@@ -916,8 +916,8 @@ class RootInstaller(
         /** Where [installPackage] copies the APK to, a directory system_server is allowed to read. */
         private const val INSTALL_TEMP_DIR = "/data/local/tmp/morphe-install"
 
-        /** The scripts the root manager runs, which have to be executable. */
-        private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh")
+        /** The scripts the root manager runs, which have to be executable. action.sh opens the app from the module list. */
+        private val MODULE_SCRIPTS = listOf("service.sh", "post-fs-data.sh", "action.sh")
         private val MODULE_FILES = MODULE_SCRIPTS + "module.prop"
         private const val STOCK_PATHS_FILE = "stock-paths.txt"
 
