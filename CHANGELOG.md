@@ -1,3 +1,13 @@
+## [2.8.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.6...v2.8.0-dev.7) (2026-11-26)
+
+### Performance Improvements
+
+* Faster app startup on Android 15+ ([#1524](https://github.com/MorpheApp/morphe-manager/issues/1524)) ([34c297f](https://github.com/MorpheApp/morphe-manager/commit/34c297f58dd14727cb3e3f98c81c9972daa8be39))
+
+### Bug Fixes
+
+* Update root modules on kernels that refuse to rename mounted files ([2d673bb](https://github.com/MorpheApp/morphe-manager/commit/2d673bb8f5836966634655ac243c4523023e85b6))
+
 ## [2.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.5...v2.8.0-dev.6) (2026-11-25)
 
 ### Features
