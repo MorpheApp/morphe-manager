@@ -80,11 +80,19 @@ data class WrongPackageDialogState(
  * Dialog state for APK signature mismatch warning.
  * Shown when the selected APK's signing certificate does not match
  * the expected signatures declared in the patch bundle.
+ *
+ * @param expectedCertificates SHA-256 fingerprints the sources declare for the app.
+ * @param apkCertificates SHA-256 fingerprints of the certificates the APK verifies with.
  */
 data class InvalidSignatureDialogState(
     val packageName: String,
     val appName: String,
-)
+    val expectedCertificates: Set<String>,
+    val apkCertificates: Set<String>,
+) {
+    /** No signature of the APK verifies at all, which points at a damaged file, not another signer. */
+    val broken get() = apkCertificates.isEmpty()
+}
 
 /** An installed app entry shown in the universal-patch app picker. */
 data class InstalledAppPickerItem(
@@ -807,32 +815,32 @@ class PatchFlow(
 
             // Verify APK signature against the expected signatures declared in the patch bundle.
             // GET_SIGNING_CERTIFICATES (API 28+) is required for reliable archive signature reads.
-            // On Android 8–10 the legacy GET_SIGNATURES path cannot read signatures from
+            // On Android 8-10 the legacy GET_SIGNATURES path cannot read signatures from
             // archive files correctly, so we skip verification there to avoid false-blocking users.
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-                val expectedSignatures = appMetadata[selectedApp.packageName]?.signatures
-                if (!expectedSignatures.isNullOrEmpty()) {
-                    val signatureMatch = withContext(Dispatchers.IO) {
-                        SplitApkInspector.withRepresentativeApk(
-                            source = selectedApp.file,
-                            workspace = filesystem.uiTempDir
-                        ) { apk ->
-                            pm.getApkFileSignatureHashes(apk).any { it in expectedSignatures }
-                        }
-                    }
-                    if (!signatureMatch) {
-                        holdFor(
-                            HomeDialog.InvalidSignature(
-                                InvalidSignatureDialogState(
-                                    packageName = selectedApp.packageName,
-                                    appName = session?.appName ?: appNameFor(selectedApp.packageName)
-                                )
-                            ),
-                            selectedApp
+            val declared = appMetadata[selectedApp.packageName]?.signatures
+            var apkCertificates = emptySet<String>()
+            val signature = apkSignatureCheck(Build.VERSION.SDK_INT, declared) {
+                withContext(Dispatchers.IO) {
+                    SplitApkInspector.withRepresentativeApk(
+                        source = selectedApp.file,
+                        workspace = filesystem.uiTempDir,
+                        block = pm::getApkFileSignatureHashes
+                    )
+                }.also { apkCertificates = it }
+            }
+            if (signature != ApkSignatureCheck.ACCEPTED) {
+                holdFor(
+                    HomeDialog.InvalidSignature(
+                        InvalidSignatureDialogState(
+                            packageName = selectedApp.packageName,
+                            appName = session?.appName ?: appNameFor(selectedApp.packageName),
+                            expectedCertificates = declared.orEmpty(),
+                            apkCertificates = apkCertificates
                         )
-                        return
-                    }
-                }
+                    ),
+                    selectedApp
+                )
+                return
             }
         }
 

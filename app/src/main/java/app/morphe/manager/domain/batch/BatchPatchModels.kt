@@ -156,6 +156,8 @@ data class BatchBundleRef(
  * @param forceVersionMismatch Set when the user chose to patch despite an unsupported version.
  * @param forceUnverifiedSignature Set when the user chose to patch an APK whose signing certificate
  *   none of the bundles vouch for. Carried along so re-resolving the item does not ask again.
+ * @param brokenSignature Set with [BatchItemState.UNVERIFIED_SIGNATURE] when no signature of the
+ *   APK verifies at all, which points at a damaged file rather than another signer.
  * @param unreadableOptionPaths Path options planning left out because nothing can be read at
  *   them anymore. The app is still patched without them, so one queued app cannot hold up the run.
  * @param restoreState State to return to when the user un-excludes the item.
@@ -190,6 +192,7 @@ data class BatchPatchItem(
     val newerVersion: String? = null,
     val forceVersionMismatch: Boolean = false,
     val forceUnverifiedSignature: Boolean = false,
+    val brokenSignature: Boolean = false,
     /** The one source simple mode was told to patch this app from, null to use every source. */
     val chosenBundleUid: Int? = null,
     /** True once the user edited the patches by hand, which resolving the app again would lose. */

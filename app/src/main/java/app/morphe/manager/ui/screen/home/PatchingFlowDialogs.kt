@@ -41,10 +41,13 @@ import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.InvalidSignatureDialogState
+import app.morphe.manager.util.AppCardColorDefaults
 import app.morphe.manager.util.androidVersionName
 import app.morphe.manager.util.copyableVersion
 import app.morphe.manager.util.getRelativeTimeString
 import app.morphe.manager.util.htmlAnnotatedString
+import app.morphe.manager.util.shortFingerprint
 import app.morphe.manager.util.withVersionPrefix
 import app.morphe.patcher.patch.AppTarget
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -470,22 +473,26 @@ internal fun DialogHostScope.UnsupportedVersionWarningDialog(
 
 /**
  * Warning dialog shown when the selected APK's signing certificate does not match
- * the expected signatures declared in the patch bundle.
+ * the expected signatures declared in the patch bundle. The certificates are shown against each
+ * other, so a file signed by someone else reads apart from one whose signature does not verify.
  */
 @Composable
 fun DialogHostScope.InvalidSignatureDialog(
-    appName: String,
-    packageName: String?,
+    state: InvalidSignatureDialogState,
     onPickAnother: () -> Unit,
     onProceed: () -> Unit,
     onDismiss: () -> Unit
 ) {
     AppDialog(
         onDismissRequest = onDismiss,
-        accentColor = rememberAppColor(packageName),
+        accentColor = rememberAppColor(state.packageName),
         title = stringResource(R.string.home_invalid_signature_title),
         description = htmlAnnotatedString(
-            stringResource(R.string.home_invalid_signature_message, appName)
+            stringResource(
+                if (state.broken) R.string.home_invalid_signature_broken_message
+                else R.string.home_invalid_signature_message,
+                state.appName
+            )
         ),
         footer = {
             AppDialogActions(
@@ -497,7 +504,8 @@ fun DialogHostScope.InvalidSignatureDialog(
                     ),
                     DialogAction(
                         text = stringResource(R.string.home_dialog_unsupported_version_dialog_proceed),
-                        onClick = onProceed
+                        onClick = onProceed,
+                        isDestructive = true
                     ),
                     DialogAction(
                         text = stringResource(android.R.string.cancel),
@@ -508,11 +516,41 @@ fun DialogHostScope.InvalidSignatureDialog(
             )
         }
     ) {
-        Notice(
-            text = stringResource(R.string.home_invalid_signature_badge),
-            tone = SemanticTone.Error,
-            icon = MaterialSymbols.Rounded.Warning
-        )
+        val gradientColors = rememberAppMetadata()[state.packageName]?.gradientColors
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            ConfirmSubject(name = state.appName) { modifier ->
+                AppIcon(
+                    packageName = state.packageName,
+                    contentDescription = null,
+                    modifier = modifier,
+                    placeholderGradientColors = gradientColors ?: AppCardColorDefaults.defaultGradientColors
+                )
+            }
+
+            // The two are read against each other, so the tone carries which is which
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
+            ) {
+                MonospaceValuePanel(
+                    value = state.expectedCertificates.joinToString("\n", transform = ::shortFingerprint),
+                    label = stringResource(R.string.home_invalid_signature_expected),
+                    tone = SemanticTone.Success,
+                    textAlign = TextAlign.Center
+                )
+                MonospaceValuePanel(
+                    value = state.apkCertificates.joinToString("\n", transform = ::shortFingerprint)
+                        .ifEmpty { stringResource(R.string.home_invalid_signature_none) },
+                    label = stringResource(R.string.home_invalid_signature_actual),
+                    tone = SemanticTone.Error,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
 
@@ -543,14 +581,7 @@ fun DialogHostScope.SplitApkWarningDialog(
                 secondaryIcon = MaterialSymbols.Rounded.Folder_open
             )
         }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-        }
-    }
+    )
 }
 
 /**
@@ -579,14 +610,7 @@ fun DialogHostScope.ExperimentalVersionWarningDialog(
                 onSecondaryClick = onDismiss
             )
         }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-        }
-    }
+    )
 }
 
 /**
@@ -668,14 +692,7 @@ internal fun DialogHostScope.NoCompatibleVersionsDialog(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(Defaults.SpaceLarge),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-        }
-    }
+    )
 }
 
 /**

@@ -12,7 +12,9 @@ import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.reinstallsByMount
 import app.morphe.manager.data.room.apps.installed.trackingKey
+import app.morphe.manager.domain.apk.ApkSignatureCheck
 import app.morphe.manager.domain.apk.LocalApkSources
+import app.morphe.manager.domain.apk.apkSignatureCheck
 import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.supportedFor
@@ -60,23 +62,6 @@ private const val TAG = "Morphe BatchPlanResolver"
 
 /** Stands in for the version of an APK that does not declare one, which is still patchable. */
 private const val UNSPECIFIED_VERSION = "unspecified"
-
-/**
- * Whether an attached APK may be patched without asking, given the certificates the sources
- * [declared] for the app and the [hashes] read out of the file itself.
- *
- * The same question the single-app picker answers before patching, and answered permissively
- * wherever it cannot be answered at all: [sdkInt] 29 and below cannot read certificates out of an
- * archive, an app no source declares certificates for has nothing to be checked against, and null
- * [hashes] mean the archive would not open, which says nothing either way. Empty [hashes] are the
- * opposite case and do count against the file: the archive opened and carried no certificate.
- */
-internal fun apkSignatureAccepted(sdkInt: Int, declared: Set<String>?, hashes: Set<String>?): Boolean {
-    if (sdkInt <= Build.VERSION_CODES.Q) return true
-    if (declared.isNullOrEmpty()) return true
-    if (hashes == null) return true
-    return hashes.any { it in declared }
-}
 
 /**
  * The patches of a source that appeared since a saved configuration was last written, and so are
@@ -238,7 +223,8 @@ class BatchPlanResolver(
                 return@withContext unusable(BatchItemState.NEEDS_APK, attached.packageName)
             }
 
-            if (!allowUnverifiedSignature && !attached.isSignedAsDeclaredFor(packageName)) {
+            val signature = attached.signatureCheckFor(packageName)
+            if (!allowUnverifiedSignature && signature != ApkSignatureCheck.ACCEPTED) {
                 // The file is kept rather than dropped: accepting it is one tap away, and the
                 // user would otherwise have to download the very same APK again to get there
                 return@withContext BatchPatchItem(
@@ -249,7 +235,8 @@ class BatchPlanResolver(
                     options = emptyMap(),
                     bundles = emptyList(),
                     state = BatchItemState.UNVERIFIED_SIGNATURE,
-                    useMount = mount
+                    useMount = mount,
+                    brokenSignature = signature == ApkSignatureCheck.BROKEN
                 )
             }
         }
@@ -641,11 +628,10 @@ class BatchPlanResolver(
         )
     }
 
-    private fun AttachedApk.isSignedAsDeclaredFor(packageName: String) = apkSignatureAccepted(
+    private fun AttachedApk.signatureCheckFor(packageName: String) = apkSignatureCheck(
         sdkInt = Build.VERSION.SDK_INT,
-        declared = patchBundleRepository.appMetadata.value[packageName]?.signatures,
-        hashes = signatureHashes
-    )
+        declared = patchBundleRepository.appMetadata.value[packageName]?.signatures
+    ) { signatureHashes }
 
     /**
      * Source priority for unattended runs: the saved original first because it is known to be

@@ -405,6 +405,13 @@ private fun ByteArray.toHex(): String = joinToString("") { byte -> "%02x".format
 /** SHA-256 fingerprint of an encoded certificate, alike from the platform, the APK signer or a keystore. */
 fun ByteArray.sha256Fingerprint(): String = MessageDigest.getInstance("SHA-256").digest(this).toHex()
 
+/**
+ * A short form of a [sha256Fingerprint] for people to compare, its first 8 bytes in groups of
+ * four. The same form PatchBundleSignature.fingerprint gives a patch bundle key, which hashes
+ * the key itself first, so the two read alike side by side.
+ */
+fun shortFingerprint(fingerprint: String): String = fingerprint.take(16).chunked(4).joinToString(" ")
+
 /** SHA-256 of this file, or null when it cannot be read. Stops reading as soon as its caller is canceled. */
 suspend fun File.sha256OrNull(): String? {
     if (!isFile) return null

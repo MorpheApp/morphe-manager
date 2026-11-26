@@ -1163,7 +1163,10 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
         item.version.orEmpty()
     )
 
-    BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(R.string.home_invalid_signature_badge)
+    BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(
+        if (item.brokenSignature) R.string.home_invalid_signature_broken_badge
+        else R.string.home_invalid_signature_badge
+    )
 
     // The patch is what the user can deselect, while the error itself is left to the dialog
     BatchItemState.FAILED -> item.failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) }

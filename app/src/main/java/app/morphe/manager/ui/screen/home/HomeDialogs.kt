@@ -336,8 +336,7 @@ private fun DialogHostScope.PatchFlowDialog(
 
         // Shown when the APK is not signed by the expected certificate
         is HomeDialog.InvalidSignature -> InvalidSignatureDialog(
-            appName = dialog.state.appName,
-            packageName = dialog.state.packageName,
+            state = dialog.state,
             onPickAnother = storagePickerLauncher,
             onProceed = flow::proceedIgnoringSignature,
             onDismiss = dismiss
