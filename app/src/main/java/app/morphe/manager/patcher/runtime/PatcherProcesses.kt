@@ -528,7 +528,7 @@ class PatcherProcesses(
             val details = logged + jvmEnded?.output.orEmpty()
             throw HostNotStartedException(
                 "The patcher $vm $cause" + if (details.isNotEmpty()) ":\n${details.joinToString("\n")}" else "",
-                heapNotReserved = details.any { HEAP_NOT_RESERVED in it }
+                heapNotReserved = details.any { line -> HEAP_NOT_RESERVED.any { it in line } }
             )
         }
 
@@ -858,8 +858,9 @@ class PatcherProcesses(
         // HotSpot prints the stacks within a second, unless no thread reaches a safepoint
         val THREAD_DUMP_WAIT = 2.seconds
 
-        // What HotSpot reports for a heap it found no room for, such as "Could not reserve enough space for 1433600KB object heap"
-        const val HEAP_NOT_RESERVED = "Could not reserve enough space"
+        // What HotSpot reports for a heap it found no room for, such as "Could not reserve enough space for 1433600KB object heap".
+        // A heap at the edge of a 32-bit address space may instead leave glibc malloc no room and abort the JVM with its own message
+        val HEAP_NOT_RESERVED = listOf("Could not reserve enough space", "corrupted size vs. prev_size")
 
         val EXIT_RECORD_TIMEOUT = 2.seconds
         val EXIT_RECORD_POLL = 200.milliseconds
