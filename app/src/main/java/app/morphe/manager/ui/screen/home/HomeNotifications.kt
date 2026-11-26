@@ -28,6 +28,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.compositeOver
@@ -277,10 +278,11 @@ fun NotificationsOverlay(
             {
                 // Over the cards peeking out under the top one, so a tap there unfolds the stack
                 // rather than opening whichever card it lands on. Left out of what a screen reader
-                // goes through, which unfolds the stack from the chip offering the same
+                // and a remote go through, which unfold the stack from the chip offering the same
                 Box(
                     modifier = Modifier
                         .clearAndSetSemantics {}
+                        .focusProperties { canFocus = false }
                         .clickable(interactionSource = null, indication = null) {
                             foldTo(StackFold.Unfolded)
                         }
