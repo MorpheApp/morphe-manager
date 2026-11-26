@@ -17,6 +17,8 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.Process
 import android.os.RemoteException
+import android.system.Os
+import android.system.OsConstants
 import android.util.Log
 import androidx.work.ForegroundInfo
 import app.morphe.manager.BuildConfig
@@ -518,6 +520,7 @@ class PatcherProcesses(
             if (started == true) return
 
             if (started == false) ended = true
+            if (started == null && launch != null) logged += describeStuckJvm(this.started.jvmPid)
             val cause = when {
                 started == null -> "did not start within $HOST_START_TIMEOUT"
                 else -> jvmEnded?.let { "ended before it started, its process ${it.describe()}" } ?: "ended before it started"
@@ -527,6 +530,35 @@ class PatcherProcesses(
                 "The patcher $vm $cause" + if (details.isNotEmpty()) ":\n${details.joinToString("\n")}" else "",
                 heapNotReserved = details.any { HEAP_NOT_RESERVED in it }
             )
+        }
+
+        /**
+         * What the JVM in process [pid], alive but not started in time, is doing. The state of each
+         * thread tells one that spins (R, its time close to the wait) from one that waits on what
+         * never comes (S or D). A JVM far enough along also prints its stacks to logcat on SIGQUIT.
+         */
+        private suspend fun describeStuckJvm(pid: Int): List<String> {
+            val threads = withContext(Dispatchers.IO) { jvmThreadStates(pid) }
+            Process.sendSignal(pid, Process.SIGNAL_QUIT)
+            delay(THREAD_DUMP_WAIT)
+            return listOf("Threads of the JVM (pid=$pid), its stacks follow in logcat if it could print them:") + threads
+        }
+
+        private fun jvmThreadStates(pid: Int): List<String> {
+            val tasks = File("/proc/$pid/task").listFiles() ?: return listOf("Threads unreadable")
+            val ticksPerSecond = Os.sysconf(OsConstants._SC_CLK_TCK).coerceAtLeast(1)
+            return tasks.sortedBy { it.name.toIntOrNull() }.mapNotNull { task ->
+                val stat = runCatching { task.resolve("stat").readText() }.getOrNull() ?: return@mapNotNull null
+                // The name may hold spaces and parentheses, so the fields are counted from its last one
+                val nameEnd = stat.lastIndexOf(')')
+                val name = stat.substring(stat.indexOf('(') + 1, nameEnd)
+                val fields = stat.substring(nameEnd + 2).split(' ')
+                // Fields 3, 14 and 15 of proc(5): state, user and system time in clock ticks
+                val cpuMs = (fields[11].toLong() + fields[12].toLong()) * 1000 / ticksPerSecond
+                val wchan = runCatching { task.resolve("wchan").readText().trim() }.getOrNull()
+                    ?.takeIf { it.isNotEmpty() && it != "0" }
+                "  ${task.name} \"$name\" state=${fields[0]} cpu=${cpuMs}ms" + wchan?.let { " wchan=$it" }.orEmpty()
+            }
         }
 
         @Synchronized
@@ -822,6 +854,9 @@ class PatcherProcesses(
 
         // A JVM starts in well under a second on a recent phone, and in a few on a slow one
         val HOST_START_TIMEOUT = 1.minutes
+
+        // HotSpot prints the stacks within a second, unless no thread reaches a safepoint
+        val THREAD_DUMP_WAIT = 2.seconds
 
         // What HotSpot reports for a heap it found no room for, such as "Could not reserve enough space for 1433600KB object heap"
         const val HEAP_NOT_RESERVED = "Could not reserve enough space"

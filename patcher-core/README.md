@@ -58,7 +58,10 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   that runs 30 seconds, again each time it runs twice as long, and names the running patch when
   the heap runs out or the process ends. It times this in the app, whose heap is not the full one.
 - **A run that hangs**: once a run has not moved on for five minutes, the host logs the stacks of
-  all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. The
+  all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. A JVM
+  that is alive but has not started the host within a minute gets the state and CPU time of each
+  of its threads logged from `/proc`, and a SIGQUIT for its stacks in logcat, before the run falls
+  back to ART (`describeStuckJvm` in `PatcherProcesses`). The
   log also has the VM the host runs on (`Host VM:`), the process and the JVM options that differ
   between devices and builds (`Patcher process:`, `Patcher JVM:`), and how long the patches took
   to load, ahead of the run or in it. All of it is in the log the user copies.
