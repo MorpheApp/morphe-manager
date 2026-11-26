@@ -1176,7 +1176,7 @@ class PatchBundleRepository(
                                     }
                                     reportProgress(0, BundleImportPhase.Downloading, bytesTotal = copyTotal)
 
-                                    sha256Of(input) { buffer, read ->
+                                    input.sha256Digest { buffer, read ->
                                         output.write(buffer, 0, read)
                                         copyRead += read
                                         reportProgress(0, BundleImportPhase.Downloading, copyRead, copyTotal)
@@ -1253,19 +1253,6 @@ class PatchBundleRepository(
         return importedUid
     }
 
-    /** Reads [input] to its end, handing each chunk to [onChunk] as it goes, and returns its SHA-256. */
-    private inline fun sha256Of(input: InputStream, onChunk: (buffer: ByteArray, read: Int) -> Unit = { _, _ -> }): ByteArray {
-        val sha256 = MessageDigest.getInstance("SHA-256")
-        val buffer = ByteArray(256 * 1024)
-        while (true) {
-            val read = input.read(buffer)
-            if (read == -1) break
-            sha256.update(buffer, 0, read)
-            onChunk(buffer, read)
-        }
-        return sha256.digest()
-    }
-
     /** The uid a local source is saved under, derived from the SHA-256 of its file's contents. */
     private fun localUidOf(contentDigest: ByteArray): Int {
         val digest = MessageDigest.getInstance("SHA-256").digest(contentDigest)
@@ -1281,7 +1268,7 @@ class PatchBundleRepository(
      * @param manifestName The bundle name the file's manifest declares, which a new version keeps.
      */
     suspend fun checkLocal(manifestName: String?, createStream: suspend () -> InputStream): LocalFileCheck {
-        val uid = localUidOf(withContext(Dispatchers.IO) { createStream().use { sha256Of(it) } })
+        val uid = localUidOf(withContext(Dispatchers.IO) { createStream().use { it.sha256Digest() } })
         val sources = (store.state.value as? BundleState.Ready)?.sources ?: persistentMapOf()
         if (uid in sources) return LocalFileCheck.Duplicate
 
