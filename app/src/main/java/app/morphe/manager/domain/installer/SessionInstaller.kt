@@ -82,7 +82,12 @@ class SessionInstaller(private val app: Application) {
         val silentUpdate = !silentUpdatesRefused
         Log.d(TAG, "installInternal: ${apkFile.name} (${apkFile.length()} bytes), silentUpdate=$silentUpdate")
         return try {
-            awaitSession(apkFile, silentUpdate)
+            val result = awaitSession(apkFile, silentUpdate)
+            if (result is InstallResult.Failure && isDexMetadataRejection(result.message)) {
+                awaitSession(apkFile, !silentUpdatesRefused)
+            } else {
+                result
+            }
         } finally {
             // However it ended, a confirmation nobody answered must not outlive the session
             ManagerApplication.onReturnToForeground = null
@@ -139,6 +144,8 @@ class SessionInstaller(private val app: Application) {
                         apkFile.inputStream().use { it.copyTo(out) }
                         session.fsync(out)
                     }
+                    // Has the app compiled with its baseline profile at install, as a store installs it
+                    dexMetadataOf(apkFile)?.let(session::writeDexMetadata)
                 }
             }
         } catch (e: Throwable) {
@@ -327,6 +334,9 @@ class SessionInstaller(private val app: Application) {
         return installShizukuWithInstallerPackage(apkFile, expectedPackage, null)
     }
 
+    /** Runs [command] in a privileged shell of Shizuku, see [ShizukuInstaller.runShell]. */
+    suspend fun runShizukuShell(command: String) = shizukuInstaller.runShell(command)
+
     suspend fun installShizukuAsPlayStore(apkFile: File, expectedPackage: String): InstallResult {
         requireApkPresent(apkFile)
         Log.d(TAG, "installShizukuAsPlayStore: ${apkFile.name} (${apkFile.length()} bytes)")
@@ -479,8 +489,8 @@ class SessionInstaller(private val app: Application) {
      * Dispatches Shizuku's permission prompt for this app. Returns false when Shizuku is
      * missing, unsupported, not running, permission is already granted, or the IPC call failed.
      *
-     * The prompt result is observed by callers via [shizukuStatus], so no
-     * [Shizuku.OnRequestPermissionResultListener] is registered here.
+     * The prompt result is observed by callers via [shizukuStatus] or [observeShizukuPermission],
+     * so no [Shizuku.OnRequestPermissionResultListener] is registered here.
      */
     fun requestShizukuPermission(): Boolean {
         val status = shizukuStatus()
@@ -491,6 +501,16 @@ class SessionInstaller(private val app: Application) {
         }.onFailure { error ->
             Log.w(TAG, "Failed to request Shizuku permission", error)
         }.getOrDefault(false)
+    }
+
+    /**
+     * Calls [onAnswer] whenever a Shizuku permission prompt is answered, until the returned handle
+     * is closed. Some prompts never take the screen from Morphe, so a return to it can't tell.
+     */
+    fun observeShizukuPermission(onAnswer: () -> Unit): AutoCloseable {
+        val listener = Shizuku.OnRequestPermissionResultListener { _, _ -> onAnswer() }
+        Shizuku.addRequestPermissionResultListener(listener)
+        return AutoCloseable { Shizuku.removeRequestPermissionResultListener(listener) }
     }
 
     /** Launches the Shizuku app. Returns false if it is not installed. */

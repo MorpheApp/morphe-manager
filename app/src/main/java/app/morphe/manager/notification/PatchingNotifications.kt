@@ -112,6 +112,16 @@ object PatchingNotifications {
         silent
     )
 
+    /** Post why a run ended without a result, for one the user can no longer return to. */
+    fun showPatchFailure(context: Context, text: CharSequence) = showResult(
+        context,
+        PATCH_RESULT_ID,
+        succeeded = false,
+        text,
+        patcherIntent(context),
+        silent = false
+    )
+
     /**
      * Post the result of a queue that finished while the user was not watching it. Tapping it
      * opens the queue on that run.
@@ -158,6 +168,8 @@ object PatchingNotifications {
                 )
             )
             .setContentText(text)
+            // A failure says what to do in a sentence or two, which one line cuts off
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setContentIntent(contentIntent)
             .setAutoCancel(true)
             .setSilent(silent)

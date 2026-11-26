@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Sumber ini dinonaktifkan. Tambalannya tercantum untuk referensi dan tidak diterapkan.</string>
     <string name="sources_management_open_in_browser">Buka di peramban</string>
     <string name="sources_management_report_issue">Laporkan masalah</string>
+    <string name="sources_management_export_patches">Ekspor berkas tambalan</string>
+    <string name="sources_management_export_patches_success">Berkas tambalan disimpan</string>
+    <string name="sources_management_export_patches_failed">Gagal mengekspor berkas tambalan</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
     <string name="sources_apps_description">Aplikasi yang dicentang berasal dari sumber ini. Ketuk aplikasi untuk mengeluarkannya atau mengembalikannya, geser untuk melihat patch-nya. Aplikasi tanpa sumber akan meninggalkan layar utama, kecuali jika Anda telah melakukan patch padanya</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Sumber tambalan ini diblokir dan tidak dapat ditambahkan</string>
     <string name="sources_management_source_blocked_badge">Diblokir</string>
     <string name="sources_management_metadata_unavailable">Metadata Tidak Tersedia</string>
+    <string name="sources_management_bundle_missing_badge">Belum diunduh</string>
     <string name="sources_management_metadata_unavailable_hint">Berkas metadata jarak jauh tidak tersedia. Penambalan dengan paket terpasang masih berfungsi, tetapi pembaruan otomatis dinonaktifkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket tambalan tidak dapat diunduh. Sumber URL mungkin salah atau berkas tidak ada. Ketuk untuk mengubahnya</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama tampilan</string>
     <string name="sources_dialog_rename">Ubah nama sumber tambalan</string>
+    <string name="sources_dialog_renamed">Diubah namanya menjadi %s</string>
     <string name="sources_dialog_change_url">Ubah lokasi pengunduhan sumber tambalan</string>
     <string name="sources_dialog_duplicate_name_error">Sumber tambalan dengan nama ini sudah ada</string>
     <string name="sources_dialog_missing_error">Tidak dapat memperbarui sumber tambalan ini</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Memperbarui %s</string>
     <string name="sources_dialog_url_valid">Repositori atau URL JSON valid</string>
-    <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub/GitLab atau berkas .json</string>
+    <string name="sources_dialog_url_invalid">URL harus mengarah ke repositori GitHub, GitLab, atau Codeberg atau berkas .json</string>
     <string name="sources_dialog_preinstalled">Sudah dipasang sebelumnya</string>
     <string name="sources_dialog_community">Tambalan komunitas</string>
     <string name="sources_dialog_choose_apps">Pilih aplikasi</string>
@@ -576,6 +581,9 @@ Untuk hasil terbaik, aplikasi ini merekomendasikan untuk menambal &lt;b&gt;APK l
     <string name="app_links_change_failed">Gagal mengubah tautan aplikasi</string>
     <string name="app_links_all_verified">Semua tautan yang didukung dikonfigurasi untuk dibuka di aplikasi ini</string>
     <string name="app_links_fix">Perbaiki tautan</string>
+    <string name="app_links_allow_shizuku">Izinkan akses Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Izinkan Morphe menggunakan Shizuku untuk mengaktifkan tautan ini untuk Anda</string>
+    <string name="app_links_shizuku_not_running_hint">Jalankan Shizuku agar Morphe dapat mengaktifkan tautan ini untuk Anda</string>
     <string name="configure">Konfigurasi</string>
     <string name="patcher_rename_title">Ini akan memasang klon</string>
     <string name="patcher_rename_description">Penambalan membuat aplikasi ini dengan nama paket tersendiri, sehingga pemasangan ini menambahkan klon di samping &lt;b&gt;%s&lt;/b&gt; alih-alih memperbaruinya</string>
@@ -745,6 +753,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="patched_app_save_failed_toast">Gagal menyimpan aplikasi yang ditambal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk melanjutkan plugin ini</string>
     <string name="patcher_process_killed_message">Sistem menghentikan patcher sebelum selesai, biasanya untuk membebaskan memori. Tutup aplikasi lain dan coba lagi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ditutup sebelum proses patching selesai, sehingga tidak ada yang dipatch. Coba lagi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Penambal mengalami kerusakan sebelum selesai. Jika hal ini terjadi lagi, nonaktifkan %1$s dan laporkan masalah ini beserta log-nya</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-game</string>
     <string name="mini_games_description">Game cepat untuk mengisi waktu luang</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Permainan</string>
     <string name="mini_game_score">Skor %s</string>
     <string name="mini_game_best">%s terbaik</string>
     <string name="mini_game_new_record">Rekor baru!</string>
@@ -1377,7 +1389,7 @@ Rincian: %2$s"</string>
     <string name="opensource_licenses_search">Cari pustaka dan lisensi</string>
     <!-- Easter egg offered after seven taps on the version in the About dialog -->
     <string name="easter_egg_pill_title">Sebuah pilihan</string>
-    <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya. Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
+    <string name="easter_egg_pill_message">Ambil pil biru dan iklan tetap di tempatnya, atau Ambil pil merah dan lihat seberapa dalam bytecode itu</string>
     <string name="easter_egg_pill_red">Pil merah</string>
     <string name="easter_egg_pill_blue">Pil biru</string>
     <string name="easter_egg_pill_red_toast">Latar belakang Matrix terbuka</string>
@@ -1561,6 +1573,7 @@ Rincian: %2$s"</string>
     <string name="changelog_show_all">Tampilkan semua (%s)</string>
     <string name="changelog_show_less">Tampilkan lebih sedikit</string>
     <string name="no_network_toast">Tidak ada sambungan internet yang tersedia</string>
+    <string name="download_waiting_for_network">Menunggu jaringan</string>
     <string name="update_available">Pembaruan tersedia</string>
     <string name="ready_to_install_update">Siap memasang pembaruan</string>
     <string name="update_completed">Pembaruan terpasang</string>

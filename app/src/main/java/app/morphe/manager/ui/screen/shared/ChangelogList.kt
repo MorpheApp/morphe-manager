@@ -5,7 +5,6 @@
 
 package app.morphe.manager.ui.screen.shared
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,16 +15,12 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
 import app.morphe.manager.util.ChangelogEntry
-import app.morphe.manager.util.GITHUB_HOST
-import app.morphe.manager.util.isGitLabUrl
+import app.morphe.manager.util.SourceUrl
 import app.morphe.manager.util.isPrerelease
 import app.morphe.manager.util.normalizeVersion
-import com.composables.icons.fontawesome.FontAwesome
-import com.composables.icons.fontawesome.brands.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.flow.filter
@@ -185,31 +180,15 @@ fun ChangelogFooter(
 @Composable
 private fun releasePageAction(pageUrl: String?): DialogAction? {
     val openUrl = rememberOpenUrl()
-    val host = pageUrl?.let(ReleaseHost::of) ?: return null
+    if (pageUrl == null) return null
+    val host = SourceUrl.parse(pageUrl)?.codeHost
 
     return DialogAction(
-        text = host.label?.let { stringResource(it) } ?: stringResource(R.string.changelog_release_page),
+        text = host?.label ?: stringResource(R.string.changelog_release_page),
         onClick = { openUrl(pageUrl) },
-        icon = host.icon,
+        icon = host?.icon ?: MaterialSymbols.Rounded.Open_in_new.autoMirrored,
         emphasis = DialogActionEmphasis.Outlined
     )
-}
-
-/** Forge a release page lives on, named by the button that opens it. */
-private enum class ReleaseHost(@param:StringRes val label: Int?, val icon: ImageVector) {
-    GITHUB(R.string.changelog_host_github, FontAwesome.Brands.Github),
-    GITLAB(R.string.changelog_host_gitlab, FontAwesome.Brands.Gitlab),
-
-    /** Any other host, which the button names generically. */
-    OTHER(null, MaterialSymbols.Rounded.Open_in_new.autoMirrored);
-
-    companion object {
-        fun of(url: String): ReleaseHost = when {
-            url.contains(GITHUB_HOST, ignoreCase = true) -> GITHUB
-            isGitLabUrl(url) -> GITLAB
-            else -> OTHER
-        }
-    }
 }
 
 /**

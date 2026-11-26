@@ -6,17 +6,21 @@
 package app.morphe.manager.ui.screen.shared.backgrounds
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import kotlin.math.PI
+import kotlin.math.ceil
 import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.max
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.random.Random
@@ -35,17 +39,15 @@ fun MeshBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val primaryColor   = MaterialTheme.colorScheme.primary
-    val secondaryColor = MaterialTheme.colorScheme.secondary
-    val tertiaryColor  = MaterialTheme.colorScheme.tertiary
+    val palette = themePalette()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
         sensitivity = 0.4f
     )
 
-    // Generate mesh grid - random offsets and Z amplitudes per node
-    val meshNodes = remember { generateMeshGrid() }
+    // Keeps each node's random motion the same when a resize lays the grid out again
+    val seed = remember { Random.nextInt() }
 
     // time accumulates in ms at speed 1x
     val time = rememberAnimatedTime(speedMultiplier)
@@ -60,125 +62,131 @@ fun MeshBackground(
         riseEasing = LinearEasing
     )
 
-    // Every node is projected once per frame into these, then shared by the cells around it
-    val projected = remember { MeshProjection(meshNodes.size) }
-    val trianglePath = remember { Path() }
+    Spacer(
+        modifier = modifier
+            .fillMaxSize()
+            .drawWithCache {
+                // The grid is laid over the canvas grown by the farthest parallax shift on every
+                // side, so no lean of the device can pull its border into view
+                val layout = MeshLayout(size, parallaxState.maxTilt * MESH_PARALLAX_DP * density, seed)
+                val trianglePath = Path()
+                onDrawBehind {
+                    drawMesh(
+                        layout = layout,
+                        trianglePath = trianglePath,
+                        timeMs = time.value,
+                        rippleProgress = rippleProgress.value,
+                        tiltX = parallaxState.tiltX.value * density,
+                        tiltY = parallaxState.tiltY.value * density,
+                        palette = palette
+                    )
+                }
+            }
+    )
+}
 
-    Canvas(modifier = modifier.fillMaxSize()) {
-        val width  = size.width
-        val height = size.height
-        val tiltX  = parallaxState.tiltX.value
-        val tiltY  = parallaxState.tiltY.value
-        val rp     = rippleProgress.value
-        val strokeWidth = 1.2f * density
+private fun DrawScope.drawMesh(
+    layout: MeshLayout,
+    trianglePath: Path,
+    timeMs: Float,
+    rippleProgress: Float,
+    tiltX: Float,
+    tiltY: Float,
+    palette: ThemePalette
+) {
+    val nodes = layout.nodes
+    val cols = layout.cols
+    val rows = layout.rows
+    val projected = layout.projection
+    val strokeWidth = 1.2f * density
+    val centerX = size.width * 0.5f
+    val centerY = size.height * 0.5f
 
-        // 3D projection parameters
-        val cameraZ  = 1.6f
-        val tiltRad  = Math.toRadians(MESH_GRID_TILT_DEGREES).toFloat()
-        val cosTilt  = cos(tiltRad)
-        val sinTilt  = sin(tiltRad)
+    // Time runs one way only: half a turn of every wave per 20 000 ms at speed 1x. A clock that
+    // ran back and forth would turn every node around at the same instant
+    val t = timeMs * PI.toFloat() / 20000f
 
-        // Time runs one way only: half a turn of every wave per 20 000 ms at speed 1x. A clock that
-        // ran back and forth would turn every node around at the same instant
-        val t = time.value * PI.toFloat() / 20000f
+    nodes.forEachIndexed { i, node ->
+        // Unique frequencies and phases for each node - creates chaotic, non-repeating motion
+        val xFreq  = 1.0f + node.u * 0.5f
+        val yFreq  = 1.2f + node.v * 0.6f
+        val zFreq  = 0.8f + (node.u + node.v) * 0.4f
+        val xPhase = node.u * TWO_PI
+        val yPhase = node.v * 3f * PI.toFloat()
+        val zPhase = (node.u + node.v) * 1.5f * PI.toFloat()
 
-        meshNodes.forEachIndexed { i, node ->
-            // Unique frequencies and phases for each node - creates chaotic, non-repeating motion
-            val xFreq  = 1.0f + node.baseX * 0.5f
-            val yFreq  = 1.2f + node.baseY * 0.6f
-            val zFreq  = 0.8f + (node.baseX + node.baseY) * 0.4f
-            val xPhase = node.baseX * 2f * PI.toFloat()
-            val yPhase = node.baseY * 3f * PI.toFloat()
-            val zPhase = (node.baseX + node.baseY) * 1.5f * PI.toFloat()
+        // Calculate position with sine/cosine for smooth looping
+        val x = node.worldX + node.offsetX * sin(t * xFreq + xPhase)
+        val y = node.worldY + node.offsetY * cos(t * yFreq + yPhase)
 
-            // Calculate position with sine/cosine for smooth looping
-            val x = node.baseX + node.offsetX * sin(t * xFreq + xPhase)
-            val y = node.baseY + node.offsetY * cos(t * yFreq + yPhase)
+        // Ripple: a circular wave front sweeps from the center and reaches the corners at
+        // 0.625 progress; width = 0.25 of the way there
+        val waveFront  = rippleProgress * 1.6f
+        val waveWidth  = 0.25f
+        val localPhase = (waveFront - node.baseDepth) / waveWidth
+        val rippleZ    = if (rippleProgress > 0f && localPhase in 0f..1f)
+            sin(localPhase * PI.toFloat()) * 0.35f * (1f - rippleProgress * 0.5f)
+        else 0f
 
-            // Ripple: a circular wave front sweeps from center (0.5, 0.5).
-            // Wave front travels at 1.6 units/sec; width = 0.25 units.
-            val distFromCentre = sqrt(
-                (node.baseX - 0.5f) * (node.baseX - 0.5f) +
-                        (node.baseY - 0.5f) * (node.baseY - 0.5f)
-            ) * sqrt(2f)
-            val waveFront  = rp * 1.6f
-            val waveWidth  = 0.25f
-            val localPhase = (waveFront - distFromCentre) / waveWidth
-            val rippleZ    = if (rp > 0f && localPhase in 0f..1f)
-                sin(localPhase * PI.toFloat()) * 0.35f * (1f - rp * 0.5f)
-            else 0f
+        val z = node.zAmplitude * sin(t * zFreq + zPhase) + rippleZ
 
-            val z = node.zAmplitude * sin(t * zFreq + zPhase) + rippleZ
+        // Apply tilt rotation
+        val rotatedY = y * MESH_COS_TILT - z * MESH_SIN_TILT
+        val rotatedZ = y * MESH_SIN_TILT + z * MESH_COS_TILT
+        projected.wx[i] = x
+        projected.wy[i] = rotatedY
+        projected.wz[i] = rotatedZ
 
-            // Normalize coordinates
-            val normalizedX = (x - 0.5f) * 3.8f
-            val normalizedY = (y - 0.5f) * 2.8f
+        // Parallax effect
+        val parallaxStrength = node.baseDepth * MESH_PARALLAX_DP
 
-            // Apply tilt rotation
-            val rotatedY = normalizedY * cosTilt - z * sinTilt
-            val rotatedZ = normalizedY * sinTilt + z * cosTilt
-            projected.wx[i] = normalizedX
-            projected.wy[i] = rotatedY
-            projected.wz[i] = rotatedZ
+        // Perspective projection
+        val perspective = MESH_CAMERA_Z / (MESH_CAMERA_Z - rotatedZ)
 
-            // Parallax effect
-            val parallaxStrength = node.baseDepth * 60f
+        // Convert to screen coordinates
+        projected.sx[i] = x * perspective * layout.scale + centerX + tiltX * parallaxStrength
+        projected.sy[i] = (rotatedY * perspective + layout.offsetY) * layout.scale + centerY +
+                tiltY * parallaxStrength
+    }
 
-            // Perspective projection
-            val perspective = cameraZ / (cameraZ - rotatedZ)
+    val sx = projected.sx; val sy = projected.sy
 
-            // Convert to screen coordinates
-            projected.sx[i] = normalizedX * perspective * width  * 0.48f + width  * 0.5f + tiltX * parallaxStrength
-            projected.sy[i] = rotatedY    * perspective * height * 0.48f + height * 0.5f + tiltY * parallaxStrength
+    // Faces first, lit by how squarely they turn to the light, so every line sits on top of them
+    nodes.forEachIndexed { index, node ->
+        val row = index / cols
+        val col = index % cols
+        if (row >= rows - 1 || col >= cols - 1) return@forEachIndexed
+        val color = palette[row + col]
+        val alpha = 0.14f + node.baseDepth * 0.05f
+        fillTriangle(trianglePath, projected, index, index + 1, index + cols, color, alpha)
+        fillTriangle(trianglePath, projected, index + 1, index + cols + 1, index + cols, color, alpha)
+    }
+
+    // Each node owns the edge to its right, the one below it and its cell's diagonal, so every
+    // shared edge is drawn once and inner lines read as bright as the border
+    nodes.forEachIndexed { index, node ->
+        val row = index / cols
+        val col = index % cols
+        val hasRight = col < cols - 1
+        val hasBelow = row < rows - 1
+        val color = palette[row + col]
+            .copy(alpha = 0.14f + node.baseDepth * 0.05f)
+        val from = Offset(sx[index], sy[index])
+
+        if (hasRight) {
+            drawLine(color, from, Offset(sx[index + 1], sy[index + 1]), strokeWidth)
         }
-
-        val sx = projected.sx; val sy = projected.sy
-
-        // Faces first, lit by how squarely they turn to the light, so every line sits on top of them
-        meshNodes.forEachIndexed { index, node ->
-            val row = index / MESH_COLS
-            val col = index % MESH_COLS
-            if (row >= MESH_ROWS - 1 || col >= MESH_COLS - 1) return@forEachIndexed
-            val color = cellColor(row, col, primaryColor, secondaryColor, tertiaryColor)
-            val alpha = 0.14f + node.baseDepth * 0.05f
-            fillTriangle(trianglePath, projected, index, index + 1, index + MESH_COLS, color, alpha)
-            fillTriangle(trianglePath, projected, index + 1, index + MESH_COLS + 1, index + MESH_COLS, color, alpha)
+        if (hasBelow) {
+            val below = index + cols
+            drawLine(color, from, Offset(sx[below], sy[below]), strokeWidth)
         }
-
-        // Each node owns the edge to its right, the one below it and its cell's diagonal, so every
-        // shared edge is drawn once and inner lines read as bright as the border
-        meshNodes.forEachIndexed { index, node ->
-            val row = index / MESH_COLS
-            val col = index % MESH_COLS
-            val hasRight = col < MESH_COLS - 1
-            val hasBelow = row < MESH_ROWS - 1
-            val color = cellColor(row, col, primaryColor, secondaryColor, tertiaryColor)
-                .copy(alpha = 0.14f + node.baseDepth * 0.05f)
-            val from = Offset(sx[index], sy[index])
-
-            if (hasRight) {
-                drawLine(color, from, Offset(sx[index + 1], sy[index + 1]), strokeWidth)
-            }
-            if (hasBelow) {
-                val below = index + MESH_COLS
-                drawLine(color, from, Offset(sx[below], sy[below]), strokeWidth)
-            }
-            if (hasRight && hasBelow) {
-                val right = index + 1
-                val below = index + MESH_COLS
-                drawLine(color, Offset(sx[right], sy[right]), Offset(sx[below], sy[below]), strokeWidth)
-            }
+        if (hasRight && hasBelow) {
+            val right = index + 1
+            val below = index + cols
+            drawLine(color, Offset(sx[right], sy[right]), Offset(sx[below], sy[below]), strokeWidth)
         }
     }
 }
-
-/** Color of the cell at [row], [col], cycling through the three theme colors across the grid. */
-private fun cellColor(row: Int, col: Int, primary: Color, secondary: Color, tertiary: Color) =
-    when ((row + col) % 3) {
-        0    -> primary
-        1    -> secondary
-        else -> tertiary
-    }
 
 // Faces turned toward this direction catch the most light: up and to the left on screen, and toward
 // the camera, which sits on +z
@@ -228,51 +236,99 @@ private class MeshProjection(size: Int) {
     val sy = FloatArray(size)
 }
 
-private const val MESH_ROWS = 12
-private const val MESH_COLS = 12
-private const val MESH_GRID_TILT_DEGREES = 10.0
+private const val MESH_CAMERA_Z = 1.6f
+private val MESH_TILT_RADIANS = Math.toRadians(10.0).toFloat()
+private val MESH_COS_TILT = cos(MESH_TILT_RADIANS)
+private val MESH_SIN_TILT = sin(MESH_TILT_RADIANS)
+
+// How far the nodes nearest the corners follow a full tilt
+private const val MESH_PARALLAX_DP = 20f
+
+// Side of one square cell in world units. The grid adds cells along whichever side is longer instead
+// of stretching them, so the mesh keeps its proportions in any orientation
+private const val MESH_CELL = 0.2f
+
+// World units the grid spans across and down a frame as long as its longest side. Past the screen
+// itself, that leaves room for the perspective to shrink the far edge and for the nodes to wander
+private const val MESH_SPAN_X = 3.2f
+private const val MESH_SPAN_Y = 2.6f
+
+// One world unit spans this share of the frame's longest side on screen
+private const val MESH_SCALE = 0.48f
 
 /**
- * Generate mesh grid with varying depth.
- * Random offsets and Z amplitudes create unique motion per node.
+ * The grid laid out for a canvas of [size], overscanned by [margin] pixels on every side, with the
+ * random motion of each node drawn from [seed].
  */
-private fun generateMeshGrid(): List<MeshNode> {
-    val nodes = mutableListOf<MeshNode>()
+private class MeshLayout(size: Size, margin: Float, seed: Int) {
+    val cols: Int
+    val rows: Int
 
-    for (row in 0 until MESH_ROWS) {
-        for (col in 0 until MESH_COLS) {
-            val baseX = col / (MESH_COLS - 1f)
-            val baseY = row / (MESH_ROWS - 1f)
+    /** Pixels per world unit, the same along both axes. */
+    val scale: Float
 
-            // Random offset for chaotic movement
-            val offsetX    = (Random.nextFloat() - 0.5f) * 0.04f
-            val offsetY    = (Random.nextFloat() - 0.5f) * 0.04f
-            val zAmplitude = Random.nextFloat() * 0.15f
+    /**
+     * World offset that centers the flat grid on screen. The tilt swells the near edge and shrinks
+     * the far one, so without it the far edge would sit much closer to the top of the screen.
+     */
+    val offsetY: Float
 
-            // Calculate depth based on distance from center
-            val centerDistX = (baseX - 0.5f) * 2f
-            val centerDistY = (baseY - 0.5f) * 2f
-            val baseDepth   = sqrt(centerDistX * centerDistX + centerDistY * centerDistY) / sqrt(2f)
+    val nodes: List<MeshNode>
+    val projection: MeshProjection
 
-            nodes.add(MeshNode(
-                baseX      = baseX,
-                baseY      = baseY,
-                offsetX    = offsetX,
-                offsetY    = offsetY,
-                baseDepth  = baseDepth,
-                zAmplitude = zAmplitude
-            ))
+    init {
+        val frameWidth  = size.width  + 2f * margin
+        val frameHeight = size.height + 2f * margin
+        val longSide = max(frameWidth, frameHeight).coerceAtLeast(1f)
+        scale = MESH_SCALE * longSide
+
+        val cellsX = ceil(MESH_SPAN_X * frameWidth  / longSide / MESH_CELL).toInt().coerceAtLeast(1)
+        val cellsY = ceil(MESH_SPAN_Y * frameHeight / longSide / MESH_CELL).toInt().coerceAtLeast(1)
+        cols = cellsX + 1
+        rows = cellsY + 1
+        val halfWidth  = cellsX * MESH_CELL / 2f
+        val halfHeight = cellsY * MESH_CELL / 2f
+
+        offsetY = -(projectFlatY(-halfHeight) + projectFlatY(halfHeight)) / 2f
+
+        val cornerDistance = hypot(halfWidth, halfHeight)
+        nodes = List(rows * cols) { index ->
+            val row = index / cols
+            val col = index % cols
+            val worldX = col * MESH_CELL - halfWidth
+            val worldY = row * MESH_CELL - halfHeight
+            val random = Random(seed + row * 7919 + col * 104729)
+
+            MeshNode(
+                worldX     = worldX,
+                worldY     = worldY,
+                u          = col / (cols - 1f).coerceAtLeast(1f),
+                v          = row / (rows - 1f).coerceAtLeast(1f),
+                // Random offset for chaotic movement, up to a fifth of a cell each way
+                offsetX    = (random.nextFloat() - 0.5f) * 0.44f * MESH_CELL,
+                offsetY    = (random.nextFloat() - 0.5f) * 0.44f * MESH_CELL,
+                zAmplitude = random.nextFloat() * 0.15f,
+                // Distance from the center, 0 there and 1 in the corners
+                baseDepth  = hypot(worldX, worldY) / cornerDistance
+            )
         }
+        projection = MeshProjection(nodes.size)
     }
 
-    return nodes
+    /** Where a node at rest at world height [y] lands on screen, in world units from the center. */
+    private fun projectFlatY(y: Float): Float {
+        val rotatedZ = y * MESH_SIN_TILT
+        return y * MESH_COS_TILT * MESH_CAMERA_Z / (MESH_CAMERA_Z - rotatedZ)
+    }
 }
 
-private data class MeshNode(
-    val baseX: Float,
-    val baseY: Float,
+private class MeshNode(
+    val worldX: Float,
+    val worldY: Float,
+    val u: Float, // Column as a share of the grid width, seeds the node's wave frequencies and phases
+    val v: Float, // Row as a share of the grid height, likewise
     val offsetX: Float,
     val offsetY: Float,
-    val baseDepth: Float, // For parallax effect
-    val zAmplitude: Float // For wave animation
+    val zAmplitude: Float, // For wave animation
+    val baseDepth: Float   // For parallax effect and the ripple
 )

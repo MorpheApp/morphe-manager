@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Овај извор је онемогућен. Његове закрпе су наведене ради увида и не примењују се.</string>
     <string name="sources_management_open_in_browser">Отвори у прегледачу</string>
     <string name="sources_management_report_issue">Пријави проблем</string>
+    <string name="sources_management_export_patches">Извези датотеку закрпа</string>
+    <string name="sources_management_export_patches_success">Датотека закрпа је сачувана</string>
+    <string name="sources_management_export_patches_failed">Није успео извоз датотеке закрпа</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отварање URL адресе</string>
     <string name="sources_apps">Апликације</string>
     <string name="sources_apps_description">Означене апликације потичу из овог извора. Додирните апликацију да је искључите или вратите, превлачите је да видите њене патчеве. Апликација коју ниједан извор не доноси нестаје са почетног екрана, осим ако је нисте патчовали</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Овај извор закрпа је блокиран и не може бити додат</string>
     <string name="sources_management_source_blocked_badge">Блокиран</string>
     <string name="sources_management_metadata_unavailable">Метаподаци нису доступни</string>
+    <string name="sources_management_bundle_missing_badge">Није преузето</string>
     <string name="sources_management_metadata_unavailable_hint">Датотека метаподатка са удаљеног извора није доступна. Поправка са инсталираним пакетом и даље функционише, али аутоматска ажурирања су искључена за овај извор</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Пакет закрпа није могао да се преузме. УРЛ адреса извора може бити неисправна или датотека не постоји</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Пакет за закрпљивање није могао да се преузме. URL извора може бити нетачан или датотека не постоји. Додирните да га промените</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Назив за приказ</string>
     <string name="sources_dialog_rename">Преименујте изворни извор</string>
+    <string name="sources_dialog_renamed">Преименовано у %s</string>
     <string name="sources_dialog_change_url">Промените локацију са које се преузима извор закрпа</string>
     <string name="sources_dialog_duplicate_name_error">Извор за патчевање са овим именом већ постоји</string>
     <string name="sources_dialog_missing_error">Није могуће ажурирати овај извор закрпа</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ажурира %s</string>
     <string name="sources_dialog_url_valid">Важећи репозиторијум или JSON URL</string>
-    <string name="sources_dialog_url_invalid">УРЛ мора да указује на GitHub/GitLab репозиторијум или .json датотеку</string>
+    <string name="sources_dialog_url_invalid">URL мора быть веза за GitHub, GitLab или Codeberg репозиторијум или .json датотеку</string>
     <string name="sources_dialog_preinstalled">Предпостављени</string>
     <string name="sources_dialog_community">Закрпе заједнице</string>
     <string name="sources_dialog_choose_apps">Изаберите апликације</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">Неуспешна промена везе апликација</string>
     <string name="app_links_all_verified">Сви подржани линкови су подешени да се отварају у овој апликацији</string>
     <string name="app_links_fix">Поправи линкове</string>
+    <string name="app_links_allow_shizuku">Дозволи приступ Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Дозволи Morphe-у да користи Shizuku како би укључио ове везе за тебе</string>
+    <string name="app_links_shizuku_not_running_hint">Покрени Shizuku како би Morphe могао да укључи ове везе за тебе</string>
     <string name="configure">Подеси</string>
     <string name="patcher_rename_title">Ово ће инсталирати клон</string>
     <string name="patcher_rename_description">Закрпе су направиле ову апликацију под сопственим именом пакета, тако да инсталација додаје клон поред &lt;b&gt;%s&lt;/b&gt; уместо да је ажурира</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">Није успело чување закрпљене и потписане апликације</string>
     <string name="plugin_activity_dialog_body">Неопходна је корисничка интеракција да бисте наставили са овом додатком.</string>
     <string name="patcher_process_killed_message">Систем је прекинуо патчер пре него што је завршио, обично да ослободи меморију. Затворите друге апликације и покушајте поново</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe је затворен пре него што је patching завршен, тако да ништа није patched. Покушајте поново</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Закрпљивач је пао пре него што је завршио. Ако се то понови, искључите %1$s и пријавите проблем уз лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Мини-игре</string>
     <string name="mini_games_description">Брзе игре за убијање времена</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Игре</string>
     <string name="mini_game_score">Резултат %s</string>
     <string name="mini_game_best">Најбољи %s</string>
     <string name="mini_game_new_record">Нови рекорд!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Прикажи све (%s)</string>
     <string name="changelog_show_less">Прикажи мање</string>
     <string name="no_network_toast">Нема доступне интернет везе</string>
+    <string name="download_waiting_for_network">Чекање мреже</string>
     <string name="update_available">Ажурирање је доступно</string>
     <string name="ready_to_install_update">Спреман за инсталирање ажурирања</string>
     <string name="update_completed">Ажурирање инсталирано</string>

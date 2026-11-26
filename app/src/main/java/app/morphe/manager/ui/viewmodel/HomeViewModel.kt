@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
+import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.domain.apk.*
@@ -23,9 +24,9 @@ import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.bundles.*
+import app.morphe.manager.domain.installer.BatchUninstaller
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
-import app.morphe.manager.domain.installer.UninstallCancelledException
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
@@ -88,6 +89,8 @@ class HomeViewModel(
     // Past the parameters viewModelOf takes
     private val patcherProcesses: PatcherProcesses by inject()
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
+    private val batchUninstaller: BatchUninstaller by inject()
+    private val networkInfo: NetworkInfo by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -109,6 +112,11 @@ class HomeViewModel(
 
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
+
+    /** Whether a source download is held up by the device being offline. */
+    val bundleDownloadWaiting: StateFlow<Boolean> = networkInfo
+        .offlineWhile(bundleUpdateProgress.map { it?.phase == PatchBundleRepository.BundleUpdatePhase.Downloading })
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
     private val contentResolver: ContentResolver = app.contentResolver
 
     /** Android 11 kills the app process after granting the "install apps" permission. */
@@ -648,14 +656,40 @@ class HomeViewModel(
     }
 
     /**
+     * Names [bundleToRename] [displayName], or gives it back its own name when that is blank. The
+     * dialog stays up on a name another source already has, for the user to pick another.
+     */
+    fun renameBundle(displayName: String) {
+        val bundle = bundleToRename ?: return
+        val newName = displayName.trim().ifEmpty { null }
+        viewModelScope.launch {
+            when (patchBundleRepository.setDisplayName(bundle.uid, newName)) {
+                PatchBundleRepository.DisplayNameUpdateResult.SUCCESS -> {
+                    dismissRenameBundle()
+                    messages.show(R.string.sources_dialog_renamed, newName ?: bundle.name)
+                }
+                PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> dismissRenameBundle()
+                PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE ->
+                    messages.show(R.string.sources_dialog_duplicate_name_error)
+                PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND ->
+                    messages.show(R.string.sources_dialog_missing_error)
+            }
+        }
+    }
+
+    fun dismissRenameBundle() {
+        showRenameBundleDialog = false
+        bundleToRename = null
+    }
+
+    /**
      * Closes every open dialog and sheet so an incoming source confirmation is not stacked behind
      * one, and so the flow the user resumes afterward is rebuilt from the new set of sources.
      */
     private fun dismissOpenDialogs() {
         patchFlow.cancel()
         showAndroid11Dialog = false
-        showRenameBundleDialog = false
-        bundleToRename = null
+        dismissRenameBundle()
         sourceAppsQueue = emptyList()
     }
 
@@ -741,17 +775,7 @@ class HomeViewModel(
         packageName: String,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
-        val appliedPatches = installedAppRepository.getAppliedPatches(app.currentPackageName)
-        installedAppRepository.addOrUpdate(
-            currentPackageName = packageName,
-            originalPackageName = app.originalPackageName,
-            isClone = app.isClone,
-            version = app.version,
-            installType = installType,
-            patchSelection = appliedPatches,
-            selectionPayload = app.selectionPayload,
-            patchedAt = app.patchedAt
-        )
+        installedAppRepository.recordReinstall(app, packageName, installType)
         apps.notifyAppStateChanged(packageName)
         if (packageName != app.currentPackageName) apps.notifyAppStateChanged(app.currentPackageName)
         true
@@ -762,45 +786,9 @@ class HomeViewModel(
         if (installs.isEmpty()) return
 
         viewModelScope.launch {
-            var completed = 0
-            var skipped = 0
-            var unverified = 0
-            for (installed in installs) {
-                runCatching {
-                    when (installed.installType) {
-                        // Unmounting only removes the bind mount and the module files, so it is
-                        // safe even when the underlying package can no longer be identified
-                        InstallType.MOUNT -> {
-                            installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
-                            installedAppRepository.delete(installed)
-                        }
-                        else -> {
-                            if (localApkSources.trackedPatchState(installed) != InstalledPatchState.Patched) {
-                                unverified++
-                                return@runCatching false
-                            }
-                            val removed = withTimeoutOrNull(BATCH_UNINSTALL_TIMEOUT) {
-                                installerManager.uninstallPackage(installed.currentPackageName, installed.installType)
-                                true
-                            } == true
-                            if (!removed) error(app.getString(R.string.uninstall_timeout))
-                        }
-                    }
-                    true
-                }.onSuccess { removed ->
-                    if (removed) completed++ else skipped++
-                    apps.notifyAppStateChanged(installed.currentPackageName)
-                }.onFailure { error ->
-                    skipped++
-                    if (error !is UninstallCancelledException) {
-                        messages.show(R.string.uninstall_app_fail, error.simpleMessage())
-                    }
-                }
-            }
-
-            if (unverified > 0) messages.show(R.string.uninstall_app_unverified)
-            app.batchActionSummary(R.plurals.batch_uninstall_summary, completed, skipped)
-                ?.let { messages.show(it) }
+            batchUninstaller.uninstall(
+                installs.map { BatchUninstaller.Target(it.currentPackageName, it.installType, tracked = it) }
+            ) { target -> apps.notifyAppStateChanged(target.packageName) }
         }
     }
 

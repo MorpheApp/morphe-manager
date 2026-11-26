@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">此源已禁用。其补丁仅列出供参考，不会被应用。</string>
     <string name="sources_management_open_in_browser">在浏览器中打开链接</string>
     <string name="sources_management_report_issue">报告问题</string>
+    <string name="sources_management_export_patches">导出补丁文件</string>
+    <string name="sources_management_export_patches_success">补丁文件已保存</string>
+    <string name="sources_management_export_patches_failed">导出补丁文件失败</string>
     <string name="sources_management_failed_to_open_url">无法打开URL</string>
     <string name="sources_apps">应用</string>
     <string name="sources_apps_description">勾选的应用来自此来源。点击应用以将其移除或恢复，滑动应用以查看其补丁。没有来源的应用将离开主屏幕，除非您对其进行了补丁处理</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">此补丁源被阻止，无法添加</string>
     <string name="sources_management_source_blocked_badge">已阻止</string>
     <string name="sources_management_metadata_unavailable">元数据不可用</string>
+    <string name="sources_management_bundle_missing_badge">未下载</string>
     <string name="sources_management_metadata_unavailable_hint">远程元数据文件不可用。使用已安装的程序包进行修补仍然有效，但此源的自动更新已禁用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">无法下载补丁包。源URL可能不正确或文件不存在</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">无法下载补丁包。源 URL 可能不正确或文件不存在。点击以更改</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">显示名称</string>
     <string name="sources_dialog_rename">重命名补丁配置文件</string>
+    <string name="sources_dialog_renamed">已重命名为 %s</string>
     <string name="sources_dialog_change_url">更改补丁源的下载地址</string>
     <string name="sources_dialog_duplicate_name_error">已存在同名的补丁包</string>
     <string name="sources_dialog_missing_error">无法更新此补丁源。</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">更新 %s</string>
     <string name="sources_dialog_url_valid">有效的仓库或JSON网址</string>
-    <string name="sources_dialog_url_invalid">URL 必须指向 GitHub/GitLab 仓库或 .json 文件</string>
+    <string name="sources_dialog_url_invalid">URL 必须指向 GitHub、GitLab 或 Codeberg 仓库或 .json 文件</string>
     <string name="sources_dialog_preinstalled">预安装</string>
     <string name="sources_dialog_community">社区补丁</string>
     <string name="sources_dialog_choose_apps">选择应用</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">更改应用链接失败</string>
     <string name="app_links_all_verified">所有受支持的链接均已配置为在此应用中打开</string>
     <string name="app_links_fix">修复链接</string>
+    <string name="app_links_allow_shizuku">允许 Shizuku 访问</string>
+    <string name="app_links_shizuku_permission_hint">允许 Morphe 使用 Shizuku 为您开启这些链接</string>
+    <string name="app_links_shizuku_not_running_hint">启动 Shizuku 以允许 Morphe 为您开启这些链接</string>
     <string name="configure">配置</string>
     <string name="patcher_rename_title">这将安装一个克隆</string>
     <string name="patcher_rename_description">补丁以它们自己的包名构建了这个应用，因此安装它会添加一个克隆，与 &lt;b&gt;%s&lt;/b&gt; 并列，而不是更新它。</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">保存修补后的应用失败</string>
     <string name="plugin_activity_dialog_body">需要用户交互才能继续使用此插件</string>
     <string name="patcher_process_killed_message">系统在修补程序完成之前停止，通常是为了释放内存。关闭其他应用并重试</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe 在补丁更新完成前已关闭，因此没有任何内容被更新。请重试</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">补丁程序在完成前崩溃。如果再次发生，请关闭 %1$s 并附带日志报告问题</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">小游戏</string>
     <string name="mini_games_description">利用碎片时间快速游玩</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">游戏</string>
     <string name="mini_game_score">得分 %s</string>
     <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新的记录！</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">显示全部（%s）</string>
     <string name="changelog_show_less">显示更少</string>
     <string name="no_network_toast">无可用网络连接</string>
+    <string name="download_waiting_for_network">等待网络</string>
     <string name="update_available">有可用更新</string>
     <string name="ready_to_install_update">准备安装更新</string>
     <string name="update_completed">更新已安装</string>

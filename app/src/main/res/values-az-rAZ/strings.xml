@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Bu mənbə qapadılıb. Onun yamaqları məlumat üçün siyahıya alınıb və tətbiq olunmur</string>
     <string name="sources_management_open_in_browser">Brauzerdə aç</string>
     <string name="sources_management_report_issue">Problemi bildir</string>
+    <string name="sources_management_export_patches">Yamaqlar faylını ixrac et</string>
+    <string name="sources_management_export_patches_success">Yamaqlar faylı saxlanıldı</string>
+    <string name="sources_management_export_patches_failed">Yamaqlar faylını ixrac etmək olmadı</string>
     <string name="sources_management_failed_to_open_url">URL açmaq uğursuzdu</string>
     <string name="sources_apps">Tətbiqlər</string>
     <string name="sources_apps_description">İşarələnmiş tətbiqlər bu mənbədən gəlir. Tətbiqi çıxarmaq və ya geri qaytarmaq üçün toxun, yamaqlarını görmək üçün sürüşdür. Mənbəsiz tətbiq, yamaqlamadığınız təqdirdə, əsas səhifədən çıxır</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Bu yamaq mənbəyi bloklanıb və əlavə edilə bilməz</string>
     <string name="sources_management_source_blocked_badge">Bloklanıb</string>
     <string name="sources_management_metadata_unavailable">Əlavə Məlumat Yoxdur</string>
+    <string name="sources_management_bundle_missing_badge">Yüklənilməyib</string>
     <string name="sources_management_metadata_unavailable_hint">Uzaq üst məlumatı faylı mövcud deyil. Quraşdırılan paketlə yamaqlanma hələ də işləyir, lakin bu mənbə üçün birbaşa yenilənmə qapadılıb</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Yamaq paketin yükləmək olmadı. Mənbə URL-si səhv ola bilər və ya fayl mövcud deyil. Dəyişdirmək üçün toxun</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Görünmə adı</string>
     <string name="sources_dialog_rename">Yamaq mənbəsin təkrar adlandır</string>
+    <string name="sources_dialog_renamed">Adını %s kimi adlandırdı</string>
     <string name="sources_dialog_change_url">Yamaq mənbəyinin haradan yüklənildiyini dəyişdir</string>
     <string name="sources_dialog_duplicate_name_error">Bu adla yamaq mənbəsi artıq var</string>
     <string name="sources_dialog_missing_error">Bu yamaq mənbəsin yeniləmək mümkün olmadı</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Yeniləmələr %s</string>
     <string name="sources_dialog_url_valid">Etibarlı depo və ya JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab depo və ya .json faylın göstərməlidir</string>
+    <string name="sources_dialog_url_invalid">URL GitHub, GitLab və ya Codeberg depo yaxud .json faylın göstərməlidir</string>
     <string name="sources_dialog_preinstalled">İlkin quraşdırılan</string>
     <string name="sources_dialog_community">İcma yamaqları</string>
     <string name="sources_dialog_choose_apps">Tətbiqləri seç</string>
@@ -576,6 +581,9 @@ APK-nı haradan götürəcəyinizi seçin"</string>
     <string name="app_links_change_failed">Tətbiq linklərini dəyişdirmək olmadı</string>
     <string name="app_links_all_verified">Bütün dəstəklənən keçidlər bu tətbiqdə açılmaq üçün tənzimlənib</string>
     <string name="app_links_fix">Linkləri düzəlt</string>
+    <string name="app_links_allow_shizuku">Shizuku girişinə icazə ver</string>
+    <string name="app_links_shizuku_permission_hint">Morphe-yə bu linkləri sizin üçün açması məqsədilə Shizuku istifadə etməyə icazə ver</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe-nin bu linkləri sizin üçün aktivləşdirməsinə icazə vermək məqsədilə Shizuku-nu başlat</string>
     <string name="configure">Tənzimlə</string>
     <string name="patcher_rename_title">Bu dublikatı quraşdıracaq</string>
     <string name="patcher_rename_description">Yamaqlar bu tətbiqi öz paket adı altında qurdu, bu səbəbdən quraşdırmaq onu yeniləmək əvəzinə &lt;b&gt;%s&lt;/b&gt; ilə birlikdə dublikatını əlavə edir</string>
@@ -745,6 +753,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="patched_app_save_failed_toast">Yamaqlanan tətbiqi saxlamaq olmadı</string>
     <string name="plugin_activity_dialog_body">Bu qoşmayla davam etmək üçün istifadəçi reaksiyası tələb olunur</string>
     <string name="patcher_process_killed_message">Sistem yamaqlayıcını işini bitirmədən dayandırdı, bu adətən yaddaşı boşaltmaq üçün olur. Digər tətbiqləri bağla və təkrar cəhd et</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe yamaqlama bitmədən bağlanmışdı, ona görə də heç nə yamaqlanmadı. Yenidən cəhd et</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Yamaqlayıcı bitmədən çökdü. Bu hal təkrarlanarsa, %1$s -i qapat və log qeydi ilə birlikdə problemi bildir</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini oyunlar</string>
     <string name="mini_games_description">Boş vaxtı keçirmək üçün sürətli oyunlar</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Oyunlar</string>
     <string name="mini_game_score">Hesab %s</string>
     <string name="mini_game_best">Ən yaxşı %s</string>
     <string name="mini_game_new_record">Yeni rekord!</string>
@@ -1560,6 +1572,7 @@ Təfərrüatlar: %2$s"</string>
     <string name="changelog_show_all">Hamısını göstər (%s)</string>
     <string name="changelog_show_less">Daha az göstər</string>
     <string name="no_network_toast">İnternet bağlantısı əlçatan deyil</string>
+    <string name="download_waiting_for_network">Şəbəkə gözlənilir</string>
     <string name="update_available">Yenilənmə mövcuddur</string>
     <string name="ready_to_install_update">Yenilənmə quraşdırılmağa hazırdır</string>
     <string name="update_completed">Yenilənmə quraşdırıldı</string>

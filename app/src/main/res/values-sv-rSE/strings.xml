@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Den här källan är inaktiverad. Dess tillägg listas som referens och tillämpas inte</string>
     <string name="sources_management_open_in_browser">Öppna i webbläsare</string>
     <string name="sources_management_report_issue">Rapportera ett problem</string>
+    <string name="sources_management_export_patches">Exportera patch-fil</string>
+    <string name="sources_management_export_patches_success">Patch-fil sparad</string>
+    <string name="sources_management_export_patches_failed">Misslyckades med att exportera patch-fil</string>
     <string name="sources_management_failed_to_open_url">Det gick inte att öppna webbadressen</string>
     <string name="sources_apps">Appar</string>
     <string name="sources_apps_description">De markerade apparna kommer från den här källan. Tryck på en app för att utesluta den eller inkludera den igen, svep på den för att se dess modifieringar. En app tas bort från startskärmen om ingen källa inkluderar den, förutom om du har modifierat den</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Den här tilläggskällan är blockerad och kan inte läggas till</string>
     <string name="sources_management_source_blocked_badge">Blockerad</string>
     <string name="sources_management_metadata_unavailable">Metadata är inte tillgängliga</string>
+    <string name="sources_management_bundle_missing_badge">Ej nedladdad</string>
     <string name="sources_management_metadata_unavailable_hint">Fjärrfilen för metadata är inte tillgänglig. Modifiering med det installerade arkivet fungerar fortfarande, men automatisk uppdatering är inaktiverad för den här källan</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Det gick inte att ladda ned tilläggsarkivet. Källadressen kan vara felaktig eller så finns inte filen. Tryck för att ändra den</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Visningsnamn</string>
     <string name="sources_dialog_rename">Byt namn på tilläggskällan</string>
+    <string name="sources_dialog_renamed">Omdöpt till %s</string>
     <string name="sources_dialog_change_url">Ändra var tilläggskällan laddas ned ifrån</string>
     <string name="sources_dialog_duplicate_name_error">Det finns redan en tilläggskälla med det här namnet</string>
     <string name="sources_dialog_missing_error">Det gick inte att uppdatera den här tilläggskällan</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uppdaterar %s</string>
     <string name="sources_dialog_url_valid">Giltig lagringsplats eller JSON-adress</string>
-    <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-/GitLab-lagringsplats eller .json-fil</string>
+    <string name="sources_dialog_url_invalid">Webbadressen måste peka på en GitHub-, GitLab- eller Codeberg-lagringsplats eller .json-fil</string>
     <string name="sources_dialog_preinstalled">Förinstallerad</string>
     <string name="sources_dialog_community">Tillägg från communityn</string>
     <string name="sources_dialog_choose_apps">Välj appar</string>
@@ -576,6 +581,9 @@ För bästa resultat rekommenderar den här appen att du modifierar en &lt;b&gt;
     <string name="app_links_change_failed">Misslyckades med att ändra applänkar</string>
     <string name="app_links_all_verified">Alla stödda länkar är konfigurerade för att öppnas i den här appen</string>
     <string name="app_links_fix">Åtgärda länkar</string>
+    <string name="app_links_allow_shizuku">Tillåt åtkomst för Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Tillåt Morphe att använda Shizuku för att aktivera dessa länkar åt dig</string>
+    <string name="app_links_shizuku_not_running_hint">Starta Shizuku så att Morphe kan aktivera dessa länkar åt dig</string>
     <string name="configure">Konfigurera</string>
     <string name="patcher_rename_title">Detta installerar en klon</string>
     <string name="patcher_rename_description">Tilläggen byggde den här appen under ett eget paketnamn, så om den installeras läggs en klon till bredvid &lt;b&gt;%s&lt;/b&gt; istället för att uppdatera den</string>
@@ -745,6 +753,8 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="patched_app_save_failed_toast">Det gick inte att spara den modifierade appen</string>
     <string name="plugin_activity_dialog_body">Användarinteraktion krävs för att fortsätta med den här insticksmodulen</string>
     <string name="patcher_process_killed_message">Systemet stoppade modifieringsverktyget innan det var klart, oftast för att frigöra minne. Stäng andra appar och försök igen</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe stängdes innan patchningen var klar, så inget patchades. Försök igen</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Modifieringsverktyget kraschade innan det var klart. Om det händer igen, inaktivera %1$s och rapportera problemet med loggen</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <!-- Mini-games -->
     <string name="mini_games">Minispel</string>
     <string name="mini_games_description">Snabba spel för att fördriva tiden</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Spel</string>
     <string name="mini_game_score">Poäng %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nytt rekord!</string>
@@ -1561,6 +1573,7 @@ Information: %2$s"</string>
     <string name="changelog_show_all">Visa alla (%s)</string>
     <string name="changelog_show_less">Visa mindre</string>
     <string name="no_network_toast">Ingen internetanslutning är tillgänglig</string>
+    <string name="download_waiting_for_network">Väntar på nätverk</string>
     <string name="update_available">En uppdatering är tillgänglig</string>
     <string name="ready_to_install_update">Redo att installera uppdateringen</string>
     <string name="update_completed">Uppdatering installerades</string>

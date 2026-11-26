@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">See allikas on keelatud. Selle paigad on loetletud viiteks ega rakendu</string>
     <string name="sources_management_open_in_browser">Ava brauseris</string>
     <string name="sources_management_report_issue">Teata probleemist</string>
+    <string name="sources_management_export_patches">Eksporteeri paigade fail</string>
+    <string name="sources_management_export_patches_success">Paigade fail on salvestatud</string>
+    <string name="sources_management_export_patches_failed">Paigade faili eksportimine nurjus</string>
     <string name="sources_management_failed_to_open_url">URL-i avamine ebaõnnestus</string>
     <string name="sources_apps">Rakendused</string>
     <string name="sources_apps_description">Märgitud rakendused tulevad sellest allikast. Puuduta rakendust, et see eemaldada või tagasi tuua, pühki seda, et näha selle paigandusi. Rakendus kaob avalehelt, kui ükski allikas seda ei paku, välja arvatud juhul, kui oled seda paiganud</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">See paigaallikas on blokeeritud ja seda ei saa lisada</string>
     <string name="sources_management_source_blocked_badge">Blokeeritud</string>
     <string name="sources_management_metadata_unavailable">Metaandmed puuduvad</string>
+    <string name="sources_management_bundle_missing_badge">Ei ole allalaaditud</string>
     <string name="sources_management_metadata_unavailable_hint">Kaugmetaandmete fail ei ole saadaval. Paigaldatud paketiga paikamine toimib endiselt, kuid selle allika automaatne värskendamine on keelatud</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paigapaketti ei õnnestunud alla laadida. Allika URL võib olla vale või fail puudub</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paigapaketti ei õnnestunud alla laadida. Allika URL võib olla vale või fail puudub. Muutmiseks puuduta</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Kuvatav nimi</string>
     <string name="sources_dialog_rename">Nimeks patchi allika ümbernimetamine</string>
+    <string name="sources_dialog_renamed">Nimetatud ümber nimeks %s</string>
     <string name="sources_dialog_change_url">Muuda paigaallika allalaadimiskohta</string>
     <string name="sources_dialog_duplicate_name_error">Selle nimega paigaallikas on juba olemas</string>
     <string name="sources_dialog_missing_error">Seda paigaallikat ei õnnestunud uuendada</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uuendused %s</string>
     <string name="sources_dialog_url_valid">Kehtiv hoidla või JSON-URL</string>
-    <string name="sources_dialog_url_invalid">URL peab viitama GitHubi/GitLabi hoidlale või .json failile</string>
+    <string name="sources_dialog_url_invalid">URL peab viima GitHubi, GitLabi või Codebergi hoidlale või .json failile</string>
     <string name="sources_dialog_preinstalled">Eelpaigaldatud</string>
     <string name="sources_dialog_community">Kogukonna paigad</string>
     <string name="sources_dialog_choose_apps">Vali rakendused</string>
@@ -576,6 +581,9 @@ Parimate tulemuste saamiseks soovitab see rakendus kasutada &lt;b&gt;täielikku 
     <string name="app_links_change_failed">Rakenduse linkide muutmine ebaõnnestus</string>
     <string name="app_links_all_verified">Kõik toetatud lingid on seadistatud avanema selles rakenduses</string>
     <string name="app_links_fix">Paranda lingid</string>
+    <string name="app_links_allow_shizuku">Luba Shizuku juurdepääs</string>
+    <string name="app_links_shizuku_permission_hint">Luba Morphel kasutada Shizukut, et need lingid sinu jaoks sisse lülitada</string>
+    <string name="app_links_shizuku_not_running_hint">Käivita Shizuku, et Morphe saaks need lingid sinu jaoks sisse lülitada</string>
     <string name="configure">Seadista</string>
     <string name="patcher_rename_title">See installib klooni</string>
     <string name="patcher_rename_description">Paigad ehitasid selle rakenduse oma paketinimega, seega selle installimine lisab klooni &lt;b&gt;%s&lt;/b&gt; kõrvale, mitte ei uuenda seda</string>
@@ -745,6 +753,8 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <string name="patched_app_save_failed_toast">Paiatud rakenduse salvestamine ebaõnnestus</string>
     <string name="plugin_activity_dialog_body">Selle lisamooduliga jätkamiseks on vaja kasutaja sekkumist</string>
     <string name="patcher_process_killed_message">Süsteem katkestas paikamise enne lõppemist, tavaliselt mälu vabastamiseks. Sulge teised rakendused ja proovi uuesti</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe suletagi enne paikuletamise lõpust, seega ei paigutatud midagi. Proovige uuesti</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Paikaja jooksis enne lõpetamist kokku. Kui see kordub, lülita %1$s välja ja teata veast koos logifailiga</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <!-- Mini-games -->
     <string name="mini_games">Minimängud</string>
     <string name="mini_games_description">Kiired mängud vaba minuti möödastamiseks</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Mängud</string>
     <string name="mini_game_score">Tulemus %s</string>
     <string name="mini_game_best">Parim %s</string>
     <string name="mini_game_new_record">Uus rekord!</string>
@@ -1561,6 +1573,7 @@ Piltide mõõtmed peavad olema järgmised:
     <string name="changelog_show_all">Näita kõiki (%s)</string>
     <string name="changelog_show_less">Näita vähem</string>
     <string name="no_network_toast">Internetiühendus puudub</string>
+    <string name="download_waiting_for_network">Oodatakse võrgühendust</string>
     <string name="update_available">Uuendus on saadaval</string>
     <string name="ready_to_install_update">Valmis uuenduse paigaldamiseks</string>
     <string name="update_completed">Uuendus on installitud</string>

@@ -120,6 +120,22 @@ class InstalledAppRepository(
             .associate { it.bundleUid to it.version }
 
     /**
+     * Records [app] installed again from its saved APK, as [packageName] by [installType], with
+     * the patches and options it was built with, since the APK is the same build.
+     */
+    suspend fun recordReinstall(app: InstalledApp, packageName: String, installType: InstallType) =
+        addOrUpdate(
+            currentPackageName = packageName,
+            originalPackageName = app.originalPackageName,
+            isClone = app.isClone,
+            version = app.version,
+            installType = installType,
+            patchSelection = getAppliedPatches(app.currentPackageName),
+            selectionPayload = app.selectionPayload,
+            patchedAt = app.patchedAt
+        )
+
+    /**
      * Records an install under the package name it ended up with.
      *
      * A run that renamed the package describes a second install rather than a replacement: the
@@ -290,9 +306,6 @@ class InstalledAppRepository(
             }
             deletedEverything
         }
-
-    suspend fun deleteSavedPatchedApk(installedApp: InstalledApp) =
-        deleteSavedPatchedApks(listOf(installedApp))
 
     /**
      * Deletes patched APKs no record claims, as the listing is built from records and could never offer them.

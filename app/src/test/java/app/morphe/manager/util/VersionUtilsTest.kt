@@ -117,6 +117,10 @@ class VersionUtilsTest {
             "https://gitlab.com/group/project/-/releases/v1.25.0",
             releasePageUrl("https://gitlab.com/group/project", "v1.25.0")
         )
+        assertEquals(
+            "https://codeberg.org/owner/repo/releases/tag/v1.25.0",
+            releasePageUrl("https://codeberg.org/owner/repo", "1.25.0")
+        )
     }
 
     @Test

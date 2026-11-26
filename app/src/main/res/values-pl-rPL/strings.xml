@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">To źródło jest wyłączone. Jego modyfikacje są wyświetlane w celach informacyjnych i nie są stosowane</string>
     <string name="sources_management_open_in_browser">Otwórz w przeglądarce</string>
     <string name="sources_management_report_issue">Zgłoś problem</string>
+    <string name="sources_management_export_patches">Eksportuj plik modyfikacji</string>
+    <string name="sources_management_export_patches_success">Zapisano plik modyfikacji</string>
+    <string name="sources_management_export_patches_failed">Nie udało się wyeksportować pliku modyfikacji</string>
     <string name="sources_management_failed_to_open_url">Nie udało się otworzyć strony</string>
     <string name="sources_apps">Aplikacje</string>
     <string name="sources_apps_description">Zaznaczone aplikacje pochodzą z tego źródła. Dotknij aplikacji, aby ją pominąć lub przywrócić, albo przesuń ją palcem, aby zobaczyć jej modyfikacje. Aplikacja, której nie dostarcza żadne źródło, znika z ekranu głównego, chyba że została przez Ciebie zmodyfikowana</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">To źródło modyfikacji jest zablokowane i nie może zostać dodane</string>
     <string name="sources_management_source_blocked_badge">Zablokowane</string>
     <string name="sources_management_metadata_unavailable">Brak metadanych</string>
+    <string name="sources_management_bundle_missing_badge">Nie pobrano</string>
     <string name="sources_management_metadata_unavailable_hint">Zdalny plik metadanych jest niedostępny. Modyfikowanie przy użyciu zainstalowanego pakietu nadal działa, ale automatyczna aktualizacja dla tego źródła została wyłączona</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Nie udało się pobrać pakietu modyfikacji. Adres źródła może być nieprawidłowy lub plik nie istnieje. Dotknij, aby go zmienić</string>
@@ -218,6 +222,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nazwa wyświetlana</string>
     <string name="sources_dialog_rename">Zmień nazwę źródła modyfikacji</string>
+    <string name="sources_dialog_renamed">Zmieniono nazwę na %s</string>
     <string name="sources_dialog_change_url">Zmień adres pobierania źródła modyfikacji</string>
     <string name="sources_dialog_duplicate_name_error">Źródło modyfikacji o tej nazwie już istnieje</string>
     <string name="sources_dialog_missing_error">Nie można zaktualizować tego źródła modyfikacji</string>
@@ -233,7 +238,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Aktualizuje %s</string>
     <string name="sources_dialog_url_valid">Prawidłowy adres repozytorium lub pliku JSON</string>
-    <string name="sources_dialog_url_invalid">Adres musi wskazywać na repozytorium GitHub/GitLab lub plik .json</string>
+    <string name="sources_dialog_url_invalid">Adres URL musi wskazywać na repozytorium GitHub, GitLab lub Codeberg albo plik .json</string>
     <string name="sources_dialog_preinstalled">Wbudowane</string>
     <string name="sources_dialog_community">Modyfikacje społeczności</string>
     <string name="sources_dialog_choose_apps">Wybierz aplikacje</string>
@@ -391,7 +396,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="home_dialog_unsupported_version_dialog_proceed">Kontynuuj mimo to</string>
     <string name="home_dialog_unsupported_version_compatible_versions">Obsługiwane wersje:</string>
     <string name="home_dialog_unsupported_version_unsupported_label">Nieobsługiwana</string>
-    <string name="home_version_copy">Kopiuj wersję</string>
+    <string name="home_version_copy">Skopiuj wersję</string>
     <string name="home_version_copied">Skopiowano wersję</string>
     <!-- "Build" here refers to a specific compiled version of the app (versionCode) -->
     <string name="home_dialog_unsupported_version_build">Kompilacja %s</string>
@@ -454,7 +459,7 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="adaptive_icon_guide_png_title">Użyj pliku PNG z przezroczystym tłem</string>
     <string name="adaptive_icon_guide_png_body">Najlepiej sprawdza się logo na przezroczystym tle, z kolorem tła wybranym poniżej. Obraz bez przezroczystości wypełni całą ikonę, a ikony z motywem i powiadomień zachowają wtedy logo Morphe.</string>
     <string name="adaptive_icon_guide_safe_zones_title">Bezpieczne strefy</string>
-    <string name="adaptive_icon_guide_safe_zones_body">Kontur pokazuje kształt ikony w Twoim launcherze, a wszystko poza nim jest odcinane. Inne launchery używają innych kształtów, dlatego zachowaj ważne szczegóły wewnątrz przerywanego okręgu, który mieści się w każdym z nich.</string>
+    <string name="adaptive_icon_guide_safe_zones_body">Kontur wyświetla kształt ikony w Twoim launcherze, a wszystko poza nim jest odcinane. Inne launchery używają innych kształtów, dlatego zachowaj ważne szczegóły wewnątrz przerywanego okręgu, który mieści się w każdym z nich.</string>
     <string name="adaptive_icon_guide_notification_title">Ikona powiadomień</string>
     <string name="adaptive_icon_guide_notification_body">Wycinana z widocznej części obrazu i dopasowana rozmiarem do innych ikon paska stanu, niezależnie od marginesów w pliku. Dostosuj ją za pomocą suwaka pod podglądem. Android wyświetla ją w jednym kolorze.</string>
     <string name="adaptive_icon_guide_monochrome_title">Ikona z motywem</string>
@@ -577,6 +582,9 @@ Aby uzyskać najlepszy efekt, zalecamy zmodyfikowanie &lt;b&gt;pełnego pliku AP
     <string name="app_links_change_failed">Nie udało się zmienić linków aplikacji</string>
     <string name="app_links_all_verified">Wszystkie obsługiwane linki są skonfigurowane tak, aby otwierać się w tej aplikacji</string>
     <string name="app_links_fix">Napraw linki</string>
+    <string name="app_links_allow_shizuku">Zezwól na dostęp do Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Zezwól Morphe na korzystanie z Shizuku, aby włączyć te linki za Ciebie</string>
+    <string name="app_links_shizuku_not_running_hint">Uruchom Shizuku, aby Morphe mogło włączyć te linki za Ciebie</string>
     <string name="configure">Konfiguruj</string>
     <string name="patcher_rename_title">To zainstaluje klona</string>
     <string name="patcher_rename_description">Modyfikacje zbudowały tę aplikację pod własną nazwą pakietu, więc jej instalacja doda klona obok &lt;b&gt;%s&lt;/b&gt; zamiast ją aktualizować</string>
@@ -746,6 +754,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="patched_app_save_failed_toast">Nie udało się zapisać zmodyfikowanej aplikacji</string>
     <string name="plugin_activity_dialog_body">Wymagana jest interakcja użytkownika, aby kontynuować działanie tej wtyczki</string>
     <string name="patcher_process_killed_message">System zatrzymał proces modyfikowania przed jego zakończeniem, zazwyczaj w celu zwolnienia pamięci. Zamknij inne aplikacje i spróbuj ponownie</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe zostało zamknięte przed zakończeniem modyfikowania, więc nic nie zostało zmodyfikowane. Spróbuj ponownie</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Proces modyfikowania uległ awarii przed zakończeniem pracy. Jeśli sytuacja się powtórzy, wyłącz opcję %1$s i zgłoś problem, dołączając dziennik zdarzeń</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +778,8 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <!-- Mini-games -->
     <string name="mini_games">Minigry</string>
     <string name="mini_games_description">Szybkie gry na wolną chwilę</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Gry</string>
     <string name="mini_game_score">Wynik %s</string>
     <string name="mini_game_best">Rekord %s</string>
     <string name="mini_game_new_record">Nowy rekord!</string>
@@ -1226,7 +1238,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="settings_system_export_debug_logs_export_failed">Nie udało się wyeksportować logów</string>
     <string name="settings_system_export_debug_logs_export_success">Wyeksportowano logi</string>
     <!-- Settings - System Tab - Files & Storage Section -->
-    <string name="settings_system_apks_size">Całkowity rozmiar: %s</string>
+    <string name="settings_system_apks_size">Łączny rozmiar: %s</string>
     <string name="settings_system_apks_delete_all_confirm">Spowoduje to trwałe usunięcie zapisanych plików APK</string>
     <string name="settings_system_apks_delete_selected_title">Usunąć wybrane pliki APK?</string>
     <string name="settings_system_apks_delete_selected_confirm">Spowoduje to trwałe usunięcie wybranych plików APK</string>
@@ -1478,7 +1490,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="more_options">Więcej opcji</string>
     <string name="import_">Importuj</string>
     <string name="export">Eksportuj</string>
-    <string name="copy">Kopiuj</string>
+    <string name="copy">Skopiuj</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="download">Pobierz</string>
     <string name="less">Mniej</string>
@@ -1562,6 +1574,7 @@ Wymagane są następujące wymiary obrazów:
     <string name="changelog_show_all">Pokaż wszystkie (%s)</string>
     <string name="changelog_show_less">Pokaż mniej</string>
     <string name="no_network_toast">Brak połączenia z internetem</string>
+    <string name="download_waiting_for_network">Oczekiwanie na sieć</string>
     <string name="update_available">Dostępna jest aktualizacja</string>
     <string name="ready_to_install_update">Gotowy do zainstalowania aktualizacji</string>
     <string name="update_completed">Zainstalowano aktualizację</string>

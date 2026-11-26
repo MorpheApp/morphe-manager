@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Nguồn này đã bị tắt. Các bản vá của nó được liệt kê để tham khảo và không được áp dụng</string>
     <string name="sources_management_open_in_browser">Mở trong trình duyệt</string>
     <string name="sources_management_report_issue">Báo cáo sự cố</string>
+    <string name="sources_management_export_patches">Xuất tệp vá</string>
+    <string name="sources_management_export_patches_success">Đã lưu tệp vá</string>
+    <string name="sources_management_export_patches_failed">Không thể xuất tệp vá</string>
     <string name="sources_management_failed_to_open_url">Không thể mở URL</string>
     <string name="sources_apps">Ứng dụng</string>
     <string name="sources_apps_description">Các ứng dụng được đánh dấu đến từ nguồn này. Nhấn vào một ứng dụng để loại bỏ hoặc đưa nó trở lại, vuốt ứng dụng đó để xem các bản vá của nó. Một ứng dụng không có nguồn sẽ rời khỏi màn hình chính, trừ khi bạn đã vá nó</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Không thể thêm nguồn vá này vì nó bị chặn</string>
     <string name="sources_management_source_blocked_badge">Bị chặn</string>
     <string name="sources_management_metadata_unavailable">Không có metadata</string>
+    <string name="sources_management_bundle_missing_badge">Chưa tải xuống</string>
     <string name="sources_management_metadata_unavailable_hint">Không thể truy cập tệp metadata từ máy chủ. Bạn vẫn có thể vá bằng gói ứng dụng đã cài, nhưng tính năng tự động cập nhật sẽ bị tắt cho nguồn này</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Không thể tải gói vá. URL nguồn có thể không đúng hoặc file không tồn tại. Nhấn để thay đổi</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Tên hiển thị</string>
     <string name="sources_dialog_rename">Đổi tên nguồn vá</string>
+    <string name="sources_dialog_renamed">Đã đổi tên thành %s</string>
     <string name="sources_dialog_change_url">Thay đổi nơi tải xuống nguồn gói vá</string>
     <string name="sources_dialog_duplicate_name_error">Đã tồn tại nguồn vá có tên này rồi</string>
     <string name="sources_dialog_missing_error">Không thể cập nhật nguồn vá này</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Cập nhật %s</string>
     <string name="sources_dialog_url_valid">URL repo hoặc JSON hợp lệ</string>
-    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub/GitLab hoặc tệp .json</string>
+    <string name="sources_dialog_url_invalid">URL phải trỏ đến kho lưu trữ GitHub, GitLab hoặc Codeberg hoặc tệp .json</string>
     <string name="sources_dialog_preinstalled">Được cài đặt sẵn</string>
     <string name="sources_dialog_community">Các bản vá cộng đồng</string>
     <string name="sources_dialog_choose_apps">Chọn ứng dụng</string>
@@ -576,6 +581,9 @@ Tốt nhất bạn nên chuyển sang &lt;b&gt;APK đầy đủ&lt;/b&gt; để 
     <string name="app_links_change_failed">Thay đổi liên kết ứng dụng thất bại</string>
     <string name="app_links_all_verified">Tất cả các liên kết được hỗ trợ đều được cấu hình để mở trong ứng dụng này</string>
     <string name="app_links_fix">Sửa liên kết</string>
+    <string name="app_links_allow_shizuku">Cho phép Shizuku truy cập</string>
+    <string name="app_links_shizuku_permission_hint">Cho phép Morphe sử dụng Shizuku để bật các liên kết này cho bạn</string>
+    <string name="app_links_shizuku_not_running_hint">Khởi động Shizuku để Morphe có thể bật các liên kết này cho bạn</string>
     <string name="configure">Cấu hình</string>
     <string name="patcher_rename_title">Cài đặt như bản sao</string>
     <string name="patcher_rename_description">Các bản vá sẽ dựng ứng dụng với một tên gói khác, vì vậy khi cài đặt sẽ có thêm một ứng dụng khác cùng với &lt;b&gt;%s&lt;/b&gt; thay vì cập nhật lên</string>
@@ -745,6 +753,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="patched_app_save_failed_toast">Không thể lưu ứng dụng đã vá</string>
     <string name="plugin_activity_dialog_body">Bạn vẫn cần tự thao tác để tải ứng dụng</string>
     <string name="patcher_process_killed_message">Hệ thống đã dừng trình vá trước khi hoàn tất, thường là để giải phóng bộ nhớ. Đóng các ứng dụng khác và thử lại</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe đã bị đóng trước khi hoàn tất vá lỗi, vì vậy không có nội dung nào được vá. Hãy thử lại</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Trình vá đã bị sự cố trước khi hoàn tất. Nếu điều này xảy ra lần nữa, hãy tắt %1$s và báo cáo sự cố cùng với nhật ký</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <!-- Mini-games -->
     <string name="mini_games">Mini-game</string>
     <string name="mini_games_description">Các trò chơi nhanh để giải trí trong lúc rảnh rỗi</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Trò chơi</string>
     <string name="mini_game_score">Điểm %s</string>
     <string name="mini_game_best">Cao nhất %s</string>
     <string name="mini_game_new_record">Kỷ lục mới!</string>
@@ -1564,6 +1576,7 @@ Chi tiết: %2$s"</string>
     <string name="changelog_show_all">Hiện tất cả (%s)</string>
     <string name="changelog_show_less">Thu</string>
     <string name="no_network_toast">Không có kết nối mạng</string>
+    <string name="download_waiting_for_network">Đang chờ kết nối mạng</string>
     <string name="update_available">Đã có bản cập nhật mới</string>
     <string name="ready_to_install_update">Sẵn sàng cài đặt bản cập nhật</string>
     <string name="update_completed">Đã cài đặt bản cập nhật</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Deze bron is uitgeschakeld. De patches ervan worden ter referentie weergegeven en worden niet toegepast.</string>
     <string name="sources_management_open_in_browser">Openen in browser</string>
     <string name="sources_management_report_issue">Een probleem melden</string>
+    <string name="sources_management_export_patches">Exporteer patches-bestand</string>
+    <string name="sources_management_export_patches_success">Patches-bestand opgeslagen</string>
+    <string name="sources_management_export_patches_failed">Kan patches-bestand niet exporteren</string>
     <string name="sources_management_failed_to_open_url">Kan URL niet openen</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Aangevinkte apps komen uit deze bron. Tik op een app om deze weg te laten of terug te brengen, veeg over een app om de patches ervan te zien. Een app zonder bron verlaat het startscherm, tenzij je deze hebt gepatcht</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Deze patchbron is geblokkeerd en kan niet worden toegevoegd</string>
     <string name="sources_management_source_blocked_badge">Geblokkeerd</string>
     <string name="sources_management_metadata_unavailable">Metadata niet beschikbaar</string>
+    <string name="sources_management_bundle_missing_badge">Niet gedownload</string>
     <string name="sources_management_metadata_unavailable_hint">Het externe metadabestand is niet beschikbaar. Patchen met het geïnstalleerde bundel werkt nog steeds, maar automatische update is uitgeschakeld voor deze bron</string>
     <string name="sources_management_metadata_unavailable_hint_missing">De patch-bundel kon niet worden gedownload. De bron-URL is mogelijk onjuist of het bestand bestaat niet</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">De patchbundel kon niet worden gedownload. De bron-URL is mogelijk onjuist of het bestand bestaat niet. Tik om deze te wijzigen</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Weergavenaam</string>
     <string name="sources_dialog_rename">Patchbron hernoemen</string>
+    <string name="sources_dialog_renamed">Hernoemd naar %s</string>
     <string name="sources_dialog_change_url">Wijzig de locatie waar de patchbron wordt gedownload</string>
     <string name="sources_dialog_duplicate_name_error">Er bestaat al een patchbron met deze naam</string>
     <string name="sources_dialog_missing_error">Kon deze patchbron niet bijwerken.</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Vervangt %s</string>
     <string name="sources_dialog_url_valid">Geldige repository of JSON-URL</string>
-    <string name="sources_dialog_url_invalid">De URL moet verwijzen naar een GitHub/GitLab-repo of een .json-bestand</string>
+    <string name="sources_dialog_url_invalid">URL moet verwijzen naar een GitHub-, GitLab- of Codeberg-repo of .json-bestand</string>
     <string name="sources_dialog_preinstalled">Voorgeïnstalleerd</string>
     <string name="sources_dialog_community">Community-patches</string>
     <string name="sources_dialog_choose_apps">Kies apps</string>
@@ -576,6 +581,9 @@ Voor de beste resultaten beveelt deze app aan om een &lt;b&gt;volledig APK&lt;/b
     <string name="app_links_change_failed">Het wijzigen van app-links is mislukt</string>
     <string name="app_links_all_verified">Alle ondersteunde links zijn geconfigureerd om in deze app te worden geopend</string>
     <string name="app_links_fix">Links herstellen</string>
+    <string name="app_links_allow_shizuku">Sta toegang tot Shizuku toe</string>
+    <string name="app_links_shizuku_permission_hint">Sta Morphe toe om Shizuku te gebruiken om deze links voor je in te schakelen</string>
+    <string name="app_links_shizuku_not_running_hint">Start Shizuku zodat Morphe deze links voor je kan inschakelen</string>
     <string name="configure">Configureren</string>
     <string name="patcher_rename_title">Dit zal een kloon installeren</string>
     <string name="patcher_rename_description">De patches hebben deze app gebouwd onder een eigen pakketnaam, dus het installeren voegt een kloon toe naast &lt;b&gt;%s&lt;/b&gt; in plaats van het bij te werken</string>
@@ -745,6 +753,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="patched_app_save_failed_toast">Kon gepatchte app niet opslaan</string>
     <string name="plugin_activity_dialog_body">Gebruikersinteractie is vereist om te kunnen doorgaan met deze plugin</string>
     <string name="patcher_process_killed_message">Het systeem heeft de patcher gestopt voordat deze klaar was, meestal om geheugen vrij te maken. Sluit andere apps en probeer opnieuw</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe werd gesloten voordat het patchen was voltooid, dus er is niets gepatcht. Probeer het opnieuw</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">De patcher is gecrasht voordat deze klaar was. Als dit opnieuw gebeurt, schakel %1$s uit en rapporteer het probleem met het logboek</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-games</string>
     <string name="mini_games_description">Korte spelletjes om een verloren minuutje mee te vullen</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Games</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Beste %s</string>
     <string name="mini_game_new_record">Nieuw record!</string>
@@ -1561,6 +1573,7 @@ Details: %2$s"</string>
     <string name="changelog_show_all">Alles tonen (%s)</string>
     <string name="changelog_show_less">Minder tonen</string>
     <string name="no_network_toast">Geen internetverbinding beschikbaar</string>
+    <string name="download_waiting_for_network">Wachten op netwerk</string>
     <string name="update_available">Een update is beschikbaar</string>
     <string name="ready_to_install_update">Klaar om update te installeren</string>
     <string name="update_completed">Update geïnstalleerd</string>

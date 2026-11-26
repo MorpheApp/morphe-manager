@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Iturri hau desaktibatuta dago. Bere patchak erreferentziatzat agertzen dira baina ez dira aplikatzen</string>
     <string name="sources_management_open_in_browser">Ireki nabigatzailean</string>
     <string name="sources_management_report_issue">Eman arazo baten berri</string>
+    <string name="sources_management_export_patches">Esportatu patch-en fitxategia</string>
+    <string name="sources_management_export_patches_success">Patch-en fitxategia gorde da</string>
+    <string name="sources_management_export_patches_failed">Patch-en fitxategia esportatzeak huts egin du</string>
     <string name="sources_management_failed_to_open_url">Ezin izan da URLa ireki</string>
     <string name="sources_apps">Aplikazioak</string>
     <string name="sources_apps_description">Markatutako aplikazioak iturri honetatik datoz. Sakatu aplikazio bat kanpora uzteko edo berriz sartzeko, eta irrastu haren patchak ikusteko. Aplikazio bat etxeko pantailatik desagertzen da iturri batek ekartzen ez duenean, baldin eta patchatu ez baduzu</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Patch-iturri hau blokeatuta dago eta ezin da gehitu</string>
     <string name="sources_management_source_blocked_badge">Blokeatuta</string>
     <string name="sources_management_metadata_unavailable">Metadatuak ez daude eskuragarri</string>
+    <string name="sources_management_bundle_missing_badge">Ez da deskargatu</string>
     <string name="sources_management_metadata_unavailable_hint">Urruneko metadatuen fitxategia ez dago eskuragarri. Instalatutako bundle-arekin patchatzeak funtzionatzen jarraitzen du, baina automatikoki eguneratzea desaktibatuta dago iturri honentzat</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch-bundle-a ezin izan da deskargatu. Iturri-URLa okerra izan daiteke edo fitxategia ez dago</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch-bundlea ezin da deskargatu. Iturriaren URLa okerra izan daiteke edo fitxategia ez da existitzen. Sakatu aldatzeko</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Pantailako izena</string>
     <string name="sources_dialog_rename">Berrizendatu patch-iturria</string>
+    <string name="sources_dialog_renamed">%s izendatu da</string>
     <string name="sources_dialog_change_url">Aldatu patch-iturria deskargatzen den lekua</string>
     <string name="sources_dialog_duplicate_name_error">Izen honekin patch-iturri bat dagoeneko existitzen da</string>
     <string name="sources_dialog_missing_error">Ezin izan da patch-iturri hau eguneratu</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Eguneratzeak %s</string>
     <string name="sources_dialog_url_valid">URL baliozko biltegi edo JSON bat</string>
-    <string name="sources_dialog_url_invalid">URL-ak GitHub/GitLab biltegi bat edo .json fitxategi bat adierazi behar du</string>
+    <string name="sources_dialog_url_invalid">URL-ak GitHub, GitLab edo Codeberg biltegi bat edo .json fitxategi bat adierazi behar du</string>
     <string name="sources_dialog_preinstalled">Aurrez instalatua</string>
     <string name="sources_dialog_community">Komunitateko patch-ak</string>
     <string name="sources_dialog_choose_apps">Aukeratu aplikazioak</string>
@@ -576,6 +581,9 @@ Emaitza onenak lortzeko, aplikazio honek &lt;b&gt;APK osoa&lt;/b&gt; patchatzea 
     <string name="app_links_change_failed">App-estekak aldatzea huts egin da</string>
     <string name="app_links_all_verified">Onartutako esteka guztiak aplikazio honetan irekitzeko konfiguratuta daude</string>
     <string name="app_links_fix">Konpondu estekak</string>
+    <string name="app_links_allow_shizuku">Baimenu Shizuku sarrerari</string>
+    <string name="app_links_shizuku_permission_hint">Baimenu Morphe-ri Shizuku erabiltzeko esteka hauek aktibatzeko</string>
+    <string name="app_links_shizuku_not_running_hint">Hasi Shizuku Morphe-k esteka hauek aktiba ditzan zure behazaz</string>
     <string name="configure">Konfiguratu</string>
     <string name="patcher_rename_title">Honek klon bat instalatu egingo du</string>
     <string name="patcher_rename_description">Patch-ek aplikazio hau bere package-izen propioarekin eraiki dute, beraz instalatzeak &lt;b&gt;%s&lt;/b&gt;-ren ondoan klon bat gehitzen du, eguneratzearen ordez</string>
@@ -745,6 +753,8 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="patched_app_save_failed_toast">Patch-atutako aplikazioa gordetzeak huts egin du</string>
     <string name="plugin_activity_dialog_body">Plugin hau aurrera eramateko erabiltzailearen parte-hartzea behar da</string>
     <string name="patcher_process_killed_message">Sistemak patchera utzi du amaitu aurretik, normalean memoria askatzeko. Itxi beste aplikazioak eta saiatu berriz</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe itxi zen patching prozesua amaitu aurretik, beraz, ezer ez zen patchatu. Saiatu berriz</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher-ak huts egin du amaitu aurretik. Berriz gertatzen bada, desaktibatu %1$s eta jakinarazi arazoa logarekin</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-jokoak</string>
     <string name="mini_games_description">Minuturik lotan pasatzeko joko azkarrak</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jokoak</string>
     <string name="mini_game_score">Puntuazioa %s</string>
     <string name="mini_game_best">Onena %s</string>
     <string name="mini_game_new_record">Errekor berria!</string>
@@ -1561,6 +1573,7 @@ Xehetasunak: %2$s"</string>
     <string name="changelog_show_all">Denak erakutsi (%s)</string>
     <string name="changelog_show_less">Gutxiago erakutsi</string>
     <string name="no_network_toast">Ez dago interneteko konexiorik</string>
+    <string name="download_waiting_for_network">Sarearen zain</string>
     <string name="update_available">Eguneratze bat dago eskuragarri</string>
     <string name="ready_to_install_update">Eguneratzea instalatzeko prest</string>
     <string name="update_completed">Eguneratzea instalatuta</string>

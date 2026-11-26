@@ -10,10 +10,18 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.view.Surface
 import androidx.compose.animation.core.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,10 +32,18 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlin.math.PI
+import kotlin.math.floor
+import kotlin.math.roundToInt
 
 // Tilt shifts the artwork by about a dozen pixels at full range, so smaller steps land under a pixel
 private const val TILT_TARGET_THRESHOLD = 0.02f
+
+// How far from its calibrated pose the device can lean before the artwork stops following, in m/s²
+// of gravity (about 18 degrees). A bounded shift lets a background overscan just enough to hide its edges
+private const val MAX_TILT_ACCELERATION = 3f
 
 // Backgrounds drift slowly enough that a 60 Hz step is indistinguishable from a 120 Hz one,
 // and every skipped step is a full-screen repaint the GPU does not have to make.
@@ -56,16 +72,73 @@ fun AnimationFrameEffect(frameLoop: suspend CoroutineScope.() -> Unit) {
     }
 }
 
-// How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
-// a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
-// It is a whole number of the cycles backgrounds wrap their own motion at, so those stay seamless
-private const val ANIMATED_TIME_WRAP_MS = 3_600_000f
+// A background eased down to this share of its speed stands still to the eye
+private const val STOPPED_SPEED = 0.01f
+
+/**
+ * How long the shared clock runs before it wraps. A Float of milliseconds this large still resolves
+ * a quarter of a millisecond, where an unbounded one stops resolving the 16 ms step after a day.
+ * A motion that repeats a whole number of times in it, see [wholeLoops], carries on across the wrap
+ * without a seam.
+ */
+internal const val BACKGROUND_LOOP_MS = 3_600_000f
+
+internal const val TWO_PI = 2f * PI.toFloat()
+
+/** How many times a motion of about [periodMs] fits into [BACKGROUND_LOOP_MS], at least once. */
+internal fun wholeLoops(periodMs: Float): Int =
+    (BACKGROUND_LOOP_MS / periodMs).roundToInt().coerceAtLeast(1)
+
+internal fun fract(value: Float) = value - floor(value)
+
+/** The three theme colors most backgrounds paint with, picked by an index that may run past them. */
+@Immutable
+data class ThemePalette(private val primary: Color, private val secondary: Color, private val tertiary: Color) {
+    operator fun get(index: Int): Color = when (index % 3) {
+        0    -> primary
+        1    -> secondary
+        else -> tertiary
+    }
+}
+
+@Composable
+@ReadOnlyComposable
+fun themePalette() = ThemePalette(
+    MaterialTheme.colorScheme.primary,
+    MaterialTheme.colorScheme.secondary,
+    MaterialTheme.colorScheme.tertiary
+)
+
+/**
+ * Draws [glow], a radial gradient laid out on a circle of radius 1 around the origin, stretched to
+ * [radiusX] by [radiusY] around [center]. One brush built ahead serves every size and place, where
+ * a gradient built per frame would allocate a new shader each time.
+ */
+internal fun DrawScope.drawRadialGlow(
+    glow: Brush,
+    center: Offset,
+    radiusX: Float,
+    radiusY: Float = radiusX,
+    alpha: Float = 1f
+) {
+    if (radiusX <= 0f || radiusY <= 0f) return
+    translate(center.x, center.y) {
+        scale(radiusX, radiusY, pivot = Offset.Zero) {
+            drawCircle(glow, radius = 1f, center = Offset.Zero, alpha = alpha.coerceIn(0f, 1f))
+        }
+    }
+}
+
+/** A radial gradient through [stops] on a circle of radius 1 around the origin, for [drawRadialGlow]. */
+internal fun unitRadialGlow(vararg stops: Pair<Float, Color>): Brush =
+    Brush.radialGradient(colorStops = stops, center = Offset.Zero, radius = 1f)
 
 /**
  * Steps a background once per [BACKGROUND_STEP_INTERVAL_MS], handing [onStep] the milliseconds of
  * animation since the previous step: real time scaled by a speed that eases toward
  * [speedMultiplier] instead of jumping to it, along with that eased speed itself. Shared by the
- * clock most backgrounds read and by the ones that integrate their own physics.
+ * clock most backgrounds read and by the ones that integrate their own physics. At a speed of 0 it
+ * eases to a stop and takes no more frames until the speed changes.
  * Named with uppercase as required by Compose convention for Unit-returning Composables.
  *
  * @param boost How much further than [speedMultiplier] this background leans into a speed-up,
@@ -85,7 +158,10 @@ fun BackgroundStepEffect(
     val currentOnStep by rememberUpdatedState(onStep)
 
     AnimationFrameEffect {
-        fun boostedTarget() = 1f + (targetSpeed.floatValue - 1f) * boost
+        fun boostedTarget(): Float {
+            val target = targetSpeed.floatValue
+            return if (target == 0f) 0f else 1f + (target - 1f) * boost
+        }
 
         var lastFrameMs = withInfiniteAnimationFrameMillis { it }
         var currentSpeed = boostedTarget()
@@ -94,6 +170,11 @@ fun BackgroundStepEffect(
         var elapsedMs = 0f
         var pendingMs = 0f
         while (true) {
+            if (targetSpeed.floatValue == 0f && currentSpeed < STOPPED_SPEED) {
+                currentSpeed = 0f
+                snapshotFlow { targetSpeed.floatValue }.first { it != 0f }
+                lastFrameMs = withInfiniteAnimationFrameMillis { it }
+            }
             withInfiniteAnimationFrameMillis { frameMs ->
                 val delta = (frameMs - lastFrameMs).coerceIn(0L, 64L).toFloat()
                 lastFrameMs = frameMs
@@ -122,10 +203,20 @@ fun BackgroundStepEffect(
  * animations. The value wraps every hour of animation to keep its precision.
  */
 @Composable
-fun rememberAnimatedTime(speedMultiplier: Float): State<Float> {
+fun rememberAnimatedTime(speedMultiplier: Float): State<Float> = rememberAnimatedTime(speedMultiplier) {}
+
+/**
+ * The same clock, calling [onStep] with the new time just before it is published, so state a
+ * background moves along with the clock is ready by the time the frame that reads it draws.
+ */
+@Composable
+fun rememberAnimatedTime(speedMultiplier: Float, onStep: (timeMs: Float) -> Unit): State<Float> {
     val time = remember { mutableFloatStateOf(0f) }
+    val currentOnStep by rememberUpdatedState(onStep)
     BackgroundStepEffect(speedMultiplier) { scaledMs, _ ->
-        time.floatValue = (time.floatValue + scaledMs) % ANIMATED_TIME_WRAP_MS
+        val next = (time.floatValue + scaledMs) % BACKGROUND_LOOP_MS
+        currentOnStep(next)
+        time.floatValue = next
     }
     return time
 }
@@ -157,11 +248,13 @@ fun rememberCompletionPulse(
 }
 
 /**
- * Parallax sensor state holder
+ * Parallax sensor state holder. [tiltX] and [tiltY] follow the screen's own axes and never leave
+ * the range of plus or minus [maxTilt].
  */
 data class ParallaxState(
     val tiltX: State<Float>,
-    val tiltY: State<Float>
+    val tiltY: State<Float>,
+    val maxTilt: Float
 )
 
 /**
@@ -185,8 +278,8 @@ fun rememberParallaxState(
     LaunchedEffect(enableParallax) {
         if (!enableParallax) {
             tiltTarget.value = Offset.Zero
-            smoothTiltX.snapTo(0f)
-            smoothTiltY.snapTo(0f)
+            launch { smoothTiltX.animateTo(0f, spring(stiffness = Spring.StiffnessLow)) }
+            launch { smoothTiltY.animateTo(0f, spring(stiffness = Spring.StiffnessLow)) }
             return@LaunchedEffect
         }
 
@@ -229,18 +322,26 @@ fun rememberParallaxState(
             // Calibration belongs to one registration, so the baseline resets with the listener itself
             var baselineX = 0f
             var baselineY = 0f
-            var isCalibrated = false
+            var calibratedRotation = -1
+            val display = ContextCompat.getDisplayOrDefault(context)
 
             val listener = object : SensorEventListener {
                 override fun onSensorChanged(event: SensorEvent) {
-                    if (!isCalibrated) {
-                        baselineX = event.values[0]
-                        baselineY = event.values[1]
-                        isCalibrated = true
+                    val rotation = display.rotation
+                    val (screenX, screenY) = event.toScreenAxes(rotation)
+
+                    // The activity handles rotation itself, so the listener survives it. A pose
+                    // calibrated for the old orientation would read as a steep tilt in the new one
+                    if (rotation != calibratedRotation) {
+                        baselineX = screenX
+                        baselineY = screenY
+                        calibratedRotation = rotation
                     }
 
-                    val rawTiltX = event.values[0] - baselineX
-                    val rawTiltY = -(event.values[1] - baselineY)
+                    val rawTiltX = (screenX - baselineX)
+                        .coerceIn(-MAX_TILT_ACCELERATION, MAX_TILT_ACCELERATION)
+                    val rawTiltY = -(screenY - baselineY)
+                        .coerceIn(-MAX_TILT_ACCELERATION, MAX_TILT_ACCELERATION)
                     val target = Offset(rawTiltX * sensitivity, rawTiltY * sensitivity)
 
                     // Sensor noise alone would retarget the springs forever, keeping the frame clock
@@ -270,6 +371,22 @@ fun rememberParallaxState(
     // Return State objects directly
     return ParallaxState(
         tiltX = smoothTiltX.asState(),
-        tiltY = smoothTiltY.asState()
+        tiltY = smoothTiltY.asState(),
+        maxTilt = MAX_TILT_ACCELERATION * sensitivity
     )
+}
+
+/**
+ * The accelerometer reading along the screen's x and y axes for a display at [rotation]. The sensor
+ * reports in the device's natural orientation, whichever way the screen is turned.
+ */
+private fun SensorEvent.toScreenAxes(rotation: Int): Pair<Float, Float> {
+    val x = values[0]
+    val y = values[1]
+    return when (rotation) {
+        Surface.ROTATION_90  -> -y to x
+        Surface.ROTATION_180 -> -x to -y
+        Surface.ROTATION_270 -> y to -x
+        else                 -> x to y
+    }
 }

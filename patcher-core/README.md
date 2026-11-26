@@ -3,7 +3,7 @@
 Everything about a patching run that does not need Android. The app runs it in the `:patcher`
 process of `PatcherService`, started by `PatcherProcesses` for every run, on one of two VMs:
 
-- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, half of it
+- JVM, the default: an embedded HotSpot with a heap of a third of the RAM (2-3 GB, at most 40% of it below 5 GB; half of it
   within 1-1.5 GB in a 32-bit process), which starts at 512 MB. BellSoft's Liberica 25 for Linux on every
   ABI, which runs as a child process of `:patcher`.
 - ART, the runtime of the process itself, within the heap Android gives the app. Used when the
@@ -41,8 +41,9 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
 - **One JVM per process**: HotSpot cannot be stopped or started again. The process ends with the
   run, and every run gets a fresh one, started ahead while the user picks what to patch.
 - **A process of its own**: a large run, such as TikTok, can take more memory than a weak device
-  spares, and the system then ends the process that holds it. Apart from the app, that is the
-  run alone, and the app reports it with the reason the system recorded. On ART the heap of the
+  spares. The system does not know of the JVM, a child of `:patcher`, so it frees memory by ending
+  `:patcher` and, while on screen, the app first. The heap is kept to a share of the RAM for that,
+  and a run that the end of the app cut short is reported once the app is back. On ART the heap of the
   run would otherwise be the app's, and running out of it would throw on the UI thread as well.
   A crash of the JVM or `System.exit` in a patch ends only that process too, and the JVM's report
   (`patcher-jvm-error-<pid>.log` in the app's temporary files) goes into the log of the run.
@@ -57,7 +58,10 @@ preload bundles and start the run, and `HostEvent` for what the run reports.
   that runs 30 seconds, again each time it runs twice as long, and names the running patch when
   the heap runs out or the process ends. It times this in the app, whose heap is not the full one.
 - **A run that hangs**: once a run has not moved on for five minutes, the host logs the stacks of
-  all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. The
+  all its threads and the heap in use (`watchForStalls` in `HostMain`), up to five times. A JVM
+  that is alive but has not started the host within a minute gets the state and CPU time of each
+  of its threads logged from `/proc`, and a SIGQUIT for its stacks in logcat, before the run falls
+  back to ART (`describeStuckJvm` in `PatcherProcesses`). The
   log also has the VM the host runs on (`Host VM:`), the process and the JVM options that differ
   between devices and builds (`Patcher process:`, `Patcher JVM:`), and how long the patches took
   to load, ahead of the run or in it. All of it is in the log the user copies.
@@ -138,8 +142,11 @@ adb exec-out run-as app.morphe.manager.debug cat files/gc.log > gc.log
   `-Xlog:gc*:file=/data/user/0/app.morphe.manager.debug/files/gc.log`.
 - **GC**: `-Xlog:gc+init` shows the collector the VM chose. G1 (the default) paused for about 3%
   of a YouTube run. ParallelGC paused for 5-8% and SerialGC for more, as both fall back to full
-  collections once the 450-650M kept alive fills the old space. A 32-bit process still gets
-  SerialGC, the collector with the fewest threads and the least to go wrong on that port.
+  collections once the 450-650M kept alive fills the old space. A 32-bit process is told to use G1
+  as well, as a small device could get SerialGC. On a computer, TikTok, which keeps 750M alive,
+  patched within 900M on G1, while ParallelGC ran out of heap at 940M and SerialGC went through 15
+  full collections there. With the marking threshold and pause goal the app passes, it took about
+  293s on a Galaxy J6 Prime (4x A53, 1410M), 328s with the pause goal alone and 312s on SerialGC.
 - **AOT cache**: the JVM keeps a JDK 25 AOT cache in `cache/jvm-aot`, named after the
   runtime and the host jar. The first run records with `-XX:AOTMode=record`. Once it ends, the app
   waits for its JVM to write the configuration as it exits, then makes the cache in a JVM of its

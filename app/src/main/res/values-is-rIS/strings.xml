@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Þessi uppspretta er óvirk. Plástrar hennar eru skráðir til viðmiðunar og ekki notaðir</string>
     <string name="sources_management_open_in_browser">Opna í vafra</string>
     <string name="sources_management_report_issue">Tilkynna vandamál</string>
+    <string name="sources_management_export_patches">Flytja út spækruskrá</string>
+    <string name="sources_management_export_patches_success">Spækruskrá vistuð</string>
+    <string name="sources_management_export_patches_failed">Mistókst að flytja út spækruskrá</string>
     <string name="sources_management_failed_to_open_url">Ekki tókst að opna vefslóð</string>
     <string name="sources_apps">Forrit</string>
     <string name="sources_apps_description">Öpp sem eru hakuð koma frá þessari uppsprettu. Ýttu á app til að sleppa því eða taka það aftur með, renndu yfir það til að sjá plástra þess. App hverfur af heimaskjánum ef engin uppspretta ber það, nema þú hafir plástrað það</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Þessi uppspretta breytistillinga er lokuð og ekki er hægt að bæta henni við</string>
     <string name="sources_management_source_blocked_badge">Lokuð</string>
     <string name="sources_management_metadata_unavailable">Lýsigögn ekki tiltæk</string>
+    <string name="sources_management_bundle_missing_badge">Ekki sótt</string>
     <string name="sources_management_metadata_unavailable_hint">Ekki er hægt að nálgast skrána með lýsigögnum. Breyting með uppsetta pakkanum virkar enn, en sjálfvirk uppfærsla er óvirk fyrir þessa uppsprettu</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Ekki tókst að sækja breytistillingapakkann. Vefslóð uppsprettunnar gæti verið röng eða skráin er ekki til</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Ekki tókst að sækja plástrasafnið. Vefslóð uppsprettunnar gæti verið röng eða skráin er ekki til. Ýttu til að breyta henni</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nafn</string>
     <string name="sources_dialog_rename">Endurnefna heimild breytistillinga</string>
+    <string name="sources_dialog_renamed">Endurnefnt í %s</string>
     <string name="sources_dialog_change_url">Breyttu staðsetningu sem plástruppspretta sækir af</string>
     <string name="sources_dialog_duplicate_name_error">Heimild breytistillinga með þessu nafni er þegar til</string>
     <string name="sources_dialog_missing_error">Ekki tókst að uppfæra þessa uppsprettu breytistillinga</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Uppfærslur: %s</string>
     <string name="sources_dialog_url_valid">Gild geymsla eða JSON-vefslóð</string>
-    <string name="sources_dialog_url_invalid">Vefslóð verður að vísa á GitHub/GitLab geymslu eða .json skrá</string>
+    <string name="sources_dialog_url_invalid">Vefslóð verður að vísa á GitHub, GitLab eða Codeberg geymslu eða .json skrá</string>
     <string name="sources_dialog_preinstalled">Foruppsett</string>
     <string name="sources_dialog_community">Samfélagsplástrar</string>
     <string name="sources_dialog_choose_apps">Veldu öpp</string>
@@ -575,6 +580,9 @@ Til að ná bestum árangri mælir þetta app með því að breyta &lt;b&gt;hei
     <string name="app_links_change_failed">Mislaðistst við að breyta tenglum forritsins</string>
     <string name="app_links_all_verified">Allir studdir tenglar eru stilltir til að opnast í þessu appi</string>
     <string name="app_links_fix">Laga tengla</string>
+    <string name="app_links_allow_shizuku">Leyfa Shizuku aðgangi</string>
+    <string name="app_links_shizuku_permission_hint">Leyfðu Morphe að nota Shizuku til að virkja þessar tengla fyrir þig</string>
+    <string name="app_links_shizuku_not_running_hint">Ræstu Shizuku svo Morphe geti virkað þessar tengla fyrir þig</string>
     <string name="configure">Stilla</string>
     <string name="patcher_rename_title">Þetta mun setja upp klón</string>
     <string name="patcher_rename_description">Plástrarnir smíðuðu þetta app undir eigin pakkaheiti, svo uppsetning bætir við klóni við hlið &lt;b&gt;%s&lt;/b&gt; í stað þess að uppfæra það</string>
@@ -744,6 +752,8 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="patched_app_save_failed_toast">Ekki tókst að vista breytt app</string>
     <string name="plugin_activity_dialog_body">Krefst samskipta við notanda til að halda áfram með þessa viðbót</string>
     <string name="patcher_process_killed_message">Kerfið stöðvaði plástrarann áður en hann lauk, yfirleitt til að losa minni. Lokaðu öðrum öppum og reyndu aftur</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe var lokað áður en uppfærsla var lokið, svo var ekkert uppfært. Reyndu aftur</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Plástrarinn hrundi áður en hann lauk. Ef þetta gerist aftur skaltu slökkva á %1$s og tilkynna vandamálið með loggnum</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -766,6 +776,8 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <!-- Mini-games -->
     <string name="mini_games">Hnýbilsleikir</string>
     <string name="mini_games_description">Hröðir leikir til að fylla ónýttan tíma</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Leikir</string>
     <string name="mini_game_score">Stig %s</string>
     <string name="mini_game_best">Besta: %s</string>
     <string name="mini_game_new_record">Nýtt met!</string>
@@ -1560,6 +1572,7 @@ Nánari upplýsingar: %2$s"</string>
     <string name="changelog_show_all">Sýna allt (%s)</string>
     <string name="changelog_show_less">Sýna minna</string>
     <string name="no_network_toast">Engin nettenging í boði</string>
+    <string name="download_waiting_for_network">Bíð eftir nettengingu</string>
     <string name="update_available">Uppfærsla er til staðar</string>
     <string name="ready_to_install_update">Tilbúið til að setja upp uppfærslu</string>
     <string name="update_completed">Uppfærsla uppsett</string>

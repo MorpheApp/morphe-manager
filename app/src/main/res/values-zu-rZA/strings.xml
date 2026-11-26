@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Lo mthombo uvalwe. Amaphetshi alo abhalwe njengokubhekisisa futhi awasebenzi</string>
     <string name="sources_management_open_in_browser">Vula kubrowser</string>
     <string name="sources_management_report_issue">Bika inkinga</string>
+    <string name="sources_management_export_patches">Thumela ifayela le-patches</string>
+    <string name="sources_management_export_patches_success">Ifayela le-patches longekile</string>
+    <string name="sources_management_export_patches_failed">Kuhlulekile ukuthumela ifayela le-patches</string>
     <string name="sources_management_failed_to_open_url">Kwephuthelwa ukuvula i-URL</string>
     <string name="sources_apps">Izinhlelo</string>
     <string name="sources_apps_description">Izinhlelo ezikhethiwe zivela kuleli thuluzi. Thinta uhlelo ukuze ulukhiphe noma ulubuyisele, luswayize ukuze ubone ama-patches alo. Uhlelo olungenalo ithuluzi lushiya isikrini sasekhaya, ngaphandle kokuba ulupatche</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Lo mthombo wepatch uvinywe futhi angeke wengezwe</string>
     <string name="sources_management_source_blocked_badge">Kuvinyele</string>
     <string name="sources_management_metadata_unavailable">I-Metadata ayitholakali</string>
+    <string name="sources_management_bundle_missing_badge">Alukalandwa</string>
     <string name="sources_management_metadata_unavailable_hint">Ifayela le-metadata elikude alitholakali. I-Patching nge-bundle efakwe isasebenza, kodwa i-auto-update icishiwe kulo mthombo</string>
     <string name="sources_management_metadata_unavailable_hint_missing">I-patch bundle ayikwazanga ukulandwa. I-URL komthombo kungenzeka ayilungile noma ifayela alikho</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">I-patch bundle ayikwazanga ukulandwa. I-URL yomthombo kungenzeka ukuthi ayilungile noma ifayela alikho. Thinta ukuze uyishintshe</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Igama elibonakalayo</string>
     <string name="sources_dialog_rename">Yishintshe igama lomthombo we-patch</string>
+    <string name="sources_dialog_renamed">Kuguqulelwe igama laba %s</string>
     <string name="sources_dialog_change_url">Shintsha lapho i-patch source ilandwa khona</string>
     <string name="sources_dialog_duplicate_name_error">Umthombo we-patch onesi gama sele ukhona</string>
     <string name="sources_dialog_missing_error">Kwenzeke ukungakwazi ukubuyekeza lo mthombo we-patch</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Izibuyekezo zika %s</string>
     <string name="sources_dialog_url_valid">I-repository noma i-JSON URL esemthethweni</string>
-    <string name="sources_dialog_url_invalid">I-URL kumele ikhombise i-GitHub/GitLab repo noma ifayela le-.json</string>
+    <string name="sources_dialog_url_invalid">I-URL kufanele ikhombise i-repo ye-GitHub, GitLab noma Codeberg noma ifayela le-.json</string>
     <string name="sources_dialog_preinstalled">Esivele sifakwe</string>
     <string name="sources_dialog_community">Ama-patch omphakathi</string>
     <string name="sources_dialog_choose_apps">Khetha ama-apps</string>
@@ -576,6 +581,9 @@ Ukuze uthole imiphumela engcono kakhulu, lolu hlelo luhlanganisa ukulungisa i-&l
     <string name="app_links_change_failed">Kuhleleke ukushintsha ama-app links</string>
     <string name="app_links_all_verified">Zonke izixhumanisi ezisekelwe zilungiselelwe ukuvulwa kulolu hlelo</string>
     <string name="app_links_fix">Lungisa izixhumanisi</string>
+    <string name="app_links_allow_shizuku">Vumela ukufinyeleleka kwe-Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Vumela u-Morphe ukusebenzisa i-Shizuku ukuze uvule lezi zixhumanisi kuwe</string>
+    <string name="app_links_shizuku_not_running_hint">Qala i-Shizuku ukuze uvumele u-Morphe uvule lezi zixhumanisi kuwe</string>
     <string name="configure">lungisa</string>
     <string name="patcher_rename_title">Lokhu kuzofaka i-clone</string>
     <string name="patcher_rename_description">Ama-patches akhe le app ngaphansi kwigama le-package lawo, ngakho ukuyifaka kwengeza i-clone eceleni kwe-&lt;b&gt;%s&lt;/b&gt; esikhundleni sokuyivuselela</string>
@@ -745,6 +753,8 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="patched_app_save_failed_toast">Kuhleleke ukulonda i-app e-patched</string>
     <string name="plugin_activity_dialog_body">Kudingeka ukuhlanganyela komsebenzisi ukuze kuqhubekwe nalolu plugin</string>
     <string name="patcher_process_killed_message">Uhlelo lusimise i-patcher ngaphambi kokuba iqedele, imvamisa ukuze kukhululwe inkumbulo. Vala ezinye izinhlelo uzame futhi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">uMorphe uvaliwe ngaphambi kokuba uku-patchi kuqedele, ngakho akukho okulungisiwe. Zama futhi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">I-patcher iye yahluleka ngaphambi kokuba iqedele. Uma kwenzeka futhi, vala u-%1$s bese ubika inkinga ngokusebenzisa i-log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <!-- Mini-games -->
     <string name="mini_games">Imidlalo emincane</string>
     <string name="mini_games_description">Imidlalo esheshayo yokuchitha imizuzu embalwa</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Imidlalo</string>
     <string name="mini_game_score">Amaphuzu %s</string>
     <string name="mini_game_best">Engcono kakhulu %s</string>
     <string name="mini_game_new_record">Irekhodi entsha!</string>
@@ -1561,6 +1573,7 @@ Imininingwane: %2$s"</string>
     <string name="changelog_show_all">Khombisa zonke (%s)</string>
     <string name="changelog_show_less">Khombisa okuncane</string>
     <string name="no_network_toast">Alikho uxhumano lwe-internet olutholakala</string>
+    <string name="download_waiting_for_network">Kulindwe unethiwekhi</string>
     <string name="update_available">Kukhona ukuvuselelwa okutholakalayo</string>
     <string name="ready_to_install_update">Kulungele ukufaka ukuvuselelwa</string>
     <string name="update_completed">Ukuvuselelwa kufakiwe</string>

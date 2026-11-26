@@ -6,7 +6,6 @@
 package app.morphe.manager.domain.links
 
 import android.app.Application
-import android.content.pm.PackageManager
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
@@ -16,9 +15,9 @@ import android.os.ParcelFileDescriptor
 import android.os.ResultReceiver
 import android.util.Log
 import app.morphe.manager.domain.installer.RootInstaller
+import app.morphe.manager.domain.installer.SessionInstaller
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import rikka.shizuku.Shizuku
 import rikka.shizuku.ShizukuBinderWrapper
 import rikka.shizuku.SystemServiceHelper
 import java.io.File
@@ -51,11 +50,19 @@ data class AppLinksStatus(
     }
 }
 
-/** The privileged channel able to change the link selection on the user's behalf. */
+/**
+ * The privileged channel able to change the link selection on the user's behalf, or what keeps
+ * Shizuku from being one, which the user can set right.
+ */
 enum class LinkSelectionAccess {
     SHIZUKU,
     ROOT,
-    NONE
+    SHIZUKU_PERMISSION_MISSING,
+    SHIZUKU_NOT_RUNNING,
+    NONE;
+
+    /** Whether the manager can change the selection itself. */
+    val canChange: Boolean get() = this == SHIZUKU || this == ROOT
 }
 
 /**
@@ -65,19 +72,33 @@ enum class LinkSelectionAccess {
  */
 class AppLinksManager(
     private val app: Application,
-    private val rootInstaller: RootInstaller
+    private val rootInstaller: RootInstaller,
+    private val sessionInstaller: SessionInstaller
 ) {
     /**
      * Returns the channel a change of the selection would go through. Probes root, so never call it
      * on the main thread.
      */
     suspend fun getSelectionAccess(): LinkSelectionAccess = withContext(Dispatchers.IO) {
+        val shizuku = sessionInstaller.shizukuStatus()
         when {
-            isShizukuGranted() -> LinkSelectionAccess.SHIZUKU
+            shizuku.permissionGranted -> LinkSelectionAccess.SHIZUKU
             rootInstaller.hasRootAccess() -> LinkSelectionAccess.ROOT
+            shizuku.running -> LinkSelectionAccess.SHIZUKU_PERMISSION_MISSING
+            shizuku.installed && shizuku.supported -> LinkSelectionAccess.SHIZUKU_NOT_RUNNING
             else -> LinkSelectionAccess.NONE
         }
     }
+
+    /** Shows Shizuku's prompt to grant Morphe access. Returns false when it could not be shown. */
+    fun requestShizukuPermission(): Boolean = sessionInstaller.requestShizukuPermission()
+
+    /** Opens the Shizuku app, where its server is started. Returns false when none can be opened. */
+    fun openShizuku(): Boolean = sessionInstaller.launchShizukuApp()
+
+    /** Calls [onAnswer] on every answer to a Shizuku prompt, see [SessionInstaller.observeShizukuPermission]. */
+    fun observeShizukuPermission(onAnswer: () -> Unit): AutoCloseable =
+        sessionInstaller.observeShizukuPermission(onAnswer)
 
     /** Returns the link selection of [packageName], or [AppLinksStatus.None] before Android 12. */
     fun getStatus(packageName: String): AppLinksStatus {
@@ -129,15 +150,11 @@ class AppLinksManager(
                 if (!result.isSuccess) Log.e(TAG, "Could not change app links of $packageName as root: ${result.err}")
                 result.isSuccess
             }
+            LinkSelectionAccess.SHIZUKU_PERMISSION_MISSING,
+            LinkSelectionAccess.SHIZUKU_NOT_RUNNING,
             LinkSelectionAccess.NONE -> false
         }
     }
-
-    private fun isShizukuGranted(): Boolean = runCatching {
-        !Shizuku.isPreV11() &&
-            Shizuku.pingBinder() &&
-            Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED
-    }.getOrDefault(false)
 
     /**
      * Runs a `pm` command as the Shizuku server's user by handing it straight to the package

@@ -12,9 +12,11 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.LocaleList
+import android.view.View
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.annotation.RequiresApi
 import androidx.core.content.edit
+import androidx.core.text.layoutDirection
 import app.morphe.manager.BuildConfig
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -97,6 +99,21 @@ object AppLocale {
     fun applyTo(overrides: Configuration) {
         if (appliedBySystem) return
         toLocale(_selected.value)?.let(overrides::setLocale)
+    }
+
+    /**
+     * Adds to [overrides] the right-to-left layout that a right-to-left locale of [base] is missing.
+     * Android 13+ resets the app language to the device one with the locale switched but the
+     * layout direction of the language before left in place, until the process restarts. Only a
+     * missing right-to-left direction is put back, so forcing it in developer options still works.
+     */
+    fun restoreLayoutDirection(base: Configuration, overrides: Configuration) {
+        val locale = base.locales[0] ?: return
+        if (base.layoutDirection == View.LAYOUT_DIRECTION_LTR &&
+            locale.layoutDirection == View.LAYOUT_DIRECTION_RTL
+        ) {
+            overrides.setLayoutDirection(locale)
+        }
     }
 
     /** The locale of [code], or null for [SYSTEM] and anything that does not name a language. */

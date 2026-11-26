@@ -10,6 +10,7 @@
 
 package app.morphe.manager.patcher.worker
 
+import android.app.ApplicationExitInfo
 import android.content.Context
 import android.os.Build
 import android.os.PowerManager
@@ -47,6 +48,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.service.ForegroundWork
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.model.State
+import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.patcher.PatcherTask
@@ -78,7 +80,8 @@ class PatcherWorker(
     private val installerManager: InstallerManager,
     private val patchBundleRepository: PatchBundleRepository,
     private val patcherProcesses: PatcherProcesses,
-    private val foregroundWork: ForegroundWork
+    private val foregroundWork: ForegroundWork,
+    private val messages: UserMessages
 ) : Worker<PatcherWorker.Args>(context, parameters) {
     private fun runtime(vm: PatcherVm) =
         Runtime(applicationContext, fs, patchBundleRepository, patcherProcesses, vm, ::getForegroundInfo)
@@ -175,12 +178,30 @@ class PatcherWorker(
         PatchingNotifications.showPatchResult(applicationContext, succeeded, silent = playSound)
     }
 
-    override suspend fun doWork(): Result {
-        if (runAttemptCount > 0) {
-            Log.d(LOG_TAG, "Android requested retrying but retrying is disabled.".logFmt())
-            return Result.failure()
+    /**
+     * Tells the user that the run of this work never finished. A retry only comes after the process
+     * the run lived in ended, and the run went with it, most often killed to free memory while the
+     * patcher held a lot of it.
+     */
+    private fun reportInterruptedRun() {
+        var lowMemory = false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val exit = applicationContext.processExits(PROCESS_EXITS_SEARCHED)
+                .firstOrNull { it.processName == applicationContext.packageName }
+            if (exit != null) Log.w(LOG_TAG, "The run ended with the app's process: ${exit.describe()}".logFmt())
+            lowMemory = exit?.reason == ApplicationExitInfo.REASON_LOW_MEMORY
         }
+        val message = applicationContext.getString(
+            if (lowMemory) R.string.patcher_process_killed_message else R.string.patcher_interrupted_message
+        )
+        // Waits for the app's screens, which the user may only open later
+        messages.show(message, long = true)
+        if (!ManagerApplication.isInForeground) PatchingNotifications.showPatchFailure(applicationContext, message)
+    }
 
+    override suspend fun doWork(): Result {
+        // Also on a retry: the system brings WorkManager's foreground service back with the dead
+        // process's ongoing notification, and WorkManager only takes it down for work it moved there
         try {
             // This does not always show up for some reason
             setForeground(getForegroundInfo())
@@ -188,6 +209,12 @@ class PatcherWorker(
             // Foreground promotion can fail on some devices or when notification permission is
             // denied. Log it but continue - patching still works, just with less OS protection
             Log.w(LOG_TAG, "Failed to promote worker to foreground service:".logFmt(), e)
+        }
+
+        if (runAttemptCount > 0) {
+            Log.d(LOG_TAG, "Android requested retrying but retrying is disabled.".logFmt())
+            reportInterruptedRun()
+            return Result.failure()
         }
 
         val wakeLock: PowerManager.WakeLock =
@@ -297,7 +324,7 @@ class PatcherWorker(
             if (args.input is SelectedApp.Installed &&
                 installedAppRepository.get(args.packageName)?.installType == InstallType.MOUNT
             ) {
-                rootInstaller.unmount(args.packageName)
+                rootInstaller.unmount(args.packageName, recompile = false)
                 unmounted = true
             }
 
@@ -525,6 +552,9 @@ class PatcherWorker(
     companion object {
         private const val LOG_PREFIX = "[Worker]"
         private fun String.logFmt() = "$LOG_PREFIX $this"
+
+        // The app's own end is among the newest, with a few of the patcher process around it
+        private const val PROCESS_EXITS_SEARCHED = 6
 
         /** Kept as the patcher screen's entry point now that the tone itself is shared. */
         fun stopCompletionSound() = CompletionSound.stop()

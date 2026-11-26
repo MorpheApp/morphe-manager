@@ -53,15 +53,10 @@ fun SpaceBackground(
         sensitivity = 0.3f
     )
 
-    val stars = remember(isDarkTheme) {
-        mutableStateListOf<StarData>().apply { addAll(generateStarPool()) }
-    }
-
-    // baseProgress drives the Z-depth of all stars each frame
-    var baseProgress by remember { mutableFloatStateOf(0f) }
-
-    // The eased speed the warp currently runs at, which stretches the near stars into streaks
-    var warpSpeed by remember { mutableFloatStateOf(1f) }
+    // The stars are moved in place by the step, which bumps step once per pass so the canvas
+    // redraws once, rather than a snapshot write per star
+    val stars = remember { StarField() }
+    val step = remember { mutableIntStateOf(0) }
 
     // flashAlpha 0→0.45→0: full-screen white flash on patching completion.
     // Snaps to its peak, the abruptness is intentional and feels like a camera flash,
@@ -77,89 +72,80 @@ fun SpaceBackground(
     // ramp gives ~0.4s to reach full speed, matching the "warp engine" feel.
     // The warp integrates the time it skipped, so a slower step covers the same distance
     BackgroundStepEffect(speedMultiplier, boost = 3f, rampPerSecond = 5f) { scaledMs, speed ->
-        // Normalize baseProgress increment to 60fps baseline so delta spikes don't jump
-        baseProgress += 0.0025f * (scaledMs / 16.67f)
-        warpSpeed = speed
-
-        // Regenerate stars that have passed the camera (adjustedProgress wraps to 0..1)
-        stars.forEachIndexed { index, star ->
-            val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
-            if (adjustedProgress !in 0.01f..0.98f) {
-                if (star.lastRegen != baseProgress.toInt()) {
-                    // Pick a new random position outside the center exclusion zone
-                    var newX: Float; var newY: Float; var newDistance: Float
-                    do {
-                        val newAngle = Random.nextFloat() * 360f
-                        newDistance = sqrt(Random.nextFloat()) * 1.5f
-                        val newAngleRad = newAngle * (Math.PI / 180f).toFloat()
-                        newX = cos(newAngleRad) * newDistance
-                        newY = sin(newAngleRad) * newDistance
-                    } while (newDistance < 0.15f)
-                    stars[index] = star.copy(x = newX, y = newY, lastRegen = baseProgress.toInt())
-                }
-            }
-        }
+        stars.advance(scaledMs, speed)
+        step.intValue++
     }
 
-    // Meteor spawner - occasional shooting star every 40–60 seconds
+    // Meteor spawner - occasional shooting star every 40-60 seconds, only while the backdrop is
+    // on screen, so a meteor never streaks across a sky nobody can see
     var meteor by remember { mutableStateOf<MeteorState?>(null) }
     val meteorProgress = remember { Animatable(0f) }
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(Random.nextLong(40000, 60000).milliseconds)
-            val direction = Random.nextInt(2)
-            val angle = when (direction) {
-                0    -> 130f + Random.nextFloat() * 20f // Right to left
-                else -> 30f  + Random.nextFloat() * 20f // Left to right
+    val currentSpeedMultiplier by rememberUpdatedState(speedMultiplier)
+    AnimationFrameEffect {
+        try {
+            while (true) {
+                delay(Random.nextLong(40000, 60000).milliseconds)
+                if (currentSpeedMultiplier == 0f) continue
+                val direction = Random.nextInt(2)
+                val angle = when (direction) {
+                    0    -> 130f + Random.nextFloat() * 20f // Right to left
+                    else -> 30f  + Random.nextFloat() * 20f // Left to right
+                }
+                meteor = MeteorState(
+                    startX    = Random.nextFloat(),
+                    startY    = Random.nextFloat() * 0.3f,
+                    angle     = angle,
+                    length    = 67f + Random.nextFloat() * 50f,
+                    depth     = 0.4f + Random.nextFloat() * 0.6f,
+                    thickness = 1.3f
+                )
+                meteorProgress.snapTo(0f)
+                meteorProgress.animateTo(1f, tween(1200, easing = LinearOutSlowInEasing))
+                meteor = null
             }
-            meteor = MeteorState(
-                startX    = Random.nextFloat(),
-                startY    = Random.nextFloat() * 0.3f,
-                angle     = angle,
-                length    = 200f + Random.nextFloat() * 150f,
-                depth     = 0.4f + Random.nextFloat() * 0.6f,
-                thickness = 4f
-            )
-            meteorProgress.snapTo(0f)
-            meteorProgress.animateTo(1f, tween(1200, easing = LinearOutSlowInEasing))
+        } finally {
+            // Cut short when the backdrop is covered, so no meteor hangs frozen mid-flight
             meteor = null
         }
     }
 
     Canvas(modifier = modifier.fillMaxSize()) {
+        // Read so every step invalidates the draw
+        step.intValue
         val width   = size.width
         val height  = size.height
         val centerX = width  / 2f
         val centerY = height / 2f
-        val tiltX   = parallaxState.tiltX.value
-        val tiltY   = parallaxState.tiltY.value
+        val tiltX   = parallaxState.tiltX.value * density
+        val tiltY   = parallaxState.tiltY.value * density
         val fa = flashAlpha.value // 0..1, drives white flash overlay
         // Streaks only once the warp is clearly faster than cruising, growing with the speed
-        val streak = ((warpSpeed - 1.3f) / 4f).coerceIn(0f, 1f) * 0.12f
+        val streak = ((stars.warpSpeed - 1.3f) / 4f).coerceIn(0f, 1f) * 0.12f
+        val cullMargin = 50f * density
 
         // Render stars
-        stars.forEach { star ->
-            val adjustedProgress = ((baseProgress * star.speed) + star.initialOffset) % 1f
-            val z = (1f - adjustedProgress).coerceAtLeast(0.01f)
-            if (z !in 0.05f..1.5f) return@forEach
+        for (i in 0 until STAR_COUNT) {
+            val z = (1f - stars.progress[i]).coerceAtLeast(0.01f)
+            if (z !in 0.05f..1.5f) continue
 
             val perspectiveFactor = 1f / z
-            val baseX = star.x * width  * 0.5f
-            val baseY = star.y * height * 0.5f
+            val baseX = stars.x[i] * width  * 0.5f
+            val baseY = stars.y[i] * height * 0.5f
 
             // Perspective projection - stars expand outward as z shrinks
             val projectedX = baseX * perspectiveFactor
             val projectedY = baseY * perspectiveFactor
 
-            val parallaxStrength = star.depth * 150f * (1f - z.coerceIn(0f, 1f))
+            val parallaxStrength = stars.depth[i] * 50f * (1f - z.coerceIn(0f, 1f))
             val finalX = centerX + projectedX + tiltX * parallaxStrength
             val finalY = centerY + projectedY + tiltY * parallaxStrength
 
             // Cull stars outside screen bounds
-            if (finalX < -150 || finalX > width + 150 || finalY < -150 || finalY > height + 150) return@forEach
+            if (finalX < -cullMargin || finalX > width + cullMargin ||
+                finalY < -cullMargin || finalY > height + cullMargin) continue
 
             val sizeFactor  = perspectiveFactor * 0.45f
-            val finalSize   = star.size * sizeFactor
+            val finalSize   = stars.size[i] * density * sizeFactor
 
             // Fade in from far distance, fade out when very close to camera
             val fadeIn    = if (z > 1.3f) ((1.5f - z) / 0.2f).coerceIn(0f, 1f) else 1f
@@ -170,9 +156,9 @@ fun SpaceBackground(
                 else     -> 1f
             }
             // Far stars twinkle, near ones are too bright and too brief for it to read
-            val twinkle = if (z > 0.5f) 0.7f + 0.3f * sin(baseProgress * 40f * star.twinkleRate + star.twinklePhase) else 1f
-            val baseAlpha = (star.baseAlpha * distAlpha * fadeIn * fadeOut * twinkle).coerceIn(0f, 1f)
-            val color = starTints[star.tint]
+            val twinkle = if (z > 0.5f) 0.7f + 0.3f * sin(stars.twinkle[i]) else 1f
+            val baseAlpha = (stars.baseAlpha[i] * distAlpha * fadeIn * fadeOut * twinkle).coerceIn(0f, 1f)
+            val color = starTints[stars.tint[i]]
             val head = Offset(finalX, finalY)
 
             if (streak > 0f && z < 0.8f) {
@@ -195,14 +181,16 @@ fun SpaceBackground(
         meteor?.let { m ->
             val p        = meteorProgress.value
             val angleRad = m.angle * (Math.PI / 180f).toFloat()
-            val parallaxX = tiltX * m.depth * 120f
-            val parallaxY = tiltY * m.depth * 120f
+            val parallaxX = tiltX * m.depth * 40f
+            val parallaxY = tiltY * m.depth * 40f
             val travelDist = width * 2f * p
             val cosA = cos(angleRad); val sinA = sin(angleRad)
+            val length = m.length * density
             val curX = m.startX * width  + travelDist * cosA + parallaxX
             val curY = m.startY * height + travelDist * sinA + parallaxY
-            val tailX = curX - m.length * cosA
-            val tailY = curY - m.length * sinA
+            val tailX = curX - length * cosA
+            val tailY = curY - length * sinA
+            val thickness = m.thickness * density
 
             // Outer glow
             drawLine(
@@ -213,7 +201,7 @@ fun SpaceBackground(
                     start = Offset(curX, curY), end = Offset(tailX, tailY)
                 ),
                 start = Offset(curX, curY), end = Offset(tailX, tailY),
-                strokeWidth = m.thickness * 4f, cap = StrokeCap.Round
+                strokeWidth = thickness * 4f, cap = StrokeCap.Round
             )
             // Core trail
             drawLine(
@@ -224,7 +212,7 @@ fun SpaceBackground(
                     start = Offset(curX, curY), end = Offset(tailX, tailY)
                 ),
                 start = Offset(curX, curY), end = Offset(tailX, tailY),
-                strokeWidth = m.thickness, cap = StrokeCap.Round
+                strokeWidth = thickness, cap = StrokeCap.Round
             )
         }
 
@@ -236,55 +224,77 @@ fun SpaceBackground(
     }
 }
 
+private const val STAR_COUNT = 300
+
 /**
- * Generates initial pool of stars with varied properties.
- * Uses golden angle distribution for even coverage and staggered Z offsets.
+ * The star pool in flat arrays, moved in place by [advance] so stepping and drawing allocate
+ * nothing. Every star keeps its own place along the Z-axis in [progress], 0 far away and 1 at the
+ * camera, wrapping on its own, so no shared counter grows until a Float can no longer resolve it.
  */
-private fun generateStarPool(): List<StarData> = List(300) { index ->
-    val depthLayer = index / 300f
-    var x: Float; var y: Float; var distance: Float
-    do {
-        val angle = (index * 137.5f) % 360f // Golden angle for even angular distribution
-        distance = sqrt(Random.nextFloat()) * 1.5f
-        val angleRad = angle * (Math.PI / 180f).toFloat()
-        x = cos(angleRad) * distance
-        y = sin(angleRad) * distance
-    } while (distance < 0.15f) // Exclude center 10% area to avoid crowding the vanishing point
+private class StarField {
+    val x = FloatArray(STAR_COUNT)
+    val y = FloatArray(STAR_COUNT)
+    val size = FloatArray(STAR_COUNT) // In dp
+    val baseAlpha = FloatArray(STAR_COUNT)
+    val tint = IntArray(STAR_COUNT) // Index into the theme's star tints: 0 white, 1 blue, 2 warm
+    val depth = FloatArray(STAR_COUNT)
+    val progress = FloatArray(STAR_COUNT)
+    val twinkle = FloatArray(STAR_COUNT) // Phase of the twinkle, in radians
+    private val speed = FloatArray(STAR_COUNT)
+    private val twinkleRate = FloatArray(STAR_COUNT)
 
-    StarData(
-        x             = x,
-        y             = y,
-        size          = 2f + Random.nextFloat() * 3.5f,
-        baseAlpha     = 0.6f + Random.nextFloat() * 0.4f,
-        tint          = Random.nextFloat().let { if (it < 0.7f) 0 else if (it < 0.88f) 1 else 2 },
-        twinkleRate   = 0.5f + Random.nextFloat(),
-        twinklePhase  = Random.nextFloat() * 6.2832f,
-        depth         = depthLayer,
-        speed         = 0.3f + depthLayer * 2.2f,
-        initialOffset = Random.nextFloat(), // Stagger stars along Z-axis for density
-        lastRegen     = -1
-    )
+    /** The eased speed the warp currently runs at, which stretches the near stars into streaks. */
+    var warpSpeed = 1f
+        private set
+
+    init {
+        for (i in 0 until STAR_COUNT) {
+            val depthLayer = i / STAR_COUNT.toFloat()
+            // Golden angle for even angular distribution
+            place(i, angleDegrees = (i * 137.5f) % 360f)
+            size[i] = 0.67f + Random.nextFloat() * 1.17f
+            baseAlpha[i] = 0.6f + Random.nextFloat() * 0.4f
+            tint[i] = Random.nextFloat().let { if (it < 0.7f) 0 else if (it < 0.88f) 1 else 2 }
+            twinkleRate[i] = 0.5f + Random.nextFloat()
+            twinkle[i] = Random.nextFloat() * TWO_PI
+            depth[i] = depthLayer
+            speed[i] = 0.3f + depthLayer * 2.2f
+            progress[i] = Random.nextFloat() // Stagger stars along Z-axis for density
+        }
+    }
+
+    fun advance(scaledMs: Float, warpSpeed: Float) {
+        this.warpSpeed = warpSpeed
+        // Normalize the increment to a 60fps baseline so delta spikes don't jump
+        val travel = 0.0025f * (scaledMs / 16.67f)
+        for (i in 0 until STAR_COUNT) {
+            twinkle[i] = (twinkle[i] + travel * 40f * twinkleRate[i]) % TWO_PI
+            progress[i] += travel * speed[i]
+            // Passed the camera: comes back far away from a new direction
+            if (progress[i] >= 1f) {
+                progress[i] = fract(progress[i])
+                place(i, angleDegrees = Random.nextFloat() * 360f)
+            }
+        }
+    }
+
+    /** Puts star [i] at [angleDegrees] around the vanishing point, outside the crowded center. */
+    private fun place(i: Int, angleDegrees: Float) {
+        val angleRad = angleDegrees * (Math.PI / 180f).toFloat()
+        var distance: Float
+        do {
+            distance = sqrt(Random.nextFloat()) * 1.5f
+        } while (distance < 0.15f) // Exclude center 10% area to avoid crowding the vanishing point
+        x[i] = cos(angleRad) * distance
+        y[i] = sin(angleRad) * distance
+    }
 }
-
-private data class StarData(
-    val x: Float,
-    val y: Float,
-    val size: Float,
-    val baseAlpha: Float,
-    val tint: Int, // Index into the theme's star tints: 0 white, 1 blue, 2 warm
-    val twinkleRate: Float,
-    val twinklePhase: Float,
-    val depth: Float,
-    val speed: Float,
-    val initialOffset: Float, // Offset along Z-axis to distribute stars
-    val lastRegen: Int // Tracks last regen frame to avoid duplicate regeneration
-)
 
 private data class MeteorState(
     val startX: Float,
     val startY: Float,
     val angle: Float,
-    val length: Float,
+    val length: Float, // In dp
     val depth: Float,
-    val thickness: Float
+    val thickness: Float // In dp
 )

@@ -120,18 +120,10 @@ fun isNewerVersion(oldVersion: String?, newVersion: String?): Boolean {
 }
 
 /**
- * Builds a release page URL for [version] in [repoUrl].
- *
- * GitHub uses `/releases/tag/<version>`, GitLab uses `/-/releases/<version>`.
- * [version] is normalized to include a `v` prefix if absent.
+ * Builds a release page URL for [version] in [repoUrl], on the [CodeHost.releasePath] of its host
+ * and the GitHub one for any other. [version] is normalized to include a `v` prefix if absent.
  */
 fun releasePageUrl(repoUrl: String, version: String): String {
-    val normalized = version.withVersionPrefix()
-    return if (isGitLabUrl(repoUrl))
-        "$repoUrl/-/releases/$normalized"
-    else
-        "$repoUrl/releases/tag/$normalized"
+    val host = SourceUrl.parse(repoUrl)?.codeHost ?: CodeHost.GITHUB
+    return "$repoUrl/${host.releasePath(version.withVersionPrefix())}"
 }
-
-/** Whether [url] points at GitLab, whose pages follow a layout of their own. */
-fun isGitLabUrl(url: String): Boolean = url.contains(GITLAB_HOST, ignoreCase = true)

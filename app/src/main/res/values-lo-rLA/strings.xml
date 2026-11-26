@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ແຫຼ່ງທີ່ມານີ້ຖືກປິດໃຊ້ງານ. ແພັດຊ໌ຂອງມັນຖືກລາຍຊື່ໄວ້ເພື່ອອ້າງອີງ ແລະ ຈະບໍ່ຖືກນຳໃຊ້</string>
     <string name="sources_management_open_in_browser">ເປີດໃນບຣາວເຊີ</string>
     <string name="sources_management_report_issue">ລາຍງານບັນຫາ</string>
+    <string name="sources_management_export_patches">ສົ່ງອອກໄຟລ໌ patches</string>
+    <string name="sources_management_export_patches_success">ບັນທຶກໄຟລ໌ patches ແລ້ວ</string>
+    <string name="sources_management_export_patches_failed">ສົ່ງອອກໄຟລ໌ patches ບໍ່ສຳເລັດ</string>
     <string name="sources_management_failed_to_open_url">ເປີດ URL ລົ້ມເຫຼວ</string>
     <string name="sources_apps">ແອັບ</string>
     <string name="sources_apps_description">ແອັບທີ່ຖືກໝາຍແມ່ນມາຈາກແຫຼ່ງນີ້. ແຕະແອັບເພື່ອເອົາມັນອອກ ຫຼື ນຳມັນກັບຄືນມາ, ປັດມັນເພື່ອເບິ່ງການປັບປຸງຂອງມັນ. ແອັບທີ່ບໍ່ມີແຫຼ່ງທີ່ມາຈະອອກຈາກໜ້າຈໍຫຼັກ, ຍົກເວັ້ນວ່າທ່ານໄດ້ປັບປຸງມັນ</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">ແຫຼ່ງຊຸດແພດນີ້ຖືກບລັອກ ແລະບໍ່ສາມາດເພີ່ມໄດ້</string>
     <string name="sources_management_source_blocked_badge">ຖືກບລັອກ</string>
     <string name="sources_management_metadata_unavailable">ຂໍ້ມູນກຳກັບບໍ່ມີ</string>
+    <string name="sources_management_bundle_missing_badge">ບໍ່ໄດ້ດາວໂຫຼດ</string>
     <string name="sources_management_metadata_unavailable_hint">ໄຟລ໌ຂໍ້ມູນກຳກັບຣີໂມດບໍ່ສາມາດໃຊ້ໄດ້. ການແພດດ້ວຍຊຸດທີ່ຕິດຕັ້ງໄວ້ຍັງເຮັດວຽກໄດ້, ແຕ່ການອັບເດດອັດຕະໂນມັດຈະຖືກປິດສຳລັບແຫຼ່ງນີ້</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ບໍ່ສາມາດດາວໂຫຼດຊຸດແພດໄດ້. URL ແຫຼ່ງຂໍ້ມູນອາດບໍ່ຖືກຕ້ອງ ຫຼືໄຟລ໌ບໍ່ມີຢູ່</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">ບໍ່ສາມາດດາວໂຫຼດຊຸດແພັດໄດ້. URL ຕົ້ນທາງອາດຈະບໍ່ຖືກຕ້ອງ ຫຼື ໄຟລ໌ບໍ່ມີຢູ່. ແຕະເພື່ອປ່ຽນມັນ</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ຊື່ທີ່ສະແດງ</string>
     <string name="sources_dialog_rename">ປ່ຽນຊື່ແຫຼ່ງຊຸດແພດ</string>
+    <string name="sources_dialog_renamed">ປ່ຽນຊື່ເປັນ %s</string>
     <string name="sources_dialog_change_url">ປ່ຽນບ່ອນທີ່ດາວໂຫຼດແຫຼ່ງຂອງແພັດ</string>
     <string name="sources_dialog_duplicate_name_error">ມີແຫຼ່ງຊຸດແພດທີ່ມີຊື່ນີ້ຢູ່ແລ້ວ</string>
     <string name="sources_dialog_missing_error">ບໍ່ສາມາດອັບເດດແຫຼ່ງຊຸດແພດນີ້ໄດ້</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">ອັບເດດ %s</string>
     <string name="sources_dialog_url_valid">ຣີໂພຊິໂທຣີ ຫຼື URL JSON ທີ່ຖືກຕ້ອງ</string>
-    <string name="sources_dialog_url_invalid">URL ຕ້ອງຊີ້ໄປທີ່ຣີໂພ GitHub/GitLab ຫຼືໄຟລ໌ .json</string>
+    <string name="sources_dialog_url_invalid">URL ຕ້ອງຊີ້ໄປທີ່ repo ຂອງ GitHub, GitLab ຫຼື Codeberg ຫຼື ໄຟລ໌ .json</string>
     <string name="sources_dialog_preinstalled">ຕິດຕັ້ງມາກ່ອນແລ້ວ</string>
     <string name="sources_dialog_community">Patch ຈາກຊຸມຊົນ</string>
     <string name="sources_dialog_choose_apps">ເລືອກແອັບ</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">ການປ່ຽນແປງລິ້ງແອັບຫຼົ້ມເຫຼວ</string>
     <string name="app_links_all_verified">ລິ້ງທີ່ຮອງຮັບທັງໝົດຖືກຕັ້ງຄ່າໃຫ້ເປີດໃນແອັບນີ້</string>
     <string name="app_links_fix">ແກ້ໄຂລິ້ງ</string>
+    <string name="app_links_allow_shizuku">ອະນຸຍາດໃຫ້ Shizuku ເຂົ້າເຖິງ</string>
+    <string name="app_links_shizuku_permission_hint">ອະນຸຍາດໃຫ້ Morphe ໃຊ້ Shizuku ເພື່ອເປີດລິງເຫຼົ່ານີ້ໃຫ້ທ່ານ</string>
+    <string name="app_links_shizuku_not_running_hint">ເລີ່ມຕົ້ນ Shizuku ເພື່ອໃຫ້ Morphe ເປີດລິງເຫຼົ່ານີ້ໃຫ້ທ່ານ</string>
     <string name="configure">ຕັ້ງຄ່າ</string>
     <string name="patcher_rename_title">ສິ່ງນີ້ຈະຕິດຕັ້ງຕົວຈຳລອງ</string>
     <string name="patcher_rename_description">Patch ໄດ້ສ້າງແອັບນີ້ພາຍໃຕ້ຊື່ package ຂອງພວກເຂົາເອງ, ດັ່ງນັ້ນການຕິດຕັ້ງມັນຈະເປັນການເພີ່ມຕົວໂຄລນຄວບຄູ່ໄປກັບ &lt;b&gt;%s&lt;/b&gt; ແທນທີ່ຈະເປັນການອັບເດດ</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">ບັນທຶກແອັບທີ່ແພດແລ້ວລົ້ມເຫຼວ</string>
     <string name="plugin_activity_dialog_body">ຕ້ອງມີການໂຕ້ຕອບຈາກຜູ້ໃຊ້ເພື່ອດຳເນີນການກັບປລັກອິນນີ້</string>
     <string name="patcher_process_killed_message">ລະບົບໄດ້ຢຸດ patcher ກ່ອນທີ່ມັນຈະສຳເລັດ, ປົກກະຕິແມ່ນເພື່ອຄືນໜ່ວຍຄວາມຈຳ. ກະລຸນາປິດແອັບອື່ນໆ ແລະ ລອງໃໝ່</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ຖືກປິດກ່ອນທີ່ການແປັດຊ໌ຈະສຳເລັດ, ດັ່ງນັ້ນຈຶ່ງບໍ່ມີສິ່ງໃດຖືກແປັດຊ໌. ກະລຸນາລອງໃໝ່</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ຕົວແພັດຢຸດເຮັດວຽກກ່ອນທີ່ຈະສຳເລັດ. ຖ້າຫາກເກີດຂຶ້ນອີກ, ໃຫ້ປິດ %1$s ແລະ ລາຍງານບັນຫານີ້ພ້ອມກັບບົດບັນທຶກ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">ເກມນ້ອຍໆ</string>
     <string name="mini_games_description">ເກມທີ່ຫຼິ້ນໄດ້ໄວໆເພື່ອຜ່ອນຄາຍໃນເວລາຫວ່າງ</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ເກມ</string>
     <string name="mini_game_score">ຄະແນນ %s</string>
     <string name="mini_game_best">ດີທີ່ສຸດ %s</string>
     <string name="mini_game_new_record">ສະຖິຕິໃໝ່!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">ສະແດງທັງໝົດ (%s)</string>
     <string name="changelog_show_less">ສະແດງໜ້ອຍລົງ</string>
     <string name="no_network_toast">ບໍ່ມີການເຊື່ອມຕໍ່ອິນເຕີເນັດ</string>
+    <string name="download_waiting_for_network">ກຳລັງລໍຖ້າເຄືອຂ່າຍ</string>
     <string name="update_available">ມີອັບເດດພ້ອມໃຊ້</string>
     <string name="ready_to_install_update">ພ້ອມຕິດຕັ້ງອັບເດດ</string>
     <string name="update_completed">ຕິດຕັ້ງອັບເດດແລ້ວ</string>

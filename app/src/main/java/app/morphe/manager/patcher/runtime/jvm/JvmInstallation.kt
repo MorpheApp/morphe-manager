@@ -6,7 +6,6 @@
 package app.morphe.manager.patcher.runtime.jvm
 
 import android.app.Application
-import android.os.Build
 import android.util.Log
 import app.morphe.manager.BuildConfig
 import app.morphe.manager.patcher.runtime.JvmUnavailableException
@@ -15,6 +14,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import app.morphe.manager.util.LOG_TAG
+import app.morphe.manager.util.processAbi
 import org.tukaani.xz.XZInputStream
 import java.io.File
 import java.io.IOException
@@ -39,10 +39,8 @@ class JvmInstallation(private val app: Application) {
      * The ABI of the runtime this device gets, null where the app ships none for it. Matched to
      * the process rather than the device, as a 64 bit device can run the app as a 32 bit one and
      * an x86 device can run ARM code through translation, which the JVM cannot run under.
-     * The process runs the native libraries of the folder Android named after its instruction set.
      */
-    val abi: String? = ABIS_BY_INSTRUCTION_SET[File(app.applicationInfo.nativeLibraryDir).name]
-        ?.takeIf { it in BuildConfig.EMBEDDED_JVM_ABIS }
+    val abi: String? = app.processAbi()?.takeIf { it in BuildConfig.EMBEDDED_JVM_ABIS }
 
     val isAvailable get() = abi != null
 
@@ -58,7 +56,7 @@ class JvmInstallation(private val app: Application) {
     suspend fun install(): Installed = lock.withLock {
         withContext(Dispatchers.IO) {
             val abi = abi ?: throw JvmUnavailableException(
-                "No patcher JVM for ${Build.SUPPORTED_ABIS.joinToString()}"
+                "No patcher JVM for ${app.processAbi() ?: "an unknown ABI"}"
             )
 
             try {
@@ -250,13 +248,6 @@ class JvmInstallation(private val app: Application) {
 
         // Takes the place of every other locale variable, LC_CTYPE included
         const val LOCALE_OVERRIDE = "LC_ALL"
-
-        val ABIS_BY_INSTRUCTION_SET = mapOf(
-            "arm64" to "arm64-v8a",
-            "arm" to "armeabi-v7a",
-            "x86_64" to "x86_64",
-            "x86" to "x86"
-        )
 
     }
 }

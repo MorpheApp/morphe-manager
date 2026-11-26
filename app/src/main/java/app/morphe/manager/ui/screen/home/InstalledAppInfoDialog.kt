@@ -39,6 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -49,7 +50,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.*
 import app.morphe.manager.domain.bundles.AppVersionStatus
-import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.bundles.versionStatus
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -213,23 +213,13 @@ fun DialogHostScope.InstalledAppInfoDialog(
     // Bundle data
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
     val appliedBundles by viewModel.appliedBundles.collectAsStateWithLifecycle()
-    // Only a remote source has a changelog. The one carrying a pending update is read from the
-    // version the app was patched with, any other from its current release
-    val changelogUids = appliedBundles.map { it.uid }.filter { uid -> sources.any { it.uid == uid && it is RemotePatchBundle } }
-    val changelogUid = appUpdate?.bundleUid?.takeIf { it in changelogUids } ?: changelogUids.firstOrNull()
-    val onShowChangelog: (() -> Unit)? = changelogUid?.let { uid ->
-        {
-            scope.launch {
-                changelogRequest.value = BundleChangelogRequest(
-                    bundleUid = uid,
-                    sinceVersion = appUpdate?.takeIf { it.bundleUid == uid }?.patchedWithVersion,
-                    subject = installedApp?.let { homeViewModel.apps.changelogSubject(it, uid) }
-                )
-            }
-        }
+    val appChangelogs by homeViewModel.apps.appChangelogs.collectAsStateWithLifecycle()
+    val appChangelog = appChangelogs[packageName]
+    val onShowChangelog: (() -> Unit)? = appChangelog?.let { changelog ->
+        { scope.launch { changelogRequest.value = homeViewModel.apps.changelogRequest(changelog) } }
     }
     // The rebuild banner reads out the notes of the update it offers, so the info row leaves them to it
-    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appUpdate?.bundleUid == changelogUid }
+    val updateChangelog = onShowChangelog?.takeIf { showsRebuildBanner && appChangelog.update != null }
     val bundlesUsedSummary by viewModel.bundlesUsedSummary.collectAsStateWithLifecycle()
     val availablePatches by viewModel.availablePatches.collectAsStateWithLifecycle()
 
@@ -989,17 +979,22 @@ private fun VersionTransition(
     modifier: Modifier = Modifier
 ) {
     val (from, to) = versions
+    val rtl = isRtl()
     // Points the way the language runs, so the move reads forwards in Arabic and Hebrew too
-    val arrow = if (isRtl()) "←" else "→"
+    val arrow = if (rtl) "←" else "→"
     val readOut = stringResource(readOutRes, from, to)
 
     Text(
+        // Each version is isolated and the line runs the layout's way, since a line opening with a
+        // Latin version would otherwise be laid out left to right with the versions in LTR order
         text = buildAnnotatedString {
-            withStyle(SpanStyle(color = contentColor.copy(alpha = 0.75f))) { append(from) }
+            withStyle(SpanStyle(color = contentColor.copy(alpha = 0.75f))) { append(from.isolateLtr()) }
             withStyle(SpanStyle(color = contentColor.copy(alpha = 0.5f))) { append("  $arrow  ") }
-            withStyle(SpanStyle(color = contentColor, fontWeight = FontWeight.Medium)) { append(to) }
+            withStyle(SpanStyle(color = contentColor, fontWeight = FontWeight.Medium)) { append(to.isolateLtr()) }
         },
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyMedium.copy(
+            textDirection = if (rtl) TextDirection.Rtl else TextDirection.Ltr
+        ),
         textAlign = TextAlign.Center,
         modifier = modifier.semantics { contentDescription = readOut }
     )

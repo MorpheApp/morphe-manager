@@ -141,7 +141,7 @@ class ReleaseAPI(
 
         /** Returns a raw.githubusercontent.com URL for a file at a specific [branch] and [path]. */
         fun rawFileUrl(branch: String, path: String): String =
-            "https://$GITHUB_RAW_HOST/$owner/$name/$branch/$path"
+            CodeHost.GITHUB.rawFileUrl(owner, name, branch, path)
     }
 
     private val rejected = MutableStateFlow<String?>(null)
@@ -402,26 +402,39 @@ class ReleaseAPI(
      */
     private suspend fun getManagerFromJson(branch: String): APIResponse<ReleaseAsset> {
         val url = cacheBusted(if (branch == BRANCH_DEV) MANAGER_PRERELEASE_JSON_URL else MANAGER_RELEASE_JSON_URL)
-        return when (val response = client.request<ManagerReleaseInfo> {
+        return client.request<ManagerReleaseInfo> {
             url(url)
             header("Cache-Control", "no-cache")
-        }) {
+        }.toManagerAsset("JSON ($branch)")
+    }
+
+    /**
+     * Fetches the same manager metadata through the Morphe API, which redirects to wherever the
+     * release file is hosted. Kept apart from GitHub, so updates still arrive when GitHub cannot
+     * be reached or no longer hosts the manager.
+     */
+    private suspend fun getManagerFromApi(branch: String): APIResponse<ReleaseAsset> {
+        val route = if (branch == BRANCH_DEV) "manager/prerelease" else "manager"
+        return apiRequest<ManagerReleaseInfo>(route).toManagerAsset("API ($branch)")
+    }
+
+    private fun APIResponse<ManagerReleaseInfo>.toManagerAsset(source: String): APIResponse<ReleaseAsset> =
+        when (this) {
             is APIResponse.Success -> runCatching {
-                mapManagerJsonToAsset(managerConfig, response.data).also {
-                    Log.d(LOG_TAG, "Manager JSON ($branch): ${it.version} → ${it.downloadUrl}")
+                mapManagerJsonToAsset(managerConfig, data).also {
+                    Log.d(LOG_TAG, "Manager $source: ${it.version} → ${it.downloadUrl}")
                 }
             }.fold(
                 onSuccess = { APIResponse.Success(it) },
                 onFailure = {
-                    Log.w(LOG_TAG, "Failed to map manager JSON ($branch)", it)
+                    Log.w(LOG_TAG, "Failed to map manager $source", it)
                     APIResponse.Failure(APIFailure(it, null))
                 }
             )
 
-            is APIResponse.Error -> APIResponse.Error(response.error)
-            is APIResponse.Failure -> APIResponse.Failure(response.error)
+            is APIResponse.Error -> APIResponse.Error(error)
+            is APIResponse.Failure -> APIResponse.Failure(error)
         }
-    }
 
     /**
      * Checks whether a newer version of the manager is out.
@@ -432,7 +445,7 @@ class ReleaseAPI(
      *
      * Update sources:
      *  - Primary: static JSON file ([USE_MANAGER_DIRECT_JSON] == true)
-     *  - Fallback: GitHub Releases API
+     *  - Fallback: the same file through the Morphe API, then GitHub Releases API
      *
      * A newer version is reported only once its APK is downloadable, so a release that is
      * already announced but still uploading is treated as if it did not exist yet.
@@ -443,7 +456,10 @@ class ReleaseAPI(
 
         val candidate = if (USE_MANAGER_DIRECT_JSON) {
             getManagerFromJson(branch).fallbackTo {
-                Log.w(LOG_TAG, "Manager JSON unavailable, falling back to GitHub API")
+                Log.w(LOG_TAG, "Manager JSON unavailable, falling back to Morphe API")
+                getManagerFromApi(branch)
+            }.fallbackTo {
+                Log.w(LOG_TAG, "Manager JSON unavailable through Morphe API, falling back to GitHub API")
                 getManagerFromGitHub()
             }
         } else {
@@ -623,14 +639,7 @@ class ReleaseAPI(
      */
     fun changelogUrlFromBundleEndpoint(endpoint: String): String? {
         val source = SourceUrl.parse(endpoint) ?: return null
-        val owner = source.owner ?: return null
-        val repo = source.repo ?: return null
-        val branch = source.branch ?: BRANCH_STABLE
-        return when (source.codeHost) {
-            CodeHost.GITHUB -> RepoConfig(owner, repo).rawFileUrl(branch, CHANGELOG_FILE)
-            CodeHost.GITLAB -> "https://$GITLAB_HOST/$owner/$repo/-/raw/$branch/$CHANGELOG_FILE"
-            null -> null
-        }
+        return source.rawFileUrl(source.branch ?: BRANCH_STABLE, CHANGELOG_FILE)
     }
 
     /**

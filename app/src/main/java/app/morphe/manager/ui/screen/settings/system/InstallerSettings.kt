@@ -8,7 +8,6 @@ package app.morphe.manager.ui.screen.settings.system
 import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
-import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.AfterPatching
 import app.morphe.manager.domain.manager.RootPatchMode
 import app.morphe.manager.ui.screen.settings.SettingsSubpage
@@ -28,7 +27,7 @@ fun InstallerSettings(settingsViewModel: SettingsViewModel = koinViewModel()) {
     val prefs = settingsViewModel.prefs
     val preferredToken = settingsViewModel.preferredInstallerToken()
     val options = rememberPolledInstallers(preferredToken) {
-        settingsViewModel.getInstallerEntries(InstallerManager.InstallTarget.PATCHER, preferredToken)
+        settingsViewModel.getInstallerEntries(preferredToken)
     }
 
     val afterPatching by prefs.afterPatching.getAsState()

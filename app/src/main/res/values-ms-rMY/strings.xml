@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Sumber ini dilumpuhkan. Tampalannya disenaraikan untuk rujukan dan tidak digunakan</string>
     <string name="sources_management_open_in_browser">Buka dalam pelayar web</string>
     <string name="sources_management_report_issue">Laporkan isu</string>
+    <string name="sources_management_export_patches">Eksport fail tampalan</string>
+    <string name="sources_management_export_patches_success">Fail tampalan disimpan</string>
+    <string name="sources_management_export_patches_failed">Gagal untuk mengeksport fail tampalan</string>
     <string name="sources_management_failed_to_open_url">Gagal membuka URL</string>
     <string name="sources_apps">Aplikasi</string>
     <string name="sources_apps_description">Aplikasi yang ditanda berasal dari sumber ini. Ketik aplikasi untuk mengeluarkannya atau membawanya kembali, leretkannya untuk melihat tampalannya. Aplikasi tanpa sumber akan meninggalkan skrin utama, melainkan anda telah menampalnya</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Sumber tampalan ini disekat dan tidak boleh ditambah</string>
     <string name="sources_management_source_blocked_badge">Disekat</string>
     <string name="sources_management_metadata_unavailable">Metadata tidak tersedia</string>
+    <string name="sources_management_bundle_missing_badge">Tidak dimuat turun</string>
     <string name="sources_management_metadata_unavailable_hint">Fail metadata jauh tidak tersedia. Menampal dengan berkas terpasang masih berfungsi, tetapi kemas kini automatik dilumpuhkan untuk sumber ini</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Berkas tampalan tidak dapat dimuat turun. URL sumber mungkin salah atau fail itu tidak ada</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Fail tampalan tidak dapat dimuat turun. URL sumber mungkin salah atau fail itu tidak wujud. Ketik untuk mengubahnya</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nama paparan</string>
     <string name="sources_dialog_rename">Namakan semula sumber tampalan</string>
+    <string name="sources_dialog_renamed">Dinamakan semula kepada %s</string>
     <string name="sources_dialog_change_url">Ubah lokasi muat turun sumber tampalan</string>
     <string name="sources_dialog_duplicate_name_error">Sumber tampalan dengan nama ini sudah ada</string>
     <string name="sources_dialog_missing_error">Sumber tampalan ini tidak dapat dikemas kini</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Mengemas kini %s</string>
     <string name="sources_dialog_url_valid">Repositori atau URL JSON yang sah</string>
-    <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub/GitLab atau fail .json</string>
+    <string name="sources_dialog_url_invalid">URL mestilah menghala ke repositori GitHub, GitLab atau Codeberg atau fail .json</string>
     <string name="sources_dialog_preinstalled">Prapasang</string>
     <string name="sources_dialog_community">Tampalan komuniti</string>
     <string name="sources_dialog_choose_apps">Pilih aplikasi</string>
@@ -577,6 +582,9 @@ Teruskannya mungkin boleh menyebabkan aplikasi tidak dapat berfungsi</string>
     <string name="app_links_change_failed">Gagal mengubah pautan aplikasi</string>
     <string name="app_links_all_verified">Semua pautan disokong dikonfigurasikan untuk dibuka dalam aplikasi ini</string>
     <string name="app_links_fix">Baiki pautan</string>
+    <string name="app_links_allow_shizuku">Benarkan akses Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Benarkan Morphe menggunakan Shizuku untuk mengaktifkan pautan ini untuk anda</string>
+    <string name="app_links_shizuku_not_running_hint">Mulakan Shizuku untuk membiarkan Morphe mengaktifkan pautan ini untuk anda</string>
     <string name="configure">Konfigurasi</string>
     <string name="patcher_rename_title">Ini akan memasang klon</string>
     <string name="patcher_rename_description">Tampalan membina aplikasi ini di bawah nama pakej sendiri, jadi memasangnya menambah klon di samping &lt;b&gt;%s&lt;/b&gt; dan bukannya mengemas kininya</string>
@@ -746,6 +754,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="patched_app_save_failed_toast">Gagal untuk menyimpan aplikasi yang telah ditampal</string>
     <string name="plugin_activity_dialog_body">Interaksi pengguna diperlukan untuk meneruskan dengan pemalam ini</string>
     <string name="patcher_process_killed_message">Sistem menghentikan patcher sebelum ia selesai, biasanya untuk mengosongkan memori. Tutup aplikasi lain dan cuba lagi</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe telah ditutup sebelum penampalan selesai, jadi tiada apa yang ditampal. Cuba lagi</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Penampal terhenti secara tiba-tiba sebelum selesai. Jika ini berlaku lagi, matikan %1$s dan laporkan isu tersebut bersama log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +778,8 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <!-- Mini-games -->
     <string name="mini_games">Permainan mini</string>
     <string name="mini_games_description">Permainan pantas untuk mengisi masa lapang</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Permainan</string>
     <string name="mini_game_score">Markah %s</string>
     <string name="mini_game_best">Terbaik %s</string>
     <string name="mini_game_new_record">Rekod baharu!</string>
@@ -1562,6 +1574,7 @@ Butiran: %2$s"</string>
     <string name="changelog_show_all">Paparkan semua (%s)</string>
     <string name="changelog_show_less">Paparkan kurang</string>
     <string name="no_network_toast">Tiada sambungan internet tersedia</string>
+    <string name="download_waiting_for_network">Menunggu rangkaian</string>
     <string name="update_available">Kemas kini tersedia</string>
     <string name="ready_to_install_update">Sedia untuk memasang kemas kini</string>
     <string name="update_completed">Kemas kini dipasang</string>

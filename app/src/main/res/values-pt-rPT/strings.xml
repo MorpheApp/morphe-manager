@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Esta fonte está desativada. Os seus patches são listados para referência e não são aplicados</string>
     <string name="sources_management_open_in_browser">Abrir no navegador</string>
     <string name="sources_management_report_issue">Comunicar um problema</string>
+    <string name="sources_management_export_patches">Exportar arquivo de patches</string>
+    <string name="sources_management_export_patches_success">Arquivo de patches salvo</string>
+    <string name="sources_management_export_patches_failed">Falha ao exportar arquivo de patches</string>
     <string name="sources_management_failed_to_open_url">Erro ao abrir URL</string>
     <string name="sources_apps">Aplicações</string>
     <string name="sources_apps_description">As aplicações marcadas vêm desta fonte. Toque numa aplicação para a deixar de fora ou a repor, deslize-a para ver os seus patches. Uma aplicação sem fonte sai do ecrã inicial, a menos que tenha aplicado um patch</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Esta fonte de atualização está bloqueada e não pode ser adicionada</string>
     <string name="sources_management_source_blocked_badge">Bloqueado</string>
     <string name="sources_management_metadata_unavailable">Metadados não disponíveis</string>
+    <string name="sources_management_bundle_missing_badge">Não transferido</string>
     <string name="sources_management_metadata_unavailable_hint">O ficheiro de metadados remoto está indisponível. A aplicação de modificações com o pacote instalado ainda funciona, mas a atualização automática está desativada para esta fonte</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Não foi possível transferir o pacote de modificações. A URL da fonte pode estar incorreta ou o ficheiro não existe</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Não foi possível transferir o pacote de modificações. A URL da fonte pode estar incorreta ou o ficheiro não existe. Toque para alterá-la</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nome de exibição</string>
     <string name="sources_dialog_rename">Mudar o nome da fonte de modificações</string>
+    <string name="sources_dialog_renamed">Renomeado para %s</string>
     <string name="sources_dialog_change_url">Alterar a origem da transferência do patch</string>
     <string name="sources_dialog_duplicate_name_error">Já existe uma fonte de modificações com este nome</string>
     <string name="sources_dialog_missing_error">Não foi possível atualizar esta fonte de modificações</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Atualiza %s</string>
     <string name="sources_dialog_url_valid">Repositório ou URL JSON válido</string>
-    <string name="sources_dialog_url_invalid">O URL deve apontar para um repositório do GitHub/GitLab ou ficheiro .json</string>
+    <string name="sources_dialog_url_invalid">O URL deve apontar para um repositório do GitHub, GitLab ou Codeberg ou ficheiro .json</string>
     <string name="sources_dialog_preinstalled">Pré-instalado</string>
     <string name="sources_dialog_community">Patches da comunidade</string>
     <string name="sources_dialog_choose_apps">Escolher apps</string>
@@ -576,6 +581,9 @@ Para obteres os melhores resultados, este ficheiro recomenda a modificação de 
     <string name="app_links_change_failed">Falha ao alterar os links do app</string>
     <string name="app_links_all_verified">Todos os links compatíveis estão configurados para abrir nesta aplicação</string>
     <string name="app_links_fix">Corrigir links</string>
+    <string name="app_links_allow_shizuku">Permitir acesso ao Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permita que o Morphe use o Shizuku para ativar esses links para você</string>
+    <string name="app_links_shizuku_not_running_hint">Inicie o Shizuku para permitir que o Morphe ative esses links para você</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Isto irá instalar uma cópia</string>
     <string name="patcher_rename_description">Os patches compilaram esta aplicação com um nome de pacote próprio, por isso, instalá-la adiciona uma cópia ao lado de &lt;b&gt;%s&lt;/b&gt; em vez de a atualizar</string>
@@ -745,6 +753,8 @@ Desinstalar vai apagar permanentemente todos os dados da aplicação."</string>
     <string name="patched_app_save_failed_toast">Erro ao guardar a aplicação modificada</string>
     <string name="plugin_activity_dialog_body">Uma interação do utilizador é necessária para continuar com este plugin</string>
     <string name="patcher_process_killed_message">O sistema interrompeu o patcher antes de concluir, geralmente para libertar memória. Feche outras aplicações e tente novamente</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">O Morphe foi fechado antes da conclusão da atualização, portanto, nada foi atualizado. Tente novamente</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">O modificador falhou antes de terminar. Se acontecer novamente, desativa %1$s e reporta o problema com o log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Desinstalar vai apagar permanentemente todos os dados da aplicação."</string>
     <!-- Mini-games -->
     <string name="mini_games">Minijogos</string>
     <string name="mini_games_description">Jogos rápidos para passar um minuto livre</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jogos</string>
     <string name="mini_game_score">Pontuação %s</string>
     <string name="mini_game_best">Melhor %s</string>
     <string name="mini_game_new_record">Novo recorde!</string>
@@ -1561,6 +1573,7 @@ Detalhes: %2$s"</string>
     <string name="changelog_show_all">Mostrar tudo (%s)</string>
     <string name="changelog_show_less">Mostrar menos</string>
     <string name="no_network_toast">Ligação à Internet indisponível</string>
+    <string name="download_waiting_for_network">A aguardar rede</string>
     <string name="update_available">Está disponível uma atualização</string>
     <string name="ready_to_install_update">Pronto para instalar a atualização</string>
     <string name="update_completed">Atualização instalada</string>

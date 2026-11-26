@@ -157,7 +157,7 @@ sealed class RemotePatchBundle(
     /**
      * Where the "open in browser" action takes the user: the source itself, not a single release.
      *
-     * Hosts other than GitHub and GitLab have no known repository layout, so those fall back to the
+     * Hosts other than a [CodeHost] have no known repository layout, so those fall back to the
      * page URL the manifest declares and finally to the endpoint, keeping self-hosted sources on
      * their own server instead of an unrelated repository.
      */
@@ -167,13 +167,13 @@ sealed class RemotePatchBundle(
     /**
      * Where the "report an issue" action takes the user: the repository's issues page.
      *
-     * Follows the same order as [browsePageUrl] and appends the host's issues path
-     * (GitHub: /issues, GitLab: /-/issues). Hosts other than GitHub and GitLab have no known
-     * issues layout, so those land on the browse page instead of a guessed path.
+     * Follows the same order as [browsePageUrl] and appends the host's [CodeHost.issuesPath].
+     * Other hosts have no known issues layout, so those land on the browse page instead of a
+     * guessed path.
      */
     open val issuesPageUrl: String
         get() = inferIssuesUrlFromEndpoint(endpoint)
-            ?: manifestPageUrl?.let { issuesUrlForRepoUrl(it) }
+            ?: manifestPageUrl?.let(::inferIssuesUrlFromEndpoint)
             ?: browsePageUrl
 
     /** Add-source link for this source, see [addSourceLinkForEndpoint]. */
@@ -251,7 +251,7 @@ sealed class RemotePatchBundle(
 
         /**
          * Infer the repository page URL from various endpoint formats.
-         * Returns null for hosts other than GitHub and GitLab, whose repository layout is unknown.
+         * Returns null for hosts other than a [CodeHost], whose repository layout is unknown.
          */
         fun inferPageUrlFromEndpoint(endpoint: String): String? =
             SourceUrl.parse(endpoint)?.repositoryUrl
@@ -263,24 +263,12 @@ sealed class RemotePatchBundle(
          */
         fun addSourceLinkForEndpoint(endpoint: String, name: String?): String? {
             val source = SourceUrl.parse(endpoint) ?: return null
-            val segments = source.segments
-            val branches = setOf(BRANCH_STABLE, BRANCH_DEV)
-
-            val provider = when (source.host) {
-                GITHUB_RAW_HOST -> CodeHost.GITHUB.key.takeIf {
-                    segments.size == 4 && segments[2] in branches && segments[3] == DEFAULT_BUNDLE_FILE
-                }
-
-                GITLAB_HOST -> CodeHost.GITLAB.key.takeIf {
-                    segments.size == 6 && segments[2] == "-" && segments[3] == "raw" &&
-                            segments[4] in branches && segments[5] == DEFAULT_BUNDLE_FILE
-                }
-
-                else -> null
-            } ?: return null
+            val branch = source.branch?.takeIf { it == BRANCH_STABLE || it == BRANCH_DEV } ?: return null
+            val rootBundle = source.rawFileUrl(branch, DEFAULT_BUNDLE_FILE) ?: return null
+            if ("https://${source.host}/${source.segments.joinToString("/")}" != rootBundle) return null
 
             return buildString {
-                append("$MORPHE_WEBSITE_URL$ADD_SOURCE_PATH?$provider=${segments[0]}/${segments[1]}")
+                append("$MORPHE_WEBSITE_URL$ADD_SOURCE_PATH?${source.repositoryKey}")
                 name?.takeIf { it.isNotBlank() }?.let {
                     append("&name=").append(URLEncoder.encode(it, "UTF-8").replace("+", "%20"))
                 }
@@ -288,8 +276,8 @@ sealed class RemotePatchBundle(
         }
 
         /**
-         * [PatchBundleSource.patchSourceEntry] of a remote source: the repository on GitHub and
-         * GitLab whatever the branch, file or pull request, otherwise the host and path. The
+         * [PatchBundleSource.patchSourceEntry] of a remote source: the repository on a [CodeHost]
+         * whatever the branch, file or pull request, otherwise the host and path. The
          * query and user info are left out, as they can hold a token.
          */
         fun patchSourceEntryForEndpoint(endpoint: String): String {
@@ -302,18 +290,10 @@ sealed class RemotePatchBundle(
         }
 
         /**
-         * Infer the issues page URL from various endpoint formats.
-         * Returns null for hosts other than GitHub and GitLab, whose issues layout is unknown.
+         * Issues page of the repository [url] points at, be it the repository page, a release or a
+         * raw file. Returns null for hosts other than a [CodeHost], whose issues layout is unknown.
          */
-        fun inferIssuesUrlFromEndpoint(endpoint: String): String? =
-            inferPageUrlFromEndpoint(endpoint)?.let { issuesUrlForRepoUrl(it) }
-
-        /** Appends the host's issues path to an already resolved repository URL. */
-        fun issuesUrlForRepoUrl(repoUrl: String): String? = when {
-            repoUrl.startsWith("https://$GITHUB_HOST/") -> "$repoUrl/issues"
-            repoUrl.startsWith("https://$GITLAB_HOST/") -> "$repoUrl/-/issues"
-            else -> null
-        }
+        fun inferIssuesUrlFromEndpoint(url: String): String? = SourceUrl.parse(url)?.issuesUrl
     }
 
     val installedVersionSignature: String? get() = installedVersionSignatureInternal
@@ -341,28 +321,11 @@ class JsonPatchBundle(
     val endpointBranch: String? get() = SourceUrl.parse(endpoint)?.branch
 
     /**
-     * Returns [url] with its branch segment replaced by [targetBranch].
-     *
-     * Supports:
-     * - https://raw.githubusercontent.com/owner/repo/branch/path/file.json
-     * - https://github.com/owner/repo/tree|blob/branch/path/file.json
-     * - https://gitlab.com/owner/repo/-/raw/branch/path/file.json
-     *
-     * Returns the original [url] unchanged for unrecognized hosts, `refs/heads/...` links,
-     * or when parsing fails.
+     * Returns the raw file [url] points at on [targetBranch], or [url] unchanged when it names no
+     * branch of a [CodeHost] repository, such as a `refs/heads/...` link, or no file.
      */
-    private fun switchBranchInUrl(url: String, targetBranch: String): String {
-        val source = SourceUrl.parse(url) ?: return url
-        val index = source.branchIndex ?: return url
-        val segments = source.segments.toMutableList().apply { set(index, targetBranch) }
-        return when (source.host) {
-            // A tree or blob page names a file, which raw.githubusercontent.com serves
-            GITHUB_HOST -> segments.takeIf { it.size >= 5 }
-                ?.let { "https://$GITHUB_RAW_HOST/" + (it.take(2) + it.drop(3)).joinToString("/") }
-                ?: url
-            else -> "https://${source.host}/" + segments.joinToString("/")
-        }
-    }
+    private fun switchBranchInUrl(url: String, targetBranch: String): String =
+        SourceUrl.parse(url)?.takeIf { it.branch != null }?.rawFileUrl(targetBranch) ?: url
 
     /**
      * The endpoint on [branch], see [switchBranchInUrl]. Only an endpoint on `BRANCH_STABLE` or

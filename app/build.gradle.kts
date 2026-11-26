@@ -344,9 +344,14 @@ val embeddedJvmAssets = tasks.register<EmbeddedJvmAssetsTask>("embeddedJvmAssets
     outputDirectory.set(layout.buildDirectory.dir("generated/embeddedJvm"))
 }
 
+/** Whether to build without the baseline profile of the app, for scripts/record-baseline-profile.py to record a new one. */
+val recordProfile = project.hasProperty("recordProfile")
+
 android {
     namespace = "app.morphe.manager"
-    compileSdk = 37
+    compileSdk {
+        version = release(37) { minorApiLevel = 1 }
+    }
 
     defaultConfig {
         applicationId = "app.morphe.manager"
@@ -486,6 +491,10 @@ android {
         @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
+
+    // A profile recorded from an app that has one would keep every rule of it for good
+    @Suppress("UnstableApiUsage")
+    if (recordProfile) sourceSets.named("main") { baselineProfiles.directories.clear() }
 
     buildFeatures {
         compose = true
@@ -642,5 +651,16 @@ androidComponents {
             licenseUrls.set(licensesByUrl)
         }
         variant.sources.assets?.addGeneratedSourceDirectory(licensesAssets, LicensesAssetsTask::outputDirectory)
+
+        // ART never compiles a debuggable app, so the Android Gradle plugin builds no profile for one
+        if (!variant.debuggable && !recordProfile) {
+            val embeddedProfileAssets = tasks.register<EmbeddedProfileAssetsTask>("${variant.name}EmbeddedProfileAssets") {
+                group = "build"
+                description = "Lays out the baseline profile of the $variantName build as an asset ART compiles it with."
+                // Only there once the variant has its tasks
+                compiledProfile.from(provider { tasks.named("compile${variantName}ArtProfile") })
+            }
+            variant.sources.assets?.addGeneratedSourceDirectory(embeddedProfileAssets, EmbeddedProfileAssetsTask::outputDirectory)
+        }
     }
 }

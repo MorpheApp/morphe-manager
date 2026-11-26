@@ -78,6 +78,7 @@ import app.morphe.manager.ui.theme.MorpheBrandTeal
 import app.morphe.manager.util.formatBytesForReport
 import app.morphe.manager.util.formatCount
 import app.morphe.manager.util.formatKibibytesPerSecond
+import app.morphe.manager.util.isSlowPatchingDevice
 import app.morphe.patcher.PatcherTask
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
@@ -381,7 +382,8 @@ fun ExpertPatchingInProgress(
     queueHeader: (@Composable () -> Unit)? = null,
     onCancelClick: () -> Unit,
     resultButton: ResultButton? = null,
-    onResultClick: () -> Unit = {}
+    onResultClick: () -> Unit = {},
+    onGamesClick: (() -> Unit)? = null
 ) {
     val (completed, total) = patchesProgress
     val rawLogs = patchProgress.logs
@@ -408,7 +410,12 @@ fun ExpertPatchingInProgress(
                         delay(50.milliseconds)
                     }
                     val targetIndex = (patchProgress.logItems.size - 1).coerceAtLeast(0)
-                    listState.animateScrollToItem(targetIndex)
+                    // A slow device has no CPU time to spare for scrolling there while patching
+                    if (patcherSucceeded == null && isSlowPatchingDevice) {
+                        listState.scrollToItem(targetIndex)
+                    } else {
+                        listState.animateScrollToItem(targetIndex)
+                    }
                     lastScrollTime = System.currentTimeMillis()
                 }
             }
@@ -429,6 +436,8 @@ fun ExpertPatchingInProgress(
             showCopyLogsButton = true,
             onCancelClick = onCancelClick,
             onResultClick = onResultClick,
+            // A run that is over has its way on in the result button instead
+            onGamesClick = onGamesClick?.takeIf { patcherSucceeded == null },
             onCopyLogsClick = {
                 copyToClipboard(buildLogsText())
             }
@@ -606,7 +615,8 @@ private fun ExpertProgressHeader(
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f),
                         transitionSpec = { Animations.fadeCrossfade(300)(this) using null },
-                        label = "expert_step_name"
+                        label = "expert_step_name",
+                        animated = !isSlowPatchingDevice
                     )
 
                     CountBadge(
@@ -623,9 +633,8 @@ private fun ExpertProgressHeader(
                 }
             }
 
-            // The simple mode's wave laid flat, so both modes show progress alike. [progress]
-            // arrives already eased by [rememberDisplayedPatchProgress], so it is drawn as is
-            WavyProgressBar(
+            // The simple mode's ring laid flat, so both modes show progress alike
+            PatchingProgressBar(
                 progress = progress,
                 accentColor = accentColor,
                 modifier = Modifier.fillMaxWidth()
@@ -1163,9 +1172,17 @@ private val LogLevel.logBadge: String
         LogLevel.ERROR -> "E"
     }
 
-/** Pulsing dot of the empty log panel, in the color of the app being patched, while logs are awaited. */
+/**
+ * Pulsing dot of the empty log panel, in the color of the app being patched, while logs are awaited.
+ * It does not pulse on a slow device.
+ */
 @Composable
 private fun LiveIndicatorDot(color: Color, size: Dp) {
+    if (isSlowPatchingDevice) {
+        Box(modifier = Modifier.size(size).drawBehind { drawCircle(color = color) })
+        return
+    }
+
     val alpha = rememberInfiniteTransition(label = "live_dot").animateFloat(
         initialValue = 0.25f,
         targetValue = 1f,

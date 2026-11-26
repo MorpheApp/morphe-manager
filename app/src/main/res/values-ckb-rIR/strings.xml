@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ئەم سەرچاوەیە ناچالاکە. پاتچەکانی تەنها بۆ ئاماژە لیست کراون و جێبەجێ ناکرێن</string>
     <string name="sources_management_open_in_browser">کردنەوە لە وێبگەڕ</string>
     <string name="sources_management_report_issue">ڕاپۆرتی کێشەیەک بکە</string>
+    <string name="sources_management_export_patches">هەناردەکردنی فایلی پینەکان</string>
+    <string name="sources_management_export_patches_success">فایلی پینەکان پاشکەوتکرا</string>
+    <string name="sources_management_export_patches_failed">هەناردەکردنی فایلی پینەکان سەرکەوتوو نەبوو</string>
     <string name="sources_management_failed_to_open_url">شکستی هێنا لەکردنەوەی بەستەر</string>
     <string name="sources_apps">بەرنامەکان</string>
     <string name="sources_apps_description">ئەپە نیشانەکراوەکان لەم سەرچاوەیە دێن. کلیک لەسەر ئەپێک بکە بۆ لادانی یان گەڕاندنەوەی، پێی بسکڕە بۆ بینینی پاتچەکانی. ئەپێک لە شاشەی سەرەکی نامێنێت ئەگەر هیچ سەرچاوەیەک نەهێنێت، مەگەر ئەوەی پاتچت کردبێت</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">ئەم سەرچاوەی پاتچە بلۆکراوە و ناتوانرێت زیاد بکرێت</string>
     <string name="sources_management_source_blocked_badge">بلۆکراو</string>
     <string name="sources_management_metadata_unavailable">مێتاداتا N/A</string>
+    <string name="sources_management_bundle_missing_badge">داگرای نەبووە</string>
     <string name="sources_management_metadata_unavailable_hint">فایلی مێتاداتای دوور بەردەست نیە. پینەکردن لەگەڵ گورزەی دامەزراو هێشتا کاردەکات، بەڵام نوێکردنەوەی خۆکار بۆ ئەم سەرچاوەیە ناچالاک کراوە</string>
     <string name="sources_management_metadata_unavailable_hint_missing">نەتوانرا گورزەی پینەکردن دابەزێنرێت. سەرچاوەی بەستەر لەوانەیە هەڵە بێت یان فایلەکە بوونی نەبێت</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">نەتوانرا گورزەی پینەکردن دابەزێنرێت. سەرچاوەی بەستەر لەوانەیە هەڵە بێت یان فایلەکە بوونی نەبێت. کلیک بکە بۆ گۆڕینی</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ناوی پیشاندان</string>
     <string name="sources_dialog_rename">ناونانەوەی سەرچاوەی پینەکردن</string>
+    <string name="sources_dialog_renamed">ناوەکەی گۆڕدرا بۆ %s</string>
     <string name="sources_dialog_change_url">گۆڕینی ئەو شوێنەی کە سەرچاوەی پینەکردن لێی دابەزێنرێت</string>
     <string name="sources_dialog_duplicate_name_error">سەرچاوەیەکی پینە بەم ناوە پێشتر بوونی هەیە</string>
     <string name="sources_dialog_missing_error">نەیتوانی سەرچاوەی ئەم پیینە نوێ بکاتەوە</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">نوێکردنەوەکانی %s</string>
     <string name="sources_dialog_url_valid">عەمباری دروست یان URL JSON</string>
-    <string name="sources_dialog_url_invalid">بەستەرەکە دەبێت ئاماژە بە ڕیپۆیەکی GitHub/GitLab یان پەڕگەیەکی .json بکات</string>
+    <string name="sources_dialog_url_invalid">بەستەرەکە دەبێت ئاماژە بە ڕیپۆیەکی GitHub، GitLab یان Codeberg یان پەڕگەیەکی .json بکات</string>
     <string name="sources_dialog_preinstalled">پێشوەختە دامەزراو</string>
     <string name="sources_dialog_community">پاتچەکانی کۆمەڵگەی بەکارهێنەران</string>
     <string name="sources_dialog_choose_apps">ئەپەکان هەڵبژێرە</string>
@@ -577,6 +582,9 @@
     <string name="app_links_change_failed">گۆڕینی لینکەکانی ئەپەکە سەرکەوتوو نەبوو</string>
     <string name="app_links_all_verified">هەموو ئەو لینکانەی پشتگیرییان لێکراوە ڕێکخراون بۆ ئەوەی لەم ئەپەدا بکرێنەوە</string>
     <string name="app_links_fix">چاککردنی لینکەکان</string>
+    <string name="app_links_allow_shizuku">ڕێگە بدە Shizuku دەسترسی هەبێت</string>
+    <string name="app_links_shizuku_permission_hint">ڕێگە بدە Morphe Shizuku بەکاربهێنێت بۆ ئەوەی ئەم لینکانە بۆت چالاک بکات</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku دەستپێبکە بۆ ئەوەی Morphe ڕێگەی بدات ئەم لینکانە بۆت چالاک بکات</string>
     <string name="configure">ڕێکخستن</string>
     <string name="patcher_rename_title">ئەمە دوانەیەک دامەزرێنێت</string>
     <string name="patcher_rename_description">پاتچەکان ئەم ئەپەیان لەژێر ناوێکی پاکێجی تایبەت بە خۆیان دروست کردووە، بۆیە دامەزراندنی کلۆنێک لە تەنیشت &lt;b&gt;%s&lt;/b&gt; زیاد دەکات لەجیاتی نوێکردنەوەی</string>
@@ -746,6 +754,8 @@
     <string name="patched_app_save_failed_toast">شکستی هێنا لە پاشەکەوت کردنی ئەپی پینەکراو</string>
     <string name="plugin_activity_dialog_body">کارلێکردنی بەکارهێنەر پێویستە بۆ ئەوەی بەردەوام بیت لەگەڵ ئەم پێوەکراوە</string>
     <string name="patcher_process_killed_message">سیستەمەکە پاتچەرەکەی ڕاگرت پێش ئەوەی تەواو ببێت، بەزۆری بۆ بەتاڵکردنی میمۆری. ئەپەکانی تر دابخە و دووبارە هەوڵ بدەوە</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe پێش کۆتاییهاتنی پاتچەکە داخرا، بۆیە هیچ شتێک پاتچ نەکرا. دووبارە هەوڵ بدەرەوە</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">پاتچەرەکە پێش تەواوبوون ڕاوەستا. ئەگەر دووبارە ڕوویدا، %1$s کوژێنەرەوە و کێشەکە لەگەڵ لۆگەکە ڕاپۆرت بکە</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +778,8 @@
     <!-- Mini-games -->
     <string name="mini_games">کێڵە-یارییەکان</string>
     <string name="mini_games_description">یارییە خێراکان بۆ بەسەربردنی خشتەیەک لە کاتی بەتاڵیدا</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">یارییەکان</string>
     <string name="mini_game_score">نمرە %s</string>
     <string name="mini_game_best">باشترین %s</string>
     <string name="mini_game_new_record">تۆمارێکی نوێ!</string>
@@ -1562,6 +1574,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">پیشاندانی هەمووی (%s)</string>
     <string name="changelog_show_less">کەمتر نیشان بدە</string>
     <string name="no_network_toast">هیچ پەیوەندییەکی ئینتەرنێت بەردەست نییە</string>
+    <string name="download_waiting_for_network">چاوەڕوانی تۆڕەکەم</string>
     <string name="update_available">نوێکردنەوە بەردەستە</string>
     <string name="ready_to_install_update">ئامادەیە بۆ دامەزراندنی نوێکردنەوە</string>
     <string name="update_completed">نوێکردنەوەکە دامەزرا</string>

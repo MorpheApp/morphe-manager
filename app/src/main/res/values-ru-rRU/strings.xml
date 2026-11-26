@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Этот источник отключен. Его патчи указаны для справки и не применяются.</string>
     <string name="sources_management_open_in_browser">Открыть в браузере</string>
     <string name="sources_management_report_issue">Сообщить о проблеме</string>
+    <string name="sources_management_export_patches">Экспортировать файл патчей</string>
+    <string name="sources_management_export_patches_success">Файл патчей сохранен</string>
+    <string name="sources_management_export_patches_failed">Не удалось экспортировать файл патчей</string>
     <string name="sources_management_failed_to_open_url">Не удалось открыть URL</string>
     <string name="sources_apps">Приложения</string>
     <string name="sources_apps_description">Отмеченные приложения поступают из этого источника. Нажмите на приложение, чтобы исключить его или вернуть обратно, смахните его, чтобы увидеть патчи. Приложение исчезает с главного экрана, если ни один источник его не добавляет, за исключением случаев, когда вы его патчили</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Этот источник патчей заблокирован и не может быть добавлен</string>
     <string name="sources_management_source_blocked_badge">Заблокировано</string>
     <string name="sources_management_metadata_unavailable">Метаданные недоступны</string>
+    <string name="sources_management_bundle_missing_badge">Не скачано</string>
     <string name="sources_management_metadata_unavailable_hint">Удаленный файл метаданных недоступен. Применение патча к установленному пакету по-прежнему работает, но автоматическое обновление для этого источника отключено</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не удалось загрузить пакет патчей. URL-адрес источника может быть указан неверно или файл не существует</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Не удалось загрузить пакет патчей. Возможно, URL источника неверен или файл не существует. Нажмите, чтобы изменить это</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Отображаемое имя</string>
     <string name="sources_dialog_rename">Переименовать источник патча</string>
+    <string name="sources_dialog_renamed">Переименовано в %s</string>
     <string name="sources_dialog_change_url">Изменение места загрузки исходного кода патча</string>
     <string name="sources_dialog_duplicate_name_error">Источник патча с таким названием уже существует</string>
     <string name="sources_dialog_missing_error">Не удалось обновить этот источник патча</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Обновляет %s</string>
     <string name="sources_dialog_url_valid">Корректный URL репозитория или JSON</string>
-    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub/GitLab или на файл .json</string>
+    <string name="sources_dialog_url_invalid">URL должен указывать на репозиторий GitHub, GitLab или Codeberg либо на .json файл</string>
     <string name="sources_dialog_preinstalled">Предварительно установлено</string>
     <string name="sources_dialog_community">Патчи сообщества</string>
     <string name="sources_dialog_choose_apps">Выбрать приложения</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">Не удалось изменить ссылки приложения</string>
     <string name="app_links_all_verified">Все поддерживаемые ссылки настроены на открытие в этом приложении</string>
     <string name="app_links_fix">Исправить ссылки</string>
+    <string name="app_links_allow_shizuku">Разрешить доступ Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Разрешите Morphe использовать Shizuku, чтобы включить эти ссылки за вас</string>
+    <string name="app_links_shizuku_not_running_hint">Запустите Shizuku, чтобы Morphe мог включить эти ссылки за вас</string>
     <string name="configure">Настроить</string>
     <string name="patcher_rename_title">Это установит клон</string>
     <string name="patcher_rename_description">Патчи собрали это приложение под собственным именем пакета, поэтому его установка добавит клон рядом с &lt;b&gt;%s&lt;/b&gt; вместо обновления</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">Не удалось сохранить пропатченное приложение</string>
     <string name="plugin_activity_dialog_body">Требуется взаимодействие пользователя для продолжения работы с этим плагином</string>
     <string name="patcher_process_killed_message">Система остановила патчер до его завершения, обычно для освобождения памяти. Закройте другие приложения и попробуйте ещё раз</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe было закрыто до завершения установки патчей, поэтому ничего не было обновлено. Попробуйте снова</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчер завершился с ошибкой до окончания работы. Если это повторится, выключите %1$s и сообщите о проблеме, приложив лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Мини-игры</string>
     <string name="mini_games_description">Быстрые игры, чтобы скоротать свободную минуту</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Игры</string>
     <string name="mini_game_score">Счет %s</string>
     <string name="mini_game_best">Лучший результат: %s</string>
     <string name="mini_game_new_record">Новый рекорд!</string>
@@ -964,7 +976,7 @@
     <string name="settings_advanced_expert_mode_dialog_title">Включить режим эксперта?</string>
     <string name="settings_advanced_expert_mode_dialog_message">Экспертный режим предоставляет больше контроля над применением патчей, но неправильная настройка параметров в экспертном режиме может привести к нетрудоспособности программы.</string>
     <string name="settings_advanced_strip_unused_libs">Оптимизация для архитектуры устройства</string>
-    <string name="settings_advanced_strip_unused_libs_description">Удаляет неиспользуемые нативные библиотеки и APK-сплиты из пропатченных приложений и сохраненных оригиналов</string>
+    <string name="settings_advanced_strip_unused_libs_description">Удаляет неиспользуемые нативные библиотеки и APK splits из пропатченных приложений и сохраненных оригиналов</string>
     <!-- Settings - Advanced Tab - GitHub PAT Settings -->
     <string name="settings_advanced_github_pat_summary">Разблокирует источники из pull request и частные репозитории</string>
     <string name="settings_advanced_github_pat_description">Для источников из pull request, частных репозиториев и повышенного лимита запросов GitHub</string>
@@ -1143,7 +1155,7 @@ morphe_header_custom_dark.png
     <string name="settings_system_battery_optimization">Оптимизация батареи</string>
     <string name="settings_system_battery_optimization_description">Поддерживает работу патчера при минимизации приложения</string>
     <string name="settings_system_process_runtime">Среда выполнения патчера</string>
-    <string name="settings_system_jvm_runtime_enable">Использовать встроенную ВМ</string>
+    <string name="settings_system_jvm_runtime_enable">Использовать встроенную VM</string>
     <string name="settings_system_jvm_runtime_description">Патчи в собственной Java VM Morphe, которая может потреблять больше памяти. Отключите, чтобы использовать среду выполнения Android</string>
     <string name="settings_system_jvm_runtime_unavailable">Требуется ARM или 64-bit x86 устройство</string>
     <string name="settings_system_patcher_completion_sound">Звук завершения</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Показать все (%s)</string>
     <string name="changelog_show_less">Показать меньше</string>
     <string name="no_network_toast">Нет подключения к Интернету</string>
+    <string name="download_waiting_for_network">Ожидание сети</string>
     <string name="update_available">Доступно обновление</string>
     <string name="ready_to_install_update">Готово к установке обновления</string>
     <string name="update_completed">Обновление установлено</string>

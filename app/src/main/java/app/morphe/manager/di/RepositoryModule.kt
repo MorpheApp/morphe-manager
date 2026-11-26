@@ -16,7 +16,9 @@ import app.morphe.manager.domain.bundles.RemoteBundleServices
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.network.api.ReleaseAPI
+import app.morphe.manager.network.service.ConnectionWatcher
 import app.morphe.manager.util.AppDataResolver
+import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.createdAtStart
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -26,7 +28,9 @@ val repositoryModule = module {
     singleOf(::Filesystem) {
         createdAtStart()
     }
-    singleOf(::NetworkInfo)
+    singleOf(::NetworkInfo) {
+        bind<ConnectionWatcher>()
+    }
     singleOf(::ManagerUpdateRepository)
     singleOf(::PatchSelectionRepository)
     singleOf(::SourceMuteRepository)

@@ -12,18 +12,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import app.morphe.manager.ui.theme.isDarkTheme
-import kotlin.math.PI
 import kotlin.math.min
 import kotlin.math.sin
 import kotlin.random.Random
 
-// Every motion repeats a whole number of times per cycle, so the wrap of the clock is seamless
+// Every motion repeats a whole number of times per cycle, and the cycle fits the shared clock's
+// loop a whole number of times, so the wrap of the clock is seamless
 private const val HALLOWEEN_CYCLE_MS = 120000f
 
 /**
@@ -62,9 +61,9 @@ fun HalloweenBackground(
                 baseY = 0.08f + Random.nextFloat() * 0.6f,
                 bobs = 20 + Random.nextInt(20),
                 bobAmplitude = 0.01f + Random.nextFloat() * 0.02f,
-                bobPhase = Random.nextFloat() * 2f * PI.toFloat(),
+                bobPhase = Random.nextFloat() * TWO_PI,
                 flaps = 420 + Random.nextInt(180),
-                flapPhase = Random.nextFloat() * 2f * PI.toFloat(),
+                flapPhase = Random.nextFloat() * TWO_PI,
                 depth = depth
             )
         }.sortedBy { it.depth }
@@ -75,7 +74,7 @@ fun HalloweenBackground(
             LanternData(
                 x = x + (Random.nextFloat() - 0.5f) * 0.08f,
                 bobs = 24 + Random.nextInt(12),
-                bobPhase = Random.nextFloat() * 2f * PI.toFloat(),
+                bobPhase = Random.nextFloat() * TWO_PI,
                 flickers = 600 + Random.nextInt(300),
                 depth = 0.4f + Random.nextFloat() * 0.6f
             )
@@ -86,6 +85,9 @@ fun HalloweenBackground(
     // allocation per shape per frame
     val batPath = remember { Path() }
     val facePath = remember { Path() }
+    val moonGlow = remember(moonColor, moonAlpha) {
+        unitRadialGlow(0f to moonColor.copy(alpha = moonAlpha * 0.45f), 1f to Color.Transparent)
+    }
 
     val animatedTime = rememberAnimatedTime(speedMultiplier)
 
@@ -94,23 +96,15 @@ fun HalloweenBackground(
     Canvas(modifier = modifier.fillMaxSize()) {
         val width = size.width
         val height = size.height
-        val tiltX = parallaxState.tiltX.value
-        val tiltY = parallaxState.tiltY.value
+        val tiltX = parallaxState.tiltX.value * density
+        val tiltY = parallaxState.tiltY.value * density
         val cycle = (animatedTime.value % HALLOWEEN_CYCLE_MS) / HALLOWEEN_CYCLE_MS
         val burst = scatter.value
 
         // Moon, held almost still so it reads as far behind everything else
         val moonRadius = min(width, height) * 0.09f
-        val moonCenter = Offset(width * 0.78f + tiltX * 8f, height * 0.14f + tiltY * 8f)
-        drawCircle(
-            brush = Brush.radialGradient(
-                colors = listOf(moonColor.copy(alpha = moonAlpha * 0.45f), Color.Transparent),
-                center = moonCenter,
-                radius = moonRadius * 3.5f
-            ),
-            radius = moonRadius * 3.5f,
-            center = moonCenter
-        )
+        val moonCenter = Offset(width * 0.78f + tiltX * 3f, height * 0.14f + tiltY * 3f)
+        drawRadialGlow(moonGlow, moonCenter, moonRadius * 3.5f)
         drawCircle(moonColor.copy(alpha = moonAlpha), moonRadius, moonCenter)
         drawCircle(
             color = Color.Black.copy(alpha = 0.06f),
@@ -129,28 +123,28 @@ fun HalloweenBackground(
             // Travels a wingspan past each edge, so a bat enters and leaves fully out of view
             val progress = (bat.startProgress + cycle * bat.crossings) % 1f
             val travel = progress * (width + span * 2f) - span
-            val bob = sin(2f * PI.toFloat() * cycle * bat.bobs + bat.bobPhase) * bat.bobAmplitude * height
-            val parallaxStrength = bat.depth * 40f
+            val bob = sin(TWO_PI * cycle * bat.bobs + bat.bobPhase) * bat.bobAmplitude * height
+            val parallaxStrength = bat.depth * 13f
             val lift = burst * (height + span * 2f) * (0.8f + bat.depth * 0.6f)
 
             val x = (if (bat.leftward) width - travel else travel) + tiltX * parallaxStrength
             val y = bat.baseY * height + bob + tiltY * parallaxStrength - lift
             if (y < -span || y > height + span) return@forEach
 
-            val flap = sin(2f * PI.toFloat() * cycle * bat.flaps + bat.flapPhase)
+            val flap = sin(TWO_PI * cycle * bat.flaps + bat.flapPhase)
             val alpha = (0.3f + bat.depth * 0.5f) * (1f - burst * 0.6f)
             drawBat(batPath, Offset(x, y), span, flap, batColor.copy(alpha = alpha))
         }
 
         lanterns.forEach { lantern ->
             val radius = (20f + lantern.depth * 14f) * density
-            val bob = sin(2f * PI.toFloat() * cycle * lantern.bobs + lantern.bobPhase) * radius * 0.25f
-            val parallaxStrength = lantern.depth * 30f
+            val bob = sin(TWO_PI * cycle * lantern.bobs + lantern.bobPhase) * radius * 0.25f
+            val parallaxStrength = lantern.depth * 10f
             val center = Offset(
                 lantern.x * width + tiltX * parallaxStrength,
                 height - LanternGround.toPx() - radius * 1.4f + bob + tiltY * parallaxStrength
             )
-            val flicker = 0.8f + 0.2f * sin(2f * PI.toFloat() * cycle * lantern.flickers)
+            val flicker = 0.8f + 0.2f * sin(TWO_PI * cycle * lantern.flickers)
             drawLantern(facePath, center, radius, lanternAlpha, flicker * (1f + burst * 1.5f))
         }
     }
@@ -196,15 +190,7 @@ private fun DrawScope.drawBat(path: Path, center: Offset, s: Float, flap: Float,
 private fun DrawScope.drawLantern(face: Path, center: Offset, r: Float, alpha: Float, glow: Float) {
     val faceAlpha = (alpha * glow).coerceIn(0f, 1f)
 
-    drawCircle(
-        brush = Brush.radialGradient(
-            colors = listOf(LanternGlow.copy(alpha = (0.22f * glow).coerceIn(0f, 1f)), Color.Transparent),
-            center = center,
-            radius = r * 2.6f
-        ),
-        radius = r * 2.6f,
-        center = center
-    )
+    drawRadialGlow(LanternHalo, center, r * 2.6f, alpha = 0.22f * glow)
 
     // Side ribs first, the front one over them
     val ribSize = Size(r * 1.3f, r * 1.6f)
@@ -262,6 +248,7 @@ private val Pumpkin = Color(0xFFF57C00)
 private val PumpkinShade = Color(0xFFE65100)
 private val PumpkinStem = Color(0xFF5D4037)
 private val LanternGlow = Color(0xFFFFD54F)
+private val LanternHalo = unitRadialGlow(0f to LanternGlow, 1f to Color.Transparent)
 
 /**
  * @param crossings How many times the bat crosses the screen per cycle. A whole number, like

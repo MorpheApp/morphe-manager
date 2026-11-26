@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
@@ -27,6 +28,7 @@ import app.morphe.manager.ui.theme.MorpheBrandBlue
 import app.morphe.manager.ui.theme.MorpheBrandTeal
 import app.morphe.manager.ui.theme.isDarkTheme
 import kotlin.math.ceil
+import kotlin.math.roundToInt
 import kotlin.random.Random
 
 // Glyphs of the rain: bits and the hex digits a dex dump is read in, bits weighted the heaviest
@@ -81,10 +83,6 @@ private const val MUTATION_INTERVAL_MS = 90f
 // changing the paint at every glyph. Fine enough that the fade still reads as continuous
 private const val ALPHA_BANDS = 16
 
-// Same wrap as the other backgrounds use, short enough for float time to stay precise
-private const val CYCLE_MS = 120000f
-private const val CYCLE_FADE_MS = 1500f
-
 /**
  * Falling columns of bytecode glyphs, the background the red pill unlocks.
  * Uses frame-based time so [speedMultiplier] changes smoothly without restarting animations.
@@ -106,8 +104,8 @@ fun MatrixBackground(
         sensitivity = 0.15f
     )
 
-    val density = LocalDensity.current
-    val glyphPx = with(density) { GLYPH_SIZE.toPx() }
+    val screenDensity = LocalDensity.current
+    val glyphPx = with(screenDensity) { GLYPH_SIZE.toPx() }
     val columnStep = glyphPx * COLUMN_STEP_RATIO
     val rowStep = glyphPx * ROW_STEP_RATIO
 
@@ -124,19 +122,22 @@ fun MatrixBackground(
     val burstProgress = rememberCompletionPulse(patchingCompleted, riseMillis = 500, fallMillis = 1300)
 
     BoxWithConstraints(modifier = modifier.fillMaxSize()) {
-        val columnCount = (with(density) { maxWidth.toPx() } / columnStep).toInt().coerceAtLeast(1)
-        val rowCount = (with(density) { maxHeight.toPx() } / rowStep).toInt().coerceAtLeast(1)
+        val columnCount = (with(screenDensity) { maxWidth.toPx() } / columnStep).toInt().coerceAtLeast(1)
+        val rowCount = (with(screenDensity) { maxHeight.toPx() } / rowStep).toInt().coerceAtLeast(1)
 
         // Columns are dealt for the current size, so a rotation gets a fresh set instead of
         // stretching the old one across a screen it was never generated for
+        // Rows a stream head travels before it comes round again, its whole tail clearing the bottom
+        val travel = rowCount + TAIL_CELLS * 2
+
         val columns = remember(columnCount, rowCount) {
             List(columnCount) { index ->
                 MatrixColumn(
                     seed = Random.nextInt(),
                     dimmed = index % 3 == 0,
                     streams = buildList {
-                        repeat(STREAMS_PER_COLUMN) { add(randomStream()) }
-                        if (Random.nextFloat() < EXTRA_STREAM_CHANCE) add(randomStream())
+                        repeat(STREAMS_PER_COLUMN) { add(randomStream(travel)) }
+                        if (Random.nextFloat() < EXTRA_STREAM_CHANCE) add(randomStream(travel))
                     }
                 )
             }
@@ -153,22 +154,14 @@ fun MatrixBackground(
         }
 
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val tiltX = parallaxState.tiltX.value
-            val tiltY = parallaxState.tiltY.value
-            val globalTime = animatedTime.value % CYCLE_MS
+            val tiltX = parallaxState.tiltX.value * density
+            val tiltY = parallaxState.tiltY.value * density
+            val globalTime = animatedTime.value
             val burst = burstProgress.value
 
-            // Every column restarts when the clock wraps, so the seam is faded over instead of shown
-            val cycleFade = when {
-                globalTime < CYCLE_FADE_MS -> globalTime / CYCLE_FADE_MS
-                globalTime > CYCLE_MS - CYCLE_FADE_MS -> (CYCLE_MS - globalTime) / CYCLE_FADE_MS
-                else -> 1f
-            }
-
             val mutationTick = (globalTime / MUTATION_INTERVAL_MS).toInt()
-            val travel = rowCount + TAIL_CELLS * 2
-            val parallaxX = tiltX * 40f
-            val parallaxY = tiltY * 40f
+            val parallaxX = tiltX * 13f
+            val parallaxY = tiltY * 13f
             val half = atlas.cell / 2f
 
             drawIntoCanvas { canvas ->
@@ -184,7 +177,7 @@ fun MatrixBackground(
                             (globalTime * stream.fallSpeed + stream.phase * travel + burst * 12f) % travel
 
                         for (offset in 0 until stream.tail) {
-                            val alpha = (stream.fadeAt(offset) * depthAlpha * maxAlpha * cycleFade *
+                            val alpha = (stream.fadeAt(offset) * depthAlpha * maxAlpha *
                                     (1f + burst * 1.2f)).coerceIn(0f, 1f)
                             // A tail only ever dims towards its end, so the rest of it is gone too
                             if (alpha < 0.02f) break
@@ -260,17 +253,25 @@ private class MatrixStream(
     }
 }
 
-private fun randomStream(): MatrixStream {
+/**
+ * A stream whose head comes round a whole number of times per loop of the clock, so the rain
+ * carries on across the wrap without a seam. [travel] is how many rows one round covers.
+ */
+private fun randomStream(travel: Int): MatrixStream {
     val phrase = if (Random.nextFloat() < PHRASE_CHANCE) PHRASES.random().toAtlasIndices() else null
+
+    // Rows per millisecond. A phrase falls slower than the surrounding code, long enough to be
+    // caught sight of
+    val speed = if (phrase != null) {
+        0.002f + Random.nextFloat() * 0.002f
+    } else {
+        0.004f + Random.nextFloat() * 0.007f
+    }
+    val rounds = (BACKGROUND_LOOP_MS * speed / travel).roundToInt().coerceAtLeast(1)
 
     return MatrixStream(
         phase = Random.nextFloat(),
-        // A phrase falls slower than the surrounding code, long enough to be caught sight of
-        fallSpeed = if (phrase != null) {
-            0.002f + Random.nextFloat() * 0.002f
-        } else {
-            0.004f + Random.nextFloat() * 0.007f
-        },
+        fallSpeed = rounds * travel / BACKGROUND_LOOP_MS,
         tail = phrase?.size
             ?: (TAIL_CELLS * (0.45f + Random.nextFloat() * 0.75f)).toInt().coerceAtLeast(4),
         phrase = phrase
@@ -363,14 +364,13 @@ private class ColumnTints(columnCount: Int, isDarkTheme: Boolean) {
         for (index in 0 until columnCount) {
             val position = if (columnCount == 1) 0f else index.toFloat() / (columnCount - 1)
             // The brand gradient, read left to right across the screen the way the wordmark reads
-            val brand = MorpheBrandBlue.blendTowards(MorpheBrandTeal, position)
+            val brand = lerp(MorpheBrandBlue, MorpheBrandTeal, position)
             // The brand blue is too light to read as code on a light background
-            val trailColor = if (isDarkTheme) brand else brand.blendTowards(Color.Black, 0.3f)
+            val trailColor = if (isDarkTheme) brand else lerp(brand, Color.Black, 0.3f)
 
+            // The head of a stream is a brighter take on the accent
             trail[index] = tint(trailColor)
-            head[index] = tint(
-                trailColor.blendTowards(if (isDarkTheme) Color.White else Color.Black, 0.55f)
-            )
+            head[index] = tint(lerp(trailColor, if (isDarkTheme) Color.White else Color.Black, 0.55f))
         }
     }
 
@@ -379,11 +379,3 @@ private class ColumnTints(columnCount: Int, isDarkTheme: Boolean) {
 
     private fun tint(color: Color) = PorterDuffColorFilter(color.toArgb(), PorterDuff.Mode.SRC_IN)
 }
-
-/** Mixes [target] into the receiver, the head of a stream being a brighter take on the accent. */
-private fun Color.blendTowards(target: Color, fraction: Float) = Color(
-    red = red + (target.red - red) * fraction,
-    green = green + (target.green - green) * fraction,
-    blue = blue + (target.blue - blue) * fraction,
-    alpha = alpha
-)

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">此來源已停用。其修補程式僅供參考，不會套用。</string>
     <string name="sources_management_open_in_browser">在瀏覽器中開啟</string>
     <string name="sources_management_report_issue">回報問題</string>
+    <string name="sources_management_export_patches">匯出修補程式檔案</string>
+    <string name="sources_management_export_patches_success">修補程式檔案已儲存</string>
+    <string name="sources_management_export_patches_failed">匯出修補程式檔案失敗</string>
     <string name="sources_management_failed_to_open_url">無法開啟網址</string>
     <string name="sources_apps">應用程式</string>
     <string name="sources_apps_description">勾選的應用程式來自此來源。輕按應用程式可將其排除或恢復，向其滑動可查看其修補項目。一旦沒有來源提供給該應用程式，它就會退出主畫面，除非你已對它做過修補</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">此修補程式來源已封鎖，無法新增</string>
     <string name="sources_management_source_blocked_badge">封鎖</string>
     <string name="sources_management_metadata_unavailable">中繼資料無法使用</string>
+    <string name="sources_management_bundle_missing_badge">尚未下載</string>
     <string name="sources_management_metadata_unavailable_hint">遠端中繼資料檔案無法使用。您仍可使用已安裝的套件進行修補，但此來源的自動更新已停用</string>
     <string name="sources_management_metadata_unavailable_hint_missing">無法下載修補套件。來源 URL 可能不正確，或檔案不存在</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">無法下載修補套件。來源 URL 可能不正確，或檔案不存在。點擊以變更</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">顯示名稱</string>
     <string name="sources_dialog_rename">重新命名修補來源</string>
+    <string name="sources_dialog_renamed">已重新命名為 %s</string>
     <string name="sources_dialog_change_url">變更修補程式來源的下載路徑</string>
     <string name="sources_dialog_duplicate_name_error">已存在同名的修補程式來源</string>
     <string name="sources_dialog_missing_error">無法更新此修補來源</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">更新 %s</string>
     <string name="sources_dialog_url_valid">有效的存放庫或 JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub/GitLab 存放庫或 .json 檔案</string>
+    <string name="sources_dialog_url_invalid">URL 必須指向 GitHub、GitLab 或 Codeberg 存放庫或 .json 檔案</string>
     <string name="sources_dialog_preinstalled">預先安裝</string>
     <string name="sources_dialog_community">社群修補程式</string>
     <string name="sources_dialog_choose_apps">選擇應用程式</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">變更應用程式連結失敗</string>
     <string name="app_links_all_verified">所有受支援的連結都已設定為在此應用程式中開啟</string>
     <string name="app_links_fix">修正連結</string>
+    <string name="app_links_allow_shizuku">允許 Shizuku 存取</string>
+    <string name="app_links_shizuku_permission_hint">允許 Morphe 使用 Shizuku 為您開啟這些連結</string>
+    <string name="app_links_shizuku_not_running_hint">啟動 Shizuku 以讓 Morphe 為您開啟這些連結</string>
     <string name="configure">設定</string>
     <string name="patcher_rename_title">這將安裝一個克隆應用程式</string>
     <string name="patcher_rename_description">這些修補程式是以它們自己的套件名稱來建置此應用程式，因此安裝它會在&lt;b&gt;%s&lt;/b&gt;旁新增一個克隆，而不是更新它</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">無法儲存修補後的應用程式</string>
     <string name="plugin_activity_dialog_body">需要使用者互動才能繼續使用此外掛程式</string>
     <string name="patcher_process_killed_message">系統在還未完成修補時就停止了，通常是為了釋放記憶體。請關閉其他應用程式後再試一次。</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe 在更新完成前已關閉，因此沒有任何內容被更新。請再試一次</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">修補程式在完成前當機了。如果再次發生，請關閉 %1$s 並附上日誌回報問題</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">小遊戲</string>
     <string name="mini_games_description">適合利用碎片時間遊玩的快速遊戲</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">遊戲</string>
     <string name="mini_game_score">分數 %s</string>
     <string name="mini_game_best">最佳 %s</string>
     <string name="mini_game_new_record">新紀錄！</string>
@@ -1559,6 +1571,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">顯示全部（%s）</string>
     <string name="changelog_show_less">顯示較少</string>
     <string name="no_network_toast">沒有可用的網際網路連線</string>
+    <string name="download_waiting_for_network">等待網路</string>
     <string name="update_available">有可用的更新</string>
     <string name="ready_to_install_update">準備安裝更新</string>
     <string name="update_completed">更新已安裝</string>

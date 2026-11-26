@@ -13,7 +13,7 @@
     <string name="home_no_patches_available">Nincsenek elérhető módosítások</string>
     <string name="home_app_hide_title">Elrejted az alkalmazást?</string>
     <string name="home_more_apps_title">További alkalmazások</string>
-    <string name="home_more_apps_hide_title">Elrejtsük ezt a kártyát?</string>
+    <string name="home_more_apps_hide_title">Elrejted ezt a kártyát?</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Appearance > Home screen", built from the names on those screens. -->
     <string name="home_more_apps_hide_message">Bármikor visszaállíthatod a(z) %1$s menüpontban</string>
     <string name="home_app_hide_message">Az alkalmazás el lesz rejtve a főképernyőről. Később visszaállíthatod a lista alján található gomb segítségével.</string>
@@ -30,19 +30,19 @@
     <string name="home_app_patch_sources_last">Alkalmazásonként legalább egy forrásnak meg kell maradnia a módosításhoz</string>
     <string name="android_11_bug_dialog_title">Android 11 hiba</string>
     <string name="android_11_bug_dialog_description">Az alkalmazástelepítési engedélyt előre el kell fogadni, hogy elkerülhető legyen az Android 11 rendszerben fellépő hiba, mely negatívan befolyásolja a felhasználói élményt</string>
-    <string name="deep_link_add_source_title">Forrás hozzáadása</string>
-    <string name="deep_link_add_source_message">Hozzáadod ezt a módosításforrást a Morphe-hez?</string>
+    <string name="deep_link_add_source_title">Forrás hozzáadás</string>
+    <string name="deep_link_add_source_message">Hozzáadod ezt a módosításforrást a Morphe-hoz?</string>
     <string name="deep_link_add_source_warning">Csak megbízható forrásokat adj hozzá</string>
     <!-- Shown under the app a link was opened for -->
-    <string name="deep_link_add_source_only_app">Csak ez az app hozzáadva. Más appokat is hozzáadhatsz a forrás applistájából</string>
+    <string name="deep_link_add_source_only_app">Csak ez az alkalmazás lett hozzáadva. További alkalmazásokat a forrás alkalmazáslistájából adhatsz hozzá.</string>
     <!-- Shown when the link was opened for the universal patches of a source, which no app is added with -->
-    <string name="deep_link_add_source_only_universal">Csak az univerzális javítások kerülnek hozzáadásra. Az alkalmazásokat a forrás alkalmazáslistájából adhatod hozzá</string>
+    <string name="deep_link_add_source_only_universal">Csak az univerzális módosítások lettek hozzáadva. További alkalmazásokat a forrás alkalmazáslistájából adhatsz hozzá.</string>
     <!-- Asked when the link names an app of a source that is already added -->
-    <string name="deep_link_add_source_app_back">Ez a forrás már hozzá van adva. Hozzáadja ezt az alkalmazást a meglévő forrásból?</string>
+    <string name="deep_link_add_source_app_back">Ez a forrás már szerepel a listán. Hozzáadod ezt az alkalmazást a meglévő forrásból?</string>
     <!-- Asked when a .mpp file opened from a file manager is another version of a local source, %s being its name -->
-    <string name="mpp_import_update_message">Ez a %s újabb verziója. Szeretné frissíteni?</string>
-    <string name="mpp_import_unreadable">Ez a fájl nem olvasható</string>
-    <string name="incoming_file_not_patch_source">Ez a fájl nem egy patch forrás</string>
+    <string name="mpp_import_update_message">Ez a(z) %s újabb verziója. Szeretnéd frissíteni?</string>
+    <string name="mpp_import_unreadable">A fájl nem olvasható</string>
+    <string name="incoming_file_not_patch_source">Ez a fájl nem egy módosításforrás</string>
     <!-- Home Screen - Update Notifications -->
     <string name="home_update_available">Morphe frissítés elérhető</string>
     <string name="home_update_available_subtitle">Az új verzió telepítésre vár</string>
@@ -51,12 +51,12 @@
     <string name="home_metadata_errors_title">Egyes módosításforrások nem elérhetők</string>
     <string name="home_metadata_errors_subtitle">Koppints a források áttekintéséhez</string>
     <string name="home_outdated_manager_title">A Morphe verziója elavult</string>
-    <string name="home_outdated_manager_subtitle">Néhány módosítási forráshoz újabb verzió szükséges</string>
-    <string name="home_held_back_title">A Morphe egy módosításforrás miatt összeomlott</string>
-    <string name="home_held_back_subtitle">Kihagytuk, hogy az alkalmazás elindulhasson. Koppintson a felülvizsgálathoz</string>
+    <string name="home_outdated_manager_subtitle">Néhány módosításforráshoz újabb verzió szükséges</string>
+    <string name="home_held_back_title">Egy módosításforrás miatt a Morphe összeomlott</string>
+    <string name="home_held_back_subtitle">Kihagyva az alkalmazás elindításához. Koppints a felülvizsgálathoz</string>
     <string name="home_source_updates_title">Módosításfrissítések érhetők el</string>
-    <string name="home_source_updates_subtitle">Koppintson a letöltéshez</string>
-    <string name="home_repatch_available_subtitle">Koppints az összes sorba állításához</string>
+    <string name="home_source_updates_subtitle">Koppints a letöltéshez</string>
+    <string name="home_repatch_available_subtitle">Koppints az összes felvételéhez a várólistára</string>
     <string name="home_update_error">A frissítés sikertelen</string>
     <string name="home_update_error_subtitle">Hiba történt a források frissítése közben</string>
     <string name="home_updating_sources">Források frissítése…</string>
@@ -83,7 +83,7 @@
     <string name="home_no_apps_search_subtitle">Nincs találat erre: „%s”</string>
     <string name="home_all_apps_hidden_title">Minden alkalmazás elrejtve</string>
     <string name="home_all_apps_hidden_subtitle">Minden alkalmazást elrejtettél a kezdőképernyőről</string>
-    <string name="home_no_apps_filter_title">Nincs a szűrésnek megfelelő alkalmazás</string>
+    <string name="home_no_apps_filter_title">Nincs a szűrőnek megfelelő alkalmazás</string>
     <string name="home_no_apps_filter_subtitle">Nincs találat erre a szűrőre: %s</string>
     <string name="home_category_add">Kategória hozzáadása</string>
     <string name="home_category_all_apps">Összes alkalmazás</string>
@@ -92,13 +92,13 @@
     <string name="home_category_new_title">Új kategória</string>
     <string name="home_category_rename_title">Kategória átnevezése</string>
     <string name="home_category_name">Kategória neve</string>
-    <string name="home_category_name_description">A kezdőképernyő e név alatt csoportosítja az alkalmazásait</string>
+    <string name="home_category_name_description">A kezdőképernyő ezen a néven csoportosítja az alkalmazásokat</string>
     <string name="home_category_move_to">Kategóriába helyezés</string>
     <string name="home_category_move_selected_title">Kiválasztott alkalmazások áthelyezése</string>
     <!-- %s is the name of the category -->
-    <string name="home_category_delete_title">Töröljük a(z) %s kategóriát?</string>
+    <string name="home_category_delete_title">Törlöd a(z) %s kategóriát?</string>
     <!-- %s is the name of the category the apps fall back to -->
-    <string name="home_category_delete_moves_apps">Alkalmazásai visszakerülnek a(z) &lt;b&gt;%s&lt;/b&gt; kategóriába</string>
+    <string name="home_category_delete_moves_apps">Az alkalmazásai visszakerülnek ide: &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="home_category_actions_unavailable">Ebben a kategóriában nem érhetők el műveletek</string>
     <!-- Home Screen - Home Greetings -->
     <string name="home_greeting_1">Melyik alkalmazást szeretnéd módosítani?</string>
@@ -143,38 +143,41 @@
     <string name="home_greeting_super_late_5">Éjszakai műszak, maximális pörgés</string>
     <!-- Halloween greetings, shown instead of the ones above around October 31 -->
     <!-- Pun on "Trick or treat" -->
-    <string name="home_greeting_halloween_1">Cukorkát vagy patch-et?</string>
+    <string name="home_greeting_halloween_1">Cukorkát vagy módosítást?</string>
     <string name="home_greeting_halloween_2">Ezekben az APK-kban nincsenek szellemek, ellenőriztük</string>
-    <string name="home_greeting_halloween_3">Hátborzongató időszak, friss patch-ek</string>
+    <string name="home_greeting_halloween_3">Hátborzongató időszak, friss módosítások</string>
     <!-- Pun on "Something wicked this way comes", a line from Shakespeare's Macbeth -->
-    <string name="home_greeting_halloween_4">Valami gonosz erre patch-el</string>
+    <string name="home_greeting_halloween_4">Valami gonosz módosít erre</string>
     <!-- Winter holiday greetings, shown instead of the ones above from late December to early January -->
-    <string name="home_greeting_winter_1">Boldog ünnepeket, friss patch-ek</string>
+    <string name="home_greeting_winter_1">Kellemes ünnepeket, friss módosításokat</string>
     <!-- Pun on the song "Let It Snow! Let It Snow! Let It Snow!" -->
-    <string name="home_greeting_winter_2">Ess, hó, ess, patch</string>
-    <string name="home_greeting_winter_3">Új év, új patch-ek</string>
+    <string name="home_greeting_winter_2">Hadd hulljon a hó, hadd jöjjön a patch</string>
+    <string name="home_greeting_winter_3">Új év, új módosítások</string>
     <!-- Pun on "Dashing through the snow", the opening line of "Jingle Bells" -->
-    <string name="home_greeting_winter_4">Patch-elünk a hóban</string>
+    <string name="home_greeting_winter_4">Módosítás a hóban</string>
     <!-- New Year greetings, shown instead of the ones above on December 31 and January 1 -->
-    <string name="home_greeting_new_year_1">Boldog új évet!</string>
-    <string name="home_greeting_new_year_2">Visszaszámlálás a friss patch-ekig</string>
+    <string name="home_greeting_new_year_1">Boldog Új Évet Kívánunk!</string>
+    <string name="home_greeting_new_year_2">Visszaszámlálás a friss módosításokig</string>
     <string name="home_greeting_new_year_3">Új év, ugyanazok a reklámmentes alkalmazások</string>
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <string name="home_greeting_new_year_4">Ki a régi verziókkal, be az újjal</string>
     <!-- Home Screen - Sources Management -->
     <string name="sources_management_title">Módosításforrások</string>
-    <string name="sources_search">Források és javítások keresése</string>
+    <string name="sources_search">Források és módosítások keresése</string>
     <!-- Which sources the sources page lists, each with what it keeps -->
     <string name="sources_filter_issues">Figyelmet igényel</string>
-    <string name="sources_sort_manual_hint">Nyomja meg hosszan egy forrást a sorrend megváltoztatásához.</string>
+    <string name="sources_sort_manual_hint">Nyomj meg hosszan egy forrást a sorrend megváltoztatásához</string>
     <string name="sources_sort_last_updated">Utolsó frissítés</string>
-    <string name="sources_sort_enabled_first">Először az engedélyezettek</string>
-    <string name="sources_patches_source_disabled_hint">Ez a forrás le van tiltva. A javításai referenciaként vannak felsorolva, és nincsenek alkalmazva.</string>
+    <string name="sources_sort_enabled_first">Engedélyezettek először</string>
+    <string name="sources_patches_source_disabled_hint">Ez a forrás le van tiltva. A módosításai referenciaként vannak felsorolva, és nincsenek alkalmazva.</string>
     <string name="sources_management_open_in_browser">Megnyitás böngészőben</string>
     <string name="sources_management_report_issue">Hiba jelentése</string>
+    <string name="sources_management_export_patches">Módosítási fájl exportálása</string>
+    <string name="sources_management_export_patches_success">Módosítási fájl mentve</string>
+    <string name="sources_management_export_patches_failed">Nem sikerült exportálni a módosítási fájlt</string>
     <string name="sources_management_failed_to_open_url">Hiba történt az URL megnyitásakor</string>
     <string name="sources_apps">Alkalmazások</string>
-    <string name="sources_apps_description">A bejelölt alkalmazások ebből a forrásból származnak. Koppints egy alkalmazásra a kihagyáshoz vagy a visszaadásához, csúsztasd el a javításai megtekintéséhez. Egy forrás nélküli alkalmazás eltűnik a kezdőképernyőről, hacsak nem javítottad</string>
+    <string name="sources_apps_description">A bejelölt alkalmazások ebből a forrásból származnak. Koppints egy alkalmazásra a kihagyáshoz vagy a visszahozáshoz, csúsztass a módosításai megtekintéséhez. Amelyik alkalmazást egyetlen forrás sem biztosít, eltűnik a kezdőképernyőről, kivéve ha módosítottad</string>
     <string name="sources_apps_brought">Ebből a forrásból származó</string>
     <string name="sources_apps_left_out">Ebből a forrásból kihagyott</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
@@ -183,110 +186,113 @@
     <string name="sources_apps_new">Új</string>
     <string name="sources_apps_new_apps">Új alkalmazások hozzáadása</string>
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
-    <string name="sources_apps_new_apps_description">A később hozzáadott alkalmazások megjelennek a kezdőképén</string>
-    <string name="sources_management_prerelease_toggle">Kiadás előtti javítások</string>
-    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés kísérleti új javításverziókhoz</string>
-    <string name="sources_prerelease_warning_title">Előzetes javítások engedélyezése?</string>
-    <string name="sources_prerelease_warning_message">Az előzetes verziók még fejlesztés alatt állnak. A javítások meghiúsulhatnak vagy megtörhetik az alkalmazást, és a funkciók figyelmeztetés nélkül változhatnak.</string>
-    <string name="expert_mode_unstable_notice">Az előzetes vagy kísérleti javítások instabilak lehetnek</string>
+    <string name="sources_apps_new_apps_description">A később hozzáadott alkalmazások megjelennek a kezdőképernyőn</string>
+    <string name="sources_management_prerelease_toggle">Kiadás előtti módosítások</string>
+    <string name="sources_management_prerelease_toggle_description">Korai hozzáférés a kísérleti, új módosításokhoz</string>
+    <string name="sources_prerelease_warning_title">Engedélyezed az előzetes kiadású módosításokat?</string>
+    <string name="sources_prerelease_warning_message">Az előzetes verziók még fejlesztés alatt állnak. A módosítások meghiúsulhatnak vagy működésképtelenné tehetik az alkalmazást, és a funkciók figyelmeztetés nélkül változhatnak.</string>
+    <string name="expert_mode_unstable_notice">Az előzetes kiadású vagy kísérleti módosítások instabilak lehetnek</string>
     <string name="sources_management_experimental_versions_toggle">Kísérleti alkalmazásverziók</string>
-    <string name="sources_management_experimental_versions_toggle_description">Megmutatja és javítja a kísérleti alkalmazás célpontjait.</string>
+    <string name="sources_management_experimental_versions_toggle_description">Megjeleníti és módosítja a kísérleti alkalmazásokat</string>
     <!-- Actions of the panel for several selected sources at once -->
     <string name="sources_management_prerelease_enable">Kiadás előtti módosítások engedélyezése</string>
     <string name="sources_management_prerelease_disable">Kiadás előtti módosítások tiltása</string>
     <string name="sources_management_experimental_versions_enable">Kísérleti alkalmazásverziók engedélyezése</string>
     <string name="sources_management_experimental_versions_disable">Kísérleti alkalmazásverziók tiltása</string>
     <string name="sources_management_already_exists">Ez a forrás már hozzá lett adva</string>
-    <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizze a címet, és próbálja újra.</string>
-    <string name="sources_management_blocked">Ez a javításcsomag forrás le van blokkolva, és nem adható hozzá</string>
-    <string name="sources_management_source_blocked_badge">Blokkolva</string>
-    <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre.</string>
-    <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő javítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
-    <string name="sources_management_metadata_unavailable_hint_missing">A javítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
-    <string name="sources_management_metadata_unavailable_hint_missing_editable">A patch csomag nem tölthető le. A forrás URL-címe helytelen lehet, vagy a fájl nem létezik. Koppintson a módosításhoz</string>
+    <string name="sources_management_invalid_url">Érvénytelen forrás URL. Kérjük, ellenőrizd a címet és próbáld újra.</string>
+    <string name="sources_management_blocked">Ez a módosításforrás blokkolva van, ezért nem adható hozzá</string>
+    <string name="sources_management_source_blocked_badge">Blokkolt</string>
+    <string name="sources_management_metadata_unavailable">Metaadatok nem állnak rendelkezésre</string>
+    <string name="sources_management_bundle_missing_badge">Nincs letöltve</string>
+    <string name="sources_management_metadata_unavailable_hint">A távoli metaadatfájl nem érhető el. A telepített csomaggal történő módosítás továbbra is működik, de az automatikus frissítés le van tiltva ehhez a forráshoz.</string>
+    <string name="sources_management_metadata_unavailable_hint_missing">A módosítócsomag letöltése nem sikerült. A forrás URL helytelen lehet, vagy a fájl nem létezik.</string>
+    <string name="sources_management_metadata_unavailable_hint_missing_editable">A módosítócsomag nem tölthető le. A forrás URL-címe helytelen lehet, vagy a fájl nem létezik. Koppints a megváltoztatáshoz</string>
     <string name="sources_management_outdated_manager_badge">Morphe frissítése</string>
-    <string name="sources_management_outdated_manager_hint">Ez a forrás a %1$s javítóprogramhoz készült, de a Morphe %2$s a %3$s javítóprogramot tartalmazza. Frissítse a Morphe-t a használatához.</string>
+    <string name="sources_management_outdated_manager_hint">Ez a forrás a %1$s módosítóprogramhoz készült, de a Morphe %2$s a %3$s módosítóprogramot tartalmazza. Frissítsd a Morphe-t a használatához.</string>
     <string name="sources_management_held_back_badge">Összeomlott</string>
-    <string name="sources_management_held_back_hint">Ez a forrás a betöltése közben okozott összeomlást a Morphe alkalmazásban, ezért kihagyásra kerül. Frissítse vagy importálja újra, hogy újra megpróbálhassa</string>
-    <string name="sources_management_signed_by">Aláírta</string>
-    <string name="sources_management_signing_key_changed_badge">Kulcs változott</string>
+    <string name="sources_management_held_back_hint">A forrás betöltésekor a Morphe összeomlott, így az kihagyásra került.
+Az újrapróbáláshoz frissítsd vagy importáld újra</string>
+    <string name="sources_management_signed_by">Aláírás</string>
+    <string name="sources_management_signing_key_changed_badge">A kulcs megváltozott</string>
     <string name="sources_management_signing_key_changed_hint">A legújabb kiadás nem azzal a kulccsal van aláírva, amelyet ez a forrás korábban használt, ezért nem lett telepítve. Koppints az áttekintéshez</string>
-    <string name="sources_management_source_enabled">Forrás engedélyezve</string>
-    <string name="sources_management_source_disabled">Forrás letiltva</string>
+    <string name="sources_management_source_enabled">Engedélyezett forrás</string>
+    <string name="sources_management_source_disabled">Letiltott forrás</string>
     <string name="sources_management_source_updating">Forrás frissítése</string>
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Megjelenítendő név</string>
     <string name="sources_dialog_rename">Módosításforrás átnevezése</string>
-    <string name="sources_dialog_change_url">Módosítsa a patch forrásának letöltési helyét</string>
+    <string name="sources_dialog_renamed">Átnevezve: %s</string>
+    <string name="sources_dialog_change_url">A patch forrás letöltési helyének módosítása</string>
     <string name="sources_dialog_duplicate_name_error">Ezzel a névvel már létezik módosításforrás</string>
     <string name="sources_dialog_missing_error">A módosításforrás frissítése sikertelen</string>
     <string name="sources_dialog_add_source">Módosításforrás hozzáadása</string>
     <string name="sources_dialog_delete_confirm_body">Ez nem vonható vissza</string>
     <string name="sources_dialog_remote">Távoli</string>
     <string name="sources_dialog_remote_url">Forrás URL</string>
-    <string name="sources_dialog_remote_url_hint">Egy forráskódtár vagy egy javítócsomag .json link. Illessz be többet egyszerre, hogy mindet hozzáadd.</string>
-    <string name="sources_dialog_paste_no_links">Nincs link a vágólapon.</string>
+    <string name="sources_dialog_remote_url_hint">Egy forráskódtár vagy egy módosítócsomag .json link. Illessz be többet egyszerre, hogy egyszerre hozzáadhasd őket</string>
+    <string name="sources_dialog_paste_no_links">Nincs link a vágólapon</string>
     <string name="sources_dialog_local">Helyi</string>
-    <string name="sources_dialog_local_files">Javítócsomag-forrásfájlok kiválasztása</string>
+    <string name="sources_dialog_local_files">Módosítás forrásfájlok kiválasztása</string>
     <string name="sources_dialog_local_invalid_extension">A fájlnak .mpp kiterjesztéssel kell rendelkeznie</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
-    <string name="sources_dialog_local_updates">Frissítések: %s</string>
+    <string name="sources_dialog_local_updates">Frissíti ezt: %s</string>
     <string name="sources_dialog_url_valid">Érvényes tároló vagy JSON URL</string>
-    <string name="sources_dialog_url_invalid">Az URL-nek GitHub/GitLab repóra vagy .json fájlra kell mutatnia</string>
+    <string name="sources_dialog_url_invalid">Az URL-nek egy GitHub, GitLab vagy Codeberg kódtárra vagy egy .json fájlra kell mutatnia</string>
     <string name="sources_dialog_preinstalled">Előretelepített</string>
-    <string name="sources_dialog_community">Közösségi javítások</string>
+    <string name="sources_dialog_community">Közösségi módosítások</string>
     <string name="sources_dialog_choose_apps">Alkalmazások választása</string>
-    <string name="sources_dialog_choose_apps_description">Válassza ki, hogy a forrás betöltése után mely alkalmazásait tartsa meg.</string>
+    <string name="sources_dialog_choose_apps_description">Válaszd ki, hogy a forrás betöltése után mely alkalmazásait tartsa meg</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
-    <string name="sources_dialog_community_notice_title">Harmadik féltől származó javításforrások</string>
-    <string name="sources_dialog_community_notice_message">"A közösségi patch forrásokat azok saját szerzői készítik és karbantartják. A Morphe nem vizsgálja és nem hitelesíti a harmadik féltől származó patcheket, és nem vállal felelősséget azok tartalmáért vagy azért, hogy mit tesznek az eszközödön"</string>
+    <string name="sources_dialog_community_notice_title">Harmadik féltől származó módosításforrások</string>
+    <string name="sources_dialog_community_notice_message">"A közösségi módosításforrásokat azok saját szerzői készítik és karbantartják. A Morphe nem vizsgálja és nem hitelesíti a harmadik féltől származó módosításokat, valamint nem vállal felelősséget azok tartalmáért vagy azért, hogy mit tesznek az eszközödön"</string>
     <string name="sources_update_success">A frissítés sikeres</string>
     <string name="sources_update_unavailable">Nincs elérhető frissítés</string>
     <string name="sources_download_fail">Nem sikerült letölteni a forrásokat: %s</string>
-    <string name="sources_download_fail_named">A(z) \'%s\' nem frissíthető. Ellenőrizd az internetkapcsolatot, és próbáld újra.</string>
-    <string name="sources_download_endpoint_not_found">A(z) \'%s\' nem található meg a patch metaadata.</string>
+    <string name="sources_download_fail_named">A(z) \'%s\' nem frissíthető. Ellenőrizd az internetkapcsolatot, és próbáld újra</string>
+    <string name="sources_download_endpoint_not_found">\'%s\': a módosítás metaadata nem található</string>
     <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
-    <string name="sources_local_network_denied">A helyi hálóján található források nem frissíthetők a „Környezetbeli eszközök” engedély nélkül</string>
-    <string name="sources_signing_key_changed_named">\'%s\' nem frissült, mert a legújabb kiadása nem azzal a kulccsal van aláírva, amelyet korábban használt</string>
-    <string name="sources_signing_key_changed_local">A fájlt nem olyan kulccsal írták alá, mint amilyet ez a forrás korábban használt. Ha megbízik benne, törölje a forrást, majd adja hozzá újra a fájlt</string>
-    <string name="sources_signing_key_trust_title">Bízni szeretne az új kulcsban?</string>
-    <string name="sources_signing_key_trust_message">A legújabb kiadás egy másik kulccsal van aláírva. Vagy a fejlesztő lecserélte a kulcsát, vagy valaki más publikálta ezt a kiadást. Csak akkor bízzon benne, ha a fejlesztő bejelentett egy új kulcsot</string>
-    <string name="sources_signing_key_trust_message_unsigned">A legújabb kiadás nincs aláírva. Vagy a fejlesztő abbahagyta a kiadások aláírását, vagy valaki más publikálta ezt a kiadást. Csak akkor bízzon benne, ha a fejlesztő bejelentette</string>
+    <string name="sources_local_network_denied">A helyi hálózaton található források nem frissíthetők a „Közeli készülékek” engedély nélkül</string>
+    <string name="sources_signing_key_changed_named">A(z) \'%s\' nem frissült, mert a legújabb kiadása nem azzal a kulccsal van aláírva, amelyet korábban használt</string>
+    <string name="sources_signing_key_changed_local">A fájlt nem azzal kulccsal írták alá, mint amit ez a forrás korábban használt. Ha megbízol benne töröld a forrást, majd add hozzá újra a fájlt</string>
+    <string name="sources_signing_key_trust_title">Bízol az új kulcsban?</string>
+    <string name="sources_signing_key_trust_message">A legújabb kiadás egy másik kulccsal van aláírva. A fejlesztő lecserélte a kulcsát vagy valaki más publikálta ezt a kiadást. Csak akkor bízz meg benne, ha a fejlesztő bejelentette az új kulcsot</string>
+    <string name="sources_signing_key_trust_message_unsigned">A legújabb kiadás nincs aláírva. A fejlesztő abbahagyta a kiadások aláírását vagy valaki más publikálta ezt a kiadást. Csak akkor bízz meg benne, ha a fejlesztő bejelentette ezt</string>
     <string name="sources_signing_key_trusted">Megbízható kulcs</string>
     <string name="sources_signing_key_new">Új kulcs</string>
     <string name="sources_patch_expert_badge">Szakértő</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Expert mode", built from the names on those screens. -->
-    <string name="sources_patch_expert_badge_tooltip">Kapcsold be a(z) %1$s opciót, hogy manuálisan hozzáadhassad ezt a patchet</string>
+    <string name="sources_patch_expert_badge_tooltip">Kapcsold be a(z) %1$s opciót, hogy manuálisan hozzáadhasd ezt a módosítást</string>
     <!-- Home Screen - Dialog 1: APK Availability -->
-    <string name="home_apk_availability_title">Segítség kell az APK megtalálásához?</string>
+    <string name="home_apk_availability_title">Segítségre van szükséged az APK megtalálásához?</string>
     <string name="home_apk_availability_dialog_simple">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő, módosítások nélküli APK-verzióra van szükséged:</string>
     <string name="home_apk_availability_dialog_expert">​A(z) &lt;b&gt;%s&lt;/b&gt; módosításához a következő, módosítások nélküli APK-verziók egyikére van szükséged:</string>
     <string name="home_apk_availability_recommended_label">Javasolt</string>
     <string name="home_apk_availability_unpatched_label">Nem módosított</string>
     <string name="home_apk_availability_incompatible_label">Nem kompatibilis</string>
     <!-- %1$s is the app name, %2$s the version of the unpatched app installed on the device, such as v21.18.164 -->
-    <string name="home_apk_availability_newer_original">Az eredeti %1$s ezen a készüléken %2$s verzió, ami újabb, mint amit a javítások támogatnak</string>
+    <string name="home_apk_availability_newer_original">Az eredeti %1$s ezen a készüléken a(z) %2$s verzió, ami újabb, mint amit a módosítások támogatnak</string>
     <string name="home_apk_availability_find">Igen, segíts megtalálni</string>
     <string name="home_apk_availability_have">Nem, már megvan</string>
-    <string name="home_apk_helper_download">Használj egy segédalkalmazást.</string>
+    <string name="home_apk_helper_download">Használj egy segédalkalmazást</string>
     <string name="home_apk_helper_untrusted">Egy segédalkalmazás telepítve van, de még nem megbízható, így itt nem jelenik meg</string>
     <string name="home_apk_helper_untrusted_action">Segédalkalmazások áttekintése</string>
-    <string name="home_apk_helper_title">Töltsd le egy segédalkalmazással.</string>
-    <string name="home_apk_helper_description">A Morphe megkéri az alábbi segédalkalmazást, hogy töltse le az eredeti APK-t, és adja vissza a fájlt.</string>
+    <string name="home_apk_helper_title">Töltsd le egy segédalkalmazással</string>
+    <string name="home_apk_helper_description">A Morphe megkéri az alábbi segédalkalmazást az eredeti APK letöltésére, majd a fájl visszaadására</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
-    <string name="home_apk_helper_continue">Segéd megnyitása</string>
-    <string name="home_apk_helper_warning">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe ellenőrzi a csomagot, a verziót és az aláírást a kapott fájlnak, mielőtt bármit is javítanál.</string>
-    <string name="home_apk_helper_warning_unverified">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe nem tudja ellenőrizni ennek az APK-nak az aláírását, így egy módosított fájl nem lenne felismerhető.</string>
-    <string name="home_apk_helper_no_result">A segédalkalmazás nem adott vissza APK-t.</string>
-    <string name="home_apk_helper_no_access">A segédalkalmazás nem engedte hozzáférést a visszaadott APK-hoz.</string>
-    <string name="home_apk_helper_no_package">A segédalkalmazás nem mondta meg, melyik telepített alkalmazást kell használni.</string>
-    <string name="home_apk_helper_wrong_package">A segédalkalmazás másik alkalmazást adott vissza, mint amelyiket éppen foltozzák.</string>
-    <string name="home_apk_helper_installed_unavailable">A Morphe nem tudta használni a telepített alkalmazást.</string>
-    <string name="home_apk_helper_installed_incompatible">A telepített verzió nem foltozható.</string>
+    <string name="home_apk_helper_continue">Segédalkalmazás megnyitása</string>
+    <string name="home_apk_helper_warning">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe módosítás előtt ellenőrzi a kapott elem csomagját, verzióját és aláírását</string>
+    <string name="home_apk_helper_warning_unverified">Csak akkor folytasd, ha megbízol ebben a segédalkalmazásban. A Morphe nem tudja ellenőrizni az APK aláírását, ezért a módosított fájlokat sem tudná észlelni</string>
+    <string name="home_apk_helper_no_result">A segédalkalmazás nem adott vissza APK-t</string>
+    <string name="home_apk_helper_no_access">A segédalkalmazás nem adott hozzáférést a visszaadott APK-hoz</string>
+    <string name="home_apk_helper_no_package">A segédalkalmazás nem mondta meg, melyik telepített alkalmazást kell használni</string>
+    <string name="home_apk_helper_wrong_package">A segédalkalmazás más alkalmazást adott vissza, mint amelyiket módosítod</string>
+    <string name="home_apk_helper_installed_unavailable">A Morphe nem tudta használni a telepített alkalmazást</string>
+    <string name="home_apk_helper_installed_incompatible">A telepített verzió nem módosítható</string>
     <string name="home_apk_use_saved_copy">Mentett másolat használata</string>
     <string name="home_apk_use_installed_app">Telepített alkalmazás használata</string>
-    <string name="home_apk_use_saved_unsupported">A javítások nem támogatják ezt a mentett másolatot. A javítás megerősítést fog kérni, vagy válasszon másik APK-t.</string>
-    <string name="home_apk_use_installed_unverified">Nem sikerült ellenőrizni a telepített alkalmazás aláírását, ezért lehet, hogy már módosították.</string>
+    <string name="home_apk_use_saved_unsupported">A módosítások nem támogatják ezt a mentett másolatot. A módosítás megerősítést fog kérni, vagy válassz másik APK-t.</string>
+    <string name="home_apk_use_installed_unverified">Nem sikerült ellenőrizni a telepített alkalmazás aláírását, ezért lehet, hogy az már módosítva van</string>
     <string name="home_unverified">Nem ellenőrzött</string>
     <string name="home_install_verification_pending">Telepítés ellenőrzése…</string>
     <string name="home_app_info_install_unverified">A Morphe nem tudja megerősíteni, hogy a telepített alkalmazás az a build, amelyet módosított. Módosítsa újra, vagy telepítse újra a mentett APK-ból a műveleteinek visszaállításához.</string>
@@ -576,6 +582,9 @@ A legjobb eredmény érdekében az alkalmazás javasolja a &lt;b&gt;teljes APK&l
     <string name="app_links_change_failed">Sikertetlen alkalmazáslinkek módosítása</string>
     <string name="app_links_all_verified">Minden támogatott hivatkozás úgy van beállítva, hogy ebben az alkalmazásban nyíljon meg</string>
     <string name="app_links_fix">Hivatkozások javítása</string>
+    <string name="app_links_allow_shizuku">Engedélyezze a Shizuku hozzáférését</string>
+    <string name="app_links_shizuku_permission_hint">Engedélyezze a Morphe számára a Shizuku használatát, hogy ezeket a linkeket bekapcsolja helyetté</string>
+    <string name="app_links_shizuku_not_running_hint">Indítsa el a Shizuku-t, hogy a Morphe bekapcsolhassa ezeket a linkeket helyetté</string>
     <string name="configure">Beállítás</string>
     <string name="patcher_rename_title">Ez egy klónt telepít</string>
     <string name="patcher_rename_description">A javítócsomagok saját csomagnév alatt építették ezt az alkalmazást, így a telepítése egy klónt ad hozzá a &lt;b&gt;%s&lt;/b&gt; mellé a frissítés helyett.</string>
@@ -745,6 +754,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="patched_app_save_failed_toast">A módosított alkalmazás mentése sikertelen</string>
     <string name="plugin_activity_dialog_body">A bővítmény használatához felhasználói beavatkozásra van szükség</string>
     <string name="patcher_process_killed_message">A rendszer leállította a javítót mielőtt befejezte, általában a memória felszabadítása érdekében. Zárja be a többi alkalmazást, és próbálja újra</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">A Morphe bezáratása miatt a javítás nem fejeződött be, így semmi sem került javítva. Próbálja újra</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">A patchelő összeomlott a befejezés előtt. Ha ez újra előfordul, kapcsold ki a(z) %1$s opciót, és jelezd a hibát a naplóval</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +778,8 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <!-- Mini-games -->
     <string name="mini_games">Minijátékok</string>
     <string name="mini_games_description">Gyors játékok a szabad percben</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Játékok</string>
     <string name="mini_game_score">Értékelés: %s</string>
     <string name="mini_game_best">Legjobb %s</string>
     <string name="mini_game_new_record">Új rekord!</string>
@@ -1561,6 +1574,7 @@ Részletek: %2$s"</string>
     <string name="changelog_show_all">Összes megjelenítése (%s)</string>
     <string name="changelog_show_less">Mutass kevesebbet</string>
     <string name="no_network_toast">Nincs elérhető internetkapcsolat</string>
+    <string name="download_waiting_for_network">Hálózatra várva</string>
     <string name="update_available">Egy frissítés érhető el</string>
     <string name="ready_to_install_update">A frissítés telepítésre kész</string>
     <string name="update_completed">A frissítés telepítve</string>

@@ -176,6 +176,9 @@
     <string name="sources_patches_source_disabled_hint">This source is disabled. Its patches are listed for reference and are not applied</string>
     <string name="sources_management_open_in_browser">Open in browser</string>
     <string name="sources_management_report_issue">Report an issue</string>
+    <string name="sources_management_export_patches">Export patches file</string>
+    <string name="sources_management_export_patches_success">Patches file saved</string>
+    <string name="sources_management_export_patches_failed">Failed to export patches file</string>
     <string name="sources_management_failed_to_open_url">Failed to open URL</string>
     <string name="sources_apps">Apps</string>
     <string name="sources_apps_description">Ticked apps come from this source. Tap an app to leave it out or bring it back, swipe it to see its patches. An app no source brings leaves the home screen, unless you patched it</string>
@@ -205,6 +208,7 @@
     <string name="sources_management_blocked">This patch source is blocked and cannot be added</string>
     <string name="sources_management_source_blocked_badge">Blocked</string>
     <string name="sources_management_metadata_unavailable">Metadata N/A</string>
+    <string name="sources_management_bundle_missing_badge">Not downloaded</string>
     <string name="sources_management_metadata_unavailable_hint">The remote metadata file is unavailable. Patching with the installed bundle still works, but auto-update is disabled for this source</string>
     <string name="sources_management_metadata_unavailable_hint_missing">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">The patch bundle could not be downloaded. The source URL may be incorrect or the file does not exist. Tap to change it</string>
@@ -222,6 +226,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Display name</string>
     <string name="sources_dialog_rename">Rename patch source</string>
+    <string name="sources_dialog_renamed">Renamed to %s</string>
     <string name="sources_dialog_change_url">Change where the patch source downloads from</string>
     <string name="sources_dialog_duplicate_name_error">A patch source with this name already exists</string>
     <string name="sources_dialog_missing_error">Could not update this patch source</string>
@@ -237,7 +242,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Updates %s</string>
     <string name="sources_dialog_url_valid">Valid repository or JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL must point to a GitHub/GitLab repo or .json file</string>
+    <string name="sources_dialog_url_invalid">URL must point to a GitHub, GitLab or Codeberg repo or .json file</string>
     <string name="sources_dialog_preinstalled">Pre-installed</string>
     <string name="sources_dialog_community">Community patches</string>
     <string name="sources_dialog_choose_apps">Choose apps</string>
@@ -593,6 +598,9 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="app_links_change_failed">Failed to change app links</string>
     <string name="app_links_all_verified">All supported links are configured to open in this app</string>
     <string name="app_links_fix">Fix links</string>
+    <string name="app_links_allow_shizuku">Allow Shizuku access</string>
+    <string name="app_links_shizuku_permission_hint">Allow Morphe to use Shizuku to turn these links on for you</string>
+    <string name="app_links_shizuku_not_running_hint">Start Shizuku to let Morphe turn these links on for you</string>
     <string name="configure">Configure</string>
     <string name="patcher_rename_title">This will install a clone</string>
     <string name="patcher_rename_description">The patches built this app under a package name of their own, so installing it adds a clone alongside &lt;b&gt;%s&lt;/b&gt; instead of updating it</string>
@@ -773,6 +781,8 @@ Uninstalling will permanently erase all app data"</string>
     <string name="patched_app_save_failed_toast">Failed to save patched app</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe was closed before patching finished, so nothing was patched. Try again</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">The patcher crashed before it finished. If it happens again, turn off %1$s and report the issue with the log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -798,6 +808,8 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-games</string>
     <string name="mini_games_description">Quick games to pass a spare minute</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Games</string>
     <string name="mini_game_score">Score %s</string>
     <string name="mini_game_best">Best %s</string>
     <string name="mini_game_new_record">New record!</string>
@@ -1636,8 +1648,6 @@ Details: %2$s"</string>
     <string name="changelog_older_failed">Couldn\'t load older releases</string>
     <!-- Label of a footer button beside "Translate". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="changelog_release_page">Release page</string>
-    <string name="changelog_host_github" translatable="false">GitHub</string>
-    <string name="changelog_host_gitlab" translatable="false">GitLab</string>
     <string name="content_translate">Translate</string>
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <string name="content_show_original">Original</string>
@@ -1656,6 +1666,7 @@ Details: %2$s"</string>
     <string name="changelog_show_all">Show all (%s)</string>
     <string name="changelog_show_less">Show less</string>
     <string name="no_network_toast">No internet connection available</string>
+    <string name="download_waiting_for_network">Waiting for network</string>
 
     <string name="update_available">An update is available</string>
     <string name="ready_to_install_update">Ready to install update</string>

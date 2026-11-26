@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ev çavkanî neçalak e. Patchên wê ji bo referansê têne lîstekirin û nayên sepandin.</string>
     <string name="sources_management_open_in_browser">Di geroker de veke</string>
     <string name="sources_management_report_issue">Pirsgirêkek rapor bike</string>
+    <string name="sources_management_export_patches">Pela patchan export bike</string>
+    <string name="sources_management_export_patches_success">Pela patchan hate tomarkirin</string>
+    <string name="sources_management_export_patches_failed">Exportkirina pela patchan têk çû</string>
     <string name="sources_management_failed_to_open_url">Vekirina URL têk çû</string>
     <string name="sources_apps">Sepan</string>
     <string name="sources_apps_description">Aplîkasyonên nîşanî ji vê çavkaniyê tên. Ji bo derxistin an zivaran li aplikasyonê bisekinê, ji bo dîtina patchên wê wê bişike. Aplîkasyonek bê çavkanî ji ekrana sereke derdikeve, mêger te patch kiribe</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Ev çavkaniya patchê astengkirî ye û nayê zêdekirin</string>
     <string name="sources_management_source_blocked_badge">Astengkirî</string>
     <string name="sources_management_metadata_unavailable">Metadata tune ye</string>
+    <string name="sources_management_bundle_missing_badge">Nehatî daxistin</string>
     <string name="sources_management_metadata_unavailable_hint">Pelgeya metadateya dûr nepehwîze. Lê dîsa jî nûkirina bi pakêta ku hatiye saz kirin dixebite, lê nûvekirina otomatîkî ji bo vê çavkaniyê nehate çalak kirin</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Pakêta patchê nehat daxistin. URL-ya çavkaniyê dibe ku ne rast be an pel tune be</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paketa patchê nehat daxistin. URL-ya çavkaniyê dibe ku ne rast be an pel tune be. Ji bo guherandinê bitikîne</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Navê nîşanê</string>
     <string name="sources_dialog_rename">Navê çavkaniya patchê biguherîne</string>
+    <string name="sources_dialog_renamed">Hate guhertin ji %s</string>
     <string name="sources_dialog_change_url">Diyar bike çavkaniya patchê ji kuderê were daxistin</string>
     <string name="sources_dialog_duplicate_name_error">Çavkaniyek bi vî navî jixwe heye</string>
     <string name="sources_dialog_missing_error">Ev çavkaniya patchê nehat nûvekirin</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s nûve dike</string>
     <string name="sources_dialog_url_valid">Depo an URL-a JSON-ê yê derbasdar</string>
-    <string name="sources_dialog_url_invalid">URL divê depoyeke GitHub/GitLab an pelê .json nîşan bide</string>
+    <string name="sources_dialog_url_invalid">URL divê depoyeke GitHub, GitLab an Codeberg an pelê .json nîşan bide</string>
     <string name="sources_dialog_preinstalled">Bi saz hatî</string>
     <string name="sources_dialog_community">Patchên civakê</string>
     <string name="sources_dialog_choose_apps">Appan hilbijêre</string>
@@ -576,6 +581,9 @@ Ji bo encamên çêtir, ev app pêşniyar dike ku APKya &lt;b&gt;tam&lt;/b&gt; w
     <string name="app_links_change_failed">Guherandina girêdanên sepanê bi ser neket</string>
     <string name="app_links_all_verified">Hemû girêdanên piştgirîkirî hatine mîhengkirin ku di vê sepanê de vebin.</string>
     <string name="app_links_fix">Girêdanan rast bike</string>
+    <string name="app_links_allow_shizuku">Destengava Shizuku bidîne</string>
+    <string name="app_links_shizuku_permission_hint">Destûr bidê Morphe ku Shizuku bikar bîne da ku van girêdanan ji bo te veke</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku destpê bike da ku Morphe van girêdanan ji bo te veke</string>
     <string name="configure">Mîheng bike</string>
     <string name="patcher_rename_title">Ev ê klonek saz bike</string>
     <string name="patcher_rename_description">Pêvajoya pêçanê ev sepan bi navê pakêta xwe çêkir, ji ber vê yekê sazkirina wê klonek li kêleka &lt;b&gt;%s&lt;/b&gt; zêde dike, li şûna ku wê nûve bike.</string>
@@ -745,6 +753,8 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="patched_app_save_failed_toast">Tomarkirina sepana patchkirî têk çû</string>
     <string name="plugin_activity_dialog_body">Ji bo domandina vê pluginê bikarhêner pêdivî bi çalakiyê ye</string>
     <string name="patcher_process_killed_message">Sîstemê patcher\'î berî ku biqedîne rawestand, bi gelemperî ji bo azadkirina bîrê. Appên din bigire û dîsa biceribîne</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe berî ku patching bi dawî bibe hat girtin, lewma tiştek nehat patchkirin. Careke din biceribîne</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher berî ku biqediye crash bûye. Ger dîsa bibe, %1$s veguherîne off û bi log-ê re pirsgirêkê rapor bike</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <!-- Mini-games -->
     <string name="mini_games">Yariyari-lîstik</string>
     <string name="mini_games_description">Lîstikên bilez ji bo xaltekî wextê vala</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Yarî</string>
     <string name="mini_game_score">Puan %s</string>
     <string name="mini_game_best">Ya herî baş %s</string>
     <string name="mini_game_new_record">Rekora nû!</string>
@@ -1561,6 +1573,7 @@ Detay: %2$s"</string>
     <string name="changelog_show_all">Hemûyan nîşan bide (%s)</string>
     <string name="changelog_show_less">Kêmtir nîşan bide</string>
     <string name="no_network_toast">Girêdana înternetê tune</string>
+    <string name="download_waiting_for_network">Li benda torê</string>
     <string name="update_available">Nûvekirin heye</string>
     <string name="ready_to_install_update">Amade ye ku nûvekirin saz bike</string>
     <string name="update_completed">Nûvekirin hate sazkirin</string>

@@ -23,6 +23,8 @@ import androidx.compose.ui.text.style.TextOverflow
  *
  * While TalkBack runs the new string swaps in place, so the main thread isn't busy animating when
  * it is announced. A null [text] draws nothing.
+ *
+ * @param animated Whether to ease at all, or to swap each string in place.
  */
 @Composable
 fun CrossfadeText(
@@ -36,7 +38,8 @@ fun CrossfadeText(
     maxLines: Int = Int.MAX_VALUE,
     overflow: TextOverflow = TextOverflow.Clip,
     transitionSpec: AnimatedContentTransitionScope<String?>.() -> ContentTransform = Animations.fadeCrossfade(),
-    label: String = "crossfadeText"
+    label: String = "crossfadeText",
+    animated: Boolean = true
 ) {
     val content: @Composable (String?, Modifier) -> Unit = { shown, textModifier ->
         if (shown != null) {
@@ -54,7 +57,7 @@ fun CrossfadeText(
         }
     }
 
-    if (rememberAccessibilityEnabled()) {
+    if (!animated || rememberAccessibilityEnabled()) {
         content(text, modifier)
     } else {
         AnimatedContent(

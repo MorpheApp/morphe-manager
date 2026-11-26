@@ -11,7 +11,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.*
@@ -97,7 +99,9 @@ data class BatchQueueAlertState(val run: BatchRunState?, val saved: SavedBatchQu
 data class BundleUpdateState(
     val visible: Boolean,
     val status: BundleUpdateStatus,
-    val progress: PatchBundleRepository.BundleUpdateProgress?
+    val progress: PatchBundleRepository.BundleUpdateProgress?,
+    /** Whether a download is held up by the device being offline. */
+    val waitingForNetwork: Boolean
 )
 
 /** Aggregate of all notification-strip inputs, grouped by alert. */
@@ -487,7 +491,11 @@ private fun homeAlerts(notifications: HomeNotificationsUi): List<HomeAlert> {
             passing = true,
             ongoing = bundleUpdate.status == BundleUpdateStatus.Updating
         ) {
-            BundleUpdateCard(status = bundleUpdate.status, progress = bundleUpdate.progress)
+            BundleUpdateCard(
+                status = bundleUpdate.status,
+                progress = bundleUpdate.progress,
+                waitingForNetwork = bundleUpdate.waitingForNetwork
+            )
         },
         // Blocked source alert takes priority and cannot be dismissed while the block persists
         alert(
@@ -776,7 +784,8 @@ private val BundleUpdateStatus.tone: SemanticTone
 @Composable
 private fun BundleUpdateCard(
     status: BundleUpdateStatus,
-    progress: PatchBundleRepository.BundleUpdateProgress?
+    progress: PatchBundleRepository.BundleUpdateProgress?,
+    waitingForNetwork: Boolean
 ) {
     val sourcesByUid = rememberSourcesByUid()
 
@@ -802,7 +811,10 @@ private fun BundleUpdateCard(
     // One line names the source at work and how much of it has arrived, while the badge carries
     // how far along the whole update is: its share, or how many sources are done when several run
     val activeName = progress?.activeNames?.firstOrNull() ?: progress?.currentBundleName
-    val arrived = progress?.takeIf { isDownloading }?.let {
+    // A download held up by the device being offline says so instead of a stalled size
+    val arrived = if (waitingForNetwork) {
+        stringResource(R.string.download_waiting_for_network)
+    } else progress?.takeIf { isDownloading }?.let {
         stringResource(
             R.string.manager_update_progress_size,
             formatMegabytes(it.bytesRead),
@@ -1027,10 +1039,10 @@ private fun StatusDisc(icon: ImageVector, tone: SemanticTone) {
  */
 @Composable
 private fun ProgressRing(progress: Float?, content: @Composable () -> Unit) {
-    // Eased, since the share arrives in steps as the download reports back
+    // Eased, since the share arrives in steps. A spring keeps pace where a tween restarts slow
     val animated by animateFloatAsState(
         targetValue = progress ?: 0f,
-        animationSpec = tween(Defaults.ANIMATION_DURATION),
+        animationSpec = spring(stiffness = Spring.StiffnessMediumLow, visibilityThreshold = 0.001f),
         label = "statusRingProgress"
     )
 

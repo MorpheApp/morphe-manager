@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ovaj izvor je onemogućen. Njegovi patchevi su navedeni za referencu i ne primjenjuju se.</string>
     <string name="sources_management_open_in_browser">Otvori u pregledniku</string>
     <string name="sources_management_report_issue">Prijavite problem</string>
+    <string name="sources_management_export_patches">Izvezi datoteku s patchevima</string>
+    <string name="sources_management_export_patches_success">Datoteka s patchevima je spremljena</string>
+    <string name="sources_management_export_patches_failed">Izvoz datoteke s patchevima nije uspio</string>
     <string name="sources_management_failed_to_open_url">Nije moguće otvoriti poveznicu</string>
     <string name="sources_apps">Aplikacije</string>
     <string name="sources_apps_description">Označene aplikacije dolaze iz ovog izvora. Dodirnite aplikaciju kako biste je uklonili ili vratili, prevucite je kako biste vidjeli njezine patchove. Aplikacija nestaje s početnog zaslona kada je više ne nudi nijedan izvor, osim ako je niste patchali</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Ovaj izvor patcha je blokiran i ne može se dodati</string>
     <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metapodaci N/A</string>
+    <string name="sources_management_bundle_missing_badge">Nije preuzeto</string>
     <string name="sources_management_metadata_unavailable_hint">Datoteka udaljenih metapodataka nije dostupna. Patchanje s instaliranim paketom i dalje radi, ali automatsko ažuriranje je onemogućeno za ovaj izvor</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket patcheva nije moguće preuzeti. Izvorna poveznica možda nije ispravna ili datoteka ne postoji.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket patcheva nije bilo moguće preuzeti. Izvorna poveznica je možda netočna ili datoteka ne postoji. Dodirnite za promjenu.</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Prikaži naziv</string>
     <string name="sources_dialog_rename">Preimenuj izvor patcha</string>
+    <string name="sources_dialog_renamed">Preimenovano u %s</string>
     <string name="sources_dialog_change_url">Promijenite odakle se preuzima izvorni kod patcha</string>
     <string name="sources_dialog_duplicate_name_error">Izvor patcha s ovim nazivom već postoji</string>
     <string name="sources_dialog_missing_error">Nije moguće ažurirati ovaj izvor patcha</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ažurira %s</string>
     <string name="sources_dialog_url_valid">Valjani repozitorij ili URL JSON</string>
-    <string name="sources_dialog_url_invalid">Poveznica mora voditi na GitHub/GitLab repo ili .json datoteku</string>
+    <string name="sources_dialog_url_invalid">URL mora voditi na GitHub, GitLab ili Codeberg repo ili .json datoteku</string>
     <string name="sources_dialog_preinstalled">Unaprijed instalirano</string>
     <string name="sources_dialog_community">Patchevi zajednice</string>
     <string name="sources_dialog_choose_apps">Odaberite aplikacije</string>
@@ -579,6 +584,9 @@ Za najbolje rezultate,  patchanje ove aplikacija preporučuje &lt;b&gt;cijeli AP
     <string name="app_links_change_failed">Promjena poveznica aplikacije nije uspjela</string>
     <string name="app_links_all_verified">Sve podržane poveznice konfigurirane su za otvaranje u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
+    <string name="app_links_allow_shizuku">Dopusti pristup aplikaciji Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dopusti aplikaciji Morphe da koristi Shizuku kako bi aktivirala ove poveznice za vas</string>
+    <string name="app_links_shizuku_not_running_hint">Pokrenite Shizuku kako biste dopustili aplikaciji Morphe da aktivira ove poveznice za vas</string>
     <string name="configure">Konfiguriraj</string>
     <string name="patcher_rename_title">Ovo će instalirati klon</string>
     <string name="patcher_rename_description">Patchevi grade ovu aplikaciju pod vlastitim nazivom paketa, pa se instaliranjem dodaje klon &lt;b&gt;%s&lt;/b&gt; umjesto ažuriranja</string>
@@ -748,6 +756,8 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Spremanje patchane aplikacije nije uspjelo</string>
     <string name="plugin_activity_dialog_body">Za nastavak rada s ovim dodatkom potrebna je interakcija korisnika</string>
     <string name="patcher_process_killed_message">Sustav je prekinuo patcher prije nego što je završio, obično kako bi oslobodio memoriju. Zatvorite druge aplikacije i pokušajte ponovno</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je zatvoren prije završetka zakrpljivanja, stoga ništa nije zakrpljeno. Pokušajte ponovno</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher je srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem s logom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -770,6 +780,8 @@ Deinstaliranje će trajno izbrisati sve podatke aplikacije"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-igre</string>
     <string name="mini_games_description">Brze igre za popunjavanje slobodnog vremena</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Igre</string>
     <string name="mini_game_score">Rezultat %s</string>
     <string name="mini_game_best">Najbolje %s</string>
     <string name="mini_game_new_record">Novi rekord!</string>
@@ -1564,6 +1576,7 @@ Detalji: %2$s"</string>
     <string name="changelog_show_all">Prikaži sve (%s)</string>
     <string name="changelog_show_less">Prikaži manje</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
+    <string name="download_waiting_for_network">Čekanje mreže</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spremno za instalaciju ažuriranja</string>
     <string name="update_completed">Ažuriranje instalirano</string>

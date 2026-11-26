@@ -53,7 +53,6 @@ import app.morphe.manager.ui.viewmodel.*
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
@@ -71,8 +70,6 @@ fun HomeDialogs(
     patchesItem: MutableState<HomeAppItem?>,
     settingsNavigation: SettingsNavigation
 ) {
-    val scope = rememberCoroutineScope()
-    val messages = koinInject<UserMessages>()
     val flow = homeViewModel.patchFlow
 
     // APK selection processing overlay - blocks interaction while APK is loaded/validated in background
@@ -145,36 +142,10 @@ fun HomeDialogs(
 
     // Rename bundle dialog
     DialogHost(target = homeViewModel.bundleToRename?.takeIf { homeViewModel.showRenameBundleDialog }) { bundle ->
-        val duplicateNameError = stringResource(R.string.sources_dialog_duplicate_name_error)
-        val missingBundleError = stringResource(R.string.sources_dialog_missing_error)
-
         RenameBundleDialog(
             initialValue = bundle.displayTitle,
-            onDismissRequest = {
-                homeViewModel.showRenameBundleDialog = false
-                homeViewModel.bundleToRename = null
-            },
-            onConfirm = { value ->
-                scope.launch {
-                    val result = homeViewModel.patchBundleRepository.setDisplayName(
-                        bundle.uid,
-                        value.trim().ifEmpty { null }
-                    )
-                    when (result) {
-                        PatchBundleRepository.DisplayNameUpdateResult.SUCCESS,
-                        PatchBundleRepository.DisplayNameUpdateResult.NO_CHANGE -> {
-                            homeViewModel.showRenameBundleDialog = false
-                            homeViewModel.bundleToRename = null
-                        }
-                        PatchBundleRepository.DisplayNameUpdateResult.DUPLICATE -> {
-                            messages.show(duplicateNameError)
-                        }
-                        PatchBundleRepository.DisplayNameUpdateResult.NOT_FOUND -> {
-                            messages.show(missingBundleError)
-                        }
-                    }
-                }
-            }
+            onDismissRequest = homeViewModel::dismissRenameBundle,
+            onConfirm = homeViewModel::renameBundle
         )
     }
 

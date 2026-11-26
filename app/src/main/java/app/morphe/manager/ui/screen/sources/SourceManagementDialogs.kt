@@ -25,20 +25,20 @@ import app.morphe.manager.domain.bundles.RemotePatchBundle
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteUrlCheck
-import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.domain.repository.appsBrought
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.appIconColorOf
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.SourceAppsViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import java.util.Locale
 
@@ -609,20 +609,19 @@ private fun String.sanitizePatchChangelogMarkdown(): String =
 fun DialogHostScope.SourceAppsDialog(
     onDismissRequest: () -> Unit,
     src: PatchBundleSource,
-    initialQuery: String = ""
+    initialQuery: String = "",
+    viewModel: SourceAppsViewModel = koinViewModel()
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
-    val sourceMuteRepository: SourceMuteRepository = koinInject()
     val installedAppRepository: InstalledAppRepository = koinInject()
-    val scope = rememberCoroutineScope()
 
     // Every source, so a disabled one still lists what it would bring once switched back on
     val bundleInfo by patchBundleRepository.allBundlesInfoFlow.collectAsStateWithLifecycle(emptyMap())
     val appMetadata by patchBundleRepository.allAppMetadata.collectAsStateWithLifecycle()
     // Null until read, so the list is never ordered or counted as if nothing were left out
-    val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(null)
+    val keptFrom by viewModel.keptFrom.collectAsStateWithLifecycle(null)
     // Null until read, so the switch never shows the default before the stored answer
-    val unseenNewApps by sourceMuteRepository.unseenNewApps.collectAsStateWithLifecycle(null)
+    val unseenNewApps by viewModel.unseenNewApps.collectAsStateWithLifecycle(null)
     val newApps = unseenNewApps?.get(src.uid).orEmpty()
     // A patched app keeps its home card whichever sources bring it, so leaving it out does not move it
     val installedApps by remember { installedAppRepository.getAll() }.collectAsStateWithLifecycle(emptyList())
@@ -668,20 +667,12 @@ fun DialogHostScope.SourceAppsDialog(
         filtered.all { (packageName, _) -> packageName in broughtApps }
     }
 
-    // Written in full even if the dialog is gone before it finishes, so a list never lands half
-    // applied
-    fun persist(write: suspend () -> Unit) {
-        scope.launch { withContext(NonCancellable) { write() } }
-    }
-
-    fun bring(packageNames: Collection<String>, brought: Boolean) = persist {
-        if (brought) sourceMuteRepository.unmuteApps(src.uid, packageNames)
-        else sourceMuteRepository.muteApps(src.uid, packageNames)
-    }
+    fun bring(packageNames: Collection<String>, brought: Boolean) =
+        viewModel.setOffered(src.uid, packageNames, offered = brought)
 
     // The new apps have been seen once the list closes, so the source card stops counting them
     fun dismiss() {
-        if (newApps.isNotEmpty()) persist { sourceMuteRepository.markNewAppsSeen(src.uid) }
+        if (newApps.isNotEmpty()) viewModel.markNewAppsSeen(src.uid)
         onDismissRequest()
     }
 
@@ -768,7 +759,7 @@ fun DialogHostScope.SourceAppsDialog(
                     SettingsSwitchItem(
                         checked = bringsNewApps,
                         onToggle = {
-                            persist { sourceMuteRepository.setBringsNewApps(src.uid, !bringsNewApps, listedApps) }
+                            viewModel.setBringsNewApps(src.uid, !bringsNewApps, listedApps)
                         },
                         icon = MaterialSymbols.Rounded.Auto_awesome,
                         title = stringResource(R.string.sources_apps_new_apps),

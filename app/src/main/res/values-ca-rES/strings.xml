@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Aquesta font està desactivada. Els seus patches s\'enllisten per referència i no s\'apliquen</string>
     <string name="sources_management_open_in_browser">Obrir al navegador</string>
     <string name="sources_management_report_issue">Informa d\'un problema</string>
+    <string name="sources_management_export_patches">Exporta el fitxer de pegats</string>
+    <string name="sources_management_export_patches_success">Fitxer de pegats desat</string>
+    <string name="sources_management_export_patches_failed">Error en exportar el fitxer de pegats</string>
     <string name="sources_management_failed_to_open_url">Error en obrir l\'URL</string>
     <string name="sources_apps">Aplicacions</string>
     <string name="sources_apps_description">Les aplicacions marcades provenen d\'aquesta font. Toqueu una aplicació per excloure-la o recuperar-la, i deslliseu-la per veure els seus retalls. Una aplicació sense font surt de la pantalla d\'inici, a menys que l\'hayeu retallat</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Aquesta font de pegats està bloquejada i no es pot afegir</string>
     <string name="sources_management_source_blocked_badge">Bloquejat</string>
     <string name="sources_management_metadata_unavailable">Metadades N/A</string>
+    <string name="sources_management_bundle_missing_badge">No descarregat</string>
     <string name="sources_management_metadata_unavailable_hint">El fitxer de metadades remot no està disponible. El pegat amb el paquet instal·lat segueix funcionant, però l\'actualització automàtica està desactivada per a aquesta font</string>
     <string name="sources_management_metadata_unavailable_hint_missing">No s\'ha pogut descarregar el paquet del pegat. La URL de la font pot ser incorrecta o el fitxer no existeix</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">No s\'ha pogut descarregar el paquet de patxes. És possible que l\'URL d\'origen sigui incorrecte o que el fitxer no existeixi. Toca per canviar-lo</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Nom mostrat</string>
     <string name="sources_dialog_rename">Canviar la font del pegat</string>
+    <string name="sources_dialog_renamed">Renomat a %s</string>
     <string name="sources_dialog_change_url">Canvia d\'on es descarrega la font de patxes</string>
     <string name="sources_dialog_duplicate_name_error">Una font de pegats amb aquest nom ja existeix</string>
     <string name="sources_dialog_missing_error">No s\'ha pogut actualitzar aquesta font del patch</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Actualitzacions de %s</string>
     <string name="sources_dialog_url_valid">URL de repositori o JSON vàlida</string>
-    <string name="sources_dialog_url_invalid">La URL ha d\'apuntar a un repo de GitHub/GitLab o a un fitxer .json</string>
+    <string name="sources_dialog_url_invalid">La URL ha d\'apuntar a un repo de GitHub, GitLab o Codeberg o a un fitxer .json</string>
     <string name="sources_dialog_preinstalled">Preinstal·lada</string>
     <string name="sources_dialog_community">Pegats de la comunitat</string>
     <string name="sources_dialog_choose_apps">Tria aplicacions</string>
@@ -576,6 +581,9 @@ Per obtenir els millors resultats, aquesta aplicació recomana patxar un &lt;b&g
     <string name="app_links_change_failed">Error en canviar els enllaços de l\'aplicació</string>
     <string name="app_links_all_verified">Tots els enllaços compatibles estan configurats per obrir-se en aquesta aplicació</string>
     <string name="app_links_fix">Corregir enllaços</string>
+    <string name="app_links_allow_shizuku">Permet l\'accés a Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Permet que Morphe utilitzi Shizuku per activar aquests enllaços per a tu</string>
+    <string name="app_links_shizuku_not_running_hint">Inicia Shizuku per permetre que Morphe activi aquests enllaços per a tu</string>
     <string name="configure">Configurar</string>
     <string name="patcher_rename_title">Això instal·larà un clon</string>
     <string name="patcher_rename_description">Els patxes han creat aquesta aplicació sota un nom de paquet propi, per la qual cosa instal·lar-la afegeix un clon al costat de &lt;b&gt;%s&lt;/b&gt; en lloc d\'actualitzar-la</string>
@@ -745,6 +753,8 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="patched_app_save_failed_toast">Error en desar l\'aplicació amb el pegat</string>
     <string name="plugin_activity_dialog_body">Es requereix la interacció de l\'usuari per procedir amb aquest plugin</string>
     <string name="patcher_process_killed_message">El sistema ha aturat el patxador abans que acabés, normalment per alliberar memòria. Tanca altres aplicacions i torna-ho a intentar</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe s\'ha tancat abans que s\'acabés el procés de patch, per la qual cosa no s\'ha patchat res. Torna-ho a intentar</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">El patxador ha fallat abans de finalitzar. Si torna a passar, desactiva %1$s i informa del problema amb el registre</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <!-- Mini-games -->
     <string name="mini_games">Minijocs</string>
     <string name="mini_games_description">Jocs ràpids per passar un minut lliure</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Jocs</string>
     <string name="mini_game_score">Puntuació %s</string>
     <string name="mini_game_best">Millor %s</string>
     <string name="mini_game_new_record">Nou rècord!</string>
@@ -1561,6 +1573,7 @@ Detalls: %2$s"</string>
     <string name="changelog_show_all">Mostra tots (%s)</string>
     <string name="changelog_show_less">Mostra menys</string>
     <string name="no_network_toast">No hi ha connexió a internet disponible</string>
+    <string name="download_waiting_for_network">Esperant la xarxa</string>
     <string name="update_available">Hi ha una actualització disponible</string>
     <string name="ready_to_install_update">Preparada per instal·lar l\'actualització</string>
     <string name="update_completed">Actualització instal·lada</string>

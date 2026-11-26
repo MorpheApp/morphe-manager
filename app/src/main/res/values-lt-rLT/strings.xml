@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Šis šaltinis išjungtas. Jo pataisos pateikiamos tik kaip nuoroda ir nėra taikomos</string>
     <string name="sources_management_open_in_browser">Atidaryti naršyklėje</string>
     <string name="sources_management_report_issue">Pranešti apie problemą</string>
+    <string name="sources_management_export_patches">Eksportuoti pataisų failą</string>
+    <string name="sources_management_export_patches_success">Pataisų failas išsaugotas</string>
+    <string name="sources_management_export_patches_failed">Nepavyko eksportuoti pataisų failo</string>
     <string name="sources_management_failed_to_open_url">Nepavyko atidaryti nuorodos</string>
     <string name="sources_apps">Programos</string>
     <string name="sources_apps_description">Pažymėtos programėlės yra iš šio šaltinio. Bakstelėkite programėlę, kad ją pašalintumėte arba grąžintumėte, braukite per ją, kad pamatytumėte pataisymus. Programėlė be šaltinio išnyksta iš pagrindinio ekrano, nebent ją pataisėte</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Šis pataisų šaltinis užblokuotas ir jo negalima pridėti</string>
     <string name="sources_management_source_blocked_badge">Užblokuota</string>
     <string name="sources_management_metadata_unavailable">Metaduomenys N/A</string>
+    <string name="sources_management_bundle_missing_badge">Nusiunčiamas</string>
     <string name="sources_management_metadata_unavailable_hint">Nutolusių metaduomenų failas nepasiekiamas. Programėlė vis tiek funkcionuos su įdiegtu paketu, bet automatinis atnaujinimas šitam šaltiniui bus išjungtas</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Šaltinio paketo rinkinys nepavyko atsisiųsti. Galbūt neteisingas šaltinio URL arba failas neegzistuoja.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Pataisų rinkinio nepavyko atsisiųsti. Šaltinio URL gali būti neteisingas arba failo nėra. Bakstelėkite, kad jį pakeistumėte</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Rodomas vardas</string>
     <string name="sources_dialog_rename">Pervadinti pataisos šaltinį</string>
+    <string name="sources_dialog_renamed">Pervardyta į %s</string>
     <string name="sources_dialog_change_url">Pakeiskite vietą, iš kurios atsisiunčiamas pataisų šaltinis</string>
     <string name="sources_dialog_duplicate_name_error">Pataisų šaltinis su šiuo pavadinimu jau egzistuoja</string>
     <string name="sources_dialog_missing_error">Negalima atnaujinti šio pataisos šaltinio</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Atnaujina %s</string>
     <string name="sources_dialog_url_valid">Validus repozitorium arba JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub/GitLab repo arba .json failą</string>
+    <string name="sources_dialog_url_invalid">URL turi rodyti į GitHub, GitLab arba Codeberg repozitorijų arba .json failą</string>
     <string name="sources_dialog_preinstalled">iš anksto įdiegta</string>
     <string name="sources_dialog_community">Bendruomenės pataisos</string>
     <string name="sources_dialog_choose_apps">Pasirinkite programėles</string>
@@ -576,6 +581,9 @@ Norint gauti geriausią rezultatą, ši programa rekomenduoja pataisyti &lt;b&gt
     <string name="app_links_change_failed">Nepavyko pakeisti programėlės nuorodų</string>
     <string name="app_links_all_verified">Visos palaikomos nuorodos sukonfigūruotos atidaryti šioje programėlėje</string>
     <string name="app_links_fix">Ištaisyti nuorodas</string>
+    <string name="app_links_allow_shizuku">Leisti prieigą prie \"Shizuku\"</string>
+    <string name="app_links_shizuku_permission_hint">Leiskite \"Morphe\" naudoti \"Shizuku\", kad nuorodos būtų įjungtos už jus</string>
+    <string name="app_links_shizuku_not_running_hint">Paleiskite \"Shizuku\", kad \"Morphe\" galėtų įjungti šias nuorodas už jus</string>
     <string name="configure">Konfigūruoti</string>
     <string name="patcher_rename_title">Tai įdiegs kloną</string>
     <string name="patcher_rename_description">Pataisos sukūrė šią programą su savo paketo pavadinimu, todėl ją įdiegus šalia &lt;b&gt;%s&lt;/b&gt; atsiras klonas, o ne atnaujinimas</string>
@@ -745,6 +753,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="patched_app_save_failed_toast">Nepavyko išsaugoti pataisytos programos</string>
     <string name="plugin_activity_dialog_body">Reikia vartotojo sąveikos, kad tęsti su šiuo įskiepiu</string>
     <string name="patcher_process_killed_message">Sistema sustabdė pataisymo įrankį, kol jis dar nebaigė veikti, paprastai dėl atminties išlaisvinimo. Uždarykite kitas programas ir bandykite dar kartą</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe buvo uždaryta prieš baigiant atnaujinimą, todėl nieko nebuvo atnaujinta. Pabandykite dar kartą</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Pataisymo įrankis sugriuvo prieš baigdamas. Jei tai pasikartos, išjunkite %1$s ir praneškite apie problemą kartu su žurnalu</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini žaidimai</string>
     <string name="mini_games_description">Greiti žaidimai, kuo galima užpildyti laisvą minutę</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Žaidimai</string>
     <string name="mini_game_score">Rezultatas %s</string>
     <string name="mini_game_best">Geriausias %s</string>
     <string name="mini_game_new_record">Naujas rekordas!</string>
@@ -1561,6 +1573,7 @@ Išsami informacija: %2$s"</string>
     <string name="changelog_show_all">Rodyti visus (%s)</string>
     <string name="changelog_show_less">Rodyti mažiau</string>
     <string name="no_network_toast">Nėra interneto ryšio</string>
+    <string name="download_waiting_for_network">Laukiama tinklo</string>
     <string name="update_available">Yra naujinimas</string>
     <string name="ready_to_install_update">Naujinimas paruoštas diegimui</string>
     <string name="update_completed">Naujinimas įdiegtas</string>

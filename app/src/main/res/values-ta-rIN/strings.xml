@@ -54,16 +54,22 @@
     <!-- Pun on the saying "Out with the old, in with the new" -->
     <!-- Home Screen - Sources Management -->
     <!-- Which sources the sources page lists, each with what it keeps -->
+    <string name="sources_management_export_patches">பேட்ச் கோப்பை ஏற்றுமதி செய்க</string>
+    <string name="sources_management_export_patches_success">பேட்ச் கோப்பு சேமிக்கப்பட்டது</string>
+    <string name="sources_management_export_patches_failed">பேட்ச் கோப்பை ஏற்றுமதி செய்ய முடியவில்லை</string>
     <string name="sources_apps_description">டிக் செய்யப்பட்ட ஆப்ஸ் இந்த மூலத்திலிருந்து வருகின்றன. ஒரு ஆப்பை நீக்க அல்லது மீண்டும் கொண்டு வர அதைத் தட்டுங்கள், அதன் பேட்ச்களைப் பார்க்க அதை ஸ்வைப் செய்யுங்கள். நீங்கள் பேட்ச் செய்யாத வரை, மூலமற்ற ஒரு ஆப் ஹோம் ஸ்கிரீனை விட்டு வெளியேறும்</string>
     <!-- Under an app left out of a source that keeps its home screen card because the user has patched it -->
     <!-- Marks an app (not a patch) the source started supporting since its app list was last opened -->
     <!-- Under the Bring new apps switch in a source's app list, whichever way it is set. "It" is the patch source -->
     <string name="expert_mode_unstable_notice">முன்பதிவு அல்லது சோதனை முயற்சியிலான பேட்ச்கள் நிலையற்றதாக இருக்கலாம்</string>
     <!-- Actions of the panel for several selected sources at once -->
+    <string name="sources_management_bundle_missing_badge">பதிவிறக்கம் செய்யப்படவில்லை</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">பேட்ச் பண்டிலை பதிவிறக்க முடியவில்லை. மூல URL தவறாக இருக்கலாம் அல்லது கோப்பு இல்லை. அதை மாற்ற தட்டவும்</string>
     <!-- Home Screen - Sources Dialogs -->
+    <string name="sources_dialog_renamed">%s என பெயர் மாற்றப்பட்டது</string>
     <string name="sources_dialog_change_url">பேட்ச் மூலப்பொருள் பதிவிறக்கம் செய்யப்படும் இடத்தை மாற்றவும்</string>
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
+    <string name="sources_dialog_url_invalid">URL ஆனது GitHub, GitLab அல்லது Codeberg ரெப்போ அல்லது .json கோப்பைக் குறிக்க வேண்டும்</string>
     <!-- Shown before leaving Morphe for the community patches website. The sources listed there are not reviewed by Morphe -->
     <!-- Shown on Android 17 when the Nearby devices permission, which covers the local network, is refused while a source is hosted there -->
     <string name="sources_local_network_denied">அருகிலுள்ள சாதனங்கள் அனுமதி இல்லாமல் உங்கள் உள்ளூர் நெட்வொர்க்கில் உள்ள ஆதாரங்களை மேம்படுத்த முடியாது</string>
@@ -117,6 +123,9 @@
     <string name="app_links_disable_success">செயலி இணைப்புகள் முடக்கப்பட்டது</string>
     <string name="app_links_disable_failed">செயலி இணைப்புகளை முடக்க முடியவில்லை</string>
     <string name="app_links_change_failed">ஆப் இணைப்புகளை மாற்ற முடியவில்லை</string>
+    <string name="app_links_allow_shizuku">Shizuku அணுகலை அனுமதிக்கவும்</string>
+    <string name="app_links_shizuku_permission_hint">இந்த இணைப்புகளை உங்களுக்காக இயக்க Shizuku-வை பயன்படுத்த Morphe-ஐ அனுமதிக்கவும்</string>
+    <string name="app_links_shizuku_not_running_hint">இந்த இணைப்புகளை உங்களுக்காக இயக்க Morphe-க்கு அனுமதி வழங்க Shizuku-வைத் தொடங்கவும்</string>
     <!-- Home Screen - Root Mode -->
     <!-- "%1$s" is where the setting is, such as "Settings > Installation > Patch mode", built from the names on those screens. "%2$s" is the option it is set to, such as "Ask every time". -->
     <string name="root_pre_patch_installer_hint">%1$s ஆனது %2$s என அமைக்கப்பட்டிருக்கும் போது கேட்கப்பட்டது. பேட்ச் செய்த பிறகு பேட்ச் பயன்முறையை மாற்ற முடியாது</string>
@@ -151,12 +160,16 @@
     <!-- Throw away reference to a Saturday Night Live sketch. "fever" means sickness or the flu. "prescription" means medical treatment or can be translated from "cure" -->
     <!-- Expert patcher Screen -->
     <!-- Patcher Screen - Other hidden strings -->
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">பேட்ச் செய்தல் முடிவதற்கு முன்பே Morphe மூடப்பட்டது, எனவே எதுவும் பேட்ச் செய்யப்படவில்லை. மீண்டும் முயற்சிக்கவும்</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">பேட்சர் முடிவடைவதற்கு முன்பே செயலிழந்தது. இது மீண்டும் நடந்தால், %1$s-ஐ ஆஃப் செய்து லாக் உடன் பிரச்சனையைப் புகாரளிக்கவும்</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
     <!-- Mini-games -->
     <string name="mini_games">மினி-கேம்கள்</string>
     <string name="mini_games_description">உறக்க நேரத்தை கழிக்க விரைவான விளையாட்டுகள்</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">விளையாட்டுகள்</string>
     <string name="mini_game_pause">நிறுத்து</string>
     <string name="mini_game_score_label">மதிப்பெண்</string>
     <string name="mini_game_best_label">சிறந்தது</string>
@@ -296,6 +309,7 @@
     <!-- Label of a footer button beside other buttons, which reads "Translate" until pressed. Keep it as short as "Translate", a longer one moves the buttons onto two rows -->
     <!-- Marks the version of a patch source downloaded to the manager, which patches with it rather than the one an installed app was patched with -->
     <!-- "%s" is the number of changes in the section -->
+    <string name="download_waiting_for_network">பிணையத்திற்காக காத்திருக்கிறது</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <!-- Shown under the download percentage. "%1$s" is the megabytes so far, "%2$s" the total. -->
     <!-- Onboarding coach marks -->

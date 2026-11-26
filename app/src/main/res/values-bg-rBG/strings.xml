@@ -173,6 +173,9 @@
     <string name="sources_patches_source_disabled_hint">Този източник е деактивиран. Кръпките му са изброени за справка и не се прилагат.</string>
     <string name="sources_management_open_in_browser">Отваряне в браузър</string>
     <string name="sources_management_report_issue">Докладвай за проблем</string>
+    <string name="sources_management_export_patches">Експортиране на файл с пачове</string>
+    <string name="sources_management_export_patches_success">Файлът с пачове е запазен</string>
+    <string name="sources_management_export_patches_failed">Неуспешно експортиране на файл с пачове</string>
     <string name="sources_management_failed_to_open_url">Неуспешно отваряне на URL</string>
     <string name="sources_apps">Приложения</string>
     <string name="sources_apps_description">Поставените приложения идват от този източник. Натиснете приложение, за да го пропуснете или да го върнете, плъзнете го, за да видите пачовете му. Приложението се премахва от началния екран, когато никой източник вече не го предоставя, освен ако не сте го пачнали</string>
@@ -202,6 +205,7 @@
     <string name="sources_management_blocked">Този източник на пачове е блокиран и не може да бъде добавен</string>
     <string name="sources_management_source_blocked_badge">Блокиран</string>
     <string name="sources_management_metadata_unavailable">Метаданни не са налични</string>
+    <string name="sources_management_bundle_missing_badge">Не е изтеглено</string>
     <string name="sources_management_metadata_unavailable_hint">Отдалеченият файл с метаданни не е достъпен. Пачването с инсталирания пакет все още работи, но автоматичната актуализация е деактивирана за този източник</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Пакетът с пачове не може да бъде изтеглен. URL адресът на източника може да е неверен или файлът не съществува</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Пакетът с пачове не можа да бъде изтеглен. URL адресът на източника може да е неправилен или файлът не съществува. Докоснете, за да го промените</string>
@@ -218,6 +222,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Показвано име</string>
     <string name="sources_dialog_rename">Преименуване на източник</string>
+    <string name="sources_dialog_renamed">Преименувано на %s</string>
     <string name="sources_dialog_change_url">Променете откъде се изтегля източникът на пачове</string>
     <string name="sources_dialog_duplicate_name_error">Източник с това име вече съществува</string>
     <string name="sources_dialog_missing_error">Този източник на кръпки не може да бъде актуализиран</string>
@@ -233,7 +238,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Актуализира %s</string>
     <string name="sources_dialog_url_valid">Валиден URL на хранилище или JSON</string>
-    <string name="sources_dialog_url_invalid">URL адресът трябва да сочи към GitHub/GitLab хранилище или .json файл</string>
+    <string name="sources_dialog_url_invalid">URL адресът трябва да сочи към хранилище в GitHub, GitLab или Codeberg или към .json файл</string>
     <string name="sources_dialog_preinstalled">Предварително инсталиран</string>
     <string name="sources_dialog_community">Общностни пачове</string>
     <string name="sources_dialog_choose_apps">Изберете приложения</string>
@@ -579,6 +584,9 @@
     <string name="app_links_change_failed">Неуспешна промяна на връзките на приложението</string>
     <string name="app_links_all_verified">Всички поддържани връзки са конфигурирани да се отварят в това приложение</string>
     <string name="app_links_fix">Поправи връзките</string>
+    <string name="app_links_allow_shizuku">Разрешете достъп до Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Позволете на Morphe да използва Shizuku, за да активира тези връзки вместо вас</string>
+    <string name="app_links_shizuku_not_running_hint">Стартирайте Shizuku, за да позволите на Morphe да активира тези връзки вместо вас</string>
     <string name="configure">Конфигурирай</string>
     <string name="patcher_rename_title">Това ще инсталира клонинг</string>
     <string name="patcher_rename_description">Пачовете изградиха това приложение под собствено име на пакет, така че инсталирането му добавя клонинг до &lt;b&gt;%s&lt;/b&gt;, вместо да го актуализира</string>
@@ -748,6 +756,8 @@
     <string name="patched_app_save_failed_toast">Запазването на закърпеното приложение не бе успешно</string>
     <string name="plugin_activity_dialog_body">Необходимо е взаимодействие с потребителя, за да продължите с този плъгин.</string>
     <string name="patcher_process_killed_message">Системата спря патчера преди той да приключи, обикновено с цел освобождаване на памет. Затворете други приложения и опитайте отново</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe беше затворено преди приключването на пачването, така че нищо не беше пачнато. Опитайте отново</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчерът се срина преди да приключи. Ако се случи отново, изключете %1$s и докладвайте проблема с лога</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -770,6 +780,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Мини-игри</string>
     <string name="mini_games_description">Бързи игри за запълване на свободното време</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Игри</string>
     <string name="mini_game_score">Резултат %s</string>
     <string name="mini_game_best">Най-добър %s</string>
     <string name="mini_game_new_record">Нов рекорд!</string>
@@ -1564,6 +1576,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Покажи всички (%s)</string>
     <string name="changelog_show_less">Покажи по-малко</string>
     <string name="no_network_toast">Няма достъп до интернет</string>
+    <string name="download_waiting_for_network">Очакване на мрежа</string>
     <string name="update_available">Налична е актуализация</string>
     <string name="ready_to_install_update">Готово за инсталиране на актуализацията</string>
     <string name="update_completed">Актуализацията е инсталирана</string>

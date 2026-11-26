@@ -25,8 +25,10 @@ import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.domain.installer.InstallCancelledException
 import app.morphe.manager.domain.installer.InstallResult
 import app.morphe.manager.domain.installer.InstallerManager
+import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.installer.awaitHandedOffInstall
+import app.morphe.manager.domain.installer.selfRelaunchCommand
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.ManagerUpdateRepository
 import app.morphe.manager.network.api.ReleaseAPI
@@ -35,6 +37,9 @@ import app.morphe.manager.network.service.AssetDownloader
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import java.io.File
 import java.io.IOException
 
@@ -53,7 +58,8 @@ class UpdateViewModel(
     private val networkInfo: NetworkInfo,
     fs: Filesystem,
     private val prefs: PreferencesManager,
-    private val installerManager: InstallerManager
+    private val installerManager: InstallerManager,
+    private val rootInstaller: RootInstaller
 ) : ViewModel() {
     private var pendingExternalInstall: InstallerManager.InstallPlan.External? = null
     private var externalInstallTimeoutJob: Job? = null
@@ -73,6 +79,11 @@ class UpdateViewModel(
     }
     var showInternetCheckDialog by mutableStateOf(false)
     var state by mutableStateOf(State.CAN_DOWNLOAD)
+
+    /** Whether the download is held up by the device being offline. */
+    val waitingForNetwork: StateFlow<Boolean> = networkInfo
+        .offlineWhile(snapshotFlow { state == State.DOWNLOADING })
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     var installError by mutableStateOf("")
 
@@ -216,7 +227,6 @@ class UpdateViewModel(
         }
 
         val plan = installerManager.resolvePlanWithStatus(
-            InstallerManager.InstallTarget.MANAGER_UPDATE,
             location,
             app.packageName,
             app.getString(R.string.app_name)
@@ -226,21 +236,46 @@ class UpdateViewModel(
             // Replacing the manager kills the process, so a session install never reports back.
             // Completion is handled by installBroadcastReceiver;
             // cancellation by resetIfInstallCancelled() in the dialog
-            is InstallerManager.InstallPlan.Internal ->
+            InstallerManager.InstallPlan.Internal ->
                 launchSystemInstall { sessionInstaller.launchIntentInstall(location) }
 
-            is InstallerManager.InstallPlan.PlayStore ->
+            InstallerManager.InstallPlan.PlayStore ->
                 launchSystemInstall { sessionInstaller.launchPlayStoreInstall(location) }
 
-            is InstallerManager.InstallPlan.Root,
-            is InstallerManager.InstallPlan.RootPlayStore,
-            is InstallerManager.InstallPlan.ShizukuPlayStore ->
-                failInstall(app.getString(R.string.installer_status_not_supported))
-
-            is InstallerManager.InstallPlan.Shizuku ->
-                awaitInstall { sessionInstaller.installShizuku(location, app.packageName) }
+            // These install silently and end the process on success, so a privileged shell
+            // opens the new version rather than leaving the user without Morphe
+            InstallerManager.InstallPlan.Root -> awaitInstall { installWithRoot(asPlayStore = false) }
+            InstallerManager.InstallPlan.RootPlayStore -> awaitInstall { installWithRoot(asPlayStore = true) }
+            InstallerManager.InstallPlan.Shizuku -> awaitInstall { installWithShizuku(asPlayStore = false) }
+            InstallerManager.InstallPlan.ShizukuPlayStore -> awaitInstall { installWithShizuku(asPlayStore = true) }
 
             is InstallerManager.InstallPlan.External -> launchExternalInstaller(plan)
+        }
+    }
+
+    private suspend fun installWithRoot(asPlayStore: Boolean): InstallResult {
+        scheduleRelaunch { check(rootInstaller.execute(it).isSuccess) { "Relaunch command failed" } }
+        rootInstaller.installPackage(location, asPlayStore)
+        return InstallResult.Success
+    }
+
+    private suspend fun installWithShizuku(asPlayStore: Boolean): InstallResult {
+        scheduleRelaunch(sessionInstaller::runShizukuShell)
+        return if (asPlayStore) {
+            sessionInstaller.installShizukuAsPlayStore(location, app.packageName)
+        } else {
+            sessionInstaller.installShizuku(location, app.packageName)
+        }
+    }
+
+    /** Leaves [runShell] a command that opens the updated manager, see [selfRelaunchCommand]. */
+    private suspend fun scheduleRelaunch(runShell: suspend (String) -> Unit) {
+        // Without it the update still goes ahead, it only leaves the user to open Morphe again
+        try {
+            selfRelaunchCommand(app)?.let { runShell(it) }
+        } catch (error: Exception) {
+            if (error is CancellationException) throw error
+            Log.w(LOG_TAG, "Could not schedule a relaunch after the update", error)
         }
     }
 

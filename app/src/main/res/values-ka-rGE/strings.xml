@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ეს წყარო გათიშულია. მისი პატჩები ჩამოთვლილია მხოლოდ საინფორმაციოდ და არ გამოიყენება</string>
     <string name="sources_management_open_in_browser">გახსენით ბრაუზერში</string>
     <string name="sources_management_report_issue">პრობლემის შეტყობინება</string>
+    <string name="sources_management_export_patches">პატჩების ფაილის ექსპორტი</string>
+    <string name="sources_management_export_patches_success">პატჩების ფაილი შენახულია</string>
+    <string name="sources_management_export_patches_failed">პატჩების ფაილის ექსპორტი ვერ მოხერხდა</string>
     <string name="sources_management_failed_to_open_url">URL-ის გახსნა ვერ მოხერხდა</string>
     <string name="sources_apps">აპლიკაციები</string>
     <string name="sources_apps_description">მონიშნული აპლიკაციები მოდის ამ წყაროდან. შეეხ impeding აპლიკაციას მის გამოსარიკვად ან დასაბრუნებლად, გადასვލეთ მის სანახავად პატჩების. აპლიკაცია, რომელსაც არ აქვს წყარო, ტოვებს მთავარ ეკრანს, თუ მას არ დააპატჩეთ</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">ეს პატჩის წყარო დაბლოკილია და მისი დამატება შეუძლებელია</string>
     <string name="sources_management_source_blocked_badge">დაბლოკილი</string>
     <string name="sources_management_metadata_unavailable">მეტამონაცემები მიუწვდომელია</string>
+    <string name="sources_management_bundle_missing_badge">არ არის ჩამოტვირთული</string>
     <string name="sources_management_metadata_unavailable_hint">დისტანციური მეტამონაცემთა ფაილი მიუწვდომელია. დაპატჩვა დაინსტალირებული პაკეტით კვლავ მუშაობს, თუმცა ამ წყაროსთვის ავტო-განახლება გამორთულია</string>
     <string name="sources_management_metadata_unavailable_hint_missing">პატჩის პაკეტის ჩამოტვირთვა ვერ მოხერხდა. შესაძლოა წყაროს URL არასწორია ან ფაილი არ არსებობს</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">პატჩების პაკეტის ჩამოტვირთვა ვერ მოხერხდა. შესაძლოა წყაროს URL არასწორია ან ფაილი არ არსებობს. შეცვლისთვის დააჭირეთ</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ჩვენების სახელი</string>
     <string name="sources_dialog_rename">გადაარქვით სახელი პატჩის წყაროს</string>
+    <string name="sources_dialog_renamed">გადარქმევა %s-ად</string>
     <string name="sources_dialog_change_url">შეცვალეთ პატჩების წყაროს ჩამოტვირთვის მისამართი</string>
     <string name="sources_dialog_duplicate_name_error">ამ სახელის მქონე პატჩის წყარო უკვე არსებობს</string>
     <string name="sources_dialog_missing_error">ამ პატჩის წყაროს განახლება ვერ მოხერხდა</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">განახლებები %s</string>
     <string name="sources_dialog_url_valid">რეპოზიტორიუმის ან JSON-ის ვალიდური URL</string>
-    <string name="sources_dialog_url_invalid">URL უნდა მიუთითებდეს GitHub/GitLab რეპოზიტორზე ან .json ფაილზე</string>
+    <string name="sources_dialog_url_invalid">URL უნდა მიუთითებდეს GitHub-ის, GitLab-ის ან Codeberg-ის რეპოზიტორზე ან .json ფაილზე</string>
     <string name="sources_dialog_preinstalled">წინასწარ დაინსტალირებული</string>
     <string name="sources_dialog_community">საზოგადოების პატჩები</string>
     <string name="sources_dialog_choose_apps">აირჩიეთ აპლიკაციები</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">აპლიკაციის ბმულების შეცვლამ ვერ იმუშავა</string>
     <string name="app_links_all_verified">ყველა მხარდაჭერი ბმული კონფიგურირებულია ამ აპლიკაციაში გასახსნელად</string>
     <string name="app_links_fix">ბმულების გასწორება</string>
+    <string name="app_links_allow_shizuku">ნებადართეთ Shizuku-ს წვდომა</string>
+    <string name="app_links_shizuku_permission_hint">ნებადართეთ Morphe-ს Shizuku-ს გამოყენება ამ ბმულების ჩასართავად</string>
+    <string name="app_links_shizuku_not_running_hint">ჩართეთ Shizuku, რათა Morphe-მ შეძლოს ამ ბმულების ჩართვა თქვენთვის</string>
     <string name="configure">კონფიგურაცია</string>
     <string name="patcher_rename_title">ეს დააინსტალირებს კლონს</string>
     <string name="patcher_rename_description">პატჩებმა ეს აპლიკაცია შექმნეს საკუთარი პაკეტის სახელით, ამიტომ მისი ინსტალაცია დაამატებს კლონს &lt;b&gt;%s&lt;/b&gt;-ის გვერდით, ნაცვლად მისი განახლებისა</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">ვერ მოხერხდა პატჩირებული აპლიკაციის შენახვა</string>
     <string name="plugin_activity_dialog_body">ამ პლაგინის გამოსაყენებლად საჭიროა მომხმარებლის ინტერაქცია</string>
     <string name="patcher_process_killed_message">სისტემამ შეაჩერა პატჩერის მუშაობა დასრულებამდე, როგორც წესი, მეხსიერების გასათავისუფლებლად. დახურეთ სხვა აპლიკაციები და სცადეთ ხელახლა</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe დაიხურა პატჩინგის დასრულებამდე, ამიტომ არაფერი განახლდა. სცადეთ ხელახლა</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher გაითიშა დასრულებამდე. თუ ეს კვლავ მოხდება, გამორთეთ %1$s და შეგვატყობინეთ პრობლემის შესახებ ლოგის თანხლებით</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">მინი-თამაშები</string>
     <string name="mini_games_description">სწრაფი თამაშები თავისუფალი წუთების გასატარებლად</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">თამაშები</string>
     <string name="mini_game_score">ქულა %s</string>
     <string name="mini_game_best">საუკეთესო %s</string>
     <string name="mini_game_new_record">ახალი რეკორდი!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">ყველას ჩვენება (%s)</string>
     <string name="changelog_show_less">ნაკლების ჩვენება</string>
     <string name="no_network_toast">ინტერნეტთან კავშირი არ არის ხელმისაწვდომი</string>
+    <string name="download_waiting_for_network">ქსელის მოლოდინი</string>
     <string name="update_available">ხელმისაწვდომია განახლება</string>
     <string name="ready_to_install_update">მზადაა განახლების დასაინსტალირებლად</string>
     <string name="update_completed">განახლება დაინსტალირებულია</string>

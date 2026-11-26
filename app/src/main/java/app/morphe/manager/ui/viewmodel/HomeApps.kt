@@ -26,6 +26,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.Companion.DEFA
 import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.ui.model.*
+import app.morphe.manager.ui.screen.sources.BundleChangelogRequest
 import app.morphe.manager.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -51,6 +52,16 @@ data class AppPatchUpdate(
     /** The source and the version it is at, which an ignored update is remembered by. */
     val release: String get() = "$bundleUid:$availableVersion"
 }
+
+/**
+ * The notes "What's new" reads for an install: one of the remote sources it was patched from, and
+ * the [update] that source carries for it, if any.
+ */
+data class AppChangelog(
+    val app: InstalledApp,
+    val bundleUid: Int,
+    val update: AppPatchUpdate?
+)
 
 /** Patch updates split by whether the user turned down the release each one brings. */
 private data class PatchUpdates(
@@ -158,6 +169,27 @@ class HomeApps(
     val ignoredAppUpdates: StateFlow<Map<String, AppPatchUpdate>> = patchUpdates
         .map { it?.ignored.orEmpty() }
         .stateIn(scope, SharingStarted.Eagerly, emptyMap())
+
+    /**
+     * What "What's new" reads for each install, keyed by its current package name. Only a remote
+     * source has a changelog, and the one carrying the app's pending update is picked over the rest.
+     * Without one the first in the order the user keeps the sources in wins.
+     */
+    val appChangelogs: StateFlow<Map<String, AppChangelog>> = combine(
+        installedAppRepository.getAll(),
+        installedAppRepository.patchedFromBundles,
+        patchBundleRepository.sources,
+        appUpdatesAvailable
+    ) { apps, patchedFrom, sources, updates ->
+        val remoteUids = sources.filterIsInstance<RemotePatchBundle>().map { it.uid }
+        apps.mapNotNull { app ->
+            val appUids = patchedFrom[app.currentPackageName].orEmpty()
+            val uids = remoteUids.filter { it in appUids }
+            val update = updates?.get(app.currentPackageName)?.takeIf { it.bundleUid in uids }
+            val bundleUid = update?.bundleUid ?: uids.firstOrNull() ?: return@mapNotNull null
+            app.currentPackageName to AppChangelog(app, bundleUid, update)
+        }.toMap()
+    }.stateIn(scope, SharingStarted.Eagerly, emptyMap())
 
     // Ticker to force homeAppState recomputation after install/uninstall without changing DB state
     private val _appStateTicker = MutableStateFlow(0L)
@@ -1039,11 +1071,21 @@ class HomeApps(
     }
 
     /**
+     * The changelog dialog for [changelog]. A pending update is read from the version the app was
+     * patched with, any other source from its current release.
+     */
+    suspend fun changelogRequest(changelog: AppChangelog) = BundleChangelogRequest(
+        bundleUid = changelog.bundleUid,
+        sinceVersion = changelog.update?.patchedWithVersion,
+        subject = changelogSubject(changelog.app, changelog.bundleUid)
+    )
+
+    /**
      * What picks [app]'s changes out of the changelog of the [bundleUid] source, the same the
      * update badge is judged by. Null when the whole changelog is the app's: the source lists only
      * this app, or no name of it is known to match scopes against.
      */
-    suspend fun changelogSubject(app: InstalledApp, bundleUid: Int): ChangelogSubject? = withContext(Dispatchers.IO) {
+    private suspend fun changelogSubject(app: InstalledApp, bundleUid: Int): ChangelogSubject? = withContext(Dispatchers.IO) {
         val bundlesInfo = patchBundleRepository.allBundlesInfoFlow.first()
         if (bundlesInfo[bundleUid]?.listedApps()?.singleOrNull() == app.originalPackageName) return@withContext null
         val appNames = resolveChangelogNames(app.originalPackageName).ifEmpty { return@withContext null }

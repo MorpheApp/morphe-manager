@@ -19,7 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -29,10 +28,11 @@ import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.links.AppLinksStatus
 import app.morphe.manager.domain.links.LinkSelectionAccess
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.viewmodel.AppLinksViewModel
 import app.morphe.manager.util.openAppOpenByDefaultSettings
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 
 /**
@@ -72,52 +72,44 @@ fun DialogHostScope.AppLinksDialog(
 /**
  * What can be done about an app's web links from the manager: [actions] for all of them at once,
  * and [onToggleDomain] for one, null where the device does not let the manager change them.
- * [pendingDomains] are the ones whose change is still being applied.
+ * [pendingDomains] are the ones whose change is still being applied. [accessHint] says what would
+ * let Shizuku change them, while that is all that stands in the way.
  */
 @Immutable
 class AppLinksControls(
     val actions: List<DialogAction>,
     val onToggleDomain: ((domain: String, selected: Boolean) -> Unit)?,
-    val pendingDomains: Set<String>
+    val pendingDomains: Set<String>,
+    @param:StringRes val accessHint: Int?
 )
 
 /**
  * The [AppLinksControls] of [packageName]: selecting every link or one at a time where Shizuku or
- * root lets the manager do it, and opening the system screen where the user picks them either way.
+ * root lets the manager do it, a way to grant Shizuku access or start it when nothing else is
+ * missing, and opening the system screen where the user picks them either way.
  */
 @Composable
 fun rememberAppLinksControls(
     packageName: String,
     status: AppLinksStatus,
-    onRefresh: () -> Unit
+    onRefresh: () -> Unit,
+    viewModel: AppLinksViewModel = koinViewModel()
 ): AppLinksControls {
     val context = LocalContext.current
-    val messages = koinInject<UserMessages>()
-    val resources = LocalResources.current
-    val scope = rememberCoroutineScope()
     val appLinksManager: AppLinksManager = koinInject()
-    val canChange by produceState(false) {
-        value = appLinksManager.getSelectionAccess() != LinkSelectionAccess.NONE
+    // Read again on a return to Morphe and on an answer to a Shizuku prompt, where the user
+    // starts Shizuku or grants access
+    var accessCheck by remember { mutableIntStateOf(0) }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { accessCheck++ }
+    DisposableEffect(appLinksManager) {
+        val observer = appLinksManager.observeShizukuPermission { accessCheck++ }
+        onDispose { observer.close() }
     }
-    var pendingDomains by remember { mutableStateOf(emptySet<String>()) }
-
-    // Marked before launching, so a second tap in the same frame starts nothing. The rows show the
-    // status read once the change lands rather than what was asked for
-    fun change(
-        domains: Set<String>,
-        @StringRes successMessage: Int?,
-        @StringRes failureMessage: Int,
-        apply: suspend () -> Boolean
-    ) {
-        if (domains.isEmpty() || domains.any { it in pendingDomains }) return
-        pendingDomains += domains
-        scope.launch {
-            val success = apply()
-            pendingDomains -= domains
-            onRefresh()
-            (if (success) successMessage else failureMessage)?.let { messages.show(resources.getString(it)) }
-        }
+    val access by produceState(LinkSelectionAccess.NONE, accessCheck) {
+        value = appLinksManager.getSelectionAccess()
     }
+    val canChange = access.canChange
+    val pendingDomains = viewModel.pendingDomains(packageName)
 
     val actions = buildList {
         if (canChange) {
@@ -131,11 +123,14 @@ fun rememberAppLinksControls(
                         text = stringResource(if (inProgress) bulk.progressLabel else bulk.label),
                         icon = bulk.icon,
                         onClick = {
-                            change(
+                            viewModel.setAllSelected(
+                                packageName = packageName,
                                 domains = domains.toSet(),
+                                selected = bulk.selected,
                                 successMessage = bulk.successMessage,
-                                failureMessage = bulk.failureMessage
-                            ) { appLinksManager.setAllDomainsSelected(packageName, bulk.selected) }
+                                failureMessage = bulk.failureMessage,
+                                onChanged = onRefresh
+                            )
                         },
                         enabled = pendingDomains.isEmpty(),
                         // Pressed for only while no link reaches the app, as a few left out can be on purpose
@@ -147,6 +142,27 @@ fun rememberAppLinksControls(
                     )
                 )
             }
+        }
+        // Pressed for while no link reaches the app, as the enable action it unlocks would be
+        val shizukuEmphasis = if (status.opensInBrowser) DialogActionEmphasis.Filled else DialogActionEmphasis.Outlined
+        when (access) {
+            LinkSelectionAccess.SHIZUKU_PERMISSION_MISSING -> add(
+                DialogAction(
+                    text = stringResource(R.string.app_links_allow_shizuku),
+                    icon = MaterialSymbols.Rounded.Key,
+                    onClick = { if (!appLinksManager.requestShizukuPermission()) accessCheck++ },
+                    emphasis = shizukuEmphasis
+                )
+            )
+            LinkSelectionAccess.SHIZUKU_NOT_RUNNING -> add(
+                DialogAction(
+                    text = stringResource(R.string.installer_action_open_shizuku),
+                    icon = MaterialSymbols.Rounded.Open_in_new.autoMirrored,
+                    onClick = { appLinksManager.openShizuku() },
+                    emphasis = shizukuEmphasis
+                )
+            )
+            else -> Unit
         }
         add(
             DialogAction(
@@ -160,13 +176,14 @@ fun rememberAppLinksControls(
     return AppLinksControls(
         actions = actions,
         onToggleDomain = if (canChange) {
-            { domain, selected ->
-                change(domains = setOf(domain), successMessage = null, failureMessage = R.string.app_links_change_failed) {
-                    appLinksManager.setDomainsSelected(packageName, listOf(domain), selected)
-                }
-            }
+            { domain, selected -> viewModel.setSelected(packageName, domain, selected, onChanged = onRefresh) }
         } else null,
-        pendingDomains = pendingDomains
+        pendingDomains = pendingDomains,
+        accessHint = when (access) {
+            LinkSelectionAccess.SHIZUKU_PERMISSION_MISSING -> R.string.app_links_shizuku_permission_hint
+            LinkSelectionAccess.SHIZUKU_NOT_RUNNING -> R.string.app_links_shizuku_not_running_hint
+            else -> null
+        }
     )
 }
 
@@ -251,6 +268,11 @@ fun AppLinksContent(status: AppLinksStatus, controls: AppLinksControls, accentCo
             text = stringResource(R.string.app_links_description),
             icon = MaterialSymbols.Rounded.Link
         )
+    }
+
+    // Only worth saying while some link still opens in the browser
+    controls.accessHint?.takeIf { status.needsAttention }?.let { hint ->
+        Footnote(text = stringResource(hint), icon = MaterialSymbols.Rounded.Key)
     }
 }
 

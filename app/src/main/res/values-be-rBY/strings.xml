@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Гэтая крыніца адключана. Яе патчы паказаны для даведкі і не прымяняюцца</string>
     <string name="sources_management_open_in_browser">Адкрыць у браўзеры</string>
     <string name="sources_management_report_issue">Паведаміць пра праблему</string>
+    <string name="sources_management_export_patches">Экспартаваць файл патчаў</string>
+    <string name="sources_management_export_patches_success">Файл патчаў захаваны</string>
+    <string name="sources_management_export_patches_failed">Не ўдалося экспартаваць файл патчаў</string>
     <string name="sources_management_failed_to_open_url">Не ўдалося адкрыць URL</string>
     <string name="sources_apps">Праграмы</string>
     <string name="sources_apps_description">Адзначаныя праграмы паходзяць з гэтай крыніцы. Націсніце на праграму, каб выключыць яе або вярнуць, або прагнайце яе, каб убачыць патчы. Праграма знікае з галоўнага экрана, калі яна больш не прадастаўляецца ніводнай крыніцай, за выключэннем выпадкаў, калі вы яе прапатчылі</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Гэтая крыніца патча заблакавана і не можа быць дададзена.</string>
     <string name="sources_management_source_blocked_badge">Заблакавана</string>
     <string name="sources_management_metadata_unavailable">Метаданыя недаступны</string>
+    <string name="sources_management_bundle_missing_badge">Не спампавана</string>
     <string name="sources_management_metadata_unavailable_hint">Знешні файл метаданых недаступны. Патчынг з усталяваным пакетам яшчэ працуе, але аўтаматычныя абнаўленні для гэтай крыніцы адключаны</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Не ўдалося спампаваць пакет патчаў. Магчыма, URL-адрас крыніцы няправільны або файл не існуе</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Не ўдалося спампаваць пакет патчаў. Магчыма, URL крыніцы няправільны або файл не існуе. Націсніце, каб змяніць яго</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Адлюстраванае iмя</string>
     <string name="sources_dialog_rename">Перайменаваць крыніцу патча</string>
+    <string name="sources_dialog_renamed">Пераіменавана ў %s</string>
     <string name="sources_dialog_change_url">Змянiць адрас спампоўкі крыніцы патчаў</string>
     <string name="sources_dialog_duplicate_name_error">Крыніца патча з такой назвай ужо існуе</string>
     <string name="sources_dialog_missing_error">Не ўдалося абнавіць гэтую крыніцу патча</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Абнаўленні %s</string>
     <string name="sources_dialog_url_valid">Дзейны рэпазіторый або JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL павінен паказваць на рэпазіторый GitHub/GitLab або файл .json</string>
+    <string name="sources_dialog_url_invalid">URL павінен паказваць на рэпазіторый GitHub, GitLab або Codeberg або файл .json</string>
     <string name="sources_dialog_preinstalled">Папярэдне ўсталяваны</string>
     <string name="sources_dialog_community">Супольнасць патчаў</string>
     <string name="sources_dialog_choose_apps">Выбраць праграмы</string>
@@ -577,6 +582,9 @@
     <string name="app_links_change_failed">Не ўдалося змяніць спасылкі праграмы</string>
     <string name="app_links_all_verified">Усе падтрыманыя спасылкі наладжаны на адкрыццё ў гэтай праграме</string>
     <string name="app_links_fix">Выправіць спасылкі</string>
+    <string name="app_links_allow_shizuku">Даць доступ Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Дазвольце Morphe выкарыстоўваць Shizuku, каб уключыць гэтыя спасылкі для вас</string>
+    <string name="app_links_shizuku_not_running_hint">Запусціце Shizuku, каб Morphe мог уключыць гэтыя спасылкі для вас</string>
     <string name="configure">Наладзіць</string>
     <string name="patcher_rename_title">Гэта ўсталюе клон</string>
     <string name="patcher_rename_description">Патчы стварылі гэту праграму з уласнай назвай пакета, таму яе ўсталёўка дадае клона побач з &lt;b&gt;%s&lt;/b&gt; замест абнаўлення</string>
@@ -746,6 +754,8 @@
     <string name="patched_app_save_failed_toast">Не ўдалося захаваць патчаную праграму</string>
     <string name="plugin_activity_dialog_body">Для працягу працы з гэтым плагінам патрабуецца ўзаемадзеянне карыстальніка</string>
     <string name="patcher_process_killed_message">Сістэма спыніла патчар да яго завяршэння, звычайна для вызвалення памяці. Закрыйце іншыя праграмы і паспрабуйце зноў</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe быў закрыты да завяршэння патчавання, таму нічога не было патчавана. Паспрабуйце яшчэ раз</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Патчар завяршыў працу з памылкай. Калі гэта паўторыцца, выключыце %1$s і паведаміце пра праблему, прыклаўшы лог</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +778,8 @@
     <!-- Mini-games -->
     <string name="mini_games">Міні-гульні</string>
     <string name="mini_games_description">Хуткі гульні, каб забіць вольную хвілінку</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Гульні</string>
     <string name="mini_game_score">Лік %s</string>
     <string name="mini_game_best">Найлепшы вынік: %s</string>
     <string name="mini_game_new_record">Новы рэкорд!</string>
@@ -1562,6 +1574,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">Паказаць усё (%s)</string>
     <string name="changelog_show_less">Паказаць менш</string>
     <string name="no_network_toast">Інтэрнэт-злучэнне недаступна</string>
+    <string name="download_waiting_for_network">Чаканне сеткі</string>
     <string name="update_available">Даступна абнаўленне</string>
     <string name="ready_to_install_update">Гатова да ўсталёўкі абнаўлення</string>
     <string name="update_completed">Абнаўленне ўсталявана</string>

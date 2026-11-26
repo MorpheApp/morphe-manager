@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">แหล่งที่มานี้ถูกปิดใช้งาน แพตช์ของมันถูกแสดงเพื่อการอ้างอิงและจะไม่ถูกนำไปใช้</string>
     <string name="sources_management_open_in_browser">เปิดในเบราว์เซอร์</string>
     <string name="sources_management_report_issue">รายงานปัญหา</string>
+    <string name="sources_management_export_patches">ส่งออกไฟล์แพตช์</string>
+    <string name="sources_management_export_patches_success">บันทึกไฟล์แพตช์แล้ว</string>
+    <string name="sources_management_export_patches_failed">ไม่สามารถส่งออกไฟล์แพตช์ได้</string>
     <string name="sources_management_failed_to_open_url">ไม่สามารถเปิด URL ได้</string>
     <string name="sources_apps">แอป</string>
     <string name="sources_apps_description">แอปที่ถูกเลือกมาจากแหล่งที่มานี้ แตะที่แอปเพื่อนำออกหรือนำกลับมา และปัดเพื่อดูแพตช์ของแอปนั้น แอปที่ไม่มีแหล่งที่มาจะถูกนำออกจากหน้าจอหลัก เว้นแต่คุณจะทำการแพตช์แอปนั้นไว้</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">แหล่งแพตช์นี้ถูกบล็อกและไม่สามารถเพิ่มได้</string>
     <string name="sources_management_source_blocked_badge">ถูกบล็อก</string>
     <string name="sources_management_metadata_unavailable">ไม่มีข้อมูล Metadata</string>
+    <string name="sources_management_bundle_missing_badge">ยังไม่ได้ดาวน์โหลด</string>
     <string name="sources_management_metadata_unavailable_hint">ไฟล์ Metadata ระยะไกลไม่พร้อมใช้งาน การแพตช์ด้วยชุดที่ติดตั้งยังคงทำงานได้ แต่การอัปเดตอัตโนมัติถูกปิดใช้งานสำหรับแหล่งที่มานี้</string>
     <string name="sources_management_metadata_unavailable_hint_missing">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">ไม่สามารถดาวน์โหลดชุดแพตช์ได้ URL แหล่งที่มาอาจไม่ถูกต้อง หรือไฟล์ไม่มีอยู่ แตะเพื่อเปลี่ยน</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">ชื่อที่แสดง</string>
     <string name="sources_dialog_rename">เปลี่ยนชื่อแหล่งที่มา</string>
+    <string name="sources_dialog_renamed">เปลี่ยนชื่อเป็น %s แล้ว</string>
     <string name="sources_dialog_change_url">เปลี่ยนตำแหน่งที่ดาวน์โหลดแหล่งที่มาของแพตช์</string>
     <string name="sources_dialog_duplicate_name_error">มีแหล่งที่มาที่ชื่อนี้อยู่แล้ว</string>
     <string name="sources_dialog_missing_error">ไม่สามารถอัปเดตแหล่งที่มานี้</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">อัปเดต %s</string>
     <string name="sources_dialog_url_valid">ที่อยู่ URL หรือ JSON ที่ถูกต้อง</string>
-    <string name="sources_dialog_url_invalid">URL ต้องชี้ไปยัง GitHub/GitLab repo หรือไฟล์ .json</string>
+    <string name="sources_dialog_url_invalid">URL ต้องระบุไปยัง repo ของ GitHub, GitLab หรือ Codeberg หรือไฟล์ .json</string>
     <string name="sources_dialog_preinstalled">ติดตั้งล่วงหน้าแล้ว</string>
     <string name="sources_dialog_community">แพตช์ชุมชน</string>
     <string name="sources_dialog_choose_apps">เลือกแอป</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">เปลี่ยนลิงก์แอปไม่สำเร็จ</string>
     <string name="app_links_all_verified">ลิงก์ที่รองรับทั้งหมดได้รับการกำหนดค่าให้เปิดในแอปนี้แล้ว</string>
     <string name="app_links_fix">แก้ไขลิงก์</string>
+    <string name="app_links_allow_shizuku">อนุญาตการเข้าถึง Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">อนุญาตให้ Morphe ใช้ Shizuku เพื่อเปิดลิงก์เหล่านี้ให้คุณ</string>
+    <string name="app_links_shizuku_not_running_hint">เริ่มการทำงานของ Shizuku เพื่อให้ Morphe เปิดลิงก์เหล่านี้ให้คุณ</string>
     <string name="configure">กำหนดค่า</string>
     <string name="patcher_rename_title">การดำเนินการนี้จะติดตั้งโคลน</string>
     <string name="patcher_rename_description">แพตช์ได้สร้างแอปนี้ภายใต้ชื่อแพ็คเกจของตนเอง ดังนั้นการติดตั้งจะเพิ่มโคลนควบคู่ไปกับ &lt;b&gt;%s&lt;/b&gt; แทนที่จะอัปเดต</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">ไม่สามารถบันทึกแอปที่แพตช์แล้วได้</string>
     <string name="plugin_activity_dialog_body">ปลั๊กอินนี้ต้องการการโต้ตอบจากผู้ใช้เพื่อดำเนินการต่อ</string>
     <string name="patcher_process_killed_message">ระบบหยุดการทำงานของตัวแพตช์ก่อนที่จะเสร็จสิ้น โดยปกติแล้วเพื่อเพิ่มพื้นที่ว่างในหน่วยความจำ โปรดปิดแอปอื่นๆ แล้วลองใหม่อีกครั้ง</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ถูกปิดก่อนที่การแพตช์จะเสร็จสิ้น ดังนั้นจึงไม่มีการแพตช์สิ่งใด โปรดลองอีกครั้ง</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ตัวแพตช์หยุดทำงานก่อนที่จะเสร็จสิ้น หากเกิดขึ้นอีก ให้ปิด %1$s และรายงานปัญหาพร้อมบันทึก</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">มินิเกม</string>
     <string name="mini_games_description">เกมสั้นๆ สำหรับใช้เวลาว่าง</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">เกม</string>
     <string name="mini_game_score">คะแนน %s</string>
     <string name="mini_game_best">ดีที่สุด %s</string>
     <string name="mini_game_new_record">บันทึกใหม่!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">แสดงทั้งหมด (%s)</string>
     <string name="changelog_show_less">แสดงน้อยลง</string>
     <string name="no_network_toast">ไม่มีการเชื่อมต่ออินเทอร์เน็ต</string>
+    <string name="download_waiting_for_network">กำลังรอเครือข่าย</string>
     <string name="update_available">มีอัปเดตพร้อมใช้งาน</string>
     <string name="ready_to_install_update">พร้อมติดตั้งอัปเดต</string>
     <string name="update_completed">ติดตั้งอัปเดตแล้ว</string>

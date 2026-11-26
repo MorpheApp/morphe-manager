@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">هذا المصدر معطل. تُدرج تعديلاته كمرجع فقط ولا يتم تطبيقها</string>
     <string name="sources_management_open_in_browser">فتح في المتصفح</string>
     <string name="sources_management_report_issue">الإبلاغ عن مشكلة</string>
+    <string name="sources_management_export_patches">تصدير ملف التعديلات</string>
+    <string name="sources_management_export_patches_success">تم حفظ ملف التعديلات</string>
+    <string name="sources_management_export_patches_failed">فشل تصدير ملف التعديلات</string>
     <string name="sources_management_failed_to_open_url">فشل في فتح الرابط</string>
     <string name="sources_apps">التطبيقات</string>
     <string name="sources_apps_description">التطبيقات المحددة تأتي من هذا المصدر. انقر على تطبيق لاستبعاده أو إعادته، ومرره لرؤية تعديلاته. يغادر التطبيق الشاشة الرئيسية بمجرد توقف أي مصدر عن تقديمه، ما لم تكن قد قمت بتعديله</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">تم حظر مصدر التعديل هذا ولا يمكن إضافته</string>
     <string name="sources_management_source_blocked_badge">محظور</string>
     <string name="sources_management_metadata_unavailable">البيانات الوصفية غير متوفرة</string>
+    <string name="sources_management_bundle_missing_badge">لم يتم التنزيل</string>
     <string name="sources_management_metadata_unavailable_hint">ملف البيانات الوصفية عن بعد غير متوفر. لا يزال التعديل بالحزمة المثبتة يعمل، ولكن التحديث التلقائي معطل لهذا المصدر.</string>
     <string name="sources_management_metadata_unavailable_hint_missing">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود.</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">تعذر تنزيل حزمة التعديل. قد يكون عنوان URL المصدر غير صحيح أو أن الملف غير موجود. انقر لتغييره</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">الاسم المعروض</string>
     <string name="sources_dialog_rename">إعادة تسمية مصدر التعديل</string>
+    <string name="sources_dialog_renamed">تم تغيير الاسم إلى %s</string>
     <string name="sources_dialog_change_url">تغيير الموقع الذي يتم منه تنزيل مصدر التعديل</string>
     <string name="sources_dialog_duplicate_name_error">يوجد مصدر تعديل بهذا الاسم بالفعل</string>
     <string name="sources_dialog_missing_error">تعذر تحديث مصدر التعديل هذا</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">تحديثات %s</string>
     <string name="sources_dialog_url_valid">مستودع صالح أو عنوان URL بتنسيق JSON</string>
-    <string name="sources_dialog_url_invalid">يجب أن يشير عنوان URL إلى مستودع GitHub/GitLab أو ملف ‎.json</string>
+    <string name="sources_dialog_url_invalid">يجب أن يشير عنوان URL إلى مستودع GitHub أو GitLab أو Codeberg أو ملف ‎.json</string>
     <string name="sources_dialog_preinstalled">مثبتة مسبقًا</string>
     <string name="sources_dialog_community">تعديلات المجتمع</string>
     <string name="sources_dialog_choose_apps">اختيار التطبيقات</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">فشل تغيير روابط التطبيق</string>
     <string name="app_links_all_verified">تم تكوين جميع الروابط المدعومة لتُفتح في هذا التطبيق</string>
     <string name="app_links_fix">إصلاح الروابط</string>
+    <string name="app_links_allow_shizuku">السماح لوصول Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">اسمح لـ Morphe باستخدام Shizuku لتمكين هذه الروابط لك</string>
+    <string name="app_links_shizuku_not_running_hint">قم بتشغيل Shizuku للسماح لـ Morphe بتمكين هذه الروابط من لك</string>
     <string name="configure">تكوين</string>
     <string name="patcher_rename_title">سيؤدي هذا إلى تثبيت نسخة مستنسخة</string>
     <string name="patcher_rename_description">تم إنشاء هذا التطبيق باستخدام اسم حزمة مختلف بسبب التعديلات، لذا فإن تثبيته سيضيف نسخة مستنسخة إلى جانب &lt;b&gt;%s&lt;/b&gt; بدلًا من تحديثه</string>
@@ -746,6 +754,8 @@
     <string name="patched_app_save_failed_toast">فشل حفظ التطبيق المعدل</string>
     <string name="plugin_activity_dialog_body">يلزم تفاعل المستخدم للمتابعة باستخدام هذا المكون الإضافي</string>
     <string name="patcher_process_killed_message">أوقف النظام أداة التعديل قبل إتمام عملها، وعادةً ما يحدث ذلك لتوفير مساحة في الذاكرة. أغلق التطبيقات الأخرى وحاول مجددًا</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">تم إغلاق Morphe قبل انتهاء عملية التعديل، لذا لم يتم تعديل أي شيء. حاول مرة أخرى</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">تعطلت أداة التعديل قبل أن تنتهي. إذا تكرر ذلك، قم بإيقاف تشغيل %1$s وأبلغ عن المشكلة مع إرفاق السجل</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -770,6 +780,8 @@
     <!-- Mini-games -->
     <string name="mini_games">ألعاب مصغّرة</string>
     <string name="mini_games_description">ألعاب سريعة لقضاء وقت الفراغ</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">الألعاب</string>
     <string name="mini_game_score">النتيجة %s</string>
     <string name="mini_game_best">الأفضل %s</string>
     <string name="mini_game_new_record">رقم قياسي جديد!</string>
@@ -1565,6 +1577,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="changelog_show_all">عرض الكل (%s)</string>
     <string name="changelog_show_less">عرض أقل</string>
     <string name="no_network_toast">لا يوجد اتصال بالإنترنت متاح</string>
+    <string name="download_waiting_for_network">بانتظار الشبكة</string>
     <string name="update_available">يتوفر تحديث</string>
     <string name="ready_to_install_update">جاهز لتثبيت التحديث</string>
     <string name="update_completed">تم تثبيت التحديث</string>

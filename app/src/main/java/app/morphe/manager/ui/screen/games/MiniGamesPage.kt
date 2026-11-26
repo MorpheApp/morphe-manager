@@ -44,9 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import app.morphe.manager.R
-import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.util.AppCoroutineScope
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.Pause
 import com.composables.icons.materialsymbols.rounded.Play_arrow
@@ -61,18 +59,17 @@ private val GamePickerIconTileSize = 44.dp
 private val GamePickerIconTileShape = RoundedCornerShape(Defaults.CornerMedium)
 
 /**
- * The mini-games, a page of their own opened from the settings: a picker of [MiniGame.entries],
- * and the game picked from it in its place, which the way back leaves for the picker again.
+ * The mini-games, a page of their own opened from the settings and the patcher: a picker of
+ * [MiniGame.entries], and the game picked from it in its place, which the way back leaves for the
+ * picker again. A game left open is still there, paused, the next time the page is opened.
  *
  * @param onBack Leaves the page for the one it was opened from.
  */
 @Composable
 fun MiniGamesPage(
     onBack: () -> Unit,
-    prefs: PreferencesManager = koinInject(),
-    appScope: AppCoroutineScope = koinInject()
+    state: MiniGameState = koinInject()
 ) {
-    val state = remember { MiniGameState(prefs, appScope) }
     val selected = state.selectedGame
     val gridState = rememberLazyGridState()
     // A game holds still, so only the picker's scroll lays the header's band down
@@ -84,9 +81,10 @@ fun MiniGamesPage(
     // Waits behind its pause overlay while the manager is away, rather than playing on the
     // moment it is back, before the player has their eyes on it again
     LifecycleEventEffect(Lifecycle.Event.ON_STOP) { state.pauseActiveGame() }
-    // However the page is left, the round on screen keeps the record it set
+    // However the page is left, the round on screen keeps the record it set and waits paused
+    // for the page to be opened again
     DisposableEffect(state) {
-        onDispose { state.saveRecord() }
+        onDispose { state.pauseActiveGame() }
     }
 
     PinnedHeaderPage(

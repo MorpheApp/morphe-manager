@@ -6,12 +6,11 @@
 package app.morphe.manager.domain.bundles
 
 import app.morphe.manager.domain.bundles.RemotePatchBundle.Companion.inferIssuesUrlFromEndpoint
-import app.morphe.manager.domain.bundles.RemotePatchBundle.Companion.issuesUrlForRepoUrl
 import kotlin.test.*
 
 /**
  * The "report an issue" button targets the repository's issues page, so the endpoint must map
- * to the right host layout (GitHub /issues, GitLab /-/issues) and to nothing when unknown.
+ * to the right host layout (GitHub and Codeberg /issues, GitLab /-/issues) and to nothing when unknown.
  */
 class IssuesUrlInferenceTest {
 
@@ -44,6 +43,14 @@ class IssuesUrlInferenceTest {
     }
 
     @Test
+    fun `codeberg endpoint maps to issues page`() {
+        assertEquals(
+            "https://codeberg.org/owner/repo/issues",
+            inferIssuesUrlFromEndpoint("https://codeberg.org/owner/repo/raw/branch/main/patches-bundle.json")
+        )
+    }
+
+    @Test
     fun `unknown host has no issues page`() {
         assertNull(
             inferIssuesUrlFromEndpoint("https://example.com/patches/patches-bundle.json")
@@ -59,12 +66,12 @@ class IssuesUrlInferenceTest {
     fun `manifest declared repository gets the host issues path`() {
         assertEquals(
             "https://github.com/owner/repo/issues",
-            issuesUrlForRepoUrl("https://github.com/owner/repo")
+            inferIssuesUrlFromEndpoint("https://github.com/owner/repo")
         )
         assertEquals(
             "https://gitlab.com/owner/repo/-/issues",
-            issuesUrlForRepoUrl("https://gitlab.com/owner/repo")
+            inferIssuesUrlFromEndpoint("https://gitlab.com/owner/repo")
         )
-        assertNull(issuesUrlForRepoUrl("https://patches.example.com/owner/repo"))
+        assertNull(inferIssuesUrlFromEndpoint("https://patches.example.com/owner/repo"))
     }
 }

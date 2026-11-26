@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Chanzo hiki kimezimwa. Viraka vyake vimeorodheshwa kwa rejea na havijatumika</string>
     <string name="sources_management_open_in_browser">Fungua kwenye kivinjari</string>
     <string name="sources_management_report_issue">Ripoti tatizo</string>
+    <string name="sources_management_export_patches">Exporti faili ya viraka</string>
+    <string name="sources_management_export_patches_success">Faili ya viraka imehifadhiwa</string>
+    <string name="sources_management_export_patches_failed">Imeshindwa kutoa faili ya viraka</string>
     <string name="sources_management_failed_to_open_url">Imeshindwa kufungua URL</string>
     <string name="sources_apps">Programu</string>
     <string name="sources_apps_description">Programu zilizochaguliwa zinatoka kwenye chanzo hiki. Gusa programu ili kuiondoa au kuirudisha, ishie kuisogeza ili kuona viraka vyake. Programu isiyo na chanzo huondoka kwenye skrini ya kuanzia, isipokuwa kama uliiraka</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Chanzo hiki cha patch kimezuiwa na hakiwezi kuongezwa</string>
     <string name="sources_management_source_blocked_badge">Imezuiwa</string>
     <string name="sources_management_metadata_unavailable">Metadata haipatikani</string>
+    <string name="sources_management_bundle_missing_badge">Haijapakiwa</string>
     <string name="sources_management_metadata_unavailable_hint">Faili ya metadata ya mbali haipatikani. Kufanya patching kwa bundle iliyosakinishwa bado inafanya kazi, lakini sasisho la kiotomatiki limezimwa kwa chanzo hiki</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Bundle ya patch haikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Kifurushi cha patch hakikuweza kupakuliwa. URL ya chanzo inaweza kuwa si sahihi au faili haipo. Gusa ili kuibadilisha</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Jina la kuonyesha</string>
     <string name="sources_dialog_rename">Badilisha jina la chanzo cha patch</string>
+    <string name="sources_dialog_renamed">Imebadilishwa jina kuwa %s</string>
     <string name="sources_dialog_change_url">Badilisha mahali ambapo chanzo cha patch kinapakuliwa</string>
     <string name="sources_dialog_duplicate_name_error">Chanzo cha patch chenye jina hili tayari kipo</string>
     <string name="sources_dialog_missing_error">Hakuweza kusasisha chanzo hiki cha patch</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Masasisho ya %s</string>
     <string name="sources_dialog_url_valid">Repository sahihi au URL ya JSON</string>
-    <string name="sources_dialog_url_invalid">URL lazima ielekeze kwenye repo ya GitHub/GitLab au faili ya .json</string>
+    <string name="sources_dialog_url_invalid">URL lazima iashirie repo ya GitHub, GitLab au Codeberg au faili ya .json</string>
     <string name="sources_dialog_preinstalled">Iliyosakinishwa awali</string>
     <string name="sources_dialog_community">Patch za jumuiya</string>
     <string name="sources_dialog_choose_apps">Chagua programu</string>
@@ -576,6 +581,9 @@ Kwa matokeo bora, programu hii inapendekeza kutumia &lt;b&gt;full APK&lt;/b&gt;"
     <string name="app_links_change_failed">Imeshindwa kubadilisha viunganishi vya programu</string>
     <string name="app_links_all_verified">Viungo vyote vinavyokubalika vimepangwa kufunguka katika programu hii</string>
     <string name="app_links_fix">Rekebisha viungo</string>
+    <string name="app_links_allow_shizuku">Ruhusu ufikiaji wa Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Ruhusu Morphe kutumia Shizuku kuwasha viunganishi hivi kwa ajili yako</string>
+    <string name="app_links_shizuku_not_running_hint">Anzisha Shizuku ili kuruhusu Morphe kuwasha viunganishi hivi kwa ajili yako</string>
     <string name="configure">Sanidi</string>
     <string name="patcher_rename_title">Hii itasakinisha nakala</string>
     <string name="patcher_rename_description">Patch hizi zimeunda programu hii chini ya jina la kifurushi chao wenyewe, hivyo kuisakinisha kunaongeza nakala kando ya &lt;b&gt;%s&lt;/b&gt; badala ya kuisasisha</string>
@@ -745,6 +753,8 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <string name="patched_app_save_failed_toast">Imeshindwa kuhifadhi programu iliyorekebishwa</string>
     <string name="plugin_activity_dialog_body">Mwingiliano wa mtumiaji unahitajika ili kuendelea na plugin hii</string>
     <string name="patcher_process_killed_message">Mfumo ulisimamisha patcher kabla haijamaliza, kwa kawaida ili kuachilia kumbukumbu. Funga programu zingine na ujaribu tena</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ilifungwa kabla ya kumaliza kusasisha, hivyo hakuna kilichosasishwa. Jaribu tena</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Kipatcha kiliacha kufanya kazi kabla hakijamaliza. Ikitokea tena, zima %1$s na uripoti tatizo pamoja na logi</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Kuondoa programu kutaondoa data zote za programu kabisa"</string>
     <!-- Mini-games -->
     <string name="mini_games">Michezo midogo</string>
     <string name="mini_games_description">Michezo ya haraka ya kupitisha dakika chache</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Michezo</string>
     <string name="mini_game_score">Alama %s</string>
     <string name="mini_game_best">Bora %s</string>
     <string name="mini_game_new_record">Rekodi mpya!</string>
@@ -1561,6 +1573,7 @@ Maelezo: %2$s"</string>
     <string name="changelog_show_all">Onyesha zote (%s)</string>
     <string name="changelog_show_less">Onyesha kidogo</string>
     <string name="no_network_toast">Hakuna muunganisho wa intaneti unaopatikana</string>
+    <string name="download_waiting_for_network">Inasubiri mtandao</string>
     <string name="update_available">Sasisho lipo</string>
     <string name="ready_to_install_update">Tayari kusakinisha sasisho</string>
     <string name="update_completed">Sasisho limesakinishwa</string>

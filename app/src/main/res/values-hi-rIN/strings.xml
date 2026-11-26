@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">यह स्रोत अक्षम है। इसके पैच केवल संदर्भ के लिए सूचीबद्ध हैं और लागू नहीं किए गए हैं।</string>
     <string name="sources_management_open_in_browser">ब्राउज़र में खोलें</string>
     <string name="sources_management_report_issue">समस्या की रिपोर्ट करें</string>
+    <string name="sources_management_export_patches">पैचेस फ़ाइल एक्सपोर्ट करें</string>
+    <string name="sources_management_export_patches_success">पैचेस फ़ाइल सहेजी गई</string>
+    <string name="sources_management_export_patches_failed">पैचेस फ़ाइल एक्सपोर्ट करने में विफल</string>
     <string name="sources_management_failed_to_open_url">URL खोलने में विफल रहा</string>
     <string name="sources_apps">ऐप्स</string>
     <string name="sources_apps_description">निशान लगे ऐप्स इस स्रोत से आते हैं। किसी ऐप को बाहर रखने या वापस लाने के लिए उस पर टैप करें, उसके पैच देखने के लिए उसे स्वाइप करें। जिस ऐप को कोई स्रोत नहीं लाता वह होम स्क्रीन से हट जाता है, जब तक कि आपने उसे पैच न किया हो</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">यह पैच स्रोत अवरुद्ध है और इसे नहीं जोड़ा जा सकता</string>
     <string name="sources_management_source_blocked_badge">अवरुद्ध</string>
     <string name="sources_management_metadata_unavailable">मेटाडेटा उपलब्ध नहीं है</string>
+    <string name="sources_management_bundle_missing_badge">डाउनलोड नहीं किया गया</string>
     <string name="sources_management_metadata_unavailable_hint">रिमोट मेटाडेटा फ़ाइल अनुपलब्ध है। स्थापित बंडल के साथ पैचिंग अभी भी काम करती है, लेकिन इस स्रोत के लिए ऑटो-अपडेट अक्षम कर दिया गया है</string>
     <string name="sources_management_metadata_unavailable_hint_missing">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">पैच बंडल डाउनलोड नहीं किया जा सका। स्रोत URL गलत हो सकता है या फ़ाइल मौजूद नहीं है। इसे बदलने के लिए टैप करें</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">प्रदर्शित नाम</string>
     <string name="sources_dialog_rename">पैच स्रोत का नाम बदलें</string>
+    <string name="sources_dialog_renamed">%s के रूप में नाम बदला गया</string>
     <string name="sources_dialog_change_url">वह स्थान बदलें जहाँ से पैच स्रोत डाउनलोड होता है</string>
     <string name="sources_dialog_duplicate_name_error">इस नाम के साथ पहले से एक पैच स्रोत मौजूद है</string>
     <string name="sources_dialog_missing_error">यह पैच स्रोत अपडेट नहीं हो सका</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s को अपडेट करता है</string>
     <string name="sources_dialog_url_valid">मान्य रिपॉजिटरी या JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab रिपो या .json फ़ाइल की ओर इंगित करना चाहिए</string>
+    <string name="sources_dialog_url_invalid">URL को GitHub, GitLab या Codeberg रेपो या .json फ़ाइल की ओर इशारा करना चाहिए</string>
     <string name="sources_dialog_preinstalled">पूर्व-स्थापित</string>
     <string name="sources_dialog_community">समुदाय पैच</string>
     <string name="sources_dialog_choose_apps">ऐप्स चुनें</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">ऐप लिंक बदलने में विफल</string>
     <string name="app_links_all_verified">सभी सपोर्टेड लिंक इस ऐप में खुलने के लिए सेट हैं</string>
     <string name="app_links_fix">लिंक ठीक करें</string>
+    <string name="app_links_allow_shizuku">Shizuku एक्सेस की अनुमति दें</string>
+    <string name="app_links_shizuku_permission_hint">इन लिंक्स को आपके लिए चालू करने के लिए Morphe को Shizuku का उपयोग करने की अनुमति दें</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe को इन लिंक्स को आपके लिए चालू करने देने के लिए Shizuku शुरू करें</string>
     <string name="configure">सेट करें</string>
     <string name="patcher_rename_title">यह एक क्लोन स्थापित करेगा</string>
     <string name="patcher_rename_description">पैच ने इस ऐप को अपने पैकेज नाम के साथ बनाया है, इसलिए इसे इंस्टॉल करने पर &lt;b&gt;%s&lt;/b&gt; के साथ एक क्लोन जुड़ जाता है, बजाय इसे अपडेट करने के।</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">पैच किया गया ऐप सहेजने में विफल</string>
     <string name="plugin_activity_dialog_body">इस प्लगइन के लिए आगे बढ़ने के लिए उपयोगकर्ता इंटरैक्शन आवश्यक है।</string>
     <string name="patcher_process_killed_message">सिस्टम ने पैचर को पूरा होने से पहले ही बंद कर दिया, आमतौर पर मेमोरी खाली करने के लिए। अन्य ऐप्स बंद करें और फिर से प्रयास करें</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">पैचिंग समाप्त होने से पहले Morphe बंद कर दिया गया था, इसलिए कुछ भी पैच नहीं किया गया। फिर से प्रयास करें</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">पैचर पूरा होने से पहले क्रैश हो गया। यदि ऐसा फिर से होता है, तो %1$s बंद करें और लॉग के साथ समस्या की रिपोर्ट करें</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">मिनी-गेम्स</string>
     <string name="mini_games_description">खाली समय बिताने के लिए त्वरित गेम</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">गेम्स</string>
     <string name="mini_game_score">स्कोर %s</string>
     <string name="mini_game_best">सर्वश्रेष्ठ %s</string>
     <string name="mini_game_new_record">नया रिकॉर्ड!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">सभी दिखाएँ (%s)</string>
     <string name="changelog_show_less">कम दिखाएँ</string>
     <string name="no_network_toast">इंटरनेट कनेक्शन उपलब्ध नहीं है</string>
+    <string name="download_waiting_for_network">नेटवर्क का इंतज़ार है</string>
     <string name="update_available">एक अपडेट उपलब्ध है</string>
     <string name="ready_to_install_update">अपडेट इंस्टॉल करने के लिए तैयार</string>
     <string name="update_completed">अपडेट इंस्टॉल हो गया</string>

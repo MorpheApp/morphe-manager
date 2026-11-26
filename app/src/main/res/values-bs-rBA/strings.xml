@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Ovaj izvor je onemogućen. Njegove zakrpe su navedene radi reference i nisu primijenjene</string>
     <string name="sources_management_open_in_browser">Otvori u pretraživaču</string>
     <string name="sources_management_report_issue">Prijavi problem</string>
+    <string name="sources_management_export_patches">Izvezi datoteku zakrpa</string>
+    <string name="sources_management_export_patches_success">Datoteka zakrpa je sačuvana</string>
+    <string name="sources_management_export_patches_failed">Izvoz datoteke zakrpa nije uspio</string>
     <string name="sources_management_failed_to_open_url">Neuspješno otvaranje URL-a</string>
     <string name="sources_apps">Aplikacije</string>
     <string name="sources_apps_description">Označene aplikacije dolaze iz ovog izvora. Dodirnite aplikaciju da je isključite ili vratite, prevucite je da vidite njene zakrpe. Aplikacija bez izvora nestaje sa početnog ekrana, osim ako je niste zakrpali</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Ovaj izvor zakrpa je blokiran i ne može biti dodan</string>
     <string name="sources_management_source_blocked_badge">Blokirano</string>
     <string name="sources_management_metadata_unavailable">Metapodaci nisu dostupni</string>
+    <string name="sources_management_bundle_missing_badge">Nije preuzeto</string>
     <string name="sources_management_metadata_unavailable_hint">Udaljeni fajl metapodataka nije dostupan. Zakrpljivanje sa instaliranim paketom i dalje radi, ali je automatsko ažuriranje onemogućeno za ovaj izvor</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Paket zakrpa nije mogao biti preuzet. URL izvora je možda neispravan ili fajl ne postoji</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Paket zakrpa nije mogao biti preuzet. Izvorni URL je možda neispravan ili datoteka ne postoji. Dodirnite da ga promijenite</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Naziv za prikaz</string>
     <string name="sources_dialog_rename">Preimenuj izvor zakrpa</string>
+    <string name="sources_dialog_renamed">Preimenovano u %s</string>
     <string name="sources_dialog_change_url">Promijenite mjesto s kojeg se preuzima izvor zakrpa</string>
     <string name="sources_dialog_duplicate_name_error">Izvor zakrpa sa ovim nazivom već postoji</string>
     <string name="sources_dialog_missing_error">Nije bilo moguće ažurirati ovaj izvor zakrpa</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Ažuriranja %s</string>
     <string name="sources_dialog_url_valid">Važeći URL repozitorija ili JSON-a</string>
-    <string name="sources_dialog_url_invalid">URL mora pokazivati na GitHub/GitLab repo ili .json datoteku</string>
+    <string name="sources_dialog_url_invalid">URL mora pokazivati na GitHub, GitLab ili Codeberg repo ili .json datoteku</string>
     <string name="sources_dialog_preinstalled">Preinstalirano</string>
     <string name="sources_dialog_community">Zajedničke zakrpe</string>
     <string name="sources_dialog_choose_apps">Izaberite aplikacije</string>
@@ -576,6 +581,9 @@ Za najbolje rezultate, ova aplikacija preporučuje zakrpljivanje &lt;b&gt;punog 
     <string name="app_links_change_failed">Neuspješna promjena poveznica aplikacije</string>
     <string name="app_links_all_verified">Sve podržane poveznice su konfigurirane da se otvaraju u ovoj aplikaciji</string>
     <string name="app_links_fix">Popravi poveznice</string>
+    <string name="app_links_allow_shizuku">Dozvoli pristup Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Dozvoli Morphe-u da koristi Shizuku kako bi uključio ove poveznice za vas</string>
+    <string name="app_links_shizuku_not_running_hint">Pokrenite Shizuku kako biste omogućili Morphe-u da uključi ove poveznice za vas</string>
     <string name="configure">Konfiguriši</string>
     <string name="patcher_rename_title">Ovim će biti instaliran klon</string>
     <string name="patcher_rename_description">Zakrpe su izgradile ovu aplikaciju pod vlastitim imenom paketa, tako da njena instalacija dodaje klon pored &lt;b&gt;%s&lt;/b&gt; umjesto njenog ažuriranja</string>
@@ -745,6 +753,8 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="patched_app_save_failed_toast">Neuspjelo spremanje zakrpljene aplikacije</string>
     <string name="plugin_activity_dialog_body">Potrebna je interakcija korisnika kako bi se nastavilo sa ovim dodatakom</string>
     <string name="patcher_process_killed_message">Sistem je zaustavio patcher prije nego što je završio, obično kako bi oslobodio memoriju. Zatvorite ostale aplikacije i pokušajte ponovo</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe je zatvoren prije nego što je zakrpa završila, tako da ništa nije zakrpljeno. Pokušajte ponovo</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Program za zakrpljivanje se srušio prije završetka. Ako se to ponovi, isključite %1$s i prijavite problem uz dnevnik</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-igre</string>
     <string name="mini_games_description">Brze igre za popunjavanje slobodnog vremena</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Igre</string>
     <string name="mini_game_score">Rezultat %s</string>
     <string name="mini_game_best">Najbolji %s</string>
     <string name="mini_game_new_record">Novi rekord!</string>
@@ -1561,6 +1573,7 @@ Detalji: %2$s"</string>
     <string name="changelog_show_all">Prikaži sve (%s)</string>
     <string name="changelog_show_less">Prikaži manje</string>
     <string name="no_network_toast">Nema dostupne internet veze</string>
+    <string name="download_waiting_for_network">Čekanje na mrežu</string>
     <string name="update_available">Dostupno je ažuriranje</string>
     <string name="ready_to_install_update">Spreman za instalaciju ažuriranja</string>
     <string name="update_completed">Ažuriranje je instalirano</string>

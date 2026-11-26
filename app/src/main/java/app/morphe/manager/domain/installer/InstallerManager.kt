@@ -56,10 +56,10 @@ class InstallerManager(
             .toSet()
 
     /**
-     * The installers to pick from for [target], [selected] among them even once the device no
-     * longer offers it, so a choice made earlier never drops out of the list.
+     * The installers to pick from, [selected] among them even once the device no longer offers it,
+     * so a choice made earlier never drops out of the list.
      */
-    fun listEntries(target: InstallTarget, selected: Token): List<Entry> {
+    fun listEntries(selected: Token): List<Entry> {
         val hiddenPackages = hiddenInstallerPackages
         val entries = listOf(
             Token.Internal,
@@ -68,7 +68,7 @@ class InstallerManager(
             Token.RootPlayStore,
             Token.Shizuku,
             Token.ShizukuPlayStore
-        ).mapTo(mutableListOf()) { entryFor(it, target) }
+        ).mapTo(mutableListOf()) { entryFor(it) }
 
         entries += queryInstallerActivities()
             .asSequence()
@@ -80,22 +80,22 @@ class InstallerManager(
                         component.packageName in hiddenPackages ||
                         isExcludedDuplicate(component)
             }
-            .map { entryFor(Token.Component(it), target) }
+            .map { entryFor(Token.Component(it)) }
             .sortedBy { it.label.lowercase() }
 
         entries += readCustomInstallerTokens()
             .filterNot { token ->
                 token.componentName.packageName in hiddenPackages || entries.any { it.token == token }
             }
-            .map { entryFor(it, target) }
+            .map { entryFor(it) }
             .sortedBy { it.label.lowercase() }
 
-        if (entries.none { it.token == selected }) entries += entryFor(selected, target)
+        if (entries.none { it.token == selected }) entries += entryFor(selected)
 
         return entries
     }
 
-    fun describeEntry(token: Token, target: InstallTarget): Entry = entryFor(token, target)
+    fun describeEntry(token: Token): Entry = entryFor(token)
 
     fun parseToken(value: String?): Token {
         val token = when (value) {
@@ -168,7 +168,7 @@ class InstallerManager(
         when (val preferredToken = getPreferredToken()) {
             Token.Shizuku,
             Token.ShizukuPlayStore -> {
-                if (availabilityFor(preferredToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                if (availabilityFor(preferredToken, checkRoot = true).available) {
                     when (val result = sessionInstaller.uninstallShizuku(packageName)) {
                         UninstallResult.Success -> return
                         is UninstallResult.Failure -> throw Exception(
@@ -181,7 +181,7 @@ class InstallerManager(
 
             Token.Root,
             Token.RootPlayStore -> {
-                if (availabilityFor(preferredToken, InstallTarget.PATCHER, checkRoot = true).available) {
+                if (availabilityFor(preferredToken, checkRoot = true).available) {
                     rootInstaller.uninstallPackage(packageName)
                 } else {
                     sessionInstaller.uninstall(packageName)
@@ -198,18 +198,17 @@ class InstallerManager(
      * whether the preferred installer was unavailable.
      */
     fun resolvePlanWithStatus(
-        target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
         sourceLabel: String?,
         tokenOverride: Token? = null
     ): ResolvedPlan {
         val preferredToken = tokenOverride ?: getPreferredToken()
-        val preferredAvailability = availabilityFor(preferredToken, target, checkRoot = true)
+        val preferredAvailability = availabilityFor(preferredToken, checkRoot = true)
 
         // If the preferred installer is available, use it
         if (preferredAvailability.available) {
-            val plan = createPlan(preferredToken, target, sourceFile, expectedPackage, sourceLabel)
+            val plan = createPlan(preferredToken, sourceFile, expectedPackage, sourceLabel)
             if (plan != null) {
                 return ResolvedPlan(
                     plan = plan,
@@ -228,7 +227,7 @@ class InstallerManager(
         if (isSpecialInstaller) {
             // Return info about unavailability so UI can show appropriate dialog
             return ResolvedPlan(
-                plan = InstallPlan.Internal(target), // Fallback
+                plan = InstallPlan.Internal, // Fallback
                 preferredUnavailable = true,
                 preferredToken = preferredToken,
                 unavailabilityReason = preferredAvailability.reason
@@ -236,9 +235,9 @@ class InstallerManager(
         }
 
         // For other installers, try fallback sequence
-        val sequence = buildSequence(target)
+        val sequence = buildSequence()
         sequence.forEach { token ->
-            createPlan(token, target, sourceFile, expectedPackage, sourceLabel)?.let { plan ->
+            createPlan(token, sourceFile, expectedPackage, sourceLabel)?.let { plan ->
                 return ResolvedPlan(
                     plan = plan,
                     preferredUnavailable = preferredToken != token,
@@ -250,7 +249,7 @@ class InstallerManager(
 
         // Fallback to internal install
         return ResolvedPlan(
-            plan = InstallPlan.Internal(target),
+            plan = InstallPlan.Internal,
             preferredUnavailable = preferredToken != Token.Internal,
             preferredToken = preferredToken,
             unavailabilityReason = preferredAvailability.reason
@@ -272,19 +271,18 @@ class InstallerManager(
     /** The plan for [token], whose availability callers have already checked. */
     private fun createPlan(
         token: Token,
-        target: InstallTarget,
         sourceFile: File,
         expectedPackage: String,
         sourceLabel: String?
     ): InstallPlan? {
         return when (token) {
-            Token.Internal -> InstallPlan.Internal(target)
-            Token.PlayStore -> InstallPlan.PlayStore(target)
-            Token.Root -> InstallPlan.Root(target)
-            Token.RootPlayStore -> InstallPlan.RootPlayStore(target)
+            Token.Internal -> InstallPlan.Internal
+            Token.PlayStore -> InstallPlan.PlayStore
+            Token.Root -> InstallPlan.Root
+            Token.RootPlayStore -> InstallPlan.RootPlayStore
             Token.None -> null
-            Token.Shizuku -> InstallPlan.Shizuku(target)
-            Token.ShizukuPlayStore -> InstallPlan.ShizukuPlayStore(target)
+            Token.Shizuku -> InstallPlan.Shizuku
+            Token.ShizukuPlayStore -> InstallPlan.ShizukuPlayStore
             is Token.Component -> {
                 val uri = InstallerFileProvider.getUriForFile(app, sourceFile)
                 val intent = Intent(Intent.ACTION_VIEW).apply {
@@ -310,7 +308,6 @@ class InstallerManager(
                             Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
                 )
                 InstallPlan.External(
-                    target = target,
                     intent = intent,
                     sharedFile = File(app.cacheDir, "${InstallerFileProvider.SHARE_DIR}/${sourceFile.name}"),
                     uri = uri,
@@ -330,10 +327,10 @@ class InstallerManager(
         }.getOrDefault(componentName.packageName)
 
     /**
-     * How [token] is offered for [target]. Availability is only what can be told without asking for
-     * root, since entries are read again and again while an installer choice is on screen.
+     * How [token] is offered. Availability is only what can be told without asking for root, since
+     * entries are read again and again while an installer choice is on screen.
      */
-    private fun entryFor(token: Token, target: InstallTarget): Entry {
+    private fun entryFor(token: Token): Entry {
         val (label, description) = when (token) {
             Token.Internal ->
                 R.string.home_app_info_install_type_system_installer to R.string.installer_internal_description
@@ -350,7 +347,7 @@ class InstallerManager(
                 token = token,
                 label = resolveLabel(token.componentName),
                 description = token.componentName.packageName,
-                availability = availabilityFor(token, target, checkRoot = false),
+                availability = availabilityFor(token, checkRoot = false),
                 iconPackageName = token.componentName.packageName
             )
         }
@@ -358,7 +355,7 @@ class InstallerManager(
             token = token,
             label = app.getString(label),
             description = app.getString(description),
-            availability = availabilityFor(token, target, checkRoot = false),
+            availability = availabilityFor(token, checkRoot = false),
             iconPackageName = when (token) {
                 Token.PlayStore, Token.RootPlayStore -> PLAY_STORE_INSTALLER_PACKAGE
                 Token.Shizuku, Token.ShizukuPlayStore -> sessionInstaller.shizukuPackageName()
@@ -367,7 +364,7 @@ class InstallerManager(
         )
     }
 
-    private fun buildSequence(target: InstallTarget): List<Token> {
+    private fun buildSequence(): List<Token> {
         val tokens = mutableListOf<Token>()
         val preferred = getPreferredToken()
 
@@ -375,7 +372,7 @@ class InstallerManager(
             if (token == Token.None) return
             if (token in tokens) return
             // Use checkRoot = true here to ensure we only add available installers
-            if (!availabilityFor(token, target, checkRoot = true).available) return
+            if (!availabilityFor(token, checkRoot = true).available) return
             tokens += token
         }
 
@@ -386,13 +383,11 @@ class InstallerManager(
         return tokens
     }
 
-    private fun availabilityFor(token: Token, target: InstallTarget, checkRoot: Boolean = true): Availability = when (token) {
+    private fun availabilityFor(token: Token, checkRoot: Boolean = true): Availability = when (token) {
         Token.Internal -> Availability(true)
         Token.PlayStore -> Availability(true)
         Token.Root,
-        Token.RootPlayStore -> if (!target.supportsRoot) {
-            Availability(false, R.string.installer_status_not_supported)
-        } else if (checkRoot) {
+        Token.RootPlayStore -> if (checkRoot) {
             if (!rootInstaller.hasRootAccess()) {
                 Availability(false, R.string.installer_status_requires_root)
             } else {
@@ -420,9 +415,7 @@ class InstallerManager(
         }
 
         Token.ShizukuPlayStore -> {
-            if (target != InstallTarget.PATCHER) {
-                Availability(false, R.string.installer_status_not_supported)
-            } else if (!sessionInstaller.isShizukuInstalled()) {
+            if (!sessionInstaller.isShizukuInstalled()) {
                 Availability(false, R.string.installer_status_shizuku_not_installed)
             } else if (checkRoot) {
                 sessionInstaller.shizukuAvailability()
@@ -565,14 +558,13 @@ class InstallerManager(
     }
 
     sealed class InstallPlan {
-        data class Internal(val target: InstallTarget) : InstallPlan()
-        data class PlayStore(val target: InstallTarget) : InstallPlan()
-        data class Root(val target: InstallTarget) : InstallPlan()
-        data class RootPlayStore(val target: InstallTarget) : InstallPlan()
-        data class Shizuku(val target: InstallTarget) : InstallPlan()
-        data class ShizukuPlayStore(val target: InstallTarget) : InstallPlan()
+        data object Internal : InstallPlan()
+        data object PlayStore : InstallPlan()
+        data object Root : InstallPlan()
+        data object RootPlayStore : InstallPlan()
+        data object Shizuku : InstallPlan()
+        data object ShizukuPlayStore : InstallPlan()
         data class External(
-            val target: InstallTarget,
             val intent: Intent,
             val sharedFile: File,
             val uri: Uri,
@@ -581,11 +573,6 @@ class InstallerManager(
             val sourceLabel: String?,
             val token: Token
         ) : InstallPlan()
-    }
-
-    enum class InstallTarget(val supportsRoot: Boolean) {
-        PATCHER(true),
-        MANAGER_UPDATE(false)
     }
 
     fun openShizukuApp(): Boolean = sessionInstaller.launchShizukuApp()

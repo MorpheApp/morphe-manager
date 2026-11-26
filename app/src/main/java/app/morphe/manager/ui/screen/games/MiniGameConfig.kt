@@ -15,9 +15,9 @@ import app.morphe.manager.domain.manager.base.IntPreference
 import app.morphe.manager.ui.screen.shared.autoMirrored
 import app.morphe.manager.ui.theme.MorpheBrandBlue
 import app.morphe.manager.ui.theme.MorpheBrandTeal
+import app.morphe.manager.util.AppCoroutineScope
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -243,6 +243,7 @@ class GameHaptics {
 
 /**
  * Holds the state for every available mini-game, each keeping its record in [PreferencesManager].
+ * One lives as long as the app, so a round left for another screen can be picked up again.
  *
  * @param scope Where the records are saved. It outlives the page, so a record set just before
  *   leaving it is still written.
@@ -250,7 +251,7 @@ class GameHaptics {
 @Stable
 class MiniGameState(
     private val prefs: PreferencesManager,
-    private val scope: CoroutineScope
+    private val scope: AppCoroutineScope
 ) {
     // Built on first use, since a visit opens a game or two and each reads its high score blocking
     val game2048 by recordKept(prefs.miniGame2048HighScore, ::Game2048State)
@@ -278,15 +279,17 @@ class MiniGameState(
         MiniGame.PAIRS -> pairs
     }
 
-    /** Restarts and selects [game], replacing any currently active game. */
+    /** Selects [game], carrying on with a round it was left in, or starting one. */
     fun selectGame(game: MiniGame) {
-        stateOf(game).restart()
+        val state = stateOf(game)
+        // Only a round left unfinished waits paused, an ended or unstarted one starts afresh
+        if (!state.isPaused) state.restart()
         selectedGame = game
     }
 
-    /** Leaves the game on screen for the picker, keeping the record its round set. */
+    /** Leaves the game on screen for the picker, its round paused for when it is picked again. */
     fun closeGame() {
-        saveRecord()
+        pauseActiveGame()
         selectedGame = null
     }
 

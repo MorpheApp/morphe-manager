@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Bu manba o‘chirilgan. Uning yamoqlari ma’lumot uchun ro‘yxatda ko‘rsatilgan va qo‘llanilmaydi</string>
     <string name="sources_management_open_in_browser">Brauzerda ochish</string>
     <string name="sources_management_report_issue">Muammo haqida xabar berish</string>
+    <string name="sources_management_export_patches">Patchlar faylini eksport qilish</string>
+    <string name="sources_management_export_patches_success">Patchlar fayli saqlandi</string>
+    <string name="sources_management_export_patches_failed">Patchlar faylini eksport qilishda xatolik</string>
     <string name="sources_management_failed_to_open_url">URL ochishda xatolik</string>
     <string name="sources_apps">Ilovalar</string>
     <string name="sources_apps_description">Belgilangan ilovalar ushbu manbadan keladi. Ilovani chiqarib tashlash yoki qaytarish uchun uni bosing, patchlarini ko\'rish uchun esa suring. Manbasiz ilova, agar siz uni patch qilmagan bo\'lsangiz, bosh sahifani tark etadi</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Ushbu patch manbasi bloklangan va qo‘shib bo‘lmaydi</string>
     <string name="sources_management_source_blocked_badge">Bloklangan</string>
     <string name="sources_management_metadata_unavailable">Metadata mavjud emas</string>
+    <string name="sources_management_bundle_missing_badge">Yuklab olinmagan</string>
     <string name="sources_management_metadata_unavailable_hint">Masofaviy metadata fayli mavjud emas. O‘rnatilgan to‘plam bilan patchlash ishlaydi, lekin ushbu manba uchun avtomatik yangilash o‘chirilgan</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Patch to‘plamini yuklab olish imkoniyati yo‘q. Manba URL noto‘g‘ri yoki fayl mavjud emas</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Patch paketi yuklab olunamadi. Manba URL manzili noto\"g\'ri bo\'lishi mumkin yoki fayl mavjud emas. Uni o\'zgartirish uchun bosing</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Ko‘rinadigan nom</string>
     <string name="sources_dialog_rename">Tuzatish manbai nomini o\'zgartirish</string>
+    <string name="sources_dialog_renamed">%s deb qayta nomlandi</string>
     <string name="sources_dialog_change_url">Patch manbasi yuklanadigan joyni o\'zgartiring</string>
     <string name="sources_dialog_duplicate_name_error">Bunday nomdagi tuzatish manbai allaqachon mavjud</string>
     <string name="sources_dialog_missing_error">Ushbu patch manbasini yangilash mumkin emas</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s ni yangilaydi</string>
     <string name="sources_dialog_url_valid">Yaroqli repozitoriy yoki JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL GitHub/GitLab repozitoriysiga yoki .json fayliga ishora qilishi kerak</string>
+    <string name="sources_dialog_url_invalid">URL GitHub, GitLab yoki Codeberg repozitoriysiga yoki .json fayliga ishora qilishi kerak</string>
     <string name="sources_dialog_preinstalled">Oldindan o‘rnatilgan</string>
     <string name="sources_dialog_community">Jamiyat yamoqlari</string>
     <string name="sources_dialog_choose_apps">Ilovalarni tanlang</string>
@@ -576,6 +581,9 @@ Eng yaxshi natijalar uchun ushbu ilova to‘liq &lt;b&gt;APK&lt;/b&gt;ni patchla
     <string name="app_links_change_failed">Ilova havolalarini o\'zgartirish imkonsiz bo\'ldi</string>
     <string name="app_links_all_verified">Barcha qo‘llab-quvvatlanadigan havolalar ushbu ilovada ochiladigan qilib sozlangan</string>
     <string name="app_links_fix">Havolalarni tuzatish</string>
+    <string name="app_links_allow_shizuku">Shizuku kirishiga ruxsat berish</string>
+    <string name="app_links_shizuku_permission_hint">Ushbu havolalarni yoqish uchun Morphe’ga Shizuku dan foydalanishga ruxsat bering</string>
+    <string name="app_links_shizuku_not_running_hint">Ushbu havolalarni yoqish uchun Shizuku ni ishga tushiring</string>
     <string name="configure">Sozlash</string>
     <string name="patcher_rename_title">Bu klonni o\'rnatadi</string>
     <string name="patcher_rename_description">Patchlar bu ilovani o\'z paket nomi ostida qurgan, shuning uchun uni o\'rnatish &lt;b&gt;%s&lt;/b&gt; yoniga klon qo\'shadi, yangilash o\'rniga</string>
@@ -745,6 +753,8 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="patched_app_save_failed_toast">Patchlangan ilovni saqlashda xatolik</string>
     <string name="plugin_activity_dialog_body">Ushbu plagin bilan davom etish uchun foydalanuvchi aralashuvi kerak</string>
     <string name="patcher_process_killed_message">Tizim patcherni tugashidan oldin to\'xtatdi, odatda xotirani bo\'shatish uchun. Boshqa ilovalarni yoping va qayta urinib ko\'ring.</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Patch jarayoni yakunlanmasdan Morphe yopildi, shuning uchun hech narsa yangilanmadi. Qayta urinib ko\"ring</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Patcher yakunlanmasdan oldin ishdan chiqdi. Agar bu yana takrorlansa, %1$s ni o\'chiring va muammoni log fayli bilan birga xabar qiling</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini-o\'yinlar</string>
     <string name="mini_games_description">Bo\'sh vaqtlarni o\'tkazish uchun tezkor o\'yinlar</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">O‘yinlar</string>
     <string name="mini_game_score">Hisob %s</string>
     <string name="mini_game_best">Eng yaxshisi %s</string>
     <string name="mini_game_new_record">Yangi rekord!</string>
@@ -1561,6 +1573,7 @@ Ma’lumotlar: %2$s"</string>
     <string name="changelog_show_all">Barchasini ko‘rsatish (%s)</string>
     <string name="changelog_show_less">Kamroq ko‘rsatish</string>
     <string name="no_network_toast">Internetga ulanish mavjud emas</string>
+    <string name="download_waiting_for_network">Tarmoq kutilmoqda</string>
     <string name="update_available">Yangilanish mavjud</string>
     <string name="ready_to_install_update">Yangilanishni o‘rnatishga tayyor</string>
     <string name="update_completed">Yangilanish o‘rnatildi</string>

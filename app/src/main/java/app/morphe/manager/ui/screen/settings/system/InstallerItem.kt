@@ -41,7 +41,7 @@ fun InstallerItem(
 ) {
     val preferredToken = settingsViewModel.preferredInstallerToken()
     val preferredEntry = rememberPolledInstallers(preferredToken) {
-        settingsViewModel.describeInstallerEntry(preferredToken, InstallerManager.InstallTarget.PATCHER)
+        settingsViewModel.describeInstallerEntry(preferredToken)
     }
 
     InstallerSettingsItem(

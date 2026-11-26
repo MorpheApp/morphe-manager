@@ -51,9 +51,6 @@ class SourceMuteRepository(db: AppDatabase) {
     suspend fun keepOnly(packageName: String, keepUid: Int, candidates: Set<Int>) =
         dao.replaceForPackage(packageName, candidates - keepUid)
 
-    suspend fun mute(packageName: String, bundleUid: Int) =
-        dao.replaceForPackage(packageName, getMutedFor(packageName) + bundleUid)
-
     /** Offers every source to [packageName] again. */
     suspend fun unmuteAll(packageName: String) = dao.replaceForPackage(packageName, emptySet())
 

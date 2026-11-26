@@ -130,7 +130,7 @@ fun BundleIcon(
 
             hasMetadataError || isMissing -> {
                 Icon(
-                    imageVector = MaterialSymbols.Rounded.Cloud_off,
+                    imageVector = if (isMissing) MaterialSymbols.Rounded.Link_off else MaterialSymbols.Rounded.Cloud_off,
                     contentDescription = null,
                     tint = SemanticTone.Warning.content,
                     modifier = Modifier.bundleGlyph()

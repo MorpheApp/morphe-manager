@@ -7,58 +7,20 @@ package app.morphe.manager.ui.screen.shared
 
 import androidx.annotation.PluralsRes
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import app.morphe.manager.R
-import app.morphe.manager.data.room.apps.installed.InstallType
-import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.data.room.apps.installed.reinstallsByMount
+import app.morphe.manager.ui.viewmodel.InstallQueue
+import app.morphe.manager.ui.viewmodel.InstallQueueRequest
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.ui.viewmodel.labelRes
-import app.morphe.manager.util.batchActionSummary
-import java.io.File
-import org.koin.compose.koinInject
 
 /**
- * A single install request queued by [rememberInstallQueue].
- *
- * @param appName the name the install overlay shows while this request runs.
- * @param installedApp the tracked app a saved patched APK belongs to, which decides with the
- *        preferred installer whether it is mounted. Null for an APK that belongs to no record.
- * @param builtForMount whether [file] was patched for a root mount, which only works mounted
- *        over [originalPackageName] whatever the record or the preferred installer say.
- * @param onPersistApp forwarded to [InstallViewModel.install] or [InstallViewModel.installSavedMount];
- *        runs after a successful install to persist app metadata in the caller's repository.
- * @param onInstalled invoked with the installed package name after a successful install,
- *        before the next queue item starts.
- * @param onFailed invoked with the failure reason when an item is skipped or rejected, for
- *        callers that show per-item state instead of relying on the summary message alone.
- */
-data class InstallQueueRequest(
-    val file: File,
-    val appName: String,
-    val originalPackageName: String,
-    val installedApp: InstalledApp? = null,
-    val builtForMount: Boolean = false,
-    val onPersistApp: suspend (String, InstallType) -> Boolean,
-    val onInstalled: (installedPackageName: String) -> Unit = {},
-    val onFailed: (message: String?) -> Unit = {}
-)
-
-/**
- * Drives sequential installs through a shared [InstallViewModel]. Handles state
- * transitions, skips missing files and dismissed installer dialogs, and reports a
- * summary once the queue drains.
+ * Shows the [InstallQueue] of [installViewModel] while it runs, and returns what starts it.
  *
  * Callers are responsible for placing [app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs]
  * somewhere in their tree so the installer selection / unavailable dialogs can appear.
  *
+ * @param completedPluralRes How the summary counts what the queue got through.
  * @param onDrained invoked with the number of apps installed or mounted once the queue runs out.
  * @return a callback that replaces the current queue with new requests and starts the
  *         first install immediately.
@@ -67,162 +29,25 @@ data class InstallQueueRequest(
 fun rememberInstallQueue(
     installViewModel: InstallViewModel,
     @PluralsRes completedPluralRes: Int,
-    showOverlay: Boolean = true,
     onDrained: (installed: Int) -> Unit = {}
 ): (requests: List<InstallQueueRequest>) -> Unit {
-    val context = LocalContext.current
-    val messages = koinInject<UserMessages>()
-    val conflictText = stringResource(R.string.installer_hint_conflict)
-    var queue by remember { mutableStateOf<List<InstallQueueRequest>>(emptyList()) }
-    var active by remember { mutableStateOf<InstallQueueRequest?>(null) }
-    // Size of the queue as it started, so the overlay can say which item of how many is running
-    var total by remember { mutableIntStateOf(0) }
-    // Whether the active item is mounted rather than installed, which the overlay says
-    var activeMounts by remember { mutableStateOf(false) }
-
-    // Whether the current item put an installer dialog on screen. Ready on its own does not
-    // mean the user backed out of one, because install() only reaches Installing from a
-    // coroutine, leaving a just-started item in the same state as a dismissed one
-    var awaitedInstallerDialog by remember { mutableStateOf(false) }
-    var completed by remember { mutableIntStateOf(0) }
-    // Counted apart from the installs, so the summary does not call a mount one
-    var mounted by remember { mutableIntStateOf(0) }
-    var skipped by remember { mutableIntStateOf(0) }
-
-    fun showSummary() {
-        context.batchActionSummary(completedPluralRes, completed, skipped, mounted)
-            ?.let { messages.show(it) }
-        completed = 0
-        mounted = 0
-        skipped = 0
+    val queue = installViewModel.installQueue
+    val installing = installViewModel.installState as? InstallViewModel.InstallState.Installing
+    // Up for the whole queue, also while the next item starts and is not Installing yet, so it
+    // does not dip between apps. Only the installer's own dialogs take its place
+    Overlay(visible = queue.active != null && (installing != null || !queue.installerDialogShowing)) {
+        // A mount names the step it is on, as the patcher's install button does
+        val caption = installing?.stage?.labelRes
+            ?: if (queue.activeMounts) R.string.mounting_ellipsis else R.string.installing_ellipsis
+        PulsingLogoWithCaption(
+            caption = stringResource(caption),
+            // The last app stays named while the overlay fades out after the queue drains
+            subtitle = rememberLatest(queue.active?.appName),
+            counter = if (queue.total > 1) {
+                stringResource(R.string.progress_count, queue.position.toString(), queue.total.toString())
+            } else null
+        )
     }
 
-    fun startNext() {
-        val next = queue.firstOrNull()
-        if (next == null) {
-            active = null
-            awaitedInstallerDialog = false
-            val installed = completed + mounted
-            showSummary()
-            onDrained(installed)
-            return
-        }
-
-        queue = queue.drop(1)
-        val file = next.file.takeIf { it.exists() }
-        if (file == null) {
-            // The patched APK went away, which its card reports like any other failure
-            next.onFailed(null)
-            skipped++
-            startNext()
-            return
-        }
-
-        active = next
-        awaitedInstallerDialog = false
-        val installedApp = next.installedApp
-        val mountPackageName = when {
-            next.builtForMount -> next.originalPackageName
-            installedApp != null && installedApp.reinstallsByMount(installViewModel.mountsByDefault()) ->
-                installedApp.currentPackageName
-            else -> null
-        }
-        activeMounts = mountPackageName != null
-        if (mountPackageName != null) {
-            installViewModel.installSavedMount(
-                outputFile = file,
-                packageName = mountPackageName,
-                onPersistApp = next.onPersistApp
-            )
-        } else {
-            installViewModel.install(
-                outputFile = file,
-                originalPackageName = next.originalPackageName,
-                onPersistApp = next.onPersistApp
-            )
-        }
-    }
-
-    val installerDialogShowing = installViewModel.installerUnavailableDialog != null ||
-            installViewModel.showInstallerSelectionDialog
-
-    LaunchedEffect(
-        installViewModel.installState,
-        installViewModel.installerUnavailableDialog,
-        installViewModel.showInstallerSelectionDialog
-    ) {
-        val current = active ?: return@LaunchedEffect
-
-        if (installerDialogShowing) awaitedInstallerDialog = true
-
-        when (val state = installViewModel.installState) {
-            is InstallViewModel.InstallState.Ready -> {
-                // The dialog this item raised is gone and nothing began, so it was dismissed
-                if (awaitedInstallerDialog && !installerDialogShowing) {
-                    skipped++
-                    current.onFailed(null)
-                    active = null
-                    startNext()
-                }
-            }
-            is InstallViewModel.InstallState.Installed -> {
-                if (activeMounts) mounted++ else completed++
-                current.onInstalled(state.packageName)
-                active = null
-                installViewModel.resetInstallState()
-                startNext()
-            }
-            is InstallViewModel.InstallState.Error -> {
-                skipped++
-                current.onFailed(state.message)
-                messages.show(state.message)
-                active = null
-                installViewModel.resetInstallState()
-                startNext()
-            }
-            is InstallViewModel.InstallState.Conflict -> {
-                skipped++
-                current.onFailed(conflictText)
-                messages.show(conflictText)
-                active = null
-                installViewModel.resetInstallState()
-                startNext()
-            }
-            else -> Unit
-        }
-    }
-
-    if (showOverlay) {
-        val installing = installViewModel.installState as? InstallViewModel.InstallState.Installing
-        // Up for the whole queue, also while the next item starts and is not Installing yet, so it
-        // does not dip between apps. Only the installer's own dialogs take its place
-        Overlay(visible = active != null && (installing != null || !installerDialogShowing)) {
-            // A mount names the step it is on, as the patcher's install button does
-            val caption = installing?.stage?.labelRes
-                ?: if (activeMounts) R.string.mounting_ellipsis else R.string.installing_ellipsis
-            val position = total - queue.size
-            PulsingLogoWithCaption(
-                caption = stringResource(caption),
-                // The last app stays named while the overlay fades out after the queue drains
-                subtitle = rememberLatest(active?.appName),
-                counter = if (total > 1) {
-                    stringResource(R.string.progress_count, position.toString(), total.toString())
-                } else null
-            )
-        }
-    }
-
-    return { requests ->
-        if (requests.isNotEmpty()) {
-            queue = requests
-            total = requests.size
-            active = null
-            awaitedInstallerDialog = false
-            completed = 0
-            mounted = 0
-            skipped = 0
-            installViewModel.resetInstallState()
-            startNext()
-        }
-    }
+    return { requests -> queue.start(requests, completedPluralRes, onDrained) }
 }

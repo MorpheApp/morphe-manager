@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">این منبع غیرفعال است. پچ‌های آن فقط برای مرجع فهرست شده‌اند و اعمال نمی‌شوند</string>
     <string name="sources_management_open_in_browser">باز کردن در مرورگر</string>
     <string name="sources_management_report_issue">گزارش مشکل</string>
+    <string name="sources_management_export_patches">صادر کردن فایل پچ‌ها</string>
+    <string name="sources_management_export_patches_success">فایل پچ‌ها ذخیره شد</string>
+    <string name="sources_management_export_patches_failed">صادر کردن فایل پچ‌ها ناموفق بود</string>
     <string name="sources_management_failed_to_open_url">بازکردن نشانی اینترنتی ناموفق بود</string>
     <string name="sources_apps">برنامه‌ها</string>
     <string name="sources_apps_description">برنامه‌های علامت‌گذاری شده از این منبع می‌آیند. برای حذف یا بازگرداندن یک برنامه روی آن ضربه بزنید و برای مشاهده پچ‌های آن، آن را بکشید. برنامه‌ای که منبعی نداشته باشد از صفحه اصلی حذف می‌شود، مگر اینکه آن را پچ کرده باشید</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">این منبع پچ مسدود شده و نمی‌توان آن را اضافه کرد</string>
     <string name="sources_management_source_blocked_badge">مسدودشده</string>
     <string name="sources_management_metadata_unavailable">فراداده در دسترس نیست</string>
+    <string name="sources_management_bundle_missing_badge">دانلود نشده است</string>
     <string name="sources_management_metadata_unavailable_hint">فایل فرادادهٔ راه دور در دسترس نیست. پچ‌کردن با بستهٔ نصب‌شده همچنان کار می‌کند، اما به‌روزرسانی خودکار برای این منبع غیرفعال است</string>
     <string name="sources_management_metadata_unavailable_hint_missing">بستهٔ پچ قابل دانلود نیست. ممکن است نشانی منبع نادرست باشد یا فایل وجود نداشته باشد</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">بستهٔ پچ قابل دانلود نیست. ممکن است نشانی منبع نادرست باشد یا فایل وجود نداشته باشد. برای تغییر آن ضربه بزنید</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">نام نمایشی</string>
     <string name="sources_dialog_rename">تغییر نام منبع پچ</string>
+    <string name="sources_dialog_renamed">نام به %s تغییر یافت</string>
     <string name="sources_dialog_change_url">تغییر محل دانلود منبع پچ</string>
     <string name="sources_dialog_duplicate_name_error">یک منبع پچ با این نام قبلا وجود دارد</string>
     <string name="sources_dialog_missing_error">نتوانستم منبع این پچ را به روزرسانی کنم</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">به‌روزرسانی %s</string>
     <string name="sources_dialog_url_valid">نشانی اینترنتی معتبر مخزن یا JSON</string>
-    <string name="sources_dialog_url_invalid">نشانی اینترنتی باید به یک مخزن GitHub/GitLab یا فایل .json اشاره کند</string>
+    <string name="sources_dialog_url_invalid">نشانی اینترنتی باید به یک مخزن GitHub، GitLab یا Codeberg یا یک فایل .json اشاره کند</string>
     <string name="sources_dialog_preinstalled">پیش نصب شده</string>
     <string name="sources_dialog_community">پچ‌های جامعه</string>
     <string name="sources_dialog_choose_apps">انتخاب اپلیکیشن‌ها</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">تغییر لینک‌های اپلیکیشن ناموفق بود</string>
     <string name="app_links_all_verified">همه پیوندهای پشتیبانی‌شده برای باز شدن در این برنامه تنظیم شده‌اند</string>
     <string name="app_links_fix">اصلاح پیوندها</string>
+    <string name="app_links_allow_shizuku">اجازه دسترسی به Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">به Morphe اجازه دهید تا با استفاده از Shizuku، این لینک‌ها را برای شما فعال کند</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku را اجرا کنید تا Morphe بتواند این لینک‌ها را برای شما فعال کند</string>
     <string name="configure">پیکربندی</string>
     <string name="patcher_rename_title">یک نسخهٔ کلون نصب می‌شود</string>
     <string name="patcher_rename_description">پچ‌ها این برنامه را با نام بستهٔ مخصوص خود ساخته‌اند؛ بنابراین نصب آن، نسخه‌ای کلون را در کنار &lt;b&gt;%s&lt;/b&gt; اضافه می‌کند، نه اینکه آن را به‌روزرسانی کند</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">ذخیرهٔ برنامهٔ پچ‌شده ناموفق بود</string>
     <string name="plugin_activity_dialog_body">برای ادامهٔ کار این افزونه، تعامل کاربر لازم است</string>
     <string name="patcher_process_killed_message">سیستم قبل از اتمام فرایند پچر آن را متوقف کرد، معمولاً برای آزادسازی حافظه. برنامه‌های دیگر را ببندید و دوباره تلاش کنید</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe قبل از اتمام وصله کردن بسته شد، بنابراین هیچ چیزی وصله نشد. دوباره تلاش کنید</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">پچر پیش از اتمام کرش کرد. اگر دوباره اتفاق افتاد، %1$s را خاموش کرده و مشکل را همراه با لاگ گزارش دهید</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">مینی‌گیم‌ها</string>
     <string name="mini_games_description">بازی‌های سریع برای پر کردن زمان‌های کوتاه</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">بازی‌ها</string>
     <string name="mini_game_score">امتیاز %s</string>
     <string name="mini_game_best">بهترین %s</string>
     <string name="mini_game_new_record">رکورد جدید!</string>
@@ -1563,6 +1575,7 @@ adb shell appops set %1$s MANAGE_EXTERNAL_STORAGE allow</string>
     <string name="changelog_show_all">نمایش همه (%s)</string>
     <string name="changelog_show_less">نمایش کمتر</string>
     <string name="no_network_toast">اتصال اینترنتی در دسترس نیست</string>
+    <string name="download_waiting_for_network">در انتظار شبکه</string>
     <string name="update_available">به‌روزرسانی در دسترس است</string>
     <string name="ready_to_install_update">به‌روزرسانی آمادهٔ نصب است</string>
     <string name="update_completed">به‌روزرسانی نصب شد</string>

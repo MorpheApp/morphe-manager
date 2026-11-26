@@ -7,10 +7,8 @@ package app.morphe.manager.ui.screen.shared
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.CircularWavyProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.WavyProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
@@ -24,11 +22,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 private val RingStrokeWidth = 10.dp
-
-private val BarStrokeWidth = 6.dp
-
-/** Height of a [WavyProgressBar], with room above and below its stroke for the wave. */
-private val BarHeight = 16.dp
 
 /**
  * Large wavy progress ring with rounded ends, sized by [modifier] to hold its own stats at the center.
@@ -81,33 +74,6 @@ fun WavyProgressRing(
     }
 }
 
-/**
- * [WavyProgressRing] laid flat, for a screen that tracks its progress along a line, in the same
- * color and wave so both patching modes read alike.
- */
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-fun WavyProgressBar(
-    progress: () -> Float,
-    accentColor: Color?,
-    modifier: Modifier = Modifier,
-    trackColor: Color = MaterialTheme.colorScheme.surfaceContainerHighest
-) {
-    val stroke = with(LocalDensity.current) { Stroke(width = BarStrokeWidth.toPx(), cap = StrokeCap.Round) }
-    val waveHeight = rememberWaveHeight(1f)
-    LinearWavyProgressIndicator(
-        progress = progress,
-        modifier = modifier.height(BarHeight),
-        color = rememberProgressColor(accentColor),
-        trackColor = trackColor,
-        stroke = stroke,
-        trackStroke = stroke,
-        // No stop dot at the end of the track, which the ring has no counterpart of
-        stopSize = 0.dp,
-        amplitude = { WavyProgressIndicatorDefaults.indicatorAmplitude(it) * waveHeight }
-    )
-}
-
 /** Share of the wave shown: [amplitude], or flat when accessibility services ask for less motion. */
 @Composable
 private fun rememberWaveHeight(amplitude: Float): Float = if (rememberAccessibilityEnabled()) 0f else amplitude
@@ -117,7 +83,7 @@ private fun rememberWaveHeight(amplitude: Float): Float = if (rememberAccessibil
  * moment after the indicator or change between queued apps.
  */
 @Composable
-private fun rememberProgressColor(accentColor: Color?): Color {
+internal fun rememberProgressColor(accentColor: Color?): Color {
     val color by animateColorAsState(
         targetValue = usableAppAccent(accentColor) ?: MaterialTheme.colorScheme.primary,
         animationSpec = tween(Defaults.ANIMATION_DURATION),

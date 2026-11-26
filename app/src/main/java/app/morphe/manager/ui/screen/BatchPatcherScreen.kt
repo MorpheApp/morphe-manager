@@ -33,6 +33,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.currentStateAsState
 import app.morphe.manager.R
+import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
 import app.morphe.manager.domain.manager.PreferencesManager
@@ -48,7 +49,11 @@ import app.morphe.manager.ui.screen.patcher.rememberDisplayedPatchProgress
 import app.morphe.manager.ui.screen.settings.system.InstallerFlowDialogs
 import app.morphe.manager.ui.screen.settings.system.PrePatchInstallerDialog
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.sources.BundleChangelogHost
+import app.morphe.manager.ui.screen.sources.BundleChangelogRequest
 import app.morphe.manager.ui.viewmodel.BatchPatcherViewModel
+import app.morphe.manager.ui.viewmodel.HomeApps
+import app.morphe.manager.ui.viewmodel.InstallQueueRequest
 import app.morphe.manager.ui.viewmodel.InstallViewModel
 import app.morphe.manager.util.*
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -70,6 +75,8 @@ import kotlin.time.Duration.Companion.milliseconds
 fun BatchPatcherScreen(
     targets: List<BatchTarget>,
     onBackClick: () -> Unit,
+    /** Home app list, the one place that knows which patch update each queued install is waiting on. */
+    homeApps: HomeApps,
     onStartTour: () -> Unit = {},
     onDeclineTour: () -> Unit = {},
     viewModel: BatchPatcherViewModel = koinViewModel(),
@@ -78,7 +85,8 @@ fun BatchPatcherScreen(
     patchBundleRepository: PatchBundleRepository = koinInject(),
     onAppStateChanged: (String) -> Unit = {},
     onBackgroundSpeedChange: (Float) -> Unit = {},
-    onPatchingCompleted: () -> Unit = {}
+    onPatchingCompleted: () -> Unit = {},
+    onOpenGames: (() -> Unit)? = null
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
@@ -444,6 +452,20 @@ fun BatchPatcherScreen(
         )
     }
 
+    // The notes of the patch update a queued app is rebuilt for, the same its info dialog opens
+    val appChangelogs by homeApps.appChangelogs.collectAsStateWithLifecycle()
+    // Keyed the way queued items are, which tells a clone apart from the app it was made from
+    val updateChangelogs = remember(appChangelogs) {
+        appChangelogs.values.filter { it.update != null }.associateBy { it.app.trackingKey }
+    }
+    var changelogRequest by remember { mutableStateOf<BundleChangelogRequest?>(null) }
+    val changelogSources by patchBundleRepository.sources.collectAsStateWithLifecycle()
+    BundleChangelogHost(
+        request = changelogRequest,
+        sources = changelogSources,
+        onDismissRequest = { changelogRequest = null }
+    )
+
     // Cards clamp the failure text, so the full reason lives in the patcher's own error dialog
     var errorItem by remember { mutableStateOf<BatchPatchItem?>(null) }
     DialogHost(target = errorItem) { item ->
@@ -489,7 +511,7 @@ fun BatchPatcherScreen(
                         )
                     }
                 } else {
-                    // Eased toward what the run reports, as a single run is
+                    // Paced as that of a single run is
                     val displayProgress = rememberDisplayedPatchProgress(run = shownRun, succeeded = null)
                     // Each app ramps the background up from rest
                     PatchingBackgroundSpeedEffect(
@@ -506,7 +528,8 @@ fun BatchPatcherScreen(
                             patchProgress = shownRun,
                             packageName = shownPackageName,
                             queueHeader = { BatchRunHeader(state = current) },
-                            onCancelClick = { showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true },
+                            onGamesClick = onOpenGames
                         )
                     } else {
                         val longStepWarning by shownRun.showLongStepWarning.collectAsStateWithLifecycle()
@@ -517,7 +540,8 @@ fun BatchPatcherScreen(
                             packageName = shownPackageName,
                             showLongStepWarning = longStepWarning,
                             queueHeader = { BatchRunHeader(state = current) },
-                            onCancelClick = { showCancelDialog = true }
+                            onCancelClick = { showCancelDialog = true },
+                            onGamesClick = onOpenGames
                         )
                     }
                 }
@@ -664,6 +688,9 @@ fun BatchPatcherScreen(
                         onEditPatches = item.source
                             ?.takeIf { useExpertMode || item.selectedByHand }
                             ?.let { { viewModel.beginEdit(item) } },
+                        onShowChangelog = updateChangelogs[item.id]?.let {
+                            { scope.launch { changelogRequest = homeApps.changelogRequest(it) } }
+                        },
                         onInstall = request?.let { { startInstallQueue(listOf(it)) } },
                         onExport = item.patchedBuild?.let { build -> { exporter.export(build.file, build.exportFileName) } },
                         onShare = item.patchedBuild?.let { { share(listOf(item)) } },
@@ -844,6 +871,7 @@ private fun BatchItemCard(
     onAcceptSignature: () -> Unit,
     onChooseTarget: (() -> Unit)? = null,
     onEditPatches: (() -> Unit)? = null,
+    onShowChangelog: (() -> Unit)? = null,
     onInstall: (() -> Unit)? = null,
     onExport: (() -> Unit)? = null,
     onShare: (() -> Unit)? = null,
@@ -1010,6 +1038,15 @@ private fun BatchItemCard(
                                 onClick = onEditPatches,
                                 icon = MaterialSymbols.Rounded.Tune,
                                 contentDescription = editLabel
+                            )
+                        }
+
+                        if (onShowChangelog != null) {
+                            val whatsNewLabel = stringResource(R.string.whats_new)
+                            ActionPillButton(
+                                onClick = onShowChangelog,
+                                icon = MaterialSymbols.Rounded.History,
+                                contentDescription = whatsNewLabel
                             )
                         }
 

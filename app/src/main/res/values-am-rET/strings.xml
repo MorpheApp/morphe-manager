@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">ይህ ምንጭ ተሰናክሏል። ፓቾቹ ለማጣቀሻ ተዘርዝረዋል ነገር ግን አልተተገበሩም</string>
     <string name="sources_management_open_in_browser">በብራውዘር ይክፈቱ</string>
     <string name="sources_management_report_issue">ችግርን ሪፖርት ያድርጉ</string>
+    <string name="sources_management_export_patches">የፓட்ச ፋይሎችን ላክ</string>
+    <string name="sources_management_export_patches_success">የፓட்ச ፋይል ተቀምጧል</string>
+    <string name="sources_management_export_patches_failed">የፓட்ச ፋይሎችን ለመላክ አልተቻለም</string>
     <string name="sources_management_failed_to_open_url">URL-ን ለመክፈት አልተቻለም</string>
     <string name="sources_apps">መተግበሪያዎች</string>
     <string name="sources_apps_description">ምልክት የተደረገላቸው መተግበሪያዎች ከዚህ ምንጭ የተገኙ ናቸው። አንድን መተግበሪያ ለማስወገድ ወይም ለመመለስ ይጫኑት፣ ፓቾቹን ለማየት ደግሞ ወደ ጎን ይሳቡት። አንድ መተግበሪያ ምንም ምንጭ ካላመጣው ከዋናው ስክሪን ላይ ይወገዳል፣ እርስዎ ካስተካከሉት ግን ይቀራል</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">ይህ የፓች ምንጭ ታግዷል እና ሊጨመር አይችልም</string>
     <string name="sources_management_source_blocked_badge">ታግዷል</string>
     <string name="sources_management_metadata_unavailable">ሜታዳታ አይገኝም</string>
+    <string name="sources_management_bundle_missing_badge">አልወረደም</string>
     <string name="sources_management_metadata_unavailable_hint">የርቀት ሜታዳታ ፋይሉ አይገኝም። ከተጫነው ባንድል ጋር ፓች ማድረግ አሁንም ይሰራል፣ ነገር ግን ለዚህ ምንጭ አውቶ-አፕዴት ተዘግቷል</string>
     <string name="sources_management_metadata_unavailable_hint_missing">የፓች ባንድሉን ማውረድ አልተቻለም። የምንጭ URL ስህተት ሊሆን ይችላል ወይም ፋይሉ የለም</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">የፓች ባንድሉ ሊወርድ አልቻለም። የምንጩ URL ስህተት ሊሆን ይችላል ወይም ፋይሉ የለም። ለመቀየር ይጫኑ</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">የሚታይ ስም</string>
     <string name="sources_dialog_rename">የፓች ምንጭን ስም ቀይር</string>
+    <string name="sources_dialog_renamed">ወደ %s ተቀይሯል</string>
     <string name="sources_dialog_change_url">የፓች ምንጭ የሚወርድበትን ቦታ ይቀይሩ</string>
     <string name="sources_dialog_duplicate_name_error">በዚህ ስም የተሰየመ የፓች ምንጭ ቀድሞውኑ አለ</string>
     <string name="sources_dialog_missing_error">ይህንን የፓች ምንጭ ማዘመን አልተቻለም</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s ያዘምናል</string>
     <string name="sources_dialog_url_valid">ትክክለኛ የሪፖዚቶሪ ወይም የJSON URL</string>
-    <string name="sources_dialog_url_invalid">URL ወደ GitHub/GitLab repo ወይም .json ፋይል የሚያመለክት መሆን አለበት</string>
+    <string name="sources_dialog_url_invalid">URL-ው ወደ GitHub፣ GitLab ወይም Codeberg repo ወይም ወደ .json ፋይል የሚያመለክት መሆን አለበት</string>
     <string name="sources_dialog_preinstalled">ቀድሞ የተጫነ</string>
     <string name="sources_dialog_community">የማህበረሰብ ፓቾች</string>
     <string name="sources_dialog_choose_apps">መተግበሪያዎችን ይምረጡ</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">የመተግበሪያ ሊንኮችን ለመለወጥ አልተቻለም</string>
     <string name="app_links_all_verified">ሁሉም የሚደገፉ ሊንኮች በዚህ መተግበሪያ ውስጥ እንዲከፈቱ ተዋቅረዋል</string>
     <string name="app_links_fix">ሊንኮችን አስተካክል</string>
+    <string name="app_links_allow_shizuku">ለ Shizuku መዳረሻ ይፍቀዱ</string>
+    <string name="app_links_shizuku_permission_hint">Morphe እነዚህን ሊንኮች እንዲያነቃቸው Shizukuን እንዲጠቀም ይፍቀዱ</string>
+    <string name="app_links_shizuku_not_running_hint">Morphe እነዚህን ሊንኮች እንዲያነቃቸው Shizukuን ያስጀምሩ</string>
     <string name="configure">ያዋቅሩ</string>
     <string name="patcher_rename_title">ይህ ቅጂን ይጭናል</string>
     <string name="patcher_rename_description">ፓቾቹ ይህንን መተግበሪያ በራሳቸው የፓኬጅ ስም ሰርተዋል፣ ስለዚህ እሱን መጫን &lt;b&gt;%s&lt;/b&gt;ን ከማዘመን ይልቅ ጎን ለጎን ሌላ ቅጂ ይጨምራል</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">የተፓች አፑን ለማስቀመጥ አልተሳካም</string>
     <string name="plugin_activity_dialog_body">በዚህ ፕለጊን ለመቀጠል የተጠቃሚ መስተጋብር ያስፈልጋል</string>
     <string name="patcher_process_killed_message">ሲስተሙ ፓቸሩን ሳይጨርስ አቋርጦታል፣ አብዛኛውን ጊዜ ይህ የሚሆነው ሜሞሪን ነፃ ለማድረግ ነው። ሌሎች አፕሊኬሽኖችን ይዝጉ እና እንደገና ይሞክሩ</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Morphe ፓቺንግ ከመጠናቀቁ በፊት ተዘግቷል፣ ስለዚህ ምንም ነገር አልተስተካከለም። እባክዎ እንደገና ይሞክሩ</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">ፓቸሩ ከመጠናቀቁ በፊት ተቋርጧል። ይህ እንደገና ከተከሰተ፣ %1$s ያጥፉ እና ችግሩን በሎግ ሪፖርት ያድርጉ</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">አጫጭር ጨዋታዎች</string>
     <string name="mini_games_description">ትርፍ ደቂቃን ለማሳለፍ የሚረዱ ፈጣን ጨዋታዎች</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ጨዋታዎች</string>
     <string name="mini_game_score">ውጤት %s</string>
     <string name="mini_game_best">ምርጥ %s</string>
     <string name="mini_game_new_record">አዲስ ክብረ ወሰን!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">ሁሉንም አሳይ (%s)</string>
     <string name="changelog_show_less">ያነሰ አሳይ</string>
     <string name="no_network_toast">የኢንተርኔት ግንኙነት የለም</string>
+    <string name="download_waiting_for_network">ኔትወርክ እየተጠባበቀ ነው</string>
     <string name="update_available">አዲስ ማሻሻያ ይገኛል</string>
     <string name="ready_to_install_update">ማሻሻያውን ለመጫን ዝግጁ ነው</string>
     <string name="update_completed">ማሻሻያው ተጫኗል</string>

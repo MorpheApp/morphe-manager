@@ -308,19 +308,15 @@ class SettingsViewModel(
         prefs.rootPatchMode.update(mode)
     }
 
-    /** The installers to pick from for [installTarget], the preferred [token] always among them. */
-    fun getInstallerEntries(
-        installTarget: InstallerManager.InstallTarget,
-        token: InstallerManager.Token,
-    ): List<InstallerManager.Entry> = installerManager.listEntries(installTarget, token)
+    /** The installers to pick from, the preferred [token] always among them. */
+    fun getInstallerEntries(token: InstallerManager.Token): List<InstallerManager.Entry> =
+        installerManager.listEntries(token)
 
     fun parseInstallerToken(preference: String): InstallerManager.Token =
         installerManager.parseToken(preference)
 
-    fun describeInstallerEntry(
-        token: InstallerManager.Token,
-        installTarget: InstallerManager.InstallTarget,
-    ): InstallerManager.Entry = installerManager.describeEntry(token, installTarget)
+    fun describeInstallerEntry(token: InstallerManager.Token): InstallerManager.Entry =
+        installerManager.describeEntry(token)
 
     fun openShizukuApp(): Boolean = installerManager.openShizukuApp()
 
@@ -387,10 +383,12 @@ class SettingsViewModel(
         sourceMuteRepository.reset()
     }
 
-    fun resetSelectionsForPackage(packageName: String) = viewModelScope.launch(Dispatchers.IO) {
-        selectionRepository.resetSelectionForPackage(packageName)
-        optionsRepository.resetOptionsForPackage(packageName)
-        sourceMuteRepository.unmuteAll(packageName)
+    fun resetSelectionsForPackages(packageNames: Collection<String>) = viewModelScope.launch(Dispatchers.IO) {
+        packageNames.forEach { packageName ->
+            selectionRepository.resetSelectionForPackage(packageName)
+            optionsRepository.resetOptionsForPackage(packageName)
+            sourceMuteRepository.unmuteAll(packageName)
+        }
     }
 
     fun resetSelectionsForPackageBundle(packageName: String, bundleUid: Int) =

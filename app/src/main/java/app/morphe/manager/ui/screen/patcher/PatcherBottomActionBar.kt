@@ -10,7 +10,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -52,7 +51,8 @@ private const val EnterMillis = 200
  * Pass a zero [horizontalPadding] where the bar sits in a column that is inset already, so the
  * two insets do not stack and the buttons keep the edges of the content above them.
  *
- * A non-null [resultButton] leads back to the result screen in place of Cancel.
+ * A non-null [resultButton] leads back to the result screen in place of Cancel, and a non-null
+ * [onGamesClick] adds a way to the mini-games.
  */
 @Composable
 fun PatcherBottomActionBar(
@@ -71,7 +71,8 @@ fun PatcherBottomActionBar(
     onHomeClick: () -> Unit = {},
     onCopyLogsClick: () -> Unit = {},
     onLogsClick: () -> Unit = {},
-    onResultClick: () -> Unit = {}
+    onResultClick: () -> Unit = {},
+    onGamesClick: (() -> Unit)? = null
 ) {
     // Tracks the brief "Copied!" feedback state on the copy button
     val copied = remember { mutableStateOf(false) }
@@ -92,9 +93,10 @@ fun PatcherBottomActionBar(
         else -> ""
     }
     val homeLabel = if (showHomeButton) stringResource(R.string.home) else ""
+    val gamesLabel = if (onGamesClick != null) stringResource(R.string.mini_games_short) else ""
     val trailingLabel = if (showCopyLogsButton) stringResource(android.R.string.copy) else ""
-    val labels = remember(leadingLabel, homeLabel, trailingLabel) {
-        listOf(leadingLabel, homeLabel, trailingLabel).filter { it.isNotEmpty() }
+    val labels = remember(leadingLabel, homeLabel, gamesLabel, trailingLabel) {
+        listOf(leadingLabel, homeLabel, gamesLabel, trailingLabel).filter { it.isNotEmpty() }
     }
 
     BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
@@ -156,6 +158,17 @@ fun PatcherBottomActionBar(
                     onClick = onHomeClick,
                     icon = MaterialSymbols.RoundedFilled.Home,
                     text = homeLabel,
+                    showLabel = showLabels,
+                    animateEntry = animateEntry
+                )
+            }
+
+            // Center: Mini-games button
+            if (onGamesClick != null) {
+                BarButton(
+                    onClick = onGamesClick,
+                    icon = MaterialSymbols.Rounded.Sports_esports,
+                    text = gamesLabel,
                     showLabel = showLabels,
                     animateEntry = animateEntry
                 )

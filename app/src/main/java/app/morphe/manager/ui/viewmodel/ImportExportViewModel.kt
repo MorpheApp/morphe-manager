@@ -13,6 +13,7 @@ package app.morphe.manager.ui.viewmodel
 import android.app.Application
 import android.net.Uri
 import android.os.Build
+import android.os.Process
 import android.util.Log
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -55,7 +56,9 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.io.path.deleteExisting
@@ -576,6 +579,7 @@ class ImportExportViewModel(
         writer.write("=== Morphe Manager Debug Log ===\n")
         writer.write("Date       : ${LocalDateTime.now()}\n")
         writer.write("Version    : ${BuildConfig.VERSION_NAME}\n")
+        writer.write("App mode   : ${if (Process.is64Bit()) "64-bit" else "32-bit"} (${app.processAbi() ?: "unknown ABI"})\n")
 
         writer.write("\n--- Device ---\n")
         writer.write("Model      : ${Build.MANUFACTURER} ${Build.MODEL}\n")
@@ -613,10 +617,23 @@ class ImportExportViewModel(
         // Read without asking, as su would raise the root prompt and wait for it unanswered
         writer.write("Root access: ${Shell.isAppGrantedRoot() ?: "not checked"}\n")
 
+        // A process the system killed logs nothing of its own end, so the system's record is the only trace
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            writer.write("\n--- Process exits ---\n")
+            val exits = app.processExits(DEBUG_LOG_PROCESS_EXITS)
+            if (exits.isEmpty()) writer.write("None recorded\n")
+            exits.forEach { exit ->
+                val time = Instant.ofEpochMilli(exit.timestamp).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                writer.write("$time ${exit.processName} (pid ${exit.pid}): ${exit.describe()}\n")
+            }
+        }
+
         writer.write("\n=== Logcat ===\n\n")
 
-        // Filter logs by current process UID to include only Morphe Manager logs
-        val logcat = ProcessBuilder("logcat", "-d", "--uid=${app.applicationInfo.uid}")
+        // Filter logs by current process UID to include only Morphe Manager logs. Logcat before
+        // Android 11 has no such filter and refuses the whole call, but shows an app only its own logs anyway
+        val uidFilter = "--uid=${app.applicationInfo.uid}".takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.R }
+        val logcat = ProcessBuilder(listOfNotNull("logcat", "-d", uidFilter))
             .redirectErrorStream(true)
             .start()
         logcat.inputStream.bufferedReader().useLines { lines -> lines.forEach { writer.write("$it\n") } }
@@ -652,5 +669,8 @@ class ImportExportViewModel(
     companion object {
         private val knownPasswords = arrayOf("Morphe", "s3cur3p@ssw0rd")
         private val aliases = arrayOf(KeystoreManager.DEFAULT, "alias", "Morphe Key")
+
+        // Enough for the end of a run and the restart that followed it, with the run before for comparison
+        private const val DEBUG_LOG_PROCESS_EXITS = 6
     }
 }

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">このソースは無効になっています。パッチは参照のために表示されるだけで、適用されません</string>
     <string name="sources_management_open_in_browser">ブラウザで開く</string>
     <string name="sources_management_report_issue">問題を報告</string>
+    <string name="sources_management_export_patches">パッチファイルをエクスポート</string>
+    <string name="sources_management_export_patches_success">パッチファイルを保存しました</string>
+    <string name="sources_management_export_patches_failed">パッチファイルのエクスポートに失敗しました</string>
     <string name="sources_management_failed_to_open_url">URL を開けませんでした</string>
     <string name="sources_apps">アプリ</string>
     <string name="sources_apps_description">チェックマーク付きのアプリはこのソースから提供されています。アプリをタップすると、ホーム画面で非表示にしたり、再表示したりできます。スワイプするとパッチを確認できます。ソースが指定されていないアプリは、パッチを適用していない限りホーム画面から非表示になります</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">このパッチソースはブロックされており、追加できません</string>
     <string name="sources_management_source_blocked_badge">ブロック済み</string>
     <string name="sources_management_metadata_unavailable">メタデータがありません</string>
+    <string name="sources_management_bundle_missing_badge">未ダウンロード</string>
     <string name="sources_management_metadata_unavailable_hint">接続先のメタデータファイルを取得できません。インストール済みのバンドルでのパッチ適用は引き続き可能ですが、このソースの自動更新は無効になります</string>
     <string name="sources_management_metadata_unavailable_hint_missing">パッチバンドルをダウンロードできませんでした。ソース URL が正しくないか、ファイルが存在しない可能性があります</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">パッチバンドルをダウンロードできませんでした。ソース URL が正しくないか、ファイルが存在しない可能性があります。タップして変更してください</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">表示名</string>
     <string name="sources_dialog_rename">パッチソースの名前を変更</string>
+    <string name="sources_dialog_renamed">%sに名前を変更しました</string>
     <string name="sources_dialog_change_url">パッチソースのダウンロード元を変更</string>
     <string name="sources_dialog_duplicate_name_error">同じ名前のパッチソースが既に存在します</string>
     <string name="sources_dialog_missing_error">このパッチソースを更新できませんでした</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">%s を更新</string>
     <string name="sources_dialog_url_valid">有効なリポジトリまたは JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL は GitHub または GitLab のリポジトリ、もしくは .json ファイルを指している必要があります</string>
+    <string name="sources_dialog_url_invalid">URL は GitHub、GitLab、または Codeberg のリポジトリ、もしくは .json ファイルを指している必要があります</string>
     <string name="sources_dialog_preinstalled">プリインストール</string>
     <string name="sources_dialog_community">コミュニティ製パッチ</string>
     <string name="sources_dialog_choose_apps">アプリを選択</string>
@@ -576,6 +581,9 @@ APK ファイルの取得元を選択してください"</string>
     <string name="app_links_change_failed">アプリリンクの変更に失敗しました</string>
     <string name="app_links_all_verified">サポートされているすべてのリンクは、このアプリで開くように設定されています</string>
     <string name="app_links_fix">リンクを修正</string>
+    <string name="app_links_allow_shizuku">Shizuku へのアクセスを許可</string>
+    <string name="app_links_shizuku_permission_hint">Morphe が Shizuku を使用して、これらのリンクを有効にすることを許可してください</string>
+    <string name="app_links_shizuku_not_running_hint">Shizuku を起動して、Morphe がこれらのリンクを有効にするようにしてください</string>
     <string name="configure">設定</string>
     <string name="patcher_rename_title">クローンをインストールします</string>
     <string name="patcher_rename_description">このパッチでは独自のパッケージ名でアプリがビルドされるため、インストールすると &lt;b&gt;%s&lt;/b&gt; が更新されるのではなく、クローンアプリとして追加されます</string>
@@ -745,6 +753,8 @@ APK ファイルの取得元を選択してください"</string>
     <string name="patched_app_save_failed_toast">パッチ適用済みアプリの保存に失敗しました</string>
     <string name="plugin_activity_dialog_body">このプラグインを続行するには、ユーザーの操作が必要です</string>
     <string name="patcher_process_killed_message">メモリを解放するためなどの理由で、システムがパッチ処理を完了前に停止しました。他のアプリを閉じて、もう一度お試しください</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">パッチ適用が完了する前に Morphe が終了したため、何もパッチが適用されませんでした。もう一度お試しください</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">パッチ処理が完了する前にクラッシュしました。再発する場合は、%1$s をオフにしてログとともに問題を報告してください</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -768,6 +778,8 @@ APK ファイルの取得元を選択してください"</string>
     <!-- Mini-games -->
     <string name="mini_games">ミニゲーム</string>
     <string name="mini_games_description">ちょっとした空き時間に楽しめるクイックゲーム</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">ゲーム</string>
     <string name="mini_game_score">スコア %s</string>
     <string name="mini_game_best">最高記録 %s</string>
     <string name="mini_game_new_record">新記録！</string>
@@ -1562,6 +1574,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">すべて表示 (%s)</string>
     <string name="changelog_show_less">表示を減らす</string>
     <string name="no_network_toast">インターネットに接続されていません</string>
+    <string name="download_waiting_for_network">ネットワーク待機中</string>
     <string name="update_available">アップデートが利用可能です</string>
     <string name="ready_to_install_update">アップデートをインストールする準備ができました</string>
     <string name="update_completed">アップデートがインストールされました</string>

@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Tento zdroj je vypnutý. Jeho záplaty sú uvedené len pre informáciu a neaplikujú sa</string>
     <string name="sources_management_open_in_browser">Otvoriť v prehliadači</string>
     <string name="sources_management_report_issue">Nahlásiť problém</string>
+    <string name="sources_management_export_patches">Exportovať súbor záplat</string>
+    <string name="sources_management_export_patches_success">Súbor záplat bol uložený</string>
+    <string name="sources_management_export_patches_failed">Nepodarilo sa exportovať súbor záplat</string>
     <string name="sources_management_failed_to_open_url">Nepodarilo sa otvoriť URL</string>
     <string name="sources_apps">Aplikácie</string>
     <string name="sources_apps_description">Zaškrtnuté aplikácie pochádzajú z tohto zdroja. Klepnutím na aplikáciu ju vynechajte alebo vráťte, potiahnutím zistíte jej patche. Aplikácia bez zdroja opustí domovskú obrazovku, pokiaľ ste ju nepatchovali</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">Tento zdroj záplat je zablokovaný a nie je možné ho pridať</string>
     <string name="sources_management_source_blocked_badge">Zablokované</string>
     <string name="sources_management_metadata_unavailable">Metadáta N/A</string>
+    <string name="sources_management_bundle_missing_badge">Nestiahnuté</string>
     <string name="sources_management_metadata_unavailable_hint">Diaľkový metaúdajový súbor nie je dostupný. Oprava pomocou nainštalovaného balíka stále funguje, ale automatická aktualizácia je pre tento zdroj zakázaná</string>
     <string name="sources_management_metadata_unavailable_hint_missing">Balík opráv sa nepodarilo stiahnuť. URL adresa zdroja môže byť nesprávna alebo súbor neexistuje</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">Balík záplat sa nepodarilo stiahnuť. Zdrojová URL môže byť nesprávna alebo súbor neexistuje. Klepnutím ju zmeňte</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">Zobrazovaný názov</string>
     <string name="sources_dialog_rename">Premenovať zdroj záplaty</string>
+    <string name="sources_dialog_renamed">Premenované na %s</string>
     <string name="sources_dialog_change_url">Zmeňte miesto, z ktorého sa sťahujú zdroje záplat</string>
     <string name="sources_dialog_duplicate_name_error">Zdroj záplat s týmto názvom už existuje</string>
     <string name="sources_dialog_missing_error">Nebolo možné aktualizovať tento zdroj záplaty</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">Aktualizuje %s</string>
     <string name="sources_dialog_url_valid">Platný repozitár alebo URL adresa JSON</string>
-    <string name="sources_dialog_url_invalid">URL musí odkazovať na repozitár GitHub/GitLab alebo na súbor .json</string>
+    <string name="sources_dialog_url_invalid">URL musí odkazovať na repo GitHub, GitLab alebo Codeberg, prípadne na súbor .json</string>
     <string name="sources_dialog_preinstalled">Predinštalované</string>
     <string name="sources_dialog_community">Komunitné záplaty</string>
     <string name="sources_dialog_choose_apps">Vybrať aplikácie</string>
@@ -576,6 +581,9 @@ Pre najlepšie výsledky sa odporúča záplatovať &lt;b&gt;úplný APK&lt;/b&g
     <string name="app_links_change_failed">Nepodarilo sa zmeniť odkazy aplikácie</string>
     <string name="app_links_all_verified">Všetky podporované odkazy sú nakonfigurované tak, aby sa otvárali v tejto aplikácii</string>
     <string name="app_links_fix">Opraviť odkazy</string>
+    <string name="app_links_allow_shizuku">Povoliť prístup pre Shizuku</string>
+    <string name="app_links_shizuku_permission_hint">Povoliť aplikácii Morphe použiť Shizuku, aby pre vás tieto odkazy zapla</string>
+    <string name="app_links_shizuku_not_running_hint">Spustite Shizuku, aby mohla aplikácia Morphe tieto odkazy zapnúť za vás</string>
     <string name="configure">Konfigurovať</string>
     <string name="patcher_rename_title">Toto nainštaluje klon</string>
     <string name="patcher_rename_description">Záplaty vytvorili túto aplikáciu pod vlastným názvom balíka, takže jej inštalácia pridá klon vedľa &lt;b&gt;%s&lt;/b&gt; namiesto jej aktualizácie</string>
@@ -745,6 +753,8 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="patched_app_save_failed_toast">Nepodarilo sa uložiť zaplátanú aplikáciu</string>
     <string name="plugin_activity_dialog_body">Vyžaduje sa interakcia používateľa, aby bolo možné pokračovať s týmto pluginom</string>
     <string name="patcher_process_killed_message">Systém ukončil patcher pred dokončením, zvyčajne kvôli uvoľneniu pamäte. Zatvorte iné aplikácie a skúste to znova</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">Aplikácia Morphe bola zatvorená pred dokončením patchovania, takže nič nebolo patchované. Skúste to znova</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">Záplatovateľ prepadol skôr, než skončil. Ak sa to zopakuje, vypnite %1$s a nahláste problém spolu s protokolom</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <!-- Mini-games -->
     <string name="mini_games">Mini hry</string>
     <string name="mini_games_description">Rýchle hry na zaplnenie voľnej minútky</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">Hry</string>
     <string name="mini_game_score">Skóre %s</string>
     <string name="mini_game_best">Najlepšie %s</string>
     <string name="mini_game_new_record">Nový rekord!</string>
@@ -1561,6 +1573,7 @@ Podrobnosti: %2$s"</string>
     <string name="changelog_show_all">Zobraziť všetky (%s)</string>
     <string name="changelog_show_less">Zobraziť menej</string>
     <string name="no_network_toast">Žiadne internetové pripojenie</string>
+    <string name="download_waiting_for_network">Čakanie na sieť</string>
     <string name="update_available">Je dostupná aktualizácia</string>
     <string name="ready_to_install_update">Inštalácia aktualizácie je pripravená.</string>
     <string name="update_completed">Aktualizácia nainštalovaná</string>

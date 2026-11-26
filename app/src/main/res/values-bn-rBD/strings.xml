@@ -172,6 +172,9 @@
     <string name="sources_patches_source_disabled_hint">এই উৎসটি অক্ষম। এর প্যাচগুলি রেফারেন্সের জন্য তালিকাভুক্ত এবং প্রয়োগ করা হয় না।</string>
     <string name="sources_management_open_in_browser">ব্রাউজারে ওপেন করুন</string>
     <string name="sources_management_report_issue">একটি সমস্যা রিপোর্ট করুন</string>
+    <string name="sources_management_export_patches">প্যাচ ফাইল এক্সপোর্ট করুন</string>
+    <string name="sources_management_export_patches_success">প্যাচ ফাইল সংরক্ষণ করা হয়েছে</string>
+    <string name="sources_management_export_patches_failed">প্যাচ ফাইল এক্সপোর্ট করতে ব্যর্থ হয়েছে</string>
     <string name="sources_management_failed_to_open_url">URL খুলতে ব্যর্থ হয়েছে</string>
     <string name="sources_apps">অ্যাপস</string>
     <string name="sources_apps_description">টিক করা অ্যাপগুলো এই সোর্স থেকে এসেছে। কোনো অ্যাপ বাদ দিতে বা পুনরায় ফিরিয়ে আনতে সেটিতে ট্যাপ করুন, এর প্যাচগুলো দেখতে সোয়াইপ করুন। সোর্সহীন অ্যাপ হোম স্ক্রিন থেকে চলে যায়, যদি না আপনি সেটিকে প্যাচ করে থাকেন</string>
@@ -201,6 +204,7 @@
     <string name="sources_management_blocked">এই প্যাচ উৎসটি ব্লক করা হয়েছে এবং এটি যোগ করা যাবে না</string>
     <string name="sources_management_source_blocked_badge">ব্লক করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable">মেটাডেটা উপলব্ধ নয়</string>
+    <string name="sources_management_bundle_missing_badge">ডাউনলোড করা হয়নি</string>
     <string name="sources_management_metadata_unavailable_hint">রিমোট মেটাডেটা ফাইলটি পাওয়া যাচ্ছে না। ইনস্টল করা বান্ডেলের সাথে প্যাচিং এখনও কাজ করে, তবে এই উৎসের জন্য স্বয়ংক্রিয় আপডেট নিষ্ক্রিয় করা হয়েছে</string>
     <string name="sources_management_metadata_unavailable_hint_missing">প্যাচ বান্ডেল ডাউনলোড করা যায়নি। উৎস URL ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই</string>
     <string name="sources_management_metadata_unavailable_hint_missing_editable">প্যাচ বান্ডিলটি ডাউনলোড করা যায়নি। সোর্স URL-টি ভুল হতে পারে অথবা ফাইলটি বিদ্যমান নেই। এটি পরিবর্তন করতে ট্যাপ করুন</string>
@@ -217,6 +221,7 @@
     <!-- Home Screen - Sources Dialogs -->
     <string name="sources_dialog_display_name">প্রদর্শিত নাম</string>
     <string name="sources_dialog_rename">প্যাচ সোর্সের নাম পরিবর্তন করুন</string>
+    <string name="sources_dialog_renamed">%s নামে পুনঃনামকরণ করা হয়েছে</string>
     <string name="sources_dialog_change_url">প্যাচ সোর্সটি কোথায় থেকে ডাউনলোড হবে তা পরিবর্তন করুন</string>
     <string name="sources_dialog_duplicate_name_error">এই নামের একটি প্যাচ সোর্স ইতিমধ্যে রয়েছে</string>
     <string name="sources_dialog_missing_error">এই প্যাচ সোর্স আপডেট করা যায়নি</string>
@@ -232,7 +237,7 @@
     <!-- %s is the name of the local source that another version of the same bundle replaces -->
     <string name="sources_dialog_local_updates">আপডেট %s</string>
     <string name="sources_dialog_url_valid">বৈধ রিপোজিটরি অথবা JSON URL</string>
-    <string name="sources_dialog_url_invalid">URL টি অবশ্যই একটি GitHub/GitLab রেপো অথবা .json ফাইল নির্দেশ করতে হবে।</string>
+    <string name="sources_dialog_url_invalid">URL অবশ্যই একটি GitHub, GitLab বা Codeberg রিপো বা .json ফাইল নির্দেশ করতে হবে</string>
     <string name="sources_dialog_preinstalled">প্রি-ইনস্টল</string>
     <string name="sources_dialog_community">কমিউনিটি প্যাচ</string>
     <string name="sources_dialog_choose_apps">অ্যাপ নির্বাচন করুন</string>
@@ -576,6 +581,9 @@
     <string name="app_links_change_failed">অ্যাপ লিঙ্ক পরিবর্তন করতে ব্যর্থ হয়েছে</string>
     <string name="app_links_all_verified">সকল সমর্থিত লিংক এই অ্যাপে খোলার জন্য কনফিগার করা হয়েছে</string>
     <string name="app_links_fix">লিংক ঠিক করুন</string>
+    <string name="app_links_allow_shizuku">Shizuku-এর অ্যাক্সেসের অনুমতি দিন</string>
+    <string name="app_links_shizuku_permission_hint">আপনার জন্য এই লিঙ্কগুলো চালু করতে Morphe-কে Shizuku ব্যবহার করার অনুমতি দিন</string>
+    <string name="app_links_shizuku_not_running_hint">আপনার জন্য এই লিঙ্কগুলো চালু করতে Morphe-কে অনুমতি দিতে Shizuku শুরু করুন</string>
     <string name="configure">কনফিগার করুন</string>
     <string name="patcher_rename_title">এটি একটি ক্লোন ইনস্টল করবে</string>
     <string name="patcher_rename_description">প্যাচগুলো এই অ্যাপটি তাদের নিজস্ব প্যাকেজ নামে তৈরি করেছে, তাই এটি ইনস্টল করলে &lt;b&gt;%s&lt;/b&gt;-এর পাশাপাশি একটি ক্লোন যুক্ত হবে, এটি আপডেট করার পরিবর্তে।</string>
@@ -745,6 +753,8 @@
     <string name="patched_app_save_failed_toast">প্যাচ করা অ্যাপ সংরক্ষণ করতে ব্যর্থ</string>
     <string name="plugin_activity_dialog_body">এই প্লাগইন চালিয়ে যেতে ব্যবহারকারীর ইন্টারঅ্যাকশন প্রয়োজন</string>
     <string name="patcher_process_killed_message">সিস্টেমটি প্যাচারকে সম্পন্ন করার আগেই বন্ধ করে দিয়েছে, সাধারণত মেমোরি খালি করতে। অন্য অ্যাপগুলো বন্ধ করুন এবং আবার চেষ্টা করুন</string>
+    <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
+    <string name="patcher_interrupted_message">প্যাচিং শেষ হওয়ার আগেই Morphe বন্ধ করা হয়েছিল, তাই কিছুই প্যাচ করা হয়নি। আবার চেষ্টা করুন</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">প্যাচার শেষ হওয়ার আগেই ক্র্যাশ করেছে। যদি এটি আবার ঘটে, তবে %1$s বন্ধ করুন এবং লগ সহ সমস্যাটি রিপোর্ট করুন</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -767,6 +777,8 @@
     <!-- Mini-games -->
     <string name="mini_games">মিনি-গেমস</string>
     <string name="mini_games_description">অবসরে সময় কাটানোর জন্য দ্রুত গেম</string>
+    <!-- Short label of the patcher button that opens the mini-games, shared with Cancel and Copy in one row -->
+    <string name="mini_games_short">গেমস</string>
     <string name="mini_game_score">স্কোর %s</string>
     <string name="mini_game_best">সেরা %s</string>
     <string name="mini_game_new_record">নতুন রেকর্ড!</string>
@@ -1561,6 +1573,7 @@ morphe_header_custom_dark.png
     <string name="changelog_show_all">সব দেখুন (%s)</string>
     <string name="changelog_show_less">কম দেখুন</string>
     <string name="no_network_toast">ইন্টারনেট সংযোগ উপলব্ধ নয়</string>
+    <string name="download_waiting_for_network">নেটওয়ার্কের জন্য অপেক্ষা করা হচ্ছে</string>
     <string name="update_available">একটি আপডেট উপলব্ধ</string>
     <string name="ready_to_install_update">আপডেট ইনস্টল করার জন্য প্রস্তুত</string>
     <string name="update_completed">আপডেট ইনস্টল করা হয়েছে</string>

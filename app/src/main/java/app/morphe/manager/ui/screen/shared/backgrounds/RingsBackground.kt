@@ -7,12 +7,10 @@ package app.morphe.manager.ui.screen.shared.backgrounds
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Stroke
-import kotlin.math.PI
 import kotlin.math.sin
 
 /**
@@ -29,9 +27,7 @@ fun RingsBackground(
     speedMultiplier: Float = 1f,
     patchingCompleted: Boolean = false
 ) {
-    val primaryColor   = MaterialTheme.colorScheme.primary
-    val secondaryColor = MaterialTheme.colorScheme.secondary
-    val tertiaryColor  = MaterialTheme.colorScheme.tertiary
+    val palette = themePalette()
 
     val parallaxState = rememberParallaxState(
         enableParallax = enableParallax,
@@ -58,30 +54,24 @@ fun RingsBackground(
 
     Canvas(modifier = modifier.fillMaxSize()) {
         val t     = time.value
-        val tiltX = parallaxState.tiltX.value
-        val tiltY = parallaxState.tiltY.value
-        val twoPi = 2f * PI.toFloat()
+        val tiltX = parallaxState.tiltX.value * density
+        val tiltY = parallaxState.tiltY.value * density
         val bp    = burstProgress.value
 
         ringConfigs.forEachIndexed { index, config ->
             // Each ring oscillates between start/end using sin - mirrors the original Reverse tween
             val halfX = (config.endX - config.startX) / 2f
             val halfY = (config.endY - config.startY) / 2f
-            val cx = config.startX + halfX + halfX * sin(t * twoPi / config.durationX)
-            val cy = config.startY + halfY + halfY * sin(t * twoPi / config.durationY)
+            val cx = config.startX + halfX + halfX * sin(t * TWO_PI / config.durationX)
+            val cy = config.startY + halfY + halfY * sin(t * TWO_PI / config.durationY)
 
-            val parallaxStrength = config.depth * 50f
+            val parallaxStrength = config.depth * 17f
             val center = Offset(
                 size.width  * cx + tiltX * parallaxStrength,
                 size.height * cy + tiltY * parallaxStrength
             )
 
-            // Select color based on index
-            val baseColor = when (index % 3) {
-                0    -> primaryColor
-                1    -> secondaryColor
-                else -> tertiaryColor
-            }
+            val baseColor = palette[index]
 
             // Stagger burst: group 0 starts immediately, last group starts at bp=0.4
             val groupDelay = index / (ringConfigs.size - 1).toFloat() * 0.4f
