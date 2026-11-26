@@ -23,6 +23,13 @@ enum class ApkSignatureCheck {
 }
 
 /**
+ * Whether an APK of an app the sources [declared] these certificates for has anything to be
+ * checked against on [sdkInt], see [apkSignatureCheck]. Only then are its certificates worth reading.
+ */
+internal fun apkSignatureCheckable(sdkInt: Int, declared: Set<String>?): Boolean =
+    sdkInt > Build.VERSION_CODES.Q && !declared.isNullOrEmpty()
+
+/**
  * Checks an APK against the certificates the sources [declared] for its app, reading its
  * certificate fingerprints through [hashes] only when there is something to check.
  *
@@ -36,11 +43,11 @@ internal inline fun apkSignatureCheck(
     declared: Set<String>?,
     hashes: () -> Set<String>?
 ): ApkSignatureCheck {
-    if (sdkInt <= Build.VERSION_CODES.Q || declared.isNullOrEmpty()) return ApkSignatureCheck.ACCEPTED
+    if (!apkSignatureCheckable(sdkInt, declared)) return ApkSignatureCheck.ACCEPTED
     val read = hashes() ?: return ApkSignatureCheck.ACCEPTED
     return when {
         read.isEmpty() -> ApkSignatureCheck.BROKEN
-        read.any { it in declared } -> ApkSignatureCheck.ACCEPTED
+        read.any { it in declared.orEmpty() } -> ApkSignatureCheck.ACCEPTED
         else -> ApkSignatureCheck.OTHER_SIGNER
     }
 }

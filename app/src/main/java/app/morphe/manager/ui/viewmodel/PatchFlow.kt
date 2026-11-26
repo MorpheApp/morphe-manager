@@ -720,7 +720,7 @@ class PatchFlow(
                         // Picked in place of the one held for a warning, which it takes the run over from
                         heldApp?.discard()
                         heldApp = null
-                        processSelectedApp(result.app)
+                        processSelectedApp(result.app, apkCertificates = result.certificates)
                     }
                     is ApkLoadResult.Unreadable -> messages.show(R.string.home_invalid_apk_unreadable)
                     is ApkLoadResult.NotAnApk -> messages.show(R.string.home_invalid_apk_not_an_apk)
@@ -778,10 +778,14 @@ class PatchFlow(
      *
      * This function only answers: "do any patches EXIST for this APK?"
      * The include/selection logic is handled in [startPatchingWithApp].
+     *
+     * @param apkCertificates Certificate fingerprints of the file, when the pass that loaded it
+     *   already read them, see [ApkLoadResult.Success.certificates].
      */
     private suspend fun processSelectedApp(
         selectedApp: SelectedApp,
-        skipSplitCheck: Boolean = false
+        skipSplitCheck: Boolean = false,
+        apkCertificates: Set<String>? = null
     ) {
         // Validate package name if expected (known-app flow sets the session's package)
         val expectedPackage = session?.packageName
@@ -818,15 +822,15 @@ class PatchFlow(
             // On Android 8-10 the legacy GET_SIGNATURES path cannot read signatures from
             // archive files correctly, so we skip verification there to avoid false-blocking users.
             val declared = appMetadata[selectedApp.packageName]?.signatures
-            var apkCertificates = emptySet<String>()
+            var certificates = emptySet<String>()
             val signature = apkSignatureCheck(Build.VERSION.SDK_INT, declared) {
-                withContext(Dispatchers.IO) {
+                (apkCertificates ?: withContext(Dispatchers.IO) {
                     SplitApkInspector.withRepresentativeApk(
                         source = selectedApp.file,
                         workspace = filesystem.uiTempDir,
                         block = pm::getApkFileSignatureHashes
                     )
-                }.also { apkCertificates = it }
+                }).also { certificates = it }
             }
             if (signature != ApkSignatureCheck.ACCEPTED) {
                 holdFor(
@@ -835,7 +839,7 @@ class PatchFlow(
                             packageName = selectedApp.packageName,
                             appName = session?.appName ?: appNameFor(selectedApp.packageName),
                             expectedCertificates = declared.orEmpty(),
-                            apkCertificates = apkCertificates
+                            apkCertificates = certificates
                         )
                     ),
                     selectedApp
@@ -1650,7 +1654,11 @@ class PatchFlow(
                             temporary = true
                         ),
                         icon = appDataResolver.detachedArchiveIcon(packageInfo),
-                        label = packageInfo.readableLabel(app.packageManager)
+                        label = packageInfo.readableLabel(app.packageManager),
+                        // Read while the module is unpacked, which the signature check would otherwise repeat
+                        certificates = if (
+                            apkSignatureCheckable(Build.VERSION.SDK_INT, appMetadata[packageInfo.packageName]?.signatures)
+                        ) pm.getApkFileSignatureHashes(apk) else null
                     )
                 }
             }
@@ -1674,8 +1682,18 @@ private fun SelectedApp.discard() {
 
 /** Result of attempting to load a local APK file. */
 private sealed interface ApkLoadResult {
-    /** File was read and parsed successfully, with the app's icon and label where it carries them. */
-    data class Success(val app: SelectedApp.Local, val icon: Drawable?, val label: String?) : ApkLoadResult
+    /**
+     * File was read and parsed successfully, with the app's icon and label where it carries them.
+     *
+     * @param certificates Certificate fingerprints of the file, null where the sources declare none
+     *   to check them against.
+     */
+    data class Success(
+        val app: SelectedApp.Local,
+        val icon: Drawable?,
+        val label: String?,
+        val certificates: Set<String>? = null
+    ) : ApkLoadResult
     /** File could not be read - provider returned null stream or zero bytes. */
     data object Unreadable : ApkLoadResult
     /** File was read but is not a valid APK/split archive. */
