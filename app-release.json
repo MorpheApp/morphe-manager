@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-25T17:37:41",
-  "description": "## [2.8.0-dev.6](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.5...v2.8.0-dev.6) (2026-11-25)\n\n### Features\n\n* Export patches from the source card and confirm renames ([0f23abd](https://github.com/MorpheApp/morphe-manager/commit/0f23abd51bfe003798d2695bb65c37c250b3dcd6))\n* Install patched apps compiled with their baseline profile ([#1523](https://github.com/MorpheApp/morphe-manager/issues/1523)) ([e436a28](https://github.com/MorpheApp/morphe-manager/commit/e436a28b8f70664baa639d3d91e669c6aa4e6ec9))",
-  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.8.0-dev.6/morphe-manager-2.8.0-dev.6.apk",
-  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.8.0-dev.6/morphe-manager-2.8.0-dev.6.apk.asc",
-  "version": "2.8.0-dev.6"
+  "created_at": "2026-11-26T07:40:58",
+  "description": "## [2.8.0-dev.7](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0-dev.6...v2.8.0-dev.7) (2026-11-26)\n\n### Performance Improvements\n\n* Faster app startup on Android 15+ ([#1524](https://github.com/MorpheApp/morphe-manager/issues/1524)) ([34c297f](https://github.com/MorpheApp/morphe-manager/commit/34c297f58dd14727cb3e3f98c81c9972daa8be39))\n\n### Bug Fixes\n\n* Update root modules on kernels that refuse to rename mounted files ([2d673bb](https://github.com/MorpheApp/morphe-manager/commit/2d673bb8f5836966634655ac243c4523023e85b6))",
+  "download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.8.0-dev.7/morphe-manager-2.8.0-dev.7.apk",
+  "signature_download_url": "https://github.com/MorpheApp/morphe-manager/releases/download/v2.8.0-dev.7/morphe-manager-2.8.0-dev.7.apk.asc",
+  "version": "2.8.0-dev.7"
 }
