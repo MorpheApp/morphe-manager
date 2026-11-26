@@ -512,9 +512,10 @@ class BatchPatchCoordinator(
             if (item.installOutcome == BatchInstallOutcome.INSTALLED) continue
             // A mount build is only of use mounted over its app, which the summary does
             if (item.useMount) continue
-            val file = item.patchedBuild?.file?.takeIf { it.exists() } ?: continue
-            val info = pm.getPackageInfo(file)
-            val targetPackage = info?.packageName ?: item.packageName
+            val build = item.patchedBuild?.takeIf { it.file.exists() } ?: continue
+            val file = build.file
+            // Read from the build when it was patched, which a patch may have renamed
+            val targetPackage = build.exportData.packageName
 
             val result = runCatching {
                 if (asPlayStore) {
@@ -529,7 +530,7 @@ class BatchPatchCoordinator(
 
             if (result !is InstallResult.Success) continue
 
-            val version = info?.versionName?.takeUnless { it.isBlank() } ?: item.version ?: continue
+            val version = build.exportData.appVersion ?: item.version ?: continue
             installedAppRepository.addOrUpdate(
                 currentPackageName = targetPackage,
                 originalPackageName = item.packageName,

@@ -828,8 +828,7 @@ class BatchPatcherViewModel(
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
         val selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
-        val version = item.patchedBuild
-            ?.let { pm.getPackageInfo(it.file)?.versionName?.takeUnless { name -> name.isBlank() } }
+        val version = item.patchedBuild?.exportData?.appVersion
             ?: item.version
             ?: return@withContext false
 
