@@ -559,8 +559,24 @@ class RootInstaller(
 
     /** Moves the staged files of [targetPaths] over them in a single call, so the switch is near instant. */
     private suspend fun commitStaged(targetPaths: Collection<String>) {
-        execute(targetPaths.joinToString(" && ") { "mv -f ${staged(it).shellQuote()} ${it.shellQuote()}" })
+        execute(targetPaths.joinToString(" && ") { commitStagedCommand(it) })
             .assertSuccess("Failed to put the module in place")
+    }
+
+    /**
+     * Moves the staged file of [targetPath] over it. Kernels before 3.18 refuse to rename over a
+     * path mounted on in any other namespace until the next boot, so the staged contents are then
+     * written into the file in place, which keeps its owner, mode and SELinux context.
+     */
+    private fun commitStagedCommand(targetPath: String): String {
+        val staging = staged(targetPath).shellQuote()
+        val target = targetPath.shellQuote()
+        return $$"""
+            { err=$(mv -f $$staging $$target 2>&1) || case "$err" in
+                *"Device or resource busy"*) cat $$staging > $$target && rm -f $$staging ;;
+                *) echo "$err" >&2; false ;;
+            esac; }
+        """.trimIndent()
     }
 
     /**
