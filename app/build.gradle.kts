@@ -349,7 +349,9 @@ val recordProfile = project.hasProperty("recordProfile")
 
 android {
     namespace = "app.morphe.manager"
-    compileSdk = 37
+    compileSdk {
+        version = release(37) { minorApiLevel = 1 }
+    }
 
     defaultConfig {
         applicationId = "app.morphe.manager"
@@ -491,7 +493,8 @@ android {
     }
 
     // A profile recorded from an app that has one would keep every rule of it for good
-    if (recordProfile) sourceSets.named("main") { baselineProfiles.setSrcDirs(emptyList<Any>()) }
+    @Suppress("UnstableApiUsage")
+    if (recordProfile) sourceSets.named("main") { baselineProfiles.directories.clear() }
 
     buildFeatures {
         compose = true

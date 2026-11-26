@@ -1,44 +1,39 @@
 [versions]
 activity = "1.13.0"
-# 9.5.0 fails to configure :app: its Compose Preview task requires unit tests to include Android resources
-android-gradle-plugin = "9.4.1"
+android-gradle-plugin = "9.5.3"
 app-icon-loader-coil = "1.5.0"
-# MorpheApp fork until its changes (MorpheApp/ARSCLib#1) land in REAndroid/ARSCLib
 # Keep in step with morphe-patcher: Gradle ships only one of the two, picked by comparing hashes as versions
 arsclib = "6435903152"
 coil = "2.7.0"
 collection = "0.5.2"
-compose-bom = "2026.09.00"
+compose-bom = "2026.11.01"
 composables-icons = "2.2.1"
 dev-tools-gradle-plugin = "2.3.12"
 documentfile = "1.1.0"
-firebase-bom = "35.1.0"
-google-services = "4.5.0"
-haze = "2.0.1"
+firebase-bom = "35.2.0"
+google-services = "4.6.0"
+haze = "2.1.0"
 hidden-api-stub = "4.4.0"
 hiddenapibypass = "6.2"
 koin = "4.2.2"
 kotlin = "2.4.21"
 kotlinx-coroutines = "1.11.0"
-ktor = "3.6.1"
+ktor = "3.6.2"
 ktx = "1.19.1"
 libsu = "6.0.0"
 licensee = "1.14.1"
-# Ahead of the Compose BOM, which still ships 1.4.0: the sheets build on the 1.5 bottom sheet API
-# (rememberBottomSheetState). Drop the override once the BOM ships a stable 1.5.0
-material3 = "1.5.0-rc01"
-morphe-patcher = "2.6.0-dev.1"
+morphe-patcher = "2.6.0"
 navigation = "2.10.2"
 play-services-base = "18.11.1"
 preferences-datastore = "1.3.0"
 proguard = "7.10.0"
 reorderable = "3.1.0"
-robolectric = "4.17"
+robolectric = "4.18.1"
 room-version = "2.8.5"
-serialization = "1.12.0"
+serialization = "1.13.0"
 shizuku = "13.1.5"
 splash-screen = "1.2.0"
-viewmodel-lifecycle = "2.11.0"
+viewmodel-lifecycle = "2.11.1"
 work-runtime = "2.12.0"
 xz = "1.12"
 
@@ -59,7 +54,7 @@ compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = 
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 
 # Haze (blur of what scrolls under floating dialog chrome)
