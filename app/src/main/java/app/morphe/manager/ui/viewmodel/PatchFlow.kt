@@ -1249,8 +1249,12 @@ class PatchFlow(
             // ship with use=false and require explicit user configuration.
             // Fall through to expert mode so the user can select and configure patches.
             // Hidden sources are read here too, for the same reason the expert branch reads
-            // them: the dialog can offer one back, and it has to have something to offer
-            openExpertMode(savedSelections(), savedOptions())
+            // them: the dialog can offer one back, and it has to have something to offer.
+            // Validated as the expert branch does, so patches the sources dropped are not offered
+            openExpertMode(
+                validatePatchSelection(savedSelections(), bundlesMap),
+                validatePatchOptions(savedOptions(), bundlesMap)
+            )
             return
         }
 
