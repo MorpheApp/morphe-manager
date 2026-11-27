@@ -1,3 +1,10 @@
+## [2.9.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.9.0-dev.1...v2.9.0-dev.2) (2026-11-27)
+
+### Features
+
+* Add a setting to hide the games button on the patcher screens ([9e11dd0](https://github.com/MorpheApp/morphe-manager/commit/9e11dd01b4e51aece972988346ac1d78777a9b5e))
+* Fetch the supported APK in batch for apps past their patches ([10f58d1](https://github.com/MorpheApp/morphe-manager/commit/10f58d1d330239514f79d87f0fb94dcd5a2a5eac))
+
 ## [2.9.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0...v2.9.0-dev.1) (2026-11-26)
 
 ### Features
