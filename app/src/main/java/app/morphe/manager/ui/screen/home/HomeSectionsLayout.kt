@@ -135,7 +135,7 @@ internal fun SectionsLayout(
     bottomBarHeight: Dp,
     alerts: HomeAlerts,
     alertsHeight: () -> Dp = { 0.dp },
-    alertsFocus: UnderTopBarFocus? = null,
+    alertsFocus: FloatingBarsRegion? = null,
     onboardingState: OnboardingState? = null,
     onHeaderHeightChange: (Dp) -> Unit = {}
 ) {

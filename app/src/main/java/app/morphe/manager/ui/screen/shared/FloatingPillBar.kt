@@ -31,7 +31,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
@@ -180,14 +179,14 @@ fun FloatingBarsLayout(
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     wrapContentHeight: Boolean = false,
-    underTopBar: UnderTopBarFocus? = null,
+    underTopBar: FloatingBarsRegion? = null,
     content: @Composable BoxScope.(topHeight: Dp, bottomHeight: Dp) -> Unit
 ) {
     val currentContent = rememberUpdatedState(content)
     val focusManager = LocalFocusManager.current
     val focus = remember(focusManager, underTopBar) { FloatingBarsFocus(focusManager, underTopBar) }
     val contentSlot = remember(wrapContentHeight, focus) {
-        HeightKeyedContent(currentContent, wrapContentHeight, focus.contentModifier)
+        HeightKeyedContent(currentContent, wrapContentHeight, focus.content.modifier)
     }
     val topSlot: @Composable () -> Unit = {
         Box(modifier = focus.top.modifier, contentAlignment = Alignment.TopCenter) { topBar() }
@@ -223,80 +222,65 @@ fun FloatingBarsLayout(
 private enum class FloatingBarsSlot { Top, Bottom, Content }
 
 /**
- * Focus of what floats under the top bar of a [FloatingBarsLayout] from outside it, such as the
- * alerts under a page's header, which takes [modifier]. The content runs on under it as under the
- * bar, and it lies outside the layout, so no search for focus finds the way between any two of
- * them. Each move between them is handed on instead.
+ * One of the parts of a [FloatingBarsLayout] stacked from top to bottom, which takes [modifier]:
+ * its bars, its content, and what floats under its top bar from outside it, such as the alerts
+ * under a page's header. They lie over one another, so a search for focus leaving one passes the
+ * next by for whatever lies beyond, or finds nothing at all. A move up or down that stays within
+ * the part, or lands in the nearest part that way able to take it, stands. Any other is handed on
+ * to that part.
  */
 @Stable
-class UnderTopBarFocus(focusManager: FocusManager) {
-    private val self = FocusRequester()
-    internal val bar = FocusRequester()
-    internal val content = FocusRequester()
-    internal var focused = false
-        private set
+class FloatingBarsRegion internal constructor(private val focusManager: FocusManager) {
+    private val requester = FocusRequester()
+    private var focused = false
+
+    /** The parts of the layout this is one of, top first. */
+    internal var stack: List<FloatingBarsRegion> = emptyList()
 
     val modifier: Modifier = Modifier
-        .focusRequester(self)
+        .focusRequester(requester)
         .onFocusChanged { focused = it.hasFocus }
-        .handingOn(FocusDirection.Down) { content.requestFocus(FocusDirection.Down) }
-        // A search up from here finds nothing at all, so it never leaves to be handed on
+        .focusGroup()
         .onKeyEvent { event ->
-            event.type == KeyEventType.KeyDown && event.key == Key.DirectionUp &&
-                (focusManager.moveFocus(FocusDirection.Up) || bar.requestFocus(FocusDirection.Up))
+            val direction = when (event.key) {
+                Key.DirectionUp -> FocusDirection.Up
+                Key.DirectionDown -> FocusDirection.Down
+                else -> null
+            }
+            event.type == KeyEventType.KeyDown && direction != null && move(direction)
         }
 
-    internal fun requestFocus() = self.requestFocus()
-}
-
-/** An [UnderTopBarFocus] for the focus of this window. */
-@Composable
-fun rememberUnderTopBarFocus(): UnderTopBarFocus {
-    val focusManager = LocalFocusManager.current
-    return remember(focusManager) { UnderTopBarFocus(focusManager) }
-}
-
-/**
- * Lands a move off a bar of a [FloatingBarsLayout] in its content, or first in what floats [under]
- * the top bar. The content runs on under both, so the area it takes up for focus reaches over them,
- * and a search leaving a bar toward it passes it by for whatever lies beyond, or finds nothing at all.
- */
-private class FloatingBarsFocus(private val focusManager: FocusManager, private val under: UnderTopBarFocus?) {
-    private val content = under?.content ?: FocusRequester()
-    private var contentFocused = false
-
-    val contentModifier: Modifier = Modifier
-        .focusRequester(content)
-        .onFocusChanged { contentFocused = it.hasFocus }
-        .then(under?.let { Modifier.handingOn(FocusDirection.Up, it::requestFocus) } ?: Modifier)
-
-    val top = Bar(
-        Key.DirectionDown,
-        FocusDirection.Down,
-        under?.let { Modifier.focusRequester(it.bar).handingOn(FocusDirection.Down, it::requestFocus) } ?: Modifier
-    )
-    val bottom = Bar(Key.DirectionUp, FocusDirection.Up)
-
-    /** A bar, its presses of [key] moving focus toward the content in [direction]. */
-    inner class Bar(private val key: Key, private val direction: FocusDirection, passing: Modifier = Modifier) {
-        private var focused = false
-
-        val modifier: Modifier = Modifier
-            .onFocusChanged { focused = it.hasFocus }
-            .then(passing)
-            .onKeyEvent { event ->
-                if (event.type != KeyEventType.KeyDown || event.key != key) return@onKeyEvent false
-                // A move the search keeps within the bar, or takes into the content or what floats under the bar, stands
-                val moved = focusManager.moveFocus(direction)
-                (moved && (focused || contentFocused || under?.focused == true)) || content.requestFocus(direction) || moved
-            }
+    private fun move(direction: FocusDirection): Boolean {
+        val moved = focusManager.moveFocus(direction)
+        if (moved && focused) return true
+        val index = stack.indexOf(this)
+        val beyond = if (direction == FocusDirection.Up) {
+            stack.subList(0, index).asReversed()
+        } else {
+            stack.subList(index + 1, stack.size)
+        }
+        return beyond.any { it.focused || it.requester.requestFocus(direction) } || moved
     }
 }
 
-/** Hands a move leaving in [direction] to [redirect], which tells whether it took it. */
-private fun Modifier.handingOn(direction: FocusDirection, redirect: () -> Boolean): Modifier = this
-    .focusProperties { onExit = { if (requestedFocusDirection == direction) redirect() } }
-    .focusGroup()
+/** A [FloatingBarsRegion] for the focus of this window, for what floats under a layout's top bar. */
+@Composable
+fun rememberFloatingBarsRegion(): FloatingBarsRegion {
+    val focusManager = LocalFocusManager.current
+    return remember(focusManager) { FloatingBarsRegion(focusManager) }
+}
+
+/** The parts of a [FloatingBarsLayout], with what floats [under] its top bar between it and the content. */
+private class FloatingBarsFocus(focusManager: FocusManager, under: FloatingBarsRegion?) {
+    val top = FloatingBarsRegion(focusManager)
+    val content = FloatingBarsRegion(focusManager)
+    val bottom = FloatingBarsRegion(focusManager)
+
+    init {
+        val stack = listOfNotNull(top, under, content, bottom)
+        stack.forEach { it.stack = stack }
+    }
+}
 
 /**
  * Content slot kept as the same lambda until a bar's height moves, since a subcomposition handed

@@ -9,8 +9,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
@@ -40,11 +38,13 @@ import app.morphe.manager.ui.screen.shared.Animations
 import app.morphe.manager.ui.screen.shared.CardBorder
 import app.morphe.manager.ui.screen.shared.Defaults
 import app.morphe.manager.ui.screen.shared.MainPage
+import app.morphe.manager.ui.screen.shared.Modal
 import app.morphe.manager.ui.screen.shared.PanelHeader
 import app.morphe.manager.ui.screen.shared.PanelSubtitle
 import app.morphe.manager.ui.screen.shared.PanelTitle
 import app.morphe.manager.ui.screen.shared.ProvideBringIntoViewInsets
 import app.morphe.manager.ui.screen.shared.autoMirrored
+import app.morphe.manager.ui.screen.shared.blocksPointerInputBelow
 import app.morphe.manager.ui.screen.shared.glassFill
 import app.morphe.manager.ui.screen.shared.TitleAction
 import app.morphe.manager.ui.screen.shared.TitleActionStyle
@@ -115,129 +115,132 @@ fun OnboardingShowcase(
     onSkip: () -> Unit = onComplete
 ) {
     if (steps.isEmpty()) return
-    var step by remember { mutableIntStateOf(0) }
+    // Raised over the whole app, which it keeps out of reach of focus, back and touch while it runs
+    Modal(covering = true) {
+        var step by remember { mutableIntStateOf(0) }
 
-    BackHandler {
-        if (step > 0) step -= 1 else onSkip()
-    }
-    val stepDef = steps[step]
-    val bounds = stepDef.getBounds()
+        BackHandler {
+            if (step > 0) step -= 1 else onSkip()
+        }
+        val stepDef = steps[step]
+        val bounds = stepDef.getBounds()
 
-    LaunchedEffect(step) { steps[step].onShow?.invoke() }
+        LaunchedEffect(step) { steps[step].onShow?.invoke() }
 
-    val pulse = rememberInfiniteTransition(label = "obs_pulse")
-    val pulseScale by pulse.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.07f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(900, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "obs_scale"
-    )
+        val pulse = rememberInfiniteTransition(label = "obs_pulse")
+        val pulseScale by pulse.animateFloat(
+            initialValue = 1f,
+            targetValue = 1.07f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(900, easing = FastOutSlowInEasing),
+                repeatMode = RepeatMode.Reverse
+            ),
+            label = "obs_scale"
+        )
 
-    // Track the overlay's own position in the window so we can convert window-space
-    // bounds (from boundsInWindow) to canvas-local coordinates. This is needed when
-    // the overlay does not start at the window origin.
-    var selfOffset by remember { mutableStateOf(Offset.Zero) }
+        // Track the overlay's own position in the window so we can convert window-space
+        // bounds (from boundsInWindow) to canvas-local coordinates. This is needed when
+        // the overlay does not start at the window origin.
+        var selfOffset by remember { mutableStateOf(Offset.Zero) }
 
-    var visible by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { visible = true }
+        var visible by remember { mutableStateOf(false) }
+        LaunchedEffect(Unit) { visible = true }
 
-    AnimatedVisibility(visible = visible, enter = Animations.overlayEnter) {
-        BoxWithConstraints(
-            modifier = Modifier
-                .fillMaxSize()
-                .onGloballyPositioned { coords ->
-                    val wb = coords.boundsInWindow()
-                    selfOffset = Offset(wb.left, wb.top)
-                }
-                .clickable(remember { MutableInteractionSource() }, indication = null) {}
-        ) {
-            val density = LocalDensity.current
-            val screenW = constraints.maxWidth
-            val screenH = constraints.maxHeight
-            // Card shows above the target when the target is in the lower half of the screen
-            val isBottomHalf = bounds != null && (bounds.center.y - selfOffset.y) > screenH * 0.5f
-
-            val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-            val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-
-            var cardSize by remember { mutableStateOf(IntSize.Zero) }
-
-            val gap = with(density) { 16.dp.roundToPx() }
-            val hPad = with(density) { 24.dp.roundToPx() }
-            val navPx = with(density) { navBarPadding.roundToPx() }
-            val statusPx = with(density) { statusBarPadding.roundToPx() }
-            // Cap card width so it always fits within horizontal padding on any screen width
-            val maxCardWidth = (screenW - 2 * hPad).coerceAtMost(with(density) { 380.dp.roundToPx() })
-            val cw = cardSize.width.takeIf { it > 0 } ?: maxCardWidth
-            val ch = cardSize.height.takeIf { it > 0 } ?: with(density) { 160.dp.roundToPx() }
-
-            val targetX = if (bounds != null) {
-                ((bounds.center.x - selfOffset.x) - cw / 2f).roundToInt()
-                    .coerceIn(hPad, (screenW - cw - hPad).coerceAtLeast(hPad))
-            } else (screenW - cw) / 2
-
-            val targetY = if (bounds != null) {
-                if (isBottomHalf)
-                    // Show card just above the spotlight target
-                    (bounds.top - selfOffset.y - ch - gap).roundToInt()
-                        .coerceAtLeast(statusPx + gap)
-                else
-                    // Show card just below the spotlight target
-                    (bounds.bottom - selfOffset.y + gap).roundToInt()
-                        .coerceAtMost(screenH - ch - navPx - gap)
-            } else ((screenH - ch) / 2).coerceAtLeast(statusPx)
-
-            val cardOffsetX by animateIntAsState(
-                targetValue = targetX,
-                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
-                label = "obs_card_x"
-            )
-            val cardOffsetY by animateIntAsState(
-                targetValue = targetY,
-                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
-                label = "obs_card_y"
-            )
-
-            Canvas(
-                Modifier
-                    .fillMaxSize()
-                    .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
-            ) {
-                drawRect(Color.Black.copy(alpha = 0.72f))
-
-                if (bounds != null) {
-                    val pad = 12.dp.toPx()
-                    val cx = bounds.center.x - selfOffset.x
-                    val cy = bounds.center.y - selfOffset.y
-                    val hw = (bounds.width / 2 + pad) * pulseScale
-                    val hh = (bounds.height / 2 + pad) * pulseScale
-                    drawRoundRect(
-                        color = Color.Black,
-                        topLeft = Offset(cx - hw, cy - hh),
-                        size = Size(hw * 2, hh * 2),
-                        cornerRadius = CornerRadius(Defaults.CornerLargeIncreased.toPx()),
-                        blendMode = BlendMode.Clear
-                    )
-                }
-            }
-
-            OnboardingCard(
-                title = stringResource(stepDef.titleRes),
-                description = stringResource(stepDef.descRes),
-                step = step + 1,
-                totalSteps = steps.size,
-                onNext = { if (step < steps.size - 1) step++ else onComplete() },
-                onPrevious = if (step > 0) { { step -= 1 } } else null,
-                onSkip = onSkip,
+        AnimatedVisibility(visible = visible, enter = Animations.overlayEnter) {
+            BoxWithConstraints(
                 modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .offset { IntOffset(cardOffsetX, cardOffsetY) }
-                    .widthIn(max = with(density) { maxCardWidth.toDp() })
-                    .onGloballyPositioned { cardSize = it.size }
-            )
+                    .fillMaxSize()
+                    .onGloballyPositioned { coords ->
+                        val wb = coords.boundsInWindow()
+                        selfOffset = Offset(wb.left, wb.top)
+                    }
+                    .blocksPointerInputBelow()
+            ) {
+                val density = LocalDensity.current
+                val screenW = constraints.maxWidth
+                val screenH = constraints.maxHeight
+                // Card shows above the target when the target is in the lower half of the screen
+                val isBottomHalf = bounds != null && (bounds.center.y - selfOffset.y) > screenH * 0.5f
+
+                val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+                var cardSize by remember { mutableStateOf(IntSize.Zero) }
+
+                val gap = with(density) { 16.dp.roundToPx() }
+                val hPad = with(density) { 24.dp.roundToPx() }
+                val navPx = with(density) { navBarPadding.roundToPx() }
+                val statusPx = with(density) { statusBarPadding.roundToPx() }
+                // Cap card width so it always fits within horizontal padding on any screen width
+                val maxCardWidth = (screenW - 2 * hPad).coerceAtMost(with(density) { 380.dp.roundToPx() })
+                val cw = cardSize.width.takeIf { it > 0 } ?: maxCardWidth
+                val ch = cardSize.height.takeIf { it > 0 } ?: with(density) { 160.dp.roundToPx() }
+
+                val targetX = if (bounds != null) {
+                    ((bounds.center.x - selfOffset.x) - cw / 2f).roundToInt()
+                        .coerceIn(hPad, (screenW - cw - hPad).coerceAtLeast(hPad))
+                } else (screenW - cw) / 2
+
+                val targetY = if (bounds != null) {
+                    if (isBottomHalf)
+                        // Show card just above the spotlight target
+                        (bounds.top - selfOffset.y - ch - gap).roundToInt()
+                            .coerceAtLeast(statusPx + gap)
+                    else
+                        // Show card just below the spotlight target
+                        (bounds.bottom - selfOffset.y + gap).roundToInt()
+                            .coerceAtMost(screenH - ch - navPx - gap)
+                } else ((screenH - ch) / 2).coerceAtLeast(statusPx)
+
+                val cardOffsetX by animateIntAsState(
+                    targetValue = targetX,
+                    animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                    label = "obs_card_x"
+                )
+                val cardOffsetY by animateIntAsState(
+                    targetValue = targetY,
+                    animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                    label = "obs_card_y"
+                )
+
+                Canvas(
+                    Modifier
+                        .fillMaxSize()
+                        .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
+                ) {
+                    drawRect(Color.Black.copy(alpha = 0.72f))
+
+                    if (bounds != null) {
+                        val pad = 12.dp.toPx()
+                        val cx = bounds.center.x - selfOffset.x
+                        val cy = bounds.center.y - selfOffset.y
+                        val hw = (bounds.width / 2 + pad) * pulseScale
+                        val hh = (bounds.height / 2 + pad) * pulseScale
+                        drawRoundRect(
+                            color = Color.Black,
+                            topLeft = Offset(cx - hw, cy - hh),
+                            size = Size(hw * 2, hh * 2),
+                            cornerRadius = CornerRadius(Defaults.CornerLargeIncreased.toPx()),
+                            blendMode = BlendMode.Clear
+                        )
+                    }
+                }
+
+                OnboardingCard(
+                    title = stringResource(stepDef.titleRes),
+                    description = stringResource(stepDef.descRes),
+                    step = step + 1,
+                    totalSteps = steps.size,
+                    onNext = { if (step < steps.size - 1) step++ else onComplete() },
+                    onPrevious = if (step > 0) { { step -= 1 } } else null,
+                    onSkip = onSkip,
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .offset { IntOffset(cardOffsetX, cardOffsetY) }
+                        .widthIn(max = with(density) { maxCardWidth.toDp() })
+                        .onGloballyPositioned { cardSize = it.size }
+                )
+            }
         }
     }
 }
