@@ -204,6 +204,14 @@ class BatchPatcherViewModel(
 ) : ViewModel(), ApkDownloadHelperHost {
     val state = coordinator.state
 
+    /** The sources, and what they declare for each app, which the queue's dialogs show. */
+    val sources = patchBundleRepository.sources
+    val appMetadata = patchBundleRepository.appMetadata
+
+    /** Settings the queue screen reads, edited elsewhere. */
+    val useExpertMode = prefs.useExpertMode
+    val autoDownloadApkHelpers = prefs.autoDownloadApkHelpersInBatch
+
     /** Notification and tour prompts raised once the queue installs or saves an app. */
     val postPatchPrompts = PostPatchPrompts(app, prefs, viewModelScope)
 
