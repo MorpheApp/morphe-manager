@@ -99,20 +99,20 @@ fun SourcesPage(
     val openLocalBundleUpdatePicker = rememberAdaptiveFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
         onResult = { uri ->
-            val uid = homeViewModel.localBundleUpdateUid
-            homeViewModel.localBundleUpdateUid = null
-            if (uri != null && uid != null) homeViewModel.updateLocalSource(uid, uri)
+            val uid = homeViewModel.sources.localBundleUpdateUid
+            homeViewModel.sources.localBundleUpdateUid = null
+            if (uri != null && uid != null) homeViewModel.sources.updateLocalSource(uid, uri)
         }
     )
 
     val openBundlePicker = rememberAdaptiveMultiFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
-        onResult = homeViewModel::pickBundles
+        onResult = homeViewModel.sources::pickBundles
     )
 
     // The files picked are held outside for the picker's round trip, so they go once the panel does
     LaunchedEffect(state.isAddingSource) {
-        if (!state.isAddingSource) homeViewModel.clearPickedBundles()
+        if (!state.isAddingSource) homeViewModel.sources.clearPickedBundles()
     }
 
     SourcesPageContent(
@@ -126,39 +126,39 @@ fun SourcesPage(
                 visible = state.isAddingSource,
                 onClose = state::closeAddSource,
                 onSubmit = { urls, options ->
-                    homeViewModel.addSources(urls, options)
+                    homeViewModel.sources.addSources(urls, options)
                     state.closeAddSource()
                     onSourceAdded()
                 },
                 onPickFiles = { openBundlePicker() },
-                onRemoveFile = homeViewModel::unpickBundle,
-                localFiles = homeViewModel.pickedBundleImports,
+                onRemoveFile = homeViewModel.sources::unpickBundle,
+                localFiles = homeViewModel.sources.pickedBundleImports,
                 onCheckUrl = homeViewModel.patchBundleRepository::checkRemoteUrl,
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        onDelete = homeViewModel::removeSources,
-        onToggleEnabled = homeViewModel::toggleSources,
+        onDelete = homeViewModel.sources::removeSources,
+        onToggleEnabled = homeViewModel.sources::toggleSources,
         onUpdate = { bundles ->
             // A local source has nothing to fetch from, so it asks for a replacement file instead,
             // which can only be picked for one at a time
             val local = bundles.singleOrNull()?.takeUnless { it is RemotePatchBundle }
             if (local != null) {
-                homeViewModel.localBundleUpdateUid = local.uid
+                homeViewModel.sources.localBundleUpdateUid = local.uid
                 openLocalBundleUpdatePicker()
             } else {
-                homeViewModel.updateSources(bundles.filterIsInstance<RemotePatchBundle>())
+                homeViewModel.sources.updateSources(bundles.filterIsInstance<RemotePatchBundle>())
             }
         },
         onRename = { bundle ->
-            homeViewModel.bundleToRename = bundle
-            homeViewModel.showRenameBundleDialog = true
+            homeViewModel.sources.bundleToRename = bundle
+            homeViewModel.sources.showRenameBundleDialog = true
         },
-        onReorder = homeViewModel::reorderSources,
-        onSetUsePrerelease = homeViewModel::setUsePrerelease,
-        onSetUseExperimentalVersions = homeViewModel::setUseExperimentalVersions,
-        onTrustSigningKey = homeViewModel::trustNewSigningKey,
-        onChangeLink = homeViewModel::changeSourceLink
+        onReorder = homeViewModel.sources::reorderSources,
+        onSetUsePrerelease = homeViewModel.sources::setUsePrerelease,
+        onSetUseExperimentalVersions = homeViewModel.sources::setUseExperimentalVersions,
+        onTrustSigningKey = homeViewModel.sources::trustNewSigningKey,
+        onChangeLink = homeViewModel.sources::changeSourceLink
     )
 }
 

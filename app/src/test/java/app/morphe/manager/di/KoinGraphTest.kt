@@ -12,6 +12,7 @@ import androidx.work.WorkerParameters
 import app.morphe.manager.service.ForegroundHost
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.viewmodel.HomeApps
+import app.morphe.manager.ui.viewmodel.HomeSources
 import app.morphe.manager.ui.viewmodel.InstalledAppInfoViewModel
 import app.morphe.manager.ui.viewmodel.PatchFlow
 import app.morphe.manager.ui.viewmodel.PatcherViewModel
@@ -68,6 +69,7 @@ class KoinGraphTest {
             // What the places creating these hand in with parametersOf
             injections = injectedParameters(
                 definition<HomeApps>(CoroutineScope::class),
+                definition<HomeSources>(CoroutineScope::class),
                 definition<PatchFlow>(CoroutineScope::class, StateFlow::class),
                 definition<PatcherViewModel>(Patcher.ViewModelParams::class),
                 definition<InstalledAppInfoViewModel>(String::class)

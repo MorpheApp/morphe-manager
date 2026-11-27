@@ -255,7 +255,7 @@ fun HomeScreen(
 
     // Sources on a home server are out of reach on Android 17 until the local network is allowed
     val allSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
-    LocalNetworkSourceAccess(allSources, onGranted = homeViewModel::retryLocalNetworkSources)
+    LocalNetworkSourceAccess(allSources, onGranted = homeViewModel.sources::retryLocalNetworkSources)
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()
@@ -307,7 +307,7 @@ fun HomeScreen(
         metadataErrors = AlertState.about(metadataFetchErrors.keys) { openPage(MainPage.SOURCES) },
         // By the versions waiting, so a newer release brings a swiped one back
         sourceUpdates = AlertState.about(pendingSourceUpdates.map { (uid, version) -> "$uid:$version" }) {
-            homeViewModel.downloadPendingUpdates()
+            homeViewModel.sources.downloadPendingUpdates()
         },
         // By what each app would be rebuilt for, so a newer version or another app brings a
         // swiped one back
