@@ -514,6 +514,59 @@ class HomeViewModel(
      */
     fun updateLocalSource(uid: Int, patchBundle: Uri) = importLocalSources(listOf(patchBundle to uid), NewSourceOptions())
 
+    fun removeSources(bundles: List<PatchBundleSource>) = viewModelScope.launch {
+        patchBundleRepository.remove(*bundles.toTypedArray())
+    }
+
+    /** Flips each of [bundles], on or off. */
+    fun toggleSources(bundles: List<PatchBundleSource>) = viewModelScope.launch {
+        patchBundleRepository.disable(*bundles.toTypedArray())
+    }
+
+    /** Downloads [bundles] again, a failed one from scratch, telling the user how it went. */
+    fun updateSources(bundles: List<RemotePatchBundle>) = viewModelScope.launch {
+        patchBundleRepository.updateOrRepair(bundles, showMessage = true)
+    }
+
+    /**
+     * Updates the sources at [endpoints] again once the local network is allowed. A connection
+     * still waiting goes through by itself, so only the sources whose update already gave up are.
+     */
+    fun retryLocalNetworkSources(endpoints: Collection<String>) = viewModelScope.launch {
+        val updating = patchBundleRepository.activeUpdateUidsFlow.value
+        val failed = patchBundleRepository.sources.value
+            .filterIsInstance<RemotePatchBundle>()
+            .filter { it.enabled && it.endpoint in endpoints && it.uid !in updating }
+        patchBundleRepository.updateOrRepair(failed, showMessage = true)
+    }
+
+    fun reorderSources(orderedUids: List<Int>) = viewModelScope.launch {
+        patchBundleRepository.reorderBundles(orderedUids)
+    }
+
+    fun setUsePrerelease(bundles: List<PatchBundleSource>, usePrerelease: Boolean) = viewModelScope.launch {
+        patchBundleRepository.setUsePrerelease(bundles.mapTo(mutableSetOf()) { it.uid }, usePrerelease)
+    }
+
+    fun setUseExperimentalVersions(bundles: List<PatchBundleSource>, useExperimental: Boolean) = viewModelScope.launch {
+        patchBundleRepository.setUseExperimentalVersions(bundles.mapTo(mutableSetOf()) { it.uid }, useExperimental)
+    }
+
+    /** Trusts the key [bundle] is signed with now, after the user accepted the change. */
+    fun trustNewSigningKey(bundle: RemotePatchBundle) = viewModelScope.launch {
+        patchBundleRepository.trustNewSigningKey(bundle)
+    }
+
+    fun changeSourceLink(bundle: RemotePatchBundle, url: String) = viewModelScope.launch {
+        patchBundleRepository.changeRemoteLink(bundle, url)
+    }
+
+    /** Checks the sources and the manager for updates, as a notification asked to. */
+    suspend fun checkForUpdates() {
+        patchBundleRepository.updateCheck()
+        checkForManagerUpdates()
+    }
+
     /** @return The uid of the source [patchBundle] landed under, or null when it could not be read. */
     private suspend fun importLocalFile(patchBundle: Uri, replacingUid: Int?): Int? {
         val permissionFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION

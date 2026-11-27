@@ -254,7 +254,8 @@ fun HomeScreen(
     }
 
     // Sources on a home server are out of reach on Android 17 until the local network is allowed
-    LocalNetworkSourceAccess(homeViewModel.patchBundleRepository)
+    val allSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
+    LocalNetworkSourceAccess(allSources, onGranted = homeViewModel::retryLocalNetworkSources)
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()

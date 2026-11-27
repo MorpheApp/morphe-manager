@@ -14,21 +14,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.bundles.PatchBundleSource
 import app.morphe.manager.domain.bundles.RemotePatchBundle
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.shared.MessageAction
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.LocalNetwork
 import app.morphe.manager.util.openAppDetailsSettings
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.compose.koinInject
 
@@ -41,13 +37,15 @@ import org.koin.compose.koinInject
  * such source is added. A refusal says what it costs and leads to the app settings to change it.
  */
 @Composable
-fun LocalNetworkSourceAccess(repository: PatchBundleRepository) {
+fun LocalNetworkSourceAccess(
+    sources: List<PatchBundleSource>,
+    /** Retries the sources at these links, once the permission is granted. */
+    onGranted: (List<String>) -> Unit
+) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.CINNAMON_BUN) return
 
     val context = LocalContext.current
     val messages = koinInject<UserMessages>()
-    val scope = rememberCoroutineScope()
-    val sources by repository.sources.collectAsStateWithLifecycle()
     // Keyed by the links alone, so the lookups are not run again whenever a source changes state.
     // A disabled source is not updated, so it is asked about once it is turned back on
     val endpoints = remember(sources) { sources.enabledRemotes().mapTo(mutableSetOf()) { it.endpoint } }
@@ -61,12 +59,7 @@ fun LocalNetworkSourceAccess(repository: PatchBundleRepository) {
         val waiting = waitingEndpoints
         waitingEndpoints = emptyList()
         if (granted) {
-            // A connection still waiting goes through once the permission is granted, so only the
-            // sources whose update already gave up are updated again
-            val updating = repository.activeUpdateUidsFlow.value
-            val failed = repository.sources.value.enabledRemotes()
-                .filter { it.endpoint in waiting && it.uid !in updating }
-            scope.launch { repository.updateOrRepair(failed, showMessage = true) }
+            onGranted(waiting)
         } else {
             messages.show(
                 R.string.sources_local_network_denied,

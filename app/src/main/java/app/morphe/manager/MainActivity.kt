@@ -592,8 +592,7 @@ private fun MorpheManager(vm: MainViewModel) {
                 // vm.pendingUpdateCheck is set in onNewIntent() and reset here after handling.
                 LaunchedEffect(vm.pendingUpdateCheck) {
                     if (vm.pendingUpdateCheck) {
-                        homeViewModel.patchBundleRepository.updateCheck()
-                        homeViewModel.checkForManagerUpdates()
+                        homeViewModel.checkForUpdates()
                         vm.pendingUpdateCheck = false
                     }
                 }
