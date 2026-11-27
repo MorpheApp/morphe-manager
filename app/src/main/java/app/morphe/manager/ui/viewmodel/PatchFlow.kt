@@ -27,14 +27,13 @@ import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
-import app.morphe.manager.domain.selection.SavedPatchConfiguration
+import app.morphe.manager.domain.selection.RunPlan
+import app.morphe.manager.domain.selection.RunPlanner
+import app.morphe.manager.domain.selection.RunRequest
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
-import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
-import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.*
@@ -42,15 +41,11 @@ import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.screen.shared.readableLabel
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
-import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
-import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import java.io.File
 
 /** Free storage below which patching is warned against before it starts. */
@@ -146,40 +141,6 @@ data class PatchFlowSession(
 }
 
 /**
- * What a run picks its patches against: the install target and the architecture of the APK it
- * starts from. [ignoresRules] leaves every patch to be picked by hand regardless.
- */
-data class PatchTarget(
-    val installerType: InstallerType,
-    val apkArchitecture: ApkArchitecture,
-    val ignoresRules: Boolean
-) {
-    fun defaultSelected(patch: PatchInfo) = patch.defaultSelected(installerType, apkArchitecture)
-
-    /** Lock state of [patch], which a REQUIRED patch only reaches while the run is [singleBundle]. */
-    fun lockState(patch: PatchInfo, singleBundle: Boolean) =
-        if (ignoresRules) PatchLockState.NONE else patch.lockState(installerType, apkArchitecture, singleBundle)
-
-    /**
-     * [selection] under this target's availability rules, which have the final say on what the run
-     * starts with. A source not among [bundles] sits them out and is put back untouched: whether a
-     * REQUIRED patch locks turns on the run drawing from one source or several, and a source the
-     * run cannot reach is not one of them.
-     */
-    fun applyTo(selection: PatchSelection, bundles: List<PatchBundleInfo.Scoped>): PatchSelection {
-        if (ignoresRules) return selection
-        val taking = bundles.mapTo(mutableSetOf()) { it.uid }
-        val heldBack = selection.filterKeys { it !in taking }
-        return selection.filterKeys { it in taking }
-            .applyAvailability(
-                installerType,
-                apkArchitecture,
-                bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-            ) + heldBack
-    }
-}
-
-/**
  * Sets up a run of the patcher for one app: finds the APK through the dialogs in [dialogs], checks
  * it, settles the patches, and hands the run to [onStartQuickPatch]. Also opens the information on
  * an installed app, which a run can be started from.
@@ -193,10 +154,8 @@ class PatchFlow(
     private val patchSelectionRepository: PatchSelectionRepository,
     private val sourceMuteRepository: SourceMuteRepository,
     private val optionsRepository: PatchOptionsRepository,
-    private val patchOptionsPrefs: PatchOptionsPreferencesManager,
     private val prefs: PreferencesManager,
     private val pm: PM,
-    private val rootInstaller: RootInstaller,
     private val installerManager: InstallerManager,
     private val filesystem: Filesystem,
     private val appDataResolver: AppDataResolver,
@@ -207,7 +166,7 @@ class PatchFlow(
     private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
     expertModePanel: SelectionPanelController,
     private val patcherProcesses: PatcherProcesses,
-    private val savedConfiguration: SavedPatchConfiguration,
+    private val runPlanner: RunPlanner,
     downloadedApkFinder: DownloadedApkFinder
 ) : ApkDownloadHelperHost {
     /** The dialogs the flow has open, see [HomeDialog]. */
@@ -1035,205 +994,69 @@ class PatchFlow(
     }
 
     /**
-     * Start patching flow.
+     * Start patching flow, as [RunPlanner] decides it goes on.
      *
-     * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor]. The run patches
-     *   from it alone when it was picked by hand, unless the others are shown again in the expert
-     *   dialog.
+     * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor] and [RunRequest].
      */
     private suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
         allowIncompatible: Boolean,
         bundleUid: Int? = chosenBundleUidFor(selectedApp)
     ) {
-        // Read before the first selection is resolved, so every rule below and every later edit
-        // in the expert dialog is answered for the APK this run actually starts from. The rules
-        // are only ignored where the patches are shown, so nothing they would have kept out is
-        // built in unseen
-        val target = PatchTarget(
-            installerType = installerTypeFor(usingMountInstall),
-            apkArchitecture = ApkArchitectureResolver.resolve(selectedApp, pm),
-            ignoresRules = isExpertMode() &&
-                    rootInstaller.isDeviceRooted() &&
-                    prefs.ignoreInstallTargetRules.get()
-        )
-
-        // Everything this app has patches in, the sources it is kept from included: the expert
-        // dialog offers those back, so it has to be told what it is hiding
-        val availableBundles = patchBundleRepository
-            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
-            .first()
-
-        if (availableBundles.isEmpty()) {
-            messages.show(R.string.home_no_patches_available)
-            selectedApp.discard()
-            endRun()
-            return
-        }
-
-        // A source picked by hand answers for the run alone, so the others are held back the way
-        // the sources the app is kept from are, for this run only. The expert dialog offers them
-        // back, which is how a run mixes sources. The preselected version is no such pick: it
-        // leaves every source in, as a user who mixes sources expects
-        val fromChosenAlone = !isExpertMode() || session?.versionPicked == true
-        val heldBackSources = if (bundleUid != null && fromChosenAlone) {
-            availableBundles.mapTo(mutableSetOf()) { it.uid } - bundleUid
-        } else withContext(Dispatchers.IO) {
-            sourceMuteRepository.getMutedFor(selectedApp.packageName)
-        }
-        // Every rule below reads this rather than the full list, so a hidden source contributes
-        // no defaults, no new-patch badges and no tab
-        val allBundles = availableBundles.withoutMutedSources(heldBackSources) { it.uid }
-
-        val configurationKey = configurationKeyFor(selectedApp.packageName)
-
-        // A source not standing behind this version, one marking it experimental with those
-        // switched off, contributes nothing unless the user adds it back by hand
-        val contributingBundles = allBundles.contributingAt(
-            prefs.bundleExperimentalVersionsEnabled.get(),
-            chosenUid = bundleUid
-        )
-
-        // Opens the selection by hand, which the patches' own availability for the install
-        // target has the final say on unless the run is set to ignore it
-        fun openExpertMode(
-            patches: PatchSelection,
-            options: Options,
-            newPatches: Map<Int, Set<String>> = emptyMap()
-        ) {
-            expertMode.open(
+        val plan = runPlanner.plan(
+            RunRequest(
                 app = selectedApp,
-                allBundles = availableBundles,
-                mutedSources = heldBackSources,
-                // The dialog opens on the source answering for the APK, or on the first one
-                // contributing when the others were left out
-                leadingBundleUid = bundleUid ?: contributingBundles
-                    .takeIf { it.size < allBundles.size }
-                    ?.firstOrNull()?.uid,
-                patches = target.applyTo(patches, allBundles),
-                options = options,
-                newPatches = newPatches,
+                useMount = usingMountInstall,
                 allowIncompatible = allowIncompatible,
-                target = target
+                bundleUid = bundleUid,
+                versionPicked = session?.versionPicked == true,
+                repatchPackageName = session?.repatchPackageName
             )
-            dialogs.advanceTo(HomeDialog.ExpertMode)
-        }
-
-        if (isExpertMode()) {
-            val saved = savedConfiguration.selection(
-                configurationKey,
-                contributingBundles,
-                target.installerType,
-                target.apkArchitecture
-            )
-            // A hidden source keeps what was saved for it, so offering it back brings that along.
-            // Set apart, since the run does not reach it: what it holds decides nothing about the
-            // patches of the sources the run starts with
-            val heldBackSelections = savedConfiguration.validSelection(
-                configurationKey,
-                availableBundles.filter { it.uid in heldBackSources }
-            )
-
-            // Tell the user if patches were removed
-            saved?.removedCount?.takeIf { it > 0 }?.let { removedCount ->
-                messages.show(app.resources.getQuantityString(
-                    R.plurals.home_app_info_repatch_cleaned_invalid_data,
-                    removedCount,
-                    removedCount.toString()
-                ))
-            }
-
-            // No saved selections - use default for the contributing bundles
-            val patches = saved?.patches
-                ?: contributingBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
-
-            // Spans every source, hidden ones included: what the user saved for a hidden one has
-            // to survive validation, or offering the source back would write emptiness over it
-            val options = savedConfiguration.options(configurationKey, availableBundles)
-            if (options.cleaned) {
-                withContext(Dispatchers.IO) {
-                    optionsRepository.saveOptions(configurationKey, options.options)
-                }
-            }
-
-            openExpertMode(heldBackSelections + patches, options.options, saved?.newPatches.orEmpty())
-            return
-        }
-
-        // Simple Mode: collect patches from all enabled bundles, then either use the sole result directly
-        // or ask the user to pick one if multiple bundles have applicable patches.
-        // A patch is applicable if:
-        //   - it is universal, see PatchInfo.isUniversal, OR
-        //   - it names this packageName
-        val bundleWithPatches = contributingBundles
-            .filter { it.enabled }
-            .map { bundle ->
-                val patchNames = bundle.patchSequence(allowIncompatible)
-                    .filter(target::defaultSelected)
-                    .mapTo(mutableSetOf()) { it.name }
-                bundle to patchNames
-            }
-            .filter { (_, patches) -> patches.isNotEmpty() }
-        val runScope = allBundles.mapTo(mutableSetOf()) { it.uid }
-
-        // Patches simple mode picked go with the options it keeps per app, while a selection
-        // made by hand carries its own, see proceedExpertMode
-        suspend fun proceedWithSimpleSelection(patches: PatchSelection, allowIncompatible: Boolean) {
-            val options = withContext(Dispatchers.IO) {
-                patchOptionsPrefs.exportPatchOptions(selectedApp.packageName)
-            }
-            proceedWithPatching(
-                selectedApp,
-                target.applyTo(patches, allBundles),
-                options,
-                selectedByHand = false,
-                allowIncompatible,
-                runScope
-            )
-        }
-
-        if (bundleWithPatches.isEmpty()) {
-            // No patches have include=true (use=true in the bundle JSON).
-            // This is the case for third-party bundles where all universal patches
-            // ship with use=false and require explicit user configuration.
-            // Fall through to expert mode so the user can select and configure patches.
-            // Hidden sources are read here too, for the same reason the expert branch reads
-            // them: the dialog can offer one back, and it has to have something to offer.
-            // Validated as the expert branch does, so patches the sources dropped are not offered
-            openExpertMode(
-                savedConfiguration.validSelection(configurationKey, availableBundles),
-                savedConfiguration.options(configurationKey, availableBundles).options
-            )
-            return
-        }
-
-        // If the user pre-selected a bundle via SimpleBundleSelectDialog, use it directly.
-        // Use allowIncompatible=true unconditionally: the user explicitly picked this bundle
-        // AND explicitly picked the APK version, so we must respect both choices regardless
-        // of whether the version is in the bundle's supported list
-        val bundle = bundleUid?.let { uid -> allBundles.find { it.uid == uid } }
-        if (bundle != null) {
-            val patchNames = bundle.patchSequence(allowIncompatible = true)
-                .filter(target::defaultSelected)
-                .mapTo(mutableSetOf()) { it.name }
-            if (patchNames.isNotEmpty()) {
-                proceedWithSimpleSelection(mapOf(bundle.uid to patchNames), allowIncompatible = true)
-                return
-            }
-            // Pre-selected bundle has no patches at all - fall through
-        }
-
-        // Simple mode: if more than one bundle has applicable patches, ask the user which single bundle to use
-        if (bundleWithPatches.size > 1) {
-            holdFor(HomeDialog.SimpleBundleSelect(selectedApp.packageName, bundleWithPatches), selectedApp, allowIncompatible)
-            return
-        }
-
-        // Only one bundle has patches - use it directly (no prompt needed)
-        proceedWithSimpleSelection(
-            bundleWithPatches.associate { (bundle, patches) -> bundle.uid to patches },
-            allowIncompatible
         )
+        when (plan) {
+            RunPlan.NoPatches -> {
+                messages.show(R.string.home_no_patches_available)
+                selectedApp.discard()
+                endRun()
+            }
+
+            is RunPlan.Expert -> {
+                if (plan.removedCount > 0) {
+                    messages.show(app.resources.getQuantityString(
+                        R.plurals.home_app_info_repatch_cleaned_invalid_data,
+                        plan.removedCount,
+                        plan.removedCount.toString()
+                    ))
+                }
+                expertMode.open(
+                    app = selectedApp,
+                    allBundles = plan.allBundles,
+                    mutedSources = plan.mutedSources,
+                    leadingBundleUid = plan.leadingBundleUid,
+                    patches = plan.patches,
+                    options = plan.options,
+                    newPatches = plan.newPatches,
+                    allowIncompatible = allowIncompatible,
+                    target = plan.target
+                )
+                dialogs.advanceTo(HomeDialog.ExpertMode)
+            }
+
+            is RunPlan.ChooseSource -> holdFor(
+                HomeDialog.SimpleBundleSelect(selectedApp.packageName, plan.candidates),
+                selectedApp,
+                allowIncompatible
+            )
+
+            is RunPlan.Start -> proceedWithPatching(
+                selectedApp,
+                plan.patches,
+                plan.options,
+                selectedByHand = false,
+                plan.allowIncompatible,
+                plan.scope
+            )
+        }
     }
 
     /**

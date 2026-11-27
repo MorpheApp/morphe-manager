@@ -24,6 +24,7 @@ import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.links.AppLinksManager
 import app.morphe.manager.domain.manager.*
+import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.notification.UpdateNotifications
 import app.morphe.manager.patcher.runtime.PatcherProcesses
@@ -58,6 +59,7 @@ val managerModule = module {
     singleOf(::LocalApkSources)
     singleOf(::DownloadedApkFinder)
     singleOf(::SavedPatchConfiguration)
+    singleOf(::RunPlanner)
     singleOf(::HomeAppButtonPreferences)
     singleOf(::AppCoroutineScope)
     singleOf(::BatchPlanResolver)

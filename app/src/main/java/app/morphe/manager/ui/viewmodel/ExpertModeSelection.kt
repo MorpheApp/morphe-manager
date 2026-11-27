@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.domain.repository.withoutMutedSources
+import app.morphe.manager.domain.selection.PatchTarget
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.ui.model.SelectedApp
 import app.morphe.manager.ui.screen.shared.CopySelectionCandidate

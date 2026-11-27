@@ -29,7 +29,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
-import app.morphe.manager.domain.selection.SavedPatchConfiguration
+import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
@@ -89,11 +89,10 @@ class HomeViewModel(
 ) : ViewModel(), KoinComponent {
     // Past the parameters viewModelOf takes
     private val patcherProcesses: PatcherProcesses by inject()
-    private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val batchUninstaller: BatchUninstaller by inject()
     private val networkInfo: NetworkInfo by inject()
     private val downloadedApkFinder: DownloadedApkFinder by inject()
-    private val savedConfiguration: SavedPatchConfiguration by inject()
+    private val runPlanner: RunPlanner by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -327,10 +326,8 @@ class HomeViewModel(
         patchSelectionRepository = patchSelectionRepository,
         sourceMuteRepository = sourceMuteRepository,
         optionsRepository = optionsRepository,
-        patchOptionsPrefs = patchOptionsPrefs,
         prefs = prefs,
         pm = pm,
-        rootInstaller = rootInstaller,
         installerManager = installerManager,
         filesystem = filesystem,
         appDataResolver = appDataResolver,
@@ -341,7 +338,7 @@ class HomeViewModel(
         recommendedVersions = recommendedVersionsFlow,
         expertModePanel = expertModePanel,
         patcherProcesses = patcherProcesses,
-        savedConfiguration = savedConfiguration,
+        runPlanner = runPlanner,
         downloadedApkFinder = downloadedApkFinder
     )
 
