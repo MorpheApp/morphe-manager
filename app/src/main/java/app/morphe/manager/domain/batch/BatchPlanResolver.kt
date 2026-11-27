@@ -10,6 +10,7 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.reinstallsByMount
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.ApkSignatureCheck
@@ -114,6 +115,13 @@ internal fun mergeNewlyAdded(
         if (added.isNotEmpty()) put(bundle.uid, getOrDefault(bundle.uid, emptySet()) + added)
     }
 }.filterValues { it.isNotEmpty() }
+
+/**
+ * The installs on the device a run for [targetId] rebuilds. A build that was only saved says nothing
+ * about the device, so it is none of them.
+ */
+internal fun List<InstalledApp>.replacedBy(targetId: String) =
+    filter { it.trackingKey == targetId && it.installType != InstallType.SAVED }
 
 /** Architecture of the APK an item is patched from, see [ApkArchitectureResolver]. */
 internal suspend fun BatchApkSource.apkArchitecture() = when (this) {
@@ -463,9 +471,7 @@ class BatchPlanResolver(
     private suspend fun mountsByDefault(target: BatchTarget): Boolean {
         if (!rootInstaller.isDeviceRooted()) return false
         val defaultMounts = installerManager.mountsByDefault()
-        // A build that was only saved says nothing about how the app is installed
-        val installs = installedAppRepository.getAll().first()
-            .filter { it.trackingKey == target.id && it.installType != InstallType.SAVED }
+        val installs = installedAppRepository.getAll().first().replacedBy(target.id)
         if (installs.isEmpty()) return defaultMounts
         return installs.any { it.reinstallsByMount(defaultMounts) }
     }

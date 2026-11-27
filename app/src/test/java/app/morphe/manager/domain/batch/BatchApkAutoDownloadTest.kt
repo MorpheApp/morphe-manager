@@ -41,10 +41,31 @@ class BatchApkAutoDownloadTest {
     }
 
     @Test
-    fun `an app past the newest version is never downgraded`() {
+    fun `an app past the newest version its patches accept is never downgraded`() {
         val current = item(BatchItemState.READY, source = saved("21.0"))
 
         assertFalse(current.autoDownloadWanted(target("20.0"), canVerifySignature = true))
+    }
+
+    @Test
+    fun `a version mismatch past the newest is swapped for the supported version`() {
+        val current = item(BatchItemState.VERSION_MISMATCH, source = saved("21.0"))
+
+        assertTrue(current.autoDownloadWanted(target("20.0"), canVerifySignature = true))
+        // A patched install no newer than the download is rebuilt over in place
+        assertTrue(current.autoDownloadWanted(target("20.0"), canVerifySignature = true, patchedVersion = "19.0"))
+        assertTrue(current.autoDownloadWanted(target("20.0"), canVerifySignature = true, patchedVersion = "20.0"))
+    }
+
+    @Test
+    fun `a version mismatch past the newest is kept where installing would go back a version`() {
+        val unmounted = item(BatchItemState.VERSION_MISMATCH, source = saved("21.0"))
+        val mounted = item(BatchItemState.VERSION_MISMATCH, source = saved("21.0"), useMount = true)
+
+        // Android refuses an older build over the newer patched install without wiping its data
+        assertFalse(unmounted.autoDownloadWanted(target("20.0"), canVerifySignature = true, patchedVersion = "21.0"))
+        // A mount has to match the stock app, which stays at the newer version
+        assertFalse(mounted.autoDownloadWanted(target("20.0"), canVerifySignature = true))
     }
 
     @Test
@@ -164,7 +185,8 @@ class BatchApkAutoDownloadTest {
         selectionEdited: Boolean = false,
         forceVersionMismatch: Boolean = false,
         bundleUids: List<Int> = emptyList(),
-        chosenBundleUid: Int? = null
+        chosenBundleUid: Int? = null,
+        useMount: Boolean = false
     ) = BatchPatchItem(
         target = BatchTarget(packageName = "com.example.app"),
         appName = "Example",
@@ -175,6 +197,7 @@ class BatchApkAutoDownloadTest {
             BatchBundleRef(uid, "Test", version = null, patchNames = emptySet(), renamingPatchNames = emptySet())
         },
         state = state,
+        useMount = useMount,
         selectionEdited = selectionEdited,
         forceVersionMismatch = forceVersionMismatch,
         chosenBundleUid = chosenBundleUid

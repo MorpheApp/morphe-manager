@@ -854,8 +854,9 @@ class BatchPatcherViewModel(
                 state,
                 versionCatalog.compatibleVersions,
                 patchBundleRepository.appMetadata,
-                homeAppButtonPrefs.ignoredVersions
-            ) { current, catalog, metadata, ignored ->
+                homeAppButtonPrefs.ignoredVersions,
+                installedAppRepository.getAll()
+            ) { current, catalog, metadata, ignored, installs ->
                 current?.takeIf { it.phase == BatchPhase.PREFLIGHT }?.items.orEmpty().mapNotNull { item ->
                     val compatible = batchAutoDownloadTargets(item, catalog[item.packageName].orEmpty())
                     val newest = compatible.recommendedEntry()
@@ -863,7 +864,9 @@ class BatchPatcherViewModel(
                         item.autoDownloadWanted(
                             newest = newest,
                             canVerifySignature = helperSignatureCheckAvailable(metadata[item.packageName]),
-                            ignoredVersion = ignored[item.packageName]
+                            ignoredVersion = ignored[item.packageName],
+                            patchedVersion = installs.replacedBy(item.id)
+                                .maxOfWithOrNull(Comparator(::compareVersions)) { it.version }
                         )
                     }
                 }
