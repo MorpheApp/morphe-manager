@@ -20,6 +20,8 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.apk.DownloadedApk
+import app.morphe.manager.domain.apk.DownloadedApkFinder
 import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.SavedApkInfo
@@ -39,6 +41,7 @@ import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.ui.model.ApkDownloadHelperHost
+import app.morphe.manager.ui.model.DownloadedApkLookup
 import app.morphe.manager.ui.model.PostPatchPrompts
 import app.morphe.manager.ui.model.createApkDownloadHelperRequest
 import app.morphe.manager.ui.model.helperSignatureCheckAvailable
@@ -194,6 +197,7 @@ class BatchPatcherViewModel(
     private val localApkSources: LocalApkSources,
     private val prefs: PreferencesManager,
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
+    downloadedApkFinder: DownloadedApkFinder,
     rootInstaller: RootInstaller,
     /** Panel the editor docks under its list, with the sets kept for the app and the copies. */
     val editPanel: SelectionPanelController
@@ -499,6 +503,9 @@ class BatchPatcherViewModel(
     var attachPrompt: BatchPatchItem? by mutableStateOf(null)
         private set
 
+    /** The APK [attachPrompt] waits on, given to its app once the browser saved it. */
+    val downloadedApk = DownloadedApkLookup(downloadedApkFinder, ::useDownloadedApk)
+
     /**
      * Hands the download page to the browser or the clipboard and leaves a prompt behind.
      *
@@ -511,6 +518,7 @@ class BatchPatcherViewModel(
         apkSearch = null
         if (handOff(search.url)) {
             attachPrompt = search.item
+            downloadedApk.expect(search.item.packageName)
         } else {
             messages.show(R.string.sources_management_failed_to_open_url)
         }
@@ -518,6 +526,14 @@ class BatchPatcherViewModel(
 
     fun dismissAttachPrompt() {
         attachPrompt = null
+        downloadedApk.clear()
+    }
+
+    /** Gives the app [attachPrompt] waits on the APK found in the Download folder. */
+    private fun useDownloadedApk(apk: DownloadedApk) {
+        val item = attachPrompt ?: return
+        dismissAttachPrompt()
+        attachApk(item.id, Uri.fromFile(apk.file), fetched = false)
     }
 
     override val helperSignatureCheckAvailable: Boolean
@@ -554,7 +570,7 @@ class BatchPatcherViewModel(
     override fun onHelperApkReceived(uri: Uri) {
         val search = apkSearch ?: return
         apkSearch = null
-        attachPrompt = null
+        dismissAttachPrompt()
         attachApk(search.item.id, uri, fetched = search.auto)
     }
 
@@ -568,7 +584,7 @@ class BatchPatcherViewModel(
         }
 
         apkSearch = null
-        attachPrompt = null
+        dismissAttachPrompt()
         // Re-resolved rather than taken on the helper's word: an installed app is only accepted
         // while it still looks like the stock one, see BatchPlanResolver
         val resolution = coordinator.useSource(item.id, preferInstalled = true)

@@ -17,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -36,10 +37,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import app.morphe.manager.R
 import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.bundles.*
+import app.morphe.manager.ui.model.DownloadedApkLookup
 import app.morphe.manager.ui.screen.shared.*
 import app.morphe.manager.ui.viewmodel.InvalidSignatureDialogState
 import app.morphe.manager.util.AppCardColorDefaults
@@ -304,7 +309,8 @@ internal fun DialogHostScope.ApkAvailabilityDialog(
  * Dialog 3: File picker prompt dialog.
  *
  * With [onUseInstalledApp] it picks the APK of any app, from a file or one already on the device,
- * and lays the two sources out as cards. Without it there is just the file the user downloaded.
+ * and lays the two sources out as cards. Without it there is just the file the user downloaded,
+ * which [downloadedApk] takes by itself once the browser has saved it.
  */
 @Composable
 internal fun DialogHostScope.FilePickerPromptDialog(
@@ -313,8 +319,15 @@ internal fun DialogHostScope.FilePickerPromptDialog(
     isLoadingInstalledApps: Boolean,
     onDismiss: () -> Unit,
     onOpenFilePicker: () -> Unit,
-    onUseInstalledApp: (() -> Unit)?
+    onUseInstalledApp: (() -> Unit)?,
+    downloadedApk: DownloadedApkLookup
 ) {
+    // Only while the app is in front: the prompt waits behind the browser while the file downloads
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    LaunchedEffect(downloadedApk, lifecycle) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) { downloadedApk.watch() }
+    }
+
     if (onUseInstalledApp == null) {
         AppDialog(
             onDismissRequest = onDismiss,

@@ -279,7 +279,8 @@ private fun DialogHostScope.PatchFlowDialog(
                 onDismiss = flow::backFromApkSource,
                 onOpenFilePicker = storagePickerLauncher,
                 // Only universal patches, with no package of their own, can take any installed app
-                onUseInstalledApp = if (session.packageName == null) flow::loadInstalledAppsForPicker else null
+                onUseInstalledApp = if (session.packageName == null) flow::loadInstalledAppsForPicker else null,
+                downloadedApk = flow.downloadedApk
             )
         }
 

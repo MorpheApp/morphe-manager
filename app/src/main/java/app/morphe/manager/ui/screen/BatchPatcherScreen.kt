@@ -384,7 +384,8 @@ fun BatchPatcherScreen(
                             viewModel.dismissAttachPrompt()
                             attachApkTo(item.id)
                         },
-                        onUseInstalledApp = null
+                        onUseInstalledApp = null,
+                        downloadedApk = viewModel.downloadedApk
                     )
                 }
 

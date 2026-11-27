@@ -11,6 +11,7 @@
 package app.morphe.manager.di
 
 import app.morphe.manager.domain.apk.ApkSignatureCache
+import app.morphe.manager.domain.apk.DownloadedApkFinder
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.backup.AutoBackup
 import app.morphe.manager.domain.backup.SettingsExporter
@@ -54,6 +55,7 @@ val managerModule = module {
     singleOf(::DownloadUrlResolver)
     singleOf(::AppVersionCatalog)
     singleOf(::LocalApkSources)
+    singleOf(::DownloadedApkFinder)
     singleOf(::HomeAppButtonPreferences)
     singleOf(::AppCoroutineScope)
     singleOf(::BatchPlanResolver)

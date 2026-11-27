@@ -91,6 +91,7 @@ class HomeViewModel(
     private val patchOptionsPrefs: PatchOptionsPreferencesManager by inject()
     private val batchUninstaller: BatchUninstaller by inject()
     private val networkInfo: NetworkInfo by inject()
+    private val downloadedApkFinder: DownloadedApkFinder by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -337,7 +338,8 @@ class HomeViewModel(
         compatibleVersions = compatibleVersionsFlow,
         recommendedVersions = recommendedVersionsFlow,
         expertModePanel = expertModePanel,
-        patcherProcesses = patcherProcesses
+        patcherProcesses = patcherProcesses,
+        downloadedApkFinder = downloadedApkFinder
     )
 
     init {

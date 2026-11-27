@@ -208,7 +208,8 @@ class PatchFlow(
     private val compatibleVersions: StateFlow<Map<String, List<BundledAppTarget>>>,
     private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
     expertModePanel: SelectionPanelController,
-    private val patcherProcesses: PatcherProcesses
+    private val patcherProcesses: PatcherProcesses,
+    downloadedApkFinder: DownloadedApkFinder
 ) : ApkDownloadHelperHost {
     /** The dialogs the flow has open, see [HomeDialog]. */
     val dialogs = HomeDialogStack()
@@ -219,6 +220,11 @@ class PatchFlow(
 
     /** The patches picked by hand for the run, while the expert dialog is open. */
     val expertMode = ExpertModeSelection(scope, expertModePanel)
+
+    /** The APK the user went to the browser for, taken once it is saved as if it had been picked. */
+    val downloadedApk = DownloadedApkLookup(downloadedApkFinder) { apk ->
+        handleApkSelection(Uri.fromFile(apk.file))
+    }
 
     /** Starts the patcher on a run once it is set up. */
     var onStartQuickPatch: ((Patcher.ViewModelParams) -> Unit)? = null
@@ -1570,9 +1576,11 @@ class PatchFlow(
      * Handle download instructions continue.
      */
     fun handleDownloadInstructionsContinue(handOff: (String) -> Boolean) {
-        val urlToOpen = session?.downloadUrl ?: return
+        val current = session ?: return
+        val urlToOpen = current.downloadUrl ?: return
 
         if (handOff(urlToOpen)) {
+            current.packageName?.let(downloadedApk::expect)
             dialogs.open(HomeDialog.FilePickerPrompt)
         } else {
             Log.w(LOG_TAG, "Failed to open URL")
@@ -1598,6 +1606,7 @@ class PatchFlow(
     /** Gives up the run being set up, the APK held for it and the dialogs it went through included. */
     private fun endRun() {
         downloadRedirectJob?.cancel()
+        downloadedApk.clear()
         heldApp?.discard()
         heldApp = null
         session = null
