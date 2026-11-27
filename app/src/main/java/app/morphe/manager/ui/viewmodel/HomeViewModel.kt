@@ -15,17 +15,14 @@ import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.platform.NetworkInfo
 import app.morphe.manager.data.room.apps.installed.InstallType
 import app.morphe.manager.data.room.apps.installed.InstalledApp
-import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
 import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.BatchUninstaller
-import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
@@ -61,43 +58,22 @@ enum class BundleUpdateStatus {
  * patched through, see [PatchFlow].
  */
 class HomeViewModel(
-    private val app: Application,
+    app: Application,
     private val messages: UserMessages,
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
-    originalApkRepository: OriginalApkRepository,
     private val sourceMuteRepository: SourceMuteRepository,
     private val managerUpdateRepository: ManagerUpdateRepository,
     val prefs: PreferencesManager,
     private val pm: PM,
-    private val rootInstaller: RootInstaller,
-    filesystem: Filesystem,
-    homeAppButtonPrefs: HomeAppButtonPreferences,
-    appDataResolver: AppDataResolver,
     private val batchPatchCoordinator: BatchPatchCoordinator,
     versionCatalog: AppVersionCatalog,
-    private val localApkSources: LocalApkSources,
     private val batchUninstaller: BatchUninstaller,
     networkInfo: NetworkInfo
 ) : ViewModel(), KoinComponent {
 
     /** The app list on the home screen. */
-    val apps = HomeApps(
-        scope = viewModelScope,
-        app = app,
-        patchBundleRepository = patchBundleRepository,
-        installedAppRepository = installedAppRepository,
-        originalApkRepository = originalApkRepository,
-        sourceMuteRepository = sourceMuteRepository,
-        prefs = prefs,
-        pm = pm,
-        filesystem = filesystem,
-        homeAppButtonPrefs = homeAppButtonPrefs,
-        appDataResolver = appDataResolver,
-        versionCatalog = versionCatalog,
-        localApkSources = localApkSources,
-        rootInstaller = rootInstaller
-    )
+    val apps: HomeApps = get { parametersOf(viewModelScope) }
 
     val availablePatches = patchBundleRepository.bundleInfoFlow.map { it.values.sumOf { bundle -> bundle.patches.size } }
     val bundleUpdateProgress = patchBundleRepository.bundleUpdateProgress
