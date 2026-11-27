@@ -38,6 +38,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
@@ -92,8 +93,7 @@ class PatcherViewModel(
     private val pm: PM,
     private val workerRepository: WorkerRepository,
     private val patchBundleRepository: PatchBundleRepository,
-    private val patchSelectionRepository: PatchSelectionRepository,
-    private val patchOptionsRepository: PatchOptionsRepository,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val installedAppRepository: InstalledAppRepository,
     private val prefs: PreferencesManager,
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
@@ -696,24 +696,12 @@ class PatcherViewModel(
                 return@withLock
             }
 
-            // The original's own version, as the worker records a merged one: a patch may rename
-            // the patched build's. An archive has no package info, so the run's version stands in
-            val originalVersion = pm.getPackageInfo(fileToSave)?.versionName?.takeUnless { it.isBlank() }
-                ?: input.selectedApp.version
-                ?: "unknown"
-
-            // Does original already exist in repository?
-            if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave)) {
-                Log.d(PATCHER_LOG_TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
-                return@withLock
-            }
-
-            // If we got here, we need to save the original
+            // An archive has no package info, so the run's version stands in for it
             val moveSource = (input.selectedApp as? SelectedApp.Local)?.temporary == true
-            val savedFile = originalApkRepository.saveOriginalApk(
+            val savedFile = originalApkRepository.saveIfNotKept(
                 packageName = packageName,
-                version = originalVersion,
                 sourceFile = fileToSave,
+                fallbackVersion = input.selectedApp.version ?: "unknown",
                 moveSource = moveSource,
                 forMount = usingMountInstall
             )
@@ -790,8 +778,6 @@ class PatcherViewModel(
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
         val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
 
-        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelection)
-
         val isClone = producedClone(finalPackageName, sanitizedSelection, scopedBundlesForSelection)
 
         installedAppRepository.addOrUpdate(
@@ -800,8 +786,7 @@ class PatcherViewModel(
             isClone,
             finalVersion,
             installType,
-            sanitizedSelection,
-            selectionPayload
+            sanitizedSelection
         )
 
         persistConfiguration(
@@ -830,26 +815,17 @@ class PatcherViewModel(
         selection: PatchSelection,
         options: Options,
         bundles: Map<Int, PatchBundleInfo.Scoped>
-    ) {
-        patchSelectionRepository.updateSelection(
-            configurationPackageName,
-            selection,
-            scope = input.sourceScope
-        )
+    ) = savedConfiguration.save(
+        configurationKey = configurationPackageName,
+        selection = selection,
+        scope = input.sourceScope,
         // Options simple mode keeps in its settings stay there, rather than replacing the ones
         // saved for the sources they name
-        if (input.selectedByHand) patchOptionsRepository.saveOptions(configurationPackageName, options)
-
+        options = options.takeIf { input.selectedByHand },
         // Taken here as well as before patching, because a copy starts out with no snapshot of
         // its own and would flag every patch it was just built with as new
-        bundles.forEach { (uid, bundle) ->
-            patchSelectionRepository.saveSeenPatches(
-                packageName = configurationPackageName,
-                bundleUid = uid,
-                patchNames = bundle.patches.mapTo(mutableSetOf()) { it.name }
-            )
-        }
-    }
+        seenPatches = bundles.mapValues { (_, bundle) -> bundle.patches.mapTo(mutableSetOf()) { it.name } }
+    )
 
     override var downloadProgress by savedStateHandle.saveable(
         key = "downloadProgress",

@@ -71,11 +71,12 @@ internal fun mergeNewlyAdded(
 }.filterValues { it.isNotEmpty() }
 
 /**
- * What the user set up by hand for an app, read against the patches its sources carry now.
+ * What the user set up by hand for an app, read against the patches its sources carry now, and
+ * recorded once a run is set up or built.
  *
- * The single-app flow and the queue both read through here, so the same app starts from the same
- * patches either way. Nothing is written back: whether a cleaned configuration is saved, or the
- * user told about it, is up to the caller.
+ * The single-app flow and the queue both go through here, so the same app starts from the same
+ * patches either way. Reading writes nothing back: whether a cleaned configuration is saved, or
+ * the user told about it, is up to the caller.
  */
 class SavedPatchConfiguration(
     private val selectionRepository: PatchSelectionRepository,
@@ -161,6 +162,29 @@ class SavedPatchConfiguration(
         }.filterKeys { it in uids }
         val validated = validatePatchOptions(saved, patchesByName)
         return SavedOptions(validated, cleaned = validated != saved)
+    }
+
+    /**
+     * Records [selection] under [configurationKey], clearing what was saved for the sources in
+     * [scope] it takes nothing from.
+     *
+     * @param options Saved with it where the patches were picked by hand. Null leaves the saved
+     *   ones alone, as simple mode keeps its options on the app's preference screen.
+     * @param seenPatches Per source, every patch it carries now. Without this snapshot the next
+     *   run cannot tell a patch the user deselected from one added since.
+     */
+    suspend fun save(
+        configurationKey: String,
+        selection: PatchSelection,
+        scope: Set<Int>,
+        options: Options?,
+        seenPatches: Map<Int, Set<String>>
+    ) = withContext(Dispatchers.IO) {
+        selectionRepository.updateSelection(configurationKey, selection, scope)
+        options?.let { optionsRepository.saveOptions(configurationKey, it) }
+        seenPatches.forEach { (bundleUid, patchNames) ->
+            selectionRepository.saveSeenPatches(configurationKey, bundleUid, patchNames)
+        }
     }
 
     private suspend fun saved(configurationKey: String, bundles: List<PatchBundleInfo.Scoped>): PatchSelection {

@@ -18,6 +18,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.SessionInstaller
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.notification.PatchingNotifications
@@ -59,8 +60,7 @@ class BatchPatchCoordinator(
     private val resolver: BatchPlanResolver,
     private val workerRepository: WorkerRepository,
     private val patchBundleRepository: PatchBundleRepository,
-    private val patchSelectionRepository: PatchSelectionRepository,
-    private val patchOptionsRepository: PatchOptionsRepository,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val installedAppRepository: InstalledAppRepository,
     private val originalApkRepository: OriginalApkRepository,
     private val sourceMuteRepository: SourceMuteRepository,
@@ -537,8 +537,7 @@ class BatchPatchCoordinator(
                 isClone = item.producesCloneAs(targetPackage),
                 version = version,
                 installType = if (asPlayStore) InstallType.SHIZUKU_PLAY_STORE else InstallType.SHIZUKU,
-                patchSelection = item.selection,
-                selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
+                patchSelection = item.selection
             )
             markInstallResult(
                 itemId = item.id,
@@ -803,9 +802,9 @@ class BatchPatchCoordinator(
 
         // What the user chose to patch with is recorded whether the APK is kept: the
         // two are separate settings, and the summary can still install from the workspace
-        patchSelectionRepository.updateSelection(
-            configurationKey,
-            item.selection,
+        savedConfiguration.save(
+            configurationKey = configurationKey,
+            selection = item.selection,
             // Scoped to every source the plan considered, so a source the user ended up taking
             // nothing from has its stale selection cleared rather than left behind. A chosen
             // source turned every other one down, which the next plan would otherwise merge back
@@ -813,20 +812,12 @@ class BatchPatchCoordinator(
                 patchBundleRepository.enabledBundlesInfoFlow.first().keys
             } else {
                 item.bundles.mapTo(mutableSetOf()) { it.uid }.ifEmpty { item.selection.keys }
-            }
+            },
+            // Options simple mode keeps on its preference screen stay there, rather than replacing
+            // the ones saved for the sources they name
+            options = item.options.takeIf { item.selectedByHand },
+            seenPatches = item.bundles.associate { it.uid to it.patchNames }
         )
-        // Without this the next plan cannot tell a patch the user deselected from one that was
-        // added since, and would keep re-enabling every deselected default
-        item.bundles.forEach { bundle ->
-            patchSelectionRepository.saveSeenPatches(
-                packageName = configurationKey,
-                bundleUid = bundle.uid,
-                patchNames = bundle.patchNames
-            )
-        }
-        // Options simple mode keeps on its preference screen stay there, rather than replacing
-        // the ones saved for the sources they name
-        if (item.selectedByHand) patchOptionsRepository.saveOptions(configurationKey, item.options)
 
         if (!prefs.savePatchedApks.get()) {
             // Retention is off, so the patched APK only lives long enough for the summary
@@ -846,15 +837,13 @@ class BatchPatchCoordinator(
             outputFile
         }
 
-        val selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
         installedAppRepository.addOrUpdate(
             currentPackageName,
             item.packageName,
             isClone,
             version,
             InstallType.SAVED,
-            item.selection,
-            selectionPayload
+            item.selection
         )
 
         PatchedBuild(stored, exportData)
@@ -873,18 +862,11 @@ class BatchPatchCoordinator(
         patchedVersion: String
     ) {
         val file = (selectedApp as? SelectedApp.Local)?.file?.takeIf { it.exists() } ?: return
-        // Recorded under its own version, which a patch may have renamed in the patched build
-        val version = pm.getPackageInfo(file)?.versionName?.takeUnless { it.isBlank() }
-            ?: item.version
-            ?: patchedVersion
-
-        if (originalApkRepository.hasOriginal(item.packageName, version, file)) return
-
         runCatching {
-            originalApkRepository.saveOriginalApk(
+            originalApkRepository.saveIfNotKept(
                 packageName = item.packageName,
-                version = version,
                 sourceFile = file,
+                fallbackVersion = item.version ?: patchedVersion,
                 moveSource = item.source is BatchApkSource.Installed,
                 forMount = item.useMount
             )

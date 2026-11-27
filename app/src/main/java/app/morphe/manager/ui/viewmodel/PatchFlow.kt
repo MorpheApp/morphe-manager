@@ -29,6 +29,7 @@ import app.morphe.manager.domain.repository.*
 import app.morphe.manager.domain.selection.RunPlan
 import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.selection.RunRequest
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.split.SplitApkPreparer
@@ -137,7 +138,7 @@ class PatchFlow(
     private val patchBundleRepository: PatchBundleRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val sourceMuteRepository: SourceMuteRepository,
-    private val optionsRepository: PatchOptionsRepository,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val prefs: PreferencesManager,
     private val installerManager: InstallerManager,
     private val batchPatchCoordinator: BatchPatchCoordinator,
@@ -1063,28 +1064,17 @@ class PatchFlow(
             return@moveOn
         }
 
-        withContext(Dispatchers.IO) {
-                // Saved before patching runs so a long selection survives a failed run. It lands
-                // on the install being rebuilt, and follows it from there if patching renames it.
-                // Only the bundles offered by the dialog are covered by this selection, so bundles
-                // that were disabled or held back at patch time keep whatever the user saved for
-                // them earlier
-                val configurationKey = configurationKeyFor(selectedApp.packageName)
-                patchSelectionRepository.updateSelection(
-                    packageName = configurationKey,
-                    selection = finalPatches,
-                    scope = scope
-                )
-                optionsRepository.saveOptions(configurationKey, finalOptions)
-                // Snapshot all bundle patch names so next open can detect genuinely new patches
-                bundles.forEach { bundle ->
-                    patchSelectionRepository.saveSeenPatches(
-                        packageName = configurationKey,
-                        bundleUid = bundle.uid,
-                        patchNames = bundle.patches.mapTo(mutableSetOf()) { it.name }
-                    )
-                }
-            }
+        // Saved before patching runs so a long selection survives a failed run. It lands on the
+        // install being rebuilt, and follows it from there if patching renames it. Only the
+        // bundles offered by the dialog are covered by this selection, so bundles that were
+        // disabled or held back at patch time keep whatever the user saved for them earlier
+        savedConfiguration.save(
+            configurationKey = configurationKeyFor(selectedApp.packageName),
+            selection = finalPatches,
+            scope = scope,
+            options = finalOptions,
+            seenPatches = bundles.associate { bundle -> bundle.uid to bundle.patches.mapTo(mutableSetOf()) { it.name } }
+        )
 
         proceedWithPatching(selectedApp, finalPatches, patcherOptions, selectedByHand = true, allowIncompatible, scope)
         expertMode.clear()

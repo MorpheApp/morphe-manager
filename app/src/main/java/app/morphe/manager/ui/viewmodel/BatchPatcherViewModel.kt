@@ -843,7 +843,6 @@ class BatchPatcherViewModel(
         installedPackageName: String,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
-        val selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
         val version = item.patchedBuild?.exportData?.appVersion
             ?: item.version
             ?: return@withContext false
@@ -854,8 +853,7 @@ class BatchPatcherViewModel(
             isClone = item.producesCloneAs(installedPackageName),
             version = version,
             installType = installType,
-            patchSelection = item.selection,
-            selectionPayload = selectionPayload
+            patchSelection = item.selection
         )
         true
     }

@@ -144,6 +144,8 @@ class InstalledAppRepository(
      *
      * @param isClone Whether the install is a copy the user asked for. Callers rewriting a record
      *   that already exists pass what it says, since only the run that built it knows the answer.
+     * @param selectionPayload The selection with the sources it came from, taken now for a fresh
+     *   build. A rewritten record passes its own, which names the sources of that build.
      */
     suspend fun addOrUpdate(
         currentPackageName: String,
@@ -152,7 +154,7 @@ class InstalledAppRepository(
         version: String,
         installType: InstallType,
         patchSelection: PatchSelection,
-        selectionPayload: SelectionPayload? = null,
+        selectionPayload: SelectionPayload? = patchBundleRepository.snapshotSelection(patchSelection),
         patchedAt: Long? = System.currentTimeMillis() // Default to current time for new patches
     ) {
         // Get current bundle versions at the time of patching
