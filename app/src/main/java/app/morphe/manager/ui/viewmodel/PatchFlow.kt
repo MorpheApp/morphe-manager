@@ -25,12 +25,12 @@ import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
-import app.morphe.manager.domain.batch.mergeNewlyAdded
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
@@ -45,8 +45,6 @@ import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.InstallerType
@@ -209,6 +207,7 @@ class PatchFlow(
     private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
     expertModePanel: SelectionPanelController,
     private val patcherProcesses: PatcherProcesses,
+    private val savedConfiguration: SavedPatchConfiguration,
     downloadedApkFinder: DownloadedApkFinder
 ) : ApkDownloadHelperHost {
     /** The dialogs the flow has open, see [HomeDialog]. */
@@ -1086,24 +1085,7 @@ class PatchFlow(
         // no defaults, no new-patch badges and no tab
         val allBundles = availableBundles.withoutMutedSources(heldBackSources) { it.uid }
 
-        // Spans every source, hidden ones included: what the user saved for a hidden one has to
-        // survive validation. Offering the source back would otherwise hand the run an empty
-        // selection, and then write that emptiness over what was saved
-        val bundlesMap = availableBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-        val currentBundleUids = availableBundles.mapTo(mutableSetOf()) { it.uid }
-
         val configurationKey = configurationKeyFor(selectedApp.packageName)
-
-        // What was saved for the app from the sources it still has patches in, read only where a
-        // selection is opened by hand
-        suspend fun savedSelections() = withContext(Dispatchers.IO) {
-            patchSelectionRepository.getAllSelectionsForPackage(configurationKey)
-                .filterKeys { it in currentBundleUids }
-        }
-        suspend fun savedOptions() = withContext(Dispatchers.IO) {
-            optionsRepository.getAllOptionsForPackage(configurationKey, bundlesMap)
-                .filterKeys { it in currentBundleUids }
-        }
 
         // A source not standing behind this version, one marking it experimental with those
         // switched off, contributes nothing unless the user adds it back by hand
@@ -1138,76 +1120,43 @@ class PatchFlow(
         }
 
         if (isExpertMode()) {
-            val contributingUids = contributingBundles.mapTo(mutableSetOf()) { it.uid }
-            val allSavedSelections = savedSelections()
-            val savedSelections = allSavedSelections.filterKeys { it in contributingUids }
+            val saved = savedConfiguration.selection(
+                configurationKey,
+                contributingBundles,
+                target.installerType,
+                target.apkArchitecture
+            )
             // A hidden source keeps what was saved for it, so offering it back brings that along.
             // Set apart, since the run does not reach it: what it holds decides nothing about the
             // patches of the sources the run starts with
-            val heldBackSelections = validatePatchSelection(
-                allSavedSelections.filterKeys { it in heldBackSources },
-                bundlesMap
+            val heldBackSelections = savedConfiguration.validSelection(
+                configurationKey,
+                availableBundles.filter { it.uid in heldBackSources }
             )
-            val savedOptions = savedOptions()
 
-            // The seen-patch snapshot is what tells a genuinely new patch from one the user
-            // deselected. Not read without a saved selection, so a first run flags nothing as new
-            val seenByBundle = if (savedSelections.isEmpty()) emptyMap() else withContext(Dispatchers.IO) {
-                contributingBundles.associate {
-                    it.uid to patchSelectionRepository.getSeenPatches(configurationKey, it.uid)
-                }
-            }
-            val newPatchesMap = contributingBundles.mapNotNull { bundle ->
-                val seen = seenByBundle[bundle.uid] ?: return@mapNotNull null
-                val new = bundle.patches.mapTo(mutableSetOf()) { it.name } - seen
-                new.takeIf { it.isNotEmpty() }?.let { bundle.uid to it }
-            }.toMap()
-
-            // Use saved selections or create new ones
-            val patches = if (savedSelections.isNotEmpty()) {
-                // Count patches before validation
-                val patchesBeforeValidation = savedSelections.values.sumOf { it.size }
-
-                // Validate saved selections against available patches
-                val validatedPatches = validatePatchSelection(savedSelections, bundlesMap)
-
-                // Count patches after validation
-                val patchesAfterValidation = validatedPatches.values.sumOf { it.size }
-
-                // Tell the user if patches were removed
-                val removedCount = patchesBeforeValidation - patchesAfterValidation
-                if (removedCount > 0) {
-                    messages.show(app.resources.getQuantityString(
-                        R.plurals.home_app_info_repatch_cleaned_invalid_data,
-                        removedCount,
-                        removedCount.toString()
-                    ))
-                }
-
-                // Runs after validation, so patches the sources dropped never sneak back in
-                mergeNewlyAdded(
-                    bundles = contributingBundles,
-                    validated = validatedPatches,
-                    known = seenByBundle::get,
-                    installerType = target.installerType,
-                    apkArchitecture = target.apkArchitecture
-                )
-            } else {
-                // No saved selections - use default for the contributing bundles
-                contributingBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
+            // Tell the user if patches were removed
+            saved?.removedCount?.takeIf { it > 0 }?.let { removedCount ->
+                messages.show(app.resources.getQuantityString(
+                    R.plurals.home_app_info_repatch_cleaned_invalid_data,
+                    removedCount,
+                    removedCount.toString()
+                ))
             }
 
-            // Validate options
-            val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
+            // No saved selections - use default for the contributing bundles
+            val patches = saved?.patches
+                ?: contributingBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
 
-            // Save validated options if anything changed
-            if (validatedOptions != savedOptions) {
+            // Spans every source, hidden ones included: what the user saved for a hidden one has
+            // to survive validation, or offering the source back would write emptiness over it
+            val options = savedConfiguration.options(configurationKey, availableBundles)
+            if (options.cleaned) {
                 withContext(Dispatchers.IO) {
-                    optionsRepository.saveOptions(configurationKey, validatedOptions)
+                    optionsRepository.saveOptions(configurationKey, options.options)
                 }
             }
 
-            openExpertMode(heldBackSelections + patches, validatedOptions, newPatchesMap)
+            openExpertMode(heldBackSelections + patches, options.options, saved?.newPatches.orEmpty())
             return
         }
 
@@ -1252,8 +1201,8 @@ class PatchFlow(
             // them: the dialog can offer one back, and it has to have something to offer.
             // Validated as the expert branch does, so patches the sources dropped are not offered
             openExpertMode(
-                validatePatchSelection(savedSelections(), bundlesMap),
-                validatePatchOptions(savedOptions(), bundlesMap)
+                savedConfiguration.validSelection(configurationKey, availableBundles),
+                savedConfiguration.options(configurationKey, availableBundles).options
             )
             return
         }

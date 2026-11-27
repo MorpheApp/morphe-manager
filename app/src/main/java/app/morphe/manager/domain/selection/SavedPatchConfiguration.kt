@@ -85,8 +85,8 @@ class SavedPatchConfiguration(
      * A saved selection, see [selection].
      *
      * @param removedCount Patches it named that the sources no longer carry, which are left out.
-     * @param newPatches Per source, the patches added since the selection was saved, whether or
-     *   not their default took them in.
+     * @param newPatches Per source, the patches added since the selection was saved, including
+     *   those their default left out.
      */
     class Selection(
         val patches: PatchSelection,

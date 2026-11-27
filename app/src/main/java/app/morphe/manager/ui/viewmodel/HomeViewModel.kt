@@ -29,6 +29,7 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
@@ -92,6 +93,7 @@ class HomeViewModel(
     private val batchUninstaller: BatchUninstaller by inject()
     private val networkInfo: NetworkInfo by inject()
     private val downloadedApkFinder: DownloadedApkFinder by inject()
+    private val savedConfiguration: SavedPatchConfiguration by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -339,6 +341,7 @@ class HomeViewModel(
         recommendedVersions = recommendedVersionsFlow,
         expertModePanel = expertModePanel,
         patcherProcesses = patcherProcesses,
+        savedConfiguration = savedConfiguration,
         downloadedApkFinder = downloadedApkFinder
     )
 
