@@ -25,18 +25,14 @@ import app.morphe.manager.domain.batch.BatchRunState
 import app.morphe.manager.domain.batch.SavedBatchQueue
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.BatchUninstaller
-import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
-import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.repository.PatchBundleRepository.LocalFileCheck
 import app.morphe.manager.patcher.patch.*
-import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
-import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.io.FileNotFoundException
@@ -46,7 +42,8 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.core.component.get
+import org.koin.core.parameter.parametersOf
 
 /** How long an added source is waited on before its app list is no longer opened for it. */
 private val NEW_SOURCE_LOAD_TIMEOUT = 10.minutes
@@ -69,30 +66,20 @@ class HomeViewModel(
     val patchBundleRepository: PatchBundleRepository,
     private val installedAppRepository: InstalledAppRepository,
     originalApkRepository: OriginalApkRepository,
-    patchSelectionRepository: PatchSelectionRepository,
     private val sourceMuteRepository: SourceMuteRepository,
-    optionsRepository: PatchOptionsRepository,
     private val managerUpdateRepository: ManagerUpdateRepository,
     val prefs: PreferencesManager,
     private val pm: PM,
     private val rootInstaller: RootInstaller,
-    private val installerManager: InstallerManager,
     filesystem: Filesystem,
     homeAppButtonPrefs: HomeAppButtonPreferences,
     appDataResolver: AppDataResolver,
     private val batchPatchCoordinator: BatchPatchCoordinator,
-    downloadUrlResolver: DownloadUrlResolver,
     versionCatalog: AppVersionCatalog,
     private val localApkSources: LocalApkSources,
-    /** Picker behind the copy-from-another-bundle action of the expert-mode dialog. */
-    expertModePanel: SelectionPanelController
+    private val batchUninstaller: BatchUninstaller,
+    networkInfo: NetworkInfo
 ) : ViewModel(), KoinComponent {
-    // Past the parameters viewModelOf takes
-    private val patcherProcesses: PatcherProcesses by inject()
-    private val batchUninstaller: BatchUninstaller by inject()
-    private val networkInfo: NetworkInfo by inject()
-    private val downloadedApkFinder: DownloadedApkFinder by inject()
-    private val runPlanner: RunPlanner by inject()
 
     /** The app list on the home screen. */
     val apps = HomeApps(
@@ -309,38 +296,14 @@ class HomeViewModel(
         versionCatalog.compatibleVersions
             .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
 
-    val recommendedVersionsFlow: StateFlow<Map<String, AppTarget>> =
-        versionCatalog.recommendedVersions
-            .stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
-
     // Convenience accessor - reads the current value synchronously for non-reactive call sites
     val compatibleVersions: Map<String, List<BundledAppTarget>> get() = compatibleVersionsFlow.value
 
-    /** Sets up a patching run for one app, and the dialogs it goes through. */
-    val patchFlow = PatchFlow(
-        scope = viewModelScope,
-        app = app,
-        messages = messages,
-        patchBundleRepository = patchBundleRepository,
-        originalApkRepository = originalApkRepository,
-        patchSelectionRepository = patchSelectionRepository,
-        sourceMuteRepository = sourceMuteRepository,
-        optionsRepository = optionsRepository,
-        prefs = prefs,
-        pm = pm,
-        installerManager = installerManager,
-        filesystem = filesystem,
-        appDataResolver = appDataResolver,
-        batchPatchCoordinator = batchPatchCoordinator,
-        downloadUrlResolver = downloadUrlResolver,
-        localApkSources = localApkSources,
-        compatibleVersions = compatibleVersionsFlow,
-        recommendedVersions = recommendedVersionsFlow,
-        expertModePanel = expertModePanel,
-        patcherProcesses = patcherProcesses,
-        runPlanner = runPlanner,
-        downloadedApkFinder = downloadedApkFinder
-    )
+    /**
+     * Sets up a patching run for one app, and the dialogs it goes through. Given the scope of this
+     * screen to run in and the version data the app list reads too, the rest comes from Koin.
+     */
+    val patchFlow: PatchFlow = get { parametersOf(viewModelScope, compatibleVersionsFlow) }
 
     init {
         observeManagerUpdate()

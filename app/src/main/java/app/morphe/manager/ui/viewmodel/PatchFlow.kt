@@ -163,7 +163,6 @@ class PatchFlow(
     private val downloadUrlResolver: DownloadUrlResolver,
     private val localApkSources: LocalApkSources,
     private val compatibleVersions: StateFlow<Map<String, List<BundledAppTarget>>>,
-    private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
     expertModePanel: SelectionPanelController,
     private val patcherProcesses: PatcherProcesses,
     private val runPlanner: RunPlanner,
@@ -290,7 +289,7 @@ class PatchFlow(
             packageName = packageName,
             appName = appNameFor(packageName),
             repatchPackageName = repatchedPackageName,
-            recommendedVersion = recommendedVersions.value[packageName],
+            recommendedVersion = versions.recommended(),
             compatibleVersions = versions,
             // The dialog shows it picked, so it answers for the APK as a pick by hand would
             selectedVersion = versions.recommendedEntry()
