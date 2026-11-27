@@ -217,7 +217,7 @@ class MainActivity : ComponentActivity() {
 
     /**
      * Handles add-source deep links from an explicit-package `intent://` fired by the website.
-     * Format: https://morphe.software/add-source?<host>=owner/repo(&name=…)(&app=package&appName=…),
+     * Format: `https://morphe.software/add-source?<host>=owner/repo(&name=…)(&app=package&appName=…)`,
      * where the host is the [CodeHost.key] of the repository's host. Other hosts are not accepted.
      */
     private fun handleDeepLinkIntent(intent: Intent?, vm: MainViewModel) {
@@ -370,6 +370,8 @@ private fun MorpheManager(vm: MainViewModel) {
     val resolvedRandomBackground =
         if (backgroundType == BackgroundType.RANDOM) rememberRandomBackground(prefs) else null
     val seasonalThemes by prefs.seasonalThemes.getAsState()
+    val showGamesButton by prefs.showGamesButton.getAsState()
+    val openGames = navController::openMiniGames.takeIf { showGamesButton }
     // Read once per launch, so an event that begins while the app is open waits for the next one
     val seasonalEvent = remember { SeasonalEvent.on() }
 
@@ -634,7 +636,7 @@ private fun MorpheManager(vm: MainViewModel) {
                     onAppStateChanged = homeViewModel.apps::notifyAppStateChanged,
                     onBackgroundSpeedChange = { patcherBackgroundSpeed.floatValue = it },
                     onPatchingCompleted = { patchingCompleted.value = true },
-                    onOpenGames = navController::openMiniGames
+                    onOpenGames = openGames
                 )
             }
 
@@ -662,7 +664,7 @@ private fun MorpheManager(vm: MainViewModel) {
                         leavePatcher()
                         homeViewModel.patchFlow.reopenPatchSelection(params)
                     },
-                    onOpenGames = navController::openMiniGames
+                    onOpenGames = openGames
                 )
             }
 

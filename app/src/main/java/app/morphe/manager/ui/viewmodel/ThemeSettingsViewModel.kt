@@ -84,6 +84,10 @@ class ThemeSettingsViewModel(
         prefs.showMoreAppsCard.update(!current)
     }
 
+    fun toggleShowGamesButton(current: Boolean) = viewModelScope.launch {
+        prefs.showGamesButton.update(!current)
+    }
+
     fun setPureBlackTheme(enabled: Boolean) = viewModelScope.launch {
         prefs.pureBlackTheme.update(enabled)
     }

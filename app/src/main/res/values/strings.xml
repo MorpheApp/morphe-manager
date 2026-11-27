@@ -925,14 +925,17 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interface scale</string>
 
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_screens">Screens</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Shows a greeting message</string>
     <string name="settings_appearance_repatch_notice">Re-patch notice</string>
     <string name="settings_appearance_repatch_notice_description">Shows a banner when patched apps can be re-patched</string>
     <string name="settings_appearance_more_apps_card">More apps card</string>
     <string name="settings_appearance_more_apps_card_description">Shows a card under the apps leading to community patches</string>
+    <string name="settings_appearance_games_button">Games button</string>
+    <string name="settings_appearance_games_button_description">Shows a button to the mini-games while patching and on the result</string>
     <string name="settings_appearance_app_card_colors">Card colors</string>
     <string name="settings_appearance_app_card_colors_default">Default</string>
     <string name="settings_appearance_app_card_colors_default_description">Give each app and source a color of its own</string>
