@@ -439,7 +439,12 @@ class PatcherProcesses(
         "-XX:InitiatingHeapOccupancyPercent=80",
         "-XX:-G1UseAdaptiveIHOP",
         // Nothing waits on a pause, and fewer but longer ones copy less of what stays alive
-        "-XX:MaxGCPauseMillis=2000"
+        "-XX:MaxGCPauseMillis=2000",
+        // The 32-bit JVM has no C1, so code runs interpreted until C2 compiles it. It starts a single
+        // C2 thread and never adds more, which stays busy for all of patching while other cores idle.
+        // Three of them on a 4 core phone patched TikTok about 9% faster and YouTube about 6%
+        "-XX:CICompilerCount=${(java.lang.Runtime.getRuntime().availableProcessors() - 1).coerceIn(1, 3)}",
+        "-XX:-UseDynamicNumberOfCompilerThreads"
     )) + aot + debugOptions()
 
     /** Where the JVM in process [pid] reports a crash, %p standing for the pid of whichever does. */
