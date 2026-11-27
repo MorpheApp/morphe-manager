@@ -23,6 +23,7 @@ import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.screen.patcher.LogItem
 import app.morphe.manager.ui.screen.patcher.LogItemAccumulator
 import app.morphe.manager.util.PATCHER_LOG_TAG
+import app.morphe.manager.util.isSlowPatchingDevice
 import app.morphe.patcher.PatcherTask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -173,6 +174,15 @@ class PatchRunProgress(
         private set
 
     /**
+     * The last progress of each task that is not taken over yet, and the last of all of them. The patcher
+     * reports its tasks in hundreds of small steps, and taking over each of them would keep the main thread
+     * busy for nothing, so they are taken over at most once every [TASK_PROGRESS_INTERVAL].
+     */
+    private val pendingTaskProgress = HashMap<PatcherTask, TaskStatus>()
+    private var lastTaskProgress: TaskStatus? = null
+    private var taskProgressScheduled = false
+
+    /**
      * [0, 1] progress across every step of the run. Each step fills its share as it completes,
      * and the steps made of patcher tasks fill theirs as the tasks and patches get through.
      */
@@ -228,10 +238,29 @@ class PatchRunProgress(
     }
 
     fun onTaskProgress(task: PatcherTask, done: Long, total: Long) {
+        val status = TaskStatus(task, done, total)
+        synchronized(pendingTaskProgress) {
+            pendingTaskProgress[task] = status
+            lastTaskProgress = status
+            if (taskProgressScheduled) return
+            taskProgressScheduled = true
+        }
+
         scope.launch(Dispatchers.Main) {
-            val fraction = if (total > 0) done.toFloat() / total else 0f
-            taskFractions[task] = max(taskFractions[task] ?: 0f, fraction)
-            runningTask = TaskStatus(task, done, total).takeIf { done < total }
+            delay(TASK_PROGRESS_INTERVAL)
+            val (statuses, last) = synchronized(pendingTaskProgress) {
+                taskProgressScheduled = false
+                (pendingTaskProgress.values.toList() to lastTaskProgress).also {
+                    pendingTaskProgress.clear()
+                    lastTaskProgress = null
+                }
+            }
+
+            statuses.forEach { (pendingTask, pendingDone, pendingTotal) ->
+                val fraction = if (pendingTotal > 0) pendingDone.toFloat() / pendingTotal else 0f
+                taskFractions[pendingTask] = max(taskFractions[pendingTask] ?: 0f, fraction)
+            }
+            if (last != null) runningTask = last.takeIf { it.done < it.total }
         }
     }
 
@@ -257,6 +286,10 @@ class PatchRunProgress(
             currentStepIndex = 0
             steps.clear()
             steps.addAll(generatePatchSteps(appContext, requiresSplitPreparation))
+            synchronized(pendingTaskProgress) {
+                pendingTaskProgress.clear()
+                lastTaskProgress = null
+            }
             taskFractions.clear()
             runningTask = null
             // A fallback to ART reports a heap limit of its own
@@ -459,6 +492,9 @@ class PatchRunProgress(
         const val SAMPLE_HISTORY_LIMIT = 60
         const val STALL_THRESHOLD_MS = 60_000L
         const val DISPLAYED_LOG_ITEMS_LIMIT = 2000
+
+        /** How often the progress of the patcher tasks is taken over, less often on a slow device. */
+        val TASK_PROGRESS_INTERVAL = if (isSlowPatchingDevice) 500.milliseconds else 250.milliseconds
 
         fun LogLevel.androidLog(msg: String) = when (this) {
             LogLevel.TRACE -> Log.v(PATCHER_LOG_TAG, msg)
