@@ -38,4 +38,5 @@ val viewModelModule = module {
     // Owned by the home screen, which hands them its scope, and the patch flow its version data
     factoryOf(::HomeApps)
     factoryOf(::PatchFlow)
+    factoryOf(::PatchFlowApks)
 }

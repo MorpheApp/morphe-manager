@@ -8,8 +8,6 @@ package app.morphe.manager.ui.viewmodel
 import android.app.Application
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
@@ -20,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.*
@@ -34,19 +31,16 @@ import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.selection.RunRequest
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.patcher.runtime.PatcherProcesses
-import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.shared.UserMessages
-import app.morphe.manager.ui.screen.shared.readableLabel
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
 import app.morphe.patcher.patch.AppTarget
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.StateFlow
-import java.io.File
 
 /** Free storage below which patching is warned against before it starts. */
 const val LOW_DISK_SPACE_THRESHOLD_BYTES = 1_000_000_000L
@@ -86,15 +80,6 @@ data class InvalidSignatureDialogState(
     /** No signature of the APK verifies at all, which points at a damaged file, not another signer. */
     val broken get() = apkCertificates.isEmpty()
 }
-
-/** An installed app entry shown in the universal-patch app picker. */
-data class InstalledAppPickerItem(
-    val packageName: String,
-    val label: String,
-    val packageInfo: PackageInfo,
-    val isSystemApp: Boolean,
-    val info: InstalledApkInfo
-)
 
 /**
  * What the patch flow knows of the run it sets up, from the app it was started for to where an
@@ -150,18 +135,15 @@ class PatchFlow(
     private val app: Application,
     private val messages: UserMessages,
     private val patchBundleRepository: PatchBundleRepository,
-    private val originalApkRepository: OriginalApkRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val sourceMuteRepository: SourceMuteRepository,
     private val optionsRepository: PatchOptionsRepository,
     private val prefs: PreferencesManager,
-    private val pm: PM,
     private val installerManager: InstallerManager,
-    private val filesystem: Filesystem,
-    private val appDataResolver: AppDataResolver,
     private val batchPatchCoordinator: BatchPatchCoordinator,
     private val downloadUrlResolver: DownloadUrlResolver,
     private val localApkSources: LocalApkSources,
+    private val apks: PatchFlowApks,
     private val compatibleVersions: StateFlow<Map<String, List<BundledAppTarget>>>,
     expertModePanel: SelectionPanelController,
     private val patcherProcesses: PatcherProcesses,
@@ -456,7 +438,7 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to prepare installed APK",
             failureMessage = R.string.home_invalid_apk_io_error,
-            prepare = { copyInstalledApk(packageName, installedInfo) },
+            prepare = { apks.copyInstalled(packageName, installedInfo) },
             // Skip signature check: the installed APK may already be patched with our key
             proceed = { processSelectedAppIgnoringSignature(it) }
         )
@@ -496,19 +478,6 @@ class PatchFlow(
             }
         }
     }
-
-    /**
-     * The APK [info] describes of the installed [packageName], copied into a file of the run's
-     * own. Throws when it has gone from the device.
-     */
-    private fun copyInstalledApk(packageName: String, info: InstalledApkInfo) = SelectedApp.Local(
-        packageName = packageName,
-        version = info.version,
-        versionCode = info.versionCode,
-        file = SplitApkPreparer.copyInstalledApp(packageName, info.apkPath, info.splitPaths, filesystem.uiTempDir),
-        temporary = true,
-        fromInstalledDevice = true
-    )
 
     /**
      * Handles a helper result where the user installed the target app outside Morphe.
@@ -594,42 +563,11 @@ class PatchFlow(
             loadingInstalledApps = true
             dialogs.open(HomeDialog.InstalledAppPicker)
             try {
-                val items = withContext(Dispatchers.IO) {
-                    try {
-                        val candidates = pm.getInstalledPackages()
-                            .mapNotNull { pkgInfo ->
-                                if (pkgInfo.packageName == app.packageName) return@mapNotNull null
-                                val appInfo = pkgInfo.applicationInfo ?: return@mapNotNull null
-                                val sourceDir = appInfo.sourceDir ?: return@mapNotNull null
-                                if (!File(sourceDir).exists()) return@mapNotNull null
-                                val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
-                                    ?: return@mapNotNull null
-                                val label = with(pm) { pkgInfo.label() }
-                                val splitPaths = appInfo.splitSourceDirs
-                                    ?.filter { File(it).exists() }
-                                    .orEmpty()
-                                InstalledAppPickerItem(
-                                    packageName = pkgInfo.packageName,
-                                    label = label,
-                                    packageInfo = pkgInfo,
-                                    isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0,
-                                    info = InstalledApkInfo(
-                                        version = version,
-                                        versionCode = pm.getVersionCode(pkgInfo),
-                                        apkPath = sourceDir,
-                                        splitPaths = splitPaths
-                                    )
-                                )
-                            }
-                        // A patched build is no app to patch, it is the app's own install
-                        val patched = localApkSources.patchedInstalls(candidates.map { it.packageInfo })
-                        candidates
-                            .filterNot { it.packageName in patched }
-                            .sortedBy { it.label.lowercase() }
-                    } catch (e: Exception) {
-                        Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
-                        emptyList()
-                    }
+                val items = try {
+                    apks.installedApps()
+                } catch (e: Exception) {
+                    Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
+                    emptyList()
                 }
                 installedAppsForPicker = items
             } finally {
@@ -647,7 +585,7 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to prepare APK from picker",
             failureMessage = R.string.home_invalid_apk_io_error,
-            prepare = { copyInstalledApk(item.packageName, item.info) },
+            prepare = { apks.copyInstalled(item.packageName, item.info) },
             // The picker only offers unpatched installs - skip split and signature checks.
             // Version/versionCode check still runs via processSelectedApp.
             proceed = { processSelectedApp(it, skipSplitCheck = true) }
@@ -666,11 +604,7 @@ class PatchFlow(
         scope.launch {
             processingApkSelection = true
             try {
-                val result = withContext(Dispatchers.IO) {
-                    loadLocalApk(uri)
-                }
-
-                when (result) {
+                when (val result = apks.load(uri)) {
                     is ApkLoadResult.Success -> {
                         pickedApk = result
                         // A run for any app is named by the section it started from until the file
@@ -712,23 +646,10 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to load saved APK",
             failureMessage = null,
-            prepare = prepare@{
-                val file = File(savedInfo.filePath)
-                if (!file.exists()) {
-                    messages.show(R.string.home_app_info_repatch_no_original_apk)
-                    return@prepare null
+            prepare = {
+                apks.useSaved(packageName, savedInfo).also { saved ->
+                    if (saved == null) messages.show(R.string.home_app_info_repatch_no_original_apk)
                 }
-
-                // Mark as used
-                originalApkRepository.markUsed(packageName)
-
-                SelectedApp.Local(
-                    packageName = packageName,
-                    version = savedInfo.version,
-                    versionCode = savedInfo.versionCode,
-                    file = file,
-                    temporary = false // Don't delete saved APK files
-                )
             },
             // Saved file may be signed with our keystore - skip signature check.
             // Version/versionCode check still runs via processSelectedApp.
@@ -787,13 +708,7 @@ class PatchFlow(
             val declared = appMetadata[selectedApp.packageName]?.signatures
             var certificates = emptySet<String>()
             val signature = apkSignatureCheck(Build.VERSION.SDK_INT, declared) {
-                (apkCertificates ?: withContext(Dispatchers.IO) {
-                    SplitApkInspector.withRepresentativeApk(
-                        source = selectedApp.file,
-                        workspace = filesystem.uiTempDir,
-                        block = pm::getApkFileSignatureHashes
-                    )
-                }).also { certificates = it }
+                (apkCertificates ?: apks.certificates(selectedApp.file)).also { certificates = it }
             }
             if (signature != ApkSignatureCheck.ACCEPTED) {
                 holdFor(
@@ -1403,60 +1318,6 @@ class PatchFlow(
         heldApp?.discard()
         expertMode.app?.discard()
     }
-
-    /**
-     * Load local APK and extract package info.
-     * Supports both single APK and split APK archives (`apkm`, `apks`, `xapk`).
-     *
-     * The file is stored in [Filesystem.uiTempDir] (app_ui_ephemeral).
-     * CacheDir can be cleared by Android at any time - even while the app is running and
-     * patching is in progress - which would cause a FileNotFoundException mid-patch.
-     * uiTempDir uses getDir() which is part of the app's private files and is never
-     * cleared by the system automatically.
-     */
-    private suspend fun loadLocalApk(uri: Uri): ApkLoadResult = withContext(Dispatchers.IO) {
-        try {
-            val tempFile = uri.copyApkInto(filesystem.uiTempDir, "temp_apk", app.contentResolver)
-                ?: return@withContext ApkLoadResult.Unreadable
-
-            // A split archive is read through its base module, deleted after the call, so the icon
-            // and the label are read in it
-            val result = SplitApkInspector.withRepresentativeApk(
-                source = tempFile,
-                workspace = filesystem.uiTempDir
-            ) { apk ->
-                val packageInfo = pm.getPackageInfo(apk)
-                when {
-                    packageInfo == null -> ApkLoadResult.NotAnApk
-                    localApkSources.isPatchedApk(apk, packageInfo.packageName) -> ApkLoadResult.AlreadyPatched
-                    else -> ApkLoadResult.Success(
-                        SelectedApp.Local(
-                            packageName = packageInfo.packageName,
-                            version = packageInfo.versionName ?: "unknown",
-                            versionCode = pm.getVersionCode(packageInfo),
-                            file = tempFile,
-                            temporary = true
-                        ),
-                        icon = appDataResolver.detachedArchiveIcon(packageInfo),
-                        label = packageInfo.readableLabel(app.packageManager),
-                        // Read while the module is unpacked, which the signature check would otherwise repeat
-                        certificates = if (
-                            apkSignatureCheckable(Build.VERSION.SDK_INT, appMetadata[packageInfo.packageName]?.signatures)
-                        ) pm.getApkFileSignatureHashes(apk) else null
-                    )
-                }
-            }
-
-            if (result == ApkLoadResult.NotAnApk) {
-                Log.w(LOG_TAG, "Picked file ${tempFile.name} could not be parsed as an APK")
-            }
-            if (result !is ApkLoadResult.Success) tempFile.delete()
-            result
-        } catch (e: Exception) {
-            Log.e(LOG_TAG, "Failed to load APK", e)
-            ApkLoadResult.IoError
-        }
-    }
 }
 
 /** Deletes the file of a picked APK that was copied for the run alone. */
@@ -1464,26 +1325,3 @@ private fun SelectedApp.discard() {
     if (this is SelectedApp.Local && temporary) file.delete()
 }
 
-/** Result of attempting to load a local APK file. */
-private sealed interface ApkLoadResult {
-    /**
-     * File was read and parsed successfully, with the app's icon and label where it carries them.
-     *
-     * @param certificates Certificate fingerprints of the file, null where the sources declare none
-     *   to check them against.
-     */
-    data class Success(
-        val app: SelectedApp.Local,
-        val icon: Drawable?,
-        val label: String?,
-        val certificates: Set<String>? = null
-    ) : ApkLoadResult
-    /** File could not be read - provider returned null stream or zero bytes. */
-    data object Unreadable : ApkLoadResult
-    /** File was read but is not a valid APK/split archive. */
-    data object NotAnApk : ApkLoadResult
-    /** File is a patched build, which is never patched again. */
-    data object AlreadyPatched : ApkLoadResult
-    /** An unexpected IO or system exception occurred while copying or parsing. */
-    data object IoError : ApkLoadResult
-}
