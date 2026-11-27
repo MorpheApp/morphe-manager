@@ -104,13 +104,18 @@ dependencies {
     // Compose UI under Robolectric, for behavior only a composition shows
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.robolectric)
+    // Checks the dependency graph, which only fails at runtime otherwise
+    testImplementation(libs.koin.test)
     debugImplementation(libs.compose.ui.test.manifest)
 }
 
 // The full Kotlin reflection comes with the patcher, yet neither it, the patches nor the app go
-// beyond the reflection of the standard library, as the patcher host already runs without it
+// beyond the reflection of the standard library, as the patcher host already runs without it.
+// Unit tests keep it, as the check of the Koin graph reads constructors through it
 configurations.configureEach {
-    if (name.endsWith("RuntimeClasspath")) exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    if (name.endsWith("RuntimeClasspath") && !name.endsWith("UnitTestRuntimeClasspath")) {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    }
 }
 
 /**
