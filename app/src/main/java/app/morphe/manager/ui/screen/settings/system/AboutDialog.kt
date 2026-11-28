@@ -279,7 +279,7 @@ private fun VersionCard(
                 Text(
                     text = stringResource(R.string.about_up_to_date),
                     style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.SemiBold
                 )
             }
             if (updateCheck is AppUpdateCheck.Available) {
@@ -289,18 +289,21 @@ private fun VersionCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
-                    ThemedIcon(icon = MaterialSymbols.Rounded.Download, size = Defaults.IconSizeSmall)
                     Text(
                         text = stringResource(R.string.about_update_available, updateVersion.isolateLtr()),
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(1f)
                     )
-                    StatusBadge(
-                        text = stringResource(R.string.update),
-                        tone = SemanticTone.Primary,
-                        onClick = onUpdateClick
+                    val update = stringResource(R.string.update)
+                    ActionPillButton(
+                        onClick = onUpdateClick,
+                        icon = MaterialSymbols.Rounded.Download,
+                        contentDescription = update,
+                        label = update,
+                        large = true,
+                        colors = ActionPillColors.primary()
                     )
                 }
             }
