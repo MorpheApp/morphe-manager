@@ -526,7 +526,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_apk_selected">APK selected</string>
     <string name="batch_patch_auto_download_stopped">Automatic APK downloads stopped</string>
     <string name="batch_patch_auto_download_stop">Stop downloads</string>
-    <string name="batch_patch_auto_download_kept">The downloaded APK could not be used, so the previous one is kept</string>
+    <string name="batch_patch_auto_download_kept">The APK downloaded for %s could not be used, so the previous one is kept</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
     <string name="batch_patch_state_no_apk">No APK</string>
     <string name="batch_patch_state_no_patches">No patches</string>
@@ -796,7 +796,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">Morphe was closed before patching finished, so nothing was patched. Try again</string>
+    <string name="patcher_interrupted_message">Morphe was closed before patching finished. Try again</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">The patcher crashed before it finished. If it happens again, turn off %1$s and report the issue with the log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->

@@ -194,21 +194,19 @@ class InstallQueue internal constructor(
                 current.onInstalled(state.packageName)
                 finishActive()
             }
-            is InstallViewModel.InstallState.Error -> {
-                skipped++
-                current.onFailed(state.message)
-                messages.show(state.message)
-                finishActive()
-            }
-            is InstallViewModel.InstallState.Conflict -> {
-                val conflictText = app.getString(R.string.installer_hint_conflict)
-                skipped++
-                current.onFailed(conflictText)
-                messages.show(conflictText)
-                finishActive()
-            }
+            is InstallViewModel.InstallState.Error -> fail(current, state.message)
+            is InstallViewModel.InstallState.Conflict ->
+                fail(current, app.getString(R.string.installer_hint_conflict))
             else -> Unit
         }
+    }
+
+    private fun fail(request: InstallQueueRequest, reason: String) {
+        skipped++
+        request.onFailed(reason)
+        // Named, as the summary that follows only counts what was skipped
+        messages.show("${request.appName}: $reason")
+        finishActive()
     }
 
     private fun finishActive(reset: Boolean = true) {

@@ -622,14 +622,16 @@ class BatchPatcherViewModel(
      * patches is selected, the editor opens next, as the single-app flow opens the selection after
      * the APK, so the app is not left for the user to find the editor for. Otherwise, the APK
      * question is closed, having waited for the answer.
+     *
+     * @param confirm whether the user chose the APK, which is then confirmed with a message.
      */
-    private suspend fun settleGivenApk(itemId: String, resolution: Job?) = whileProcessingApk {
+    private suspend fun settleGivenApk(itemId: String, resolution: Job?, confirm: Boolean = true) = whileProcessingApk {
         resolution?.join()
         // Another APK given to the app meanwhile settles all this itself
         if (resolution?.isCancelled == true) return@whileProcessingApk
         val item = state.value?.items?.firstOrNull { it.id == itemId }?.takeIf { resolution != null }
         // The card changes little for an APK of the version it already had, so the choice is confirmed
-        if (item?.source != null) messages.show(R.string.batch_patch_apk_selected)
+        if (confirm && item?.source != null) messages.show(R.string.batch_patch_apk_selected)
         if (item?.state == BatchItemState.NO_SELECTION && item.source != null) {
             openEdit(item)
         } else if (apkChoice?.item?.id == itemId) {
@@ -766,11 +768,13 @@ class BatchPatcherViewModel(
                 }
                 val resolution = coordinator.attachFetchedApk(itemId, file)
                 resolution?.join()
-                val source = state.value?.items?.firstOrNull { it.id == itemId }?.source
-                if (resolution?.isCancelled == false && (source as? BatchApkSource.UserFile)?.file != file) {
-                    messages.show(R.string.batch_patch_auto_download_kept)
+                val item = state.value?.items?.firstOrNull { it.id == itemId }
+                if (resolution?.isCancelled == false && (item?.source as? BatchApkSource.UserFile)?.file != file) {
+                    // The automatic pass moves on through the queue, so the message names its app
+                    messages.show(R.string.batch_patch_auto_download_kept, item?.appName.orEmpty())
                 } else {
-                    settleGivenApk(itemId, resolution)
+                    // Nobody chose this APK, the card updating is all the pass needs to show
+                    settleGivenApk(itemId, resolution, confirm = false)
                 }
             }
         }
