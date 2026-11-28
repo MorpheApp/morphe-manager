@@ -96,7 +96,7 @@ fun HomeDialogs(
     }
 
     // Deep link: Add source confirmation dialog
-    DialogHost(target = homeViewModel.deepLinkPendingSource) { source ->
+    DialogHost(target = homeViewModel.sources.deepLinkPendingSource) { source ->
         val sourceMuteRepository: SourceMuteRepository = koinInject()
         val appMetadata by homeViewModel.patchBundleRepository.allAppMetadata.collectAsStateWithLifecycle()
         val keptFrom by sourceMuteRepository.mutedSources.collectAsStateWithLifecycle(emptyMap())
@@ -115,37 +115,37 @@ fun HomeDialogs(
             appGradientColors = app?.let { appMetadata[it.packageName]?.gradientColors },
             isAdded = existingUid != null,
             isAppLeftOut = app != null && existingUid != null && existingUid in keptFrom[app.packageName].orEmpty(),
-            onConfirm = homeViewModel::confirmDeepLinkSource,
-            onDismiss = { homeViewModel.dismissDeepLinkSource() }
+            onConfirm = homeViewModel.sources::confirmDeepLinkSource,
+            onDismiss = { homeViewModel.sources.dismissDeepLinkSource() }
         )
     }
 
     // .mpp file opened from file manager: Add or update bundle confirmation dialog
-    DialogHost(target = homeViewModel.pendingMpp) { pending ->
+    DialogHost(target = homeViewModel.sources.pendingMpp) { pending ->
         MppImportDialog(
             manifest = pending.manifest,
             fileName = pending.fileName,
             check = pending.check,
-            onConfirm = homeViewModel::confirmMppImport,
-            onDismiss = { homeViewModel.dismissMppImport() }
+            onConfirm = homeViewModel.sources::confirmMppImport,
+            onDismiss = { homeViewModel.sources.dismissMppImport() }
         )
     }
 
     // App list of a source just added with "Choose apps" on
     val sources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
-    DialogHost(target = sources.firstOrNull { it.uid == homeViewModel.sourceAppsDialogUid }) { source ->
+    DialogHost(target = sources.firstOrNull { it.uid == homeViewModel.sources.sourceAppsDialogUid }) { source ->
         SourceAppsDialog(
-            onDismissRequest = homeViewModel::dismissSourceApps,
+            onDismissRequest = homeViewModel.sources::dismissSourceApps,
             src = source
         )
     }
 
     // Rename bundle dialog
-    DialogHost(target = homeViewModel.bundleToRename?.takeIf { homeViewModel.showRenameBundleDialog }) { bundle ->
+    DialogHost(target = homeViewModel.sources.bundleToRename?.takeIf { homeViewModel.sources.showRenameBundleDialog }) { bundle ->
         RenameBundleDialog(
             initialValue = bundle.displayTitle,
-            onDismissRequest = homeViewModel::dismissRenameBundle,
-            onConfirm = homeViewModel::renameBundle
+            onDismissRequest = homeViewModel.sources::dismissRenameBundle,
+            onConfirm = homeViewModel.sources::renameBundle
         )
     }
 
@@ -279,7 +279,8 @@ private fun DialogHostScope.PatchFlowDialog(
                 onDismiss = flow::backFromApkSource,
                 onOpenFilePicker = storagePickerLauncher,
                 // Only universal patches, with no package of their own, can take any installed app
-                onUseInstalledApp = if (session.packageName == null) flow::loadInstalledAppsForPicker else null
+                onUseInstalledApp = if (session.packageName == null) flow::loadInstalledAppsForPicker else null,
+                downloadedApk = flow.downloadedApk
             )
         }
 
@@ -336,8 +337,7 @@ private fun DialogHostScope.PatchFlowDialog(
 
         // Shown when the APK is not signed by the expected certificate
         is HomeDialog.InvalidSignature -> InvalidSignatureDialog(
-            appName = dialog.state.appName,
-            packageName = dialog.state.packageName,
+            state = dialog.state,
             onPickAnother = storagePickerLauncher,
             onProceed = flow::proceedIgnoringSignature,
             onDismiss = dismiss

@@ -52,6 +52,7 @@ fun AppearanceSettings(themeViewModel: ThemeSettingsViewModel = koinViewModel())
     val showGreetingPhrases by themeViewModel.prefs.showGreetingPhrases.getAsState()
     val showRepatchNotice by themeViewModel.prefs.showRepatchNotice.getAsState()
     val showMoreAppsCard by themeViewModel.prefs.showMoreAppsCard.getAsState()
+    val showGamesButton by themeViewModel.prefs.showGamesButton.getAsState()
     val colorAccents by themeViewModel.prefs.colorAccents.getAsState()
     val outlines by themeViewModel.prefs.outlines.getAsState()
     val blur by themeViewModel.prefs.blur.getAsState()
@@ -126,13 +127,15 @@ fun AppearanceSettings(themeViewModel: ThemeSettingsViewModel = koinViewModel())
             onBackgroundClick = { showBackgroundDialog.value = true }
         )
 
-        HomeScreenSection(
+        ScreensSection(
             showGreetingPhrases = showGreetingPhrases,
             showRepatchNotice = showRepatchNotice,
             onGreetingPhrasesToggle = { themeViewModel.toggleShowGreetingPhrases(showGreetingPhrases) },
             onRepatchNoticeToggle = { themeViewModel.toggleShowRepatchNotice(showRepatchNotice) },
             showMoreAppsCard = showMoreAppsCard,
-            onMoreAppsCardToggle = { themeViewModel.toggleShowMoreAppsCard(showMoreAppsCard) }
+            onMoreAppsCardToggle = { themeViewModel.toggleShowMoreAppsCard(showMoreAppsCard) },
+            showGamesButton = showGamesButton,
+            onGamesButtonToggle = { themeViewModel.toggleShowGamesButton(showGamesButton) }
         )
     }
 
@@ -347,19 +350,21 @@ private fun EffectsSection(
 }
 
 /**
- * What the home screen shows besides the apps.
+ * What the home screen shows besides the apps, and the patcher screens besides the run.
  */
 @Composable
-private fun HomeScreenSection(
+private fun ScreensSection(
     showGreetingPhrases: Boolean,
     showRepatchNotice: Boolean,
     onGreetingPhrasesToggle: () -> Unit,
     onRepatchNoticeToggle: () -> Unit,
     showMoreAppsCard: Boolean,
-    onMoreAppsCardToggle: () -> Unit
+    onMoreAppsCardToggle: () -> Unit,
+    showGamesButton: Boolean,
+    onGamesButtonToggle: () -> Unit
 ) {
     SettingsSection(
-        title = stringResource(R.string.settings_appearance_home_screen),
+        title = stringResource(R.string.settings_appearance_screens),
         icon = MaterialSymbols.Rounded.Dashboard
     ) {
         SettingsGroup {
@@ -383,6 +388,13 @@ private fun HomeScreenSection(
                 icon = MaterialSymbols.Rounded.Apps,
                 checked = showMoreAppsCard,
                 onToggle = onMoreAppsCardToggle
+            )
+            SettingsSwitchItem(
+                title = stringResource(R.string.settings_appearance_games_button),
+                subtitle = stringResource(R.string.settings_appearance_games_button_description),
+                icon = MaterialSymbols.Rounded.Sports_esports,
+                checked = showGamesButton,
+                onToggle = onGamesButtonToggle
             )
         }
     }

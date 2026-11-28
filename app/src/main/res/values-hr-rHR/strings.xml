@@ -379,6 +379,11 @@ Odaberite odakle ćete preuzeti APK datoteku"</string>
     <string name="home_invalid_signature_title">Nepotvrđena aplikacija</string>
     <string name="home_invalid_signature_message">Aplikacija koju ste odabrali za&lt;b&gt;%s&lt;/b&gt; ne odgovara očekivanom certifikatu za potpis. Moguće je da je modificirana ili da potječe iz nepouzdanog izvora.</string>
     <string name="home_invalid_signature_badge">Ovaj aplikacija možda nije original</string>
+    <string name="home_invalid_signature_broken_message">Odabrani APK za &lt;b&gt;%s&lt;/b&gt; nije prošao provjeru potpisa. Vjerojatno je oštećen ili još nije potpuno preuzet, stoga ga preuzmite ponovno ili odaberite drugu datoteku</string>
+    <string name="home_invalid_signature_broken_badge">Ovaj APK može biti oštećen ili nepotpun</string>
+    <string name="home_invalid_signature_expected">Očekivani certifikat</string>
+    <string name="home_invalid_signature_actual">Certifikat APK-a</string>
+    <string name="home_invalid_signature_none">Nema valjanog potpisa</string>
     <string name="home_split_apk_warning_title">Otkrivena je split aplikacija</string>
     <string name="home_split_apk_warning_message">"Ova datoteka je APK paket
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

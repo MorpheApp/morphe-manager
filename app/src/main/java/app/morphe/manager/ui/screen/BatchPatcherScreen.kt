@@ -36,8 +36,6 @@ import app.morphe.manager.R
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.batch.*
 import app.morphe.manager.domain.bundles.PatchBundleSource.Extensions.usesPrerelease
-import app.morphe.manager.domain.manager.PreferencesManager
-import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.ui.screen.home.*
 import app.morphe.manager.ui.screen.patcher.ExpertPatchingInProgress
 import app.morphe.manager.ui.screen.patcher.PatcherErrorDialog
@@ -61,7 +59,6 @@ import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import kotlin.time.Duration.Companion.milliseconds
 
 /**
@@ -81,8 +78,6 @@ fun BatchPatcherScreen(
     onDeclineTour: () -> Unit = {},
     viewModel: BatchPatcherViewModel = koinViewModel(),
     installViewModel: InstallViewModel = koinViewModel(),
-    prefs: PreferencesManager = koinInject(),
-    patchBundleRepository: PatchBundleRepository = koinInject(),
     onAppStateChanged: (String) -> Unit = {},
     onBackgroundSpeedChange: (Float) -> Unit = {},
     onPatchingCompleted: () -> Unit = {},
@@ -144,8 +139,8 @@ fun BatchPatcherScreen(
     }
     val installRequests: List<InstallQueueRequest> = installRequestsByItem.values.toList()
 
-    val useExpertMode by prefs.useExpertMode.getAsState()
-    val autoDownloadApkHelpers by prefs.autoDownloadApkHelpersInBatch.getAsState()
+    val useExpertMode by viewModel.useExpertMode.getAsState()
+    val autoDownloadApkHelpers by viewModel.autoDownloadApkHelpers.getAsState()
 
     // The app last patched keeps its name and color on the progress once the queue moves past it
     val shownPackageName = rememberLatest(current?.activeItem?.packageName)
@@ -354,7 +349,7 @@ fun BatchPatcherScreen(
                 // an APK, pointed at a queued app. Continuing hands off the link and then opens the
                 // file picker
                 QueueDialog.ApkSearch -> held(viewModel.apkSearch)?.let { search ->
-                    val bundleMetadata by patchBundleRepository.appMetadata.collectAsStateWithLifecycle()
+                    val bundleMetadata by viewModel.appMetadata.collectAsStateWithLifecycle()
                     val metadata = bundleMetadata[search.item.packageName]
 
                     DownloadInstructionsDialog(
@@ -384,14 +379,15 @@ fun BatchPatcherScreen(
                             viewModel.dismissAttachPrompt()
                             attachApkTo(item.id)
                         },
-                        onUseInstalledApp = null
+                        onUseInstalledApp = null,
+                        downloadedApk = viewModel.downloadedApk
                     )
                 }
 
                 // The same dialog the single-app flow uses, pointed at one queued app instead of the
                 // patcher, so the queue never has to grow a second patch list
                 QueueDialog.Edit -> held(viewModel.edit)?.let { edit ->
-                    val sources by patchBundleRepository.sources.collectAsStateWithLifecycle()
+                    val sources by viewModel.sources.collectAsStateWithLifecycle()
                     val sourcesByUid = remember(sources) { sources.associateBy { it.uid } }
                     ExpertModeDialog(
                         packageName = edit.packageName,
@@ -459,7 +455,7 @@ fun BatchPatcherScreen(
         appChangelogs.values.filter { it.update != null }.associateBy { it.app.trackingKey }
     }
     var changelogRequest by remember { mutableStateOf<BundleChangelogRequest?>(null) }
-    val changelogSources by patchBundleRepository.sources.collectAsStateWithLifecycle()
+    val changelogSources by viewModel.sources.collectAsStateWithLifecycle()
     BundleChangelogHost(
         request = changelogRequest,
         sources = changelogSources,
@@ -659,12 +655,18 @@ fun BatchPatcherScreen(
                     }
                 }
 
-                // Nothing was installed yet, so say where the APKs went
-                if (current.phase == BatchPhase.FINISHED && current.patchedItems.isNotEmpty()) {
+                // Says where the APKs still to install went, which is nowhere once the run is
+                // left when retention is off
+                if (current.phase == BatchPhase.FINISHED && installRequests.isNotEmpty()) {
+                    val allKept = current.patchedItems.all {
+                        it.installOutcome == BatchInstallOutcome.INSTALLED || it.patchedBuild?.kept == true
+                    }
                     item(key = "saved_hint") {
                         Footnote(
-                            text = stringResource(R.string.batch_patch_saved_hint),
-                            icon = MaterialSymbols.Rounded.Save,
+                            text = stringResource(
+                                if (allKept) R.string.batch_patch_saved_hint else R.string.batch_patch_not_kept_hint
+                            ),
+                            icon = if (allKept) MaterialSymbols.Rounded.Save else MaterialSymbols.Rounded.Info,
                             modifier = Modifier.animateItem()
                         )
                     }
@@ -1163,7 +1165,10 @@ private fun itemDetails(item: BatchPatchItem): String = when (item.state) {
         item.version.orEmpty()
     )
 
-    BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(R.string.home_invalid_signature_badge)
+    BatchItemState.UNVERIFIED_SIGNATURE -> stringResource(
+        if (item.brokenSignature) R.string.home_invalid_signature_broken_badge
+        else R.string.home_invalid_signature_badge
+    )
 
     // The patch is what the user can deselect, while the error itself is left to the dialog
     BatchItemState.FAILED -> item.failedPatch?.let { stringResource(R.string.failed_to_execute_patch, it) }

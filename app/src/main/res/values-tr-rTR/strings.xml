@@ -377,6 +377,11 @@ APK'nin nereden alınacağını seçin"</string>
     <string name="home_invalid_signature_title">Onaylanmamış APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt; için seçtiğiniz APK, beklenen imzalama sertifikasıyla eşleşmiyor. Değiştirilmiş olabilir veya güvenilmeyen bir kaynaktan olabilir</string>
     <string name="home_invalid_signature_badge">Bu APK orijinal olmayabilir</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; için seçtiğiniz APK imza kontrolünden geçemedi. Muhtemelen hasar görmüş veya henüz tamamen indirilmemiş, bu nedenle tekrar indirin veya başka bir dosya seçin</string>
+    <string name="home_invalid_signature_broken_badge">Bu APK hasar görmüş veya eksik olabilir</string>
+    <string name="home_invalid_signature_expected">Beklenen sertifika</string>
+    <string name="home_invalid_signature_actual">APK\'nın sertifikası</string>
+    <string name="home_invalid_signature_none">Geçerli imza yok</string>
     <string name="home_split_apk_warning_title">Bölünmüş APK tespit edildi</string>
     <string name="home_split_apk_warning_message">"Bu dosya bir APK bundle'ıdır
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

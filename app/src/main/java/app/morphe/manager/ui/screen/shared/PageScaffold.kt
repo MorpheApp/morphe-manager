@@ -141,6 +141,7 @@ class ListContentPadding(
  * @param bottomBar Docked over the bottom of the page, such as a [DockedPanel], blurring the content
  *   under it as the header does.
  * @param onHeaderHeightChange Told the header's height, for what floats over the page below it.
+ * @param underHeader Focus of what floats over the page below the header, see [FloatingBarsRegion].
  * @param content Handed the room to leave around it, see [PageInsets].
  */
 @Composable
@@ -150,12 +151,14 @@ fun PinnedHeaderPage(
     modifier: Modifier = Modifier,
     bottomBar: @Composable () -> Unit = {},
     onHeaderHeightChange: (Dp) -> Unit = {},
+    underHeader: FloatingBarsRegion? = null,
     content: @Composable BoxScope.(insets: PageInsets) -> Unit
 ) {
     val haze = rememberHazeState()
     val gutter = rememberWindowSize().contentPadding
     FloatingBarsLayout(
         modifier = modifier.fillMaxSize(),
+        underTopBar = underHeader,
         bottomBar = {
             CompositionLocalProvider(LocalBackdropHaze provides haze) {
                 // Held to the bottom edge, so a panel coming in as a taller one leaves rises from

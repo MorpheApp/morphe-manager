@@ -7,8 +7,7 @@ package app.morphe.manager.ui.screen.settings.system
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -21,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -213,6 +213,7 @@ private fun VersionCard(
     onPillsFound: () -> Unit
 ) {
     val view = LocalView.current
+    val currentOnPillsFound by rememberUpdatedState(onPillsFound)
     var versionTaps by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(versionTaps) {
@@ -224,22 +225,22 @@ private fun VersionCard(
 
     SurfaceCard(
         cornerRadius = Defaults.CornerLargeIncreased,
-        // The whole card counts the taps, silently: nothing about it says there is anything to find
-        modifier = Modifier.clickable(
-            interactionSource = remember { MutableInteractionSource() },
-            indication = null
-        ) {
-            versionTaps++
-            when {
-                versionTaps >= PILL_TAP_COUNT -> {
-                    versionTaps = 0
-                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                    onPillsFound()
+        // The whole card counts the taps, silently: nothing about it says there is anything to find.
+        // A touch gesture alone, so neither a remote nor a screen reader stops on it on the way to the update
+        modifier = Modifier.pointerInput(Unit) {
+            detectTapGestures {
+                versionTaps++
+                when {
+                    versionTaps >= PILL_TAP_COUNT -> {
+                        versionTaps = 0
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                        currentOnPillsFound()
+                    }
+                    // The halfway point is where the taps start answering back,
+                    // enough of a hint to keep going without naming what is coming
+                    versionTaps > PILL_TAP_COUNT / 2 ->
+                        view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                 }
-                // The halfway point is where the taps start answering back,
-                // enough of a hint to keep going without naming what is coming
-                versionTaps > PILL_TAP_COUNT / 2 ->
-                    view.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
             }
         }
     ) {
@@ -278,7 +279,7 @@ private fun VersionCard(
                 Text(
                     text = stringResource(R.string.about_up_to_date),
                     style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.SemiBold
                 )
             }
             if (updateCheck is AppUpdateCheck.Available) {
@@ -288,18 +289,21 @@ private fun VersionCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
                 ) {
-                    ThemedIcon(icon = MaterialSymbols.Rounded.Download, size = Defaults.IconSizeSmall)
                     Text(
                         text = stringResource(R.string.about_update_available, updateVersion.isolateLtr()),
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Medium,
+                        fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.weight(1f)
                     )
-                    StatusBadge(
-                        text = stringResource(R.string.update),
-                        tone = SemanticTone.Primary,
-                        onClick = onUpdateClick
+                    val update = stringResource(R.string.update)
+                    ActionPillButton(
+                        onClick = onUpdateClick,
+                        icon = MaterialSymbols.Rounded.Download,
+                        contentDescription = update,
+                        label = update,
+                        large = true,
+                        colors = ActionPillColors.primary()
                     )
                 }
             }

@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">უვერიფიცირებელი APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt;-ისთვის არჩეული APK არ შეესაბამება მოსალოდნელ ხელმოწერის სერტიფიკატს. შესაძლოა იგი იყოს შეცვლილი ან მოდიფიცირებული არასანდო წყაროდან</string>
     <string name="home_invalid_signature_badge">ეს APK შესაძლოა არ იყოს ორიგინალი</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;თვის თქვენ მიერ არჩეულ APK-ს ხელმოწერის შემოწმება ვერ მოხერხდა. ის სავარაუდოდ დაზიანებულია ან ჯერ კიდევ არ არის სრულად ჩამოტვირთული, ამიტომ ჩამოტვირთეთ ის ხელახლა ან აირჩიეთ სხვა ფაილი</string>
+    <string name="home_invalid_signature_broken_badge">ეს APK შესაძლოა იყოს დაზიანებული ან არასრული</string>
+    <string name="home_invalid_signature_expected">მოსალოდნელი სერტიფიკატი</string>
+    <string name="home_invalid_signature_actual">APK-ს სერტიფიკატი</string>
+    <string name="home_invalid_signature_none">ვალიდური ხელმოწერა არ მოიძებნა</string>
     <string name="home_split_apk_warning_title">აღმოჩენილია Split APK</string>
     <string name="home_split_apk_warning_message">"ეს ფაილი არის APK ბანდლი
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

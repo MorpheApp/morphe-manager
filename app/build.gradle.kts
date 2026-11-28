@@ -104,13 +104,18 @@ dependencies {
     // Compose UI under Robolectric, for behavior only a composition shows
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.robolectric)
+    // Checks the dependency graph, which only fails at runtime otherwise
+    testImplementation(libs.koin.test)
     debugImplementation(libs.compose.ui.test.manifest)
 }
 
 // The full Kotlin reflection comes with the patcher, yet neither it, the patches nor the app go
-// beyond the reflection of the standard library, as the patcher host already runs without it
+// beyond the reflection of the standard library, as the patcher host already runs without it.
+// Unit tests keep it, as the check of the Koin graph reads constructors through it
 configurations.configureEach {
-    if (name.endsWith("RuntimeClasspath")) exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    if (name.endsWith("RuntimeClasspath") && !name.endsWith("UnitTestRuntimeClasspath")) {
+        exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+    }
 }
 
 /**
@@ -159,7 +164,7 @@ val libericaFeature = libericaVersion.substringBefore('.').toInt()
  * The release of MorpheApp/morphe-jvm the packages of the GNU C library come from: termux-pacman's
  * recipes with what Android needs on top, and the packages of termux-pacman kept as they built them.
  */
-val glibcRelease = "gpkg-2"
+val glibcRelease = "gpkg-3"
 
 /**
  * The JVM the app embeds for one ABI: Liberica for Linux, pinned by [sha256], which runs on the
@@ -206,7 +211,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-aarch64",
         termuxArch = "aarch64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "d724753a7bc5374972b95b6c720bca64922d54701d07d5758ad338c24ad015bc",
+            "glibc-2.44-0" to "a190d90f0d097465a49d7467d630da69f9be38dfb5d838cd46e258c3c1d762fb",
             "zlib-glibc-1.3.2-0" to "823322a4dfaccf77ead5935941320c53cf25f73d113253c53382ac6f42d7868b",
             "gcc-libs-glibc-14.2.1-1" to "9316728ceeb23c320756aa0bb03460f9767b6efdc44a478c86f7fcc44c6e11ec"
         ),
@@ -218,7 +223,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-arm",
         termuxArch = "arm",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "f28c0682b8b15333180a47bc551245183c16f7ced24dd8bda09ba5a9394507d9",
+            "glibc-2.44-0" to "29a2580243674498bb7fb56a66590a599924d2599a7b50d88f6d1b1fc918bf06",
             "zlib-glibc-1.3.2-0" to "f0489608b9ae7249c72df983b8ed5ee61d9ef0052e5d3398eca139275d1485a0",
             "gcc-libs-glibc-14.2.1-1" to "5b253b412651218f7478de4b747d8f851dc9609e1f218246d841e44caa81613a"
         ),
@@ -230,7 +235,7 @@ val embeddedJvms = mapOf(
         jmodPlatform = "linux-amd64",
         termuxArch = "x86_64",
         glibcPackages = mapOf(
-            "glibc-2.44-0" to "71b57bdf1fb9dc13701bea732303dac5499ed0542c6d70a28d59b7f6645f2f0e",
+            "glibc-2.44-0" to "b0bca2eb75d84b14a752df801b3ea40cb60ccb17410d33657a257b0f72e7e470",
             "zlib-glibc-1.3.2-0" to "aea6ba84be3801808bd5bd06fddf6e304ceaea75a5e73d5248bf99406b0b88bb",
             "gcc-libs-glibc-14.2.1-1" to "5f7fd3600a4ac83357c91cd30641eae488c9afc1e2549e62429cafa4d0badf5a"
         ),

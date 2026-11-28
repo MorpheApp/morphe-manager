@@ -8,6 +8,8 @@
     <string name="home_app_status_newer_patches">New patches</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
+    <!-- Named beside the other marks when one app has a build for a phone and for another device -->
+    <string name="form_factor_mobile">Phone</string>
     <string name="form_factor_wearable" translatable="false">Wear OS</string>
     <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">No patches available</string>
@@ -368,6 +370,10 @@ Choose where to take its APK from"</string>
     <string name="expert_mode_recommended">Recommended patches</string>
     <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_selected_count">%1$s of %2$s selected</string>
+    <!-- Which build of an app with builds for several devices the patches are for, such as TV or Wear OS -->
+    <string name="expert_mode_form_factor">For the %s build</string>
+    <!-- The same for the phone build, named as a common noun rather than by its mark -->
+    <string name="expert_mode_form_factor_mobile">For the phone build</string>
     <string name="expert_mode_saved_selection">Saved selection</string>
     <string name="expert_mode_restore_saved_done">Saved selection restored</string>
     <string name="expert_mode_copy_from_bundle_no_patches">No matching patches in this bundle</string>
@@ -387,6 +393,11 @@ Choose where to take its APK from"</string>
     <string name="home_invalid_signature_title">Unverified APK</string>
     <string name="home_invalid_signature_message">The APK you selected for &lt;b&gt;%s&lt;/b&gt; does not match the expected signing certificate. It may be modified or from an untrusted source</string>
     <string name="home_invalid_signature_badge">This APK may not be the original</string>
+    <string name="home_invalid_signature_broken_message">The APK you selected for &lt;b&gt;%s&lt;/b&gt; fails its signature check. It is probably damaged or was not fully downloaded yet, so download it again or pick another file</string>
+    <string name="home_invalid_signature_broken_badge">This APK may be damaged or incomplete</string>
+    <string name="home_invalid_signature_expected">Expected certificate</string>
+    <string name="home_invalid_signature_actual">Certificate of the APK</string>
+    <string name="home_invalid_signature_none">No valid signature</string>
     <string name="home_split_apk_warning_title">Split APK detected</string>
     <string name="home_split_apk_warning_message">"This file is an APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
@@ -499,7 +510,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_preparing_next">Preparing the next app…</string>
     <string name="batch_patch_progress_counter">Patching %1$s of %2$s</string>
     <string name="batch_patch_summary">%1$s patched, %2$s failed, %3$s skipped</string>
-    <string name="batch_patch_saved_hint">The patched apps are saved. Install them now, or later from the patched APK list in settings</string>
+    <string name="batch_patch_saved_hint">Patched APKs are saved. Install them now or later from the home screen</string>
+    <string name="batch_patch_not_kept_hint">Patched APKs are not kept. Install or export them before closing this screen</string>
     <string name="batch_patch_multiple_sources">Some apps combine patches from more than one source, which can cause conflicts</string>
     <string name="batch_patch_needs_apk">No APK available, attach a file</string>
     <string name="batch_patch_wrong_package">The attached file belongs to %s</string>
@@ -514,22 +526,22 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_apk_selected">APK selected</string>
     <string name="batch_patch_auto_download_stopped">Automatic APK downloads stopped</string>
     <string name="batch_patch_auto_download_stop">Stop downloads</string>
-    <string name="batch_patch_auto_download_kept">The downloaded APK could not be used, so the previous one is kept</string>
+    <string name="batch_patch_auto_download_kept">The APK downloaded for %s could not be used, so the previous one is kept</string>
     <string name="batch_patch_edit_patches">Choose patches</string>
     <string name="batch_patch_state_no_apk">No APK</string>
     <string name="batch_patch_state_no_patches">No patches</string>
     <string name="batch_patch_state_no_selection">None selected</string>
     <string name="batch_patch_no_selection">None of the available patches is selected</string>
     <string name="batch_patch_policy_install">Install when finished</string>
-    <string name="batch_patch_policy_install_description">Installs every patched app right after the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_install_description">Installs every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <string name="batch_patch_policy_mount">Mount when finished</string>
-    <string name="batch_patch_policy_mount_description">Mounts every patched app once the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_mount_description">Mounts every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <string name="batch_patch_policy_install_mount">Install or mount when finished</string>
-    <string name="batch_patch_policy_install_mount_description">Installs or mounts every patched app once the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_install_mount_description">Installs or mounts every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Start</string>
     <string name="batch_patch_stop_title">Stop batch patching?</string>
-    <string name="batch_patch_stop_description">The app being patched right now and everything still queued will be canceled</string>
+    <string name="batch_patch_stop_description">The current app and the rest of the queue will be canceled</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_install_all">Install all</string>
     <string name="batch_patch_install_failed">Install failed</string>
@@ -540,7 +552,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_queue_clear_title">Clear the queue?</string>
     <string name="batch_queue_clear_description">All apps will be removed from the queue</string>
     <string name="batch_queue_keep_title">Keep the queue?</string>
-    <string name="batch_queue_keep_description">The queued apps will wait on the home screen to be started later</string>
+    <string name="batch_queue_keep_description">The queue waits on the home screen until you start it</string>
     <string name="batch_queue_keep">Keep</string>
     <string name="shortcut_repatch_short">Re-patch</string>
     <string name="shortcut_repatch_long">Re-patch outdated apps</string>
@@ -680,6 +692,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">The patched app uses a different certificate than the installed version. Uninstalling will erase all app data</string>
+    <!-- The patched APK is for another kind of device, such as TV or Wear OS, so it may not start on this one -->
+    <string name="patcher_built_for_other_device">Built for %s, so it may not start here. Save it to install on that device</string>
     <string name="patcher_installed_conflict_title">Uninstall required</string>
     <string name="patcher_installed_conflict_body">"Morphe signs patched apps with its own certificate, which differs from the original. Android requires removing the existing version before the patched app can be installed.
 
@@ -782,7 +796,7 @@ Uninstalling will permanently erase all app data"</string>
     <string name="plugin_activity_dialog_body">User interaction is required in order to proceed with this plugin</string>
     <string name="patcher_process_killed_message">The system stopped the patcher before it finished, usually to free memory. Close other apps and try again</string>
     <!-- Shown once Morphe is back after it was closed in the middle of patching, for a reason other than low memory. -->
-    <string name="patcher_interrupted_message">Morphe was closed before patching finished, so nothing was patched. Try again</string>
+    <string name="patcher_interrupted_message">Morphe was closed before patching finished. Try again</string>
     <!-- "%1$s" is where the setting is, such as "Settings > Patcher > Use embedded VM", built from the names on those screens. -->
     <string name="patcher_process_crashed_message">The patcher crashed before it finished. If it happens again, turn off %1$s and report the issue with the log</string>
     <!-- Shown when a run fills the heap it was given. "%1$s" is the heap in megabytes. -->
@@ -920,14 +934,17 @@ Uninstalling will permanently erase all app data"</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interface scale</string>
 
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_screens">Screens</string>
     <string name="settings_appearance_greeting_phrases">Greeting phrases</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Shows a greeting message</string>
     <string name="settings_appearance_repatch_notice">Re-patch notice</string>
     <string name="settings_appearance_repatch_notice_description">Shows a banner when patched apps can be re-patched</string>
     <string name="settings_appearance_more_apps_card">More apps card</string>
     <string name="settings_appearance_more_apps_card_description">Shows a card under the apps leading to community patches</string>
+    <string name="settings_appearance_games_button">Games button</string>
+    <string name="settings_appearance_games_button_description">Shows a button to the mini-games while patching and on the result</string>
     <string name="settings_appearance_app_card_colors">Card colors</string>
     <string name="settings_appearance_app_card_colors_default">Default</string>
     <string name="settings_appearance_app_card_colors_default_description">Give each app and source a color of its own</string>
@@ -1314,7 +1331,7 @@ Details: %2$s"</string>
     <string name="settings_system_apks_delete_all_confirm">This will permanently delete the saved APK files shown here</string>
     <string name="settings_system_apks_delete_selected_title">Delete selected APKs?</string>
     <string name="settings_system_apks_delete_selected_confirm">This will permanently delete the selected APK files</string>
-    <string name="settings_system_apks_deleted_all">APKs deleted successfully</string>
+    <string name="settings_system_apks_deleted_all">APKs deleted</string>
     <string name="settings_system_apks_delete_failed">Some APK files could not be deleted</string>
     <string name="settings_system_apks_export_zip_success">Selected APKs exported</string>
     <string name="settings_system_apks_export_zip_failed">Failed to export selected APKs</string>
@@ -1339,8 +1356,8 @@ Details: %2$s"</string>
     <string name="settings_system_storage_temporary_title">Temporary files</string>
     <string name="settings_system_storage_temporary_description">Working files created during patching</string>
     <string name="settings_system_storage_clear_all">Clear all caches</string>
-    <string name="settings_system_storage_clear_all_description">Frees all reclaimable cache space at once</string>
-    <string name="settings_system_storage_clear_all_confirm">This clears cached network responses, staged installer copies, and temporary files. Original and patched APKs are kept</string>
+    <string name="settings_system_storage_clear_all_description">Every cache listed above</string>
+    <string name="settings_system_storage_clear_all_confirm">Every cache above will be cleared. Original and patched APKs are kept</string>
     <string name="settings_system_storage_cleared">Freed %s</string>
     <string name="settings_system_storage_patch_running_warning">A patch is running and uses these files. Clearing them now makes it fail</string>
     <string name="settings_system_storage_clear_anyway">Clear anyway</string>
@@ -1348,15 +1365,15 @@ Details: %2$s"</string>
     <string name="settings_system_storage_open_app_info_title">Open Android app storage</string>
     <string name="settings_system_storage_open_app_info_description">Manage or clear all Morphe data through system settings</string>
     <string name="settings_system_save_original_apks_title">Keep original APKs</string>
-    <string name="settings_system_save_original_apks_description">Save the pre-patch APK so it can be reused for repatching without picking the file again</string>
+    <string name="settings_system_save_original_apks_description">Reuse the original APK when repatching, without picking the file again</string>
     <string name="settings_system_save_patched_apks_title">Keep patched APKs</string>
-    <string name="settings_system_save_patched_apks_description">Save a copy of the patched APK for later export or reinstall from the manager</string>
+    <string name="settings_system_save_patched_apks_description">Keep a copy to export or reinstall later</string>
 
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patched APKs</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
-    <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
+    <string name="settings_system_patched_apks_deleted">Patched APK deleted</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
     <string name="settings_system_patched_apks_export_zip_name" translatable="false">morphe-patched-apks.zip</string>
 

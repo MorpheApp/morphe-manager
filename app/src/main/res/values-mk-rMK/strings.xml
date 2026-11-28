@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Непотврден APK</string>
     <string name="home_invalid_signature_message">APK-то што го одбра за &lt;b&gt;%s&lt;/b&gt; не одговара на очекуваниот потписен сертификат. Можеби е модифицирано или е од недоверлив извор</string>
     <string name="home_invalid_signature_badge">Овој APK можеби не е оригинален</string>
+    <string name="home_invalid_signature_broken_message">APK што го избравте за &lt;b&gt;%s&lt;/b&gt; не ја помина проверката на потписот. Веројатно е оштетен или сè уште не е целосно преземен, па затоа преземете го повторно или изберете друга датотека</string>
+    <string name="home_invalid_signature_broken_badge">Овој APK можеби е оштетен или нецелосен</string>
+    <string name="home_invalid_signature_expected">Очакван сертификат</string>
+    <string name="home_invalid_signature_actual">Сертификат на APK-то</string>
+    <string name="home_invalid_signature_none">Нема валиден потпис</string>
     <string name="home_split_apk_warning_title">Откриен поделен APK</string>
     <string name="home_split_apk_warning_message">"Оваа датотека е APK пакување (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 

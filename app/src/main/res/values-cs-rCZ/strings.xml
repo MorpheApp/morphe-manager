@@ -377,6 +377,11 @@ Vyberte, odkud vzít její APK"</string>
     <string name="home_invalid_signature_title">Neověřené APK</string>
     <string name="home_invalid_signature_message">APK, který jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neodpovídá očekávanému podpisovému certifikátu. Může být upravený nebo z nedůvěryhodného zdroje</string>
     <string name="home_invalid_signature_badge">Toto APK nemusí být originální</string>
+    <string name="home_invalid_signature_broken_message">APK, kterou jste vybrali pro &lt;b&gt;%s&lt;/b&gt;, neprošla kontrolou podpisu. Pravděpodobně je poškozený nebo nebyl plně stažen, zkuste jej tedy stáhnout znovu nebo vybrat jiný soubor</string>
+    <string name="home_invalid_signature_broken_badge">Tento APK může být poškozený nebo neúplný</string>
+    <string name="home_invalid_signature_expected">Očekávaný certifikát</string>
+    <string name="home_invalid_signature_actual">Certifikát APK</string>
+    <string name="home_invalid_signature_none">Žádný platný podpis</string>
     <string name="home_split_apk_warning_title">Rozdělené APK detekováno</string>
     <string name="home_split_apk_warning_message">"Tento soubor je APK balíček
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

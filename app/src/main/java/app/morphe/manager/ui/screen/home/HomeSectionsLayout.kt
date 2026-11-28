@@ -122,6 +122,7 @@ class HomeChromeActions(
  * @param bottomBarHeight Height of the navigation floating over the page, which the list ends clear of.
  * @param alerts The alerts of the main screen, those swiped aside brought back from the header.
  * @param alertsHeight How far down those alerts reach under the header, which the list starts below.
+ * @param alertsFocus Focus of those alerts, which a remote passes through between the header and the list.
  * @param onHeaderHeightChange Told the header's height, for the alerts floating over the page below it.
  */
 @Composable
@@ -134,6 +135,7 @@ internal fun SectionsLayout(
     bottomBarHeight: Dp,
     alerts: HomeAlerts,
     alertsHeight: () -> Dp = { 0.dp },
+    alertsFocus: FloatingBarsRegion? = null,
     onboardingState: OnboardingState? = null,
     onHeaderHeightChange: (Dp) -> Unit = {}
 ) {
@@ -174,7 +176,8 @@ internal fun SectionsLayout(
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        onHeaderHeightChange = onHeaderHeightChange
+        onHeaderHeightChange = onHeaderHeightChange,
+        underHeader = alertsFocus
     ) { insets ->
         MainAppsSection(
             apps = apps,

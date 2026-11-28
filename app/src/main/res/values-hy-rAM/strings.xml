@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Չվերիֆիկացված APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt;-ի համար ընտրված APK-ն չի համապատասխանում սպասվող ստորագրման սերտիֆիկատին: Այն կարող է լինել փոփոխված կամ անվստահ աղբյուրից</string>
     <string name="home_invalid_signature_badge">Այս APK-ն կարող է չլինել բնօրինակը</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;-ի համար ընտրված APK-ն չի անցնում ստորագրության ստուգումը: Այն հավանաբար վնասված է կամ դեռևս լիարժեք չի ներբեռնվել, ուստի ներբեռնեք այն կրկին կամ ընտրեք մեկ այլ ֆայլի</string>
+    <string name="home_invalid_signature_broken_badge">Այս APK-ն կարող է լինել վնասված կամ թերի</string>
+    <string name="home_invalid_signature_expected">Սպասվող սերտիֆիկատը</string>
+    <string name="home_invalid_signature_actual">APK-ի սերտիֆիկատը</string>
+    <string name="home_invalid_signature_none">Վավեր ստորագրություն չկա</string>
     <string name="home_split_apk_warning_title">Հայտնաբերվել է Split APK</string>
     <string name="home_split_apk_warning_message">"Այս ֆայլը APK փաթեթ է
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

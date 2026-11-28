@@ -38,12 +38,17 @@ import app.morphe.manager.domain.installer.InstallerManager
 import app.morphe.manager.domain.manager.PatchOptionsPreferencesManager
 import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.patchNamesByUid
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
+import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.worker.PatcherWorker
 import app.morphe.manager.service.ForegroundWork
@@ -54,6 +59,7 @@ import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.patcher.patch.ApkArchitecture
+import app.morphe.patcher.patch.FormFactor
 import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -91,8 +97,7 @@ class PatcherViewModel(
     private val pm: PM,
     private val workerRepository: WorkerRepository,
     private val patchBundleRepository: PatchBundleRepository,
-    private val patchSelectionRepository: PatchSelectionRepository,
-    private val patchOptionsRepository: PatchOptionsRepository,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val installedAppRepository: InstalledAppRepository,
     private val prefs: PreferencesManager,
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
@@ -168,6 +173,12 @@ class PatcherViewModel(
     val packageName = selectedApp.packageName
     val version = selectedApp.version
 
+    // Read once at most, by the preflight check that comes first while a temporary input still
+    // exists, as it is gone by the time the finished run asks again
+    private val apkFormFactor = viewModelScope.async(start = CoroutineStart.LAZY) {
+        ApkFormFactorResolver.resolve(selectedApp, pm)
+    }
+
     /** Whether the build is mounted over the stock app rather than installed. */
     val usingMountInstall = input.useMount
 
@@ -199,7 +210,8 @@ class PatcherViewModel(
         patchBundleRepository.scopedBundleInfoFlow(
             packageName,
             input.selectedApp.version,
-            input.selectedApp.versionCode
+            input.selectedApp.versionCode,
+            { apkFormFactor.await() }
         ).first().associateBy { it.uid }
 
     /**
@@ -329,6 +341,24 @@ class PatcherViewModel(
     private var apkArchitecture: ApkArchitecture? = null
 
     /**
+     * The device the patched APK is built for when it is neither a phone nor this device, which an
+     * install here may take and still not start. Null for every other build.
+     *
+     * The APK is read only for an app the sources give a build for another device, which spares
+     * nearly every run. The output is read rather than the input, which a temporary run has
+     * deleted by now.
+     */
+    suspend fun foreignFormFactor(): FormFactor? {
+        val device = pm.deviceFormFactor()
+        val declared = patchBundleRepository.appMetadata.value[packageName]?.formFactors.orEmpty()
+        if (declared.none { it.isForeignTo(device) }) return null
+        return ApkFormFactorResolver.resolve(outputFile)?.takeIf { it.isForeignTo(device) }
+    }
+
+    // A phone build runs on the other devices well enough to install, so only the reverse counts
+    private fun FormFactor.isForeignTo(device: FormFactor) = this != FormFactor.MOBILE && this != device
+
+    /**
      * Patches the sources declare unavailable for [installerType] that the run left out, so the
      * finished app can name what it was built without instead of leaving the user to spot the
      * missing patch. One the user picked regardless of the install target is built in, so not named.
@@ -390,9 +420,12 @@ class PatcherViewModel(
         val label = withContext(Dispatchers.IO) {
             runCatching {
                 when (val selected = selectedApp) {
-                    is SelectedApp.Local -> pm.getPackageInfo(selected.file)
-                    else -> pm.getPackageInfo(packageName)
-                }?.let { with(pm) { it.label() } }
+                    // A split archive is read through its base module, which the label is read in
+                    is SelectedApp.Local -> SplitApkInspector.withRepresentativeApk(selected.file, fs.uiTempDir) {
+                        pm.getPackageInfo(it)?.let { info -> with(pm) { info.label() } }
+                    }
+                    else -> pm.getPackageInfo(packageName)?.let { with(pm) { it.label() } }
+                }
             }.getOrNull()
         }
         val bundles = collectSelectedBundleMetadata()
@@ -692,24 +725,12 @@ class PatcherViewModel(
                 return@withLock
             }
 
-            // The original's own version, as the worker records a merged one: a patch may rename
-            // the patched build's. An archive has no package info, so the run's version stands in
-            val originalVersion = pm.getPackageInfo(fileToSave)?.versionName?.takeUnless { it.isBlank() }
-                ?: input.selectedApp.version
-                ?: "unknown"
-
-            // Does original already exist in repository?
-            if (originalApkRepository.hasOriginal(packageName, originalVersion, fileToSave)) {
-                Log.d(PATCHER_LOG_TAG, "Original APK already exists in repository (version $originalVersion), skipping duplicate save")
-                return@withLock
-            }
-
-            // If we got here, we need to save the original
+            // An archive has no package info, so the run's version stands in for it
             val moveSource = (input.selectedApp as? SelectedApp.Local)?.temporary == true
-            val savedFile = originalApkRepository.saveOriginalApk(
+            val savedFile = originalApkRepository.saveIfNotKept(
                 packageName = packageName,
-                version = originalVersion,
                 sourceFile = fileToSave,
+                fallbackVersion = input.selectedApp.version ?: "unknown",
                 moveSource = moveSource,
                 forMount = usingMountInstall
             )
@@ -786,8 +807,6 @@ class PatcherViewModel(
         val sanitizedSelection = sanitizeSelection(appliedSelection, scopedBundlesForSelection)
         val sanitizedOptions = sanitizeOptions(appliedOptions, scopedBundlesForSelection)
 
-        val selectionPayload = patchBundleRepository.snapshotSelection(sanitizedSelection)
-
         val isClone = producedClone(finalPackageName, sanitizedSelection, scopedBundlesForSelection)
 
         installedAppRepository.addOrUpdate(
@@ -796,8 +815,7 @@ class PatcherViewModel(
             isClone,
             finalVersion,
             installType,
-            sanitizedSelection,
-            selectionPayload
+            sanitizedSelection
         )
 
         persistConfiguration(
@@ -826,26 +844,18 @@ class PatcherViewModel(
         selection: PatchSelection,
         options: Options,
         bundles: Map<Int, PatchBundleInfo.Scoped>
-    ) {
-        patchSelectionRepository.updateSelection(
-            configurationPackageName,
-            selection,
-            scope = input.sourceScope
-        )
+    ) = savedConfiguration.save(
+        configurationKey = configurationPackageName,
+        selection = selection,
+        scope = input.sourceScope,
         // Options simple mode keeps in its settings stay there, rather than replacing the ones
         // saved for the sources they name
-        if (input.selectedByHand) patchOptionsRepository.saveOptions(configurationPackageName, options)
-
+        options = options.takeIf { input.selectedByHand },
         // Taken here as well as before patching, because a copy starts out with no snapshot of
         // its own and would flag every patch it was just built with as new
-        bundles.forEach { (uid, bundle) ->
-            patchSelectionRepository.saveSeenPatches(
-                packageName = configurationPackageName,
-                bundleUid = uid,
-                patchNames = bundle.patches.mapTo(mutableSetOf()) { it.name }
-            )
-        }
-    }
+        seenPatches = bundles.values.patchNamesByUid(),
+        otherBuildPatches = bundles.values.otherBuildPatchesByUid()
+    )
 
     override var downloadProgress by savedStateHandle.saveable(
         key = "downloadProgress",

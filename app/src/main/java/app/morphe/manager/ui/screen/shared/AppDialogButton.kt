@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -291,11 +292,13 @@ private fun ActionColumn(actions: List<DialogAction>, modifier: Modifier = Modif
         verticalArrangement = Arrangement.spacedBy(Defaults.SpaceSmall)
     ) {
         actions.forEachIndexed { index, action ->
-            DialogActionButton(
-                action = action,
-                filled = action.isFilled(index),
-                modifier = Modifier.fillMaxWidth()
-            )
+            key(index) {
+                DialogActionButton(
+                    action = action,
+                    filled = action.isFilled(index),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }
@@ -307,13 +310,16 @@ private fun ActionRow(actions: List<DialogAction>, modifier: Modifier = Modifier
         horizontalArrangement = Arrangement.spacedBy(Defaults.SpaceMedium)
     ) {
         // Reversed so the primary action sits on the right, but emphasis still follows
-        // the priority order the caller listed
+        // the priority order the caller listed. Keyed by that order, so an action added beside
+        // the primary leaves it the same button, focus included
         actions.withIndex().reversed().forEach { (index, action) ->
-            DialogActionButton(
-                action = action,
-                filled = action.isFilled(index),
-                modifier = Modifier.weight(1f)
-            )
+            key(index) {
+                DialogActionButton(
+                    action = action,
+                    filled = action.isFilled(index),
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
     }
 }

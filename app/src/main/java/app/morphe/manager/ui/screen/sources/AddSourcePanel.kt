@@ -37,7 +37,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteSourceRe
 import app.morphe.manager.domain.repository.PatchBundleRepository.RemoteUrlCheck
 import app.morphe.manager.ui.model.NewSourceOptions
 import app.morphe.manager.ui.screen.shared.*
-import app.morphe.manager.ui.viewmodel.HomeViewModel.PickedBundle
+import app.morphe.manager.ui.viewmodel.HomeSources.PickedBundle
 import app.morphe.manager.util.CodeHost
 import app.morphe.manager.util.REMOTE_URL_PLACEHOLDER
 import app.morphe.manager.util.toFilePath

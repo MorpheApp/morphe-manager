@@ -11,12 +11,14 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateMapOf
@@ -168,6 +170,8 @@ fun AnimatedRowPill(visible: Boolean, gap: Dp = Defaults.SpaceSmall, content: @C
  *
  * @param wrapContentHeight Takes the height of the content rather than all there is, for a block
  *   centered with what stands around it until it runs out of room and scrolls.
+ * @param underTopBar What floats under the [topBar] from outside the layout, such as the alerts under
+ *   a page's header, which a remote passes through on its way between the bar and the content.
  */
 @Composable
 fun FloatingBarsLayout(
@@ -175,13 +179,14 @@ fun FloatingBarsLayout(
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     wrapContentHeight: Boolean = false,
+    underTopBar: FloatingBarsRegion? = null,
     content: @Composable BoxScope.(topHeight: Dp, bottomHeight: Dp) -> Unit
 ) {
     val currentContent = rememberUpdatedState(content)
     val focusManager = LocalFocusManager.current
-    val focus = remember(focusManager) { FloatingBarsFocus(focusManager) }
+    val focus = remember(focusManager, underTopBar) { FloatingBarsFocus(focusManager, underTopBar) }
     val contentSlot = remember(wrapContentHeight, focus) {
-        HeightKeyedContent(currentContent, wrapContentHeight, focus.contentModifier)
+        HeightKeyedContent(currentContent, wrapContentHeight, focus.content.modifier)
     }
     val topSlot: @Composable () -> Unit = {
         Box(modifier = focus.top.modifier, contentAlignment = Alignment.TopCenter) { topBar() }
@@ -217,33 +222,63 @@ fun FloatingBarsLayout(
 private enum class FloatingBarsSlot { Top, Bottom, Content }
 
 /**
- * Lands a move off a bar of a [FloatingBarsLayout] in its content. The content runs on under the
- * bars, so the area it takes up for focus reaches over them, and a search leaving a bar toward it
- * passes it by for whatever lies beyond, or finds nothing at all.
+ * One of the parts of a [FloatingBarsLayout] stacked from top to bottom, which takes [modifier]:
+ * its bars, its content, and what floats under its top bar from outside it, such as the alerts
+ * under a page's header. They lie over one another, so a search for focus leaving one passes the
+ * next by for whatever lies beyond, or finds nothing at all. A move up or down that stays within
+ * the part, or lands in the nearest part that way able to take it, stands. Any other is handed on
+ * to that part.
  */
-private class FloatingBarsFocus(private val focusManager: FocusManager) {
-    private val content = FocusRequester()
-    private var contentFocused = false
+@Stable
+class FloatingBarsRegion internal constructor(private val focusManager: FocusManager) {
+    private val requester = FocusRequester()
+    private var focused = false
 
-    val contentModifier: Modifier = Modifier
-        .focusRequester(content)
-        .onFocusChanged { contentFocused = it.hasFocus }
+    /** The parts of the layout this is one of, top first. */
+    internal var stack: List<FloatingBarsRegion> = emptyList()
 
-    val top = Bar(Key.DirectionDown, FocusDirection.Down)
-    val bottom = Bar(Key.DirectionUp, FocusDirection.Up)
-
-    /** A bar, its presses of [key] moving focus toward the content in [direction]. */
-    inner class Bar(private val key: Key, private val direction: FocusDirection) {
-        private var focused = false
-
-        val modifier: Modifier = Modifier
-            .onFocusChanged { focused = it.hasFocus }
-            .onKeyEvent { event ->
-                if (event.type != KeyEventType.KeyDown || event.key != key) return@onKeyEvent false
-                // A move the search keeps within the bar, or takes into the content, stands
-                val moved = focusManager.moveFocus(direction)
-                (moved && (focused || contentFocused)) || content.requestFocus(direction) || moved
+    val modifier: Modifier = Modifier
+        .focusRequester(requester)
+        .onFocusChanged { focused = it.hasFocus }
+        .focusGroup()
+        .onKeyEvent { event ->
+            val direction = when (event.key) {
+                Key.DirectionUp -> FocusDirection.Up
+                Key.DirectionDown -> FocusDirection.Down
+                else -> null
             }
+            event.type == KeyEventType.KeyDown && direction != null && move(direction)
+        }
+
+    private fun move(direction: FocusDirection): Boolean {
+        val moved = focusManager.moveFocus(direction)
+        if (moved && focused) return true
+        val index = stack.indexOf(this)
+        val beyond = if (direction == FocusDirection.Up) {
+            stack.subList(0, index).asReversed()
+        } else {
+            stack.subList(index + 1, stack.size)
+        }
+        return beyond.any { it.focused || it.requester.requestFocus(direction) } || moved
+    }
+}
+
+/** A [FloatingBarsRegion] for the focus of this window, for what floats under a layout's top bar. */
+@Composable
+fun rememberFloatingBarsRegion(): FloatingBarsRegion {
+    val focusManager = LocalFocusManager.current
+    return remember(focusManager) { FloatingBarsRegion(focusManager) }
+}
+
+/** The parts of a [FloatingBarsLayout], with what floats [under] its top bar between it and the content. */
+private class FloatingBarsFocus(focusManager: FocusManager, under: FloatingBarsRegion?) {
+    val top = FloatingBarsRegion(focusManager)
+    val content = FloatingBarsRegion(focusManager)
+    val bottom = FloatingBarsRegion(focusManager)
+
+    init {
+        val stack = listOfNotNull(top, under, content, bottom)
+        stack.forEach { it.stack = stack }
     }
 }
 

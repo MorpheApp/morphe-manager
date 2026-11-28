@@ -3,7 +3,7 @@
  * https://github.com/MorpheApp/morphe-manager
  */
 
-package app.morphe.manager.domain.batch
+package app.morphe.manager.domain.selection
 
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
@@ -18,7 +18,7 @@ import kotlin.test.assertEquals
  * without ever asking. It has to answer exactly as the expert dialog does, or the same app comes
  * out of the queue patched differently than it would have been from the home screen.
  */
-class BatchSelectionMergeTest {
+class SelectionMergeTest {
     private val installer = InstallerType.STANDARD
     private val architecture = ApkArchitecture.UNIVERSAL
 
@@ -168,5 +168,40 @@ class MergeNewlyAddedTest {
                 known = mapOf(1 to setOf("Opt-in"))
             )
         )
+    }
+}
+
+/**
+ * Builds of one app for different devices share a saved configuration, and a run for one build
+ * offers only its own patches. What the user chose for the other build has to survive that run.
+ */
+class KeepingOtherBuildsTest {
+    private val stored = mapOf(1 to setOf("Shared", "TV only"))
+    private val otherBuild = mapOf(1 to setOf("TV only"))
+
+    @Test
+    fun `a run for one build keeps what was chosen for the other`() {
+        assertEquals(
+            mapOf(1 to setOf("Phone only", "TV only")),
+            keepingOtherBuilds(mapOf(1 to setOf("Phone only")), stored, otherBuild)
+        )
+    }
+
+    @Test
+    fun `a patch of the other build left unchosen stays unchosen`() {
+        assertEquals(
+            mapOf(1 to setOf("Shared")),
+            keepingOtherBuilds(mapOf(1 to setOf("Shared")), mapOf(1 to setOf("Shared")), otherBuild)
+        )
+    }
+
+    @Test
+    fun `a source the run takes nothing from still keeps the other build's choice`() {
+        assertEquals(mapOf(1 to setOf("TV only")), keepingOtherBuilds(emptyMap(), stored, otherBuild))
+    }
+
+    @Test
+    fun `without another build the selection is saved as it is`() {
+        assertEquals(mapOf(1 to setOf("Shared")), keepingOtherBuilds(mapOf(1 to setOf("Shared")), stored, emptyMap()))
     }
 }

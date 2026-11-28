@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">ملف APK غير معتمد</string>
     <string name="home_invalid_signature_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; لا يتطابق مع شهادة التوقيع الأصلية. قد يكون معدلًا أو من مصدر غير موثوق به</string>
     <string name="home_invalid_signature_badge">قد لا يكون ملف APK هذا هو الأصلي</string>
+    <string name="home_invalid_signature_broken_message">ملف APK الذي اخترته لـ &lt;b&gt;%s&lt;/b&gt; فشل في فحص التوقيع. من المحتمل أن يكون تالفًا أو لم يتم تنزيله بالكامل بعد، لذا قم بتنزيله مرة أخرى أو اختر ملفًا آخر</string>
+    <string name="home_invalid_signature_broken_badge">قد يكون ملف APK هذا تالفًا أو غير مكتمل</string>
+    <string name="home_invalid_signature_expected">الشهادة المتوقعة</string>
+    <string name="home_invalid_signature_actual">شهادة ملف APK</string>
+    <string name="home_invalid_signature_none">لا يوجد توقيع صالح</string>
     <string name="home_split_apk_warning_title">تم اكتشاف ملف APK مُقسّم</string>
     <string name="home_split_apk_warning_message">"هذا الملف عبارة عن حزمة APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
@@ -1583,7 +1588,7 @@ morphe_adaptive_monochrome_custom.xml
     <string name="update_completed">تم تثبيت التحديث</string>
     <string name="install_update_manager_failed">فشل تثبيت التحديث</string>
     <string name="installing_manager_update">جارٍ تثبيت التحديث…</string>
-    <string name="installing_manager_update_hint">سيُغلق Morphe لإتمام التحديث</string>
+    <string name="installing_manager_update_hint">سيُغلَق Morphe لإتمام التحديث</string>
     <string name="downloading_manager_update">جارٍ تنزيل التحديث…</string>
     <!-- Shown while downloading when the server does not report the total size. "%1$s" is the megabytes so far. -->
     <string name="manager_update_progress_downloaded">%1$s م.ب تم تنزيلها</string>

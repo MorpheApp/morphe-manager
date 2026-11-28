@@ -62,16 +62,22 @@ class PatchOptionsRepository(db: AppDatabase) {
         }
 
     /**
-     * Save options for multiple bundles for a package
+     * Save options for multiple bundles for a package, replacing what each of them had.
+     *
+     * @param keeping Per bundle, patches whose stored options stay as they are. Their rows are
+     *   carried over as stored, since the patches may not be loaded to read them against.
      */
-    suspend fun saveOptions(packageName: String, options: Options) =
+    suspend fun saveOptions(packageName: String, options: Options, keeping: Map<Int, Set<String>> = emptyMap()) {
+        val stored = if (keeping.isEmpty()) emptyMap() else dao.getOptions(packageName)
         dao.updateOptions(options.entries.associate { (sourceUid, bundlePatchOptions) ->
             val groupId = getOrCreateGroup(sourceUid, packageName)
+            val kept = keeping[sourceUid].orEmpty() - bundlePatchOptions.keys
 
             groupId to bundlePatchOptions.serializedOptions { patchName, key, serialized ->
                 Option(groupId, patchName, key, serialized)
-            }
+            } + stored[sourceUid].orEmpty().filter { it.patchName in kept }
         })
+    }
 
     /**
      * Get all packages that have saved options for any bundle

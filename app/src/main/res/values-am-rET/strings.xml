@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">ያልተረጋገጠ APK</string>
     <string name="home_invalid_signature_message">ለ&lt;b&gt;%s&lt;/b&gt; የመረጡት APK ከሚጠበቀው የፊርማ ሰርቲፊኬት ጋር አይዛመድም። ተሻሽሎ ሊሆን ይችላል ወይም ካልተረጋገጠ ምንጭ የተገኘ ሊሆን ይችላል</string>
     <string name="home_invalid_signature_badge">ይህ APK ዋናው ላይሆን ይችላል</string>
+    <string name="home_invalid_signature_broken_message">ለ&lt;b&gt;%s&lt;/b&gt; የመረጡት APK የፊርማ ማረጋገጫ አልተሳካም። ምናልባት ተበላሽቶ ሊሆን ይችላል ወይም ገና ሙሉ በሙሉ አልወረደም፣ ስለዚህ እንደገና ያውርዱት ወይም ሌላ ፋይል ይምረጡ</string>
+    <string name="home_invalid_signature_broken_badge">ይህ APK ተበላሽቶ ወይም ያልተሟላ ሊሆን ይችላል</string>
+    <string name="home_invalid_signature_expected">የሚጠበቀው ሰርቲፊኬት</string>
+    <string name="home_invalid_signature_actual">የ APK ሰርቲፊኬት</string>
+    <string name="home_invalid_signature_none">ትክክለኛ ፊርማ የለም</string>
     <string name="home_split_apk_warning_title">የተከፈለ APK ተገኝቷል</string>
     <string name="home_split_apk_warning_message">"ይህ ፋይል የAPK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;) ነው።

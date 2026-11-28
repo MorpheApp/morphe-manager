@@ -377,6 +377,11 @@ Veldu hvaðan á að sækja APK-skrána"</string>
     <string name="home_invalid_signature_title">Óstaðfest APK</string>
     <string name="home_invalid_signature_message">Þetta APK sem þú valdir fyrir &lt;b&gt;%s&lt;/b&gt; samsvarar ekki væntanlegu undirritunarvottorði. Það gæti hafa verið breytt eða komið frá óáreiðanlegum uppruna</string>
     <string name="home_invalid_signature_badge">Þetta APK gæti ekki verið upprunalega útgáfan</string>
+    <string name="home_invalid_signature_broken_message">APK-skráin sem þú valdir fyrir &lt;b&gt;%s&lt;/b&gt; หลังจาก staðfestingar á undirskrift hennar mistekist. Hún er líklega skemmd eða var ekki hlaðin niður að lokum, svo hlað henni niður aftur eða veldu aðra skrá</string>
+    <string name="home_invalid_signature_broken_badge">Þessi APK gæti verið skemmd eða ófullnægjandi</string>
+    <string name="home_invalid_signature_expected">Vænt vottorð</string>
+    <string name="home_invalid_signature_actual">Vottorð APK-skrárinnar</string>
+    <string name="home_invalid_signature_none">Engin gild undirskrift</string>
     <string name="home_split_apk_warning_title">Skipt APK fannst</string>
     <string name="home_split_apk_warning_message">"Þessi skrá er APK-pakki (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
 

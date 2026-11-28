@@ -117,10 +117,14 @@ enum class BatchItemState {
 /**
  * The patched APK a successful run kept, with what it is named by once it leaves the manager:
  * the same name the single-app flow gives a build, see [app.morphe.manager.util.exportData].
+ *
+ * @param kept whether a copy outlives the run in the patched APK list, rather than only the
+ * workspace file the next run drops.
  */
 data class PatchedBuild(
     val file: File,
-    val exportData: ApkExportData
+    val exportData: ApkExportData,
+    val kept: Boolean
 ) {
     val exportFileName get() = ExportNameFormatter.format(exportData)
 }
@@ -136,13 +140,16 @@ enum class BatchInstallOutcome { INSTALLED, FAILED }
  *   the user deselected.
  * @param renamingPatchNames Those of [patchNames] that build the app under a package name of
  *   their own, which is what a run needs to know to tell a copy of the app from the app itself.
+ * @param otherBuildPatchNames Patches the source has for other builds of the app, see
+ *   [app.morphe.manager.patcher.patch.PatchBundleInfo.Scoped.otherBuildPatches].
  */
 data class BatchBundleRef(
     val uid: Int,
     val name: String,
     val version: String?,
     val patchNames: Set<String>,
-    val renamingPatchNames: Set<String>
+    val renamingPatchNames: Set<String>,
+    val otherBuildPatchNames: Set<String> = emptySet()
 )
 
 /**
@@ -156,6 +163,8 @@ data class BatchBundleRef(
  * @param forceVersionMismatch Set when the user chose to patch despite an unsupported version.
  * @param forceUnverifiedSignature Set when the user chose to patch an APK whose signing certificate
  *   none of the bundles vouch for. Carried along so re-resolving the item does not ask again.
+ * @param brokenSignature Set with [BatchItemState.UNVERIFIED_SIGNATURE] when no signature of the
+ *   APK verifies at all, which points at a damaged file rather than another signer.
  * @param unreadableOptionPaths Path options planning left out because nothing can be read at
  *   them anymore. The app is still patched without them, so one queued app cannot hold up the run.
  * @param restoreState State to return to when the user un-excludes the item.
@@ -190,6 +199,7 @@ data class BatchPatchItem(
     val newerVersion: String? = null,
     val forceVersionMismatch: Boolean = false,
     val forceUnverifiedSignature: Boolean = false,
+    val brokenSignature: Boolean = false,
     /** The one source simple mode was told to patch this app from, null to use every source. */
     val chosenBundleUid: Int? = null,
     /** True once the user edited the patches by hand, which resolving the app again would lose. */

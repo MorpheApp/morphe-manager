@@ -377,6 +377,11 @@ Chagua mahali pa kuchukulia APK yake"</string>
     <string name="home_invalid_signature_title">APK isiyothibitishwa</string>
     <string name="home_invalid_signature_message">APK uliyochagua kwa &lt;b&gt;%s&lt;/b&gt; hailingani na cheti cha saini kinachotarajiwa. Inaweza kuwa imebadilishwa au imetoka kwa chanzo kisichoaminika</string>
     <string name="home_invalid_signature_badge">APK hii inaweza isiwe ya asili</string>
+    <string name="home_invalid_signature_broken_message">APK uliyochagua kwa ajili ya &lt;b&gt;%s&lt;/b&gt; imeshindwa uhakiki wa saini. Inaweza kuwa imeharibika au haijapakuliwa kikamilifu, hivyo ipakulie tena au chagua faili nyingine</string>
+    <string name="home_invalid_signature_broken_badge">APK hii inaweza kuwa imeharibika au haijakamilika</string>
+    <string name="home_invalid_signature_expected">Cheti kinachotarajiwa</string>
+    <string name="home_invalid_signature_actual">Cheti cha APK</string>
+    <string name="home_invalid_signature_none">Hakuna saini halali</string>
     <string name="home_split_apk_warning_title">Split APK imegunduliwa</string>
     <string name="home_split_apk_warning_message">"Faili hili ni APK bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

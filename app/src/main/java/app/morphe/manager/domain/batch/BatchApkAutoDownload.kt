@@ -26,13 +26,17 @@ internal fun batchAutoDownloadTargets(
 }
 
 /**
- * Whether the automatic pass should fetch [newest] for this app: it has no APK or one behind it.
- * Choices the user made by hand are left alone, since a new APK resolves the app from scratch.
+ * Whether the automatic pass should fetch [newest] for this app: it has no APK, one behind it, or
+ * one past it that no patch accepts. Choices the user made by hand are left alone, since a new APK
+ * resolves the app from scratch.
+ *
+ * @param patchedVersion The newest version among the installs the run rebuilds, see [replacedBy].
  */
 internal fun BatchPatchItem.autoDownloadWanted(
     newest: BundledAppTarget?,
     canVerifySignature: Boolean,
-    ignoredVersion: String? = null
+    ignoredVersion: String? = null,
+    patchedVersion: String? = null
 ): Boolean {
     if (!canVerifySignature || selectionEdited || forceVersionMismatch) return false
     if (ignoredVersion != null && newest?.target?.version == ignoredVersion) return false
@@ -45,13 +49,18 @@ internal fun BatchPatchItem.autoDownloadWanted(
         else -> return false
     }
 
-    val target = newest?.target
     // Nothing names a version, so only an app without an APK has something to download
-    if (target == null) return state == BatchItemState.NEEDS_APK
+    val target = newest?.target ?: return state == BatchItemState.NEEDS_APK
 
     val source = source ?: return true
     val comparison = compareVersions(source.version, target.version)
-    if (comparison != 0) return comparison < 0
+    if (comparison < 0) return true
+    // Going back a version is safe only where nothing installed has to follow: a mount needs the
+    // stock app at the patched version, and Android refuses an older build over a newer one
+    if (comparison > 0) {
+        return state == BatchItemState.VERSION_MISMATCH && !useMount &&
+                compareVersions(patchedVersion, target.version) <= 0
+    }
 
     // READY already means some patch accepts the build code, so only a mismatch can be refused
     // over it while the version itself is the newest one

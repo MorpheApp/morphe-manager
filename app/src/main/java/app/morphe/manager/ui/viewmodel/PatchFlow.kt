@@ -8,8 +8,6 @@ package app.morphe.manager.ui.viewmodel
 import android.app.Application
 import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
@@ -20,40 +18,32 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.morphe.manager.R
-import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.trackingKey
 import app.morphe.manager.domain.apk.*
 import app.morphe.manager.domain.batch.BatchPatchCoordinator
-import app.morphe.manager.domain.batch.mergeNewlyAdded
 import app.morphe.manager.domain.bundles.*
 import app.morphe.manager.domain.installer.InstallerManager
-import app.morphe.manager.domain.installer.RootInstaller
 import app.morphe.manager.domain.manager.*
 import app.morphe.manager.domain.repository.*
+import app.morphe.manager.domain.selection.RunPlan
+import app.morphe.manager.domain.selection.RunPlanner
+import app.morphe.manager.domain.selection.RunRequest
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.*
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.patchNamesByUid
 import app.morphe.manager.patcher.runtime.PatcherProcesses
-import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
-import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
-import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.*
 import app.morphe.manager.ui.model.navigation.Patcher
 import app.morphe.manager.ui.screen.shared.UserMessages
-import app.morphe.manager.ui.screen.shared.readableLabel
 import app.morphe.manager.util.*
-import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.manager.util.PatchSelectionUtils.sanitizeForPatcher
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
-import app.morphe.patcher.patch.ApkArchitecture
 import app.morphe.patcher.patch.AppTarget
-import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
-import java.io.File
 
 /** Free storage below which patching is warned against before it starts. */
 const val LOW_DISK_SPACE_THRESHOLD_BYTES = 1_000_000_000L
@@ -80,20 +70,19 @@ data class WrongPackageDialogState(
  * Dialog state for APK signature mismatch warning.
  * Shown when the selected APK's signing certificate does not match
  * the expected signatures declared in the patch bundle.
+ *
+ * @param expectedCertificates SHA-256 fingerprints the sources declare for the app.
+ * @param apkCertificates SHA-256 fingerprints of the certificates the APK verifies with.
  */
 data class InvalidSignatureDialogState(
     val packageName: String,
     val appName: String,
-)
-
-/** An installed app entry shown in the universal-patch app picker. */
-data class InstalledAppPickerItem(
-    val packageName: String,
-    val label: String,
-    val packageInfo: PackageInfo,
-    val isSystemApp: Boolean,
-    val info: InstalledApkInfo
-)
+    val expectedCertificates: Set<String>,
+    val apkCertificates: Set<String>,
+) {
+    /** No signature of the APK verifies at all, which points at a damaged file, not another signer. */
+    val broken get() = apkCertificates.isEmpty()
+}
 
 /**
  * What the patch flow knows of the run it sets up, from the app it was started for to where an
@@ -140,40 +129,6 @@ data class PatchFlowSession(
 }
 
 /**
- * What a run picks its patches against: the install target and the architecture of the APK it
- * starts from. [ignoresRules] leaves every patch to be picked by hand regardless.
- */
-data class PatchTarget(
-    val installerType: InstallerType,
-    val apkArchitecture: ApkArchitecture,
-    val ignoresRules: Boolean
-) {
-    fun defaultSelected(patch: PatchInfo) = patch.defaultSelected(installerType, apkArchitecture)
-
-    /** Lock state of [patch], which a REQUIRED patch only reaches while the run is [singleBundle]. */
-    fun lockState(patch: PatchInfo, singleBundle: Boolean) =
-        if (ignoresRules) PatchLockState.NONE else patch.lockState(installerType, apkArchitecture, singleBundle)
-
-    /**
-     * [selection] under this target's availability rules, which have the final say on what the run
-     * starts with. A source not among [bundles] sits them out and is put back untouched: whether a
-     * REQUIRED patch locks turns on the run drawing from one source or several, and a source the
-     * run cannot reach is not one of them.
-     */
-    fun applyTo(selection: PatchSelection, bundles: List<PatchBundleInfo.Scoped>): PatchSelection {
-        if (ignoresRules) return selection
-        val taking = bundles.mapTo(mutableSetOf()) { it.uid }
-        val heldBack = selection.filterKeys { it !in taking }
-        return selection.filterKeys { it in taking }
-            .applyAvailability(
-                installerType,
-                apkArchitecture,
-                bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-            ) + heldBack
-    }
-}
-
-/**
  * Sets up a run of the patcher for one app: finds the APK through the dialogs in [dialogs], checks
  * it, settles the patches, and hands the run to [onStartQuickPatch]. Also opens the information on
  * an installed app, which a run can be started from.
@@ -183,24 +138,20 @@ class PatchFlow(
     private val app: Application,
     private val messages: UserMessages,
     private val patchBundleRepository: PatchBundleRepository,
-    private val originalApkRepository: OriginalApkRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
     private val sourceMuteRepository: SourceMuteRepository,
-    private val optionsRepository: PatchOptionsRepository,
-    private val patchOptionsPrefs: PatchOptionsPreferencesManager,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val prefs: PreferencesManager,
-    private val pm: PM,
-    private val rootInstaller: RootInstaller,
     private val installerManager: InstallerManager,
-    private val filesystem: Filesystem,
-    private val appDataResolver: AppDataResolver,
     private val batchPatchCoordinator: BatchPatchCoordinator,
     private val downloadUrlResolver: DownloadUrlResolver,
     private val localApkSources: LocalApkSources,
+    private val apks: PatchFlowApks,
     private val compatibleVersions: StateFlow<Map<String, List<BundledAppTarget>>>,
-    private val recommendedVersions: StateFlow<Map<String, AppTarget>>,
     expertModePanel: SelectionPanelController,
-    private val patcherProcesses: PatcherProcesses
+    private val patcherProcesses: PatcherProcesses,
+    private val runPlanner: RunPlanner,
+    downloadedApkFinder: DownloadedApkFinder
 ) : ApkDownloadHelperHost {
     /** The dialogs the flow has open, see [HomeDialog]. */
     val dialogs = HomeDialogStack()
@@ -211,6 +162,11 @@ class PatchFlow(
 
     /** The patches picked by hand for the run, while the expert dialog is open. */
     val expertMode = ExpertModeSelection(scope, expertModePanel)
+
+    /** The APK the user went to the browser for, taken once it is saved as if it had been picked. */
+    val downloadedApk = DownloadedApkLookup(downloadedApkFinder) { apk ->
+        handleApkSelection(Uri.fromFile(apk.file))
+    }
 
     /** Starts the patcher on a run once it is set up. */
     var onStartQuickPatch: ((Patcher.ViewModelParams) -> Unit)? = null
@@ -318,7 +274,7 @@ class PatchFlow(
             packageName = packageName,
             appName = appNameFor(packageName),
             repatchPackageName = repatchedPackageName,
-            recommendedVersion = recommendedVersions.value[packageName],
+            recommendedVersion = versions.recommended(),
             compatibleVersions = versions,
             // The dialog shows it picked, so it answers for the APK as a pick by hand would
             selectedVersion = versions.recommendedEntry()
@@ -485,7 +441,7 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to prepare installed APK",
             failureMessage = R.string.home_invalid_apk_io_error,
-            prepare = { copyInstalledApk(packageName, installedInfo) },
+            prepare = { apks.copyInstalled(packageName, installedInfo) },
             // Skip signature check: the installed APK may already be patched with our key
             proceed = { processSelectedAppIgnoringSignature(it) }
         )
@@ -525,19 +481,6 @@ class PatchFlow(
             }
         }
     }
-
-    /**
-     * The APK [info] describes of the installed [packageName], copied into a file of the run's
-     * own. Throws when it has gone from the device.
-     */
-    private fun copyInstalledApk(packageName: String, info: InstalledApkInfo) = SelectedApp.Local(
-        packageName = packageName,
-        version = info.version,
-        versionCode = info.versionCode,
-        file = SplitApkPreparer.copyInstalledApp(packageName, info.apkPath, info.splitPaths, filesystem.uiTempDir),
-        temporary = true,
-        fromInstalledDevice = true
-    )
 
     /**
      * Handles a helper result where the user installed the target app outside Morphe.
@@ -623,42 +566,11 @@ class PatchFlow(
             loadingInstalledApps = true
             dialogs.open(HomeDialog.InstalledAppPicker)
             try {
-                val items = withContext(Dispatchers.IO) {
-                    try {
-                        val candidates = pm.getInstalledPackages()
-                            .mapNotNull { pkgInfo ->
-                                if (pkgInfo.packageName == app.packageName) return@mapNotNull null
-                                val appInfo = pkgInfo.applicationInfo ?: return@mapNotNull null
-                                val sourceDir = appInfo.sourceDir ?: return@mapNotNull null
-                                if (!File(sourceDir).exists()) return@mapNotNull null
-                                val version = pkgInfo.versionName?.takeUnless { it.isBlank() }
-                                    ?: return@mapNotNull null
-                                val label = with(pm) { pkgInfo.label() }
-                                val splitPaths = appInfo.splitSourceDirs
-                                    ?.filter { File(it).exists() }
-                                    .orEmpty()
-                                InstalledAppPickerItem(
-                                    packageName = pkgInfo.packageName,
-                                    label = label,
-                                    packageInfo = pkgInfo,
-                                    isSystemApp = (appInfo.flags and ApplicationInfo.FLAG_SYSTEM) != 0,
-                                    info = InstalledApkInfo(
-                                        version = version,
-                                        versionCode = pm.getVersionCode(pkgInfo),
-                                        apkPath = sourceDir,
-                                        splitPaths = splitPaths
-                                    )
-                                )
-                            }
-                        // A patched build is no app to patch, it is the app's own install
-                        val patched = localApkSources.patchedInstalls(candidates.map { it.packageInfo })
-                        candidates
-                            .filterNot { it.packageName in patched }
-                            .sortedBy { it.label.lowercase() }
-                    } catch (e: Exception) {
-                        Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
-                        emptyList()
-                    }
+                val items = try {
+                    apks.installedApps()
+                } catch (e: Exception) {
+                    Log.e(LOG_TAG, "Failed to load installed apps for picker", e)
+                    emptyList()
                 }
                 installedAppsForPicker = items
             } finally {
@@ -676,7 +588,7 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to prepare APK from picker",
             failureMessage = R.string.home_invalid_apk_io_error,
-            prepare = { copyInstalledApk(item.packageName, item.info) },
+            prepare = { apks.copyInstalled(item.packageName, item.info) },
             // The picker only offers unpatched installs - skip split and signature checks.
             // Version/versionCode check still runs via processSelectedApp.
             proceed = { processSelectedApp(it, skipSplitCheck = true) }
@@ -695,11 +607,7 @@ class PatchFlow(
         scope.launch {
             processingApkSelection = true
             try {
-                val result = withContext(Dispatchers.IO) {
-                    loadLocalApk(uri)
-                }
-
-                when (result) {
+                when (val result = apks.load(uri)) {
                     is ApkLoadResult.Success -> {
                         pickedApk = result
                         // A run for any app is named by the section it started from until the file
@@ -712,7 +620,7 @@ class PatchFlow(
                         // Picked in place of the one held for a warning, which it takes the run over from
                         heldApp?.discard()
                         heldApp = null
-                        processSelectedApp(result.app)
+                        processSelectedApp(result.app, apkCertificates = result.certificates)
                     }
                     is ApkLoadResult.Unreadable -> messages.show(R.string.home_invalid_apk_unreadable)
                     is ApkLoadResult.NotAnApk -> messages.show(R.string.home_invalid_apk_not_an_apk)
@@ -741,23 +649,10 @@ class PatchFlow(
         launchApkSelection(
             logMessage = "Failed to load saved APK",
             failureMessage = null,
-            prepare = prepare@{
-                val file = File(savedInfo.filePath)
-                if (!file.exists()) {
-                    messages.show(R.string.home_app_info_repatch_no_original_apk)
-                    return@prepare null
+            prepare = {
+                apks.useSaved(packageName, savedInfo).also { saved ->
+                    if (saved == null) messages.show(R.string.home_app_info_repatch_no_original_apk)
                 }
-
-                // Mark as used
-                originalApkRepository.markUsed(packageName)
-
-                SelectedApp.Local(
-                    packageName = packageName,
-                    version = savedInfo.version,
-                    versionCode = savedInfo.versionCode,
-                    file = file,
-                    temporary = false // Don't delete saved APK files
-                )
             },
             // Saved file may be signed with our keystore - skip signature check.
             // Version/versionCode check still runs via processSelectedApp.
@@ -770,10 +665,14 @@ class PatchFlow(
      *
      * This function only answers: "do any patches EXIST for this APK?"
      * The include/selection logic is handled in [startPatchingWithApp].
+     *
+     * @param apkCertificates Certificate fingerprints of the file, when the pass that loaded it
+     *   already read them, see [ApkLoadResult.Success.certificates].
      */
     private suspend fun processSelectedApp(
         selectedApp: SelectedApp,
-        skipSplitCheck: Boolean = false
+        skipSplitCheck: Boolean = false,
+        apkCertificates: Set<String>? = null
     ) {
         // Validate package name if expected (known-app flow sets the session's package)
         val expectedPackage = session?.packageName
@@ -807,32 +706,26 @@ class PatchFlow(
 
             // Verify APK signature against the expected signatures declared in the patch bundle.
             // GET_SIGNING_CERTIFICATES (API 28+) is required for reliable archive signature reads.
-            // On Android 8–10 the legacy GET_SIGNATURES path cannot read signatures from
+            // On Android 8-10 the legacy GET_SIGNATURES path cannot read signatures from
             // archive files correctly, so we skip verification there to avoid false-blocking users.
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-                val expectedSignatures = appMetadata[selectedApp.packageName]?.signatures
-                if (!expectedSignatures.isNullOrEmpty()) {
-                    val signatureMatch = withContext(Dispatchers.IO) {
-                        SplitApkInspector.withRepresentativeApk(
-                            source = selectedApp.file,
-                            workspace = filesystem.uiTempDir
-                        ) { apk ->
-                            pm.getApkFileSignatureHashes(apk).any { it in expectedSignatures }
-                        }
-                    }
-                    if (!signatureMatch) {
-                        holdFor(
-                            HomeDialog.InvalidSignature(
-                                InvalidSignatureDialogState(
-                                    packageName = selectedApp.packageName,
-                                    appName = session?.appName ?: appNameFor(selectedApp.packageName)
-                                )
-                            ),
-                            selectedApp
+            val declared = appMetadata[selectedApp.packageName]?.signatures
+            var certificates = emptySet<String>()
+            val signature = apkSignatureCheck(Build.VERSION.SDK_INT, declared) {
+                (apkCertificates ?: apks.certificates(selectedApp.file)).also { certificates = it }
+            }
+            if (signature != ApkSignatureCheck.ACCEPTED) {
+                holdFor(
+                    HomeDialog.InvalidSignature(
+                        InvalidSignatureDialogState(
+                            packageName = selectedApp.packageName,
+                            appName = session?.appName ?: appNameFor(selectedApp.packageName),
+                            expectedCertificates = declared.orEmpty(),
+                            apkCertificates = certificates
                         )
-                        return
-                    }
-                }
+                    ),
+                    selectedApp
+                )
+                return
             }
         }
 
@@ -845,7 +738,11 @@ class PatchFlow(
         // Scoped.universal = universal patches (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository.resolvingBundleInfo(
-                selectedApp.packageName, selectedApp.version, selectedApp.versionCode, chosenBundleUidFor(selectedApp)
+                selectedApp.packageName,
+                selectedApp.version,
+                selectedApp.versionCode,
+                { apks.formFactor(selectedApp) },
+                chosenBundleUidFor(selectedApp)
             )
         }
         val support = VersionSupport(bundles)
@@ -1018,251 +915,69 @@ class PatchFlow(
     }
 
     /**
-     * Start patching flow.
+     * Start patching flow, as [RunPlanner] decides it goes on.
      *
-     * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor]. The run patches
-     *   from it alone when it was picked by hand, unless the others are shown again in the expert
-     *   dialog.
+     * @param bundleUid The source chosen for the APK, see [chosenBundleUidFor] and [RunRequest].
      */
     private suspend fun startPatchingWithApp(
         selectedApp: SelectedApp,
         allowIncompatible: Boolean,
         bundleUid: Int? = chosenBundleUidFor(selectedApp)
     ) {
-        // Read before the first selection is resolved, so every rule below and every later edit
-        // in the expert dialog is answered for the APK this run actually starts from. The rules
-        // are only ignored where the patches are shown, so nothing they would have kept out is
-        // built in unseen
-        val target = PatchTarget(
-            installerType = installerTypeFor(usingMountInstall),
-            apkArchitecture = ApkArchitectureResolver.resolve(selectedApp, pm),
-            ignoresRules = isExpertMode() &&
-                    rootInstaller.isDeviceRooted() &&
-                    prefs.ignoreInstallTargetRules.get()
-        )
-
-        // Everything this app has patches in, the sources it is kept from included: the expert
-        // dialog offers those back, so it has to be told what it is hiding
-        val availableBundles = patchBundleRepository
-            .scopedBundleInfoFlow(selectedApp.packageName, selectedApp.version, selectedApp.versionCode)
-            .first()
-
-        if (availableBundles.isEmpty()) {
-            messages.show(R.string.home_no_patches_available)
-            selectedApp.discard()
-            endRun()
-            return
-        }
-
-        // A source picked by hand answers for the run alone, so the others are held back the way
-        // the sources the app is kept from are, for this run only. The expert dialog offers them
-        // back, which is how a run mixes sources. The preselected version is no such pick: it
-        // leaves every source in, as a user who mixes sources expects
-        val fromChosenAlone = !isExpertMode() || session?.versionPicked == true
-        val heldBackSources = if (bundleUid != null && fromChosenAlone) {
-            availableBundles.mapTo(mutableSetOf()) { it.uid } - bundleUid
-        } else withContext(Dispatchers.IO) {
-            sourceMuteRepository.getMutedFor(selectedApp.packageName)
-        }
-        // Every rule below reads this rather than the full list, so a hidden source contributes
-        // no defaults, no new-patch badges and no tab
-        val allBundles = availableBundles.withoutMutedSources(heldBackSources) { it.uid }
-
-        // Spans every source, hidden ones included: what the user saved for a hidden one has to
-        // survive validation. Offering the source back would otherwise hand the run an empty
-        // selection, and then write that emptiness over what was saved
-        val bundlesMap = availableBundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-        val currentBundleUids = availableBundles.mapTo(mutableSetOf()) { it.uid }
-
-        val configurationKey = configurationKeyFor(selectedApp.packageName)
-
-        // What was saved for the app from the sources it still has patches in, read only where a
-        // selection is opened by hand
-        suspend fun savedSelections() = withContext(Dispatchers.IO) {
-            patchSelectionRepository.getAllSelectionsForPackage(configurationKey)
-                .filterKeys { it in currentBundleUids }
-        }
-        suspend fun savedOptions() = withContext(Dispatchers.IO) {
-            optionsRepository.getAllOptionsForPackage(configurationKey, bundlesMap)
-                .filterKeys { it in currentBundleUids }
-        }
-
-        // A source not standing behind this version, one marking it experimental with those
-        // switched off, contributes nothing unless the user adds it back by hand
-        val contributingBundles = allBundles.contributingAt(
-            prefs.bundleExperimentalVersionsEnabled.get(),
-            chosenUid = bundleUid
-        )
-
-        // Opens the selection by hand, which the patches' own availability for the install
-        // target has the final say on unless the run is set to ignore it
-        fun openExpertMode(
-            patches: PatchSelection,
-            options: Options,
-            newPatches: Map<Int, Set<String>> = emptyMap()
-        ) {
-            expertMode.open(
+        val plan = runPlanner.plan(
+            RunRequest(
                 app = selectedApp,
-                allBundles = availableBundles,
-                mutedSources = heldBackSources,
-                // The dialog opens on the source answering for the APK, or on the first one
-                // contributing when the others were left out
-                leadingBundleUid = bundleUid ?: contributingBundles
-                    .takeIf { it.size < allBundles.size }
-                    ?.firstOrNull()?.uid,
-                patches = target.applyTo(patches, allBundles),
-                options = options,
-                newPatches = newPatches,
+                useMount = usingMountInstall,
                 allowIncompatible = allowIncompatible,
-                target = target
+                bundleUid = bundleUid,
+                versionPicked = session?.versionPicked == true,
+                repatchPackageName = session?.repatchPackageName
             )
-            dialogs.advanceTo(HomeDialog.ExpertMode)
-        }
-
-        if (isExpertMode()) {
-            val contributingUids = contributingBundles.mapTo(mutableSetOf()) { it.uid }
-            val allSavedSelections = savedSelections()
-            val savedSelections = allSavedSelections.filterKeys { it in contributingUids }
-            // A hidden source keeps what was saved for it, so offering it back brings that along.
-            // Set apart, since the run does not reach it: what it holds decides nothing about the
-            // patches of the sources the run starts with
-            val heldBackSelections = validatePatchSelection(
-                allSavedSelections.filterKeys { it in heldBackSources },
-                bundlesMap
-            )
-            val savedOptions = savedOptions()
-
-            // The seen-patch snapshot is what tells a genuinely new patch from one the user
-            // deselected. Not read without a saved selection, so a first run flags nothing as new
-            val seenByBundle = if (savedSelections.isEmpty()) emptyMap() else withContext(Dispatchers.IO) {
-                contributingBundles.associate {
-                    it.uid to patchSelectionRepository.getSeenPatches(configurationKey, it.uid)
-                }
+        )
+        when (plan) {
+            RunPlan.NoPatches -> {
+                messages.show(R.string.home_no_patches_available)
+                selectedApp.discard()
+                endRun()
             }
-            val newPatchesMap = contributingBundles.mapNotNull { bundle ->
-                val seen = seenByBundle[bundle.uid] ?: return@mapNotNull null
-                val new = bundle.patches.mapTo(mutableSetOf()) { it.name } - seen
-                new.takeIf { it.isNotEmpty() }?.let { bundle.uid to it }
-            }.toMap()
 
-            // Use saved selections or create new ones
-            val patches = if (savedSelections.isNotEmpty()) {
-                // Count patches before validation
-                val patchesBeforeValidation = savedSelections.values.sumOf { it.size }
-
-                // Validate saved selections against available patches
-                val validatedPatches = validatePatchSelection(savedSelections, bundlesMap)
-
-                // Count patches after validation
-                val patchesAfterValidation = validatedPatches.values.sumOf { it.size }
-
-                // Tell the user if patches were removed
-                val removedCount = patchesBeforeValidation - patchesAfterValidation
-                if (removedCount > 0) {
+            is RunPlan.Expert -> {
+                if (plan.removedCount > 0) {
                     messages.show(app.resources.getQuantityString(
                         R.plurals.home_app_info_repatch_cleaned_invalid_data,
-                        removedCount,
-                        removedCount.toString()
+                        plan.removedCount,
+                        plan.removedCount.toString()
                     ))
                 }
-
-                // Runs after validation, so patches the sources dropped never sneak back in
-                mergeNewlyAdded(
-                    bundles = contributingBundles,
-                    validated = validatedPatches,
-                    known = seenByBundle::get,
-                    installerType = target.installerType,
-                    apkArchitecture = target.apkArchitecture
+                expertMode.open(
+                    app = selectedApp,
+                    allBundles = plan.allBundles,
+                    mutedSources = plan.mutedSources,
+                    leadingBundleUid = plan.leadingBundleUid,
+                    patches = plan.patches,
+                    options = plan.options,
+                    newPatches = plan.newPatches,
+                    allowIncompatible = allowIncompatible,
+                    target = plan.target
                 )
-            } else {
-                // No saved selections - use default for the contributing bundles
-                contributingBundles.toPatchSelection(allowIncompatible) { _, patch -> target.defaultSelected(patch) }
+                dialogs.advanceTo(HomeDialog.ExpertMode)
             }
 
-            // Validate options
-            val validatedOptions = validatePatchOptions(savedOptions, bundlesMap)
-
-            // Save validated options if anything changed
-            if (validatedOptions != savedOptions) {
-                withContext(Dispatchers.IO) {
-                    optionsRepository.saveOptions(configurationKey, validatedOptions)
-                }
-            }
-
-            openExpertMode(heldBackSelections + patches, validatedOptions, newPatchesMap)
-            return
-        }
-
-        // Simple Mode: collect patches from all enabled bundles, then either use the sole result directly
-        // or ask the user to pick one if multiple bundles have applicable patches.
-        // A patch is applicable if:
-        //   - it is universal, see PatchInfo.isUniversal, OR
-        //   - it names this packageName
-        val bundleWithPatches = contributingBundles
-            .filter { it.enabled }
-            .map { bundle ->
-                val patchNames = bundle.patchSequence(allowIncompatible)
-                    .filter(target::defaultSelected)
-                    .mapTo(mutableSetOf()) { it.name }
-                bundle to patchNames
-            }
-            .filter { (_, patches) -> patches.isNotEmpty() }
-        val runScope = allBundles.mapTo(mutableSetOf()) { it.uid }
-
-        // Patches simple mode picked go with the options it keeps per app, while a selection
-        // made by hand carries its own, see proceedExpertMode
-        suspend fun proceedWithSimpleSelection(patches: PatchSelection, allowIncompatible: Boolean) {
-            val options = withContext(Dispatchers.IO) {
-                patchOptionsPrefs.exportPatchOptions(selectedApp.packageName)
-            }
-            proceedWithPatching(
+            is RunPlan.ChooseSource -> holdFor(
+                HomeDialog.SimpleBundleSelect(selectedApp.packageName, plan.candidates),
                 selectedApp,
-                target.applyTo(patches, allBundles),
-                options,
+                allowIncompatible
+            )
+
+            is RunPlan.Start -> proceedWithPatching(
+                selectedApp,
+                plan.patches,
+                plan.options,
                 selectedByHand = false,
-                allowIncompatible,
-                runScope
+                plan.allowIncompatible,
+                plan.scope
             )
         }
-
-        if (bundleWithPatches.isEmpty()) {
-            // No patches have include=true (use=true in the bundle JSON).
-            // This is the case for third-party bundles where all universal patches
-            // ship with use=false and require explicit user configuration.
-            // Fall through to expert mode so the user can select and configure patches.
-            // Hidden sources are read here too, for the same reason the expert branch reads
-            // them: the dialog can offer one back, and it has to have something to offer
-            openExpertMode(savedSelections(), savedOptions())
-            return
-        }
-
-        // If the user pre-selected a bundle via SimpleBundleSelectDialog, use it directly.
-        // Use allowIncompatible=true unconditionally: the user explicitly picked this bundle
-        // AND explicitly picked the APK version, so we must respect both choices regardless
-        // of whether the version is in the bundle's supported list
-        val bundle = bundleUid?.let { uid -> allBundles.find { it.uid == uid } }
-        if (bundle != null) {
-            val patchNames = bundle.patchSequence(allowIncompatible = true)
-                .filter(target::defaultSelected)
-                .mapTo(mutableSetOf()) { it.name }
-            if (patchNames.isNotEmpty()) {
-                proceedWithSimpleSelection(mapOf(bundle.uid to patchNames), allowIncompatible = true)
-                return
-            }
-            // Pre-selected bundle has no patches at all - fall through
-        }
-
-        // Simple mode: if more than one bundle has applicable patches, ask the user which single bundle to use
-        if (bundleWithPatches.size > 1) {
-            holdFor(HomeDialog.SimpleBundleSelect(selectedApp.packageName, bundleWithPatches), selectedApp, allowIncompatible)
-            return
-        }
-
-        // Only one bundle has patches - use it directly (no prompt needed)
-        proceedWithSimpleSelection(
-            bundleWithPatches.associate { (bundle, patches) -> bundle.uid to patches },
-            allowIncompatible
-        )
     }
 
     /**
@@ -1355,28 +1070,18 @@ class PatchFlow(
             return@moveOn
         }
 
-        withContext(Dispatchers.IO) {
-                // Saved before patching runs so a long selection survives a failed run. It lands
-                // on the install being rebuilt, and follows it from there if patching renames it.
-                // Only the bundles offered by the dialog are covered by this selection, so bundles
-                // that were disabled or held back at patch time keep whatever the user saved for
-                // them earlier
-                val configurationKey = configurationKeyFor(selectedApp.packageName)
-                patchSelectionRepository.updateSelection(
-                    packageName = configurationKey,
-                    selection = finalPatches,
-                    scope = scope
-                )
-                optionsRepository.saveOptions(configurationKey, finalOptions)
-                // Snapshot all bundle patch names so next open can detect genuinely new patches
-                bundles.forEach { bundle ->
-                    patchSelectionRepository.saveSeenPatches(
-                        packageName = configurationKey,
-                        bundleUid = bundle.uid,
-                        patchNames = bundle.patches.mapTo(mutableSetOf()) { it.name }
-                    )
-                }
-            }
+        // Saved before patching runs so a long selection survives a failed run. It lands on the
+        // install being rebuilt, and follows it from there if patching renames it. Only the
+        // bundles offered by the dialog are covered by this selection, so bundles that were
+        // disabled or held back at patch time keep whatever the user saved for them earlier
+        savedConfiguration.save(
+            configurationKey = configurationKeyFor(selectedApp.packageName),
+            selection = finalPatches,
+            scope = scope,
+            options = finalOptions,
+            seenPatches = bundles.patchNamesByUid(),
+            otherBuildPatches = bundles.otherBuildPatchesByUid()
+        )
 
         proceedWithPatching(selectedApp, finalPatches, patcherOptions, selectedByHand = true, allowIncompatible, scope)
         expertMode.clear()
@@ -1558,9 +1263,11 @@ class PatchFlow(
      * Handle download instructions continue.
      */
     fun handleDownloadInstructionsContinue(handOff: (String) -> Boolean) {
-        val urlToOpen = session?.downloadUrl ?: return
+        val current = session ?: return
+        val urlToOpen = current.downloadUrl ?: return
 
         if (handOff(urlToOpen)) {
+            current.packageName?.let(downloadedApk::expect)
             dialogs.open(HomeDialog.FilePickerPrompt)
         } else {
             Log.w(LOG_TAG, "Failed to open URL")
@@ -1586,6 +1293,7 @@ class PatchFlow(
     /** Gives up the run being set up, the APK held for it and the dialogs it went through included. */
     private fun endRun() {
         downloadRedirectJob?.cancel()
+        downloadedApk.clear()
         heldApp?.discard()
         heldApp = null
         session = null
@@ -1607,56 +1315,6 @@ class PatchFlow(
         heldApp?.discard()
         expertMode.app?.discard()
     }
-
-    /**
-     * Load local APK and extract package info.
-     * Supports both single APK and split APK archives (`apkm`, `apks`, `xapk`).
-     *
-     * The file is stored in [Filesystem.uiTempDir] (app_ui_ephemeral).
-     * CacheDir can be cleared by Android at any time - even while the app is running and
-     * patching is in progress - which would cause a FileNotFoundException mid-patch.
-     * uiTempDir uses getDir() which is part of the app's private files and is never
-     * cleared by the system automatically.
-     */
-    private suspend fun loadLocalApk(uri: Uri): ApkLoadResult = withContext(Dispatchers.IO) {
-        try {
-            val tempFile = uri.copyApkInto(filesystem.uiTempDir, "temp_apk", app.contentResolver)
-                ?: return@withContext ApkLoadResult.Unreadable
-
-            // A split archive is read through its base module, deleted after the call, so the icon
-            // and the label are read in it
-            val result = SplitApkInspector.withRepresentativeApk(
-                source = tempFile,
-                workspace = filesystem.uiTempDir
-            ) { apk ->
-                val packageInfo = pm.getPackageInfo(apk)
-                when {
-                    packageInfo == null -> ApkLoadResult.NotAnApk
-                    localApkSources.isPatchedApk(apk, packageInfo.packageName) -> ApkLoadResult.AlreadyPatched
-                    else -> ApkLoadResult.Success(
-                        SelectedApp.Local(
-                            packageName = packageInfo.packageName,
-                            version = packageInfo.versionName ?: "unknown",
-                            versionCode = pm.getVersionCode(packageInfo),
-                            file = tempFile,
-                            temporary = true
-                        ),
-                        icon = appDataResolver.detachedArchiveIcon(packageInfo),
-                        label = packageInfo.readableLabel(app.packageManager)
-                    )
-                }
-            }
-
-            if (result == ApkLoadResult.NotAnApk) {
-                Log.w(LOG_TAG, "Picked file ${tempFile.name} could not be parsed as an APK")
-            }
-            if (result !is ApkLoadResult.Success) tempFile.delete()
-            result
-        } catch (e: Exception) {
-            Log.e(LOG_TAG, "Failed to load APK", e)
-            ApkLoadResult.IoError
-        }
-    }
 }
 
 /** Deletes the file of a picked APK that was copied for the run alone. */
@@ -1664,16 +1322,3 @@ private fun SelectedApp.discard() {
     if (this is SelectedApp.Local && temporary) file.delete()
 }
 
-/** Result of attempting to load a local APK file. */
-private sealed interface ApkLoadResult {
-    /** File was read and parsed successfully, with the app's icon and label where it carries them. */
-    data class Success(val app: SelectedApp.Local, val icon: Drawable?, val label: String?) : ApkLoadResult
-    /** File could not be read - provider returned null stream or zero bytes. */
-    data object Unreadable : ApkLoadResult
-    /** File was read but is not a valid APK/split archive. */
-    data object NotAnApk : ApkLoadResult
-    /** File is a patched build, which is never patched again. */
-    data object AlreadyPatched : ApkLoadResult
-    /** An unexpected IO or system exception occurred while copying or parsing. */
-    data object IoError : ApkLoadResult
-}

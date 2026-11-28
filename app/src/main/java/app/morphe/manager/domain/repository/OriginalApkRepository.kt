@@ -14,6 +14,7 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.patcher.util.NativeLibs
 import app.morphe.manager.util.FilenameUtils
+import app.morphe.manager.util.PM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
@@ -93,7 +94,8 @@ internal fun retainOriginalApk(source: File, target: File, moveSource: Boolean) 
 class OriginalApkRepository(
     db: AppDatabase,
     fs: Filesystem,
-    private val prefs: PreferencesManager
+    private val prefs: PreferencesManager,
+    private val pm: PM
 ) {
     private val dao = db.originalApkDao()
     // Use permanent directory from Filesystem instead of temporary directory
@@ -116,6 +118,27 @@ class OriginalApkRepository(
             SplitApkPreparer.isSplitArchive(file) -> false
             else -> NativeLibs.hasSigningBlock(saved) || !NativeLibs.hasSigningBlock(file)
         }
+    }
+
+    /**
+     * Keeps [sourceFile] as the original of [packageName] unless that version is kept already,
+     * see [saveOriginalApk]. Recorded under the file's own version, which a patch may have
+     * renamed in the patched build, or [fallbackVersion] where it declares none, as an archive.
+     *
+     * @return The kept file, null where nothing was saved.
+     */
+    suspend fun saveIfNotKept(
+        packageName: String,
+        sourceFile: File,
+        fallbackVersion: String,
+        moveSource: Boolean,
+        forMount: Boolean
+    ): File? {
+        val version = withContext(Dispatchers.IO) {
+            pm.getPackageInfo(sourceFile)?.versionName?.takeUnless { it.isBlank() }
+        } ?: fallbackVersion
+        if (hasOriginal(packageName, version, sourceFile)) return null
+        return saveOriginalApk(packageName, version, sourceFile, moveSource, forMount)
     }
 
     /**

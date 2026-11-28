@@ -377,6 +377,11 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="home_invalid_signature_title">Баталгаажаагүй APK</string>
     <string name="home_invalid_signature_message">&lt;b&gt;%s&lt;/b&gt;-д зориулж сонгосон APK нь хүлээгдэж буй гарын үсгийн сертификаттай тохирохгүй байна. Энэ нь өөрчлөгдсөн эсвэл найдваргүй эх сурвалжаас ирсэн байж болзошгүй</string>
     <string name="home_invalid_signature_badge">Энэхүү APK нь эх хувилбар биш байж магадгүй</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt;-т зориулж таны сонгосон APK-ны гарын үсгийн шалгалт амжилтгүй боллоо. Энэ нь гэмтсэн эсвэл бүрэн татагдаагүй байх магадлалтай тул дахин татаж авах эсвэл өөр файл сонгоно уу</string>
+    <string name="home_invalid_signature_broken_badge">Энэхүү APK нь гэмтсэн эсвэл дутуу байж болзошгүй</string>
+    <string name="home_invalid_signature_expected">Хүлээгдэж буй сертификат</string>
+    <string name="home_invalid_signature_actual">APK-ны сертификат</string>
+    <string name="home_invalid_signature_none">Хүчинтэй гарын үсэг байхгүй</string>
     <string name="home_split_apk_warning_title">Хуваагдсан APK илрэв</string>
     <string name="home_split_apk_warning_message">"Энэхүү файл нь APK багц (
 &lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;) байна.

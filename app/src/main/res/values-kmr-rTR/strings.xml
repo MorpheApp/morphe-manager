@@ -377,6 +377,11 @@ Hilbijêre ku APK ya wê ji ku derê bê"</string>
     <string name="home_invalid_signature_title">APKya nehatiye verastkirin</string>
     <string name="home_invalid_signature_message">APKya ku ji bo &lt;b&gt;%s&lt;/b&gt; hilbijartî bi sertîfîka îmzeyê ya hêvîkirî li hev nayê. Dibe ku hatibe guhertin an ji çavkaniyeke nebawer be</string>
     <string name="home_invalid_signature_badge">Dibe ku ev APK ne ya orîjînal be</string>
+    <string name="home_invalid_signature_broken_message">APKya ku we ji bo &lt;b&gt;%s&lt;/b&gt; hilbijartî di kontrolkirina îmzayê de bi ser neket. Dîserê wê xera bûye an jî hîşta temam nehatî daxistin, lewma dîsa daxine an fîleya din hilbijêre</string>
+    <string name="home_invalid_signature_broken_badge">Ev APK dibe ku xera be an jî netemam be</string>
+    <string name="home_invalid_signature_expected">Sertîfîkaya bendewar</string>
+    <string name="home_invalid_signature_actual">Sertîfîkaya APKyê</string>
+    <string name="home_invalid_signature_none">Tu îmzaya valîd tune</string>
     <string name="home_split_apk_warning_title">APKya parçekirî hate dîtin</string>
     <string name="home_split_apk_warning_message">"Ev pel bundleyek APK ye
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

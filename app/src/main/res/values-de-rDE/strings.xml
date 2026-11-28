@@ -377,6 +377,11 @@ Wähle aus, woher die APK bezogen werden soll"</string>
     <string name="home_invalid_signature_title">Unverifizierte APK</string>
     <string name="home_invalid_signature_message">Die ausgewählte APK für &lt;b&gt;%s&lt;/b&gt; passt nicht zu dem erwarteten Signaturzertifikat. Möglicherweise wurde sie modifiziert oder stammt aus einer nicht vertrauenswürdigen Quelle</string>
     <string name="home_invalid_signature_badge">Diese APK ist möglicherweise nicht die Originalversion</string>
+    <string name="home_invalid_signature_broken_message">Die für &lt;b&gt;%s&lt;/b&gt; ausgewählte APK ist in der Signaturprüfung fehlgeschlagen. Sie ist wahrscheinlich beschädigt oder wurde noch nicht vollständig heruntergeladen, laden Sie sie daher erneut herunter oder wählen Sie eine andere Datei aus</string>
+    <string name="home_invalid_signature_broken_badge">Diese APK ist möglicherweise beschädigt oder unvollständig</string>
+    <string name="home_invalid_signature_expected">Erwartetes Zertifikat</string>
+    <string name="home_invalid_signature_actual">Zertifikat der APK</string>
+    <string name="home_invalid_signature_none">Keine gültige Signatur</string>
     <string name="home_split_apk_warning_title">Split-APK erkannt</string>
     <string name="home_split_apk_warning_message">"Diese Datei ist ein APK-Bundle
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

@@ -10,9 +10,12 @@ import android.os.Build
 import android.util.Log
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.data.room.apps.installed.InstalledApp
 import app.morphe.manager.data.room.apps.installed.reinstallsByMount
 import app.morphe.manager.data.room.apps.installed.trackingKey
+import app.morphe.manager.domain.apk.ApkSignatureCheck
 import app.morphe.manager.domain.apk.LocalApkSources
+import app.morphe.manager.domain.apk.apkSignatureCheck
 import app.morphe.manager.domain.bundles.AppVersionCatalog
 import app.morphe.manager.domain.bundles.BundledAppTarget
 import app.morphe.manager.domain.bundles.supportedFor
@@ -25,13 +28,13 @@ import app.morphe.manager.domain.manager.PreferencesManager
 import app.morphe.manager.domain.repository.InstalledAppRepository
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
-import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
+import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
-import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.patcher.patch.VersionSupport
 import app.morphe.manager.patcher.patch.installerTypeFor
 import app.morphe.manager.patcher.split.SplitApkInspector
@@ -42,12 +45,9 @@ import app.morphe.manager.util.Options
 import app.morphe.manager.util.PM
 import app.morphe.manager.util.PatchSelection
 import app.morphe.manager.util.PatchSelectionUtils.applyAvailability
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchOptions
-import app.morphe.manager.util.PatchSelectionUtils.validatePatchSelection
 import app.morphe.manager.util.validateOptionPaths
 import app.morphe.manager.util.withoutFailingPaths
 import app.morphe.patcher.patch.ApkArchitecture
-import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -62,73 +62,11 @@ private const val TAG = "Morphe BatchPlanResolver"
 private const val UNSPECIFIED_VERSION = "unspecified"
 
 /**
- * Whether an attached APK may be patched without asking, given the certificates the sources
- * [declared] for the app and the [hashes] read out of the file itself.
- *
- * The same question the single-app picker answers before patching, and answered permissively
- * wherever it cannot be answered at all: [sdkInt] 29 and below cannot read certificates out of an
- * archive, an app no source declares certificates for has nothing to be checked against, and null
- * [hashes] mean the archive would not open, which says nothing either way. Empty [hashes] are the
- * opposite case and do count against the file: the archive opened and carried no certificate.
+ * The installs on the device a run for [targetId] rebuilds. A build that was only saved says nothing
+ * about the device, so it is none of them.
  */
-internal fun apkSignatureAccepted(sdkInt: Int, declared: Set<String>?, hashes: Set<String>?): Boolean {
-    if (sdkInt <= Build.VERSION_CODES.Q) return true
-    if (declared.isNullOrEmpty()) return true
-    if (hashes == null) return true
-    return hashes.any { it in declared }
-}
-
-/**
- * The patches of a source that appeared since a saved configuration was last written, and so are
- * selected by their own default rather than by what the user saved.
- *
- * [known] is the seen-patch snapshot that configuration recorded for the source. Null means there
- * is none, which is a different thing entirely from a source whose patches are all new: a source
- * added after the app was configured contributes nothing until the user picks from it, the same way
- * the expert dialog leaves it alone. A selection with no snapshot behind it, such as one restored
- * from a backup, stands as saved too, or a patch the user turned off would read as new.
- */
-internal fun newlyAddedDefaults(
-    patches: List<PatchInfo>,
-    known: Set<String>?,
-    installerType: InstallerType,
-    apkArchitecture: ApkArchitecture
-): Set<String> {
-    if (known == null) return emptySet()
-    return patches
-        .filter { it.name !in known && it.defaultSelected(installerType, apkArchitecture) }
-        .mapTo(mutableSetOf()) { it.name }
-}
-
-/**
- * A saved selection brought up to date with the patches added since it was made.
- *
- * [validated] is that selection with patches the sources no longer carry already removed. Every
- * bundle in [bundles] then contributes what [newlyAddedDefaults] asks for, measured against the
- * names [known] recalls for it.
- *
- * A bundle outside [bundles] keeps whatever [validated] holds for it. That is how a source the app
- * is kept from keeps the selection made from it while taking no part in the run.
- */
-internal fun mergeNewlyAdded(
-    bundles: List<PatchBundleInfo.Scoped>,
-    validated: PatchSelection,
-    known: (bundleUid: Int) -> Set<String>?,
-    installerType: InstallerType,
-    apkArchitecture: ApkArchitecture
-): PatchSelection = buildMap {
-    putAll(validated)
-
-    bundles.forEach { bundle ->
-        val added = newlyAddedDefaults(
-            patches = bundle.patches,
-            known = known(bundle.uid),
-            installerType = installerType,
-            apkArchitecture = apkArchitecture
-        )
-        if (added.isNotEmpty()) put(bundle.uid, getOrDefault(bundle.uid, emptySet()) + added)
-    }
-}.filterValues { it.isNotEmpty() }
+internal fun List<InstalledApp>.replacedBy(targetId: String) =
+    filter { it.trackingKey == targetId && it.installType != InstallType.SAVED }
 
 /** Architecture of the APK an item is patched from, see [ApkArchitectureResolver]. */
 internal suspend fun BatchApkSource.apkArchitecture() = when (this) {
@@ -136,6 +74,13 @@ internal suspend fun BatchApkSource.apkArchitecture() = when (this) {
     is BatchApkSource.UserFile -> ApkArchitectureResolver.resolve(file)
     is BatchApkSource.Installed ->
         ApkArchitectureResolver.resolve((listOf(apkPath) + splitPaths).map(::File))
+}
+
+/** Build of its app an item is patched from, see [ApkFormFactorResolver]. */
+internal suspend fun BatchApkSource.formFactor() = when (this) {
+    is BatchApkSource.SavedOriginal -> ApkFormFactorResolver.resolve(file)
+    is BatchApkSource.UserFile -> ApkFormFactorResolver.resolve(file)
+    is BatchApkSource.Installed -> ApkFormFactorResolver.resolve(File(apkPath))
 }
 
 /**
@@ -152,7 +97,7 @@ class BatchPlanResolver(
     private val originalApkRepository: OriginalApkRepository,
     private val installedAppRepository: InstalledAppRepository,
     private val patchSelectionRepository: PatchSelectionRepository,
-    private val patchOptionsRepository: PatchOptionsRepository,
+    private val savedConfiguration: SavedPatchConfiguration,
     private val patchOptionsPrefs: PatchOptionsPreferencesManager,
     private val prefs: PreferencesManager,
     private val fs: Filesystem,
@@ -238,7 +183,8 @@ class BatchPlanResolver(
                 return@withContext unusable(BatchItemState.NEEDS_APK, attached.packageName)
             }
 
-            if (!allowUnverifiedSignature && !attached.isSignedAsDeclaredFor(packageName)) {
+            val signature = attached.signatureCheckFor(packageName)
+            if (!allowUnverifiedSignature && signature != ApkSignatureCheck.ACCEPTED) {
                 // The file is kept rather than dropped: accepting it is one tap away, and the
                 // user would otherwise have to download the very same APK again to get there
                 return@withContext BatchPatchItem(
@@ -249,7 +195,8 @@ class BatchPlanResolver(
                     options = emptyMap(),
                     bundles = emptyList(),
                     state = BatchItemState.UNVERIFIED_SIGNATURE,
-                    useMount = mount
+                    useMount = mount,
+                    brokenSignature = signature == ApkSignatureCheck.BROKEN
                 )
             }
         }
@@ -372,7 +319,7 @@ class BatchPlanResolver(
         // A chosen source is the only one the app is patched from, and the version warnings
         // are its own
         val bundles = patchBundleRepository.resolvingBundleInfo(
-            packageName, source.version, source.versionCode, chosenBundleUid
+            packageName, source.version, source.versionCode, { source.formFactor() }, chosenBundleUid
         )
 
         // Asked of the bundles the APK is being resolved against rather than of the version
@@ -411,8 +358,9 @@ class BatchPlanResolver(
 
         if (!support.hasPatches) return blocked()
 
-        // Every source that has something to contribute is used, the same way the single-app
-        // flow merges them. Picking just one would silently drop patches the user relies on
+        // Every source that has something to contribute is used, as expert mode merges them.
+        // Simple mode asks for one instead, which a queue cannot stop to do, and picking one for
+        // the user would silently drop patches they rely on
         val contributing = bundles
             .filter { it.patchSequence(allowIncompatible).any() }
             .contributingAt(prefs.bundleExperimentalVersionsEnabled.get())
@@ -464,7 +412,8 @@ class BatchPlanResolver(
         patchNames = patches.mapTo(mutableSetOf()) { it.name },
         renamingPatchNames = patches
             .filter { it.declaresPackageName }
-            .mapTo(mutableSetOf()) { it.name }
+            .mapTo(mutableSetOf()) { it.name },
+        otherBuildPatchNames = otherBuildPatches
     )
 
     /**
@@ -476,9 +425,7 @@ class BatchPlanResolver(
     private suspend fun mountsByDefault(target: BatchTarget): Boolean {
         if (!rootInstaller.isDeviceRooted()) return false
         val defaultMounts = installerManager.mountsByDefault()
-        // A build that was only saved says nothing about how the app is installed
-        val installs = installedAppRepository.getAll().first()
-            .filter { it.trackingKey == target.id && it.installType != InstallType.SAVED }
+        val installs = installedAppRepository.getAll().first().replacedBy(target.id)
         if (installs.isEmpty()) return defaultMounts
         return installs.any { it.reinstallsByMount(defaultMounts) }
     }
@@ -506,7 +453,6 @@ class BatchPlanResolver(
         apkArchitecture: ApkArchitecture
     ): ResolvedSelection {
         val installerType = installerTypeFor(useMount)
-        val uids = bundles.mapTo(mutableSetOf()) { it.uid }
         val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
         val defaults = bundles
             .toPatchSelection(allowIncompatible) { _, patch ->
@@ -520,31 +466,14 @@ class BatchPlanResolver(
         val selectedByHand = prefs.useExpertMode.get() || defaults.isEmpty()
         if (!selectedByHand) return ResolvedSelection(defaults, selectedByHand = false)
 
-        val saved = patchSelectionRepository.getAllSelectionsForPackage(configurationKey)
-            .filterKeys { it in uids }
-
-        if (saved.isNotEmpty()) {
-            val validated = validatePatchSelection(saved, patchesByName)
-            val seenByBundle = bundles.associate {
-                it.uid to patchSelectionRepository.getSeenPatches(configurationKey, it.uid)
-            }
-
-            // Patches added to a bundle since the last run follow their own default, the same
-            // rule the expert dialog applies when it merges new patches in
-            val merged = mergeNewlyAdded(
-                bundles = bundles,
-                validated = validated,
-                known = seenByBundle::get,
-                installerType = installerType,
-                apkArchitecture = apkArchitecture
+        // Patches added to a bundle since the last run follow their own default, the same rule
+        // the expert dialog applies when it merges new patches in
+        val saved = savedConfiguration.selection(configurationKey, bundles, installerType, apkArchitecture)
+        if (saved != null && saved.patches.isNotEmpty()) {
+            return ResolvedSelection(
+                saved.patches.applyAvailability(installerType, apkArchitecture, patchesByName),
+                selectedByHand = true
             )
-
-            if (merged.isNotEmpty()) {
-                return ResolvedSelection(
-                    merged.applyAvailability(installerType, apkArchitecture, patchesByName),
-                    selectedByHand = true
-                )
-            }
         }
 
         return ResolvedSelection(defaults, selectedByHand = true)
@@ -568,11 +497,7 @@ class BatchPlanResolver(
                 .getOrDefault(emptyMap())
         }
 
-        val uids = bundles.mapTo(mutableSetOf()) { it.uid }
-        val patchesByName = bundles.associate { it.uid to it.patches.associateBy { patch -> patch.name } }
-        val saved = patchOptionsRepository.getAllOptionsForPackage(configurationKey, patchesByName)
-            .filterKeys { it in uids }
-        return validatePatchOptions(saved, patchesByName)
+        return savedConfiguration.options(configurationKey, bundles).options
     }
 
     /**
@@ -641,11 +566,10 @@ class BatchPlanResolver(
         )
     }
 
-    private fun AttachedApk.isSignedAsDeclaredFor(packageName: String) = apkSignatureAccepted(
+    private fun AttachedApk.signatureCheckFor(packageName: String) = apkSignatureCheck(
         sdkInt = Build.VERSION.SDK_INT,
-        declared = patchBundleRepository.appMetadata.value[packageName]?.signatures,
-        hashes = signatureHashes
-    )
+        declared = patchBundleRepository.appMetadata.value[packageName]?.signatures
+    ) { signatureHashes }
 
     /**
      * Source priority for unattended runs: the saved original first because it is known to be

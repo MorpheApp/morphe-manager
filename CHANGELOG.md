@@ -1,3 +1,41 @@
+## [2.9.0-dev.3](https://github.com/MorpheApp/morphe-manager/compare/v2.9.0-dev.2...v2.9.0-dev.3) (2026-11-27)
+
+### Features
+
+* Pick up the APK downloaded in the browser automatically ([61225ac](https://github.com/MorpheApp/morphe-manager/commit/61225acbd2354b61627f373bb132b6c89b6bcb2a))
+
+### Bug Fixes
+
+* Drop patches a source no longer has when opening the selection ([0249d95](https://github.com/MorpheApp/morphe-manager/commit/0249d955d48b819dba2c24db8137072832b9cfcd))
+* Let a TV remote step through the feature tour ([fe191d6](https://github.com/MorpheApp/morphe-manager/commit/fe191d653e9c15ba152922353a98b6241b111427))
+* Reach the About dialog's update button with a TV remote ([21de490](https://github.com/MorpheApp/morphe-manager/commit/21de49050af5d930c9885c7ac9e4660db4b22d44))
+
+## [2.9.0-dev.2](https://github.com/MorpheApp/morphe-manager/compare/v2.9.0-dev.1...v2.9.0-dev.2) (2026-11-27)
+
+### Features
+
+* Add a setting to hide the games button on the patcher screens ([9e11dd0](https://github.com/MorpheApp/morphe-manager/commit/9e11dd01b4e51aece972988346ac1d78777a9b5e))
+* Fetch the supported APK in batch for apps past their patches ([10f58d1](https://github.com/MorpheApp/morphe-manager/commit/10f58d1d330239514f79d87f0fb94dcd5a2a5eac))
+
+## [2.9.0-dev.1](https://github.com/MorpheApp/morphe-manager/compare/v2.8.0...v2.9.0-dev.1) (2026-11-26)
+
+### Features
+
+* Open the patched app from the root manager's module list ([#1532](https://github.com/MorpheApp/morphe-manager/issues/1532)) ([44cec40](https://github.com/MorpheApp/morphe-manager/commit/44cec40ffbe49ea417931c76f8352283072d64ff))
+* Tell a damaged APK apart from one signed by someone else ([79eb269](https://github.com/MorpheApp/morphe-manager/commit/79eb26906eb3ff837c3f277289a487cc8236c8f3))
+
+### Performance Improvements
+
+* Read a picked APK's certificates while it is unpacked ([ffb896e](https://github.com/MorpheApp/morphe-manager/commit/ffb896e7f7375f60f7d08d5a19c282c73147451b))
+* Reuse the patched build's package and version in batch runs ([a39eb39](https://github.com/MorpheApp/morphe-manager/commit/a39eb39d3f4237674af6f92e3705857fd11b44d3))
+
+### Bug Fixes
+
+* Name a split archive's app in the patching error dialog ([e50cadb](https://github.com/MorpheApp/morphe-manager/commit/e50cadbfbf87a43264d348c81b9fb1f3f9435f8c))
+* Reach the home alerts with a TV remote ([775139e](https://github.com/MorpheApp/morphe-manager/commit/775139eb53057d15ff06cc4056994053f32f5468))
+* Start the patcher JVM on 32-bit phones whose vDSO gives no time ([#1528](https://github.com/MorpheApp/morphe-manager/issues/1528)) ([2eb6031](https://github.com/MorpheApp/morphe-manager/commit/2eb6031c3eafe437a3a64dc29be6476589ada973))
+* Stop cut short patch bundles from reading as unsigned ([3cf831e](https://github.com/MorpheApp/morphe-manager/commit/3cf831e367249366f77682dccb69c486dc15cc70))
+
 ## [2.8.0](https://github.com/MorpheApp/morphe-manager/compare/v2.7.1...v2.8.0) (2026-11-26)
 
 ### Features

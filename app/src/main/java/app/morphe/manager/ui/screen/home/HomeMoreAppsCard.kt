@@ -99,7 +99,7 @@ private fun MoreAppsCard(
             title = stringResource(R.string.home_more_apps_hide_title),
             message = stringResource(
                 R.string.home_more_apps_hide_message,
-                settingsPath(R.string.appearance, R.string.settings_appearance_home_screen)
+                settingsPath(R.string.appearance, R.string.settings_appearance_screens)
             ),
             primaryText = hideAction.label,
             isPrimaryDestructive = false,

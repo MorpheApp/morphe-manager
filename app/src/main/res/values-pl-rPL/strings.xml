@@ -378,6 +378,11 @@
     <string name="home_invalid_signature_title">Niezweryfikowany plik APK</string>
     <string name="home_invalid_signature_message">Wybrany plik APK aplikacji &lt;b&gt;%s&lt;/b&gt; nie jest zgodny z oczekiwanym certyfikatem podpisu. Może być zmodyfikowany lub pochodzić z niezaufanego źródła</string>
     <string name="home_invalid_signature_badge">Ten plik APK może nie być oryginalny</string>
+    <string name="home_invalid_signature_broken_message">Wybrany plik APK dla &lt;b&gt;%s&lt;/b&gt; nie przeszedł weryfikacji podpisu. Jest on prawdopodobnie uszkodzony lub nie został w pełni pobrany, więc pobierz go ponownie lub wybierz inny plik</string>
+    <string name="home_invalid_signature_broken_badge">Ten plik APK może być uszkodzony lub niekompletny</string>
+    <string name="home_invalid_signature_expected">Oczekiwany certyfikat</string>
+    <string name="home_invalid_signature_actual">Certyfikat pliku APK</string>
+    <string name="home_invalid_signature_none">Brak poprawnego podpisu</string>
     <string name="home_split_apk_warning_title">Wykryto podzielony plik APK</string>
     <string name="home_split_apk_warning_message">"Ten plik to pakiet APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

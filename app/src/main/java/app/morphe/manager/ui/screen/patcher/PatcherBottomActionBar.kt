@@ -93,10 +93,10 @@ fun PatcherBottomActionBar(
         else -> ""
     }
     val homeLabel = if (showHomeButton) stringResource(R.string.home) else ""
+    val copyLabel = if (showCopyLogsButton) stringResource(android.R.string.copy) else ""
     val gamesLabel = if (onGamesClick != null) stringResource(R.string.mini_games_short) else ""
-    val trailingLabel = if (showCopyLogsButton) stringResource(android.R.string.copy) else ""
-    val labels = remember(leadingLabel, homeLabel, gamesLabel, trailingLabel) {
-        listOf(leadingLabel, homeLabel, gamesLabel, trailingLabel).filter { it.isNotEmpty() }
+    val labels = remember(leadingLabel, homeLabel, copyLabel, gamesLabel) {
+        listOf(leadingLabel, homeLabel, copyLabel, gamesLabel).filter { it.isNotEmpty() }
     }
 
     BoxWithConstraints(modifier = modifier.fillMaxWidth()) {
@@ -163,18 +163,7 @@ fun PatcherBottomActionBar(
                 )
             }
 
-            // Center: Mini-games button
-            if (onGamesClick != null) {
-                BarButton(
-                    onClick = onGamesClick,
-                    icon = MaterialSymbols.Rounded.Sports_esports,
-                    text = gamesLabel,
-                    showLabel = showLabels,
-                    animateEntry = animateEntry
-                )
-            }
-
-            // Right: Copy logs button
+            // Copy logs button
             if (showCopyLogsButton) {
                 BarButton(
                     onClick = {
@@ -186,11 +175,22 @@ fun PatcherBottomActionBar(
                         }
                     },
                     icon = MaterialSymbols.RoundedFilled.Content_copy,
-                    text = trailingLabel,
+                    text = copyLabel,
                     showLabel = showLabels,
                     animateEntry = animateEntry,
                     // The tone alone reports the copy, so the label keeps a stable width
                     tone = if (copied.value) BottomActionTone.Highlight else BottomActionTone.Neutral
+                )
+            }
+
+            // Right: Mini-games button, last so it keeps the same edge from patching to the result
+            if (onGamesClick != null) {
+                BarButton(
+                    onClick = onGamesClick,
+                    icon = MaterialSymbols.Rounded.Sports_esports,
+                    text = gamesLabel,
+                    showLabel = showLabels,
+                    animateEntry = animateEntry
                 )
             }
         }

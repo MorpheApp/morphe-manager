@@ -37,6 +37,7 @@ import app.morphe.manager.ui.screen.shared.MainPage
 import app.morphe.manager.ui.screen.shared.MainPagerScaffold
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.screen.shared.rememberInstallQueue
+import app.morphe.manager.ui.screen.shared.rememberFloatingBarsRegion
 import app.morphe.manager.ui.screen.shared.turnTo
 import app.morphe.manager.ui.screen.sources.LocalNetworkSourceAccess
 import app.morphe.manager.ui.screen.sources.SourcesPage
@@ -253,7 +254,8 @@ fun HomeScreen(
     }
 
     // Sources on a home server are out of reach on Android 17 until the local network is allowed
-    LocalNetworkSourceAccess(homeViewModel.patchBundleRepository)
+    val allSources by homeViewModel.patchBundleRepository.sources.collectAsStateWithLifecycle()
+    LocalNetworkSourceAccess(allSources, onGranted = homeViewModel.sources::retryLocalNetworkSources)
 
     val blockedSources by homeViewModel.patchBundleRepository.blockedSources.collectAsStateWithLifecycle(emptyMap())
     val pendingSourceUpdates by homeViewModel.patchBundleRepository.pendingUpdates.collectAsStateWithLifecycle()
@@ -305,7 +307,7 @@ fun HomeScreen(
         metadataErrors = AlertState.about(metadataFetchErrors.keys) { openPage(MainPage.SOURCES) },
         // By the versions waiting, so a newer release brings a swiped one back
         sourceUpdates = AlertState.about(pendingSourceUpdates.map { (uid, version) -> "$uid:$version" }) {
-            homeViewModel.downloadPendingUpdates()
+            homeViewModel.sources.downloadPendingUpdates()
         },
         // By what each app would be rebuilt for, so a newer version or another app brings a
         // swiped one back
@@ -335,6 +337,7 @@ fun HomeScreen(
     // How far down the alerts reach under the header, which the lists keep clear of. Read only
     // where a list is laid out, so the cards easing in and out do not recompose the screen
     val alertsHeight = remember { mutableStateOf(0.dp) }
+    val alertsFocus = rememberFloatingBarsRegion()
 
     MainPagerScaffold(
         pagerState = pagerState,
@@ -364,7 +367,8 @@ fun HomeScreen(
                     modifier = Modifier
                         .widthIn(max = Defaults.ContentMaxWidth)
                         .align(Alignment.TopCenter)
-                        .padding(top = alertsTop),
+                        .padding(top = alertsTop)
+                        .then(alertsFocus.modifier),
                     onHeightChange = { alertsHeight.value = it }
                 )
             }
@@ -493,6 +497,7 @@ fun HomeScreen(
                     bottomBarHeight = bottomBarHeight,
                     alerts = alerts,
                     alertsHeight = { alertsHeight.value },
+                    alertsFocus = alertsFocus,
                     onboardingState = onboardingState,
                     onHeaderHeightChange = { pageHeaderHeights[MainPage.APPS] = it }
                 )

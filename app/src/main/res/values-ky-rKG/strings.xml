@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Тастыкталбаган APK</string>
     <string name="home_invalid_signature_message">Сиз &lt;b&gt;%s&lt;/b&gt; үчүн тандаган APK күтүлгөн кол коюу сертификатына дал келбейт. Ал өзгөртүлгөн болушу мүмкүн же ишенимсиз булактан келген</string>
     <string name="home_invalid_signature_badge">Бул APK түп нускасы эмес болушу мүмкүн</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; үчүн сиз тандаган APK кол тамгасын текшерүүдөн өтпөй жатат. Ал бузулган болушу мүмкүн же али толук жүктөлгөн эмес, ошондуктан аны кайра жүктөп алыңыз же башка файлды тандаңыз</string>
+    <string name="home_invalid_signature_broken_badge">Бул APK бузулган же толук эмес болушу мүмкүн</string>
+    <string name="home_invalid_signature_expected">Күтүлгөн сертификат</string>
+    <string name="home_invalid_signature_actual">APKнин сертификаты</string>
+    <string name="home_invalid_signature_none">Жарамдуу кол тамга жок</string>
     <string name="home_split_apk_warning_title">Бөлүнгөн APK табылды</string>
     <string name="home_split_apk_warning_message">"Бул файл APK пакеттемеси
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

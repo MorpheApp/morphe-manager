@@ -93,28 +93,26 @@ fun SourcesPage(
     onHeaderHeightChange: (Dp) -> Unit = {},
     onSourceAdded: () -> Unit = {}
 ) {
-    val scope = rememberCoroutineScope()
-    val repository = homeViewModel.patchBundleRepository
 
     // Replacing the file of a local source keeps its uid, so the patch selection and options
     // stay attached instead of being stranded on a freshly added second source
     val openLocalBundleUpdatePicker = rememberAdaptiveFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
         onResult = { uri ->
-            val uid = homeViewModel.localBundleUpdateUid
-            homeViewModel.localBundleUpdateUid = null
-            if (uri != null && uid != null) homeViewModel.updateLocalSource(uid, uri)
+            val uid = homeViewModel.sources.localBundleUpdateUid
+            homeViewModel.sources.localBundleUpdateUid = null
+            if (uri != null && uid != null) homeViewModel.sources.updateLocalSource(uid, uri)
         }
     )
 
     val openBundlePicker = rememberAdaptiveMultiFilePicker(
         mimeTypes = MPP_FILE_MIME_TYPES,
-        onResult = homeViewModel::pickBundles
+        onResult = homeViewModel.sources::pickBundles
     )
 
     // The files picked are held outside for the picker's round trip, so they go once the panel does
     LaunchedEffect(state.isAddingSource) {
-        if (!state.isAddingSource) homeViewModel.clearPickedBundles()
+        if (!state.isAddingSource) homeViewModel.sources.clearPickedBundles()
     }
 
     SourcesPageContent(
@@ -128,37 +126,39 @@ fun SourcesPage(
                 visible = state.isAddingSource,
                 onClose = state::closeAddSource,
                 onSubmit = { urls, options ->
-                    homeViewModel.addSources(urls, options)
+                    homeViewModel.sources.addSources(urls, options)
                     state.closeAddSource()
                     onSourceAdded()
                 },
                 onPickFiles = { openBundlePicker() },
-                onRemoveFile = homeViewModel::unpickBundle,
-                localFiles = homeViewModel.pickedBundleImports,
-                onCheckUrl = repository::checkRemoteUrl,
+                onRemoveFile = homeViewModel.sources::unpickBundle,
+                localFiles = homeViewModel.sources.pickedBundleImports,
+                onCheckUrl = homeViewModel.patchBundleRepository::checkRemoteUrl,
                 modifier = Modifier.fillMaxWidth()
             )
         },
-        onDelete = { bundles -> scope.launch { repository.remove(*bundles.toTypedArray()) } },
-        onToggleEnabled = { bundles -> scope.launch { repository.disable(*bundles.toTypedArray()) } },
+        onDelete = homeViewModel.sources::removeSources,
+        onToggleEnabled = homeViewModel.sources::toggleSources,
         onUpdate = { bundles ->
             // A local source has nothing to fetch from, so it asks for a replacement file instead,
             // which can only be picked for one at a time
             val local = bundles.singleOrNull()?.takeUnless { it is RemotePatchBundle }
             if (local != null) {
-                homeViewModel.localBundleUpdateUid = local.uid
+                homeViewModel.sources.localBundleUpdateUid = local.uid
                 openLocalBundleUpdatePicker()
             } else {
-                scope.launch {
-                    repository.updateOrRepair(bundles.filterIsInstance<RemotePatchBundle>(), showMessage = true)
-                }
+                homeViewModel.sources.updateSources(bundles.filterIsInstance<RemotePatchBundle>())
             }
         },
         onRename = { bundle ->
-            homeViewModel.bundleToRename = bundle
-            homeViewModel.showRenameBundleDialog = true
+            homeViewModel.sources.bundleToRename = bundle
+            homeViewModel.sources.showRenameBundleDialog = true
         },
-        onReorder = { orderedUids -> scope.launch { repository.reorderBundles(orderedUids) } }
+        onReorder = homeViewModel.sources::reorderSources,
+        onSetUsePrerelease = homeViewModel.sources::setUsePrerelease,
+        onSetUseExperimentalVersions = homeViewModel.sources::setUseExperimentalVersions,
+        onTrustSigningKey = homeViewModel.sources::trustNewSigningKey,
+        onChangeLink = homeViewModel.sources::changeSourceLink
     )
 }
 
@@ -175,7 +175,11 @@ private fun SourcesPageContent(
     onToggleEnabled: (List<PatchBundleSource>) -> Unit,
     onUpdate: (List<PatchBundleSource>) -> Unit,
     onRename: (PatchBundleSource) -> Unit,
-    onReorder: (List<Int>) -> Unit
+    onReorder: (List<Int>) -> Unit,
+    onSetUsePrerelease: (List<PatchBundleSource>, Boolean) -> Unit,
+    onSetUseExperimentalVersions: (List<PatchBundleSource>, Boolean) -> Unit,
+    onTrustSigningKey: (RemotePatchBundle) -> Unit,
+    onChangeLink: (RemotePatchBundle, String) -> Unit
 ) {
     val patchBundleRepository: PatchBundleRepository = koinInject()
     val prefs: PreferencesManager = koinInject()
@@ -353,20 +357,15 @@ private fun SourcesPageContent(
         if (bundles.any { it.uid == bundleToShowChangelogUid }) {
             bundleToShowChangelogUid = null
         }
-        scope.launch {
-            patchBundleRepository.setUsePrerelease(bundles.uids(), usePrerelease)
-        }
+        onSetUsePrerelease(bundles, usePrerelease)
     }
 
     fun setPrerelease(bundles: List<PatchBundleSource>, usePrerelease: Boolean) {
         if (usePrerelease) bundlesToConfirmPrerelease.value = bundles else applyPrerelease(bundles, false)
     }
 
-    fun setExperimentalVersions(bundles: List<PatchBundleSource>, useExperimental: Boolean) {
-        scope.launch {
-            patchBundleRepository.setUseExperimentalVersions(bundles.uids(), useExperimental)
-        }
-    }
+    fun setExperimentalVersions(bundles: List<PatchBundleSource>, useExperimental: Boolean) =
+        onSetUseExperimentalVersions(bundles, useExperimental)
 
     // Check if only default bundle exists
     val isSingleDefaultBundle = sources.size == 1
@@ -715,7 +714,7 @@ private fun SourcesPageContent(
             newKey = (metadataFetchErrors[bundle.uid] as? PatchBundleSignerChangedException)?.signerFingerprint,
             onTrust = {
                 bundleToTrustKey = null
-                scope.launch { patchBundleRepository.trustNewSigningKey(bundle) }
+                onTrustSigningKey(bundle)
             },
             onDismiss = { bundleToTrustKey = null }
         )
@@ -729,7 +728,7 @@ private fun SourcesPageContent(
             onDismissRequest = { bundleToChangeLink = null },
             onConfirm = { url ->
                 bundleToChangeLink = null
-                scope.launch { patchBundleRepository.changeRemoteLink(bundle, url) }
+                onChangeLink(bundle, url)
             }
         )
     }
@@ -808,8 +807,6 @@ private fun PatchBundleSource.sourceSortTitle(): String =
 /** Whether the source's own name answers to a search query, before its patches are consulted. */
 private fun PatchBundleSource.matchesQuery(query: String): Boolean =
     displayTitle.contains(query, ignoreCase = true) || name.contains(query, ignoreCase = true)
-
-private fun List<PatchBundleSource>.uids() = mapTo(mutableSetOf()) { it.uid }
 
 /**
  * Whether the experimental app versions switch is offered for the source, given the uids of the

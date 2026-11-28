@@ -377,6 +377,11 @@ Välj var dess APK ska hämtas ifrån"</string>
     <string name="home_invalid_signature_title">Overifierad APK-fil</string>
     <string name="home_invalid_signature_message">Den APK-fil du har valt för &lt;b&gt;%s&lt;/b&gt; matchar inte det förväntade signeringscertifikatet. Den kan ha modifierats eller vara från en opålitlig källa.</string>
     <string name="home_invalid_signature_badge">Den här APK-filen kanske inte är den ursprungliga</string>
+    <string name="home_invalid_signature_broken_message">Den APK som du valde för &lt;b&gt;%s&lt;/b&gt; misslyckas med sin signaturkontroll. Den är förmodligen skadad eller har inte laddats ner helt ännu, så ladda ner den igen eller välj en annan fil</string>
+    <string name="home_invalid_signature_broken_badge">Denna APK kan vara skadad eller ofullständig</string>
+    <string name="home_invalid_signature_expected">Förväntat certifikat</string>
+    <string name="home_invalid_signature_actual">APK-certifikat</string>
+    <string name="home_invalid_signature_none">Ingen giltig signatur</string>
     <string name="home_split_apk_warning_title">Delad APK-fil upptäckt</string>
     <string name="home_split_apk_warning_message">"Den här filen är ett APK-arkiv
 (&lt;b&gt;APKM/APKS/XAPK&lt;/b&gt;). 

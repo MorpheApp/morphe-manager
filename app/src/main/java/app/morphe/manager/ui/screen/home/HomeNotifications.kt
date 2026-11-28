@@ -15,7 +15,6 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -33,12 +32,12 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
@@ -276,15 +275,9 @@ fun NotificationsOverlay(
             },
             {
                 // Over the cards peeking out under the top one, so a tap there unfolds the stack
-                // rather than opening whichever card it lands on. Left out of what a screen reader
-                // goes through, which unfolds the stack from the chip offering the same
-                Box(
-                    modifier = Modifier
-                        .clearAndSetSemantics {}
-                        .clickable(interactionSource = null, indication = null) {
-                            foldTo(StackFold.Unfolded)
-                        }
-                )
+                // rather than opening whichever card it lands on. A touch gesture alone, as a screen
+                // reader and a remote unfold the stack from the chip offering the same
+                Box(modifier = Modifier.pointerInput(Unit) { detectTapGestures { foldTo(StackFold.Unfolded) } })
             },
             {
                 AlertStackControls(

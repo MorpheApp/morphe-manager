@@ -377,6 +377,11 @@ Chọn nơi lấy tệp APK của nó"</string>
     <string name="home_invalid_signature_title">APK chưa xác minh</string>
     <string name="home_invalid_signature_message">Tệp APK bạn chọn cho &lt;b&gt;%s&lt;/b&gt; không khớp với chữ ký dự kiến. Nó có thể đã bị chỉnh sửa hoặc đến từ một nguồn không đáng tin</string>
     <string name="home_invalid_signature_badge">Không phải APK gốc</string>
+    <string name="home_invalid_signature_broken_message">APK bạn đã chọn cho &lt;b&gt;%s&lt;/b&gt; không vượt qua kiểm tra chữ ký. Có thể tệp này bị hỏng hoặc chưa được tải xuống đầy đủ, vì vậy hãy tải lại hoặc chọn tệp khác</string>
+    <string name="home_invalid_signature_broken_badge">APK này có thể bị hỏng hoặc không đầy đủ</string>
+    <string name="home_invalid_signature_expected">Chứng chỉ mong đợi</string>
+    <string name="home_invalid_signature_actual">Chứng chỉ của APK</string>
+    <string name="home_invalid_signature_none">Không có chữ ký hợp lệ</string>
     <string name="home_split_apk_warning_title">Phát hiện APK chia nhỏ</string>
     <string name="home_split_apk_warning_message">"Đây là gói APK chia nhỏ
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

@@ -35,4 +35,10 @@ val viewModelModule = module {
     viewModelOf(::OriginalApksViewModel)
     // One of its own for each screen that edits a selection, as it holds that screen's panel
     factoryOf(::SelectionPanelController)
+    // Owned by the home screen, which hands them its scope, the sources its app list, and the patch
+    // flow its version data
+    factoryOf(::HomeApps)
+    factoryOf(::HomeSources)
+    factoryOf(::PatchFlow)
+    factoryOf(::PatchFlowApks)
 }

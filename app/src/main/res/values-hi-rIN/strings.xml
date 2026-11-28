@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">अपरिचित APK</string>
     <string name="home_invalid_signature_message">आपके द्वारा चयनित APK &lt;b&gt;%s&lt;/b&gt; प्रमाण पत्र से मेल नहीं खाता। यह संशोधित किया गया हो सकता है या किसी अविश्वसनीय स्रोत से हो सकता है</string>
     <string name="home_invalid_signature_badge">यह APK मूल नहीं हो सकता है</string>
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; के लिए आपने जो APK चुना है, वह सिग्नेचर चेक में विफल रहा। यह संभवतः क्षतिग्रस्त है या अभी तक पूरी तरह से डाउनलोड नहीं हुआ है, इसलिए इसे फिर से डाउनलोड करें या कोई दूसरी फ़ाइल चुनें</string>
+    <string name="home_invalid_signature_broken_badge">यह APK क्षतिग्रस्त या अधूरा हो सकता है</string>
+    <string name="home_invalid_signature_expected">अपेक्षित प्रमाणपत्र</string>
+    <string name="home_invalid_signature_actual">APK का प्रमाणपत्र</string>
+    <string name="home_invalid_signature_none">कोई मान्य हस्ताक्षर नहीं</string>
     <string name="home_split_apk_warning_title">APK का विभाजन पता चला</string>
     <string name="home_split_apk_warning_message">"यह फ़ाइल एक APK बंडल है
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

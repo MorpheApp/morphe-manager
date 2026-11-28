@@ -172,9 +172,9 @@
     <string name="sources_patches_source_disabled_hint">Tá an fhoinse seo díchumasaithe. Tá na paistí a bhaineann léi liostaithe mar thagairt agus níl siad curtha i bhfeidhm.</string>
     <string name="sources_management_open_in_browser">Oscail sa bhrabhsálaí</string>
     <string name="sources_management_report_issue">Tuairiscigh fadhb</string>
-    <string name="sources_management_export_patches">Easpórtáil comhad paisteáilteAsString</string>
-    <string name="sources_management_export_patches_success">Sábháilte comhad paisteáilteAsString</string>
-    <string name="sources_management_export_patches_failed">Theip ar comhad paisteáilte a easpórtáilAsString</string>
+    <string name="sources_management_export_patches">Easpórtáil comhad paistí</string>
+    <string name="sources_management_export_patches_success">Comhad paistí sábháilte</string>
+    <string name="sources_management_export_patches_failed">Theip ar onnmhairiú an chomhaid paistí</string>
     <string name="sources_management_failed_to_open_url">Teip ar URL a oscailt</string>
     <string name="sources_apps">Aipeanna</string>
     <string name="sources_apps_description">Tagann aipeanna atá marcáilte ón bhfoinse seo. Tapáil aip chun í a fhágáil ar lár nó chun í a thabhairt ar ais; sleamhnaigh í chun a paistí a fheiceáil. Má bhaintear foinse, imeoidh na haipeanna a tháinig ón bhfoinse sin ón scáileán baile, mura rud é gur chuir tú paiste i bhfeidhm orthu.</string>
@@ -377,6 +377,11 @@ Roghnaigh cá as a bhfaighfear an APK"</string>
     <string name="home_invalid_signature_title">APK neamhfhíoraithe</string>
     <string name="home_invalid_signature_message">Ní hionann an APK a roghnaigh tú do &lt;b&gt;%s&lt;/b&gt; agus an deimhniú sínithe a bhfuiltear ag súil leis. Seans go bhfuil sé modhnaithe nó go bhfuil sé ó fhoinse neamhiontaofa.</string>
     <string name="home_invalid_signature_badge">B’fhéidir nach é an APK seo an bunleagan</string>
+    <string name="home_invalid_signature_broken_message">Ní tharla seiceáil sínithe don APK a roghnaigh tú do &lt;b&gt;%s&lt;/b&gt;. Tá sé damaged go háireachtach nó ní raibh sé íoslódáilte go hiomlán go fóill, mar sin íoslaodhaigh é arís nó roghnaigh comhad eile</string>
+    <string name="home_invalid_signature_broken_badge">Seacta gur damaged nó go bhfuil an APK seo neamhiomlán</string>
+    <string name="home_invalid_signature_expected">Ceadbraitheachateach iontais</string>
+    <string name="home_invalid_signature_actual">Ceadbraitheachateach an APK</string>
+    <string name="home_invalid_signature_none">Níl aon shínníú bailí ann</string>
     <string name="home_split_apk_warning_title">APK scoilte braite</string>
     <string name="home_split_apk_warning_message">"Is pacáiste APK é an comhad seo
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

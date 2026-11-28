@@ -20,6 +20,8 @@ import androidx.lifecycle.viewModelScope
 import app.morphe.manager.R
 import app.morphe.manager.data.platform.Filesystem
 import app.morphe.manager.data.room.apps.installed.InstallType
+import app.morphe.manager.domain.apk.DownloadedApk
+import app.morphe.manager.domain.apk.DownloadedApkFinder
 import app.morphe.manager.domain.apk.InstalledApkInfo
 import app.morphe.manager.domain.apk.LocalApkSources
 import app.morphe.manager.domain.apk.SavedApkInfo
@@ -39,6 +41,7 @@ import app.morphe.manager.domain.repository.SelectionSetSummary
 import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.patcher.patch.*
 import app.morphe.manager.ui.model.ApkDownloadHelperHost
+import app.morphe.manager.ui.model.DownloadedApkLookup
 import app.morphe.manager.ui.model.PostPatchPrompts
 import app.morphe.manager.ui.model.createApkDownloadHelperRequest
 import app.morphe.manager.ui.model.helperSignatureCheckAvailable
@@ -194,11 +197,20 @@ class BatchPatcherViewModel(
     private val localApkSources: LocalApkSources,
     private val prefs: PreferencesManager,
     private val homeAppButtonPrefs: HomeAppButtonPreferences,
+    downloadedApkFinder: DownloadedApkFinder,
     rootInstaller: RootInstaller,
     /** Panel the editor docks under its list, with the sets kept for the app and the copies. */
     val editPanel: SelectionPanelController
 ) : ViewModel(), ApkDownloadHelperHost {
     val state = coordinator.state
+
+    /** The sources, and what they declare for each app, which the queue's dialogs show. */
+    val sources = patchBundleRepository.sources
+    val appMetadata = patchBundleRepository.appMetadata
+
+    /** Settings the queue screen reads, edited elsewhere. */
+    val useExpertMode = prefs.useExpertMode
+    val autoDownloadApkHelpers = prefs.autoDownloadApkHelpersInBatch
 
     /** Notification and tour prompts raised once the queue installs or saves an app. */
     val postPatchPrompts = PostPatchPrompts(app, prefs, viewModelScope)
@@ -499,6 +511,9 @@ class BatchPatcherViewModel(
     var attachPrompt: BatchPatchItem? by mutableStateOf(null)
         private set
 
+    /** The APK [attachPrompt] waits on, given to its app once the browser saved it. */
+    val downloadedApk = DownloadedApkLookup(downloadedApkFinder, ::useDownloadedApk)
+
     /**
      * Hands the download page to the browser or the clipboard and leaves a prompt behind.
      *
@@ -511,6 +526,7 @@ class BatchPatcherViewModel(
         apkSearch = null
         if (handOff(search.url)) {
             attachPrompt = search.item
+            downloadedApk.expect(search.item.packageName)
         } else {
             messages.show(R.string.sources_management_failed_to_open_url)
         }
@@ -518,6 +534,14 @@ class BatchPatcherViewModel(
 
     fun dismissAttachPrompt() {
         attachPrompt = null
+        downloadedApk.clear()
+    }
+
+    /** Gives the app [attachPrompt] waits on the APK found in the Download folder. */
+    private fun useDownloadedApk(apk: DownloadedApk) {
+        val item = attachPrompt ?: return
+        dismissAttachPrompt()
+        attachApk(item.id, Uri.fromFile(apk.file), fetched = false)
     }
 
     override val helperSignatureCheckAvailable: Boolean
@@ -554,7 +578,7 @@ class BatchPatcherViewModel(
     override fun onHelperApkReceived(uri: Uri) {
         val search = apkSearch ?: return
         apkSearch = null
-        attachPrompt = null
+        dismissAttachPrompt()
         attachApk(search.item.id, uri, fetched = search.auto)
     }
 
@@ -568,7 +592,7 @@ class BatchPatcherViewModel(
         }
 
         apkSearch = null
-        attachPrompt = null
+        dismissAttachPrompt()
         // Re-resolved rather than taken on the helper's word: an installed app is only accepted
         // while it still looks like the stock one, see BatchPlanResolver
         val resolution = coordinator.useSource(item.id, preferInstalled = true)
@@ -598,14 +622,16 @@ class BatchPatcherViewModel(
      * patches is selected, the editor opens next, as the single-app flow opens the selection after
      * the APK, so the app is not left for the user to find the editor for. Otherwise, the APK
      * question is closed, having waited for the answer.
+     *
+     * @param confirm whether the user chose the APK, which is then confirmed with a message.
      */
-    private suspend fun settleGivenApk(itemId: String, resolution: Job?) = whileProcessingApk {
+    private suspend fun settleGivenApk(itemId: String, resolution: Job?, confirm: Boolean = true) = whileProcessingApk {
         resolution?.join()
         // Another APK given to the app meanwhile settles all this itself
         if (resolution?.isCancelled == true) return@whileProcessingApk
         val item = state.value?.items?.firstOrNull { it.id == itemId }?.takeIf { resolution != null }
         // The card changes little for an APK of the version it already had, so the choice is confirmed
-        if (item?.source != null) messages.show(R.string.batch_patch_apk_selected)
+        if (confirm && item?.source != null) messages.show(R.string.batch_patch_apk_selected)
         if (item?.state == BatchItemState.NO_SELECTION && item.source != null) {
             openEdit(item)
         } else if (apkChoice?.item?.id == itemId) {
@@ -630,7 +656,7 @@ class BatchPatcherViewModel(
     private suspend fun openEdit(item: BatchPatchItem) {
         val source = item.source ?: return
         val bundles = patchBundleRepository
-            .offeredBundleInfoFlow(item.packageName, source.version, source.versionCode)
+            .offeredBundleInfoFlow(item.packageName, source.version, source.versionCode) { source.formFactor() }
             .first()
             .filter { it.enabled }
 
@@ -742,11 +768,13 @@ class BatchPatcherViewModel(
                 }
                 val resolution = coordinator.attachFetchedApk(itemId, file)
                 resolution?.join()
-                val source = state.value?.items?.firstOrNull { it.id == itemId }?.source
-                if (resolution?.isCancelled == false && (source as? BatchApkSource.UserFile)?.file != file) {
-                    messages.show(R.string.batch_patch_auto_download_kept)
+                val item = state.value?.items?.firstOrNull { it.id == itemId }
+                if (resolution?.isCancelled == false && (item?.source as? BatchApkSource.UserFile)?.file != file) {
+                    // The automatic pass moves on through the queue, so the message names its app
+                    messages.show(R.string.batch_patch_auto_download_kept, item?.appName.orEmpty())
                 } else {
-                    settleGivenApk(itemId, resolution)
+                    // Nobody chose this APK, the card updating is all the pass needs to show
+                    settleGivenApk(itemId, resolution, confirm = false)
                 }
             }
         }
@@ -827,9 +855,7 @@ class BatchPatcherViewModel(
         installedPackageName: String,
         installType: InstallType
     ): Boolean = withContext(Dispatchers.IO) {
-        val selectionPayload = patchBundleRepository.snapshotSelection(item.selection)
-        val version = item.patchedBuild
-            ?.let { pm.getPackageInfo(it.file)?.versionName?.takeUnless { name -> name.isBlank() } }
+        val version = item.patchedBuild?.exportData?.appVersion
             ?: item.version
             ?: return@withContext false
 
@@ -839,8 +865,7 @@ class BatchPatcherViewModel(
             isClone = item.producesCloneAs(installedPackageName),
             version = version,
             installType = installType,
-            patchSelection = item.selection,
-            selectionPayload = selectionPayload
+            patchSelection = item.selection
         )
         true
     }
@@ -855,8 +880,9 @@ class BatchPatcherViewModel(
                 state,
                 versionCatalog.compatibleVersions,
                 patchBundleRepository.appMetadata,
-                homeAppButtonPrefs.ignoredVersions
-            ) { current, catalog, metadata, ignored ->
+                homeAppButtonPrefs.ignoredVersions,
+                installedAppRepository.getAll()
+            ) { current, catalog, metadata, ignored, installs ->
                 current?.takeIf { it.phase == BatchPhase.PREFLIGHT }?.items.orEmpty().mapNotNull { item ->
                     val compatible = batchAutoDownloadTargets(item, catalog[item.packageName].orEmpty())
                     val newest = compatible.recommendedEntry()
@@ -864,7 +890,9 @@ class BatchPatcherViewModel(
                         item.autoDownloadWanted(
                             newest = newest,
                             canVerifySignature = helperSignatureCheckAvailable(metadata[item.packageName]),
-                            ignoredVersion = ignored[item.packageName]
+                            ignoredVersion = ignored[item.packageName],
+                            patchedVersion = installs.replacedBy(item.id)
+                                .maxOfWithOrNull(Comparator(::compareVersions)) { it.version }
                         )
                     }
                 }

@@ -377,6 +377,11 @@
     <string name="home_invalid_signature_title">Μη επαληθευμένο APK</string>
     <string name="home_invalid_signature_message">Το APK που επιλέξατε για το &lt;b&gt;%s&lt;/b&gt; δεν ταιριάζει με το αναμενόμενο πιστοποιητικό υπογραφής. Μπορεί να έχει τροποποιηθεί ή να προέρχεται από μη αξιόπιστη πηγή</string>
     <string name="home_invalid_signature_badge">Αυτό το APK μπορεί να μην είναι το πρωτότυπο</string>
+    <string name="home_invalid_signature_broken_message">Το APK που επιλέξατε για το &lt;b&gt;%s&lt;/b&gt; απέτυχε στον έλεγχο υπογραφής. Πιθανότατα είναι κατεστραμμένο ή δεν έχει ληφθεί πλήρως, επομένως κατεβάστε το ξανά ή επιλέξτε άλλο αρχείο</string>
+    <string name="home_invalid_signature_broken_badge">Αυτό το APK ενδέχεται να είναι κατεστραμμένο ή ελλιπές</string>
+    <string name="home_invalid_signature_expected">Αναμενόμενο πιστοποιητικό</string>
+    <string name="home_invalid_signature_actual">Πιστοποιητικό του APK</string>
+    <string name="home_invalid_signature_none">Καμία έγκυρη υπογραφή</string>
     <string name="home_split_apk_warning_title">Ανιχνεύθηκε διαχωρισμένο APK</string>
     <string name="home_split_apk_warning_message">"Αυτό το αρχείο είναι ένα πακέτο APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

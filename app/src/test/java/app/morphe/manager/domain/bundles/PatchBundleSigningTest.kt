@@ -8,6 +8,7 @@ package app.morphe.manager.domain.bundles
 import app.morphe.patcher.patch.PatchBundleSignature
 import kotlinx.coroutines.runBlocking
 import java.io.File
+import java.io.IOException
 import java.nio.file.Files
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -91,6 +92,15 @@ class PatchBundleSigningTest {
     }
 
     @Test
+    fun `bundle cut short is a failed download rather than an unsigned one`() {
+        install(bundle(1, KEY))
+        val bundle = bundle(2, KEY).apply { writeBytes(readBytes().copyOf(length().toInt() / 2)) }
+
+        assertFailsWith<IOException> { install(bundle) }
+        assertEquals(PUBLIC_KEY, source().signingKey)
+    }
+
+    @Test
     fun `trusted new key is taken`() {
         install(bundle(1, KEY))
         source().trustSigningKey(OTHER_PUBLIC_KEY)
@@ -103,8 +113,11 @@ class PatchBundleSigningTest {
     @Test
     fun `changed bundle is refused`() {
         val bundle = bundle(1, KEY).apply {
+            // A byte of the entry's data, past its local header, so the archive stays whole and
+            // only the signature can tell. Anywhere else the bundle reads as a broken download
+            val dataOffset = LOCAL_HEADER_SIZE + "classes.dex".length
             val bytes = readBytes()
-            bytes[100] = (bytes[100].toInt() xor 1).toByte()
+            bytes[dataOffset] = (bytes[dataOffset].toInt() xor 1).toByte()
             writeBytes(bytes)
         }
 
@@ -113,6 +126,8 @@ class PatchBundleSigningTest {
     }
 
     private companion object {
+        const val LOCAL_HEADER_SIZE = 30
+
         // Keys made of the bytes 0 to 31 and of 32 sevens
         const val KEY = "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8="
         const val PUBLIC_KEY = "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg="

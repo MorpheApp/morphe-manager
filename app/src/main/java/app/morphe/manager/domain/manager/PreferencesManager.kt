@@ -85,6 +85,9 @@ class PreferencesManager(
 
     /** Whether the apps list ends on a card leading to the community patches for more apps. */
     val showMoreAppsCard = booleanPreference("show_more_apps_card", true)
+
+    /** The games stay reachable from the settings, so the patcher screens can do without their button. */
+    val showGamesButton = booleanPreference("show_games_button", true)
     val customAccentColor = stringPreference("custom_accent_color", "")
     val customThemeColor = stringPreference("custom_theme_color", "")
     val appCardColorMode = enumPreference("app_card_color_mode", AppCardColorMode.DEFAULT)
@@ -382,6 +385,7 @@ class PreferencesManager(
         val disablePatchVersionCompatCheck: Boolean? = null,
         val showGreetingPhrases: Boolean? = null,
         val showRepatchNotice: Boolean? = null,
+        val showGamesButton: Boolean? = null,
         val backgroundType: BackgroundType? = null,
         val randomBackgroundInterval: RandomInterval? = null,
         val matrixBackgroundUnlocked: Boolean? = null,
@@ -456,6 +460,7 @@ class PreferencesManager(
                 disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.takeIf { patching },
                 showGreetingPhrases = showGreetingPhrases.takeIf { home },
                 showRepatchNotice = showRepatchNotice.takeIf { home },
+                showGamesButton = showGamesButton.takeIf { appearance },
                 backgroundType = backgroundType.takeIf { appearance },
                 randomBackgroundInterval = randomBackgroundInterval.takeIf { appearance },
                 matrixBackgroundUnlocked = matrixBackgroundUnlocked.takeIf { appearance },
@@ -518,6 +523,7 @@ class PreferencesManager(
         disablePatchVersionCompatCheck = disablePatchVersionCompatCheck.get(),
         showGreetingPhrases = showGreetingPhrases.get(),
         showRepatchNotice = showRepatchNotice.get(),
+        showGamesButton = showGamesButton.get(),
         backgroundType = backgroundType.get(),
         randomBackgroundInterval = randomBackgroundInterval.get(),
         matrixBackgroundUnlocked = matrixBackgroundUnlocked.get(),
@@ -599,6 +605,7 @@ class PreferencesManager(
         snapshot.disablePatchVersionCompatCheck?.let { disablePatchVersionCompatCheck.value = it }
         snapshot.showGreetingPhrases?.let { showGreetingPhrases.value = it }
         snapshot.showRepatchNotice?.let { showRepatchNotice.value = it }
+        snapshot.showGamesButton?.let { showGamesButton.value = it }
         snapshot.backgroundType?.let { backgroundType.value = it }
         snapshot.randomBackgroundInterval?.let { randomBackgroundInterval.value = it }
         snapshot.matrixBackgroundUnlocked?.let { matrixBackgroundUnlocked.value = it }

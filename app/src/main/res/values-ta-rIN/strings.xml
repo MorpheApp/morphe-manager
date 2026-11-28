@@ -91,6 +91,11 @@
     <string name="expert_mode_selected_count">%2$s இல் %1$s தேர்ந்தெடுக்கப்பட்டது</string>
     <string name="expert_mode_saved_selection">சேமிக்கப்பட்ட தேர்வு</string>
     <!-- Home Screen - Home Sub-Dialogs -->
+    <string name="home_invalid_signature_broken_message">&lt;b&gt;%s&lt;/b&gt; க்காக நீங்கள் தேர்ந்தெடுத்த APK அதன் கையொப்பச் சரிபார்ப்பில் தோல்வியுற்றது. இது சேதமடைந்திருக்கலாம் அல்லது இன்னும் முழுமையாகப் பதிவிறக்கம் செய்யப்படவில்லை, எனவே மீண்டும் பதிவிறக்கவும் அல்லது மற்றொரு கோப்பைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_invalid_signature_broken_badge">இந்த APK சேதமடைந்திருக்கலாம் அல்லது முழுமையற்றதாக இருக்கலாம்</string>
+    <string name="home_invalid_signature_expected">எதிர்பார்க்கப்படும் சான்றிதழ்</string>
+    <string name="home_invalid_signature_actual">APK-இன் சான்றிதழ்</string>
+    <string name="home_invalid_signature_none">செல்லுபடியாகும் கையொப்பம் இல்லை</string>
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="home_version_copy">பதிப்பை நகலெடு</string>
     <string name="home_version_copied">பதிப்பு நகலெடுக்கப்பட்டது</string>

@@ -377,6 +377,11 @@ Selectați locul de unde să fie preluat fișierul APK"</string>
     <string name="home_invalid_signature_title">APK neverificat</string>
     <string name="home_invalid_signature_message">Fișierul APK selectat pentru &lt;b&gt;%s&lt;/b&gt; nu corespunde certificatului de semnătură așteptat. Poate fi modificat sau provenit dintr-o sursă nesigură</string>
     <string name="home_invalid_signature_badge">Acest APK poate să nu fie original</string>
+    <string name="home_invalid_signature_broken_message">Fișierul APK pe care l-ați selectat pentru &lt;b&gt;%s&lt;/b&gt; a eșuat la verificarea semnăturii. Este probabil deteriorat sau nu a fost descărcat complet, deci descărcați-l din nou sau alegeți alt fișier</string>
+    <string name="home_invalid_signature_broken_badge">Acest APK poate fi deteriorat sau incomplet</string>
+    <string name="home_invalid_signature_expected">Certificat așteptat</string>
+    <string name="home_invalid_signature_actual">Certificatul fișierului APK</string>
+    <string name="home_invalid_signature_none">Nicio semnătură validă</string>
     <string name="home_split_apk_warning_title">APK split detectat</string>
     <string name="home_split_apk_warning_message">"Acest fișier este un bundle APK
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).

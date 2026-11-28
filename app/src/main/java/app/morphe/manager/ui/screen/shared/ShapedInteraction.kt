@@ -40,17 +40,22 @@ fun shapedIndication(shape: Shape, press: Boolean = true): IndicationNodeFactory
     enableHoverIndication = press
 )
 
-/** [clickable] on [shape], clipped to it and showing the [shapedIndication] of it. */
+/**
+ * [clickable] on [shape], clipped to it and showing the [shapedIndication] of it.
+ *
+ * @param press See [shapedIndication].
+ */
 fun Modifier.shapedClickable(
     shape: Shape,
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
     interactionSource: MutableInteractionSource? = null,
+    press: Boolean = true,
     onClick: () -> Unit
 ): Modifier = clip(shape).clickable(
     interactionSource = interactionSource,
-    indication = shapedIndication(shape),
+    indication = shapedIndication(shape, press),
     enabled = enabled,
     onClickLabel = onClickLabel,
     role = role,

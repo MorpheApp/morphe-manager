@@ -378,6 +378,11 @@ Válaszd ki, honnan szerezd be az APK-t"</string>
     <string name="home_invalid_signature_title">Nem ellenőrzött APK</string>
     <string name="home_invalid_signature_message">Az &lt;b&gt;%s&lt;/b&gt; kiválasztott APK nem egyezik a várt aláírási tanúsítvánnyal. Lehetséges, hogy módosították vagy nem megbízható forrásból származik</string>
     <string name="home_invalid_signature_badge">Lehet, hogy ez nem az eredeti APK.</string>
+    <string name="home_invalid_signature_broken_message">A &lt;b&gt;%s&lt;/b&gt; alkalmazáshoz választott APK aláírás-ellenőrzése sikertelen. Valószínűleg sérült, vagy nem töltődött le teljesen, ezért töltse le újra, vagy válasszon egy másik fájlt</string>
+    <string name="home_invalid_signature_broken_badge">Ez az APK sérült vagy nem teljes lehet</string>
+    <string name="home_invalid_signature_expected">Várった tanúsítvány</string>
+    <string name="home_invalid_signature_actual">Az APK tanúsítványa</string>
+    <string name="home_invalid_signature_none">Nincs érvényes aláírás</string>
     <string name="home_split_apk_warning_title">Osztott APK észlelve</string>
     <string name="home_split_apk_warning_message">"Ez a fájl egy APK csomag
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
