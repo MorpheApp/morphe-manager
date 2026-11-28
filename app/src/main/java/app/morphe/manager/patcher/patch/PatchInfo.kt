@@ -212,7 +212,28 @@ data class PatchInfo(
 
     /** Whether the patch names [packageName] itself, rather than taking it as a universal patch. */
     fun names(packageName: String): Boolean = targetFor(packageName) != null
+
+    /**
+     * This patch with its entries for [packageName] cut down to those covering an APK built for
+     * [formFactor], so every question asked of it afterward answers for that build. A patch left
+     * with no entry for the package no longer names it, and entries for other apps stay.
+     */
+    fun narrowedTo(packageName: String, formFactor: FormFactor): PatchInfo {
+        val entries = compatiblePackages ?: return this
+        val kept = entries.filter { it.packageName != packageName || formFactor.isCoveredBy(it.formFactor) }
+        return if (kept.size == entries.size) this else copy(compatiblePackages = kept.toImmutableList())
+    }
 }
+
+/**
+ * The form factors these patches tell builds of [packageName] apart by. Only a package with more
+ * than one is narrowed, since every entry that declares none counts as [FormFactor.MOBILE] and
+ * would otherwise strip all patches from the TV build of an app whose sources never said so.
+ */
+fun Sequence<PatchInfo>.formFactorsOf(packageName: String): Set<FormFactor> =
+    flatMap { it.compatiblePackages.orEmpty() }
+        .filter { it.packageName == packageName }
+        .mapNotNullTo(mutableSetOf()) { it.formFactor }
 
 /** Compatible package names, sorted, or empty for a universal patch. */
 private fun PatchInfo.compatibilityKey() =

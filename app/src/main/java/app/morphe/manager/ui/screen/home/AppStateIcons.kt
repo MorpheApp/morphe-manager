@@ -34,10 +34,20 @@ internal object AppStateIcons {
 /** How an app's card and details name and draw the device the app is built for. */
 internal class FormFactorMark(@StringRes val label: Int, val icon: ImageVector)
 
-/** The mark of a device other than a phone, null for a phone app or one any device runs. */
-internal fun FormFactor?.mark(): FormFactorMark? = when (this) {
+/**
+ * The marks of the devices an app has a build for. A phone app is left unmarked, unless the same
+ * package has a build for another device too, when the phone is named beside it so the card does
+ * not pass for that device alone.
+ */
+internal fun Set<FormFactor>.marks(): List<FormFactorMark> {
+    if (this == setOf(FormFactor.MOBILE)) return emptyList()
+    return sorted().map { it.mark() }
+}
+
+/** How a single device is named and drawn, the phone included. */
+internal fun FormFactor.mark(): FormFactorMark = when (this) {
+    FormFactor.MOBILE -> FormFactorMark(R.string.form_factor_mobile, MaterialSymbols.Rounded.Phone_android)
     FormFactor.TV -> FormFactorMark(R.string.form_factor_tv, MaterialSymbols.Rounded.Tv)
     FormFactor.WEARABLE -> FormFactorMark(R.string.form_factor_wearable, MaterialSymbols.Rounded.Watch)
     FormFactor.AUTOMOTIVE -> FormFactorMark(R.string.form_factor_automotive, MaterialSymbols.Rounded.Directions_car)
-    FormFactor.MOBILE, null -> null
 }

@@ -42,7 +42,10 @@ import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.domain.worker.WorkerRepository
 import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.patchNamesByUid
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkInspector
@@ -56,6 +59,7 @@ import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.util.*
 import app.morphe.manager.util.PatchSelectionUtils.restrictTo
 import app.morphe.patcher.patch.ApkArchitecture
+import app.morphe.patcher.patch.FormFactor
 import app.morphe.patcher.patch.InstallerType
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -169,6 +173,12 @@ class PatcherViewModel(
     val packageName = selectedApp.packageName
     val version = selectedApp.version
 
+    // Read once at most, by the preflight check that comes first while a temporary input still
+    // exists, as it is gone by the time the finished run asks again
+    private val apkFormFactor = viewModelScope.async(start = CoroutineStart.LAZY) {
+        ApkFormFactorResolver.resolve(selectedApp, pm)
+    }
+
     /** Whether the build is mounted over the stock app rather than installed. */
     val usingMountInstall = input.useMount
 
@@ -200,7 +210,8 @@ class PatcherViewModel(
         patchBundleRepository.scopedBundleInfoFlow(
             packageName,
             input.selectedApp.version,
-            input.selectedApp.versionCode
+            input.selectedApp.versionCode,
+            { apkFormFactor.await() }
         ).first().associateBy { it.uid }
 
     /**
@@ -328,6 +339,24 @@ class PatcherViewModel(
     }
 
     private var apkArchitecture: ApkArchitecture? = null
+
+    /**
+     * The device the patched APK is built for when it is neither a phone nor this device, which an
+     * install here may take and still not start. Null for every other build.
+     *
+     * The APK is read only for an app the sources give a build for another device, which spares
+     * nearly every run. The output is read rather than the input, which a temporary run has
+     * deleted by now.
+     */
+    suspend fun foreignFormFactor(): FormFactor? {
+        val device = pm.deviceFormFactor()
+        val declared = patchBundleRepository.appMetadata.value[packageName]?.formFactors.orEmpty()
+        if (declared.none { it.isForeignTo(device) }) return null
+        return ApkFormFactorResolver.resolve(outputFile)?.takeIf { it.isForeignTo(device) }
+    }
+
+    // A phone build runs on the other devices well enough to install, so only the reverse counts
+    private fun FormFactor.isForeignTo(device: FormFactor) = this != FormFactor.MOBILE && this != device
 
     /**
      * Patches the sources declare unavailable for [installerType] that the run left out, so the
@@ -824,7 +853,8 @@ class PatcherViewModel(
         options = options.takeIf { input.selectedByHand },
         // Taken here as well as before patching, because a copy starts out with no snapshot of
         // its own and would flag every patch it was just built with as new
-        seenPatches = bundles.mapValues { (_, bundle) -> bundle.patches.mapTo(mutableSetOf()) { it.name } }
+        seenPatches = bundles.values.patchNamesByUid(),
+        otherBuildPatches = bundles.values.otherBuildPatchesByUid()
     )
 
     override var downloadProgress by savedStateHandle.saveable(

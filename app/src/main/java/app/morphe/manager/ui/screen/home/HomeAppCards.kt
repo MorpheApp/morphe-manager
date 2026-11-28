@@ -206,14 +206,15 @@ internal fun AppCardScope.AppCardTag(
  * marked, never hidden, as a TV app is often patched on a phone and carried over.
  */
 @Composable
-internal fun AppCardScope.FormFactorTag(formFactor: FormFactor?) {
-    val mark = formFactor.mark() ?: return
-    val label = stringResource(mark.label)
-    AppCardTag(
-        text = null,
-        icon = mark.icon,
-        modifier = Modifier.semantics { contentDescription = label }
-    )
+internal fun AppCardScope.FormFactorTags(formFactors: Set<FormFactor>) {
+    formFactors.marks().forEach { mark ->
+        val label = stringResource(mark.label)
+        AppCardTag(
+            text = null,
+            icon = mark.icon,
+            modifier = Modifier.semantics { contentDescription = label }
+        )
+    }
 }
 
 /** The line a home card says [this] state in, null for a build of no known version. */
@@ -321,7 +322,7 @@ internal fun HomeAppCard(
                 )
             }
             if (item.isClone) AppCardTag(stringResource(R.string.clone))
-            FormFactorTag(item.formFactor)
+            FormFactorTags(item.formFactors)
         }
     }
 }

@@ -654,7 +654,7 @@ class BatchPatcherViewModel(
     private suspend fun openEdit(item: BatchPatchItem) {
         val source = item.source ?: return
         val bundles = patchBundleRepository
-            .offeredBundleInfoFlow(item.packageName, source.version, source.versionCode)
+            .offeredBundleInfoFlow(item.packageName, source.version, source.versionCode) { source.formFactor() }
             .first()
             .filter { it.enabled }
 

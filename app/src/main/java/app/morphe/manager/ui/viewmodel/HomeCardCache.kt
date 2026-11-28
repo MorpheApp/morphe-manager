@@ -108,7 +108,7 @@ internal data class CachedCard(
     val isClone: Boolean,
     val nameSuffix: String?,
     // By name, as the enum belongs to the patcher and a file from an older build has none
-    val formFactor: String? = null
+    val formFactors: List<String> = emptyList()
 ) {
     constructor(item: HomeAppItem) : this(
         id = item.id,
@@ -127,7 +127,7 @@ internal data class CachedCard(
         versionStatus = item.versionStatus?.let(::CachedVersionStatus),
         isClone = item.isClone,
         nameSuffix = item.nameSuffix,
-        formFactor = item.formFactor?.name
+        formFactors = item.formFactors.map { it.name }
     )
 
     fun toItem(records: Map<String, InstalledApp>) = HomeAppItem(
@@ -152,7 +152,7 @@ internal data class CachedCard(
         patchCount = 0,
         isClone = isClone,
         nameSuffix = nameSuffix,
-        formFactor = enumByNameOrNull<FormFactor>(formFactor)
+        formFactors = formFactors.mapNotNullTo(mutableSetOf()) { enumByNameOrNull<FormFactor>(it) }
     )
 }
 

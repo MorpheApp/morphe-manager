@@ -19,6 +19,7 @@ import app.morphe.manager.domain.apk.SavedApkInfo
 import app.morphe.manager.domain.apk.apkSignatureCheckable
 import app.morphe.manager.domain.repository.OriginalApkRepository
 import app.morphe.manager.domain.repository.PatchBundleRepository
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.split.SplitApkInspector
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.SelectedApp
@@ -158,6 +159,9 @@ class PatchFlowApks(
             temporary = false
         )
     }
+
+    /** The build of its app [selectedApp] is, which decides the patches it is offered. */
+    suspend fun formFactor(selectedApp: SelectedApp) = ApkFormFactorResolver.resolve(selectedApp, pm)
 
     /** The apps on the device that can be patched, by label, for the universal-patch picker. */
     suspend fun installedApps(): List<InstalledAppPickerItem> = withContext(Dispatchers.IO) {

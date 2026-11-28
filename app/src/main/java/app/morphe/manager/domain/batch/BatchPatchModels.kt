@@ -136,13 +136,16 @@ enum class BatchInstallOutcome { INSTALLED, FAILED }
  *   the user deselected.
  * @param renamingPatchNames Those of [patchNames] that build the app under a package name of
  *   their own, which is what a run needs to know to tell a copy of the app from the app itself.
+ * @param otherBuildPatchNames Patches the source has for other builds of the app, see
+ *   [app.morphe.manager.patcher.patch.PatchBundleInfo.Scoped.otherBuildPatches].
  */
 data class BatchBundleRef(
     val uid: Int,
     val name: String,
     val version: String?,
     val patchNames: Set<String>,
-    val renamingPatchNames: Set<String>
+    val renamingPatchNames: Set<String>,
+    val otherBuildPatchNames: Set<String> = emptySet()
 )
 
 /**

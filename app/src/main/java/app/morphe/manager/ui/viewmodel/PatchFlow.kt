@@ -31,6 +31,8 @@ import app.morphe.manager.domain.selection.RunPlanner
 import app.morphe.manager.domain.selection.RunRequest
 import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.*
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.patchNamesByUid
 import app.morphe.manager.patcher.runtime.PatcherProcesses
 import app.morphe.manager.patcher.split.SplitApkPreparer
 import app.morphe.manager.ui.model.*
@@ -736,7 +738,11 @@ class PatchFlow(
         // Scoped.universal = universal patches (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository.resolvingBundleInfo(
-                selectedApp.packageName, selectedApp.version, selectedApp.versionCode, chosenBundleUidFor(selectedApp)
+                selectedApp.packageName,
+                selectedApp.version,
+                selectedApp.versionCode,
+                { apks.formFactor(selectedApp) },
+                chosenBundleUidFor(selectedApp)
             )
         }
         val support = VersionSupport(bundles)
@@ -1073,7 +1079,8 @@ class PatchFlow(
             selection = finalPatches,
             scope = scope,
             options = finalOptions,
-            seenPatches = bundles.associate { bundle -> bundle.uid to bundle.patches.mapTo(mutableSetOf()) { it.name } }
+            seenPatches = bundles.patchNamesByUid(),
+            otherBuildPatches = bundles.otherBuildPatchesByUid()
         )
 
         proceedWithPatching(selectedApp, finalPatches, patcherOptions, selectedByHand = true, allowIncompatible, scope)

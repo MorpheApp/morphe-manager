@@ -38,7 +38,9 @@ import androidx.compose.ui.unit.dp
 import app.morphe.manager.R
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.ui.screen.shared.*
+import app.morphe.manager.ui.screen.home.mark
 import app.morphe.manager.ui.viewmodel.InstallViewModel.InstallState
+import app.morphe.patcher.patch.FormFactor
 import app.morphe.manager.ui.viewmodel.labelRes
 import app.morphe.manager.util.withVersionPrefix
 import com.composables.icons.materialsymbols.MaterialSymbols
@@ -222,6 +224,9 @@ class InstallResultActions(
 
 /**
  * Patching success screen.
+ *
+ * @param foreignFormFactor The device the patched APK is built for when it is not this one. Saving
+ *   then leads the actions, as the APK is meant to be carried over, while installing stays offered.
  */
 @Composable
 fun PatchingSuccess(
@@ -231,6 +236,7 @@ fun PatchingSuccess(
     usingMountInstall: Boolean,
     installActions: InstallResultActions,
     excludedPatches: List<String> = emptyList(),
+    foreignFormFactor: FormFactor? = null,
     isExpertMode: Boolean = false,
     onConfigureAppLinks: (() -> Unit)? = null,
     onHomeClick: () -> Unit,
@@ -246,6 +252,12 @@ fun PatchingSuccess(
         status = status,
         summary = summary,
         notices = {
+            val foreignMark = foreignFormFactor?.mark()
+            ResultNotice(
+                text = foreignMark?.let { stringResource(R.string.patcher_built_for_other_device, stringResource(it.label)) },
+                tone = SemanticTone.Warning,
+                icon = foreignMark?.icon ?: MaterialSymbols.Rounded.Warning
+            )
             ResultNotice(
                 text = (installState as? InstallState.Error)?.message,
                 tone = SemanticTone.Error,
@@ -277,6 +289,8 @@ fun PatchingSuccess(
                 installState = installState,
                 failed = status.failed,
                 usingMountInstall = usingMountInstall,
+                // Only until an install is started anyway, which then reports in the leading button
+                leadsWithSave = foreignFormFactor != null && installState is InstallState.Ready,
                 actions = installActions,
                 onSave = onSaveClick,
                 onShare = onShareClick,
@@ -728,6 +742,7 @@ private fun InstallActions(
     installState: InstallState,
     failed: Boolean,
     usingMountInstall: Boolean,
+    leadsWithSave: Boolean,
     actions: InstallResultActions,
     onSave: () -> Unit,
     onShare: () -> Unit,
@@ -749,58 +764,84 @@ private fun InstallActions(
             val saveInteraction = remember { MutableInteractionSource() }
             val shareInteraction = remember { MutableInteractionSource() }
 
-            ResultActionButton(
-                modifier = Modifier.buttonGroupItem(installInteraction, enabled = !isInstalling),
-                interactionSource = installInteraction,
-                shape = ConnectedShapes.Pill.leading,
-                text = stringResource(
-                    when {
-                        isInstalling -> if (usingMountInstall) {
-                            installState.stage?.labelRes ?: R.string.mounting_ellipsis
-                        } else {
-                            R.string.installing_ellipsis
-                        }
-                        isInstalled -> R.string.open
-                        conflictPackageName != null -> R.string.uninstall
-                        isError -> R.string.retry
-                        usingMountInstall -> R.string.mount
-                        else -> R.string.install
-                    }
-                ),
-                icon = when {
-                    isInstalled -> MaterialSymbols.Rounded.Open_in_new.autoMirrored
-                    conflictPackageName != null -> MaterialSymbols.RoundedFilled.Delete_forever
-                    isError -> MaterialSymbols.RoundedFilled.Refresh
-                    usingMountInstall -> MaterialSymbols.Rounded.Link
-                    else -> MaterialSymbols.Rounded.Install_mobile
-                },
-                failed = failed,
-                busy = isInstalling,
-                onClick = {
-                    when {
-                        isInstalled -> actions.onOpen()
-                        conflictPackageName != null -> actions.onUninstall(conflictPackageName)
-                        else -> actions.onInstall()
-                    }
-                }
-            )
-            // Square as the install button is tall, named by a tooltip since a label would take
-            // the room the install button's own needs
-            PatcherActionButton(
-                onClick = onSave,
-                icon = MaterialSymbols.Rounded.Save,
-                text = stringResource(R.string.save),
-                enabled = !isSaving,
-                showProgress = isSaving,
-                shape = ConnectedShapes.Pill.middle,
-                interactionSource = saveInteraction,
-                modifier = Modifier.buttonGroupItem(
-                    saveInteraction,
-                    enabled = !isSaving,
-                    width = PatcherActionHeight,
-                    minWidth = Defaults.MinTouchTarget
+            if (leadsWithSave) {
+                // Built to be carried over to another device, so keeping the file comes first
+                ResultActionButton(
+                    modifier = Modifier.buttonGroupItem(saveInteraction, enabled = !isSaving),
+                    interactionSource = saveInteraction,
+                    shape = ConnectedShapes.Pill.leading,
+                    text = stringResource(R.string.save),
+                    icon = MaterialSymbols.Rounded.Save,
+                    failed = failed,
+                    busy = isSaving,
+                    onClick = onSave
                 )
-            )
+                PatcherActionButton(
+                    onClick = actions.onInstall,
+                    icon = if (usingMountInstall) MaterialSymbols.Rounded.Link else MaterialSymbols.Rounded.Install_mobile,
+                    text = stringResource(if (usingMountInstall) R.string.mount else R.string.install),
+                    shape = ConnectedShapes.Pill.middle,
+                    interactionSource = installInteraction,
+                    modifier = Modifier.buttonGroupItem(
+                        installInteraction,
+                        width = PatcherActionHeight,
+                        minWidth = Defaults.MinTouchTarget
+                    )
+                )
+            } else {
+                ResultActionButton(
+                    modifier = Modifier.buttonGroupItem(installInteraction, enabled = !isInstalling),
+                    interactionSource = installInteraction,
+                    shape = ConnectedShapes.Pill.leading,
+                    text = stringResource(
+                        when {
+                            isInstalling -> if (usingMountInstall) {
+                                installState.stage?.labelRes ?: R.string.mounting_ellipsis
+                            } else {
+                                R.string.installing_ellipsis
+                            }
+                            isInstalled -> R.string.open
+                            conflictPackageName != null -> R.string.uninstall
+                            isError -> R.string.retry
+                            usingMountInstall -> R.string.mount
+                            else -> R.string.install
+                        }
+                    ),
+                    icon = when {
+                        isInstalled -> MaterialSymbols.Rounded.Open_in_new.autoMirrored
+                        conflictPackageName != null -> MaterialSymbols.RoundedFilled.Delete_forever
+                        isError -> MaterialSymbols.RoundedFilled.Refresh
+                        usingMountInstall -> MaterialSymbols.Rounded.Link
+                        else -> MaterialSymbols.Rounded.Install_mobile
+                    },
+                    failed = failed,
+                    busy = isInstalling,
+                    onClick = {
+                        when {
+                            isInstalled -> actions.onOpen()
+                            conflictPackageName != null -> actions.onUninstall(conflictPackageName)
+                            else -> actions.onInstall()
+                        }
+                    }
+                )
+                // Square as the install button is tall, named by a tooltip since a label would take
+                // the room the install button's own needs
+                PatcherActionButton(
+                    onClick = onSave,
+                    icon = MaterialSymbols.Rounded.Save,
+                    text = stringResource(R.string.save),
+                    enabled = !isSaving,
+                    showProgress = isSaving,
+                    shape = ConnectedShapes.Pill.middle,
+                    interactionSource = saveInteraction,
+                    modifier = Modifier.buttonGroupItem(
+                        saveInteraction,
+                        enabled = !isSaving,
+                        width = PatcherActionHeight,
+                        minWidth = Defaults.MinTouchTarget
+                    )
+                )
+            }
             PatcherActionButton(
                 onClick = onShare,
                 icon = MaterialSymbols.Rounded.Share,

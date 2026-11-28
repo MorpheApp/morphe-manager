@@ -29,6 +29,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.pm.PackageInfoCompat
 import app.morphe.manager.domain.apk.ApkSignatureCache
 import app.morphe.patcher.apk.ApkUtils
+import app.morphe.patcher.patch.FormFactor
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import org.koin.core.component.KoinComponent
@@ -121,9 +122,24 @@ class PM(
 
     fun getVersionCode(packageInfo: PackageInfo) = PackageInfoCompat.getLongVersionCode(packageInfo)
 
-    fun canLaunch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg) != null
+    /** The device this is, told by the same features an APK's own form factor is read from. */
+    fun deviceFormFactor(): FormFactor = with(app.packageManager) {
+        when {
+            hasSystemFeature(PackageManager.FEATURE_WATCH) -> FormFactor.WEARABLE
+            hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) -> FormFactor.AUTOMOTIVE
+            hasSystemFeature(PackageManager.FEATURE_LEANBACK) -> FormFactor.TV
+            else -> FormFactor.MOBILE
+        }
+    }
 
-    fun launch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg)?.let {
+    // A TV build opens only from the TV launcher, yet a phone can still start it
+    private fun launchIntent(pkg: String) = with(app.packageManager) {
+        getLaunchIntentForPackage(pkg) ?: getLeanbackLaunchIntentForPackage(pkg)
+    }
+
+    fun canLaunch(pkg: String) = launchIntent(pkg) != null
+
+    fun launch(pkg: String) = launchIntent(pkg)?.let {
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(it)
     }

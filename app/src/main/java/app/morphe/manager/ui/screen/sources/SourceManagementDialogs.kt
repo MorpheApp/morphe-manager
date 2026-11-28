@@ -814,7 +814,7 @@ fun DialogHostScope.SourceAppsDialog(
                                     ).joinToString(" · ")
                                 )
                             ) {
-                                FormFactorTag(appMetadata[packageName]?.formFactor)
+                                FormFactorTags(appMetadata[packageName]?.formFactors.orEmpty())
                                 // Shown until the list is closed once, so it has to catch the eye
                                 if (packageName in newApps) {
                                     StatusBadge(

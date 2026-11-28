@@ -44,6 +44,7 @@ import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelectionUtils.hasCustomizedOptions
 import app.morphe.manager.util.PatchSelectionUtils.hasMissingRequiredOptions
 import app.morphe.manager.util.PatchSelectionUtils.hasUniversalToEnable
+import app.morphe.patcher.patch.FormFactor
 import com.composables.icons.materialsymbols.MaterialSymbols
 import com.composables.icons.materialsymbols.rounded.*
 import kotlinx.coroutines.delay
@@ -166,6 +167,7 @@ fun DialogHostScope.ExpertModeDialog(
     val (allPatchesInfo, options, totalSelectedCount, newPatches, lockStateOf, holdsUniversalPatches) =
         selection
     val totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size }
+    val narrowedTo = allPatchesInfo.firstNotNullOfOrNull { (bundle, _) -> bundle.formFactor }
     // Sources on pre-release patches or marking the APK's version experimental. A run leaves out
     // the ones whose experimental versions are off, so one added back by hand still says what its
     // patches are applied to
@@ -340,6 +342,15 @@ fun DialogHostScope.ExpertModeDialog(
                 // How much of the app is selected, every source counted, while the tabs count each
                 subtitle = listOfNotNull(
                     stringResource(R.string.expert_mode_selected_count, totalSelectedCount, totalPatchesCount),
+                    // Named only where the app has builds for several devices, so a list shorter
+                    // than the one another build gets is not taken for missing patches
+                    narrowedTo?.let { formFactor ->
+                        if (formFactor == FormFactor.MOBILE) {
+                            stringResource(R.string.expert_mode_form_factor_mobile)
+                        } else {
+                            stringResource(R.string.expert_mode_form_factor, stringResource(formFactor.mark().label))
+                        }
+                    },
                     allPatchesInfo.singleOrNull()?.first?.name
                 ).joinToString("\n"),
                 search = search,

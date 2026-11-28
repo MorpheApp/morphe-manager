@@ -8,6 +8,7 @@ package app.morphe.manager.domain.selection
 import app.morphe.manager.domain.repository.PatchOptionsRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
 import app.morphe.manager.patcher.patch.PatchInfo
 import app.morphe.manager.util.Options
 import app.morphe.manager.util.PatchSelection
@@ -71,12 +72,33 @@ internal fun mergeNewlyAdded(
 }.filterValues { it.isNotEmpty() }
 
 /**
+ * [selection] with what [stored] holds for the patches of another build of the app put back. A run
+ * for one build neither shows nor offers those, so it must not clear what the user chose for them.
+ */
+internal fun keepingOtherBuilds(
+    selection: PatchSelection,
+    stored: PatchSelection,
+    otherBuildPatches: Map<Int, Set<String>>
+): PatchSelection = buildMap {
+    putAll(selection)
+
+    otherBuildPatches.forEach { (bundleUid, names) ->
+        val kept = stored[bundleUid].orEmpty() intersect names
+        if (kept.isNotEmpty()) put(bundleUid, getOrDefault(bundleUid, emptySet()) + kept)
+    }
+}
+
+/**
  * What the user set up by hand for an app, read against the patches its sources carry now, and
  * recorded once a run is set up or built.
  *
  * The single-app flow and the queue both go through here, so the same app starts from the same
  * patches either way. Reading writes nothing back: whether a cleaned configuration is saved, or
  * the user told about it, is up to the caller.
+ *
+ * Builds of one app for different devices share a configuration. What is saved for the patches of
+ * another build, see [PatchBundleInfo.Scoped.otherBuildPatches], is neither read as outdated nor
+ * written over.
  */
 class SavedPatchConfiguration(
     private val selectionRepository: PatchSelectionRepository,
@@ -157,9 +179,12 @@ class SavedPatchConfiguration(
     suspend fun options(configurationKey: String, bundles: List<PatchBundleInfo.Scoped>): SavedOptions {
         val patchesByName = bundles.patchesByName()
         val uids = patchesByName.keys
+        val otherBuildPatches = bundles.otherBuildPatchesByUid()
         val saved = withContext(Dispatchers.IO) {
             optionsRepository.getAllOptionsForPackage(configurationKey, patchesByName)
-        }.filterKeys { it in uids }
+        }
+            .filterKeys { it in uids }
+            .mapValues { (bundleUid, patchOptions) -> patchOptions - otherBuildPatches[bundleUid].orEmpty() }
         val validated = validatePatchOptions(saved, patchesByName)
         return SavedOptions(validated, cleaned = validated != saved)
     }
@@ -172,26 +197,39 @@ class SavedPatchConfiguration(
      *   ones alone, as simple mode keeps its options on the app's preference screen.
      * @param seenPatches Per source, every patch it carries now. Without this snapshot the next
      *   run cannot tell a patch the user deselected from one added since.
+     * @param otherBuildPatches Per source, the patches of other builds of the app, whose saved
+     *   selection, options and seen state are kept as they are.
      */
     suspend fun save(
         configurationKey: String,
         selection: PatchSelection,
         scope: Set<Int>,
         options: Options?,
-        seenPatches: Map<Int, Set<String>>
+        seenPatches: Map<Int, Set<String>>,
+        otherBuildPatches: Map<Int, Set<String>>
     ) = withContext(Dispatchers.IO) {
-        selectionRepository.updateSelection(configurationKey, selection, scope)
-        options?.let { optionsRepository.saveOptions(configurationKey, it) }
+        val kept = otherBuildPatches.filterValues { it.isNotEmpty() }
+        val stored = if (kept.isEmpty()) emptyMap() else {
+            selectionRepository.getAllSelectionsForPackage(configurationKey)
+        }
+        selectionRepository.updateSelection(configurationKey, keepingOtherBuilds(selection, stored, kept), scope)
+        options?.let { optionsRepository.saveOptions(configurationKey, it, keeping = kept) }
         seenPatches.forEach { (bundleUid, patchNames) ->
-            selectionRepository.saveSeenPatches(configurationKey, bundleUid, patchNames)
+            val seenForOtherBuilds = kept[bundleUid]?.let { names ->
+                selectionRepository.getSeenPatches(configurationKey, bundleUid)?.intersect(names)
+            }.orEmpty()
+            selectionRepository.saveSeenPatches(configurationKey, bundleUid, patchNames + seenForOtherBuilds)
         }
     }
 
     private suspend fun saved(configurationKey: String, bundles: List<PatchBundleInfo.Scoped>): PatchSelection {
-        val uids = bundles.mapTo(mutableSetOf()) { it.uid }
+        val byUid = bundles.associateBy { it.uid }
         return withContext(Dispatchers.IO) {
             selectionRepository.getAllSelectionsForPackage(configurationKey)
-        }.filterKeys { it in uids }
+        }
+            .filterKeys { it in byUid }
+            .mapValues { (bundleUid, names) -> names - byUid.getValue(bundleUid).otherBuildPatches }
+            .filterValues { it.isNotEmpty() }
     }
 
     private fun List<PatchBundleInfo.Scoped>.patchesByName() =

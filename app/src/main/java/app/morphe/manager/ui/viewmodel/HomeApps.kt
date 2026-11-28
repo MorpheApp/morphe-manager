@@ -660,7 +660,7 @@ class HomeApps(
                 ),
                 patchCount = 0,
                 isClone = slot.isClone,
-                formFactor = bundleMeta?.formFactor
+                formFactors = bundleMeta?.formFactors.orEmpty()
             )
         }
 
