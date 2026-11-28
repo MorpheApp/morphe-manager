@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">ຄຳແປສຳລັບບາງພາສາອາດຂາດຫາຍ ຫຼືບໍ່ຄົບຖ້ວນ</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">ຂະໜາດຂອງອິນເຕີເຟສ</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">ໜ້າຫຼັກ</string>
+    <string name="settings_appearance_screens">ໜ້າຈໍ</string>
     <string name="settings_appearance_greeting_phrases">ປະໂຫຍກທັກທາຍ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">ສະແດງຂໍ້ຄວາມທັກທາຍ</string>
     <string name="settings_appearance_repatch_notice">ແຈ້ງເຕືອນການແພັດຊ໌ຄືນ</string>
     <string name="settings_appearance_repatch_notice_description">ສະແດງແຖບແຈ້ງເຕືອນເມື່ອແອັບທີ່ປັບແກ້ແລ້ວສາມາດປັບແກ້ຄືນໃໝ່ໄດ້</string>
     <string name="settings_appearance_more_apps_card">ບັດແອັບເພີ່ມເຕີມ</string>
     <string name="settings_appearance_more_apps_card_description">ສະແດງບັດຢູ່ກຸ່ມແອັບ ເຊິ່ງຈະນຳໄປສູ່ການປັບປຸງຈາກຊຸມຊົນ</string>
+    <string name="settings_appearance_games_button">ປຸ່ມເກມ</string>
+    <string name="settings_appearance_games_button_description">ສະແດງປຸ່ມໄປຫາເກມຍ່ອຍໃນຂະນະທີ່ກຳລັງແປັດ ແລະ ໃນໜ້າຜົນລັດ</string>
     <string name="settings_appearance_app_card_colors">ສີຂອງບັດ</string>
     <string name="settings_appearance_app_card_colors_default">ຄ່າເລີ່ມຕົ້ນ</string>
     <string name="settings_appearance_app_card_colors_default_description">ກຳນົດສີໃຫ້ແຕ່ລະແອັບ ແລະ ແຫຼ່ງທີ່ມາຂອງຕົນເອງ</string>

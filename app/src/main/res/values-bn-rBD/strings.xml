@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">কিছু ভাষার অনুবাদ অনুপস্থিত বা অসম্পূর্ণ হতে পারে</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">ইন্টারফেস স্কেল</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">হোম স্ক্রিন</string>
+    <string name="settings_appearance_screens">স্ক্রিনসমূহ</string>
     <string name="settings_appearance_greeting_phrases">শুভেচ্ছা বার্তা</string>
     <string name="settings_appearance_greeting_phrases_subtitle">একটি অভিবাদন বার্তা দেখায়</string>
     <string name="settings_appearance_repatch_notice">পুনরায় প্যাচ বিজ্ঞপ্তি</string>
     <string name="settings_appearance_repatch_notice_description">যখন প্যাচড অ্যাপগুলিকে পুনরায় প্যাচ করা যায় তখন একটি ব্যানার দেখায়</string>
     <string name="settings_appearance_more_apps_card">আরও অ্যাপ কার্ড</string>
     <string name="settings_appearance_more_apps_card_description">অ্যাপগুলির নিচে একটি কার্ড দেখায় যা কমিউনিটি প্যাচগুলোর দিকে নিয়ে যায়</string>
+    <string name="settings_appearance_games_button">গেমস বোতাম</string>
+    <string name="settings_appearance_games_button_description">প্যাচিং করার সময় এবং ফলাফলের পাতায় মিনি-গেমসের একটি বোতাম দেখায়</string>
     <string name="settings_appearance_app_card_colors">কার্ডের রঙ</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্রতিটি অ্যাপ এবং সোর্সকে নিজস্ব রঙ দিন</string>

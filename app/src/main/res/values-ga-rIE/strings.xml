@@ -377,11 +377,11 @@ Roghnaigh cá as a bhfaighfear an APK"</string>
     <string name="home_invalid_signature_title">APK neamhfhíoraithe</string>
     <string name="home_invalid_signature_message">Ní hionann an APK a roghnaigh tú do &lt;b&gt;%s&lt;/b&gt; agus an deimhniú sínithe a bhfuiltear ag súil leis. Seans go bhfuil sé modhnaithe nó go bhfuil sé ó fhoinse neamhiontaofa.</string>
     <string name="home_invalid_signature_badge">B’fhéidir nach é an APK seo an bunleagan</string>
-    <string name="home_invalid_signature_broken_message">Ní tharla seiceáil sínithe don APK a roghnaigh tú do &lt;b&gt;%s&lt;/b&gt;. Tá sé damaged go háireachtach nó ní raibh sé íoslódáilte go hiomlán go fóill, mar sin íoslaodhaigh é arís nó roghnaigh comhad eile</string>
-    <string name="home_invalid_signature_broken_badge">Seacta gur damaged nó go bhfuil an APK seo neamhiomlán</string>
-    <string name="home_invalid_signature_expected">Ceadbraitheachateach iontais</string>
-    <string name="home_invalid_signature_actual">Ceadbraitheachateach an APK</string>
-    <string name="home_invalid_signature_none">Níl aon shínníú bailí ann</string>
+    <string name="home_invalid_signature_broken_message">Theipeann ar an seiceáil sínithe i gcás an chomhaid APK a roghnaigh tú do &lt;b&gt;%s&lt;/b&gt;. Is dócha go bhfuil sé damáistithe nó nár íoslódáladh go hiomlán é go fóill; mar sin, íoslódáil arís é nó roghnaigh comhad eile.</string>
+    <string name="home_invalid_signature_broken_badge">D’fhéadfadh an APK seo a bheith damáistithe nó neamhiomlán.</string>
+    <string name="home_invalid_signature_expected">Teastas ionchais</string>
+    <string name="home_invalid_signature_actual">Teastas an APK</string>
+    <string name="home_invalid_signature_none">Gan síniú bailí</string>
     <string name="home_split_apk_warning_title">APK scoilte braite</string>
     <string name="home_split_apk_warning_message">"Is pacáiste APK é an comhad seo
 (&lt;b&gt;APKM / APKS / XAPK&lt;/b&gt;).
@@ -868,14 +868,17 @@ Scriosfaidh díshuiteáil gach sonraí aip go buan."</string>
     <string name="settings_appearance_translations_info_title">D’fhéadfadh aistriúcháin do roinnt teangacha a bheith ar iarraidh nó neamhiomlán</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Scála comhéadain</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_screens">Scáileáin</string>
     <string name="settings_appearance_greeting_phrases">Frásaí beannachta</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Taispeánann sé teachtaireacht bheannachta</string>
     <string name="settings_appearance_repatch_notice">Fógra athphaisteála</string>
     <string name="settings_appearance_repatch_notice_description">Taispeánann sé bratach nuair is féidir aipeanna paisteáilte a phaisteáil arís</string>
     <string name="settings_appearance_more_apps_card">Cárta tuilleadh aipeanna</string>
     <string name="settings_appearance_more_apps_card_description">Taispeánann sé cárta faoi na haipeanna a threoraíonn chuig paistí pobail</string>
+    <string name="settings_appearance_games_button">Cnaipe na gcluichí</string>
+    <string name="settings_appearance_games_button_description">Taispeánann sé cnaipe chuig na mionchluichí le linn an phatchála agus ag an gcéim torthaí</string>
     <string name="settings_appearance_app_card_colors">Dathanna cártaí</string>
     <string name="settings_appearance_app_card_colors_default">Réamhshocrú</string>
     <string name="settings_appearance_app_card_colors_default_description">Sann dath ar leith do gach aip agus foinse</string>

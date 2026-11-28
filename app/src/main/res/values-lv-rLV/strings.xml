@@ -868,14 +868,17 @@ Atinstalējot tiks neatgriezeniski dzēsti visi lietotnes dati"</string>
     <string name="settings_appearance_translations_info_title">Dažām valodām tulkojumi var būt nepilnīgi vai trūkst</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Saskarnes mērogs</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Sākuma ekrāns</string>
+    <string name="settings_appearance_screens">Ekrāni</string>
     <string name="settings_appearance_greeting_phrases">Sveicienu frāzes</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Rāda sveiciena ziņojumu</string>
     <string name="settings_appearance_repatch_notice">Paziņojums par atkārtotu labošanu</string>
     <string name="settings_appearance_repatch_notice_description">Rāda baneri, ja patchētas lietotnes var patchēt vēlreiz</string>
     <string name="settings_appearance_more_apps_card">Vairāk lietotnes karte</string>
     <string name="settings_appearance_more_apps_card_description">Rāda karti zem lietotnēm, kas ved uz kopienas patchētām versijām</string>
+    <string name="settings_appearance_games_button">Spēļu poga</string>
+    <string name="settings_appearance_games_button_description">Rāda pogu uz mini-spēlēm patchēšanas laikā un rezultātu ekranā</string>
     <string name="settings_appearance_app_card_colors">Kartes krāsas</string>
     <string name="settings_appearance_app_card_colors_default">Pēc noklusējuma</string>
     <string name="settings_appearance_app_card_colors_default_description">Piešķiriet katrai lietotnei un avotam savu krāsu</string>

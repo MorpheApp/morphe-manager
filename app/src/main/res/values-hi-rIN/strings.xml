@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">कुछ भाषाओं के लिए अनुवाद या अपूर्ण अनुवाद उपलब्ध हो सकते हैं</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">इंटरफ़ेस स्केल</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">मुखपृष्ठ</string>
+    <string name="settings_appearance_screens">स्क्रीन</string>
     <string name="settings_appearance_greeting_phrases">अभिवादन वाक्यांश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">अभिवादन संदेश दिखाता है</string>
     <string name="settings_appearance_repatch_notice">पुनः पैच सूचना</string>
     <string name="settings_appearance_repatch_notice_description">जब पैच किए गए ऐप्स को फिर से पैच किया जा सकता है, तब बैनर दिखाता है</string>
     <string name="settings_appearance_more_apps_card">और ऐप्स कार्ड</string>
     <string name="settings_appearance_more_apps_card_description">ऐप्स के नीचे एक कार्ड दिखाता है जो कम्युनिटी पैच की ओर ले जाता है</string>
+    <string name="settings_appearance_games_button">गेम्स बटन</string>
+    <string name="settings_appearance_games_button_description">पैचिंग के दौरान और परिणाम पर मिनी-गेम्स के लिए एक बटन दिखाता है</string>
     <string name="settings_appearance_app_card_colors">कार्ड रंग</string>
     <string name="settings_appearance_app_card_colors_default">डिफ़ॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ऐप और स्रोत को अपना अलग रंग दें</string>

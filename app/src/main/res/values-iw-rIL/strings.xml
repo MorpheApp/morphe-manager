@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">ייתכן שתרגומים עבור חלק מהשפות חסרים או לא שלמים</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">קנה מידה של הממשק</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">מסך הבית</string>
+    <string name="settings_appearance_screens">מסכים</string>
     <string name="settings_appearance_greeting_phrases">משפטי פתיחה</string>
     <string name="settings_appearance_greeting_phrases_subtitle">מציג הודעת ברכה</string>
     <string name="settings_appearance_repatch_notice">הודעת תיקון מחדש</string>
     <string name="settings_appearance_repatch_notice_description">מציג באנר כאשר ניתן להחזיר תיקון לאפליקציות שתוקנו</string>
     <string name="settings_appearance_more_apps_card">כרטיס עוד אפליקציות</string>
     <string name="settings_appearance_more_apps_card_description">מציג כרטיס מתחת לאפליקציות המוביל לתיקוני קהילה</string>
+    <string name="settings_appearance_games_button">לחצן משחקים</string>
+    <string name="settings_appearance_games_button_description">מציג לחצן למשחקים קטנים בזמן עדכון ובתוצאה</string>
     <string name="settings_appearance_app_card_colors">צבעי כרטיסים</string>
     <string name="settings_appearance_app_card_colors_default">ברירת מחדל</string>
     <string name="settings_appearance_app_card_colors_default_description">הענק לכל אפליקציה ומקור צבע משלהם</string>

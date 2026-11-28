@@ -868,14 +868,17 @@ Kaldırma işlemi tüm uygulama verilerini kalıcı olarak silecektir"</string>
     <string name="settings_appearance_translations_info_title">Çeviriler bazı diller için eksik veya tamamlanmamış olabilir</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Arayüz ölçeği</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Ana ekran</string>
+    <string name="settings_appearance_screens">Ekranlar</string>
     <string name="settings_appearance_greeting_phrases">Selamlama cümleleri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Bir karşılama mesajı gösterir</string>
     <string name="settings_appearance_repatch_notice">Yeniden yama bildirimi</string>
     <string name="settings_appearance_repatch_notice_description">Yamalanmış uygulamalar yeniden yamalanabilir olduğunda bir başlık gösterir.</string>
     <string name="settings_appearance_more_apps_card">Daha fazla uygulama kartı</string>
     <string name="settings_appearance_more_apps_card_description">Uygulamaların altında topluluk yamalarına yönlendiren bir kart gösterir</string>
+    <string name="settings_appearance_games_button">Oyunlar düğmesi</string>
+    <string name="settings_appearance_games_button_description">Yama yapılırken ve sonuç ekranında mini oyunlar için bir düğme gösterir</string>
     <string name="settings_appearance_app_card_colors">Kart renkleri</string>
     <string name="settings_appearance_app_card_colors_default">Varsayılan</string>
     <string name="settings_appearance_app_card_colors_default_description">Her uygulama ve kaynağa kendi rengini ver</string>

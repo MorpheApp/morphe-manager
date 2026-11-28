@@ -869,14 +869,17 @@ Az eltávolítás véglegesen törli az alkalmazás összes adatát."</string>
     <string name="settings_appearance_translations_info_title">Egyes nyelvek fordításai hiányozhatnak vagy hiányosak lehetnek</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Felület mérete</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Kezdőképernyő</string>
+    <string name="settings_appearance_screens">Képernyők</string>
     <string name="settings_appearance_greeting_phrases">Üdvözlő szövegek</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Üdvözlő üzenet megjelenítése</string>
     <string name="settings_appearance_repatch_notice">Újrajavítási értesítés</string>
     <string name="settings_appearance_repatch_notice_description">Riasztó sáv megjelenítése, ha a módosított alkalmazások újra módosíthatók</string>
     <string name="settings_appearance_more_apps_card">További alkalmazások kártya</string>
     <string name="settings_appearance_more_apps_card_description">Kártyát jelenít az alkalmazások alatt, amely a közösségi javításokhoz vezet</string>
+    <string name="settings_appearance_games_button">Játékok gomb</string>
+    <string name="settings_appearance_games_button_description">Gombot jelenít a mini-játékokhoz a patchelés során és az eredménynél</string>
     <string name="settings_appearance_app_card_colors">Kártyaszínek</string>
     <string name="settings_appearance_app_card_colors_default">Alapértelmezett</string>
     <string name="settings_appearance_app_card_colors_default_description">Adjon egy saját színt minden alkalmazásnak és forrásnak</string>

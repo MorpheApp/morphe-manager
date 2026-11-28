@@ -868,14 +868,17 @@ Rakenduse eemaldamine kustutab kõik rakenduse andmed jäädavalt"</string>
     <string name="settings_appearance_translations_info_title">Mõne keele tõlked võivad puududa või olla mittäielikud</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Liidese mastaap</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Avakuva</string>
+    <string name="settings_appearance_screens">Ekranid</string>
     <string name="settings_appearance_greeting_phrases">Tervituslaused</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Kuvab tervitussõnumi</string>
     <string name="settings_appearance_repatch_notice">Uuesti paikamise teavitus</string>
     <string name="settings_appearance_repatch_notice_description">Kuvab teavituse, kui paigatud rakendusi saab uuesti paigata</string>
     <string name="settings_appearance_more_apps_card">Kaart \'Rohkem rakendusi\'</string>
     <string name="settings_appearance_more_apps_card_description">Näitab rakenduste all kaarti, mis viib kogukonna paikade juurde</string>
+    <string name="settings_appearance_games_button">Mängude nupp</string>
+    <string name="settings_appearance_games_button_description">Kuvab nupu minimängude juurde ownumiseks uuendamise ajal ja tulemuse ekraanil</string>
     <string name="settings_appearance_app_card_colors">Kaardi värvid</string>
     <string name="settings_appearance_app_card_colors_default">Vaikimisi</string>
     <string name="settings_appearance_app_card_colors_default_description">Määra igale rakendusele ja allikale oma värv</string>

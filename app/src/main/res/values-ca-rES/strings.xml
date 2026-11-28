@@ -868,14 +868,17 @@ Desinstal·lar-la esborrarà permanentment totes les dades de l'aplicació"</str
     <string name="settings_appearance_translations_info_title">És possible que faltin traduccions o que aquestes estiguin incompletes per a alguns idiomes</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Escala de la interfície</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Pantalla d\'inici</string>
+    <string name="settings_appearance_screens">Pantalles</string>
     <string name="settings_appearance_greeting_phrases">Frases de salutació</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra un missatge de salutació</string>
     <string name="settings_appearance_repatch_notice">Avís de re-patch</string>
     <string name="settings_appearance_repatch_notice_description">Mostra un bàner quan les aplicacions patxades es poden tornar a patxar</string>
     <string name="settings_appearance_more_apps_card">Targeta de més aplicacions</string>
     <string name="settings_appearance_more_apps_card_description">Mostra una targeta sota les aplicacions que porta als patxes de la comunitat</string>
+    <string name="settings_appearance_games_button">Botó de jocs</string>
+    <string name="settings_appearance_games_button_description">Mostra un botó per als mini-jocs mentre es patcha i al resultat</string>
     <string name="settings_appearance_app_card_colors">Colors de la targeta</string>
     <string name="settings_appearance_app_card_colors_default">Per defecte</string>
     <string name="settings_appearance_app_card_colors_default_description">Assigna a cada aplicació i font un color propi</string>

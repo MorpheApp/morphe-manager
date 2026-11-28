@@ -868,14 +868,17 @@ Deinstalacija će trajno izbrisati sve podatke aplikacije"</string>
     <string name="settings_appearance_translations_info_title">Prevod za neke jezike može nedostajati ili biti nepotpun</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Razmjer interfejsa</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Početni ekran</string>
+    <string name="settings_appearance_screens">Ekrani</string>
     <string name="settings_appearance_greeting_phrases">Fraze za pozdravljanje</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Prikazuje pozdravnu poruku</string>
     <string name="settings_appearance_repatch_notice">Obavještenje o ponovnom zakrpljivanju</string>
     <string name="settings_appearance_repatch_notice_description">Prikazuje baner kada se zakrpljene aplikacije mogu ponovo zakrpliti</string>
     <string name="settings_appearance_more_apps_card">Kartica \"Više aplikacija\"</string>
     <string name="settings_appearance_more_apps_card_description">Prikazuje karticu ispod aplikacija koja vodi do zakrpa zajednice</string>
+    <string name="settings_appearance_games_button">Dugme za igre</string>
+    <string name="settings_appearance_games_button_description">Prikazuje dugme za mini-igre tokom patchovanja i na rezultatu</string>
     <string name="settings_appearance_app_card_colors">Boje kartica</string>
     <string name="settings_appearance_app_card_colors_default">Zadano</string>
     <string name="settings_appearance_app_card_colors_default_description">Dodijelite svakoj aplikaciji i izvoru vlastitu boju</string>

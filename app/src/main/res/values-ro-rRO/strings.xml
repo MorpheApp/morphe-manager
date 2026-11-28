@@ -868,14 +868,17 @@ Dezinstalarea va șterge definitiv toate datele aplicației."</string>
     <string name="settings_appearance_translations_info_title">Traducerile pentru unele limbi pot lipsi sau pot fi incomplete</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Scara interfeței</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Ecran de pornire</string>
+    <string name="settings_appearance_screens">Ecrane</string>
     <string name="settings_appearance_greeting_phrases">Fraze de salut</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Afișează un mesaj de salut</string>
     <string name="settings_appearance_repatch_notice">Notificare privind repatch-uirea</string>
     <string name="settings_appearance_repatch_notice_description">Afișează o banderolă când aplicațiile cu patch-uri pot fi repatch-uite</string>
     <string name="settings_appearance_more_apps_card">Cardul Mai multe aplicații</string>
     <string name="settings_appearance_more_apps_card_description">Afișează un card sub aplicații, care conduce către patch-urile comunității</string>
+    <string name="settings_appearance_games_button">Butonul Jocuri</string>
+    <string name="settings_appearance_games_button_description">Afișează un buton către mini-jocuri în timpul patch-ului și la rezultat</string>
     <string name="settings_appearance_app_card_colors">Culori carduri</string>
     <string name="settings_appearance_app_card_colors_default">Implicit</string>
     <string name="settings_appearance_app_card_colors_default_description">Atribuă fiecărei aplicații și surse o culoare proprie</string>

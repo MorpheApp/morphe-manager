@@ -868,14 +868,17 @@ O‘chirish barcha ilova ma'lumotlarini butunlay o‘chirib tashlaydi"</string>
     <string name="settings_appearance_translations_info_title">Ba\'zi tillar uchun tarjimaning yo\'qligi yoki to\'liq bo\'lmasligi mumkin</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interfeys masshtabi</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Bosh ekran</string>
+    <string name="settings_appearance_screens">Ekranlar</string>
     <string name="settings_appearance_greeting_phrases">Salomlashish iborasi</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Tabrik xabarini ko\'rsatadi.</string>
     <string name="settings_appearance_repatch_notice">Qayta yamash bildirishnomasi</string>
     <string name="settings_appearance_repatch_notice_description">Patchlangan ilovalar qayta patchlanishi mumkin bo\'lganda banner ko\'rsatadi.</string>
     <string name="settings_appearance_more_apps_card">Yana ko\'proq ilovalar kartasi</string>
     <string name="settings_appearance_more_apps_card_description">Ilovalar ostida hamjamiyat yamoqlariga olib boruvchi kartani ko\'rsatadi</string>
+    <string name="settings_appearance_games_button">O\'yinlar tugmasi</string>
+    <string name="settings_appearance_games_button_description">Patch jarayonida va natijada mini-o\'yinlar tugmasini ko\'rsatadi</string>
     <string name="settings_appearance_app_card_colors">Karta ranglari</string>
     <string name="settings_appearance_app_card_colors_default">Standart</string>
     <string name="settings_appearance_app_card_colors_default_description">Har bir ilova va manbaga o\'zining shaxsiy rangini bering</string>

@@ -868,14 +868,17 @@ Jêbirin dê hemû daneyên appê bi domdarî jê bibe"</string>
     <string name="settings_appearance_translations_info_title">Wergerandin ji bo hin zimanên kêmtir an jî ne tamkirin</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Mezinahiya navrûyê</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Ekrana sereke</string>
+    <string name="settings_appearance_screens">Ekran</string>
     <string name="settings_appearance_greeting_phrases">Peyvên silavê</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Payameke silavê nîşan dide</string>
     <string name="settings_appearance_repatch_notice">Agahdariya ji nû ve patchkirinê</string>
     <string name="settings_appearance_repatch_notice_description">Dema appên patchkirî dikarin dîsa patchkirin, bannerek nîşan dide</string>
     <string name="settings_appearance_more_apps_card">Karta app-ên zêdetir</string>
     <string name="settings_appearance_more_apps_card_description">Karteke bin aplikasyonan nîşan dide ku bi patchên civakê ve girêdayî ye</string>
+    <string name="settings_appearance_games_button">Bişkoja Lîban</string>
+    <string name="settings_appearance_games_button_description">Bişkojekê ya lîbanên piçûk di dema patching û li ser encaman nîşan dide</string>
     <string name="settings_appearance_app_card_colors">Rengên kartan</string>
     <string name="settings_appearance_app_card_colors_default">Bixweber</string>
     <string name="settings_appearance_app_card_colors_default_description">Ji bo her aplikasyon û çavkaniyê rengê xwe yê taybet bide</string>

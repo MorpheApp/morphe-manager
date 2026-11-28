@@ -189,7 +189,10 @@
     <!-- Settings - Appearance Tab - Theme -->
     <!-- Settings - Appearance Tab - Language Selector -->
     <!-- Settings - Appearance Tab - Interface Scale -->
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
+    <string name="settings_appearance_screens">திரைகள்</string>
+    <string name="settings_appearance_games_button">விளையாட்டுகள் பொத்தான்</string>
+    <string name="settings_appearance_games_button_description">பேட்ச் செய்யும் போதும் மற்றும் முடிவின் போதும் மினி-விளையாட்டுகளுக்கான பொத்தானைக் காட்டுகிறது</string>
     <!-- Settings - Appearance Tab - App Icon Selector -->
     <!-- %s is the name of the icon picked -->
     <!-- Label of a footer button beside "Cancel". Keep it short, a longer one moves the buttons onto two rows -->

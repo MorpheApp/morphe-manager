@@ -867,14 +867,17 @@
     <string name="settings_appearance_translations_info_title">काही भाषांसाठी भाषांतरे गहाळ किंवा अपूर्ण असू शकतात</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">इंटरफेस स्केल</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">मुख्य स्क्रीन</string>
+    <string name="settings_appearance_screens">स्क्रीन्ज</string>
     <string name="settings_appearance_greeting_phrases">शुभेच्छा संदेश</string>
     <string name="settings_appearance_greeting_phrases_subtitle">अभिवादन संदेश दाखवते</string>
     <string name="settings_appearance_repatch_notice">री-पॅच सूचना</string>
     <string name="settings_appearance_repatch_notice_description">जेव्हा पॅच केलेल्या ॲप्स पुन्हा-पॅच केले जाऊ शकतात, तेव्हा एक बॅनर दाखवते</string>
     <string name="settings_appearance_more_apps_card">अधिक ॲप्स कार्ड</string>
     <string name="settings_appearance_more_apps_card_description">ॲप्सच्या खाली एक कार्ड दाखवते जे समुदाय पॅचेसकडे घेऊन जाते</string>
+    <string name="settings_appearance_games_button">गेम्स बटण</string>
+    <string name="settings_appearance_games_button_description">पॅचिंग दरम्यान आणि रिझल्टवर मिनी-गेम्ससाठी बटण दर्शवते</string>
     <string name="settings_appearance_app_card_colors">कार्डचे रंग</string>
     <string name="settings_appearance_app_card_colors_default">डीफॉल्ट</string>
     <string name="settings_appearance_app_card_colors_default_description">प्रत्येक ॲप आणि स्त्रोताला स्वतःचा वेगळा रंग द्या</string>

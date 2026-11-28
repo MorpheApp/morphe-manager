@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">কিছু ভাষাৰ অনুবাদ অনুপস্থিত বা অসম্পূৰ্ণ হ\'ব পাৰে</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">ইণ্টাৰফেচ স্কেল</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">হোম স্ক্ৰীন</string>
+    <string name="settings_appearance_screens">স্ক্ৰীনসমূহ</string>
     <string name="settings_appearance_greeting_phrases">অভিবাদনৰ বাক্যাংশ</string>
     <string name="settings_appearance_greeting_phrases_subtitle">এটি সম্ভাষণ বাৰ্তা দেখুৱায়</string>
     <string name="settings_appearance_repatch_notice">পুনৰ-পেচ জাননী</string>
     <string name="settings_appearance_repatch_notice_description">পেচড এপবোৰ পুনৰ পেচ কৰিব পৰা হ\'লে এটা বেনাৰ দেখুৱায়</string>
     <string name="settings_appearance_more_apps_card">আৰু অধিক এপ কাৰ্ড</string>
     <string name="settings_appearance_more_apps_card_description">এপবোৰৰ তলত এটা কাৰ্ড দেখুৱায় যিয়ে কমিউনিটি পেচবোৰলৈ লৈ যায়</string>
+    <string name="settings_appearance_games_button">গেম্ছ বুটাম</string>
+    <string name="settings_appearance_games_button_description">পেচিং কৰাৰ সময়ত আৰু ফলাফলত মিনি-গেম্ছৰ বাবে এটা বুটাম দেখুৱায়</string>
     <string name="settings_appearance_app_card_colors">কাৰ্ডৰ ৰং</string>
     <string name="settings_appearance_app_card_colors_default">ডিফল্ট</string>
     <string name="settings_appearance_app_card_colors_default_description">প্ৰতিটো এপ আৰু উৎসৰ বাবে নিজা ৰং নিৰ্ধাৰণ কৰক</string>

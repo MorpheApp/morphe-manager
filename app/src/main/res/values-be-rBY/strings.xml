@@ -869,14 +869,17 @@
     <string name="settings_appearance_translations_info_title">Пераклады для некаторых моў могуць адсутнічаць або быць няпоўнымі</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Маштаб інтэрфейсу</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Галоўны экран</string>
+    <string name="settings_appearance_screens">Экраны</string>
     <string name="settings_appearance_greeting_phrases">Прывітальныя фразы</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Паказвае прывітальнае паведамленне</string>
     <string name="settings_appearance_repatch_notice">Паведамленне аб перапатчынгу</string>
     <string name="settings_appearance_repatch_notice_description">Паказвае банер, калі прапатчаныя праграмы можна перапатчыць</string>
     <string name="settings_appearance_more_apps_card">Больш картак праграм</string>
     <string name="settings_appearance_more_apps_card_description">Паказвае картку пад праграмамі, якая вядзе да патчаў супольнасці</string>
+    <string name="settings_appearance_games_button">Кнопка гульняў</string>
+    <string name="settings_appearance_games_button_description">Паказвае кнопку міні-гульняў падчас патчынга і ў выніках</string>
     <string name="settings_appearance_app_card_colors">Колеры карткі</string>
     <string name="settings_appearance_app_card_colors_default">Звычайны</string>
     <string name="settings_appearance_app_card_colors_default_description">Прызначыце кожнай праграме і крыніцы ўласны колер</string>

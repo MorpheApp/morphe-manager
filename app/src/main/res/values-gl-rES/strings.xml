@@ -869,14 +869,17 @@ A desinstalación borrará permanentemente todos os datos da aplicación"</strin
     <string name="settings_appearance_translations_info_title">As traducións de algunhas linguas poden faltar ou estar incompletas</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Escala da interface</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Pantalla de inicio</string>
+    <string name="settings_appearance_screens">Pantallas</string>
     <string name="settings_appearance_greeting_phrases">Frases de saudación</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Mostra unha mensaxe de saúdo</string>
     <string name="settings_appearance_repatch_notice">Aviso de volver parchear</string>
     <string name="settings_appearance_repatch_notice_description">Mostra un aviso cando as aplicacións parcheadas poden volver parchearse</string>
     <string name="settings_appearance_more_apps_card">Tarxeta de máis aplicacións</string>
     <string name="settings_appearance_more_apps_card_description">Mostra unha tarxeta baixo as aplicacións que leva aos parches da comunidade</string>
+    <string name="settings_appearance_games_button">Botón Xogos</string>
+    <string name="settings_appearance_games_button_description">Amosa un botón para os minixogos mentres se fai o parcheo e no resultado</string>
     <string name="settings_appearance_app_card_colors">Colores das tarxetas</string>
     <string name="settings_appearance_app_card_colors_default">Predefinido</string>
     <string name="settings_appearance_app_card_colors_default_description">Asigna a cada aplicación e fonte un colore propio</string>

@@ -868,14 +868,17 @@ Quraşdırma ləğvi bütün tətbiq məlumatını qalıcı siləcək"</string>
     <string name="settings_appearance_translations_info_title">Bəzi dillər üçün tərcümələr əskik və ya nöqsanlı ola bilər.</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">İnterfeys miqyası</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Əsas ekran</string>
+    <string name="settings_appearance_screens">Ekranlar</string>
     <string name="settings_appearance_greeting_phrases">Salamlaşma ifadələri</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Salamlama mesajını göstərir</string>
     <string name="settings_appearance_repatch_notice">Yenidən yamaqlama bildirişi</string>
     <string name="settings_appearance_repatch_notice_description">Yamaqlanmış tətbiqlər yenidən yamaqlana bildikdə etiket göstərir</string>
     <string name="settings_appearance_more_apps_card">Daha çox tətbiq kartı</string>
     <string name="settings_appearance_more_apps_card_description">Tətbiqlərin altında icma yamaqlarına yönləndirən kart göstərir</string>
+    <string name="settings_appearance_games_button">Oyunlar düyməsi</string>
+    <string name="settings_appearance_games_button_description">Yamaqlama zamanı və nəticədə kiçik oyunlar üçün düymə göstərir</string>
     <string name="settings_appearance_app_card_colors">Kart rəngləri</string>
     <string name="settings_appearance_app_card_colors_default">İlkin</string>
     <string name="settings_appearance_app_card_colors_default_description">Hər tətbiqə və mənbəyə özünəməxsus rəng ver</string>

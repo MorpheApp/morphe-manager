@@ -377,7 +377,7 @@ Choisissez d'où provient son APK"</string>
     <string name="home_invalid_signature_title">APK non vérifié</string>
     <string name="home_invalid_signature_message">L\'APK que vous avez sélectionné pour &lt;b&gt;%s&lt;/b&gt; ne correspond pas au certificat de signature attendu. Il peut avoir été modifié ou provenir d\'une source non fiable</string>
     <string name="home_invalid_signature_badge">Cet APK n\'est peut-être pas celui d\'origine</string>
-    <string name="home_invalid_signature_broken_message">L\'APK que vous avez sélectionnée pour &lt;b&gt;%s&lt;/b&gt; échoue à la vérification de sa signature. Elle est probablement endommagée ou n\'a pas été entièrement téléchargée, veuillez donc la télécharger à nouveau ou choisir un autre fichier</string>
+    <string name="home_invalid_signature_broken_message">L\'APK que vous avez sélectionné pour &lt;b&gt;%s&lt;/b&gt; échoue à la vérification de sa signature. Il est probablement endommagé ou n\'a pas été téléchargé entièrement, veuillez donc le télécharger à nouveau ou choisir un autre fichier</string>
     <string name="home_invalid_signature_broken_badge">Cet APK peut être endommagé ou incomplet</string>
     <string name="home_invalid_signature_expected">Certificat attendu</string>
     <string name="home_invalid_signature_actual">Certificat de l\'APK</string>
@@ -869,14 +869,17 @@ La désinstallation effacera définitivement toutes les données de l'applicatio
     <string name="settings_appearance_translations_info_title">Certaines traductions peuvent être manquantes ou incomplètes</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Échelle de l\'interface</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Écran d\'accueil</string>
+    <string name="settings_appearance_screens">Écrans</string>
     <string name="settings_appearance_greeting_phrases">Phrases de salutation</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Affiche un message de salutation</string>
     <string name="settings_appearance_repatch_notice">Avis de re-patch</string>
     <string name="settings_appearance_repatch_notice_description">Affiche une bannière lorsque les applications patchées peuvent être re-patchées</string>
     <string name="settings_appearance_more_apps_card">Carte \'Plus d\'applications\'</string>
     <string name="settings_appearance_more_apps_card_description">Affiche une carte sous les applications permettant d\'accéder aux patchs communautaires</string>
+    <string name="settings_appearance_games_button">Bouton \'Jeux\'</string>
+    <string name="settings_appearance_games_button_description">Affiche un bouton permettant d\'accéder aux mini-jeux pendant le patching et sur le résultat</string>
     <string name="settings_appearance_app_card_colors">Couleurs des cartes</string>
     <string name="settings_appearance_app_card_colors_default">Par défaut</string>
     <string name="settings_appearance_app_card_colors_default_description">Attribuez une couleur propre à chaque application et source</string>

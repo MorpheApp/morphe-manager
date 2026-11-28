@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">Недостаје превода за неке језике</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Размера интерфејса</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Почетни екран</string>
+    <string name="settings_appearance_screens">Екрани</string>
     <string name="settings_appearance_greeting_phrases">Почетне фразе</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Приказује поздравну поруку</string>
     <string name="settings_appearance_repatch_notice">Обавештење о поновном закрпавању</string>
     <string name="settings_appearance_repatch_notice_description">Приказује банер када закрпљене апликације могу поново да се закрпе</string>
     <string name="settings_appearance_more_apps_card">Картица „Више апликација“</string>
     <string name="settings_appearance_more_apps_card_description">Приказује картицу испод апликација која води до закрпа заједнице</string>
+    <string name="settings_appearance_games_button">Дугме „Игре“</string>
+    <string name="settings_appearance_games_button_description">Приказује дугме за мини-игре током патчовања и на резултату</string>
     <string name="settings_appearance_app_card_colors">Боје картица</string>
     <string name="settings_appearance_app_card_colors_default">Подразумевано</string>
     <string name="settings_appearance_app_card_colors_default_description">Доделите свакој апликацији и извору сопствену боју</string>

@@ -868,14 +868,17 @@ APK를 가져올 위치를 선택하세요"</string>
     <string name="settings_appearance_translations_info_title">일부 언어의 번역이 누락되거나 불완전할 수 있습니다</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">인터페이스 배율</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">홈 화면</string>
+    <string name="settings_appearance_screens">화면</string>
     <string name="settings_appearance_greeting_phrases">인사말</string>
     <string name="settings_appearance_greeting_phrases_subtitle">인사말을 표시합니다</string>
     <string name="settings_appearance_repatch_notice">다시 패치 알림</string>
     <string name="settings_appearance_repatch_notice_description">패치된 앱을 다시 패치할 수 있을 경우 배너를 표시합니다</string>
     <string name="settings_appearance_more_apps_card">앱 카드 더보기</string>
     <string name="settings_appearance_more_apps_card_description">앱 목록 아래에 커뮤니티 패치로 연결되는 카드를 표시합니다</string>
+    <string name="settings_appearance_games_button">게임 버튼</string>
+    <string name="settings_appearance_games_button_description">패칭 중 및 결과 화면에서 미니 게임 버튼을 표시합니다</string>
     <string name="settings_appearance_app_card_colors">카드 색상</string>
     <string name="settings_appearance_app_card_colors_default">기본값</string>
     <string name="settings_appearance_app_card_colors_default_description">각 앱과 소스에 고유한 색상을 지정하세요</string>

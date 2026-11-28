@@ -868,14 +868,17 @@ Mencopot akan menghapus semua data aplikasi secara permanen"</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk beberapa bahasa mungkin belum tersedia atau belum lengkap</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Skala antarmuka</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Layar beranda</string>
+    <string name="settings_appearance_screens">Layar</string>
     <string name="settings_appearance_greeting_phrases">Frasa sapaan</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Menampilkan pesan sapaan</string>
     <string name="settings_appearance_repatch_notice">Notifikasi penambalan ulang</string>
     <string name="settings_appearance_repatch_notice_description">Menampilkan spanduk ketika aplikasi yang telah ditambal dapat ditambal ulang</string>
     <string name="settings_appearance_more_apps_card">Kartu lebih banyak aplikasi</string>
     <string name="settings_appearance_more_apps_card_description">Menampilkan kartu di bawah aplikasi yang mengarah ke tambalan komunitas</string>
+    <string name="settings_appearance_games_button">Tombol Game</string>
+    <string name="settings_appearance_games_button_description">Menampilkan tombol ke mini-game saat patching dan pada hasil</string>
     <string name="settings_appearance_app_card_colors">Warna kartu</string>
     <string name="settings_appearance_app_card_colors_default">Bawaan</string>
     <string name="settings_appearance_app_card_colors_default_description">Berikan warna tersendiri untuk setiap aplikasi dan sumber</string>

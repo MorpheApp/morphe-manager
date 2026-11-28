@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">某些語言的翻譯可能遺失或不完整</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">介面縮放</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">主螢幕</string>
+    <string name="settings_appearance_screens">螢幕</string>
     <string name="settings_appearance_greeting_phrases">問候語</string>
     <string name="settings_appearance_greeting_phrases_subtitle">顯示問候訊息</string>
     <string name="settings_appearance_repatch_notice">重新修補通知</string>
     <string name="settings_appearance_repatch_notice_description">當修補過的應用程式可再次修補時顯示橫幅通知</string>
     <string name="settings_appearance_more_apps_card">更多應用程式卡片</string>
     <string name="settings_appearance_more_apps_card_description">在應用程式下方顯示一個導向社群修補程式的卡片</string>
+    <string name="settings_appearance_games_button">遊戲按鈕</string>
+    <string name="settings_appearance_games_button_description">在修補和結果頁面中顯示指向迷你遊戲的按鈕</string>
     <string name="settings_appearance_app_card_colors">卡片顏色</string>
     <string name="settings_appearance_app_card_colors_default">預設</string>
     <string name="settings_appearance_app_card_colors_default_description">為每個應用程式和來源設定獨立的顏色</string>

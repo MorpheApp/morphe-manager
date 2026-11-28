@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">Οι μεταφράσεις για ορισμένες γλώσσες μπορεί να λείπουν ή να μην είναι ολοκληρωμένες</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Κλίμακα διεπαφής</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Αρχική οθόνη</string>
+    <string name="settings_appearance_screens">Οθόνες</string>
     <string name="settings_appearance_greeting_phrases">Φράσεις υποδοχής</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Εμφανίζει ένα μήνυμα χαιρετισμού</string>
     <string name="settings_appearance_repatch_notice">Ειδοποίηση επανάληψης τροποποιήσεων</string>
     <string name="settings_appearance_repatch_notice_description">Εμφανίζει banner όταν οι διορθωμένες εφαρμογές μπορούν να επαναδιορθωθούν</string>
     <string name="settings_appearance_more_apps_card">Κάρτα περισσότερων εφαρμογών</string>
     <string name="settings_appearance_more_apps_card_description">Εμφανίζει μια κάρτα κάτω από τις εφαρμογές που οδηγεί σε κοινοτικά διορθώματα</string>
+    <string name="settings_appearance_games_button">Κουμπί \"Παιχνίδια\"</string>
+    <string name="settings_appearance_games_button_description">Εμφανίζει ένα κουμπί για τα μίνι παιχνίδια κατά την εφαρμογή διορθώσεων και στο αποτέλεσμα</string>
     <string name="settings_appearance_app_card_colors">Χρώματα καρτών</string>
     <string name="settings_appearance_app_card_colors_default">Προεπιλογή</string>
     <string name="settings_appearance_app_card_colors_default_description">Δώστε σε κάθε εφαρμογή και πηγή το δικό της χρώμα</string>

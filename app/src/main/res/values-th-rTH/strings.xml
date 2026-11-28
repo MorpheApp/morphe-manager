@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">อาจมีคำแปลสำหรับบางภาษาขาดหายไปหรือไม่สมบูรณ์</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">ขนาดอินเทอร์เฟซ</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">หน้าจอหลัก</string>
+    <string name="settings_appearance_screens">หน้าจอ</string>
     <string name="settings_appearance_greeting_phrases">วลีทักทาย</string>
     <string name="settings_appearance_greeting_phrases_subtitle">แสดงข้อความทักทาย</string>
     <string name="settings_appearance_repatch_notice">ประกาศการแพตช์ซ้ำ</string>
     <string name="settings_appearance_repatch_notice_description">แสดงแบนเนอร์เมื่อแอปที่แพตช์แล้วสามารถแพตช์ซ้ำได้</string>
     <string name="settings_appearance_more_apps_card">การ์ดแอปเพิ่มเติม</string>
     <string name="settings_appearance_more_apps_card_description">แสดงการ์ดใต้แอปที่นำไปสู่แพตช์ชุมชน</string>
+    <string name="settings_appearance_games_button">ปุ่มเกม</string>
+    <string name="settings_appearance_games_button_description">แสดงปุ่มไปยังมินิเกมขณะกำลังแพตช์และในหน้าผลลัพธ์</string>
     <string name="settings_appearance_app_card_colors">สีการ์ด</string>
     <string name="settings_appearance_app_card_colors_default">ค่าเริ่มต้น</string>
     <string name="settings_appearance_app_card_colors_default_description">กำหนดสีเฉพาะให้สำหรับแต่ละแอปและแหล่งที่มา</string>

@@ -868,14 +868,17 @@ Gỡ cài đặt sẽ xóa vĩnh viễn toàn bộ dữ liệu ứng dụng"</st
     <string name="settings_appearance_translations_info_title">Một số ngôn ngữ có thể bị thiếu hoặc chưa hoàn thiện</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Tỷ lệ giao diện</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Trang chủ</string>
+    <string name="settings_appearance_screens">Màn hình</string>
     <string name="settings_appearance_greeting_phrases">Thông điệp</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Hiển thị lời chào</string>
     <string name="settings_appearance_repatch_notice">Thông báo vá lại</string>
     <string name="settings_appearance_repatch_notice_description">Hiển thị banner khi các ứng dụng đã vá có thể được vá lại</string>
     <string name="settings_appearance_more_apps_card">Thẻ Thêm ứng dụng</string>
     <string name="settings_appearance_more_apps_card_description">Hiển thị một thẻ bên dưới các ứng dụng dẫn đến các bản vá cộng đồng</string>
+    <string name="settings_appearance_games_button">Nút Trò chơi</string>
+    <string name="settings_appearance_games_button_description">Hiển thị nút dẫn đến các trò chơi nhỏ trong khi đang vá lỗi và trên kết quả</string>
     <string name="settings_appearance_app_card_colors">Màu thẻ</string>
     <string name="settings_appearance_app_card_colors_default">Mặc định</string>
     <string name="settings_appearance_app_card_colors_default_description">Gán cho mỗi ứng dụng và nguồn một màu riêng</string>

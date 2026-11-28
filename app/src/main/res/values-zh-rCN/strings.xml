@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">某些语言的翻译可能缺失或不完整</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">界面缩放</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">主屏幕</string>
+    <string name="settings_appearance_screens">屏幕</string>
     <string name="settings_appearance_greeting_phrases">问候语</string>
     <string name="settings_appearance_greeting_phrases_subtitle">显示问候语</string>
     <string name="settings_appearance_repatch_notice">重新打补丁通知</string>
     <string name="settings_appearance_repatch_notice_description">当已修补的应用可重新修补时显示横幅通知</string>
     <string name="settings_appearance_more_apps_card">更多应用卡片</string>
     <string name="settings_appearance_more_apps_card_description">在应用下方显示一个指向社区补丁的卡片</string>
+    <string name="settings_appearance_games_button">游戏按钮</string>
+    <string name="settings_appearance_games_button_description">在补丁更新期间和结果界面显示一个进入小游戏的按钮</string>
     <string name="settings_appearance_app_card_colors">卡片颜色</string>
     <string name="settings_appearance_app_card_colors_default">默认</string>
     <string name="settings_appearance_app_card_colors_default_description">为每个应用和来源赋予专属颜色</string>

@@ -868,14 +868,17 @@ Afinstallation sletter permanent alle appdata."</string>
     <string name="settings_appearance_translations_info_title">Oversættelser for visse sprog kan mangle eller være ufærdige</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interface-skala</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Startskærm</string>
+    <string name="settings_appearance_screens">Skærme</string>
     <string name="settings_appearance_greeting_phrases">Hilsenfraser</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Viser en hilsen</string>
     <string name="settings_appearance_repatch_notice">Meddelelse om gen-patch</string>
     <string name="settings_appearance_repatch_notice_description">Viser et banner, når patchede apps kan genpatches</string>
     <string name="settings_appearance_more_apps_card">Kort med flere apps</string>
     <string name="settings_appearance_more_apps_card_description">Viser et kort under apps, der fører til community-patches</string>
+    <string name="settings_appearance_games_button">Spil-knap</string>
+    <string name="settings_appearance_games_button_description">Viser en knap til minispillene under patching og på resultatet</string>
     <string name="settings_appearance_app_card_colors">Kortfarver</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Giv hver app og kilde sin egen farve</string>

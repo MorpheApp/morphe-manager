@@ -868,14 +868,17 @@ APK-г хаанаас авахыг сонгоно уу"</string>
     <string name="settings_appearance_translations_info_title">Зарим хэлний орчуулга дутуу эсвэл бүрэн бус байж болно</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Интерфэйсийн хэмжээ</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Нүүр дэлгэц</string>
+    <string name="settings_appearance_screens">Дэлгэцүүд</string>
     <string name="settings_appearance_greeting_phrases">Мэндчилгээний хэллэгүүд</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Мэндчилгээний зурвас харуулах</string>
     <string name="settings_appearance_repatch_notice">Дахин патчлах мэдэгдэл</string>
     <string name="settings_appearance_repatch_notice_description">Зассан аппликейшнүүдийг дахин засварлах боломжтой үед баннер харуулах</string>
     <string name="settings_appearance_more_apps_card">Илүү олон апп-ын карт</string>
     <string name="settings_appearance_more_apps_card_description">Апп-уудын доор хамт олны патчууд руу хөтлөх картыг харуулна</string>
+    <string name="settings_appearance_games_button">Тоглоомын товч</string>
+    <string name="settings_appearance_games_button_description">Нэвтрүүлэг хийх болон үр дүн дээр жижиг тоглоомуудын товчийг харуулна</string>
     <string name="settings_appearance_app_card_colors">Картын өнгөнүүд</string>
     <string name="settings_appearance_app_card_colors_default">Өгөгдсөн</string>
     <string name="settings_appearance_app_card_colors_default_description">Аппликейшн болон эх сурвалж бүрт өөрийн гэсэн өнгө оноо</string>

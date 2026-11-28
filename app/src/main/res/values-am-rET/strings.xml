@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">የአንዳንድ ቋንቋዎች ትርጉሞች ሊጠፉ ወይም ያልተሟሉ ሊሆኑ ይችላሉ</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">የኢንተርፌስ መጠን</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">የቤት ስክሪን</string>
+    <string name="settings_appearance_screens">ስክሪኖች</string>
     <string name="settings_appearance_greeting_phrases">የሰላምታ ቃላት</string>
     <string name="settings_appearance_greeting_phrases_subtitle">የሰላምታ መልእክትን ያሳያል</string>
     <string name="settings_appearance_repatch_notice">እንደገና ፓች የማድረግ ማሳሰቢያ</string>
     <string name="settings_appearance_repatch_notice_description">የተስተካከሉ መተግበሪያዎች በድጋሚ ሊስተካከሉ የሚችሉበት ጊዜ ባነር ያሳያል</string>
     <string name="settings_appearance_more_apps_card">የተጨማሪ መተግበሪያዎች ካርድ</string>
     <string name="settings_appearance_more_apps_card_description">ወደ ማህበረሰብ ጥገናዎች የሚመራ ካርድ በመተግበሪያዎች ስር ያሳያል</string>
+    <string name="settings_appearance_games_button">የጨዋታዎች ቁልፍ</string>
+    <string name="settings_appearance_games_button_description">በማዘመን እና በውጤቱ ወቅት ወደ ትናንሽ ጨዋታዎች የሚወስድ ቁልፍ ያሳያል</string>
     <string name="settings_appearance_app_card_colors">የካርድ ቀለሞች</string>
     <string name="settings_appearance_app_card_colors_default">መደበኛ</string>
     <string name="settings_appearance_app_card_colors_default_description">ለእያንዳንዱ መተግበሪያ እና ምንጭ የራሱ የሆነ ቀለም ይስጡ</string>

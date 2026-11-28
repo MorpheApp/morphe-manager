@@ -868,14 +868,17 @@ Odinštalovanie trvalo vymaže všetky údaje aplikácie."</string>
     <string name="settings_appearance_translations_info_title">Preklady pre niektoré jazyky sa môžu byť neúplné</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Mierka rozhrania</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Domovská obrazovka</string>
+    <string name="settings_appearance_screens">Obrazovky</string>
     <string name="settings_appearance_greeting_phrases">Pozdravné frázy</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Zobrazuje privítaciu správu</string>
     <string name="settings_appearance_repatch_notice">Upozornenie na opätovné záplatovanie</string>
     <string name="settings_appearance_repatch_notice_description">Zobrazuje banner, keď je možné znovu opraviť opravené aplikácie</string>
     <string name="settings_appearance_more_apps_card">Karta Ďalšie aplikácie</string>
     <string name="settings_appearance_more_apps_card_description">Zobrazí kartu pod aplikáciami, ktorá vedie k záplatám komunity</string>
+    <string name="settings_appearance_games_button">Tlačidlo Games</string>
+    <string name="settings_appearance_games_button_description">Zobrazuje tlačidlo pre minihry počas patchovania a pri výsledku</string>
     <string name="settings_appearance_app_card_colors">Farby kariet</string>
     <string name="settings_appearance_app_card_colors_default">Predvolená</string>
     <string name="settings_appearance_app_card_colors_default_description">Pridelte každej aplikácii a zdroju vlastnú farbu</string>

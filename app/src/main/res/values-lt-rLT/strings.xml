@@ -868,14 +868,17 @@ Pašalinus bus visam laikui ištrinti visi programos duomenys."</string>
     <string name="settings_appearance_translations_info_title">Kai kurių kalbų vertimų gali trūkti arba jie gali būti nepilni</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Sąsajos mastelis</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Pagrindinis ekranas</string>
+    <string name="settings_appearance_screens">Ekranai</string>
     <string name="settings_appearance_greeting_phrases">Pasveikinimo frazės</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Rodo pasisveikinimo žinutę</string>
     <string name="settings_appearance_repatch_notice">Pakartotinio pataisymo pranešimas</string>
     <string name="settings_appearance_repatch_notice_description">Rodo pranešimą, kai pataisytas programas galima pataisyti iš naujo</string>
     <string name="settings_appearance_more_apps_card">„Daugiau programų“ kortelė</string>
     <string name="settings_appearance_more_apps_card_description">Rodo kortelę po programėlėmis, vedančią į bendruomenės pataisymus</string>
+    <string name="settings_appearance_games_button">Žaidimų mygtukas</string>
+    <string name="settings_appearance_games_button_description">Rodo mygtuką į mini-žaidimus atnaujinimo metu ir rezultate</string>
     <string name="settings_appearance_app_card_colors">Kortelių spalvos</string>
     <string name="settings_appearance_app_card_colors_default">Numatytasis</string>
     <string name="settings_appearance_app_card_colors_default_description">Priskirkite kiekvienai programėliui ir šaltiniui savo spalvą</string>

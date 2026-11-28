@@ -869,14 +869,17 @@ Nyahpasang akan memadam semua data aplikasi secara kekal"</string>
     <string name="settings_appearance_translations_info_title">Terjemahan untuk sesetengah bahasa mungkin kurang atau tidak lengkap</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Skala antara muka</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Skrin utama</string>
+    <string name="settings_appearance_screens">Skrin</string>
     <string name="settings_appearance_greeting_phrases">Frasa ucapan</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Menunjukkan mesej ucapan</string>
     <string name="settings_appearance_repatch_notice">Notis tampalan semula</string>
     <string name="settings_appearance_repatch_notice_description">Menunjukkan sepanduk apabila aplikasi yang ditampal boleh ditampal semula</string>
     <string name="settings_appearance_more_apps_card">Kad lebih banyak aplikasi</string>
     <string name="settings_appearance_more_apps_card_description">Menunjukkan kad di bawah aplikasi yang membawa ke tampalan komuniti</string>
+    <string name="settings_appearance_games_button">Butang Permainan</string>
+    <string name="settings_appearance_games_button_description">Menunjukkan butang ke mini-permainan semasa menampal dan pada hasil</string>
     <string name="settings_appearance_app_card_colors">Warna kad</string>
     <string name="settings_appearance_app_card_colors_default">Lalai</string>
     <string name="settings_appearance_app_card_colors_default_description">Berikan setiap apl dan sumber warna tersendiri</string>

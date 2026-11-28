@@ -867,14 +867,17 @@
     <string name="settings_appearance_translations_info_title">Преводите за некои јазици може да бидат отсутни или нецелосни</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Скалирање на интерфејсот</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Почетен екран</string>
+    <string name="settings_appearance_screens">Екрани</string>
     <string name="settings_appearance_greeting_phrases">Поздрави</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Прикажува порака за поздрав</string>
     <string name="settings_appearance_repatch_notice">Известување за повторно закрпување</string>
     <string name="settings_appearance_repatch_notice_description">Прикажува банер кога зафлакираните апликации можат повторно да се зафлакираат</string>
     <string name="settings_appearance_more_apps_card">Картичка за повеќе апликации</string>
     <string name="settings_appearance_more_apps_card_description">Прикажува картичка под апликациите која води до закрпи од заедницата</string>
+    <string name="settings_appearance_games_button">Копче за игри</string>
+    <string name="settings_appearance_games_button_description">Прикажува копче за мини-игри за време на закрпувањето и на резултатот</string>
     <string name="settings_appearance_app_card_colors">Бои на картичките</string>
     <string name="settings_appearance_app_card_colors_default">Стандардно</string>
     <string name="settings_appearance_app_card_colors_default_description">Доделете посебна боја за секоја апликација и извор</string>

@@ -868,14 +868,17 @@ Ukususa kuzosula uphakade yonke idatha yohlelo"</string>
     <string name="settings_appearance_translations_info_title">Izihumushi zezinye izilimi zingase zibe khona noma zingaphelele</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Isayizi ye-interface</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Isikrini sasekhaya</string>
+    <string name="settings_appearance_screens">Izikrini</string>
     <string name="settings_appearance_greeting_phrases">Amazwi okubingelela</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Kukhombisa umlayezo wokubingelela</string>
     <string name="settings_appearance_repatch_notice">Isaziso sokuphinda ufake i-patch</string>
     <string name="settings_appearance_repatch_notice_description">Kukhombisa ibhena lapho izinhlelo ezipatshwe zingapatshwa kabusha</string>
     <string name="settings_appearance_more_apps_card">Ikhadi lezinhlelo eziningi</string>
     <string name="settings_appearance_more_apps_card_description">Ikhombisa ikhadi ngaphansi kwe-apps eliqondisa kuma-community patches</string>
+    <string name="settings_appearance_games_button">Inkinobho yezimidlalo</string>
+    <string name="settings_appearance_games_button_description">Ikhombisa inkinobho eyezimidlalo emincane ngesikhathi kulungiswa nasekupheleni</string>
     <string name="settings_appearance_app_card_colors">Imibala yamakadi</string>
     <string name="settings_appearance_app_card_colors_default">Okujwayelekile</string>
     <string name="settings_appearance_app_card_colors_default_description">Nika i-app ngayinye nomthombo umbala wawo owakhe</string>

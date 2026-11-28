@@ -378,7 +378,7 @@
     <string name="home_invalid_signature_title">Niezweryfikowany plik APK</string>
     <string name="home_invalid_signature_message">Wybrany plik APK aplikacji &lt;b&gt;%s&lt;/b&gt; nie jest zgodny z oczekiwanym certyfikatem podpisu. Może być zmodyfikowany lub pochodzić z niezaufanego źródła</string>
     <string name="home_invalid_signature_badge">Ten plik APK może nie być oryginalny</string>
-    <string name="home_invalid_signature_broken_message">Wybrany plik APK dla &lt;b&gt;%s&lt;/b&gt; nie przeszedł weryfikacji podpisu. Jest on prawdopodobnie uszkodzony lub nie został w pełni pobrany, więc pobierz go ponownie lub wybierz inny plik</string>
+    <string name="home_invalid_signature_broken_message">Wybrany plik APK dla &lt;b&gt;%s&lt;/b&gt; nie przeszedł weryfikacji podpisu. Prawdopodobnie jest uszkodzony lub nie został jeszcze w pełni pobrany. Pobierz go ponownie lub wybierz inny plik</string>
     <string name="home_invalid_signature_broken_badge">Ten plik APK może być uszkodzony lub niekompletny</string>
     <string name="home_invalid_signature_expected">Oczekiwany certyfikat</string>
     <string name="home_invalid_signature_actual">Certyfikat pliku APK</string>
@@ -869,14 +869,17 @@ Odinstalowanie bezpowrotnie usunie wszystkie dane aplikacji"</string>
     <string name="settings_appearance_translations_info_title">Tłumaczenia dla niektórych języków mogą być niekompletne lub może ich brakować</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Skala interfejsu</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Ekran główny</string>
+    <string name="settings_appearance_screens">Ekrany</string>
     <string name="settings_appearance_greeting_phrases">Powitania</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Wyświetla wiadomość powitalną</string>
     <string name="settings_appearance_repatch_notice">Powiadomienie o ponownym modyfikowaniu</string>
     <string name="settings_appearance_repatch_notice_description">Wyświetla baner, gdy można ponownie zmodyfikować aplikacje</string>
     <string name="settings_appearance_more_apps_card">Karta \"Więcej aplikacji\"</string>
     <string name="settings_appearance_more_apps_card_description">Wyświetla kartę pod listą aplikacji, prowadzącą do modyfikacji społeczności</string>
+    <string name="settings_appearance_games_button">Przycisk gier</string>
+    <string name="settings_appearance_games_button_description">Wyświetla przycisk do minigier podczas modyfikowania i na ekranie wyników</string>
     <string name="settings_appearance_app_card_colors">Kolory kart</string>
     <string name="settings_appearance_app_card_colors_default">Domyślne</string>
     <string name="settings_appearance_app_card_colors_default_description">Nadaj każdej aplikacji i źródłu własny kolor</string>

@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">ზოგიერთი ენის თარგმანები შესაძლოა იყოს გამოტოვებული ან არასრული</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">ინტერფეისის მასშტაბი</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">მთავარი ეკრანი</string>
+    <string name="settings_appearance_screens">ეკრანები</string>
     <string name="settings_appearance_greeting_phrases">მისალმების ფრაზები</string>
     <string name="settings_appearance_greeting_phrases_subtitle">აჩვენებს მისალმების შეტყობინებას</string>
     <string name="settings_appearance_repatch_notice">ხელახალი პატჩირების შეტყობინება</string>
     <string name="settings_appearance_repatch_notice_description">აჩვენებს ბანერს, როდესაც დაპატჩული აპლიკაციების ხელახალი პატჩირებაა შესაძლებელი</string>
     <string name="settings_appearance_more_apps_card">მეტი აპლიკაციის ბარათი</string>
     <string name="settings_appearance_more_apps_card_description">აჩვენებს ბარათს აპლიკაციების ქვემოთ, რომელიც მიდის საზოგადოების პატჩებისკენ</string>
+    <string name="settings_appearance_games_button">თამაშების ღილაკი</string>
+    <string name="settings_appearance_games_button_description">აჩვენებს მინი-თამაშების ღილაკს განახლებისას და შედეგების გვერდზე</string>
     <string name="settings_appearance_app_card_colors">ბარათების ფერები</string>
     <string name="settings_appearance_app_card_colors_default">ნაგულისხმები</string>
     <string name="settings_appearance_app_card_colors_default_description">მიანიჭეთ თითოეულ აპლიკაციას და წყაროს საკუთარი ფერი</string>

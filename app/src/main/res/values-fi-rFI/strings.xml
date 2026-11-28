@@ -868,14 +868,17 @@ Poistaminen poistaa pysyvästi kaikki sovelluksen tiedot."</string>
     <string name="settings_appearance_translations_info_title">Joidenkin kielten käännökset saattavat puuttua tai olla puutteellisia</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Käyttöliittymän skaalaus</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Aloitusnäyttö</string>
+    <string name="settings_appearance_screens">Ruudut</string>
     <string name="settings_appearance_greeting_phrases">Tervehdysviestit</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Näyttää tervehdysviestin</string>
     <string name="settings_appearance_repatch_notice">Uudelleenkorjausilmoitus</string>
     <string name="settings_appearance_repatch_notice_description">Näyttää bannerin, kun paikattuja sovelluksia voi paikata uudelleen</string>
     <string name="settings_appearance_more_apps_card">Lisää sovelluksia -kortti</string>
     <string name="settings_appearance_more_apps_card_description">Näyttää sovellusten alapuolella kortin, joka johtaa yhteisön korjauksiin</string>
+    <string name="settings_appearance_games_button">Pelipainike</string>
+    <string name="settings_appearance_games_button_description">Näyttää painikkeen minipeleihin päivityksen aikana ja tulossivulla</string>
     <string name="settings_appearance_app_card_colors">Korttien värit</string>
     <string name="settings_appearance_app_card_colors_default">Oletus</string>
     <string name="settings_appearance_app_card_colors_default_description">Anna jokaiselle sovellukselle ja lähteelle oma värinsä</string>

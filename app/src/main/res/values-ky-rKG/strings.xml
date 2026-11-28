@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">Кээ бир тилдер үчүн котормолор жок болушу мүмкүн же толук эмес</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Интерфейстин масштабы</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Башкы экран</string>
+    <string name="settings_appearance_screens">Экрандар</string>
     <string name="settings_appearance_greeting_phrases">Саламдашуу сөздөрү</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Саламдашуу билдирүүсүн көрсөтөт</string>
     <string name="settings_appearance_repatch_notice">Кайра патчдоо боюнча билдирүү</string>
     <string name="settings_appearance_repatch_notice_description">Патчтелген тиркемелерди кайра патчтөө мүмкүн болгондо баннерди көрсөтөт</string>
     <string name="settings_appearance_more_apps_card">Көбүрөөк колдонмолор картасы</string>
     <string name="settings_appearance_more_apps_card_description">Колдонмолордун астында коомдук патчтарга алып баруучу картаны көрсөтөт</string>
+    <string name="settings_appearance_games_button">Оюндар баскычы</string>
+    <string name="settings_appearance_games_button_description">Патчинг учурунда жана жыйынтыкта мини-оюндарга баскычты көрсөтөт</string>
     <string name="settings_appearance_app_card_colors">Карточкалардын түстөрү</string>
     <string name="settings_appearance_app_card_colors_default">Негизги</string>
     <string name="settings_appearance_app_card_colors_default_description">Ар бир тиркемеге жана булакка өзүнүн түсүн бериңиз</string>

@@ -869,14 +869,17 @@
     <string name="settings_appearance_translations_info_title">وەرگێڕانەکان بۆ هەندێک زمانەکان لەوانەیە وون یان ناتەواو بن</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">قەبارەی ڕووکاری بەکارهێنەر</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">شاشەی ماڵەوە</string>
+    <string name="settings_appearance_screens">شاشەکان</string>
     <string name="settings_appearance_greeting_phrases">دەستەواژەی بەخێرهاتن</string>
     <string name="settings_appearance_greeting_phrases_subtitle">نامەیەکی بەخێرهاتن پیشان دەدات</string>
     <string name="settings_appearance_repatch_notice">ئاگاداری دووبارە پاتچکردن</string>
     <string name="settings_appearance_repatch_notice_description">بەنەرێکی پیشان دەدات کاتێک ئەپەکانی پاتچکراو دەتوانرێن دووبارە پاتچ بکرێنەوە</string>
     <string name="settings_appearance_more_apps_card">کارتی زیاتر لە ئەپەکان</string>
     <string name="settings_appearance_more_apps_card_description">کارتێکی لەژێر ئەپەکان دەردەکەوێت کە دەبات بۆ پاتچەکانی کۆمەڵگە</string>
+    <string name="settings_appearance_games_button">دوگمەی یارییەکان</string>
+    <string name="settings_appearance_games_button_description">دوگمەیەک بۆ یارییە بچووکەکان نیشان دەدات لە کاتی نوێکردنەوە و لە ئەنجامەکاندا</string>
     <string name="settings_appearance_app_card_colors">ڕەنگەکانی کارت</string>
     <string name="settings_appearance_app_card_colors_default">بنەڕەت</string>
     <string name="settings_appearance_app_card_colors_default_description">ڕەنگێکی تایبەت بە هەر ئەپ و سەرچاوەیەک بدە</string>

@@ -868,14 +868,17 @@ Ang pag-uninstall ay permanenteng bubura sa lahat ng data ng app."</string>
     <string name="settings_appearance_translations_info_title">Maaaring nawawala o hindi kumpleto ang pagsasalin-wika para sa ibang wika</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Sukat ng interface</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Home screen</string>
+    <string name="settings_appearance_screens">Mga Screen</string>
     <string name="settings_appearance_greeting_phrases">Mga pagbati</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Nagpapakita ng mensahe ng pagbati</string>
     <string name="settings_appearance_repatch_notice">Paunawa sa muling pag-patch</string>
     <string name="settings_appearance_repatch_notice_description">Nagpapakita ng banner kapag maaaring i-patch muli ang mga patched apps</string>
     <string name="settings_appearance_more_apps_card">Card ng higit pang mga aplikasyon</string>
     <string name="settings_appearance_more_apps_card_description">Nagpapakita ng card sa ilalim ng mga app na humahantong sa mga community patch</string>
+    <string name="settings_appearance_games_button">Button ng mga Laro</string>
+    <string name="settings_appearance_games_button_description">Nagpapakita ng button para sa mga mini-game habang nagpa-patch at sa resulta</string>
     <string name="settings_appearance_app_card_colors">Mga kulay ng card</string>
     <string name="settings_appearance_app_card_colors_default">Awtomatiko</string>
     <string name="settings_appearance_app_card_colors_default_description">Bigyan ang bawat app at source ng sarili nitong kulay</string>

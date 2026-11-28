@@ -867,14 +867,17 @@ Með því að fjarlægja appið eyðast öll gögn þess varanlega"</string>
     <string name="settings_appearance_translations_info_title">Þýðingar fyrir sum tungumál gætu vantað eða verið ófullkomnar</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Stærð viðmóts</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Heimaskjár</string>
+    <string name="settings_appearance_screens">Skjár</string>
     <string name="settings_appearance_greeting_phrases">Kveðjusetningar</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Sýnir kveðjuskilaboð</string>
     <string name="settings_appearance_repatch_notice">Tilkynning um endurplástrun</string>
     <string name="settings_appearance_repatch_notice_description">Sýnir borða þegar hægt er að endurplástra öpp</string>
     <string name="settings_appearance_more_apps_card">Kort með fleiri öppum</string>
     <string name="settings_appearance_more_apps_card_description">Sýnir kort undir öppunum sem leiðir á samfélagsplástra</string>
+    <string name="settings_appearance_games_button">Leiki hnappur</string>
+    <string name="settings_appearance_games_button_description">Sýnir hnapp fyrir smáþráleiki á meðan uppfært er og á niðurstöðusíðunni</string>
     <string name="settings_appearance_app_card_colors">Litir kortanna</string>
     <string name="settings_appearance_app_card_colors_default">Sjálfgefið</string>
     <string name="settings_appearance_app_card_colors_default_description">Gefðu hverju appi og uppsprettu sinn eigin lit</string>

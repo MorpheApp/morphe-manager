@@ -868,14 +868,17 @@ Om du avinstallerar raderas alla appdata permanent"</string>
     <string name="settings_appearance_translations_info_title">Översättningar till vissa språk kan saknas eller vara ofullständiga</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Gränssnittsskala</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Startskärm</string>
+    <string name="settings_appearance_screens">Skärmar</string>
     <string name="settings_appearance_greeting_phrases">Hälsningsfraser</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Visar ett hälsningsmeddelande</string>
     <string name="settings_appearance_repatch_notice">Meddelande om att modifiera igen</string>
     <string name="settings_appearance_repatch_notice_description">Visa en banner när modifierade appar kan modifieras igen</string>
     <string name="settings_appearance_more_apps_card">Kortet Fler appar</string>
     <string name="settings_appearance_more_apps_card_description">Visar ett kort under apparna som leder till tillägg från communityn</string>
+    <string name="settings_appearance_games_button">Knappen Spel</string>
+    <string name="settings_appearance_games_button_description">Visar en knapp till minispelen under patchning och på resultatet</string>
     <string name="settings_appearance_app_card_colors">Färger för appkort</string>
     <string name="settings_appearance_app_card_colors_default">Standard</string>
     <string name="settings_appearance_app_card_colors_default_description">Ge varje app och källa en egen färg</string>

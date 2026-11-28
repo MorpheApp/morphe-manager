@@ -868,14 +868,17 @@ Desinstalatzeak aplikazioaren datu guztiak betiko ezabatuko ditu"</string>
     <string name="settings_appearance_translations_info_title">Hizkuntza batzuen itzulpenak falta edo osatugabeak izan daitezke</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interfazearen eskala</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Hasierako pantaila</string>
+    <string name="settings_appearance_screens">Pantailak</string>
     <string name="settings_appearance_greeting_phrases">Agurtzeko esaldiak</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Agur-mezu bat erakusten du</string>
     <string name="settings_appearance_repatch_notice">Berriz patchatzearen abisua</string>
     <string name="settings_appearance_repatch_notice_description">Patchatutako aplikazioak berriz patchatu daitezkeenean banner bat erakusten du</string>
     <string name="settings_appearance_more_apps_card">Aplikazio gehiagoko txartela</string>
     <string name="settings_appearance_more_apps_card_description">Komunitateko patchetara eramaten duen txartela erakusten du aplikazioen azpian</string>
+    <string name="settings_appearance_games_button">Jokoen botoia</string>
+    <string name="settings_appearance_games_button_description">Patching egiten ari den bitartean eta emaitzan mini-jokoen botoi bat erakutsi</string>
     <string name="settings_appearance_app_card_colors">Karta-koloreak</string>
     <string name="settings_appearance_app_card_colors_default">Lehenetsua</string>
     <string name="settings_appearance_app_card_colors_default_description">Eman aplikazio eta iturri bakoitzari bere kolorea</string>

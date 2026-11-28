@@ -868,14 +868,17 @@
     <string name="settings_appearance_translations_info_title">ترجمهٔ بعضی زبان‌ها ممکن است ناقص یا موجود نباشد</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">مقیاس رابط کاربری</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">صفحهٔ اصلی</string>
+    <string name="settings_appearance_screens">صفحه‌ها</string>
     <string name="settings_appearance_greeting_phrases">عبارت‌های خوشامدگویی</string>
     <string name="settings_appearance_greeting_phrases_subtitle">نمایش پیام خوش‌آمدگویی</string>
     <string name="settings_appearance_repatch_notice">اعلان پچ دوباره</string>
     <string name="settings_appearance_repatch_notice_description">نمایش بنر هنگامی که برنامه‌های پچ‌شده را می‌توان دوباره پچ کرد</string>
     <string name="settings_appearance_more_apps_card">کارت برنامه‌های بیشتر</string>
     <string name="settings_appearance_more_apps_card_description">یک کارت را زیر برنامه‌ها نمایش می‌دهد که به وصله‌های جامعه منجر می‌شود</string>
+    <string name="settings_appearance_games_button">دکمهٔ بازی‌ها</string>
+    <string name="settings_appearance_games_button_description">نمایش دکمه‌ای برای مینی‌بازی‌ها هنگام وصله کردن و در صفحهٔ نتیجه</string>
     <string name="settings_appearance_app_card_colors">رنگ کارت برنامه‌ها</string>
     <string name="settings_appearance_app_card_colors_default">پیش‌فرض</string>
     <string name="settings_appearance_app_card_colors_default_description">برای هر برنامه و منبع، رنگ مخصوص به خود را تعیین کنید</string>

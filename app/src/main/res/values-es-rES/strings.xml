@@ -868,14 +868,17 @@ Al desinstalarla se borrarán permanentemente todos los datos de la aplicación"
     <string name="settings_appearance_translations_info_title">Las traducciones para algunos idiomas pueden faltar o estar incompletas</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Escala de la interfaz</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Pantalla de inicio</string>
+    <string name="settings_appearance_screens">Pantallas</string>
     <string name="settings_appearance_greeting_phrases">Frases de saludo</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Muestra un mensaje de bienvenida</string>
     <string name="settings_appearance_repatch_notice">Aviso de nuevos parches</string>
     <string name="settings_appearance_repatch_notice_description">Muestra un banner cuando las aplicaciones parcheadas se pueden volver a parchear</string>
     <string name="settings_appearance_more_apps_card">Tarjeta de Más aplicaciones</string>
     <string name="settings_appearance_more_apps_card_description">Muestra una tarjeta debajo de las aplicaciones que lleva a los parches de la comunidad</string>
+    <string name="settings_appearance_games_button">Botón Juegos</string>
+    <string name="settings_appearance_games_button_description">Muestra un botón para los minijuegos mientras se aplica el parche y en el resultado</string>
     <string name="settings_appearance_app_card_colors">Colores de las tarjetas</string>
     <string name="settings_appearance_app_card_colors_default">Predeterminado</string>
     <string name="settings_appearance_app_card_colors_default_description">Asigna a cada app y fuente un color propio</string>

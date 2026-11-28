@@ -871,14 +871,17 @@
     <string name="settings_appearance_translations_info_title">قد تكون ترجمات بعض اللغات مفقودة أو غير مكتملة</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">مقياس الواجهة</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">الشاشة الرئيسية</string>
+    <string name="settings_appearance_screens">الشاشات</string>
     <string name="settings_appearance_greeting_phrases">عبارات الترحيب</string>
     <string name="settings_appearance_greeting_phrases_subtitle">يعرض رسالة ترحيب</string>
     <string name="settings_appearance_repatch_notice">إشعار إعادة التعديل</string>
     <string name="settings_appearance_repatch_notice_description">يعرض شريطًا إعلاميًا عندما يمكن إعادة تعديل التطبيقات المعدلة</string>
     <string name="settings_appearance_more_apps_card">بطاقة المزيد من التطبيقات</string>
     <string name="settings_appearance_more_apps_card_description">يعرض بطاقة أسفل التطبيقات تؤدي إلى تعديلات المجتمع</string>
+    <string name="settings_appearance_games_button">زر الألعاب</string>
+    <string name="settings_appearance_games_button_description">يعرض زرًا للألعاب الصغيرة أثناء التعديل وفي النتيجة</string>
     <string name="settings_appearance_app_card_colors">ألوان البطاقة</string>
     <string name="settings_appearance_app_card_colors_default">الافتراضية</string>
     <string name="settings_appearance_app_card_colors_default_description">امنح كل تطبيق ومصدر لونًا خاصًا به</string>

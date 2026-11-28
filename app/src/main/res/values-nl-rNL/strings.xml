@@ -868,14 +868,17 @@ Deïnstalleren wist alle app-gegevens permanent."</string>
     <string name="settings_appearance_translations_info_title">Vertalingen voor sommige talen kunnen ontbreken of onvolledig zijn</string>
     <!-- Settings - Appearance Tab - Interface Scale -->
     <string name="settings_appearance_ui_scale">Interfaceschaal</string>
-    <!-- Settings - Appearance Tab - Home Screen Section -->
+    <!-- Settings - Appearance Tab - Screens Section -->
     <string name="settings_appearance_home_screen">Startscherm</string>
+    <string name="settings_appearance_screens">Schermen</string>
     <string name="settings_appearance_greeting_phrases">Begroetingszinnen</string>
     <string name="settings_appearance_greeting_phrases_subtitle">Toont een begroetingsbericht</string>
     <string name="settings_appearance_repatch_notice">Melding over opnieuw patchen</string>
     <string name="settings_appearance_repatch_notice_description">Toont een banner wanneer gepatchte apps opnieuw kunnen worden gepatcht</string>
     <string name="settings_appearance_more_apps_card">Kaart Meer apps</string>
     <string name="settings_appearance_more_apps_card_description">Toont een kaart onder de apps die leidt naar community-patches</string>
+    <string name="settings_appearance_games_button">Games-knop</string>
+    <string name="settings_appearance_games_button_description">Toont een knop naar de mini-games tijdens het patchen en op het resultaat</string>
     <string name="settings_appearance_app_card_colors">Kaartkleuren</string>
     <string name="settings_appearance_app_card_colors_default">Standaard</string>
     <string name="settings_appearance_app_card_colors_default_description">Geef elke app en bron een eigen kleur</string>
