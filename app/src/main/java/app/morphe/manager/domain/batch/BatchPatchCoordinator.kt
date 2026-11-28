@@ -816,7 +816,8 @@ class BatchPatchCoordinator(
             // Options simple mode keeps on its preference screen stay there, rather than replacing
             // the ones saved for the sources they name
             options = item.options.takeIf { item.selectedByHand },
-            seenPatches = item.bundles.associate { it.uid to it.patchNames }
+            seenPatches = item.bundles.associate { it.uid to it.patchNames },
+            otherBuildPatches = item.bundles.associate { it.uid to it.otherBuildPatchNames }
         )
 
         if (!prefs.savePatchedApks.get()) {

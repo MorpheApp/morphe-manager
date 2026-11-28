@@ -372,6 +372,8 @@ Choose where to take its APK from"</string>
     <string name="expert_mode_selected_count">%1$s of %2$s selected</string>
     <!-- Which build of an app with builds for several devices the patches are for, such as TV or Wear OS -->
     <string name="expert_mode_form_factor">For the %s build</string>
+    <!-- The same for the phone build, named as a common noun rather than by its mark -->
+    <string name="expert_mode_form_factor_mobile">For the phone build</string>
     <string name="expert_mode_saved_selection">Saved selection</string>
     <string name="expert_mode_restore_saved_done">Saved selection restored</string>
     <string name="expert_mode_copy_from_bundle_no_patches">No matching patches in this bundle</string>

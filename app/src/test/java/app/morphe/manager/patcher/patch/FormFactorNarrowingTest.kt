@@ -98,7 +98,24 @@ class FormFactorNarrowingTest {
     fun `the form factors of a package are those its entries declare`() {
         assertEquals(setOf(FormFactor.MOBILE, FormFactor.TV), sequenceOf(phoneOnly, tvOnly, anyBuild).formFactorsOf(APP))
         assertEquals(setOf(FormFactor.MOBILE), sequenceOf(phoneOnly, anyBuild, universal).formFactorsOf(APP))
-        assertTrue(sequenceOf(phoneOnly).formFactorsOf(OTHER_APP).isEmpty())
+        assertEquals(emptySet(), sequenceOf(phoneOnly).formFactorsOf(OTHER_APP))
+    }
+
+    @Test
+    fun `the patches only another build gets are named so what was saved for them is kept`() {
+        val tvScoped = bundle(phoneOnly, tvOnly, both, universal).forPackage(APP, "5.0", formFactor = FormFactor.TV)
+        val unnarrowed = bundle(phoneOnly, tvOnly).forPackage(APP, "5.0")
+
+        assertEquals(setOf("Phone"), tvScoped.otherBuildPatches)
+        assertEquals(emptySet(), unnarrowed.otherBuildPatches)
+    }
+
+    @Test
+    fun `a patch of another build named like one of this build is not kept apart`() {
+        val tvTwin = patch("Phone", entry(FormFactor.TV))
+        val tvScoped = bundle(phoneOnly, tvTwin).forPackage(APP, null, formFactor = FormFactor.TV)
+
+        assertEquals(emptySet(), tvScoped.otherBuildPatches)
     }
 
     private companion object {

@@ -132,9 +132,14 @@ class PM(
         }
     }
 
-    fun canLaunch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg) != null
+    // A TV build opens only from the TV launcher, yet a phone can still start it
+    private fun launchIntent(pkg: String) = with(app.packageManager) {
+        getLaunchIntentForPackage(pkg) ?: getLeanbackLaunchIntentForPackage(pkg)
+    }
 
-    fun launch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg)?.let {
+    fun canLaunch(pkg: String) = launchIntent(pkg) != null
+
+    fun launch(pkg: String) = launchIntent(pkg)?.let {
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(it)
     }

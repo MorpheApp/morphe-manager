@@ -44,6 +44,8 @@ import app.morphe.manager.notification.OngoingContent
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
 import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.otherBuildPatchesByUid
+import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.patchNamesByUid
 import app.morphe.manager.patcher.patch.PatchLockState
 import app.morphe.manager.patcher.patch.PatchSourceRef
 import app.morphe.manager.patcher.split.SplitApkInspector
@@ -851,7 +853,8 @@ class PatcherViewModel(
         options = options.takeIf { input.selectedByHand },
         // Taken here as well as before patching, because a copy starts out with no snapshot of
         // its own and would flag every patch it was just built with as new
-        seenPatches = bundles.mapValues { (_, bundle) -> bundle.patches.mapTo(mutableSetOf()) { it.name } }
+        seenPatches = bundles.values.patchNamesByUid(),
+        otherBuildPatches = bundles.values.otherBuildPatchesByUid()
     )
 
     override var downloadProgress by savedStateHandle.saveable(
