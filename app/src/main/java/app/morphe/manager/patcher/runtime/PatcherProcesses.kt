@@ -439,13 +439,23 @@ class PatcherProcesses(
         "-XX:InitiatingHeapOccupancyPercent=80",
         "-XX:-G1UseAdaptiveIHOP",
         // Nothing waits on a pause, and fewer but longer ones copy less of what stays alive
-        "-XX:MaxGCPauseMillis=2000",
-        // The 32-bit JVM has no C1, so code runs interpreted until C2 compiles it. It starts a single
-        // C2 thread and never adds more, which stays busy for all of patching while other cores idle.
-        // Three of them on a 4 core phone patched TikTok about 9% faster and YouTube about 6%
-        "-XX:CICompilerCount=${(java.lang.Runtime.getRuntime().availableProcessors() - 1).coerceIn(1, 3)}",
-        "-XX:-UseDynamicNumberOfCompilerThreads"
-    )) + aot + debugOptions()
+        "-XX:MaxGCPauseMillis=2000"
+    )) + compilerThreads() + aot + debugOptions()
+
+    /**
+     * A fixed number of compiler threads, all started with the JVM. On its own the JVM starts with
+     * one and adds more only as compiles queue up, which comes too late for a run that lasts
+     * seconds to minutes. The 32-bit JVM has no C1, so code runs interpreted until C2 compiles it,
+     * and it never added a second C2 thread: three on a 4 core phone patched TikTok about 9% faster
+     * and YouTube about 6%. On an 8 core 64-bit phone three patched TikTok about 11% faster than
+     * the default of four started as needed, and YouTube about as fast. A 64-bit JVM compiles with
+     * both C1 and C2, which takes at least two threads.
+     */
+    private fun compilerThreads(): List<String> {
+        val minimum = if (Process.is64Bit()) 2 else 1
+        val threads = (java.lang.Runtime.getRuntime().availableProcessors() - 1).coerceIn(minimum, 3)
+        return listOf("-XX:CICompilerCount=$threads", "-XX:-UseDynamicNumberOfCompilerThreads")
+    }
 
     /** Where the JVM in process [pid] reports a crash, %p standing for the pid of whichever does. */
     private fun errorFile(pid: Any) = fs.tempDir.resolve("patcher-jvm-error-$pid.log")
