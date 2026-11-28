@@ -57,12 +57,16 @@ fun cardFill(): Color = ThemeTraitsDefaults.surfaceColor(MaterialTheme.colorSche
  * In a [SettingsGroup] it is a row of the group, shaped and outlined by its place among the rows,
  * and [cornerRadius] goes unused. Cards inside it are cards again. A [shape] given outright, as a
  * lazy list does from each row's index, is taken over [cornerRadius] and eased into as it changes.
+ *
+ * @param foldsOnClick Whether [onClick] folds content out of the card or back in. The fold answers
+ *   the tap then: a ripple keeps the size the card had when pressed and stands as a circle in it.
  */
 @Composable
 fun SurfaceCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
     enabled: Boolean = true,
+    foldsOnClick: Boolean = false,
     elevation: Dp = Defaults.CardElevation,
     cornerRadius: Dp = Defaults.CornerLarge,
     showBorder: Boolean = false,
@@ -94,7 +98,7 @@ fun SurfaceCard(
             .fillMaxWidth()
             .then(
                 if (onClick != null) {
-                    Modifier.shapedClickable(shape, enabled = enabled, onClick = onClick)
+                    Modifier.shapedClickable(shape, enabled = enabled, press = !foldsOnClick, onClick = onClick)
                 } else Modifier
             ),
         shape = shape,
@@ -369,12 +373,15 @@ fun IconTextRow(
 /**
  * Settings item card wrapper.
  * Private component used by settings item variants.
+ *
+ * @param foldsOnClick See [SurfaceCard].
  */
 @Composable
 fun SettingsItemCard(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    foldsOnClick: Boolean = false,
     showBorder: Boolean = false,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
     color: Color = cardFill(),
@@ -384,6 +391,7 @@ fun SettingsItemCard(
     SurfaceCard(
         onClick = onClick,
         enabled = enabled,
+        foldsOnClick = foldsOnClick,
         elevation = 1.dp,
         cornerRadius = Defaults.CornerLarge,
         showBorder = showBorder,

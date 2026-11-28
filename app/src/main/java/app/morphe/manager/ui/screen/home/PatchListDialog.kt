@@ -402,6 +402,7 @@ internal fun PatchItemCard(
         onClick = if (options.isNotEmpty()) {
             { expandOptions = !expandOptions }
         } else null,
+        foldsOnClick = true,
         modifier = modifier,
         showBorder = true,
         borderColor = appAccentBorder(accentColor),
