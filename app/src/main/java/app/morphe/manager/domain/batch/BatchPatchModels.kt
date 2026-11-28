@@ -117,10 +117,14 @@ enum class BatchItemState {
 /**
  * The patched APK a successful run kept, with what it is named by once it leaves the manager:
  * the same name the single-app flow gives a build, see [app.morphe.manager.util.exportData].
+ *
+ * @param kept whether a copy outlives the run in the patched APK list, rather than only the
+ * workspace file the next run drops.
  */
 data class PatchedBuild(
     val file: File,
-    val exportData: ApkExportData
+    val exportData: ApkExportData,
+    val kept: Boolean
 ) {
     val exportFileName get() = ExportNameFormatter.format(exportData)
 }

@@ -823,7 +823,7 @@ class BatchPatchCoordinator(
         if (!prefs.savePatchedApks.get()) {
             // Retention is off, so the patched APK only lives long enough for the summary
             // to install it and is dropped together with the workspace
-            return@withContext PatchedBuild(outputFile, exportData)
+            return@withContext PatchedBuild(outputFile, exportData, kept = false)
         }
 
         val retained = fs.getPatchedAppFile(currentPackageName, version)
@@ -847,7 +847,7 @@ class BatchPatchCoordinator(
             item.selection
         )
 
-        PatchedBuild(stored, exportData)
+        PatchedBuild(stored, exportData, kept = stored != outputFile)
     }
 
     /**

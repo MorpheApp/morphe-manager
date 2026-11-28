@@ -510,7 +510,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_preparing_next">Preparing the next app…</string>
     <string name="batch_patch_progress_counter">Patching %1$s of %2$s</string>
     <string name="batch_patch_summary">%1$s patched, %2$s failed, %3$s skipped</string>
-    <string name="batch_patch_saved_hint">The patched apps are saved. Install them now, or later from the patched APK list in settings</string>
+    <string name="batch_patch_saved_hint">Patched APKs are saved. Install them now or later from the home screen</string>
+    <string name="batch_patch_not_kept_hint">Patched APKs are not kept. Install or export them before closing this screen</string>
     <string name="batch_patch_multiple_sources">Some apps combine patches from more than one source, which can cause conflicts</string>
     <string name="batch_patch_needs_apk">No APK available, attach a file</string>
     <string name="batch_patch_wrong_package">The attached file belongs to %s</string>
@@ -532,15 +533,15 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_patch_state_no_selection">None selected</string>
     <string name="batch_patch_no_selection">None of the available patches is selected</string>
     <string name="batch_patch_policy_install">Install when finished</string>
-    <string name="batch_patch_policy_install_description">Installs every patched app right after the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_install_description">Installs every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <string name="batch_patch_policy_mount">Mount when finished</string>
-    <string name="batch_patch_policy_mount_description">Mounts every patched app once the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_mount_description">Mounts every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <string name="batch_patch_policy_install_mount">Install or mount when finished</string>
-    <string name="batch_patch_policy_install_mount_description">Installs or mounts every patched app once the queue finishes. Off keeps the APKs for later</string>
+    <string name="batch_patch_policy_install_mount_description">Installs or mounts every patched app once the queue finishes. Off leaves the APKs on this screen</string>
     <!-- Label of a footer button beside "Close". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_start">Start</string>
     <string name="batch_patch_stop_title">Stop batch patching?</string>
-    <string name="batch_patch_stop_description">The app being patched right now and everything still queued will be canceled</string>
+    <string name="batch_patch_stop_description">The current app and the rest of the queue will be canceled</string>
     <!-- Label of a footer button beside "Done". Keep it short, a longer one moves the buttons onto two rows -->
     <string name="batch_patch_install_all">Install all</string>
     <string name="batch_patch_install_failed">Install failed</string>
@@ -551,7 +552,7 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="batch_queue_clear_title">Clear the queue?</string>
     <string name="batch_queue_clear_description">All apps will be removed from the queue</string>
     <string name="batch_queue_keep_title">Keep the queue?</string>
-    <string name="batch_queue_keep_description">The queued apps will wait on the home screen to be started later</string>
+    <string name="batch_queue_keep_description">The queue waits on the home screen until you start it</string>
     <string name="batch_queue_keep">Keep</string>
     <string name="shortcut_repatch_short">Re-patch</string>
     <string name="shortcut_repatch_long">Re-patch outdated apps</string>
@@ -1330,7 +1331,7 @@ Details: %2$s"</string>
     <string name="settings_system_apks_delete_all_confirm">This will permanently delete the saved APK files shown here</string>
     <string name="settings_system_apks_delete_selected_title">Delete selected APKs?</string>
     <string name="settings_system_apks_delete_selected_confirm">This will permanently delete the selected APK files</string>
-    <string name="settings_system_apks_deleted_all">APKs deleted successfully</string>
+    <string name="settings_system_apks_deleted_all">APKs deleted</string>
     <string name="settings_system_apks_delete_failed">Some APK files could not be deleted</string>
     <string name="settings_system_apks_export_zip_success">Selected APKs exported</string>
     <string name="settings_system_apks_export_zip_failed">Failed to export selected APKs</string>
@@ -1355,8 +1356,8 @@ Details: %2$s"</string>
     <string name="settings_system_storage_temporary_title">Temporary files</string>
     <string name="settings_system_storage_temporary_description">Working files created during patching</string>
     <string name="settings_system_storage_clear_all">Clear all caches</string>
-    <string name="settings_system_storage_clear_all_description">Frees all reclaimable cache space at once</string>
-    <string name="settings_system_storage_clear_all_confirm">This clears cached network responses, staged installer copies, and temporary files. Original and patched APKs are kept</string>
+    <string name="settings_system_storage_clear_all_description">Every cache listed above</string>
+    <string name="settings_system_storage_clear_all_confirm">Every cache above will be cleared. Original and patched APKs are kept</string>
     <string name="settings_system_storage_cleared">Freed %s</string>
     <string name="settings_system_storage_patch_running_warning">A patch is running and uses these files. Clearing them now makes it fail</string>
     <string name="settings_system_storage_clear_anyway">Clear anyway</string>
@@ -1364,15 +1365,15 @@ Details: %2$s"</string>
     <string name="settings_system_storage_open_app_info_title">Open Android app storage</string>
     <string name="settings_system_storage_open_app_info_description">Manage or clear all Morphe data through system settings</string>
     <string name="settings_system_save_original_apks_title">Keep original APKs</string>
-    <string name="settings_system_save_original_apks_description">Save the pre-patch APK so it can be reused for repatching without picking the file again</string>
+    <string name="settings_system_save_original_apks_description">Reuse the original APK when repatching, without picking the file again</string>
     <string name="settings_system_save_patched_apks_title">Keep patched APKs</string>
-    <string name="settings_system_save_patched_apks_description">Save a copy of the patched APK for later export or reinstall from the manager</string>
+    <string name="settings_system_save_patched_apks_description">Keep a copy to export or reinstall later</string>
 
     <!-- Settings - System Tab - Storage Management - Patched APKs Management -->
     <string name="settings_system_patched_apks_title">Patched APKs</string>
     <string name="settings_system_patched_apks_empty">No patched APKs saved yet</string>
     <string name="settings_system_patched_apks_delete_title">Delete patched APK?</string>
-    <string name="settings_system_patched_apks_deleted">Patched APK deleted successfully</string>
+    <string name="settings_system_patched_apks_deleted">Patched APK deleted</string>
     <string name="settings_system_patched_apks_delete_all_title">Delete all patched APKs?</string>
     <string name="settings_system_patched_apks_export_zip_name" translatable="false">morphe-patched-apks.zip</string>
 

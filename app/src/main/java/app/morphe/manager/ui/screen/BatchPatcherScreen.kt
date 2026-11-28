@@ -655,12 +655,18 @@ fun BatchPatcherScreen(
                     }
                 }
 
-                // Nothing was installed yet, so say where the APKs went
-                if (current.phase == BatchPhase.FINISHED && current.patchedItems.isNotEmpty()) {
+                // Says where the APKs still to install went, which is nowhere once the run is
+                // left when retention is off
+                if (current.phase == BatchPhase.FINISHED && installRequests.isNotEmpty()) {
+                    val allKept = current.patchedItems.all {
+                        it.installOutcome == BatchInstallOutcome.INSTALLED || it.patchedBuild?.kept == true
+                    }
                     item(key = "saved_hint") {
                         Footnote(
-                            text = stringResource(R.string.batch_patch_saved_hint),
-                            icon = MaterialSymbols.Rounded.Save,
+                            text = stringResource(
+                                if (allKept) R.string.batch_patch_saved_hint else R.string.batch_patch_not_kept_hint
+                            ),
+                            icon = if (allKept) MaterialSymbols.Rounded.Save else MaterialSymbols.Rounded.Info,
                             modifier = Modifier.animateItem()
                         )
                     }
