@@ -31,7 +31,7 @@ fun Sequence<PatchInfo>.appColorFor(packageName: String): Color? =
  * @param apkFileType  Preferred/required APK input format. Null if not declared.
  * @param signatures   Union of all valid SHA-256 signing fingerprints across all bundles.
  *                     Null means no bundle declared signatures → skip verification.
- * @param formFactor   Device the app is built for. Null if not declared, which runs anywhere.
+ * @param formFactors  Devices the app has a build for. Empty if none is declared, which runs anywhere.
  */
 data class BundleAppMetadata(
     val packageName: String,
@@ -39,7 +39,7 @@ data class BundleAppMetadata(
     val appIconColor: Int?,
     val apkFileType: ApkFileType?,
     val signatures: Set<String>?,
-    val formFactor: FormFactor? = null,
+    val formFactors: Set<FormFactor> = emptySet(),
 ) {
     /** Derived gradient color list for home screen buttons. Null means use fallback. */
     val gradientColors: List<Color>? = appIconColor?.let { rgb ->
@@ -73,7 +73,7 @@ data class BundleAppMetadata(
             val iconColors = mutableMapOf<String, Int>()
             val apkFileTypes = mutableMapOf<String, ApkFileType>()
             val signaturesMap = mutableMapOf<String, MutableSet<String>>()
-            val formFactors = mutableMapOf<String, FormFactor>()
+            val formFactors = mutableMapOf<String, MutableSet<FormFactor>>()
 
             bundleInfoMap.values
                 .flatMap { it.patches }
@@ -98,9 +98,7 @@ data class BundleAppMetadata(
                         pkg.signatures?.let {
                             signaturesMap.getOrPut(pkgName) { mutableSetOf() }.addAll(it)
                         }
-                        if (pkg.formFactor != null && pkgName !in formFactors) {
-                            formFactors[pkgName] = pkg.formFactor
-                        }
+                        pkg.formFactor?.let { formFactors.getOrPut(pkgName) { mutableSetOf() }.add(it) }
                     }
                 }
 
@@ -111,7 +109,7 @@ data class BundleAppMetadata(
                     appIconColor = iconColors[pkgName],
                     apkFileType = apkFileTypes[pkgName],
                     signatures = signaturesMap[pkgName]?.toSet(),
-                    formFactor = formFactors[pkgName],
+                    formFactors = formFactors[pkgName].orEmpty(),
                 )
             }
         }

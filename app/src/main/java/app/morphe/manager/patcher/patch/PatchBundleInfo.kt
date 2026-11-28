@@ -11,6 +11,7 @@
 package app.morphe.manager.patcher.patch
 
 import app.morphe.manager.util.PatchSelection
+import app.morphe.patcher.patch.FormFactor
 
 /**
  * A base class for storing [PatchBundle] metadata.
@@ -73,9 +74,19 @@ sealed class PatchBundleInfo {
     ) : PatchBundleInfo() {
         /**
          * Create a [PatchBundleInfo.Scoped] that only contains information about patches that are relevant for a specific [packageName].
+         *
+         * @param formFactor The build of [packageName] the patches are for, see [PatchInfo.narrowedTo].
+         *   Null keeps the patches of every build.
          */
-        fun forPackage(packageName: String, version: String?, versionCode: Long? = null): Scoped {
-            val forThisPackage = patches.filter { it.compatibleWith(packageName) }
+        fun forPackage(
+            packageName: String,
+            version: String?,
+            versionCode: Long? = null,
+            formFactor: FormFactor? = null
+        ): Scoped {
+            val forThisPackage = patches
+                .map { if (formFactor == null) it else it.narrowedTo(packageName, formFactor) }
+                .filter { it.compatibleWith(packageName) }
             // Selections are stored per app, so a name only has to be unique within this list
             val keys = uniqueNames(forThisPackage)
             val relevantPatches = forThisPackage.mapIndexed { index, patch ->
@@ -128,7 +139,8 @@ sealed class PatchBundleInfo {
                 apkFileType = apkFileType,
                 displayName = displayName,
                 signatures = signaturesAcc.takeIf { it.isNotEmpty() },
-                patcherVersion = patcherVersion
+                patcherVersion = patcherVersion,
+                formFactor = formFactor
             )
         }
     }
@@ -146,6 +158,7 @@ sealed class PatchBundleInfo {
      * @param apkFileType The preferred/required APK file type declared in the bundle, or null.
      * @param displayName The app display name declared in the patch bundle (e.g. "YouTube"), or null.
      * @param signatures Valid SHA-256 signing fingerprints of the original app, or null if not declared.
+     * @param formFactor The build of the app the patches were narrowed to, or null when they cover every build.
      * @see [PatchBundleInfo.Global.forPackage]
      * @see [PatchBundleInfo]
      */
@@ -164,7 +177,8 @@ sealed class PatchBundleInfo {
         val apkFileType: app.morphe.patcher.patch.ApkFileType? = null,
         val displayName: String? = null,
         val signatures: Set<String>? = null,
-        val patcherVersion: String? = null // Propagated from Global.patcherVersion
+        val patcherVersion: String? = null, // Propagated from Global.patcherVersion
+        val formFactor: FormFactor? = null
     ) : PatchBundleInfo() {
         /**
          * Whether the source stands behind the version it was scoped to: one marking it

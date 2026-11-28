@@ -35,9 +35,11 @@ import app.morphe.manager.patcher.patch.BundleAppMetadata
 import app.morphe.manager.patcher.patch.PatchBundle
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchInfo
+import app.morphe.manager.patcher.patch.formFactorsOf
 import app.morphe.manager.ui.screen.shared.UserMessages
 import app.morphe.manager.ui.viewmodel.BundleSnapshot
 import app.morphe.manager.util.*
+import app.morphe.patcher.patch.FormFactor
 import io.ktor.client.plugins.ResponseException
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.mutate
@@ -162,9 +164,26 @@ class PatchBundleRepository(
         combine(appMetadata, allAppMetadata, BundleAppMetadata::displayNames)
             .stateIn(scope, SharingStarted.Eagerly, emptyMap())
 
-    fun scopedBundleInfoFlow(packageName: String, version: String?, versionCode: Long? = null) = enabledBundlesInfoFlow.map {
-        it.map { (_, bundleInfo) ->
-            bundleInfo.forPackage(packageName, version, versionCode)
+    /**
+     * The enabled sources scoped to [packageName] at [version].
+     *
+     * [readFormFactor] reads the build the APK is for, see
+     * [app.morphe.manager.patcher.patch.ApkFormFactorResolver]. It narrows the patches only when
+     * the sources tell builds of the package apart, see [formFactorsOf], and is not called for any
+     * other app, which spares nearly every run reading the APK. The sources are counted together,
+     * as a TV patch in one source and the phone patches of another split the app just the same.
+     */
+    fun scopedBundleInfoFlow(
+        packageName: String,
+        version: String?,
+        versionCode: Long? = null,
+        readFormFactor: (suspend () -> FormFactor?)? = null
+    ) = enabledBundlesInfoFlow.map { bundles ->
+        val narrowTo = readFormFactor
+            ?.takeIf { bundles.values.asSequence().flatMap { it.patches }.formFactorsOf(packageName).size > 1 }
+            ?.invoke()
+        bundles.map { (_, bundleInfo) ->
+            bundleInfo.forPackage(packageName, version, versionCode, narrowTo)
         }
     }
 
@@ -176,9 +195,14 @@ class PatchBundleRepository(
      * selection is answered for by the sources it was made from, whether the app has since
      * been kept from one.
      */
-    fun offeredBundleInfoFlow(packageName: String, version: String?, versionCode: Long? = null) =
+    fun offeredBundleInfoFlow(
+        packageName: String,
+        version: String?,
+        versionCode: Long? = null,
+        readFormFactor: (suspend () -> FormFactor?)? = null
+    ) =
         combine(
-            scopedBundleInfoFlow(packageName, version, versionCode),
+            scopedBundleInfoFlow(packageName, version, versionCode, readFormFactor),
             sourceMuteRepository.mutedFor(packageName)
         ) { bundles, muted ->
             bundles.withoutMutedSources(muted) { it.uid }
@@ -192,9 +216,10 @@ class PatchBundleRepository(
         packageName: String,
         version: String?,
         versionCode: Long?,
+        readFormFactor: suspend () -> FormFactor?,
         chosenBundleUid: Int?
     ): List<PatchBundleInfo.Scoped> =
-        offeredBundleInfoFlow(packageName, version, versionCode).first()
+        offeredBundleInfoFlow(packageName, version, versionCode, readFormFactor).first()
             .filter { it.enabled }
             .let { offered -> offered.filter { it.uid == chosenBundleUid }.ifEmpty { offered } }
 

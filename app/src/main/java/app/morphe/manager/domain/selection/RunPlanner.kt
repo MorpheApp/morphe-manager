@@ -14,6 +14,7 @@ import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.domain.repository.SourceMuteRepository
 import app.morphe.manager.domain.repository.withoutMutedSources
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -165,7 +166,12 @@ class RunPlanner(
         // Everything this app has patches in, the sources it is kept from included: the expert
         // dialog offers those back, so it has to be told what it is hiding
         val availableBundles = patchBundleRepository
-            .scopedBundleInfoFlow(app.packageName, app.version, app.versionCode)
+            .scopedBundleInfoFlow(
+                app.packageName,
+                app.version,
+                app.versionCode,
+                { ApkFormFactorResolver.resolve(app, pm) }
+            )
             .first()
         if (availableBundles.isEmpty()) return RunPlan.NoPatches
 

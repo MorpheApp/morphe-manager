@@ -8,6 +8,8 @@
     <string name="home_app_status_newer_patches">New patches</string>
     <!-- Mark on the card of an app built for a device other than a phone -->
     <string name="form_factor_tv">TV</string>
+    <!-- Named beside the other marks when one app has a build for a phone and for another device -->
+    <string name="form_factor_mobile">Phone</string>
     <string name="form_factor_wearable" translatable="false">Wear OS</string>
     <string name="form_factor_automotive">Automotive</string>
     <string name="home_no_patches_available">No patches available</string>
@@ -368,6 +370,8 @@ Choose where to take its APK from"</string>
     <string name="expert_mode_recommended">Recommended patches</string>
     <string name="expert_mode_reset_to_default_done">Recommended patches applied</string>
     <string name="expert_mode_selected_count">%1$s of %2$s selected</string>
+    <!-- Which build of an app with builds for several devices the patches are for, such as TV or Wear OS -->
+    <string name="expert_mode_form_factor">For the %s build</string>
     <string name="expert_mode_saved_selection">Saved selection</string>
     <string name="expert_mode_restore_saved_done">Saved selection restored</string>
     <string name="expert_mode_copy_from_bundle_no_patches">No matching patches in this bundle</string>
@@ -685,6 +689,8 @@ For the best results, this app recommends patching a &lt;b&gt;full APK&lt;/b&gt;
     <string name="patcher_conflict_title">Package conflict</string>
     <string name="patcher_conflict_subtitle">You need to uninstall the existing version</string>
     <string name="patcher_conflict_hint">The patched app uses a different certificate than the installed version. Uninstalling will erase all app data</string>
+    <!-- The patched APK is for another kind of device, such as TV or Wear OS, so it may not start on this one -->
+    <string name="patcher_built_for_other_device">Built for %s, so it may not start here. Save it to install on that device</string>
     <string name="patcher_installed_conflict_title">Uninstall required</string>
     <string name="patcher_installed_conflict_body">"Morphe signs patched apps with its own certificate, which differs from the original. Android requires removing the existing version before the patched app can be installed.
 

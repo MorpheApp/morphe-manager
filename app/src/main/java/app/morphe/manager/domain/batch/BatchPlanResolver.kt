@@ -31,6 +31,7 @@ import app.morphe.manager.domain.repository.PatchBundleRepository
 import app.morphe.manager.domain.repository.PatchSelectionRepository
 import app.morphe.manager.domain.selection.SavedPatchConfiguration
 import app.morphe.manager.patcher.patch.ApkArchitectureResolver
+import app.morphe.manager.patcher.patch.ApkFormFactorResolver
 import app.morphe.manager.patcher.patch.PatchBundleInfo
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.contributingAt
 import app.morphe.manager.patcher.patch.PatchBundleInfo.Extensions.toPatchSelection
@@ -73,6 +74,13 @@ internal suspend fun BatchApkSource.apkArchitecture() = when (this) {
     is BatchApkSource.UserFile -> ApkArchitectureResolver.resolve(file)
     is BatchApkSource.Installed ->
         ApkArchitectureResolver.resolve((listOf(apkPath) + splitPaths).map(::File))
+}
+
+/** Build of its app an item is patched from, see [ApkFormFactorResolver]. */
+internal suspend fun BatchApkSource.formFactor() = when (this) {
+    is BatchApkSource.SavedOriginal -> ApkFormFactorResolver.resolve(file)
+    is BatchApkSource.UserFile -> ApkFormFactorResolver.resolve(file)
+    is BatchApkSource.Installed -> ApkFormFactorResolver.resolve(File(apkPath))
 }
 
 /**
@@ -311,7 +319,7 @@ class BatchPlanResolver(
         // A chosen source is the only one the app is patched from, and the version warnings
         // are its own
         val bundles = patchBundleRepository.resolvingBundleInfo(
-            packageName, source.version, source.versionCode, chosenBundleUid
+            packageName, source.version, source.versionCode, { source.formFactor() }, chosenBundleUid
         )
 
         // Asked of the bundles the APK is being resolved against rather than of the version

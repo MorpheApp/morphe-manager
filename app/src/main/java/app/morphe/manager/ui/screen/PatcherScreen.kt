@@ -38,6 +38,7 @@ import app.morphe.manager.util.APK_MIMETYPE
 import app.morphe.manager.util.EventEffect
 import app.morphe.manager.util.rememberDocumentSaver
 import app.morphe.manager.util.shareApks
+import app.morphe.patcher.patch.FormFactor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -191,6 +192,12 @@ private fun PatcherScreenContent(
     var excludedPatches by remember { mutableStateOf(emptyList<String>()) }
     LaunchedEffect(usingMountInstall) {
         excludedPatches = patcherViewModel.unavailablePatchNames(installerTypeFor(usingMountInstall))
+    }
+
+    // Read once the patched APK is there, see PatcherViewModel.foreignFormFactor
+    var foreignFormFactor by remember { mutableStateOf<FormFactor?>(null) }
+    LaunchedEffect(patcherSucceeded) {
+        if (patcherSucceeded == true) foreignFormFactor = patcherViewModel.foreignFormFactor()
     }
 
     LaunchedEffect(installState, targetInstalledPackage) {
@@ -464,6 +471,7 @@ private fun PatcherScreenContent(
                             }
                         ),
                         excludedPatches = excludedPatches,
+                        foreignFormFactor = foreignFormFactor,
                         isExpertMode = useExpertMode,
                         onConfigureAppLinks = { showAppLinksDialog = true }.takeIf { linksOpenInBrowser },
                         onLogsClick = patcherViewModel::hideSuccessScreen,

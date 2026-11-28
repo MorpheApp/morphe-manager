@@ -722,7 +722,7 @@ private fun InstalledAppHeader(
 ) {
     val relativeTime = remember(installedApp.patchedAt) { installedApp.patchedAt?.let { getRelativeTimeString(it) } }
     // The home card marks it by its glyph alone, so the details name it in full
-    val formFactorMark = rememberAppMetadata()[installedApp.originalPackageName]?.formFactor.mark()
+    val formFactorMarks = rememberAppMetadata()[installedApp.originalPackageName]?.formFactors.orEmpty().marks()
 
     // What the install is, then when it was made. The clone and device chips sit between them:
     // they qualify the install the same way its type does, rather than dating it
@@ -731,7 +731,7 @@ private fun InstalledAppHeader(
         if (installedApp.isClone) {
             add(AppStateIcons.Clone to stringResource(R.string.clone))
         }
-        formFactorMark?.let { add(it.icon to stringResource(it.label)) }
+        formFactorMarks.forEach { add(it.icon to stringResource(it.label)) }
         relativeTime?.let { add(MaterialSymbols.Rounded.Schedule to it) }
     }
     val badges = @Composable {

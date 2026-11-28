@@ -736,7 +736,11 @@ class PatchFlow(
         // Scoped.universal = universal patches (applies to any package/version).
         val bundles = withContext(Dispatchers.IO) {
             patchBundleRepository.resolvingBundleInfo(
-                selectedApp.packageName, selectedApp.version, selectedApp.versionCode, chosenBundleUidFor(selectedApp)
+                selectedApp.packageName,
+                selectedApp.version,
+                selectedApp.versionCode,
+                { apks.formFactor(selectedApp) },
+                chosenBundleUidFor(selectedApp)
             )
         }
         val support = VersionSupport(bundles)

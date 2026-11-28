@@ -166,6 +166,7 @@ fun DialogHostScope.ExpertModeDialog(
     val (allPatchesInfo, options, totalSelectedCount, newPatches, lockStateOf, holdsUniversalPatches) =
         selection
     val totalPatchesCount = allPatchesInfo.sumOf { (_, patches) -> patches.size }
+    val narrowedTo = allPatchesInfo.firstNotNullOfOrNull { (bundle, _) -> bundle.formFactor }?.mark()
     // Sources on pre-release patches or marking the APK's version experimental. A run leaves out
     // the ones whose experimental versions are off, so one added back by hand still says what its
     // patches are applied to
@@ -340,6 +341,9 @@ fun DialogHostScope.ExpertModeDialog(
                 // How much of the app is selected, every source counted, while the tabs count each
                 subtitle = listOfNotNull(
                     stringResource(R.string.expert_mode_selected_count, totalSelectedCount, totalPatchesCount),
+                    // Named only where the app has builds for several devices, so a list shorter
+                    // than the one another build gets is not taken for missing patches
+                    narrowedTo?.let { stringResource(R.string.expert_mode_form_factor, stringResource(it.label)) },
                     allPatchesInfo.singleOrNull()?.first?.name
                 ).joinToString("\n"),
                 search = search,

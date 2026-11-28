@@ -43,8 +43,8 @@ data class HomeAppItem(
     val isClone: Boolean,
     /** What tells the card from another app of the same name, see [withNameSuffixes]. */
     val nameSuffix: String? = null,
-    /** Device the sources say the app is built for, null where they do not say. */
-    val formFactor: FormFactor? = null
+    /** Devices the sources say the app has a build for, empty where they do not say. */
+    val formFactors: Set<FormFactor> = emptySet()
 ) {
     val hasSavedCopy: Boolean get() = savedApkFile != null
 

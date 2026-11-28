@@ -29,6 +29,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.pm.PackageInfoCompat
 import app.morphe.manager.domain.apk.ApkSignatureCache
 import app.morphe.patcher.apk.ApkUtils
+import app.morphe.patcher.patch.FormFactor
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import org.koin.core.component.KoinComponent
@@ -120,6 +121,16 @@ class PM(
     }
 
     fun getVersionCode(packageInfo: PackageInfo) = PackageInfoCompat.getLongVersionCode(packageInfo)
+
+    /** The device this is, told by the same features an APK's own form factor is read from. */
+    fun deviceFormFactor(): FormFactor = with(app.packageManager) {
+        when {
+            hasSystemFeature(PackageManager.FEATURE_WATCH) -> FormFactor.WEARABLE
+            hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE) -> FormFactor.AUTOMOTIVE
+            hasSystemFeature(PackageManager.FEATURE_LEANBACK) -> FormFactor.TV
+            else -> FormFactor.MOBILE
+        }
+    }
 
     fun canLaunch(pkg: String) = app.packageManager.getLaunchIntentForPackage(pkg) != null
 
